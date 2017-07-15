@@ -1,0 +1,190 @@
+{
+	articles: {
+		"0": {
+			id: 0,
+			title: "Apples Rain in New York City",
+			slug: "apples-rain-in-new-york-city",
+			content: [
+				"Paragraph 1",
+				"Paragraph 2"
+			],
+			volume: 108,
+			issue: 1,
+			subsection: 2
+		},
+		"1": {
+			id: 1,
+			title: "Backyard Raccoon Strikes Again",
+			slug: "backyard-raccoon-strikes-again",
+			content: [
+				"Paragraph 1",
+				"Paragraph 2"
+			],
+			volume: 108,
+			issue: 1,
+			subsection: 
+		},
+		"1": {
+			id: 1,
+			authors: [0, 2],
+			title: "Backyard Racoon Strikes Again"
+		}		
+	},
+	sections: {
+		"0": {
+			id: 0,
+			name: "News",
+			slug: "news",
+		},
+		"1": {
+			id: 1,
+			name: "Opinions",
+			slug: "opinions",
+		},
+		"2": {
+			id: 2,
+			name: "Features",
+			slug: "features",
+		},
+		"3": {
+			id: 3,
+			name: "Arts & Entertainment",
+			slug: "ae",
+		},
+		"4": {
+			id: 4,
+			name: "Humor",
+			slug: "humor",
+		},
+		"5": {
+			id: 5,
+			name: "Sports",
+			slug: "sports",
+		},
+		"6": {
+			id: 6,
+			name: "Art",
+			slug: "art",
+		},
+		"7": {
+			id: 7,
+			name: "Photo",
+			slug: "photo",
+		},
+		"8": {
+			id: 8,
+			name: "Video",
+			slug: "video",
+		},
+	},
+	subsections: {
+		"0": {
+			id: 0,
+			name: "2014 Campaign Coverage",
+			slug: "2014-campaign-coverage",
+			section_id: 0
+		},
+		"1": {
+			id: 1,
+			name: "2016 Campaign Coverage",
+			slug: "2016-campaign-coverage",
+			section_id: 0
+		},
+		"2": {
+			id: 2,
+			name: "2017 Campaign Coverage",
+			slug: "2017-campaign-coverage",
+			section_id: 0
+		},
+		"3": {
+			id: 3,
+			name: "Staff Editorials",
+			slug: "staff-editorials",
+			section_id: 1
+		},
+		"4": {
+			id: 4,
+			name: "9/11",
+			slug: "9-11",
+			section_id: 2
+		},
+		"5": {
+			id: 5,
+			name: "College Essays",
+			slug: "college-essays",
+			section_id: 2
+		},
+		"6": {
+			id: 6,
+			name: "VOICES",
+			slug: "voices",
+			section_id: 2
+		},
+		"7": {
+			id: 7,
+			name: "Art",
+			slug: "art",
+			section_id: 3
+		},
+		"8": {
+			id: 8,
+			name: "Books",
+			slug: "books",
+			section_id: 3
+		},
+		"9": {
+			id: 9,
+			name: "Feature",
+			slug: "feature",
+			section_id: 3
+		},
+		"10": {
+			id: 10,
+			name: "Film",
+			slug: "film",
+			section_id: 3
+		},
+		"11": {
+			id: 11,
+			name: "Food",
+			slug: "food",
+			section_id: 3
+		},
+		"12": {
+			id: 12,
+			name: "Live Performances",
+			slug: "live-performances",
+			section_id: 3
+		},
+		"13": {
+			id: 13,
+			name: "Music",
+			slug: "music",
+			section_id: 3
+		},
+		"14": {
+			id: 14,
+			name: "Television",
+			slug: "television",
+			section_id: 3
+		},
+		"15": {
+			id: 15,
+			name: "Film",
+			slug: "film",
+			section_id: 3
+		},
+		"16": {
+			id: 16,
+			name: "Disrespectator",
+			slug: "disrespectator",
+			section_id: 4
+		},
+		"17": {
+			id: 17,
+			name: "Spooktator",
+			slug: "Spooktator",
+			section_id: 4
+		},
+	}
+}
