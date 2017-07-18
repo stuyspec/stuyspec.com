@@ -1,0 +1,1 @@
+export const FETCH_ARTICLE = 'core/FETCH_ARTICLE'

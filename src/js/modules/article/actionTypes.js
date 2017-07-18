@@ -1,1 +1,0 @@
-export const FETCH_ARTICLE = 'article/FETCH_ARTICLE'

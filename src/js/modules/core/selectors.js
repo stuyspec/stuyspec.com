@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect'
 
 const getJSONResponse = (state) => {
-	console.log(state.article.article.request)
-	if (state.article.article.request) {
-		return JSON.parse(state.article.article.request.response)
+	console.log(state.core.request)
+	if (state.core.request) {
+		return JSON.parse(state.core.request.request.response)
 	}
 }
 

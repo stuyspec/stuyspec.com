@@ -1,11 +1,13 @@
 import Provider from 'react-redux/lib/components/Provider';
 import React, { Component } from 'react';
+//import { Route, Switch } from 'react-router';
+import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
 import appHistory from 'tools/appHistory';
+import Article from './core/components/Article';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
 import store from '../store';
 
-import Article from './article/components/Article';
 
 class RoutingApp extends Component
 {
@@ -14,13 +16,14 @@ class RoutingApp extends Component
         return (
             <Provider store={ store }>
                 <ConnectedRouter history={ appHistory }>
-                    <Route
-                        path='/'
-                        component={ Article }
-                    />
+                        <Switch>
+                            <Route exact path="/" component={Article} />
+                            <Route path="/test" component={Article} />
+                            <Route component={Article} />
+                        </Switch>
                 </ConnectedRouter>
             </Provider>
-        );
+            );
     }
 }
 

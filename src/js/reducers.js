@@ -1,9 +1,9 @@
 import combineReducers from 'redux/lib/combineReducers'
-import routerReducer from 'react-router-redux/reducer'
-import article from './modules/article'
+import routerReducer   from 'react-router-redux/reducer'
+import core            from './modules/core'
 
 export default combineReducers(
 {
-    [article.constants.NAME]: article.reducer,
-    router: routerReducer
+    [core.constants.NAME]              : core.reducer,
+    router                             : routerReducer
 });
