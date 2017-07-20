@@ -5,15 +5,17 @@ import { fetch } from '../actions';
 import { getArticle } from '../selectors';
 import { Link } from 'react-router-dom'
 
+import ArticleHeader from 'ArticleHeader';
+
 class Article extends Component {
 	render() {
 		return (
 	    <div>
-	    	<Link to='/test'>Test</Link>
 	        <h2 onClick={() => this.props.fetch()}>
    	            Click Me for an async joke
 	        </h2>
 	        { this.props.article.joke }
+	        <ArticleHeader />
 	    </div>
     	);
 	}
@@ -25,7 +27,6 @@ function mapStateToProps (state) {
         article: getArticle(state)
 	}
 }
-
 
 // Get actions and pass them as props
 function matchDispatchToProps (dispatch) {

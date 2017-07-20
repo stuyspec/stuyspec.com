@@ -3,35 +3,35 @@ import
     FETCH_ARTICLE
 } from './actionTypes'
 
+// currently has sample data
 const initialState =
 {
     isFetching: false,
     isFetched: false,
     error: null,
-    articles: {
-        /*
-        "0": {
-            id: 0,
-            title: "Apples Rain in New York City",
-            slug: "apples-rain-in-new-york-city",
-            content: [
-                "Paragraph 1",
-                "Paragraph 2"
-            ],
-            volume: 108,
-            issue: 1,
-            section: 0,
-        }
-        */
-    },
-    sections: {
-        "0": {
-            id: 0,
-            name: "News",
-            slug: "news",
-            parent_id: null
+    entities: {
+        articles: {
+            0: {
+                id: 0,
+                title: "Apples Rain in New York City",
+                slug: "apples-rain-in-new-york-city",
+                content: [
+                    "Paragraph 1",
+                    "Paragraph 2"
+                ],
+                volume: 108,
+                issue: 1,
+                section: 0,
+            },
         },
-    },
+        sections: {
+            0: {
+                id: 0,
+                name: "News",
+                slug: "news",
+                parent_id: null
+            },
+        },
     request: null,
 };
 
