@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fetch } from '../actions';
 import { Link } from 'react-router-dom'
 
+import { fetch } from '../actions';
+import { makeGetArticle } from '../selectors';
 import ArticleHeader from './ArticleHeader';
 import ArticleBody from './ArticleBody';
 
@@ -22,12 +23,16 @@ class ArticlePage extends Component {
 	}
 }
 
-function mapStateToProps (state) {
-	articleObject = state.core.entities.articles[0];
-    return {
-        article: articleObject,
-        section: state.core.entities.sections[ articleObject.section ],
+const makeMapStateToProps = () => {
+	const getArticle = makeGetArticle();
+	const mapStateToProps = (state, props) => {
+		article = getArticle(state, props);
+	    return {
+	        article: article,
+	        section: state.core.entities.sections[ article.section ],
+		}
 	}
+	return mapStateToProps
 }
 
 // Get actions and pass them as props
@@ -37,4 +42,4 @@ function matchDispatchToProps (dispatch) {
 
 // We don't want to return the plain Article (component) anymore, we want to return the smart Container
 //      > Article is now aware of state and actions
-export default connect(mapStateToProps, matchDispatchToProps)(ArticlePage);
+export default connect(makeMapStateToProps, matchDispatchToProps)(ArticlePage);

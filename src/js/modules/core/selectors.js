@@ -20,11 +20,27 @@ Object.filter = (obj, predicate) =>
           .filter( key => predicate(obj[key]) )
           .reduce( (res, key) => (res[key] = obj[key], res), {} );
 
+const getRequestedArticleSlug = (state, props) => props.match.params.article;
+
+export const makeGetArticle = () => {
+	return createSelector(
+		[ getArticles, getRequestedArticleSlug ],
+		(articles, requestedArticleSlug) => {
+			article = Object.filter(articles, article => {
+				return article.slug === requestedArticleSlug;
+			});
+			for (var key in article) {
+				return article[key];
+			}
+		}
+	)
+}
+
 const getSectionId = (state, props) => {
 	sections = state.core.entities.sections;
-	sectionName = props.match.params.section;
+	requestedSectionSlug = props.match.params.section;
 	section = Object.filter(sections, section => {
-		return section.slug === sectionName;
+		return section.slug === requestedSectionSlug;
 	});
 	for (var key in section) {
 		return section[key].id
@@ -32,12 +48,14 @@ const getSectionId = (state, props) => {
 	console.log("ERROR: SECTION NOT FOUND.");
 }
 
-export const getSectionArticles = createSelector(
-	[ getSectionId, getArticles ],
-	(sectionId, articles) => {
-		sectionArticles = Object.filter(articles, article => {
-			return article.section === sectionId;
-		});
-		return sectionArticles;
-	}
-)
+export const makeGetSectionArticles = () => {
+	return createSelector(
+		[ getSectionId, getArticles ],
+		(sectionId, articles) => {
+			sectionArticles = Object.filter(articles, article => {
+				return article.section === sectionId;
+			});
+			return sectionArticles;
+		}
+	)
+}

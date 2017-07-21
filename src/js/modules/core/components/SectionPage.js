@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getSectionArticles } from '../selectors';
+import { makeGetSectionArticles } from '../selectors';
 
 class SectionPage extends Component {
 
@@ -30,15 +30,18 @@ class SectionPage extends Component {
 	}
 }
 
-// BUT WAIT THERE'S A PROBLEM https://github.com/reactjs/reselect#accessing-react-props-in-selectors
-function mapStateToProps (state, props) {
-    return {
-    	articles: getSectionArticles(state, props),
-    }
+const makeMapStateToProps = () => {
+	const getSectionArticles = makeGetSectionArticles();
+	const mapStateToProps = (state, props) => {
+	    return {
+	    	articles: getSectionArticles(state, props),
+	    }
+	}
+	return mapStateToProps
 }
 
 function matchDispatchToProps (dispatch) {
     return bindActionCreators({}, dispatch)
 } 
 
-export default connect(mapStateToProps, matchDispatchToProps)(SectionPage);
+export default connect(makeMapStateToProps, matchDispatchToProps)(SectionPage);
