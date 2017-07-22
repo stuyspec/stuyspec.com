@@ -6,21 +6,23 @@ export const getHomeArticles = createSelector(
 	[ getArticles ],
 	(articles) => {
 		homeArticles = {}
+		// for all articles, take a subset of keys
 		Object.keys(articles).map( (key, index) => {
 			article = articles[key];
-			pickedArticle = ( ({ title, slug, section, content }) => ({ title, slug, section, content }) ) (article);
+			pickedArticle = ( ({ title, slug, section }) => ({ title, slug, section }) ) (article);
 			homeArticles[key] = pickedArticle;
 		});
 		return homeArticles;
 	}
 )
 
+// filters all nested objects for which the predicate returns true
 Object.filter = (obj, predicate) =>
     Object.keys(obj)
           .filter( key => predicate(obj[key]) )
           .reduce( (res, key) => (res[key] = obj[key], res), {} );
 
-const getRequestedArticleSlug = (state, props) => props.match.params.article;
+const getRequestedArticleSlug = (state, props) => props.match.params.article_slug;
 
 export const makeGetArticle = () => {
 	return createSelector(
@@ -29,6 +31,7 @@ export const makeGetArticle = () => {
 			article = Object.filter(articles, article => {
 				return article.slug === requestedArticleSlug;
 			});
+			// article is currently in { id_key : {} } format
 			for (var key in article) {
 				return article[key];
 			}
@@ -36,26 +39,39 @@ export const makeGetArticle = () => {
 	)
 }
 
-const getSectionId = (state, props) => {
-	sections = state.core.entities.sections;
-	requestedSectionSlug = props.match.params.section;
-	section = Object.filter(sections, section => {
-		return section.slug === requestedSectionSlug;
-	});
-	for (var key in section) {
-		return section[key].id
-	}
-	console.log("ERROR: SECTION NOT FOUND.");
+const getRequestedSectionSlug = (state, props) => props.match.params.section_slug;
+const getSections = state => state.core.entities.sections;
+
+export const makeGetSection = () => {
+	return createSelector(
+		[ getSections, getRequestedSectionSlug ],
+		(sections, requestedSectionSlug) => {
+			// find the nested section object with a matching slug
+			targetSection = Object.filter(sections, section => {
+				return section.slug === requestedSectionSlug;
+			})
+			sectionsMatched = Object.keys(targetSection).length;
+			if (sectionsMatched == 1) { // only one section matched
+				var sectionId;
+				for (var key in targetSection) {
+					return targetSection[key];
+				}
+			}
+			console.log("EXCEPTION: section_slug matched " + sectionsMatched + " sections.")
+		}
+	)
 }
 
 export const makeGetSectionArticles = () => {
+	getSection = makeGetSection();
 	return createSelector(
-		[ getSectionId, getArticles ],
-		(sectionId, articles) => {
+		[ getArticles, getSection ],
+		(articles, section) => {			
+			// find all articles with matching section id
 			sectionArticles = Object.filter(articles, article => {
-				return article.section === sectionId;
+				return article.section === section.id;
 			});
-			return sectionArticles;
+			return sectionArticles;						
 		}
 	)
 }

@@ -17,8 +17,8 @@ class RoutingApp extends Component
                 <ConnectedRouter history={ appHistory }>
                     <Switch>
                         <Route exact path="/" component={ HomePage } />
-                        <Route exact path="/:section" component={ SectionPage } />
-                        <Route exact path="/:section/:article" component={ ArticlePage } />
+                        <Route exact path="/:section_slug" component={ SectionPage } />
+                        <Route exact path="/:section_slug/:article_slug" component={ ArticlePage } />
                     </Switch>
                 </ConnectedRouter>
             </Provider>

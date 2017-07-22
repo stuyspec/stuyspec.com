@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 class ArticleHeader extends Component {
 	render() {
 		return (
 			<div>
-				<p>{ this.props.section.name }</p>
+				<Link to={ this.props.section.slug }>
+					{ this.props.section.name }
+				</Link>
 				<h1>{ this.props.headline }</h1>
-				<p>{ this.props.byline }</p>
-				<p>{ this.props.dateline }</p>
+				<p>
+					<span>{ this.props.byline }</span>
+					<span>{ this.props.dateline }</span>
+				</p>
 			</div>
 		)
 	}
