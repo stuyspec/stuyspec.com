@@ -11,14 +11,14 @@ const { ArticlePage, HomePage, SectionPage } = core;
 class RoutingApp extends Component
 {
     render ()
-    {
+    {console.log(30);
         return (
-            <Provider store={ store }>
+            <Provider store={ store }>            
                 <ConnectedRouter history={ appHistory }>
                     <Switch>
                         <Route exact path="/" component={ HomePage } />
-                        <Route exact path="/:section" component={ SectionPage } />
-                        <Route exact path="/:section/:article" component={ ArticlePage } />
+                        <Route exact path="/:section_slug" component={ SectionPage } />
+                        <Route exact path="/:section_slug/:article_slug" component={ ArticlePage } />
                     </Switch>
                 </ConnectedRouter>
             </Provider>

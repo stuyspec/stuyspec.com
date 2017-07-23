@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import injectSheet from 'react-jss';
 
-import { makeGetSectionArticles } from '../selectors';
+import { makeGetSectionArticles, makeGetSection } from '../selectors';
 
 class SectionPage extends Component {
 
@@ -21,7 +22,8 @@ class SectionPage extends Component {
 	render() {
 		return (
 			<div>
-				<h1>{ this.props.match.params.section }</h1>
+				<h1>{ this.props.section.name }</h1>
+				<p>description: { this.props.section.description }</p>
 				<ul>
 					{ this.createArticleListItems( this.props.match.url ) }
 				</ul>
@@ -32,9 +34,11 @@ class SectionPage extends Component {
 
 const makeMapStateToProps = () => {
 	const getSectionArticles = makeGetSectionArticles();
+	const getSection = makeGetSection();
 	const mapStateToProps = (state, props) => {
 	    return {
 	    	articles: getSectionArticles(state, props),
+	    	section: getSection(state, props)
 	    }
 	}
 	return mapStateToProps

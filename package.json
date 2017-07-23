@@ -62,6 +62,8 @@
     "ejs": "^2.5.6",
     "envify": "^4.0.0",
     "express": "^4.15.3",
+    "jss": "^8.1.0",
+    "jss-preset-default": "^3.0.0",
     "reselect": "^3.0.1",
     "yargs": "^8.0.2"
   }
