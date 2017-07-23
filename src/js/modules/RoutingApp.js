@@ -11,9 +11,9 @@ const { ArticlePage, HomePage, SectionPage } = core;
 class RoutingApp extends Component
 {
     render ()
-    {
+    {console.log(30);
         return (
-            <Provider store={ store }>
+            <Provider store={ store }>            
                 <ConnectedRouter history={ appHistory }>
                     <Switch>
                         <Route exact path="/" component={ HomePage } />

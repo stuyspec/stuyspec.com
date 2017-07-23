@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
-import injectSheet from 'react-jss'
+import { Link } from 'react-router-dom';
+import injectSheet from 'react-jss';
 
 import { fetch } from '../actions';
 import { makeGetArticle, makeGetSection } from '../selectors';
@@ -10,23 +10,26 @@ import ArticleHeader from './ArticleHeader';
 import ArticleBody from './ArticleBody';
 
 const styles = {
-  button: {
-    color: 'red'
-  }
+	ArticlePage: {
+		'width': '1060px',
+		'margin': '0 auto',
+	}
 }
 
-// see https://stackoverflow.com/questions/39766694/2-different-ways-to-create-react-component
 class ArticlePage extends Component {
-	render() {
+	render()
+	{
+		const { classes } = this.props;
+
 		return (
-	    <div>
-	        <ArticleHeader headline={ this.props.article.title } 
-		        section={ this.props.section }
-		        byline="By Jason Kao"
-		        dateline="July 20, 2017"
-		    />
-		    <ArticleBody content={ this.props.article.content }/>
-	    </div>
+		    <div className={ classes.ArticlePage }>
+		        <ArticleHeader headline={ this.props.article.title } 
+			        section={ this.props.section }
+			        byline="By Jason Kao"
+			        dateline="July 20, 2017"
+			    />
+			    <ArticleBody content={ this.props.article.content }/>
+		    </div>
     	);
 	}
 }
