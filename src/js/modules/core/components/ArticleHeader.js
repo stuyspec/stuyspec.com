@@ -6,26 +6,38 @@ import injectSheet from 'react-jss';
 
 const styles = {
 	ArticleHeader: {
-		'border-top': '1px solid #000',
-		'border-bottom': '1px solid #dedede',
-		'padding': '10px 0px',		
+		borderTop: '1px solid #000',
+		borderBottom: '1px solid #dedede',
+		marginBottom: '20px',
+		padding: '12px 0px',	
 	},
 	ArticleHeader__rubric: {
-		'color': '#000',
-		'font-size': '12px',
-		'font-weight': '500',
-		'text-transform': 'uppercase',
-		'margin-bottom': '20px',
+		color: '#000',
+		display: 'block',
+		fontFamily: 'Circular Std',
+		fontSize: '12px',
+		fontWeight: 500,
+		marginBottom: '18px',
+		textDecoration: 'none',
+		textTransform: 'uppercase',
 	},
 	ArticleHeader__headline: {
-		'color': '#000',
-		'font-size': '36px',
-		'margin-bottom': '20px',		
+		color: '#000',
+		fontFamily: 'Minion Pro',
+		fontSize: '36px',
+		fontWeight: 'normal',
+		marginTop: '0px',	
+		marginBottom: '15	px',	
 	},
 	ArticleHeader__metaInfo: {
-		'font-size': '14px',
-		'color': '#000000',
-	}
+		fontSize: '14px',
+		color: '#000000',
+		margin: '0px',
+		'& span:first-child': {
+			fontWeight: 'bold',
+			marginRight: '9px',
+		},		
+	},
 }
 
 const ArticleHeader = ({ classes, children, section, headline, byline, dateline }) => {

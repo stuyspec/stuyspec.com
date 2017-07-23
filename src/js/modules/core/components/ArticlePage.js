@@ -11,8 +11,8 @@ import ArticleBody from './ArticleBody';
 
 const styles = {
 	ArticlePage: {
-		'width': '1060px',
-		'margin': '0 auto',
+		margin: '0 auto',
+		width: '1060px',		
 	}
 }
 
@@ -28,7 +28,7 @@ class ArticlePage extends Component {
 			        byline="By Jason Kao"
 			        dateline="July 20, 2017"
 			    />
-			    <ArticleBody content={ this.props.article.content }/>
+			    <ArticleBody content={ this.props.article.content } featured={ this.props.featured }/>
 		    </div>
     	);
 	}
@@ -40,7 +40,13 @@ const makeMapStateToProps = () => {
 	const mapStateToProps = (state, props) => {
 	    return {
 	        article: getArticle(state, props),
-	        section: getSection(state, props)
+	        section: getSection(state, props),
+	        featured: {
+	        	url: 'http://planesandpleasures.com/wp-content/uploads/2016/09/NewYork-Chinatown-7.jpg',
+	        	caption: 'New York City street after rain is covered in water, dirt, and snow. Pedestrians walk back and forth as post-flood confusion amasses.',
+	        	type: 'Photograph',
+	        	credits: 'Mika Simoncelli',
+	        }
 		}
 	}
 	return mapStateToProps
