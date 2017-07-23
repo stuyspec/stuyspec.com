@@ -1,0 +1,41 @@
+@font-face {
+    font-family: "Minion Pro";
+    src: url(/fonts/MinionPro_Regular.ttf) format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Minion Pro";
+    src: url(/fonts/MinionPro_Italic.ttf) format("truetype");
+    font-style: italic;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Minion Pro";
+    src: url(/fonts/MinionPro_Bold.ttf) format("truetype");
+    font-style: normal;
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Circular Std";
+    src: url(/fonts/CircularStd_Book.otf) format("opentype");
+    font-style: normal;
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Circular Std";
+    src: url(/fonts/CircularStd_Medium.otf) format("opentype");
+    font-style: normal;
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Old English Text MT";
+    src: url(/fonts/OldEnglishTextMT.ttf) format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
