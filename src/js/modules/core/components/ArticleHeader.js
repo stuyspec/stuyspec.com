@@ -27,7 +27,7 @@ const styles = {
 		fontSize: '36px',
 		fontWeight: 'normal',
 		marginTop: '0px',	
-		marginBottom: '15	px',	
+		marginBottom: '15px',	
 	},
 	ArticleHeader__metaInfo: {
 		fontSize: '14px',
