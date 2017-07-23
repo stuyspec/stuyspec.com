@@ -7,6 +7,7 @@ import localizer from 'middleware/localizer'
 import logger from 'redux-logger'
 import routerMiddleware from 'react-router-redux/middleware'
 import appHistory from 'tools/appHistory'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 const middleware = process.env.NODE_ENV == 'production' ?
                         applyMiddleware(
@@ -14,12 +15,14 @@ const middleware = process.env.NODE_ENV == 'production' ?
                             thunk,
                             localizer,
                             routerMiddleware(appHistory) //for intercepting navigation actions
-                        ) : applyMiddleware(
-                            promise(),
-                            thunk,
-                            logger,
-                            localizer,
-                            routerMiddleware(appHistory)
+                        ) : composeWithDevTools(
+                            applyMiddleware(
+                                promise(),
+                                thunk,
+                                logger,
+                                localizer,
+                                routerMiddleware(appHistory)
+                            )
                         );
 
 export default createStore(reducer, middleware)

@@ -2,7 +2,6 @@
 
 // TODO -> come up with cleaner way of keeping track
 // TODO... of update count, preventing bump-version, etc
-
 var _global = { DEV_MODE : false };
 
 var gulp          = require('gulp'),
@@ -29,40 +28,47 @@ var gulp          = require('gulp'),
     argv          = require('yargs').argv,
     figlet        = require('figlet'),
     Table         = require('cli-table'),
-    liveReactLoad = null,
+    liveReactLoad = require('livereactload'),
     liveReload    = null;
 
 // build configuration
 
 const Flags =
+{
+    version_bump      :
     {
-        version_bump      :
-            {
-                defaultValue : true,
-                description  : 'Whether or not to bump versions on successive updates when building'
-            },
-        success_notice    :
-            {
-                defaultValue : true,
-                description  : 'Displays a success notice in the OS when build is successful'
-            },
-        error_notice :
-            {
-                defaultValue : true,
-                description  : 'Displays an error notice in the OS when a build fails'
-            },
-        error_sound       :
-            {
-                defaultValue : false,
-                description  : 'Play a sound when there is an error'
-            },
-        build_js_debug    :
-            {
-                defaultValue : false,
-                description  : 'Whether or not to include source ' +
-                'maps in Javascript release builds'
-            }
-    };
+        defaultValue : true,
+        description  : 'Whether or not to bump versions on successive updates when building'
+    },
+    success_notice    :
+    {
+        defaultValue : true,
+        description  : 'Displays a success notice in the OS when build is successful'
+    },
+    error_notice :
+    {
+        defaultValue : true,
+        description  : 'Displays an error notice in the OS when a build fails'
+    },
+    error_sound       :
+    {
+        defaultValue : false,
+        description  : 'Play a sound when there is an error'
+    },
+    build_js_debug    :
+    {
+        defaultValue : false,
+        description  : 'Whether or not to include source ' +
+        'maps in Javascript release builds'
+    },
+    export_standalone   :
+    {
+        defaultValue : false,
+        description  : 'Automatically generate a build folder ' +
+                        'corresponding to the time you created' +
+                        'your package via a builds/[current_date] folder/'
+    }
+};
 
 // set up build paths config
 const Paths   = require('./build-config/paths.json');
@@ -91,13 +97,13 @@ const BABELIFY_CONFIG =
         extensions : [ '.js', '.jsx' ],
         presets    : [ 'es2015', 'react', 'stage-2', 'stage-3' ],
         plugins :
-            [
-                'transform-remove-strict-mode',
-                'transform-decorators-legacy',
-                'add-module-exports',
-                'react-hot-loader/babel',
-                ['module-alias', Aliases]
-            ]
+        [
+            'transform-remove-strict-mode',
+            'transform-decorators-legacy',
+            'add-module-exports',
+            'react-hot-loader/babel',
+            ['module-alias', Aliases]
+        ]
     };
 
 const WATCHIFY_CONFIG =
@@ -162,99 +168,99 @@ let Notices =
 
 /** various logging functions */
 let Log =
+{
+    updateBuild (files, updateCountShown)
     {
-        updateBuild (files, updateCountShown)
+        if(!Array.isArray(files)) { files = Array.from([files]); }
+        files = files.map((file,i)=>
         {
-            if(!Array.isArray(files)) { files = Array.from([files]); }
-            files = files.map((file,i)=>
-            {
-                let dirNameIndex = file.toLowerCase().indexOf(__dirname.toLowerCase());
-                return '['+(i+1)+'] '+((dirNameIndex!=-1) ?
-                        file.substr(dirNameIndex+__dirname.length+1+Paths.ENTRY_FOLDER.length) :
-                        file).bold.magenta;
-            });
-            console.log('\nFile changes detected ->\n', files.join('\n'), '\n');
+            let dirNameIndex = file.toLowerCase().indexOf(__dirname.toLowerCase());
+            return '['+(i+1)+'] '+((dirNameIndex!=-1) ?
+                    file.substr(dirNameIndex+__dirname.length+1+Paths.ENTRY_FOLDER.length) :
+                    file).bold.magenta;
+        });
+        console.log('\nFile changes detected ->\n', files.join('\n'), '\n');
 
-            var updatedAt        = new Date(),
-                updatedAtDisplay = `[${updatedAt.getHours()}:${updatedAt.getMinutes()}:${(updatedAt.getMilliseconds()+'').substr(0,2)}]`.gray;
+        var updatedAt        = new Date(),
+            updatedAtDisplay = `[${updatedAt.getHours()}:${updatedAt.getMinutes()}:${(updatedAt.getMilliseconds()+'').substr(0,2)}]`.gray;
 
-            if(updateCountShown)
-            {
-                console.log(updatedAtDisplay + 'Updated source files ' +
-                    (++updateCount + '').bold.magenta + ' time' +
-                    ((updateCount == 1) ? '' : 's') + '. \n');
-            }
-        },
-        watchStarted ()
+        if(updateCountShown)
         {
-            console.log(`Getting ready to watching for file changes to build to 
-                [${Paths.DEST_PROD.bold}]\n`);
-        },
-        startNotice (mode)
-        {
-            let appPrintOut = '\n' + figlet.textSync(pkg.name,
-                    {
-                        font: 'Slant',
-                        horizontalLayout: 'default',
-                        verticalLayout: 'default'
-                    });
-
-            console.log(appPrintOut);
-            console.log(`\t\tSource Code Builder\n`);
-            console.log(`> Running in ${mode == 'build' ? 'Build':'Dev'} Mode\n`);
-            console.log('[ gulp tasks: build \u2022 dev-server (default) \u2022 dev ]\n');
-
-            Log.listFlags();
-
-            if(mode != 'build')
-            {
-                console.log('Note : Initial build may take a bit of time on the first run before cache-ing...\n');
-            }
-        },
-        buildMessage (message)
-        {
-            if(latestVersionBuilt == getLatestVersionStrInFile())
-            {
-                console.log(message + '\n');
-            }
-        },
-        errorWhileRebuilding (err)
-        {
-            var errorAt = new Date(),
-                errorAtDisplay = `${errorAt.getHours()}:${errorAt.getMinutes()}.${errorAt.getMilliseconds()}`;
-            console.log(`${errorAtDisplay} ${`error occurred during build:\n\t${err.message.red.bold}\n`}`);
-            console.log(`Even though building may have finished successfully, ${''
-                }there was an error compiling the app sourcecode. ${''
-                }This may lead to errors\n`);
-        },
-        listFlags ()
-        {
-            let flagTable = new Table(
+            console.log(updatedAtDisplay + 'Updated source files ' +
+                (++updateCount + '').bold.magenta + ' time' +
+                ((updateCount == 1) ? '' : 's') + '. \n');
+        }
+    },
+    watchStarted ()
+    {
+        console.log(`Getting ready to watching for file changes to build to 
+            [${Paths.DEST_PROD.bold}]\n`);
+    },
+    startNotice (mode)
+    {
+        let appPrintOut = '\n' + figlet.textSync(pkg.name,
                 {
-                    head : ['flag'.gray, 'status'.gray, 'description'.gray],
-                    colWidths: [20, 10, 60]
+                    font: 'Slant',
+                    horizontalLayout: 'default',
+                    verticalLayout: 'default'
                 });
 
-            for(var flagName in FlagValues)
-            {
-                let flagValue       = FlagValues[flagName],
-                    flagDescription = Flags[flagName].description;
+        console.log(appPrintOut);
+        console.log(`\t\tSource Code Builder\n`);
+        console.log(`> Running in ${mode == 'build' ? 'Build':'Dev'} Mode\n`);
+        console.log('[ gulp tasks: build \u2022 dev-server (default) \u2022 dev ]\n');
 
-                if(flagValue)
-                {
-                    flagValue= flagValue.toString();
-                }
-                else
-                {
-                    flagValue = flagValue.toString();
-                }
+        Log.listFlags();
 
-                flagTable.push([flagName, flagValue, flagDescription]);
-            }
-            console.log(flagTable.toString().gray);
-            console.log('\n');
+        if(mode != 'build')
+        {
+            console.log('Note : Initial build may take a bit of time on the first run before cache-ing...\n');
         }
-    };
+    },
+    buildMessage (message)
+    {
+        if(latestVersionBuilt == getLatestVersionStrInFile())
+        {
+            console.log(message + '\n');
+        }
+    },
+    errorWhileRebuilding (err)
+    {
+        var errorAt = new Date(),
+            errorAtDisplay = `${errorAt.getHours()}:${errorAt.getMinutes()}.${errorAt.getMilliseconds()}`;
+        console.log(`${errorAtDisplay} ${`error occurred during build:\n\t${err.message.red.bold}\n`}`);
+        console.log(`Even though building may have finished successfully, ${''
+            }there was an error compiling the app sourcecode. ${''
+            }This may lead to errors\n`);
+    },
+    listFlags ()
+    {
+        let flagTable = new Table(
+        {
+            head : ['flag'.gray, 'status'.gray, 'description'.gray],
+            colWidths: [20, 10, 60]
+        });
+
+        for(var flagName in FlagValues)
+        {
+            let flagValue       = FlagValues[flagName],
+                flagDescription = Flags[flagName].description;
+
+            if(flagValue)
+            {
+                flagValue= flagValue.toString();
+            }
+            else
+            {
+                flagValue = flagValue.toString();
+            }
+
+            flagTable.push([flagName, flagValue, flagDescription]);
+        }
+        console.log(flagTable.toString().gray);
+        console.log('\n');
+    }
+};
 
 let Events =
     {
@@ -323,7 +329,7 @@ function scripts(p)
     b.on('error', (err)=>
     {
         if(watch) { Log.errorWhileRebuilding(err); }
-        else      { Log.errorBuilding(err);        }
+        else      { Log.errorWhileRebuilding(err);        }
         Notices.errorBuilding({ message : err.message })
     });
 
@@ -339,7 +345,7 @@ function scripts(p)
         stream.on('error', (err)=>
         {
             if(watch) { Log.errorWhileRebuilding(err); }
-            else      { Log.errorBuilding(err); }
+            else      { Log.errorWhileRebuilding(err); }
             Notices.errorBuilding({ message : err.message });
         });
 
@@ -394,18 +400,17 @@ gulp.task('dev', function()
 
 gulp.task('dev-server', ['dev'], function()
 {
-    liveReactLoad = require('livereactload');
     liveReload    = require('gulp-server-livereload');
     _global.DEV_MODE = true;
     return gulp.src(Paths.DEST_DEV)
         .pipe(liveReload(
-            {
-                host: '0.0.0.0',
-                port: 8080
-                // TODO | configure live reload
-                // TODO | to react to CSS/static asset
-                // TODO | changes. currently just JS
-            }));
+        {
+            host: '0.0.0.0',
+            port: 8080
+            // TODO | configure live reload
+            // TODO | to react to CSS/static asset
+            // TODO | changes. currently just JS
+        }));
 });
 
 gulp.task('html-ref-and-concat-css', function()
@@ -462,28 +467,70 @@ gulp.task('welcome-dev-notice', function()
     Log.startNotice('dev');
 });
 
-gulp.task('build',
-    [
-        'welcome-build-notice','apply-prod-environment', 'copy-extra-to-build',
-        'html-ref-and-concat-css', 'minify-images'
-    ],()=>
+gulp.task('create-js-build', function()
+{
+    _global.DEV_MODE = false;
+    if(FlagValues.build_js_debug)
     {
-        _global.DEV_MODE = false;
-        if(FlagValues.build_js_debug)
+        return scripts({ watch : false })
+            .pipe(buffer())
+            .pipe(uglify().on('error', gulpUtil.log))
+            .pipe(gulp.dest(Paths.DEST_PROD));
+    }
+    else
+    {
+        return scripts({ watch : false })
+            .pipe(buffer())
+            .pipe(uglify().on('error', gulpUtil.log))
+            .pipe(stripDebug())                         //remove console logging
+            .pipe(gulp.dest(Paths.DEST_PROD));
+    }
+});
+
+gulp.task('build', function()
+{
+    return runSequence(
+        'welcome-build-notice',
+        'apply-prod-environment',
+        [
+            'copy-extra-to-build',
+            'html-ref-and-concat-css',
+            'minify-images',
+            'create-js-build',
+        ],
+        'export-standalone-build'
+    );
+});
+
+gulp.task('export-standalone-build', ()=>
+{
+    if(FlagValues.export_standalone)
+    {
+        let moment = require('moment'),
+            packageDir = moment(new Date()).format('YYYY-MM-DD-HHmmss');
+
+        if(fs.existsSync(packageDir + '/'))
         {
-            return scripts({ watch : false })
-                .pipe(buffer())
-                .pipe(uglify().on('error', gulpUtil.log))
-                .pipe(gulp.dest(Paths.DEST_PROD));
+            let charSuffix = 'a';
+
+            while(!fs.existsSync(`${packageDir}(${charSuffix})/`))
+            {
+                charSuffix++;
+            }
+            packageDir = `${packageDir}(${charSuffix})`;
         }
-        else
+
+        let buildDir = `./builds/${packageDir}/`;
+        if(!fs.existsSync('./builds/'))
         {
-            return scripts({ watch : false })
-                .pipe(buffer())
-                .pipe(uglify().on('error', gulpUtil.log))
-                .pipe(stripDebug())                         //remove console logging
-                .pipe(gulp.dest(Paths.DEST_PROD));
+            fs.mkdirSync('./builds/');
         }
-    });
+        fs.mkdirSync(buildDir);
+        console.log(`Creating an exportable production build at:\n\t${buildDir}`);
+
+        return gulp.src(Paths.BUILD_PACKAGE_SOURCES)
+            .pipe(gulp.dest(buildDir));
+    }
+});
 
 gulp.task('default', ['dev-server']);

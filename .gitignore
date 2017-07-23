@@ -1,4 +1,5 @@
-.idea
-.idea/**/*.*
-node_modules/**
+dist/dev/*.js
+dist/prod/*.js
+dist/prod/**
 node_modules
+builds/**

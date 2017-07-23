@@ -9,14 +9,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 try { injectTapEventPlugin();}
 catch(err){ /* hot reloading, no issue  */}
 
-
 import { VERSION } from './versionInfo'
+
 console.log('appVersion ->', VERSION);
 
-const app = document.getElementById('app');
-ReactDOM.render(
-	(<AppContainer>
-		
-			<RoutingApp/>
-
-	</AppContainer>), app);
+ReactDOM.render((<AppContainer><RoutingApp/></AppContainer>), document.getElementById('app'));
