@@ -2,7 +2,6 @@ import
 {
     FETCH_ARTICLE
 } from './actionTypes'
-
 // currently has sample data
 const initialState = {
     isFetching: false,
@@ -72,25 +71,25 @@ const initialState = {
                 name: "News",
                 slug: "news",
                 description: "The news of Stuyvesant.",
-                parent_id: null
+                parent_id: null,
             },
             1: {
                 id: 1,
                 name: "Opinions",
                 slug: "opinions",
                 description: "The opinions of Stuyvesant.",
-                parent_id: null
+                parent_id: null,
             },
             2: {
                 id: 2,
                 name: "Features",
                 slug: "features",
                 description: "The features of Stuyvesant.",
-                parent_id: null
+                parent_id: null,
             },
         },
     },
-    request: null
+    request: null,
 }
 
 const reducer = (state={...initialState}, action)=>

@@ -9,13 +9,14 @@ import { getHomeArticles } from '../selectors';
 class HomePage extends Component {
 	createSectionListItems() {
 		sections = this.props.sections;
-		return Object.keys(sections).map(function(key, index) {
+		const links = Object.keys(sections).map(function(key, index) {
 		   return (
 				<li key={ sections[key].id }>
 					<Link to={ sections[key].slug }>{ sections[key].name }</Link>
 				</li>
 			)
 		});
+		return links;
 	}
 	render() {
 		return (

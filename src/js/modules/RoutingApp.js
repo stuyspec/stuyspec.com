@@ -6,24 +6,40 @@ import ConnectedRouter from 'react-router-redux/ConnectedRouter';
 import store from '../store';
 
 import core from './core';
-const { ArticlePage, HomePage, SectionPage } = core;
+const { ArticlePage , HomePage, SectionPage, SectionRoutes } = core;
 
 class RoutingApp extends Component
 {
-    render ()
-    {console.log(30);
-        return (
-            <Provider store={ store }>            
-                <ConnectedRouter history={ appHistory }>
-                    <Switch>
-                        <Route exact path="/" component={ HomePage } />
-                        <Route exact path="/:section_slug" component={ SectionPage } />
-                        <Route exact path="/:section_slug/:article_slug" component={ ArticlePage } />
-                    </Switch>
-                </ConnectedRouter>
-            </Provider>
-        );
-    }
+  createSectionRoutes( sections ) {
+    return Object.keys(sections).map(function(key) {
+      section = sections[key];
+      return <Route exact path={ "/"+section.slug } component={ SectionPage } key={section.id}/>
+    })
+  }
+
+  createArticleRoutes( sections ) {
+    return Object.keys(sections).map(function(key) {
+      section = sections[key];
+      return <Route path={ "/"+section.slug+"/:article_slug" } component={ ArticlePage } key={section.id}/>        
+    })
+  }
+
+  render ()
+  {
+    
+    const sections = store.getState().core.entities.sections;
+    return (
+      <Provider store={ store }>
+          <ConnectedRouter history={ appHistory }>
+              <Switch>
+                  <Route exact path="/" component={ HomePage } />
+                  { this.createSectionRoutes(sections) }
+                  { this.createArticleRoutes(sections) }
+              </Switch>
+          </ConnectedRouter>
+      </Provider>
+    );
+  }
 }
 
 export default RoutingApp

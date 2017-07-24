@@ -5,10 +5,10 @@ const getArticles = state => state.core.entities.articles;
 export const getHomeArticles = createSelector(
 	[ getArticles ],
 	(articles) => {
-		homeArticles = {}
-		// for all articles, take a subset of keys
-		Object.keys(articles).map( (key, index) => {
+		homeArticles = {}; // for immutability
+		Object.keys(articles).map( (key) => { // for all articles, take a subset of keys
 			article = articles[key];
+			// chooses minimum properties for a link to the article
 			pickedArticle = ( ({ title, slug, section }) => ({ title, slug, section }) ) (article);
 			homeArticles[key] = pickedArticle;
 		});
@@ -16,7 +16,8 @@ export const getHomeArticles = createSelector(
 	}
 )
 
-// filters all nested objects for which the predicate returns true
+// Writes the Filer function for objects.
+// predicate is the function which keys/properties must match
 Object.filter = (obj, predicate) =>
     Object.keys(obj)
           .filter( key => predicate(obj[key]) )
@@ -39,8 +40,11 @@ export const makeGetArticle = () => {
 	)
 }
 
-const getRequestedSectionSlug = (state, props) => props.match.params.section_slug;
-const getSections = state => state.core.entities.sections;
+const getRequestedSectionSlug = (state, props) => {
+	pathComponents = props.match.path.split('/');
+	return pathComponents[1];
+}
+export const getSections = state => state.core.entities.sections;
 
 export const makeGetSection = () => {
 	return createSelector(
