@@ -9,7 +9,7 @@ const initialState = {
     error: null,
     entities: {
         articles: {
-            0: {
+            "apples-rain-in-new-york-city": {
                 id: 0,
                 title: "Apples Rain in New York City",
                 slug: "apples-rain-in-new-york-city",
@@ -20,7 +20,7 @@ const initialState = {
                 time: "8:27 AM",
                 section: 0,
             },
-            1: {
+            "mccains-miraculous-recovery": {
                 id: 1,
                 title: "McCain's Miraculous Recovery",
                 slug: "mccains-miraculous-recovery",
@@ -31,7 +31,7 @@ const initialState = {
                 time: "8:27 AM",                
                 section: 0,
             },
-            2: {
+            "jason-kao-hits-a-home-run": {
                 id: 2,
                 title: "Jason Kao Hits a Home Run",
                 slug: "jason-kao-hits-a-home-run",
@@ -42,7 +42,7 @@ const initialState = {
                 time: "8:27 AM",
                 section: 1,
             },
-            3: {
+            "fashion-tree-wins-techdisrupt-2018": {
                 id: 3,
                 title: "Fashion Tree Wins TechDisrupt 2018",
                 slug: "fashion-tree-wins-techdisrupt-2018",
@@ -53,7 +53,7 @@ const initialState = {
                 time: "8:27 AM",
                 section: 1,
             },
-            4: {
+            "hackathons-are-illegal-words-from-a-diva": {
                 id: 4,
                 title: "Hackathons are Illegal: Words from a Diva",
                 slug: "hackathons-are-illegal-words-from-a-diva",
@@ -66,21 +66,21 @@ const initialState = {
             },
         },
         sections: {
-            0: {
+            "news": {
                 id: 0,
                 name: "News",
                 slug: "news",
                 description: "The news of Stuyvesant.",
                 parent_id: null,
             },
-            1: {
+            "opinions": {
                 id: 1,
                 name: "Opinions",
                 slug: "opinions",
                 description: "The opinions of Stuyvesant.",
                 parent_id: null,
             },
-            2: {
+            "featuresw": {
                 id: 2,
                 name: "Features",
                 slug: "features",

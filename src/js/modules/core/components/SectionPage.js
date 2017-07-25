@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import injectSheet from 'react-jss';
 
-import { makeGetSectionArticles, makeGetSection } from '../selectors';
+import { getArticlesWithinSection } from '../selectors';
 
 class SectionPage extends Component {
 
@@ -23,7 +23,9 @@ class SectionPage extends Component {
 		return (
 			<div>
 				<h1>{ this.props.section.name }</h1>
-				<p>description: { this.props.section.description }</p>
+				<p>description: { this.props.section.description }</p>				
+				<hr/>
+				<p>articles</p>
 				<ul>
 					{ this.createArticleListItems( this.props.match.url ) }
 				</ul>
@@ -32,20 +34,13 @@ class SectionPage extends Component {
 	}
 }
 
-const makeMapStateToProps = () => {
-	const getSectionArticles = makeGetSectionArticles();
-	const getSection = makeGetSection();
-	const mapStateToProps = (state, props) => {
-	    return {
-	    	articles: getSectionArticles(state, props),
-	    	section: getSection(state, props)
-	    }
-	}
-	return mapStateToProps
-}
+const mapStateToProps = (state, ownProps) => ({
+   	articles: getArticlesWithinSection(state, ownProps),
+   	section: ownProps.section,
+});
 
-function matchDispatchToProps (dispatch) {
+const matchDispatchToProps = dispatch => {
     return bindActionCreators({}, dispatch)
 } 
 
-export default connect(makeMapStateToProps, matchDispatchToProps)(SectionPage);
+export default connect(mapStateToProps, matchDispatchToProps)(SectionPage);

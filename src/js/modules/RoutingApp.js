@@ -6,21 +6,37 @@ import ConnectedRouter from 'react-router-redux/ConnectedRouter';
 import store from '../store';
 
 import core from './core';
-const { ArticlePage , HomePage, SectionPage, SectionRoutes } = core;
+const { ArticlePage , HomePage, SectionPage } = core;
 
 class RoutingApp extends Component
 {
   createSectionRoutes( sections ) {
     return Object.keys(sections).map(function(key) {
-      section = sections[key];
-      return <Route exact path={ "/"+section.slug } component={ SectionPage } key={section.id}/>
+      let section = sections[key];
+      return <Route
+        exact path={ "/"+section.slug }
+        key={ section.id }
+        render={(props) => (
+          <SectionPage history={ props.history }
+            location={ props.location }
+            match={ props.match }
+            section={ section }/>
+        )}/>    
     })
   }
 
   createArticleRoutes( sections ) {
     return Object.keys(sections).map(function(key) {
-      section = sections[key];
-      return <Route path={ "/"+section.slug+"/:article_slug" } component={ ArticlePage } key={section.id}/>        
+      let section = sections[key];
+      return <Route
+        exact path={ "/"+section.slug+"/:article_slug" }
+        key={ section.id }
+        render={(props) => (
+          <ArticlePage history={ props.history }
+            location={ props.location }
+            match={ props.match }
+            section={ section }/>
+        )}/> 
     })
   }
 
