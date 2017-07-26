@@ -32,6 +32,7 @@ const SectionPage = ({classes, articles, subsections, section, match}) => {
     return Object.keys(articles).map(function (key, index) {
       const article = articles[key];
       let pathToArticlePage = article.slug;
+      // if article is not a direct child of this section but is that of the section's subsection
       if (subsections !== null && subsections[article.section_slug] !== undefined) {
         pathToArticlePage = article.section_slug + '/' + article.slug;
       }

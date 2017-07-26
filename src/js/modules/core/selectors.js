@@ -41,6 +41,7 @@ export const getArticleBySlug = createSelector(
   [getSectionByProps, getArticles, getRequestedArticleSlug],
   (section, articles, articleSlug) => {
     const potentiallyWantedArticle = articles[articleSlug];
+    // the article may match the slug, but does it match the requested section?
     if (potentiallyWantedArticle.section_slug === section.slug) {
       return potentiallyWantedArticle;
     }
