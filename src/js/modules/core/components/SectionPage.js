@@ -12,6 +12,9 @@ const styles = {
   }
 }
 
+/* TODO: make subsection tree work for any depth
+ */
+
 const SectionPage = ({classes, articles, subsections, section, match}) => {
   const createSubsectionLinks = () => {
     if (subsections !== null) {

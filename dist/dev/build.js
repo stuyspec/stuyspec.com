@@ -374,8 +374,8 @@
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./../utils": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/utils.js",
       "./../helpers/btoa": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/helpers/btoa.js",
-      "./../helpers/buildURL": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/helpers/buildURL.js",
       "./../helpers/parseHeaders": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/helpers/parseHeaders.js",
+      "./../helpers/buildURL": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/helpers/buildURL.js",
       "./../helpers/isURLSameOrigin": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/helpers/isURLSameOrigin.js",
       "./../helpers/cookies": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/helpers/cookies.js",
       "./../core/settle": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/core/settle.js",
@@ -442,8 +442,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/core/Axios.js": [
     "'use strict';\n\nvar defaults = require('./../defaults');\nvar utils = require('./../utils');\nvar InterceptorManager = require('./InterceptorManager');\nvar dispatchRequest = require('./dispatchRequest');\nvar isAbsoluteURL = require('./../helpers/isAbsoluteURL');\nvar combineURLs = require('./../helpers/combineURLs');\n\n/**\n * Create a new instance of Axios\n *\n * @param {Object} instanceConfig The default config for the instance\n */\nfunction Axios(instanceConfig) {\n  this.defaults = instanceConfig;\n  this.interceptors = {\n    request: new InterceptorManager(),\n    response: new InterceptorManager()\n  };\n}\n\n/**\n * Dispatch a request\n *\n * @param {Object} config The config specific for this request (merged with this.defaults)\n */\nAxios.prototype.request = function request(config) {\n  /*eslint no-param-reassign:0*/\n  // Allow for axios('example/url'[, config]) a la fetch API\n  if (typeof config === 'string') {\n    config = utils.merge({\n      url: arguments[0]\n    }, arguments[1]);\n  }\n\n  config = utils.merge(defaults, this.defaults, { method: 'get' }, config);\n  config.method = config.method.toLowerCase();\n\n  // Support baseURL config\n  if (config.baseURL && !isAbsoluteURL(config.url)) {\n    config.url = combineURLs(config.baseURL, config.url);\n  }\n\n  // Hook up interceptors middleware\n  var chain = [dispatchRequest, undefined];\n  var promise = Promise.resolve(config);\n\n  this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {\n    chain.unshift(interceptor.fulfilled, interceptor.rejected);\n  });\n\n  this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {\n    chain.push(interceptor.fulfilled, interceptor.rejected);\n  });\n\n  while (chain.length) {\n    promise = promise.then(chain.shift(), chain.shift());\n  }\n\n  return promise;\n};\n\n// Provide aliases for supported request methods\nutils.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData(method) {\n  /*eslint func-names:0*/\n  Axios.prototype[method] = function(url, config) {\n    return this.request(utils.merge(config || {}, {\n      method: method,\n      url: url\n    }));\n  };\n});\n\nutils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {\n  /*eslint func-names:0*/\n  Axios.prototype[method] = function(url, data, config) {\n    return this.request(utils.merge(config || {}, {\n      method: method,\n      url: url,\n      data: data\n    }));\n  };\n});\n\nmodule.exports = Axios;\n",
     {
-      "./../defaults": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/defaults.js",
       "./../utils": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/utils.js",
+      "./../defaults": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/defaults.js",
       "./../helpers/isAbsoluteURL": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/helpers/isAbsoluteURL.js",
       "./../helpers/combineURLs": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/helpers/combineURLs.js",
       "./InterceptorManager": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/core/InterceptorManager.js",
@@ -825,8 +825,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-reduce.js": [
     "var aFunction = require('./_a-function')\n  , toObject  = require('./_to-object')\n  , IObject   = require('./_iobject')\n  , toLength  = require('./_to-length');\n\nmodule.exports = function(that, callbackfn, aLen, memo, isRight){\n  aFunction(callbackfn);\n  var O      = toObject(that)\n    , self   = IObject(O)\n    , length = toLength(O.length)\n    , index  = isRight ? length - 1 : 0\n    , i      = isRight ? -1 : 1;\n  if(aLen < 2)for(;;){\n    if(index in self){\n      memo = self[index];\n      index += i;\n      break;\n    }\n    index += i;\n    if(isRight ? index < 0 : length <= index){\n      throw TypeError('Reduce of empty array with no initial value');\n    }\n  }\n  for(;isRight ? index >= 0 : length > index; index += i)if(index in self){\n    memo = callbackfn(memo, self[index], index, O);\n  }\n  return memo;\n};",
     {
-      "./_a-function": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_a-function.js",
       "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
+      "./_a-function": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_a-function.js",
       "./_iobject": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iobject.js",
       "./_to-length": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-length.js"
     },
@@ -907,13 +907,13 @@
       "./_object-create": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-create.js",
       "./_redefine-all": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine-all.js",
       "./_ctx": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_ctx.js",
-      "./_an-instance": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-instance.js",
       "./_defined": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_defined.js",
+      "./_an-instance": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-instance.js",
       "./_for-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_for-of.js",
       "./_iter-define": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iter-define.js",
       "./_iter-step": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iter-step.js",
-      "./_set-species": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_set-species.js",
       "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
+      "./_set-species": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_set-species.js",
       "./_meta": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_meta.js"
     },
     {
@@ -1492,9 +1492,9 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_microtask.js": [
     "var global    = require('./_global')\n  , macrotask = require('./_task').set\n  , Observer  = global.MutationObserver || global.WebKitMutationObserver\n  , process   = global.process\n  , Promise   = global.Promise\n  , isNode    = require('./_cof')(process) == 'process';\n\nmodule.exports = function(){\n  var head, last, notify;\n\n  var flush = function(){\n    var parent, fn;\n    if(isNode && (parent = process.domain))parent.exit();\n    while(head){\n      fn   = head.fn;\n      head = head.next;\n      try {\n        fn();\n      } catch(e){\n        if(head)notify();\n        else last = undefined;\n        throw e;\n      }\n    } last = undefined;\n    if(parent)parent.enter();\n  };\n\n  // Node.js\n  if(isNode){\n    notify = function(){\n      process.nextTick(flush);\n    };\n  // browsers with MutationObserver\n  } else if(Observer){\n    var toggle = true\n      , node   = document.createTextNode('');\n    new Observer(flush).observe(node, {characterData: true}); // eslint-disable-line no-new\n    notify = function(){\n      node.data = toggle = !toggle;\n    };\n  // environments with maybe non-completely correct, but existent Promise\n  } else if(Promise && Promise.resolve){\n    var promise = Promise.resolve();\n    notify = function(){\n      promise.then(flush);\n    };\n  // for other environments - macrotask based on:\n  // - setImmediate\n  // - MessageChannel\n  // - window.postMessag\n  // - onreadystatechange\n  // - setTimeout\n  } else {\n    notify = function(){\n      // strange IE + webpack dev server bug - use .call(global)\n      macrotask.call(global, flush);\n    };\n  }\n\n  return function(fn){\n    var task = {fn: fn, next: undefined};\n    if(last)last.next = task;\n    if(!head){\n      head = task;\n      notify();\n    } last = task;\n  };\n};",
     {
+      "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
       "./_task": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_task.js",
-      "./_cof": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_cof.js",
-      "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js"
+      "./_cof": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_cof.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_microtask.js",
@@ -1510,8 +1510,8 @@
       "./_object-gops": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gops.js",
       "./_object-pie": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-pie.js",
       "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
-      "./_iobject": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iobject.js",
-      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js"
+      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
+      "./_iobject": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iobject.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-assign.js",
@@ -1541,9 +1541,9 @@
     "var anObject       = require('./_an-object')\n  , IE8_DOM_DEFINE = require('./_ie8-dom-define')\n  , toPrimitive    = require('./_to-primitive')\n  , dP             = Object.defineProperty;\n\nexports.f = require('./_descriptors') ? Object.defineProperty : function defineProperty(O, P, Attributes){\n  anObject(O);\n  P = toPrimitive(P, true);\n  anObject(Attributes);\n  if(IE8_DOM_DEFINE)try {\n    return dP(O, P, Attributes);\n  } catch(e){ /* empty */ }\n  if('get' in Attributes || 'set' in Attributes)throw TypeError('Accessors not supported!');\n  if('value' in Attributes)O[P] = Attributes.value;\n  return O;\n};",
     {
       "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
-      "./_ie8-dom-define": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_ie8-dom-define.js",
       "./_to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-primitive.js",
-      "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js"
+      "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
+      "./_ie8-dom-define": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_ie8-dom-define.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
@@ -1589,8 +1589,8 @@
       "./_to-iobject": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-iobject.js",
       "./_to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-primitive.js",
       "./_has": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_has.js",
-      "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
-      "./_ie8-dom-define": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_ie8-dom-define.js"
+      "./_ie8-dom-define": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_ie8-dom-define.js",
+      "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js",
@@ -1719,8 +1719,8 @@
     "// all object keys, includes non-enumerable and symbols\nvar gOPN     = require('./_object-gopn')\n  , gOPS     = require('./_object-gops')\n  , anObject = require('./_an-object')\n  , Reflect  = require('./_global').Reflect;\nmodule.exports = Reflect && Reflect.ownKeys || function ownKeys(it){\n  var keys       = gOPN.f(anObject(it))\n    , getSymbols = gOPS.f;\n  return getSymbols ? keys.concat(getSymbols(it)) : keys;\n};",
     {
       "./_object-gopn": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopn.js",
-      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
       "./_object-gops": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gops.js",
+      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
       "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js"
     },
     {
@@ -1810,8 +1810,8 @@
     "var global    = require('./_global')\n  , hide      = require('./_hide')\n  , has       = require('./_has')\n  , SRC       = require('./_uid')('src')\n  , TO_STRING = 'toString'\n  , $toString = Function[TO_STRING]\n  , TPL       = ('' + $toString).split(TO_STRING);\n\nrequire('./_core').inspectSource = function(it){\n  return $toString.call(it);\n};\n\n(module.exports = function(O, key, val, safe){\n  var isFunction = typeof val == 'function';\n  if(isFunction)has(val, 'name') || hide(val, 'name', key);\n  if(O[key] === val)return;\n  if(isFunction)has(val, SRC) || hide(val, SRC, O[key] ? '' + O[key] : TPL.join(String(key)));\n  if(O === global){\n    O[key] = val;\n  } else {\n    if(!safe){\n      delete O[key];\n      hide(O, key, val);\n    } else {\n      if(O[key])O[key] = val;\n      else hide(O, key, val);\n    }\n  }\n// add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative\n})(Function.prototype, TO_STRING, function toString(){\n  return typeof this == 'function' && this[SRC] || $toString.call(this);\n});",
     {
       "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
-      "./_has": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_has.js",
       "./_hide": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_hide.js",
+      "./_has": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_has.js",
       "./_uid": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_uid.js",
       "./_core": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_core.js"
     },
@@ -2134,8 +2134,8 @@
       "./_redefine-all": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine-all.js",
       "./_to-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-integer.js",
       "./_to-length": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-length.js",
-      "./_to-index": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-index.js",
       "./_to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-primitive.js",
+      "./_to-index": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-index.js",
       "./_has": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_has.js",
       "./_same-value": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_same-value.js",
       "./_classof": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_classof.js",
@@ -2178,8 +2178,8 @@
       "./_redefine-all": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine-all.js",
       "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
       "./_an-instance": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-instance.js",
-      "./_to-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-integer.js",
       "./_to-length": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-length.js",
+      "./_to-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-integer.js",
       "./_object-gopn": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopn.js",
       "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
       "./_array-fill": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-fill.js",
@@ -2263,8 +2263,8 @@
     {
       "./_classof": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_classof.js",
       "./_wks": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks.js",
-      "./_core": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_core.js",
-      "./_iterators": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iterators.js"
+      "./_iterators": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iterators.js",
+      "./_core": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_core.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/core.get-iterator-method.js",
@@ -2467,8 +2467,8 @@
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
       "./_to-iobject": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-iobject.js",
-      "./_to-length": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-length.js",
       "./_to-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-integer.js",
+      "./_to-length": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-length.js",
       "./_strict-method": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_strict-method.js"
     },
     {
@@ -3371,8 +3371,8 @@
       "./_for-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_for-of.js",
       "./_species-constructor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_species-constructor.js",
       "./_task": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_task.js",
-      "./_redefine-all": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine-all.js",
-      "./_microtask": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_microtask.js"
+      "./_microtask": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_microtask.js",
+      "./_redefine-all": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine-all.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.promise.js",
@@ -3387,8 +3387,8 @@
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
       "./_a-function": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_a-function.js",
       "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
-      "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
-      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js"
+      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
+      "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.apply.js",
@@ -3754,8 +3754,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.code-point-at.js": [
     "'use strict';\nvar $export = require('./_export')\n  , $at     = require('./_string-at')(false);\n$export($export.P, 'String', {\n  // 21.1.3.3 String.prototype.codePointAt(pos)\n  codePointAt: function codePointAt(pos){\n    return $at(this, pos);\n  }\n});",
     {
-      "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_string-at": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_string-at.js"
+      "./_string-at": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_string-at.js",
+      "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.code-point-at.js",
@@ -3984,16 +3984,17 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.symbol.js": [
     "'use strict';\n// ECMAScript 6 symbols shim\nvar global         = require('./_global')\n  , has            = require('./_has')\n  , DESCRIPTORS    = require('./_descriptors')\n  , $export        = require('./_export')\n  , redefine       = require('./_redefine')\n  , META           = require('./_meta').KEY\n  , $fails         = require('./_fails')\n  , shared         = require('./_shared')\n  , setToStringTag = require('./_set-to-string-tag')\n  , uid            = require('./_uid')\n  , wks            = require('./_wks')\n  , wksExt         = require('./_wks-ext')\n  , wksDefine      = require('./_wks-define')\n  , keyOf          = require('./_keyof')\n  , enumKeys       = require('./_enum-keys')\n  , isArray        = require('./_is-array')\n  , anObject       = require('./_an-object')\n  , toIObject      = require('./_to-iobject')\n  , toPrimitive    = require('./_to-primitive')\n  , createDesc     = require('./_property-desc')\n  , _create        = require('./_object-create')\n  , gOPNExt        = require('./_object-gopn-ext')\n  , $GOPD          = require('./_object-gopd')\n  , $DP            = require('./_object-dp')\n  , $keys          = require('./_object-keys')\n  , gOPD           = $GOPD.f\n  , dP             = $DP.f\n  , gOPN           = gOPNExt.f\n  , $Symbol        = global.Symbol\n  , $JSON          = global.JSON\n  , _stringify     = $JSON && $JSON.stringify\n  , PROTOTYPE      = 'prototype'\n  , HIDDEN         = wks('_hidden')\n  , TO_PRIMITIVE   = wks('toPrimitive')\n  , isEnum         = {}.propertyIsEnumerable\n  , SymbolRegistry = shared('symbol-registry')\n  , AllSymbols     = shared('symbols')\n  , OPSymbols      = shared('op-symbols')\n  , ObjectProto    = Object[PROTOTYPE]\n  , USE_NATIVE     = typeof $Symbol == 'function'\n  , QObject        = global.QObject;\n// Don't use setters in Qt Script, https://github.com/zloirock/core-js/issues/173\nvar setter = !QObject || !QObject[PROTOTYPE] || !QObject[PROTOTYPE].findChild;\n\n// fallback for old Android, https://code.google.com/p/v8/issues/detail?id=687\nvar setSymbolDesc = DESCRIPTORS && $fails(function(){\n  return _create(dP({}, 'a', {\n    get: function(){ return dP(this, 'a', {value: 7}).a; }\n  })).a != 7;\n}) ? function(it, key, D){\n  var protoDesc = gOPD(ObjectProto, key);\n  if(protoDesc)delete ObjectProto[key];\n  dP(it, key, D);\n  if(protoDesc && it !== ObjectProto)dP(ObjectProto, key, protoDesc);\n} : dP;\n\nvar wrap = function(tag){\n  var sym = AllSymbols[tag] = _create($Symbol[PROTOTYPE]);\n  sym._k = tag;\n  return sym;\n};\n\nvar isSymbol = USE_NATIVE && typeof $Symbol.iterator == 'symbol' ? function(it){\n  return typeof it == 'symbol';\n} : function(it){\n  return it instanceof $Symbol;\n};\n\nvar $defineProperty = function defineProperty(it, key, D){\n  if(it === ObjectProto)$defineProperty(OPSymbols, key, D);\n  anObject(it);\n  key = toPrimitive(key, true);\n  anObject(D);\n  if(has(AllSymbols, key)){\n    if(!D.enumerable){\n      if(!has(it, HIDDEN))dP(it, HIDDEN, createDesc(1, {}));\n      it[HIDDEN][key] = true;\n    } else {\n      if(has(it, HIDDEN) && it[HIDDEN][key])it[HIDDEN][key] = false;\n      D = _create(D, {enumerable: createDesc(0, false)});\n    } return setSymbolDesc(it, key, D);\n  } return dP(it, key, D);\n};\nvar $defineProperties = function defineProperties(it, P){\n  anObject(it);\n  var keys = enumKeys(P = toIObject(P))\n    , i    = 0\n    , l = keys.length\n    , key;\n  while(l > i)$defineProperty(it, key = keys[i++], P[key]);\n  return it;\n};\nvar $create = function create(it, P){\n  return P === undefined ? _create(it) : $defineProperties(_create(it), P);\n};\nvar $propertyIsEnumerable = function propertyIsEnumerable(key){\n  var E = isEnum.call(this, key = toPrimitive(key, true));\n  if(this === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key))return false;\n  return E || !has(this, key) || !has(AllSymbols, key) || has(this, HIDDEN) && this[HIDDEN][key] ? E : true;\n};\nvar $getOwnPropertyDescriptor = function getOwnPropertyDescriptor(it, key){\n  it  = toIObject(it);\n  key = toPrimitive(key, true);\n  if(it === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key))return;\n  var D = gOPD(it, key);\n  if(D && has(AllSymbols, key) && !(has(it, HIDDEN) && it[HIDDEN][key]))D.enumerable = true;\n  return D;\n};\nvar $getOwnPropertyNames = function getOwnPropertyNames(it){\n  var names  = gOPN(toIObject(it))\n    , result = []\n    , i      = 0\n    , key;\n  while(names.length > i){\n    if(!has(AllSymbols, key = names[i++]) && key != HIDDEN && key != META)result.push(key);\n  } return result;\n};\nvar $getOwnPropertySymbols = function getOwnPropertySymbols(it){\n  var IS_OP  = it === ObjectProto\n    , names  = gOPN(IS_OP ? OPSymbols : toIObject(it))\n    , result = []\n    , i      = 0\n    , key;\n  while(names.length > i){\n    if(has(AllSymbols, key = names[i++]) && (IS_OP ? has(ObjectProto, key) : true))result.push(AllSymbols[key]);\n  } return result;\n};\n\n// 19.4.1.1 Symbol([description])\nif(!USE_NATIVE){\n  $Symbol = function Symbol(){\n    if(this instanceof $Symbol)throw TypeError('Symbol is not a constructor!');\n    var tag = uid(arguments.length > 0 ? arguments[0] : undefined);\n    var $set = function(value){\n      if(this === ObjectProto)$set.call(OPSymbols, value);\n      if(has(this, HIDDEN) && has(this[HIDDEN], tag))this[HIDDEN][tag] = false;\n      setSymbolDesc(this, tag, createDesc(1, value));\n    };\n    if(DESCRIPTORS && setter)setSymbolDesc(ObjectProto, tag, {configurable: true, set: $set});\n    return wrap(tag);\n  };\n  redefine($Symbol[PROTOTYPE], 'toString', function toString(){\n    return this._k;\n  });\n\n  $GOPD.f = $getOwnPropertyDescriptor;\n  $DP.f   = $defineProperty;\n  require('./_object-gopn').f = gOPNExt.f = $getOwnPropertyNames;\n  require('./_object-pie').f  = $propertyIsEnumerable;\n  require('./_object-gops').f = $getOwnPropertySymbols;\n\n  if(DESCRIPTORS && !require('./_library')){\n    redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);\n  }\n\n  wksExt.f = function(name){\n    return wrap(wks(name));\n  }\n}\n\n$export($export.G + $export.W + $export.F * !USE_NATIVE, {Symbol: $Symbol});\n\nfor(var symbols = (\n  // 19.4.2.2, 19.4.2.3, 19.4.2.4, 19.4.2.6, 19.4.2.8, 19.4.2.9, 19.4.2.10, 19.4.2.11, 19.4.2.12, 19.4.2.13, 19.4.2.14\n  'hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables'\n).split(','), i = 0; symbols.length > i; )wks(symbols[i++]);\n\nfor(var symbols = $keys(wks.store), i = 0; symbols.length > i; )wksDefine(symbols[i++]);\n\n$export($export.S + $export.F * !USE_NATIVE, 'Symbol', {\n  // 19.4.2.1 Symbol.for(key)\n  'for': function(key){\n    return has(SymbolRegistry, key += '')\n      ? SymbolRegistry[key]\n      : SymbolRegistry[key] = $Symbol(key);\n  },\n  // 19.4.2.5 Symbol.keyFor(sym)\n  keyFor: function keyFor(key){\n    if(isSymbol(key))return keyOf(SymbolRegistry, key);\n    throw TypeError(key + ' is not a symbol!');\n  },\n  useSetter: function(){ setter = true; },\n  useSimple: function(){ setter = false; }\n});\n\n$export($export.S + $export.F * !USE_NATIVE, 'Object', {\n  // 19.1.2.2 Object.create(O [, Properties])\n  create: $create,\n  // 19.1.2.4 Object.defineProperty(O, P, Attributes)\n  defineProperty: $defineProperty,\n  // 19.1.2.3 Object.defineProperties(O, Properties)\n  defineProperties: $defineProperties,\n  // 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)\n  getOwnPropertyDescriptor: $getOwnPropertyDescriptor,\n  // 19.1.2.7 Object.getOwnPropertyNames(O)\n  getOwnPropertyNames: $getOwnPropertyNames,\n  // 19.1.2.8 Object.getOwnPropertySymbols(O)\n  getOwnPropertySymbols: $getOwnPropertySymbols\n});\n\n// 24.3.2 JSON.stringify(value [, replacer [, space]])\n$JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function(){\n  var S = $Symbol();\n  // MS Edge converts symbol values to JSON as {}\n  // WebKit converts symbol values to JSON as null\n  // V8 throws on boxed symbols\n  return _stringify([S]) != '[null]' || _stringify({a: S}) != '{}' || _stringify(Object(S)) != '{}';\n})), 'JSON', {\n  stringify: function stringify(it){\n    if(it === undefined || isSymbol(it))return; // IE8 returns string on undefined\n    var args = [it]\n      , i    = 1\n      , replacer, $replacer;\n    while(arguments.length > i)args.push(arguments[i++]);\n    replacer = args[1];\n    if(typeof replacer == 'function')$replacer = replacer;\n    if($replacer || !isArray(replacer))replacer = function(key, value){\n      if($replacer)value = $replacer.call(this, key, value);\n      if(!isSymbol(value))return value;\n    };\n    args[1] = replacer;\n    return _stringify.apply($JSON, args);\n  }\n});\n\n// 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)\n$Symbol[PROTOTYPE][TO_PRIMITIVE] || require('./_hide')($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);\n// 19.4.3.5 Symbol.prototype[@@toStringTag]\nsetToStringTag($Symbol, 'Symbol');\n// 20.2.1.9 Math[@@toStringTag]\nsetToStringTag(Math, 'Math', true);\n// 24.3.3 JSON[@@toStringTag]\nsetToStringTag(global.JSON, 'JSON', true);",
     {
-      "./_has": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_has.js",
+      "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
+      "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
+      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
       "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
+      "./_has": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_has.js",
       "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
       "./_uid": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_uid.js",
       "./_property-desc": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_property-desc.js",
       "./_object-pie": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-pie.js",
       "./_object-gops": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gops.js",
       "./_library": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_library.js",
-      "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
-      "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
       "./_redefine": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine.js",
       "./_meta": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_meta.js",
       "./_shared": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_shared.js",
@@ -4003,16 +4004,15 @@
       "./_wks-define": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks-define.js",
       "./_keyof": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_keyof.js",
       "./_enum-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_enum-keys.js",
-      "./_is-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-array.js",
       "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
-      "./_to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-primitive.js",
+      "./_is-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-array.js",
       "./_to-iobject": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-iobject.js",
+      "./_to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-primitive.js",
       "./_object-gopn-ext": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopn-ext.js",
-      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
+      "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js",
       "./_object-gopn": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopn.js",
       "./_hide": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_hide.js",
       "./_object-create": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-create.js",
-      "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js",
       "./_object-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-keys.js"
     },
     {
@@ -4229,8 +4229,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.error.is-error.js": [
     "// https://github.com/ljharb/proposal-is-error\nvar $export = require('./_export')\n  , cof     = require('./_cof');\n\n$export($export.S, 'Error', {\n  isError: function isError(it){\n    return cof(it) === 'Error';\n  }\n});",
     {
-      "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_cof": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_cof.js"
+      "./_cof": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_cof.js",
+      "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.error.is-error.js",
@@ -4574,8 +4574,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.at.js": [
     "'use strict';\n// https://github.com/mathiasbynens/String.prototype.at\nvar $export = require('./_export')\n  , $at     = require('./_string-at')(true);\n\n$export($export.P, 'String', {\n  at: function at(pos){\n    return $at(this, pos);\n  }\n});",
     {
-      "./_string-at": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_string-at.js",
-      "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js"
+      "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
+      "./_string-at": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_string-at.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.at.js",
@@ -4738,22 +4738,21 @@
     {
       "./modules/_core": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_core.js",
       "./modules/es6.object.create": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.create.js",
-      "./modules/es6.object.define-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.define-property.js",
-      "./modules/es6.object.keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.keys.js",
       "./modules/es6.object.get-own-property-names": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.get-own-property-names.js",
+      "./modules/es6.object.keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.keys.js",
       "./modules/es6.object.seal": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.seal.js",
-      "./modules/es6.object.prevent-extensions": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.prevent-extensions.js",
       "./modules/es6.object.is-frozen": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.is-frozen.js",
+      "./modules/es6.object.prevent-extensions": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.prevent-extensions.js",
       "./modules/es6.object.is-sealed": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.is-sealed.js",
       "./modules/es6.object.is-extensible": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.is-extensible.js",
       "./modules/es6.function.name": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.function.name.js",
       "./modules/es6.function.has-instance": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.function.has-instance.js",
-      "./modules/es6.number.to-precision": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.to-precision.js",
       "./modules/es6.number.epsilon": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.epsilon.js",
+      "./modules/es6.number.to-precision": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.to-precision.js",
       "./modules/es6.number.is-finite": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.is-finite.js",
+      "./modules/es6.number.max-safe-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.max-safe-integer.js",
       "./modules/es6.number.is-nan": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.is-nan.js",
       "./modules/es6.number.is-safe-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.is-safe-integer.js",
-      "./modules/es6.number.max-safe-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.max-safe-integer.js",
       "./modules/es6.number.min-safe-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.min-safe-integer.js",
       "./modules/es6.number.parse-int": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.parse-int.js",
       "./modules/es6.number.parse-float": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.parse-float.js",
@@ -4764,30 +4763,30 @@
       "./modules/es6.math.fround": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.fround.js",
       "./modules/es6.math.hypot": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.hypot.js",
       "./modules/es6.math.imul": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.imul.js",
-      "./modules/es6.math.log10": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.log10.js",
       "./modules/es6.math.log1p": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.log1p.js",
+      "./modules/es6.math.log10": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.log10.js",
       "./modules/es6.math.log2": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.log2.js",
-      "./modules/es6.math.sign": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.sign.js",
       "./modules/es6.math.sinh": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.sinh.js",
+      "./modules/es6.math.sign": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.sign.js",
       "./modules/es6.math.tanh": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.tanh.js",
       "./modules/es6.math.trunc": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.trunc.js",
       "./modules/es6.string.trim": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.trim.js",
       "./modules/es6.string.code-point-at": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.code-point-at.js",
-      "./modules/es6.string.includes": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.includes.js",
+      "./modules/es6.string.ends-with": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.ends-with.js",
       "./modules/es6.string.repeat": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.repeat.js",
       "./modules/es6.string.starts-with": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.starts-with.js",
       "./modules/es6.string.big": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.big.js",
       "./modules/es6.string.blink": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.blink.js",
-      "./modules/es6.string.bold": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.bold.js",
       "./modules/es6.string.fixed": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.fixed.js",
-      "./modules/es6.string.fontcolor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.fontcolor.js",
+      "./modules/es6.string.bold": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.bold.js",
       "./modules/es6.string.fontsize": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.fontsize.js",
-      "./modules/es6.string.italics": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.italics.js",
+      "./modules/es6.string.fontcolor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.fontcolor.js",
       "./modules/es6.string.link": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.link.js",
-      "./modules/es6.string.strike": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.strike.js",
+      "./modules/es6.string.italics": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.italics.js",
       "./modules/es6.string.small": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.small.js",
-      "./modules/es6.string.sup": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.sup.js",
+      "./modules/es6.string.strike": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.strike.js",
       "./modules/es6.string.sub": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.sub.js",
+      "./modules/es6.string.sup": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.sup.js",
       "./modules/es6.date.now": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.date.now.js",
       "./modules/es6.date.to-json": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.date.to-json.js",
       "./modules/es6.date.to-iso-string": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.date.to-iso-string.js",
@@ -4804,8 +4803,8 @@
       "./modules/es6.array.find-index": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.find-index.js",
       "./modules/es6.regexp.to-string": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.to-string.js",
       "./modules/es6.regexp.flags": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.flags.js",
-      "./modules/es6.regexp.replace": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.replace.js",
       "./modules/es6.regexp.search": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.search.js",
+      "./modules/es6.regexp.replace": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.replace.js",
       "./modules/es6.regexp.split": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.split.js",
       "./modules/es6.set": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.set.js",
       "./modules/es6.weak-set": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.weak-set.js",
@@ -4827,16 +4826,16 @@
       "./modules/es6.reflect.get-prototype-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.get-prototype-of.js",
       "./modules/es6.reflect.has": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.has.js",
       "./modules/es6.reflect.is-extensible": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.is-extensible.js",
-      "./modules/es6.reflect.prevent-extensions": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.prevent-extensions.js",
       "./modules/es6.reflect.set": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.set.js",
+      "./modules/es6.reflect.prevent-extensions": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.prevent-extensions.js",
       "./modules/es6.reflect.set-prototype-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.set-prototype-of.js",
       "./modules/es7.array.includes": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.array.includes.js",
       "./modules/es7.string.at": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.at.js",
       "./modules/es7.string.pad-end": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.pad-end.js",
-      "./modules/es7.string.trim-left": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.trim-left.js",
       "./modules/es7.string.trim-right": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.trim-right.js",
-      "./modules/es7.symbol.async-iterator": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.symbol.async-iterator.js",
+      "./modules/es7.string.trim-left": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.trim-left.js",
       "./modules/es7.symbol.observable": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.symbol.observable.js",
+      "./modules/es7.symbol.async-iterator": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.symbol.async-iterator.js",
       "./modules/es7.object.get-own-property-descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.get-own-property-descriptors.js",
       "./modules/es7.object.entries": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.entries.js",
       "./modules/es7.object.define-setter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.define-setter.js",
@@ -4853,9 +4852,9 @@
       "./modules/es7.reflect.get-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-metadata.js",
       "./modules/es7.reflect.get-own-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-own-metadata.js",
       "./modules/es7.reflect.get-own-metadata-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-own-metadata-keys.js",
-      "./modules/es7.reflect.metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.metadata.js",
       "./modules/es7.reflect.has-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.has-metadata.js",
       "./modules/es7.reflect.has-own-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.has-own-metadata.js",
+      "./modules/es7.reflect.metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.metadata.js",
       "./modules/es7.asap": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.asap.js",
       "./modules/es7.observable": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.observable.js",
       "./modules/web.immediate": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/web.immediate.js",
@@ -4879,10 +4878,10 @@
       "./modules/es6.number.constructor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.constructor.js",
       "./modules/es6.number.to-fixed": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.to-fixed.js",
       "./modules/es6.number.is-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.is-integer.js",
-      "./modules/es6.string.raw": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.raw.js",
       "./modules/es6.string.from-code-point": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.from-code-point.js",
+      "./modules/es6.string.raw": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.raw.js",
       "./modules/es6.string.iterator": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.iterator.js",
-      "./modules/es6.string.ends-with": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.ends-with.js",
+      "./modules/es6.string.includes": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.includes.js",
       "./modules/es6.string.anchor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.anchor.js",
       "./modules/es6.date.to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.date.to-primitive.js",
       "./modules/es6.array.from": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.from.js",
@@ -4901,14 +4900,15 @@
       "./modules/es6.typed.array-buffer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.array-buffer.js",
       "./modules/es6.typed.int8-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.int8-array.js",
       "./modules/es6.reflect.enumerate": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.enumerate.js",
-      "./modules/es6.reflect.own-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.own-keys.js",
       "./modules/es7.string.pad-start": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.pad-start.js",
+      "./modules/es6.reflect.own-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.own-keys.js",
       "./modules/es7.object.values": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.values.js",
       "./modules/es7.object.define-getter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.define-getter.js",
       "./modules/es7.map.to-json": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.map.to-json.js",
-      "./modules/es7.reflect.define-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.define-metadata.js",
       "./modules/es7.reflect.get-metadata-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-metadata-keys.js",
+      "./modules/es7.reflect.define-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.define-metadata.js",
       "./modules/es6.parse-int": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.parse-int.js",
+      "./modules/es6.object.define-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.define-property.js",
       "./modules/es6.symbol": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.symbol.js",
       "./modules/web.timers": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/web.timers.js",
       "./modules/es6.array.for-each": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.for-each.js"
@@ -4949,9 +4949,9 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/css-vendor/lib/index.js": [
     "'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.supportedValue = exports.supportedProperty = exports.prefix = undefined;\n\nvar _prefix = require('./prefix');\n\nvar _prefix2 = _interopRequireDefault(_prefix);\n\nvar _supportedProperty = require('./supported-property');\n\nvar _supportedProperty2 = _interopRequireDefault(_supportedProperty);\n\nvar _supportedValue = require('./supported-value');\n\nvar _supportedValue2 = _interopRequireDefault(_supportedValue);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }\n\nexports['default'] = {\n  prefix: _prefix2['default'],\n  supportedProperty: _supportedProperty2['default'],\n  supportedValue: _supportedValue2['default']\n}; /**\n    * CSS Vendor prefix detection and property feature testing.\n    *\n    * @copyright Oleg Slobodskoi 2015\n    * @website https://github.com/jsstyles/css-vendor\n    * @license MIT\n    */\n\nexports.prefix = _prefix2['default'];\nexports.supportedProperty = _supportedProperty2['default'];\nexports.supportedValue = _supportedValue2['default'];",
     {
+      "./prefix": "/Users/jasonkao/stuyspec/client-app/node_modules/css-vendor/lib/prefix.js",
       "./supported-property": "/Users/jasonkao/stuyspec/client-app/node_modules/css-vendor/lib/supported-property.js",
-      "./supported-value": "/Users/jasonkao/stuyspec/client-app/node_modules/css-vendor/lib/supported-value.js",
-      "./prefix": "/Users/jasonkao/stuyspec/client-app/node_modules/css-vendor/lib/prefix.js"
+      "./supported-value": "/Users/jasonkao/stuyspec/client-app/node_modules/css-vendor/lib/supported-value.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/css-vendor/lib/index.js",
@@ -5320,8 +5320,8 @@
     "'use strict';\n\nexports.__esModule = true;\nexports.locationsAreEqual = exports.createLocation = undefined;\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _resolvePathname = require('resolve-pathname');\n\nvar _resolvePathname2 = _interopRequireDefault(_resolvePathname);\n\nvar _valueEqual = require('value-equal');\n\nvar _valueEqual2 = _interopRequireDefault(_valueEqual);\n\nvar _PathUtils = require('./PathUtils');\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar createLocation = exports.createLocation = function createLocation(path, state, key, currentLocation) {\n  var location = void 0;\n  if (typeof path === 'string') {\n    // Two-arg form: push(path, state)\n    location = (0, _PathUtils.parsePath)(path);\n    location.state = state;\n  } else {\n    // One-arg form: push(location)\n    location = _extends({}, path);\n\n    if (location.pathname === undefined) location.pathname = '';\n\n    if (location.search) {\n      if (location.search.charAt(0) !== '?') location.search = '?' + location.search;\n    } else {\n      location.search = '';\n    }\n\n    if (location.hash) {\n      if (location.hash.charAt(0) !== '#') location.hash = '#' + location.hash;\n    } else {\n      location.hash = '';\n    }\n\n    if (state !== undefined && location.state === undefined) location.state = state;\n  }\n\n  try {\n    location.pathname = decodeURI(location.pathname);\n  } catch (e) {\n    if (e instanceof URIError) {\n      throw new URIError('Pathname \"' + location.pathname + '\" could not be decoded. ' + 'This is likely caused by an invalid percent-encoding.');\n    } else {\n      throw e;\n    }\n  }\n\n  if (key) location.key = key;\n\n  if (currentLocation) {\n    // Resolve incomplete/relative pathname relative to current location.\n    if (!location.pathname) {\n      location.pathname = currentLocation.pathname;\n    } else if (location.pathname.charAt(0) !== '/') {\n      location.pathname = (0, _resolvePathname2.default)(location.pathname, currentLocation.pathname);\n    }\n  } else {\n    // When there is no prior location and pathname is empty, set it to /\n    if (!location.pathname) {\n      location.pathname = '/';\n    }\n  }\n\n  return location;\n};\n\nvar locationsAreEqual = exports.locationsAreEqual = function locationsAreEqual(a, b) {\n  return a.pathname === b.pathname && a.search === b.search && a.hash === b.hash && a.key === b.key && (0, _valueEqual2.default)(a.state, b.state);\n};",
     {
       "./PathUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/history/PathUtils.js",
-      "resolve-pathname": "/Users/jasonkao/stuyspec/client-app/node_modules/resolve-pathname/index.js",
-      "value-equal": "/Users/jasonkao/stuyspec/client-app/node_modules/value-equal/index.js"
+      "value-equal": "/Users/jasonkao/stuyspec/client-app/node_modules/value-equal/index.js",
+      "resolve-pathname": "/Users/jasonkao/stuyspec/client-app/node_modules/resolve-pathname/index.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/history/LocationUtils.js",
@@ -5364,8 +5364,8 @@
       "./PathUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/history/PathUtils.js",
       "./createTransitionManager": "/Users/jasonkao/stuyspec/client-app/node_modules/history/createTransitionManager.js",
       "./DOMUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/history/DOMUtils.js",
-      "invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/invariant/browser.js",
-      "warning": "/Users/jasonkao/stuyspec/client-app/node_modules/warning/browser.js"
+      "warning": "/Users/jasonkao/stuyspec/client-app/node_modules/warning/browser.js",
+      "invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/invariant/browser.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/history/createHashHistory.js",
@@ -5377,8 +5377,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/history/createMemoryHistory.js": [
     "'use strict';\n\nexports.__esModule = true;\n\nvar _typeof = typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; };\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _warning = require('warning');\n\nvar _warning2 = _interopRequireDefault(_warning);\n\nvar _PathUtils = require('./PathUtils');\n\nvar _LocationUtils = require('./LocationUtils');\n\nvar _createTransitionManager = require('./createTransitionManager');\n\nvar _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar clamp = function clamp(n, lowerBound, upperBound) {\n  return Math.min(Math.max(n, lowerBound), upperBound);\n};\n\n/**\n * Creates a history object that stores locations in memory.\n */\nvar createMemoryHistory = function createMemoryHistory() {\n  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};\n  var getUserConfirmation = props.getUserConfirmation,\n      _props$initialEntries = props.initialEntries,\n      initialEntries = _props$initialEntries === undefined ? ['/'] : _props$initialEntries,\n      _props$initialIndex = props.initialIndex,\n      initialIndex = _props$initialIndex === undefined ? 0 : _props$initialIndex,\n      _props$keyLength = props.keyLength,\n      keyLength = _props$keyLength === undefined ? 6 : _props$keyLength;\n\n\n  var transitionManager = (0, _createTransitionManager2.default)();\n\n  var setState = function setState(nextState) {\n    _extends(history, nextState);\n\n    history.length = history.entries.length;\n\n    transitionManager.notifyListeners(history.location, history.action);\n  };\n\n  var createKey = function createKey() {\n    return Math.random().toString(36).substr(2, keyLength);\n  };\n\n  var index = clamp(initialIndex, 0, initialEntries.length - 1);\n  var entries = initialEntries.map(function (entry) {\n    return typeof entry === 'string' ? (0, _LocationUtils.createLocation)(entry, undefined, createKey()) : (0, _LocationUtils.createLocation)(entry, undefined, entry.key || createKey());\n  });\n\n  // Public interface\n\n  var createHref = _PathUtils.createPath;\n\n  var push = function push(path, state) {\n    (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored');\n\n    var action = 'PUSH';\n    var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);\n\n    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {\n      if (!ok) return;\n\n      var prevIndex = history.index;\n      var nextIndex = prevIndex + 1;\n\n      var nextEntries = history.entries.slice(0);\n      if (nextEntries.length > nextIndex) {\n        nextEntries.splice(nextIndex, nextEntries.length - nextIndex, location);\n      } else {\n        nextEntries.push(location);\n      }\n\n      setState({\n        action: action,\n        location: location,\n        index: nextIndex,\n        entries: nextEntries\n      });\n    });\n  };\n\n  var replace = function replace(path, state) {\n    (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored');\n\n    var action = 'REPLACE';\n    var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);\n\n    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {\n      if (!ok) return;\n\n      history.entries[history.index] = location;\n\n      setState({ action: action, location: location });\n    });\n  };\n\n  var go = function go(n) {\n    var nextIndex = clamp(history.index + n, 0, history.entries.length - 1);\n\n    var action = 'POP';\n    var location = history.entries[nextIndex];\n\n    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {\n      if (ok) {\n        setState({\n          action: action,\n          location: location,\n          index: nextIndex\n        });\n      } else {\n        // Mimic the behavior of DOM histories by\n        // causing a render after a cancelled POP.\n        setState();\n      }\n    });\n  };\n\n  var goBack = function goBack() {\n    return go(-1);\n  };\n\n  var goForward = function goForward() {\n    return go(1);\n  };\n\n  var canGo = function canGo(n) {\n    var nextIndex = history.index + n;\n    return nextIndex >= 0 && nextIndex < history.entries.length;\n  };\n\n  var block = function block() {\n    var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;\n    return transitionManager.setPrompt(prompt);\n  };\n\n  var listen = function listen(listener) {\n    return transitionManager.appendListener(listener);\n  };\n\n  var history = {\n    length: entries.length,\n    action: 'POP',\n    location: entries[index],\n    index: index,\n    entries: entries,\n    createHref: createHref,\n    push: push,\n    replace: replace,\n    go: go,\n    goBack: goBack,\n    goForward: goForward,\n    canGo: canGo,\n    block: block,\n    listen: listen\n  };\n\n  return history;\n};\n\nexports.default = createMemoryHistory;",
     {
-      "./PathUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/history/PathUtils.js",
       "./LocationUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/history/LocationUtils.js",
+      "./PathUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/history/PathUtils.js",
       "./createTransitionManager": "/Users/jasonkao/stuyspec/client-app/node_modules/history/createTransitionManager.js",
       "warning": "/Users/jasonkao/stuyspec/client-app/node_modules/warning/browser.js"
     },
@@ -5461,8 +5461,8 @@
     {
       "./_hashDelete": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_hashDelete.js",
       "./_hashGet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_hashGet.js",
-      "./_hashHas": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_hashHas.js",
       "./_hashSet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_hashSet.js",
+      "./_hashHas": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_hashHas.js",
       "./_hashClear": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_hashClear.js"
     },
     {
@@ -5477,9 +5477,9 @@
     {
       "./_listCacheClear": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_listCacheClear.js",
       "./_listCacheGet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_listCacheGet.js",
+      "./_listCacheDelete": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_listCacheDelete.js",
       "./_listCacheHas": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_listCacheHas.js",
-      "./_listCacheSet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_listCacheSet.js",
-      "./_listCacheDelete": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_listCacheDelete.js"
+      "./_listCacheSet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_listCacheSet.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_ListCache.js",
@@ -5504,10 +5504,10 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_MapCache.js": [
     "var mapCacheClear = require('./_mapCacheClear'),\n    mapCacheDelete = require('./_mapCacheDelete'),\n    mapCacheGet = require('./_mapCacheGet'),\n    mapCacheHas = require('./_mapCacheHas'),\n    mapCacheSet = require('./_mapCacheSet');\n\n/**\n * Creates a map cache object to store key-value pairs.\n *\n * @private\n * @constructor\n * @param {Array} [entries] The key-value pairs to cache.\n */\nfunction MapCache(entries) {\n  var index = -1,\n      length = entries == null ? 0 : entries.length;\n\n  this.clear();\n  while (++index < length) {\n    var entry = entries[index];\n    this.set(entry[0], entry[1]);\n  }\n}\n\n// Add methods to `MapCache`.\nMapCache.prototype.clear = mapCacheClear;\nMapCache.prototype['delete'] = mapCacheDelete;\nMapCache.prototype.get = mapCacheGet;\nMapCache.prototype.has = mapCacheHas;\nMapCache.prototype.set = mapCacheSet;\n\nmodule.exports = MapCache;\n",
     {
-      "./_mapCacheGet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheGet.js",
+      "./_mapCacheDelete": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheDelete.js",
       "./_mapCacheHas": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheHas.js",
       "./_mapCacheSet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheSet.js",
-      "./_mapCacheDelete": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheDelete.js",
+      "./_mapCacheGet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheGet.js",
       "./_mapCacheClear": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheClear.js"
     },
     {
@@ -5780,8 +5780,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseGet.js": [
     "var castPath = require('./_castPath'),\n    toKey = require('./_toKey');\n\n/**\n * The base implementation of `_.get` without support for default values.\n *\n * @private\n * @param {Object} object The object to query.\n * @param {Array|string} path The path of the property to get.\n * @returns {*} Returns the resolved value.\n */\nfunction baseGet(object, path) {\n  path = castPath(path, object);\n\n  var index = 0,\n      length = path.length;\n\n  while (object != null && index < length) {\n    object = object[toKey(path[index++])];\n  }\n  return (index && index == length) ? object : undefined;\n}\n\nmodule.exports = baseGet;\n",
     {
-      "./_castPath": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_castPath.js",
-      "./_toKey": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_toKey.js"
+      "./_toKey": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_toKey.js",
+      "./_castPath": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_castPath.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseGet.js",
@@ -5831,8 +5831,8 @@
     "var baseFindIndex = require('./_baseFindIndex'),\n    baseIsNaN = require('./_baseIsNaN'),\n    strictIndexOf = require('./_strictIndexOf');\n\n/**\n * The base implementation of `_.indexOf` without `fromIndex` bounds checks.\n *\n * @private\n * @param {Array} array The array to inspect.\n * @param {*} value The value to search for.\n * @param {number} fromIndex The index to search from.\n * @returns {number} Returns the index of the matched value, else `-1`.\n */\nfunction baseIndexOf(array, value, fromIndex) {\n  return value === value\n    ? strictIndexOf(array, value, fromIndex)\n    : baseFindIndex(array, baseIsNaN, fromIndex);\n}\n\nmodule.exports = baseIndexOf;\n",
     {
       "./_baseFindIndex": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseFindIndex.js",
-      "./_strictIndexOf": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_strictIndexOf.js",
-      "./_baseIsNaN": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseIsNaN.js"
+      "./_baseIsNaN": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseIsNaN.js",
+      "./_strictIndexOf": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_strictIndexOf.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseIndexOf.js",
@@ -5844,8 +5844,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseIsArguments.js": [
     "var baseGetTag = require('./_baseGetTag'),\n    isObjectLike = require('./isObjectLike');\n\n/** `Object#toString` result references. */\nvar argsTag = '[object Arguments]';\n\n/**\n * The base implementation of `_.isArguments`.\n *\n * @private\n * @param {*} value The value to check.\n * @returns {boolean} Returns `true` if `value` is an `arguments` object,\n */\nfunction baseIsArguments(value) {\n  return isObjectLike(value) && baseGetTag(value) == argsTag;\n}\n\nmodule.exports = baseIsArguments;\n",
     {
-      "./_baseGetTag": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseGetTag.js",
-      "./isObjectLike": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isObjectLike.js"
+      "./isObjectLike": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isObjectLike.js",
+      "./_baseGetTag": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseGetTag.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseIsArguments.js",
@@ -5875,8 +5875,8 @@
       "./isBuffer": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isBuffer.js",
       "./isTypedArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isTypedArray.js",
       "./_equalArrays": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_equalArrays.js",
-      "./_equalByTag": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_equalByTag.js",
       "./_getTag": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_getTag.js",
+      "./_equalByTag": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_equalByTag.js",
       "./_equalObjects": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_equalObjects.js"
     },
     {
@@ -5987,10 +5987,10 @@
       "./_matchesStrictComparable": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_matchesStrictComparable.js",
       "./_isStrictComparable": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_isStrictComparable.js",
       "./_toKey": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_toKey.js",
-      "./get": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/get.js",
       "./_isKey": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_isKey.js",
+      "./hasIn": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/hasIn.js",
       "./_baseIsEqual": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseIsEqual.js",
-      "./hasIn": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/hasIn.js"
+      "./get": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/get.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseMatchesProperty.js",
@@ -6064,8 +6064,8 @@
     {
       "./_Symbol": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_Symbol.js",
       "./_arrayMap": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_arrayMap.js",
-      "./isArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArray.js",
-      "./isSymbol": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isSymbol.js"
+      "./isSymbol": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isSymbol.js",
+      "./isArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArray.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseToString.js",
@@ -6112,8 +6112,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_copyObject.js": [
     "var assignValue = require('./_assignValue'),\n    baseAssignValue = require('./_baseAssignValue');\n\n/**\n * Copies properties of `source` to `object`.\n *\n * @private\n * @param {Object} source The object to copy properties from.\n * @param {Array} props The property identifiers to copy.\n * @param {Object} [object={}] The object to copy properties to.\n * @param {Function} [customizer] The function to customize copied values.\n * @returns {Object} Returns `object`.\n */\nfunction copyObject(source, props, object, customizer) {\n  var isNew = !object;\n  object || (object = {});\n\n  var index = -1,\n      length = props.length;\n\n  while (++index < length) {\n    var key = props[index];\n\n    var newValue = customizer\n      ? customizer(object[key], source[key], key, object, source)\n      : undefined;\n\n    if (newValue === undefined) {\n      newValue = source[key];\n    }\n    if (isNew) {\n      baseAssignValue(object, key, newValue);\n    } else {\n      assignValue(object, key, newValue);\n    }\n  }\n  return object;\n}\n\nmodule.exports = copyObject;\n",
     {
-      "./_baseAssignValue": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseAssignValue.js",
-      "./_assignValue": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_assignValue.js"
+      "./_assignValue": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_assignValue.js",
+      "./_baseAssignValue": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseAssignValue.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_copyObject.js",
@@ -6305,8 +6305,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_getSymbols.js": [
     "var arrayFilter = require('./_arrayFilter'),\n    stubArray = require('./stubArray');\n\n/** Used for built-in method references. */\nvar objectProto = Object.prototype;\n\n/** Built-in value references. */\nvar propertyIsEnumerable = objectProto.propertyIsEnumerable;\n\n/* Built-in method references for those with the same name as other `lodash` methods. */\nvar nativeGetSymbols = Object.getOwnPropertySymbols;\n\n/**\n * Creates an array of the own enumerable symbols of `object`.\n *\n * @private\n * @param {Object} object The object to query.\n * @returns {Array} Returns the array of symbols.\n */\nvar getSymbols = !nativeGetSymbols ? stubArray : function(object) {\n  if (object == null) {\n    return [];\n  }\n  object = Object(object);\n  return arrayFilter(nativeGetSymbols(object), function(symbol) {\n    return propertyIsEnumerable.call(object, symbol);\n  });\n};\n\nmodule.exports = getSymbols;\n",
     {
-      "./_arrayFilter": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_arrayFilter.js",
-      "./stubArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/stubArray.js"
+      "./stubArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/stubArray.js",
+      "./_arrayFilter": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_arrayFilter.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_getSymbols.js",
@@ -6322,8 +6322,8 @@
       "./_baseGetTag": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseGetTag.js",
       "./_toSource": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_toSource.js",
       "./_DataView": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_DataView.js",
-      "./_Promise": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_Promise.js",
       "./_Set": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_Set.js",
+      "./_Promise": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_Promise.js",
       "./_WeakMap": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_WeakMap.js"
     },
     {
@@ -6346,12 +6346,12 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_hasPath.js": [
     "var castPath = require('./_castPath'),\n    isArguments = require('./isArguments'),\n    isArray = require('./isArray'),\n    isIndex = require('./_isIndex'),\n    isLength = require('./isLength'),\n    toKey = require('./_toKey');\n\n/**\n * Checks if `path` exists on `object`.\n *\n * @private\n * @param {Object} object The object to query.\n * @param {Array|string} path The path to check.\n * @param {Function} hasFunc The function to check properties.\n * @returns {boolean} Returns `true` if `path` exists, else `false`.\n */\nfunction hasPath(object, path, hasFunc) {\n  path = castPath(path, object);\n\n  var index = -1,\n      length = path.length,\n      result = false;\n\n  while (++index < length) {\n    var key = toKey(path[index]);\n    if (!(result = object != null && hasFunc(object, key))) {\n      break;\n    }\n    object = object[key];\n  }\n  if (result || ++index != length) {\n    return result;\n  }\n  length = object == null ? 0 : object.length;\n  return !!length && isLength(length) && isIndex(key, length) &&\n    (isArray(object) || isArguments(object));\n}\n\nmodule.exports = hasPath;\n",
     {
+      "./_castPath": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_castPath.js",
       "./isArguments": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArguments.js",
-      "./isArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArray.js",
       "./_isIndex": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_isIndex.js",
+      "./isArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArray.js",
       "./isLength": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isLength.js",
-      "./_toKey": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_toKey.js",
-      "./_castPath": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_castPath.js"
+      "./_toKey": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_toKey.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_hasPath.js",
@@ -6845,8 +6845,8 @@
     "var ListCache = require('./_ListCache'),\n    Map = require('./_Map'),\n    MapCache = require('./_MapCache');\n\n/** Used as the size to enable large array optimizations. */\nvar LARGE_ARRAY_SIZE = 200;\n\n/**\n * Sets the stack `key` to `value`.\n *\n * @private\n * @name set\n * @memberOf Stack\n * @param {string} key The key of the value to set.\n * @param {*} value The value to set.\n * @returns {Object} Returns the stack cache instance.\n */\nfunction stackSet(key, value) {\n  var data = this.__data__;\n  if (data instanceof ListCache) {\n    var pairs = data.__data__;\n    if (!Map || (pairs.length < LARGE_ARRAY_SIZE - 1)) {\n      pairs.push([key, value]);\n      this.size = ++data.size;\n      return this;\n    }\n    data = this.__data__ = new MapCache(pairs);\n  }\n  data.set(key, value);\n  this.size = data.size;\n  return this;\n}\n\nmodule.exports = stackSet;\n",
     {
       "./_ListCache": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_ListCache.js",
-      "./_Map": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_Map.js",
-      "./_MapCache": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_MapCache.js"
+      "./_MapCache": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_MapCache.js",
+      "./_Map": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_Map.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_stackSet.js",
@@ -7599,11 +7599,11 @@
     "(function (process){\n/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar _prodInvariant = require('./reactProdInvariant');\n\nvar DOMLazyTree = require('./DOMLazyTree');\nvar ExecutionEnvironment = require('fbjs/lib/ExecutionEnvironment');\n\nvar createNodesFromMarkup = require('fbjs/lib/createNodesFromMarkup');\nvar emptyFunction = require('fbjs/lib/emptyFunction');\nvar invariant = require('fbjs/lib/invariant');\n\nvar Danger = {\n  /**\n   * Replaces a node with a string of markup at its current position within its\n   * parent. The markup must render into a single root node.\n   *\n   * @param {DOMElement} oldChild Child node to replace.\n   * @param {string} markup Markup to render in place of the child node.\n   * @internal\n   */\n  dangerouslyReplaceNodeWithMarkup: function (oldChild, markup) {\n    !ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? invariant(false, 'dangerouslyReplaceNodeWithMarkup(...): Cannot render markup in a worker thread. Make sure `window` and `document` are available globally before requiring React when unit testing or use ReactDOMServer.renderToString() for server rendering.') : _prodInvariant('56') : void 0;\n    !markup ? process.env.NODE_ENV !== 'production' ? invariant(false, 'dangerouslyReplaceNodeWithMarkup(...): Missing markup.') : _prodInvariant('57') : void 0;\n    !(oldChild.nodeName !== 'HTML') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'dangerouslyReplaceNodeWithMarkup(...): Cannot replace markup of the <html> node. This is because browser quirks make this unreliable and/or slow. If you want to render to the root you must use server rendering. See ReactDOMServer.renderToString().') : _prodInvariant('58') : void 0;\n\n    if (typeof markup === 'string') {\n      var newChild = createNodesFromMarkup(markup, emptyFunction)[0];\n      oldChild.parentNode.replaceChild(newChild, oldChild);\n    } else {\n      DOMLazyTree.replaceChildWithTree(oldChild, markup);\n    }\n  }\n};\n\nmodule.exports = Danger;\n}).call(this,require('_process'))\n",
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
-      "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
       "./DOMLazyTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMLazyTree.js",
+      "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
-      "fbjs/lib/ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
       "fbjs/lib/emptyFunction": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyFunction.js",
+      "fbjs/lib/ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
       "fbjs/lib/createNodesFromMarkup": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/createNodesFromMarkup.js"
     },
     {
@@ -7684,10 +7684,10 @@
     "(function (process){\n/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar _prodInvariant = require('./reactProdInvariant');\n\nvar ReactErrorUtils = require('./ReactErrorUtils');\n\nvar invariant = require('fbjs/lib/invariant');\nvar warning = require('fbjs/lib/warning');\n\n/**\n * Injected dependencies:\n */\n\n/**\n * - `ComponentTree`: [required] Module that can convert between React instances\n *   and actual node references.\n */\nvar ComponentTree;\nvar TreeTraversal;\nvar injection = {\n  injectComponentTree: function (Injected) {\n    ComponentTree = Injected;\n    if (process.env.NODE_ENV !== 'production') {\n      process.env.NODE_ENV !== 'production' ? warning(Injected && Injected.getNodeFromInstance && Injected.getInstanceFromNode, 'EventPluginUtils.injection.injectComponentTree(...): Injected ' + 'module is missing getNodeFromInstance or getInstanceFromNode.') : void 0;\n    }\n  },\n  injectTreeTraversal: function (Injected) {\n    TreeTraversal = Injected;\n    if (process.env.NODE_ENV !== 'production') {\n      process.env.NODE_ENV !== 'production' ? warning(Injected && Injected.isAncestor && Injected.getLowestCommonAncestor, 'EventPluginUtils.injection.injectTreeTraversal(...): Injected ' + 'module is missing isAncestor or getLowestCommonAncestor.') : void 0;\n    }\n  }\n};\n\nfunction isEndish(topLevelType) {\n  return topLevelType === 'topMouseUp' || topLevelType === 'topTouchEnd' || topLevelType === 'topTouchCancel';\n}\n\nfunction isMoveish(topLevelType) {\n  return topLevelType === 'topMouseMove' || topLevelType === 'topTouchMove';\n}\nfunction isStartish(topLevelType) {\n  return topLevelType === 'topMouseDown' || topLevelType === 'topTouchStart';\n}\n\nvar validateEventDispatches;\nif (process.env.NODE_ENV !== 'production') {\n  validateEventDispatches = function (event) {\n    var dispatchListeners = event._dispatchListeners;\n    var dispatchInstances = event._dispatchInstances;\n\n    var listenersIsArr = Array.isArray(dispatchListeners);\n    var listenersLen = listenersIsArr ? dispatchListeners.length : dispatchListeners ? 1 : 0;\n\n    var instancesIsArr = Array.isArray(dispatchInstances);\n    var instancesLen = instancesIsArr ? dispatchInstances.length : dispatchInstances ? 1 : 0;\n\n    process.env.NODE_ENV !== 'production' ? warning(instancesIsArr === listenersIsArr && instancesLen === listenersLen, 'EventPluginUtils: Invalid `event`.') : void 0;\n  };\n}\n\n/**\n * Dispatch the event to the listener.\n * @param {SyntheticEvent} event SyntheticEvent to handle\n * @param {boolean} simulated If the event is simulated (changes exn behavior)\n * @param {function} listener Application-level callback\n * @param {*} inst Internal component instance\n */\nfunction executeDispatch(event, simulated, listener, inst) {\n  var type = event.type || 'unknown-event';\n  event.currentTarget = EventPluginUtils.getNodeFromInstance(inst);\n  if (simulated) {\n    ReactErrorUtils.invokeGuardedCallbackWithCatch(type, listener, event);\n  } else {\n    ReactErrorUtils.invokeGuardedCallback(type, listener, event);\n  }\n  event.currentTarget = null;\n}\n\n/**\n * Standard/simple iteration through an event's collected dispatches.\n */\nfunction executeDispatchesInOrder(event, simulated) {\n  var dispatchListeners = event._dispatchListeners;\n  var dispatchInstances = event._dispatchInstances;\n  if (process.env.NODE_ENV !== 'production') {\n    validateEventDispatches(event);\n  }\n  if (Array.isArray(dispatchListeners)) {\n    for (var i = 0; i < dispatchListeners.length; i++) {\n      if (event.isPropagationStopped()) {\n        break;\n      }\n      // Listeners and Instances are two parallel arrays that are always in sync.\n      executeDispatch(event, simulated, dispatchListeners[i], dispatchInstances[i]);\n    }\n  } else if (dispatchListeners) {\n    executeDispatch(event, simulated, dispatchListeners, dispatchInstances);\n  }\n  event._dispatchListeners = null;\n  event._dispatchInstances = null;\n}\n\n/**\n * Standard/simple iteration through an event's collected dispatches, but stops\n * at the first dispatch execution returning true, and returns that id.\n *\n * @return {?string} id of the first dispatch execution who's listener returns\n * true, or null if no listener returned true.\n */\nfunction executeDispatchesInOrderStopAtTrueImpl(event) {\n  var dispatchListeners = event._dispatchListeners;\n  var dispatchInstances = event._dispatchInstances;\n  if (process.env.NODE_ENV !== 'production') {\n    validateEventDispatches(event);\n  }\n  if (Array.isArray(dispatchListeners)) {\n    for (var i = 0; i < dispatchListeners.length; i++) {\n      if (event.isPropagationStopped()) {\n        break;\n      }\n      // Listeners and Instances are two parallel arrays that are always in sync.\n      if (dispatchListeners[i](event, dispatchInstances[i])) {\n        return dispatchInstances[i];\n      }\n    }\n  } else if (dispatchListeners) {\n    if (dispatchListeners(event, dispatchInstances)) {\n      return dispatchInstances;\n    }\n  }\n  return null;\n}\n\n/**\n * @see executeDispatchesInOrderStopAtTrueImpl\n */\nfunction executeDispatchesInOrderStopAtTrue(event) {\n  var ret = executeDispatchesInOrderStopAtTrueImpl(event);\n  event._dispatchInstances = null;\n  event._dispatchListeners = null;\n  return ret;\n}\n\n/**\n * Execution of a \"direct\" dispatch - there must be at most one dispatch\n * accumulated on the event or it is considered an error. It doesn't really make\n * sense for an event with multiple dispatches (bubbled) to keep track of the\n * return values at each dispatch execution, but it does tend to make sense when\n * dealing with \"direct\" dispatches.\n *\n * @return {*} The return value of executing the single dispatch.\n */\nfunction executeDirectDispatch(event) {\n  if (process.env.NODE_ENV !== 'production') {\n    validateEventDispatches(event);\n  }\n  var dispatchListener = event._dispatchListeners;\n  var dispatchInstance = event._dispatchInstances;\n  !!Array.isArray(dispatchListener) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'executeDirectDispatch(...): Invalid `event`.') : _prodInvariant('103') : void 0;\n  event.currentTarget = dispatchListener ? EventPluginUtils.getNodeFromInstance(dispatchInstance) : null;\n  var res = dispatchListener ? dispatchListener(event) : null;\n  event.currentTarget = null;\n  event._dispatchListeners = null;\n  event._dispatchInstances = null;\n  return res;\n}\n\n/**\n * @param {SyntheticEvent} event\n * @return {boolean} True iff number of dispatches accumulated is greater than 0.\n */\nfunction hasDispatches(event) {\n  return !!event._dispatchListeners;\n}\n\n/**\n * General utilities that are useful in creating custom Event Plugins.\n */\nvar EventPluginUtils = {\n  isEndish: isEndish,\n  isMoveish: isMoveish,\n  isStartish: isStartish,\n\n  executeDirectDispatch: executeDirectDispatch,\n  executeDispatchesInOrder: executeDispatchesInOrder,\n  executeDispatchesInOrderStopAtTrue: executeDispatchesInOrderStopAtTrue,\n  hasDispatches: hasDispatches,\n\n  getInstanceFromNode: function (node) {\n    return ComponentTree.getInstanceFromNode(node);\n  },\n  getNodeFromInstance: function (node) {\n    return ComponentTree.getNodeFromInstance(node);\n  },\n  isAncestor: function (a, b) {\n    return TreeTraversal.isAncestor(a, b);\n  },\n  getLowestCommonAncestor: function (a, b) {\n    return TreeTraversal.getLowestCommonAncestor(a, b);\n  },\n  getParentInstance: function (inst) {\n    return TreeTraversal.getParentInstance(inst);\n  },\n  traverseTwoPhase: function (target, fn, arg) {\n    return TreeTraversal.traverseTwoPhase(target, fn, arg);\n  },\n  traverseEnterLeave: function (from, to, fn, argFrom, argTo) {\n    return TreeTraversal.traverseEnterLeave(from, to, fn, argFrom, argTo);\n  },\n\n  injection: injection\n};\n\nmodule.exports = EventPluginUtils;\n}).call(this,require('_process'))\n",
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
-      "./ReactErrorUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactErrorUtils.js",
       "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
-      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
-      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js"
+      "./ReactErrorUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactErrorUtils.js",
+      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
+      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPluginUtils.js",
@@ -7806,8 +7806,8 @@
       "./instantiateReactComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/instantiateReactComponent.js",
       "./shouldUpdateReactComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/shouldUpdateReactComponent.js",
       "./KeyEscapeUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/KeyEscapeUtils.js",
-      "react/lib/ReactComponentTreeHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactComponentTreeHook.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
+      "react/lib/ReactComponentTreeHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactComponentTreeHook.js",
       "./traverseAllChildren": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/traverseAllChildren.js"
     },
     {
@@ -7850,9 +7850,9 @@
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
       "./ReactComponentEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactComponentEnvironment.js",
-      "./ReactInstanceMap": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInstanceMap.js",
       "./ReactErrorUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactErrorUtils.js",
       "./ReactInstrumentation": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInstrumentation.js",
+      "./ReactInstanceMap": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInstanceMap.js",
       "./ReactNodeTypes": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactNodeTypes.js",
       "./ReactReconciler": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactReconciler.js",
       "./shouldUpdateReactComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/shouldUpdateReactComponent.js",
@@ -7861,8 +7861,8 @@
       "react/lib/React": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/React.js",
       "fbjs/lib/emptyObject": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyObject.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
-      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
       "fbjs/lib/shallowEqual": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/shallowEqual.js",
+      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
       "./checkReactTypeSpec": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/checkReactTypeSpec.js"
     },
     {
@@ -7880,9 +7880,9 @@
       "./renderSubtreeIntoContainer": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/renderSubtreeIntoContainer.js",
       "fbjs/lib/ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
       "./findDOMNode": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/findDOMNode.js",
-      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
       "./ReactDOMNullInputValuePropHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMNullInputValuePropHook.js",
       "./ReactDOMInvalidARIAHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMInvalidARIAHook.js",
+      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
       "./ReactDOMComponentTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
       "./ReactUpdates": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdates.js",
       "./getHostComponentFromComposite": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/getHostComponentFromComposite.js",
@@ -7922,8 +7922,8 @@
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
       "fbjs/lib/shallowEqual": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/shallowEqual.js",
       "./DOMPropertyOperations": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMPropertyOperations.js",
-      "./ReactDOMOption": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMOption.js",
       "./ReactDOMSelect": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMSelect.js",
+      "./ReactDOMOption": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMOption.js",
       "./ReactDOMTextarea": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMTextarea.js",
       "./validateDOMNesting": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/validateDOMNesting.js",
       "./AutoFocusUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/AutoFocusUtils.js",
@@ -8005,8 +8005,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMIDOperations.js": [
     "/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar DOMChildrenOperations = require('./DOMChildrenOperations');\nvar ReactDOMComponentTree = require('./ReactDOMComponentTree');\n\n/**\n * Operations used to process updates to DOM nodes.\n */\nvar ReactDOMIDOperations = {\n  /**\n   * Updates a component's children by processing a series of updates.\n   *\n   * @param {array<object>} updates List of update configurations.\n   * @internal\n   */\n  dangerouslyProcessChildrenUpdates: function (parentInst, updates) {\n    var node = ReactDOMComponentTree.getNodeFromInstance(parentInst);\n    DOMChildrenOperations.processUpdates(node, updates);\n  }\n};\n\nmodule.exports = ReactDOMIDOperations;",
     {
-      "./DOMChildrenOperations": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMChildrenOperations.js",
-      "./ReactDOMComponentTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js"
+      "./ReactDOMComponentTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
+      "./DOMChildrenOperations": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMChildrenOperations.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMIDOperations.js",
@@ -8024,8 +8024,8 @@
       "./ReactDOMComponentTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
       "./ReactUpdates": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdates.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
-      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
+      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "./LinkedValueUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/LinkedValueUtils.js"
     },
     {
@@ -8040,8 +8040,8 @@
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./DOMProperty": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMProperty.js",
-      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
-      "react/lib/ReactComponentTreeHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactComponentTreeHook.js"
+      "react/lib/ReactComponentTreeHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactComponentTreeHook.js",
+      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMInvalidARIAHook.js",
@@ -8138,8 +8138,8 @@
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
       "./LinkedValueUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/LinkedValueUtils.js",
-      "./ReactUpdates": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdates.js",
       "./ReactDOMComponentTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
+      "./ReactUpdates": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdates.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
@@ -8186,8 +8186,8 @@
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./ReactHostOperationHistoryHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactHostOperationHistoryHook.js",
-      "fbjs/lib/ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
       "react/lib/ReactComponentTreeHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactComponentTreeHook.js",
+      "fbjs/lib/ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
       "./ReactInvalidSetStateWarningHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInvalidSetStateWarningHook.js",
       "fbjs/lib/performanceNow": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/performanceNow.js"
@@ -8292,8 +8292,8 @@
     "/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar _assign = require('object-assign');\n\nvar EventListener = require('fbjs/lib/EventListener');\nvar ExecutionEnvironment = require('fbjs/lib/ExecutionEnvironment');\nvar PooledClass = require('./PooledClass');\nvar ReactDOMComponentTree = require('./ReactDOMComponentTree');\nvar ReactUpdates = require('./ReactUpdates');\n\nvar getEventTarget = require('./getEventTarget');\nvar getUnboundedScrollPosition = require('fbjs/lib/getUnboundedScrollPosition');\n\n/**\n * Find the deepest React component completely containing the root of the\n * passed-in instance (for use when entire React trees are nested within each\n * other). If React trees are not nested, returns null.\n */\nfunction findParent(inst) {\n  // TODO: It may be a good idea to cache this to prevent unnecessary DOM\n  // traversal, but caching is difficult to do correctly without using a\n  // mutation observer to listen for all DOM changes.\n  while (inst._hostParent) {\n    inst = inst._hostParent;\n  }\n  var rootNode = ReactDOMComponentTree.getNodeFromInstance(inst);\n  var container = rootNode.parentNode;\n  return ReactDOMComponentTree.getClosestInstanceFromNode(container);\n}\n\n// Used to store ancestor hierarchy in top level callback\nfunction TopLevelCallbackBookKeeping(topLevelType, nativeEvent) {\n  this.topLevelType = topLevelType;\n  this.nativeEvent = nativeEvent;\n  this.ancestors = [];\n}\n_assign(TopLevelCallbackBookKeeping.prototype, {\n  destructor: function () {\n    this.topLevelType = null;\n    this.nativeEvent = null;\n    this.ancestors.length = 0;\n  }\n});\nPooledClass.addPoolingTo(TopLevelCallbackBookKeeping, PooledClass.twoArgumentPooler);\n\nfunction handleTopLevelImpl(bookKeeping) {\n  var nativeEventTarget = getEventTarget(bookKeeping.nativeEvent);\n  var targetInst = ReactDOMComponentTree.getClosestInstanceFromNode(nativeEventTarget);\n\n  // Loop through the hierarchy, in case there's any nested components.\n  // It's important that we build the array of ancestors before calling any\n  // event handlers, because event handlers can modify the DOM, leading to\n  // inconsistencies with ReactMount's node cache. See #1105.\n  var ancestor = targetInst;\n  do {\n    bookKeeping.ancestors.push(ancestor);\n    ancestor = ancestor && findParent(ancestor);\n  } while (ancestor);\n\n  for (var i = 0; i < bookKeeping.ancestors.length; i++) {\n    targetInst = bookKeeping.ancestors[i];\n    ReactEventListener._handleTopLevel(bookKeeping.topLevelType, targetInst, bookKeeping.nativeEvent, getEventTarget(bookKeeping.nativeEvent));\n  }\n}\n\nfunction scrollValueMonitor(cb) {\n  var scrollPosition = getUnboundedScrollPosition(window);\n  cb(scrollPosition);\n}\n\nvar ReactEventListener = {\n  _enabled: true,\n  _handleTopLevel: null,\n\n  WINDOW_HANDLE: ExecutionEnvironment.canUseDOM ? window : null,\n\n  setHandleTopLevel: function (handleTopLevel) {\n    ReactEventListener._handleTopLevel = handleTopLevel;\n  },\n\n  setEnabled: function (enabled) {\n    ReactEventListener._enabled = !!enabled;\n  },\n\n  isEnabled: function () {\n    return ReactEventListener._enabled;\n  },\n\n  /**\n   * Traps top-level events by using event bubbling.\n   *\n   * @param {string} topLevelType Record from `EventConstants`.\n   * @param {string} handlerBaseName Event name (e.g. \"click\").\n   * @param {object} element Element on which to attach listener.\n   * @return {?object} An object with a remove function which will forcefully\n   *                  remove the listener.\n   * @internal\n   */\n  trapBubbledEvent: function (topLevelType, handlerBaseName, element) {\n    if (!element) {\n      return null;\n    }\n    return EventListener.listen(element, handlerBaseName, ReactEventListener.dispatchEvent.bind(null, topLevelType));\n  },\n\n  /**\n   * Traps a top-level event by using event capturing.\n   *\n   * @param {string} topLevelType Record from `EventConstants`.\n   * @param {string} handlerBaseName Event name (e.g. \"click\").\n   * @param {object} element Element on which to attach listener.\n   * @return {?object} An object with a remove function which will forcefully\n   *                  remove the listener.\n   * @internal\n   */\n  trapCapturedEvent: function (topLevelType, handlerBaseName, element) {\n    if (!element) {\n      return null;\n    }\n    return EventListener.capture(element, handlerBaseName, ReactEventListener.dispatchEvent.bind(null, topLevelType));\n  },\n\n  monitorScrollValue: function (refresh) {\n    var callback = scrollValueMonitor.bind(null, refresh);\n    EventListener.listen(window, 'scroll', callback);\n  },\n\n  dispatchEvent: function (topLevelType, nativeEvent) {\n    if (!ReactEventListener._enabled) {\n      return;\n    }\n\n    var bookKeeping = TopLevelCallbackBookKeeping.getPooled(topLevelType, nativeEvent);\n    try {\n      // Event queue being processed in the same cycle allows\n      // `preventDefault`.\n      ReactUpdates.batchedUpdates(handleTopLevelImpl, bookKeeping);\n    } finally {\n      TopLevelCallbackBookKeeping.release(bookKeeping);\n    }\n  }\n};\n\nmodule.exports = ReactEventListener;",
     {
       "./PooledClass": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/PooledClass.js",
-      "./ReactDOMComponentTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
       "./ReactUpdates": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdates.js",
+      "./ReactDOMComponentTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
       "./getEventTarget": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/getEventTarget.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
       "fbjs/lib/ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
@@ -8350,8 +8350,8 @@
       "./ReactBrowserEventEmitter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactBrowserEventEmitter.js",
       "./ReactUpdates": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdates.js",
       "./ReactEmptyComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactEmptyComponent.js",
-      "./ReactComponentEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactComponentEnvironment.js",
-      "./ReactHostComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactHostComponent.js"
+      "./ReactHostComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactHostComponent.js",
+      "./ReactComponentEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactComponentEnvironment.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInjection.js",
@@ -8441,13 +8441,13 @@
       "./ReactMarkupChecksum": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactMarkupChecksum.js",
       "react/lib/React": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/React.js",
       "react/lib/ReactCurrentOwner": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactCurrentOwner.js",
-      "fbjs/lib/emptyObject": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyObject.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
+      "fbjs/lib/emptyObject": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyObject.js",
       "./ReactUpdateQueue": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdateQueue.js",
       "./setInnerHTML": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/setInnerHTML.js",
-      "./DOMLazyTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMLazyTree.js",
       "./ReactBrowserEventEmitter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactBrowserEventEmitter.js",
+      "./DOMLazyTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMLazyTree.js",
       "./instantiateReactComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/instantiateReactComponent.js"
     },
     {
@@ -8617,8 +8617,8 @@
       "./ReactInstrumentation": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInstrumentation.js",
       "./ReactUpdates": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdates.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
-      "react/lib/ReactCurrentOwner": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactCurrentOwner.js",
-      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
+      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
+      "react/lib/ReactCurrentOwner": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactCurrentOwner.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdateQueue.js",
@@ -8636,9 +8636,9 @@
       "./ReactReconciler": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactReconciler.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
-      "./PooledClass": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/PooledClass.js",
       "./CallbackQueue": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/CallbackQueue.js",
-      "./Transaction": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/Transaction.js"
+      "./Transaction": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/Transaction.js",
+      "./PooledClass": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/PooledClass.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdates.js",
@@ -8672,8 +8672,8 @@
     {
       "./EventPropagators": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPropagators.js",
       "./ReactDOMComponentTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
-      "./SyntheticEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticEvent.js",
       "./ReactInputSelection": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInputSelection.js",
+      "./SyntheticEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticEvent.js",
       "./isTextInputElement": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/isTextInputElement.js",
       "fbjs/lib/ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
       "fbjs/lib/shallowEqual": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/shallowEqual.js",
@@ -8697,16 +8697,16 @@
       "./SyntheticMouseEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticMouseEvent.js",
       "./SyntheticUIEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticUIEvent.js",
       "./getEventCharCode": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/getEventCharCode.js",
-      "./SyntheticClipboardEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticClipboardEvent.js",
       "./SyntheticAnimationEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticAnimationEvent.js",
+      "./SyntheticClipboardEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticClipboardEvent.js",
       "./SyntheticFocusEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticFocusEvent.js",
       "./SyntheticDragEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticDragEvent.js",
       "./SyntheticTouchEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticTouchEvent.js",
       "./SyntheticTransitionEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticTransitionEvent.js",
       "./SyntheticWheelEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticWheelEvent.js",
       "./SyntheticKeyboardEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticKeyboardEvent.js",
-      "fbjs/lib/EventListener": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/EventListener.js",
       "fbjs/lib/emptyFunction": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyFunction.js",
+      "fbjs/lib/EventListener": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/EventListener.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js"
     },
     {
@@ -8770,8 +8770,8 @@
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./PooledClass": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/PooledClass.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
-      "fbjs/lib/emptyFunction": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyFunction.js",
-      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
+      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
+      "fbjs/lib/emptyFunction": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyFunction.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticEvent.js",
@@ -8836,8 +8836,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticTouchEvent.js": [
     "/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar SyntheticUIEvent = require('./SyntheticUIEvent');\n\nvar getEventModifierState = require('./getEventModifierState');\n\n/**\n * @interface TouchEvent\n * @see http://www.w3.org/TR/touch-events/\n */\nvar TouchEventInterface = {\n  touches: null,\n  targetTouches: null,\n  changedTouches: null,\n  altKey: null,\n  metaKey: null,\n  ctrlKey: null,\n  shiftKey: null,\n  getModifierState: getEventModifierState\n};\n\n/**\n * @param {object} dispatchConfig Configuration used to dispatch this event.\n * @param {string} dispatchMarker Marker identifying the event target.\n * @param {object} nativeEvent Native browser event.\n * @extends {SyntheticUIEvent}\n */\nfunction SyntheticTouchEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeEventTarget) {\n  return SyntheticUIEvent.call(this, dispatchConfig, dispatchMarker, nativeEvent, nativeEventTarget);\n}\n\nSyntheticUIEvent.augmentClass(SyntheticTouchEvent, TouchEventInterface);\n\nmodule.exports = SyntheticTouchEvent;",
     {
-      "./SyntheticUIEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticUIEvent.js",
-      "./getEventModifierState": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/getEventModifierState.js"
+      "./getEventModifierState": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/getEventModifierState.js",
+      "./SyntheticUIEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticUIEvent.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticTouchEvent.js",
@@ -8992,8 +8992,8 @@
       "./ReactInstanceMap": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInstanceMap.js",
       "./getHostComponentFromComposite": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/getHostComponentFromComposite.js",
       "react/lib/ReactCurrentOwner": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactCurrentOwner.js",
-      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
-      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js"
+      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
+      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/findDOMNode.js",
@@ -9258,8 +9258,8 @@
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
       "./KeyEscapeUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/KeyEscapeUtils.js",
-      "./ReactElementSymbol": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactElementSymbol.js",
       "./getIteratorFn": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/getIteratorFn.js",
+      "./ReactElementSymbol": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactElementSymbol.js",
       "react/lib/ReactCurrentOwner": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactCurrentOwner.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
@@ -9418,8 +9418,8 @@
     "'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _propTypes = require('prop-types');\n\nvar _jss = require('jss');\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar SheetsRegistryProvider = function (_Component) {\n  _inherits(SheetsRegistryProvider, _Component);\n\n  function SheetsRegistryProvider() {\n    _classCallCheck(this, SheetsRegistryProvider);\n\n    return _possibleConstructorReturn(this, (SheetsRegistryProvider.__proto__ || Object.getPrototypeOf(SheetsRegistryProvider)).apply(this, arguments));\n  }\n\n  _createClass(SheetsRegistryProvider, [{\n    key: 'getChildContext',\n    value: function getChildContext() {\n      return {\n        jssSheetsRegistry: this.props.registry\n      };\n    }\n  }, {\n    key: 'render',\n    value: function render() {\n      var children = this.props.children;\n\n      return _react.Children.count(children) > 1 ? _react2['default'].createElement(\n        'div',\n        null,\n        children\n      ) : children;\n    }\n  }]);\n\n  return SheetsRegistryProvider;\n}(_react.Component);\n\nSheetsRegistryProvider.propTypes = {\n  registry: (0, _propTypes.instanceOf)(_jss.SheetsRegistry).isRequired,\n  children: _propTypes.node.isRequired\n};\nSheetsRegistryProvider.childContextTypes = {\n  jssSheetsRegistry: (0, _propTypes.instanceOf)(_jss.SheetsRegistry).isRequired\n};\nexports['default'] = SheetsRegistryProvider;",
     {
       "jss": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/index.js",
-      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
-      "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js"
+      "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js",
+      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/lib/SheetsRegistryProvider.js",
@@ -9721,8 +9721,8 @@
     "'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _findRenderer = require('./utils/findRenderer');\n\nvar _findRenderer2 = _interopRequireDefault(_findRenderer);\n\nvar _linkRule = require('./utils/linkRule');\n\nvar _linkRule2 = _interopRequireDefault(_linkRule);\n\nvar _RulesContainer = require('./RulesContainer');\n\nvar _RulesContainer2 = _interopRequireDefault(_RulesContainer);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nvar StyleSheet = function () {\n  function StyleSheet(styles, options) {\n    _classCallCheck(this, StyleSheet);\n\n    var Renderer = (0, _findRenderer2['default'])(options);\n\n    this.attached = false;\n    this.deployed = false;\n    this.linked = false;\n    this.classes = Object.create(null);\n    this.options = _extends({\n      sheet: this,\n      parent: this,\n      classes: this.classes,\n      Renderer: Renderer\n    }, options);\n    this.renderer = new Renderer(this);\n    this.renderer.createElement();\n    this.rules = new _RulesContainer2['default'](this.options);\n\n    for (var name in styles) {\n      this.rules.add(name, styles[name]);\n    }\n\n    this.rules.process();\n  }\n\n  /**\n   * Attach renderable to the render tree.\n   */\n\n\n  _createClass(StyleSheet, [{\n    key: 'attach',\n    value: function attach() {\n      if (this.attached) return this;\n      if (!this.deployed) this.deploy();\n      this.renderer.attach();\n      if (!this.linked && this.options.link) this.link();\n      this.attached = true;\n      return this;\n    }\n\n    /**\n     * Remove renderable from render tree.\n     */\n\n  }, {\n    key: 'detach',\n    value: function detach() {\n      if (!this.attached) return this;\n      this.renderer.detach();\n      this.attached = false;\n      return this;\n    }\n\n    /**\n     * Add a rule to the current stylesheet.\n     * Will insert a rule also after the stylesheet has been rendered first time.\n     */\n\n  }, {\n    key: 'addRule',\n    value: function addRule(name, decl, options) {\n      var queue = this.queue;\n\n      // Plugins can create rules.\n      // In order to preserve the right order, we need to queue all `.addRule` calls,\n      // which happen after the first `rules.add()` call.\n\n      if (this.attached && !queue) this.queue = [];\n\n      var rule = this.rules.add(name, decl, options);\n      this.options.jss.plugins.onProcessRule(rule);\n\n      if (this.attached) {\n        if (!this.deployed) return rule;\n        // Don't insert rule directly if there is no stringified version yet.\n        // It will be inserted all together when .attach is called.\n        if (queue) queue.push(rule);else {\n          this.insertRule(rule);\n          if (this.queue) {\n            this.queue.forEach(this.insertRule, this);\n            this.queue = undefined;\n          }\n        }\n        return rule;\n      }\n\n      // We can't add rules to a detached style node.\n      // We will redeploy the sheet once user will attach it.\n      this.deployed = false;\n\n      return rule;\n    }\n\n    /**\n     * Insert rule into the StyleSheet\n     */\n\n  }, {\n    key: 'insertRule',\n    value: function insertRule(rule) {\n      var renderable = this.renderer.insertRule(rule);\n      if (renderable && this.options.link) (0, _linkRule2['default'])(rule, renderable);\n    }\n\n    /**\n     * Create and add rules.\n     * Will render also after Style Sheet was rendered the first time.\n     */\n\n  }, {\n    key: 'addRules',\n    value: function addRules(styles, options) {\n      var added = [];\n      for (var name in styles) {\n        added.push(this.addRule(name, styles[name], options));\n      }\n      return added;\n    }\n\n    /**\n     * Get a rule by name.\n     */\n\n  }, {\n    key: 'getRule',\n    value: function getRule(name) {\n      return this.rules.get(name);\n    }\n\n    /**\n     * Delete a rule by name.\n     * Returns `true`: if rule has been deleted from the DOM.\n     */\n\n  }, {\n    key: 'deleteRule',\n    value: function deleteRule(name) {\n      var rule = this.rules.get(name);\n\n      if (!rule) return false;\n\n      this.rules.remove(rule);\n\n      if (this.attached && rule.renderable) {\n        return this.renderer.deleteRule(rule.renderable);\n      }\n\n      return true;\n    }\n\n    /**\n     * Get index of a rule.\n     */\n\n  }, {\n    key: 'indexOf',\n    value: function indexOf(rule) {\n      return this.rules.indexOf(rule);\n    }\n\n    /**\n     * Deploy pure CSS string to a renderable.\n     */\n\n  }, {\n    key: 'deploy',\n    value: function deploy() {\n      this.renderer.deploy();\n      this.deployed = true;\n      return this;\n    }\n\n    /**\n     * Link renderable CSS rules from sheet with their corresponding models.\n     */\n\n  }, {\n    key: 'link',\n    value: function link() {\n      var cssRules = this.renderer.getRules\n\n      // Is undefined when VirtualRenderer is used.\n      ();if (cssRules) this.rules.link(cssRules);\n      this.linked = true;\n      return this;\n    }\n\n    /**\n     * Update the function values with a new data.\n     */\n\n  }, {\n    key: 'update',\n    value: function update(name, data) {\n      this.rules.update(name, data);\n      return this;\n    }\n\n    /**\n     * Convert rules to a CSS string.\n     */\n\n  }, {\n    key: 'toString',\n    value: function toString(options) {\n      return this.rules.toString(options);\n    }\n  }]);\n\n  return StyleSheet;\n}();\n\nexports['default'] = StyleSheet;",
     {
       "./RulesContainer": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/RulesContainer.js",
-      "./utils/linkRule": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/linkRule.js",
-      "./utils/findRenderer": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/findRenderer.js"
+      "./utils/findRenderer": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/findRenderer.js",
+      "./utils/linkRule": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/linkRule.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/StyleSheet.js",
@@ -9809,8 +9809,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/RegularRule.js": [
     "'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _typeof = typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; };\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _toCss = require('../utils/toCss');\n\nvar _toCss2 = _interopRequireDefault(_toCss);\n\nvar _toCssValue = require('../utils/toCssValue');\n\nvar _toCssValue2 = _interopRequireDefault(_toCssValue);\n\nvar _findClassNames = require('../utils/findClassNames');\n\nvar _findClassNames2 = _interopRequireDefault(_findClassNames);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nvar RegularRule = function () {\n\n  /**\n   * We expect `style` to be a plain object.\n   * To avoid original style object mutations, we clone it and hash it\n   * along the way.\n   * It is also the fastetst way.\n   * http://jsperf.com/lodash-deepclone-vs-jquery-extend-deep/6\n   */\n  function RegularRule(name, style, options) {\n    _classCallCheck(this, RegularRule);\n\n    this.type = 'regular';\n    var generateClassName = options.generateClassName,\n        sheet = options.sheet,\n        Renderer = options.Renderer;\n\n    this.name = name;\n    this.className = '';\n    this.options = options;\n    this.style = style;\n    if (options.className) this.className = options.className;else if (generateClassName) this.className = generateClassName(this, sheet);\n    this.selectorText = options.selector || '.' + this.className;\n    if (sheet) this.renderer = sheet.renderer;else if (Renderer) this.renderer = new Renderer();\n  }\n\n  /**\n   * Set selector string.\n   * Attenition: use this with caution. Most browser didn't implement\n   * selectorText setter, so this may result in rerendering of entire Style Sheet.\n   */\n\n\n  _createClass(RegularRule, [{\n    key: 'prop',\n\n\n    /**\n     * Get or set a style property.\n     */\n    value: function prop(name, value) {\n      var $name = typeof this.style[name] === 'function' ? '$' + name : name;\n      var currValue = this.style[$name];\n\n      // Its a setter.\n      if (value != null) {\n        // Don't do anything if the value has not changed.\n        if (currValue !== value) {\n          var jss = this.options.jss;\n\n          var newValue = jss ? jss.plugins.onChangeValue(value, name, this) : value;\n          Object.defineProperty(this.style, $name, {\n            value: newValue,\n            writable: true\n          }\n          // Only defined if option linked is true.\n          );if (this.renderable) this.renderer.setStyle(this.renderable, name, newValue);\n        }\n        return this;\n      }\n      // Its a getter, read the value from the DOM if its not cached.\n      if (this.renderable && currValue == null) {\n        currValue = this.renderer.getStyle(this.renderable, name\n        // Cache the value after we have got it from the DOM first time.\n        );this.prop(name, currValue);\n      }\n\n      return this.style[$name];\n    }\n\n    /**\n     * Apply rule to an element inline.\n     */\n\n  }, {\n    key: 'applyTo',\n    value: function applyTo(renderable) {\n      var json = this.toJSON();\n      for (var prop in json) {\n        this.renderer.setStyle(renderable, prop, json[prop]);\n      }return this;\n    }\n\n    /**\n     * Returns JSON representation of the rule.\n     * Fallbacks are not supported.\n     * Useful for inline styles.\n     */\n\n  }, {\n    key: 'toJSON',\n    value: function toJSON() {\n      var json = Object.create(null);\n      for (var prop in this.style) {\n        var value = this.style[prop];\n        var type = typeof value === 'undefined' ? 'undefined' : _typeof(value);\n        if (type === 'function') json[prop] = this.style['$' + prop];else if (type !== 'object') json[prop] = value;else if (Array.isArray(value)) json[prop] = (0, _toCssValue2['default'])(value);\n      }\n      return json;\n    }\n\n    /**\n     * Generates a CSS string.\n     */\n\n  }, {\n    key: 'toString',\n    value: function toString(options) {\n      return (0, _toCss2['default'])(this.selector, this.style, options);\n    }\n  }, {\n    key: 'selector',\n    set: function set(selector) {\n      var sheet = this.options.sheet;\n\n      // After we modify a selector, ref by old selector needs to be removed.\n\n      if (sheet) sheet.rules.unregister(this);\n\n      this.selectorText = selector;\n      this.className = (0, _findClassNames2['default'])(selector);\n\n      if (!this.renderable) {\n        // Register the rule with new selector.\n        if (sheet) sheet.rules.register(this);\n        return;\n      }\n\n      var changed = this.renderer.setSelector(this.renderable, selector);\n\n      if (changed && sheet) {\n        sheet.rules.register(this);\n        return;\n      }\n\n      // If selector setter is not implemented, rerender the sheet.\n      // We need to delete renderable from the rule, because when sheet.deploy()\n      // calls rule.toString, it will get the old selector.\n      delete this.renderable;\n      if (sheet) {\n        sheet.rules.register(this);\n        sheet.deploy().link();\n      }\n    }\n\n    /**\n     * Get selector string.\n     */\n    ,\n    get: function get() {\n      if (this.renderable) {\n        return this.renderer.getSelector(this.renderable);\n      }\n\n      return this.selectorText;\n    }\n  }]);\n\n  return RegularRule;\n}();\n\nexports['default'] = RegularRule;",
     {
-      "../utils/toCssValue": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/toCssValue.js",
       "../utils/findClassNames": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/findClassNames.js",
+      "../utils/toCssValue": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/toCssValue.js",
       "../utils/toCss": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/toCss.js"
     },
     {
@@ -9848,8 +9848,8 @@
       "./SimpleRule": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/SimpleRule.js",
       "./KeyframeRule": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/KeyframeRule.js",
       "./ConditionalRule": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/ConditionalRule.js",
-      "./FontFaceRule": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/FontFaceRule.js",
-      "./ViewportRule": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/ViewportRule.js"
+      "./ViewportRule": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/ViewportRule.js",
+      "./FontFaceRule": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/FontFaceRule.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/index.js",
@@ -10057,8 +10057,8 @@
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "../utils/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/utils/warning.js",
-      "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js",
       "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
+      "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js",
       "../utils/PropTypes": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/utils/PropTypes.js"
     },
     {
@@ -10074,9 +10074,9 @@
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "../utils/PropTypes": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/utils/PropTypes.js",
       "../utils/Subscription": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/utils/Subscription.js",
-      "hoist-non-react-statics": "/Users/jasonkao/stuyspec/client-app/node_modules/hoist-non-react-statics/index.js",
       "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
-      "invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/invariant/browser.js"
+      "invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/invariant/browser.js",
+      "hoist-non-react-statics": "/Users/jasonkao/stuyspec/client-app/node_modules/hoist-non-react-statics/index.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/components/connectAdvanced.js",
@@ -10306,8 +10306,8 @@
     "'use strict';\n\nexports.__esModule = true;\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _typeof = typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; };\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _propTypes = require('prop-types');\n\nvar _propTypes2 = _interopRequireDefault(_propTypes);\n\nvar _reactRouter = require('react-router');\n\nvar _Link = require('./Link');\n\nvar _Link2 = _interopRequireDefault(_Link);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }\n\n/**\n * A <Link> wrapper that knows if it's \"active\" or not.\n */\nvar NavLink = function NavLink(_ref) {\n  var to = _ref.to,\n      exact = _ref.exact,\n      strict = _ref.strict,\n      location = _ref.location,\n      activeClassName = _ref.activeClassName,\n      className = _ref.className,\n      activeStyle = _ref.activeStyle,\n      style = _ref.style,\n      getIsActive = _ref.isActive,\n      rest = _objectWithoutProperties(_ref, ['to', 'exact', 'strict', 'location', 'activeClassName', 'className', 'activeStyle', 'style', 'isActive']);\n\n  return _react2.default.createElement(_reactRouter.Route, {\n    path: (typeof to === 'undefined' ? 'undefined' : _typeof(to)) === 'object' ? to.pathname : to,\n    exact: exact,\n    strict: strict,\n    location: location,\n    children: function children(_ref2) {\n      var location = _ref2.location,\n          match = _ref2.match;\n\n      var isActive = !!(getIsActive ? getIsActive(match, location) : match);\n\n      return _react2.default.createElement(_Link2.default, _extends({\n        to: to,\n        className: isActive ? [activeClassName, className].filter(function (i) {\n          return i;\n        }).join(' ') : className,\n        style: isActive ? _extends({}, style, activeStyle) : style\n      }, rest));\n    }\n  });\n};\n\nNavLink.propTypes = {\n  to: _Link2.default.propTypes.to,\n  exact: _propTypes2.default.bool,\n  strict: _propTypes2.default.bool,\n  location: _propTypes2.default.object,\n  activeClassName: _propTypes2.default.string,\n  className: _propTypes2.default.string,\n  activeStyle: _propTypes2.default.object,\n  style: _propTypes2.default.object,\n  isActive: _propTypes2.default.func\n};\n\nNavLink.defaultProps = {\n  activeClassName: 'active'\n};\n\nexports.default = NavLink;",
     {
       "./Link": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Link.js",
-      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
       "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js",
+      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
       "react-router": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/index.js"
     },
     {
@@ -10395,12 +10395,12 @@
       "./Link": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Link.js",
       "./MemoryRouter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/MemoryRouter.js",
       "./NavLink": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/NavLink.js",
-      "./Redirect": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Redirect.js",
       "./Prompt": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Prompt.js",
+      "./Redirect": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Redirect.js",
       "./Route": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Route.js",
       "./Router": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Router.js",
-      "./StaticRouter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/StaticRouter.js",
       "./Switch": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Switch.js",
+      "./StaticRouter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/StaticRouter.js",
       "./matchPath": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/matchPath.js",
       "./withRouter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/withRouter.js",
       "./BrowserRouter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/BrowserRouter.js",
@@ -10545,8 +10545,8 @@
     {
       "warning": "/Users/jasonkao/stuyspec/client-app/node_modules/warning/browser.js",
       "invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/invariant/browser.js",
-      "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js",
-      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js"
+      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
+      "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/Router.js",
@@ -10559,8 +10559,8 @@
     "'use strict';\n\nexports.__esModule = true;\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _invariant = require('invariant');\n\nvar _invariant2 = _interopRequireDefault(_invariant);\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _propTypes = require('prop-types');\n\nvar _propTypes2 = _interopRequireDefault(_propTypes);\n\nvar _PathUtils = require('history/PathUtils');\n\nvar _Router = require('./Router');\n\nvar _Router2 = _interopRequireDefault(_Router);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar normalizeLocation = function normalizeLocation(object) {\n  var _object$pathname = object.pathname,\n      pathname = _object$pathname === undefined ? '/' : _object$pathname,\n      _object$search = object.search,\n      search = _object$search === undefined ? '' : _object$search,\n      _object$hash = object.hash,\n      hash = _object$hash === undefined ? '' : _object$hash;\n\n\n  return {\n    pathname: pathname,\n    search: search === '?' ? '' : search,\n    hash: hash === '#' ? '' : hash\n  };\n};\n\nvar addBasename = function addBasename(basename, location) {\n  if (!basename) return location;\n\n  return _extends({}, location, {\n    pathname: (0, _PathUtils.addLeadingSlash)(basename) + location.pathname\n  });\n};\n\nvar stripBasename = function stripBasename(basename, location) {\n  if (!basename) return location;\n\n  var base = (0, _PathUtils.addLeadingSlash)(basename);\n\n  if (location.pathname.indexOf(base) !== 0) return location;\n\n  return _extends({}, location, {\n    pathname: location.pathname.substr(base.length)\n  });\n};\n\nvar createLocation = function createLocation(location) {\n  return typeof location === 'string' ? (0, _PathUtils.parsePath)(location) : normalizeLocation(location);\n};\n\nvar createURL = function createURL(location) {\n  return typeof location === 'string' ? location : (0, _PathUtils.createPath)(location);\n};\n\nvar staticHandler = function staticHandler(methodName) {\n  return function () {\n    (0, _invariant2.default)(false, 'You cannot %s with <StaticRouter>', methodName);\n  };\n};\n\nvar noop = function noop() {};\n\n/**\n * The public top-level API for a \"static\" <Router>, so-called because it\n * can't actually change the current location. Instead, it just records\n * location changes in a context object. Useful mainly in testing and\n * server-rendering scenarios.\n */\n\nvar StaticRouter = function (_React$Component) {\n  _inherits(StaticRouter, _React$Component);\n\n  function StaticRouter() {\n    var _temp, _this, _ret;\n\n    _classCallCheck(this, StaticRouter);\n\n    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {\n      args[_key] = arguments[_key];\n    }\n\n    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.createHref = function (path) {\n      return (0, _PathUtils.addLeadingSlash)(_this.props.basename + createURL(path));\n    }, _this.handlePush = function (location) {\n      var _this$props = _this.props,\n          basename = _this$props.basename,\n          context = _this$props.context;\n\n      context.action = 'PUSH';\n      context.location = addBasename(basename, createLocation(location));\n      context.url = createURL(context.location);\n    }, _this.handleReplace = function (location) {\n      var _this$props2 = _this.props,\n          basename = _this$props2.basename,\n          context = _this$props2.context;\n\n      context.action = 'REPLACE';\n      context.location = addBasename(basename, createLocation(location));\n      context.url = createURL(context.location);\n    }, _this.handleListen = function () {\n      return noop;\n    }, _this.handleBlock = function () {\n      return noop;\n    }, _temp), _possibleConstructorReturn(_this, _ret);\n  }\n\n  StaticRouter.prototype.getChildContext = function getChildContext() {\n    return {\n      router: {\n        staticContext: this.props.context\n      }\n    };\n  };\n\n  StaticRouter.prototype.render = function render() {\n    var _props = this.props,\n        basename = _props.basename,\n        context = _props.context,\n        location = _props.location,\n        props = _objectWithoutProperties(_props, ['basename', 'context', 'location']);\n\n    var history = {\n      createHref: this.createHref,\n      action: 'POP',\n      location: stripBasename(basename, createLocation(location)),\n      push: this.handlePush,\n      replace: this.handleReplace,\n      go: staticHandler('go'),\n      goBack: staticHandler('goBack'),\n      goForward: staticHandler('goForward'),\n      listen: this.handleListen,\n      block: this.handleBlock\n    };\n\n    return _react2.default.createElement(_Router2.default, _extends({}, props, { history: history }));\n  };\n\n  return StaticRouter;\n}(_react2.default.Component);\n\nStaticRouter.propTypes = {\n  basename: _propTypes2.default.string,\n  context: _propTypes2.default.object.isRequired,\n  location: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.object])\n};\nStaticRouter.defaultProps = {\n  basename: '',\n  location: '/'\n};\nStaticRouter.childContextTypes = {\n  router: _propTypes2.default.object.isRequired\n};\nexports.default = StaticRouter;",
     {
       "./Router": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/Router.js",
-      "invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/invariant/browser.js",
       "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
+      "invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/invariant/browser.js",
       "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js",
       "history/PathUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/history/PathUtils.js"
     },
@@ -10575,9 +10575,9 @@
     "'use strict';\n\nexports.__esModule = true;\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _propTypes = require('prop-types');\n\nvar _propTypes2 = _interopRequireDefault(_propTypes);\n\nvar _warning = require('warning');\n\nvar _warning2 = _interopRequireDefault(_warning);\n\nvar _matchPath = require('./matchPath');\n\nvar _matchPath2 = _interopRequireDefault(_matchPath);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\n/**\n * The public API for rendering the first <Route> that matches.\n */\nvar Switch = function (_React$Component) {\n  _inherits(Switch, _React$Component);\n\n  function Switch() {\n    _classCallCheck(this, Switch);\n\n    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));\n  }\n\n  Switch.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {\n    (0, _warning2.default)(!(nextProps.location && !this.props.location), '<Switch> elements should not change from uncontrolled to controlled (or vice versa). You initially used no \"location\" prop and then provided one on a subsequent render.');\n\n    (0, _warning2.default)(!(!nextProps.location && this.props.location), '<Switch> elements should not change from controlled to uncontrolled (or vice versa). You provided a \"location\" prop initially but omitted it on a subsequent render.');\n  };\n\n  Switch.prototype.render = function render() {\n    var route = this.context.router.route;\n    var children = this.props.children;\n\n    var location = this.props.location || route.location;\n\n    var match = void 0,\n        child = void 0;\n    _react2.default.Children.forEach(children, function (element) {\n      if (!_react2.default.isValidElement(element)) return;\n\n      var _element$props = element.props,\n          pathProp = _element$props.path,\n          exact = _element$props.exact,\n          strict = _element$props.strict,\n          from = _element$props.from;\n\n      var path = pathProp || from;\n\n      if (match == null) {\n        child = element;\n        match = path ? (0, _matchPath2.default)(location.pathname, { path: path, exact: exact, strict: strict }) : route.match;\n      }\n    });\n\n    return match ? _react2.default.cloneElement(child, { location: location, computedMatch: match }) : null;\n  };\n\n  return Switch;\n}(_react2.default.Component);\n\nSwitch.contextTypes = {\n  router: _propTypes2.default.shape({\n    route: _propTypes2.default.object.isRequired\n  }).isRequired\n};\nSwitch.propTypes = {\n  children: _propTypes2.default.node,\n  location: _propTypes2.default.object\n};\nexports.default = Switch;",
     {
       "./matchPath": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/matchPath.js",
-      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
       "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js",
-      "warning": "/Users/jasonkao/stuyspec/client-app/node_modules/warning/browser.js"
+      "warning": "/Users/jasonkao/stuyspec/client-app/node_modules/warning/browser.js",
+      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/Switch.js",
@@ -10591,8 +10591,8 @@
     {
       "./Prompt": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/Prompt.js",
       "./Redirect": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/Redirect.js",
-      "./Router": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/Router.js",
       "./Route": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/Route.js",
+      "./Router": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/Router.js",
       "./Switch": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/Switch.js",
       "./withRouter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/withRouter.js",
       "./StaticRouter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/StaticRouter.js",
@@ -10745,8 +10745,8 @@
       "./lowPriorityWarning": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/lowPriorityWarning.js",
       "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/reactProdInvariant.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
-      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/emptyObject": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyObject.js",
+      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "./ReactNoopUpdateQueue": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactNoopUpdateQueue.js"
     },
     {
@@ -10942,8 +10942,8 @@
       "./ReactComponentTreeHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactComponentTreeHook.js",
       "./ReactPropTypesSecret": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactPropTypesSecret.js",
       "./ReactPropTypeLocationNames": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactPropTypeLocationNames.js",
-      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
-      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
+      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
+      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/checkReactTypeSpec.js",
@@ -11064,8 +11064,8 @@
     {
       "./style.js": "/Users/jasonkao/stuyspec/client-app/node_modules/redbox-react/lib/style.js",
       "./lib": "/Users/jasonkao/stuyspec/client-app/node_modules/redbox-react/lib/lib.js",
-      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
       "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js",
+      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
       "react-dom": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/index.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
       "sourcemapped-stacktrace": "/Users/jasonkao/stuyspec/client-app/node_modules/sourcemapped-stacktrace/dist/sourcemapped-stacktrace.js",
@@ -11452,8 +11452,8 @@
       "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
       "redux": "/Users/jasonkao/stuyspec/client-app/node_modules/redux/lib/index.js",
       "../selectors": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/selectors.js",
-      "./ArticleHeader": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/ArticleHeader.js",
       "./ArticleBody": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/ArticleBody.js",
+      "./ArticleHeader": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/ArticleHeader.js",
       "../actions": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/actions.js",
       "react-redux": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/index.js",
       "react-jss": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/lib/index.js"
@@ -11484,7 +11484,7 @@
     }
   ],
   "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/SectionPage.js": [
-    "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _redux = require('redux');\n\nvar _reactRedux = require('react-redux');\n\nvar _reactRouterDom = require('react-router-dom');\n\nvar _reactJss = require('react-jss');\n\nvar _reactJss2 = _interopRequireDefault(_reactJss);\n\nvar _selectors = require('../selectors');\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar styles = {\n  SectionPage__Header: {\n    color: '#000'\n  }\n};\n\nvar SectionPage = function SectionPage(_ref) {\n  var classes = _ref.classes,\n      articles = _ref.articles,\n      subsections = _ref.subsections,\n      section = _ref.section,\n      match = _ref.match;\n\n  var createSubsectionLinks = function createSubsectionLinks() {\n    if (subsections !== null) {\n      return Object.keys(subsections).map(function (key, index) {\n        var subsection = subsections[key];\n        return _react2.default.createElement(\n          'li',\n          { key: 'subsectionLink' + index },\n          _react2.default.createElement(\n            _reactRouterDom.Link,\n            { to: match.url + '/' + subsection.slug },\n            subsection.name\n          )\n        );\n      });\n    }\n  };\n  var createArticleLinks = function createArticleLinks() {\n    return Object.keys(articles).map(function (key, index) {\n      var article = articles[key];\n      var pathToArticlePage = article.slug;\n      if (subsections !== null && subsections[article.section_slug] !== undefined) {\n        pathToArticlePage = article.section_slug + '/' + article.slug;\n      }\n      return _react2.default.createElement(\n        'li',\n        { key: 'articleLink' + index },\n        _react2.default.createElement(\n          _reactRouterDom.Link,\n          { to: match.url + '/' + pathToArticlePage },\n          article.title\n        )\n      );\n    });\n  };\n  return _react2.default.createElement(\n    'div',\n    null,\n    _react2.default.createElement(\n      'h1',\n      { className: classes.SectionPage__Header },\n      section.name\n    ),\n    _react2.default.createElement(\n      'p',\n      null,\n      'description: ',\n      section.description\n    ),\n    _react2.default.createElement('hr', null),\n    _react2.default.createElement(\n      'p',\n      null,\n      'subsections'\n    ),\n    _react2.default.createElement(\n      'ul',\n      null,\n      createSubsectionLinks()\n    ),\n    _react2.default.createElement('hr', null),\n    _react2.default.createElement(\n      'p',\n      null,\n      'articles'\n    ),\n    _react2.default.createElement(\n      'ul',\n      null,\n      createArticleLinks()\n    )\n  );\n};\n\nvar mapStateToProps = function mapStateToProps(state, ownProps) {\n  return {\n    articles: (0, _selectors.getArticlesWithinSection)(state, ownProps),\n    sections: state.core.entities.sections\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return (0, _redux.bindActionCreators)({}, dispatch);\n};\n\nvar _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _reactJss2.default)(styles)(SectionPage));\n\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n\n  __REACT_HOT_LOADER__.register(styles, 'styles', '/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/SectionPage.js');\n\n  __REACT_HOT_LOADER__.register(SectionPage, 'SectionPage', '/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/SectionPage.js');\n\n  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', '/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/SectionPage.js');\n\n  __REACT_HOT_LOADER__.register(mapDispatchToProps, 'mapDispatchToProps', '/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/SectionPage.js');\n\n  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/SectionPage.js');\n}();\n\n;\n",
+    "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _redux = require('redux');\n\nvar _reactRedux = require('react-redux');\n\nvar _reactRouterDom = require('react-router-dom');\n\nvar _reactJss = require('react-jss');\n\nvar _reactJss2 = _interopRequireDefault(_reactJss);\n\nvar _selectors = require('../selectors');\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar styles = {\n  SectionPage__Header: {\n    color: '#000'\n  }\n\n  /* TODO: make subsection tree work for any depth\n   */\n\n};var SectionPage = function SectionPage(_ref) {\n  var classes = _ref.classes,\n      articles = _ref.articles,\n      subsections = _ref.subsections,\n      section = _ref.section,\n      match = _ref.match;\n\n  var createSubsectionLinks = function createSubsectionLinks() {\n    if (subsections !== null) {\n      return Object.keys(subsections).map(function (key, index) {\n        var subsection = subsections[key];\n        return _react2.default.createElement(\n          'li',\n          { key: 'subsectionLink' + index },\n          _react2.default.createElement(\n            _reactRouterDom.Link,\n            { to: match.url + '/' + subsection.slug },\n            subsection.name\n          )\n        );\n      });\n    }\n  };\n  var createArticleLinks = function createArticleLinks() {\n    return Object.keys(articles).map(function (key, index) {\n      var article = articles[key];\n      var pathToArticlePage = article.slug;\n      if (subsections !== null && subsections[article.section_slug] !== undefined) {\n        pathToArticlePage = article.section_slug + '/' + article.slug;\n      }\n      return _react2.default.createElement(\n        'li',\n        { key: 'articleLink' + index },\n        _react2.default.createElement(\n          _reactRouterDom.Link,\n          { to: match.url + '/' + pathToArticlePage },\n          article.title\n        )\n      );\n    });\n  };\n  return _react2.default.createElement(\n    'div',\n    null,\n    _react2.default.createElement(\n      'h1',\n      { className: classes.SectionPage__Header },\n      section.name\n    ),\n    _react2.default.createElement(\n      'p',\n      null,\n      'description: ',\n      section.description\n    ),\n    _react2.default.createElement('hr', null),\n    _react2.default.createElement(\n      'p',\n      null,\n      'subsections'\n    ),\n    _react2.default.createElement(\n      'ul',\n      null,\n      createSubsectionLinks()\n    ),\n    _react2.default.createElement('hr', null),\n    _react2.default.createElement(\n      'p',\n      null,\n      'articles'\n    ),\n    _react2.default.createElement(\n      'ul',\n      null,\n      createArticleLinks()\n    )\n  );\n};\n\nvar mapStateToProps = function mapStateToProps(state, ownProps) {\n  return {\n    articles: (0, _selectors.getArticlesWithinSection)(state, ownProps),\n    sections: state.core.entities.sections\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return (0, _redux.bindActionCreators)({}, dispatch);\n};\n\nvar _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _reactJss2.default)(styles)(SectionPage));\n\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n\n  __REACT_HOT_LOADER__.register(styles, 'styles', '/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/SectionPage.js');\n\n  __REACT_HOT_LOADER__.register(SectionPage, 'SectionPage', '/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/SectionPage.js');\n\n  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', '/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/SectionPage.js');\n\n  __REACT_HOT_LOADER__.register(mapDispatchToProps, 'mapDispatchToProps', '/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/SectionPage.js');\n\n  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/SectionPage.js');\n}();\n\n;\n",
     {
       "../selectors": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/selectors.js",
       "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
@@ -11495,9 +11495,9 @@
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/SectionPage.js",
-      "hash": "MDwOvg",
+      "hash": "ht+LWA",
       "browserifyId": 820,
-      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlNlY3Rpb25QYWdlLmpzP3ZlcnNpb249TUR3T3ZnIl0sIm5hbWVzIjpbInN0eWxlcyIsIlNlY3Rpb25QYWdlX19IZWFkZXIiLCJjb2xvciIsIlNlY3Rpb25QYWdlIiwiY2xhc3NlcyIsImFydGljbGVzIiwic3Vic2VjdGlvbnMiLCJzZWN0aW9uIiwibWF0Y2giLCJjcmVhdGVTdWJzZWN0aW9uTGlua3MiLCJPYmplY3QiLCJrZXlzIiwibWFwIiwia2V5IiwiaW5kZXgiLCJzdWJzZWN0aW9uIiwidXJsIiwic2x1ZyIsIm5hbWUiLCJjcmVhdGVBcnRpY2xlTGlua3MiLCJhcnRpY2xlIiwicGF0aFRvQXJ0aWNsZVBhZ2UiLCJzZWN0aW9uX3NsdWciLCJ1bmRlZmluZWQiLCJ0aXRsZSIsImRlc2NyaXB0aW9uIiwibWFwU3RhdGVUb1Byb3BzIiwic3RhdGUiLCJvd25Qcm9wcyIsInNlY3Rpb25zIiwiY29yZSIsImVudGl0aWVzIiwibWFwRGlzcGF0Y2hUb1Byb3BzIiwiZGlzcGF0Y2giXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUE7Ozs7QUFDQTs7QUFDQTs7QUFDQTs7QUFDQTs7OztBQUVBOzs7O0FBRUEsSUFBTUEsU0FBUztBQUNiQyx1QkFBcUI7QUFDbkJDLFdBQU87QUFEWTtBQURSLENBQWY7O0FBTUEsSUFBTUMsY0FBYyxTQUFkQSxXQUFjLE9BQXNEO0FBQUEsTUFBcERDLE9BQW9ELFFBQXBEQSxPQUFvRDtBQUFBLE1BQTNDQyxRQUEyQyxRQUEzQ0EsUUFBMkM7QUFBQSxNQUFqQ0MsV0FBaUMsUUFBakNBLFdBQWlDO0FBQUEsTUFBcEJDLE9BQW9CLFFBQXBCQSxPQUFvQjtBQUFBLE1BQVhDLEtBQVcsUUFBWEEsS0FBVzs7QUFDeEUsTUFBTUMsd0JBQXdCLFNBQXhCQSxxQkFBd0IsR0FBTTtBQUNsQyxRQUFJSCxnQkFBZ0IsSUFBcEIsRUFBMEI7QUFDeEIsYUFBT0ksT0FBT0MsSUFBUCxDQUFZTCxXQUFaLEVBQXlCTSxHQUF6QixDQUE2QixVQUFVQyxHQUFWLEVBQWVDLEtBQWYsRUFBc0I7QUFDeEQsWUFBTUMsYUFBYVQsWUFBWU8sR0FBWixDQUFuQjtBQUNBLGVBQ0U7QUFBQTtBQUFBLFlBQUksd0JBQXNCQyxLQUExQjtBQUNFO0FBQUE7QUFBQSxjQUFNLElBQUlOLE1BQU1RLEdBQU4sR0FBWSxHQUFaLEdBQWtCRCxXQUFXRSxJQUF2QztBQUE4Q0YsdUJBQVdHO0FBQXpEO0FBREYsU0FERjtBQUtELE9BUE0sQ0FBUDtBQVFEO0FBQ0YsR0FYRDtBQVlBLE1BQU1DLHFCQUFxQixTQUFyQkEsa0JBQXFCLEdBQU07QUFDL0IsV0FBT1QsT0FBT0MsSUFBUCxDQUFZTixRQUFaLEVBQXNCTyxHQUF0QixDQUEwQixVQUFVQyxHQUFWLEVBQWVDLEtBQWYsRUFBc0I7QUFDckQsVUFBTU0sVUFBVWYsU0FBU1EsR0FBVCxDQUFoQjtBQUNBLFVBQUlRLG9CQUFvQkQsUUFBUUgsSUFBaEM7QUFDQSxVQUFJWCxnQkFBZ0IsSUFBaEIsSUFBd0JBLFlBQVljLFFBQVFFLFlBQXBCLE1BQXNDQyxTQUFsRSxFQUE2RTtBQUMzRUYsNEJBQW9CRCxRQUFRRSxZQUFSLEdBQXVCLEdBQXZCLEdBQTZCRixRQUFRSCxJQUF6RDtBQUNEO0FBQ0QsYUFDRTtBQUFBO0FBQUEsVUFBSSxxQkFBbUJILEtBQXZCO0FBQ0U7QUFBQTtBQUFBLFlBQU0sSUFBSU4sTUFBTVEsR0FBTixHQUFZLEdBQVosR0FBa0JLLGlCQUE1QjtBQUFnREQsa0JBQVFJO0FBQXhEO0FBREYsT0FERjtBQUtELEtBWE0sQ0FBUDtBQVlELEdBYkQ7QUFjQSxTQUNFO0FBQUE7QUFBQTtBQUNFO0FBQUE7QUFBQSxRQUFJLFdBQVdwQixRQUFRSCxtQkFBdkI7QUFBNkNNLGNBQVFXO0FBQXJELEtBREY7QUFFRTtBQUFBO0FBQUE7QUFBQTtBQUFpQlgsY0FBUWtCO0FBQXpCLEtBRkY7QUFHRSw2Q0FIRjtBQUlFO0FBQUE7QUFBQTtBQUFBO0FBQUEsS0FKRjtBQUtFO0FBQUE7QUFBQTtBQUNHaEI7QUFESCxLQUxGO0FBUUUsNkNBUkY7QUFTRTtBQUFBO0FBQUE7QUFBQTtBQUFBLEtBVEY7QUFVRTtBQUFBO0FBQUE7QUFDR1U7QUFESDtBQVZGLEdBREY7QUFnQkQsQ0EzQ0Q7O0FBOENBLElBQU1PLGtCQUFrQixTQUFsQkEsZUFBa0IsQ0FBQ0MsS0FBRCxFQUFRQyxRQUFSO0FBQUEsU0FBc0I7QUFDNUN2QixjQUFVLHlDQUF5QnNCLEtBQXpCLEVBQWdDQyxRQUFoQyxDQURrQztBQUU1Q0MsY0FBVUYsTUFBTUcsSUFBTixDQUFXQyxRQUFYLENBQW9CRjtBQUZjLEdBQXRCO0FBQUEsQ0FBeEI7O0FBS0EsSUFBTUcscUJBQXFCLFNBQXJCQSxrQkFBcUIsV0FBWTtBQUNyQyxTQUFPLCtCQUFtQixFQUFuQixFQUF1QkMsUUFBdkIsQ0FBUDtBQUNELENBRkQ7O2VBSWUseUJBQ2JQLGVBRGEsRUFFYk0sa0JBRmEsRUFHYix3QkFBWWhDLE1BQVosRUFBb0JHLFdBQXBCLENBSGE7Ozs7Ozs7Ozs7O2dDQTdEVEg7O2dDQU1BRzs7Z0NBOENBdUI7O2dDQUtBTSIsImZpbGUiOiJTZWN0aW9uUGFnZS5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XG5pbXBvcnQge2JpbmRBY3Rpb25DcmVhdG9yc30gZnJvbSAncmVkdXgnO1xuaW1wb3J0IHtjb25uZWN0fSBmcm9tICdyZWFjdC1yZWR1eCc7XG5pbXBvcnQge0xpbmt9IGZyb20gJ3JlYWN0LXJvdXRlci1kb20nO1xuaW1wb3J0IGluamVjdFNoZWV0IGZyb20gJ3JlYWN0LWpzcyc7XG5cbmltcG9ydCB7Z2V0QXJ0aWNsZXNXaXRoaW5TZWN0aW9ufSBmcm9tICcuLi9zZWxlY3RvcnMnO1xuXG5jb25zdCBzdHlsZXMgPSB7XG4gIFNlY3Rpb25QYWdlX19IZWFkZXI6IHtcbiAgICBjb2xvcjogJyMwMDAnLFxuICB9XG59XG5cbmNvbnN0IFNlY3Rpb25QYWdlID0gKHtjbGFzc2VzLCBhcnRpY2xlcywgc3Vic2VjdGlvbnMsIHNlY3Rpb24sIG1hdGNofSkgPT4ge1xuICBjb25zdCBjcmVhdGVTdWJzZWN0aW9uTGlua3MgPSAoKSA9PiB7XG4gICAgaWYgKHN1YnNlY3Rpb25zICE9PSBudWxsKSB7XG4gICAgICByZXR1cm4gT2JqZWN0LmtleXMoc3Vic2VjdGlvbnMpLm1hcChmdW5jdGlvbiAoa2V5LCBpbmRleCkge1xuICAgICAgICBjb25zdCBzdWJzZWN0aW9uID0gc3Vic2VjdGlvbnNba2V5XTtcbiAgICAgICAgcmV0dXJuIChcbiAgICAgICAgICA8bGkga2V5PXtgc3Vic2VjdGlvbkxpbmske2luZGV4fWB9PlxuICAgICAgICAgICAgPExpbmsgdG89e21hdGNoLnVybCArICcvJyArIHN1YnNlY3Rpb24uc2x1Z30+e3N1YnNlY3Rpb24ubmFtZX08L0xpbms+XG4gICAgICAgICAgPC9saT5cbiAgICAgICAgKVxuICAgICAgfSk7XG4gICAgfVxuICB9O1xuICBjb25zdCBjcmVhdGVBcnRpY2xlTGlua3MgPSAoKSA9PiB7XG4gICAgcmV0dXJuIE9iamVjdC5rZXlzKGFydGljbGVzKS5tYXAoZnVuY3Rpb24gKGtleSwgaW5kZXgpIHtcbiAgICAgIGNvbnN0IGFydGljbGUgPSBhcnRpY2xlc1trZXldO1xuICAgICAgbGV0IHBhdGhUb0FydGljbGVQYWdlID0gYXJ0aWNsZS5zbHVnO1xuICAgICAgaWYgKHN1YnNlY3Rpb25zICE9PSBudWxsICYmIHN1YnNlY3Rpb25zW2FydGljbGUuc2VjdGlvbl9zbHVnXSAhPT0gdW5kZWZpbmVkKSB7XG4gICAgICAgIHBhdGhUb0FydGljbGVQYWdlID0gYXJ0aWNsZS5zZWN0aW9uX3NsdWcgKyAnLycgKyBhcnRpY2xlLnNsdWc7XG4gICAgICB9XG4gICAgICByZXR1cm4gKFxuICAgICAgICA8bGkga2V5PXtgYXJ0aWNsZUxpbmske2luZGV4fWB9PlxuICAgICAgICAgIDxMaW5rIHRvPXttYXRjaC51cmwgKyAnLycgKyBwYXRoVG9BcnRpY2xlUGFnZX0+e2FydGljbGUudGl0bGV9PC9MaW5rPlxuICAgICAgICA8L2xpPlxuICAgICAgKVxuICAgIH0pO1xuICB9O1xuICByZXR1cm4gKFxuICAgIDxkaXY+XG4gICAgICA8aDEgY2xhc3NOYW1lPXtjbGFzc2VzLlNlY3Rpb25QYWdlX19IZWFkZXJ9PntzZWN0aW9uLm5hbWV9PC9oMT5cbiAgICAgIDxwPmRlc2NyaXB0aW9uOiB7c2VjdGlvbi5kZXNjcmlwdGlvbn08L3A+XG4gICAgICA8aHIvPlxuICAgICAgPHA+c3Vic2VjdGlvbnM8L3A+XG4gICAgICA8dWw+XG4gICAgICAgIHtjcmVhdGVTdWJzZWN0aW9uTGlua3MoKX1cbiAgICAgIDwvdWw+XG4gICAgICA8aHIvPlxuICAgICAgPHA+YXJ0aWNsZXM8L3A+XG4gICAgICA8dWw+XG4gICAgICAgIHtjcmVhdGVBcnRpY2xlTGlua3MoKX1cbiAgICAgIDwvdWw+XG4gICAgPC9kaXY+XG4gIClcbn07XG5cblxuY29uc3QgbWFwU3RhdGVUb1Byb3BzID0gKHN0YXRlLCBvd25Qcm9wcykgPT4gKHtcbiAgYXJ0aWNsZXM6IGdldEFydGljbGVzV2l0aGluU2VjdGlvbihzdGF0ZSwgb3duUHJvcHMpLFxuICBzZWN0aW9uczogc3RhdGUuY29yZS5lbnRpdGllcy5zZWN0aW9ucyxcbn0pO1xuXG5jb25zdCBtYXBEaXNwYXRjaFRvUHJvcHMgPSBkaXNwYXRjaCA9PiB7XG4gIHJldHVybiBiaW5kQWN0aW9uQ3JlYXRvcnMoe30sIGRpc3BhdGNoKVxufVxuXG5leHBvcnQgZGVmYXVsdCBjb25uZWN0KFxuICBtYXBTdGF0ZVRvUHJvcHMsXG4gIG1hcERpc3BhdGNoVG9Qcm9wc1xuKShpbmplY3RTaGVldChzdHlsZXMpKFNlY3Rpb25QYWdlKSk7Il19"
+      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlNlY3Rpb25QYWdlLmpzP3ZlcnNpb249aHQrTFdBIl0sIm5hbWVzIjpbInN0eWxlcyIsIlNlY3Rpb25QYWdlX19IZWFkZXIiLCJjb2xvciIsIlNlY3Rpb25QYWdlIiwiY2xhc3NlcyIsImFydGljbGVzIiwic3Vic2VjdGlvbnMiLCJzZWN0aW9uIiwibWF0Y2giLCJjcmVhdGVTdWJzZWN0aW9uTGlua3MiLCJPYmplY3QiLCJrZXlzIiwibWFwIiwia2V5IiwiaW5kZXgiLCJzdWJzZWN0aW9uIiwidXJsIiwic2x1ZyIsIm5hbWUiLCJjcmVhdGVBcnRpY2xlTGlua3MiLCJhcnRpY2xlIiwicGF0aFRvQXJ0aWNsZVBhZ2UiLCJzZWN0aW9uX3NsdWciLCJ1bmRlZmluZWQiLCJ0aXRsZSIsImRlc2NyaXB0aW9uIiwibWFwU3RhdGVUb1Byb3BzIiwic3RhdGUiLCJvd25Qcm9wcyIsInNlY3Rpb25zIiwiY29yZSIsImVudGl0aWVzIiwibWFwRGlzcGF0Y2hUb1Byb3BzIiwiZGlzcGF0Y2giXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUE7Ozs7QUFDQTs7QUFDQTs7QUFDQTs7QUFDQTs7OztBQUVBOzs7O0FBRUEsSUFBTUEsU0FBUztBQUNiQyx1QkFBcUI7QUFDbkJDLFdBQU87QUFEWTs7QUFLdkI7OztBQU5lLENBQWYsQ0FTQSxJQUFNQyxjQUFjLFNBQWRBLFdBQWMsT0FBc0Q7QUFBQSxNQUFwREMsT0FBb0QsUUFBcERBLE9BQW9EO0FBQUEsTUFBM0NDLFFBQTJDLFFBQTNDQSxRQUEyQztBQUFBLE1BQWpDQyxXQUFpQyxRQUFqQ0EsV0FBaUM7QUFBQSxNQUFwQkMsT0FBb0IsUUFBcEJBLE9BQW9CO0FBQUEsTUFBWEMsS0FBVyxRQUFYQSxLQUFXOztBQUN4RSxNQUFNQyx3QkFBd0IsU0FBeEJBLHFCQUF3QixHQUFNO0FBQ2xDLFFBQUlILGdCQUFnQixJQUFwQixFQUEwQjtBQUN4QixhQUFPSSxPQUFPQyxJQUFQLENBQVlMLFdBQVosRUFBeUJNLEdBQXpCLENBQTZCLFVBQVVDLEdBQVYsRUFBZUMsS0FBZixFQUFzQjtBQUN4RCxZQUFNQyxhQUFhVCxZQUFZTyxHQUFaLENBQW5CO0FBQ0EsZUFDRTtBQUFBO0FBQUEsWUFBSSx3QkFBc0JDLEtBQTFCO0FBQ0U7QUFBQTtBQUFBLGNBQU0sSUFBSU4sTUFBTVEsR0FBTixHQUFZLEdBQVosR0FBa0JELFdBQVdFLElBQXZDO0FBQThDRix1QkFBV0c7QUFBekQ7QUFERixTQURGO0FBS0QsT0FQTSxDQUFQO0FBUUQ7QUFDRixHQVhEO0FBWUEsTUFBTUMscUJBQXFCLFNBQXJCQSxrQkFBcUIsR0FBTTtBQUMvQixXQUFPVCxPQUFPQyxJQUFQLENBQVlOLFFBQVosRUFBc0JPLEdBQXRCLENBQTBCLFVBQVVDLEdBQVYsRUFBZUMsS0FBZixFQUFzQjtBQUNyRCxVQUFNTSxVQUFVZixTQUFTUSxHQUFULENBQWhCO0FBQ0EsVUFBSVEsb0JBQW9CRCxRQUFRSCxJQUFoQztBQUNBLFVBQUlYLGdCQUFnQixJQUFoQixJQUF3QkEsWUFBWWMsUUFBUUUsWUFBcEIsTUFBc0NDLFNBQWxFLEVBQTZFO0FBQzNFRiw0QkFBb0JELFFBQVFFLFlBQVIsR0FBdUIsR0FBdkIsR0FBNkJGLFFBQVFILElBQXpEO0FBQ0Q7QUFDRCxhQUNFO0FBQUE7QUFBQSxVQUFJLHFCQUFtQkgsS0FBdkI7QUFDRTtBQUFBO0FBQUEsWUFBTSxJQUFJTixNQUFNUSxHQUFOLEdBQVksR0FBWixHQUFrQkssaUJBQTVCO0FBQWdERCxrQkFBUUk7QUFBeEQ7QUFERixPQURGO0FBS0QsS0FYTSxDQUFQO0FBWUQsR0FiRDtBQWNBLFNBQ0U7QUFBQTtBQUFBO0FBQ0U7QUFBQTtBQUFBLFFBQUksV0FBV3BCLFFBQVFILG1CQUF2QjtBQUE2Q00sY0FBUVc7QUFBckQsS0FERjtBQUVFO0FBQUE7QUFBQTtBQUFBO0FBQWlCWCxjQUFRa0I7QUFBekIsS0FGRjtBQUdFLDZDQUhGO0FBSUU7QUFBQTtBQUFBO0FBQUE7QUFBQSxLQUpGO0FBS0U7QUFBQTtBQUFBO0FBQ0doQjtBQURILEtBTEY7QUFRRSw2Q0FSRjtBQVNFO0FBQUE7QUFBQTtBQUFBO0FBQUEsS0FURjtBQVVFO0FBQUE7QUFBQTtBQUNHVTtBQURIO0FBVkYsR0FERjtBQWdCRCxDQTNDRDs7QUE4Q0EsSUFBTU8sa0JBQWtCLFNBQWxCQSxlQUFrQixDQUFDQyxLQUFELEVBQVFDLFFBQVI7QUFBQSxTQUFzQjtBQUM1Q3ZCLGNBQVUseUNBQXlCc0IsS0FBekIsRUFBZ0NDLFFBQWhDLENBRGtDO0FBRTVDQyxjQUFVRixNQUFNRyxJQUFOLENBQVdDLFFBQVgsQ0FBb0JGO0FBRmMsR0FBdEI7QUFBQSxDQUF4Qjs7QUFLQSxJQUFNRyxxQkFBcUIsU0FBckJBLGtCQUFxQixXQUFZO0FBQ3JDLFNBQU8sK0JBQW1CLEVBQW5CLEVBQXVCQyxRQUF2QixDQUFQO0FBQ0QsQ0FGRDs7ZUFJZSx5QkFDYlAsZUFEYSxFQUViTSxrQkFGYSxFQUdiLHdCQUFZaEMsTUFBWixFQUFvQkcsV0FBcEIsQ0FIYTs7Ozs7Ozs7Ozs7Z0NBaEVUSDs7Z0NBU0FHOztnQ0E4Q0F1Qjs7Z0NBS0FNIiwiZmlsZSI6IlNlY3Rpb25QYWdlLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0JztcbmltcG9ydCB7YmluZEFjdGlvbkNyZWF0b3JzfSBmcm9tICdyZWR1eCc7XG5pbXBvcnQge2Nvbm5lY3R9IGZyb20gJ3JlYWN0LXJlZHV4JztcbmltcG9ydCB7TGlua30gZnJvbSAncmVhY3Qtcm91dGVyLWRvbSc7XG5pbXBvcnQgaW5qZWN0U2hlZXQgZnJvbSAncmVhY3QtanNzJztcblxuaW1wb3J0IHtnZXRBcnRpY2xlc1dpdGhpblNlY3Rpb259IGZyb20gJy4uL3NlbGVjdG9ycyc7XG5cbmNvbnN0IHN0eWxlcyA9IHtcbiAgU2VjdGlvblBhZ2VfX0hlYWRlcjoge1xuICAgIGNvbG9yOiAnIzAwMCcsXG4gIH1cbn1cblxuLyogVE9ETzogbWFrZSBzdWJzZWN0aW9uIHRyZWUgd29yayBmb3IgYW55IGRlcHRoXG4gKi9cblxuY29uc3QgU2VjdGlvblBhZ2UgPSAoe2NsYXNzZXMsIGFydGljbGVzLCBzdWJzZWN0aW9ucywgc2VjdGlvbiwgbWF0Y2h9KSA9PiB7XG4gIGNvbnN0IGNyZWF0ZVN1YnNlY3Rpb25MaW5rcyA9ICgpID0+IHtcbiAgICBpZiAoc3Vic2VjdGlvbnMgIT09IG51bGwpIHtcbiAgICAgIHJldHVybiBPYmplY3Qua2V5cyhzdWJzZWN0aW9ucykubWFwKGZ1bmN0aW9uIChrZXksIGluZGV4KSB7XG4gICAgICAgIGNvbnN0IHN1YnNlY3Rpb24gPSBzdWJzZWN0aW9uc1trZXldO1xuICAgICAgICByZXR1cm4gKFxuICAgICAgICAgIDxsaSBrZXk9e2BzdWJzZWN0aW9uTGluayR7aW5kZXh9YH0+XG4gICAgICAgICAgICA8TGluayB0bz17bWF0Y2gudXJsICsgJy8nICsgc3Vic2VjdGlvbi5zbHVnfT57c3Vic2VjdGlvbi5uYW1lfTwvTGluaz5cbiAgICAgICAgICA8L2xpPlxuICAgICAgICApXG4gICAgICB9KTtcbiAgICB9XG4gIH07XG4gIGNvbnN0IGNyZWF0ZUFydGljbGVMaW5rcyA9ICgpID0+IHtcbiAgICByZXR1cm4gT2JqZWN0LmtleXMoYXJ0aWNsZXMpLm1hcChmdW5jdGlvbiAoa2V5LCBpbmRleCkge1xuICAgICAgY29uc3QgYXJ0aWNsZSA9IGFydGljbGVzW2tleV07XG4gICAgICBsZXQgcGF0aFRvQXJ0aWNsZVBhZ2UgPSBhcnRpY2xlLnNsdWc7XG4gICAgICBpZiAoc3Vic2VjdGlvbnMgIT09IG51bGwgJiYgc3Vic2VjdGlvbnNbYXJ0aWNsZS5zZWN0aW9uX3NsdWddICE9PSB1bmRlZmluZWQpIHtcbiAgICAgICAgcGF0aFRvQXJ0aWNsZVBhZ2UgPSBhcnRpY2xlLnNlY3Rpb25fc2x1ZyArICcvJyArIGFydGljbGUuc2x1ZztcbiAgICAgIH1cbiAgICAgIHJldHVybiAoXG4gICAgICAgIDxsaSBrZXk9e2BhcnRpY2xlTGluayR7aW5kZXh9YH0+XG4gICAgICAgICAgPExpbmsgdG89e21hdGNoLnVybCArICcvJyArIHBhdGhUb0FydGljbGVQYWdlfT57YXJ0aWNsZS50aXRsZX08L0xpbms+XG4gICAgICAgIDwvbGk+XG4gICAgICApXG4gICAgfSk7XG4gIH07XG4gIHJldHVybiAoXG4gICAgPGRpdj5cbiAgICAgIDxoMSBjbGFzc05hbWU9e2NsYXNzZXMuU2VjdGlvblBhZ2VfX0hlYWRlcn0+e3NlY3Rpb24ubmFtZX08L2gxPlxuICAgICAgPHA+ZGVzY3JpcHRpb246IHtzZWN0aW9uLmRlc2NyaXB0aW9ufTwvcD5cbiAgICAgIDxoci8+XG4gICAgICA8cD5zdWJzZWN0aW9uczwvcD5cbiAgICAgIDx1bD5cbiAgICAgICAge2NyZWF0ZVN1YnNlY3Rpb25MaW5rcygpfVxuICAgICAgPC91bD5cbiAgICAgIDxoci8+XG4gICAgICA8cD5hcnRpY2xlczwvcD5cbiAgICAgIDx1bD5cbiAgICAgICAge2NyZWF0ZUFydGljbGVMaW5rcygpfVxuICAgICAgPC91bD5cbiAgICA8L2Rpdj5cbiAgKVxufTtcblxuXG5jb25zdCBtYXBTdGF0ZVRvUHJvcHMgPSAoc3RhdGUsIG93blByb3BzKSA9PiAoe1xuICBhcnRpY2xlczogZ2V0QXJ0aWNsZXNXaXRoaW5TZWN0aW9uKHN0YXRlLCBvd25Qcm9wcyksXG4gIHNlY3Rpb25zOiBzdGF0ZS5jb3JlLmVudGl0aWVzLnNlY3Rpb25zLFxufSk7XG5cbmNvbnN0IG1hcERpc3BhdGNoVG9Qcm9wcyA9IGRpc3BhdGNoID0+IHtcbiAgcmV0dXJuIGJpbmRBY3Rpb25DcmVhdG9ycyh7fSwgZGlzcGF0Y2gpXG59XG5cbmV4cG9ydCBkZWZhdWx0IGNvbm5lY3QoXG4gIG1hcFN0YXRlVG9Qcm9wcyxcbiAgbWFwRGlzcGF0Y2hUb1Byb3BzXG4pKGluamVjdFNoZWV0KHN0eWxlcykoU2VjdGlvblBhZ2UpKTsiXX0="
     }
   ],
   "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/constants.js": [
@@ -11622,13 +11622,13 @@
     }
   ],
   "/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js": [
-    "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n/**\r\n * Warning : if editing this file, be sure to keep the VERSION variable set to 'X.X.X'\r\n *           without modifying formatting for automation scripts\r\n * @type {{VERSION: string}}\r\n */\nvar VersionInfo = { VERSION: '0.0.573' };\nvar _default = VersionInfo;\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n\n  __REACT_HOT_LOADER__.register(VersionInfo, 'VersionInfo', '/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js');\n\n  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js');\n}();\n\n;\n",
+    "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n/**\r\n * Warning : if editing this file, be sure to keep the VERSION variable set to 'X.X.X'\r\n *           without modifying formatting for automation scripts\r\n * @type {{VERSION: string}}\r\n */\nvar VersionInfo = { VERSION: '0.0.574' };\nvar _default = VersionInfo;\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n\n  __REACT_HOT_LOADER__.register(VersionInfo, 'VersionInfo', '/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js');\n\n  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js');\n}();\n\n;\n",
     {},
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js",
-      "hash": "zo8A5w",
+      "hash": "ScNp4A",
       "browserifyId": 830,
-      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZlcnNpb25JbmZvLmpzP3ZlcnNpb249em84QTV3Il0sIm5hbWVzIjpbIlZlcnNpb25JbmZvIiwiVkVSU0lPTiJdLCJtYXBwaW5ncyI6Ijs7OztBQUFBOzs7OztBQUtBLElBQUlBLGNBQWMsRUFBRUMsU0FBVSxTQUFaLEVBQWxCO2VBQ2VEOzs7Ozs7Ozs7O2dDQURYQSIsImZpbGUiOiJ2ZXJzaW9uSW5mby5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxyXG4gKiBXYXJuaW5nIDogaWYgZWRpdGluZyB0aGlzIGZpbGUsIGJlIHN1cmUgdG8ga2VlcCB0aGUgVkVSU0lPTiB2YXJpYWJsZSBzZXQgdG8gJ1guWC5YJ1xyXG4gKiAgICAgICAgICAgd2l0aG91dCBtb2RpZnlpbmcgZm9ybWF0dGluZyBmb3IgYXV0b21hdGlvbiBzY3JpcHRzXHJcbiAqIEB0eXBlIHt7VkVSU0lPTjogc3RyaW5nfX1cclxuICovXHJcbmxldCBWZXJzaW9uSW5mbyA9IHsgVkVSU0lPTiA6ICcwLjAuNTczJyB9O1xyXG5leHBvcnQgZGVmYXVsdCBWZXJzaW9uSW5mbyJdfQ=="
+      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZlcnNpb25JbmZvLmpzP3ZlcnNpb249U2NOcDRBIl0sIm5hbWVzIjpbIlZlcnNpb25JbmZvIiwiVkVSU0lPTiJdLCJtYXBwaW5ncyI6Ijs7OztBQUFBOzs7OztBQUtBLElBQUlBLGNBQWMsRUFBRUMsU0FBVSxTQUFaLEVBQWxCO2VBQ2VEOzs7Ozs7Ozs7O2dDQURYQSIsImZpbGUiOiJ2ZXJzaW9uSW5mby5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxyXG4gKiBXYXJuaW5nIDogaWYgZWRpdGluZyB0aGlzIGZpbGUsIGJlIHN1cmUgdG8ga2VlcCB0aGUgVkVSU0lPTiB2YXJpYWJsZSBzZXQgdG8gJ1guWC5YJ1xyXG4gKiAgICAgICAgICAgd2l0aG91dCBtb2RpZnlpbmcgZm9ybWF0dGluZyBmb3IgYXV0b21hdGlvbiBzY3JpcHRzXHJcbiAqIEB0eXBlIHt7VkVSU0lPTjogc3RyaW5nfX1cclxuICovXHJcbmxldCBWZXJzaW9uSW5mbyA9IHsgVkVSU0lPTiA6ICcwLjAuNTc0JyB9O1xyXG5leHBvcnQgZGVmYXVsdCBWZXJzaW9uSW5mbyJdfQ=="
     }
   ],
   "react-hot-loader/patch": [
