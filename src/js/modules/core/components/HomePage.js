@@ -1,15 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import injectSheet from 'react-jss';
 
 import { fetch } from '../actions';
 import { getCondensedArticles } from '../selectors';
 
-class HomePage extends Component {
-	createSectionListItems() {
-		sections = this.props.sections;
-		return Object.keys(sections).map(function(key, index) {
+const styles = {
+}
+
+const HomePage = ({ classes, sections, articles }) => {
+	const createSectionListItems = () => {
+		return Object.keys(sections).map(function(key) {
 		   return (
 				<li key={ sections[key].id }>
 					<Link to={ sections[key].slug }>{ sections[key].name }</Link>
@@ -17,26 +20,26 @@ class HomePage extends Component {
 			)
 		});
 	}
-	render() {
-		return (
-			<div>
-				<h1>Home page</h1>
-				<ul>
-					{ this.createSectionListItems() }
-				</ul>
-			</div>
-		)
-	}
+	return (
+		<div>
+			<h1>Home page</h1>
+			<ul>
+				{ createSectionListItems() }
+			</ul>
+		</div>
+	)
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
     articles: getCondensedArticles(state),
     sections: state.core.entities.sections,
 });
 
-// Get actions and pass them as props
-const matchDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => {
     return bindActionCreators({fetch: fetch}, dispatch)
 } 
 
-export default connect(mapStateToProps, matchDispatchToProps)(HomePage);
+export default connect(
+	mapStateToProps, 
+	mapDispatchToProps
+)( injectSheet(styles)(HomePage) );

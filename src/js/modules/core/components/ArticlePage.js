@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import injectSheet from 'react-jss';
 
 import { fetch } from '../actions';
@@ -40,15 +39,11 @@ const mapStateToProps = (state, ownProps) => ({
     },
 });
 
-const matchDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => {
     return bindActionCreators({fetch: fetch}, dispatch)
-} 
+}
 
-// We don't want to return the plain Article (component) anymore, we want to return the smart Container
-//      > Article is now aware of state and actions
-const VisibleArticlePage = connect(
-	mapStateToProps, 
-	matchDispatchToProps
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
 )( injectSheet(styles)(ArticlePage) );
-
-export default VisibleArticlePage;

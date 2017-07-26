@@ -40,7 +40,7 @@ const styles = {
 	},
 }
 
-const ArticleHeader = ({ classes, children, section, headline, byline, dateline }) => {
+const ArticleHeader = ({ classes, section, headline, byline, dateline }) => {
 	return (
 		
 		<div className={ classes.ArticleHeader }>

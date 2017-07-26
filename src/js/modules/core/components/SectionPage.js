@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -6,10 +6,11 @@ import injectSheet from 'react-jss';
 
 import { getArticlesWithinSection } from '../selectors';
 
-class SectionPage extends Component {
+const styles = {
+}
 
-	createArticleListItems(url) {
-		articles = this.props.articles;
+const SectionPage = ({ classes, articles, section, match }) => {
+	const createArticleListItems = (url) => {
 		return Object.keys(articles).map(function(key, index) {
 		   return (
 				<li key={ articles[key].id }>
@@ -18,29 +19,28 @@ class SectionPage extends Component {
 			)
 		});
 	}
-	
-	render() {
-		return (
-			<div>
-				<h1>{ this.props.section.name }</h1>
-				<p>description: { this.props.section.description }</p>				
-				<hr/>
-				<p>articles</p>
-				<ul>
-					{ this.createArticleListItems( this.props.match.url ) }
-				</ul>
-			</div>
-		)
-	}
+	return (
+		<div>
+			<h1>{ section.name }</h1>
+			<p>description: { section.description }</p>				
+			<hr/>
+			<p>articles</p>
+			<ul>
+				{ createArticleListItems( match.url ) }
+			</ul>
+		</div>
+	)
 }
 
 const mapStateToProps = (state, ownProps) => ({
    	articles: getArticlesWithinSection(state, ownProps),
-   	section: ownProps.section,
 });
 
-const matchDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => {
     return bindActionCreators({}, dispatch)
 } 
 
-export default connect(mapStateToProps, matchDispatchToProps)(SectionPage);
+export default connect(
+	mapStateToProps, 
+	mapDispatchToProps
+)( injectSheet(styles)(SectionPage) );
