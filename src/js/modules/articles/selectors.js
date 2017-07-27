@@ -5,15 +5,6 @@ const getArticles = state => state.articles.articles;
 const getRequestedArticleSlug = (state, props) => props.match.params.article_slug;
 const getSectionByProps = (state, props) => props.section;
 
-/* Writes the filter function for objects.
- * predicate is the function which keys/properties must match
- */
-Object.filter = (obj, predicate) =>
-  Object.keys(obj)
-    .filter(key => predicate(obj[ key ]))
-    .reduce((res, key) => (res[ key ] = obj[ key ], res), {});
-
-
 export const getArticleBySlug = createSelector(
   [ getSectionByProps, getArticles, getRequestedArticleSlug ],
   (section, articles, articleSlug) => {

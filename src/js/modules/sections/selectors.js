@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect'
+import { createSelector } from 'reselect';
 
 const getSections = (state) => state.sections.sections;
 
@@ -43,7 +43,7 @@ export const getAllSectionRoutes = createSelector(
         ...section,
         pathToSectionPage: pathToSectionPage,
         subsections: subsections,
-      }
+      };
     });
     return sectionRoutes;
   }
@@ -67,8 +67,8 @@ export const getAllSectionLinksFromHome = createSelector(
       sectionLinks[ key ] = {
         ...section,
         pathToSectionPage: pathToSectionPage,
-      }
+      };
     });
     return sectionLinks;
   }
-)
+);
