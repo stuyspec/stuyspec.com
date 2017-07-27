@@ -1,7 +1,8 @@
-import * as actions from './actions';
-import * as components from './components';
-import * as constants from './constants';
-import reducer from './reducer';
-import * as selectors from './selectors';
+import constants from './constants'
+import reducer   from './reducer'
 
-export default { actions, components, constants, reducer, selectors };
+import ArticlePage from './components/ArticlePage'
+import HomePage from './components/HomePage'
+import SectionPage from './components/SectionPage'
+
+export default { constants, reducer, ArticlePage, HomePage, SectionPage }
