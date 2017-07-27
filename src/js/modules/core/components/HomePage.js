@@ -1,45 +1,46 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import injectSheet from 'react-jss';
+import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
 
-import { fetch } from '../actions';
-import { getCondensedArticles } from '../selectors';
+import sections from "../../sections";
 
 const styles = {
-}
+  HomePage__linkList: {
+  },
+};
 
-const HomePage = ({ classes, sections, articles }) => {
-	const createSectionListItems = () => {
-		return Object.keys(sections).map(function(key) {
-		   return (
-				<li key={ sections[key].id }>
-					<Link to={ sections[key].slug }>{ sections[key].name }</Link>
-				</li>
-			)
-		});
-	}
-	return (
-		<div>
-			<h1>Home page</h1>
-			<ul>
-				{ createSectionListItems() }
-			</ul>
-		</div>
-	)
-}
+const HomePage = ({ classes, sectionLinks }) => {
+  const createSectionLinks = () => {
+    return Object.keys(sectionLinks).map(function (key, index) {
+      return (
+        <li key={`sectionLink${index}`}>
+          <Link to={sectionLinks[ key ].pathToSectionPage}>{sectionLinks[ key ].name}</Link>
+        </li>
+      );
+    });
+  };
+  return (
+    <div>
+      <h1>Home page</h1>
+      <ul className={classes.HomePage__linkList}>
+        {createSectionLinks()}
+      </ul>
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => ({
-    articles: getCondensedArticles(state),
-    sections: state.core.entities.sections,
+  articles: {},
+  sectionLinks: sections.selectors.getAllSectionLinksFromHome(state),
 });
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({fetch: fetch}, dispatch)
-} 
+    return bindActionCreators({}, dispatch);
+};
 
 export default connect(
-	mapStateToProps, 
-	mapDispatchToProps
-)( injectSheet(styles)(HomePage) );
+  mapStateToProps,
+  mapDispatchToProps
+)(injectSheet(styles)(HomePage));
