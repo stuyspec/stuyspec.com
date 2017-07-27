@@ -7,5 +7,5 @@ export const fetch = () => {
 	return {
 		type: t.FETCH_ARTICLE,
 		payload: axios.get(apiUrl),
-	}
+	};
 };

@@ -39,7 +39,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetch: fetch }, dispatch)
+  return bindActionCreators({ fetch: fetch }, dispatch);
 };
 
 export default connect(

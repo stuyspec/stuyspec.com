@@ -29,7 +29,7 @@ const HomePage = ({ classes, sectionLinks }) => {
       </ul>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   articles: {},
@@ -37,7 +37,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({}, dispatch)
+    return bindActionCreators({}, dispatch);
 };
 
 export default connect(

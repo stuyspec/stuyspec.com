@@ -1,4 +1,4 @@
-import * as t from './actionTypes'
+import * as t from './actionTypes';
 
 export const setLanguage = (language) => ({
   type: t.SET_LANGUAGE,

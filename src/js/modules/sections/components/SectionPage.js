@@ -11,7 +11,7 @@ const styles = {
   SectionPage__Header: {
     color: '#000',
   }
-}
+};
 
 /* TODO: make subsection tree work for any depth
  */
@@ -24,7 +24,7 @@ const SectionPage = ({ classes, articles, subsections, section, match }) => {
         <li key={`subsectionLink${index}`}>
           <Link to={match.url + '/' + subsection.slug}>{subsection.name}</Link>
         </li>
-      )
+      );
     });
   };
   const createArticleLinks = () => {
@@ -40,7 +40,7 @@ const SectionPage = ({ classes, articles, subsections, section, match }) => {
         <li key={`articleLink${index}`}>
           <Link to={match.url + '/' + pathToArticlePage}>{article.title}</Link>
         </li>
-      )
+      );
     });
   };
   return (
@@ -58,7 +58,7 @@ const SectionPage = ({ classes, articles, subsections, section, match }) => {
         {createArticleLinks()}
       </ul>
     </div>
-  )
+  );
 };
 
 
@@ -67,8 +67,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({}, dispatch)
-}
+  return bindActionCreators({}, dispatch);
+};
 
 export default connect(
   mapStateToProps,

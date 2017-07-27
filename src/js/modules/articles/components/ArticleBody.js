@@ -5,7 +5,7 @@ const styles = {
   ArticleBody: {
     color: '#000',
     fontFamily: 'Minion Pro',
-    fontSize: '18px',   
+    fontSize: '18px',
     lineHeight: 1.44,
     width: '700px',
     '& p:first-child::first-letter': {
@@ -30,7 +30,7 @@ const styles = {
       color: '#888',
     },
   },
-}
+};
 
 const ArticleBody = ({ classes, content, featured }) => {
   return(
@@ -45,7 +45,7 @@ const ArticleBody = ({ classes, content, featured }) => {
       <div dangerouslySetInnerHTML={{ __html: content }}>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default injectSheet(styles)(ArticleBody);

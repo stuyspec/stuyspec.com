@@ -2,7 +2,7 @@ import
 {
   SET_LANGUAGE,
   REFRESH_WINDOW_DIMENSIONS,
-} from './actionTypes'
+} from './actionTypes';
 
 // getWindowWidth & getWindowHeight was
 // adapted from http://stackoverflow.com/a/8876069/1291659
@@ -42,4 +42,4 @@ const reducer = (state = { ...initialState }, action) => {
   return state;
 };
 
-export default reducer
+export default reducer;

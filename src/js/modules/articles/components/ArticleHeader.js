@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import injectSheet from 'react-jss';
 
 const styles = {
@@ -36,9 +36,10 @@ const styles = {
       marginRight: '9px',
     },
   },
-}
+};
 
 const ArticleHeader = ({ classes, section, headline, byline, dateline }) => {
+  // TODO: make link to section work
   return (
     <div className={classes.ArticleHeader}>
       <Link to={section.slug} className={classes.ArticleHeader__rubric}>
@@ -50,7 +51,7 @@ const ArticleHeader = ({ classes, section, headline, byline, dateline }) => {
         <span>{dateline}</span>
       </p>
     </div>
-  )
-}
+  );
+};
 
 export default injectSheet(styles)(ArticleHeader);

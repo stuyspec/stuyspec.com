@@ -1,3 +1,9 @@
+import {
+  FETCH_ARTICLE_PENDING,
+  FETCH_ARTICLE_REJECTED,
+  FETCH_ARTICLE_FULFILLED,
+} from './actionTypes';
+
 const initialState = {
   isFetching: false,
   isFetched: false,
@@ -93,23 +99,23 @@ const initialState = {
       sectionSlug: "creative-writing",
     },
   },
-}
+};
 
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
-    case 'articles/FETCH_ARTICLE_PENDING': {
-      return { ...state, isFetching: true }
+    case FETCH_ARTICLE_PENDING: {
+      return { ...state, isFetching: true };
     }
-    case 'articles/FETCH_ARTICLE_REJECTED': {
-      return { ...state, isFetching: false, error: action.payload }
+    case FETCH_ARTICLE_REJECTED: {
+      return { ...state, isFetching: false, error: action.payload };
     }
-    case 'articles/FETCH_ARTICLE_FULFILLED': {
+    case FETCH_ARTICLE_FULFILLED: {
       return {
         ...state,
         isFetching: false,
         isFetched: true,
         request: action.payload,
-      }
+      };
     }
   }
   return state;
