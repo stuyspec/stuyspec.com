@@ -1,8 +1,6 @@
-import constants from './constants'
-import reducer   from './reducer'
+import constants from './constants';
+import reducer from './reducer';
 
-import ArticlePage from './components/ArticlePage'
-import HomePage from './components/HomePage'
-import SectionPage from './components/SectionPage'
+import HomePage from './components/HomePage';
 
-export default { constants, reducer, ArticlePage, HomePage, SectionPage }
+export default { constants, reducer, HomePage };

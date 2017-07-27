@@ -1,10 +1,11 @@
-import axios from 'axios';
-import * as t from './actionTypes';
+import * as t from './actionTypes'
 
-const apiUrl = 'http://api.icndb.com/jokes/random'
-export const fetch = () => {
-	return {
-		type: t.FETCH_ARTICLE,
-		payload: axios.get( apiUrl )
-	}
-}
+export const setLanguage = (language) => ({
+  type: t.SET_LANGUAGE,
+  payload: {language},
+});
+
+export const refreshWindowDimensions = () => ({
+  type: t.REFRESH_WINDOW_DIMENSIONS,
+  payload: {},
+});

@@ -1,0 +1,1 @@
+export const FETCH_SECTION = 'core/FETCH_SECTION';

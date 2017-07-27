@@ -5,21 +5,16 @@ import {Link} from 'react-router-dom';
 import injectSheet from 'react-jss';
 
 import {fetch} from '../actions';
-import {getCondensedArticles} from '../selectors';
+import {getAllSectionLinks} from "../../sections";
 
-const styles = {}
+const styles = {};
 
-const HomePage = ({classes, sections}) => {
+const HomePage = ({ classes, sectionLinks }) => {
   const createSectionLinks = () => {
-    return Object.keys(sections).map(function (key,index) {
-      const section = sections[key];
-      let pathToSectionPage = section.slug;
-      if (section.parent_slug !== null) {
-        pathToSectionPage = "/" + section.parent_slug + "/" + section.slug;
-      }
+    return Object.keys(sectionLinks).map(function (key,index) {
       return (
         <li key={`sectionLink${index}`}>
-          <Link to={pathToSectionPage}>{section.name}</Link>
+          <Link to={sectionLinks[key].pathToSectionPage}>{sectionLinks[key].name}</Link>
         </li>
       )
     });
@@ -28,15 +23,15 @@ const HomePage = ({classes, sections}) => {
     <div>
       <h1>Home page</h1>
       <ul>
-        {createSectionLinks()}
+        { createSectionLinks() }
       </ul>
     </div>
   )
 }
 
 const mapStateToProps = (state) => ({
-  articles: getCondensedArticles(state),
-  sections: state.core.entities.sections,
+  articles: {},
+  sectionLinks: getAllSectionLinks(state),
 });
 
 const mapDispatchToProps = dispatch => {

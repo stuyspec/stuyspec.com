@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import injectSheet from 'react-jss';
 
-import {getArticlesWithinSection} from '../selectors';
+import {getArticlesWithinSection} from '../../articles';
 
 const styles = {
   SectionPage__Header: {
@@ -64,7 +64,6 @@ const SectionPage = ({classes, articles, subsections, section, match}) => {
 
 const mapStateToProps = (state, ownProps) => ({
   articles: getArticlesWithinSection(state, ownProps),
-  sections: state.core.entities.sections,
 });
 
 const mapDispatchToProps = dispatch => {

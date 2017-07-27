@@ -3,8 +3,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import injectSheet from 'react-jss';
 
-import {fetch} from '../actions';
-import {getArticleBySlug} from '../selectors';
+import {fetch} from '../../core/actions';
+import {getArticleBySlug} from '../../core/selectors';
 import ArticleHeader from './ArticleHeader';
 import ArticleBody from './ArticleBody';
 
