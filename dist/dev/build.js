@@ -3577,9 +3577,9 @@
       "./_property-desc": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_property-desc.js",
       "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
       "./_is-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-object.js",
+      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
       "./_object-gpo": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gpo.js",
-      "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js",
-      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js"
+      "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.set.js",
@@ -4306,9 +4306,9 @@
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
       "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
       "./_a-function": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_a-function.js",
-      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
       "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
-      "./_object-forced-pam": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-forced-pam.js"
+      "./_object-forced-pam": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-forced-pam.js",
+      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.define-getter.js",
@@ -4322,10 +4322,10 @@
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
       "./_a-function": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_a-function.js",
-      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
       "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
       "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
-      "./_object-forced-pam": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-forced-pam.js"
+      "./_object-forced-pam": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-forced-pam.js",
+      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.define-setter.js",
@@ -4385,12 +4385,12 @@
     "'use strict';\nvar $export                  = require('./_export')\n  , toObject                 = require('./_to-object')\n  , toPrimitive              = require('./_to-primitive')\n  , getPrototypeOf           = require('./_object-gpo')\n  , getOwnPropertyDescriptor = require('./_object-gopd').f;\n\n// B.2.2.5 Object.prototype.__lookupSetter__(P)\nrequire('./_descriptors') && $export($export.P + require('./_object-forced-pam'), 'Object', {\n  __lookupSetter__: function __lookupSetter__(P){\n    var O = toObject(this)\n      , K = toPrimitive(P, true)\n      , D;\n    do {\n      if(D = getOwnPropertyDescriptor(O, K))return D.set;\n    } while(O = getPrototypeOf(O));\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
       "./_object-gpo": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gpo.js",
+      "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js",
+      "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
       "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
       "./_to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-primitive.js",
-      "./_object-forced-pam": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-forced-pam.js",
-      "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js"
+      "./_object-forced-pam": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-forced-pam.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.lookup-setter.js",
@@ -4769,53 +4769,52 @@
       "./modules/es6.math.cbrt": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.cbrt.js",
       "./modules/es6.math.expm1": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.expm1.js",
       "./modules/es6.number.epsilon": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.epsilon.js",
-      "./modules/es6.string.fontsize": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.fontsize.js",
-      "./modules/es6.string.italics": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.italics.js",
-      "./modules/es6.string.link": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.link.js",
-      "./modules/es6.string.small": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.small.js",
-      "./modules/es6.string.strike": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.strike.js",
-      "./modules/es6.typed.float64-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.float64-array.js",
-      "./modules/es6.string.sub": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.sub.js",
-      "./modules/es6.typed.int8-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.int8-array.js",
       "./modules/es6.string.sup": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.sup.js",
-      "./modules/es6.typed.uint8-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.uint8-array.js",
       "./modules/es6.string.anchor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.anchor.js",
-      "./modules/es6.typed.uint8-clamped-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.uint8-clamped-array.js",
+      "./modules/es6.string.big": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.big.js",
+      "./modules/es6.string.blink": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.blink.js",
+      "./modules/es6.string.bold": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.bold.js",
+      "./modules/es6.typed.int32-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.int32-array.js",
+      "./modules/es6.string.fontcolor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.fontcolor.js",
+      "./modules/es6.typed.uint32-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.uint32-array.js",
+      "./modules/es6.string.fixed": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.fixed.js",
+      "./modules/es6.typed.float32-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.float32-array.js",
+      "./modules/es6.string.fontsize": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.fontsize.js",
+      "./modules/es6.typed.float64-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.float64-array.js",
       "./modules/es6.reflect.prevent-extensions": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.prevent-extensions.js",
       "./modules/es7.reflect.has-own-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.has-own-metadata.js",
-      "./modules/es6.string.big": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.big.js",
-      "./modules/es6.typed.int16-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.int16-array.js",
+      "./modules/es6.string.italics": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.italics.js",
+      "./modules/es6.typed.int8-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.int8-array.js",
       "./modules/es7.reflect.metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.metadata.js",
-      "./modules/es6.array.map": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.map.js",
-      "./modules/es6.string.blink": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.blink.js",
-      "./modules/es6.typed.uint16-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.uint16-array.js",
+      "./modules/es6.array.filter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.filter.js",
+      "./modules/es6.string.link": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.link.js",
+      "./modules/es6.typed.uint8-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.uint8-array.js",
       "./modules/es7.reflect.define-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.define-metadata.js",
+      "./modules/es6.object.get-prototype-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.get-prototype-of.js",
+      "./modules/es7.object.lookup-getter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.lookup-getter.js",
+      "./modules/es6.object.define-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.define-property.js",
+      "./modules/es6.reflect.get": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.get.js",
+      "./modules/es6.array.some": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.some.js",
+      "./modules/es6.string.small": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.small.js",
+      "./modules/es6.typed.uint8-clamped-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.uint8-clamped-array.js",
+      "./modules/es7.reflect.delete-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.delete-metadata.js",
+      "./modules/es6.object.is-frozen": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.is-frozen.js",
+      "./modules/es7.object.lookup-setter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.lookup-setter.js",
+      "./modules/es6.function.name": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.function.name.js",
+      "./modules/es6.object.prevent-extensions": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.prevent-extensions.js",
+      "./modules/es6.regexp.search": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.search.js",
+      "./modules/es7.string.trim-left": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.trim-left.js",
+      "./modules/es6.reflect.get-own-property-descriptor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.get-own-property-descriptor.js",
+      "./modules/es7.reflect.has-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.has-metadata.js",
+      "./modules/es6.array.every": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.every.js",
+      "./modules/es6.string.strike": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.strike.js",
+      "./modules/es6.typed.int16-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.int16-array.js",
+      "./modules/es6.reflect.apply": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.apply.js",
+      "./modules/es7.reflect.get-own-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-own-metadata.js",
       "./modules/es6.object.is-sealed": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.is-sealed.js",
       "./modules/es6.array.sort": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.sort.js",
       "./modules/es6.date.to-json": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.date.to-json.js",
       "./modules/es6.reflect.set": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.set.js",
-      "./modules/es7.object.define-getter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.define-getter.js",
-      "./modules/es6.reflect.delete-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.delete-property.js",
-      "./modules/es6.reflect.get-prototype-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.get-prototype-of.js",
-      "./modules/es6.array.filter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.filter.js",
-      "./modules/es6.string.bold": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.bold.js",
-      "./modules/es6.typed.int32-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.int32-array.js",
-      "./modules/es7.reflect.delete-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.delete-metadata.js",
-      "./modules/es6.object.is-extensible": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.is-extensible.js",
-      "./modules/es7.object.define-setter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.define-setter.js",
-      "./modules/es6.reflect.define-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.define-property.js",
-      "./modules/es6.object.prevent-extensions": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.prevent-extensions.js",
-      "./modules/es6.regexp.search": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.search.js",
-      "./modules/es7.string.trim-left": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.trim-left.js",
-      "./modules/es6.reflect.get": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.get.js",
-      "./modules/es6.array.some": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.some.js",
-      "./modules/es6.string.fontcolor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.fontcolor.js",
-      "./modules/es6.typed.uint32-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.uint32-array.js",
-      "./modules/es6.reflect.apply": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.apply.js",
-      "./modules/es7.reflect.get-own-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-own-metadata.js",
-      "./modules/es6.object.get-prototype-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.get-prototype-of.js",
-      "./modules/es7.object.lookup-getter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.lookup-getter.js",
-      "./modules/es6.object.define-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.define-property.js",
       "./modules/es7.string.trim-right": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.trim-right.js",
       "./modules/es6.object.freeze": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.freeze.js",
       "./modules/es6.regexp.match": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.match.js",
@@ -4847,17 +4846,18 @@
       "./modules/es6.object.assign": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.assign.js",
       "./modules/es6.function.has-instance": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.function.has-instance.js",
       "./modules/es6.array.species": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.species.js",
-      "./modules/es6.reflect.get-own-property-descriptor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.get-own-property-descriptor.js",
-      "./modules/es7.reflect.has-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.has-metadata.js",
+      "./modules/es7.reflect.get-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-metadata.js",
+      "./modules/es7.object.define-getter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.define-getter.js",
       "./modules/es6.reflect.construct": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.construct.js",
       "./modules/es6.number.constructor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.constructor.js",
-      "./modules/es6.array.every": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.every.js",
-      "./modules/es6.string.fixed": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.fixed.js",
-      "./modules/es6.typed.float32-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.float32-array.js",
+      "./modules/es6.array.for-each": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.for-each.js",
+      "./modules/es6.string.sub": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.sub.js",
+      "./modules/es6.typed.uint16-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.uint16-array.js",
       "./modules/es6.reflect.is-extensible": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.is-extensible.js",
       "./modules/es7.reflect.get-own-metadata-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-own-metadata-keys.js",
-      "./modules/es6.object.is-frozen": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.is-frozen.js",
-      "./modules/es7.object.lookup-setter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.lookup-setter.js",
+      "./modules/es6.object.is-extensible": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.is-extensible.js",
+      "./modules/es6.reflect.define-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.define-property.js",
+      "./modules/es6.reflect.delete-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.delete-property.js",
       "./modules/es6.object.seal": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.seal.js",
       "./modules/es6.string.trim": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.trim.js",
       "./modules/es6.regexp.replace": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.replace.js",
@@ -4906,12 +4906,12 @@
       "./modules/es6.promise": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.promise.js",
       "./modules/es7.reflect.get-metadata-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-metadata-keys.js",
       "./modules/es6.symbol": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.symbol.js",
-      "./modules/es7.reflect.get-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-metadata.js",
-      "./modules/es6.function.name": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.function.name.js",
+      "./modules/es7.object.define-setter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.define-setter.js",
+      "./modules/es6.reflect.get-prototype-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.get-prototype-of.js",
       "./modules/es6.regexp.constructor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.constructor.js",
       "./modules/es6.object.create": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.create.js",
       "./modules/web.timers": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/web.timers.js",
-      "./modules/es6.array.for-each": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.for-each.js"
+      "./modules/es6.array.map": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.map.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/shim.js",
@@ -5460,10 +5460,10 @@
     "var hashClear = require('./_hashClear'),\n    hashDelete = require('./_hashDelete'),\n    hashGet = require('./_hashGet'),\n    hashHas = require('./_hashHas'),\n    hashSet = require('./_hashSet');\n\n/**\n * Creates a hash object.\n *\n * @private\n * @constructor\n * @param {Array} [entries] The key-value pairs to cache.\n */\nfunction Hash(entries) {\n  var index = -1,\n      length = entries == null ? 0 : entries.length;\n\n  this.clear();\n  while (++index < length) {\n    var entry = entries[index];\n    this.set(entry[0], entry[1]);\n  }\n}\n\n// Add methods to `Hash`.\nHash.prototype.clear = hashClear;\nHash.prototype['delete'] = hashDelete;\nHash.prototype.get = hashGet;\nHash.prototype.has = hashHas;\nHash.prototype.set = hashSet;\n\nmodule.exports = Hash;\n",
     {
       "./_hashDelete": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_hashDelete.js",
-      "./_hashHas": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_hashHas.js",
-      "./_hashClear": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_hashClear.js",
       "./_hashGet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_hashGet.js",
-      "./_hashSet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_hashSet.js"
+      "./_hashSet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_hashSet.js",
+      "./_hashHas": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_hashHas.js",
+      "./_hashClear": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_hashClear.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_Hash.js",
@@ -5476,10 +5476,10 @@
     "var listCacheClear = require('./_listCacheClear'),\n    listCacheDelete = require('./_listCacheDelete'),\n    listCacheGet = require('./_listCacheGet'),\n    listCacheHas = require('./_listCacheHas'),\n    listCacheSet = require('./_listCacheSet');\n\n/**\n * Creates an list cache object.\n *\n * @private\n * @constructor\n * @param {Array} [entries] The key-value pairs to cache.\n */\nfunction ListCache(entries) {\n  var index = -1,\n      length = entries == null ? 0 : entries.length;\n\n  this.clear();\n  while (++index < length) {\n    var entry = entries[index];\n    this.set(entry[0], entry[1]);\n  }\n}\n\n// Add methods to `ListCache`.\nListCache.prototype.clear = listCacheClear;\nListCache.prototype['delete'] = listCacheDelete;\nListCache.prototype.get = listCacheGet;\nListCache.prototype.has = listCacheHas;\nListCache.prototype.set = listCacheSet;\n\nmodule.exports = ListCache;\n",
     {
       "./_listCacheClear": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_listCacheClear.js",
-      "./_listCacheSet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_listCacheSet.js",
-      "./_listCacheDelete": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_listCacheDelete.js",
       "./_listCacheGet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_listCacheGet.js",
-      "./_listCacheHas": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_listCacheHas.js"
+      "./_listCacheHas": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_listCacheHas.js",
+      "./_listCacheSet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_listCacheSet.js",
+      "./_listCacheDelete": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_listCacheDelete.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_ListCache.js",
@@ -5504,10 +5504,10 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_MapCache.js": [
     "var mapCacheClear = require('./_mapCacheClear'),\n    mapCacheDelete = require('./_mapCacheDelete'),\n    mapCacheGet = require('./_mapCacheGet'),\n    mapCacheHas = require('./_mapCacheHas'),\n    mapCacheSet = require('./_mapCacheSet');\n\n/**\n * Creates a map cache object to store key-value pairs.\n *\n * @private\n * @constructor\n * @param {Array} [entries] The key-value pairs to cache.\n */\nfunction MapCache(entries) {\n  var index = -1,\n      length = entries == null ? 0 : entries.length;\n\n  this.clear();\n  while (++index < length) {\n    var entry = entries[index];\n    this.set(entry[0], entry[1]);\n  }\n}\n\n// Add methods to `MapCache`.\nMapCache.prototype.clear = mapCacheClear;\nMapCache.prototype['delete'] = mapCacheDelete;\nMapCache.prototype.get = mapCacheGet;\nMapCache.prototype.has = mapCacheHas;\nMapCache.prototype.set = mapCacheSet;\n\nmodule.exports = MapCache;\n",
     {
-      "./_mapCacheSet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheSet.js",
-      "./_mapCacheDelete": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheDelete.js",
       "./_mapCacheGet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheGet.js",
       "./_mapCacheHas": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheHas.js",
+      "./_mapCacheSet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheSet.js",
+      "./_mapCacheDelete": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheDelete.js",
       "./_mapCacheClear": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheClear.js"
     },
     {
@@ -5985,9 +5985,9 @@
     "var baseIsEqual = require('./_baseIsEqual'),\n    get = require('./get'),\n    hasIn = require('./hasIn'),\n    isKey = require('./_isKey'),\n    isStrictComparable = require('./_isStrictComparable'),\n    matchesStrictComparable = require('./_matchesStrictComparable'),\n    toKey = require('./_toKey');\n\n/** Used to compose bitmasks for value comparisons. */\nvar COMPARE_PARTIAL_FLAG = 1,\n    COMPARE_UNORDERED_FLAG = 2;\n\n/**\n * The base implementation of `_.matchesProperty` which doesn't clone `srcValue`.\n *\n * @private\n * @param {string} path The path of the property to get.\n * @param {*} srcValue The value to match.\n * @returns {Function} Returns the new spec function.\n */\nfunction baseMatchesProperty(path, srcValue) {\n  if (isKey(path) && isStrictComparable(srcValue)) {\n    return matchesStrictComparable(toKey(path), srcValue);\n  }\n  return function(object) {\n    var objValue = get(object, path);\n    return (objValue === undefined && objValue === srcValue)\n      ? hasIn(object, path)\n      : baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG);\n  };\n}\n\nmodule.exports = baseMatchesProperty;\n",
     {
       "./_matchesStrictComparable": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_matchesStrictComparable.js",
-      "./_isKey": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_isKey.js",
-      "./_isStrictComparable": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_isStrictComparable.js",
       "./_toKey": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_toKey.js",
+      "./_isStrictComparable": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_isStrictComparable.js",
+      "./_isKey": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_isKey.js",
       "./hasIn": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/hasIn.js",
       "./_baseIsEqual": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseIsEqual.js",
       "./get": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/get.js"
@@ -7189,8 +7189,8 @@
     "var baseProperty = require('./_baseProperty'),\n    basePropertyDeep = require('./_basePropertyDeep'),\n    isKey = require('./_isKey'),\n    toKey = require('./_toKey');\n\n/**\n * Creates a function that returns the value at `path` of a given object.\n *\n * @static\n * @memberOf _\n * @since 2.4.0\n * @category Util\n * @param {Array|string} path The path of the property to get.\n * @returns {Function} Returns the new accessor function.\n * @example\n *\n * var objects = [\n *   { 'a': { 'b': 2 } },\n *   { 'a': { 'b': 1 } }\n * ];\n *\n * _.map(objects, _.property('a.b'));\n * // => [2, 1]\n *\n * _.map(_.sortBy(objects, _.property(['a', 'b'])), 'a.b');\n * // => [1, 2]\n */\nfunction property(path) {\n  return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);\n}\n\nmodule.exports = property;\n",
     {
       "./_baseProperty": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseProperty.js",
-      "./_toKey": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_toKey.js",
       "./_isKey": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_isKey.js",
+      "./_toKey": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_toKey.js",
       "./_basePropertyDeep": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_basePropertyDeep.js"
     },
     {
@@ -11757,7 +11757,7 @@
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/selectors.js",
       "hash": "GlCydw",
       "browserifyId": 841,
-      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNlbGVjdG9ycy5qcz92ZXJzaW9uPUdsQ3lkdyJdLCJuYW1lcyI6WyJnZXRTZWN0aW9ucyIsInN0YXRlIiwic2VjdGlvbnMiLCJnZXRTZWN0aW9uQnlQcm9wcyIsInByb3BzIiwic2VjdGlvbiIsImdldFN1YnNlY3Rpb25zQnlQcm9wcyIsInN1YnNlY3Rpb25zIiwiZ2V0U2VjdGlvbkFuZFN1YnNlY3Rpb25TbHVncyIsInNsdWciLCJPYmplY3QiLCJrZXlzIiwiZmlsdGVyIiwib2JqIiwicHJlZGljYXRlIiwia2V5IiwicmVkdWNlIiwicmVzIiwiZ2V0QWxsU2VjdGlvblJvdXRlcyIsInNlY3Rpb25Sb3V0ZXMiLCJtYXAiLCJwYXRoVG9TZWN0aW9uUGFnZSIsInBhcmVudFNsdWciLCJwb3RlbnRpYWxTdWJzZWN0aW9uIiwiZ2V0QWxsU2VjdGlvbkxpbmtzRnJvbUhvbWUiLCJzZWN0aW9uTGlua3MiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7O0FBQUE7Ozs7QUFFQSxJQUFNQSxjQUFjLFNBQWRBLFdBQWMsQ0FBQ0MsS0FBRDtBQUFBLFNBQVdBLE1BQU1DLFFBQU4sQ0FBZUEsUUFBMUI7QUFBQSxDQUFwQjs7QUFFQSxJQUFNQyxvQkFBb0IsU0FBcEJBLGlCQUFvQixDQUFDRixLQUFELEVBQVFHLEtBQVI7QUFBQSxTQUFrQkEsTUFBTUMsT0FBeEI7QUFBQSxDQUExQjtBQUNBLElBQU1DLHdCQUF3QixTQUF4QkEscUJBQXdCLENBQUNMLEtBQUQsRUFBUUcsS0FBUjtBQUFBLFNBQWtCQSxNQUFNRyxXQUF4QjtBQUFBLENBQTlCOztBQUVBOzs7QUFHTyxJQUFNQyxzRUFBK0IsOEJBQzFDLENBQUVMLGlCQUFGLEVBQXFCRyxxQkFBckIsQ0FEMEMsRUFFMUMsVUFBQ0QsT0FBRCxFQUFVRSxXQUFWLEVBQTBCO0FBQ3hCLFVBQVNGLFFBQVFJLElBQWpCLDRCQUEwQkMsT0FBT0MsSUFBUCxDQUFZSixXQUFaLENBQTFCO0FBQ0QsQ0FKeUMsQ0FBckM7O0FBT1A7OztBQUdBRyxPQUFPRSxNQUFQLEdBQWdCLFVBQUNDLEdBQUQsRUFBTUMsU0FBTjtBQUFBLFNBQ2RKLE9BQU9DLElBQVAsQ0FBWUUsR0FBWixFQUNHRCxNQURILENBQ1U7QUFBQSxXQUFPRSxVQUFVRCxJQUFLRSxHQUFMLENBQVYsQ0FBUDtBQUFBLEdBRFYsRUFFR0MsTUFGSCxDQUVVLFVBQUNDLEdBQUQsRUFBTUYsR0FBTjtBQUFBLFdBQWVFLElBQUtGLEdBQUwsSUFBYUYsSUFBS0UsR0FBTCxDQUFiLEVBQXlCRSxHQUF4QztBQUFBLEdBRlYsRUFFd0QsRUFGeEQsQ0FEYztBQUFBLENBQWhCOztBQUtBOzs7O0FBSU8sSUFBTUMsb0RBQXNCLDhCQUNqQ2xCLFdBRGlDLEVBRWpDLFVBQUNFLFFBQUQsRUFBYztBQUNaLE1BQUlpQixnQkFBZ0IsRUFBcEI7QUFDQVQsU0FBT0MsSUFBUCxDQUFZVCxRQUFaLEVBQXNCa0IsR0FBdEIsQ0FBMEIsVUFBVUwsR0FBVixFQUFlO0FBQ3ZDLFFBQU1WLFVBQVVILFNBQVVhLEdBQVYsQ0FBaEI7QUFDQSxRQUFJTSxvQkFBb0IsTUFBTWhCLFFBQVFJLElBQXRDO0FBQ0EsUUFBSUYsY0FBYyxFQUFsQjtBQUNBLFFBQUlGLFFBQVFpQixVQUFSLEtBQXVCLElBQTNCLEVBQWlDO0FBQUU7QUFDakNELDBCQUFvQixNQUFNaEIsUUFBUWlCLFVBQWQsR0FBMkIsR0FBM0IsR0FBaUNqQixRQUFRSSxJQUE3RDtBQUNELEtBRkQsTUFFTztBQUFFO0FBQ1BGLG9CQUFjRyxPQUFPRSxNQUFQLENBQWNWLFFBQWQsRUFBd0IsVUFBQ3FCLG1CQUFELEVBQXlCO0FBQzdELGVBQU9BLG9CQUFvQkQsVUFBcEIsS0FBbUNqQixRQUFRSSxJQUFsRDtBQUNELE9BRmEsQ0FBZDtBQUdEO0FBQ0RVLGtCQUFlSixHQUFmLGlCQUNLVixPQURMO0FBRUVnQix5QkFBbUJBLGlCQUZyQjtBQUdFZCxtQkFBYUE7QUFIZjtBQUtELEdBaEJEO0FBaUJBLFNBQU9ZLGFBQVA7QUFDRCxDQXRCZ0MsQ0FBNUI7O0FBeUJQOzs7OztBQUtPLElBQU1LLGtFQUE2Qiw4QkFDeEN4QixXQUR3QyxFQUV4QyxVQUFDRSxRQUFELEVBQWM7QUFDWixNQUFJdUIsZUFBZSxFQUFuQjtBQUNBZixTQUFPQyxJQUFQLENBQVlULFFBQVosRUFBc0JrQixHQUF0QixDQUEwQixVQUFDTCxHQUFELEVBQVM7QUFDakMsUUFBTVYsVUFBVUgsU0FBVWEsR0FBVixDQUFoQjtBQUNBLFFBQUlNLG9CQUFvQmhCLFFBQVFJLElBQWhDO0FBQ0EsUUFBSUosUUFBUWlCLFVBQVIsS0FBdUIsSUFBM0IsRUFBaUM7QUFBRTtBQUNqQ0QsMEJBQW9CLE1BQU1oQixRQUFRaUIsVUFBZCxHQUEyQixHQUEzQixHQUFpQ2pCLFFBQVFJLElBQTdEO0FBQ0Q7QUFDRGdCLGlCQUFjVixHQUFkLGlCQUNLVixPQURMO0FBRUVnQix5QkFBbUJBO0FBRnJCO0FBSUQsR0FWRDtBQVdBLFNBQU9JLFlBQVA7QUFDRCxDQWhCdUMsQ0FBbkM7Ozs7Ozs7O2dDQXpERHpCOztnQ0FFQUc7O2dDQUNBRzs7Z0NBS09FOztnQ0FtQkFVOztnQ0E4QkFNIiwiZmlsZSI6InNlbGVjdG9ycy5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGNyZWF0ZVNlbGVjdG9yIH0gZnJvbSAncmVzZWxlY3QnO1xuXG5jb25zdCBnZXRTZWN0aW9ucyA9IChzdGF0ZSkgPT4gc3RhdGUuc2VjdGlvbnMuc2VjdGlvbnM7XG5cbmNvbnN0IGdldFNlY3Rpb25CeVByb3BzID0gKHN0YXRlLCBwcm9wcykgPT4gcHJvcHMuc2VjdGlvbjtcbmNvbnN0IGdldFN1YnNlY3Rpb25zQnlQcm9wcyA9IChzdGF0ZSwgcHJvcHMpID0+IHByb3BzLnN1YnNlY3Rpb25zO1xuXG4vKipcbiAqIFJldHVybnMgYW4gYXJyYXkgb2Ygc2x1Z3MgZm9yIGEgc2VjdGlvbiBhbmQgaXRzIHN1YnNlY3Rpb24uXG4gKi9cbmV4cG9ydCBjb25zdCBnZXRTZWN0aW9uQW5kU3Vic2VjdGlvblNsdWdzID0gY3JlYXRlU2VsZWN0b3IoXG4gIFsgZ2V0U2VjdGlvbkJ5UHJvcHMsIGdldFN1YnNlY3Rpb25zQnlQcm9wcyBdLFxuICAoc2VjdGlvbiwgc3Vic2VjdGlvbnMpID0+IHtcbiAgICByZXR1cm4gWyBzZWN0aW9uLnNsdWcsIC4uLk9iamVjdC5rZXlzKHN1YnNlY3Rpb25zKSBdO1xuICB9XG4pO1xuXG4vKiBXcml0ZXMgdGhlIGZpbHRlciBmdW5jdGlvbiBmb3Igb2JqZWN0cy5cbiAqIHByZWRpY2F0ZSBpcyB0aGUgZnVuY3Rpb24gd2hpY2gga2V5cy9wcm9wZXJ0aWVzIG11c3QgbWF0Y2hcbiAqL1xuT2JqZWN0LmZpbHRlciA9IChvYmosIHByZWRpY2F0ZSkgPT5cbiAgT2JqZWN0LmtleXMob2JqKVxuICAgIC5maWx0ZXIoa2V5ID0+IHByZWRpY2F0ZShvYmpbIGtleSBdKSlcbiAgICAucmVkdWNlKChyZXMsIGtleSkgPT4gKHJlc1sga2V5IF0gPSBvYmpbIGtleSBdLCByZXMpLCB7fSk7XG5cbi8qKlxuICogUmV0dXJucyBhIG1vZGlmaWVkIHZlcnNpb24gb2Ygc3RhdGUuc2VjdGlvbnMuc2VjdGlvbnMgZm9yIFJvdXRlcy5cbiAqIEZvciBlYWNoIHNlY3Rpb24sIGl0cyBzdWJzZWN0aW9ucyBhbmQgdGhlIHBhdGggdG8gaXRzZWxmIGFyZSBkZWZpbmVkLlxuICovXG5leHBvcnQgY29uc3QgZ2V0QWxsU2VjdGlvblJvdXRlcyA9IGNyZWF0ZVNlbGVjdG9yKFxuICBnZXRTZWN0aW9ucyxcbiAgKHNlY3Rpb25zKSA9PiB7XG4gICAgbGV0IHNlY3Rpb25Sb3V0ZXMgPSB7fTtcbiAgICBPYmplY3Qua2V5cyhzZWN0aW9ucykubWFwKGZ1bmN0aW9uIChrZXkpIHtcbiAgICAgIGNvbnN0IHNlY3Rpb24gPSBzZWN0aW9uc1sga2V5IF07XG4gICAgICBsZXQgcGF0aFRvU2VjdGlvblBhZ2UgPSAnLycgKyBzZWN0aW9uLnNsdWc7XG4gICAgICBsZXQgc3Vic2VjdGlvbnMgPSB7fTtcbiAgICAgIGlmIChzZWN0aW9uLnBhcmVudFNsdWcgIT09IG51bGwpIHsgLy8gdGhpcyBzZWN0aW9uIGlzIGEgc3Vic2VjdGlvblxuICAgICAgICBwYXRoVG9TZWN0aW9uUGFnZSA9ICcvJyArIHNlY3Rpb24ucGFyZW50U2x1ZyArICcvJyArIHNlY3Rpb24uc2x1ZztcbiAgICAgIH0gZWxzZSB7IC8vIHRoaXMgc2VjdGlvbiBpcyBhIHBhcmVudFxuICAgICAgICBzdWJzZWN0aW9ucyA9IE9iamVjdC5maWx0ZXIoc2VjdGlvbnMsIChwb3RlbnRpYWxTdWJzZWN0aW9uKSA9PiB7XG4gICAgICAgICAgcmV0dXJuIHBvdGVudGlhbFN1YnNlY3Rpb24ucGFyZW50U2x1ZyA9PT0gc2VjdGlvbi5zbHVnO1xuICAgICAgICB9KTtcbiAgICAgIH1cbiAgICAgIHNlY3Rpb25Sb3V0ZXNbIGtleSBdID0ge1xuICAgICAgICAuLi5zZWN0aW9uLFxuICAgICAgICBwYXRoVG9TZWN0aW9uUGFnZTogcGF0aFRvU2VjdGlvblBhZ2UsXG4gICAgICAgIHN1YnNlY3Rpb25zOiBzdWJzZWN0aW9ucyxcbiAgICAgIH07XG4gICAgfSk7XG4gICAgcmV0dXJuIHNlY3Rpb25Sb3V0ZXM7XG4gIH1cbik7XG5cbi8qKlxuICogUmV0dXJucyBhIG1vZGlmaWVkIHZlcnNpb24gb2Ygc3RhdGUuc2VjdGlvbnMuc2VjdGlvbnMgZm9yIExpbmtzIGZyb20gdGhlXG4gKiAgICAgaG9tZSBwYWdlLlxuICogRm9yIGVhY2ggc2VjdGlvbiwgaXRzIHBhdGggdG8gaXRzZWxmIGlzIGRlZmluZWQuXG4gKi9cbmV4cG9ydCBjb25zdCBnZXRBbGxTZWN0aW9uTGlua3NGcm9tSG9tZSA9IGNyZWF0ZVNlbGVjdG9yKFxuICBnZXRTZWN0aW9ucyxcbiAgKHNlY3Rpb25zKSA9PiB7XG4gICAgbGV0IHNlY3Rpb25MaW5rcyA9IHt9O1xuICAgIE9iamVjdC5rZXlzKHNlY3Rpb25zKS5tYXAoKGtleSkgPT4ge1xuICAgICAgY29uc3Qgc2VjdGlvbiA9IHNlY3Rpb25zWyBrZXkgXTtcbiAgICAgIGxldCBwYXRoVG9TZWN0aW9uUGFnZSA9IHNlY3Rpb24uc2x1ZztcbiAgICAgIGlmIChzZWN0aW9uLnBhcmVudFNsdWcgIT09IG51bGwpIHsgLy8gdGhpcyBzZWN0aW9uIGlzIGEgc3Vic2VjdGlvblxuICAgICAgICBwYXRoVG9TZWN0aW9uUGFnZSA9ICcvJyArIHNlY3Rpb24ucGFyZW50U2x1ZyArICcvJyArIHNlY3Rpb24uc2x1ZztcbiAgICAgIH1cbiAgICAgIHNlY3Rpb25MaW5rc1sga2V5IF0gPSB7XG4gICAgICAgIC4uLnNlY3Rpb24sXG4gICAgICAgIHBhdGhUb1NlY3Rpb25QYWdlOiBwYXRoVG9TZWN0aW9uUGFnZSxcbiAgICAgIH07XG4gICAgfSk7XG4gICAgcmV0dXJuIHNlY3Rpb25MaW5rcztcbiAgfVxuKTtcbiJdfQ=="
+      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNlbGVjdG9ycy5qcz92ZXJzaW9uPUdsQ3lkdyJdLCJuYW1lcyI6WyJnZXRTZWN0aW9ucyIsInN0YXRlIiwic2VjdGlvbnMiLCJnZXRTZWN0aW9uQnlQcm9wcyIsInByb3BzIiwic2VjdGlvbiIsImdldFN1YnNlY3Rpb25zQnlQcm9wcyIsInN1YnNlY3Rpb25zIiwiZ2V0U2VjdGlvbkFuZFN1YnNlY3Rpb25TbHVncyIsInNsdWciLCJPYmplY3QiLCJrZXlzIiwiZmlsdGVyIiwib2JqIiwicHJlZGljYXRlIiwia2V5IiwicmVkdWNlIiwicmVzIiwiZ2V0QWxsU2VjdGlvblJvdXRlcyIsInNlY3Rpb25Sb3V0ZXMiLCJtYXAiLCJwYXRoVG9TZWN0aW9uUGFnZSIsInBhcmVudFNsdWciLCJwb3RlbnRpYWxTdWJzZWN0aW9uIiwiZ2V0QWxsU2VjdGlvbkxpbmtzRnJvbUhvbWUiLCJzZWN0aW9uTGlua3MiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7O0FBQUE7Ozs7QUFFQSxJQUFNQSxjQUFjLFNBQWRBLFdBQWMsQ0FBQ0MsS0FBRDtBQUFBLFNBQVdBLE1BQU1DLFFBQU4sQ0FBZUEsUUFBMUI7QUFBQSxDQUFwQjs7QUFFQSxJQUFNQyxvQkFBb0IsU0FBcEJBLGlCQUFvQixDQUFDRixLQUFELEVBQVFHLEtBQVI7QUFBQSxTQUFrQkEsTUFBTUMsT0FBeEI7QUFBQSxDQUExQjtBQUNBLElBQU1DLHdCQUF3QixTQUF4QkEscUJBQXdCLENBQUNMLEtBQUQsRUFBUUcsS0FBUjtBQUFBLFNBQWtCQSxNQUFNRyxXQUF4QjtBQUFBLENBQTlCOztBQUVBOzs7QUFHTyxJQUFNQyxzRUFBK0IsOEJBQzFDLENBQUVMLGlCQUFGLEVBQXFCRyxxQkFBckIsQ0FEMEMsRUFFMUMsVUFBQ0QsT0FBRCxFQUFVRSxXQUFWLEVBQTBCO0FBQ3hCLFVBQVNGLFFBQVFJLElBQWpCLDRCQUEwQkMsT0FBT0MsSUFBUCxDQUFZSixXQUFaLENBQTFCO0FBQ0QsQ0FKeUMsQ0FBckM7O0FBT1A7OztBQUdBRyxPQUFPRSxNQUFQLEdBQWdCLFVBQUNDLEdBQUQsRUFBTUMsU0FBTjtBQUFBLFNBQ2RKLE9BQU9DLElBQVAsQ0FBWUUsR0FBWixFQUNHRCxNQURILENBQ1U7QUFBQSxXQUFPRSxVQUFVRCxJQUFLRSxHQUFMLENBQVYsQ0FBUDtBQUFBLEdBRFYsRUFFR0MsTUFGSCxDQUVVLFVBQUNDLEdBQUQsRUFBTUYsR0FBTjtBQUFBLFdBQWVFLElBQUtGLEdBQUwsSUFBYUYsSUFBS0UsR0FBTCxDQUFiLEVBQXlCRSxHQUF4QztBQUFBLEdBRlYsRUFFd0QsRUFGeEQsQ0FEYztBQUFBLENBQWhCOztBQUtBOzs7O0FBSU8sSUFBTUMsb0RBQXNCLDhCQUNqQ2xCLFdBRGlDLEVBRWpDLFVBQUNFLFFBQUQsRUFBYztBQUNaLE1BQUlpQixnQkFBZ0IsRUFBcEI7QUFDQVQsU0FBT0MsSUFBUCxDQUFZVCxRQUFaLEVBQXNCa0IsR0FBdEIsQ0FBMEIsVUFBVUwsR0FBVixFQUFlO0FBQ3ZDLFFBQU1WLFVBQVVILFNBQVVhLEdBQVYsQ0FBaEI7QUFDQSxRQUFJTSwwQkFBd0JoQixRQUFRSSxJQUFwQztBQUNBLFFBQUlGLGNBQWMsRUFBbEI7QUFDQSxRQUFJRixRQUFRaUIsVUFBUixLQUF1QixJQUEzQixFQUFpQztBQUFFO0FBQ2pDRCxnQ0FBd0JoQixRQUFRaUIsVUFBaEMsU0FBK0NqQixRQUFRSSxJQUF2RDtBQUNELEtBRkQsTUFFTztBQUFFO0FBQ1BGLG9CQUFjRyxPQUFPRSxNQUFQLENBQWNWLFFBQWQsRUFBd0IsVUFBQ3FCLG1CQUFELEVBQXlCO0FBQzdELGVBQU9BLG9CQUFvQkQsVUFBcEIsS0FBbUNqQixRQUFRSSxJQUFsRDtBQUNELE9BRmEsQ0FBZDtBQUdEO0FBQ0RVLGtCQUFlSixHQUFmLGlCQUNLVixPQURMO0FBRUVnQix5QkFBbUJBLGlCQUZyQjtBQUdFZCxtQkFBYUE7QUFIZjtBQUtELEdBaEJEO0FBaUJBLFNBQU9ZLGFBQVA7QUFDRCxDQXRCZ0MsQ0FBNUI7O0FBeUJQOzs7OztBQUtPLElBQU1LLGtFQUE2Qiw4QkFDeEN4QixXQUR3QyxFQUV4QyxVQUFDRSxRQUFELEVBQWM7QUFDWixNQUFJdUIsZUFBZSxFQUFuQjtBQUNBZixTQUFPQyxJQUFQLENBQVlULFFBQVosRUFBc0JrQixHQUF0QixDQUEwQixVQUFDTCxHQUFELEVBQVM7QUFDakMsUUFBTVYsVUFBVUgsU0FBVWEsR0FBVixDQUFoQjtBQUNBLFFBQUlNLG9CQUFvQmhCLFFBQVFJLElBQWhDO0FBQ0EsUUFBSUosUUFBUWlCLFVBQVIsS0FBdUIsSUFBM0IsRUFBaUM7QUFBRTtBQUNqQ0QsMEJBQW9CLE1BQU1oQixRQUFRaUIsVUFBZCxHQUEyQixHQUEzQixHQUFpQ2pCLFFBQVFJLElBQTdEO0FBQ0Q7QUFDRGdCLGlCQUFjVixHQUFkLGlCQUNLVixPQURMO0FBRUVnQix5QkFBbUJBO0FBRnJCO0FBSUQsR0FWRDtBQVdBLFNBQU9JLFlBQVA7QUFDRCxDQWhCdUMsQ0FBbkM7Ozs7Ozs7O2dDQXpERHpCOztnQ0FFQUc7O2dDQUNBRzs7Z0NBS09FOztnQ0FtQkFVOztnQ0E4QkFNIiwiZmlsZSI6InNlbGVjdG9ycy5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGNyZWF0ZVNlbGVjdG9yIH0gZnJvbSAncmVzZWxlY3QnO1xuXG5jb25zdCBnZXRTZWN0aW9ucyA9IChzdGF0ZSkgPT4gc3RhdGUuc2VjdGlvbnMuc2VjdGlvbnM7XG5cbmNvbnN0IGdldFNlY3Rpb25CeVByb3BzID0gKHN0YXRlLCBwcm9wcykgPT4gcHJvcHMuc2VjdGlvbjtcbmNvbnN0IGdldFN1YnNlY3Rpb25zQnlQcm9wcyA9IChzdGF0ZSwgcHJvcHMpID0+IHByb3BzLnN1YnNlY3Rpb25zO1xuXG4vKipcbiAqIFJldHVybnMgYW4gYXJyYXkgb2Ygc2x1Z3MgZm9yIGEgc2VjdGlvbiBhbmQgaXRzIHN1YnNlY3Rpb24uXG4gKi9cbmV4cG9ydCBjb25zdCBnZXRTZWN0aW9uQW5kU3Vic2VjdGlvblNsdWdzID0gY3JlYXRlU2VsZWN0b3IoXG4gIFsgZ2V0U2VjdGlvbkJ5UHJvcHMsIGdldFN1YnNlY3Rpb25zQnlQcm9wcyBdLFxuICAoc2VjdGlvbiwgc3Vic2VjdGlvbnMpID0+IHtcbiAgICByZXR1cm4gWyBzZWN0aW9uLnNsdWcsIC4uLk9iamVjdC5rZXlzKHN1YnNlY3Rpb25zKSBdO1xuICB9XG4pO1xuXG4vKiBXcml0ZXMgdGhlIGZpbHRlciBmdW5jdGlvbiBmb3Igb2JqZWN0cy5cbiAqIHByZWRpY2F0ZSBpcyB0aGUgZnVuY3Rpb24gd2hpY2gga2V5cy9wcm9wZXJ0aWVzIG11c3QgbWF0Y2hcbiAqL1xuT2JqZWN0LmZpbHRlciA9IChvYmosIHByZWRpY2F0ZSkgPT5cbiAgT2JqZWN0LmtleXMob2JqKVxuICAgIC5maWx0ZXIoa2V5ID0+IHByZWRpY2F0ZShvYmpbIGtleSBdKSlcbiAgICAucmVkdWNlKChyZXMsIGtleSkgPT4gKHJlc1sga2V5IF0gPSBvYmpbIGtleSBdLCByZXMpLCB7fSk7XG5cbi8qKlxuICogUmV0dXJucyBhIG1vZGlmaWVkIHZlcnNpb24gb2Ygc3RhdGUuc2VjdGlvbnMuc2VjdGlvbnMgZm9yIFJvdXRlcy5cbiAqIEZvciBlYWNoIHNlY3Rpb24sIGl0cyBzdWJzZWN0aW9ucyBhbmQgdGhlIHBhdGggdG8gaXRzZWxmIGFyZSBkZWZpbmVkLlxuICovXG5leHBvcnQgY29uc3QgZ2V0QWxsU2VjdGlvblJvdXRlcyA9IGNyZWF0ZVNlbGVjdG9yKFxuICBnZXRTZWN0aW9ucyxcbiAgKHNlY3Rpb25zKSA9PiB7XG4gICAgbGV0IHNlY3Rpb25Sb3V0ZXMgPSB7fTtcbiAgICBPYmplY3Qua2V5cyhzZWN0aW9ucykubWFwKGZ1bmN0aW9uIChrZXkpIHtcbiAgICAgIGNvbnN0IHNlY3Rpb24gPSBzZWN0aW9uc1sga2V5IF07XG4gICAgICBsZXQgcGF0aFRvU2VjdGlvblBhZ2UgPSBgLyR7c2VjdGlvbi5zbHVnfWA7XG4gICAgICBsZXQgc3Vic2VjdGlvbnMgPSB7fTtcbiAgICAgIGlmIChzZWN0aW9uLnBhcmVudFNsdWcgIT09IG51bGwpIHsgLy8gdGhpcyBzZWN0aW9uIGlzIGEgc3Vic2VjdGlvblxuICAgICAgICBwYXRoVG9TZWN0aW9uUGFnZSA9IGAvJHtzZWN0aW9uLnBhcmVudFNsdWd9LyR7IHNlY3Rpb24uc2x1Z31gO1xuICAgICAgfSBlbHNlIHsgLy8gdGhpcyBzZWN0aW9uIGlzIGEgcGFyZW50XG4gICAgICAgIHN1YnNlY3Rpb25zID0gT2JqZWN0LmZpbHRlcihzZWN0aW9ucywgKHBvdGVudGlhbFN1YnNlY3Rpb24pID0+IHtcbiAgICAgICAgICByZXR1cm4gcG90ZW50aWFsU3Vic2VjdGlvbi5wYXJlbnRTbHVnID09PSBzZWN0aW9uLnNsdWc7XG4gICAgICAgIH0pO1xuICAgICAgfVxuICAgICAgc2VjdGlvblJvdXRlc1sga2V5IF0gPSB7XG4gICAgICAgIC4uLnNlY3Rpb24sXG4gICAgICAgIHBhdGhUb1NlY3Rpb25QYWdlOiBwYXRoVG9TZWN0aW9uUGFnZSxcbiAgICAgICAgc3Vic2VjdGlvbnM6IHN1YnNlY3Rpb25zLFxuICAgICAgfTtcbiAgICB9KTtcbiAgICByZXR1cm4gc2VjdGlvblJvdXRlcztcbiAgfVxuKTtcblxuLyoqXG4gKiBSZXR1cm5zIGEgbW9kaWZpZWQgdmVyc2lvbiBvZiBzdGF0ZS5zZWN0aW9ucy5zZWN0aW9ucyBmb3IgTGlua3MgZnJvbSB0aGVcbiAqICAgICBob21lIHBhZ2UuXG4gKiBGb3IgZWFjaCBzZWN0aW9uLCBpdHMgcGF0aCB0byBpdHNlbGYgaXMgZGVmaW5lZC5cbiAqL1xuZXhwb3J0IGNvbnN0IGdldEFsbFNlY3Rpb25MaW5rc0Zyb21Ib21lID0gY3JlYXRlU2VsZWN0b3IoXG4gIGdldFNlY3Rpb25zLFxuICAoc2VjdGlvbnMpID0+IHtcbiAgICBsZXQgc2VjdGlvbkxpbmtzID0ge307XG4gICAgT2JqZWN0LmtleXMoc2VjdGlvbnMpLm1hcCgoa2V5KSA9PiB7XG4gICAgICBjb25zdCBzZWN0aW9uID0gc2VjdGlvbnNbIGtleSBdO1xuICAgICAgbGV0IHBhdGhUb1NlY3Rpb25QYWdlID0gc2VjdGlvbi5zbHVnO1xuICAgICAgaWYgKHNlY3Rpb24ucGFyZW50U2x1ZyAhPT0gbnVsbCkgeyAvLyB0aGlzIHNlY3Rpb24gaXMgYSBzdWJzZWN0aW9uXG4gICAgICAgIHBhdGhUb1NlY3Rpb25QYWdlID0gJy8nICsgc2VjdGlvbi5wYXJlbnRTbHVnICsgJy8nICsgc2VjdGlvbi5zbHVnO1xuICAgICAgfVxuICAgICAgc2VjdGlvbkxpbmtzWyBrZXkgXSA9IHtcbiAgICAgICAgLi4uc2VjdGlvbixcbiAgICAgICAgcGF0aFRvU2VjdGlvblBhZ2U6IHBhdGhUb1NlY3Rpb25QYWdlLFxuICAgICAgfTtcbiAgICB9KTtcbiAgICByZXR1cm4gc2VjdGlvbkxpbmtzO1xuICB9XG4pO1xuIl19"
     }
   ],
   "/Users/jasonkao/stuyspec/client-app/src/js/reducers.js": [
@@ -11822,13 +11822,13 @@
     }
   ],
   "/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js": [
-    "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n/**\r\n * Warning : if editing this file, be sure to keep the VERSION variable set to 'X.X.X'\r\n *           without modifying formatting for automation scripts\r\n * @type {{VERSION: string}}\r\n */\nvar VersionInfo = { VERSION: '0.0.751' };\nvar _default = VersionInfo;\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n\n  __REACT_HOT_LOADER__.register(VersionInfo, 'VersionInfo', '/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js');\n\n  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js');\n}();\n\n;\n",
+    "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n/**\r\n * Warning : if editing this file, be sure to keep the VERSION variable set to 'X.X.X'\r\n *           without modifying formatting for automation scripts\r\n * @type {{VERSION: string}}\r\n */\nvar VersionInfo = { VERSION: '0.0.754' };\nvar _default = VersionInfo;\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n\n  __REACT_HOT_LOADER__.register(VersionInfo, 'VersionInfo', '/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js');\n\n  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js');\n}();\n\n;\n",
     {},
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js",
-      "hash": "4uKQmw",
+      "hash": "xRvRsw",
       "browserifyId": 846,
-      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZlcnNpb25JbmZvLmpzP3ZlcnNpb249NHVLUW13Il0sIm5hbWVzIjpbIlZlcnNpb25JbmZvIiwiVkVSU0lPTiJdLCJtYXBwaW5ncyI6Ijs7OztBQUFBOzs7OztBQUtBLElBQUlBLGNBQWMsRUFBRUMsU0FBVSxTQUFaLEVBQWxCO2VBQ2VEOzs7Ozs7Ozs7O2dDQURYQSIsImZpbGUiOiJ2ZXJzaW9uSW5mby5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxyXG4gKiBXYXJuaW5nIDogaWYgZWRpdGluZyB0aGlzIGZpbGUsIGJlIHN1cmUgdG8ga2VlcCB0aGUgVkVSU0lPTiB2YXJpYWJsZSBzZXQgdG8gJ1guWC5YJ1xyXG4gKiAgICAgICAgICAgd2l0aG91dCBtb2RpZnlpbmcgZm9ybWF0dGluZyBmb3IgYXV0b21hdGlvbiBzY3JpcHRzXHJcbiAqIEB0eXBlIHt7VkVSU0lPTjogc3RyaW5nfX1cclxuICovXHJcbmxldCBWZXJzaW9uSW5mbyA9IHsgVkVSU0lPTiA6ICcwLjAuNzUxJyB9O1xyXG5leHBvcnQgZGVmYXVsdCBWZXJzaW9uSW5mbyJdfQ=="
+      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZlcnNpb25JbmZvLmpzP3ZlcnNpb249eFJ2UnN3Il0sIm5hbWVzIjpbIlZlcnNpb25JbmZvIiwiVkVSU0lPTiJdLCJtYXBwaW5ncyI6Ijs7OztBQUFBOzs7OztBQUtBLElBQUlBLGNBQWMsRUFBRUMsU0FBVSxTQUFaLEVBQWxCO2VBQ2VEOzs7Ozs7Ozs7O2dDQURYQSIsImZpbGUiOiJ2ZXJzaW9uSW5mby5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxyXG4gKiBXYXJuaW5nIDogaWYgZWRpdGluZyB0aGlzIGZpbGUsIGJlIHN1cmUgdG8ga2VlcCB0aGUgVkVSU0lPTiB2YXJpYWJsZSBzZXQgdG8gJ1guWC5YJ1xyXG4gKiAgICAgICAgICAgd2l0aG91dCBtb2RpZnlpbmcgZm9ybWF0dGluZyBmb3IgYXV0b21hdGlvbiBzY3JpcHRzXHJcbiAqIEB0eXBlIHt7VkVSU0lPTjogc3RyaW5nfX1cclxuICovXHJcbmxldCBWZXJzaW9uSW5mbyA9IHsgVkVSU0lPTiA6ICcwLjAuNzU0JyB9O1xyXG5leHBvcnQgZGVmYXVsdCBWZXJzaW9uSW5mbyJdfQ=="
     }
   ],
   "react-hot-loader/patch": [

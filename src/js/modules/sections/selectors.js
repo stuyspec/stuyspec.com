@@ -33,10 +33,10 @@ export const getAllSectionRoutes = createSelector(
     let sectionRoutes = {};
     Object.keys(sections).map(function (key) {
       const section = sections[ key ];
-      let pathToSectionPage = '/' + section.slug;
+      let pathToSectionPage = `/${section.slug}`;
       let subsections = {};
       if (section.parentSlug !== null) { // this section is a subsection
-        pathToSectionPage = '/' + section.parentSlug + '/' + section.slug;
+        pathToSectionPage = `/${section.parentSlug}/${ section.slug}`;
       } else { // this section is a parent
         subsections = Object.filter(sections, (potentialSubsection) => {
           return potentialSubsection.parentSlug === section.slug;
