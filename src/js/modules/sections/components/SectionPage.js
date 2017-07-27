@@ -1,10 +1,11 @@
 import React from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import injectSheet from 'react-jss';
+import sections from '../../sections';
 
-import {getArticlesWithinSection} from '../../articles';
+import articles from '../../articles';
 
 const styles = {
   SectionPage__Header: {
@@ -15,26 +16,25 @@ const styles = {
 /* TODO: make subsection tree work for any depth
  */
 
-const SectionPage = ({classes, articles, subsections, section, match}) => {
+const SectionPage = ({ classes, articles, subsections, section, match }) => {
   const createSubsectionLinks = () => {
-    if (subsections !== null) {
-      return Object.keys(subsections).map(function (key, index) {
-        const subsection = subsections[key];
-        return (
-          <li key={`subsectionLink${index}`}>
-            <Link to={match.url + '/' + subsection.slug}>{subsection.name}</Link>
-          </li>
-        )
-      });
-    }
+    return Object.keys(subsections).map(function (key, index) {
+      const subsection = subsections[ key ];
+      return (
+        <li key={`subsectionLink${index}`}>
+          <Link to={match.url + '/' + subsection.slug}>{subsection.name}</Link>
+        </li>
+      )
+    });
   };
   const createArticleLinks = () => {
+    console.log(sections);
     return Object.keys(articles).map(function (key, index) {
-      const article = articles[key];
+      const article = articles[ key ];
       let pathToArticlePage = article.slug;
       // if article is not a direct child of this section but is that of the section's subsection
-      if (subsections !== null && subsections[article.section_slug] !== undefined) {
-        pathToArticlePage = article.section_slug + '/' + article.slug;
+      if (subsections[ article.sectionSlug ] !== undefined) {
+        pathToArticlePage = article.sectionSlug + '/' + article.slug;
       }
       return (
         <li key={`articleLink${index}`}>
@@ -63,7 +63,7 @@ const SectionPage = ({classes, articles, subsections, section, match}) => {
 
 
 const mapStateToProps = (state, ownProps) => ({
-  articles: getArticlesWithinSection(state, ownProps),
+  articles: articles.selectors.getArticlesWithinSection(state, ownProps),
 });
 
 const mapDispatchToProps = dispatch => {

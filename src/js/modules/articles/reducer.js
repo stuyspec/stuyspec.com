@@ -1,5 +1,3 @@
-import { FETCH_ARTICLE } from './actionTypes'
-// currently has sample data
 const initialState = {
   isFetching: false,
   isFetched: false,
@@ -15,7 +13,7 @@ const initialState = {
       issue: 1,
       date: "July 19, 2017",
       time: "8:27 AM",
-      section_slug: "news",
+      sectionSlug: "news",
     },
     "mccains-miraculous-recovery": {
       id: 1,
@@ -26,7 +24,7 @@ const initialState = {
       issue: 1,
       date: "July 19, 2017",
       time: "8:27 AM",
-      section_slug: "news",
+      sectionSlug: "news",
     },
     "jason-kao-hits-a-home-run": {
       id: 2,
@@ -37,7 +35,7 @@ const initialState = {
       issue: 1,
       date: "July 19, 2017",
       time: "8:27 AM",
-      section_slug: "opinions",
+      sectionSlug: "opinions",
     },
     "fashion-tree-wins-techdisrupt-2018": {
       id: 3,
@@ -48,7 +46,7 @@ const initialState = {
       issue: 1,
       date: "July 19, 2017",
       time: "8:27 AM",
-      section_slug: "opinions",
+      sectionSlug: "opinions",
     },
     "hackathons-are-illegal-words-from-a-diva": {
       id: 4,
@@ -59,7 +57,7 @@ const initialState = {
       issue: 1,
       date: "July 19, 2017",
       time: "8:27 AM",
-      section_slug: "features",
+      sectionSlug: "features",
     },
     "tahseen-chowdhury-wins-again": {
       id: 5,
@@ -70,7 +68,7 @@ const initialState = {
       issue: 1,
       date: "July 19, 2017",
       time: "8:27 AM",
-      section_slug: "campaign-coverage",
+      sectionSlug: "campaign-coverage",
     },
     "stuyvesant-perceptions-vs-reality": {
       id: 4,
@@ -81,7 +79,7 @@ const initialState = {
       issue: 1,
       date: "July 19, 2017",
       time: "8:27 AM",
-      section_slug: "staff-editorials",
+      sectionSlug: "staff-editorials",
     },
     "creativity-the-spark-of-success": {
       id: 4,
@@ -92,29 +90,29 @@ const initialState = {
       issue: 1,
       date: "July 19, 2017",
       time: "8:27 AM",
-      section_slug: "creative-writing",
+      sectionSlug: "creative-writing",
     },
   },
 }
 
-const reducer = (state = {...initialState}, action) => {
+const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     case 'articles/FETCH_ARTICLE_PENDING': {
-      return {...state, isFetching: true}
+      return { ...state, isFetching: true }
     }
     case 'articles/FETCH_ARTICLE_REJECTED': {
-      return {...state, isFetching: false, error: action.payload}
+      return { ...state, isFetching: false, error: action.payload }
     }
     case 'articles/FETCH_ARTICLE_FULFILLED': {
       return {
         ...state,
         isFetching: false,
         isFetched: true,
-        request: action.payload
+        request: action.payload,
       }
     }
   }
   return state;
 };
 
-export default reducer
+export default reducer;

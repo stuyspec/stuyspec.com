@@ -1,21 +1,20 @@
 import React from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 
-import {fetch} from '../../core/actions';
-import {getArticleBySlug} from '../../core/selectors';
+import { fetch } from '../actions';
+import { getArticleBySlug } from '../selectors';
 import ArticleHeader from './ArticleHeader';
 import ArticleBody from './ArticleBody';
 
 const styles = {
   ArticlePage: {
-    margin: '0 auto',
-    width: '1060px',
+    margin: '0 auto', width: '1060px',
   },
 };
 
-const ArticlePage = ({classes, article, section, featured}) => {
+const ArticlePage = ({ classes, article, section, featured }) => {
   return (
     <div className={classes.ArticlePage}>
       <ArticleHeader
@@ -40,10 +39,10 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({fetch: fetch}, dispatch)
+  return bindActionCreators({ fetch: fetch }, dispatch)
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(injectSheet(styles)(ArticlePage));
+)( injectSheet(styles)(ArticlePage) );

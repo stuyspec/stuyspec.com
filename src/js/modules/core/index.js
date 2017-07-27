@@ -1,6 +1,7 @@
-import constants from './constants';
+import * as actions from './actions';
+import * as components from './components';
+import * as constants from './constants';
 import reducer from './reducer';
+import * as selectors from './selectors';
 
-import HomePage from './components/HomePage';
-
-export default { constants, reducer, HomePage };
+export default { actions, components, constants, reducer, selectors };

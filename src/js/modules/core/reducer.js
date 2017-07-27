@@ -20,19 +20,19 @@ const initialState = {
   viewportHeight: getViewportHeight(),
 };
 
-const reducer = (state = {...initialState}, action) => {
+const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     case SET_LANGUAGE :
       return Object.assign(
-        {...state},
-        {language: action.payload.language}
+        { ...state },
+        { language: action.payload.language }
       );
     case REFRESH_WINDOW_DIMENSIONS :
       let viewportWidth = getViewportWidth(),
         viewportHeight = getViewportHeight();
       if (state.viewportWidth != viewportWidth || state.viewportHeight != viewportHeight) {
         // override width/height which will refresh app view
-        return Object.assign({...state}, {viewportWidth, viewportHeight});
+        return Object.assign({ ...state }, { viewportWidth, viewportHeight });
       } else { // otherwise do not mutate
         return state;
       }

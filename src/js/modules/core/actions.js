@@ -2,7 +2,7 @@ import * as t from './actionTypes'
 
 export const setLanguage = (language) => ({
   type: t.SET_LANGUAGE,
-  payload: {language},
+  payload: { language },
 });
 
 export const refreshWindowDimensions = () => ({

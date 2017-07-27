@@ -1,1 +1,1 @@
-export const FETCH_SECTION = 'core/FETCH_SECTION';
+export const FETCH_SECTION = 'sections/FETCH_SECTION';

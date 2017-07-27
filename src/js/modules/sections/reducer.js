@@ -54,13 +54,13 @@ const initialState = {
   },
 }
 
-const reducer = (state = {...initialState}, action) => {
+const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     case 'sections/FETCH_SECTION_PENDING': {
-      return {...state, isFetching: true}
+      return { ...state, isFetching: true }
     }
     case 'sections/FETCH_SECTION_REJECTED': {
-      return {...state, isFetching: false, error: action.payload}
+      return { ...state, isFetching: false, error: action.payload }
     }
     case 'sections/FETCH_SECTION_FULFILLED': {
       return {

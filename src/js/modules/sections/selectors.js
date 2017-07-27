@@ -20,12 +20,16 @@ Object.filter = (obj, predicate) =>
     .filter(key => predicate(obj[ key ]))
     .reduce((res, key) => (res[ key ] = obj[ key ], res), {});
 
+/**
+ * Returns a modified version of state.sections.sections for Routes.
+ * For each section, its subsections and the path to itself are defined.
+ */
 export const getAllSectionRoutes = createSelector(
   getSections,
   (sections) => {
     let sectionRoutes = {};
     Object.keys(sections).map(function (key) {
-      const section = sections[key];
+      const section = sections[ key ];
       let pathToSectionPage = '/' + section.slug;
       let subsections = {};
       if (section.parentSlug !== null) { // this section is a subsection
@@ -35,7 +39,7 @@ export const getAllSectionRoutes = createSelector(
           return potentialSubsection.parentSlug === section.slug;
         });
       }
-      sectionRoutes[key] = {
+      sectionRoutes[ key ] = {
         ...section,
         pathToSectionPage: pathToSectionPage,
         subsections: subsections,
@@ -45,17 +49,22 @@ export const getAllSectionRoutes = createSelector(
   }
 );
 
-export const getAllSectionLinks = createSelector(
+/**
+ * Returns a modified version of state.sections.sections for Links from the
+ *     home page.
+ * For each section, its path to itself is defined.
+ */
+export const getAllSectionLinksFromHome = createSelector(
   getSections,
   (sections) => {
     let sectionLinks = {};
-    Object.keys(sections).map(function (key,index) {
-      const section = sections[key];
+    Object.keys(sections).map((key) => {
+      const section = sections[ key ];
       let pathToSectionPage = section.slug;
-      if (section.parentSlug !== null) {
+      if (section.parentSlug !== null) { // this section is a subsection
         pathToSectionPage = '/' + section.parentSlug + '/' + section.slug;
       }
-      sectionLinks[key] = {
+      sectionLinks[ key ] = {
         ...section,
         pathToSectionPage: pathToSectionPage,
       }

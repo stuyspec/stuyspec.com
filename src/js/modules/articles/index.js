@@ -1,7 +1,7 @@
-import constants from './constants';
-import reducer   from './reducer';
+import * as actions from './actions';
+import * as components from './components';
+import * as constants from './constants';
+import reducer from './reducer';
+import * as selectors from './selectors';
 
-import ArticlePage from './components/ArticlePage';
-import getArticlesWithinSection from './selectors';
-
-export default { constants, reducer, ArticlePage, getArticlesWithinSection };
+export default { actions, components, constants, reducer, selectors };

@@ -1,7 +1,7 @@
-import constants from './constants'
-import reducer from './reducer'
+import * as actions from './actions';
+import * as components from './components';
+import * as constants from './constants';
+import reducer from './reducer';
+import * as selectors from './selectors';
 
-import SectionPage from './components/SectionPage'
-import { getAllSectionRoutes, getAllSectionLinks } from './selectors'
-
-export default { constants, reducer, SectionPage, getAllSectionRoutes, getAllSectionLinks }
+export default { actions, components, constants, reducer, selectors };

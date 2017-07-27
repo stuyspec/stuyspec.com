@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import injectSheet from 'react-jss';
 
 const styles = {
@@ -32,7 +32,7 @@ const styles = {
   },
 }
 
-const ArticleBody = ({ classes, children, content, featured }) => {
+const ArticleBody = ({ classes, content, featured }) => {
   return(
     <div className={ classes.ArticleBody }>
       <figure className={ classes.Figure }>
