@@ -1,4 +1,4 @@
 export default
 {
-    NAME :  'core'
-}
+    NAME :  'core',
+};
