@@ -3,5 +3,5 @@ dist/prod/*.js
 dist/prod/**
 node_modules
 builds/**
-.ideas
+.idea
 .DS_STORE

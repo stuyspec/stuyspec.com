@@ -9,7 +9,7 @@ const styles = {
     marginBottom: '20px',
     padding: '12px 0px',
   },
-  ArticleHeader__rubric: {
+  rubric: {
     color: '#000',
     display: 'block',
     fontFamily: 'Circular Std',
@@ -19,7 +19,7 @@ const styles = {
     textDecoration: 'none',
     textTransform: 'uppercase',
   },
-  ArticleHeader__headline: {
+  headline: {
     color: '#000',
     fontFamily: 'Minion Pro',
     fontSize: '36px',
@@ -27,7 +27,7 @@ const styles = {
     marginTop: '0px',
     marginBottom: '15px',
   },
-  ArticleHeader__metaInfo: {
+  metaInfo: {
     fontSize: '14px',
     color: '#000000',
     margin: '0px',
@@ -42,11 +42,11 @@ const ArticleHeader = ({ classes, section, headline, byline, dateline }) => {
   // TODO: make link to section work
   return (
     <div className={classes.ArticleHeader}>
-      <Link to={section.slug} className={classes.ArticleHeader__rubric}>
+      <Link to={'/thisLinkNoWork'} className={classes.rubric}>
         {section.name}
       </Link>
-      <h1 className={classes.ArticleHeader__headline}>{headline}</h1>
-      <p className={classes.ArticleHeader__metaInfo}>
+      <h1 className={classes.headline}>{headline}</h1>
+      <p className={classes.metaInfo}>
         <span>{byline}</span>
         <span>{dateline}</span>
       </p>

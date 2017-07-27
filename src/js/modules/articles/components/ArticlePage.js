@@ -10,11 +10,12 @@ import ArticleBody from './ArticleBody';
 
 const styles = {
   ArticlePage: {
-    margin: '0 auto', width: '1060px',
+    margin: '0 auto',
+    width: '1060px',
   },
 };
 
-const ArticlePage = ({ classes, article, section, featured }) => {
+const ArticlePage = ({ classes, article, section, featuredMedia }) => {
   return (
     <div className={classes.ArticlePage}>
       <ArticleHeader
@@ -23,14 +24,14 @@ const ArticlePage = ({ classes, article, section, featured }) => {
         byline="By Jason Kao"
         dateline="July 20, 2017"
       />
-      <ArticleBody content={article.content} featured={featured}/>
+      <ArticleBody content={article.content} featuredMedia={featuredMedia}/>
     </div>
   );
 };
 
 const mapStateToProps = (state, ownProps) => ({
   article: getArticleBySlug(state, ownProps),
-  featured: {
+  featuredMedia: {
     url: 'http://planesandpleasures.com/wp-content/uploads/2016/09/NewYork-Chinatown-7.jpg',
     caption: 'New York City street after rain is covered in water, dirt, and snow. Pedestrians walk back and forth as post-flood confusion amasses.',
     type: 'Photograph',

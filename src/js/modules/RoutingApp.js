@@ -13,7 +13,8 @@ const { HomePage } = core.components;
 const { ArticlePage } = articles.components;
 const { SectionPage } = sections.components;
 
-const allSectionRoutes = sections.selectors.getAllSectionRoutes( store.getState() ); // change to mapStateToProps
+//TODO: change to mapStateToProps
+const allSectionRoutes = sections.selectors.getAllSectionRoutes( store.getState() );
 
 const RoutingApp = () => {
   const createSectionRoutes = () => {

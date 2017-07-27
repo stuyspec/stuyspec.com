@@ -5,9 +5,12 @@ const getSections = (state) => state.sections.sections;
 const getSectionByProps = (state, props) => props.section;
 const getSubsectionsByProps = (state, props) => props.subsections;
 
-export const getDeepSectionSlugsList = createSelector(
+/**
+ * Returns an array of slugs for a section and its subsection.
+ */
+export const getSectionAndSubsectionSlugs = createSelector(
   [ getSectionByProps, getSubsectionsByProps ],
-  (section, subsections = {}) => {
+  (section, subsections) => {
     return [ section.slug, ...Object.keys(subsections) ];
   }
 );
