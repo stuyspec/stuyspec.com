@@ -1,62 +1,61 @@
 import Provider from 'react-redux/lib/components/Provider';
-import React  from 'react';
+import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import appHistory from 'tools/appHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
 import store from '../store';
 
 import core from './core';
-import articles from './articles';
-import sections from './sections';
+const { ArticlePage , HomePage, SectionPage } = core;
 
-const { HomePage } = core.components;
-const { ArticlePage } = articles.components;
-const { SectionPage } = sections.components;
-
-const allSectionRoutes = sections.selectors.getAllSectionRoutes( store.getState() ); // change to mapStateToProps
-
-const RoutingApp = () => {
-  const createSectionRoutes = () => {
-    return Object.keys(allSectionRoutes).map((key, index) => {
-      const sectionRoute = allSectionRoutes[ key ];
-      return (<Route
-        exact path={sectionRoute.pathToSectionPage}
-        key={`sectionRoute${index}`}
-        render={(props) => (
-          <SectionPage history={props.history}
-                       location={props.location}
-                       match={props.match}
-                       section={sectionRoute}
-                       subsections={sectionRoute.subsections}/>
-        )}/>
-      );
-    });
-  };
-  const createArticleRoutes = () => {
-    return Object.keys(allSectionRoutes).map((key, index) => {
-      const sectionRoute = allSectionRoutes[ key ];
+class RoutingApp extends Component
+{
+  createSectionRoutes( sections ) {
+    return Object.keys(sections).map(function(key) {
+      let section = sections[key];
       return <Route
-        exact path={sectionRoute.pathToSectionPage + "/:article_slug"}
-        key={`articleRoute${index}`}
+        exact path={ "/"+section.slug }
+        key={ section.id }
         render={(props) => (
-          <ArticlePage history={props.history}
-                       location={props.location}
-                       match={props.match}
-                       section={sectionRoute}/>
-        )}/>
+          <SectionPage history={ props.history }
+            location={ props.location }
+            match={ props.match }
+            section={ section }/>
+        )}/>    
     })
-  };
-  return (
-    <Provider store={store}>
-      <ConnectedRouter history={appHistory}>
-        <Switch>
-          <Route exact path="/" component={HomePage}/>
-          { createSectionRoutes() }
-          { createArticleRoutes() }
-        </Switch>
-      </ConnectedRouter>
-    </Provider>
-  );
-};
+  }
 
-export default RoutingApp;
+  createArticleRoutes( sections ) {
+    return Object.keys(sections).map(function(key) {
+      let section = sections[key];
+      return <Route
+        exact path={ "/"+section.slug+"/:article_slug" }
+        key={ section.id }
+        render={(props) => (
+          <ArticlePage history={ props.history }
+            location={ props.location }
+            match={ props.match }
+            section={ section }/>
+        )}/> 
+    })
+  }
+
+  render ()
+  {
+    
+    const sections = store.getState().core.entities.sections;
+    return (
+      <Provider store={ store }>
+          <ConnectedRouter history={ appHistory }>
+              <Switch>
+                  <Route exact path="/" component={ HomePage } />
+                  { this.createSectionRoutes(sections) }
+                  { this.createArticleRoutes(sections) }
+              </Switch>
+          </ConnectedRouter>
+      </Provider>
+    );
+  }
+}
+
+export default RoutingApp
