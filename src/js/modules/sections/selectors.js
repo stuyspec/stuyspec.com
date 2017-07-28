@@ -73,33 +73,43 @@ export const getAllSectionLinksFromHome = createSelector(
   }
 );
 
-const getParentSections = (state) => Object.filter(getSections(state), sections => {
-    return sections.parentSlug == null;
-  });
+const getParentSections = createSelector(
+  getSections,
+  (sections) => {
+    return Object.filter(sections, section => {
+      return section.parentSlug === null;
+    });
+  }
+);
+const getSubsections = createSelector(
+  getSections,
+  (sections) => {
+    return Object.filter(sections, section => {
+      return section.parentSlug !== null;
+    });
+  }
+);
 
-const getSubSections = (state) => Object.filter(getSections(state), sections => {
-    return sections.parentSlug !== null;
-  });
-
+// TODO: make subsections its own selector, or some other smarty way to split this fat thing up
 
 export const getSectionTree = createSelector(
-  [getParentSections, getSubSections],
-  (parentSectionObject, subSectionObject) => {
+  [ getParentSections, getSubsections ],
+  (parentSection, allSubsections) => {
     let sectionTree = [];
-    Object.keys(parentSectionObject).map((parent) => {
+    Object.keys(parentSection).map((parentSectionSlug) => {
       sectionTree.push({
-        name: parentSectionObject[parent].name,
-        slug: parentSectionObject[parent].slug,
-        subsections: Object.keys(subSectionObject).filter((subSectionSlug) => {
-          return subSectionObject[subSectionSlug].parentSlug == parentSectionObject[parent].slug
-        }).map((subSectionSlug) => {
+        name: parentSection[ parentSectionSlug ].name,
+        slug: parentSectionSlug,
+        subsections: Object.keys(allSubsections).filter((subsectionSlug) => {
+          return allSubsections[ subsectionSlug ].parentSlug === parentSectionSlug
+        }).map((subsectionSlug) => {
           return {
-            name: subSectionObject[subSectionSlug].name,
-            slug: subSectionObject[subSectionSlug].slug,
+            name: allSubsections[ subsectionSlug ].name,
+            slug: subsectionSlug,
           }
-        })
+        }),
       })
-    })
+    });
     return sectionTree;
   }
 );

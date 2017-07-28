@@ -52,6 +52,13 @@ const initialState = {
       description: "The creative writing of Stuyvesant.",
       parentSlug: "features",
     },
+    "voices": {
+      id: 6,
+      name: "Voices",
+      slug: "voices",
+      description: "The voices of Stuyvesant.",
+      parentSlug: "features",
+    },
   },
 };
 

@@ -8,7 +8,7 @@ import store from '../store';
 import core from './core';
 import articles from './articles';
 import sections from './sections';
-import Layout from './core/components/Layout'
+import Layout from './core/components/PageLayout'
 
 const { HomePage } = core.components;
 const { ArticlePage } = articles.components;
