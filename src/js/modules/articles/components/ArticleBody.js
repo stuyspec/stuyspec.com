@@ -1,6 +1,8 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 
+import ArticleFeaturedMedia from './ArticleFeaturedMedia';
+
 const styles = {
   ArticleBody: {
     color: '#000',
@@ -15,33 +17,28 @@ const styles = {
       padding: '7px 6px 0px 3px',
     },
   },
-  Figure: {
+  featuredMedia: {
     margin: '0px 0px 13px 0px',
     width: '100%',
-  },
-  Figure__image: {
-    width: '100%',
-  },
-  Figure__caption: {
-    fontFamily: 'Minion Pro',
-    fontSize: '14px',
-    lineHeight: '1.07',
-    '& span:last-child': {
-      color: '#888',
+    '& .img': {
+      width: '100%'
+    },
+    '& .caption': {
+      fontFamily: 'Minion Pro',
+      fontSize: '14px',
+      lineHeight: '1.07',
+      '& span:last-child': {
+        color: '#888'
+      },
     },
   },
 };
 
-const ArticleBody = ({ classes, content, featured }) => {
+const ArticleBody = ({ classes, content, featuredMedia }) => {
+  console.log(classes);
   return(
     <div className={ classes.ArticleBody }>
-      <figure className={ classes.Figure }>
-        <img className={ classes.Figure__image} src={ featured.url }/>
-        <figcaption className={ classes.Figure__caption}>
-          <span>{ featured.caption } </span>
-          <span>{ featured.type } by { featured.credits }</span>
-        </figcaption>
-      </figure>
+      <ArticleFeaturedMedia featuredMedia={featuredMedia}/>
       <div dangerouslySetInnerHTML={{ __html: content }}>
       </div>
     </div>

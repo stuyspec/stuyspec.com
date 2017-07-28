@@ -5,9 +5,12 @@ const getSections = (state) => state.sections.sections;
 const getSectionByProps = (state, props) => props.section;
 const getSubsectionsByProps = (state, props) => props.subsections;
 
-export const getDeepSectionSlugsList = createSelector(
+/**
+ * Returns an array of slugs for a section and its subsection.
+ */
+export const getSectionAndSubsectionSlugs = createSelector(
   [ getSectionByProps, getSubsectionsByProps ],
-  (section, subsections = {}) => {
+  (section, subsections) => {
     return [ section.slug, ...Object.keys(subsections) ];
   }
 );
@@ -30,10 +33,10 @@ export const getAllSectionRoutes = createSelector(
     let sectionRoutes = {};
     Object.keys(sections).map(function (key) {
       const section = sections[ key ];
-      let pathToSectionPage = '/' + section.slug;
+      let pathToSectionPage = `/${section.slug}`;
       let subsections = {};
       if (section.parentSlug !== null) { // this section is a subsection
-        pathToSectionPage = '/' + section.parentSlug + '/' + section.slug;
+        pathToSectionPage = `/${section.parentSlug}/${ section.slug}`;
       } else { // this section is a parent
         subsections = Object.filter(sections, (potentialSubsection) => {
           return potentialSubsection.parentSlug === section.slug;
