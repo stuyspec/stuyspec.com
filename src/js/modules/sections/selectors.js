@@ -82,7 +82,7 @@ const getSubSections = (state) => Object.filter(getSections(state), sections => 
   });
 
 
-export const makeSectionTree = createSelector(
+export const getSectionTree = createSelector(
   [getParentSections, getSubSections],
   (parentSectionObject, subSectionObject) => {
     let sectionTree = [];
@@ -90,17 +90,16 @@ export const makeSectionTree = createSelector(
       sectionTree.push({
         name: parentSectionObject[parent].name,
         slug: parentSectionObject[parent].slug,
-        subsections: Object.keys(subSectionObject).filter((subSection) => {
-          return subSectionObject[subSection].parentSlug == parentSectionObject[parent].slug
-        }).map((filteredSubSections) => {
+        subsections: Object.keys(subSectionObject).filter((subSectionSlug) => {
+          return subSectionObject[subSectionSlug].parentSlug == parentSectionObject[parent].slug
+        }).map((subSectionSlug) => {
           return {
-            name: subSectionObject[filteredSubSections].name,
-            slug: subSectionObject[filteredSubSections].slug,
+            name: subSectionObject[subSectionSlug].name,
+            slug: subSectionObject[subSectionSlug].slug,
           }
         })
       })
     })
-    console.log(sectionTree)
     return sectionTree;
   }
 );

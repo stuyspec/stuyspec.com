@@ -13,6 +13,8 @@ import Layout from './core/components/Layout'
 const { HomePage } = core.components;
 const { ArticlePage } = articles.components;
 const { SectionPage } = sections.components;
+//const { Layout } = core.components;
+// Jason Kao please look into this Layout Thing
 
 const allSectionRoutes = sections.selectors.getAllSectionRoutes( store.getState() ); // change to mapStateToProps
 

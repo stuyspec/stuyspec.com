@@ -3,10 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
-
 import sections from "../../sections";
-
-import Footer from './Footer';
 
 const styles = {
   HomePage__linkList: {
@@ -33,10 +30,7 @@ const HomePage = ({ classes, sectionLinks }) => {
   );
 };
 
-//Should remove footer after done styling it
-
 const mapStateToProps = (state) => ({
-  articles: {},
   sectionLinks: sections.selectors.getAllSectionLinksFromHome(state),
 });
 

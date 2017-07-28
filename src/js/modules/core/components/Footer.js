@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 import { Link } from 'react-router-dom';
-import { makeSectionTree } from '../../sections/selectors';
+import { getSectionTree } from '../../sections/selectors';
 
 const styles= {
 	Footer: {
@@ -60,6 +60,34 @@ const styles= {
 }
 
 const Footer = ({classes, sectionTree}) => {
+
+	const makeSectionLink = (sectionTree) => {
+		return ( sectionTree.map((section) => {
+					return (
+						<div className={classes.Section__Div}>
+							<Link to={`/${section.slug}`} className={classes.Section}>
+								{section.name}
+							</Link><br />
+							{section.subsections.map((subsection)=> {
+								return makeSubSectionLink(section.slug, subsection);
+							})}
+						</div>
+							);
+					})
+			);
+	}
+
+	const makeSubSectionLink = (sectionSlug, subSection) => {
+		return (
+				<div>
+ 					<Link to={`/${sectionSlug}/${subSection.slug}`} className={classes.Subsection}>
+ 						{subSection.name}
+ 					</Link>
+ 					<br />
+ 				</div>
+			);
+	}
+
 	return (
 	 	<div className={classes.Footer}>
 			<div className={classes.Footer__Top}>
@@ -69,25 +97,7 @@ const Footer = ({classes, sectionTree}) => {
 			</div>
 			<div className={classes.Footer__Bottom}>
 				<div className={classes.Footer__Bottom__Main}>
-					{sectionTree.map((section) => {
-						return (
-							<div className={classes.Section__Div}>
-								<Link to={'/' +section.slug} className={classes.Section}>
-									{section.name}
-								</Link><br />
-								{section.subsections.map((subsection)=> {
-									return (
-											<div>
-											<Link to={'/' + section.slug + '/' +subsection.slug} className={classes.Subsection}>
-												{subsection.name}
-											</Link>
-											<br />
-											</div>
-										)
-								})}
-							</div>
-							)
-					})}
+					{makeSectionLink(sectionTree)}
 				</div>
 			</div>
 		</div>
@@ -95,7 +105,7 @@ const Footer = ({classes, sectionTree}) => {
 }
 
 const mapStateToProps = (state) => ({
-    sectionTree: makeSectionTree(state)
+    sectionTree: getSectionTree(state)
 });
 
 export default connect(
