@@ -72,3 +72,35 @@ export const getAllSectionLinksFromHome = createSelector(
     return sectionLinks;
   }
 );
+
+const getParentSections = (state) => Object.filter(getSections(state), sections => {
+    return sections.parentSlug == null;
+  });
+
+const getSubSections = (state) => Object.filter(getSections(state), sections => {
+    return sections.parentSlug !== null;
+  });
+
+
+export const makeSectionTree = createSelector(
+  [getParentSections, getSubSections],
+  (parentSectionObject, subSectionObject) => {
+    let sectionTree = [];
+    Object.keys(parentSectionObject).map((parent) => {
+      sectionTree.push({
+        name: parentSectionObject[parent].name,
+        slug: parentSectionObject[parent].slug,
+        subsections: Object.keys(subSectionObject).filter((subSection) => {
+          return subSectionObject[subSection].parentSlug == parentSectionObject[parent].slug
+        }).map((filteredSubSections) => {
+          return {
+            name: subSectionObject[filteredSubSections].name,
+            slug: subSectionObject[filteredSubSections].slug,
+          }
+        })
+      })
+    })
+    console.log(sectionTree)
+    return sectionTree;
+  }
+);

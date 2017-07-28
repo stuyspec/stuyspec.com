@@ -8,6 +8,7 @@ import store from '../store';
 import core from './core';
 import articles from './articles';
 import sections from './sections';
+import Layout from './core/components/Layout'
 
 const { HomePage } = core.components;
 const { ArticlePage } = articles.components;
@@ -48,12 +49,14 @@ const RoutingApp = () => {
   };
   return (
     <Provider store={store}>
-      <ConnectedRouter history={appHistory}>
-        <Switch>
-          <Route exact path="/" component={HomePage}/>
-          { createSectionRoutes() }
-          { createArticleRoutes() }
-        </Switch>
+       <ConnectedRouter history={appHistory}>
+        <Layout>
+          <Switch>
+            <Route exact path="/" component={HomePage}/>
+            { createSectionRoutes() }
+            { createArticleRoutes() }
+          </Switch>
+        </Layout>
       </ConnectedRouter>
     </Provider>
   );

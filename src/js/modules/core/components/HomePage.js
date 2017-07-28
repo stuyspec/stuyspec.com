@@ -6,6 +6,8 @@ import injectSheet from "react-jss";
 
 import sections from "../../sections";
 
+import Footer from './Footer';
+
 const styles = {
   HomePage__linkList: {
   },
@@ -30,6 +32,8 @@ const HomePage = ({ classes, sectionLinks }) => {
     </div>
   );
 };
+
+//Should remove footer after done styling it
 
 const mapStateToProps = (state) => ({
   articles: {},
