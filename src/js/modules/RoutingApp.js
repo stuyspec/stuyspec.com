@@ -8,12 +8,10 @@ import store from '../store';
 import core from './core';
 import articles from './articles';
 import sections from './sections';
-import Layout from './core/components/PageLayout';
 
-const { HomePage } = core.components;
+const { HomePage, PageLayout } = core.components;
 const { ArticlePage } = articles.components;
 const { SectionPage } = sections.components;
-//const { Layout } = core.components;
 // TODO: Jason Kao please look into this Layout Thing
 
 const allSectionRoutes = sections.selectors.getAllSectionRoutes(store.getState()); // change to mapStateToProps
@@ -51,13 +49,11 @@ const RoutingApp = () => {
   return (
     <Provider store={store}>
       <ConnectedRouter history={appHistory}>
-        <Layout>
-          <Switch>
-            <Route exact path="/" component={HomePage}/>
-            {createSectionRoutes()}
-            {createArticleRoutes()}
-          </Switch>
-        </Layout>
+        <Switch>
+          <Route exact path="/" component={HomePage}/>
+          {createSectionRoutes()}
+          {createArticleRoutes()}
+        </Switch>
       </ConnectedRouter>
     </Provider>
   );

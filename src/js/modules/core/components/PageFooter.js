@@ -27,17 +27,21 @@ const styles = {
   },
 };
 
-const PageFooter = ({ classes, sectionTree }) => {
-  const makeSectionLinks = (sectionTree) => {
-    return (sectionTree.map((parentSection) => {
+const PageFooter = ({ classes, sectionsWithSubsections }) => {
+  const makeSectionLinks = () => {
+    return (sectionsWithSubsections.map((parentSection) => {
         return (
           <div className={classes.sectionBlock} key={parentSection.id}>
             <Link to={`/${parentSection.slug}`} className={classes.parentSectionLink}>
               {parentSection.name}
             </Link><br/>
-            {parentSection.subsections.map((subsection) => {
-              return makeSubsectionLink(parentSection.slug, subsection);
-            })}
+            {
+              Object.keys(parentSection.subsections).map((subsectionSlug) => {
+                return makeSubsectionLink(
+                  parentSection.slug,
+                  parentSection.subsections[subsectionSlug]);
+              })
+            }
           </div>
         );
       })
@@ -55,7 +59,7 @@ const PageFooter = ({ classes, sectionTree }) => {
   };
   return (
     <div className={classes.PageFooter}>
-      {makeSectionLinks(sectionTree)}
+      {makeSectionLinks()}
     </div>
   );
 };

@@ -4,22 +4,22 @@ import injectSheet from 'react-jss';
 
 import PageHeader from './PageHeader';
 import PageFooter from './PageFooter';
-import { getSectionTree } from '../../sections/selectors';
+import { getSectionsWithSubsections } from '../../sections/selectors';
 
 const styles = {};
 
-const PageLayout = ({ children, sectionTree }) => {
+const PageLayout = ({ children, sectionsWithSubsections }) => {
   return (
     <div>
       <PageHeader/>
       {children}
-      <PageFooter sectionTree={sectionTree}/>
+      <PageFooter sectionsWithSubsections={sectionsWithSubsections}/>
     </div>
   )
 }
 
 const mapStateToProps = (state) => ({
-  sectionTree: getSectionTree(state),
+  sectionsWithSubsections: getSectionsWithSubsections(state),
 });
 
 export default connect(
