@@ -391,14 +391,14 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/axios.js": [
     "'use strict';\n\nvar utils = require('./utils');\nvar bind = require('./helpers/bind');\nvar Axios = require('./core/Axios');\nvar defaults = require('./defaults');\n\n/**\n * Create an instance of Axios\n *\n * @param {Object} defaultConfig The default config for the instance\n * @return {Axios} A new instance of Axios\n */\nfunction createInstance(defaultConfig) {\n  var context = new Axios(defaultConfig);\n  var instance = bind(Axios.prototype.request, context);\n\n  // Copy axios.prototype to instance\n  utils.extend(instance, Axios.prototype, context);\n\n  // Copy context to instance\n  utils.extend(instance, context);\n\n  return instance;\n}\n\n// Create the default instance to be exported\nvar axios = createInstance(defaults);\n\n// Expose Axios class to allow class inheritance\naxios.Axios = Axios;\n\n// Factory for creating new instances\naxios.create = function create(instanceConfig) {\n  return createInstance(utils.merge(defaults, instanceConfig));\n};\n\n// Expose Cancel & CancelToken\naxios.Cancel = require('./cancel/Cancel');\naxios.CancelToken = require('./cancel/CancelToken');\naxios.isCancel = require('./cancel/isCancel');\n\n// Expose all/spread\naxios.all = function all(promises) {\n  return Promise.all(promises);\n};\naxios.spread = require('./helpers/spread');\n\nmodule.exports = axios;\n\n// Allow use of default import syntax in TypeScript\nmodule.exports.default = axios;\n",
     {
-      "./helpers/bind": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/helpers/bind.js",
-      "./cancel/Cancel": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/cancel/Cancel.js",
-      "./cancel/isCancel": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/cancel/isCancel.js",
       "./helpers/spread": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/helpers/spread.js",
+      "./helpers/bind": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/helpers/bind.js",
+      "./cancel/isCancel": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/cancel/isCancel.js",
+      "./cancel/Cancel": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/cancel/Cancel.js",
+      "./utils": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/utils.js",
       "./cancel/CancelToken": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/cancel/CancelToken.js",
       "./core/Axios": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/core/Axios.js",
-      "./defaults": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/defaults.js",
-      "./utils": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/utils.js"
+      "./defaults": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/defaults.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/axios.js",
@@ -534,9 +534,9 @@
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./utils": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/utils.js",
-      "./adapters/http": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/adapters/xhr.js",
+      "./adapters/xhr": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/adapters/xhr.js",
       "./helpers/normalizeHeaderName": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/helpers/normalizeHeaderName.js",
-      "./adapters/xhr": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/adapters/xhr.js"
+      "./adapters/http": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/adapters/xhr.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/defaults.js",
@@ -658,8 +658,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/utils.js": [
     "'use strict';\n\nvar bind = require('./helpers/bind');\nvar isBuffer = require('is-buffer');\n\n/*global toString:true*/\n\n// utils is a library of generic helper functions non-specific to axios\n\nvar toString = Object.prototype.toString;\n\n/**\n * Determine if a value is an Array\n *\n * @param {Object} val The value to test\n * @returns {boolean} True if value is an Array, otherwise false\n */\nfunction isArray(val) {\n  return toString.call(val) === '[object Array]';\n}\n\n/**\n * Determine if a value is an ArrayBuffer\n *\n * @param {Object} val The value to test\n * @returns {boolean} True if value is an ArrayBuffer, otherwise false\n */\nfunction isArrayBuffer(val) {\n  return toString.call(val) === '[object ArrayBuffer]';\n}\n\n/**\n * Determine if a value is a FormData\n *\n * @param {Object} val The value to test\n * @returns {boolean} True if value is an FormData, otherwise false\n */\nfunction isFormData(val) {\n  return (typeof FormData !== 'undefined') && (val instanceof FormData);\n}\n\n/**\n * Determine if a value is a view on an ArrayBuffer\n *\n * @param {Object} val The value to test\n * @returns {boolean} True if value is a view on an ArrayBuffer, otherwise false\n */\nfunction isArrayBufferView(val) {\n  var result;\n  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {\n    result = ArrayBuffer.isView(val);\n  } else {\n    result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);\n  }\n  return result;\n}\n\n/**\n * Determine if a value is a String\n *\n * @param {Object} val The value to test\n * @returns {boolean} True if value is a String, otherwise false\n */\nfunction isString(val) {\n  return typeof val === 'string';\n}\n\n/**\n * Determine if a value is a Number\n *\n * @param {Object} val The value to test\n * @returns {boolean} True if value is a Number, otherwise false\n */\nfunction isNumber(val) {\n  return typeof val === 'number';\n}\n\n/**\n * Determine if a value is undefined\n *\n * @param {Object} val The value to test\n * @returns {boolean} True if the value is undefined, otherwise false\n */\nfunction isUndefined(val) {\n  return typeof val === 'undefined';\n}\n\n/**\n * Determine if a value is an Object\n *\n * @param {Object} val The value to test\n * @returns {boolean} True if value is an Object, otherwise false\n */\nfunction isObject(val) {\n  return val !== null && typeof val === 'object';\n}\n\n/**\n * Determine if a value is a Date\n *\n * @param {Object} val The value to test\n * @returns {boolean} True if value is a Date, otherwise false\n */\nfunction isDate(val) {\n  return toString.call(val) === '[object Date]';\n}\n\n/**\n * Determine if a value is a File\n *\n * @param {Object} val The value to test\n * @returns {boolean} True if value is a File, otherwise false\n */\nfunction isFile(val) {\n  return toString.call(val) === '[object File]';\n}\n\n/**\n * Determine if a value is a Blob\n *\n * @param {Object} val The value to test\n * @returns {boolean} True if value is a Blob, otherwise false\n */\nfunction isBlob(val) {\n  return toString.call(val) === '[object Blob]';\n}\n\n/**\n * Determine if a value is a Function\n *\n * @param {Object} val The value to test\n * @returns {boolean} True if value is a Function, otherwise false\n */\nfunction isFunction(val) {\n  return toString.call(val) === '[object Function]';\n}\n\n/**\n * Determine if a value is a Stream\n *\n * @param {Object} val The value to test\n * @returns {boolean} True if value is a Stream, otherwise false\n */\nfunction isStream(val) {\n  return isObject(val) && isFunction(val.pipe);\n}\n\n/**\n * Determine if a value is a URLSearchParams object\n *\n * @param {Object} val The value to test\n * @returns {boolean} True if value is a URLSearchParams object, otherwise false\n */\nfunction isURLSearchParams(val) {\n  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;\n}\n\n/**\n * Trim excess whitespace off the beginning and end of a string\n *\n * @param {String} str The String to trim\n * @returns {String} The String freed of excess whitespace\n */\nfunction trim(str) {\n  return str.replace(/^\\s*/, '').replace(/\\s*$/, '');\n}\n\n/**\n * Determine if we're running in a standard browser environment\n *\n * This allows axios to run in a web worker, and react-native.\n * Both environments support XMLHttpRequest, but not fully standard globals.\n *\n * web workers:\n *  typeof window -> undefined\n *  typeof document -> undefined\n *\n * react-native:\n *  navigator.product -> 'ReactNative'\n */\nfunction isStandardBrowserEnv() {\n  if (typeof navigator !== 'undefined' && navigator.product === 'ReactNative') {\n    return false;\n  }\n  return (\n    typeof window !== 'undefined' &&\n    typeof document !== 'undefined'\n  );\n}\n\n/**\n * Iterate over an Array or an Object invoking a function for each item.\n *\n * If `obj` is an Array callback will be called passing\n * the value, index, and complete array for each item.\n *\n * If 'obj' is an Object callback will be called passing\n * the value, key, and complete object for each property.\n *\n * @param {Object|Array} obj The object to iterate\n * @param {Function} fn The callback to invoke for each item\n */\nfunction forEach(obj, fn) {\n  // Don't bother if no value provided\n  if (obj === null || typeof obj === 'undefined') {\n    return;\n  }\n\n  // Force an array if not already something iterable\n  if (typeof obj !== 'object' && !isArray(obj)) {\n    /*eslint no-param-reassign:0*/\n    obj = [obj];\n  }\n\n  if (isArray(obj)) {\n    // Iterate over array values\n    for (var i = 0, l = obj.length; i < l; i++) {\n      fn.call(null, obj[i], i, obj);\n    }\n  } else {\n    // Iterate over object keys\n    for (var key in obj) {\n      if (Object.prototype.hasOwnProperty.call(obj, key)) {\n        fn.call(null, obj[key], key, obj);\n      }\n    }\n  }\n}\n\n/**\n * Accepts varargs expecting each argument to be an object, then\n * immutably merges the properties of each object and returns result.\n *\n * When multiple objects contain the same key the later object in\n * the arguments list will take precedence.\n *\n * Example:\n *\n * ```js\n * var result = merge({foo: 123}, {foo: 456});\n * console.log(result.foo); // outputs 456\n * ```\n *\n * @param {Object} obj1 Object to merge\n * @returns {Object} Result of all merge properties\n */\nfunction merge(/* obj1, obj2, obj3, ... */) {\n  var result = {};\n  function assignValue(val, key) {\n    if (typeof result[key] === 'object' && typeof val === 'object') {\n      result[key] = merge(result[key], val);\n    } else {\n      result[key] = val;\n    }\n  }\n\n  for (var i = 0, l = arguments.length; i < l; i++) {\n    forEach(arguments[i], assignValue);\n  }\n  return result;\n}\n\n/**\n * Extends object a by mutably adding to it the properties of object b.\n *\n * @param {Object} a The object to be extended\n * @param {Object} b The object to copy properties from\n * @param {Object} thisArg The object to bind function to\n * @return {Object} The resulting value of object a\n */\nfunction extend(a, b, thisArg) {\n  forEach(b, function assignValue(val, key) {\n    if (thisArg && typeof val === 'function') {\n      a[key] = bind(val, thisArg);\n    } else {\n      a[key] = val;\n    }\n  });\n  return a;\n}\n\nmodule.exports = {\n  isArray: isArray,\n  isArrayBuffer: isArrayBuffer,\n  isBuffer: isBuffer,\n  isFormData: isFormData,\n  isArrayBufferView: isArrayBufferView,\n  isString: isString,\n  isNumber: isNumber,\n  isObject: isObject,\n  isUndefined: isUndefined,\n  isDate: isDate,\n  isFile: isFile,\n  isBlob: isBlob,\n  isFunction: isFunction,\n  isStream: isStream,\n  isURLSearchParams: isURLSearchParams,\n  isStandardBrowserEnv: isStandardBrowserEnv,\n  forEach: forEach,\n  merge: merge,\n  extend: extend,\n  trim: trim\n};\n",
     {
-      "./helpers/bind": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/helpers/bind.js",
-      "is-buffer": "/Users/jasonkao/stuyspec/client-app/node_modules/is-buffer/index.js"
+      "is-buffer": "/Users/jasonkao/stuyspec/client-app/node_modules/is-buffer/index.js",
+      "./helpers/bind": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/helpers/bind.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/axios/lib/utils.js",
@@ -672,8 +672,8 @@
     "(function (global){\n\"use strict\";\n\nrequire(\"core-js/shim\");\n\nrequire(\"regenerator-runtime/runtime\");\n\nrequire(\"core-js/fn/regexp/escape\");\n\nif (global._babelPolyfill) {\n  throw new Error(\"only one instance of babel-polyfill is allowed\");\n}\nglobal._babelPolyfill = true;\n\nvar DEFINE_PROPERTY = \"defineProperty\";\nfunction define(O, key, value) {\n  O[key] || Object[DEFINE_PROPERTY](O, key, {\n    writable: true,\n    configurable: true,\n    value: value\n  });\n}\n\ndefine(String.prototype, \"padLeft\", \"\".padStart);\ndefine(String.prototype, \"padRight\", \"\".padEnd);\n\n\"pop,reverse,shift,keys,values,entries,indexOf,every,some,forEach,map,filter,find,findIndex,includes,join,slice,concat,push,splice,unshift,sort,lastIndexOf,reduce,reduceRight,copyWithin,fill\".split(\",\").forEach(function (key) {\n  [][key] && define(Array, key, Function.call.bind([][key]));\n});\n}).call(this,typeof global !== \"undefined\" ? global : typeof self !== \"undefined\" ? self : typeof window !== \"undefined\" ? window : {})\n",
     {
       "regenerator-runtime/runtime": "/Users/jasonkao/stuyspec/client-app/node_modules/regenerator-runtime/runtime.js",
-      "core-js/shim": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/shim.js",
-      "core-js/fn/regexp/escape": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/fn/regexp/escape.js"
+      "core-js/fn/regexp/escape": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/fn/regexp/escape.js",
+      "core-js/shim": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/shim.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/babel-polyfill/lib/index.js",
@@ -810,8 +810,8 @@
     "// 0 -> Array#forEach\n// 1 -> Array#map\n// 2 -> Array#filter\n// 3 -> Array#some\n// 4 -> Array#every\n// 5 -> Array#find\n// 6 -> Array#findIndex\nvar ctx      = require('./_ctx')\n  , IObject  = require('./_iobject')\n  , toObject = require('./_to-object')\n  , toLength = require('./_to-length')\n  , asc      = require('./_array-species-create');\nmodule.exports = function(TYPE, $create){\n  var IS_MAP        = TYPE == 1\n    , IS_FILTER     = TYPE == 2\n    , IS_SOME       = TYPE == 3\n    , IS_EVERY      = TYPE == 4\n    , IS_FIND_INDEX = TYPE == 6\n    , NO_HOLES      = TYPE == 5 || IS_FIND_INDEX\n    , create        = $create || asc;\n  return function($this, callbackfn, that){\n    var O      = toObject($this)\n      , self   = IObject(O)\n      , f      = ctx(callbackfn, that, 3)\n      , length = toLength(self.length)\n      , index  = 0\n      , result = IS_MAP ? create($this, length) : IS_FILTER ? create($this, 0) : undefined\n      , val, res;\n    for(;length > index; index++)if(NO_HOLES || index in self){\n      val = self[index];\n      res = f(val, index, O);\n      if(TYPE){\n        if(IS_MAP)result[index] = res;            // map\n        else if(res)switch(TYPE){\n          case 3: return true;                    // some\n          case 5: return val;                     // find\n          case 6: return index;                   // findIndex\n          case 2: result.push(val);               // filter\n        } else if(IS_EVERY)return false;          // every\n      }\n    }\n    return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : result;\n  };\n};",
     {
       "./_ctx": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_ctx.js",
-      "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
       "./_iobject": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iobject.js",
+      "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
       "./_to-length": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-length.js",
       "./_array-species-create": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-species-create.js"
     },
@@ -841,8 +841,8 @@
     "var isObject = require('./_is-object')\n  , isArray  = require('./_is-array')\n  , SPECIES  = require('./_wks')('species');\n\nmodule.exports = function(original){\n  var C;\n  if(isArray(original)){\n    C = original.constructor;\n    // cross-realm fallback\n    if(typeof C == 'function' && (C === Array || isArray(C.prototype)))C = undefined;\n    if(isObject(C)){\n      C = C[SPECIES];\n      if(C === null)C = undefined;\n    }\n  } return C === undefined ? Array : C;\n};",
     {
       "./_is-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-object.js",
-      "./_is-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-array.js",
-      "./_wks": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks.js"
+      "./_wks": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks.js",
+      "./_is-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-array.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-species-constructor.js",
@@ -963,8 +963,8 @@
       "./_redefine": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine.js",
       "./_redefine-all": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine-all.js",
       "./_meta": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_meta.js",
-      "./_an-instance": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-instance.js",
       "./_for-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_for-of.js",
+      "./_an-instance": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-instance.js",
       "./_is-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-object.js",
       "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
       "./_iter-detect": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iter-detect.js",
@@ -991,8 +991,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_create-property.js": [
     "'use strict';\nvar $defineProperty = require('./_object-dp')\n  , createDesc      = require('./_property-desc');\n\nmodule.exports = function(object, index, value){\n  if(index in object)$defineProperty.f(object, index, createDesc(0, value));\n  else object[index] = value;\n};",
     {
-      "./_property-desc": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_property-desc.js",
-      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js"
+      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
+      "./_property-desc": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_property-desc.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_create-property.js",
@@ -1091,8 +1091,8 @@
       "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
       "./_core": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_core.js",
       "./_hide": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_hide.js",
-      "./_redefine": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine.js",
-      "./_ctx": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_ctx.js"
+      "./_ctx": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_ctx.js",
+      "./_redefine": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
@@ -1154,8 +1154,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_for-of.js": [
     "var ctx         = require('./_ctx')\n  , call        = require('./_iter-call')\n  , isArrayIter = require('./_is-array-iter')\n  , anObject    = require('./_an-object')\n  , toLength    = require('./_to-length')\n  , getIterFn   = require('./core.get-iterator-method')\n  , BREAK       = {}\n  , RETURN      = {};\nvar exports = module.exports = function(iterable, entries, fn, that, ITERATOR){\n  var iterFn = ITERATOR ? function(){ return iterable; } : getIterFn(iterable)\n    , f      = ctx(fn, that, entries ? 2 : 1)\n    , index  = 0\n    , length, step, iterator, result;\n  if(typeof iterFn != 'function')throw TypeError(iterable + ' is not iterable!');\n  // fast case for arrays with default iterator\n  if(isArrayIter(iterFn))for(length = toLength(iterable.length); length > index; index++){\n    result = entries ? f(anObject(step = iterable[index])[0], step[1]) : f(iterable[index]);\n    if(result === BREAK || result === RETURN)return result;\n  } else for(iterator = iterFn.call(iterable); !(step = iterator.next()).done; ){\n    result = call(iterator, f, step.value, entries);\n    if(result === BREAK || result === RETURN)return result;\n  }\n};\nexports.BREAK  = BREAK;\nexports.RETURN = RETURN;",
     {
-      "./_iter-call": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iter-call.js",
       "./_ctx": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_ctx.js",
+      "./_iter-call": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iter-call.js",
       "./_is-array-iter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-array-iter.js",
       "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
       "./_to-length": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-length.js",
@@ -1266,8 +1266,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-array-iter.js": [
     "// check on default Array iterator\nvar Iterators  = require('./_iterators')\n  , ITERATOR   = require('./_wks')('iterator')\n  , ArrayProto = Array.prototype;\n\nmodule.exports = function(it){\n  return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);\n};",
     {
-      "./_wks": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks.js",
-      "./_iterators": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iterators.js"
+      "./_iterators": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iterators.js",
+      "./_wks": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-array-iter.js",
@@ -1463,8 +1463,8 @@
     {
       "./_uid": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_uid.js",
       "./_is-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-object.js",
-      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
       "./_has": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_has.js",
+      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
       "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js"
     },
     {
@@ -1478,9 +1478,9 @@
     "var Map     = require('./es6.map')\n  , $export = require('./_export')\n  , shared  = require('./_shared')('metadata')\n  , store   = shared.store || (shared.store = new (require('./es6.weak-map')));\n\nvar getOrCreateMetadataMap = function(target, targetKey, create){\n  var targetMetadata = store.get(target);\n  if(!targetMetadata){\n    if(!create)return undefined;\n    store.set(target, targetMetadata = new Map);\n  }\n  var keyMetadata = targetMetadata.get(targetKey);\n  if(!keyMetadata){\n    if(!create)return undefined;\n    targetMetadata.set(targetKey, keyMetadata = new Map);\n  } return keyMetadata;\n};\nvar ordinaryHasOwnMetadata = function(MetadataKey, O, P){\n  var metadataMap = getOrCreateMetadataMap(O, P, false);\n  return metadataMap === undefined ? false : metadataMap.has(MetadataKey);\n};\nvar ordinaryGetOwnMetadata = function(MetadataKey, O, P){\n  var metadataMap = getOrCreateMetadataMap(O, P, false);\n  return metadataMap === undefined ? undefined : metadataMap.get(MetadataKey);\n};\nvar ordinaryDefineOwnMetadata = function(MetadataKey, MetadataValue, O, P){\n  getOrCreateMetadataMap(O, P, true).set(MetadataKey, MetadataValue);\n};\nvar ordinaryOwnMetadataKeys = function(target, targetKey){\n  var metadataMap = getOrCreateMetadataMap(target, targetKey, false)\n    , keys        = [];\n  if(metadataMap)metadataMap.forEach(function(_, key){ keys.push(key); });\n  return keys;\n};\nvar toMetaKey = function(it){\n  return it === undefined || typeof it == 'symbol' ? it : String(it);\n};\nvar exp = function(O){\n  $export($export.S, 'Reflect', O);\n};\n\nmodule.exports = {\n  store: store,\n  map: getOrCreateMetadataMap,\n  has: ordinaryHasOwnMetadata,\n  get: ordinaryGetOwnMetadata,\n  set: ordinaryDefineOwnMetadata,\n  keys: ordinaryOwnMetadataKeys,\n  key: toMetaKey,\n  exp: exp\n};",
     {
       "./es6.map": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.map.js",
-      "./_shared": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_shared.js",
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./es6.weak-map": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.weak-map.js"
+      "./es6.weak-map": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.weak-map.js",
+      "./_shared": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_shared.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_metadata.js",
@@ -1527,8 +1527,8 @@
       "./_object-dps": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dps.js",
       "./_html": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_html.js",
       "./_enum-bug-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_enum-bug-keys.js",
-      "./_dom-create": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_dom-create.js",
-      "./_shared-key": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_shared-key.js"
+      "./_shared-key": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_shared-key.js",
+      "./_dom-create": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_dom-create.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-create.js",
@@ -1541,9 +1541,9 @@
     "var anObject       = require('./_an-object')\n  , IE8_DOM_DEFINE = require('./_ie8-dom-define')\n  , toPrimitive    = require('./_to-primitive')\n  , dP             = Object.defineProperty;\n\nexports.f = require('./_descriptors') ? Object.defineProperty : function defineProperty(O, P, Attributes){\n  anObject(O);\n  P = toPrimitive(P, true);\n  anObject(Attributes);\n  if(IE8_DOM_DEFINE)try {\n    return dP(O, P, Attributes);\n  } catch(e){ /* empty */ }\n  if('get' in Attributes || 'set' in Attributes)throw TypeError('Accessors not supported!');\n  if('value' in Attributes)O[P] = Attributes.value;\n  return O;\n};",
     {
       "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
-      "./_ie8-dom-define": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_ie8-dom-define.js",
       "./_to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-primitive.js",
-      "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js"
+      "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
+      "./_ie8-dom-define": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_ie8-dom-define.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
@@ -1556,8 +1556,8 @@
     "var dP       = require('./_object-dp')\n  , anObject = require('./_an-object')\n  , getKeys  = require('./_object-keys');\n\nmodule.exports = require('./_descriptors') ? Object.defineProperties : function defineProperties(O, Properties){\n  anObject(O);\n  var keys   = getKeys(Properties)\n    , length = keys.length\n    , i = 0\n    , P;\n  while(length > i)dP.f(O, P = keys[i++], Properties[P]);\n  return O;\n};",
     {
       "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
-      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
       "./_object-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-keys.js",
+      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
       "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js"
     },
     {
@@ -1615,8 +1615,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopn.js": [
     "// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)\nvar $keys      = require('./_object-keys-internal')\n  , hiddenKeys = require('./_enum-bug-keys').concat('length', 'prototype');\n\nexports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){\n  return $keys(O, hiddenKeys);\n};",
     {
-      "./_object-keys-internal": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-keys-internal.js",
-      "./_enum-bug-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_enum-bug-keys.js"
+      "./_enum-bug-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_enum-bug-keys.js",
+      "./_object-keys-internal": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-keys-internal.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopn.js",
@@ -1639,8 +1639,8 @@
     "// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)\nvar has         = require('./_has')\n  , toObject    = require('./_to-object')\n  , IE_PROTO    = require('./_shared-key')('IE_PROTO')\n  , ObjectProto = Object.prototype;\n\nmodule.exports = Object.getPrototypeOf || function(O){\n  O = toObject(O);\n  if(has(O, IE_PROTO))return O[IE_PROTO];\n  if(typeof O.constructor == 'function' && O instanceof O.constructor){\n    return O.constructor.prototype;\n  } return O instanceof Object ? ObjectProto : null;\n};",
     {
       "./_has": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_has.js",
-      "./_shared-key": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_shared-key.js",
-      "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js"
+      "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
+      "./_shared-key": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_shared-key.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gpo.js",
@@ -1691,8 +1691,8 @@
     "// most Object methods by ES6 should accept primitives\nvar $export = require('./_export')\n  , core    = require('./_core')\n  , fails   = require('./_fails');\nmodule.exports = function(KEY, exec){\n  var fn  = (core.Object || {})[KEY] || Object[KEY]\n    , exp = {};\n  exp[KEY] = exec(fn);\n  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);\n};",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_core": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_core.js",
-      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js"
+      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
+      "./_core": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_core.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-sap.js",
@@ -1845,8 +1845,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_set-proto.js": [
     "// Works with __proto__ only. Old v8 can't work with null proto objects.\n/* eslint-disable no-proto */\nvar isObject = require('./_is-object')\n  , anObject = require('./_an-object');\nvar check = function(O, proto){\n  anObject(O);\n  if(!isObject(proto) && proto !== null)throw TypeError(proto + \": can't set as prototype!\");\n};\nmodule.exports = {\n  set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line\n    function(test, buggy, set){\n      try {\n        set = require('./_ctx')(Function.call, require('./_object-gopd').f(Object.prototype, '__proto__').set, 2);\n        set(test, []);\n        buggy = !(test instanceof Array);\n      } catch(e){ buggy = true; }\n      return function setPrototypeOf(O, proto){\n        check(O, proto);\n        if(buggy)O.__proto__ = proto;\n        else set(O, proto);\n        return O;\n      };\n    }({}, false) : undefined),\n  check: check\n};",
     {
-      "./_is-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-object.js",
       "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
+      "./_is-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-object.js",
       "./_ctx": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_ctx.js",
       "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js"
     },
@@ -1875,8 +1875,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_set-to-string-tag.js": [
     "var def = require('./_object-dp').f\n  , has = require('./_has')\n  , TAG = require('./_wks')('toStringTag');\n\nmodule.exports = function(it, tag, stat){\n  if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});\n};",
     {
-      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
       "./_has": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_has.js",
+      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
       "./_wks": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks.js"
     },
     {
@@ -1967,8 +1967,8 @@
     "var $export = require('./_export')\n  , fails   = require('./_fails')\n  , defined = require('./_defined')\n  , quot    = /\"/g;\n// B.2.3.2.1 CreateHTML(string, tag, attribute, value)\nvar createHTML = function(string, tag, attribute, value) {\n  var S  = String(defined(string))\n    , p1 = '<' + tag;\n  if(attribute !== '')p1 += ' ' + attribute + '=\"' + String(value).replace(quot, '&quot;') + '\"';\n  return p1 + '>' + S + '</' + tag + '>';\n};\nmodule.exports = function(NAME, exec){\n  var O = {};\n  O[NAME] = exec(createHTML);\n  $export($export.P + $export.F * fails(function(){\n    var test = ''[NAME]('\"');\n    return test !== test.toLowerCase() || test.split('\"').length > 3;\n  }), 'String', O);\n};",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
-      "./_defined": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_defined.js"
+      "./_defined": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_defined.js",
+      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_string-html.js",
@@ -1980,8 +1980,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_string-pad.js": [
     "// https://github.com/tc39/proposal-string-pad-start-end\nvar toLength = require('./_to-length')\n  , repeat   = require('./_string-repeat')\n  , defined  = require('./_defined');\n\nmodule.exports = function(that, maxLength, fillString, left){\n  var S            = String(defined(that))\n    , stringLength = S.length\n    , fillStr      = fillString === undefined ? ' ' : String(fillString)\n    , intMaxLength = toLength(maxLength);\n  if(intMaxLength <= stringLength || fillStr == '')return S;\n  var fillLen = intMaxLength - stringLength\n    , stringFiller = repeat.call(fillStr, Math.ceil(fillLen / fillStr.length));\n  if(stringFiller.length > fillLen)stringFiller = stringFiller.slice(0, fillLen);\n  return left ? stringFiller + S : S + stringFiller;\n};\n",
     {
-      "./_to-length": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-length.js",
       "./_string-repeat": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_string-repeat.js",
+      "./_to-length": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-length.js",
       "./_defined": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_defined.js"
     },
     {
@@ -2007,9 +2007,9 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_string-trim.js": [
     "var $export = require('./_export')\n  , defined = require('./_defined')\n  , fails   = require('./_fails')\n  , spaces  = require('./_string-ws')\n  , space   = '[' + spaces + ']'\n  , non     = '\\u200b\\u0085'\n  , ltrim   = RegExp('^' + space + space + '*')\n  , rtrim   = RegExp(space + space + '*$');\n\nvar exporter = function(KEY, exec, ALIAS){\n  var exp   = {};\n  var FORCE = fails(function(){\n    return !!spaces[KEY]() || non[KEY]() != non;\n  });\n  var fn = exp[KEY] = FORCE ? exec(trim) : spaces[KEY];\n  if(ALIAS)exp[ALIAS] = fn;\n  $export($export.P + $export.F * FORCE, 'String', exp);\n};\n\n// 1 -> String#trimLeft\n// 2 -> String#trimRight\n// 3 -> String#trim\nvar trim = exporter.trim = function(string, TYPE){\n  string = String(defined(string));\n  if(TYPE & 1)string = string.replace(ltrim, '');\n  if(TYPE & 2)string = string.replace(rtrim, '');\n  return string;\n};\n\nmodule.exports = exporter;",
     {
+      "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
       "./_defined": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_defined.js",
       "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
-      "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
       "./_string-ws": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_string-ws.js"
     },
     {
@@ -2035,8 +2035,8 @@
       "./_ctx": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_ctx.js",
       "./_invoke": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_invoke.js",
       "./_html": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_html.js",
-      "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
       "./_dom-create": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_dom-create.js",
+      "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
       "./_cof": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_cof.js"
     },
     {
@@ -2122,20 +2122,20 @@
     {
       "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
       "./_library": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_library.js",
-      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
       "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
+      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
       "./_typed": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_typed.js",
       "./_typed-buffer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_typed-buffer.js",
       "./_ctx": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_ctx.js",
       "./_an-instance": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-instance.js",
-      "./_property-desc": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_property-desc.js",
       "./_hide": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_hide.js",
-      "./_redefine-all": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine-all.js",
+      "./_property-desc": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_property-desc.js",
       "./_to-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-integer.js",
+      "./_redefine-all": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine-all.js",
       "./_to-length": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-length.js",
-      "./_to-index": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-index.js",
       "./_to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-primitive.js",
+      "./_to-index": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-index.js",
       "./_has": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_has.js",
       "./_same-value": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_same-value.js",
       "./_classof": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_classof.js",
@@ -2146,13 +2146,13 @@
       "./_object-gpo": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gpo.js",
       "./_object-gopn": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopn.js",
       "./core.get-iterator-method": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/core.get-iterator-method.js",
-      "./_uid": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_uid.js",
       "./_wks": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks.js",
-      "./_array-includes": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-includes.js",
+      "./_uid": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_uid.js",
       "./_array-methods": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-methods.js",
+      "./_array-includes": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-includes.js",
       "./_species-constructor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_species-constructor.js",
-      "./es6.array.iterator": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.iterator.js",
       "./_iterators": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iterators.js",
+      "./es6.array.iterator": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.iterator.js",
       "./_iter-detect": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iter-detect.js",
       "./_set-species": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_set-species.js",
       "./_array-fill": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-fill.js",
@@ -2171,15 +2171,15 @@
     "'use strict';\nvar global         = require('./_global')\n  , DESCRIPTORS    = require('./_descriptors')\n  , LIBRARY        = require('./_library')\n  , $typed         = require('./_typed')\n  , hide           = require('./_hide')\n  , redefineAll    = require('./_redefine-all')\n  , fails          = require('./_fails')\n  , anInstance     = require('./_an-instance')\n  , toInteger      = require('./_to-integer')\n  , toLength       = require('./_to-length')\n  , gOPN           = require('./_object-gopn').f\n  , dP             = require('./_object-dp').f\n  , arrayFill      = require('./_array-fill')\n  , setToStringTag = require('./_set-to-string-tag')\n  , ARRAY_BUFFER   = 'ArrayBuffer'\n  , DATA_VIEW      = 'DataView'\n  , PROTOTYPE      = 'prototype'\n  , WRONG_LENGTH   = 'Wrong length!'\n  , WRONG_INDEX    = 'Wrong index!'\n  , $ArrayBuffer   = global[ARRAY_BUFFER]\n  , $DataView      = global[DATA_VIEW]\n  , Math           = global.Math\n  , RangeError     = global.RangeError\n  , Infinity       = global.Infinity\n  , BaseBuffer     = $ArrayBuffer\n  , abs            = Math.abs\n  , pow            = Math.pow\n  , floor          = Math.floor\n  , log            = Math.log\n  , LN2            = Math.LN2\n  , BUFFER         = 'buffer'\n  , BYTE_LENGTH    = 'byteLength'\n  , BYTE_OFFSET    = 'byteOffset'\n  , $BUFFER        = DESCRIPTORS ? '_b' : BUFFER\n  , $LENGTH        = DESCRIPTORS ? '_l' : BYTE_LENGTH\n  , $OFFSET        = DESCRIPTORS ? '_o' : BYTE_OFFSET;\n\n// IEEE754 conversions based on https://github.com/feross/ieee754\nvar packIEEE754 = function(value, mLen, nBytes){\n  var buffer = Array(nBytes)\n    , eLen   = nBytes * 8 - mLen - 1\n    , eMax   = (1 << eLen) - 1\n    , eBias  = eMax >> 1\n    , rt     = mLen === 23 ? pow(2, -24) - pow(2, -77) : 0\n    , i      = 0\n    , s      = value < 0 || value === 0 && 1 / value < 0 ? 1 : 0\n    , e, m, c;\n  value = abs(value)\n  if(value != value || value === Infinity){\n    m = value != value ? 1 : 0;\n    e = eMax;\n  } else {\n    e = floor(log(value) / LN2);\n    if(value * (c = pow(2, -e)) < 1){\n      e--;\n      c *= 2;\n    }\n    if(e + eBias >= 1){\n      value += rt / c;\n    } else {\n      value += rt * pow(2, 1 - eBias);\n    }\n    if(value * c >= 2){\n      e++;\n      c /= 2;\n    }\n    if(e + eBias >= eMax){\n      m = 0;\n      e = eMax;\n    } else if(e + eBias >= 1){\n      m = (value * c - 1) * pow(2, mLen);\n      e = e + eBias;\n    } else {\n      m = value * pow(2, eBias - 1) * pow(2, mLen);\n      e = 0;\n    }\n  }\n  for(; mLen >= 8; buffer[i++] = m & 255, m /= 256, mLen -= 8);\n  e = e << mLen | m;\n  eLen += mLen;\n  for(; eLen > 0; buffer[i++] = e & 255, e /= 256, eLen -= 8);\n  buffer[--i] |= s * 128;\n  return buffer;\n};\nvar unpackIEEE754 = function(buffer, mLen, nBytes){\n  var eLen  = nBytes * 8 - mLen - 1\n    , eMax  = (1 << eLen) - 1\n    , eBias = eMax >> 1\n    , nBits = eLen - 7\n    , i     = nBytes - 1\n    , s     = buffer[i--]\n    , e     = s & 127\n    , m;\n  s >>= 7;\n  for(; nBits > 0; e = e * 256 + buffer[i], i--, nBits -= 8);\n  m = e & (1 << -nBits) - 1;\n  e >>= -nBits;\n  nBits += mLen;\n  for(; nBits > 0; m = m * 256 + buffer[i], i--, nBits -= 8);\n  if(e === 0){\n    e = 1 - eBias;\n  } else if(e === eMax){\n    return m ? NaN : s ? -Infinity : Infinity;\n  } else {\n    m = m + pow(2, mLen);\n    e = e - eBias;\n  } return (s ? -1 : 1) * m * pow(2, e - mLen);\n};\n\nvar unpackI32 = function(bytes){\n  return bytes[3] << 24 | bytes[2] << 16 | bytes[1] << 8 | bytes[0];\n};\nvar packI8 = function(it){\n  return [it & 0xff];\n};\nvar packI16 = function(it){\n  return [it & 0xff, it >> 8 & 0xff];\n};\nvar packI32 = function(it){\n  return [it & 0xff, it >> 8 & 0xff, it >> 16 & 0xff, it >> 24 & 0xff];\n};\nvar packF64 = function(it){\n  return packIEEE754(it, 52, 8);\n};\nvar packF32 = function(it){\n  return packIEEE754(it, 23, 4);\n};\n\nvar addGetter = function(C, key, internal){\n  dP(C[PROTOTYPE], key, {get: function(){ return this[internal]; }});\n};\n\nvar get = function(view, bytes, index, isLittleEndian){\n  var numIndex = +index\n    , intIndex = toInteger(numIndex);\n  if(numIndex != intIndex || intIndex < 0 || intIndex + bytes > view[$LENGTH])throw RangeError(WRONG_INDEX);\n  var store = view[$BUFFER]._b\n    , start = intIndex + view[$OFFSET]\n    , pack  = store.slice(start, start + bytes);\n  return isLittleEndian ? pack : pack.reverse();\n};\nvar set = function(view, bytes, index, conversion, value, isLittleEndian){\n  var numIndex = +index\n    , intIndex = toInteger(numIndex);\n  if(numIndex != intIndex || intIndex < 0 || intIndex + bytes > view[$LENGTH])throw RangeError(WRONG_INDEX);\n  var store = view[$BUFFER]._b\n    , start = intIndex + view[$OFFSET]\n    , pack  = conversion(+value);\n  for(var i = 0; i < bytes; i++)store[start + i] = pack[isLittleEndian ? i : bytes - i - 1];\n};\n\nvar validateArrayBufferArguments = function(that, length){\n  anInstance(that, $ArrayBuffer, ARRAY_BUFFER);\n  var numberLength = +length\n    , byteLength   = toLength(numberLength);\n  if(numberLength != byteLength)throw RangeError(WRONG_LENGTH);\n  return byteLength;\n};\n\nif(!$typed.ABV){\n  $ArrayBuffer = function ArrayBuffer(length){\n    var byteLength = validateArrayBufferArguments(this, length);\n    this._b       = arrayFill.call(Array(byteLength), 0);\n    this[$LENGTH] = byteLength;\n  };\n\n  $DataView = function DataView(buffer, byteOffset, byteLength){\n    anInstance(this, $DataView, DATA_VIEW);\n    anInstance(buffer, $ArrayBuffer, DATA_VIEW);\n    var bufferLength = buffer[$LENGTH]\n      , offset       = toInteger(byteOffset);\n    if(offset < 0 || offset > bufferLength)throw RangeError('Wrong offset!');\n    byteLength = byteLength === undefined ? bufferLength - offset : toLength(byteLength);\n    if(offset + byteLength > bufferLength)throw RangeError(WRONG_LENGTH);\n    this[$BUFFER] = buffer;\n    this[$OFFSET] = offset;\n    this[$LENGTH] = byteLength;\n  };\n\n  if(DESCRIPTORS){\n    addGetter($ArrayBuffer, BYTE_LENGTH, '_l');\n    addGetter($DataView, BUFFER, '_b');\n    addGetter($DataView, BYTE_LENGTH, '_l');\n    addGetter($DataView, BYTE_OFFSET, '_o');\n  }\n\n  redefineAll($DataView[PROTOTYPE], {\n    getInt8: function getInt8(byteOffset){\n      return get(this, 1, byteOffset)[0] << 24 >> 24;\n    },\n    getUint8: function getUint8(byteOffset){\n      return get(this, 1, byteOffset)[0];\n    },\n    getInt16: function getInt16(byteOffset /*, littleEndian */){\n      var bytes = get(this, 2, byteOffset, arguments[1]);\n      return (bytes[1] << 8 | bytes[0]) << 16 >> 16;\n    },\n    getUint16: function getUint16(byteOffset /*, littleEndian */){\n      var bytes = get(this, 2, byteOffset, arguments[1]);\n      return bytes[1] << 8 | bytes[0];\n    },\n    getInt32: function getInt32(byteOffset /*, littleEndian */){\n      return unpackI32(get(this, 4, byteOffset, arguments[1]));\n    },\n    getUint32: function getUint32(byteOffset /*, littleEndian */){\n      return unpackI32(get(this, 4, byteOffset, arguments[1])) >>> 0;\n    },\n    getFloat32: function getFloat32(byteOffset /*, littleEndian */){\n      return unpackIEEE754(get(this, 4, byteOffset, arguments[1]), 23, 4);\n    },\n    getFloat64: function getFloat64(byteOffset /*, littleEndian */){\n      return unpackIEEE754(get(this, 8, byteOffset, arguments[1]), 52, 8);\n    },\n    setInt8: function setInt8(byteOffset, value){\n      set(this, 1, byteOffset, packI8, value);\n    },\n    setUint8: function setUint8(byteOffset, value){\n      set(this, 1, byteOffset, packI8, value);\n    },\n    setInt16: function setInt16(byteOffset, value /*, littleEndian */){\n      set(this, 2, byteOffset, packI16, value, arguments[2]);\n    },\n    setUint16: function setUint16(byteOffset, value /*, littleEndian */){\n      set(this, 2, byteOffset, packI16, value, arguments[2]);\n    },\n    setInt32: function setInt32(byteOffset, value /*, littleEndian */){\n      set(this, 4, byteOffset, packI32, value, arguments[2]);\n    },\n    setUint32: function setUint32(byteOffset, value /*, littleEndian */){\n      set(this, 4, byteOffset, packI32, value, arguments[2]);\n    },\n    setFloat32: function setFloat32(byteOffset, value /*, littleEndian */){\n      set(this, 4, byteOffset, packF32, value, arguments[2]);\n    },\n    setFloat64: function setFloat64(byteOffset, value /*, littleEndian */){\n      set(this, 8, byteOffset, packF64, value, arguments[2]);\n    }\n  });\n} else {\n  if(!fails(function(){\n    new $ArrayBuffer;     // eslint-disable-line no-new\n  }) || !fails(function(){\n    new $ArrayBuffer(.5); // eslint-disable-line no-new\n  })){\n    $ArrayBuffer = function ArrayBuffer(length){\n      return new BaseBuffer(validateArrayBufferArguments(this, length));\n    };\n    var ArrayBufferProto = $ArrayBuffer[PROTOTYPE] = BaseBuffer[PROTOTYPE];\n    for(var keys = gOPN(BaseBuffer), j = 0, key; keys.length > j; ){\n      if(!((key = keys[j++]) in $ArrayBuffer))hide($ArrayBuffer, key, BaseBuffer[key]);\n    };\n    if(!LIBRARY)ArrayBufferProto.constructor = $ArrayBuffer;\n  }\n  // iOS Safari 7.x bug\n  var view = new $DataView(new $ArrayBuffer(2))\n    , $setInt8 = $DataView[PROTOTYPE].setInt8;\n  view.setInt8(0, 2147483648);\n  view.setInt8(1, 2147483649);\n  if(view.getInt8(0) || !view.getInt8(1))redefineAll($DataView[PROTOTYPE], {\n    setInt8: function setInt8(byteOffset, value){\n      $setInt8.call(this, byteOffset, value << 24 >> 24);\n    },\n    setUint8: function setUint8(byteOffset, value){\n      $setInt8.call(this, byteOffset, value << 24 >> 24);\n    }\n  }, true);\n}\nsetToStringTag($ArrayBuffer, ARRAY_BUFFER);\nsetToStringTag($DataView, DATA_VIEW);\nhide($DataView[PROTOTYPE], $typed.VIEW, true);\nexports[ARRAY_BUFFER] = $ArrayBuffer;\nexports[DATA_VIEW] = $DataView;",
     {
       "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
-      "./_library": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_library.js",
       "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
-      "./_hide": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_hide.js",
+      "./_library": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_library.js",
       "./_typed": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_typed.js",
+      "./_hide": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_hide.js",
       "./_redefine-all": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine-all.js",
       "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
+      "./_an-instance": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-instance.js",
       "./_to-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-integer.js",
       "./_to-length": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-length.js",
-      "./_an-instance": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-instance.js",
       "./_object-gopn": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopn.js",
       "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
       "./_array-fill": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-fill.js",
@@ -2248,8 +2248,8 @@
     "var store      = require('./_shared')('wks')\n  , uid        = require('./_uid')\n  , Symbol     = require('./_global').Symbol\n  , USE_SYMBOL = typeof Symbol == 'function';\n\nvar $exports = module.exports = function(name){\n  return store[name] || (store[name] =\n    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));\n};\n\n$exports.store = store;",
     {
       "./_shared": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_shared.js",
-      "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
-      "./_uid": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_uid.js"
+      "./_uid": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_uid.js",
+      "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks.js",
@@ -2276,8 +2276,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/core.regexp.escape.js": [
     "// https://github.com/benjamingr/RexExp.escape\nvar $export = require('./_export')\n  , $re     = require('./_replacer')(/[\\\\^$*+?.()|[\\]{}]/g, '\\\\$&');\n\n$export($export.S, 'RegExp', {escape: function escape(it){ return $re(it); }});\n",
     {
-      "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_replacer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_replacer.js"
+      "./_replacer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_replacer.js",
+      "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/core.regexp.escape.js",
@@ -2290,8 +2290,8 @@
     "// 22.1.3.3 Array.prototype.copyWithin(target, start, end = this.length)\nvar $export = require('./_export');\n\n$export($export.P, 'Array', {copyWithin: require('./_array-copy-within')});\n\nrequire('./_add-to-unscopables')('copyWithin');",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_array-copy-within": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-copy-within.js",
-      "./_add-to-unscopables": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_add-to-unscopables.js"
+      "./_add-to-unscopables": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_add-to-unscopables.js",
+      "./_array-copy-within": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-copy-within.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.copy-within.js",
@@ -2304,8 +2304,8 @@
     "'use strict';\nvar $export = require('./_export')\n  , $every  = require('./_array-methods')(4);\n\n$export($export.P + $export.F * !require('./_strict-method')([].every, true), 'Array', {\n  // 22.1.3.5 / 15.4.4.16 Array.prototype.every(callbackfn [, thisArg])\n  every: function every(callbackfn /* , thisArg */){\n    return $every(this, callbackfn, arguments[1]);\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_array-methods": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-methods.js",
-      "./_strict-method": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_strict-method.js"
+      "./_strict-method": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_strict-method.js",
+      "./_array-methods": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-methods.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.every.js",
@@ -2332,8 +2332,8 @@
     "'use strict';\nvar $export = require('./_export')\n  , $filter = require('./_array-methods')(2);\n\n$export($export.P + $export.F * !require('./_strict-method')([].filter, true), 'Array', {\n  // 22.1.3.7 / 15.4.4.20 Array.prototype.filter(callbackfn [, thisArg])\n  filter: function filter(callbackfn /* , thisArg */){\n    return $filter(this, callbackfn, arguments[1]);\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_array-methods": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-methods.js",
-      "./_strict-method": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_strict-method.js"
+      "./_strict-method": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_strict-method.js",
+      "./_array-methods": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-methods.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.filter.js",
@@ -2390,12 +2390,12 @@
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
       "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
       "./_to-length": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-length.js",
-      "./_iter-call": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iter-call.js",
-      "./_ctx": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_ctx.js",
-      "./_is-array-iter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-array-iter.js",
       "./_create-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_create-property.js",
-      "./_iter-detect": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iter-detect.js",
-      "./core.get-iterator-method": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/core.get-iterator-method.js"
+      "./_ctx": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_ctx.js",
+      "./_iter-call": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iter-call.js",
+      "./_is-array-iter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-array-iter.js",
+      "./core.get-iterator-method": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/core.get-iterator-method.js",
+      "./_iter-detect": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iter-detect.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.from.js",
@@ -2436,9 +2436,9 @@
     {
       "./_add-to-unscopables": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_add-to-unscopables.js",
       "./_to-iobject": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-iobject.js",
-      "./_iter-define": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iter-define.js",
       "./_iter-step": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iter-step.js",
-      "./_iterators": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iterators.js"
+      "./_iterators": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iterators.js",
+      "./_iter-define": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iter-define.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.iterator.js",
@@ -2466,10 +2466,10 @@
     "'use strict';\nvar $export       = require('./_export')\n  , toIObject     = require('./_to-iobject')\n  , toInteger     = require('./_to-integer')\n  , toLength      = require('./_to-length')\n  , $native       = [].lastIndexOf\n  , NEGATIVE_ZERO = !!$native && 1 / [1].lastIndexOf(1, -0) < 0;\n\n$export($export.P + $export.F * (NEGATIVE_ZERO || !require('./_strict-method')($native)), 'Array', {\n  // 22.1.3.14 / 15.4.4.15 Array.prototype.lastIndexOf(searchElement [, fromIndex])\n  lastIndexOf: function lastIndexOf(searchElement /*, fromIndex = @[*-1] */){\n    // convert -0 to +0\n    if(NEGATIVE_ZERO)return $native.apply(this, arguments) || 0;\n    var O      = toIObject(this)\n      , length = toLength(O.length)\n      , index  = length - 1;\n    if(arguments.length > 1)index = Math.min(index, toInteger(arguments[1]));\n    if(index < 0)index = length + index;\n    for(;index >= 0; index--)if(index in O)if(O[index] === searchElement)return index || 0;\n    return -1;\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_to-iobject": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-iobject.js",
       "./_to-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-integer.js",
+      "./_strict-method": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_strict-method.js",
       "./_to-length": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-length.js",
-      "./_strict-method": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_strict-method.js"
+      "./_to-iobject": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-iobject.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.last-index-of.js",
@@ -2482,8 +2482,8 @@
     "'use strict';\nvar $export = require('./_export')\n  , $map    = require('./_array-methods')(1);\n\n$export($export.P + $export.F * !require('./_strict-method')([].map, true), 'Array', {\n  // 22.1.3.15 / 15.4.4.19 Array.prototype.map(callbackfn [, thisArg])\n  map: function map(callbackfn /* , thisArg */){\n    return $map(this, callbackfn, arguments[1]);\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_array-methods": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-methods.js",
-      "./_strict-method": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_strict-method.js"
+      "./_strict-method": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_strict-method.js",
+      "./_array-methods": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-methods.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.map.js",
@@ -2496,8 +2496,8 @@
     "'use strict';\nvar $export        = require('./_export')\n  , createProperty = require('./_create-property');\n\n// WebKit Array.of isn't generic\n$export($export.S + $export.F * require('./_fails')(function(){\n  function F(){}\n  return !(Array.of.call(F) instanceof F);\n}), 'Array', {\n  // 22.1.2.3 Array.of( ...items)\n  of: function of(/* ...args */){\n    var index  = 0\n      , aLen   = arguments.length\n      , result = new (typeof this == 'function' ? this : Array)(aLen);\n    while(aLen > index)createProperty(result, index, arguments[index++]);\n    result.length = aLen;\n    return result;\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_create-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_create-property.js",
-      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js"
+      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
+      "./_create-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_create-property.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.of.js",
@@ -2510,8 +2510,8 @@
     "'use strict';\nvar $export = require('./_export')\n  , $reduce = require('./_array-reduce');\n\n$export($export.P + $export.F * !require('./_strict-method')([].reduceRight, true), 'Array', {\n  // 22.1.3.19 / 15.4.4.22 Array.prototype.reduceRight(callbackfn [, initialValue])\n  reduceRight: function reduceRight(callbackfn /* , initialValue */){\n    return $reduce(this, callbackfn, arguments.length, arguments[1], true);\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_array-reduce": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-reduce.js",
-      "./_strict-method": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_strict-method.js"
+      "./_strict-method": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_strict-method.js",
+      "./_array-reduce": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-reduce.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.reduce-right.js",
@@ -2555,8 +2555,8 @@
     "'use strict';\nvar $export = require('./_export')\n  , $some   = require('./_array-methods')(3);\n\n$export($export.P + $export.F * !require('./_strict-method')([].some, true), 'Array', {\n  // 22.1.3.23 / 15.4.4.17 Array.prototype.some(callbackfn [, thisArg])\n  some: function some(callbackfn /* , thisArg */){\n    return $some(this, callbackfn, arguments[1]);\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_array-methods": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-methods.js",
-      "./_strict-method": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_strict-method.js"
+      "./_strict-method": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_strict-method.js",
+      "./_array-methods": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-methods.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.some.js",
@@ -2569,10 +2569,10 @@
     "'use strict';\nvar $export   = require('./_export')\n  , aFunction = require('./_a-function')\n  , toObject  = require('./_to-object')\n  , fails     = require('./_fails')\n  , $sort     = [].sort\n  , test      = [1, 2, 3];\n\n$export($export.P + $export.F * (fails(function(){\n  // IE8-\n  test.sort(undefined);\n}) || !fails(function(){\n  // V8 bug\n  test.sort(null);\n  // Old WebKit\n}) || !require('./_strict-method')($sort)), 'Array', {\n  // 22.1.3.25 Array.prototype.sort(comparefn)\n  sort: function sort(comparefn){\n    return comparefn === undefined\n      ? $sort.call(toObject(this))\n      : $sort.call(toObject(this), aFunction(comparefn));\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
       "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
       "./_strict-method": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_strict-method.js",
-      "./_a-function": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_a-function.js"
+      "./_a-function": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_a-function.js",
+      "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.sort.js",
@@ -2622,9 +2622,9 @@
     "'use strict';\nvar $export     = require('./_export')\n  , toObject    = require('./_to-object')\n  , toPrimitive = require('./_to-primitive');\n\n$export($export.P + $export.F * require('./_fails')(function(){\n  return new Date(NaN).toJSON() !== null || Date.prototype.toJSON.call({toISOString: function(){ return 1; }}) !== 1;\n}), 'Date', {\n  toJSON: function toJSON(key){\n    var O  = toObject(this)\n      , pv = toPrimitive(O);\n    return typeof pv == 'number' && !isFinite(pv) ? null : O.toISOString();\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
+      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
       "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
-      "./_to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-primitive.js",
-      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js"
+      "./_to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-primitive.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.date.to-json.js",
@@ -2676,9 +2676,9 @@
     "'use strict';\nvar isObject       = require('./_is-object')\n  , getPrototypeOf = require('./_object-gpo')\n  , HAS_INSTANCE   = require('./_wks')('hasInstance')\n  , FunctionProto  = Function.prototype;\n// 19.2.3.6 Function.prototype[@@hasInstance](V)\nif(!(HAS_INSTANCE in FunctionProto))require('./_object-dp').f(FunctionProto, HAS_INSTANCE, {value: function(O){\n  if(typeof this != 'function' || !isObject(O))return false;\n  if(!isObject(this.prototype))return O instanceof this;\n  // for environment w/o native `@@hasInstance` logic enough `instanceof`, but add this:\n  while(O = getPrototypeOf(O))if(this.prototype === O)return true;\n  return false;\n}});",
     {
       "./_is-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-object.js",
+      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
       "./_object-gpo": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gpo.js",
-      "./_wks": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks.js",
-      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js"
+      "./_wks": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.function.has-instance.js",
@@ -2690,10 +2690,10 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.function.name.js": [
     "var dP         = require('./_object-dp').f\n  , createDesc = require('./_property-desc')\n  , has        = require('./_has')\n  , FProto     = Function.prototype\n  , nameRE     = /^\\s*function ([^ (]*)/\n  , NAME       = 'name';\n\nvar isExtensible = Object.isExtensible || function(){\n  return true;\n};\n\n// 19.2.4.2 name\nNAME in FProto || require('./_descriptors') && dP(FProto, NAME, {\n  configurable: true,\n  get: function(){\n    try {\n      var that = this\n        , name = ('' + that).match(nameRE)[1];\n      has(that, NAME) || !isExtensible(that) || dP(that, NAME, createDesc(5, name));\n      return name;\n    } catch(e){\n      return '';\n    }\n  }\n});",
     {
-      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
       "./_property-desc": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_property-desc.js",
       "./_has": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_has.js",
-      "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js"
+      "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
+      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.function.name.js",
@@ -2705,8 +2705,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.map.js": [
     "'use strict';\nvar strong = require('./_collection-strong');\n\n// 23.1 Map Objects\nmodule.exports = require('./_collection')('Map', function(get){\n  return function Map(){ return get(this, arguments.length > 0 ? arguments[0] : undefined); };\n}, {\n  // 23.1.3.6 Map.prototype.get(key)\n  get: function get(key){\n    var entry = strong.getEntry(this, key);\n    return entry && entry.v;\n  },\n  // 23.1.3.9 Map.prototype.set(key, value)\n  set: function set(key, value){\n    return strong.def(this, key === 0 ? 0 : key, value);\n  }\n}, strong, true);",
     {
-      "./_collection-strong": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_collection-strong.js",
-      "./_collection": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_collection.js"
+      "./_collection": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_collection.js",
+      "./_collection-strong": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_collection-strong.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.map.js",
@@ -2932,19 +2932,19 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.constructor.js": [
     "'use strict';\nvar global            = require('./_global')\n  , has               = require('./_has')\n  , cof               = require('./_cof')\n  , inheritIfRequired = require('./_inherit-if-required')\n  , toPrimitive       = require('./_to-primitive')\n  , fails             = require('./_fails')\n  , gOPN              = require('./_object-gopn').f\n  , gOPD              = require('./_object-gopd').f\n  , dP                = require('./_object-dp').f\n  , $trim             = require('./_string-trim').trim\n  , NUMBER            = 'Number'\n  , $Number           = global[NUMBER]\n  , Base              = $Number\n  , proto             = $Number.prototype\n  // Opera ~12 has broken Object#toString\n  , BROKEN_COF        = cof(require('./_object-create')(proto)) == NUMBER\n  , TRIM              = 'trim' in String.prototype;\n\n// 7.1.3 ToNumber(argument)\nvar toNumber = function(argument){\n  var it = toPrimitive(argument, false);\n  if(typeof it == 'string' && it.length > 2){\n    it = TRIM ? it.trim() : $trim(it, 3);\n    var first = it.charCodeAt(0)\n      , third, radix, maxCode;\n    if(first === 43 || first === 45){\n      third = it.charCodeAt(2);\n      if(third === 88 || third === 120)return NaN; // Number('+0x1') should be NaN, old V8 fix\n    } else if(first === 48){\n      switch(it.charCodeAt(1)){\n        case 66 : case 98  : radix = 2; maxCode = 49; break; // fast equal /^0b[01]+$/i\n        case 79 : case 111 : radix = 8; maxCode = 55; break; // fast equal /^0o[0-7]+$/i\n        default : return +it;\n      }\n      for(var digits = it.slice(2), i = 0, l = digits.length, code; i < l; i++){\n        code = digits.charCodeAt(i);\n        // parseInt parses a string to a first unavailable symbol\n        // but ToNumber should return NaN if a string contains unavailable symbols\n        if(code < 48 || code > maxCode)return NaN;\n      } return parseInt(digits, radix);\n    }\n  } return +it;\n};\n\nif(!$Number(' 0o1') || !$Number('0b1') || $Number('+0x1')){\n  $Number = function Number(value){\n    var it = arguments.length < 1 ? 0 : value\n      , that = this;\n    return that instanceof $Number\n      // check on 1..constructor(foo) case\n      && (BROKEN_COF ? fails(function(){ proto.valueOf.call(that); }) : cof(that) != NUMBER)\n        ? inheritIfRequired(new Base(toNumber(it)), that, $Number) : toNumber(it);\n  };\n  for(var keys = require('./_descriptors') ? gOPN(Base) : (\n    // ES3:\n    'MAX_VALUE,MIN_VALUE,NaN,NEGATIVE_INFINITY,POSITIVE_INFINITY,' +\n    // ES6 (in case, if modules with ES6 Number statics required before):\n    'EPSILON,isFinite,isInteger,isNaN,isSafeInteger,MAX_SAFE_INTEGER,' +\n    'MIN_SAFE_INTEGER,parseFloat,parseInt,isInteger'\n  ).split(','), j = 0, key; keys.length > j; j++){\n    if(has(Base, key = keys[j]) && !has($Number, key)){\n      dP($Number, key, gOPD(Base, key));\n    }\n  }\n  $Number.prototype = proto;\n  proto.constructor = $Number;\n  require('./_redefine')(global, NUMBER, $Number);\n}",
     {
-      "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
       "./_has": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_has.js",
-      "./_to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-primitive.js",
-      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
-      "./_object-gopn": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopn.js",
       "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js",
       "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
       "./_object-create": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-create.js",
       "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
       "./_redefine": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine.js",
+      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
+      "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
       "./_cof": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_cof.js",
+      "./_to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-primitive.js",
+      "./_string-trim": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_string-trim.js",
       "./_inherit-if-required": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_inherit-if-required.js",
-      "./_string-trim": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_string-trim.js"
+      "./_object-gopn": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopn.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.constructor.js",
@@ -2968,8 +2968,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.is-finite.js": [
     "// 20.1.2.2 Number.isFinite(number)\nvar $export   = require('./_export')\n  , _isFinite = require('./_global').isFinite;\n\n$export($export.S, 'Number', {\n  isFinite: function isFinite(it){\n    return typeof it == 'number' && _isFinite(it);\n  }\n});",
     {
-      "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js"
+      "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
+      "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.is-finite.js",
@@ -3086,8 +3086,8 @@
     "'use strict';\nvar $export      = require('./_export')\n  , $fails       = require('./_fails')\n  , aNumberValue = require('./_a-number-value')\n  , $toPrecision = 1..toPrecision;\n\n$export($export.P + $export.F * ($fails(function(){\n  // IE7-\n  return $toPrecision.call(1, undefined) !== '1';\n}) || !$fails(function(){\n  // V8 ~ Android 4.3-\n  $toPrecision.call({});\n})), 'Number', {\n  toPrecision: function toPrecision(precision){\n    var that = aNumberValue(this, 'Number#toPrecision: incorrect invocation!');\n    return precision === undefined ? $toPrecision.call(that) : $toPrecision.call(that, precision); \n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_a-number-value": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_a-number-value.js",
-      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js"
+      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
+      "./_a-number-value": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_a-number-value.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.to-precision.js",
@@ -3154,8 +3154,8 @@
     "// 19.1.2.5 Object.freeze(O)\nvar isObject = require('./_is-object')\n  , meta     = require('./_meta').onFreeze;\n\nrequire('./_object-sap')('freeze', function($freeze){\n  return function freeze(it){\n    return $freeze && isObject(it) ? $freeze(meta(it)) : it;\n  };\n});",
     {
       "./_object-sap": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-sap.js",
-      "./_meta": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_meta.js",
-      "./_is-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-object.js"
+      "./_is-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-object.js",
+      "./_meta": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_meta.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.freeze.js",
@@ -3167,9 +3167,9 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.get-own-property-descriptor.js": [
     "// 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)\nvar toIObject                 = require('./_to-iobject')\n  , $getOwnPropertyDescriptor = require('./_object-gopd').f;\n\nrequire('./_object-sap')('getOwnPropertyDescriptor', function(){\n  return function getOwnPropertyDescriptor(it, key){\n    return $getOwnPropertyDescriptor(toIObject(it), key);\n  };\n});",
     {
-      "./_to-iobject": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-iobject.js",
+      "./_object-sap": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-sap.js",
       "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js",
-      "./_object-sap": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-sap.js"
+      "./_to-iobject": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-iobject.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.get-own-property-descriptor.js",
@@ -3194,9 +3194,9 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.get-prototype-of.js": [
     "// 19.1.2.9 Object.getPrototypeOf(O)\nvar toObject        = require('./_to-object')\n  , $getPrototypeOf = require('./_object-gpo');\n\nrequire('./_object-sap')('getPrototypeOf', function(){\n  return function getPrototypeOf(it){\n    return $getPrototypeOf(toObject(it));\n  };\n});",
     {
-      "./_object-sap": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-sap.js",
       "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
-      "./_object-gpo": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gpo.js"
+      "./_object-gpo": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gpo.js",
+      "./_object-sap": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-sap.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.get-prototype-of.js",
@@ -3261,8 +3261,8 @@
     "// 19.1.2.14 Object.keys(O)\nvar toObject = require('./_to-object')\n  , $keys    = require('./_object-keys');\n\nrequire('./_object-sap')('keys', function(){\n  return function keys(it){\n    return $keys(toObject(it));\n  };\n});",
     {
       "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
-      "./_object-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-keys.js",
-      "./_object-sap": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-sap.js"
+      "./_object-sap": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-sap.js",
+      "./_object-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-keys.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.keys.js",
@@ -3289,8 +3289,8 @@
     "// 19.1.2.17 Object.seal(O)\nvar isObject = require('./_is-object')\n  , meta     = require('./_meta').onFreeze;\n\nrequire('./_object-sap')('seal', function($seal){\n  return function seal(it){\n    return $seal && isObject(it) ? $seal(meta(it)) : it;\n  };\n});",
     {
       "./_is-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-object.js",
-      "./_meta": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_meta.js",
-      "./_object-sap": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-sap.js"
+      "./_object-sap": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-sap.js",
+      "./_meta": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_meta.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.seal.js",
@@ -3355,7 +3355,6 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.promise.js": [
     "'use strict';\nvar LIBRARY            = require('./_library')\n  , global             = require('./_global')\n  , ctx                = require('./_ctx')\n  , classof            = require('./_classof')\n  , $export            = require('./_export')\n  , isObject           = require('./_is-object')\n  , aFunction          = require('./_a-function')\n  , anInstance         = require('./_an-instance')\n  , forOf              = require('./_for-of')\n  , speciesConstructor = require('./_species-constructor')\n  , task               = require('./_task').set\n  , microtask          = require('./_microtask')()\n  , PROMISE            = 'Promise'\n  , TypeError          = global.TypeError\n  , process            = global.process\n  , $Promise           = global[PROMISE]\n  , process            = global.process\n  , isNode             = classof(process) == 'process'\n  , empty              = function(){ /* empty */ }\n  , Internal, GenericPromiseCapability, Wrapper;\n\nvar USE_NATIVE = !!function(){\n  try {\n    // correct subclassing with @@species support\n    var promise     = $Promise.resolve(1)\n      , FakePromise = (promise.constructor = {})[require('./_wks')('species')] = function(exec){ exec(empty, empty); };\n    // unhandled rejections tracking support, NodeJS Promise without it fails @@species test\n    return (isNode || typeof PromiseRejectionEvent == 'function') && promise.then(empty) instanceof FakePromise;\n  } catch(e){ /* empty */ }\n}();\n\n// helpers\nvar sameConstructor = function(a, b){\n  // with library wrapper special case\n  return a === b || a === $Promise && b === Wrapper;\n};\nvar isThenable = function(it){\n  var then;\n  return isObject(it) && typeof (then = it.then) == 'function' ? then : false;\n};\nvar newPromiseCapability = function(C){\n  return sameConstructor($Promise, C)\n    ? new PromiseCapability(C)\n    : new GenericPromiseCapability(C);\n};\nvar PromiseCapability = GenericPromiseCapability = function(C){\n  var resolve, reject;\n  this.promise = new C(function($$resolve, $$reject){\n    if(resolve !== undefined || reject !== undefined)throw TypeError('Bad Promise constructor');\n    resolve = $$resolve;\n    reject  = $$reject;\n  });\n  this.resolve = aFunction(resolve);\n  this.reject  = aFunction(reject);\n};\nvar perform = function(exec){\n  try {\n    exec();\n  } catch(e){\n    return {error: e};\n  }\n};\nvar notify = function(promise, isReject){\n  if(promise._n)return;\n  promise._n = true;\n  var chain = promise._c;\n  microtask(function(){\n    var value = promise._v\n      , ok    = promise._s == 1\n      , i     = 0;\n    var run = function(reaction){\n      var handler = ok ? reaction.ok : reaction.fail\n        , resolve = reaction.resolve\n        , reject  = reaction.reject\n        , domain  = reaction.domain\n        , result, then;\n      try {\n        if(handler){\n          if(!ok){\n            if(promise._h == 2)onHandleUnhandled(promise);\n            promise._h = 1;\n          }\n          if(handler === true)result = value;\n          else {\n            if(domain)domain.enter();\n            result = handler(value);\n            if(domain)domain.exit();\n          }\n          if(result === reaction.promise){\n            reject(TypeError('Promise-chain cycle'));\n          } else if(then = isThenable(result)){\n            then.call(result, resolve, reject);\n          } else resolve(result);\n        } else reject(value);\n      } catch(e){\n        reject(e);\n      }\n    };\n    while(chain.length > i)run(chain[i++]); // variable length - can't use forEach\n    promise._c = [];\n    promise._n = false;\n    if(isReject && !promise._h)onUnhandled(promise);\n  });\n};\nvar onUnhandled = function(promise){\n  task.call(global, function(){\n    var value = promise._v\n      , abrupt, handler, console;\n    if(isUnhandled(promise)){\n      abrupt = perform(function(){\n        if(isNode){\n          process.emit('unhandledRejection', value, promise);\n        } else if(handler = global.onunhandledrejection){\n          handler({promise: promise, reason: value});\n        } else if((console = global.console) && console.error){\n          console.error('Unhandled promise rejection', value);\n        }\n      });\n      // Browsers should not trigger `rejectionHandled` event if it was handled here, NodeJS - should\n      promise._h = isNode || isUnhandled(promise) ? 2 : 1;\n    } promise._a = undefined;\n    if(abrupt)throw abrupt.error;\n  });\n};\nvar isUnhandled = function(promise){\n  if(promise._h == 1)return false;\n  var chain = promise._a || promise._c\n    , i     = 0\n    , reaction;\n  while(chain.length > i){\n    reaction = chain[i++];\n    if(reaction.fail || !isUnhandled(reaction.promise))return false;\n  } return true;\n};\nvar onHandleUnhandled = function(promise){\n  task.call(global, function(){\n    var handler;\n    if(isNode){\n      process.emit('rejectionHandled', promise);\n    } else if(handler = global.onrejectionhandled){\n      handler({promise: promise, reason: promise._v});\n    }\n  });\n};\nvar $reject = function(value){\n  var promise = this;\n  if(promise._d)return;\n  promise._d = true;\n  promise = promise._w || promise; // unwrap\n  promise._v = value;\n  promise._s = 2;\n  if(!promise._a)promise._a = promise._c.slice();\n  notify(promise, true);\n};\nvar $resolve = function(value){\n  var promise = this\n    , then;\n  if(promise._d)return;\n  promise._d = true;\n  promise = promise._w || promise; // unwrap\n  try {\n    if(promise === value)throw TypeError(\"Promise can't be resolved itself\");\n    if(then = isThenable(value)){\n      microtask(function(){\n        var wrapper = {_w: promise, _d: false}; // wrap\n        try {\n          then.call(value, ctx($resolve, wrapper, 1), ctx($reject, wrapper, 1));\n        } catch(e){\n          $reject.call(wrapper, e);\n        }\n      });\n    } else {\n      promise._v = value;\n      promise._s = 1;\n      notify(promise, false);\n    }\n  } catch(e){\n    $reject.call({_w: promise, _d: false}, e); // wrap\n  }\n};\n\n// constructor polyfill\nif(!USE_NATIVE){\n  // 25.4.3.1 Promise(executor)\n  $Promise = function Promise(executor){\n    anInstance(this, $Promise, PROMISE, '_h');\n    aFunction(executor);\n    Internal.call(this);\n    try {\n      executor(ctx($resolve, this, 1), ctx($reject, this, 1));\n    } catch(err){\n      $reject.call(this, err);\n    }\n  };\n  Internal = function Promise(executor){\n    this._c = [];             // <- awaiting reactions\n    this._a = undefined;      // <- checked in isUnhandled reactions\n    this._s = 0;              // <- state\n    this._d = false;          // <- done\n    this._v = undefined;      // <- value\n    this._h = 0;              // <- rejection state, 0 - default, 1 - handled, 2 - unhandled\n    this._n = false;          // <- notify\n  };\n  Internal.prototype = require('./_redefine-all')($Promise.prototype, {\n    // 25.4.5.3 Promise.prototype.then(onFulfilled, onRejected)\n    then: function then(onFulfilled, onRejected){\n      var reaction    = newPromiseCapability(speciesConstructor(this, $Promise));\n      reaction.ok     = typeof onFulfilled == 'function' ? onFulfilled : true;\n      reaction.fail   = typeof onRejected == 'function' && onRejected;\n      reaction.domain = isNode ? process.domain : undefined;\n      this._c.push(reaction);\n      if(this._a)this._a.push(reaction);\n      if(this._s)notify(this, false);\n      return reaction.promise;\n    },\n    // 25.4.5.1 Promise.prototype.catch(onRejected)\n    'catch': function(onRejected){\n      return this.then(undefined, onRejected);\n    }\n  });\n  PromiseCapability = function(){\n    var promise  = new Internal;\n    this.promise = promise;\n    this.resolve = ctx($resolve, promise, 1);\n    this.reject  = ctx($reject, promise, 1);\n  };\n}\n\n$export($export.G + $export.W + $export.F * !USE_NATIVE, {Promise: $Promise});\nrequire('./_set-to-string-tag')($Promise, PROMISE);\nrequire('./_set-species')(PROMISE);\nWrapper = require('./_core')[PROMISE];\n\n// statics\n$export($export.S + $export.F * !USE_NATIVE, PROMISE, {\n  // 25.4.4.5 Promise.reject(r)\n  reject: function reject(r){\n    var capability = newPromiseCapability(this)\n      , $$reject   = capability.reject;\n    $$reject(r);\n    return capability.promise;\n  }\n});\n$export($export.S + $export.F * (LIBRARY || !USE_NATIVE), PROMISE, {\n  // 25.4.4.6 Promise.resolve(x)\n  resolve: function resolve(x){\n    // instanceof instead of internal slot check because we should fix it without replacement native Promise core\n    if(x instanceof $Promise && sameConstructor(x.constructor, this))return x;\n    var capability = newPromiseCapability(this)\n      , $$resolve  = capability.resolve;\n    $$resolve(x);\n    return capability.promise;\n  }\n});\n$export($export.S + $export.F * !(USE_NATIVE && require('./_iter-detect')(function(iter){\n  $Promise.all(iter)['catch'](empty);\n})), PROMISE, {\n  // 25.4.4.1 Promise.all(iterable)\n  all: function all(iterable){\n    var C          = this\n      , capability = newPromiseCapability(C)\n      , resolve    = capability.resolve\n      , reject     = capability.reject;\n    var abrupt = perform(function(){\n      var values    = []\n        , index     = 0\n        , remaining = 1;\n      forOf(iterable, false, function(promise){\n        var $index        = index++\n          , alreadyCalled = false;\n        values.push(undefined);\n        remaining++;\n        C.resolve(promise).then(function(value){\n          if(alreadyCalled)return;\n          alreadyCalled  = true;\n          values[$index] = value;\n          --remaining || resolve(values);\n        }, reject);\n      });\n      --remaining || resolve(values);\n    });\n    if(abrupt)reject(abrupt.error);\n    return capability.promise;\n  },\n  // 25.4.4.4 Promise.race(iterable)\n  race: function race(iterable){\n    var C          = this\n      , capability = newPromiseCapability(C)\n      , reject     = capability.reject;\n    var abrupt = perform(function(){\n      forOf(iterable, false, function(promise){\n        C.resolve(promise).then(capability.resolve, reject);\n      });\n    });\n    if(abrupt)reject(abrupt.error);\n    return capability.promise;\n  }\n});",
     {
-      "./_library": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_library.js",
       "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
       "./_ctx": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_ctx.js",
       "./_classof": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_classof.js",
@@ -3363,16 +3362,17 @@
       "./_is-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-object.js",
       "./_a-function": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_a-function.js",
       "./_wks": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks.js",
-      "./_set-to-string-tag": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_set-to-string-tag.js",
       "./_set-species": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_set-species.js",
       "./_core": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_core.js",
       "./_iter-detect": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iter-detect.js",
+      "./_library": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_library.js",
       "./_an-instance": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-instance.js",
       "./_for-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_for-of.js",
-      "./_species-constructor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_species-constructor.js",
       "./_task": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_task.js",
+      "./_microtask": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_microtask.js",
       "./_redefine-all": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine-all.js",
-      "./_microtask": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_microtask.js"
+      "./_species-constructor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_species-constructor.js",
+      "./_set-to-string-tag": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_set-to-string-tag.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.promise.js",
@@ -3386,9 +3386,9 @@
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
       "./_a-function": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_a-function.js",
-      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
       "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
-      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js"
+      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
+      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.apply.js",
@@ -3401,13 +3401,13 @@
     "// 26.1.2 Reflect.construct(target, argumentsList [, newTarget])\nvar $export    = require('./_export')\n  , create     = require('./_object-create')\n  , aFunction  = require('./_a-function')\n  , anObject   = require('./_an-object')\n  , isObject   = require('./_is-object')\n  , fails      = require('./_fails')\n  , bind       = require('./_bind')\n  , rConstruct = (require('./_global').Reflect || {}).construct;\n\n// MS Edge supports only 2 arguments and argumentsList argument is optional\n// FF Nightly sets third argument as `new.target`, but does not create `this` from it\nvar NEW_TARGET_BUG = fails(function(){\n  function F(){}\n  return !(rConstruct(function(){}, [], F) instanceof F);\n});\nvar ARGS_BUG = !fails(function(){\n  rConstruct(function(){});\n});\n\n$export($export.S + $export.F * (NEW_TARGET_BUG || ARGS_BUG), 'Reflect', {\n  construct: function construct(Target, args /*, newTarget*/){\n    aFunction(Target);\n    anObject(args);\n    var newTarget = arguments.length < 3 ? Target : aFunction(arguments[2]);\n    if(ARGS_BUG && !NEW_TARGET_BUG)return rConstruct(Target, args, newTarget);\n    if(Target == newTarget){\n      // w/o altered newTarget, optimization for 0-4 arguments\n      switch(args.length){\n        case 0: return new Target;\n        case 1: return new Target(args[0]);\n        case 2: return new Target(args[0], args[1]);\n        case 3: return new Target(args[0], args[1], args[2]);\n        case 4: return new Target(args[0], args[1], args[2], args[3]);\n      }\n      // w/o altered newTarget, lot of arguments case\n      var $args = [null];\n      $args.push.apply($args, args);\n      return new (bind.apply(Target, $args));\n    }\n    // with altered newTarget, not support built-in constructors\n    var proto    = newTarget.prototype\n      , instance = create(isObject(proto) ? proto : Object.prototype)\n      , result   = Function.apply.call(Target, instance, args);\n    return isObject(result) ? result : instance;\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_object-create": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-create.js",
       "./_a-function": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_a-function.js",
       "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
       "./_is-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-object.js",
       "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
+      "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
       "./_bind": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_bind.js",
-      "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js"
+      "./_object-create": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-create.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.construct.js",
@@ -3419,11 +3419,11 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.define-property.js": [
     "// 26.1.3 Reflect.defineProperty(target, propertyKey, attributes)\nvar dP          = require('./_object-dp')\n  , $export     = require('./_export')\n  , anObject    = require('./_an-object')\n  , toPrimitive = require('./_to-primitive');\n\n// MS Edge has broken Reflect.defineProperty - throwing instead of returning false\n$export($export.S + $export.F * require('./_fails')(function(){\n  Reflect.defineProperty(dP.f({}, 1, {value: 1}), 1, {value: 2});\n}), 'Reflect', {\n  defineProperty: function defineProperty(target, propertyKey, attributes){\n    anObject(target);\n    propertyKey = toPrimitive(propertyKey, true);\n    anObject(attributes);\n    try {\n      dP.f(target, propertyKey, attributes);\n      return true;\n    } catch(e){\n      return false;\n    }\n  }\n});",
     {
-      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
+      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
       "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
       "./_to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-primitive.js",
-      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js"
+      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.define-property.js",
@@ -3436,8 +3436,8 @@
     "// 26.1.4 Reflect.deleteProperty(target, propertyKey)\nvar $export  = require('./_export')\n  , gOPD     = require('./_object-gopd').f\n  , anObject = require('./_an-object');\n\n$export($export.S, 'Reflect', {\n  deleteProperty: function deleteProperty(target, propertyKey){\n    var desc = gOPD(anObject(target), propertyKey);\n    return desc && !desc.configurable ? false : delete target[propertyKey];\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js",
-      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js"
+      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
+      "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.delete-property.js",
@@ -3463,9 +3463,9 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.get-own-property-descriptor.js": [
     "// 26.1.7 Reflect.getOwnPropertyDescriptor(target, propertyKey)\nvar gOPD     = require('./_object-gopd')\n  , $export  = require('./_export')\n  , anObject = require('./_an-object');\n\n$export($export.S, 'Reflect', {\n  getOwnPropertyDescriptor: function getOwnPropertyDescriptor(target, propertyKey){\n    return gOPD.f(anObject(target), propertyKey);\n  }\n});",
     {
-      "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js",
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js"
+      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
+      "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.get-own-property-descriptor.js",
@@ -3478,8 +3478,8 @@
     "// 26.1.8 Reflect.getPrototypeOf(target)\nvar $export  = require('./_export')\n  , getProto = require('./_object-gpo')\n  , anObject = require('./_an-object');\n\n$export($export.S, 'Reflect', {\n  getPrototypeOf: function getPrototypeOf(target){\n    return getProto(anObject(target));\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_object-gpo": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gpo.js",
-      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js"
+      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
+      "./_object-gpo": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gpo.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.get-prototype-of.js",
@@ -3491,12 +3491,12 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.get.js": [
     "// 26.1.6 Reflect.get(target, propertyKey [, receiver])\nvar gOPD           = require('./_object-gopd')\n  , getPrototypeOf = require('./_object-gpo')\n  , has            = require('./_has')\n  , $export        = require('./_export')\n  , isObject       = require('./_is-object')\n  , anObject       = require('./_an-object');\n\nfunction get(target, propertyKey/*, receiver*/){\n  var receiver = arguments.length < 3 ? target : arguments[2]\n    , desc, proto;\n  if(anObject(target) === receiver)return target[propertyKey];\n  if(desc = gOPD.f(target, propertyKey))return has(desc, 'value')\n    ? desc.value\n    : desc.get !== undefined\n      ? desc.get.call(receiver)\n      : undefined;\n  if(isObject(proto = getPrototypeOf(target)))return get(proto, propertyKey, receiver);\n}\n\n$export($export.S, 'Reflect', {get: get});",
     {
-      "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js",
       "./_object-gpo": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gpo.js",
       "./_has": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_has.js",
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
       "./_is-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-object.js",
-      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js"
+      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
+      "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.get.js",
@@ -3572,14 +3572,14 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.set.js": [
     "// 26.1.13 Reflect.set(target, propertyKey, V [, receiver])\nvar dP             = require('./_object-dp')\n  , gOPD           = require('./_object-gopd')\n  , getPrototypeOf = require('./_object-gpo')\n  , has            = require('./_has')\n  , $export        = require('./_export')\n  , createDesc     = require('./_property-desc')\n  , anObject       = require('./_an-object')\n  , isObject       = require('./_is-object');\n\nfunction set(target, propertyKey, V/*, receiver*/){\n  var receiver = arguments.length < 4 ? target : arguments[3]\n    , ownDesc  = gOPD.f(anObject(target), propertyKey)\n    , existingDescriptor, proto;\n  if(!ownDesc){\n    if(isObject(proto = getPrototypeOf(target))){\n      return set(proto, propertyKey, V, receiver);\n    }\n    ownDesc = createDesc(0);\n  }\n  if(has(ownDesc, 'value')){\n    if(ownDesc.writable === false || !isObject(receiver))return false;\n    existingDescriptor = gOPD.f(receiver, propertyKey) || createDesc(0);\n    existingDescriptor.value = V;\n    dP.f(receiver, propertyKey, existingDescriptor);\n    return true;\n  }\n  return ownDesc.set === undefined ? false : (ownDesc.set.call(receiver, V), true);\n}\n\n$export($export.S, 'Reflect', {set: set});",
     {
-      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
-      "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js",
-      "./_object-gpo": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gpo.js",
       "./_has": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_has.js",
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
       "./_property-desc": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_property-desc.js",
       "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
-      "./_is-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-object.js"
+      "./_is-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-object.js",
+      "./_object-gpo": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gpo.js",
+      "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
+      "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.set.js",
@@ -3592,16 +3592,16 @@
     "var global            = require('./_global')\n  , inheritIfRequired = require('./_inherit-if-required')\n  , dP                = require('./_object-dp').f\n  , gOPN              = require('./_object-gopn').f\n  , isRegExp          = require('./_is-regexp')\n  , $flags            = require('./_flags')\n  , $RegExp           = global.RegExp\n  , Base              = $RegExp\n  , proto             = $RegExp.prototype\n  , re1               = /a/g\n  , re2               = /a/g\n  // \"new\" creates a new object, old webkit buggy here\n  , CORRECT_NEW       = new $RegExp(re1) !== re1;\n\nif(require('./_descriptors') && (!CORRECT_NEW || require('./_fails')(function(){\n  re2[require('./_wks')('match')] = false;\n  // RegExp constructor can alter flags and IsRegExp works correct with @@match\n  return $RegExp(re1) != re1 || $RegExp(re2) == re2 || $RegExp(re1, 'i') != '/a/i';\n}))){\n  $RegExp = function RegExp(p, f){\n    var tiRE = this instanceof $RegExp\n      , piRE = isRegExp(p)\n      , fiU  = f === undefined;\n    return !tiRE && piRE && p.constructor === $RegExp && fiU ? p\n      : inheritIfRequired(CORRECT_NEW\n        ? new Base(piRE && !fiU ? p.source : p, f)\n        : Base((piRE = p instanceof $RegExp) ? p.source : p, piRE && fiU ? $flags.call(p) : f)\n      , tiRE ? this : proto, $RegExp);\n  };\n  var proxy = function(key){\n    key in $RegExp || dP($RegExp, key, {\n      configurable: true,\n      get: function(){ return Base[key]; },\n      set: function(it){ Base[key] = it; }\n    });\n  };\n  for(var keys = gOPN(Base), i = 0; keys.length > i; )proxy(keys[i++]);\n  proto.constructor = $RegExp;\n  $RegExp.prototype = proto;\n  require('./_redefine')(global, 'RegExp', $RegExp);\n}\n\nrequire('./_set-species')('RegExp');",
     {
       "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
-      "./_inherit-if-required": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_inherit-if-required.js",
       "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
-      "./_object-gopn": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopn.js",
       "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
       "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
-      "./_wks": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks.js",
       "./_redefine": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine.js",
+      "./_flags": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_flags.js",
+      "./_wks": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks.js",
       "./_set-species": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_set-species.js",
+      "./_inherit-if-required": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_inherit-if-required.js",
       "./_is-regexp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-regexp.js",
-      "./_flags": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_flags.js"
+      "./_object-gopn": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopn.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.constructor.js",
@@ -3613,8 +3613,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.flags.js": [
     "// 21.2.5.3 get RegExp.prototype.flags()\nif(require('./_descriptors') && /./g.flags != 'g')require('./_object-dp').f(RegExp.prototype, 'flags', {\n  configurable: true,\n  get: require('./_flags')\n});",
     {
-      "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
       "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
+      "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
       "./_flags": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_flags.js"
     },
     {
@@ -3677,11 +3677,11 @@
     "'use strict';\nrequire('./es6.regexp.flags');\nvar anObject    = require('./_an-object')\n  , $flags      = require('./_flags')\n  , DESCRIPTORS = require('./_descriptors')\n  , TO_STRING   = 'toString'\n  , $toString   = /./[TO_STRING];\n\nvar define = function(fn){\n  require('./_redefine')(RegExp.prototype, TO_STRING, fn, true);\n};\n\n// 21.2.5.14 RegExp.prototype.toString()\nif(require('./_fails')(function(){ return $toString.call({source: 'a', flags: 'b'}) != '/a/b'; })){\n  define(function toString(){\n    var R = anObject(this);\n    return '/'.concat(R.source, '/',\n      'flags' in R ? R.flags : !DESCRIPTORS && R instanceof RegExp ? $flags.call(R) : undefined);\n  });\n// FF44- RegExp#toString has a wrong name\n} else if($toString.name != TO_STRING){\n  define(function toString(){\n    return $toString.call(this);\n  });\n}",
     {
       "./es6.regexp.flags": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.flags.js",
+      "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
+      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
       "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
       "./_flags": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_flags.js",
-      "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
-      "./_redefine": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine.js",
-      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js"
+      "./_redefine": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.to-string.js",
@@ -3922,9 +3922,9 @@
     "// 21.1.3.18 String.prototype.startsWith(searchString [, position ])\n'use strict';\nvar $export     = require('./_export')\n  , toLength    = require('./_to-length')\n  , context     = require('./_string-context')\n  , STARTS_WITH = 'startsWith'\n  , $startsWith = ''[STARTS_WITH];\n\n$export($export.P + $export.F * require('./_fails-is-regexp')(STARTS_WITH), 'String', {\n  startsWith: function startsWith(searchString /*, position = 0 */){\n    var that   = context(this, searchString, STARTS_WITH)\n      , index  = toLength(Math.min(arguments.length > 1 ? arguments[1] : undefined, that.length))\n      , search = String(searchString);\n    return $startsWith\n      ? $startsWith.call(that, search, index)\n      : that.slice(index, index + search.length) === search;\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_to-length": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-length.js",
       "./_string-context": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_string-context.js",
-      "./_fails-is-regexp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails-is-regexp.js"
+      "./_fails-is-regexp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails-is-regexp.js",
+      "./_to-length": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-length.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.starts-with.js",
@@ -3986,34 +3986,34 @@
     {
       "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
       "./_has": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_has.js",
-      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
-      "./_uid": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_uid.js",
-      "./_property-desc": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_property-desc.js",
-      "./_object-gops": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gops.js",
-      "./_object-pie": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-pie.js",
-      "./_library": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_library.js",
-      "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
       "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
+      "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
       "./_redefine": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine.js",
       "./_meta": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_meta.js",
-      "./_shared": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_shared.js",
+      "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
       "./_set-to-string-tag": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_set-to-string-tag.js",
       "./_wks": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks.js",
       "./_wks-define": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks-define.js",
-      "./_wks-ext": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks-ext.js",
-      "./_keyof": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_keyof.js",
-      "./_enum-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_enum-keys.js",
       "./_is-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-array.js",
       "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
       "./_to-iobject": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-iobject.js",
       "./_to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-primitive.js",
-      "./_object-gopn-ext": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopn-ext.js",
+      "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js",
       "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
       "./_object-gopn": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopn.js",
-      "./_hide": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_hide.js",
+      "./_property-desc": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_property-desc.js",
       "./_object-create": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-create.js",
-      "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js",
-      "./_object-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-keys.js"
+      "./_object-gopn-ext": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopn-ext.js",
+      "./_library": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_library.js",
+      "./_hide": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_hide.js",
+      "./_uid": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_uid.js",
+      "./_object-pie": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-pie.js",
+      "./_object-gops": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gops.js",
+      "./_object-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-keys.js",
+      "./_shared": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_shared.js",
+      "./_wks-ext": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks-ext.js",
+      "./_keyof": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_keyof.js",
+      "./_enum-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_enum-keys.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.symbol.js",
@@ -4027,15 +4027,15 @@
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
       "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
-      "./_to-index": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-index.js",
       "./_to-length": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-length.js",
-      "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
       "./_is-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-object.js",
-      "./_species-constructor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_species-constructor.js",
+      "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
       "./_fails": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_fails.js",
       "./_set-species": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_set-species.js",
+      "./_to-index": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-index.js",
+      "./_typed-buffer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_typed-buffer.js",
       "./_typed": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_typed.js",
-      "./_typed-buffer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_typed-buffer.js"
+      "./_species-constructor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_species-constructor.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.array-buffer.js",
@@ -4172,9 +4172,9 @@
       "./_array-methods": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-methods.js",
       "./_redefine": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine.js",
       "./_meta": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_meta.js",
-      "./_object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-assign.js",
       "./_is-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-object.js",
       "./_collection": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_collection.js",
+      "./_object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-assign.js",
       "./_collection-weak": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_collection-weak.js"
     },
     {
@@ -4187,8 +4187,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.weak-set.js": [
     "'use strict';\nvar weak = require('./_collection-weak');\n\n// 23.4 WeakSet Objects\nrequire('./_collection')('WeakSet', function(get){\n  return function WeakSet(){ return get(this, arguments.length > 0 ? arguments[0] : undefined); };\n}, {\n  // 23.4.3.1 WeakSet.prototype.add(value)\n  add: function add(value){\n    return weak.def(this, value, true);\n  }\n}, weak, false, true);",
     {
-      "./_collection-weak": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_collection-weak.js",
-      "./_collection": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_collection.js"
+      "./_collection": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_collection.js",
+      "./_collection-weak": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_collection-weak.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.weak-set.js",
@@ -4201,8 +4201,8 @@
     "'use strict';\n// https://github.com/tc39/Array.prototype.includes\nvar $export   = require('./_export')\n  , $includes = require('./_array-includes')(true);\n\n$export($export.P, 'Array', {\n  includes: function includes(el /*, fromIndex = 0 */){\n    return $includes(this, el, arguments.length > 1 ? arguments[1] : undefined);\n  }\n});\n\nrequire('./_add-to-unscopables')('includes');",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_array-includes": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-includes.js",
-      "./_add-to-unscopables": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_add-to-unscopables.js"
+      "./_add-to-unscopables": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_add-to-unscopables.js",
+      "./_array-includes": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_array-includes.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.array.includes.js",
@@ -4215,9 +4215,9 @@
     "// https://github.com/rwaldron/tc39-notes/blob/master/es6/2014-09/sept-25.md#510-globalasap-for-enqueuing-a-microtask\nvar $export   = require('./_export')\n  , microtask = require('./_microtask')()\n  , process   = require('./_global').process\n  , isNode    = require('./_cof')(process) == 'process';\n\n$export($export.G, {\n  asap: function asap(fn){\n    var domain = isNode && process.domain;\n    microtask(domain ? domain.bind(fn) : fn);\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_microtask": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_microtask.js",
       "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
-      "./_cof": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_cof.js"
+      "./_cof": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_cof.js",
+      "./_microtask": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_microtask.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.asap.js",
@@ -4304,10 +4304,10 @@
     "'use strict';\nvar $export         = require('./_export')\n  , toObject        = require('./_to-object')\n  , aFunction       = require('./_a-function')\n  , $defineProperty = require('./_object-dp');\n\n// B.2.2.2 Object.prototype.__defineGetter__(P, getter)\nrequire('./_descriptors') && $export($export.P + require('./_object-forced-pam'), 'Object', {\n  __defineGetter__: function __defineGetter__(P, getter){\n    $defineProperty.f(toObject(this), P, {get: aFunction(getter), enumerable: true, configurable: true});\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
       "./_a-function": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_a-function.js",
       "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
       "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
+      "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
       "./_object-forced-pam": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-forced-pam.js"
     },
     {
@@ -4320,8 +4320,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.define-setter.js": [
     "'use strict';\nvar $export         = require('./_export')\n  , toObject        = require('./_to-object')\n  , aFunction       = require('./_a-function')\n  , $defineProperty = require('./_object-dp');\n\n// B.2.2.3 Object.prototype.__defineSetter__(P, setter)\nrequire('./_descriptors') && $export($export.P + require('./_object-forced-pam'), 'Object', {\n  __defineSetter__: function __defineSetter__(P, setter){\n    $defineProperty.f(toObject(this), P, {set: aFunction(setter), enumerable: true, configurable: true});\n  }\n});",
     {
-      "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
+      "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
       "./_a-function": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_a-function.js",
       "./_object-dp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-dp.js",
       "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
@@ -4351,10 +4351,10 @@
     "// https://github.com/tc39/proposal-object-getownpropertydescriptors\nvar $export        = require('./_export')\n  , ownKeys        = require('./_own-keys')\n  , toIObject      = require('./_to-iobject')\n  , gOPD           = require('./_object-gopd')\n  , createProperty = require('./_create-property');\n\n$export($export.S, 'Object', {\n  getOwnPropertyDescriptors: function getOwnPropertyDescriptors(object){\n    var O       = toIObject(object)\n      , getDesc = gOPD.f\n      , keys    = ownKeys(O)\n      , result  = {}\n      , i       = 0\n      , key;\n    while(keys.length > i)createProperty(result, key = keys[i++], getDesc(O, key));\n    return result;\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_own-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_own-keys.js",
       "./_to-iobject": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-iobject.js",
       "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js",
-      "./_create-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_create-property.js"
+      "./_create-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_create-property.js",
+      "./_own-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_own-keys.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.get-own-property-descriptors.js",
@@ -4367,12 +4367,12 @@
     "'use strict';\nvar $export                  = require('./_export')\n  , toObject                 = require('./_to-object')\n  , toPrimitive              = require('./_to-primitive')\n  , getPrototypeOf           = require('./_object-gpo')\n  , getOwnPropertyDescriptor = require('./_object-gopd').f;\n\n// B.2.2.4 Object.prototype.__lookupGetter__(P)\nrequire('./_descriptors') && $export($export.P + require('./_object-forced-pam'), 'Object', {\n  __lookupGetter__: function __lookupGetter__(P){\n    var O = toObject(this)\n      , K = toPrimitive(P, true)\n      , D;\n    do {\n      if(D = getOwnPropertyDescriptor(O, K))return D.get;\n    } while(O = getPrototypeOf(O));\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-primitive.js",
       "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
-      "./_object-gpo": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gpo.js",
-      "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js",
       "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
-      "./_object-forced-pam": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-forced-pam.js"
+      "./_object-forced-pam": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-forced-pam.js",
+      "./_to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-primitive.js",
+      "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js",
+      "./_object-gpo": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gpo.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.lookup-getter.js",
@@ -4386,10 +4386,10 @@
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
       "./_object-gpo": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gpo.js",
-      "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
-      "./_to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-primitive.js",
       "./_object-gopd": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gopd.js",
       "./_descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_descriptors.js",
+      "./_to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-primitive.js",
+      "./_to-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-object.js",
       "./_object-forced-pam": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-forced-pam.js"
     },
     {
@@ -4415,18 +4415,18 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.observable.js": [
     "'use strict';\n// https://github.com/zenparsing/es-observable\nvar $export     = require('./_export')\n  , global      = require('./_global')\n  , core        = require('./_core')\n  , microtask   = require('./_microtask')()\n  , OBSERVABLE  = require('./_wks')('observable')\n  , aFunction   = require('./_a-function')\n  , anObject    = require('./_an-object')\n  , anInstance  = require('./_an-instance')\n  , redefineAll = require('./_redefine-all')\n  , hide        = require('./_hide')\n  , forOf       = require('./_for-of')\n  , RETURN      = forOf.RETURN;\n\nvar getMethod = function(fn){\n  return fn == null ? undefined : aFunction(fn);\n};\n\nvar cleanupSubscription = function(subscription){\n  var cleanup = subscription._c;\n  if(cleanup){\n    subscription._c = undefined;\n    cleanup();\n  }\n};\n\nvar subscriptionClosed = function(subscription){\n  return subscription._o === undefined;\n};\n\nvar closeSubscription = function(subscription){\n  if(!subscriptionClosed(subscription)){\n    subscription._o = undefined;\n    cleanupSubscription(subscription);\n  }\n};\n\nvar Subscription = function(observer, subscriber){\n  anObject(observer);\n  this._c = undefined;\n  this._o = observer;\n  observer = new SubscriptionObserver(this);\n  try {\n    var cleanup      = subscriber(observer)\n      , subscription = cleanup;\n    if(cleanup != null){\n      if(typeof cleanup.unsubscribe === 'function')cleanup = function(){ subscription.unsubscribe(); };\n      else aFunction(cleanup);\n      this._c = cleanup;\n    }\n  } catch(e){\n    observer.error(e);\n    return;\n  } if(subscriptionClosed(this))cleanupSubscription(this);\n};\n\nSubscription.prototype = redefineAll({}, {\n  unsubscribe: function unsubscribe(){ closeSubscription(this); }\n});\n\nvar SubscriptionObserver = function(subscription){\n  this._s = subscription;\n};\n\nSubscriptionObserver.prototype = redefineAll({}, {\n  next: function next(value){\n    var subscription = this._s;\n    if(!subscriptionClosed(subscription)){\n      var observer = subscription._o;\n      try {\n        var m = getMethod(observer.next);\n        if(m)return m.call(observer, value);\n      } catch(e){\n        try {\n          closeSubscription(subscription);\n        } finally {\n          throw e;\n        }\n      }\n    }\n  },\n  error: function error(value){\n    var subscription = this._s;\n    if(subscriptionClosed(subscription))throw value;\n    var observer = subscription._o;\n    subscription._o = undefined;\n    try {\n      var m = getMethod(observer.error);\n      if(!m)throw value;\n      value = m.call(observer, value);\n    } catch(e){\n      try {\n        cleanupSubscription(subscription);\n      } finally {\n        throw e;\n      }\n    } cleanupSubscription(subscription);\n    return value;\n  },\n  complete: function complete(value){\n    var subscription = this._s;\n    if(!subscriptionClosed(subscription)){\n      var observer = subscription._o;\n      subscription._o = undefined;\n      try {\n        var m = getMethod(observer.complete);\n        value = m ? m.call(observer, value) : undefined;\n      } catch(e){\n        try {\n          cleanupSubscription(subscription);\n        } finally {\n          throw e;\n        }\n      } cleanupSubscription(subscription);\n      return value;\n    }\n  }\n});\n\nvar $Observable = function Observable(subscriber){\n  anInstance(this, $Observable, 'Observable', '_f')._f = aFunction(subscriber);\n};\n\nredefineAll($Observable.prototype, {\n  subscribe: function subscribe(observer){\n    return new Subscription(observer, this._f);\n  },\n  forEach: function forEach(fn){\n    var that = this;\n    return new (core.Promise || global.Promise)(function(resolve, reject){\n      aFunction(fn);\n      var subscription = that.subscribe({\n        next : function(value){\n          try {\n            return fn(value);\n          } catch(e){\n            reject(e);\n            subscription.unsubscribe();\n          }\n        },\n        error: reject,\n        complete: resolve\n      });\n    });\n  }\n});\n\nredefineAll($Observable, {\n  from: function from(x){\n    var C = typeof this === 'function' ? this : $Observable;\n    var method = getMethod(anObject(x)[OBSERVABLE]);\n    if(method){\n      var observable = anObject(method.call(x));\n      return observable.constructor === C ? observable : new C(function(observer){\n        return observable.subscribe(observer);\n      });\n    }\n    return new C(function(observer){\n      var done = false;\n      microtask(function(){\n        if(!done){\n          try {\n            if(forOf(x, false, function(it){\n              observer.next(it);\n              if(done)return RETURN;\n            }) === RETURN)return;\n          } catch(e){\n            if(done)throw e;\n            observer.error(e);\n            return;\n          } observer.complete();\n        }\n      });\n      return function(){ done = true; };\n    });\n  },\n  of: function of(){\n    for(var i = 0, l = arguments.length, items = Array(l); i < l;)items[i] = arguments[i++];\n    return new (typeof this === 'function' ? this : $Observable)(function(observer){\n      var done = false;\n      microtask(function(){\n        if(!done){\n          for(var i = 0; i < items.length; ++i){\n            observer.next(items[i]);\n            if(done)return;\n          } observer.complete();\n        }\n      });\n      return function(){ done = true; };\n    });\n  }\n});\n\nhide($Observable.prototype, OBSERVABLE, function(){ return this; });\n\n$export($export.G, {Observable: $Observable});\n\nrequire('./_set-species')('Observable');",
     {
-      "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
+      "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
       "./_core": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_core.js",
-      "./_wks": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks.js",
-      "./_microtask": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_microtask.js",
       "./_a-function": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_a-function.js",
       "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
+      "./_wks": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks.js",
       "./_an-instance": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-instance.js",
-      "./_redefine-all": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine-all.js",
+      "./_microtask": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_microtask.js",
       "./_hide": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_hide.js",
-      "./_for-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_for-of.js",
-      "./_set-species": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_set-species.js"
+      "./_set-species": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_set-species.js",
+      "./_redefine-all": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine-all.js",
+      "./_for-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_for-of.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.observable.js",
@@ -4451,8 +4451,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.delete-metadata.js": [
     "var metadata               = require('./_metadata')\n  , anObject               = require('./_an-object')\n  , toMetaKey              = metadata.key\n  , getOrCreateMetadataMap = metadata.map\n  , store                  = metadata.store;\n\nmetadata.exp({deleteMetadata: function deleteMetadata(metadataKey, target /*, targetKey */){\n  var targetKey   = arguments.length < 3 ? undefined : toMetaKey(arguments[2])\n    , metadataMap = getOrCreateMetadataMap(anObject(target), targetKey, false);\n  if(metadataMap === undefined || !metadataMap['delete'](metadataKey))return false;\n  if(metadataMap.size)return true;\n  var targetMetadata = store.get(target);\n  targetMetadata['delete'](targetKey);\n  return !!targetMetadata.size || store['delete'](target);\n}});",
     {
-      "./_metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_metadata.js",
-      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js"
+      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
+      "./_metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_metadata.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.delete-metadata.js",
@@ -4480,8 +4480,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-metadata.js": [
     "var metadata               = require('./_metadata')\n  , anObject               = require('./_an-object')\n  , getPrototypeOf         = require('./_object-gpo')\n  , ordinaryHasOwnMetadata = metadata.has\n  , ordinaryGetOwnMetadata = metadata.get\n  , toMetaKey              = metadata.key;\n\nvar ordinaryGetMetadata = function(MetadataKey, O, P){\n  var hasOwn = ordinaryHasOwnMetadata(MetadataKey, O, P);\n  if(hasOwn)return ordinaryGetOwnMetadata(MetadataKey, O, P);\n  var parent = getPrototypeOf(O);\n  return parent !== null ? ordinaryGetMetadata(MetadataKey, parent, P) : undefined;\n};\n\nmetadata.exp({getMetadata: function getMetadata(metadataKey, target /*, targetKey */){\n  return ordinaryGetMetadata(metadataKey, anObject(target), arguments.length < 3 ? undefined : toMetaKey(arguments[2]));\n}});",
     {
-      "./_metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_metadata.js",
       "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
+      "./_metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_metadata.js",
       "./_object-gpo": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_object-gpo.js"
     },
     {
@@ -4494,8 +4494,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-own-metadata-keys.js": [
     "var metadata                = require('./_metadata')\n  , anObject                = require('./_an-object')\n  , ordinaryOwnMetadataKeys = metadata.keys\n  , toMetaKey               = metadata.key;\n\nmetadata.exp({getOwnMetadataKeys: function getOwnMetadataKeys(target /*, targetKey */){\n  return ordinaryOwnMetadataKeys(anObject(target), arguments.length < 2 ? undefined : toMetaKey(arguments[1]));\n}});",
     {
-      "./_metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_metadata.js",
-      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js"
+      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
+      "./_metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_metadata.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-own-metadata-keys.js",
@@ -4507,8 +4507,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-own-metadata.js": [
     "var metadata               = require('./_metadata')\n  , anObject               = require('./_an-object')\n  , ordinaryGetOwnMetadata = metadata.get\n  , toMetaKey              = metadata.key;\n\nmetadata.exp({getOwnMetadata: function getOwnMetadata(metadataKey, target /*, targetKey */){\n  return ordinaryGetOwnMetadata(metadataKey, anObject(target)\n    , arguments.length < 3 ? undefined : toMetaKey(arguments[2]));\n}});",
     {
-      "./_metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_metadata.js",
-      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js"
+      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
+      "./_metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_metadata.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-own-metadata.js",
@@ -4534,8 +4534,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.has-own-metadata.js": [
     "var metadata               = require('./_metadata')\n  , anObject               = require('./_an-object')\n  , ordinaryHasOwnMetadata = metadata.has\n  , toMetaKey              = metadata.key;\n\nmetadata.exp({hasOwnMetadata: function hasOwnMetadata(metadataKey, target /*, targetKey */){\n  return ordinaryHasOwnMetadata(metadataKey, anObject(target)\n    , arguments.length < 3 ? undefined : toMetaKey(arguments[2]));\n}});",
     {
-      "./_metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_metadata.js",
-      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js"
+      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
+      "./_metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_metadata.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.has-own-metadata.js",
@@ -4547,9 +4547,9 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.metadata.js": [
     "var metadata                  = require('./_metadata')\n  , anObject                  = require('./_an-object')\n  , aFunction                 = require('./_a-function')\n  , toMetaKey                 = metadata.key\n  , ordinaryDefineOwnMetadata = metadata.set;\n\nmetadata.exp({metadata: function metadata(metadataKey, metadataValue){\n  return function decorator(target, targetKey){\n    ordinaryDefineOwnMetadata(\n      metadataKey, metadataValue,\n      (targetKey !== undefined ? anObject : aFunction)(target),\n      toMetaKey(targetKey)\n    );\n  };\n}});",
     {
+      "./_a-function": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_a-function.js",
       "./_metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_metadata.js",
-      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js",
-      "./_a-function": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_a-function.js"
+      "./_an-object": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_an-object.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.metadata.js",
@@ -4588,11 +4588,11 @@
     "'use strict';\n// https://tc39.github.io/String.prototype.matchAll/\nvar $export     = require('./_export')\n  , defined     = require('./_defined')\n  , toLength    = require('./_to-length')\n  , isRegExp    = require('./_is-regexp')\n  , getFlags    = require('./_flags')\n  , RegExpProto = RegExp.prototype;\n\nvar $RegExpStringIterator = function(regexp, string){\n  this._r = regexp;\n  this._s = string;\n};\n\nrequire('./_iter-create')($RegExpStringIterator, 'RegExp String', function next(){\n  var match = this._r.exec(this._s);\n  return {value: match, done: match === null};\n});\n\n$export($export.P, 'String', {\n  matchAll: function matchAll(regexp){\n    defined(this);\n    if(!isRegExp(regexp))throw TypeError(regexp + ' is not a regexp!');\n    var S     = String(this)\n      , flags = 'flags' in RegExpProto ? String(regexp.flags) : getFlags.call(regexp)\n      , rx    = new RegExp(regexp.source, ~flags.indexOf('g') ? flags : 'g' + flags);\n    rx.lastIndex = toLength(regexp.lastIndex);\n    return new $RegExpStringIterator(rx, S);\n  }\n});",
     {
       "./_export": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_export.js",
-      "./_is-regexp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-regexp.js",
       "./_to-length": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_to-length.js",
+      "./_is-regexp": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_is-regexp.js",
       "./_flags": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_flags.js",
-      "./_iter-create": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iter-create.js",
-      "./_defined": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_defined.js"
+      "./_defined": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_defined.js",
+      "./_iter-create": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iter-create.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.match-all.js",
@@ -4692,11 +4692,11 @@
     "var $iterators    = require('./es6.array.iterator')\n  , redefine      = require('./_redefine')\n  , global        = require('./_global')\n  , hide          = require('./_hide')\n  , Iterators     = require('./_iterators')\n  , wks           = require('./_wks')\n  , ITERATOR      = wks('iterator')\n  , TO_STRING_TAG = wks('toStringTag')\n  , ArrayValues   = Iterators.Array;\n\nfor(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList', 'CSSRuleList'], i = 0; i < 5; i++){\n  var NAME       = collections[i]\n    , Collection = global[NAME]\n    , proto      = Collection && Collection.prototype\n    , key;\n  if(proto){\n    if(!proto[ITERATOR])hide(proto, ITERATOR, ArrayValues);\n    if(!proto[TO_STRING_TAG])hide(proto, TO_STRING_TAG, NAME);\n    Iterators[NAME] = ArrayValues;\n    for(key in $iterators)if(!proto[key])redefine(proto, key, $iterators[key], true);\n  }\n}",
     {
       "./es6.array.iterator": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.iterator.js",
-      "./_redefine": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine.js",
       "./_global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_global.js",
-      "./_hide": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_hide.js",
       "./_iterators": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_iterators.js",
-      "./_wks": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks.js"
+      "./_redefine": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_redefine.js",
+      "./_wks": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_wks.js",
+      "./_hide": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_hide.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/web.dom.iterable.js",
@@ -4737,181 +4737,181 @@
     "require('./modules/es6.symbol');\nrequire('./modules/es6.object.create');\nrequire('./modules/es6.object.define-property');\nrequire('./modules/es6.object.define-properties');\nrequire('./modules/es6.object.get-own-property-descriptor');\nrequire('./modules/es6.object.get-prototype-of');\nrequire('./modules/es6.object.keys');\nrequire('./modules/es6.object.get-own-property-names');\nrequire('./modules/es6.object.freeze');\nrequire('./modules/es6.object.seal');\nrequire('./modules/es6.object.prevent-extensions');\nrequire('./modules/es6.object.is-frozen');\nrequire('./modules/es6.object.is-sealed');\nrequire('./modules/es6.object.is-extensible');\nrequire('./modules/es6.object.assign');\nrequire('./modules/es6.object.is');\nrequire('./modules/es6.object.set-prototype-of');\nrequire('./modules/es6.object.to-string');\nrequire('./modules/es6.function.bind');\nrequire('./modules/es6.function.name');\nrequire('./modules/es6.function.has-instance');\nrequire('./modules/es6.parse-int');\nrequire('./modules/es6.parse-float');\nrequire('./modules/es6.number.constructor');\nrequire('./modules/es6.number.to-fixed');\nrequire('./modules/es6.number.to-precision');\nrequire('./modules/es6.number.epsilon');\nrequire('./modules/es6.number.is-finite');\nrequire('./modules/es6.number.is-integer');\nrequire('./modules/es6.number.is-nan');\nrequire('./modules/es6.number.is-safe-integer');\nrequire('./modules/es6.number.max-safe-integer');\nrequire('./modules/es6.number.min-safe-integer');\nrequire('./modules/es6.number.parse-float');\nrequire('./modules/es6.number.parse-int');\nrequire('./modules/es6.math.acosh');\nrequire('./modules/es6.math.asinh');\nrequire('./modules/es6.math.atanh');\nrequire('./modules/es6.math.cbrt');\nrequire('./modules/es6.math.clz32');\nrequire('./modules/es6.math.cosh');\nrequire('./modules/es6.math.expm1');\nrequire('./modules/es6.math.fround');\nrequire('./modules/es6.math.hypot');\nrequire('./modules/es6.math.imul');\nrequire('./modules/es6.math.log10');\nrequire('./modules/es6.math.log1p');\nrequire('./modules/es6.math.log2');\nrequire('./modules/es6.math.sign');\nrequire('./modules/es6.math.sinh');\nrequire('./modules/es6.math.tanh');\nrequire('./modules/es6.math.trunc');\nrequire('./modules/es6.string.from-code-point');\nrequire('./modules/es6.string.raw');\nrequire('./modules/es6.string.trim');\nrequire('./modules/es6.string.iterator');\nrequire('./modules/es6.string.code-point-at');\nrequire('./modules/es6.string.ends-with');\nrequire('./modules/es6.string.includes');\nrequire('./modules/es6.string.repeat');\nrequire('./modules/es6.string.starts-with');\nrequire('./modules/es6.string.anchor');\nrequire('./modules/es6.string.big');\nrequire('./modules/es6.string.blink');\nrequire('./modules/es6.string.bold');\nrequire('./modules/es6.string.fixed');\nrequire('./modules/es6.string.fontcolor');\nrequire('./modules/es6.string.fontsize');\nrequire('./modules/es6.string.italics');\nrequire('./modules/es6.string.link');\nrequire('./modules/es6.string.small');\nrequire('./modules/es6.string.strike');\nrequire('./modules/es6.string.sub');\nrequire('./modules/es6.string.sup');\nrequire('./modules/es6.date.now');\nrequire('./modules/es6.date.to-json');\nrequire('./modules/es6.date.to-iso-string');\nrequire('./modules/es6.date.to-string');\nrequire('./modules/es6.date.to-primitive');\nrequire('./modules/es6.array.is-array');\nrequire('./modules/es6.array.from');\nrequire('./modules/es6.array.of');\nrequire('./modules/es6.array.join');\nrequire('./modules/es6.array.slice');\nrequire('./modules/es6.array.sort');\nrequire('./modules/es6.array.for-each');\nrequire('./modules/es6.array.map');\nrequire('./modules/es6.array.filter');\nrequire('./modules/es6.array.some');\nrequire('./modules/es6.array.every');\nrequire('./modules/es6.array.reduce');\nrequire('./modules/es6.array.reduce-right');\nrequire('./modules/es6.array.index-of');\nrequire('./modules/es6.array.last-index-of');\nrequire('./modules/es6.array.copy-within');\nrequire('./modules/es6.array.fill');\nrequire('./modules/es6.array.find');\nrequire('./modules/es6.array.find-index');\nrequire('./modules/es6.array.species');\nrequire('./modules/es6.array.iterator');\nrequire('./modules/es6.regexp.constructor');\nrequire('./modules/es6.regexp.to-string');\nrequire('./modules/es6.regexp.flags');\nrequire('./modules/es6.regexp.match');\nrequire('./modules/es6.regexp.replace');\nrequire('./modules/es6.regexp.search');\nrequire('./modules/es6.regexp.split');\nrequire('./modules/es6.promise');\nrequire('./modules/es6.map');\nrequire('./modules/es6.set');\nrequire('./modules/es6.weak-map');\nrequire('./modules/es6.weak-set');\nrequire('./modules/es6.typed.array-buffer');\nrequire('./modules/es6.typed.data-view');\nrequire('./modules/es6.typed.int8-array');\nrequire('./modules/es6.typed.uint8-array');\nrequire('./modules/es6.typed.uint8-clamped-array');\nrequire('./modules/es6.typed.int16-array');\nrequire('./modules/es6.typed.uint16-array');\nrequire('./modules/es6.typed.int32-array');\nrequire('./modules/es6.typed.uint32-array');\nrequire('./modules/es6.typed.float32-array');\nrequire('./modules/es6.typed.float64-array');\nrequire('./modules/es6.reflect.apply');\nrequire('./modules/es6.reflect.construct');\nrequire('./modules/es6.reflect.define-property');\nrequire('./modules/es6.reflect.delete-property');\nrequire('./modules/es6.reflect.enumerate');\nrequire('./modules/es6.reflect.get');\nrequire('./modules/es6.reflect.get-own-property-descriptor');\nrequire('./modules/es6.reflect.get-prototype-of');\nrequire('./modules/es6.reflect.has');\nrequire('./modules/es6.reflect.is-extensible');\nrequire('./modules/es6.reflect.own-keys');\nrequire('./modules/es6.reflect.prevent-extensions');\nrequire('./modules/es6.reflect.set');\nrequire('./modules/es6.reflect.set-prototype-of');\nrequire('./modules/es7.array.includes');\nrequire('./modules/es7.string.at');\nrequire('./modules/es7.string.pad-start');\nrequire('./modules/es7.string.pad-end');\nrequire('./modules/es7.string.trim-left');\nrequire('./modules/es7.string.trim-right');\nrequire('./modules/es7.string.match-all');\nrequire('./modules/es7.symbol.async-iterator');\nrequire('./modules/es7.symbol.observable');\nrequire('./modules/es7.object.get-own-property-descriptors');\nrequire('./modules/es7.object.values');\nrequire('./modules/es7.object.entries');\nrequire('./modules/es7.object.define-getter');\nrequire('./modules/es7.object.define-setter');\nrequire('./modules/es7.object.lookup-getter');\nrequire('./modules/es7.object.lookup-setter');\nrequire('./modules/es7.map.to-json');\nrequire('./modules/es7.set.to-json');\nrequire('./modules/es7.system.global');\nrequire('./modules/es7.error.is-error');\nrequire('./modules/es7.math.iaddh');\nrequire('./modules/es7.math.isubh');\nrequire('./modules/es7.math.imulh');\nrequire('./modules/es7.math.umulh');\nrequire('./modules/es7.reflect.define-metadata');\nrequire('./modules/es7.reflect.delete-metadata');\nrequire('./modules/es7.reflect.get-metadata');\nrequire('./modules/es7.reflect.get-metadata-keys');\nrequire('./modules/es7.reflect.get-own-metadata');\nrequire('./modules/es7.reflect.get-own-metadata-keys');\nrequire('./modules/es7.reflect.has-metadata');\nrequire('./modules/es7.reflect.has-own-metadata');\nrequire('./modules/es7.reflect.metadata');\nrequire('./modules/es7.asap');\nrequire('./modules/es7.observable');\nrequire('./modules/web.timers');\nrequire('./modules/web.immediate');\nrequire('./modules/web.dom.iterable');\nmodule.exports = require('./modules/_core');",
     {
       "./modules/_core": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/_core.js",
-      "./modules/es6.object.create": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.create.js",
-      "./modules/es6.object.define-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.define-property.js",
-      "./modules/es6.object.get-own-property-names": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.get-own-property-names.js",
-      "./modules/es6.object.keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.keys.js",
-      "./modules/es6.object.seal": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.seal.js",
-      "./modules/es6.object.prevent-extensions": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.prevent-extensions.js",
-      "./modules/es6.object.is-frozen": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.is-frozen.js",
-      "./modules/es6.object.is-extensible": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.is-extensible.js",
-      "./modules/es6.object.is-sealed": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.is-sealed.js",
-      "./modules/es6.function.name": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.function.name.js",
-      "./modules/es6.function.has-instance": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.function.has-instance.js",
-      "./modules/es6.number.epsilon": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.epsilon.js",
-      "./modules/es6.number.is-finite": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.is-finite.js",
-      "./modules/es6.number.to-precision": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.to-precision.js",
+      "./modules/es6.number.max-safe-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.max-safe-integer.js",
       "./modules/es6.number.is-nan": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.is-nan.js",
       "./modules/es6.number.min-safe-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.min-safe-integer.js",
-      "./modules/es6.number.max-safe-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.max-safe-integer.js",
-      "./modules/es6.number.is-safe-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.is-safe-integer.js",
-      "./modules/es6.number.parse-float": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.parse-float.js",
-      "./modules/es6.number.parse-int": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.parse-int.js",
-      "./modules/es6.math.asinh": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.asinh.js",
       "./modules/es6.math.atanh": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.atanh.js",
+      "./modules/es6.math.asinh": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.asinh.js",
       "./modules/es6.math.cosh": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.cosh.js",
-      "./modules/es6.math.clz32": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.clz32.js",
       "./modules/es6.math.fround": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.fround.js",
       "./modules/es6.math.hypot": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.hypot.js",
-      "./modules/es6.math.imul": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.imul.js",
+      "./modules/es6.math.clz32": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.clz32.js",
       "./modules/es6.math.log10": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.log10.js",
+      "./modules/es6.math.imul": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.imul.js",
       "./modules/es6.math.log1p": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.log1p.js",
-      "./modules/es6.math.log2": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.log2.js",
-      "./modules/es6.math.sign": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.sign.js",
       "./modules/es6.math.sinh": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.sinh.js",
-      "./modules/es6.math.tanh": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.tanh.js",
+      "./modules/es6.math.log2": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.log2.js",
       "./modules/es6.math.trunc": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.trunc.js",
-      "./modules/es6.string.code-point-at": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.code-point-at.js",
-      "./modules/es6.string.trim": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.trim.js",
-      "./modules/es6.string.repeat": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.repeat.js",
-      "./modules/es6.string.ends-with": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.ends-with.js",
-      "./modules/es6.string.starts-with": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.starts-with.js",
-      "./modules/es6.string.anchor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.anchor.js",
-      "./modules/es6.string.blink": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.blink.js",
-      "./modules/es6.string.bold": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.bold.js",
-      "./modules/es6.string.fixed": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.fixed.js",
-      "./modules/es6.string.fontsize": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.fontsize.js",
-      "./modules/es6.string.fontcolor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.fontcolor.js",
-      "./modules/es6.string.italics": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.italics.js",
-      "./modules/es6.string.link": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.link.js",
-      "./modules/es6.string.small": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.small.js",
-      "./modules/es6.string.strike": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.strike.js",
-      "./modules/es6.string.sub": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.sub.js",
-      "./modules/es6.string.sup": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.sup.js",
+      "./modules/es6.math.sign": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.sign.js",
+      "./modules/es6.math.tanh": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.tanh.js",
       "./modules/es6.date.now": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.date.now.js",
-      "./modules/es6.date.to-json": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.date.to-json.js",
       "./modules/es6.date.to-iso-string": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.date.to-iso-string.js",
-      "./modules/es6.date.to-string": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.date.to-string.js",
-      "./modules/es6.array.is-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.is-array.js",
-      "./modules/es6.array.of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.of.js",
-      "./modules/es6.array.map": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.map.js",
-      "./modules/es6.array.filter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.filter.js",
-      "./modules/es6.array.some": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.some.js",
-      "./modules/es6.array.every": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.every.js",
-      "./modules/es6.array.reduce-right": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.reduce-right.js",
-      "./modules/es6.array.last-index-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.last-index-of.js",
-      "./modules/es6.array.find": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.find.js",
-      "./modules/es6.array.find-index": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.find-index.js",
-      "./modules/es6.regexp.to-string": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.to-string.js",
-      "./modules/es6.regexp.flags": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.flags.js",
-      "./modules/es6.regexp.replace": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.replace.js",
-      "./modules/es6.regexp.search": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.search.js",
-      "./modules/es6.regexp.split": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.split.js",
-      "./modules/es6.map": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.map.js",
-      "./modules/es6.weak-set": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.weak-set.js",
-      "./modules/es6.typed.data-view": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.data-view.js",
-      "./modules/es6.typed.uint8-clamped-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.uint8-clamped-array.js",
-      "./modules/es6.typed.int16-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.int16-array.js",
-      "./modules/es6.typed.int32-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.int32-array.js",
-      "./modules/es6.typed.uint8-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.uint8-array.js",
-      "./modules/es6.typed.uint32-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.uint32-array.js",
-      "./modules/es6.typed.float64-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.float64-array.js",
-      "./modules/es6.typed.uint16-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.uint16-array.js",
-      "./modules/es6.typed.float32-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.float32-array.js",
-      "./modules/es6.reflect.apply": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.apply.js",
-      "./modules/es6.reflect.construct": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.construct.js",
-      "./modules/es6.reflect.define-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.define-property.js",
-      "./modules/es6.reflect.delete-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.delete-property.js",
-      "./modules/es6.reflect.get": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.get.js",
-      "./modules/es6.reflect.get-own-property-descriptor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.get-own-property-descriptor.js",
-      "./modules/es6.reflect.get-prototype-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.get-prototype-of.js",
       "./modules/es6.reflect.has": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.has.js",
-      "./modules/es6.reflect.is-extensible": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.is-extensible.js",
-      "./modules/es6.reflect.prevent-extensions": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.prevent-extensions.js",
-      "./modules/es6.reflect.set": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.set.js",
-      "./modules/es7.array.includes": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.array.includes.js",
-      "./modules/es6.reflect.set-prototype-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.set-prototype-of.js",
-      "./modules/es7.string.at": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.at.js",
-      "./modules/es7.string.pad-end": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.pad-end.js",
-      "./modules/es7.string.trim-right": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.trim-right.js",
-      "./modules/es7.symbol.observable": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.symbol.observable.js",
-      "./modules/es7.string.trim-left": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.trim-left.js",
-      "./modules/es7.symbol.async-iterator": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.symbol.async-iterator.js",
-      "./modules/es7.object.get-own-property-descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.get-own-property-descriptors.js",
-      "./modules/es7.object.values": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.values.js",
-      "./modules/es7.object.define-setter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.define-setter.js",
-      "./modules/es7.object.lookup-getter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.lookup-getter.js",
-      "./modules/es7.object.lookup-setter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.lookup-setter.js",
-      "./modules/es7.set.to-json": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.set.to-json.js",
       "./modules/es7.system.global": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.system.global.js",
       "./modules/es7.error.is-error": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.error.is-error.js",
-      "./modules/es7.math.isubh": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.math.isubh.js",
-      "./modules/es7.math.iaddh": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.math.iaddh.js",
       "./modules/es7.math.imulh": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.math.imulh.js",
+      "./modules/es7.math.iaddh": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.math.iaddh.js",
+      "./modules/es7.math.isubh": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.math.isubh.js",
       "./modules/es7.math.umulh": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.math.umulh.js",
-      "./modules/es7.reflect.get-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-metadata.js",
-      "./modules/es7.reflect.delete-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.delete-metadata.js",
-      "./modules/es7.reflect.get-own-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-own-metadata.js",
-      "./modules/es7.reflect.get-own-metadata-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-own-metadata-keys.js",
-      "./modules/es7.reflect.has-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.has-metadata.js",
-      "./modules/es7.reflect.has-own-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.has-own-metadata.js",
-      "./modules/es7.reflect.metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.metadata.js",
-      "./modules/es7.asap": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.asap.js",
-      "./modules/es7.observable": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.observable.js",
-      "./modules/web.immediate": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/web.immediate.js",
-      "./modules/web.dom.iterable": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/web.dom.iterable.js",
       "./modules/es6.object.is": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.is.js",
-      "./modules/es6.object.freeze": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.freeze.js",
       "./modules/es6.math.acosh": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.acosh.js",
       "./modules/es6.math.cbrt": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.cbrt.js",
       "./modules/es6.math.expm1": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.math.expm1.js",
-      "./modules/es6.array.sort": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.sort.js",
-      "./modules/es6.array.iterator": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.iterator.js",
-      "./modules/es7.string.match-all": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.match-all.js",
-      "./modules/es6.object.get-own-property-descriptor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.get-own-property-descriptor.js",
-      "./modules/es6.object.define-properties": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.define-properties.js",
-      "./modules/es6.object.get-prototype-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.get-prototype-of.js",
-      "./modules/es6.object.assign": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.assign.js",
-      "./modules/es6.object.set-prototype-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.set-prototype-of.js",
-      "./modules/es6.object.to-string": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.to-string.js",
-      "./modules/es6.function.bind": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.function.bind.js",
-      "./modules/es6.parse-float": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.parse-float.js",
-      "./modules/es6.number.constructor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.constructor.js",
-      "./modules/es6.number.to-fixed": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.to-fixed.js",
-      "./modules/es6.number.is-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.is-integer.js",
-      "./modules/es6.string.from-code-point": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.from-code-point.js",
-      "./modules/es6.string.raw": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.raw.js",
-      "./modules/es6.string.iterator": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.iterator.js",
-      "./modules/es6.string.includes": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.includes.js",
+      "./modules/es6.string.anchor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.anchor.js",
+      "./modules/es6.number.is-finite": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.is-finite.js",
       "./modules/es6.string.big": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.big.js",
-      "./modules/es6.date.to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.date.to-primitive.js",
-      "./modules/es6.array.from": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.from.js",
-      "./modules/es6.array.join": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.join.js",
-      "./modules/es6.array.slice": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.slice.js",
-      "./modules/es6.array.index-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.index-of.js",
-      "./modules/es6.array.reduce": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.reduce.js",
-      "./modules/es6.array.copy-within": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.copy-within.js",
-      "./modules/es6.array.fill": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.fill.js",
-      "./modules/es6.array.species": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.species.js",
-      "./modules/es6.regexp.constructor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.constructor.js",
-      "./modules/es6.regexp.match": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.match.js",
-      "./modules/es6.promise": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.promise.js",
+      "./modules/es6.number.epsilon": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.epsilon.js",
+      "./modules/es6.string.blink": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.blink.js",
+      "./modules/es6.string.bold": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.bold.js",
+      "./modules/es6.string.fixed": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.fixed.js",
+      "./modules/es6.typed.int32-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.int32-array.js",
+      "./modules/es6.string.fontcolor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.fontcolor.js",
+      "./modules/es6.typed.uint8-clamped-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.uint8-clamped-array.js",
+      "./modules/es6.string.fontsize": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.fontsize.js",
+      "./modules/es6.typed.uint32-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.uint32-array.js",
+      "./modules/es6.string.italics": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.italics.js",
+      "./modules/es6.typed.float32-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.float32-array.js",
+      "./modules/es7.reflect.define-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.define-metadata.js",
+      "./modules/es6.string.link": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.link.js",
+      "./modules/es6.typed.float64-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.float64-array.js",
+      "./modules/es6.reflect.apply": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.apply.js",
+      "./modules/es7.reflect.delete-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.delete-metadata.js",
+      "./modules/es6.reflect.get": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.get.js",
+      "./modules/es6.array.filter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.filter.js",
+      "./modules/es6.string.sub": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.sub.js",
+      "./modules/es6.typed.int8-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.int8-array.js",
+      "./modules/es7.reflect.get-own-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-own-metadata.js",
+      "./modules/es6.object.is-sealed": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.is-sealed.js",
+      "./modules/es7.object.lookup-setter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.lookup-setter.js",
+      "./modules/es7.reflect.has-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.has-metadata.js",
+      "./modules/es6.reflect.delete-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.delete-property.js",
+      "./modules/es6.array.some": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.some.js",
+      "./modules/es6.string.strike": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.strike.js",
+      "./modules/es6.typed.int16-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.int16-array.js",
+      "./modules/es6.reflect.is-extensible": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.is-extensible.js",
+      "./modules/es7.reflect.get-own-metadata-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-own-metadata-keys.js",
+      "./modules/es6.object.is-extensible": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.is-extensible.js",
+      "./modules/es6.reflect.set": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.set.js",
+      "./modules/es6.array.sort": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.sort.js",
+      "./modules/es7.object.define-setter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.define-setter.js",
+      "./modules/es6.object.seal": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.seal.js",
+      "./modules/es6.string.trim": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.trim.js",
+      "./modules/es6.array.last-index-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.last-index-of.js",
+      "./modules/es6.regexp.search": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.search.js",
+      "./modules/es6.string.ends-with": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.ends-with.js",
+      "./modules/es7.reflect.get-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-metadata.js",
+      "./modules/es6.reflect.define-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.define-property.js",
+      "./modules/es6.array.map": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.map.js",
+      "./modules/es6.string.small": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.small.js",
+      "./modules/es6.typed.uint16-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.uint16-array.js",
+      "./modules/es6.reflect.prevent-extensions": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.prevent-extensions.js",
+      "./modules/es7.reflect.has-own-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.has-own-metadata.js",
+      "./modules/es6.object.is-frozen": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.is-frozen.js",
+      "./modules/es6.date.to-json": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.date.to-json.js",
+      "./modules/es6.function.name": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.function.name.js",
+      "./modules/es7.object.define-getter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.define-getter.js",
+      "./modules/es6.regexp.replace": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.replace.js",
+      "./modules/es7.string.trim-left": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.trim-left.js",
+      "./modules/es6.object.freeze": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.freeze.js",
+      "./modules/es6.string.raw": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.raw.js",
+      "./modules/es6.string.includes": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.includes.js",
+      "./modules/es6.regexp.to-string": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.to-string.js",
+      "./modules/es6.number.to-precision": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.to-precision.js",
+      "./modules/es6.number.is-safe-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.is-safe-integer.js",
+      "./modules/es6.number.parse-int": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.parse-int.js",
+      "./modules/es6.number.parse-float": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.parse-float.js",
+      "./modules/es6.string.repeat": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.repeat.js",
+      "./modules/es6.array.reduce-right": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.reduce-right.js",
+      "./modules/es6.array.find": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.find.js",
+      "./modules/es6.regexp.split": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.split.js",
       "./modules/es6.set": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.set.js",
       "./modules/es6.weak-map": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.weak-map.js",
-      "./modules/es6.typed.array-buffer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.array-buffer.js",
-      "./modules/es6.typed.int8-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.int8-array.js",
+      "./modules/es6.reflect.set-prototype-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.set-prototype-of.js",
+      "./modules/es7.array.includes": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.array.includes.js",
+      "./modules/es7.string.at": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.at.js",
+      "./modules/es7.string.pad-end": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.pad-end.js",
+      "./modules/es7.object.get-own-property-descriptors": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.get-own-property-descriptors.js",
+      "./modules/es7.symbol.observable": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.symbol.observable.js",
+      "./modules/es7.object.values": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.values.js",
+      "./modules/es7.map.to-json": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.map.to-json.js",
+      "./modules/es6.array.iterator": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.iterator.js",
+      "./modules/es7.string.match-all": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.match-all.js",
+      "./modules/es6.function.has-instance": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.function.has-instance.js",
+      "./modules/es6.array.species": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.species.js",
+      "./modules/es6.reflect.get-prototype-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.get-prototype-of.js",
+      "./modules/es6.reflect.get-own-property-descriptor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.get-own-property-descriptor.js",
+      "./modules/es6.reflect.construct": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.construct.js",
+      "./modules/es6.number.constructor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.constructor.js",
+      "./modules/es6.array.for-each": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.for-each.js",
+      "./modules/es6.string.sup": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.sup.js",
+      "./modules/es6.typed.uint8-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.uint8-array.js",
+      "./modules/es7.reflect.metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.metadata.js",
+      "./modules/es6.object.get-prototype-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.get-prototype-of.js",
+      "./modules/es6.object.define-property": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.define-property.js",
+      "./modules/es7.string.trim-right": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.trim-right.js",
+      "./modules/es6.object.prevent-extensions": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.prevent-extensions.js",
+      "./modules/es6.regexp.match": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.match.js",
+      "./modules/es6.object.get-own-property-descriptor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.get-own-property-descriptor.js",
+      "./modules/es6.string.starts-with": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.starts-with.js",
+      "./modules/es6.date.to-string": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.date.to-string.js",
+      "./modules/es6.regexp.flags": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.flags.js",
+      "./modules/es6.array.find-index": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.find-index.js",
+      "./modules/es6.function.bind": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.function.bind.js",
+      "./modules/es6.object.assign": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.assign.js",
+      "./modules/es6.object.set-prototype-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.set-prototype-of.js",
+      "./modules/es6.parse-int": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.parse-int.js",
+      "./modules/es6.number.to-fixed": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.to-fixed.js",
+      "./modules/es6.number.is-integer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.number.is-integer.js",
+      "./modules/es6.string.code-point-at": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.code-point-at.js",
+      "./modules/es6.string.iterator": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.iterator.js",
+      "./modules/es6.array.reduce": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.reduce.js",
+      "./modules/es6.array.index-of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.index-of.js",
+      "./modules/es6.map": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.map.js",
+      "./modules/es6.weak-set": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.weak-set.js",
       "./modules/es6.reflect.enumerate": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.enumerate.js",
       "./modules/es6.reflect.own-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.reflect.own-keys.js",
       "./modules/es7.string.pad-start": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.string.pad-start.js",
+      "./modules/es7.symbol.async-iterator": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.symbol.async-iterator.js",
       "./modules/es7.object.entries": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.entries.js",
-      "./modules/es7.object.define-getter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.define-getter.js",
-      "./modules/es7.map.to-json": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.map.to-json.js",
-      "./modules/es7.reflect.define-metadata": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.define-metadata.js",
-      "./modules/es7.reflect.get-metadata-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-metadata-keys.js",
-      "./modules/es6.parse-int": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.parse-int.js",
+      "./modules/es7.set.to-json": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.set.to-json.js",
+      "./modules/es6.parse-float": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.parse-float.js",
+      "./modules/es6.array.of": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.of.js",
+      "./modules/es6.typed.data-view": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.data-view.js",
+      "./modules/es6.string.from-code-point": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.string.from-code-point.js",
+      "./modules/es7.asap": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.asap.js",
+      "./modules/web.dom.iterable": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/web.dom.iterable.js",
+      "./modules/es6.typed.array-buffer": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.typed.array-buffer.js",
+      "./modules/es6.object.keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.keys.js",
+      "./modules/es7.observable": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.observable.js",
+      "./modules/web.immediate": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/web.immediate.js",
+      "./modules/es6.object.define-properties": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.define-properties.js",
+      "./modules/es6.object.get-own-property-names": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.get-own-property-names.js",
+      "./modules/es6.object.to-string": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.to-string.js",
+      "./modules/es6.array.from": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.from.js",
+      "./modules/es6.array.join": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.join.js",
+      "./modules/es6.array.slice": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.slice.js",
+      "./modules/es6.date.to-primitive": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.date.to-primitive.js",
+      "./modules/es6.array.is-array": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.is-array.js",
+      "./modules/es6.array.fill": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.fill.js",
+      "./modules/es6.array.copy-within": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.copy-within.js",
+      "./modules/es6.promise": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.promise.js",
       "./modules/es6.symbol": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.symbol.js",
+      "./modules/es7.reflect.get-metadata-keys": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.reflect.get-metadata-keys.js",
+      "./modules/es7.object.lookup-getter": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es7.object.lookup-getter.js",
+      "./modules/es6.regexp.constructor": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.regexp.constructor.js",
+      "./modules/es6.object.create": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.object.create.js",
       "./modules/web.timers": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/web.timers.js",
-      "./modules/es6.array.for-each": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.for-each.js"
+      "./modules/es6.array.every": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/modules/es6.array.every.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/core-js/shim.js",
@@ -4925,8 +4925,8 @@
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
-      "fbjs/lib/emptyObject": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyObject.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
+      "fbjs/lib/emptyObject": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyObject.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
     },
     {
@@ -4949,9 +4949,9 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/css-vendor/lib/index.js": [
     "'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.supportedValue = exports.supportedProperty = exports.prefix = undefined;\n\nvar _prefix = require('./prefix');\n\nvar _prefix2 = _interopRequireDefault(_prefix);\n\nvar _supportedProperty = require('./supported-property');\n\nvar _supportedProperty2 = _interopRequireDefault(_supportedProperty);\n\nvar _supportedValue = require('./supported-value');\n\nvar _supportedValue2 = _interopRequireDefault(_supportedValue);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }\n\nexports['default'] = {\n  prefix: _prefix2['default'],\n  supportedProperty: _supportedProperty2['default'],\n  supportedValue: _supportedValue2['default']\n}; /**\n    * CSS Vendor prefix detection and property feature testing.\n    *\n    * @copyright Oleg Slobodskoi 2015\n    * @website https://github.com/jsstyles/css-vendor\n    * @license MIT\n    */\n\nexports.prefix = _prefix2['default'];\nexports.supportedProperty = _supportedProperty2['default'];\nexports.supportedValue = _supportedValue2['default'];",
     {
+      "./supported-value": "/Users/jasonkao/stuyspec/client-app/node_modules/css-vendor/lib/supported-value.js",
       "./supported-property": "/Users/jasonkao/stuyspec/client-app/node_modules/css-vendor/lib/supported-property.js",
-      "./prefix": "/Users/jasonkao/stuyspec/client-app/node_modules/css-vendor/lib/prefix.js",
-      "./supported-value": "/Users/jasonkao/stuyspec/client-app/node_modules/css-vendor/lib/supported-value.js"
+      "./prefix": "/Users/jasonkao/stuyspec/client-app/node_modules/css-vendor/lib/prefix.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/css-vendor/lib/index.js",
@@ -5097,8 +5097,8 @@
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
       "./invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
-      "./getMarkupWrap": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/getMarkupWrap.js",
-      "./createArrayFromMixed": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/createArrayFromMixed.js"
+      "./createArrayFromMixed": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/createArrayFromMixed.js",
+      "./getMarkupWrap": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/getMarkupWrap.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/createNodesFromMarkup.js",
@@ -5153,8 +5153,8 @@
     "(function (process){\n'use strict';\n\n/**\n * Copyright (c) 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n/*eslint-disable fb-www/unsafe-html */\n\nvar ExecutionEnvironment = require('./ExecutionEnvironment');\n\nvar invariant = require('./invariant');\n\n/**\n * Dummy container used to detect which wraps are necessary.\n */\nvar dummyNode = ExecutionEnvironment.canUseDOM ? document.createElement('div') : null;\n\n/**\n * Some browsers cannot use `innerHTML` to render certain elements standalone,\n * so we wrap them, render the wrapped nodes, then extract the desired node.\n *\n * In IE8, certain elements cannot render alone, so wrap all elements ('*').\n */\n\nvar shouldWrap = {};\n\nvar selectWrap = [1, '<select multiple=\"true\">', '</select>'];\nvar tableWrap = [1, '<table>', '</table>'];\nvar trWrap = [3, '<table><tbody><tr>', '</tr></tbody></table>'];\n\nvar svgWrap = [1, '<svg xmlns=\"http://www.w3.org/2000/svg\">', '</svg>'];\n\nvar markupWrap = {\n  '*': [1, '?<div>', '</div>'],\n\n  'area': [1, '<map>', '</map>'],\n  'col': [2, '<table><tbody></tbody><colgroup>', '</colgroup></table>'],\n  'legend': [1, '<fieldset>', '</fieldset>'],\n  'param': [1, '<object>', '</object>'],\n  'tr': [2, '<table><tbody>', '</tbody></table>'],\n\n  'optgroup': selectWrap,\n  'option': selectWrap,\n\n  'caption': tableWrap,\n  'colgroup': tableWrap,\n  'tbody': tableWrap,\n  'tfoot': tableWrap,\n  'thead': tableWrap,\n\n  'td': trWrap,\n  'th': trWrap\n};\n\n// Initialize the SVG elements since we know they'll always need to be wrapped\n// consistently. If they are created inside a <div> they will be initialized in\n// the wrong namespace (and will not display).\nvar svgElements = ['circle', 'clipPath', 'defs', 'ellipse', 'g', 'image', 'line', 'linearGradient', 'mask', 'path', 'pattern', 'polygon', 'polyline', 'radialGradient', 'rect', 'stop', 'text', 'tspan'];\nsvgElements.forEach(function (nodeName) {\n  markupWrap[nodeName] = svgWrap;\n  shouldWrap[nodeName] = true;\n});\n\n/**\n * Gets the markup wrap configuration for the supplied `nodeName`.\n *\n * NOTE: This lazily detects which wraps are necessary for the current browser.\n *\n * @param {string} nodeName Lowercase `nodeName`.\n * @return {?array} Markup wrap configuration, if applicable.\n */\nfunction getMarkupWrap(nodeName) {\n  !!!dummyNode ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Markup wrapping node not initialized') : invariant(false) : void 0;\n  if (!markupWrap.hasOwnProperty(nodeName)) {\n    nodeName = '*';\n  }\n  if (!shouldWrap.hasOwnProperty(nodeName)) {\n    if (nodeName === '*') {\n      dummyNode.innerHTML = '<link />';\n    } else {\n      dummyNode.innerHTML = '<' + nodeName + '></' + nodeName + '>';\n    }\n    shouldWrap[nodeName] = !dummyNode.firstChild;\n  }\n  return shouldWrap[nodeName] ? markupWrap[nodeName] : null;\n}\n\nmodule.exports = getMarkupWrap;\n}).call(this,require('_process'))\n",
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
-      "./invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
-      "./ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js"
+      "./ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
+      "./invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/getMarkupWrap.js",
@@ -5345,8 +5345,8 @@
     {
       "./PathUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/history/PathUtils.js",
       "./DOMUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/history/DOMUtils.js",
-      "invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/invariant/browser.js",
       "warning": "/Users/jasonkao/stuyspec/client-app/node_modules/warning/browser.js",
+      "invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/invariant/browser.js",
       "./createTransitionManager": "/Users/jasonkao/stuyspec/client-app/node_modules/history/createTransitionManager.js",
       "./LocationUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/history/LocationUtils.js"
     },
@@ -5446,8 +5446,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_DataView.js": [
     "var getNative = require('./_getNative'),\n    root = require('./_root');\n\n/* Built-in method references that are verified to be native. */\nvar DataView = getNative(root, 'DataView');\n\nmodule.exports = DataView;\n",
     {
-      "./_root": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_root.js",
-      "./_getNative": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_getNative.js"
+      "./_getNative": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_getNative.js",
+      "./_root": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_root.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_DataView.js",
@@ -5504,8 +5504,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_MapCache.js": [
     "var mapCacheClear = require('./_mapCacheClear'),\n    mapCacheDelete = require('./_mapCacheDelete'),\n    mapCacheGet = require('./_mapCacheGet'),\n    mapCacheHas = require('./_mapCacheHas'),\n    mapCacheSet = require('./_mapCacheSet');\n\n/**\n * Creates a map cache object to store key-value pairs.\n *\n * @private\n * @constructor\n * @param {Array} [entries] The key-value pairs to cache.\n */\nfunction MapCache(entries) {\n  var index = -1,\n      length = entries == null ? 0 : entries.length;\n\n  this.clear();\n  while (++index < length) {\n    var entry = entries[index];\n    this.set(entry[0], entry[1]);\n  }\n}\n\n// Add methods to `MapCache`.\nMapCache.prototype.clear = mapCacheClear;\nMapCache.prototype['delete'] = mapCacheDelete;\nMapCache.prototype.get = mapCacheGet;\nMapCache.prototype.has = mapCacheHas;\nMapCache.prototype.set = mapCacheSet;\n\nmodule.exports = MapCache;\n",
     {
-      "./_mapCacheGet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheGet.js",
       "./_mapCacheHas": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheHas.js",
+      "./_mapCacheGet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheGet.js",
       "./_mapCacheSet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheSet.js",
       "./_mapCacheDelete": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheDelete.js",
       "./_mapCacheClear": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheClear.js"
@@ -5560,12 +5560,12 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_Stack.js": [
     "var ListCache = require('./_ListCache'),\n    stackClear = require('./_stackClear'),\n    stackDelete = require('./_stackDelete'),\n    stackGet = require('./_stackGet'),\n    stackHas = require('./_stackHas'),\n    stackSet = require('./_stackSet');\n\n/**\n * Creates a stack cache object to store key-value pairs.\n *\n * @private\n * @constructor\n * @param {Array} [entries] The key-value pairs to cache.\n */\nfunction Stack(entries) {\n  var data = this.__data__ = new ListCache(entries);\n  this.size = data.size;\n}\n\n// Add methods to `Stack`.\nStack.prototype.clear = stackClear;\nStack.prototype['delete'] = stackDelete;\nStack.prototype.get = stackGet;\nStack.prototype.has = stackHas;\nStack.prototype.set = stackSet;\n\nmodule.exports = Stack;\n",
     {
-      "./_stackGet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_stackGet.js",
       "./_stackDelete": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_stackDelete.js",
+      "./_stackGet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_stackGet.js",
       "./_stackHas": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_stackHas.js",
+      "./_ListCache": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_ListCache.js",
       "./_stackClear": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_stackClear.js",
-      "./_stackSet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_stackSet.js",
-      "./_ListCache": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_ListCache.js"
+      "./_stackSet": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_stackSet.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_Stack.js",
@@ -5660,8 +5660,8 @@
       "./_baseTimes": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseTimes.js",
       "./_isIndex": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_isIndex.js",
       "./isArguments": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArguments.js",
-      "./isTypedArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isTypedArray.js",
-      "./isBuffer": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isBuffer.js"
+      "./isBuffer": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isBuffer.js",
+      "./isTypedArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isTypedArray.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_arrayLikeKeys.js",
@@ -5703,8 +5703,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_assignValue.js": [
     "var baseAssignValue = require('./_baseAssignValue'),\n    eq = require('./eq');\n\n/** Used for built-in method references. */\nvar objectProto = Object.prototype;\n\n/** Used to check objects for own properties. */\nvar hasOwnProperty = objectProto.hasOwnProperty;\n\n/**\n * Assigns `value` to `key` of `object` if the existing value is not equivalent\n * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)\n * for equality comparisons.\n *\n * @private\n * @param {Object} object The object to modify.\n * @param {string} key The key of the property to assign.\n * @param {*} value The value to assign.\n */\nfunction assignValue(object, key, value) {\n  var objValue = object[key];\n  if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) ||\n      (value === undefined && !(key in object))) {\n    baseAssignValue(object, key, value);\n  }\n}\n\nmodule.exports = assignValue;\n",
     {
-      "./_baseAssignValue": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseAssignValue.js",
-      "./eq": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/eq.js"
+      "./eq": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/eq.js",
+      "./_baseAssignValue": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseAssignValue.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_assignValue.js",
@@ -5740,8 +5740,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseDifference.js": [
     "var SetCache = require('./_SetCache'),\n    arrayIncludes = require('./_arrayIncludes'),\n    arrayIncludesWith = require('./_arrayIncludesWith'),\n    arrayMap = require('./_arrayMap'),\n    baseUnary = require('./_baseUnary'),\n    cacheHas = require('./_cacheHas');\n\n/** Used as the size to enable large array optimizations. */\nvar LARGE_ARRAY_SIZE = 200;\n\n/**\n * The base implementation of methods like `_.difference` without support\n * for excluding multiple arrays or iteratee shorthands.\n *\n * @private\n * @param {Array} array The array to inspect.\n * @param {Array} values The values to exclude.\n * @param {Function} [iteratee] The iteratee invoked per element.\n * @param {Function} [comparator] The comparator invoked per element.\n * @returns {Array} Returns the new array of filtered values.\n */\nfunction baseDifference(array, values, iteratee, comparator) {\n  var index = -1,\n      includes = arrayIncludes,\n      isCommon = true,\n      length = array.length,\n      result = [],\n      valuesLength = values.length;\n\n  if (!length) {\n    return result;\n  }\n  if (iteratee) {\n    values = arrayMap(values, baseUnary(iteratee));\n  }\n  if (comparator) {\n    includes = arrayIncludesWith;\n    isCommon = false;\n  }\n  else if (values.length >= LARGE_ARRAY_SIZE) {\n    includes = cacheHas;\n    isCommon = false;\n    values = new SetCache(values);\n  }\n  outer:\n  while (++index < length) {\n    var value = array[index],\n        computed = iteratee == null ? value : iteratee(value);\n\n    value = (comparator || value !== 0) ? value : 0;\n    if (isCommon && computed === computed) {\n      var valuesIndex = valuesLength;\n      while (valuesIndex--) {\n        if (values[valuesIndex] === computed) {\n          continue outer;\n        }\n      }\n      result.push(value);\n    }\n    else if (!includes(values, computed, comparator)) {\n      result.push(value);\n    }\n  }\n  return result;\n}\n\nmodule.exports = baseDifference;\n",
     {
-      "./_arrayIncludesWith": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_arrayIncludesWith.js",
       "./_arrayMap": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_arrayMap.js",
+      "./_arrayIncludesWith": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_arrayIncludesWith.js",
       "./_baseUnary": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseUnary.js",
       "./_cacheHas": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_cacheHas.js",
       "./_arrayIncludes": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_arrayIncludes.js",
@@ -5793,8 +5793,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseGetAllKeys.js": [
     "var arrayPush = require('./_arrayPush'),\n    isArray = require('./isArray');\n\n/**\n * The base implementation of `getAllKeys` and `getAllKeysIn` which uses\n * `keysFunc` and `symbolsFunc` to get the enumerable property names and\n * symbols of `object`.\n *\n * @private\n * @param {Object} object The object to query.\n * @param {Function} keysFunc The function to get the keys of `object`.\n * @param {Function} symbolsFunc The function to get the symbols of `object`.\n * @returns {Array} Returns the array of property names and symbols.\n */\nfunction baseGetAllKeys(object, keysFunc, symbolsFunc) {\n  var result = keysFunc(object);\n  return isArray(object) ? result : arrayPush(result, symbolsFunc(object));\n}\n\nmodule.exports = baseGetAllKeys;\n",
     {
-      "./_arrayPush": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_arrayPush.js",
-      "./isArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArray.js"
+      "./isArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArray.js",
+      "./_arrayPush": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_arrayPush.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseGetAllKeys.js",
@@ -5806,9 +5806,9 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseGetTag.js": [
     "var Symbol = require('./_Symbol'),\n    getRawTag = require('./_getRawTag'),\n    objectToString = require('./_objectToString');\n\n/** `Object#toString` result references. */\nvar nullTag = '[object Null]',\n    undefinedTag = '[object Undefined]';\n\n/** Built-in value references. */\nvar symToStringTag = Symbol ? Symbol.toStringTag : undefined;\n\n/**\n * The base implementation of `getTag` without fallbacks for buggy environments.\n *\n * @private\n * @param {*} value The value to query.\n * @returns {string} Returns the `toStringTag`.\n */\nfunction baseGetTag(value) {\n  if (value == null) {\n    return value === undefined ? undefinedTag : nullTag;\n  }\n  return (symToStringTag && symToStringTag in Object(value))\n    ? getRawTag(value)\n    : objectToString(value);\n}\n\nmodule.exports = baseGetTag;\n",
     {
-      "./_Symbol": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_Symbol.js",
       "./_objectToString": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_objectToString.js",
-      "./_getRawTag": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_getRawTag.js"
+      "./_getRawTag": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_getRawTag.js",
+      "./_Symbol": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_Symbol.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseGetTag.js",
@@ -5875,8 +5875,8 @@
       "./isBuffer": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isBuffer.js",
       "./isTypedArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isTypedArray.js",
       "./_equalArrays": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_equalArrays.js",
-      "./_equalByTag": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_equalByTag.js",
       "./_getTag": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_getTag.js",
+      "./_equalByTag": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_equalByTag.js",
       "./_equalObjects": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_equalObjects.js"
     },
     {
@@ -5941,8 +5941,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseIteratee.js": [
     "var baseMatches = require('./_baseMatches'),\n    baseMatchesProperty = require('./_baseMatchesProperty'),\n    identity = require('./identity'),\n    isArray = require('./isArray'),\n    property = require('./property');\n\n/**\n * The base implementation of `_.iteratee`.\n *\n * @private\n * @param {*} [value=_.identity] The value to convert to an iteratee.\n * @returns {Function} Returns the iteratee.\n */\nfunction baseIteratee(value) {\n  // Don't store the `typeof` result in a variable to avoid a JIT bug in Safari 9.\n  // See https://bugs.webkit.org/show_bug.cgi?id=156034 for more details.\n  if (typeof value == 'function') {\n    return value;\n  }\n  if (value == null) {\n    return identity;\n  }\n  if (typeof value == 'object') {\n    return isArray(value)\n      ? baseMatchesProperty(value[0], value[1])\n      : baseMatches(value);\n  }\n  return property(value);\n}\n\nmodule.exports = baseIteratee;\n",
     {
-      "./isArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArray.js",
       "./identity": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/identity.js",
+      "./isArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArray.js",
       "./property": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/property.js",
       "./_baseMatches": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseMatches.js",
       "./_baseMatchesProperty": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseMatchesProperty.js"
@@ -5985,10 +5985,10 @@
     "var baseIsEqual = require('./_baseIsEqual'),\n    get = require('./get'),\n    hasIn = require('./hasIn'),\n    isKey = require('./_isKey'),\n    isStrictComparable = require('./_isStrictComparable'),\n    matchesStrictComparable = require('./_matchesStrictComparable'),\n    toKey = require('./_toKey');\n\n/** Used to compose bitmasks for value comparisons. */\nvar COMPARE_PARTIAL_FLAG = 1,\n    COMPARE_UNORDERED_FLAG = 2;\n\n/**\n * The base implementation of `_.matchesProperty` which doesn't clone `srcValue`.\n *\n * @private\n * @param {string} path The path of the property to get.\n * @param {*} srcValue The value to match.\n * @returns {Function} Returns the new spec function.\n */\nfunction baseMatchesProperty(path, srcValue) {\n  if (isKey(path) && isStrictComparable(srcValue)) {\n    return matchesStrictComparable(toKey(path), srcValue);\n  }\n  return function(object) {\n    var objValue = get(object, path);\n    return (objValue === undefined && objValue === srcValue)\n      ? hasIn(object, path)\n      : baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG);\n  };\n}\n\nmodule.exports = baseMatchesProperty;\n",
     {
       "./_matchesStrictComparable": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_matchesStrictComparable.js",
-      "./_isStrictComparable": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_isStrictComparable.js",
       "./_toKey": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_toKey.js",
-      "./hasIn": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/hasIn.js",
+      "./_isStrictComparable": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_isStrictComparable.js",
       "./_isKey": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_isKey.js",
+      "./hasIn": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/hasIn.js",
       "./_baseIsEqual": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseIsEqual.js",
       "./get": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/get.js"
     },
@@ -6064,8 +6064,8 @@
     {
       "./_Symbol": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_Symbol.js",
       "./_arrayMap": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_arrayMap.js",
-      "./isArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArray.js",
-      "./isSymbol": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isSymbol.js"
+      "./isSymbol": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isSymbol.js",
+      "./isArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArray.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseToString.js",
@@ -6193,8 +6193,8 @@
       "./_Symbol": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_Symbol.js",
       "./eq": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/eq.js",
       "./_equalArrays": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_equalArrays.js",
-      "./_setToArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_setToArray.js",
       "./_mapToArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapToArray.js",
+      "./_setToArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_setToArray.js",
       "./_Uint8Array": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_Uint8Array.js"
     },
     {
@@ -6305,8 +6305,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_getSymbols.js": [
     "var arrayFilter = require('./_arrayFilter'),\n    stubArray = require('./stubArray');\n\n/** Used for built-in method references. */\nvar objectProto = Object.prototype;\n\n/** Built-in value references. */\nvar propertyIsEnumerable = objectProto.propertyIsEnumerable;\n\n/* Built-in method references for those with the same name as other `lodash` methods. */\nvar nativeGetSymbols = Object.getOwnPropertySymbols;\n\n/**\n * Creates an array of the own enumerable symbols of `object`.\n *\n * @private\n * @param {Object} object The object to query.\n * @returns {Array} Returns the array of symbols.\n */\nvar getSymbols = !nativeGetSymbols ? stubArray : function(object) {\n  if (object == null) {\n    return [];\n  }\n  object = Object(object);\n  return arrayFilter(nativeGetSymbols(object), function(symbol) {\n    return propertyIsEnumerable.call(object, symbol);\n  });\n};\n\nmodule.exports = getSymbols;\n",
     {
-      "./stubArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/stubArray.js",
-      "./_arrayFilter": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_arrayFilter.js"
+      "./_arrayFilter": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_arrayFilter.js",
+      "./stubArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/stubArray.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_getSymbols.js",
@@ -6350,8 +6350,8 @@
       "./isArguments": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArguments.js",
       "./isArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArray.js",
       "./_isIndex": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_isIndex.js",
-      "./_toKey": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_toKey.js",
-      "./isLength": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isLength.js"
+      "./isLength": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isLength.js",
+      "./_toKey": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_toKey.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_hasPath.js",
@@ -6421,9 +6421,9 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_isFlattenable.js": [
     "var Symbol = require('./_Symbol'),\n    isArguments = require('./isArguments'),\n    isArray = require('./isArray');\n\n/** Built-in value references. */\nvar spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined;\n\n/**\n * Checks if `value` is a flattenable `arguments` object or array.\n *\n * @private\n * @param {*} value The value to check.\n * @returns {boolean} Returns `true` if `value` is flattenable, else `false`.\n */\nfunction isFlattenable(value) {\n  return isArray(value) || isArguments(value) ||\n    !!(spreadableSymbol && value && value[spreadableSymbol]);\n}\n\nmodule.exports = isFlattenable;\n",
     {
-      "./isArguments": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArguments.js",
       "./isArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArray.js",
-      "./_Symbol": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_Symbol.js"
+      "./_Symbol": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_Symbol.js",
+      "./isArguments": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArguments.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_isFlattenable.js",
@@ -6575,8 +6575,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_mapCacheClear.js": [
     "var Hash = require('./_Hash'),\n    ListCache = require('./_ListCache'),\n    Map = require('./_Map');\n\n/**\n * Removes all key-value entries from the map.\n *\n * @private\n * @name clear\n * @memberOf MapCache\n */\nfunction mapCacheClear() {\n  this.size = 0;\n  this.__data__ = {\n    'hash': new Hash,\n    'map': new (Map || ListCache),\n    'string': new Hash\n  };\n}\n\nmodule.exports = mapCacheClear;\n",
     {
-      "./_ListCache": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_ListCache.js",
       "./_Map": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_Map.js",
+      "./_ListCache": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_ListCache.js",
       "./_Hash": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_Hash.js"
     },
     {
@@ -6902,12 +6902,12 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/assign.js": [
     "var assignValue = require('./_assignValue'),\n    copyObject = require('./_copyObject'),\n    createAssigner = require('./_createAssigner'),\n    isArrayLike = require('./isArrayLike'),\n    isPrototype = require('./_isPrototype'),\n    keys = require('./keys');\n\n/** Used for built-in method references. */\nvar objectProto = Object.prototype;\n\n/** Used to check objects for own properties. */\nvar hasOwnProperty = objectProto.hasOwnProperty;\n\n/**\n * Assigns own enumerable string keyed properties of source objects to the\n * destination object. Source objects are applied from left to right.\n * Subsequent sources overwrite property assignments of previous sources.\n *\n * **Note:** This method mutates `object` and is loosely based on\n * [`Object.assign`](https://mdn.io/Object/assign).\n *\n * @static\n * @memberOf _\n * @since 0.10.0\n * @category Object\n * @param {Object} object The destination object.\n * @param {...Object} [sources] The source objects.\n * @returns {Object} Returns `object`.\n * @see _.assignIn\n * @example\n *\n * function Foo() {\n *   this.a = 1;\n * }\n *\n * function Bar() {\n *   this.c = 3;\n * }\n *\n * Foo.prototype.b = 2;\n * Bar.prototype.d = 4;\n *\n * _.assign({ 'a': 0 }, new Foo, new Bar);\n * // => { 'a': 1, 'c': 3 }\n */\nvar assign = createAssigner(function(object, source) {\n  if (isPrototype(source) || isArrayLike(source)) {\n    copyObject(source, keys(source), object);\n    return;\n  }\n  for (var key in source) {\n    if (hasOwnProperty.call(source, key)) {\n      assignValue(object, key, source[key]);\n    }\n  }\n});\n\nmodule.exports = assign;\n",
     {
+      "./_isPrototype": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_isPrototype.js",
+      "./_copyObject": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_copyObject.js",
+      "./_createAssigner": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_createAssigner.js",
       "./isArrayLike": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArrayLike.js",
       "./keys": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/keys.js",
-      "./_isPrototype": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_isPrototype.js",
-      "./_assignValue": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_assignValue.js",
-      "./_createAssigner": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_createAssigner.js",
-      "./_copyObject": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_copyObject.js"
+      "./_assignValue": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_assignValue.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/assign.js",
@@ -6930,8 +6930,8 @@
     "var baseDifference = require('./_baseDifference'),\n    baseFlatten = require('./_baseFlatten'),\n    baseRest = require('./_baseRest'),\n    isArrayLikeObject = require('./isArrayLikeObject');\n\n/**\n * Creates an array of `array` values not included in the other given arrays\n * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)\n * for equality comparisons. The order and references of result values are\n * determined by the first array.\n *\n * **Note:** Unlike `_.pullAll`, this method returns a new array.\n *\n * @static\n * @memberOf _\n * @since 0.1.0\n * @category Array\n * @param {Array} array The array to inspect.\n * @param {...Array} [values] The values to exclude.\n * @returns {Array} Returns the new array of filtered values.\n * @see _.without, _.xor\n * @example\n *\n * _.difference([2, 1], [2, 3]);\n * // => [1]\n */\nvar difference = baseRest(function(array, values) {\n  return isArrayLikeObject(array)\n    ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true))\n    : [];\n});\n\nmodule.exports = difference;\n",
     {
       "./isArrayLikeObject": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isArrayLikeObject.js",
-      "./_baseFlatten": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseFlatten.js",
       "./_baseRest": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseRest.js",
+      "./_baseFlatten": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseFlatten.js",
       "./_baseDifference": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseDifference.js"
     },
     {
@@ -6967,8 +6967,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/findIndex.js": [
     "var baseFindIndex = require('./_baseFindIndex'),\n    baseIteratee = require('./_baseIteratee'),\n    toInteger = require('./toInteger');\n\n/* Built-in method references for those with the same name as other `lodash` methods. */\nvar nativeMax = Math.max;\n\n/**\n * This method is like `_.find` except that it returns the index of the first\n * element `predicate` returns truthy for instead of the element itself.\n *\n * @static\n * @memberOf _\n * @since 1.1.0\n * @category Array\n * @param {Array} array The array to inspect.\n * @param {Function} [predicate=_.identity] The function invoked per iteration.\n * @param {number} [fromIndex=0] The index to search from.\n * @returns {number} Returns the index of the found element, else `-1`.\n * @example\n *\n * var users = [\n *   { 'user': 'barney',  'active': false },\n *   { 'user': 'fred',    'active': false },\n *   { 'user': 'pebbles', 'active': true }\n * ];\n *\n * _.findIndex(users, function(o) { return o.user == 'barney'; });\n * // => 0\n *\n * // The `_.matches` iteratee shorthand.\n * _.findIndex(users, { 'user': 'fred', 'active': false });\n * // => 1\n *\n * // The `_.matchesProperty` iteratee shorthand.\n * _.findIndex(users, ['active', false]);\n * // => 0\n *\n * // The `_.property` iteratee shorthand.\n * _.findIndex(users, 'active');\n * // => 2\n */\nfunction findIndex(array, predicate, fromIndex) {\n  var length = array == null ? 0 : array.length;\n  if (!length) {\n    return -1;\n  }\n  var index = fromIndex == null ? 0 : toInteger(fromIndex);\n  if (index < 0) {\n    index = nativeMax(length + index, 0);\n  }\n  return baseFindIndex(array, baseIteratee(predicate, 3), index);\n}\n\nmodule.exports = findIndex;\n",
     {
-      "./_baseIteratee": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseIteratee.js",
       "./_baseFindIndex": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseFindIndex.js",
+      "./_baseIteratee": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseIteratee.js",
       "./toInteger": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/toInteger.js"
     },
     {
@@ -7121,9 +7121,9 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isPlainObject.js": [
     "var baseGetTag = require('./_baseGetTag'),\n    getPrototype = require('./_getPrototype'),\n    isObjectLike = require('./isObjectLike');\n\n/** `Object#toString` result references. */\nvar objectTag = '[object Object]';\n\n/** Used for built-in method references. */\nvar funcProto = Function.prototype,\n    objectProto = Object.prototype;\n\n/** Used to resolve the decompiled source of functions. */\nvar funcToString = funcProto.toString;\n\n/** Used to check objects for own properties. */\nvar hasOwnProperty = objectProto.hasOwnProperty;\n\n/** Used to infer the `Object` constructor. */\nvar objectCtorString = funcToString.call(Object);\n\n/**\n * Checks if `value` is a plain object, that is, an object created by the\n * `Object` constructor or one with a `[[Prototype]]` of `null`.\n *\n * @static\n * @memberOf _\n * @since 0.8.0\n * @category Lang\n * @param {*} value The value to check.\n * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.\n * @example\n *\n * function Foo() {\n *   this.a = 1;\n * }\n *\n * _.isPlainObject(new Foo);\n * // => false\n *\n * _.isPlainObject([1, 2, 3]);\n * // => false\n *\n * _.isPlainObject({ 'x': 0, 'y': 0 });\n * // => true\n *\n * _.isPlainObject(Object.create(null));\n * // => true\n */\nfunction isPlainObject(value) {\n  if (!isObjectLike(value) || baseGetTag(value) != objectTag) {\n    return false;\n  }\n  var proto = getPrototype(value);\n  if (proto === null) {\n    return true;\n  }\n  var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;\n  return typeof Ctor == 'function' && Ctor instanceof Ctor &&\n    funcToString.call(Ctor) == objectCtorString;\n}\n\nmodule.exports = isPlainObject;\n",
     {
-      "./_baseGetTag": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseGetTag.js",
       "./isObjectLike": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isObjectLike.js",
-      "./_getPrototype": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_getPrototype.js"
+      "./_getPrototype": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_getPrototype.js",
+      "./_baseGetTag": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseGetTag.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isPlainObject.js",
@@ -7149,8 +7149,8 @@
     "var baseIsTypedArray = require('./_baseIsTypedArray'),\n    baseUnary = require('./_baseUnary'),\n    nodeUtil = require('./_nodeUtil');\n\n/* Node.js helper references. */\nvar nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;\n\n/**\n * Checks if `value` is classified as a typed array.\n *\n * @static\n * @memberOf _\n * @since 3.0.0\n * @category Lang\n * @param {*} value The value to check.\n * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.\n * @example\n *\n * _.isTypedArray(new Uint8Array);\n * // => true\n *\n * _.isTypedArray([]);\n * // => false\n */\nvar isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;\n\nmodule.exports = isTypedArray;\n",
     {
       "./_baseUnary": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseUnary.js",
-      "./_baseIsTypedArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseIsTypedArray.js",
-      "./_nodeUtil": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_nodeUtil.js"
+      "./_nodeUtil": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_nodeUtil.js",
+      "./_baseIsTypedArray": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseIsTypedArray.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isTypedArray.js",
@@ -7188,9 +7188,9 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/property.js": [
     "var baseProperty = require('./_baseProperty'),\n    basePropertyDeep = require('./_basePropertyDeep'),\n    isKey = require('./_isKey'),\n    toKey = require('./_toKey');\n\n/**\n * Creates a function that returns the value at `path` of a given object.\n *\n * @static\n * @memberOf _\n * @since 2.4.0\n * @category Util\n * @param {Array|string} path The path of the property to get.\n * @returns {Function} Returns the new accessor function.\n * @example\n *\n * var objects = [\n *   { 'a': { 'b': 2 } },\n *   { 'a': { 'b': 1 } }\n * ];\n *\n * _.map(objects, _.property('a.b'));\n * // => [2, 1]\n *\n * _.map(_.sortBy(objects, _.property(['a', 'b'])), 'a.b');\n * // => [1, 2]\n */\nfunction property(path) {\n  return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);\n}\n\nmodule.exports = property;\n",
     {
+      "./_baseProperty": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseProperty.js",
       "./_isKey": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_isKey.js",
       "./_toKey": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_toKey.js",
-      "./_baseProperty": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_baseProperty.js",
       "./_basePropertyDeep": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/_basePropertyDeep.js"
     },
     {
@@ -7315,9 +7315,9 @@
     "(function (process){\n/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n */\n\n'use strict';\n\nif (process.env.NODE_ENV !== 'production') {\n  var invariant = require('fbjs/lib/invariant');\n  var warning = require('fbjs/lib/warning');\n  var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');\n  var loggedTypeFailures = {};\n}\n\n/**\n * Assert that the values match with the type specs.\n * Error messages are memorized and will only be shown once.\n *\n * @param {object} typeSpecs Map of name to a ReactPropType\n * @param {object} values Runtime values that need to be type-checked\n * @param {string} location e.g. \"prop\", \"context\", \"child context\"\n * @param {string} componentName Name of the component for error messages.\n * @param {?Function} getStack Returns the component stack.\n * @private\n */\nfunction checkPropTypes(typeSpecs, values, location, componentName, getStack) {\n  if (process.env.NODE_ENV !== 'production') {\n    for (var typeSpecName in typeSpecs) {\n      if (typeSpecs.hasOwnProperty(typeSpecName)) {\n        var error;\n        // Prop type validation may throw. In case they do, we don't want to\n        // fail the render phase where it didn't fail before. So we log it.\n        // After these have been cleaned up, we'll let them throw.\n        try {\n          // This is intentionally an invariant that gets caught. It's the same\n          // behavior as without this statement except with a better message.\n          invariant(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'React.PropTypes.', componentName || 'React class', location, typeSpecName);\n          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);\n        } catch (ex) {\n          error = ex;\n        }\n        warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);\n        if (error instanceof Error && !(error.message in loggedTypeFailures)) {\n          // Only monitor this failure once because there tends to be a lot of the\n          // same error.\n          loggedTypeFailures[error.message] = true;\n\n          var stack = getStack ? getStack() : '';\n\n          warning(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');\n        }\n      }\n    }\n  }\n}\n\nmodule.exports = checkPropTypes;\n\n}).call(this,require('_process'))\n",
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
-      "./lib/ReactPropTypesSecret": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/lib/ReactPropTypesSecret.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
-      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
+      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
+      "./lib/ReactPropTypesSecret": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/lib/ReactPropTypesSecret.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/checkPropTypes.js",
@@ -7341,9 +7341,9 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/factoryWithThrowingShims.js": [
     "/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n */\n\n'use strict';\n\nvar emptyFunction = require('fbjs/lib/emptyFunction');\nvar invariant = require('fbjs/lib/invariant');\nvar ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');\n\nmodule.exports = function() {\n  function shim(props, propName, componentName, location, propFullName, secret) {\n    if (secret === ReactPropTypesSecret) {\n      // It is still safe when called from React.\n      return;\n    }\n    invariant(\n      false,\n      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +\n      'Use PropTypes.checkPropTypes() to call them. ' +\n      'Read more at http://fb.me/use-check-prop-types'\n    );\n  };\n  shim.isRequired = shim;\n  function getShim() {\n    return shim;\n  };\n  // Important!\n  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.\n  var ReactPropTypes = {\n    array: shim,\n    bool: shim,\n    func: shim,\n    number: shim,\n    object: shim,\n    string: shim,\n    symbol: shim,\n\n    any: shim,\n    arrayOf: getShim,\n    element: shim,\n    instanceOf: getShim,\n    node: shim,\n    objectOf: getShim,\n    oneOf: getShim,\n    oneOfType: getShim,\n    shape: getShim\n  };\n\n  ReactPropTypes.checkPropTypes = emptyFunction;\n  ReactPropTypes.PropTypes = ReactPropTypes;\n\n  return ReactPropTypes;\n};\n",
     {
-      "./lib/ReactPropTypesSecret": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/lib/ReactPropTypesSecret.js",
+      "fbjs/lib/emptyFunction": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyFunction.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
-      "fbjs/lib/emptyFunction": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyFunction.js"
+      "./lib/ReactPropTypesSecret": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/lib/ReactPropTypesSecret.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/factoryWithThrowingShims.js",
@@ -7356,10 +7356,10 @@
     "(function (process){\n/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n */\n\n'use strict';\n\nvar emptyFunction = require('fbjs/lib/emptyFunction');\nvar invariant = require('fbjs/lib/invariant');\nvar warning = require('fbjs/lib/warning');\n\nvar ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');\nvar checkPropTypes = require('./checkPropTypes');\n\nmodule.exports = function(isValidElement, throwOnDirectAccess) {\n  /* global Symbol */\n  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;\n  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.\n\n  /**\n   * Returns the iterator method function contained on the iterable object.\n   *\n   * Be sure to invoke the function with the iterable as context:\n   *\n   *     var iteratorFn = getIteratorFn(myIterable);\n   *     if (iteratorFn) {\n   *       var iterator = iteratorFn.call(myIterable);\n   *       ...\n   *     }\n   *\n   * @param {?object} maybeIterable\n   * @return {?function}\n   */\n  function getIteratorFn(maybeIterable) {\n    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);\n    if (typeof iteratorFn === 'function') {\n      return iteratorFn;\n    }\n  }\n\n  /**\n   * Collection of methods that allow declaration and validation of props that are\n   * supplied to React components. Example usage:\n   *\n   *   var Props = require('ReactPropTypes');\n   *   var MyArticle = React.createClass({\n   *     propTypes: {\n   *       // An optional string prop named \"description\".\n   *       description: Props.string,\n   *\n   *       // A required enum prop named \"category\".\n   *       category: Props.oneOf(['News','Photos']).isRequired,\n   *\n   *       // A prop named \"dialog\" that requires an instance of Dialog.\n   *       dialog: Props.instanceOf(Dialog).isRequired\n   *     },\n   *     render: function() { ... }\n   *   });\n   *\n   * A more formal specification of how these methods are used:\n   *\n   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)\n   *   decl := ReactPropTypes.{type}(.isRequired)?\n   *\n   * Each and every declaration produces a function with the same signature. This\n   * allows the creation of custom validation functions. For example:\n   *\n   *  var MyLink = React.createClass({\n   *    propTypes: {\n   *      // An optional string or URI prop named \"href\".\n   *      href: function(props, propName, componentName) {\n   *        var propValue = props[propName];\n   *        if (propValue != null && typeof propValue !== 'string' &&\n   *            !(propValue instanceof URI)) {\n   *          return new Error(\n   *            'Expected a string or an URI for ' + propName + ' in ' +\n   *            componentName\n   *          );\n   *        }\n   *      }\n   *    },\n   *    render: function() {...}\n   *  });\n   *\n   * @internal\n   */\n\n  var ANONYMOUS = '<<anonymous>>';\n\n  // Important!\n  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.\n  var ReactPropTypes = {\n    array: createPrimitiveTypeChecker('array'),\n    bool: createPrimitiveTypeChecker('boolean'),\n    func: createPrimitiveTypeChecker('function'),\n    number: createPrimitiveTypeChecker('number'),\n    object: createPrimitiveTypeChecker('object'),\n    string: createPrimitiveTypeChecker('string'),\n    symbol: createPrimitiveTypeChecker('symbol'),\n\n    any: createAnyTypeChecker(),\n    arrayOf: createArrayOfTypeChecker,\n    element: createElementTypeChecker(),\n    instanceOf: createInstanceTypeChecker,\n    node: createNodeChecker(),\n    objectOf: createObjectOfTypeChecker,\n    oneOf: createEnumTypeChecker,\n    oneOfType: createUnionTypeChecker,\n    shape: createShapeTypeChecker\n  };\n\n  /**\n   * inlined Object.is polyfill to avoid requiring consumers ship their own\n   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is\n   */\n  /*eslint-disable no-self-compare*/\n  function is(x, y) {\n    // SameValue algorithm\n    if (x === y) {\n      // Steps 1-5, 7-10\n      // Steps 6.b-6.e: +0 != -0\n      return x !== 0 || 1 / x === 1 / y;\n    } else {\n      // Step 6.a: NaN == NaN\n      return x !== x && y !== y;\n    }\n  }\n  /*eslint-enable no-self-compare*/\n\n  /**\n   * We use an Error-like object for backward compatibility as people may call\n   * PropTypes directly and inspect their output. However, we don't use real\n   * Errors anymore. We don't inspect their stack anyway, and creating them\n   * is prohibitively expensive if they are created too often, such as what\n   * happens in oneOfType() for any type before the one that matched.\n   */\n  function PropTypeError(message) {\n    this.message = message;\n    this.stack = '';\n  }\n  // Make `instanceof Error` still work for returned errors.\n  PropTypeError.prototype = Error.prototype;\n\n  function createChainableTypeChecker(validate) {\n    if (process.env.NODE_ENV !== 'production') {\n      var manualPropTypeCallCache = {};\n      var manualPropTypeWarningCount = 0;\n    }\n    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {\n      componentName = componentName || ANONYMOUS;\n      propFullName = propFullName || propName;\n\n      if (secret !== ReactPropTypesSecret) {\n        if (throwOnDirectAccess) {\n          // New behavior only for users of `prop-types` package\n          invariant(\n            false,\n            'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +\n            'Use `PropTypes.checkPropTypes()` to call them. ' +\n            'Read more at http://fb.me/use-check-prop-types'\n          );\n        } else if (process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {\n          // Old behavior for people using React.PropTypes\n          var cacheKey = componentName + ':' + propName;\n          if (\n            !manualPropTypeCallCache[cacheKey] &&\n            // Avoid spamming the console because they are often not actionable except for lib authors\n            manualPropTypeWarningCount < 3\n          ) {\n            warning(\n              false,\n              'You are manually calling a React.PropTypes validation ' +\n              'function for the `%s` prop on `%s`. This is deprecated ' +\n              'and will throw in the standalone `prop-types` package. ' +\n              'You may be seeing this warning due to a third-party PropTypes ' +\n              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.',\n              propFullName,\n              componentName\n            );\n            manualPropTypeCallCache[cacheKey] = true;\n            manualPropTypeWarningCount++;\n          }\n        }\n      }\n      if (props[propName] == null) {\n        if (isRequired) {\n          if (props[propName] === null) {\n            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));\n          }\n          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));\n        }\n        return null;\n      } else {\n        return validate(props, propName, componentName, location, propFullName);\n      }\n    }\n\n    var chainedCheckType = checkType.bind(null, false);\n    chainedCheckType.isRequired = checkType.bind(null, true);\n\n    return chainedCheckType;\n  }\n\n  function createPrimitiveTypeChecker(expectedType) {\n    function validate(props, propName, componentName, location, propFullName, secret) {\n      var propValue = props[propName];\n      var propType = getPropType(propValue);\n      if (propType !== expectedType) {\n        // `propValue` being instance of, say, date/regexp, pass the 'object'\n        // check, but we can offer a more precise error message here rather than\n        // 'of type `object`'.\n        var preciseType = getPreciseType(propValue);\n\n        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));\n      }\n      return null;\n    }\n    return createChainableTypeChecker(validate);\n  }\n\n  function createAnyTypeChecker() {\n    return createChainableTypeChecker(emptyFunction.thatReturnsNull);\n  }\n\n  function createArrayOfTypeChecker(typeChecker) {\n    function validate(props, propName, componentName, location, propFullName) {\n      if (typeof typeChecker !== 'function') {\n        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');\n      }\n      var propValue = props[propName];\n      if (!Array.isArray(propValue)) {\n        var propType = getPropType(propValue);\n        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));\n      }\n      for (var i = 0; i < propValue.length; i++) {\n        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);\n        if (error instanceof Error) {\n          return error;\n        }\n      }\n      return null;\n    }\n    return createChainableTypeChecker(validate);\n  }\n\n  function createElementTypeChecker() {\n    function validate(props, propName, componentName, location, propFullName) {\n      var propValue = props[propName];\n      if (!isValidElement(propValue)) {\n        var propType = getPropType(propValue);\n        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));\n      }\n      return null;\n    }\n    return createChainableTypeChecker(validate);\n  }\n\n  function createInstanceTypeChecker(expectedClass) {\n    function validate(props, propName, componentName, location, propFullName) {\n      if (!(props[propName] instanceof expectedClass)) {\n        var expectedClassName = expectedClass.name || ANONYMOUS;\n        var actualClassName = getClassName(props[propName]);\n        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));\n      }\n      return null;\n    }\n    return createChainableTypeChecker(validate);\n  }\n\n  function createEnumTypeChecker(expectedValues) {\n    if (!Array.isArray(expectedValues)) {\n      process.env.NODE_ENV !== 'production' ? warning(false, 'Invalid argument supplied to oneOf, expected an instance of array.') : void 0;\n      return emptyFunction.thatReturnsNull;\n    }\n\n    function validate(props, propName, componentName, location, propFullName) {\n      var propValue = props[propName];\n      for (var i = 0; i < expectedValues.length; i++) {\n        if (is(propValue, expectedValues[i])) {\n          return null;\n        }\n      }\n\n      var valuesString = JSON.stringify(expectedValues);\n      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + propValue + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));\n    }\n    return createChainableTypeChecker(validate);\n  }\n\n  function createObjectOfTypeChecker(typeChecker) {\n    function validate(props, propName, componentName, location, propFullName) {\n      if (typeof typeChecker !== 'function') {\n        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');\n      }\n      var propValue = props[propName];\n      var propType = getPropType(propValue);\n      if (propType !== 'object') {\n        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));\n      }\n      for (var key in propValue) {\n        if (propValue.hasOwnProperty(key)) {\n          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);\n          if (error instanceof Error) {\n            return error;\n          }\n        }\n      }\n      return null;\n    }\n    return createChainableTypeChecker(validate);\n  }\n\n  function createUnionTypeChecker(arrayOfTypeCheckers) {\n    if (!Array.isArray(arrayOfTypeCheckers)) {\n      process.env.NODE_ENV !== 'production' ? warning(false, 'Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;\n      return emptyFunction.thatReturnsNull;\n    }\n\n    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {\n      var checker = arrayOfTypeCheckers[i];\n      if (typeof checker !== 'function') {\n        warning(\n          false,\n          'Invalid argument supplid to oneOfType. Expected an array of check functions, but ' +\n          'received %s at index %s.',\n          getPostfixForTypeWarning(checker),\n          i\n        );\n        return emptyFunction.thatReturnsNull;\n      }\n    }\n\n    function validate(props, propName, componentName, location, propFullName) {\n      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {\n        var checker = arrayOfTypeCheckers[i];\n        if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret) == null) {\n          return null;\n        }\n      }\n\n      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));\n    }\n    return createChainableTypeChecker(validate);\n  }\n\n  function createNodeChecker() {\n    function validate(props, propName, componentName, location, propFullName) {\n      if (!isNode(props[propName])) {\n        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));\n      }\n      return null;\n    }\n    return createChainableTypeChecker(validate);\n  }\n\n  function createShapeTypeChecker(shapeTypes) {\n    function validate(props, propName, componentName, location, propFullName) {\n      var propValue = props[propName];\n      var propType = getPropType(propValue);\n      if (propType !== 'object') {\n        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));\n      }\n      for (var key in shapeTypes) {\n        var checker = shapeTypes[key];\n        if (!checker) {\n          continue;\n        }\n        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);\n        if (error) {\n          return error;\n        }\n      }\n      return null;\n    }\n    return createChainableTypeChecker(validate);\n  }\n\n  function isNode(propValue) {\n    switch (typeof propValue) {\n      case 'number':\n      case 'string':\n      case 'undefined':\n        return true;\n      case 'boolean':\n        return !propValue;\n      case 'object':\n        if (Array.isArray(propValue)) {\n          return propValue.every(isNode);\n        }\n        if (propValue === null || isValidElement(propValue)) {\n          return true;\n        }\n\n        var iteratorFn = getIteratorFn(propValue);\n        if (iteratorFn) {\n          var iterator = iteratorFn.call(propValue);\n          var step;\n          if (iteratorFn !== propValue.entries) {\n            while (!(step = iterator.next()).done) {\n              if (!isNode(step.value)) {\n                return false;\n              }\n            }\n          } else {\n            // Iterator will provide entry [k,v] tuples rather than values.\n            while (!(step = iterator.next()).done) {\n              var entry = step.value;\n              if (entry) {\n                if (!isNode(entry[1])) {\n                  return false;\n                }\n              }\n            }\n          }\n        } else {\n          return false;\n        }\n\n        return true;\n      default:\n        return false;\n    }\n  }\n\n  function isSymbol(propType, propValue) {\n    // Native Symbol.\n    if (propType === 'symbol') {\n      return true;\n    }\n\n    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'\n    if (propValue['@@toStringTag'] === 'Symbol') {\n      return true;\n    }\n\n    // Fallback for non-spec compliant Symbols which are polyfilled.\n    if (typeof Symbol === 'function' && propValue instanceof Symbol) {\n      return true;\n    }\n\n    return false;\n  }\n\n  // Equivalent of `typeof` but with special handling for array and regexp.\n  function getPropType(propValue) {\n    var propType = typeof propValue;\n    if (Array.isArray(propValue)) {\n      return 'array';\n    }\n    if (propValue instanceof RegExp) {\n      // Old webkits (at least until Android 4.0) return 'function' rather than\n      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/\n      // passes PropTypes.object.\n      return 'object';\n    }\n    if (isSymbol(propType, propValue)) {\n      return 'symbol';\n    }\n    return propType;\n  }\n\n  // This handles more types than `getPropType`. Only used for error messages.\n  // See `createPrimitiveTypeChecker`.\n  function getPreciseType(propValue) {\n    if (typeof propValue === 'undefined' || propValue === null) {\n      return '' + propValue;\n    }\n    var propType = getPropType(propValue);\n    if (propType === 'object') {\n      if (propValue instanceof Date) {\n        return 'date';\n      } else if (propValue instanceof RegExp) {\n        return 'regexp';\n      }\n    }\n    return propType;\n  }\n\n  // Returns a string that is postfixed to a warning about an invalid type.\n  // For example, \"undefined\" or \"of type array\"\n  function getPostfixForTypeWarning(value) {\n    var type = getPreciseType(value);\n    switch (type) {\n      case 'array':\n      case 'object':\n        return 'an ' + type;\n      case 'boolean':\n      case 'date':\n      case 'regexp':\n        return 'a ' + type;\n      default:\n        return type;\n    }\n  }\n\n  // Returns class name of the object, if any.\n  function getClassName(propValue) {\n    if (!propValue.constructor || !propValue.constructor.name) {\n      return ANONYMOUS;\n    }\n    return propValue.constructor.name;\n  }\n\n  ReactPropTypes.checkPropTypes = checkPropTypes;\n  ReactPropTypes.PropTypes = ReactPropTypes;\n\n  return ReactPropTypes;\n};\n\n}).call(this,require('_process'))\n",
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
-      "./lib/ReactPropTypesSecret": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/lib/ReactPropTypesSecret.js",
+      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/emptyFunction": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyFunction.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
-      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
+      "./lib/ReactPropTypesSecret": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/lib/ReactPropTypesSecret.js",
       "./checkPropTypes": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/checkPropTypes.js"
     },
     {
@@ -7373,8 +7373,8 @@
     "(function (process){\n/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n */\n\nif (process.env.NODE_ENV !== 'production') {\n  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&\n    Symbol.for &&\n    Symbol.for('react.element')) ||\n    0xeac7;\n\n  var isValidElement = function(object) {\n    return typeof object === 'object' &&\n      object !== null &&\n      object.$$typeof === REACT_ELEMENT_TYPE;\n  };\n\n  // By explicitly using `prop-types` you are opting into new development behavior.\n  // http://fb.me/prop-types-in-prod\n  var throwOnDirectAccess = true;\n  module.exports = require('./factoryWithTypeCheckers')(isValidElement, throwOnDirectAccess);\n} else {\n  // By explicitly using `prop-types` you are opting into new production behavior.\n  // http://fb.me/prop-types-in-prod\n  module.exports = require('./factoryWithThrowingShims')();\n}\n\n}).call(this,require('_process'))\n",
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
-      "./factoryWithThrowingShims": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/factoryWithThrowingShims.js",
-      "./factoryWithTypeCheckers": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/factoryWithTypeCheckers.js"
+      "./factoryWithTypeCheckers": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/factoryWithTypeCheckers.js",
+      "./factoryWithThrowingShims": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/factoryWithThrowingShims.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js",
@@ -7442,9 +7442,9 @@
     "/**\n * Copyright 2013-present Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar EventPropagators = require('./EventPropagators');\nvar ExecutionEnvironment = require('fbjs/lib/ExecutionEnvironment');\nvar FallbackCompositionState = require('./FallbackCompositionState');\nvar SyntheticCompositionEvent = require('./SyntheticCompositionEvent');\nvar SyntheticInputEvent = require('./SyntheticInputEvent');\n\nvar END_KEYCODES = [9, 13, 27, 32]; // Tab, Return, Esc, Space\nvar START_KEYCODE = 229;\n\nvar canUseCompositionEvent = ExecutionEnvironment.canUseDOM && 'CompositionEvent' in window;\n\nvar documentMode = null;\nif (ExecutionEnvironment.canUseDOM && 'documentMode' in document) {\n  documentMode = document.documentMode;\n}\n\n// Webkit offers a very useful `textInput` event that can be used to\n// directly represent `beforeInput`. The IE `textinput` event is not as\n// useful, so we don't use it.\nvar canUseTextInputEvent = ExecutionEnvironment.canUseDOM && 'TextEvent' in window && !documentMode && !isPresto();\n\n// In IE9+, we have access to composition events, but the data supplied\n// by the native compositionend event may be incorrect. Japanese ideographic\n// spaces, for instance (\\u3000) are not recorded correctly.\nvar useFallbackCompositionData = ExecutionEnvironment.canUseDOM && (!canUseCompositionEvent || documentMode && documentMode > 8 && documentMode <= 11);\n\n/**\n * Opera <= 12 includes TextEvent in window, but does not fire\n * text input events. Rely on keypress instead.\n */\nfunction isPresto() {\n  var opera = window.opera;\n  return typeof opera === 'object' && typeof opera.version === 'function' && parseInt(opera.version(), 10) <= 12;\n}\n\nvar SPACEBAR_CODE = 32;\nvar SPACEBAR_CHAR = String.fromCharCode(SPACEBAR_CODE);\n\n// Events and their corresponding property names.\nvar eventTypes = {\n  beforeInput: {\n    phasedRegistrationNames: {\n      bubbled: 'onBeforeInput',\n      captured: 'onBeforeInputCapture'\n    },\n    dependencies: ['topCompositionEnd', 'topKeyPress', 'topTextInput', 'topPaste']\n  },\n  compositionEnd: {\n    phasedRegistrationNames: {\n      bubbled: 'onCompositionEnd',\n      captured: 'onCompositionEndCapture'\n    },\n    dependencies: ['topBlur', 'topCompositionEnd', 'topKeyDown', 'topKeyPress', 'topKeyUp', 'topMouseDown']\n  },\n  compositionStart: {\n    phasedRegistrationNames: {\n      bubbled: 'onCompositionStart',\n      captured: 'onCompositionStartCapture'\n    },\n    dependencies: ['topBlur', 'topCompositionStart', 'topKeyDown', 'topKeyPress', 'topKeyUp', 'topMouseDown']\n  },\n  compositionUpdate: {\n    phasedRegistrationNames: {\n      bubbled: 'onCompositionUpdate',\n      captured: 'onCompositionUpdateCapture'\n    },\n    dependencies: ['topBlur', 'topCompositionUpdate', 'topKeyDown', 'topKeyPress', 'topKeyUp', 'topMouseDown']\n  }\n};\n\n// Track whether we've ever handled a keypress on the space key.\nvar hasSpaceKeypress = false;\n\n/**\n * Return whether a native keypress event is assumed to be a command.\n * This is required because Firefox fires `keypress` events for key commands\n * (cut, copy, select-all, etc.) even though no character is inserted.\n */\nfunction isKeypressCommand(nativeEvent) {\n  return (nativeEvent.ctrlKey || nativeEvent.altKey || nativeEvent.metaKey) &&\n  // ctrlKey && altKey is equivalent to AltGr, and is not a command.\n  !(nativeEvent.ctrlKey && nativeEvent.altKey);\n}\n\n/**\n * Translate native top level events into event types.\n *\n * @param {string} topLevelType\n * @return {object}\n */\nfunction getCompositionEventType(topLevelType) {\n  switch (topLevelType) {\n    case 'topCompositionStart':\n      return eventTypes.compositionStart;\n    case 'topCompositionEnd':\n      return eventTypes.compositionEnd;\n    case 'topCompositionUpdate':\n      return eventTypes.compositionUpdate;\n  }\n}\n\n/**\n * Does our fallback best-guess model think this event signifies that\n * composition has begun?\n *\n * @param {string} topLevelType\n * @param {object} nativeEvent\n * @return {boolean}\n */\nfunction isFallbackCompositionStart(topLevelType, nativeEvent) {\n  return topLevelType === 'topKeyDown' && nativeEvent.keyCode === START_KEYCODE;\n}\n\n/**\n * Does our fallback mode think that this event is the end of composition?\n *\n * @param {string} topLevelType\n * @param {object} nativeEvent\n * @return {boolean}\n */\nfunction isFallbackCompositionEnd(topLevelType, nativeEvent) {\n  switch (topLevelType) {\n    case 'topKeyUp':\n      // Command keys insert or clear IME input.\n      return END_KEYCODES.indexOf(nativeEvent.keyCode) !== -1;\n    case 'topKeyDown':\n      // Expect IME keyCode on each keydown. If we get any other\n      // code we must have exited earlier.\n      return nativeEvent.keyCode !== START_KEYCODE;\n    case 'topKeyPress':\n    case 'topMouseDown':\n    case 'topBlur':\n      // Events are not possible without cancelling IME.\n      return true;\n    default:\n      return false;\n  }\n}\n\n/**\n * Google Input Tools provides composition data via a CustomEvent,\n * with the `data` property populated in the `detail` object. If this\n * is available on the event object, use it. If not, this is a plain\n * composition event and we have nothing special to extract.\n *\n * @param {object} nativeEvent\n * @return {?string}\n */\nfunction getDataFromCustomEvent(nativeEvent) {\n  var detail = nativeEvent.detail;\n  if (typeof detail === 'object' && 'data' in detail) {\n    return detail.data;\n  }\n  return null;\n}\n\n// Track the current IME composition fallback object, if any.\nvar currentComposition = null;\n\n/**\n * @return {?object} A SyntheticCompositionEvent.\n */\nfunction extractCompositionEvent(topLevelType, targetInst, nativeEvent, nativeEventTarget) {\n  var eventType;\n  var fallbackData;\n\n  if (canUseCompositionEvent) {\n    eventType = getCompositionEventType(topLevelType);\n  } else if (!currentComposition) {\n    if (isFallbackCompositionStart(topLevelType, nativeEvent)) {\n      eventType = eventTypes.compositionStart;\n    }\n  } else if (isFallbackCompositionEnd(topLevelType, nativeEvent)) {\n    eventType = eventTypes.compositionEnd;\n  }\n\n  if (!eventType) {\n    return null;\n  }\n\n  if (useFallbackCompositionData) {\n    // The current composition is stored statically and must not be\n    // overwritten while composition continues.\n    if (!currentComposition && eventType === eventTypes.compositionStart) {\n      currentComposition = FallbackCompositionState.getPooled(nativeEventTarget);\n    } else if (eventType === eventTypes.compositionEnd) {\n      if (currentComposition) {\n        fallbackData = currentComposition.getData();\n      }\n    }\n  }\n\n  var event = SyntheticCompositionEvent.getPooled(eventType, targetInst, nativeEvent, nativeEventTarget);\n\n  if (fallbackData) {\n    // Inject data generated from fallback path into the synthetic event.\n    // This matches the property of native CompositionEventInterface.\n    event.data = fallbackData;\n  } else {\n    var customData = getDataFromCustomEvent(nativeEvent);\n    if (customData !== null) {\n      event.data = customData;\n    }\n  }\n\n  EventPropagators.accumulateTwoPhaseDispatches(event);\n  return event;\n}\n\n/**\n * @param {string} topLevelType Record from `EventConstants`.\n * @param {object} nativeEvent Native browser event.\n * @return {?string} The string corresponding to this `beforeInput` event.\n */\nfunction getNativeBeforeInputChars(topLevelType, nativeEvent) {\n  switch (topLevelType) {\n    case 'topCompositionEnd':\n      return getDataFromCustomEvent(nativeEvent);\n    case 'topKeyPress':\n      /**\n       * If native `textInput` events are available, our goal is to make\n       * use of them. However, there is a special case: the spacebar key.\n       * In Webkit, preventing default on a spacebar `textInput` event\n       * cancels character insertion, but it *also* causes the browser\n       * to fall back to its default spacebar behavior of scrolling the\n       * page.\n       *\n       * Tracking at:\n       * https://code.google.com/p/chromium/issues/detail?id=355103\n       *\n       * To avoid this issue, use the keypress event as if no `textInput`\n       * event is available.\n       */\n      var which = nativeEvent.which;\n      if (which !== SPACEBAR_CODE) {\n        return null;\n      }\n\n      hasSpaceKeypress = true;\n      return SPACEBAR_CHAR;\n\n    case 'topTextInput':\n      // Record the characters to be added to the DOM.\n      var chars = nativeEvent.data;\n\n      // If it's a spacebar character, assume that we have already handled\n      // it at the keypress level and bail immediately. Android Chrome\n      // doesn't give us keycodes, so we need to blacklist it.\n      if (chars === SPACEBAR_CHAR && hasSpaceKeypress) {\n        return null;\n      }\n\n      return chars;\n\n    default:\n      // For other native event types, do nothing.\n      return null;\n  }\n}\n\n/**\n * For browsers that do not provide the `textInput` event, extract the\n * appropriate string to use for SyntheticInputEvent.\n *\n * @param {string} topLevelType Record from `EventConstants`.\n * @param {object} nativeEvent Native browser event.\n * @return {?string} The fallback string for this `beforeInput` event.\n */\nfunction getFallbackBeforeInputChars(topLevelType, nativeEvent) {\n  // If we are currently composing (IME) and using a fallback to do so,\n  // try to extract the composed characters from the fallback object.\n  // If composition event is available, we extract a string only at\n  // compositionevent, otherwise extract it at fallback events.\n  if (currentComposition) {\n    if (topLevelType === 'topCompositionEnd' || !canUseCompositionEvent && isFallbackCompositionEnd(topLevelType, nativeEvent)) {\n      var chars = currentComposition.getData();\n      FallbackCompositionState.release(currentComposition);\n      currentComposition = null;\n      return chars;\n    }\n    return null;\n  }\n\n  switch (topLevelType) {\n    case 'topPaste':\n      // If a paste event occurs after a keypress, throw out the input\n      // chars. Paste events should not lead to BeforeInput events.\n      return null;\n    case 'topKeyPress':\n      /**\n       * As of v27, Firefox may fire keypress events even when no character\n       * will be inserted. A few possibilities:\n       *\n       * - `which` is `0`. Arrow keys, Esc key, etc.\n       *\n       * - `which` is the pressed key code, but no char is available.\n       *   Ex: 'AltGr + d` in Polish. There is no modified character for\n       *   this key combination and no character is inserted into the\n       *   document, but FF fires the keypress for char code `100` anyway.\n       *   No `input` event will occur.\n       *\n       * - `which` is the pressed key code, but a command combination is\n       *   being used. Ex: `Cmd+C`. No character is inserted, and no\n       *   `input` event will occur.\n       */\n      if (nativeEvent.which && !isKeypressCommand(nativeEvent)) {\n        return String.fromCharCode(nativeEvent.which);\n      }\n      return null;\n    case 'topCompositionEnd':\n      return useFallbackCompositionData ? null : nativeEvent.data;\n    default:\n      return null;\n  }\n}\n\n/**\n * Extract a SyntheticInputEvent for `beforeInput`, based on either native\n * `textInput` or fallback behavior.\n *\n * @return {?object} A SyntheticInputEvent.\n */\nfunction extractBeforeInputEvent(topLevelType, targetInst, nativeEvent, nativeEventTarget) {\n  var chars;\n\n  if (canUseTextInputEvent) {\n    chars = getNativeBeforeInputChars(topLevelType, nativeEvent);\n  } else {\n    chars = getFallbackBeforeInputChars(topLevelType, nativeEvent);\n  }\n\n  // If no characters are being inserted, no BeforeInput event should\n  // be fired.\n  if (!chars) {\n    return null;\n  }\n\n  var event = SyntheticInputEvent.getPooled(eventTypes.beforeInput, targetInst, nativeEvent, nativeEventTarget);\n\n  event.data = chars;\n  EventPropagators.accumulateTwoPhaseDispatches(event);\n  return event;\n}\n\n/**\n * Create an `onBeforeInput` event to match\n * http://www.w3.org/TR/2013/WD-DOM-Level-3-Events-20131105/#events-inputevents.\n *\n * This event plugin is based on the native `textInput` event\n * available in Chrome, Safari, Opera, and IE. This event fires after\n * `onKeyPress` and `onCompositionEnd`, but before `onInput`.\n *\n * `beforeInput` is spec'd but not implemented in any browsers, and\n * the `input` event does not provide any useful information about what has\n * actually been added, contrary to the spec. Thus, `textInput` is the best\n * available event to identify the characters that have actually been inserted\n * into the target node.\n *\n * This plugin is also responsible for emitting `composition` events, thus\n * allowing us to share composition fallback code for both `beforeInput` and\n * `composition` event types.\n */\nvar BeforeInputEventPlugin = {\n  eventTypes: eventTypes,\n\n  extractEvents: function (topLevelType, targetInst, nativeEvent, nativeEventTarget) {\n    return [extractCompositionEvent(topLevelType, targetInst, nativeEvent, nativeEventTarget), extractBeforeInputEvent(topLevelType, targetInst, nativeEvent, nativeEventTarget)];\n  }\n};\n\nmodule.exports = BeforeInputEventPlugin;",
     {
       "./EventPropagators": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPropagators.js",
-      "./SyntheticCompositionEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticCompositionEvent.js",
-      "./SyntheticInputEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticInputEvent.js",
       "fbjs/lib/ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
+      "./SyntheticInputEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticInputEvent.js",
+      "./SyntheticCompositionEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticCompositionEvent.js",
       "./FallbackCompositionState": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/FallbackCompositionState.js"
     },
     {
@@ -7474,8 +7474,8 @@
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
       "fbjs/lib/memoizeStringOnly": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/memoizeStringOnly.js",
       "./dangerousStyleValue": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/dangerousStyleValue.js",
-      "fbjs/lib/hyphenateStyleName": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/hyphenateStyleName.js",
-      "fbjs/lib/camelizeStyleName": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/camelizeStyleName.js"
+      "fbjs/lib/camelizeStyleName": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/camelizeStyleName.js",
+      "fbjs/lib/hyphenateStyleName": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/hyphenateStyleName.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/CSSPropertyOperations.js",
@@ -7508,10 +7508,10 @@
       "./ReactUpdates": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdates.js",
       "./getEventTarget": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/getEventTarget.js",
       "./isTextInputElement": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/isTextInputElement.js",
-      "./inputValueTracking": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/inputValueTracking.js",
-      "fbjs/lib/ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
       "./SyntheticEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticEvent.js",
-      "./isEventSupported": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/isEventSupported.js"
+      "./isEventSupported": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/isEventSupported.js",
+      "fbjs/lib/ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
+      "./inputValueTracking": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/inputValueTracking.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ChangeEventPlugin.js",
@@ -7526,8 +7526,8 @@
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./DOMLazyTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMLazyTree.js",
       "./ReactDOMComponentTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
-      "./ReactInstrumentation": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInstrumentation.js",
       "./createMicrosoftUnsafeLocalFunction": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/createMicrosoftUnsafeLocalFunction.js",
+      "./ReactInstrumentation": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInstrumentation.js",
       "./setInnerHTML": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/setInnerHTML.js",
       "./setTextContent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/setTextContent.js",
       "./Danger": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/Danger.js"
@@ -7585,8 +7585,8 @@
       "./DOMProperty": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMProperty.js",
       "./ReactDOMComponentTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
       "./ReactInstrumentation": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInstrumentation.js",
-      "./quoteAttributeValueForBrowser": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/quoteAttributeValueForBrowser.js",
-      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
+      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
+      "./quoteAttributeValueForBrowser": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/quoteAttributeValueForBrowser.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMPropertyOperations.js",
@@ -7601,9 +7601,9 @@
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
       "./DOMLazyTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMLazyTree.js",
+      "fbjs/lib/ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
       "fbjs/lib/emptyFunction": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyFunction.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
-      "fbjs/lib/ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
       "fbjs/lib/createNodesFromMarkup": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/createNodesFromMarkup.js"
     },
     {
@@ -7652,11 +7652,11 @@
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
-      "./EventPluginUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPluginUtils.js",
-      "./EventPluginRegistry": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPluginRegistry.js",
       "./forEachAccumulated": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/forEachAccumulated.js",
       "./ReactErrorUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactErrorUtils.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
+      "./EventPluginUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPluginUtils.js",
+      "./EventPluginRegistry": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPluginRegistry.js",
       "./accumulateInto": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/accumulateInto.js"
     },
     {
@@ -7700,8 +7700,8 @@
     "(function (process){\n/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar EventPluginHub = require('./EventPluginHub');\nvar EventPluginUtils = require('./EventPluginUtils');\n\nvar accumulateInto = require('./accumulateInto');\nvar forEachAccumulated = require('./forEachAccumulated');\nvar warning = require('fbjs/lib/warning');\n\nvar getListener = EventPluginHub.getListener;\n\n/**\n * Some event types have a notion of different registration names for different\n * \"phases\" of propagation. This finds listeners by a given phase.\n */\nfunction listenerAtPhase(inst, event, propagationPhase) {\n  var registrationName = event.dispatchConfig.phasedRegistrationNames[propagationPhase];\n  return getListener(inst, registrationName);\n}\n\n/**\n * Tags a `SyntheticEvent` with dispatched listeners. Creating this function\n * here, allows us to not have to bind or create functions for each event.\n * Mutating the event's members allows us to not have to create a wrapping\n * \"dispatch\" object that pairs the event with the listener.\n */\nfunction accumulateDirectionalDispatches(inst, phase, event) {\n  if (process.env.NODE_ENV !== 'production') {\n    process.env.NODE_ENV !== 'production' ? warning(inst, 'Dispatching inst must not be null') : void 0;\n  }\n  var listener = listenerAtPhase(inst, event, phase);\n  if (listener) {\n    event._dispatchListeners = accumulateInto(event._dispatchListeners, listener);\n    event._dispatchInstances = accumulateInto(event._dispatchInstances, inst);\n  }\n}\n\n/**\n * Collect dispatches (must be entirely collected before dispatching - see unit\n * tests). Lazily allocate the array to conserve memory.  We must loop through\n * each event and perform the traversal for each one. We cannot perform a\n * single traversal for the entire collection of events because each event may\n * have a different target.\n */\nfunction accumulateTwoPhaseDispatchesSingle(event) {\n  if (event && event.dispatchConfig.phasedRegistrationNames) {\n    EventPluginUtils.traverseTwoPhase(event._targetInst, accumulateDirectionalDispatches, event);\n  }\n}\n\n/**\n * Same as `accumulateTwoPhaseDispatchesSingle`, but skips over the targetID.\n */\nfunction accumulateTwoPhaseDispatchesSingleSkipTarget(event) {\n  if (event && event.dispatchConfig.phasedRegistrationNames) {\n    var targetInst = event._targetInst;\n    var parentInst = targetInst ? EventPluginUtils.getParentInstance(targetInst) : null;\n    EventPluginUtils.traverseTwoPhase(parentInst, accumulateDirectionalDispatches, event);\n  }\n}\n\n/**\n * Accumulates without regard to direction, does not look for phased\n * registration names. Same as `accumulateDirectDispatchesSingle` but without\n * requiring that the `dispatchMarker` be the same as the dispatched ID.\n */\nfunction accumulateDispatches(inst, ignoredDirection, event) {\n  if (event && event.dispatchConfig.registrationName) {\n    var registrationName = event.dispatchConfig.registrationName;\n    var listener = getListener(inst, registrationName);\n    if (listener) {\n      event._dispatchListeners = accumulateInto(event._dispatchListeners, listener);\n      event._dispatchInstances = accumulateInto(event._dispatchInstances, inst);\n    }\n  }\n}\n\n/**\n * Accumulates dispatches on an `SyntheticEvent`, but only for the\n * `dispatchMarker`.\n * @param {SyntheticEvent} event\n */\nfunction accumulateDirectDispatchesSingle(event) {\n  if (event && event.dispatchConfig.registrationName) {\n    accumulateDispatches(event._targetInst, null, event);\n  }\n}\n\nfunction accumulateTwoPhaseDispatches(events) {\n  forEachAccumulated(events, accumulateTwoPhaseDispatchesSingle);\n}\n\nfunction accumulateTwoPhaseDispatchesSkipTarget(events) {\n  forEachAccumulated(events, accumulateTwoPhaseDispatchesSingleSkipTarget);\n}\n\nfunction accumulateEnterLeaveDispatches(leave, enter, from, to) {\n  EventPluginUtils.traverseEnterLeave(from, to, accumulateDispatches, leave, enter);\n}\n\nfunction accumulateDirectDispatches(events) {\n  forEachAccumulated(events, accumulateDirectDispatchesSingle);\n}\n\n/**\n * A small set of propagation patterns, each of which will accept a small amount\n * of information, and generate a set of \"dispatch ready event objects\" - which\n * are sets of events that have already been annotated with a set of dispatched\n * listener functions/ids. The API is designed this way to discourage these\n * propagation strategies from actually executing the dispatches, since we\n * always want to collect the entire set of dispatches before executing event a\n * single one.\n *\n * @constructor EventPropagators\n */\nvar EventPropagators = {\n  accumulateTwoPhaseDispatches: accumulateTwoPhaseDispatches,\n  accumulateTwoPhaseDispatchesSkipTarget: accumulateTwoPhaseDispatchesSkipTarget,\n  accumulateDirectDispatches: accumulateDirectDispatches,\n  accumulateEnterLeaveDispatches: accumulateEnterLeaveDispatches\n};\n\nmodule.exports = EventPropagators;\n}).call(this,require('_process'))\n",
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
-      "./EventPluginHub": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPluginHub.js",
       "./EventPluginUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPluginUtils.js",
+      "./EventPluginHub": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPluginHub.js",
       "./accumulateInto": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/accumulateInto.js",
       "./forEachAccumulated": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/forEachAccumulated.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
@@ -7756,8 +7756,8 @@
       "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
       "./ReactPropTypesSecret": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactPropTypesSecret.js",
       "prop-types/factory": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/factory.js",
-      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "react/lib/React": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/React.js",
+      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
     },
     {
@@ -7786,9 +7786,9 @@
     {
       "./EventPluginRegistry": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPluginRegistry.js",
       "./ViewportMetrics": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ViewportMetrics.js",
-      "./isEventSupported": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/isEventSupported.js",
-      "./ReactEventEmitterMixin": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactEventEmitterMixin.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
+      "./ReactEventEmitterMixin": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactEventEmitterMixin.js",
+      "./isEventSupported": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/isEventSupported.js",
       "./getVendorPrefixedEventName": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/getVendorPrefixedEventName.js"
     },
     {
@@ -7850,8 +7850,8 @@
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
       "./ReactComponentEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactComponentEnvironment.js",
-      "./ReactErrorUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactErrorUtils.js",
       "./ReactInstanceMap": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInstanceMap.js",
+      "./ReactErrorUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactErrorUtils.js",
       "./ReactInstrumentation": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInstrumentation.js",
       "./ReactNodeTypes": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactNodeTypes.js",
       "./ReactReconciler": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactReconciler.js",
@@ -7860,8 +7860,8 @@
       "react/lib/React": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/React.js",
       "react/lib/ReactCurrentOwner": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactCurrentOwner.js",
       "fbjs/lib/emptyObject": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyObject.js",
-      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/shallowEqual": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/shallowEqual.js",
+      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
       "./checkReactTypeSpec": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/checkReactTypeSpec.js"
     },
@@ -7877,16 +7877,16 @@
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./ReactVersion": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactVersion.js",
-      "./renderSubtreeIntoContainer": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/renderSubtreeIntoContainer.js",
       "fbjs/lib/ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
+      "./renderSubtreeIntoContainer": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/renderSubtreeIntoContainer.js",
       "./findDOMNode": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/findDOMNode.js",
       "./ReactDOMNullInputValuePropHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMNullInputValuePropHook.js",
       "./ReactDOMInvalidARIAHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMInvalidARIAHook.js",
       "./ReactDOMComponentTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
+      "./ReactDOMUnknownPropertyHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMUnknownPropertyHook.js",
       "./ReactUpdates": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdates.js",
       "./getHostComponentFromComposite": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/getHostComponentFromComposite.js",
-      "./ReactDOMUnknownPropertyHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMUnknownPropertyHook.js",
       "./ReactReconciler": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactReconciler.js",
       "./ReactMount": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactMount.js",
       "./ReactInstrumentation": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInstrumentation.js",
@@ -7917,17 +7917,17 @@
       "./DOMNamespaces": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMNamespaces.js",
       "./escapeTextContentForBrowser": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/escapeTextContentForBrowser.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
+      "./validateDOMNesting": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/validateDOMNesting.js",
       "fbjs/lib/emptyFunction": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyFunction.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
       "fbjs/lib/shallowEqual": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/shallowEqual.js",
-      "./DOMPropertyOperations": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMPropertyOperations.js",
-      "./ReactDOMSelect": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMSelect.js",
       "./ReactDOMOption": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMOption.js",
-      "./ReactDOMTextarea": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMTextarea.js",
-      "./validateDOMNesting": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/validateDOMNesting.js",
       "./AutoFocusUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/AutoFocusUtils.js",
+      "./ReactDOMSelect": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMSelect.js",
+      "./ReactDOMTextarea": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMTextarea.js",
       "./ReactDOMInput": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMInput.js",
+      "./DOMPropertyOperations": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMPropertyOperations.js",
       "./ReactServerRenderingTransaction": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactServerRenderingTransaction.js",
       "./CSSPropertyOperations": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/CSSPropertyOperations.js",
       "./ReactMultiChild": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactMultiChild.js"
@@ -8039,9 +8039,9 @@
     "(function (process){\n/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar DOMProperty = require('./DOMProperty');\nvar ReactComponentTreeHook = require('react/lib/ReactComponentTreeHook');\n\nvar warning = require('fbjs/lib/warning');\n\nvar warnedProperties = {};\nvar rARIA = new RegExp('^(aria)-[' + DOMProperty.ATTRIBUTE_NAME_CHAR + ']*$');\n\nfunction validateProperty(tagName, name, debugID) {\n  if (warnedProperties.hasOwnProperty(name) && warnedProperties[name]) {\n    return true;\n  }\n\n  if (rARIA.test(name)) {\n    var lowerCasedName = name.toLowerCase();\n    var standardName = DOMProperty.getPossibleStandardName.hasOwnProperty(lowerCasedName) ? DOMProperty.getPossibleStandardName[lowerCasedName] : null;\n\n    // If this is an aria-* attribute, but is not listed in the known DOM\n    // DOM properties, then it is an invalid aria-* attribute.\n    if (standardName == null) {\n      warnedProperties[name] = true;\n      return false;\n    }\n    // aria-* attributes should be lowercase; suggest the lowercase version.\n    if (name !== standardName) {\n      process.env.NODE_ENV !== 'production' ? warning(false, 'Unknown ARIA attribute %s. Did you mean %s?%s', name, standardName, ReactComponentTreeHook.getStackAddendumByID(debugID)) : void 0;\n      warnedProperties[name] = true;\n      return true;\n    }\n  }\n\n  return true;\n}\n\nfunction warnInvalidARIAProps(debugID, element) {\n  var invalidProps = [];\n\n  for (var key in element.props) {\n    var isValid = validateProperty(element.type, key, debugID);\n    if (!isValid) {\n      invalidProps.push(key);\n    }\n  }\n\n  var unknownPropString = invalidProps.map(function (prop) {\n    return '`' + prop + '`';\n  }).join(', ');\n\n  if (invalidProps.length === 1) {\n    process.env.NODE_ENV !== 'production' ? warning(false, 'Invalid aria prop %s on <%s> tag. ' + 'For details, see https://fb.me/invalid-aria-prop%s', unknownPropString, element.type, ReactComponentTreeHook.getStackAddendumByID(debugID)) : void 0;\n  } else if (invalidProps.length > 1) {\n    process.env.NODE_ENV !== 'production' ? warning(false, 'Invalid aria props %s on <%s> tag. ' + 'For details, see https://fb.me/invalid-aria-prop%s', unknownPropString, element.type, ReactComponentTreeHook.getStackAddendumByID(debugID)) : void 0;\n  }\n}\n\nfunction handleElement(debugID, element) {\n  if (element == null || typeof element.type !== 'string') {\n    return;\n  }\n  if (element.type.indexOf('-') >= 0 || element.props.is) {\n    return;\n  }\n\n  warnInvalidARIAProps(debugID, element);\n}\n\nvar ReactDOMInvalidARIAHook = {\n  onBeforeMountComponent: function (debugID, element) {\n    if (process.env.NODE_ENV !== 'production') {\n      handleElement(debugID, element);\n    }\n  },\n  onBeforeUpdateComponent: function (debugID, element) {\n    if (process.env.NODE_ENV !== 'production') {\n      handleElement(debugID, element);\n    }\n  }\n};\n\nmodule.exports = ReactDOMInvalidARIAHook;\n}).call(this,require('_process'))\n",
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
-      "./DOMProperty": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMProperty.js",
       "react/lib/ReactComponentTreeHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactComponentTreeHook.js",
-      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
+      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
+      "./DOMProperty": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMProperty.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMInvalidARIAHook.js",
@@ -8054,8 +8054,8 @@
     "(function (process){\n/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar ReactComponentTreeHook = require('react/lib/ReactComponentTreeHook');\n\nvar warning = require('fbjs/lib/warning');\n\nvar didWarnValueNull = false;\n\nfunction handleElement(debugID, element) {\n  if (element == null) {\n    return;\n  }\n  if (element.type !== 'input' && element.type !== 'textarea' && element.type !== 'select') {\n    return;\n  }\n  if (element.props != null && element.props.value === null && !didWarnValueNull) {\n    process.env.NODE_ENV !== 'production' ? warning(false, '`value` prop on `%s` should not be null. ' + 'Consider using the empty string to clear the component or `undefined` ' + 'for uncontrolled components.%s', element.type, ReactComponentTreeHook.getStackAddendumByID(debugID)) : void 0;\n\n    didWarnValueNull = true;\n  }\n}\n\nvar ReactDOMNullInputValuePropHook = {\n  onBeforeMountComponent: function (debugID, element) {\n    handleElement(debugID, element);\n  },\n  onBeforeUpdateComponent: function (debugID, element) {\n    handleElement(debugID, element);\n  }\n};\n\nmodule.exports = ReactDOMNullInputValuePropHook;\n}).call(this,require('_process'))\n",
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
-      "react/lib/ReactComponentTreeHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactComponentTreeHook.js",
-      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
+      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
+      "react/lib/ReactComponentTreeHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactComponentTreeHook.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMNullInputValuePropHook.js",
@@ -8085,11 +8085,11 @@
     "(function (process){\n/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar _assign = require('object-assign');\n\nvar LinkedValueUtils = require('./LinkedValueUtils');\nvar ReactDOMComponentTree = require('./ReactDOMComponentTree');\nvar ReactUpdates = require('./ReactUpdates');\n\nvar warning = require('fbjs/lib/warning');\n\nvar didWarnValueLink = false;\nvar didWarnValueDefaultValue = false;\n\nfunction updateOptionsIfPendingUpdateAndMounted() {\n  if (this._rootNodeID && this._wrapperState.pendingUpdate) {\n    this._wrapperState.pendingUpdate = false;\n\n    var props = this._currentElement.props;\n    var value = LinkedValueUtils.getValue(props);\n\n    if (value != null) {\n      updateOptions(this, Boolean(props.multiple), value);\n    }\n  }\n}\n\nfunction getDeclarationErrorAddendum(owner) {\n  if (owner) {\n    var name = owner.getName();\n    if (name) {\n      return ' Check the render method of `' + name + '`.';\n    }\n  }\n  return '';\n}\n\nvar valuePropNames = ['value', 'defaultValue'];\n\n/**\n * Validation function for `value` and `defaultValue`.\n * @private\n */\nfunction checkSelectPropTypes(inst, props) {\n  var owner = inst._currentElement._owner;\n  LinkedValueUtils.checkPropTypes('select', props, owner);\n\n  if (props.valueLink !== undefined && !didWarnValueLink) {\n    process.env.NODE_ENV !== 'production' ? warning(false, '`valueLink` prop on `select` is deprecated; set `value` and `onChange` instead.') : void 0;\n    didWarnValueLink = true;\n  }\n\n  for (var i = 0; i < valuePropNames.length; i++) {\n    var propName = valuePropNames[i];\n    if (props[propName] == null) {\n      continue;\n    }\n    var isArray = Array.isArray(props[propName]);\n    if (props.multiple && !isArray) {\n      process.env.NODE_ENV !== 'production' ? warning(false, 'The `%s` prop supplied to <select> must be an array if ' + '`multiple` is true.%s', propName, getDeclarationErrorAddendum(owner)) : void 0;\n    } else if (!props.multiple && isArray) {\n      process.env.NODE_ENV !== 'production' ? warning(false, 'The `%s` prop supplied to <select> must be a scalar ' + 'value if `multiple` is false.%s', propName, getDeclarationErrorAddendum(owner)) : void 0;\n    }\n  }\n}\n\n/**\n * @param {ReactDOMComponent} inst\n * @param {boolean} multiple\n * @param {*} propValue A stringable (with `multiple`, a list of stringables).\n * @private\n */\nfunction updateOptions(inst, multiple, propValue) {\n  var selectedValue, i;\n  var options = ReactDOMComponentTree.getNodeFromInstance(inst).options;\n\n  if (multiple) {\n    selectedValue = {};\n    for (i = 0; i < propValue.length; i++) {\n      selectedValue['' + propValue[i]] = true;\n    }\n    for (i = 0; i < options.length; i++) {\n      var selected = selectedValue.hasOwnProperty(options[i].value);\n      if (options[i].selected !== selected) {\n        options[i].selected = selected;\n      }\n    }\n  } else {\n    // Do not set `select.value` as exact behavior isn't consistent across all\n    // browsers for all cases.\n    selectedValue = '' + propValue;\n    for (i = 0; i < options.length; i++) {\n      if (options[i].value === selectedValue) {\n        options[i].selected = true;\n        return;\n      }\n    }\n    if (options.length) {\n      options[0].selected = true;\n    }\n  }\n}\n\n/**\n * Implements a <select> host component that allows optionally setting the\n * props `value` and `defaultValue`. If `multiple` is false, the prop must be a\n * stringable. If `multiple` is true, the prop must be an array of stringables.\n *\n * If `value` is not supplied (or null/undefined), user actions that change the\n * selected option will trigger updates to the rendered options.\n *\n * If it is supplied (and not null/undefined), the rendered options will not\n * update in response to user actions. Instead, the `value` prop must change in\n * order for the rendered options to update.\n *\n * If `defaultValue` is provided, any options with the supplied values will be\n * selected.\n */\nvar ReactDOMSelect = {\n  getHostProps: function (inst, props) {\n    return _assign({}, props, {\n      onChange: inst._wrapperState.onChange,\n      value: undefined\n    });\n  },\n\n  mountWrapper: function (inst, props) {\n    if (process.env.NODE_ENV !== 'production') {\n      checkSelectPropTypes(inst, props);\n    }\n\n    var value = LinkedValueUtils.getValue(props);\n    inst._wrapperState = {\n      pendingUpdate: false,\n      initialValue: value != null ? value : props.defaultValue,\n      listeners: null,\n      onChange: _handleChange.bind(inst),\n      wasMultiple: Boolean(props.multiple)\n    };\n\n    if (props.value !== undefined && props.defaultValue !== undefined && !didWarnValueDefaultValue) {\n      process.env.NODE_ENV !== 'production' ? warning(false, 'Select elements must be either controlled or uncontrolled ' + '(specify either the value prop, or the defaultValue prop, but not ' + 'both). Decide between using a controlled or uncontrolled select ' + 'element and remove one of these props. More info: ' + 'https://fb.me/react-controlled-components') : void 0;\n      didWarnValueDefaultValue = true;\n    }\n  },\n\n  getSelectValueContext: function (inst) {\n    // ReactDOMOption looks at this initial value so the initial generated\n    // markup has correct `selected` attributes\n    return inst._wrapperState.initialValue;\n  },\n\n  postUpdateWrapper: function (inst) {\n    var props = inst._currentElement.props;\n\n    // After the initial mount, we control selected-ness manually so don't pass\n    // this value down\n    inst._wrapperState.initialValue = undefined;\n\n    var wasMultiple = inst._wrapperState.wasMultiple;\n    inst._wrapperState.wasMultiple = Boolean(props.multiple);\n\n    var value = LinkedValueUtils.getValue(props);\n    if (value != null) {\n      inst._wrapperState.pendingUpdate = false;\n      updateOptions(inst, Boolean(props.multiple), value);\n    } else if (wasMultiple !== Boolean(props.multiple)) {\n      // For simplicity, reapply `defaultValue` if `multiple` is toggled.\n      if (props.defaultValue != null) {\n        updateOptions(inst, Boolean(props.multiple), props.defaultValue);\n      } else {\n        // Revert the select back to its default unselected state.\n        updateOptions(inst, Boolean(props.multiple), props.multiple ? [] : '');\n      }\n    }\n  }\n};\n\nfunction _handleChange(event) {\n  var props = this._currentElement.props;\n  var returnValue = LinkedValueUtils.executeOnChange(props, event);\n\n  if (this._rootNodeID) {\n    this._wrapperState.pendingUpdate = true;\n  }\n  ReactUpdates.asap(updateOptionsIfPendingUpdateAndMounted, this);\n  return returnValue;\n}\n\nmodule.exports = ReactDOMSelect;\n}).call(this,require('_process'))\n",
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
-      "./LinkedValueUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/LinkedValueUtils.js",
       "./ReactDOMComponentTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
       "./ReactUpdates": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdates.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
-      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
+      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
+      "./LinkedValueUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/LinkedValueUtils.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMSelect.js",
@@ -8117,13 +8117,13 @@
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
-      "./DOMChildrenOperations": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMChildrenOperations.js",
       "./DOMLazyTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMLazyTree.js",
       "./ReactDOMComponentTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
       "./escapeTextContentForBrowser": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/escapeTextContentForBrowser.js",
       "./validateDOMNesting": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/validateDOMNesting.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
-      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js"
+      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
+      "./DOMChildrenOperations": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMChildrenOperations.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMTextComponent.js",
@@ -8138,11 +8138,11 @@
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
       "./ReactDOMComponentTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
-      "./LinkedValueUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/LinkedValueUtils.js",
       "./ReactUpdates": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdates.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
+      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
-      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
+      "./LinkedValueUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/LinkedValueUtils.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMTextarea.js",
@@ -8169,10 +8169,10 @@
     "(function (process){\n/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar DOMProperty = require('./DOMProperty');\nvar EventPluginRegistry = require('./EventPluginRegistry');\nvar ReactComponentTreeHook = require('react/lib/ReactComponentTreeHook');\n\nvar warning = require('fbjs/lib/warning');\n\nif (process.env.NODE_ENV !== 'production') {\n  var reactProps = {\n    children: true,\n    dangerouslySetInnerHTML: true,\n    key: true,\n    ref: true,\n\n    autoFocus: true,\n    defaultValue: true,\n    valueLink: true,\n    defaultChecked: true,\n    checkedLink: true,\n    innerHTML: true,\n    suppressContentEditableWarning: true,\n    onFocusIn: true,\n    onFocusOut: true\n  };\n  var warnedProperties = {};\n\n  var validateProperty = function (tagName, name, debugID) {\n    if (DOMProperty.properties.hasOwnProperty(name) || DOMProperty.isCustomAttribute(name)) {\n      return true;\n    }\n    if (reactProps.hasOwnProperty(name) && reactProps[name] || warnedProperties.hasOwnProperty(name) && warnedProperties[name]) {\n      return true;\n    }\n    if (EventPluginRegistry.registrationNameModules.hasOwnProperty(name)) {\n      return true;\n    }\n    warnedProperties[name] = true;\n    var lowerCasedName = name.toLowerCase();\n\n    // data-* attributes should be lowercase; suggest the lowercase version\n    var standardName = DOMProperty.isCustomAttribute(lowerCasedName) ? lowerCasedName : DOMProperty.getPossibleStandardName.hasOwnProperty(lowerCasedName) ? DOMProperty.getPossibleStandardName[lowerCasedName] : null;\n\n    var registrationName = EventPluginRegistry.possibleRegistrationNames.hasOwnProperty(lowerCasedName) ? EventPluginRegistry.possibleRegistrationNames[lowerCasedName] : null;\n\n    if (standardName != null) {\n      process.env.NODE_ENV !== 'production' ? warning(false, 'Unknown DOM property %s. Did you mean %s?%s', name, standardName, ReactComponentTreeHook.getStackAddendumByID(debugID)) : void 0;\n      return true;\n    } else if (registrationName != null) {\n      process.env.NODE_ENV !== 'production' ? warning(false, 'Unknown event handler property %s. Did you mean `%s`?%s', name, registrationName, ReactComponentTreeHook.getStackAddendumByID(debugID)) : void 0;\n      return true;\n    } else {\n      // We were unable to guess which prop the user intended.\n      // It is likely that the user was just blindly spreading/forwarding props\n      // Components should be careful to only render valid props/attributes.\n      // Warning will be invoked in warnUnknownProperties to allow grouping.\n      return false;\n    }\n  };\n}\n\nvar warnUnknownProperties = function (debugID, element) {\n  var unknownProps = [];\n  for (var key in element.props) {\n    var isValid = validateProperty(element.type, key, debugID);\n    if (!isValid) {\n      unknownProps.push(key);\n    }\n  }\n\n  var unknownPropString = unknownProps.map(function (prop) {\n    return '`' + prop + '`';\n  }).join(', ');\n\n  if (unknownProps.length === 1) {\n    process.env.NODE_ENV !== 'production' ? warning(false, 'Unknown prop %s on <%s> tag. Remove this prop from the element. ' + 'For details, see https://fb.me/react-unknown-prop%s', unknownPropString, element.type, ReactComponentTreeHook.getStackAddendumByID(debugID)) : void 0;\n  } else if (unknownProps.length > 1) {\n    process.env.NODE_ENV !== 'production' ? warning(false, 'Unknown props %s on <%s> tag. Remove these props from the element. ' + 'For details, see https://fb.me/react-unknown-prop%s', unknownPropString, element.type, ReactComponentTreeHook.getStackAddendumByID(debugID)) : void 0;\n  }\n};\n\nfunction handleElement(debugID, element) {\n  if (element == null || typeof element.type !== 'string') {\n    return;\n  }\n  if (element.type.indexOf('-') >= 0 || element.props.is) {\n    return;\n  }\n  warnUnknownProperties(debugID, element);\n}\n\nvar ReactDOMUnknownPropertyHook = {\n  onBeforeMountComponent: function (debugID, element) {\n    handleElement(debugID, element);\n  },\n  onBeforeUpdateComponent: function (debugID, element) {\n    handleElement(debugID, element);\n  }\n};\n\nmodule.exports = ReactDOMUnknownPropertyHook;\n}).call(this,require('_process'))\n",
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
-      "./DOMProperty": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMProperty.js",
       "react/lib/ReactComponentTreeHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactComponentTreeHook.js",
+      "./EventPluginRegistry": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPluginRegistry.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
-      "./EventPluginRegistry": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPluginRegistry.js"
+      "./DOMProperty": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMProperty.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMUnknownPropertyHook.js",
@@ -8186,8 +8186,8 @@
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./ReactHostOperationHistoryHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactHostOperationHistoryHook.js",
-      "fbjs/lib/ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
       "react/lib/ReactComponentTreeHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactComponentTreeHook.js",
+      "fbjs/lib/ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
       "./ReactInvalidSetStateWarningHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInvalidSetStateWarningHook.js",
       "fbjs/lib/performanceNow": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/performanceNow.js"
@@ -8223,18 +8223,18 @@
       "./SVGDOMPropertyConfig": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SVGDOMPropertyConfig.js",
       "./HTMLDOMPropertyConfig": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/HTMLDOMPropertyConfig.js",
       "./ReactDOMEmptyComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMEmptyComponent.js",
-      "./EnterLeaveEventPlugin": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EnterLeaveEventPlugin.js",
-      "./ReactDOMTextComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMTextComponent.js",
       "./ReactDOMTreeTraversal": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMTreeTraversal.js",
       "./ReactDefaultBatchingStrategy": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDefaultBatchingStrategy.js",
-      "./SimpleEventPlugin": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SimpleEventPlugin.js",
       "./SelectEventPlugin": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SelectEventPlugin.js",
+      "./ReactDOMTextComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMTextComponent.js",
+      "./EnterLeaveEventPlugin": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EnterLeaveEventPlugin.js",
       "./ChangeEventPlugin": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ChangeEventPlugin.js",
       "./ReactEventListener": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactEventListener.js",
       "./ReactInjection": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInjection.js",
       "./BeforeInputEventPlugin": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/BeforeInputEventPlugin.js",
-      "./ReactDOMComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponent.js",
+      "./SimpleEventPlugin": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SimpleEventPlugin.js",
       "./ReactReconcileTransaction": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactReconcileTransaction.js",
+      "./ReactDOMComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponent.js",
       "./ReactComponentBrowserEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactComponentBrowserEnvironment.js"
     },
     {
@@ -8291,8 +8291,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactEventListener.js": [
     "/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar _assign = require('object-assign');\n\nvar EventListener = require('fbjs/lib/EventListener');\nvar ExecutionEnvironment = require('fbjs/lib/ExecutionEnvironment');\nvar PooledClass = require('./PooledClass');\nvar ReactDOMComponentTree = require('./ReactDOMComponentTree');\nvar ReactUpdates = require('./ReactUpdates');\n\nvar getEventTarget = require('./getEventTarget');\nvar getUnboundedScrollPosition = require('fbjs/lib/getUnboundedScrollPosition');\n\n/**\n * Find the deepest React component completely containing the root of the\n * passed-in instance (for use when entire React trees are nested within each\n * other). If React trees are not nested, returns null.\n */\nfunction findParent(inst) {\n  // TODO: It may be a good idea to cache this to prevent unnecessary DOM\n  // traversal, but caching is difficult to do correctly without using a\n  // mutation observer to listen for all DOM changes.\n  while (inst._hostParent) {\n    inst = inst._hostParent;\n  }\n  var rootNode = ReactDOMComponentTree.getNodeFromInstance(inst);\n  var container = rootNode.parentNode;\n  return ReactDOMComponentTree.getClosestInstanceFromNode(container);\n}\n\n// Used to store ancestor hierarchy in top level callback\nfunction TopLevelCallbackBookKeeping(topLevelType, nativeEvent) {\n  this.topLevelType = topLevelType;\n  this.nativeEvent = nativeEvent;\n  this.ancestors = [];\n}\n_assign(TopLevelCallbackBookKeeping.prototype, {\n  destructor: function () {\n    this.topLevelType = null;\n    this.nativeEvent = null;\n    this.ancestors.length = 0;\n  }\n});\nPooledClass.addPoolingTo(TopLevelCallbackBookKeeping, PooledClass.twoArgumentPooler);\n\nfunction handleTopLevelImpl(bookKeeping) {\n  var nativeEventTarget = getEventTarget(bookKeeping.nativeEvent);\n  var targetInst = ReactDOMComponentTree.getClosestInstanceFromNode(nativeEventTarget);\n\n  // Loop through the hierarchy, in case there's any nested components.\n  // It's important that we build the array of ancestors before calling any\n  // event handlers, because event handlers can modify the DOM, leading to\n  // inconsistencies with ReactMount's node cache. See #1105.\n  var ancestor = targetInst;\n  do {\n    bookKeeping.ancestors.push(ancestor);\n    ancestor = ancestor && findParent(ancestor);\n  } while (ancestor);\n\n  for (var i = 0; i < bookKeeping.ancestors.length; i++) {\n    targetInst = bookKeeping.ancestors[i];\n    ReactEventListener._handleTopLevel(bookKeeping.topLevelType, targetInst, bookKeeping.nativeEvent, getEventTarget(bookKeeping.nativeEvent));\n  }\n}\n\nfunction scrollValueMonitor(cb) {\n  var scrollPosition = getUnboundedScrollPosition(window);\n  cb(scrollPosition);\n}\n\nvar ReactEventListener = {\n  _enabled: true,\n  _handleTopLevel: null,\n\n  WINDOW_HANDLE: ExecutionEnvironment.canUseDOM ? window : null,\n\n  setHandleTopLevel: function (handleTopLevel) {\n    ReactEventListener._handleTopLevel = handleTopLevel;\n  },\n\n  setEnabled: function (enabled) {\n    ReactEventListener._enabled = !!enabled;\n  },\n\n  isEnabled: function () {\n    return ReactEventListener._enabled;\n  },\n\n  /**\n   * Traps top-level events by using event bubbling.\n   *\n   * @param {string} topLevelType Record from `EventConstants`.\n   * @param {string} handlerBaseName Event name (e.g. \"click\").\n   * @param {object} element Element on which to attach listener.\n   * @return {?object} An object with a remove function which will forcefully\n   *                  remove the listener.\n   * @internal\n   */\n  trapBubbledEvent: function (topLevelType, handlerBaseName, element) {\n    if (!element) {\n      return null;\n    }\n    return EventListener.listen(element, handlerBaseName, ReactEventListener.dispatchEvent.bind(null, topLevelType));\n  },\n\n  /**\n   * Traps a top-level event by using event capturing.\n   *\n   * @param {string} topLevelType Record from `EventConstants`.\n   * @param {string} handlerBaseName Event name (e.g. \"click\").\n   * @param {object} element Element on which to attach listener.\n   * @return {?object} An object with a remove function which will forcefully\n   *                  remove the listener.\n   * @internal\n   */\n  trapCapturedEvent: function (topLevelType, handlerBaseName, element) {\n    if (!element) {\n      return null;\n    }\n    return EventListener.capture(element, handlerBaseName, ReactEventListener.dispatchEvent.bind(null, topLevelType));\n  },\n\n  monitorScrollValue: function (refresh) {\n    var callback = scrollValueMonitor.bind(null, refresh);\n    EventListener.listen(window, 'scroll', callback);\n  },\n\n  dispatchEvent: function (topLevelType, nativeEvent) {\n    if (!ReactEventListener._enabled) {\n      return;\n    }\n\n    var bookKeeping = TopLevelCallbackBookKeeping.getPooled(topLevelType, nativeEvent);\n    try {\n      // Event queue being processed in the same cycle allows\n      // `preventDefault`.\n      ReactUpdates.batchedUpdates(handleTopLevelImpl, bookKeeping);\n    } finally {\n      TopLevelCallbackBookKeeping.release(bookKeeping);\n    }\n  }\n};\n\nmodule.exports = ReactEventListener;",
     {
-      "./ReactDOMComponentTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
       "./PooledClass": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/PooledClass.js",
+      "./ReactDOMComponentTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
       "./ReactUpdates": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdates.js",
       "./getEventTarget": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/getEventTarget.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
@@ -8347,11 +8347,11 @@
       "./DOMProperty": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMProperty.js",
       "./EventPluginHub": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPluginHub.js",
       "./EventPluginUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPluginUtils.js",
-      "./ReactUpdates": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdates.js",
       "./ReactBrowserEventEmitter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactBrowserEventEmitter.js",
+      "./ReactUpdates": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdates.js",
       "./ReactEmptyComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactEmptyComponent.js",
-      "./ReactComponentEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactComponentEnvironment.js",
-      "./ReactHostComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactHostComponent.js"
+      "./ReactHostComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactHostComponent.js",
+      "./ReactComponentEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactComponentEnvironment.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInjection.js",
@@ -8363,8 +8363,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInputSelection.js": [
     "/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar ReactDOMSelection = require('./ReactDOMSelection');\n\nvar containsNode = require('fbjs/lib/containsNode');\nvar focusNode = require('fbjs/lib/focusNode');\nvar getActiveElement = require('fbjs/lib/getActiveElement');\n\nfunction isInDocument(node) {\n  return containsNode(document.documentElement, node);\n}\n\n/**\n * @ReactInputSelection: React input selection module. Based on Selection.js,\n * but modified to be suitable for react and has a couple of bug fixes (doesn't\n * assume buttons have range selections allowed).\n * Input selection module for React.\n */\nvar ReactInputSelection = {\n  hasSelectionCapabilities: function (elem) {\n    var nodeName = elem && elem.nodeName && elem.nodeName.toLowerCase();\n    return nodeName && (nodeName === 'input' && elem.type === 'text' || nodeName === 'textarea' || elem.contentEditable === 'true');\n  },\n\n  getSelectionInformation: function () {\n    var focusedElem = getActiveElement();\n    return {\n      focusedElem: focusedElem,\n      selectionRange: ReactInputSelection.hasSelectionCapabilities(focusedElem) ? ReactInputSelection.getSelection(focusedElem) : null\n    };\n  },\n\n  /**\n   * @restoreSelection: If any selection information was potentially lost,\n   * restore it. This is useful when performing operations that could remove dom\n   * nodes and place them back in, resulting in focus being lost.\n   */\n  restoreSelection: function (priorSelectionInformation) {\n    var curFocusedElem = getActiveElement();\n    var priorFocusedElem = priorSelectionInformation.focusedElem;\n    var priorSelectionRange = priorSelectionInformation.selectionRange;\n    if (curFocusedElem !== priorFocusedElem && isInDocument(priorFocusedElem)) {\n      if (ReactInputSelection.hasSelectionCapabilities(priorFocusedElem)) {\n        ReactInputSelection.setSelection(priorFocusedElem, priorSelectionRange);\n      }\n      focusNode(priorFocusedElem);\n    }\n  },\n\n  /**\n   * @getSelection: Gets the selection bounds of a focused textarea, input or\n   * contentEditable node.\n   * -@input: Look up selection bounds of this input\n   * -@return {start: selectionStart, end: selectionEnd}\n   */\n  getSelection: function (input) {\n    var selection;\n\n    if ('selectionStart' in input) {\n      // Modern browser with input or textarea.\n      selection = {\n        start: input.selectionStart,\n        end: input.selectionEnd\n      };\n    } else if (document.selection && input.nodeName && input.nodeName.toLowerCase() === 'input') {\n      // IE8 input.\n      var range = document.selection.createRange();\n      // There can only be one selection per document in IE, so it must\n      // be in our element.\n      if (range.parentElement() === input) {\n        selection = {\n          start: -range.moveStart('character', -input.value.length),\n          end: -range.moveEnd('character', -input.value.length)\n        };\n      }\n    } else {\n      // Content editable or old IE textarea.\n      selection = ReactDOMSelection.getOffsets(input);\n    }\n\n    return selection || { start: 0, end: 0 };\n  },\n\n  /**\n   * @setSelection: Sets the selection bounds of a textarea or input and focuses\n   * the input.\n   * -@input     Set selection bounds of this input or textarea\n   * -@offsets   Object of same form that is returned from get*\n   */\n  setSelection: function (input, offsets) {\n    var start = offsets.start;\n    var end = offsets.end;\n    if (end === undefined) {\n      end = start;\n    }\n\n    if ('selectionStart' in input) {\n      input.selectionStart = start;\n      input.selectionEnd = Math.min(end, input.value.length);\n    } else if (document.selection && input.nodeName && input.nodeName.toLowerCase() === 'input') {\n      var range = input.createTextRange();\n      range.collapse(true);\n      range.moveStart('character', start);\n      range.moveEnd('character', end - start);\n      range.select();\n    } else {\n      ReactDOMSelection.setOffsets(input, offsets);\n    }\n  }\n};\n\nmodule.exports = ReactInputSelection;",
     {
-      "fbjs/lib/getActiveElement": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/getActiveElement.js",
       "fbjs/lib/focusNode": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/focusNode.js",
+      "fbjs/lib/getActiveElement": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/getActiveElement.js",
       "./ReactDOMSelection": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMSelection.js",
       "fbjs/lib/containsNode": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/containsNode.js"
     },
@@ -8437,15 +8437,15 @@
       "./ReactFeatureFlags": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactFeatureFlags.js",
       "./ReactInstanceMap": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInstanceMap.js",
       "./shouldUpdateReactComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/shouldUpdateReactComponent.js",
-      "./ReactDOMContainerInfo": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMContainerInfo.js",
-      "./ReactMarkupChecksum": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactMarkupChecksum.js",
-      "react/lib/React": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/React.js",
       "react/lib/ReactCurrentOwner": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactCurrentOwner.js",
+      "react/lib/React": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/React.js",
       "fbjs/lib/emptyObject": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyObject.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
+      "./ReactMarkupChecksum": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactMarkupChecksum.js",
       "./ReactUpdateQueue": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdateQueue.js",
       "./setInnerHTML": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/setInnerHTML.js",
+      "./ReactDOMContainerInfo": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMContainerInfo.js",
       "./DOMLazyTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/DOMLazyTree.js",
       "./ReactBrowserEventEmitter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactBrowserEventEmitter.js",
       "./instantiateReactComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/instantiateReactComponent.js"
@@ -8484,8 +8484,8 @@
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
-      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
-      "react/lib/React": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/React.js"
+      "react/lib/React": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/React.js",
+      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactNodeTypes.js",
@@ -8616,8 +8616,8 @@
       "./ReactInstanceMap": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInstanceMap.js",
       "./ReactInstrumentation": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInstrumentation.js",
       "./ReactUpdates": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactUpdates.js",
-      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "react/lib/ReactCurrentOwner": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactCurrentOwner.js",
+      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
     },
     {
@@ -8672,12 +8672,12 @@
     {
       "./EventPropagators": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPropagators.js",
       "./ReactDOMComponentTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
-      "./ReactInputSelection": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInputSelection.js",
       "./SyntheticEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticEvent.js",
       "./isTextInputElement": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/isTextInputElement.js",
       "fbjs/lib/ExecutionEnvironment": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
       "fbjs/lib/shallowEqual": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/shallowEqual.js",
-      "fbjs/lib/getActiveElement": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/getActiveElement.js"
+      "fbjs/lib/getActiveElement": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/getActiveElement.js",
+      "./ReactInputSelection": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInputSelection.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SelectEventPlugin.js",
@@ -8697,17 +8697,17 @@
       "./SyntheticMouseEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticMouseEvent.js",
       "./SyntheticUIEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticUIEvent.js",
       "./getEventCharCode": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/getEventCharCode.js",
-      "./SyntheticClipboardEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticClipboardEvent.js",
+      "fbjs/lib/emptyFunction": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyFunction.js",
+      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
+      "fbjs/lib/EventListener": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/EventListener.js",
       "./SyntheticAnimationEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticAnimationEvent.js",
+      "./SyntheticClipboardEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticClipboardEvent.js",
       "./SyntheticFocusEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticFocusEvent.js",
-      "./SyntheticDragEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticDragEvent.js",
       "./SyntheticTouchEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticTouchEvent.js",
       "./SyntheticTransitionEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticTransitionEvent.js",
+      "./SyntheticDragEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticDragEvent.js",
       "./SyntheticWheelEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticWheelEvent.js",
-      "./SyntheticKeyboardEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticKeyboardEvent.js",
-      "fbjs/lib/EventListener": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/EventListener.js",
-      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
-      "fbjs/lib/emptyFunction": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyFunction.js"
+      "./SyntheticKeyboardEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticKeyboardEvent.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SimpleEventPlugin.js",
@@ -8768,10 +8768,10 @@
     "(function (process){\n/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar _assign = require('object-assign');\n\nvar PooledClass = require('./PooledClass');\n\nvar emptyFunction = require('fbjs/lib/emptyFunction');\nvar warning = require('fbjs/lib/warning');\n\nvar didWarnForAddedNewProperty = false;\nvar isProxySupported = typeof Proxy === 'function';\n\nvar shouldBeReleasedProperties = ['dispatchConfig', '_targetInst', 'nativeEvent', 'isDefaultPrevented', 'isPropagationStopped', '_dispatchListeners', '_dispatchInstances'];\n\n/**\n * @interface Event\n * @see http://www.w3.org/TR/DOM-Level-3-Events/\n */\nvar EventInterface = {\n  type: null,\n  target: null,\n  // currentTarget is set when dispatching; no use in copying it here\n  currentTarget: emptyFunction.thatReturnsNull,\n  eventPhase: null,\n  bubbles: null,\n  cancelable: null,\n  timeStamp: function (event) {\n    return event.timeStamp || Date.now();\n  },\n  defaultPrevented: null,\n  isTrusted: null\n};\n\n/**\n * Synthetic events are dispatched by event plugins, typically in response to a\n * top-level event delegation handler.\n *\n * These systems should generally use pooling to reduce the frequency of garbage\n * collection. The system should check `isPersistent` to determine whether the\n * event should be released into the pool after being dispatched. Users that\n * need a persisted event should invoke `persist`.\n *\n * Synthetic events (and subclasses) implement the DOM Level 3 Events API by\n * normalizing browser quirks. Subclasses do not necessarily have to implement a\n * DOM interface; custom application-specific events can also subclass this.\n *\n * @param {object} dispatchConfig Configuration used to dispatch this event.\n * @param {*} targetInst Marker identifying the event target.\n * @param {object} nativeEvent Native browser event.\n * @param {DOMEventTarget} nativeEventTarget Target node.\n */\nfunction SyntheticEvent(dispatchConfig, targetInst, nativeEvent, nativeEventTarget) {\n  if (process.env.NODE_ENV !== 'production') {\n    // these have a getter/setter for warnings\n    delete this.nativeEvent;\n    delete this.preventDefault;\n    delete this.stopPropagation;\n  }\n\n  this.dispatchConfig = dispatchConfig;\n  this._targetInst = targetInst;\n  this.nativeEvent = nativeEvent;\n\n  var Interface = this.constructor.Interface;\n  for (var propName in Interface) {\n    if (!Interface.hasOwnProperty(propName)) {\n      continue;\n    }\n    if (process.env.NODE_ENV !== 'production') {\n      delete this[propName]; // this has a getter/setter for warnings\n    }\n    var normalize = Interface[propName];\n    if (normalize) {\n      this[propName] = normalize(nativeEvent);\n    } else {\n      if (propName === 'target') {\n        this.target = nativeEventTarget;\n      } else {\n        this[propName] = nativeEvent[propName];\n      }\n    }\n  }\n\n  var defaultPrevented = nativeEvent.defaultPrevented != null ? nativeEvent.defaultPrevented : nativeEvent.returnValue === false;\n  if (defaultPrevented) {\n    this.isDefaultPrevented = emptyFunction.thatReturnsTrue;\n  } else {\n    this.isDefaultPrevented = emptyFunction.thatReturnsFalse;\n  }\n  this.isPropagationStopped = emptyFunction.thatReturnsFalse;\n  return this;\n}\n\n_assign(SyntheticEvent.prototype, {\n  preventDefault: function () {\n    this.defaultPrevented = true;\n    var event = this.nativeEvent;\n    if (!event) {\n      return;\n    }\n\n    if (event.preventDefault) {\n      event.preventDefault();\n      // eslint-disable-next-line valid-typeof\n    } else if (typeof event.returnValue !== 'unknown') {\n      event.returnValue = false;\n    }\n    this.isDefaultPrevented = emptyFunction.thatReturnsTrue;\n  },\n\n  stopPropagation: function () {\n    var event = this.nativeEvent;\n    if (!event) {\n      return;\n    }\n\n    if (event.stopPropagation) {\n      event.stopPropagation();\n      // eslint-disable-next-line valid-typeof\n    } else if (typeof event.cancelBubble !== 'unknown') {\n      // The ChangeEventPlugin registers a \"propertychange\" event for\n      // IE. This event does not support bubbling or cancelling, and\n      // any references to cancelBubble throw \"Member not found\".  A\n      // typeof check of \"unknown\" circumvents this issue (and is also\n      // IE specific).\n      event.cancelBubble = true;\n    }\n\n    this.isPropagationStopped = emptyFunction.thatReturnsTrue;\n  },\n\n  /**\n   * We release all dispatched `SyntheticEvent`s after each event loop, adding\n   * them back into the pool. This allows a way to hold onto a reference that\n   * won't be added back into the pool.\n   */\n  persist: function () {\n    this.isPersistent = emptyFunction.thatReturnsTrue;\n  },\n\n  /**\n   * Checks if this event should be released back into the pool.\n   *\n   * @return {boolean} True if this should not be released, false otherwise.\n   */\n  isPersistent: emptyFunction.thatReturnsFalse,\n\n  /**\n   * `PooledClass` looks for `destructor` on each instance it releases.\n   */\n  destructor: function () {\n    var Interface = this.constructor.Interface;\n    for (var propName in Interface) {\n      if (process.env.NODE_ENV !== 'production') {\n        Object.defineProperty(this, propName, getPooledWarningPropertyDefinition(propName, Interface[propName]));\n      } else {\n        this[propName] = null;\n      }\n    }\n    for (var i = 0; i < shouldBeReleasedProperties.length; i++) {\n      this[shouldBeReleasedProperties[i]] = null;\n    }\n    if (process.env.NODE_ENV !== 'production') {\n      Object.defineProperty(this, 'nativeEvent', getPooledWarningPropertyDefinition('nativeEvent', null));\n      Object.defineProperty(this, 'preventDefault', getPooledWarningPropertyDefinition('preventDefault', emptyFunction));\n      Object.defineProperty(this, 'stopPropagation', getPooledWarningPropertyDefinition('stopPropagation', emptyFunction));\n    }\n  }\n});\n\nSyntheticEvent.Interface = EventInterface;\n\nif (process.env.NODE_ENV !== 'production') {\n  if (isProxySupported) {\n    /*eslint-disable no-func-assign */\n    SyntheticEvent = new Proxy(SyntheticEvent, {\n      construct: function (target, args) {\n        return this.apply(target, Object.create(target.prototype), args);\n      },\n      apply: function (constructor, that, args) {\n        return new Proxy(constructor.apply(that, args), {\n          set: function (target, prop, value) {\n            if (prop !== 'isPersistent' && !target.constructor.Interface.hasOwnProperty(prop) && shouldBeReleasedProperties.indexOf(prop) === -1) {\n              process.env.NODE_ENV !== 'production' ? warning(didWarnForAddedNewProperty || target.isPersistent(), \"This synthetic event is reused for performance reasons. If you're \" + \"seeing this, you're adding a new property in the synthetic event object. \" + 'The property is never released. See ' + 'https://fb.me/react-event-pooling for more information.') : void 0;\n              didWarnForAddedNewProperty = true;\n            }\n            target[prop] = value;\n            return true;\n          }\n        });\n      }\n    });\n    /*eslint-enable no-func-assign */\n  }\n}\n/**\n * Helper to reduce boilerplate when creating subclasses.\n *\n * @param {function} Class\n * @param {?object} Interface\n */\nSyntheticEvent.augmentClass = function (Class, Interface) {\n  var Super = this;\n\n  var E = function () {};\n  E.prototype = Super.prototype;\n  var prototype = new E();\n\n  _assign(prototype, Class.prototype);\n  Class.prototype = prototype;\n  Class.prototype.constructor = Class;\n\n  Class.Interface = _assign({}, Super.Interface, Interface);\n  Class.augmentClass = Super.augmentClass;\n\n  PooledClass.addPoolingTo(Class, PooledClass.fourArgumentPooler);\n};\n\nPooledClass.addPoolingTo(SyntheticEvent, PooledClass.fourArgumentPooler);\n\nmodule.exports = SyntheticEvent;\n\n/**\n  * Helper to nullify syntheticEvent instance properties when destructing\n  *\n  * @param {object} SyntheticEvent\n  * @param {String} propName\n  * @return {object} defineProperty object\n  */\nfunction getPooledWarningPropertyDefinition(propName, getVal) {\n  var isFunction = typeof getVal === 'function';\n  return {\n    configurable: true,\n    set: set,\n    get: get\n  };\n\n  function set(val) {\n    var action = isFunction ? 'setting the method' : 'setting the property';\n    warn(action, 'This is effectively a no-op');\n    return val;\n  }\n\n  function get() {\n    var action = isFunction ? 'accessing the method' : 'accessing the property';\n    var result = isFunction ? 'This is a no-op function' : 'This is set to null';\n    warn(action, result);\n    return getVal;\n  }\n\n  function warn(action, result) {\n    var warningCondition = false;\n    process.env.NODE_ENV !== 'production' ? warning(warningCondition, \"This synthetic event is reused for performance reasons. If you're seeing this, \" + \"you're %s `%s` on a released/nullified synthetic event. %s. \" + 'If you must keep the original synthetic event around, use event.persist(). ' + 'See https://fb.me/react-event-pooling for more information.', action, propName, result) : void 0;\n  }\n}\n}).call(this,require('_process'))\n",
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
-      "./PooledClass": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/PooledClass.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
       "fbjs/lib/emptyFunction": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyFunction.js",
-      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
+      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
+      "./PooledClass": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/PooledClass.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticEvent.js",
@@ -8861,8 +8861,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticUIEvent.js": [
     "/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar SyntheticEvent = require('./SyntheticEvent');\n\nvar getEventTarget = require('./getEventTarget');\n\n/**\n * @interface UIEvent\n * @see http://www.w3.org/TR/DOM-Level-3-Events/\n */\nvar UIEventInterface = {\n  view: function (event) {\n    if (event.view) {\n      return event.view;\n    }\n\n    var target = getEventTarget(event);\n    if (target.window === target) {\n      // target is a window object\n      return target;\n    }\n\n    var doc = target.ownerDocument;\n    // TODO: Figure out why `ownerDocument` is sometimes undefined in IE8.\n    if (doc) {\n      return doc.defaultView || doc.parentWindow;\n    } else {\n      return window;\n    }\n  },\n  detail: function (event) {\n    return event.detail || 0;\n  }\n};\n\n/**\n * @param {object} dispatchConfig Configuration used to dispatch this event.\n * @param {string} dispatchMarker Marker identifying the event target.\n * @param {object} nativeEvent Native browser event.\n * @extends {SyntheticEvent}\n */\nfunction SyntheticUIEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeEventTarget) {\n  return SyntheticEvent.call(this, dispatchConfig, dispatchMarker, nativeEvent, nativeEventTarget);\n}\n\nSyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);\n\nmodule.exports = SyntheticUIEvent;",
     {
-      "./SyntheticEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticEvent.js",
-      "./getEventTarget": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/getEventTarget.js"
+      "./getEventTarget": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/getEventTarget.js",
+      "./SyntheticEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticEvent.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticUIEvent.js",
@@ -8938,8 +8938,8 @@
       "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
       "./ReactPropTypesSecret": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactPropTypesSecret.js",
       "./ReactPropTypeLocationNames": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactPropTypeLocationNames.js",
-      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "react/lib/ReactComponentTreeHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactComponentTreeHook.js",
+      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
     },
     {
@@ -8988,11 +8988,11 @@
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
-      "./ReactInstanceMap": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInstanceMap.js",
       "./ReactDOMComponentTree": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
+      "./ReactInstanceMap": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactInstanceMap.js",
       "./getHostComponentFromComposite": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/getHostComponentFromComposite.js",
-      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "react/lib/ReactCurrentOwner": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactCurrentOwner.js",
+      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
     },
     {
@@ -9007,9 +9007,9 @@
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./KeyEscapeUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/KeyEscapeUtils.js",
-      "./traverseAllChildren": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/traverseAllChildren.js",
+      "react/lib/ReactComponentTreeHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactComponentTreeHook.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
-      "react/lib/ReactComponentTreeHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactComponentTreeHook.js"
+      "./traverseAllChildren": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/traverseAllChildren.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/flattenChildren.js",
@@ -9144,11 +9144,11 @@
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
       "./ReactEmptyComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactEmptyComponent.js",
-      "./ReactHostComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactHostComponent.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
+      "react/lib/getNextDebugID": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/getNextDebugID.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
-      "react/lib/getNextDebugID": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/getNextDebugID.js",
+      "./ReactHostComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactHostComponent.js",
       "./ReactCompositeComponent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactCompositeComponent.js"
     },
     {
@@ -9258,11 +9258,11 @@
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
       "./KeyEscapeUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/KeyEscapeUtils.js",
-      "./getIteratorFn": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/getIteratorFn.js",
       "./ReactElementSymbol": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ReactElementSymbol.js",
-      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
+      "./getIteratorFn": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/getIteratorFn.js",
       "react/lib/ReactCurrentOwner": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactCurrentOwner.js",
-      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js"
+      "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
+      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/traverseAllChildren.js",
@@ -9276,8 +9276,8 @@
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
-      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
-      "fbjs/lib/emptyFunction": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyFunction.js"
+      "fbjs/lib/emptyFunction": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/emptyFunction.js",
+      "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/validateDOMNesting.js",
@@ -9354,8 +9354,8 @@
     "(function (process){\n/* eslint-disable global-require */\n\n'use strict';\n\nif (!module.hot || process.env.NODE_ENV === 'production') {\n  module.exports = require('./index.prod');\n} else {\n  module.exports = require('./index.dev');\n}\n}).call(this,require('_process'))\n",
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
-      "./index.prod": "/Users/jasonkao/stuyspec/client-app/node_modules/react-hot-loader/lib/index.prod.js",
-      "./index.dev": "/Users/jasonkao/stuyspec/client-app/node_modules/react-hot-loader/lib/index.dev.js"
+      "./index.dev": "/Users/jasonkao/stuyspec/client-app/node_modules/react-hot-loader/lib/index.dev.js",
+      "./index.prod": "/Users/jasonkao/stuyspec/client-app/node_modules/react-hot-loader/lib/index.prod.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-hot-loader/lib/index.js",
@@ -9379,8 +9379,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/react-hot-loader/lib/patch.dev.js": [
     "'use strict';\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nvar React = require('react');\nvar createProxy = require('react-proxy').default;\nvar global = require('global');\n\nvar ComponentMap = function () {\n  function ComponentMap(useWeakMap) {\n    _classCallCheck(this, ComponentMap);\n\n    if (useWeakMap) {\n      this.wm = new WeakMap();\n    } else {\n      this.slots = {};\n    }\n  }\n\n  _createClass(ComponentMap, [{\n    key: 'getSlot',\n    value: function getSlot(type) {\n      var key = type.displayName || type.name || 'Unknown';\n      if (!this.slots[key]) {\n        this.slots[key] = [];\n      }\n      return this.slots[key];\n    }\n  }, {\n    key: 'get',\n    value: function get(type) {\n      if (this.wm) {\n        return this.wm.get(type);\n      }\n\n      var slot = this.getSlot(type);\n      for (var i = 0; i < slot.length; i++) {\n        if (slot[i].key === type) {\n          return slot[i].value;\n        }\n      }\n\n      return undefined;\n    }\n  }, {\n    key: 'set',\n    value: function set(type, value) {\n      if (this.wm) {\n        this.wm.set(type, value);\n      } else {\n        var slot = this.getSlot(type);\n        for (var i = 0; i < slot.length; i++) {\n          if (slot[i].key === type) {\n            slot[i].value = value;\n            return;\n          }\n        }\n        slot.push({ key: type, value: value });\n      }\n    }\n  }, {\n    key: 'has',\n    value: function has(type) {\n      if (this.wm) {\n        return this.wm.has(type);\n      }\n\n      var slot = this.getSlot(type);\n      for (var i = 0; i < slot.length; i++) {\n        if (slot[i].key === type) {\n          return true;\n        }\n      }\n      return false;\n    }\n  }]);\n\n  return ComponentMap;\n}();\n\nvar proxiesByID = void 0;\nvar didWarnAboutID = void 0;\nvar hasCreatedElementsByType = void 0;\nvar idsByType = void 0;\n\nvar hooks = {\n  register: function register(type, uniqueLocalName, fileName) {\n    if (typeof type !== 'function') {\n      return;\n    }\n    if (!uniqueLocalName || !fileName) {\n      return;\n    }\n    if (typeof uniqueLocalName !== 'string' || typeof fileName !== 'string') {\n      return;\n    }\n    var id = fileName + '#' + uniqueLocalName; // eslint-disable-line prefer-template\n    if (!idsByType.has(type) && hasCreatedElementsByType.has(type)) {\n      if (!didWarnAboutID[id]) {\n        didWarnAboutID[id] = true;\n        var baseName = fileName.replace(/^.*[\\\\\\/]/, '');\n        console.error('React Hot Loader: ' + uniqueLocalName + ' in ' + fileName + ' will not hot reload ' + ('correctly because ' + baseName + ' uses <' + uniqueLocalName + ' /> during ') + ('module definition. For hot reloading to work, move ' + uniqueLocalName + ' ') + ('into a separate file and import it from ' + baseName + '.'));\n      }\n      return;\n    }\n\n    // Remember the ID.\n    idsByType.set(type, id);\n\n    // We use React Proxy to generate classes that behave almost\n    // the same way as the original classes but are updatable with\n    // new versions without destroying original instances.\n    if (!proxiesByID[id]) {\n      proxiesByID[id] = createProxy(type);\n    } else {\n      proxiesByID[id].update(type);\n    }\n  },\n  reset: function reset(useWeakMap) {\n    proxiesByID = {};\n    didWarnAboutID = {};\n    hasCreatedElementsByType = new ComponentMap(useWeakMap);\n    idsByType = new ComponentMap(useWeakMap);\n  }\n};\n\nhooks.reset(typeof WeakMap === 'function');\n\nfunction resolveType(type) {\n  // We only care about composite components\n  if (typeof type !== 'function') {\n    return type;\n  }\n\n  hasCreatedElementsByType.set(type, true);\n\n  // When available, give proxy class to React instead of the real class.\n  var id = idsByType.get(type);\n  if (!id) {\n    return type;\n  }\n\n  var proxy = proxiesByID[id];\n  if (!proxy) {\n    return type;\n  }\n\n  return proxy.get();\n}\n\nvar createElement = React.createElement;\nfunction patchedCreateElement(type) {\n  // Trick React into rendering a proxy so that\n  // its state is preserved when the class changes.\n  // This will update the proxy if it's for a known type.\n  var resolvedType = resolveType(type);\n\n  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {\n    args[_key - 1] = arguments[_key];\n  }\n\n  return createElement.apply(undefined, [resolvedType].concat(args));\n}\npatchedCreateElement.isPatchedByReactHotLoader = true;\n\nfunction patchedCreateFactory(type) {\n  // Patch React.createFactory to use patched createElement\n  // because the original implementation uses the internal,\n  // unpatched ReactElement.createElement\n  var factory = patchedCreateElement.bind(null, type);\n  factory.type = type;\n  return factory;\n}\npatchedCreateFactory.isPatchedByReactHotLoader = true;\n\nif (typeof global.__REACT_HOT_LOADER__ === 'undefined') {\n  React.createElement = patchedCreateElement;\n  React.createFactory = patchedCreateFactory;\n  global.__REACT_HOT_LOADER__ = hooks;\n}",
     {
-      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
       "global": "/Users/jasonkao/stuyspec/client-app/node_modules/global/window.js",
+      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
       "react-proxy": "/Users/jasonkao/stuyspec/client-app/node_modules/react-proxy/modules/index.js"
     },
     {
@@ -9393,8 +9393,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/react-hot-loader/lib/patch.js": [
     "(function (process){\n/* eslint-disable global-require */\n\n'use strict';\n\nif (!module.hot || process.env.NODE_ENV === 'production') {\n  module.exports = require('./patch.prod');\n} else {\n  module.exports = require('./patch.dev');\n}\n}).call(this,require('_process'))\n",
     {
-      "./patch.prod": "/Users/jasonkao/stuyspec/client-app/node_modules/react-hot-loader/lib/patch.prod.js",
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
+      "./patch.prod": "/Users/jasonkao/stuyspec/client-app/node_modules/react-hot-loader/lib/patch.prod.js",
       "./patch.dev": "/Users/jasonkao/stuyspec/client-app/node_modules/react-hot-loader/lib/patch.dev.js"
     },
     {
@@ -9417,9 +9417,9 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/lib/SheetsRegistryProvider.js": [
     "'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _propTypes = require('prop-types');\n\nvar _jss = require('jss');\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar SheetsRegistryProvider = function (_Component) {\n  _inherits(SheetsRegistryProvider, _Component);\n\n  function SheetsRegistryProvider() {\n    _classCallCheck(this, SheetsRegistryProvider);\n\n    return _possibleConstructorReturn(this, (SheetsRegistryProvider.__proto__ || Object.getPrototypeOf(SheetsRegistryProvider)).apply(this, arguments));\n  }\n\n  _createClass(SheetsRegistryProvider, [{\n    key: 'getChildContext',\n    value: function getChildContext() {\n      return {\n        jssSheetsRegistry: this.props.registry\n      };\n    }\n  }, {\n    key: 'render',\n    value: function render() {\n      var children = this.props.children;\n\n      return _react.Children.count(children) > 1 ? _react2['default'].createElement(\n        'div',\n        null,\n        children\n      ) : children;\n    }\n  }]);\n\n  return SheetsRegistryProvider;\n}(_react.Component);\n\nSheetsRegistryProvider.propTypes = {\n  registry: (0, _propTypes.instanceOf)(_jss.SheetsRegistry).isRequired,\n  children: _propTypes.node.isRequired\n};\nSheetsRegistryProvider.childContextTypes = {\n  jssSheetsRegistry: (0, _propTypes.instanceOf)(_jss.SheetsRegistry).isRequired\n};\nexports['default'] = SheetsRegistryProvider;",
     {
-      "jss": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/index.js",
       "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
-      "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js"
+      "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js",
+      "jss": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/index.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/lib/SheetsRegistryProvider.js",
@@ -9442,11 +9442,11 @@
     "(function (process){\n'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _propTypes = require('prop-types');\n\nvar _jss = require('jss');\n\nvar _compose = require('./compose');\n\nvar _compose2 = _interopRequireDefault(_compose);\n\nvar _getDisplayName = require('./getDisplayName');\n\nvar _getDisplayName2 = _interopRequireDefault(_getDisplayName);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar refNs = 'ref-' + String(Math.random()).substr(2);\nvar refs = function refs(sheet) {\n  return sheet[refNs] || 0;\n};\nvar dec = function dec(sheet) {\n  return --sheet[refNs];\n};\nvar inc = function inc(sheet) {\n  return ++sheet[refNs];\n};\n\n/**\n * Wrap a Component into a JSS Container Component.\n *\n * @param {Jss} jss\n * @param {Component} InnerComponent\n * @param {Object|StyleSheet} stylesOrSheet\n * @param {Object} [options]\n * @return {Component}\n */\n\nexports['default'] = function (jss, InnerComponent, stylesOrSheet) {\n  var _class, _temp;\n\n  var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};\n\n  var styles = stylesOrSheet;\n  var staticSheet = null;\n  var dynamicStyles = void 0;\n\n  // Accept StyleSheet instance.\n  if (stylesOrSheet && typeof stylesOrSheet.attach === 'function') {\n    staticSheet = stylesOrSheet;\n    styles = null;\n  }\n\n  var displayName = (0, _getDisplayName2['default'])(InnerComponent);\n\n  if (!options.meta) options.meta = displayName;\n\n  var dynamicSheetOptions = _extends({}, options, {\n    meta: options.meta + 'Dynamic',\n    link: true\n  });\n\n  function ref() {\n    if (!staticSheet) {\n      staticSheet = jss.createStyleSheet(styles, options);\n      dynamicStyles = (0, _compose2['default'])(staticSheet, (0, _jss.getDynamicStyles)(styles));\n    }\n    if (staticSheet[refNs] === undefined) staticSheet[refNs] = 0;\n    if (refs(staticSheet) === 0) staticSheet.attach();\n    inc(staticSheet);\n    return staticSheet;\n  }\n\n  function deref() {\n    if (dec(staticSheet) === 0) staticSheet.detach();\n  }\n\n  return _temp = _class = function (_Component) {\n    _inherits(Jss, _Component);\n\n    function Jss() {\n      _classCallCheck(this, Jss);\n\n      return _possibleConstructorReturn(this, (Jss.__proto__ || Object.getPrototypeOf(Jss)).apply(this, arguments));\n    }\n\n    _createClass(Jss, [{\n      key: 'componentWillMount',\n      value: function componentWillMount() {\n        this.staticSheet = ref();\n        if (this.dynamicSheet) this.dynamicSheet.attach();else if (dynamicStyles) {\n          this.dynamicSheet = jss.createStyleSheet(dynamicStyles, dynamicSheetOptions).update(this.props).attach();\n        }\n        var jssSheetsRegistry = this.context.jssSheetsRegistry;\n\n        if (jssSheetsRegistry) jssSheetsRegistry.add(this.staticSheet);\n      }\n    }, {\n      key: 'componentWillReceiveProps',\n      value: function componentWillReceiveProps(nextProps) {\n        if (this.dynamicSheet) {\n          this.dynamicSheet.update(nextProps);\n        }\n      }\n    }, {\n      key: 'componentWillUpdate',\n      value: function componentWillUpdate() {\n        if (process.env.NODE_ENV !== 'production') {\n          // Support React Hot Loader.\n          if (this.staticSheet !== staticSheet) {\n            this.staticSheet.detach();\n            this.staticSheet = ref();\n          }\n        }\n      }\n    }, {\n      key: 'componentWillUnmount',\n      value: function componentWillUnmount() {\n        if (this.staticSheet && !staticSheet) {\n          this.staticSheet.detach();\n          var jssSheetsRegistry = this.context.jssSheetsRegistry;\n\n          if (jssSheetsRegistry) jssSheetsRegistry.remove(this.staticSheet);\n        } else deref();\n        if (this.dynamicSheet) this.dynamicSheet.detach();\n      }\n    }, {\n      key: 'render',\n      value: function render() {\n        var sheet = this.dynamicSheet || this.staticSheet;\n        return _react2['default'].createElement(InnerComponent, _extends({ sheet: sheet, classes: sheet.classes }, this.props));\n      }\n    }]);\n\n    return Jss;\n  }(_react.Component), _class.InnerComponent = InnerComponent, _class.displayName = 'Jss(' + displayName + ')', _class.contextTypes = {\n    jssSheetsRegistry: (0, _propTypes.instanceOf)(_jss.SheetsRegistry)\n  }, _class.defaultProps = InnerComponent.defaultProps, _temp;\n};\n}).call(this,require('_process'))\n",
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
-      "./compose": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/lib/compose.js",
       "./getDisplayName": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/lib/getDisplayName.js",
-      "jss": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/index.js",
+      "./compose": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/lib/compose.js",
+      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
       "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js",
-      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js"
+      "jss": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/index.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/lib/createHoc.js",
@@ -9667,11 +9667,11 @@
     "'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _typeof = typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; };\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _StyleSheet = require('./StyleSheet');\n\nvar _StyleSheet2 = _interopRequireDefault(_StyleSheet);\n\nvar _PluginsRegistry = require('./PluginsRegistry');\n\nvar _PluginsRegistry2 = _interopRequireDefault(_PluginsRegistry);\n\nvar _plugins = require('./plugins');\n\nvar _plugins2 = _interopRequireDefault(_plugins);\n\nvar _sheets = require('./sheets');\n\nvar _sheets2 = _interopRequireDefault(_sheets);\n\nvar _generateClassName = require('./utils/generateClassName');\n\nvar _generateClassName2 = _interopRequireDefault(_generateClassName);\n\nvar _createRule2 = require('./utils/createRule');\n\nvar _createRule3 = _interopRequireDefault(_createRule2);\n\nvar _findRenderer = require('./utils/findRenderer');\n\nvar _findRenderer2 = _interopRequireDefault(_findRenderer);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nvar Jss = function () {\n  function Jss(options) {\n    _classCallCheck(this, Jss);\n\n    this.version = \"7.1.7\";\n    this.plugins = new _PluginsRegistry2['default']();\n\n    // eslint-disable-next-line prefer-spread\n    this.use.apply(this, _plugins2['default']);\n    this.setup(options);\n  }\n\n  _createClass(Jss, [{\n    key: 'setup',\n    value: function setup() {\n      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};\n\n      this.options = _extends({\n        generateClassName: options.generateClassName || _generateClassName2['default'],\n        insertionPoint: options.insertionPoint || 'jss'\n      }, options);\n      // eslint-disable-next-line prefer-spread\n      if (options.plugins) this.use.apply(this, options.plugins);\n      return this;\n    }\n\n    /**\n     * Create a Style Sheet.\n     */\n\n  }, {\n    key: 'createStyleSheet',\n    value: function createStyleSheet(styles) {\n      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};\n\n      var index = options.index;\n      if (typeof index !== 'number') {\n        index = _sheets2['default'].index === 0 ? 0 : _sheets2['default'].index + 1;\n      }\n      var sheet = new _StyleSheet2['default'](styles, _extends({\n        jss: this,\n        generateClassName: this.options.generateClassName,\n        insertionPoint: this.options.insertionPoint\n      }, options, {\n        index: index\n      }));\n      this.plugins.onProcessSheet(sheet);\n      return sheet;\n    }\n\n    /**\n     * Detach the Style Sheet and remove it from the registry.\n     */\n\n  }, {\n    key: 'removeStyleSheet',\n    value: function removeStyleSheet(sheet) {\n      sheet.detach();\n      _sheets2['default'].remove(sheet);\n      return this;\n    }\n\n    /**\n     * Create a rule without a Style Sheet.\n     */\n\n  }, {\n    key: 'createRule',\n    value: function createRule(name) {\n      var style = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};\n      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};\n\n      // Enable rule without name for inline styles.\n      if ((typeof name === 'undefined' ? 'undefined' : _typeof(name)) === 'object') {\n        options = style;\n        style = name;\n        name = undefined;\n      }\n\n      if (!options.classes) options.classes = {};\n      if (!options.jss) options.jss = this;\n      if (!options.Renderer) options.Renderer = (0, _findRenderer2['default'])(options);\n      if (!options.generateClassName) {\n        options.generateClassName = this.options.generateClassName || _generateClassName2['default'];\n      }\n\n      var rule = (0, _createRule3['default'])(name, style, options);\n      this.plugins.onProcessRule(rule);\n\n      return rule;\n    }\n\n    /**\n     * Register plugin. Passed function will be invoked with a rule instance.\n     */\n\n  }, {\n    key: 'use',\n    value: function use() {\n      var _this = this;\n\n      for (var _len = arguments.length, plugins = Array(_len), _key = 0; _key < _len; _key++) {\n        plugins[_key] = arguments[_key];\n      }\n\n      plugins.forEach(function (plugin) {\n        return _this.plugins.use(plugin);\n      });\n      return this;\n    }\n  }]);\n\n  return Jss;\n}();\n\nexports['default'] = Jss;",
     {
       "./sheets": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/sheets.js",
-      "./utils/createRule": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/createRule.js",
       "./utils/generateClassName": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/generateClassName.js",
+      "./utils/createRule": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/createRule.js",
+      "./PluginsRegistry": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/PluginsRegistry.js",
       "./StyleSheet": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/StyleSheet.js",
       "./plugins": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/index.js",
-      "./PluginsRegistry": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/PluginsRegistry.js",
       "./utils/findRenderer": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/findRenderer.js"
     },
     {
@@ -9760,8 +9760,8 @@
       "./SheetsRegistry": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/SheetsRegistry.js",
       "./utils/getDynamicStyles": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/getDynamicStyles.js",
       "./sheets": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/sheets.js",
-      "./RulesContainer": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/RulesContainer.js",
-      "./Jss": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/Jss.js"
+      "./Jss": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/Jss.js",
+      "./RulesContainer": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/RulesContainer.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/index.js",
@@ -9809,8 +9809,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/RegularRule.js": [
     "'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _typeof = typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; };\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _toCss = require('../utils/toCss');\n\nvar _toCss2 = _interopRequireDefault(_toCss);\n\nvar _toCssValue = require('../utils/toCssValue');\n\nvar _toCssValue2 = _interopRequireDefault(_toCssValue);\n\nvar _findClassNames = require('../utils/findClassNames');\n\nvar _findClassNames2 = _interopRequireDefault(_findClassNames);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nvar RegularRule = function () {\n\n  /**\n   * We expect `style` to be a plain object.\n   * To avoid original style object mutations, we clone it and hash it\n   * along the way.\n   * It is also the fastetst way.\n   * http://jsperf.com/lodash-deepclone-vs-jquery-extend-deep/6\n   */\n  function RegularRule(name, style, options) {\n    _classCallCheck(this, RegularRule);\n\n    this.type = 'regular';\n    var generateClassName = options.generateClassName,\n        sheet = options.sheet,\n        Renderer = options.Renderer;\n\n    this.name = name;\n    this.className = '';\n    this.options = options;\n    this.style = style;\n    if (options.className) this.className = options.className;else if (generateClassName) this.className = generateClassName(this, sheet);\n    this.selectorText = options.selector || '.' + this.className;\n    if (sheet) this.renderer = sheet.renderer;else if (Renderer) this.renderer = new Renderer();\n  }\n\n  /**\n   * Set selector string.\n   * Attenition: use this with caution. Most browser didn't implement\n   * selectorText setter, so this may result in rerendering of entire Style Sheet.\n   */\n\n\n  _createClass(RegularRule, [{\n    key: 'prop',\n\n\n    /**\n     * Get or set a style property.\n     */\n    value: function prop(name, value) {\n      var $name = typeof this.style[name] === 'function' ? '$' + name : name;\n      var currValue = this.style[$name];\n\n      // Its a setter.\n      if (value != null) {\n        // Don't do anything if the value has not changed.\n        if (currValue !== value) {\n          var jss = this.options.jss;\n\n          var newValue = jss ? jss.plugins.onChangeValue(value, name, this) : value;\n          Object.defineProperty(this.style, $name, {\n            value: newValue,\n            writable: true\n          }\n          // Only defined if option linked is true.\n          );if (this.renderable) this.renderer.setStyle(this.renderable, name, newValue);\n        }\n        return this;\n      }\n      // Its a getter, read the value from the DOM if its not cached.\n      if (this.renderable && currValue == null) {\n        currValue = this.renderer.getStyle(this.renderable, name\n        // Cache the value after we have got it from the DOM first time.\n        );this.prop(name, currValue);\n      }\n\n      return this.style[$name];\n    }\n\n    /**\n     * Apply rule to an element inline.\n     */\n\n  }, {\n    key: 'applyTo',\n    value: function applyTo(renderable) {\n      var json = this.toJSON();\n      for (var prop in json) {\n        this.renderer.setStyle(renderable, prop, json[prop]);\n      }return this;\n    }\n\n    /**\n     * Returns JSON representation of the rule.\n     * Fallbacks are not supported.\n     * Useful for inline styles.\n     */\n\n  }, {\n    key: 'toJSON',\n    value: function toJSON() {\n      var json = Object.create(null);\n      for (var prop in this.style) {\n        var value = this.style[prop];\n        var type = typeof value === 'undefined' ? 'undefined' : _typeof(value);\n        if (type === 'function') json[prop] = this.style['$' + prop];else if (type !== 'object') json[prop] = value;else if (Array.isArray(value)) json[prop] = (0, _toCssValue2['default'])(value);\n      }\n      return json;\n    }\n\n    /**\n     * Generates a CSS string.\n     */\n\n  }, {\n    key: 'toString',\n    value: function toString(options) {\n      return (0, _toCss2['default'])(this.selector, this.style, options);\n    }\n  }, {\n    key: 'selector',\n    set: function set(selector) {\n      var sheet = this.options.sheet;\n\n      // After we modify a selector, ref by old selector needs to be removed.\n\n      if (sheet) sheet.rules.unregister(this);\n\n      this.selectorText = selector;\n      this.className = (0, _findClassNames2['default'])(selector);\n\n      if (!this.renderable) {\n        // Register the rule with new selector.\n        if (sheet) sheet.rules.register(this);\n        return;\n      }\n\n      var changed = this.renderer.setSelector(this.renderable, selector);\n\n      if (changed && sheet) {\n        sheet.rules.register(this);\n        return;\n      }\n\n      // If selector setter is not implemented, rerender the sheet.\n      // We need to delete renderable from the rule, because when sheet.deploy()\n      // calls rule.toString, it will get the old selector.\n      delete this.renderable;\n      if (sheet) {\n        sheet.rules.register(this);\n        sheet.deploy().link();\n      }\n    }\n\n    /**\n     * Get selector string.\n     */\n    ,\n    get: function get() {\n      if (this.renderable) {\n        return this.renderer.getSelector(this.renderable);\n      }\n\n      return this.selectorText;\n    }\n  }]);\n\n  return RegularRule;\n}();\n\nexports['default'] = RegularRule;",
     {
-      "../utils/toCssValue": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/toCssValue.js",
       "../utils/findClassNames": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/findClassNames.js",
+      "../utils/toCssValue": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/toCssValue.js",
       "../utils/toCss": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/toCss.js"
     },
     {
@@ -9884,8 +9884,8 @@
     "'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports['default'] = createRule;\n\nvar _warning = require('warning');\n\nvar _warning2 = _interopRequireDefault(_warning);\n\nvar _RegularRule = require('../plugins/RegularRule');\n\nvar _RegularRule2 = _interopRequireDefault(_RegularRule);\n\nvar _cloneStyle = require('../utils/cloneStyle');\n\nvar _cloneStyle2 = _interopRequireDefault(_cloneStyle);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }\n\n/**\n * Create a rule instance.\n */\nfunction createRule(name, decl, options) {\n  var jss = options.jss;\n\n  var declCopy = (0, _cloneStyle2['default'])(decl);\n\n  if (jss) {\n    var rule = jss.plugins.onCreateRule(name, declCopy, options);\n    if (rule) return rule;\n  }\n\n  // It is an at-rule and it has no instance.\n  if (name && name[0] === '@') {\n    (0, _warning2['default'])(false, '[JSS] Unknown at-rule %s', name);\n  }\n\n  return new _RegularRule2['default'](name, declCopy, options);\n}",
     {
       "../utils/cloneStyle": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/cloneStyle.js",
-      "../plugins/RegularRule": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/RegularRule.js",
-      "warning": "/Users/jasonkao/stuyspec/client-app/node_modules/warning/browser.js"
+      "warning": "/Users/jasonkao/stuyspec/client-app/node_modules/warning/browser.js",
+      "../plugins/RegularRule": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/RegularRule.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/node_modules/jss/lib/utils/createRule.js",
@@ -10009,8 +10009,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/react-proxy/modules/createPrototypeProxy.js": [
     "'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = createPrototypeProxy;\n\nvar _assign = require('lodash/assign');\n\nvar _assign2 = _interopRequireDefault(_assign);\n\nvar _difference = require('lodash/difference');\n\nvar _difference2 = _interopRequireDefault(_difference);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction createPrototypeProxy() {\n  var proxy = {};\n  var current = null;\n  var mountedInstances = [];\n\n  /**\n   * Creates a proxied toString() method pointing to the current version's toString().\n   */\n  function proxyToString(name) {\n    // Wrap to always call the current version\n    return function toString() {\n      if (typeof current[name] === 'function') {\n        return current[name].toString();\n      } else {\n        return '<method was deleted>';\n      }\n    };\n  }\n\n  /**\n   * Creates a proxied method that calls the current version, whenever available.\n   */\n  function proxyMethod(name) {\n    // Wrap to always call the current version\n    var proxiedMethod = function proxiedMethod() {\n      if (typeof current[name] === 'function') {\n        return current[name].apply(this, arguments);\n      }\n    };\n\n    // Copy properties of the original function, if any\n    (0, _assign2.default)(proxiedMethod, current[name]);\n    proxiedMethod.toString = proxyToString(name);\n    try {\n      Object.defineProperty(proxiedMethod, 'name', {\n        value: name\n      });\n    } catch (err) {}\n\n    return proxiedMethod;\n  }\n\n  /**\n   * Augments the original componentDidMount with instance tracking.\n   */\n  function proxiedComponentDidMount() {\n    mountedInstances.push(this);\n    if (typeof current.componentDidMount === 'function') {\n      return current.componentDidMount.apply(this, arguments);\n    }\n  }\n  proxiedComponentDidMount.toString = proxyToString('componentDidMount');\n\n  /**\n   * Augments the original componentWillUnmount with instance tracking.\n   */\n  function proxiedComponentWillUnmount() {\n    var index = mountedInstances.indexOf(this);\n    // Unless we're in a weird environment without componentDidMount\n    if (index !== -1) {\n      mountedInstances.splice(index, 1);\n    }\n    if (typeof current.componentWillUnmount === 'function') {\n      return current.componentWillUnmount.apply(this, arguments);\n    }\n  }\n  proxiedComponentWillUnmount.toString = proxyToString('componentWillUnmount');\n\n  /**\n   * Defines a property on the proxy.\n   */\n  function defineProxyProperty(name, descriptor) {\n    Object.defineProperty(proxy, name, descriptor);\n  }\n\n  /**\n   * Defines a property, attempting to keep the original descriptor configuration.\n   */\n  function defineProxyPropertyWithValue(name, value) {\n    var _ref = Object.getOwnPropertyDescriptor(current, name) || {};\n\n    var _ref$enumerable = _ref.enumerable;\n    var enumerable = _ref$enumerable === undefined ? false : _ref$enumerable;\n    var _ref$writable = _ref.writable;\n    var writable = _ref$writable === undefined ? true : _ref$writable;\n\n\n    defineProxyProperty(name, {\n      configurable: true,\n      enumerable: enumerable,\n      writable: writable,\n      value: value\n    });\n  }\n\n  /**\n   * Creates an auto-bind map mimicking the original map, but directed at proxy.\n   */\n  function createAutoBindMap() {\n    if (!current.__reactAutoBindMap) {\n      return;\n    }\n\n    var __reactAutoBindMap = {};\n    for (var name in current.__reactAutoBindMap) {\n      if (typeof proxy[name] === 'function' && current.__reactAutoBindMap.hasOwnProperty(name)) {\n        __reactAutoBindMap[name] = proxy[name];\n      }\n    }\n\n    return __reactAutoBindMap;\n  }\n\n  /**\n   * Creates an auto-bind map mimicking the original map, but directed at proxy.\n   */\n  function createAutoBindPairs() {\n    var __reactAutoBindPairs = [];\n\n    for (var i = 0; i < current.__reactAutoBindPairs.length; i += 2) {\n      var name = current.__reactAutoBindPairs[i];\n      var method = proxy[name];\n\n      if (typeof method === 'function') {\n        __reactAutoBindPairs.push(name, method);\n      }\n    }\n\n    return __reactAutoBindPairs;\n  }\n\n  /**\n   * Applies the updated prototype.\n   */\n  function update(next) {\n    // Save current source of truth\n    current = next;\n\n    // Find changed property names\n    var currentNames = Object.getOwnPropertyNames(current);\n    var previousName = Object.getOwnPropertyNames(proxy);\n    var removedNames = (0, _difference2.default)(previousName, currentNames);\n\n    // Remove properties and methods that are no longer there\n    removedNames.forEach(function (name) {\n      delete proxy[name];\n    });\n\n    // Copy every descriptor\n    currentNames.forEach(function (name) {\n      var descriptor = Object.getOwnPropertyDescriptor(current, name);\n      if (typeof descriptor.value === 'function') {\n        // Functions require additional wrapping so they can be bound later\n        defineProxyPropertyWithValue(name, proxyMethod(name));\n      } else {\n        // Other values can be copied directly\n        defineProxyProperty(name, descriptor);\n      }\n    });\n\n    // Track mounting and unmounting\n    defineProxyPropertyWithValue('componentDidMount', proxiedComponentDidMount);\n    defineProxyPropertyWithValue('componentWillUnmount', proxiedComponentWillUnmount);\n\n    if (current.hasOwnProperty('__reactAutoBindMap')) {\n      defineProxyPropertyWithValue('__reactAutoBindMap', createAutoBindMap());\n    }\n\n    if (current.hasOwnProperty('__reactAutoBindPairs')) {\n      defineProxyPropertyWithValue('__reactAutoBindPairs', createAutoBindPairs());\n    }\n\n    // Set up the prototype chain\n    proxy.__proto__ = next;\n\n    return mountedInstances;\n  }\n\n  /**\n   * Returns the up-to-date proxy prototype.\n   */\n  function get() {\n    return proxy;\n  }\n\n  return {\n    update: update,\n    get: get\n  };\n};",
     {
-      "lodash/assign": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/assign.js",
-      "lodash/difference": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/difference.js"
+      "lodash/difference": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/difference.js",
+      "lodash/assign": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/assign.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-proxy/modules/createPrototypeProxy.js",
@@ -10056,9 +10056,9 @@
     "(function (process){\n'use strict';\n\nexports.__esModule = true;\nexports.createProvider = createProvider;\n\nvar _react = require('react');\n\nvar _propTypes = require('prop-types');\n\nvar _propTypes2 = _interopRequireDefault(_propTypes);\n\nvar _PropTypes = require('../utils/PropTypes');\n\nvar _warning = require('../utils/warning');\n\nvar _warning2 = _interopRequireDefault(_warning);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar didWarnAboutReceivingStore = false;\nfunction warnAboutReceivingStore() {\n  if (didWarnAboutReceivingStore) {\n    return;\n  }\n  didWarnAboutReceivingStore = true;\n\n  (0, _warning2.default)('<Provider> does not support changing `store` on the fly. ' + 'It is most likely that you see this error because you updated to ' + 'Redux 2.x and React Redux 2.x which no longer hot reload reducers ' + 'automatically. See https://github.com/reactjs/react-redux/releases/' + 'tag/v2.0.0 for the migration instructions.');\n}\n\nfunction createProvider() {\n  var _Provider$childContex;\n\n  var storeKey = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'store';\n  var subKey = arguments[1];\n\n  var subscriptionKey = subKey || storeKey + 'Subscription';\n\n  var Provider = function (_Component) {\n    _inherits(Provider, _Component);\n\n    Provider.prototype.getChildContext = function getChildContext() {\n      var _ref;\n\n      return _ref = {}, _ref[storeKey] = this[storeKey], _ref[subscriptionKey] = null, _ref;\n    };\n\n    function Provider(props, context) {\n      _classCallCheck(this, Provider);\n\n      var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));\n\n      _this[storeKey] = props.store;\n      return _this;\n    }\n\n    Provider.prototype.render = function render() {\n      return _react.Children.only(this.props.children);\n    };\n\n    return Provider;\n  }(_react.Component);\n\n  if (process.env.NODE_ENV !== 'production') {\n    Provider.prototype.componentWillReceiveProps = function (nextProps) {\n      if (this[storeKey] !== nextProps.store) {\n        warnAboutReceivingStore();\n      }\n    };\n  }\n\n  Provider.propTypes = {\n    store: _PropTypes.storeShape.isRequired,\n    children: _propTypes2.default.element.isRequired\n  };\n  Provider.childContextTypes = (_Provider$childContex = {}, _Provider$childContex[storeKey] = _PropTypes.storeShape.isRequired, _Provider$childContex[subscriptionKey] = _PropTypes.subscriptionShape, _Provider$childContex);\n  Provider.displayName = 'Provider';\n\n  return Provider;\n}\n\nexports.default = createProvider();\n}).call(this,require('_process'))\n",
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
-      "../utils/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/utils/warning.js",
       "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
       "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js",
+      "../utils/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/utils/warning.js",
       "../utils/PropTypes": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/utils/PropTypes.js"
     },
     {
@@ -10072,11 +10072,11 @@
     "(function (process){\n'use strict';\n\nexports.__esModule = true;\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nexports.default = connectAdvanced;\n\nvar _hoistNonReactStatics = require('hoist-non-react-statics');\n\nvar _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);\n\nvar _invariant = require('invariant');\n\nvar _invariant2 = _interopRequireDefault(_invariant);\n\nvar _react = require('react');\n\nvar _Subscription = require('../utils/Subscription');\n\nvar _Subscription2 = _interopRequireDefault(_Subscription);\n\nvar _PropTypes = require('../utils/PropTypes');\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nfunction _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }\n\nvar hotReloadingVersion = 0;\nvar dummyState = {};\nfunction noop() {}\nfunction makeSelectorStateful(sourceSelector, store) {\n  // wrap the selector in an object that tracks its results between runs.\n  var selector = {\n    run: function runComponentSelector(props) {\n      try {\n        var nextProps = sourceSelector(store.getState(), props);\n        if (nextProps !== selector.props || selector.error) {\n          selector.shouldComponentUpdate = true;\n          selector.props = nextProps;\n          selector.error = null;\n        }\n      } catch (error) {\n        selector.shouldComponentUpdate = true;\n        selector.error = error;\n      }\n    }\n  };\n\n  return selector;\n}\n\nfunction connectAdvanced(\n/*\n  selectorFactory is a func that is responsible for returning the selector function used to\n  compute new props from state, props, and dispatch. For example:\n     export default connectAdvanced((dispatch, options) => (state, props) => ({\n      thing: state.things[props.thingId],\n      saveThing: fields => dispatch(actionCreators.saveThing(props.thingId, fields)),\n    }))(YourComponent)\n   Access to dispatch is provided to the factory so selectorFactories can bind actionCreators\n  outside of their selector as an optimization. Options passed to connectAdvanced are passed to\n  the selectorFactory, along with displayName and WrappedComponent, as the second argument.\n   Note that selectorFactory is responsible for all caching/memoization of inbound and outbound\n  props. Do not use connectAdvanced directly without memoizing results between calls to your\n  selector, otherwise the Connect component will re-render on every state or props change.\n*/\nselectorFactory) {\n  var _contextTypes, _childContextTypes;\n\n  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},\n      _ref$getDisplayName = _ref.getDisplayName,\n      getDisplayName = _ref$getDisplayName === undefined ? function (name) {\n    return 'ConnectAdvanced(' + name + ')';\n  } : _ref$getDisplayName,\n      _ref$methodName = _ref.methodName,\n      methodName = _ref$methodName === undefined ? 'connectAdvanced' : _ref$methodName,\n      _ref$renderCountProp = _ref.renderCountProp,\n      renderCountProp = _ref$renderCountProp === undefined ? undefined : _ref$renderCountProp,\n      _ref$shouldHandleStat = _ref.shouldHandleStateChanges,\n      shouldHandleStateChanges = _ref$shouldHandleStat === undefined ? true : _ref$shouldHandleStat,\n      _ref$storeKey = _ref.storeKey,\n      storeKey = _ref$storeKey === undefined ? 'store' : _ref$storeKey,\n      _ref$withRef = _ref.withRef,\n      withRef = _ref$withRef === undefined ? false : _ref$withRef,\n      connectOptions = _objectWithoutProperties(_ref, ['getDisplayName', 'methodName', 'renderCountProp', 'shouldHandleStateChanges', 'storeKey', 'withRef']);\n\n  var subscriptionKey = storeKey + 'Subscription';\n  var version = hotReloadingVersion++;\n\n  var contextTypes = (_contextTypes = {}, _contextTypes[storeKey] = _PropTypes.storeShape, _contextTypes[subscriptionKey] = _PropTypes.subscriptionShape, _contextTypes);\n  var childContextTypes = (_childContextTypes = {}, _childContextTypes[subscriptionKey] = _PropTypes.subscriptionShape, _childContextTypes);\n\n  return function wrapWithConnect(WrappedComponent) {\n    (0, _invariant2.default)(typeof WrappedComponent == 'function', 'You must pass a component to the function returned by ' + ('connect. Instead received ' + JSON.stringify(WrappedComponent)));\n\n    var wrappedComponentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';\n\n    var displayName = getDisplayName(wrappedComponentName);\n\n    var selectorFactoryOptions = _extends({}, connectOptions, {\n      getDisplayName: getDisplayName,\n      methodName: methodName,\n      renderCountProp: renderCountProp,\n      shouldHandleStateChanges: shouldHandleStateChanges,\n      storeKey: storeKey,\n      withRef: withRef,\n      displayName: displayName,\n      wrappedComponentName: wrappedComponentName,\n      WrappedComponent: WrappedComponent\n    });\n\n    var Connect = function (_Component) {\n      _inherits(Connect, _Component);\n\n      function Connect(props, context) {\n        _classCallCheck(this, Connect);\n\n        var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));\n\n        _this.version = version;\n        _this.state = {};\n        _this.renderCount = 0;\n        _this.store = props[storeKey] || context[storeKey];\n        _this.propsMode = Boolean(props[storeKey]);\n        _this.setWrappedInstance = _this.setWrappedInstance.bind(_this);\n\n        (0, _invariant2.default)(_this.store, 'Could not find \"' + storeKey + '\" in either the context or props of ' + ('\"' + displayName + '\". Either wrap the root component in a <Provider>, ') + ('or explicitly pass \"' + storeKey + '\" as a prop to \"' + displayName + '\".'));\n\n        _this.initSelector();\n        _this.initSubscription();\n        return _this;\n      }\n\n      Connect.prototype.getChildContext = function getChildContext() {\n        var _ref2;\n\n        // If this component received store from props, its subscription should be transparent\n        // to any descendants receiving store+subscription from context; it passes along\n        // subscription passed to it. Otherwise, it shadows the parent subscription, which allows\n        // Connect to control ordering of notifications to flow top-down.\n        var subscription = this.propsMode ? null : this.subscription;\n        return _ref2 = {}, _ref2[subscriptionKey] = subscription || this.context[subscriptionKey], _ref2;\n      };\n\n      Connect.prototype.componentDidMount = function componentDidMount() {\n        if (!shouldHandleStateChanges) return;\n\n        // componentWillMount fires during server side rendering, but componentDidMount and\n        // componentWillUnmount do not. Because of this, trySubscribe happens during ...didMount.\n        // Otherwise, unsubscription would never take place during SSR, causing a memory leak.\n        // To handle the case where a child component may have triggered a state change by\n        // dispatching an action in its componentWillMount, we have to re-run the select and maybe\n        // re-render.\n        this.subscription.trySubscribe();\n        this.selector.run(this.props);\n        if (this.selector.shouldComponentUpdate) this.forceUpdate();\n      };\n\n      Connect.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {\n        this.selector.run(nextProps);\n      };\n\n      Connect.prototype.shouldComponentUpdate = function shouldComponentUpdate() {\n        return this.selector.shouldComponentUpdate;\n      };\n\n      Connect.prototype.componentWillUnmount = function componentWillUnmount() {\n        if (this.subscription) this.subscription.tryUnsubscribe();\n        this.subscription = null;\n        this.notifyNestedSubs = noop;\n        this.store = null;\n        this.selector.run = noop;\n        this.selector.shouldComponentUpdate = false;\n      };\n\n      Connect.prototype.getWrappedInstance = function getWrappedInstance() {\n        (0, _invariant2.default)(withRef, 'To access the wrapped instance, you need to specify ' + ('{ withRef: true } in the options argument of the ' + methodName + '() call.'));\n        return this.wrappedInstance;\n      };\n\n      Connect.prototype.setWrappedInstance = function setWrappedInstance(ref) {\n        this.wrappedInstance = ref;\n      };\n\n      Connect.prototype.initSelector = function initSelector() {\n        var sourceSelector = selectorFactory(this.store.dispatch, selectorFactoryOptions);\n        this.selector = makeSelectorStateful(sourceSelector, this.store);\n        this.selector.run(this.props);\n      };\n\n      Connect.prototype.initSubscription = function initSubscription() {\n        if (!shouldHandleStateChanges) return;\n\n        // parentSub's source should match where store came from: props vs. context. A component\n        // connected to the store via props shouldn't use subscription from context, or vice versa.\n        var parentSub = (this.propsMode ? this.props : this.context)[subscriptionKey];\n        this.subscription = new _Subscription2.default(this.store, parentSub, this.onStateChange.bind(this));\n\n        // `notifyNestedSubs` is duplicated to handle the case where the component is  unmounted in\n        // the middle of the notification loop, where `this.subscription` will then be null. An\n        // extra null check every change can be avoided by copying the method onto `this` and then\n        // replacing it with a no-op on unmount. This can probably be avoided if Subscription's\n        // listeners logic is changed to not call listeners that have been unsubscribed in the\n        // middle of the notification loop.\n        this.notifyNestedSubs = this.subscription.notifyNestedSubs.bind(this.subscription);\n      };\n\n      Connect.prototype.onStateChange = function onStateChange() {\n        this.selector.run(this.props);\n\n        if (!this.selector.shouldComponentUpdate) {\n          this.notifyNestedSubs();\n        } else {\n          this.componentDidUpdate = this.notifyNestedSubsOnComponentDidUpdate;\n          this.setState(dummyState);\n        }\n      };\n\n      Connect.prototype.notifyNestedSubsOnComponentDidUpdate = function notifyNestedSubsOnComponentDidUpdate() {\n        // `componentDidUpdate` is conditionally implemented when `onStateChange` determines it\n        // needs to notify nested subs. Once called, it unimplements itself until further state\n        // changes occur. Doing it this way vs having a permanent `componentDidMount` that does\n        // a boolean check every time avoids an extra method call most of the time, resulting\n        // in some perf boost.\n        this.componentDidUpdate = undefined;\n        this.notifyNestedSubs();\n      };\n\n      Connect.prototype.isSubscribed = function isSubscribed() {\n        return Boolean(this.subscription) && this.subscription.isSubscribed();\n      };\n\n      Connect.prototype.addExtraProps = function addExtraProps(props) {\n        if (!withRef && !renderCountProp && !(this.propsMode && this.subscription)) return props;\n        // make a shallow copy so that fields added don't leak to the original selector.\n        // this is especially important for 'ref' since that's a reference back to the component\n        // instance. a singleton memoized selector would then be holding a reference to the\n        // instance, preventing the instance from being garbage collected, and that would be bad\n        var withExtras = _extends({}, props);\n        if (withRef) withExtras.ref = this.setWrappedInstance;\n        if (renderCountProp) withExtras[renderCountProp] = this.renderCount++;\n        if (this.propsMode && this.subscription) withExtras[subscriptionKey] = this.subscription;\n        return withExtras;\n      };\n\n      Connect.prototype.render = function render() {\n        var selector = this.selector;\n        selector.shouldComponentUpdate = false;\n\n        if (selector.error) {\n          throw selector.error;\n        } else {\n          return (0, _react.createElement)(WrappedComponent, this.addExtraProps(selector.props));\n        }\n      };\n\n      return Connect;\n    }(_react.Component);\n\n    Connect.WrappedComponent = WrappedComponent;\n    Connect.displayName = displayName;\n    Connect.childContextTypes = childContextTypes;\n    Connect.contextTypes = contextTypes;\n    Connect.propTypes = contextTypes;\n\n    if (process.env.NODE_ENV !== 'production') {\n      Connect.prototype.componentWillUpdate = function componentWillUpdate() {\n        // We are hot reloading!\n        if (this.version !== version) {\n          this.version = version;\n          this.initSelector();\n\n          if (this.subscription) this.subscription.tryUnsubscribe();\n          this.initSubscription();\n          if (shouldHandleStateChanges) this.subscription.trySubscribe();\n        }\n      };\n    }\n\n    return (0, _hoistNonReactStatics2.default)(Connect, WrappedComponent);\n  };\n}\n}).call(this,require('_process'))\n",
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
-      "../utils/PropTypes": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/utils/PropTypes.js",
-      "../utils/Subscription": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/utils/Subscription.js",
       "hoist-non-react-statics": "/Users/jasonkao/stuyspec/client-app/node_modules/hoist-non-react-statics/index.js",
+      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
       "invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/invariant/browser.js",
-      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js"
+      "../utils/Subscription": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/utils/Subscription.js",
+      "../utils/PropTypes": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/utils/PropTypes.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/components/connectAdvanced.js",
@@ -10091,8 +10091,8 @@
       "../components/connectAdvanced": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/components/connectAdvanced.js",
       "../utils/shallowEqual": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/utils/shallowEqual.js",
       "./mapStateToProps": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/connect/mapStateToProps.js",
-      "./selectorFactory": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/connect/selectorFactory.js",
       "./mapDispatchToProps": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/connect/mapDispatchToProps.js",
+      "./selectorFactory": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/connect/selectorFactory.js",
       "./mergeProps": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/connect/mergeProps.js"
     },
     {
@@ -10105,8 +10105,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/connect/mapDispatchToProps.js": [
     "'use strict';\n\nexports.__esModule = true;\nexports.whenMapDispatchToPropsIsFunction = whenMapDispatchToPropsIsFunction;\nexports.whenMapDispatchToPropsIsMissing = whenMapDispatchToPropsIsMissing;\nexports.whenMapDispatchToPropsIsObject = whenMapDispatchToPropsIsObject;\n\nvar _redux = require('redux');\n\nvar _wrapMapToProps = require('./wrapMapToProps');\n\nfunction whenMapDispatchToPropsIsFunction(mapDispatchToProps) {\n  return typeof mapDispatchToProps === 'function' ? (0, _wrapMapToProps.wrapMapToPropsFunc)(mapDispatchToProps, 'mapDispatchToProps') : undefined;\n}\n\nfunction whenMapDispatchToPropsIsMissing(mapDispatchToProps) {\n  return !mapDispatchToProps ? (0, _wrapMapToProps.wrapMapToPropsConstant)(function (dispatch) {\n    return { dispatch: dispatch };\n  }) : undefined;\n}\n\nfunction whenMapDispatchToPropsIsObject(mapDispatchToProps) {\n  return mapDispatchToProps && typeof mapDispatchToProps === 'object' ? (0, _wrapMapToProps.wrapMapToPropsConstant)(function (dispatch) {\n    return (0, _redux.bindActionCreators)(mapDispatchToProps, dispatch);\n  }) : undefined;\n}\n\nexports.default = [whenMapDispatchToPropsIsFunction, whenMapDispatchToPropsIsMissing, whenMapDispatchToPropsIsObject];",
     {
-      "./wrapMapToProps": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/connect/wrapMapToProps.js",
-      "redux": "/Users/jasonkao/stuyspec/client-app/node_modules/redux/lib/index.js"
+      "redux": "/Users/jasonkao/stuyspec/client-app/node_modules/redux/lib/index.js",
+      "./wrapMapToProps": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/connect/wrapMapToProps.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/connect/mapDispatchToProps.js",
@@ -10250,8 +10250,8 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/BrowserRouter.js": [
     "'use strict';\n\nexports.__esModule = true;\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _propTypes = require('prop-types');\n\nvar _propTypes2 = _interopRequireDefault(_propTypes);\n\nvar _createBrowserHistory = require('history/createBrowserHistory');\n\nvar _createBrowserHistory2 = _interopRequireDefault(_createBrowserHistory);\n\nvar _reactRouter = require('react-router');\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\n/**\n * The public API for a <Router> that uses HTML5 history.\n */\nvar BrowserRouter = function (_React$Component) {\n  _inherits(BrowserRouter, _React$Component);\n\n  function BrowserRouter() {\n    var _temp, _this, _ret;\n\n    _classCallCheck(this, BrowserRouter);\n\n    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {\n      args[_key] = arguments[_key];\n    }\n\n    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.history = (0, _createBrowserHistory2.default)(_this.props), _temp), _possibleConstructorReturn(_this, _ret);\n  }\n\n  BrowserRouter.prototype.render = function render() {\n    return _react2.default.createElement(_reactRouter.Router, { history: this.history, children: this.props.children });\n  };\n\n  return BrowserRouter;\n}(_react2.default.Component);\n\nBrowserRouter.propTypes = {\n  basename: _propTypes2.default.string,\n  forceRefresh: _propTypes2.default.bool,\n  getUserConfirmation: _propTypes2.default.func,\n  keyLength: _propTypes2.default.number,\n  children: _propTypes2.default.node\n};\nexports.default = BrowserRouter;",
     {
-      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
       "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js",
+      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
       "react-router": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/index.js",
       "history/createBrowserHistory": "/Users/jasonkao/stuyspec/client-app/node_modules/history/createBrowserHistory.js"
     },
@@ -10306,8 +10306,8 @@
     "'use strict';\n\nexports.__esModule = true;\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _typeof = typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; };\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _propTypes = require('prop-types');\n\nvar _propTypes2 = _interopRequireDefault(_propTypes);\n\nvar _reactRouter = require('react-router');\n\nvar _Link = require('./Link');\n\nvar _Link2 = _interopRequireDefault(_Link);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }\n\n/**\n * A <Link> wrapper that knows if it's \"active\" or not.\n */\nvar NavLink = function NavLink(_ref) {\n  var to = _ref.to,\n      exact = _ref.exact,\n      strict = _ref.strict,\n      location = _ref.location,\n      activeClassName = _ref.activeClassName,\n      className = _ref.className,\n      activeStyle = _ref.activeStyle,\n      style = _ref.style,\n      getIsActive = _ref.isActive,\n      rest = _objectWithoutProperties(_ref, ['to', 'exact', 'strict', 'location', 'activeClassName', 'className', 'activeStyle', 'style', 'isActive']);\n\n  return _react2.default.createElement(_reactRouter.Route, {\n    path: (typeof to === 'undefined' ? 'undefined' : _typeof(to)) === 'object' ? to.pathname : to,\n    exact: exact,\n    strict: strict,\n    location: location,\n    children: function children(_ref2) {\n      var location = _ref2.location,\n          match = _ref2.match;\n\n      var isActive = !!(getIsActive ? getIsActive(match, location) : match);\n\n      return _react2.default.createElement(_Link2.default, _extends({\n        to: to,\n        className: isActive ? [activeClassName, className].filter(function (i) {\n          return i;\n        }).join(' ') : className,\n        style: isActive ? _extends({}, style, activeStyle) : style\n      }, rest));\n    }\n  });\n};\n\nNavLink.propTypes = {\n  to: _Link2.default.propTypes.to,\n  exact: _propTypes2.default.bool,\n  strict: _propTypes2.default.bool,\n  location: _propTypes2.default.object,\n  activeClassName: _propTypes2.default.string,\n  className: _propTypes2.default.string,\n  activeStyle: _propTypes2.default.object,\n  style: _propTypes2.default.object,\n  isActive: _propTypes2.default.func\n};\n\nNavLink.defaultProps = {\n  activeClassName: 'active'\n};\n\nexports.default = NavLink;",
     {
       "./Link": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Link.js",
-      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
       "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js",
+      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
       "react-router": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/index.js"
     },
     {
@@ -10393,17 +10393,17 @@
     "'use strict';\n\nexports.__esModule = true;\nexports.withRouter = exports.matchPath = exports.Switch = exports.StaticRouter = exports.Router = exports.Route = exports.Redirect = exports.Prompt = exports.NavLink = exports.MemoryRouter = exports.Link = exports.HashRouter = exports.BrowserRouter = undefined;\n\nvar _BrowserRouter2 = require('./BrowserRouter');\n\nvar _BrowserRouter3 = _interopRequireDefault(_BrowserRouter2);\n\nvar _HashRouter2 = require('./HashRouter');\n\nvar _HashRouter3 = _interopRequireDefault(_HashRouter2);\n\nvar _Link2 = require('./Link');\n\nvar _Link3 = _interopRequireDefault(_Link2);\n\nvar _MemoryRouter2 = require('./MemoryRouter');\n\nvar _MemoryRouter3 = _interopRequireDefault(_MemoryRouter2);\n\nvar _NavLink2 = require('./NavLink');\n\nvar _NavLink3 = _interopRequireDefault(_NavLink2);\n\nvar _Prompt2 = require('./Prompt');\n\nvar _Prompt3 = _interopRequireDefault(_Prompt2);\n\nvar _Redirect2 = require('./Redirect');\n\nvar _Redirect3 = _interopRequireDefault(_Redirect2);\n\nvar _Route2 = require('./Route');\n\nvar _Route3 = _interopRequireDefault(_Route2);\n\nvar _Router2 = require('./Router');\n\nvar _Router3 = _interopRequireDefault(_Router2);\n\nvar _StaticRouter2 = require('./StaticRouter');\n\nvar _StaticRouter3 = _interopRequireDefault(_StaticRouter2);\n\nvar _Switch2 = require('./Switch');\n\nvar _Switch3 = _interopRequireDefault(_Switch2);\n\nvar _matchPath2 = require('./matchPath');\n\nvar _matchPath3 = _interopRequireDefault(_matchPath2);\n\nvar _withRouter2 = require('./withRouter');\n\nvar _withRouter3 = _interopRequireDefault(_withRouter2);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.BrowserRouter = _BrowserRouter3.default;\nexports.HashRouter = _HashRouter3.default;\nexports.Link = _Link3.default;\nexports.MemoryRouter = _MemoryRouter3.default;\nexports.NavLink = _NavLink3.default;\nexports.Prompt = _Prompt3.default;\nexports.Redirect = _Redirect3.default;\nexports.Route = _Route3.default;\nexports.Router = _Router3.default;\nexports.StaticRouter = _StaticRouter3.default;\nexports.Switch = _Switch3.default;\nexports.matchPath = _matchPath3.default;\nexports.withRouter = _withRouter3.default;",
     {
       "./Link": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Link.js",
-      "./MemoryRouter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/MemoryRouter.js",
-      "./NavLink": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/NavLink.js",
-      "./Redirect": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Redirect.js",
-      "./Prompt": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Prompt.js",
-      "./Route": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Route.js",
-      "./Router": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Router.js",
       "./StaticRouter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/StaticRouter.js",
       "./Switch": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Switch.js",
-      "./matchPath": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/matchPath.js",
       "./withRouter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/withRouter.js",
+      "./matchPath": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/matchPath.js",
       "./BrowserRouter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/BrowserRouter.js",
+      "./MemoryRouter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/MemoryRouter.js",
+      "./Prompt": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Prompt.js",
+      "./Redirect": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Redirect.js",
+      "./NavLink": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/NavLink.js",
+      "./Route": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Route.js",
+      "./Router": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/Router.js",
       "./HashRouter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/HashRouter.js"
     },
     {
@@ -10529,9 +10529,9 @@
     "'use strict';\n\nexports.__esModule = true;\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _warning = require('warning');\n\nvar _warning2 = _interopRequireDefault(_warning);\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _propTypes = require('prop-types');\n\nvar _propTypes2 = _interopRequireDefault(_propTypes);\n\nvar _matchPath = require('./matchPath');\n\nvar _matchPath2 = _interopRequireDefault(_matchPath);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\n/**\n * The public API for matching a single path and rendering.\n */\nvar Route = function (_React$Component) {\n  _inherits(Route, _React$Component);\n\n  function Route() {\n    var _temp, _this, _ret;\n\n    _classCallCheck(this, Route);\n\n    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {\n      args[_key] = arguments[_key];\n    }\n\n    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.state = {\n      match: _this.computeMatch(_this.props, _this.context.router)\n    }, _temp), _possibleConstructorReturn(_this, _ret);\n  }\n\n  Route.prototype.getChildContext = function getChildContext() {\n    return {\n      router: _extends({}, this.context.router, {\n        route: {\n          location: this.props.location || this.context.router.route.location,\n          match: this.state.match\n        }\n      })\n    };\n  };\n\n  Route.prototype.computeMatch = function computeMatch(_ref, _ref2) {\n    var computedMatch = _ref.computedMatch,\n        location = _ref.location,\n        path = _ref.path,\n        strict = _ref.strict,\n        exact = _ref.exact;\n    var route = _ref2.route;\n\n    if (computedMatch) return computedMatch; // <Switch> already computed the match for us\n\n    var pathname = (location || route.location).pathname;\n\n    return path ? (0, _matchPath2.default)(pathname, { path: path, strict: strict, exact: exact }) : route.match;\n  };\n\n  Route.prototype.componentWillMount = function componentWillMount() {\n    var _props = this.props,\n        component = _props.component,\n        render = _props.render,\n        children = _props.children;\n\n\n    (0, _warning2.default)(!(component && render), 'You should not use <Route component> and <Route render> in the same route; <Route render> will be ignored');\n\n    (0, _warning2.default)(!(component && children), 'You should not use <Route component> and <Route children> in the same route; <Route children> will be ignored');\n\n    (0, _warning2.default)(!(render && children), 'You should not use <Route render> and <Route children> in the same route; <Route children> will be ignored');\n  };\n\n  Route.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps, nextContext) {\n    (0, _warning2.default)(!(nextProps.location && !this.props.location), '<Route> elements should not change from uncontrolled to controlled (or vice versa). You initially used no \"location\" prop and then provided one on a subsequent render.');\n\n    (0, _warning2.default)(!(!nextProps.location && this.props.location), '<Route> elements should not change from controlled to uncontrolled (or vice versa). You provided a \"location\" prop initially but omitted it on a subsequent render.');\n\n    this.setState({\n      match: this.computeMatch(nextProps, nextContext.router)\n    });\n  };\n\n  Route.prototype.render = function render() {\n    var match = this.state.match;\n    var _props2 = this.props,\n        children = _props2.children,\n        component = _props2.component,\n        render = _props2.render;\n    var _context$router = this.context.router,\n        history = _context$router.history,\n        route = _context$router.route,\n        staticContext = _context$router.staticContext;\n\n    var location = this.props.location || route.location;\n    var props = { match: match, location: location, history: history, staticContext: staticContext };\n\n    return component ? // component prop gets first priority, only called if there's a match\n    match ? _react2.default.createElement(component, props) : null : render ? // render prop is next, only called if there's a match\n    match ? render(props) : null : children ? // children come last, always called\n    typeof children === 'function' ? children(props) : !Array.isArray(children) || children.length ? // Preact defaults to empty children array\n    _react2.default.Children.only(children) : null : null;\n  };\n\n  return Route;\n}(_react2.default.Component);\n\nRoute.propTypes = {\n  computedMatch: _propTypes2.default.object, // private, from <Switch>\n  path: _propTypes2.default.string,\n  exact: _propTypes2.default.bool,\n  strict: _propTypes2.default.bool,\n  component: _propTypes2.default.func,\n  render: _propTypes2.default.func,\n  children: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.node]),\n  location: _propTypes2.default.object\n};\nRoute.contextTypes = {\n  router: _propTypes2.default.shape({\n    history: _propTypes2.default.object.isRequired,\n    route: _propTypes2.default.object.isRequired,\n    staticContext: _propTypes2.default.object\n  })\n};\nRoute.childContextTypes = {\n  router: _propTypes2.default.object.isRequired\n};\nexports.default = Route;",
     {
       "./matchPath": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/matchPath.js",
+      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
       "warning": "/Users/jasonkao/stuyspec/client-app/node_modules/warning/browser.js",
-      "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js",
-      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js"
+      "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/Route.js",
@@ -10589,10 +10589,10 @@
   "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/index.js": [
     "'use strict';\n\nexports.__esModule = true;\nexports.withRouter = exports.matchPath = exports.Switch = exports.StaticRouter = exports.Router = exports.Route = exports.Redirect = exports.Prompt = exports.MemoryRouter = undefined;\n\nvar _MemoryRouter2 = require('./MemoryRouter');\n\nvar _MemoryRouter3 = _interopRequireDefault(_MemoryRouter2);\n\nvar _Prompt2 = require('./Prompt');\n\nvar _Prompt3 = _interopRequireDefault(_Prompt2);\n\nvar _Redirect2 = require('./Redirect');\n\nvar _Redirect3 = _interopRequireDefault(_Redirect2);\n\nvar _Route2 = require('./Route');\n\nvar _Route3 = _interopRequireDefault(_Route2);\n\nvar _Router2 = require('./Router');\n\nvar _Router3 = _interopRequireDefault(_Router2);\n\nvar _StaticRouter2 = require('./StaticRouter');\n\nvar _StaticRouter3 = _interopRequireDefault(_StaticRouter2);\n\nvar _Switch2 = require('./Switch');\n\nvar _Switch3 = _interopRequireDefault(_Switch2);\n\nvar _matchPath2 = require('./matchPath');\n\nvar _matchPath3 = _interopRequireDefault(_matchPath2);\n\nvar _withRouter2 = require('./withRouter');\n\nvar _withRouter3 = _interopRequireDefault(_withRouter2);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.MemoryRouter = _MemoryRouter3.default;\nexports.Prompt = _Prompt3.default;\nexports.Redirect = _Redirect3.default;\nexports.Route = _Route3.default;\nexports.Router = _Router3.default;\nexports.StaticRouter = _StaticRouter3.default;\nexports.Switch = _Switch3.default;\nexports.matchPath = _matchPath3.default;\nexports.withRouter = _withRouter3.default;",
     {
-      "./Prompt": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/Prompt.js",
       "./Redirect": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/Redirect.js",
-      "./Route": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/Route.js",
+      "./Prompt": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/Prompt.js",
       "./Router": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/Router.js",
+      "./Route": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/Route.js",
       "./Switch": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/Switch.js",
       "./withRouter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/withRouter.js",
       "./StaticRouter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router/StaticRouter.js",
@@ -10638,11 +10638,11 @@
     {
       "./TouchEventUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-tap-event-plugin/src/TouchEventUtils.js",
       "react-dom/lib/EventConstants": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventConstants.js",
-      "fbjs/lib/keyOf": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/keyOf.js",
       "react-dom/lib/ViewportMetrics": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/ViewportMetrics.js",
-      "react-dom/lib/SyntheticUIEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticUIEvent.js",
+      "fbjs/lib/keyOf": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/keyOf.js",
       "react-dom/lib/EventPluginUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPluginUtils.js",
-      "react-dom/lib/EventPropagators": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPropagators.js"
+      "react-dom/lib/EventPropagators": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPropagators.js",
+      "react-dom/lib/SyntheticUIEvent": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/SyntheticUIEvent.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-tap-event-plugin/src/TapEventPlugin.js",
@@ -10677,8 +10677,8 @@
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./defaultClickRejectionStrategy": "/Users/jasonkao/stuyspec/client-app/node_modules/react-tap-event-plugin/src/defaultClickRejectionStrategy.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
-      "./TapEventPlugin.js": "/Users/jasonkao/stuyspec/client-app/node_modules/react-tap-event-plugin/src/TapEventPlugin.js",
-      "react-dom/lib/EventPluginHub": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPluginHub.js"
+      "react-dom/lib/EventPluginHub": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/lib/EventPluginHub.js",
+      "./TapEventPlugin.js": "/Users/jasonkao/stuyspec/client-app/node_modules/react-tap-event-plugin/src/TapEventPlugin.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react-tap-event-plugin/src/injectTapEventPlugin.js",
@@ -10720,15 +10720,15 @@
       "./ReactVersion": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactVersion.js",
       "./lowPriorityWarning": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/lowPriorityWarning.js",
       "./canDefineProperty": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/canDefineProperty.js",
-      "./ReactDOMFactories": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactDOMFactories.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
-      "./ReactElement": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactElement.js",
+      "./ReactDOMFactories": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactDOMFactories.js",
       "./onlyChild": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/onlyChild.js",
-      "./ReactPropTypes": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactPropTypes.js",
+      "./ReactElement": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactElement.js",
       "./ReactBaseClasses": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactBaseClasses.js",
       "./ReactChildren": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactChildren.js",
       "./ReactElementValidator": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactElementValidator.js",
-      "./createClass": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/createClass.js"
+      "./createClass": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/createClass.js",
+      "./ReactPropTypes": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactPropTypes.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/React.js",
@@ -10850,8 +10850,8 @@
       "./lowPriorityWarning": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/lowPriorityWarning.js",
       "./getIteratorFn": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/getIteratorFn.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js",
-      "./checkReactTypeSpec": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/checkReactTypeSpec.js",
-      "./ReactComponentTreeHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactComponentTreeHook.js"
+      "./ReactComponentTreeHook": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactComponentTreeHook.js",
+      "./checkReactTypeSpec": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/checkReactTypeSpec.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactElementValidator.js",
@@ -11032,10 +11032,10 @@
     "(function (process){\n/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar _prodInvariant = require('./reactProdInvariant');\n\nvar ReactCurrentOwner = require('./ReactCurrentOwner');\nvar REACT_ELEMENT_TYPE = require('./ReactElementSymbol');\n\nvar getIteratorFn = require('./getIteratorFn');\nvar invariant = require('fbjs/lib/invariant');\nvar KeyEscapeUtils = require('./KeyEscapeUtils');\nvar warning = require('fbjs/lib/warning');\n\nvar SEPARATOR = '.';\nvar SUBSEPARATOR = ':';\n\n/**\n * This is inlined from ReactElement since this file is shared between\n * isomorphic and renderers. We could extract this to a\n *\n */\n\n/**\n * TODO: Test that a single child and an array with one item have the same key\n * pattern.\n */\n\nvar didWarnAboutMaps = false;\n\n/**\n * Generate a key string that identifies a component within a set.\n *\n * @param {*} component A component that could contain a manual key.\n * @param {number} index Index that is used if a manual key is not provided.\n * @return {string}\n */\nfunction getComponentKey(component, index) {\n  // Do some typechecking here since we call this blindly. We want to ensure\n  // that we don't block potential future ES APIs.\n  if (component && typeof component === 'object' && component.key != null) {\n    // Explicit key\n    return KeyEscapeUtils.escape(component.key);\n  }\n  // Implicit key determined by the index in the set\n  return index.toString(36);\n}\n\n/**\n * @param {?*} children Children tree container.\n * @param {!string} nameSoFar Name of the key path so far.\n * @param {!function} callback Callback to invoke with each child found.\n * @param {?*} traverseContext Used to pass information throughout the traversal\n * process.\n * @return {!number} The number of children in this subtree.\n */\nfunction traverseAllChildrenImpl(children, nameSoFar, callback, traverseContext) {\n  var type = typeof children;\n\n  if (type === 'undefined' || type === 'boolean') {\n    // All of the above are perceived as null.\n    children = null;\n  }\n\n  if (children === null || type === 'string' || type === 'number' ||\n  // The following is inlined from ReactElement. This means we can optimize\n  // some checks. React Fiber also inlines this logic for similar purposes.\n  type === 'object' && children.$$typeof === REACT_ELEMENT_TYPE) {\n    callback(traverseContext, children,\n    // If it's the only child, treat the name as if it was wrapped in an array\n    // so that it's consistent if the number of children grows.\n    nameSoFar === '' ? SEPARATOR + getComponentKey(children, 0) : nameSoFar);\n    return 1;\n  }\n\n  var child;\n  var nextName;\n  var subtreeCount = 0; // Count of children found in the current subtree.\n  var nextNamePrefix = nameSoFar === '' ? SEPARATOR : nameSoFar + SUBSEPARATOR;\n\n  if (Array.isArray(children)) {\n    for (var i = 0; i < children.length; i++) {\n      child = children[i];\n      nextName = nextNamePrefix + getComponentKey(child, i);\n      subtreeCount += traverseAllChildrenImpl(child, nextName, callback, traverseContext);\n    }\n  } else {\n    var iteratorFn = getIteratorFn(children);\n    if (iteratorFn) {\n      var iterator = iteratorFn.call(children);\n      var step;\n      if (iteratorFn !== children.entries) {\n        var ii = 0;\n        while (!(step = iterator.next()).done) {\n          child = step.value;\n          nextName = nextNamePrefix + getComponentKey(child, ii++);\n          subtreeCount += traverseAllChildrenImpl(child, nextName, callback, traverseContext);\n        }\n      } else {\n        if (process.env.NODE_ENV !== 'production') {\n          var mapsAsChildrenAddendum = '';\n          if (ReactCurrentOwner.current) {\n            var mapsAsChildrenOwnerName = ReactCurrentOwner.current.getName();\n            if (mapsAsChildrenOwnerName) {\n              mapsAsChildrenAddendum = ' Check the render method of `' + mapsAsChildrenOwnerName + '`.';\n            }\n          }\n          process.env.NODE_ENV !== 'production' ? warning(didWarnAboutMaps, 'Using Maps as children is not yet fully supported. It is an ' + 'experimental feature that might be removed. Convert it to a ' + 'sequence / iterable of keyed ReactElements instead.%s', mapsAsChildrenAddendum) : void 0;\n          didWarnAboutMaps = true;\n        }\n        // Iterator will provide entry [k,v] tuples rather than values.\n        while (!(step = iterator.next()).done) {\n          var entry = step.value;\n          if (entry) {\n            child = entry[1];\n            nextName = nextNamePrefix + KeyEscapeUtils.escape(entry[0]) + SUBSEPARATOR + getComponentKey(child, 0);\n            subtreeCount += traverseAllChildrenImpl(child, nextName, callback, traverseContext);\n          }\n        }\n      }\n    } else if (type === 'object') {\n      var addendum = '';\n      if (process.env.NODE_ENV !== 'production') {\n        addendum = ' If you meant to render a collection of children, use an array ' + 'instead or wrap the object using createFragment(object) from the ' + 'React add-ons.';\n        if (children._isReactElement) {\n          addendum = \" It looks like you're using an element created by a different \" + 'version of React. Make sure to use only one copy of React.';\n        }\n        if (ReactCurrentOwner.current) {\n          var name = ReactCurrentOwner.current.getName();\n          if (name) {\n            addendum += ' Check the render method of `' + name + '`.';\n          }\n        }\n      }\n      var childrenString = String(children);\n      !false ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Objects are not valid as a React child (found: %s).%s', childrenString === '[object Object]' ? 'object with keys {' + Object.keys(children).join(', ') + '}' : childrenString, addendum) : _prodInvariant('31', childrenString === '[object Object]' ? 'object with keys {' + Object.keys(children).join(', ') + '}' : childrenString, addendum) : void 0;\n    }\n  }\n\n  return subtreeCount;\n}\n\n/**\n * Traverses children that are typically specified as `props.children`, but\n * might also be specified through attributes:\n *\n * - `traverseAllChildren(this.props.children, ...)`\n * - `traverseAllChildren(this.props.leftPanelChildren, ...)`\n *\n * The `traverseContext` is an optional argument that is passed through the\n * entire traversal. It can be used to store accumulations or anything else that\n * the callback might find relevant.\n *\n * @param {?*} children Children tree object.\n * @param {!function} callback To invoke upon traversing each child.\n * @param {?*} traverseContext Context for traversal.\n * @return {!number} The number of children in this subtree.\n */\nfunction traverseAllChildren(children, callback, traverseContext) {\n  if (children == null) {\n    return 0;\n  }\n\n  return traverseAllChildrenImpl(children, '', callback, traverseContext);\n}\n\nmodule.exports = traverseAllChildren;\n}).call(this,require('_process'))\n",
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
-      "./ReactCurrentOwner": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactCurrentOwner.js",
       "./reactProdInvariant": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/reactProdInvariant.js",
-      "./ReactElementSymbol": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactElementSymbol.js",
+      "./ReactCurrentOwner": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactCurrentOwner.js",
       "./getIteratorFn": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/getIteratorFn.js",
+      "./ReactElementSymbol": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/ReactElementSymbol.js",
       "./KeyEscapeUtils": "/Users/jasonkao/stuyspec/client-app/node_modules/react/lib/KeyEscapeUtils.js",
       "fbjs/lib/invariant": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/fbjs/lib/warning.js"
@@ -11064,11 +11064,11 @@
     {
       "./style.js": "/Users/jasonkao/stuyspec/client-app/node_modules/redbox-react/lib/style.js",
       "./lib": "/Users/jasonkao/stuyspec/client-app/node_modules/redbox-react/lib/lib.js",
-      "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js",
       "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
       "react-dom": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/index.js",
       "object-assign": "/Users/jasonkao/stuyspec/client-app/node_modules/object-assign/index.js",
       "sourcemapped-stacktrace": "/Users/jasonkao/stuyspec/client-app/node_modules/sourcemapped-stacktrace/dist/sourcemapped-stacktrace.js",
+      "prop-types": "/Users/jasonkao/stuyspec/client-app/node_modules/prop-types/index.js",
       "error-stack-parser": "/Users/jasonkao/stuyspec/client-app/node_modules/error-stack-parser/error-stack-parser.js"
     },
     {
@@ -11179,8 +11179,8 @@
     {
       "_process": "/Users/jasonkao/stuyspec/client-app/node_modules/process/browser.js",
       "./createStore": "/Users/jasonkao/stuyspec/client-app/node_modules/redux/lib/createStore.js",
-      "./utils/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/redux/lib/utils/warning.js",
-      "lodash/isPlainObject": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isPlainObject.js"
+      "lodash/isPlainObject": "/Users/jasonkao/stuyspec/client-app/node_modules/lodash/isPlainObject.js",
+      "./utils/warning": "/Users/jasonkao/stuyspec/client-app/node_modules/redux/lib/utils/warning.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/node_modules/redux/lib/combineReducers.js",
@@ -11350,13 +11350,13 @@
   "/Users/jasonkao/stuyspec/client-app/src/js/clientApp.js": [
     "require('babel-polyfill');\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = require('react-dom');\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nvar _modules = require('./modules');\n\nvar _reactHotLoader = require('react-hot-loader');\n\nvar _reactTapEventPlugin = require('react-tap-event-plugin');\n\nvar _reactTapEventPlugin2 = _interopRequireDefault(_reactTapEventPlugin);\n\nvar _versionInfo = require('./versionInfo');\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n// for onClick events with MUI/React\ntry {\n  (0, _reactTapEventPlugin2.default)();\n} catch (err) {/* hot reloading, no issue  */}\n\nconsole.log('appVersion ->', _versionInfo.VERSION);\n\n_reactDom2.default.render(_react2.default.createElement(\n  _reactHotLoader.AppContainer,\n  null,\n  _react2.default.createElement(_modules.RoutingApp, null)\n), document.getElementById('app'));\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n}();\n\n;\n",
     {
-      "./versionInfo": "/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js",
+      "react-tap-event-plugin": "/Users/jasonkao/stuyspec/client-app/node_modules/react-tap-event-plugin/src/injectTapEventPlugin.js",
+      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
       "babel-polyfill": "/Users/jasonkao/stuyspec/client-app/node_modules/babel-polyfill/lib/index.js",
       "react-hot-loader": "/Users/jasonkao/stuyspec/client-app/node_modules/react-hot-loader/index.js",
-      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
-      "react-tap-event-plugin": "/Users/jasonkao/stuyspec/client-app/node_modules/react-tap-event-plugin/src/injectTapEventPlugin.js",
       "react-dom": "/Users/jasonkao/stuyspec/client-app/node_modules/react-dom/index.js",
-      "./modules": "/Users/jasonkao/stuyspec/client-app/src/js/modules/index.js"
+      "./modules": "/Users/jasonkao/stuyspec/client-app/src/js/modules/index.js",
+      "./versionInfo": "/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/clientApp.js",
@@ -11368,8 +11368,8 @@
   "/Users/jasonkao/stuyspec/client-app/src/js/middleware/localizer.js": [
     "Object.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _localizationSetter = require('../tools/localizationSetter');\n\nvar _localizationSetter2 = _interopRequireDefault(_localizationSetter);\n\nvar _actionTypes = require('../modules/core/actionTypes');\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar localizer = function localizer(store) {\n    return function (next) {\n        return function (action) {\n            if (action.type == _actionTypes.SET_LANGUAGE) {\n                // now apply language localization to all\n                // registered localization components\n                _localizationSetter2.default.setLanguage(action.payload.language);\n            }\n            return next(action);\n        };\n    };\n};\n\nvar _default = localizer;\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n    if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n        return;\n    }\n\n    __REACT_HOT_LOADER__.register(localizer, 'localizer', '/Users/jasonkao/stuyspec/client-app/src/js/middleware/localizer.js');\n\n    __REACT_HOT_LOADER__.register(_default, 'default', '/Users/jasonkao/stuyspec/client-app/src/js/middleware/localizer.js');\n}();\n\n;\n",
     {
-      "../modules/core/actionTypes": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/actionTypes.js",
-      "../tools/localizationSetter": "/Users/jasonkao/stuyspec/client-app/src/js/tools/localizationSetter.js"
+      "../tools/localizationSetter": "/Users/jasonkao/stuyspec/client-app/src/js/tools/localizationSetter.js",
+      "../modules/core/actionTypes": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/actionTypes.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/middleware/localizer.js",
@@ -11379,23 +11379,23 @@
     }
   ],
   "/Users/jasonkao/stuyspec/client-app/src/js/modules/RoutingApp.js": [
-    "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _Provider = require('react-redux/lib/components/Provider');\n\nvar _Provider2 = _interopRequireDefault(_Provider);\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = require('react-router-dom');\n\nvar _appHistory = require('../tools/appHistory');\n\nvar _appHistory2 = _interopRequireDefault(_appHistory);\n\nvar _ConnectedRouter = require('react-router-redux/ConnectedRouter');\n\nvar _ConnectedRouter2 = _interopRequireDefault(_ConnectedRouter);\n\nvar _store = require('../store');\n\nvar _store2 = _interopRequireDefault(_store);\n\nvar _core = require('./core');\n\nvar _core2 = _interopRequireDefault(_core);\n\nvar _articles = require('./articles');\n\nvar _articles2 = _interopRequireDefault(_articles);\n\nvar _sections = require('./sections');\n\nvar _sections2 = _interopRequireDefault(_sections);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar _core$components = _core2.default.components,\n    HomePage = _core$components.HomePage,\n    PageLayout = _core$components.PageLayout;\nvar ArticlePage = _articles2.default.components.ArticlePage;\nvar SectionPage = _sections2.default.components.SectionPage;\n// TODO: Jason Kao please look into this Layout Thing\n\nvar allSectionRoutes = _sections2.default.selectors.getAllSectionRoutes(_store2.default.getState()); // change to mapStateToProps\n\nvar RoutingApp = function RoutingApp() {\n  var createSectionRoutes = function createSectionRoutes() {\n    return Object.keys(allSectionRoutes).map(function (key, index) {\n      var sectionRoute = allSectionRoutes[key];\n      return _react2.default.createElement(_reactRouterDom.Route, {\n        exact: true, path: sectionRoute.pathToSectionPage,\n        key: 'sectionRoute' + index,\n        render: function render(props) {\n          return _react2.default.createElement(SectionPage, { history: props.history,\n            location: props.location,\n            match: props.match,\n            section: sectionRoute,\n            subsections: sectionRoute.subsections });\n        } });\n    });\n  };\n  var createArticleRoutes = function createArticleRoutes() {\n    return Object.keys(allSectionRoutes).map(function (key, index) {\n      var sectionRoute = allSectionRoutes[key];\n      return _react2.default.createElement(_reactRouterDom.Route, {\n        exact: true, path: sectionRoute.pathToSectionPage + \"/:article_slug\",\n        key: 'articleRoute' + index,\n        render: function render(props) {\n          return _react2.default.createElement(ArticlePage, { history: props.history,\n            location: props.location,\n            match: props.match,\n            section: sectionRoute });\n        } });\n    });\n  };\n  return _react2.default.createElement(\n    _Provider2.default,\n    { store: _store2.default },\n    _react2.default.createElement(\n      _ConnectedRouter2.default,\n      { history: _appHistory2.default },\n      _react2.default.createElement(\n        _reactRouterDom.Switch,\n        null,\n        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: HomePage }),\n        createSectionRoutes(),\n        createArticleRoutes()\n      )\n    )\n  );\n};\n\nvar _default = RoutingApp;\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n\n  __REACT_HOT_LOADER__.register(HomePage, 'HomePage', '/Users/jasonkao/stuyspec/client-app/src/js/modules/RoutingApp.js');\n\n  __REACT_HOT_LOADER__.register(PageLayout, 'PageLayout', '/Users/jasonkao/stuyspec/client-app/src/js/modules/RoutingApp.js');\n\n  __REACT_HOT_LOADER__.register(ArticlePage, 'ArticlePage', '/Users/jasonkao/stuyspec/client-app/src/js/modules/RoutingApp.js');\n\n  __REACT_HOT_LOADER__.register(SectionPage, 'SectionPage', '/Users/jasonkao/stuyspec/client-app/src/js/modules/RoutingApp.js');\n\n  __REACT_HOT_LOADER__.register(allSectionRoutes, 'allSectionRoutes', '/Users/jasonkao/stuyspec/client-app/src/js/modules/RoutingApp.js');\n\n  __REACT_HOT_LOADER__.register(RoutingApp, 'RoutingApp', '/Users/jasonkao/stuyspec/client-app/src/js/modules/RoutingApp.js');\n\n  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/jasonkao/stuyspec/client-app/src/js/modules/RoutingApp.js');\n}();\n\n;\n",
+    "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _Provider = require('react-redux/lib/components/Provider');\n\nvar _Provider2 = _interopRequireDefault(_Provider);\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = require('react-router-dom');\n\nvar _appHistory = require('../tools/appHistory');\n\nvar _appHistory2 = _interopRequireDefault(_appHistory);\n\nvar _ConnectedRouter = require('react-router-redux/ConnectedRouter');\n\nvar _ConnectedRouter2 = _interopRequireDefault(_ConnectedRouter);\n\nvar _store = require('../store');\n\nvar _store2 = _interopRequireDefault(_store);\n\nvar _core = require('./core');\n\nvar _core2 = _interopRequireDefault(_core);\n\nvar _articles = require('./articles');\n\nvar _articles2 = _interopRequireDefault(_articles);\n\nvar _sections = require('./sections');\n\nvar _sections2 = _interopRequireDefault(_sections);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar _core$components = _core2.default.components,\n    HomePage = _core$components.HomePage,\n    PageHeader = _core$components.PageHeader,\n    PageFooter = _core$components.PageFooter;\nvar ArticlePage = _articles2.default.components.ArticlePage;\nvar SectionPage = _sections2.default.components.SectionPage;\n// TODO: Jason Kao please look into this Layout Thing\n\n\n// TODO: change to mapStateToProps\n\nvar allSectionRoutes = _sections2.default.selectors.getAllSectionRoutes(_store2.default.getState());\nvar sectionsWithSubsections = _sections2.default.selectors.getSectionsWithSubsections(_store2.default.getState());\n\nvar RoutingApp = function RoutingApp() {\n  var createSectionRoutes = function createSectionRoutes() {\n    return Object.keys(allSectionRoutes).map(function (key, index) {\n      var sectionRoute = allSectionRoutes[key];\n      return _react2.default.createElement(_reactRouterDom.Route, {\n        exact: true, path: sectionRoute.pathToSectionPage,\n        key: 'sectionRoute' + index,\n        render: function render(props) {\n          return _react2.default.createElement(SectionPage, { history: props.history,\n            location: props.location,\n            match: props.match,\n            section: sectionRoute,\n            subsections: sectionRoute.subsections });\n        } });\n    });\n  };\n  var createArticleRoutes = function createArticleRoutes() {\n    return Object.keys(allSectionRoutes).map(function (key, index) {\n      var sectionRoute = allSectionRoutes[key];\n      return _react2.default.createElement(_reactRouterDom.Route, {\n        exact: true, path: sectionRoute.pathToSectionPage + \"/:article_slug\",\n        key: 'articleRoute' + index,\n        render: function render(props) {\n          return _react2.default.createElement(ArticlePage, { history: props.history,\n            location: props.location,\n            match: props.match,\n            section: sectionRoute });\n        } });\n    });\n  };\n  return _react2.default.createElement(\n    _Provider2.default,\n    { store: _store2.default },\n    _react2.default.createElement(\n      _ConnectedRouter2.default,\n      { history: _appHistory2.default },\n      _react2.default.createElement(\n        _reactRouterDom.Switch,\n        null,\n        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: HomePage }),\n        createSectionRoutes(),\n        createArticleRoutes()\n      )\n    )\n  );\n};\n\nvar _default = RoutingApp;\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n\n  __REACT_HOT_LOADER__.register(HomePage, 'HomePage', '/Users/jasonkao/stuyspec/client-app/src/js/modules/RoutingApp.js');\n\n  __REACT_HOT_LOADER__.register(PageHeader, 'PageHeader', '/Users/jasonkao/stuyspec/client-app/src/js/modules/RoutingApp.js');\n\n  __REACT_HOT_LOADER__.register(PageFooter, 'PageFooter', '/Users/jasonkao/stuyspec/client-app/src/js/modules/RoutingApp.js');\n\n  __REACT_HOT_LOADER__.register(ArticlePage, 'ArticlePage', '/Users/jasonkao/stuyspec/client-app/src/js/modules/RoutingApp.js');\n\n  __REACT_HOT_LOADER__.register(SectionPage, 'SectionPage', '/Users/jasonkao/stuyspec/client-app/src/js/modules/RoutingApp.js');\n\n  __REACT_HOT_LOADER__.register(allSectionRoutes, 'allSectionRoutes', '/Users/jasonkao/stuyspec/client-app/src/js/modules/RoutingApp.js');\n\n  __REACT_HOT_LOADER__.register(sectionsWithSubsections, 'sectionsWithSubsections', '/Users/jasonkao/stuyspec/client-app/src/js/modules/RoutingApp.js');\n\n  __REACT_HOT_LOADER__.register(RoutingApp, 'RoutingApp', '/Users/jasonkao/stuyspec/client-app/src/js/modules/RoutingApp.js');\n\n  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/jasonkao/stuyspec/client-app/src/js/modules/RoutingApp.js');\n}();\n\n;\n",
     {
       "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
-      "./sections": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/index.js",
-      "../tools/appHistory": "/Users/jasonkao/stuyspec/client-app/src/js/tools/appHistory.js",
-      "react-router-dom": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/index.js",
-      "./articles": "/Users/jasonkao/stuyspec/client-app/src/js/modules/articles/index.js",
-      "../store": "/Users/jasonkao/stuyspec/client-app/src/js/store.js",
-      "react-router-redux/ConnectedRouter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-redux/ConnectedRouter.js",
       "react-redux/lib/components/Provider": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/components/Provider.js",
+      "../tools/appHistory": "/Users/jasonkao/stuyspec/client-app/src/js/tools/appHistory.js",
+      "./sections": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/index.js",
+      "react-router-dom": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/index.js",
+      "react-router-redux/ConnectedRouter": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-redux/ConnectedRouter.js",
+      "../store": "/Users/jasonkao/stuyspec/client-app/src/js/store.js",
+      "./articles": "/Users/jasonkao/stuyspec/client-app/src/js/modules/articles/index.js",
       "./core": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/index.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/RoutingApp.js",
-      "hash": "qS+21g",
+      "hash": "FVZIWA",
       "browserifyId": 813,
-      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlJvdXRpbmdBcHAuanM/dmVyc2lvbj1xUysyMWciXSwibmFtZXMiOlsiY29tcG9uZW50cyIsIkhvbWVQYWdlIiwiUGFnZUxheW91dCIsIkFydGljbGVQYWdlIiwiU2VjdGlvblBhZ2UiLCJhbGxTZWN0aW9uUm91dGVzIiwic2VsZWN0b3JzIiwiZ2V0QWxsU2VjdGlvblJvdXRlcyIsImdldFN0YXRlIiwiUm91dGluZ0FwcCIsImNyZWF0ZVNlY3Rpb25Sb3V0ZXMiLCJPYmplY3QiLCJrZXlzIiwibWFwIiwia2V5IiwiaW5kZXgiLCJzZWN0aW9uUm91dGUiLCJwYXRoVG9TZWN0aW9uUGFnZSIsInByb3BzIiwiaGlzdG9yeSIsImxvY2F0aW9uIiwibWF0Y2giLCJzdWJzZWN0aW9ucyIsImNyZWF0ZUFydGljbGVSb3V0ZXMiXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUE7Ozs7QUFDQTs7OztBQUNBOzs7Ozs7QUFFQTs7OztBQUNBOzs7O0FBRUE7Ozs7QUFDQTs7OztBQUNBOzs7Ozs7dUJBRWlDLGVBQUtBO0lBQTlCQyw0QkFBQUE7SUFBVUMsOEJBQUFBO0lBQ1ZDLGNBQWdCLG1CQUFTSCxXQUF6Qkc7SUFDQUMsY0FBZ0IsbUJBQVNKLFdBQXpCSTtBQUNSOztBQUVBLElBQU1DLG1CQUFtQixtQkFBU0MsU0FBVCxDQUFtQkMsbUJBQW5CLENBQXVDLGdCQUFNQyxRQUFOLEVBQXZDLENBQXpCLEVBQW1GOztBQUVuRixJQUFNQyxhQUFhLFNBQWJBLFVBQWEsR0FBTTtBQUN2QixNQUFNQyxzQkFBc0IsU0FBdEJBLG1CQUFzQixHQUFNO0FBQ2hDLFdBQU9DLE9BQU9DLElBQVAsQ0FBWVAsZ0JBQVosRUFBOEJRLEdBQTlCLENBQWtDLFVBQUNDLEdBQUQsRUFBTUMsS0FBTixFQUFnQjtBQUN2RCxVQUFNQyxlQUFlWCxpQkFBa0JTLEdBQWxCLENBQXJCO0FBQ0EsYUFBTztBQUNMLG1CQURLLEVBQ0MsTUFBTUUsYUFBYUMsaUJBRHBCO0FBRUwsOEJBQW9CRixLQUZmO0FBR0wsZ0JBQVEsZ0JBQUNHLEtBQUQ7QUFBQSxpQkFDTiw4QkFBQyxXQUFELElBQWEsU0FBU0EsTUFBTUMsT0FBNUI7QUFDYSxzQkFBVUQsTUFBTUUsUUFEN0I7QUFFYSxtQkFBT0YsTUFBTUcsS0FGMUI7QUFHYSxxQkFBU0wsWUFIdEI7QUFJYSx5QkFBYUEsYUFBYU0sV0FKdkMsR0FETTtBQUFBLFNBSEgsR0FBUDtBQVVELEtBWk0sQ0FBUDtBQWFELEdBZEQ7QUFlQSxNQUFNQyxzQkFBc0IsU0FBdEJBLG1CQUFzQixHQUFNO0FBQ2hDLFdBQU9aLE9BQU9DLElBQVAsQ0FBWVAsZ0JBQVosRUFBOEJRLEdBQTlCLENBQWtDLFVBQUNDLEdBQUQsRUFBTUMsS0FBTixFQUFnQjtBQUN2RCxVQUFNQyxlQUFlWCxpQkFBa0JTLEdBQWxCLENBQXJCO0FBQ0EsYUFBTztBQUNMLG1CQURLLEVBQ0MsTUFBTUUsYUFBYUMsaUJBQWIsR0FBaUMsZ0JBRHhDO0FBRUwsOEJBQW9CRixLQUZmO0FBR0wsZ0JBQVEsZ0JBQUNHLEtBQUQ7QUFBQSxpQkFDTiw4QkFBQyxXQUFELElBQWEsU0FBU0EsTUFBTUMsT0FBNUI7QUFDYSxzQkFBVUQsTUFBTUUsUUFEN0I7QUFFYSxtQkFBT0YsTUFBTUcsS0FGMUI7QUFHYSxxQkFBU0wsWUFIdEIsR0FETTtBQUFBLFNBSEgsR0FBUDtBQVNELEtBWE0sQ0FBUDtBQVlELEdBYkQ7QUFjQSxTQUNFO0FBQUE7QUFBQSxNQUFVLHNCQUFWO0FBQ0U7QUFBQTtBQUFBLFFBQWlCLDZCQUFqQjtBQUNFO0FBQUE7QUFBQTtBQUNFLCtEQUFPLFdBQVAsRUFBYSxNQUFLLEdBQWxCLEVBQXNCLFdBQVdmLFFBQWpDLEdBREY7QUFFR1MsNkJBRkg7QUFHR2E7QUFISDtBQURGO0FBREYsR0FERjtBQVdELENBekNEOztlQTJDZWQ7Ozs7Ozs7Ozs7Z0NBbERQUjs7Z0NBQVVDOztnQ0FDVkM7O2dDQUNBQzs7Z0NBR0ZDOztnQ0FFQUkiLCJmaWxlIjoiUm91dGluZ0FwcC5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBQcm92aWRlciBmcm9tICdyZWFjdC1yZWR1eC9saWIvY29tcG9uZW50cy9Qcm92aWRlcic7XHJcbmltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XHJcbmltcG9ydCB7IFJvdXRlLCBTd2l0Y2ggfSBmcm9tICdyZWFjdC1yb3V0ZXItZG9tJztcclxuaW1wb3J0IGFwcEhpc3RvcnkgZnJvbSAndG9vbHMvYXBwSGlzdG9yeSc7XHJcbmltcG9ydCBDb25uZWN0ZWRSb3V0ZXIgZnJvbSAncmVhY3Qtcm91dGVyLXJlZHV4L0Nvbm5lY3RlZFJvdXRlcic7XHJcbmltcG9ydCBzdG9yZSBmcm9tICcuLi9zdG9yZSc7XHJcblxyXG5pbXBvcnQgY29yZSBmcm9tICcuL2NvcmUnO1xyXG5pbXBvcnQgYXJ0aWNsZXMgZnJvbSAnLi9hcnRpY2xlcyc7XHJcbmltcG9ydCBzZWN0aW9ucyBmcm9tICcuL3NlY3Rpb25zJztcclxuXHJcbmNvbnN0IHsgSG9tZVBhZ2UsIFBhZ2VMYXlvdXQgfSA9IGNvcmUuY29tcG9uZW50cztcclxuY29uc3QgeyBBcnRpY2xlUGFnZSB9ID0gYXJ0aWNsZXMuY29tcG9uZW50cztcclxuY29uc3QgeyBTZWN0aW9uUGFnZSB9ID0gc2VjdGlvbnMuY29tcG9uZW50cztcclxuLy8gVE9ETzogSmFzb24gS2FvIHBsZWFzZSBsb29rIGludG8gdGhpcyBMYXlvdXQgVGhpbmdcclxuXHJcbmNvbnN0IGFsbFNlY3Rpb25Sb3V0ZXMgPSBzZWN0aW9ucy5zZWxlY3RvcnMuZ2V0QWxsU2VjdGlvblJvdXRlcyhzdG9yZS5nZXRTdGF0ZSgpKTsgLy8gY2hhbmdlIHRvIG1hcFN0YXRlVG9Qcm9wc1xyXG5cclxuY29uc3QgUm91dGluZ0FwcCA9ICgpID0+IHtcclxuICBjb25zdCBjcmVhdGVTZWN0aW9uUm91dGVzID0gKCkgPT4ge1xyXG4gICAgcmV0dXJuIE9iamVjdC5rZXlzKGFsbFNlY3Rpb25Sb3V0ZXMpLm1hcCgoa2V5LCBpbmRleCkgPT4ge1xyXG4gICAgICBjb25zdCBzZWN0aW9uUm91dGUgPSBhbGxTZWN0aW9uUm91dGVzWyBrZXkgXTtcclxuICAgICAgcmV0dXJuIDxSb3V0ZVxyXG4gICAgICAgIGV4YWN0IHBhdGg9e3NlY3Rpb25Sb3V0ZS5wYXRoVG9TZWN0aW9uUGFnZX1cclxuICAgICAgICBrZXk9e2BzZWN0aW9uUm91dGUke2luZGV4fWB9XHJcbiAgICAgICAgcmVuZGVyPXsocHJvcHMpID0+IChcclxuICAgICAgICAgIDxTZWN0aW9uUGFnZSBoaXN0b3J5PXtwcm9wcy5oaXN0b3J5fVxyXG4gICAgICAgICAgICAgICAgICAgICAgIGxvY2F0aW9uPXtwcm9wcy5sb2NhdGlvbn1cclxuICAgICAgICAgICAgICAgICAgICAgICBtYXRjaD17cHJvcHMubWF0Y2h9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgc2VjdGlvbj17c2VjdGlvblJvdXRlfVxyXG4gICAgICAgICAgICAgICAgICAgICAgIHN1YnNlY3Rpb25zPXtzZWN0aW9uUm91dGUuc3Vic2VjdGlvbnN9Lz5cclxuICAgICAgICApfS8+XHJcbiAgICB9KTtcclxuICB9O1xyXG4gIGNvbnN0IGNyZWF0ZUFydGljbGVSb3V0ZXMgPSAoKSA9PiB7XHJcbiAgICByZXR1cm4gT2JqZWN0LmtleXMoYWxsU2VjdGlvblJvdXRlcykubWFwKChrZXksIGluZGV4KSA9PiB7XHJcbiAgICAgIGNvbnN0IHNlY3Rpb25Sb3V0ZSA9IGFsbFNlY3Rpb25Sb3V0ZXNbIGtleSBdO1xyXG4gICAgICByZXR1cm4gPFJvdXRlXHJcbiAgICAgICAgZXhhY3QgcGF0aD17c2VjdGlvblJvdXRlLnBhdGhUb1NlY3Rpb25QYWdlICsgXCIvOmFydGljbGVfc2x1Z1wifVxyXG4gICAgICAgIGtleT17YGFydGljbGVSb3V0ZSR7aW5kZXh9YH1cclxuICAgICAgICByZW5kZXI9eyhwcm9wcykgPT4gKFxyXG4gICAgICAgICAgPEFydGljbGVQYWdlIGhpc3Rvcnk9e3Byb3BzLmhpc3Rvcnl9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgbG9jYXRpb249e3Byb3BzLmxvY2F0aW9ufVxyXG4gICAgICAgICAgICAgICAgICAgICAgIG1hdGNoPXtwcm9wcy5tYXRjaH1cclxuICAgICAgICAgICAgICAgICAgICAgICBzZWN0aW9uPXtzZWN0aW9uUm91dGV9Lz5cclxuICAgICAgICApfS8+XHJcbiAgICB9KTtcclxuICB9O1xyXG4gIHJldHVybiAoXHJcbiAgICA8UHJvdmlkZXIgc3RvcmU9e3N0b3JlfT5cclxuICAgICAgPENvbm5lY3RlZFJvdXRlciBoaXN0b3J5PXthcHBIaXN0b3J5fT5cclxuICAgICAgICA8U3dpdGNoPlxyXG4gICAgICAgICAgPFJvdXRlIGV4YWN0IHBhdGg9XCIvXCIgY29tcG9uZW50PXtIb21lUGFnZX0vPlxyXG4gICAgICAgICAge2NyZWF0ZVNlY3Rpb25Sb3V0ZXMoKX1cclxuICAgICAgICAgIHtjcmVhdGVBcnRpY2xlUm91dGVzKCl9XHJcbiAgICAgICAgPC9Td2l0Y2g+XHJcbiAgICAgIDwvQ29ubmVjdGVkUm91dGVyPlxyXG4gICAgPC9Qcm92aWRlcj5cclxuICApO1xyXG59O1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgUm91dGluZ0FwcDtcclxuIl19"
+      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlJvdXRpbmdBcHAuanM/dmVyc2lvbj1GVlpJV0EiXSwibmFtZXMiOlsiY29tcG9uZW50cyIsIkhvbWVQYWdlIiwiUGFnZUhlYWRlciIsIlBhZ2VGb290ZXIiLCJBcnRpY2xlUGFnZSIsIlNlY3Rpb25QYWdlIiwiYWxsU2VjdGlvblJvdXRlcyIsInNlbGVjdG9ycyIsImdldEFsbFNlY3Rpb25Sb3V0ZXMiLCJnZXRTdGF0ZSIsInNlY3Rpb25zV2l0aFN1YnNlY3Rpb25zIiwiZ2V0U2VjdGlvbnNXaXRoU3Vic2VjdGlvbnMiLCJSb3V0aW5nQXBwIiwiY3JlYXRlU2VjdGlvblJvdXRlcyIsIk9iamVjdCIsImtleXMiLCJtYXAiLCJrZXkiLCJpbmRleCIsInNlY3Rpb25Sb3V0ZSIsInBhdGhUb1NlY3Rpb25QYWdlIiwicHJvcHMiLCJoaXN0b3J5IiwibG9jYXRpb24iLCJtYXRjaCIsInN1YnNlY3Rpb25zIiwiY3JlYXRlQXJ0aWNsZVJvdXRlcyJdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQTs7OztBQUNBOzs7O0FBQ0E7Ozs7OztBQUVBOzs7O0FBQ0E7Ozs7QUFFQTs7OztBQUNBOzs7O0FBQ0E7Ozs7Ozt1QkFFNkMsZUFBS0E7SUFBMUNDLDRCQUFBQTtJQUFVQyw4QkFBQUE7SUFBWUMsOEJBQUFBO0lBQ3RCQyxjQUFnQixtQkFBU0osV0FBekJJO0lBQ0FDLGNBQWdCLG1CQUFTTCxXQUF6Qks7QUFDUjs7O0FBR0E7O0FBQ0EsSUFBTUMsbUJBQW1CLG1CQUFTQyxTQUFULENBQW1CQyxtQkFBbkIsQ0FBdUMsZ0JBQU1DLFFBQU4sRUFBdkMsQ0FBekI7QUFDQSxJQUFNQywwQkFBMEIsbUJBQVNILFNBQVQsQ0FBbUJJLDBCQUFuQixDQUE4QyxnQkFBTUYsUUFBTixFQUE5QyxDQUFoQzs7QUFFQSxJQUFNRyxhQUFhLFNBQWJBLFVBQWEsR0FBTTtBQUN2QixNQUFNQyxzQkFBc0IsU0FBdEJBLG1CQUFzQixHQUFNO0FBQ2hDLFdBQU9DLE9BQU9DLElBQVAsQ0FBWVQsZ0JBQVosRUFBOEJVLEdBQTlCLENBQWtDLFVBQUNDLEdBQUQsRUFBTUMsS0FBTixFQUFnQjtBQUN2RCxVQUFNQyxlQUFlYixpQkFBa0JXLEdBQWxCLENBQXJCO0FBQ0EsYUFBTztBQUNMLG1CQURLLEVBQ0MsTUFBTUUsYUFBYUMsaUJBRHBCO0FBRUwsOEJBQW9CRixLQUZmO0FBR0wsZ0JBQVEsZ0JBQUNHLEtBQUQ7QUFBQSxpQkFDTiw4QkFBQyxXQUFELElBQWEsU0FBU0EsTUFBTUMsT0FBNUI7QUFDYSxzQkFBVUQsTUFBTUUsUUFEN0I7QUFFYSxtQkFBT0YsTUFBTUcsS0FGMUI7QUFHYSxxQkFBU0wsWUFIdEI7QUFJYSx5QkFBYUEsYUFBYU0sV0FKdkMsR0FETTtBQUFBLFNBSEgsR0FBUDtBQVVELEtBWk0sQ0FBUDtBQWFELEdBZEQ7QUFlQSxNQUFNQyxzQkFBc0IsU0FBdEJBLG1CQUFzQixHQUFNO0FBQ2hDLFdBQU9aLE9BQU9DLElBQVAsQ0FBWVQsZ0JBQVosRUFBOEJVLEdBQTlCLENBQWtDLFVBQUNDLEdBQUQsRUFBTUMsS0FBTixFQUFnQjtBQUN2RCxVQUFNQyxlQUFlYixpQkFBa0JXLEdBQWxCLENBQXJCO0FBQ0EsYUFBTztBQUNMLG1CQURLLEVBQ0MsTUFBTUUsYUFBYUMsaUJBQWIsR0FBaUMsZ0JBRHhDO0FBRUwsOEJBQW9CRixLQUZmO0FBR0wsZ0JBQVEsZ0JBQUNHLEtBQUQ7QUFBQSxpQkFDTiw4QkFBQyxXQUFELElBQWEsU0FBU0EsTUFBTUMsT0FBNUI7QUFDYSxzQkFBVUQsTUFBTUUsUUFEN0I7QUFFYSxtQkFBT0YsTUFBTUcsS0FGMUI7QUFHYSxxQkFBU0wsWUFIdEIsR0FETTtBQUFBLFNBSEgsR0FBUDtBQVNELEtBWE0sQ0FBUDtBQVlELEdBYkQ7QUFjQSxTQUNFO0FBQUE7QUFBQSxNQUFVLHNCQUFWO0FBQ0U7QUFBQTtBQUFBLFFBQWlCLDZCQUFqQjtBQUNFO0FBQUE7QUFBQTtBQUNFLCtEQUFPLFdBQVAsRUFBYSxNQUFLLEdBQWxCLEVBQXNCLFdBQVdsQixRQUFqQyxHQURGO0FBRUdZLDZCQUZIO0FBR0dhO0FBSEg7QUFERjtBQURGLEdBREY7QUFXRCxDQXpDRDs7ZUEyQ2VkOzs7Ozs7Ozs7O2dDQXJEUFg7O2dDQUFVQzs7Z0NBQVlDOztnQ0FDdEJDOztnQ0FDQUM7O2dDQUtGQzs7Z0NBQ0FJOztnQ0FFQUUiLCJmaWxlIjoiUm91dGluZ0FwcC5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBQcm92aWRlciBmcm9tICdyZWFjdC1yZWR1eC9saWIvY29tcG9uZW50cy9Qcm92aWRlcic7XHJcbmltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XHJcbmltcG9ydCB7IFJvdXRlLCBTd2l0Y2ggfSBmcm9tICdyZWFjdC1yb3V0ZXItZG9tJztcclxuaW1wb3J0IGFwcEhpc3RvcnkgZnJvbSAndG9vbHMvYXBwSGlzdG9yeSc7XHJcbmltcG9ydCBDb25uZWN0ZWRSb3V0ZXIgZnJvbSAncmVhY3Qtcm91dGVyLXJlZHV4L0Nvbm5lY3RlZFJvdXRlcic7XHJcbmltcG9ydCBzdG9yZSBmcm9tICcuLi9zdG9yZSc7XHJcblxyXG5pbXBvcnQgY29yZSBmcm9tICcuL2NvcmUnO1xyXG5pbXBvcnQgYXJ0aWNsZXMgZnJvbSAnLi9hcnRpY2xlcyc7XHJcbmltcG9ydCBzZWN0aW9ucyBmcm9tICcuL3NlY3Rpb25zJztcclxuXHJcbmNvbnN0IHsgSG9tZVBhZ2UsIFBhZ2VIZWFkZXIsIFBhZ2VGb290ZXIgfSA9IGNvcmUuY29tcG9uZW50cztcclxuY29uc3QgeyBBcnRpY2xlUGFnZSB9ID0gYXJ0aWNsZXMuY29tcG9uZW50cztcclxuY29uc3QgeyBTZWN0aW9uUGFnZSB9ID0gc2VjdGlvbnMuY29tcG9uZW50cztcclxuLy8gVE9ETzogSmFzb24gS2FvIHBsZWFzZSBsb29rIGludG8gdGhpcyBMYXlvdXQgVGhpbmdcclxuXHJcblxyXG4vLyBUT0RPOiBjaGFuZ2UgdG8gbWFwU3RhdGVUb1Byb3BzXHJcbmNvbnN0IGFsbFNlY3Rpb25Sb3V0ZXMgPSBzZWN0aW9ucy5zZWxlY3RvcnMuZ2V0QWxsU2VjdGlvblJvdXRlcyhzdG9yZS5nZXRTdGF0ZSgpKTtcclxuY29uc3Qgc2VjdGlvbnNXaXRoU3Vic2VjdGlvbnMgPSBzZWN0aW9ucy5zZWxlY3RvcnMuZ2V0U2VjdGlvbnNXaXRoU3Vic2VjdGlvbnMoc3RvcmUuZ2V0U3RhdGUoKSk7XHJcblxyXG5jb25zdCBSb3V0aW5nQXBwID0gKCkgPT4ge1xyXG4gIGNvbnN0IGNyZWF0ZVNlY3Rpb25Sb3V0ZXMgPSAoKSA9PiB7XHJcbiAgICByZXR1cm4gT2JqZWN0LmtleXMoYWxsU2VjdGlvblJvdXRlcykubWFwKChrZXksIGluZGV4KSA9PiB7XHJcbiAgICAgIGNvbnN0IHNlY3Rpb25Sb3V0ZSA9IGFsbFNlY3Rpb25Sb3V0ZXNbIGtleSBdO1xyXG4gICAgICByZXR1cm4gPFJvdXRlXHJcbiAgICAgICAgZXhhY3QgcGF0aD17c2VjdGlvblJvdXRlLnBhdGhUb1NlY3Rpb25QYWdlfVxyXG4gICAgICAgIGtleT17YHNlY3Rpb25Sb3V0ZSR7aW5kZXh9YH1cclxuICAgICAgICByZW5kZXI9eyhwcm9wcykgPT4gKFxyXG4gICAgICAgICAgPFNlY3Rpb25QYWdlIGhpc3Rvcnk9e3Byb3BzLmhpc3Rvcnl9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgbG9jYXRpb249e3Byb3BzLmxvY2F0aW9ufVxyXG4gICAgICAgICAgICAgICAgICAgICAgIG1hdGNoPXtwcm9wcy5tYXRjaH1cclxuICAgICAgICAgICAgICAgICAgICAgICBzZWN0aW9uPXtzZWN0aW9uUm91dGV9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgc3Vic2VjdGlvbnM9e3NlY3Rpb25Sb3V0ZS5zdWJzZWN0aW9uc30vPlxyXG4gICAgICAgICl9Lz5cclxuICAgIH0pO1xyXG4gIH07XHJcbiAgY29uc3QgY3JlYXRlQXJ0aWNsZVJvdXRlcyA9ICgpID0+IHtcclxuICAgIHJldHVybiBPYmplY3Qua2V5cyhhbGxTZWN0aW9uUm91dGVzKS5tYXAoKGtleSwgaW5kZXgpID0+IHtcclxuICAgICAgY29uc3Qgc2VjdGlvblJvdXRlID0gYWxsU2VjdGlvblJvdXRlc1sga2V5IF07XHJcbiAgICAgIHJldHVybiA8Um91dGVcclxuICAgICAgICBleGFjdCBwYXRoPXtzZWN0aW9uUm91dGUucGF0aFRvU2VjdGlvblBhZ2UgKyBcIi86YXJ0aWNsZV9zbHVnXCJ9XHJcbiAgICAgICAga2V5PXtgYXJ0aWNsZVJvdXRlJHtpbmRleH1gfVxyXG4gICAgICAgIHJlbmRlcj17KHByb3BzKSA9PiAoXHJcbiAgICAgICAgICA8QXJ0aWNsZVBhZ2UgaGlzdG9yeT17cHJvcHMuaGlzdG9yeX1cclxuICAgICAgICAgICAgICAgICAgICAgICBsb2NhdGlvbj17cHJvcHMubG9jYXRpb259XHJcbiAgICAgICAgICAgICAgICAgICAgICAgbWF0Y2g9e3Byb3BzLm1hdGNofVxyXG4gICAgICAgICAgICAgICAgICAgICAgIHNlY3Rpb249e3NlY3Rpb25Sb3V0ZX0vPlxyXG4gICAgICAgICl9Lz5cclxuICAgIH0pO1xyXG4gIH07XHJcbiAgcmV0dXJuIChcclxuICAgIDxQcm92aWRlciBzdG9yZT17c3RvcmV9PlxyXG4gICAgICA8Q29ubmVjdGVkUm91dGVyIGhpc3Rvcnk9e2FwcEhpc3Rvcnl9PlxyXG4gICAgICAgIDxTd2l0Y2g+XHJcbiAgICAgICAgICA8Um91dGUgZXhhY3QgcGF0aD1cIi9cIiBjb21wb25lbnQ9e0hvbWVQYWdlfS8+XHJcbiAgICAgICAgICB7Y3JlYXRlU2VjdGlvblJvdXRlcygpfVxyXG4gICAgICAgICAge2NyZWF0ZUFydGljbGVSb3V0ZXMoKX1cclxuICAgICAgICA8L1N3aXRjaD5cclxuICAgICAgPC9Db25uZWN0ZWRSb3V0ZXI+XHJcbiAgICA8L1Byb3ZpZGVyPlxyXG4gICk7XHJcbn07XHJcblxyXG5leHBvcnQgZGVmYXVsdCBSb3V0aW5nQXBwO1xyXG4iXX0="
     }
   ],
   "/Users/jasonkao/stuyspec/client-app/src/js/modules/articles/actionTypes.js": [
@@ -11454,8 +11454,8 @@
       "../actions": "/Users/jasonkao/stuyspec/client-app/src/js/modules/articles/actions.js",
       "../selectors": "/Users/jasonkao/stuyspec/client-app/src/js/modules/articles/selectors.js",
       "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
-      "react-redux": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/index.js",
       "redux": "/Users/jasonkao/stuyspec/client-app/node_modules/redux/lib/index.js",
+      "react-redux": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/index.js",
       "react-jss": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/lib/index.js",
       "./ArticleBody": "/Users/jasonkao/stuyspec/client-app/src/js/modules/articles/components/ArticleBody.js",
       "./ArticleHeader": "/Users/jasonkao/stuyspec/client-app/src/js/modules/articles/components/ArticleHeader.js"
@@ -11520,8 +11520,8 @@
   "/Users/jasonkao/stuyspec/client-app/src/js/modules/articles/selectors.js": [
     "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.getArticlesWithinSection = exports.getArticleBySlug = undefined;\n\nvar _reselect = require(\"reselect\");\n\nvar _selectors = require(\"../sections/selectors\");\n\n// TODO: figure out how to make this^ import correct\nvar getArticles = function getArticles(state) {\n  return state.articles.articles;\n};\nvar getRequestedArticleSlug = function getRequestedArticleSlug(state, props) {\n  return props.match.params.article_slug;\n};\nvar getSectionByProps = function getSectionByProps(state, props) {\n  return props.section;\n};\n\nvar getArticleBySlug = exports.getArticleBySlug = (0, _reselect.createSelector)([getSectionByProps, getArticles, getRequestedArticleSlug], function (section, articles, articleSlug) {\n  var potentiallyWantedArticle = articles[articleSlug];\n  // the article may match the slug, but does it match the requested section?\n  if (potentiallyWantedArticle.sectionSlug === section.slug) {\n    return potentiallyWantedArticle;\n  }\n});\n\n//\nvar getArticlesWithinSection = exports.getArticlesWithinSection = (0, _reselect.createSelector)([_selectors.getDeepSectionSlugsList, getArticles], function (deepSectionSlugsList, articles) {\n  return Object.filter(articles, function (article) {\n    return deepSectionSlugsList.includes(article.sectionSlug);\n  });\n});\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n\n  __REACT_HOT_LOADER__.register(getArticles, \"getArticles\", \"/Users/jasonkao/stuyspec/client-app/src/js/modules/articles/selectors.js\");\n\n  __REACT_HOT_LOADER__.register(getRequestedArticleSlug, \"getRequestedArticleSlug\", \"/Users/jasonkao/stuyspec/client-app/src/js/modules/articles/selectors.js\");\n\n  __REACT_HOT_LOADER__.register(getSectionByProps, \"getSectionByProps\", \"/Users/jasonkao/stuyspec/client-app/src/js/modules/articles/selectors.js\");\n\n  __REACT_HOT_LOADER__.register(getArticleBySlug, \"getArticleBySlug\", \"/Users/jasonkao/stuyspec/client-app/src/js/modules/articles/selectors.js\");\n\n  __REACT_HOT_LOADER__.register(getArticlesWithinSection, \"getArticlesWithinSection\", \"/Users/jasonkao/stuyspec/client-app/src/js/modules/articles/selectors.js\");\n}();\n\n;\n",
     {
-      "../sections/selectors": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/selectors.js",
-      "reselect": "/Users/jasonkao/stuyspec/client-app/node_modules/reselect/lib/index.js"
+      "reselect": "/Users/jasonkao/stuyspec/client-app/node_modules/reselect/lib/index.js",
+      "../sections/selectors": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/selectors.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/articles/selectors.js",
@@ -11557,10 +11557,10 @@
     {
       "../../sections": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/index.js",
       "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
-      "react-router-dom": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/index.js",
       "redux": "/Users/jasonkao/stuyspec/client-app/node_modules/redux/lib/index.js",
-      "react-redux": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/index.js",
-      "react-jss": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/lib/index.js"
+      "react-jss": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/lib/index.js",
+      "react-router-dom": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/index.js",
+      "react-redux": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/index.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/HomePage.js",
@@ -11572,8 +11572,8 @@
   "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/PageFooter.js": [
     "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactJss = require('react-jss');\n\nvar _reactJss2 = _interopRequireDefault(_reactJss);\n\nvar _reactRouterDom = require('react-router-dom');\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar styles = {\n  PageFooter: {\n    background: '#121212'\n  },\n  sectionBlock: {\n    marginTop: '20px'\n  },\n  parentSectionLink: {\n    color: '#fffefe',\n    fontSize: '14px',\n    fontFamily: \"Circular Std\",\n    fontStyle: 'normal',\n    fontWeight: '500',\n    textDecoration: 'none'\n  },\n  subsectionLink: {\n    color: '#b6b6b6',\n    fontSize: '13px',\n    fontFamily: 'Circular Std',\n    fontStyle: 'normal',\n    fontWeight: '300',\n    textDecoration: 'none'\n  }\n};\n\nvar PageFooter = function PageFooter(_ref) {\n  var classes = _ref.classes,\n      sectionsWithSubsections = _ref.sectionsWithSubsections;\n\n  var makeSectionLinks = function makeSectionLinks() {\n    return sectionsWithSubsections.map(function (parentSection) {\n      return _react2.default.createElement(\n        'div',\n        { className: classes.sectionBlock, key: parentSection.id },\n        _react2.default.createElement(\n          _reactRouterDom.Link,\n          { to: '/' + parentSection.slug, className: classes.parentSectionLink },\n          parentSection.name\n        ),\n        _react2.default.createElement('br', null),\n        Object.keys(parentSection.subsections).map(function (subsectionSlug) {\n          return makeSubsectionLink(parentSection.slug, parentSection.subsections[subsectionSlug]);\n        })\n      );\n    });\n  };\n  var makeSubsectionLink = function makeSubsectionLink(parentSectionSlug, subsection) {\n    return _react2.default.createElement(\n      'div',\n      null,\n      _react2.default.createElement(\n        _reactRouterDom.Link,\n        { to: '/' + parentSectionSlug + '/' + subsection.slug, className: classes.subsectionLink },\n        subsection.name\n      ),\n      _react2.default.createElement('br', null)\n    );\n  };\n  return _react2.default.createElement(\n    'div',\n    { className: classes.PageFooter },\n    makeSectionLinks()\n  );\n};\n\nvar _default = (0, _reactJss2.default)(styles)(PageFooter);\n\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n\n  __REACT_HOT_LOADER__.register(styles, 'styles', '/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/PageFooter.js');\n\n  __REACT_HOT_LOADER__.register(PageFooter, 'PageFooter', '/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/PageFooter.js');\n\n  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/PageFooter.js');\n}();\n\n;\n",
     {
-      "react-router-dom": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/index.js",
       "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
+      "react-router-dom": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/index.js",
       "react-jss": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/lib/index.js"
     },
     {
@@ -11596,34 +11596,18 @@
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlBhZ2VIZWFkZXIuanM/dmVyc2lvbj1PL01KamciXSwibmFtZXMiOlsic3R5bGVzIiwiUGFnZUhlYWRlciJdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQTs7OztBQUNBOzs7Ozs7QUFFQSxJQUFNQSxTQUFTLEVBQWY7O0FBRUEsSUFBTUMsYUFBYSxTQUFiQSxVQUFhLEdBQU07QUFDdkIsU0FDRTtBQUFBO0FBQUE7QUFBQTtBQUFBLEdBREY7QUFHRCxDQUpEOztlQU1nQix3QkFBWUQsTUFBWixFQUFvQkMsVUFBcEI7Ozs7Ozs7Ozs7O2dDQVJWRDs7Z0NBRUFDIiwiZmlsZSI6IlBhZ2VIZWFkZXIuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QgIGZyb20gJ3JlYWN0JztcbmltcG9ydCBpbmplY3RTaGVldCBmcm9tICdyZWFjdC1qc3MnO1xuXG5jb25zdCBzdHlsZXMgPSB7fTtcblxuY29uc3QgUGFnZUhlYWRlciA9ICgpID0+IHtcbiAgcmV0dXJuIChcbiAgICA8aDE+SGVsbG8gdGhpcyBpcyBhIEhlYWRlcjwvaDE+XG4gIClcbn1cblxuZXhwb3J0IGRlZmF1bHQgKGluamVjdFNoZWV0KHN0eWxlcykoUGFnZUhlYWRlcikpOyJdfQ=="
     }
   ],
-  "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/PageLayout.js": [
-    "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRedux = require('react-redux');\n\nvar _reactJss = require('react-jss');\n\nvar _reactJss2 = _interopRequireDefault(_reactJss);\n\nvar _PageHeader = require('./PageHeader');\n\nvar _PageHeader2 = _interopRequireDefault(_PageHeader);\n\nvar _PageFooter = require('./PageFooter');\n\nvar _PageFooter2 = _interopRequireDefault(_PageFooter);\n\nvar _selectors = require('../../sections/selectors');\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar styles = {};\n\nvar PageLayout = function PageLayout(_ref) {\n  var children = _ref.children,\n      sectionsWithSubsections = _ref.sectionsWithSubsections;\n\n  return _react2.default.createElement(\n    'div',\n    null,\n    _react2.default.createElement(_PageHeader2.default, null),\n    children,\n    _react2.default.createElement(_PageFooter2.default, { sectionsWithSubsections: sectionsWithSubsections })\n  );\n};\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    sectionsWithSubsections: (0, _selectors.getSectionsWithSubsections)(state)\n  };\n};\n\nvar _default = (0, _reactRedux.connect)(mapStateToProps)((0, _reactJss2.default)(styles)(PageLayout));\n\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n\n  __REACT_HOT_LOADER__.register(styles, 'styles', '/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/PageLayout.js');\n\n  __REACT_HOT_LOADER__.register(PageLayout, 'PageLayout', '/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/PageLayout.js');\n\n  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', '/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/PageLayout.js');\n\n  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/PageLayout.js');\n}();\n\n;\n",
+  "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/index.js": [
+    "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _HomePage = require(\"./HomePage\");\n\nObject.defineProperty(exports, \"HomePage\", {\n  enumerable: true,\n  get: function get() {\n    return _interopRequireDefault(_HomePage).default;\n  }\n});\n\nvar _PageHeader = require(\"./PageHeader\");\n\nObject.defineProperty(exports, \"PageHeader\", {\n  enumerable: true,\n  get: function get() {\n    return _interopRequireDefault(_PageHeader).default;\n  }\n});\n\nvar _PageFooter = require(\"./PageFooter\");\n\nObject.defineProperty(exports, \"PageFooter\", {\n  enumerable: true,\n  get: function get() {\n    return _interopRequireDefault(_PageFooter).default;\n  }\n});\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n}();\n\n;\n",
     {
-      "../../sections/selectors": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/selectors.js",
-      "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
-      "react-redux": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/index.js",
-      "react-jss": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/lib/index.js",
       "./PageFooter": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/PageFooter.js",
+      "./HomePage": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/HomePage.js",
       "./PageHeader": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/PageHeader.js"
     },
     {
-      "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/PageLayout.js",
-      "hash": "lD3cyA",
-      "browserifyId": 829,
-      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlBhZ2VMYXlvdXQuanM/dmVyc2lvbj1sRDNjeUEiXSwibmFtZXMiOlsic3R5bGVzIiwiUGFnZUxheW91dCIsImNoaWxkcmVuIiwic2VjdGlvbnNXaXRoU3Vic2VjdGlvbnMiLCJtYXBTdGF0ZVRvUHJvcHMiLCJzdGF0ZSJdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQTs7OztBQUNBOztBQUNBOzs7O0FBRUE7Ozs7QUFDQTs7OztBQUNBOzs7O0FBRUEsSUFBTUEsU0FBUyxFQUFmOztBQUVBLElBQU1DLGFBQWEsU0FBYkEsVUFBYSxPQUEyQztBQUFBLE1BQXhDQyxRQUF3QyxRQUF4Q0EsUUFBd0M7QUFBQSxNQUE5QkMsdUJBQThCLFFBQTlCQSx1QkFBOEI7O0FBQzVELFNBQ0U7QUFBQTtBQUFBO0FBQ0UsNkRBREY7QUFFR0QsWUFGSDtBQUdFLDBEQUFZLHlCQUF5QkMsdUJBQXJDO0FBSEYsR0FERjtBQU9ELENBUkQ7O0FBVUEsSUFBTUMsa0JBQWtCLFNBQWxCQSxlQUFrQixDQUFDQyxLQUFEO0FBQUEsU0FBWTtBQUNsQ0YsNkJBQXlCLDJDQUEyQkUsS0FBM0I7QUFEUyxHQUFaO0FBQUEsQ0FBeEI7O2VBSWUseUJBQ2JELGVBRGEsRUFFYix3QkFBWUosTUFBWixFQUFvQkMsVUFBcEIsQ0FGYTs7Ozs7Ozs7Ozs7Z0NBaEJURDs7Z0NBRUFDOztnQ0FVQUciLCJmaWxlIjoiUGFnZUxheW91dC5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XG5pbXBvcnQgeyBjb25uZWN0IH0gZnJvbSAncmVhY3QtcmVkdXgnO1xuaW1wb3J0IGluamVjdFNoZWV0IGZyb20gJ3JlYWN0LWpzcyc7XG5cbmltcG9ydCBQYWdlSGVhZGVyIGZyb20gJy4vUGFnZUhlYWRlcic7XG5pbXBvcnQgUGFnZUZvb3RlciBmcm9tICcuL1BhZ2VGb290ZXInO1xuaW1wb3J0IHsgZ2V0U2VjdGlvbnNXaXRoU3Vic2VjdGlvbnMgfSBmcm9tICcuLi8uLi9zZWN0aW9ucy9zZWxlY3RvcnMnO1xuXG5jb25zdCBzdHlsZXMgPSB7fTtcblxuY29uc3QgUGFnZUxheW91dCA9ICh7IGNoaWxkcmVuLCBzZWN0aW9uc1dpdGhTdWJzZWN0aW9ucyB9KSA9PiB7XG4gIHJldHVybiAoXG4gICAgPGRpdj5cbiAgICAgIDxQYWdlSGVhZGVyLz5cbiAgICAgIHtjaGlsZHJlbn1cbiAgICAgIDxQYWdlRm9vdGVyIHNlY3Rpb25zV2l0aFN1YnNlY3Rpb25zPXtzZWN0aW9uc1dpdGhTdWJzZWN0aW9uc30vPlxuICAgIDwvZGl2PlxuICApXG59XG5cbmNvbnN0IG1hcFN0YXRlVG9Qcm9wcyA9IChzdGF0ZSkgPT4gKHtcbiAgc2VjdGlvbnNXaXRoU3Vic2VjdGlvbnM6IGdldFNlY3Rpb25zV2l0aFN1YnNlY3Rpb25zKHN0YXRlKSxcbn0pO1xuXG5leHBvcnQgZGVmYXVsdCBjb25uZWN0KFxuICBtYXBTdGF0ZVRvUHJvcHNcbikoaW5qZWN0U2hlZXQoc3R5bGVzKShQYWdlTGF5b3V0KSk7Il19"
-    }
-  ],
-  "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/index.js": [
-    "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _HomePage = require(\"./HomePage\");\n\nObject.defineProperty(exports, \"HomePage\", {\n  enumerable: true,\n  get: function get() {\n    return _interopRequireDefault(_HomePage).default;\n  }\n});\n\nvar _PageLayout = require(\"./PageLayout\");\n\nObject.defineProperty(exports, \"PageLayout\", {\n  enumerable: true,\n  get: function get() {\n    return _interopRequireDefault(_PageLayout).default;\n  }\n});\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n}();\n\n;\n",
-    {
-      "./PageLayout": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/PageLayout.js",
-      "./HomePage": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/HomePage.js"
-    },
-    {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/components/index.js",
-      "hash": "WBO3LA",
-      "browserifyId": 830,
-      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4LmpzP3ZlcnNpb249V0JPM0xBIl0sIm5hbWVzIjpbImRlZmF1bHQiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7NkNBQVNBOzs7Ozs7Ozs7K0NBQ0FBIiwiZmlsZSI6ImluZGV4LmpzIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IHsgZGVmYXVsdCBhcyBIb21lUGFnZSB9IGZyb20gXCIuL0hvbWVQYWdlXCI7XG5leHBvcnQgeyBkZWZhdWx0IGFzIFBhZ2VMYXlvdXQgfSBmcm9tIFwiLi9QYWdlTGF5b3V0XCI7Il19"
+      "hash": "CKepWQ",
+      "browserifyId": 829,
+      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4LmpzP3ZlcnNpb249Q0tlcFdRIl0sIm5hbWVzIjpbImRlZmF1bHQiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7NkNBQVNBOzs7Ozs7Ozs7K0NBQ0FBOzs7Ozs7Ozs7K0NBQ0FBIiwiZmlsZSI6ImluZGV4LmpzIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IHsgZGVmYXVsdCBhcyBIb21lUGFnZSB9IGZyb20gXCIuL0hvbWVQYWdlXCI7XG5leHBvcnQgeyBkZWZhdWx0IGFzIFBhZ2VIZWFkZXIgfSBmcm9tIFwiLi9QYWdlSGVhZGVyXCI7XG5leHBvcnQgeyBkZWZhdWx0IGFzIFBhZ2VGb290ZXIgfSBmcm9tIFwiLi9QYWdlRm9vdGVyXCI7Il19"
     }
   ],
   "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/constants.js": [
@@ -11632,7 +11616,7 @@
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/constants.js",
       "hash": "eRmmxw",
-      "browserifyId": 831,
+      "browserifyId": 830,
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbnN0YW50cy5qcz92ZXJzaW9uPWVSbW14dyJdLCJuYW1lcyI6WyJOQU1FIl0sIm1hcHBpbmdzIjoiOzs7O2VBQ0E7QUFDSUEsVUFBUTtBQURaIiwiZmlsZSI6ImNvbnN0YW50cy5qcyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWZhdWx0XHJcbntcclxuICAgIE5BTUUgOiAgJ2NvcmUnLFxyXG59O1xyXG4iXX0="
     }
   ],
@@ -11648,7 +11632,7 @@
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/index.js",
       "hash": "Naxozw",
-      "browserifyId": 832,
+      "browserifyId": 831,
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4LmpzP3ZlcnNpb249TmF4b3p3Il0sIm5hbWVzIjpbImFjdGlvbnMiLCJjb21wb25lbnRzIiwiY29uc3RhbnRzIiwic2VsZWN0b3JzIiwicmVkdWNlciJdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQTs7SUFBWUE7O0FBQ1o7O0lBQVlDOztBQUNaOztJQUFZQzs7QUFDWjs7OztBQUNBOztJQUFZQzs7Ozs7O2VBRUcsRUFBRUgsZ0JBQUYsRUFBV0Msc0JBQVgsRUFBdUJDLG9CQUF2QixFQUFrQ0UsMEJBQWxDLEVBQTJDRCxvQkFBM0MiLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgKiBhcyBhY3Rpb25zIGZyb20gJy4vYWN0aW9ucyc7XHJcbmltcG9ydCAqIGFzIGNvbXBvbmVudHMgZnJvbSAnLi9jb21wb25lbnRzJztcclxuaW1wb3J0ICogYXMgY29uc3RhbnRzIGZyb20gJy4vY29uc3RhbnRzJztcclxuaW1wb3J0IHJlZHVjZXIgZnJvbSAnLi9yZWR1Y2VyJztcclxuaW1wb3J0ICogYXMgc2VsZWN0b3JzIGZyb20gJy4vc2VsZWN0b3JzJztcclxuXHJcbmV4cG9ydCBkZWZhdWx0IHsgYWN0aW9ucywgY29tcG9uZW50cywgY29uc3RhbnRzLCByZWR1Y2VyLCBzZWxlY3RvcnMgfTsiXX0="
     }
   ],
@@ -11660,7 +11644,7 @@
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/reducer.js",
       "hash": "jA9Olg",
-      "browserifyId": 833,
+      "browserifyId": 832,
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJlZHVjZXIuanM/dmVyc2lvbj1qQTlPbGciXSwibmFtZXMiOlsiZ2V0Vmlld3BvcnRXaWR0aCIsIk1hdGgiLCJtYXgiLCJ3aW5kb3ciLCJkb2N1bWVudCIsImRvY3VtZW50RWxlbWVudCIsImNsaWVudFdpZHRoIiwiaW5uZXJXaWR0aCIsImdldFZpZXdwb3J0SGVpZ2h0IiwiY2xpZW50SGVpZ2h0IiwiaW5uZXJIZWlnaHQiLCJpbml0aWFsU3RhdGUiLCJsYW5ndWFnZSIsInZpZXdwb3J0V2lkdGgiLCJ2aWV3cG9ydEhlaWdodCIsInJlZHVjZXIiLCJzdGF0ZSIsImFjdGlvbiIsInR5cGUiLCJPYmplY3QiLCJhc3NpZ24iLCJwYXlsb2FkIl0sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBQUE7O0FBTUE7QUFDQTtBQUNBLElBQU1BLG1CQUFtQixTQUFuQkEsZ0JBQW1CLEdBQU07QUFDN0IsU0FBT0MsS0FBS0MsR0FBTCxDQUFTQyxPQUFPQyxRQUFQLENBQWdCQyxlQUFoQixDQUFnQ0MsV0FBekMsRUFBc0RILE9BQU9JLFVBQVAsSUFBcUIsQ0FBM0UsQ0FBUDtBQUNELENBRkQ7O0FBSUEsSUFBTUMsb0JBQW9CLFNBQXBCQSxpQkFBb0IsR0FBTTtBQUM5QixTQUFPUCxLQUFLQyxHQUFMLENBQVNDLE9BQU9DLFFBQVAsQ0FBZ0JDLGVBQWhCLENBQWdDSSxZQUF6QyxFQUF1RE4sT0FBT08sV0FBUCxJQUFzQixDQUE3RSxDQUFQO0FBQ0QsQ0FGRDs7QUFJQSxJQUFNQyxlQUFlO0FBQ25CQyxZQUFVLElBRFM7QUFFbkJDLGlCQUFlYixrQkFGSTtBQUduQmMsa0JBQWdCTjtBQUhHLENBQXJCOztBQU1BLElBQU1PLFVBQVUsU0FBVkEsT0FBVSxHQUF5QztBQUFBLE1BQXhDQyxLQUF3QyxvRkFBM0JMLFlBQTJCO0FBQUEsTUFBWE0sTUFBVzs7QUFDdkQsVUFBUUEsT0FBT0MsSUFBZjtBQUNFO0FBQ0UsYUFBT0MsT0FBT0MsTUFBUCxjQUNBSixLQURBLEdBRUwsRUFBRUosVUFBVUssT0FBT0ksT0FBUCxDQUFlVCxRQUEzQixFQUZLLENBQVA7QUFJRjtBQUNFLFVBQUlDLGdCQUFnQmIsa0JBQXBCO0FBQUEsVUFDRWMsaUJBQWlCTixtQkFEbkI7QUFFQSxVQUFJUSxNQUFNSCxhQUFOLElBQXVCQSxhQUF2QixJQUF3Q0csTUFBTUYsY0FBTixJQUF3QkEsY0FBcEUsRUFBb0Y7QUFDbEY7QUFDQSxlQUFPSyxPQUFPQyxNQUFQLGNBQW1CSixLQUFuQixHQUE0QixFQUFFSCw0QkFBRixFQUFpQkMsOEJBQWpCLEVBQTVCLENBQVA7QUFDRCxPQUhELE1BR087QUFBRTtBQUNQLGVBQU9FLEtBQVA7QUFDRDtBQUNIO0FBQ0U7QUFoQko7QUFrQkEsU0FBT0EsS0FBUDtBQUNELENBcEJEOztlQXNCZUQ7Ozs7Ozs7Ozs7Z0NBcENUZjs7Z0NBSUFROztnQ0FJQUc7O2dDQU1BSSIsImZpbGUiOiJyZWR1Y2VyLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0XHJcbntcclxuICBTRVRfTEFOR1VBR0UsXHJcbiAgUkVGUkVTSF9XSU5ET1dfRElNRU5TSU9OUyxcclxufSBmcm9tICcuL2FjdGlvblR5cGVzJztcclxuXHJcbi8vIGdldFdpbmRvd1dpZHRoICYgZ2V0V2luZG93SGVpZ2h0IHdhc1xyXG4vLyBhZGFwdGVkIGZyb20gaHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL2EvODg3NjA2OS8xMjkxNjU5XHJcbmNvbnN0IGdldFZpZXdwb3J0V2lkdGggPSAoKSA9PiB7XHJcbiAgcmV0dXJuIE1hdGgubWF4KHdpbmRvdy5kb2N1bWVudC5kb2N1bWVudEVsZW1lbnQuY2xpZW50V2lkdGgsIHdpbmRvdy5pbm5lcldpZHRoIHx8IDApO1xyXG59O1xyXG5cclxuY29uc3QgZ2V0Vmlld3BvcnRIZWlnaHQgPSAoKSA9PiB7XHJcbiAgcmV0dXJuIE1hdGgubWF4KHdpbmRvdy5kb2N1bWVudC5kb2N1bWVudEVsZW1lbnQuY2xpZW50SGVpZ2h0LCB3aW5kb3cuaW5uZXJIZWlnaHQgfHwgMCk7XHJcbn07XHJcblxyXG5jb25zdCBpbml0aWFsU3RhdGUgPSB7XHJcbiAgbGFuZ3VhZ2U6ICdlbicsXHJcbiAgdmlld3BvcnRXaWR0aDogZ2V0Vmlld3BvcnRXaWR0aCgpLFxyXG4gIHZpZXdwb3J0SGVpZ2h0OiBnZXRWaWV3cG9ydEhlaWdodCgpLFxyXG59O1xyXG5cclxuY29uc3QgcmVkdWNlciA9IChzdGF0ZSA9IHsgLi4uaW5pdGlhbFN0YXRlIH0sIGFjdGlvbikgPT4ge1xyXG4gIHN3aXRjaCAoYWN0aW9uLnR5cGUpIHtcclxuICAgIGNhc2UgU0VUX0xBTkdVQUdFIDpcclxuICAgICAgcmV0dXJuIE9iamVjdC5hc3NpZ24oXHJcbiAgICAgICAgeyAuLi5zdGF0ZSB9LFxyXG4gICAgICAgIHsgbGFuZ3VhZ2U6IGFjdGlvbi5wYXlsb2FkLmxhbmd1YWdlIH1cclxuICAgICAgKTtcclxuICAgIGNhc2UgUkVGUkVTSF9XSU5ET1dfRElNRU5TSU9OUyA6XHJcbiAgICAgIGxldCB2aWV3cG9ydFdpZHRoID0gZ2V0Vmlld3BvcnRXaWR0aCgpLFxyXG4gICAgICAgIHZpZXdwb3J0SGVpZ2h0ID0gZ2V0Vmlld3BvcnRIZWlnaHQoKTtcclxuICAgICAgaWYgKHN0YXRlLnZpZXdwb3J0V2lkdGggIT0gdmlld3BvcnRXaWR0aCB8fCBzdGF0ZS52aWV3cG9ydEhlaWdodCAhPSB2aWV3cG9ydEhlaWdodCkge1xyXG4gICAgICAgIC8vIG92ZXJyaWRlIHdpZHRoL2hlaWdodCB3aGljaCB3aWxsIHJlZnJlc2ggYXBwIHZpZXdcclxuICAgICAgICByZXR1cm4gT2JqZWN0LmFzc2lnbih7IC4uLnN0YXRlIH0sIHsgdmlld3BvcnRXaWR0aCwgdmlld3BvcnRIZWlnaHQgfSk7XHJcbiAgICAgIH0gZWxzZSB7IC8vIG90aGVyd2lzZSBkbyBub3QgbXV0YXRlXHJcbiAgICAgICAgcmV0dXJuIHN0YXRlO1xyXG4gICAgICB9XHJcbiAgICBkZWZhdWx0OlxyXG4gICAgICBicmVhaztcclxuICB9XHJcbiAgcmV0dXJuIHN0YXRlO1xyXG59O1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgcmVkdWNlcjtcclxuIl19"
     }
   ],
@@ -11672,7 +11656,7 @@
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/selectors.js",
       "hash": "UoFcmg",
-      "browserifyId": 834,
+      "browserifyId": 833,
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNlbGVjdG9ycy5qcz92ZXJzaW9uPVVvRmNtZyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEiLCJmaWxlIjoic2VsZWN0b3JzLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHtjcmVhdGVTZWxlY3Rvcn0gZnJvbSAncmVzZWxlY3QnO1xuIl19"
     }
   ],
@@ -11684,7 +11668,7 @@
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/index.js",
       "hash": "tlv0qw",
-      "browserifyId": 835,
+      "browserifyId": 834,
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4LmpzP3ZlcnNpb249dGx2MHF3Il0sIm5hbWVzIjpbIlJvdXRpbmdBcHAiXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBOzs7Ozs7UUFFU0EiLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUm91dGluZ0FwcCBmcm9tICcuL1JvdXRpbmdBcHAnO1xyXG5cclxuZXhwb3J0IHsgUm91dGluZ0FwcCB9OyJdfQ=="
     }
   ],
@@ -11694,7 +11678,7 @@
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/actionTypes.js",
       "hash": "meZXcQ",
-      "browserifyId": 836,
+      "browserifyId": 835,
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFjdGlvblR5cGVzLmpzP3ZlcnNpb249bWVaWGNRIl0sIm5hbWVzIjpbIkZFVENIX1NFQ1RJT05fUEVORElORyIsIkZFVENIX1NFQ1RJT05fUkVKRUNURUQiLCJGRVRDSF9TRUNUSU9OX0ZVTEZJTExFRCJdLCJtYXBwaW5ncyI6Ijs7OztBQUFPLElBQU1BLHdEQUF3QixnQ0FBOUI7QUFDQSxJQUFNQywwREFBeUIsaUNBQS9CO0FBQ0EsSUFBTUMsNERBQTBCLGtDQUFoQzs7Ozs7Ozs7Z0NBRk1GOztnQ0FDQUM7O2dDQUNBQyIsImZpbGUiOiJhY3Rpb25UeXBlcy5qcyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBjb25zdCBGRVRDSF9TRUNUSU9OX1BFTkRJTkcgPSAnc2VjdGlvbnMvRkVUQ0hfU0VDVElPTl9QRU5ESU5HJztcbmV4cG9ydCBjb25zdCBGRVRDSF9TRUNUSU9OX1JFSkVDVEVEID0gJ3NlY3Rpb25zL0ZFVENIX1NFQ1RJT05fUkVKRUNURUQnO1xuZXhwb3J0IGNvbnN0IEZFVENIX1NFQ1RJT05fRlVMRklMTEVEID0gJ3NlY3Rpb25zL0ZFVENIX1NFQ1RJT05fRlVMRklMTEVEJztcbiJdfQ=="
     }
   ],
@@ -11707,7 +11691,7 @@
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/actions.js",
       "hash": "K9bZLQ",
-      "browserifyId": 837,
+      "browserifyId": 836,
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFjdGlvbnMuanM/dmVyc2lvbj1LOWJaTFEiXSwibmFtZXMiOlsidCIsImFwaVVybCIsImZldGNoIiwidHlwZSIsIkZFVENIX1NFQ1RJT04iLCJwYXlsb2FkIiwiZ2V0Il0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQTs7OztBQUNBOztJQUFZQTs7Ozs7O0FBRVosSUFBTUMsU0FBUyxtQ0FBZjtBQUNPLElBQU1DLHdCQUFRLFNBQVJBLEtBQVEsR0FBTTtBQUMxQixRQUFPO0FBQ05DLFFBQU1ILEVBQUVJLGFBREY7QUFFTkMsV0FBUyxnQkFBTUMsR0FBTixDQUFXTCxNQUFYO0FBRkgsRUFBUDtBQUlBLENBTE07Ozs7Ozs7OytCQUREQTs7K0JBQ09DIiwiZmlsZSI6ImFjdGlvbnMuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgYXhpb3MgZnJvbSAnYXhpb3MnO1xyXG5pbXBvcnQgKiBhcyB0IGZyb20gJy4vYWN0aW9uVHlwZXMnO1xyXG5cclxuY29uc3QgYXBpVXJsID0gJ2h0dHA6Ly9hcGkuaWNuZGIuY29tL2pva2VzL3JhbmRvbSc7XHJcbmV4cG9ydCBjb25zdCBmZXRjaCA9ICgpID0+IHtcclxuXHRyZXR1cm4ge1xyXG5cdFx0dHlwZTogdC5GRVRDSF9TRUNUSU9OLFxyXG5cdFx0cGF5bG9hZDogYXhpb3MuZ2V0KCBhcGlVcmwgKVxyXG5cdH07XHJcbn07XHJcbiJdfQ=="
     }
   ],
@@ -11717,15 +11701,15 @@
       "../../sections": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/index.js",
       "../../articles": "/Users/jasonkao/stuyspec/client-app/src/js/modules/articles/index.js",
       "react": "/Users/jasonkao/stuyspec/client-app/node_modules/react/react.js",
-      "react-router-dom": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/index.js",
       "redux": "/Users/jasonkao/stuyspec/client-app/node_modules/redux/lib/index.js",
       "react-redux": "/Users/jasonkao/stuyspec/client-app/node_modules/react-redux/lib/index.js",
+      "react-router-dom": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-dom/index.js",
       "react-jss": "/Users/jasonkao/stuyspec/client-app/node_modules/react-jss/lib/index.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/components/SectionPage.js",
       "hash": "I8EA/Q",
-      "browserifyId": 838,
+      "browserifyId": 837,
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlNlY3Rpb25QYWdlLmpzP3ZlcnNpb249SThFQS9RIl0sIm5hbWVzIjpbInN0eWxlcyIsIlNlY3Rpb25QYWdlX19IZWFkZXIiLCJjb2xvciIsIlNlY3Rpb25QYWdlIiwiY2xhc3NlcyIsImFydGljbGVzIiwic3Vic2VjdGlvbnMiLCJzZWN0aW9uIiwibWF0Y2giLCJjcmVhdGVTdWJzZWN0aW9uTGlua3MiLCJPYmplY3QiLCJrZXlzIiwibWFwIiwia2V5IiwiaW5kZXgiLCJzdWJzZWN0aW9uIiwidXJsIiwic2x1ZyIsIm5hbWUiLCJjcmVhdGVBcnRpY2xlTGlua3MiLCJjb25zb2xlIiwibG9nIiwiYXJ0aWNsZSIsInBhdGhUb0FydGljbGVQYWdlIiwic2VjdGlvblNsdWciLCJ1bmRlZmluZWQiLCJ0aXRsZSIsImRlc2NyaXB0aW9uIiwibWFwU3RhdGVUb1Byb3BzIiwic3RhdGUiLCJvd25Qcm9wcyIsInNlbGVjdG9ycyIsImdldEFydGljbGVzV2l0aGluU2VjdGlvbiIsIm1hcERpc3BhdGNoVG9Qcm9wcyIsImRpc3BhdGNoIl0sIm1hcHBpbmdzIjoiOzs7OztBQUFBOzs7O0FBQ0E7O0FBQ0E7O0FBQ0E7O0FBQ0E7Ozs7QUFDQTs7OztBQUVBOzs7Ozs7QUFFQSxJQUFNQSxTQUFTO0FBQ2JDLHVCQUFxQjtBQUNuQkMsV0FBTztBQURZO0FBRFIsQ0FBZjs7QUFNQTs7O0FBR0EsSUFBTUMsY0FBYyxTQUFkQSxXQUFjLE9BQXdEO0FBQUEsTUFBckRDLE9BQXFELFFBQXJEQSxPQUFxRDtBQUFBLE1BQTVDQyxRQUE0QyxRQUE1Q0EsUUFBNEM7QUFBQSxNQUFsQ0MsV0FBa0MsUUFBbENBLFdBQWtDO0FBQUEsTUFBckJDLE9BQXFCLFFBQXJCQSxPQUFxQjtBQUFBLE1BQVpDLEtBQVksUUFBWkEsS0FBWTs7QUFDMUUsTUFBTUMsd0JBQXdCLFNBQXhCQSxxQkFBd0IsR0FBTTtBQUNsQyxXQUFPQyxPQUFPQyxJQUFQLENBQVlMLFdBQVosRUFBeUJNLEdBQXpCLENBQTZCLFVBQVVDLEdBQVYsRUFBZUMsS0FBZixFQUFzQjtBQUN4RCxVQUFNQyxhQUFhVCxZQUFhTyxHQUFiLENBQW5CO0FBQ0EsYUFDRTtBQUFBO0FBQUEsVUFBSSx3QkFBc0JDLEtBQTFCO0FBQ0U7QUFBQTtBQUFBLFlBQU0sSUFBSU4sTUFBTVEsR0FBTixHQUFZLEdBQVosR0FBa0JELFdBQVdFLElBQXZDO0FBQThDRixxQkFBV0c7QUFBekQ7QUFERixPQURGO0FBS0QsS0FQTSxDQUFQO0FBUUQsR0FURDtBQVVBLE1BQU1DLHFCQUFxQixTQUFyQkEsa0JBQXFCLEdBQU07QUFDL0JDLFlBQVFDLEdBQVI7QUFDQSxXQUFPWCxPQUFPQyxJQUFQLENBQVlOLFFBQVosRUFBc0JPLEdBQXRCLENBQTBCLFVBQVVDLEdBQVYsRUFBZUMsS0FBZixFQUFzQjtBQUNyRCxVQUFNUSxVQUFVakIsU0FBVVEsR0FBVixDQUFoQjtBQUNBLFVBQUlVLG9CQUFvQkQsUUFBUUwsSUFBaEM7QUFDQTtBQUNBLFVBQUlYLFlBQWFnQixRQUFRRSxXQUFyQixNQUF1Q0MsU0FBM0MsRUFBc0Q7QUFDcERGLDRCQUFvQkQsUUFBUUUsV0FBUixHQUFzQixHQUF0QixHQUE0QkYsUUFBUUwsSUFBeEQ7QUFDRDtBQUNELGFBQ0U7QUFBQTtBQUFBLFVBQUkscUJBQW1CSCxLQUF2QjtBQUNFO0FBQUE7QUFBQSxZQUFNLElBQUlOLE1BQU1RLEdBQU4sR0FBWSxHQUFaLEdBQWtCTyxpQkFBNUI7QUFBZ0RELGtCQUFRSTtBQUF4RDtBQURGLE9BREY7QUFLRCxLQVpNLENBQVA7QUFhRCxHQWZEO0FBZ0JBLFNBQ0U7QUFBQTtBQUFBO0FBQ0U7QUFBQTtBQUFBLFFBQUksV0FBV3RCLFFBQVFILG1CQUF2QjtBQUE2Q00sY0FBUVc7QUFBckQsS0FERjtBQUVFO0FBQUE7QUFBQTtBQUFBO0FBQWlCWCxjQUFRb0I7QUFBekIsS0FGRjtBQUdFLDZDQUhGO0FBSUU7QUFBQTtBQUFBO0FBQUE7QUFBQSxLQUpGO0FBS0U7QUFBQTtBQUFBO0FBQ0dsQjtBQURILEtBTEY7QUFRRSw2Q0FSRjtBQVNFO0FBQUE7QUFBQTtBQUFBO0FBQUEsS0FURjtBQVVFO0FBQUE7QUFBQTtBQUNHVTtBQURIO0FBVkYsR0FERjtBQWdCRCxDQTNDRDs7QUE4Q0EsSUFBTVMsa0JBQWtCLFNBQWxCQSxlQUFrQixDQUFDQyxLQUFELEVBQVFDLFFBQVI7QUFBQSxTQUFzQjtBQUM1Q3pCLGNBQVUsbUJBQVMwQixTQUFULENBQW1CQyx3QkFBbkIsQ0FBNENILEtBQTVDLEVBQW1EQyxRQUFuRDtBQURrQyxHQUF0QjtBQUFBLENBQXhCOztBQUlBLElBQU1HLHFCQUFxQixTQUFyQkEsa0JBQXFCLFdBQVk7QUFDckMsU0FBTywrQkFBbUIsRUFBbkIsRUFBdUJDLFFBQXZCLENBQVA7QUFDRCxDQUZEOztlQUllLHlCQUNiTixlQURhLEVBRWJLLGtCQUZhLEVBR2Isd0JBQVlqQyxNQUFaLEVBQW9CRyxXQUFwQixDQUhhOzs7Ozs7Ozs7OztnQ0EvRFRIOztnQ0FTQUc7O2dDQThDQXlCOztnQ0FJQUsiLCJmaWxlIjoiU2VjdGlvblBhZ2UuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QgZnJvbSAncmVhY3QnO1xuaW1wb3J0IHsgYmluZEFjdGlvbkNyZWF0b3JzIH0gZnJvbSAncmVkdXgnO1xuaW1wb3J0IHsgY29ubmVjdCB9IGZyb20gJ3JlYWN0LXJlZHV4JztcbmltcG9ydCB7IExpbmsgfSBmcm9tICdyZWFjdC1yb3V0ZXItZG9tJztcbmltcG9ydCBpbmplY3RTaGVldCBmcm9tICdyZWFjdC1qc3MnO1xuaW1wb3J0IHNlY3Rpb25zIGZyb20gJy4uLy4uL3NlY3Rpb25zJztcblxuaW1wb3J0IGFydGljbGVzIGZyb20gJy4uLy4uL2FydGljbGVzJztcblxuY29uc3Qgc3R5bGVzID0ge1xuICBTZWN0aW9uUGFnZV9fSGVhZGVyOiB7XG4gICAgY29sb3I6ICcjMDAwJyxcbiAgfVxufTtcblxuLyogVE9ETzogbWFrZSBzdWJzZWN0aW9uIHRyZWUgd29yayBmb3IgYW55IGRlcHRoXG4gKi9cblxuY29uc3QgU2VjdGlvblBhZ2UgPSAoeyBjbGFzc2VzLCBhcnRpY2xlcywgc3Vic2VjdGlvbnMsIHNlY3Rpb24sIG1hdGNoIH0pID0+IHtcbiAgY29uc3QgY3JlYXRlU3Vic2VjdGlvbkxpbmtzID0gKCkgPT4ge1xuICAgIHJldHVybiBPYmplY3Qua2V5cyhzdWJzZWN0aW9ucykubWFwKGZ1bmN0aW9uIChrZXksIGluZGV4KSB7XG4gICAgICBjb25zdCBzdWJzZWN0aW9uID0gc3Vic2VjdGlvbnNbIGtleSBdO1xuICAgICAgcmV0dXJuIChcbiAgICAgICAgPGxpIGtleT17YHN1YnNlY3Rpb25MaW5rJHtpbmRleH1gfT5cbiAgICAgICAgICA8TGluayB0bz17bWF0Y2gudXJsICsgJy8nICsgc3Vic2VjdGlvbi5zbHVnfT57c3Vic2VjdGlvbi5uYW1lfTwvTGluaz5cbiAgICAgICAgPC9saT5cbiAgICAgICk7XG4gICAgfSk7XG4gIH07XG4gIGNvbnN0IGNyZWF0ZUFydGljbGVMaW5rcyA9ICgpID0+IHtcbiAgICBjb25zb2xlLmxvZyhzZWN0aW9ucyk7XG4gICAgcmV0dXJuIE9iamVjdC5rZXlzKGFydGljbGVzKS5tYXAoZnVuY3Rpb24gKGtleSwgaW5kZXgpIHtcbiAgICAgIGNvbnN0IGFydGljbGUgPSBhcnRpY2xlc1sga2V5IF07XG4gICAgICBsZXQgcGF0aFRvQXJ0aWNsZVBhZ2UgPSBhcnRpY2xlLnNsdWc7XG4gICAgICAvLyBpZiBhcnRpY2xlIGlzIG5vdCBhIGRpcmVjdCBjaGlsZCBvZiB0aGlzIHNlY3Rpb24gYnV0IGlzIHRoYXQgb2YgdGhlIHNlY3Rpb24ncyBzdWJzZWN0aW9uXG4gICAgICBpZiAoc3Vic2VjdGlvbnNbIGFydGljbGUuc2VjdGlvblNsdWcgXSAhPT0gdW5kZWZpbmVkKSB7XG4gICAgICAgIHBhdGhUb0FydGljbGVQYWdlID0gYXJ0aWNsZS5zZWN0aW9uU2x1ZyArICcvJyArIGFydGljbGUuc2x1ZztcbiAgICAgIH1cbiAgICAgIHJldHVybiAoXG4gICAgICAgIDxsaSBrZXk9e2BhcnRpY2xlTGluayR7aW5kZXh9YH0+XG4gICAgICAgICAgPExpbmsgdG89e21hdGNoLnVybCArICcvJyArIHBhdGhUb0FydGljbGVQYWdlfT57YXJ0aWNsZS50aXRsZX08L0xpbms+XG4gICAgICAgIDwvbGk+XG4gICAgICApO1xuICAgIH0pO1xuICB9O1xuICByZXR1cm4gKFxuICAgIDxkaXY+XG4gICAgICA8aDEgY2xhc3NOYW1lPXtjbGFzc2VzLlNlY3Rpb25QYWdlX19IZWFkZXJ9PntzZWN0aW9uLm5hbWV9PC9oMT5cbiAgICAgIDxwPmRlc2NyaXB0aW9uOiB7c2VjdGlvbi5kZXNjcmlwdGlvbn08L3A+XG4gICAgICA8aHIvPlxuICAgICAgPHA+c3Vic2VjdGlvbnM8L3A+XG4gICAgICA8dWw+XG4gICAgICAgIHtjcmVhdGVTdWJzZWN0aW9uTGlua3MoKX1cbiAgICAgIDwvdWw+XG4gICAgICA8aHIvPlxuICAgICAgPHA+YXJ0aWNsZXM8L3A+XG4gICAgICA8dWw+XG4gICAgICAgIHtjcmVhdGVBcnRpY2xlTGlua3MoKX1cbiAgICAgIDwvdWw+XG4gICAgPC9kaXY+XG4gICk7XG59O1xuXG5cbmNvbnN0IG1hcFN0YXRlVG9Qcm9wcyA9IChzdGF0ZSwgb3duUHJvcHMpID0+ICh7XG4gIGFydGljbGVzOiBhcnRpY2xlcy5zZWxlY3RvcnMuZ2V0QXJ0aWNsZXNXaXRoaW5TZWN0aW9uKHN0YXRlLCBvd25Qcm9wcyksXG59KTtcblxuY29uc3QgbWFwRGlzcGF0Y2hUb1Byb3BzID0gZGlzcGF0Y2ggPT4ge1xuICByZXR1cm4gYmluZEFjdGlvbkNyZWF0b3JzKHt9LCBkaXNwYXRjaCk7XG59O1xuXG5leHBvcnQgZGVmYXVsdCBjb25uZWN0KFxuICBtYXBTdGF0ZVRvUHJvcHMsXG4gIG1hcERpc3BhdGNoVG9Qcm9wc1xuKShpbmplY3RTaGVldChzdHlsZXMpKFNlY3Rpb25QYWdlKSk7XG4iXX0="
     }
   ],
@@ -11737,7 +11721,7 @@
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/components/index.js",
       "hash": "NixCpw",
-      "browserifyId": 839,
+      "browserifyId": 838,
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4LmpzP3ZlcnNpb249Tml4Q3B3Il0sIm5hbWVzIjpbImRlZmF1bHQiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Z0RBQVNBIiwiZmlsZSI6ImluZGV4LmpzIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IHsgZGVmYXVsdCBhcyBTZWN0aW9uUGFnZSB9IGZyb20gJy4vU2VjdGlvblBhZ2UnOyJdfQ=="
     }
   ],
@@ -11747,7 +11731,7 @@
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/constants.js",
       "hash": "YC94GQ",
-      "browserifyId": 840,
+      "browserifyId": 839,
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbnN0YW50cy5qcz92ZXJzaW9uPVlDOTRHUSJdLCJuYW1lcyI6WyJOQU1FIl0sIm1hcHBpbmdzIjoiOzs7O2VBQ0E7QUFDSUEsVUFBUTtBQURaIiwiZmlsZSI6ImNvbnN0YW50cy5qcyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWZhdWx0XHJcbntcclxuICAgIE5BTUUgOiAgJ3NlY3Rpb25zJyxcclxufSJdfQ=="
     }
   ],
@@ -11755,15 +11739,15 @@
     "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _actions = require('./actions');\n\nvar actions = _interopRequireWildcard(_actions);\n\nvar _components = require('./components');\n\nvar components = _interopRequireWildcard(_components);\n\nvar _constants = require('./constants');\n\nvar constants = _interopRequireWildcard(_constants);\n\nvar _reducer = require('./reducer');\n\nvar _reducer2 = _interopRequireDefault(_reducer);\n\nvar _selectors = require('./selectors');\n\nvar selectors = _interopRequireWildcard(_selectors);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }\n\nvar _default = { actions: actions, components: components, constants: constants, reducer: _reducer2.default, selectors: selectors };\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n\n  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/index.js');\n}();\n\n;\n",
     {
       "./constants": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/constants.js",
+      "./selectors": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/selectors.js",
       "./reducer": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/reducer.js",
       "./actions": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/actions.js",
-      "./selectors": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/selectors.js",
       "./components": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/components/index.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/index.js",
       "hash": "1WZ/WQ",
-      "browserifyId": 841,
+      "browserifyId": 840,
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4LmpzP3ZlcnNpb249MVdaL1dRIl0sIm5hbWVzIjpbImFjdGlvbnMiLCJjb21wb25lbnRzIiwiY29uc3RhbnRzIiwic2VsZWN0b3JzIiwicmVkdWNlciJdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQTs7SUFBWUE7O0FBQ1o7O0lBQVlDOztBQUNaOztJQUFZQzs7QUFDWjs7OztBQUNBOztJQUFZQzs7Ozs7O2VBRUcsRUFBRUgsZ0JBQUYsRUFBV0Msc0JBQVgsRUFBdUJDLG9CQUF2QixFQUFrQ0UsMEJBQWxDLEVBQTJDRCxvQkFBM0MiLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgKiBhcyBhY3Rpb25zIGZyb20gJy4vYWN0aW9ucyc7XHJcbmltcG9ydCAqIGFzIGNvbXBvbmVudHMgZnJvbSAnLi9jb21wb25lbnRzJztcclxuaW1wb3J0ICogYXMgY29uc3RhbnRzIGZyb20gJy4vY29uc3RhbnRzJztcclxuaW1wb3J0IHJlZHVjZXIgZnJvbSAnLi9yZWR1Y2VyJztcclxuaW1wb3J0ICogYXMgc2VsZWN0b3JzIGZyb20gJy4vc2VsZWN0b3JzJztcclxuXHJcbmV4cG9ydCBkZWZhdWx0IHsgYWN0aW9ucywgY29tcG9uZW50cywgY29uc3RhbnRzLCByZWR1Y2VyLCBzZWxlY3RvcnMgfTsiXX0="
     }
   ],
@@ -11775,7 +11759,7 @@
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/reducer.js",
       "hash": "5RPT8g",
-      "browserifyId": 842,
+      "browserifyId": 841,
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJlZHVjZXIuanM/dmVyc2lvbj01UlBUOGciXSwibmFtZXMiOlsiaW5pdGlhbFN0YXRlIiwiaXNGZXRjaGluZyIsImlzRmV0Y2hlZCIsImVycm9yIiwicmVxdWVzdCIsInNlY3Rpb25zIiwiaWQiLCJuYW1lIiwic2x1ZyIsImRlc2NyaXB0aW9uIiwicGFyZW50U2x1ZyIsInJlZHVjZXIiLCJzdGF0ZSIsImFjdGlvbiIsInR5cGUiLCJwYXlsb2FkIl0sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBQUE7O0FBTUEsSUFBTUEsZUFBZTtBQUNuQkMsY0FBWSxLQURPO0FBRW5CQyxhQUFXLEtBRlE7QUFHbkJDLFNBQU8sSUFIWTtBQUluQkMsV0FBUyxJQUpVO0FBS25CQyxZQUFVO0FBQ1IsWUFBUTtBQUNOQyxVQUFJLENBREU7QUFFTkMsWUFBTSxNQUZBO0FBR05DLFlBQU0sTUFIQTtBQUlOQyxtQkFBYSx5QkFKUDtBQUtOQyxrQkFBWTtBQUxOLEtBREE7QUFRUixnQkFBWTtBQUNWSixVQUFJLENBRE07QUFFVkMsWUFBTSxVQUZJO0FBR1ZDLFlBQU0sVUFISTtBQUlWQyxtQkFBYSw2QkFKSDtBQUtWQyxrQkFBWTtBQUxGLEtBUko7QUFlUixnQkFBWTtBQUNWSixVQUFJLENBRE07QUFFVkMsWUFBTSxVQUZJO0FBR1ZDLFlBQU0sVUFISTtBQUlWQyxtQkFBYSw2QkFKSDtBQUtWQyxrQkFBWTtBQUxGLEtBZko7QUFzQlIseUJBQXFCO0FBQ25CSixVQUFJLENBRGU7QUFFbkJDLFlBQU0sbUJBRmE7QUFHbkJDLFlBQU0sbUJBSGE7QUFJbkJDLG1CQUFhLHNDQUpNO0FBS25CQyxrQkFBWTtBQUxPLEtBdEJiO0FBNkJSLHdCQUFvQjtBQUNsQkosVUFBSSxDQURjO0FBRWxCQyxZQUFNLGtCQUZZO0FBR2xCQyxZQUFNLGtCQUhZO0FBSWxCQyxtQkFBYSxxQ0FKSztBQUtsQkMsa0JBQVk7QUFMTSxLQTdCWjtBQW9DUix3QkFBb0I7QUFDbEJKLFVBQUksQ0FEYztBQUVsQkMsWUFBTSxrQkFGWTtBQUdsQkMsWUFBTSxrQkFIWTtBQUlsQkMsbUJBQWEscUNBSks7QUFLbEJDLGtCQUFZO0FBTE0sS0FwQ1o7QUEyQ1IsY0FBVTtBQUNSSixVQUFJLENBREk7QUFFUkMsWUFBTSxRQUZFO0FBR1JDLFlBQU0sUUFIRTtBQUlSQyxtQkFBYSwyQkFKTDtBQUtSQyxrQkFBWTtBQUxKO0FBM0NGO0FBTFMsQ0FBckI7O0FBMERBLElBQU1DLFVBQVUsU0FBVkEsT0FBVSxHQUF5QztBQUFBLE1BQXhDQyxLQUF3QyxvRkFBM0JaLFlBQTJCO0FBQUEsTUFBWGEsTUFBVzs7QUFDdkQsVUFBUUEsT0FBT0MsSUFBZjtBQUNFLFNBQUssZ0NBQUw7QUFBdUM7QUFDckMsNEJBQVlGLEtBQVosSUFBbUJYLFlBQVksSUFBL0I7QUFDRDtBQUNELFNBQUssaUNBQUw7QUFBd0M7QUFDdEMsNEJBQVlXLEtBQVosSUFBbUJYLFlBQVksS0FBL0IsRUFBc0NFLE9BQU9VLE9BQU9FLE9BQXBEO0FBQ0Q7QUFDRCxTQUFLLGtDQUFMO0FBQXlDO0FBQ3ZDLDRCQUNLSCxLQURMO0FBRUVYLHNCQUFZLEtBRmQ7QUFHRUMscUJBQVcsSUFIYjtBQUlFRSxtQkFBU1MsT0FBT0U7QUFKbEI7QUFNRDtBQWRIO0FBZ0JBLFNBQU9ILEtBQVA7QUFDRCxDQWxCRDs7ZUFvQmVEOzs7Ozs7Ozs7O2dDQTlFVFg7O2dDQTBEQVciLCJmaWxlIjoicmVkdWNlci5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7XHJcbiAgRkVUQ0hfU0VDVElPTl9QRU5ESU5HLFxyXG4gIEZFVENIX1NFQ1RJT05fUkVKRUNURUQsXHJcbiAgRkVUQ0hfU0VDVElPTl9GVUxGSUxMRUQsXHJcbn0gZnJvbSAnLi9hY3Rpb25UeXBlcyc7XHJcblxyXG5jb25zdCBpbml0aWFsU3RhdGUgPSB7XHJcbiAgaXNGZXRjaGluZzogZmFsc2UsXHJcbiAgaXNGZXRjaGVkOiBmYWxzZSxcclxuICBlcnJvcjogbnVsbCxcclxuICByZXF1ZXN0OiBudWxsLFxyXG4gIHNlY3Rpb25zOiB7XHJcbiAgICBcIm5ld3NcIjoge1xyXG4gICAgICBpZDogMCxcclxuICAgICAgbmFtZTogXCJOZXdzXCIsXHJcbiAgICAgIHNsdWc6IFwibmV3c1wiLFxyXG4gICAgICBkZXNjcmlwdGlvbjogXCJUaGUgbmV3cyBvZiBTdHV5dmVzYW50LlwiLFxyXG4gICAgICBwYXJlbnRTbHVnOiBudWxsLFxyXG4gICAgfSxcclxuICAgIFwib3BpbmlvbnNcIjoge1xyXG4gICAgICBpZDogMSxcclxuICAgICAgbmFtZTogXCJPcGluaW9uc1wiLFxyXG4gICAgICBzbHVnOiBcIm9waW5pb25zXCIsXHJcbiAgICAgIGRlc2NyaXB0aW9uOiBcIlRoZSBvcGluaW9ucyBvZiBTdHV5dmVzYW50LlwiLFxyXG4gICAgICBwYXJlbnRTbHVnOiBudWxsLFxyXG4gICAgfSxcclxuICAgIFwiZmVhdHVyZXNcIjoge1xyXG4gICAgICBpZDogMixcclxuICAgICAgbmFtZTogXCJGZWF0dXJlc1wiLFxyXG4gICAgICBzbHVnOiBcImZlYXR1cmVzXCIsXHJcbiAgICAgIGRlc2NyaXB0aW9uOiBcIlRoZSBmZWF0dXJlcyBvZiBTdHV5dmVzYW50LlwiLFxyXG4gICAgICBwYXJlbnRTbHVnOiBudWxsLFxyXG4gICAgfSxcclxuICAgIFwiY2FtcGFpZ24tY292ZXJhZ2VcIjoge1xyXG4gICAgICBpZDogMyxcclxuICAgICAgbmFtZTogXCJDYW1wYWlnbiBDb3ZlcmFnZVwiLFxyXG4gICAgICBzbHVnOiBcImNhbXBhaWduLWNvdmVyYWdlXCIsXHJcbiAgICAgIGRlc2NyaXB0aW9uOiBcIlRoZSBjYW1wYWlnbiBjb3ZlcmFnZSBvZiBTdHV5dmVzYW50LlwiLFxyXG4gICAgICBwYXJlbnRTbHVnOiBcIm5ld3NcIixcclxuICAgIH0sXHJcbiAgICBcInN0YWZmLWVkaXRvcmlhbHNcIjoge1xyXG4gICAgICBpZDogNCxcclxuICAgICAgbmFtZTogXCJTdGFmZiBFZGl0b3JpYWxzXCIsXHJcbiAgICAgIHNsdWc6IFwic3RhZmYtZWRpdG9yaWFsc1wiLFxyXG4gICAgICBkZXNjcmlwdGlvbjogXCJUaGUgc3RhZmYgZWRpdG9yaWFscyBvZiBTdHV5dmVzYW50LlwiLFxyXG4gICAgICBwYXJlbnRTbHVnOiBcIm9waW5pb25zXCIsXHJcbiAgICB9LFxyXG4gICAgXCJjcmVhdGl2ZS13cml0aW5nXCI6IHtcclxuICAgICAgaWQ6IDUsXHJcbiAgICAgIG5hbWU6IFwiQ3JlYXRpdmUgV3JpdGluZ1wiLFxyXG4gICAgICBzbHVnOiBcImNyZWF0aXZlLXdyaXRpbmdcIixcclxuICAgICAgZGVzY3JpcHRpb246IFwiVGhlIGNyZWF0aXZlIHdyaXRpbmcgb2YgU3R1eXZlc2FudC5cIixcclxuICAgICAgcGFyZW50U2x1ZzogXCJmZWF0dXJlc1wiLFxyXG4gICAgfSxcclxuICAgIFwidm9pY2VzXCI6IHtcclxuICAgICAgaWQ6IDYsXHJcbiAgICAgIG5hbWU6IFwiVm9pY2VzXCIsXHJcbiAgICAgIHNsdWc6IFwidm9pY2VzXCIsXHJcbiAgICAgIGRlc2NyaXB0aW9uOiBcIlRoZSB2b2ljZXMgb2YgU3R1eXZlc2FudC5cIixcclxuICAgICAgcGFyZW50U2x1ZzogXCJmZWF0dXJlc1wiLFxyXG4gICAgfSxcclxuICB9LFxyXG59O1xyXG5cclxuY29uc3QgcmVkdWNlciA9IChzdGF0ZSA9IHsgLi4uaW5pdGlhbFN0YXRlIH0sIGFjdGlvbikgPT4ge1xyXG4gIHN3aXRjaCAoYWN0aW9uLnR5cGUpIHtcclxuICAgIGNhc2UgJ3NlY3Rpb25zL0ZFVENIX1NFQ1RJT05fUEVORElORyc6IHtcclxuICAgICAgcmV0dXJuIHsgLi4uc3RhdGUsIGlzRmV0Y2hpbmc6IHRydWUgfTtcclxuICAgIH1cclxuICAgIGNhc2UgJ3NlY3Rpb25zL0ZFVENIX1NFQ1RJT05fUkVKRUNURUQnOiB7XHJcbiAgICAgIHJldHVybiB7IC4uLnN0YXRlLCBpc0ZldGNoaW5nOiBmYWxzZSwgZXJyb3I6IGFjdGlvbi5wYXlsb2FkIH07XHJcbiAgICB9XHJcbiAgICBjYXNlICdzZWN0aW9ucy9GRVRDSF9TRUNUSU9OX0ZVTEZJTExFRCc6IHtcclxuICAgICAgcmV0dXJuIHtcclxuICAgICAgICAuLi5zdGF0ZSxcclxuICAgICAgICBpc0ZldGNoaW5nOiBmYWxzZSxcclxuICAgICAgICBpc0ZldGNoZWQ6IHRydWUsXHJcbiAgICAgICAgcmVxdWVzdDogYWN0aW9uLnBheWxvYWRcclxuICAgICAgfTtcclxuICAgIH1cclxuICB9XHJcbiAgcmV0dXJuIHN0YXRlO1xyXG59O1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgcmVkdWNlcjtcclxuIl19"
     }
   ],
@@ -11788,36 +11772,36 @@
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/selectors.js",
       "hash": "I3hZyg",
-      "browserifyId": 843,
+      "browserifyId": 842,
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNlbGVjdG9ycy5qcz92ZXJzaW9uPUkzaFp5ZyJdLCJuYW1lcyI6WyJPYmplY3QiLCJmaWx0ZXIiLCJnZXRTZWN0aW9ucyIsInN0YXRlIiwic2VjdGlvbnMiLCJnZXRTZWN0aW9uQnlQcm9wcyIsInByb3BzIiwic2VjdGlvbiIsImdldFN1YnNlY3Rpb25zQnlQcm9wcyIsInN1YnNlY3Rpb25zIiwiZ2V0RGVlcFNlY3Rpb25TbHVnc0xpc3QiLCJzbHVnIiwia2V5cyIsImdldEFsbFNlY3Rpb25Sb3V0ZXMiLCJzZWN0aW9uUm91dGVzIiwibWFwIiwia2V5IiwicGF0aFRvU2VjdGlvblBhZ2UiLCJwYXJlbnRTbHVnIiwicG90ZW50aWFsU3Vic2VjdGlvbiIsImdldEFsbFNlY3Rpb25MaW5rc0Zyb21Ib21lIiwic2VjdGlvbkxpbmtzIiwiZ2V0UGFyZW50U2VjdGlvbnMiLCJnZXRTdWJzZWN0aW9ucyIsImdldFNlY3Rpb25zV2l0aFN1YnNlY3Rpb25zIiwicGFyZW50U2VjdGlvbnMiLCJhbGxTdWJzZWN0aW9ucyIsInNlY3Rpb25zV2l0aFN1YnNlY3Rpb25zIiwicGFyZW50U2VjdGlvblNsdWciLCJzZWN0aW9uV2l0aFN1YnNlY3Rpb25zIiwic3Vic2VjdGlvbiIsInB1c2giXSwibWFwcGluZ3MiOiI7Ozs7Ozs7O0FBQUE7O0FBQ0E7Ozs7QUFFQUEsT0FBT0MsTUFBUDs7QUFFQSxJQUFNQyxjQUFjLFNBQWRBLFdBQWMsQ0FBQ0MsS0FBRDtBQUFBLFNBQVdBLE1BQU1DLFFBQU4sQ0FBZUEsUUFBMUI7QUFBQSxDQUFwQjtBQUNBLElBQU1DLG9CQUFvQixTQUFwQkEsaUJBQW9CLENBQUNGLEtBQUQsRUFBUUcsS0FBUjtBQUFBLFNBQWtCQSxNQUFNQyxPQUF4QjtBQUFBLENBQTFCO0FBQ0EsSUFBTUMsd0JBQXdCLFNBQXhCQSxxQkFBd0IsQ0FBQ0wsS0FBRCxFQUFRRyxLQUFSO0FBQUEsU0FBa0JBLE1BQU1HLFdBQXhCO0FBQUEsQ0FBOUI7O0FBRU8sSUFBTUMsNERBQTBCLDhCQUNyQyxDQUFFTCxpQkFBRixFQUFxQkcscUJBQXJCLENBRHFDLEVBRXJDLFVBQUNELE9BQUQsRUFBK0I7QUFBQSxNQUFyQkUsV0FBcUIsdUVBQVAsRUFBTzs7QUFDN0IsVUFBU0YsUUFBUUksSUFBakIsNEJBQTBCWCxPQUFPWSxJQUFQLENBQVlILFdBQVosQ0FBMUI7QUFDRCxDQUpvQyxDQUFoQzs7QUFPUDs7OztBQUlPLElBQU1JLG9EQUFzQiw4QkFDakNYLFdBRGlDLEVBRWpDLFVBQUNFLFFBQUQsRUFBYztBQUNaLE1BQUlVLGdCQUFnQixFQUFwQjtBQUNBZCxTQUFPWSxJQUFQLENBQVlSLFFBQVosRUFBc0JXLEdBQXRCLENBQTBCLFVBQVVDLEdBQVYsRUFBZTtBQUN2QyxRQUFNVCxVQUFVSCxTQUFVWSxHQUFWLENBQWhCO0FBQ0EsUUFBSUMsb0JBQW9CLE1BQU1WLFFBQVFJLElBQXRDO0FBQ0EsUUFBSUYsY0FBYyxFQUFsQjtBQUNBLFFBQUlGLFFBQVFXLFVBQVIsS0FBdUIsSUFBM0IsRUFBaUM7QUFBRTtBQUNqQ0QsMEJBQW9CLE1BQU1WLFFBQVFXLFVBQWQsR0FBMkIsR0FBM0IsR0FBaUNYLFFBQVFJLElBQTdEO0FBQ0QsS0FGRCxNQUVPO0FBQUU7QUFDUEYsb0JBQWNULE9BQU9DLE1BQVAsQ0FBY0csUUFBZCxFQUF3QixVQUFDZSxtQkFBRCxFQUF5QjtBQUM3RCxlQUFPQSxvQkFBb0JELFVBQXBCLEtBQW1DWCxRQUFRSSxJQUFsRDtBQUNELE9BRmEsQ0FBZDtBQUdEO0FBQ0RHLGtCQUFlRSxHQUFmLGlCQUNLVCxPQURMO0FBRUVVLHlCQUFtQkEsaUJBRnJCO0FBR0VSLG1CQUFhQTtBQUhmO0FBS0QsR0FoQkQ7QUFpQkEsU0FBT0ssYUFBUDtBQUNELENBdEJnQyxDQUE1Qjs7QUF5QlA7Ozs7O0FBS08sSUFBTU0sa0VBQTZCLDhCQUN4Q2xCLFdBRHdDLEVBRXhDLFVBQUNFLFFBQUQsRUFBYztBQUNaLE1BQUlpQixlQUFlLEVBQW5CO0FBQ0FyQixTQUFPWSxJQUFQLENBQVlSLFFBQVosRUFBc0JXLEdBQXRCLENBQTBCLFVBQUNDLEdBQUQsRUFBUztBQUNqQyxRQUFNVCxVQUFVSCxTQUFVWSxHQUFWLENBQWhCO0FBQ0EsUUFBSUMsb0JBQW9CVixRQUFRSSxJQUFoQztBQUNBLFFBQUlKLFFBQVFXLFVBQVIsS0FBdUIsSUFBM0IsRUFBaUM7QUFBRTtBQUNqQ0QsMEJBQW9CLE1BQU1WLFFBQVFXLFVBQWQsR0FBMkIsR0FBM0IsR0FBaUNYLFFBQVFJLElBQTdEO0FBQ0Q7QUFDRFUsaUJBQWNMLEdBQWQsaUJBQ0tULE9BREw7QUFFRVUseUJBQW1CQTtBQUZyQjtBQUlELEdBVkQ7QUFXQSxTQUFPSSxZQUFQO0FBQ0QsQ0FoQnVDLENBQW5DOztBQW1CUCxJQUFNQyxvQkFBb0IsOEJBQ3hCcEIsV0FEd0IsRUFFeEIsVUFBQ0UsUUFBRCxFQUFjO0FBQ1osU0FBT0osT0FBT0MsTUFBUCxDQUFjRyxRQUFkLEVBQXdCLG1CQUFXO0FBQ3hDLFdBQU9HLFFBQVFXLFVBQVIsS0FBdUIsSUFBOUI7QUFDRCxHQUZNLENBQVA7QUFHRCxDQU51QixDQUExQjtBQVFBLElBQU1LLGlCQUFpQiw4QkFDckJyQixXQURxQixFQUVyQixVQUFDRSxRQUFELEVBQWM7QUFDWixTQUFPSixPQUFPQyxNQUFQLENBQWNHLFFBQWQsRUFBd0IsbUJBQVc7QUFDeEMsV0FBT0csUUFBUVcsVUFBUixLQUF1QixJQUE5QjtBQUNELEdBRk0sQ0FBUDtBQUdELENBTm9CLENBQXZCOztBQVNBOzs7O0FBSU8sSUFBTU0sa0VBQTZCLDhCQUN4QyxDQUFFRixpQkFBRixFQUFxQkMsY0FBckIsQ0FEd0MsRUFFeEMsVUFBQ0UsY0FBRCxFQUFpQkMsY0FBakIsRUFBb0M7QUFDbEMsTUFBSUMsMEJBQTBCLEVBQTlCO0FBQ0EzQixTQUFPWSxJQUFQLENBQVlhLGNBQVosRUFBNEJWLEdBQTVCLENBQWdDLFVBQUNhLGlCQUFELEVBQXVCO0FBQ3JELFFBQU1DLHNDQUNESixlQUFnQkcsaUJBQWhCLENBREM7QUFFSm5CLG1CQUFhVCxPQUFPQyxNQUFQLENBQWN5QixjQUFkLEVBQThCLHNCQUFjO0FBQ3ZELGVBQU9JLFdBQVdaLFVBQVgsS0FBMEJVLGlCQUFqQztBQUNELE9BRlk7QUFGVCxNQUFOO0FBTUFELDRCQUF3QkksSUFBeEIsQ0FBNkJGLHNCQUE3QjtBQUNELEdBUkQ7QUFTQSxTQUFPRix1QkFBUDtBQUNELENBZHVDLENBQW5DOzs7Ozs7OztnQ0FyRkR6Qjs7Z0NBQ0FHOztnQ0FDQUc7O2dDQUVPRTs7Z0NBV0FHOztnQ0E4QkFPOztnQ0FtQlBFOztnQ0FRQUM7O2dDQWFPQyIsImZpbGUiOiJzZWxlY3RvcnMuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBjcmVhdGVTZWxlY3RvciB9IGZyb20gJ3Jlc2VsZWN0JztcbmltcG9ydCB7IG9iamVjdEZpbHRlciB9IGZyb20gJy4uLy4uL3V0aWxzLmpzJztcblxuT2JqZWN0LmZpbHRlciA9IG9iamVjdEZpbHRlcjtcblxuY29uc3QgZ2V0U2VjdGlvbnMgPSAoc3RhdGUpID0+IHN0YXRlLnNlY3Rpb25zLnNlY3Rpb25zO1xuY29uc3QgZ2V0U2VjdGlvbkJ5UHJvcHMgPSAoc3RhdGUsIHByb3BzKSA9PiBwcm9wcy5zZWN0aW9uO1xuY29uc3QgZ2V0U3Vic2VjdGlvbnNCeVByb3BzID0gKHN0YXRlLCBwcm9wcykgPT4gcHJvcHMuc3Vic2VjdGlvbnM7XG5cbmV4cG9ydCBjb25zdCBnZXREZWVwU2VjdGlvblNsdWdzTGlzdCA9IGNyZWF0ZVNlbGVjdG9yKFxuICBbIGdldFNlY3Rpb25CeVByb3BzLCBnZXRTdWJzZWN0aW9uc0J5UHJvcHMgXSxcbiAgKHNlY3Rpb24sIHN1YnNlY3Rpb25zID0ge30pID0+IHtcbiAgICByZXR1cm4gWyBzZWN0aW9uLnNsdWcsIC4uLk9iamVjdC5rZXlzKHN1YnNlY3Rpb25zKSBdO1xuICB9XG4pO1xuXG4vKipcbiAqIFJldHVybnMgYSBtb2RpZmllZCB2ZXJzaW9uIG9mIHN0YXRlLnNlY3Rpb25zLnNlY3Rpb25zIGZvciBSb3V0ZXMuXG4gKiBGb3IgZWFjaCBzZWN0aW9uLCBpdHMgc3Vic2VjdGlvbnMgYW5kIHRoZSBwYXRoIHRvIGl0c2VsZiBhcmUgZGVmaW5lZC5cbiAqL1xuZXhwb3J0IGNvbnN0IGdldEFsbFNlY3Rpb25Sb3V0ZXMgPSBjcmVhdGVTZWxlY3RvcihcbiAgZ2V0U2VjdGlvbnMsXG4gIChzZWN0aW9ucykgPT4ge1xuICAgIGxldCBzZWN0aW9uUm91dGVzID0ge307XG4gICAgT2JqZWN0LmtleXMoc2VjdGlvbnMpLm1hcChmdW5jdGlvbiAoa2V5KSB7XG4gICAgICBjb25zdCBzZWN0aW9uID0gc2VjdGlvbnNbIGtleSBdO1xuICAgICAgbGV0IHBhdGhUb1NlY3Rpb25QYWdlID0gJy8nICsgc2VjdGlvbi5zbHVnO1xuICAgICAgbGV0IHN1YnNlY3Rpb25zID0ge307XG4gICAgICBpZiAoc2VjdGlvbi5wYXJlbnRTbHVnICE9PSBudWxsKSB7IC8vIHRoaXMgc2VjdGlvbiBpcyBhIHN1YnNlY3Rpb25cbiAgICAgICAgcGF0aFRvU2VjdGlvblBhZ2UgPSAnLycgKyBzZWN0aW9uLnBhcmVudFNsdWcgKyAnLycgKyBzZWN0aW9uLnNsdWc7XG4gICAgICB9IGVsc2UgeyAvLyB0aGlzIHNlY3Rpb24gaXMgYSBwYXJlbnRcbiAgICAgICAgc3Vic2VjdGlvbnMgPSBPYmplY3QuZmlsdGVyKHNlY3Rpb25zLCAocG90ZW50aWFsU3Vic2VjdGlvbikgPT4ge1xuICAgICAgICAgIHJldHVybiBwb3RlbnRpYWxTdWJzZWN0aW9uLnBhcmVudFNsdWcgPT09IHNlY3Rpb24uc2x1ZztcbiAgICAgICAgfSk7XG4gICAgICB9XG4gICAgICBzZWN0aW9uUm91dGVzWyBrZXkgXSA9IHtcbiAgICAgICAgLi4uc2VjdGlvbixcbiAgICAgICAgcGF0aFRvU2VjdGlvblBhZ2U6IHBhdGhUb1NlY3Rpb25QYWdlLFxuICAgICAgICBzdWJzZWN0aW9uczogc3Vic2VjdGlvbnMsXG4gICAgICB9O1xuICAgIH0pO1xuICAgIHJldHVybiBzZWN0aW9uUm91dGVzO1xuICB9XG4pO1xuXG4vKipcbiAqIFJldHVybnMgYSBtb2RpZmllZCB2ZXJzaW9uIG9mIHN0YXRlLnNlY3Rpb25zLnNlY3Rpb25zIGZvciBMaW5rcyBmcm9tIHRoZVxuICogICAgIGhvbWUgcGFnZS5cbiAqIEZvciBlYWNoIHNlY3Rpb24sIGl0cyBwYXRoIHRvIGl0c2VsZiBpcyBkZWZpbmVkLlxuICovXG5leHBvcnQgY29uc3QgZ2V0QWxsU2VjdGlvbkxpbmtzRnJvbUhvbWUgPSBjcmVhdGVTZWxlY3RvcihcbiAgZ2V0U2VjdGlvbnMsXG4gIChzZWN0aW9ucykgPT4ge1xuICAgIGxldCBzZWN0aW9uTGlua3MgPSB7fTtcbiAgICBPYmplY3Qua2V5cyhzZWN0aW9ucykubWFwKChrZXkpID0+IHtcbiAgICAgIGNvbnN0IHNlY3Rpb24gPSBzZWN0aW9uc1sga2V5IF07XG4gICAgICBsZXQgcGF0aFRvU2VjdGlvblBhZ2UgPSBzZWN0aW9uLnNsdWc7XG4gICAgICBpZiAoc2VjdGlvbi5wYXJlbnRTbHVnICE9PSBudWxsKSB7IC8vIHRoaXMgc2VjdGlvbiBpcyBhIHN1YnNlY3Rpb25cbiAgICAgICAgcGF0aFRvU2VjdGlvblBhZ2UgPSAnLycgKyBzZWN0aW9uLnBhcmVudFNsdWcgKyAnLycgKyBzZWN0aW9uLnNsdWc7XG4gICAgICB9XG4gICAgICBzZWN0aW9uTGlua3NbIGtleSBdID0ge1xuICAgICAgICAuLi5zZWN0aW9uLFxuICAgICAgICBwYXRoVG9TZWN0aW9uUGFnZTogcGF0aFRvU2VjdGlvblBhZ2UsXG4gICAgICB9O1xuICAgIH0pO1xuICAgIHJldHVybiBzZWN0aW9uTGlua3M7XG4gIH1cbik7XG5cbmNvbnN0IGdldFBhcmVudFNlY3Rpb25zID0gY3JlYXRlU2VsZWN0b3IoXG4gIGdldFNlY3Rpb25zLFxuICAoc2VjdGlvbnMpID0+IHtcbiAgICByZXR1cm4gT2JqZWN0LmZpbHRlcihzZWN0aW9ucywgc2VjdGlvbiA9PiB7XG4gICAgICByZXR1cm4gc2VjdGlvbi5wYXJlbnRTbHVnID09PSBudWxsO1xuICAgIH0pO1xuICB9XG4pO1xuY29uc3QgZ2V0U3Vic2VjdGlvbnMgPSBjcmVhdGVTZWxlY3RvcihcbiAgZ2V0U2VjdGlvbnMsXG4gIChzZWN0aW9ucykgPT4ge1xuICAgIHJldHVybiBPYmplY3QuZmlsdGVyKHNlY3Rpb25zLCBzZWN0aW9uID0+IHtcbiAgICAgIHJldHVybiBzZWN0aW9uLnBhcmVudFNsdWcgIT09IG51bGw7XG4gICAgfSk7XG4gIH1cbik7XG5cbi8qKlxuICogUmV0dXJucyBhIG1vZGlmaWVkIHZlcnNpb24gb2Ygc3RhdGUuc2VjdGlvbnMuc2VjdGlvbnMgZm9yIHRoZSBGb290ZXIuXG4gKiBGb3IgZWFjaCBzZWN0aW9uLCBpdHMgc3Vic2VjdGlvbnMgYXJlIGluY2x1ZGVkIGFzIGEga2V5OiBvYmplY3QuXG4gKi9cbmV4cG9ydCBjb25zdCBnZXRTZWN0aW9uc1dpdGhTdWJzZWN0aW9ucyA9IGNyZWF0ZVNlbGVjdG9yKFxuICBbIGdldFBhcmVudFNlY3Rpb25zLCBnZXRTdWJzZWN0aW9ucyBdLFxuICAocGFyZW50U2VjdGlvbnMsIGFsbFN1YnNlY3Rpb25zKSA9PiB7XG4gICAgbGV0IHNlY3Rpb25zV2l0aFN1YnNlY3Rpb25zID0gW107XG4gICAgT2JqZWN0LmtleXMocGFyZW50U2VjdGlvbnMpLm1hcCgocGFyZW50U2VjdGlvblNsdWcpID0+IHtcbiAgICAgIGNvbnN0IHNlY3Rpb25XaXRoU3Vic2VjdGlvbnMgPSB7XG4gICAgICAgIC4uLnBhcmVudFNlY3Rpb25zWyBwYXJlbnRTZWN0aW9uU2x1ZyBdLFxuICAgICAgICBzdWJzZWN0aW9uczogT2JqZWN0LmZpbHRlcihhbGxTdWJzZWN0aW9ucywgc3Vic2VjdGlvbiA9PiB7XG4gICAgICAgICAgcmV0dXJuIHN1YnNlY3Rpb24ucGFyZW50U2x1ZyA9PT0gcGFyZW50U2VjdGlvblNsdWc7XG4gICAgICAgIH0pLFxuICAgICAgfVxuICAgICAgc2VjdGlvbnNXaXRoU3Vic2VjdGlvbnMucHVzaChzZWN0aW9uV2l0aFN1YnNlY3Rpb25zKTtcbiAgICB9KTtcbiAgICByZXR1cm4gc2VjdGlvbnNXaXRoU3Vic2VjdGlvbnM7XG4gIH1cbik7XG4iXX0="
     }
   ],
   "/Users/jasonkao/stuyspec/client-app/src/js/reducers.js": [
     "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _combineReducers;\n\nvar _combineReducers2 = require('redux/lib/combineReducers');\n\nvar _combineReducers3 = _interopRequireDefault(_combineReducers2);\n\nvar _reducer = require('react-router-redux/reducer');\n\nvar _core = require('./modules/core');\n\nvar _core2 = _interopRequireDefault(_core);\n\nvar _articles = require('./modules/articles');\n\nvar _articles2 = _interopRequireDefault(_articles);\n\nvar _sections = require('./modules/sections');\n\nvar _sections2 = _interopRequireDefault(_sections);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\nvar _default = (0, _combineReducers3.default)((_combineReducers = {}, _defineProperty(_combineReducers, _core2.default.constants.NAME, _core2.default.reducer), _defineProperty(_combineReducers, _articles2.default.constants.NAME, _articles2.default.reducer), _defineProperty(_combineReducers, _sections2.default.constants.NAME, _sections2.default.reducer), _defineProperty(_combineReducers, 'router', _reducer.routerReducer), _combineReducers));\n\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n\n  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/jasonkao/stuyspec/client-app/src/js/reducers.js');\n}();\n\n;\n",
     {
+      "react-router-redux/reducer": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-redux/reducer.js",
       "./modules/core": "/Users/jasonkao/stuyspec/client-app/src/js/modules/core/index.js",
       "./modules/articles": "/Users/jasonkao/stuyspec/client-app/src/js/modules/articles/index.js",
       "./modules/sections": "/Users/jasonkao/stuyspec/client-app/src/js/modules/sections/index.js",
-      "react-router-redux/reducer": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-redux/reducer.js",
       "redux/lib/combineReducers": "/Users/jasonkao/stuyspec/client-app/node_modules/redux/lib/combineReducers.js"
     },
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/reducers.js",
       "hash": "zZXJXw",
-      "browserifyId": 844,
+      "browserifyId": 843,
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJlZHVjZXJzLmpzP3ZlcnNpb249elpYSlh3Il0sIm5hbWVzIjpbImNvbnN0YW50cyIsIk5BTUUiLCJyZWR1Y2VyIl0sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBQUE7Ozs7QUFDQTs7QUFDQTs7OztBQUNBOzs7O0FBQ0E7Ozs7Ozs7O2VBRWUseUZBRVYsZUFBS0EsU0FBTCxDQUFlQyxJQUZMLEVBRVksZUFBS0MsT0FGakIscUNBR1YsbUJBQVNGLFNBQVQsQ0FBbUJDLElBSFQsRUFHZ0IsbUJBQVNDLE9BSHpCLHFDQUlWLG1CQUFTRixTQUFULENBQW1CQyxJQUpULEVBSWdCLG1CQUFTQyxPQUp6QiIsImZpbGUiOiJyZWR1Y2Vycy5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBjb21iaW5lUmVkdWNlcnMgZnJvbSAncmVkdXgvbGliL2NvbWJpbmVSZWR1Y2VycydcclxuaW1wb3J0IHsgcm91dGVyUmVkdWNlciB9IGZyb20gJ3JlYWN0LXJvdXRlci1yZWR1eC9yZWR1Y2VyJ1xyXG5pbXBvcnQgY29yZSBmcm9tICcuL21vZHVsZXMvY29yZSdcclxuaW1wb3J0IGFydGljbGVzIGZyb20gJy4vbW9kdWxlcy9hcnRpY2xlcydcclxuaW1wb3J0IHNlY3Rpb25zIGZyb20gJy4vbW9kdWxlcy9zZWN0aW9ucydcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGNvbWJpbmVSZWR1Y2VycyhcclxuICB7XHJcbiAgICBbY29yZS5jb25zdGFudHMuTkFNRV06IGNvcmUucmVkdWNlcixcclxuICAgIFthcnRpY2xlcy5jb25zdGFudHMuTkFNRV06IGFydGljbGVzLnJlZHVjZXIsXHJcbiAgICBbc2VjdGlvbnMuY29uc3RhbnRzLk5BTUVdOiBzZWN0aW9ucy5yZWR1Y2VyLFxyXG4gICAgcm91dGVyOiByb3V0ZXJSZWR1Y2VyXHJcbiAgfSk7XHJcbiJdfQ=="
     }
   ],
   "/Users/jasonkao/stuyspec/client-app/src/js/store.js": [
     "Object.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _applyMiddleware = require('redux/lib/applyMiddleware');\n\nvar _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);\n\nvar _createStore = require('redux/lib/createStore');\n\nvar _createStore2 = _interopRequireDefault(_createStore);\n\nvar _reduxThunk = require('redux-thunk');\n\nvar _reduxThunk2 = _interopRequireDefault(_reduxThunk);\n\nvar _reduxPromiseMiddleware = require('redux-promise-middleware');\n\nvar _reduxPromiseMiddleware2 = _interopRequireDefault(_reduxPromiseMiddleware);\n\nvar _reducers = require('./reducers');\n\nvar _reducers2 = _interopRequireDefault(_reducers);\n\nvar _localizer = require('./middleware/localizer');\n\nvar _localizer2 = _interopRequireDefault(_localizer);\n\nvar _reduxLogger = require('redux-logger');\n\nvar _reduxLogger2 = _interopRequireDefault(_reduxLogger);\n\nvar _middleware = require('react-router-redux/middleware');\n\nvar _middleware2 = _interopRequireDefault(_middleware);\n\nvar _appHistory = require('./tools/appHistory');\n\nvar _appHistory2 = _interopRequireDefault(_appHistory);\n\nvar _reduxDevtoolsExtension = require('redux-devtools-extension');\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar middleware = \"development\" == 'production' ? (0, _applyMiddleware2.default)((0, _reduxPromiseMiddleware2.default)(), _reduxThunk2.default, _localizer2.default, (0, _middleware2.default)(_appHistory2.default) //for intercepting navigation actions\n) : (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _applyMiddleware2.default)((0, _reduxPromiseMiddleware2.default)(), _reduxThunk2.default, _reduxLogger2.default, _localizer2.default, (0, _middleware2.default)(_appHistory2.default)));\n\nvar _default = (0, _createStore2.default)(_reducers2.default, middleware);\n\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n    if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n        return;\n    }\n\n    __REACT_HOT_LOADER__.register(middleware, 'middleware', '/Users/jasonkao/stuyspec/client-app/src/js/store.js');\n\n    __REACT_HOT_LOADER__.register(_default, 'default', '/Users/jasonkao/stuyspec/client-app/src/js/store.js');\n}();\n\n;\n",
     {
-      "./tools/appHistory": "/Users/jasonkao/stuyspec/client-app/src/js/tools/appHistory.js",
-      "./middleware/localizer": "/Users/jasonkao/stuyspec/client-app/src/js/middleware/localizer.js",
       "redux-thunk": "/Users/jasonkao/stuyspec/client-app/node_modules/redux-thunk/lib/index.js",
       "redux-logger": "/Users/jasonkao/stuyspec/client-app/node_modules/redux-logger/dist/redux-logger.js",
-      "redux-promise-middleware": "/Users/jasonkao/stuyspec/client-app/node_modules/redux-promise-middleware/dist/index.js",
+      "./tools/appHistory": "/Users/jasonkao/stuyspec/client-app/src/js/tools/appHistory.js",
       "react-router-redux/middleware": "/Users/jasonkao/stuyspec/client-app/node_modules/react-router-redux/middleware.js",
+      "redux-promise-middleware": "/Users/jasonkao/stuyspec/client-app/node_modules/redux-promise-middleware/dist/index.js",
       "redux/lib/applyMiddleware": "/Users/jasonkao/stuyspec/client-app/node_modules/redux/lib/applyMiddleware.js",
+      "./middleware/localizer": "/Users/jasonkao/stuyspec/client-app/src/js/middleware/localizer.js",
       "redux-devtools-extension": "/Users/jasonkao/stuyspec/client-app/node_modules/redux-devtools-extension/index.js",
       "./reducers": "/Users/jasonkao/stuyspec/client-app/src/js/reducers.js",
       "redux/lib/createStore": "/Users/jasonkao/stuyspec/client-app/node_modules/redux/lib/createStore.js"
@@ -11825,7 +11809,7 @@
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/store.js",
       "hash": "6Lbr1Q",
-      "browserifyId": 845,
+      "browserifyId": 844,
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0b3JlLmpzP3ZlcnNpb249NkxicjFRIl0sIm5hbWVzIjpbIm1pZGRsZXdhcmUiLCJwcm9jZXNzIiwiZW52IiwiTk9ERV9FTlYiXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUE7Ozs7QUFDQTs7OztBQUNBOzs7O0FBQ0E7Ozs7QUFDQTs7Ozs7Ozs7QUFFQTs7OztBQUNBOzs7Ozs7OztBQUVBOzs7O0FBRUEsSUFBTUEsYUFBYUMsUUFBUUMsR0FBUixDQUFZQyxRQUFaLElBQXdCLFlBQXhCLEdBQ0ssK0JBQ0ksdUNBREosNkNBSUksK0NBSkosQ0FJaUM7QUFKakMsQ0FETCxHQU1TLGlEQUNBLCtCQUNJLHVDQURKLG9FQUtJLCtDQUxKLENBREEsQ0FONUI7O2VBZ0JlLCtDQUFxQkgsVUFBckI7Ozs7Ozs7Ozs7O2tDQWhCVEEiLCJmaWxlIjoic3RvcmUuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgYXBwbHlNaWRkbGV3YXJlIGZyb20gJ3JlZHV4L2xpYi9hcHBseU1pZGRsZXdhcmUnXHJcbmltcG9ydCBjcmVhdGVTdG9yZSBmcm9tICdyZWR1eC9saWIvY3JlYXRlU3RvcmUnXHJcbmltcG9ydCB0aHVuayAgZnJvbSAncmVkdXgtdGh1bmsnXHJcbmltcG9ydCBwcm9taXNlIGZyb20gJ3JlZHV4LXByb21pc2UtbWlkZGxld2FyZSdcclxuaW1wb3J0IHJlZHVjZXIgZnJvbSAnLi9yZWR1Y2VycydcclxuaW1wb3J0IGxvY2FsaXplciBmcm9tICdtaWRkbGV3YXJlL2xvY2FsaXplcidcclxuaW1wb3J0IGxvZ2dlciBmcm9tICdyZWR1eC1sb2dnZXInXHJcbmltcG9ydCByb3V0ZXJNaWRkbGV3YXJlIGZyb20gJ3JlYWN0LXJvdXRlci1yZWR1eC9taWRkbGV3YXJlJ1xyXG5pbXBvcnQgYXBwSGlzdG9yeSBmcm9tICd0b29scy9hcHBIaXN0b3J5J1xyXG5pbXBvcnQgeyBjb21wb3NlV2l0aERldlRvb2xzIH0gZnJvbSAncmVkdXgtZGV2dG9vbHMtZXh0ZW5zaW9uJ1xyXG5cclxuY29uc3QgbWlkZGxld2FyZSA9IHByb2Nlc3MuZW52Lk5PREVfRU5WID09ICdwcm9kdWN0aW9uJyA/XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGFwcGx5TWlkZGxld2FyZShcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIHByb21pc2UoKSxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRodW5rLFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgbG9jYWxpemVyLFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgcm91dGVyTWlkZGxld2FyZShhcHBIaXN0b3J5KSAvL2ZvciBpbnRlcmNlcHRpbmcgbmF2aWdhdGlvbiBhY3Rpb25zXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICkgOiBjb21wb3NlV2l0aERldlRvb2xzKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgYXBwbHlNaWRkbGV3YXJlKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHByb21pc2UoKSxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0aHVuayxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBsb2dnZXIsXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbG9jYWxpemVyLFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJvdXRlck1pZGRsZXdhcmUoYXBwSGlzdG9yeSlcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIClcclxuICAgICAgICAgICAgICAgICAgICAgICAgKTtcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGNyZWF0ZVN0b3JlKHJlZHVjZXIsIG1pZGRsZXdhcmUpXHJcbiJdfQ=="
     }
   ],
@@ -11837,7 +11821,7 @@
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/tools/appHistory.js",
       "hash": "0VSTdQ",
-      "browserifyId": 846,
+      "browserifyId": 845,
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcEhpc3RvcnkuanM/dmVyc2lvbj0wVlNUZFEiXSwibmFtZXMiOlsiYXBwSGlzdG9yeSIsImdvVG8iLCJ1cmwiLCJyZXBsYWNlIl0sIm1hcHBpbmdzIjoiOzs7OztBQUFBOzs7Ozs7QUFFQSxJQUFJQSxhQUFhLHFDQUFqQjs7QUFFQUEsV0FBV0MsSUFBWCxHQUFrQixVQUFTQyxHQUFULEVBQ2xCO0FBQ0lGLGVBQVdHLE9BQVgsQ0FBbUJELEdBQW5CO0FBQ0gsQ0FIRDs7ZUFLZUY7Ozs7Ozs7Ozs7a0NBUFhBIiwiZmlsZSI6ImFwcEhpc3RvcnkuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgY3JlYXRlQnJvd3Nlckhpc3RvcnkgZnJvbSAnaGlzdG9yeS9jcmVhdGVCcm93c2VySGlzdG9yeSdcclxuXHJcbmxldCBhcHBIaXN0b3J5ID0gY3JlYXRlQnJvd3Nlckhpc3RvcnkoKTtcclxuXHJcbmFwcEhpc3RvcnkuZ29UbyA9IGZ1bmN0aW9uKHVybClcclxue1xyXG4gICAgYXBwSGlzdG9yeS5yZXBsYWNlKHVybCk7XHJcbn07XHJcblxyXG5leHBvcnQgZGVmYXVsdCBhcHBIaXN0b3J5Il19"
     }
   ],
@@ -11849,7 +11833,7 @@
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/tools/localizationSetter.js",
       "hash": "pH4K9A",
-      "browserifyId": 847,
+      "browserifyId": 846,
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxvY2FsaXphdGlvblNldHRlci5qcz92ZXJzaW9uPXBINEs5QSJdLCJuYW1lcyI6WyJMb2NhbGl6YXRpb25TZXR0ZXIiLCJhZGRMb2NhbGl6ZWRTdHJpbmdzIiwic2V0TGFuZ3VhZ2UiLCJsb2NhbGl6ZWRTdHJpbmdzIiwib24iLCJsYW5ndWFnZSIsImVtaXQiLCJsb2NhbGl6YXRpb25TZXR0ZXIiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFBQTs7Ozs7Ozs7Ozs7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7O0lBRU1BOzs7Ozs7Ozs7Ozs7OztrTkFFRkM7Ozs7aUJBT0FDOzs7Ozs7Ozs7a0VBUHVCQyxrQkFDdkI7QUFDSSxpQkFBS0MsRUFBTCxDQUFRLGFBQVIsRUFBdUIsVUFBU0MsUUFBVCxFQUN2QjtBQUNJRixpQ0FBaUJELFdBQWpCLENBQTZCRyxRQUE3QjtBQUNILGFBSEQ7QUFJSDs7OzBEQUNjQSxVQUNmO0FBQ0ksaUJBQUtDLElBQUwsQ0FBVSxhQUFWLEVBQXlCRCxRQUF6QjtBQUNIOzs7Ozs7QUFHTDs7O0FBQ0EsSUFBSUUscUJBQXFCLElBQUlQLGtCQUFKLEVBQXpCO2VBQ2VPOzs7Ozs7Ozs7O2tDQWpCVFA7O2tDQWdCRk8iLCJmaWxlIjoibG9jYWxpemF0aW9uU2V0dGVyLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IEV2ZW50RW1pdHRlciBmcm9tICdldmVudHMnXHJcblxyXG4vLyBzaW1wbGUgaW50ZXJmYWNlIHRvXHJcbi8vIGFnZ3JlZ2F0ZSB2YXJpb3VzIHNldHMgb2YgJ2xvY2FsaXplZC1zdHJpbmdzJ1xyXG4vLyAobnBtIHBhY2thZ2UpIGFuZCBzZXQgdGhlIGxhbmd1YWdlIGFjcm9zc1xyXG4vLyBtdWx0aXBsZSBkaWZmZXJlbnQgb25lcyBhdCBvbmNlXHJcblxyXG5jbGFzcyBMb2NhbGl6YXRpb25TZXR0ZXIgZXh0ZW5kcyBFdmVudEVtaXR0ZXJcclxue1xyXG4gICAgYWRkTG9jYWxpemVkU3RyaW5ncyA9IChsb2NhbGl6ZWRTdHJpbmdzKT0+XHJcbiAgICB7XHJcbiAgICAgICAgdGhpcy5vbignc2V0TGFuZ3VhZ2UnLCBmdW5jdGlvbihsYW5ndWFnZSlcclxuICAgICAgICB7XHJcbiAgICAgICAgICAgIGxvY2FsaXplZFN0cmluZ3Muc2V0TGFuZ3VhZ2UobGFuZ3VhZ2UpO1xyXG4gICAgICAgIH0pO1xyXG4gICAgfTtcclxuICAgIHNldExhbmd1YWdlID0gKGxhbmd1YWdlKT0+XHJcbiAgICB7XHJcbiAgICAgICAgdGhpcy5lbWl0KCdzZXRMYW5ndWFnZScsIGxhbmd1YWdlKTtcclxuICAgIH07XHJcbn1cclxuXHJcbi8vIGV4cG9ydCBhbiBpbnN0YW5jZVxyXG5sZXQgbG9jYWxpemF0aW9uU2V0dGVyID0gbmV3IExvY2FsaXphdGlvblNldHRlcigpO1xyXG5leHBvcnQgZGVmYXVsdCBsb2NhbGl6YXRpb25TZXR0ZXIiXX0="
     }
   ],
@@ -11859,18 +11843,18 @@
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/utils.js",
       "hash": "I6vwcg",
-      "browserifyId": 848,
+      "browserifyId": 847,
       "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInV0aWxzLmpzP3ZlcnNpb249STZ2d2NnIl0sIm5hbWVzIjpbIm9iamVjdEZpbHRlciIsIm9iaiIsInByZWRpY2F0ZSIsIk9iamVjdCIsImtleXMiLCJmaWx0ZXIiLCJrZXkiLCJyZWR1Y2UiLCJyZXMiXSwibWFwcGluZ3MiOiI7Ozs7QUFBQTs7OztBQUlPLElBQU1BLHNDQUFlLFNBQWZBLFlBQWUsQ0FBQ0MsR0FBRCxFQUFNQyxTQUFOO0FBQUEsU0FDMUJDLE9BQU9DLElBQVAsQ0FBWUgsR0FBWixFQUNHSSxNQURILENBQ1U7QUFBQSxXQUFPSCxVQUFVRCxJQUFLSyxHQUFMLENBQVYsQ0FBUDtBQUFBLEdBRFYsRUFFR0MsTUFGSCxDQUVVLFVBQUNDLEdBQUQsRUFBTUYsR0FBTjtBQUFBLFdBQWVFLElBQUtGLEdBQUwsSUFBYUwsSUFBS0ssR0FBTCxDQUFiLEVBQXlCRSxHQUF4QztBQUFBLEdBRlYsRUFFd0QsRUFGeEQsQ0FEMEI7QUFBQSxDQUFyQjs7Ozs7Ozs7Z0NBQU1SIiwiZmlsZSI6InV0aWxzLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBXcml0ZXMgdGhlIGZpbHRlciBmdW5jdGlvbiBmb3Igb2JqZWN0cy5cbiAqIEBwYXJhbSB7ZnVuY3Rpb259IHByZWRpY2F0ZSBpcyB0aGUgZnVuY3Rpb24gd2hpY2gga2V5cy9wcm9wZXJ0aWVzIG11c3QgbWF0Y2guXG4gKi9cbmV4cG9ydCBjb25zdCBvYmplY3RGaWx0ZXIgPSAob2JqLCBwcmVkaWNhdGUpID0+XG4gIE9iamVjdC5rZXlzKG9iailcbiAgICAuZmlsdGVyKGtleSA9PiBwcmVkaWNhdGUob2JqWyBrZXkgXSkpXG4gICAgLnJlZHVjZSgocmVzLCBrZXkpID0+IChyZXNbIGtleSBdID0gb2JqWyBrZXkgXSwgcmVzKSwge30pO1xuIl19"
     }
   ],
   "/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js": [
-    "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n/**\r\n * Warning : if editing this file, be sure to keep the VERSION variable set to 'X.X.X'\r\n *           without modifying formatting for automation scripts\r\n * @type {{VERSION: string}}\r\n */\nvar VersionInfo = { VERSION: '0.0.913' };\nvar _default = VersionInfo;\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n\n  __REACT_HOT_LOADER__.register(VersionInfo, 'VersionInfo', '/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js');\n\n  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js');\n}();\n\n;\n",
+    "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n/**\r\n * Warning : if editing this file, be sure to keep the VERSION variable set to 'X.X.X'\r\n *           without modifying formatting for automation scripts\r\n * @type {{VERSION: string}}\r\n */\nvar VersionInfo = { VERSION: '0.0.920' };\nvar _default = VersionInfo;\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n\n  __REACT_HOT_LOADER__.register(VersionInfo, 'VersionInfo', '/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js');\n\n  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js');\n}();\n\n;\n",
     {},
     {
       "id": "/Users/jasonkao/stuyspec/client-app/src/js/versionInfo.js",
-      "hash": "OZo++Q",
-      "browserifyId": 849,
-      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZlcnNpb25JbmZvLmpzP3ZlcnNpb249T1pvKytRIl0sIm5hbWVzIjpbIlZlcnNpb25JbmZvIiwiVkVSU0lPTiJdLCJtYXBwaW5ncyI6Ijs7OztBQUFBOzs7OztBQUtBLElBQUlBLGNBQWMsRUFBRUMsU0FBVSxTQUFaLEVBQWxCO2VBQ2VEOzs7Ozs7Ozs7O2dDQURYQSIsImZpbGUiOiJ2ZXJzaW9uSW5mby5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxyXG4gKiBXYXJuaW5nIDogaWYgZWRpdGluZyB0aGlzIGZpbGUsIGJlIHN1cmUgdG8ga2VlcCB0aGUgVkVSU0lPTiB2YXJpYWJsZSBzZXQgdG8gJ1guWC5YJ1xyXG4gKiAgICAgICAgICAgd2l0aG91dCBtb2RpZnlpbmcgZm9ybWF0dGluZyBmb3IgYXV0b21hdGlvbiBzY3JpcHRzXHJcbiAqIEB0eXBlIHt7VkVSU0lPTjogc3RyaW5nfX1cclxuICovXHJcbmxldCBWZXJzaW9uSW5mbyA9IHsgVkVSU0lPTiA6ICcwLjAuOTEzJyB9O1xyXG5leHBvcnQgZGVmYXVsdCBWZXJzaW9uSW5mbyJdfQ=="
+      "hash": "N7zOiA",
+      "browserifyId": 848,
+      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZlcnNpb25JbmZvLmpzP3ZlcnNpb249Tjd6T2lBIl0sIm5hbWVzIjpbIlZlcnNpb25JbmZvIiwiVkVSU0lPTiJdLCJtYXBwaW5ncyI6Ijs7OztBQUFBOzs7OztBQUtBLElBQUlBLGNBQWMsRUFBRUMsU0FBVSxTQUFaLEVBQWxCO2VBQ2VEOzs7Ozs7Ozs7O2dDQURYQSIsImZpbGUiOiJ2ZXJzaW9uSW5mby5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxyXG4gKiBXYXJuaW5nIDogaWYgZWRpdGluZyB0aGlzIGZpbGUsIGJlIHN1cmUgdG8ga2VlcCB0aGUgVkVSU0lPTiB2YXJpYWJsZSBzZXQgdG8gJ1guWC5YJ1xyXG4gKiAgICAgICAgICAgd2l0aG91dCBtb2RpZnlpbmcgZm9ybWF0dGluZyBmb3IgYXV0b21hdGlvbiBzY3JpcHRzXHJcbiAqIEB0eXBlIHt7VkVSU0lPTjogc3RyaW5nfX1cclxuICovXHJcbmxldCBWZXJzaW9uSW5mbyA9IHsgVkVSU0lPTiA6ICcwLjAuOTIwJyB9O1xyXG5leHBvcnQgZGVmYXVsdCBWZXJzaW9uSW5mbyJdfQ=="
     }
   ],
   "react-hot-loader/patch": [
