@@ -374,10 +374,10 @@
       "_process": "/home/kachitachi/client-app/node_modules/process/browser.js",
       "./../utils": "/home/kachitachi/client-app/node_modules/axios/lib/utils.js",
       "./../helpers/btoa": "/home/kachitachi/client-app/node_modules/axios/lib/helpers/btoa.js",
-      "./../helpers/buildURL": "/home/kachitachi/client-app/node_modules/axios/lib/helpers/buildURL.js",
       "./../helpers/parseHeaders": "/home/kachitachi/client-app/node_modules/axios/lib/helpers/parseHeaders.js",
       "./../helpers/isURLSameOrigin": "/home/kachitachi/client-app/node_modules/axios/lib/helpers/isURLSameOrigin.js",
       "./../helpers/cookies": "/home/kachitachi/client-app/node_modules/axios/lib/helpers/cookies.js",
+      "./../helpers/buildURL": "/home/kachitachi/client-app/node_modules/axios/lib/helpers/buildURL.js",
       "./../core/settle": "/home/kachitachi/client-app/node_modules/axios/lib/core/settle.js",
       "../core/createError": "/home/kachitachi/client-app/node_modules/axios/lib/core/createError.js"
     },
@@ -391,12 +391,12 @@
   "/home/kachitachi/client-app/node_modules/axios/lib/axios.js": [
     "'use strict';\n\nvar utils = require('./utils');\nvar bind = require('./helpers/bind');\nvar Axios = require('./core/Axios');\nvar defaults = require('./defaults');\n\n/**\n * Create an instance of Axios\n *\n * @param {Object} defaultConfig The default config for the instance\n * @return {Axios} A new instance of Axios\n */\nfunction createInstance(defaultConfig) {\n  var context = new Axios(defaultConfig);\n  var instance = bind(Axios.prototype.request, context);\n\n  // Copy axios.prototype to instance\n  utils.extend(instance, Axios.prototype, context);\n\n  // Copy context to instance\n  utils.extend(instance, context);\n\n  return instance;\n}\n\n// Create the default instance to be exported\nvar axios = createInstance(defaults);\n\n// Expose Axios class to allow class inheritance\naxios.Axios = Axios;\n\n// Factory for creating new instances\naxios.create = function create(instanceConfig) {\n  return createInstance(utils.merge(defaults, instanceConfig));\n};\n\n// Expose Cancel & CancelToken\naxios.Cancel = require('./cancel/Cancel');\naxios.CancelToken = require('./cancel/CancelToken');\naxios.isCancel = require('./cancel/isCancel');\n\n// Expose all/spread\naxios.all = function all(promises) {\n  return Promise.all(promises);\n};\naxios.spread = require('./helpers/spread');\n\nmodule.exports = axios;\n\n// Allow use of default import syntax in TypeScript\nmodule.exports.default = axios;\n",
     {
-      "./helpers/spread": "/home/kachitachi/client-app/node_modules/axios/lib/helpers/spread.js",
-      "./helpers/bind": "/home/kachitachi/client-app/node_modules/axios/lib/helpers/bind.js",
       "./cancel/isCancel": "/home/kachitachi/client-app/node_modules/axios/lib/cancel/isCancel.js",
       "./cancel/Cancel": "/home/kachitachi/client-app/node_modules/axios/lib/cancel/Cancel.js",
-      "./utils": "/home/kachitachi/client-app/node_modules/axios/lib/utils.js",
+      "./helpers/bind": "/home/kachitachi/client-app/node_modules/axios/lib/helpers/bind.js",
+      "./helpers/spread": "/home/kachitachi/client-app/node_modules/axios/lib/helpers/spread.js",
       "./cancel/CancelToken": "/home/kachitachi/client-app/node_modules/axios/lib/cancel/CancelToken.js",
+      "./utils": "/home/kachitachi/client-app/node_modules/axios/lib/utils.js",
       "./core/Axios": "/home/kachitachi/client-app/node_modules/axios/lib/core/Axios.js",
       "./defaults": "/home/kachitachi/client-app/node_modules/axios/lib/defaults.js"
     },
@@ -534,9 +534,9 @@
     {
       "_process": "/home/kachitachi/client-app/node_modules/process/browser.js",
       "./utils": "/home/kachitachi/client-app/node_modules/axios/lib/utils.js",
-      "./adapters/xhr": "/home/kachitachi/client-app/node_modules/axios/lib/adapters/xhr.js",
+      "./adapters/http": "/home/kachitachi/client-app/node_modules/axios/lib/adapters/xhr.js",
       "./helpers/normalizeHeaderName": "/home/kachitachi/client-app/node_modules/axios/lib/helpers/normalizeHeaderName.js",
-      "./adapters/http": "/home/kachitachi/client-app/node_modules/axios/lib/adapters/xhr.js"
+      "./adapters/xhr": "/home/kachitachi/client-app/node_modules/axios/lib/adapters/xhr.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/axios/lib/defaults.js",
@@ -926,8 +926,8 @@
   "/home/kachitachi/client-app/node_modules/core-js/modules/_collection-to-json.js": [
     "// https://github.com/DavidBruant/Map-Set.prototype.toJSON\nvar classof = require('./_classof')\n  , from    = require('./_array-from-iterable');\nmodule.exports = function(NAME){\n  return function toJSON(){\n    if(classof(this) != NAME)throw TypeError(NAME + \"#toJSON isn't generic\");\n    return from(this);\n  };\n};",
     {
-      "./_classof": "/home/kachitachi/client-app/node_modules/core-js/modules/_classof.js",
-      "./_array-from-iterable": "/home/kachitachi/client-app/node_modules/core-js/modules/_array-from-iterable.js"
+      "./_array-from-iterable": "/home/kachitachi/client-app/node_modules/core-js/modules/_array-from-iterable.js",
+      "./_classof": "/home/kachitachi/client-app/node_modules/core-js/modules/_classof.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/core-js/modules/_collection-to-json.js",
@@ -2009,8 +2009,8 @@
     {
       "./_export": "/home/kachitachi/client-app/node_modules/core-js/modules/_export.js",
       "./_defined": "/home/kachitachi/client-app/node_modules/core-js/modules/_defined.js",
-      "./_fails": "/home/kachitachi/client-app/node_modules/core-js/modules/_fails.js",
-      "./_string-ws": "/home/kachitachi/client-app/node_modules/core-js/modules/_string-ws.js"
+      "./_string-ws": "/home/kachitachi/client-app/node_modules/core-js/modules/_string-ws.js",
+      "./_fails": "/home/kachitachi/client-app/node_modules/core-js/modules/_fails.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/core-js/modules/_string-trim.js",
@@ -2392,10 +2392,10 @@
       "./_to-length": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-length.js",
       "./_create-property": "/home/kachitachi/client-app/node_modules/core-js/modules/_create-property.js",
       "./_ctx": "/home/kachitachi/client-app/node_modules/core-js/modules/_ctx.js",
-      "./_iter-call": "/home/kachitachi/client-app/node_modules/core-js/modules/_iter-call.js",
-      "./_is-array-iter": "/home/kachitachi/client-app/node_modules/core-js/modules/_is-array-iter.js",
       "./core.get-iterator-method": "/home/kachitachi/client-app/node_modules/core-js/modules/core.get-iterator-method.js",
-      "./_iter-detect": "/home/kachitachi/client-app/node_modules/core-js/modules/_iter-detect.js"
+      "./_iter-detect": "/home/kachitachi/client-app/node_modules/core-js/modules/_iter-detect.js",
+      "./_is-array-iter": "/home/kachitachi/client-app/node_modules/core-js/modules/_is-array-iter.js",
+      "./_iter-call": "/home/kachitachi/client-app/node_modules/core-js/modules/_iter-call.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.from.js",
@@ -2622,8 +2622,8 @@
     "'use strict';\nvar $export     = require('./_export')\n  , toObject    = require('./_to-object')\n  , toPrimitive = require('./_to-primitive');\n\n$export($export.P + $export.F * require('./_fails')(function(){\n  return new Date(NaN).toJSON() !== null || Date.prototype.toJSON.call({toISOString: function(){ return 1; }}) !== 1;\n}), 'Date', {\n  toJSON: function toJSON(key){\n    var O  = toObject(this)\n      , pv = toPrimitive(O);\n    return typeof pv == 'number' && !isFinite(pv) ? null : O.toISOString();\n  }\n});",
     {
       "./_export": "/home/kachitachi/client-app/node_modules/core-js/modules/_export.js",
-      "./_to-object": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-object.js",
       "./_fails": "/home/kachitachi/client-app/node_modules/core-js/modules/_fails.js",
+      "./_to-object": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-object.js",
       "./_to-primitive": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-primitive.js"
     },
     {
@@ -2692,8 +2692,8 @@
     {
       "./_property-desc": "/home/kachitachi/client-app/node_modules/core-js/modules/_property-desc.js",
       "./_has": "/home/kachitachi/client-app/node_modules/core-js/modules/_has.js",
-      "./_object-dp": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-dp.js",
-      "./_descriptors": "/home/kachitachi/client-app/node_modules/core-js/modules/_descriptors.js"
+      "./_descriptors": "/home/kachitachi/client-app/node_modules/core-js/modules/_descriptors.js",
+      "./_object-dp": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-dp.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.function.name.js",
@@ -3072,8 +3072,8 @@
       "./_export": "/home/kachitachi/client-app/node_modules/core-js/modules/_export.js",
       "./_fails": "/home/kachitachi/client-app/node_modules/core-js/modules/_fails.js",
       "./_to-integer": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-integer.js",
-      "./_a-number-value": "/home/kachitachi/client-app/node_modules/core-js/modules/_a-number-value.js",
-      "./_string-repeat": "/home/kachitachi/client-app/node_modules/core-js/modules/_string-repeat.js"
+      "./_string-repeat": "/home/kachitachi/client-app/node_modules/core-js/modules/_string-repeat.js",
+      "./_a-number-value": "/home/kachitachi/client-app/node_modules/core-js/modules/_a-number-value.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.to-fixed.js",
@@ -3140,8 +3140,8 @@
     "var $export = require('./_export');\n// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)\n$export($export.S + $export.F * !require('./_descriptors'), 'Object', {defineProperty: require('./_object-dp').f});",
     {
       "./_export": "/home/kachitachi/client-app/node_modules/core-js/modules/_export.js",
-      "./_object-dp": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-dp.js",
-      "./_descriptors": "/home/kachitachi/client-app/node_modules/core-js/modules/_descriptors.js"
+      "./_descriptors": "/home/kachitachi/client-app/node_modules/core-js/modules/_descriptors.js",
+      "./_object-dp": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-dp.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.define-property.js",
@@ -3194,8 +3194,8 @@
   "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.get-prototype-of.js": [
     "// 19.1.2.9 Object.getPrototypeOf(O)\nvar toObject        = require('./_to-object')\n  , $getPrototypeOf = require('./_object-gpo');\n\nrequire('./_object-sap')('getPrototypeOf', function(){\n  return function getPrototypeOf(it){\n    return $getPrototypeOf(toObject(it));\n  };\n});",
     {
-      "./_object-gpo": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gpo.js",
       "./_object-sap": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-sap.js",
+      "./_object-gpo": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gpo.js",
       "./_to-object": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-object.js"
     },
     {
@@ -3260,8 +3260,8 @@
   "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.keys.js": [
     "// 19.1.2.14 Object.keys(O)\nvar toObject = require('./_to-object')\n  , $keys    = require('./_object-keys');\n\nrequire('./_object-sap')('keys', function(){\n  return function keys(it){\n    return $keys(toObject(it));\n  };\n});",
     {
-      "./_to-object": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-object.js",
       "./_object-sap": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-sap.js",
+      "./_to-object": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-object.js",
       "./_object-keys": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-keys.js"
     },
     {
@@ -3367,10 +3367,10 @@
       "./_core": "/home/kachitachi/client-app/node_modules/core-js/modules/_core.js",
       "./_iter-detect": "/home/kachitachi/client-app/node_modules/core-js/modules/_iter-detect.js",
       "./_an-instance": "/home/kachitachi/client-app/node_modules/core-js/modules/_an-instance.js",
-      "./_for-of": "/home/kachitachi/client-app/node_modules/core-js/modules/_for-of.js",
       "./_task": "/home/kachitachi/client-app/node_modules/core-js/modules/_task.js",
-      "./_microtask": "/home/kachitachi/client-app/node_modules/core-js/modules/_microtask.js",
+      "./_for-of": "/home/kachitachi/client-app/node_modules/core-js/modules/_for-of.js",
       "./_redefine-all": "/home/kachitachi/client-app/node_modules/core-js/modules/_redefine-all.js",
+      "./_microtask": "/home/kachitachi/client-app/node_modules/core-js/modules/_microtask.js",
       "./_species-constructor": "/home/kachitachi/client-app/node_modules/core-js/modules/_species-constructor.js",
       "./_set-to-string-tag": "/home/kachitachi/client-app/node_modules/core-js/modules/_set-to-string-tag.js"
     },
@@ -3577,9 +3577,9 @@
       "./_property-desc": "/home/kachitachi/client-app/node_modules/core-js/modules/_property-desc.js",
       "./_an-object": "/home/kachitachi/client-app/node_modules/core-js/modules/_an-object.js",
       "./_is-object": "/home/kachitachi/client-app/node_modules/core-js/modules/_is-object.js",
-      "./_object-gopd": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gopd.js",
       "./_object-dp": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-dp.js",
-      "./_object-gpo": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gpo.js"
+      "./_object-gpo": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gpo.js",
+      "./_object-gopd": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gopd.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.set.js",
@@ -3593,14 +3593,14 @@
     {
       "./_global": "/home/kachitachi/client-app/node_modules/core-js/modules/_global.js",
       "./_object-dp": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-dp.js",
+      "./_flags": "/home/kachitachi/client-app/node_modules/core-js/modules/_flags.js",
       "./_descriptors": "/home/kachitachi/client-app/node_modules/core-js/modules/_descriptors.js",
       "./_fails": "/home/kachitachi/client-app/node_modules/core-js/modules/_fails.js",
       "./_redefine": "/home/kachitachi/client-app/node_modules/core-js/modules/_redefine.js",
-      "./_flags": "/home/kachitachi/client-app/node_modules/core-js/modules/_flags.js",
-      "./_wks": "/home/kachitachi/client-app/node_modules/core-js/modules/_wks.js",
-      "./_set-species": "/home/kachitachi/client-app/node_modules/core-js/modules/_set-species.js",
-      "./_inherit-if-required": "/home/kachitachi/client-app/node_modules/core-js/modules/_inherit-if-required.js",
       "./_is-regexp": "/home/kachitachi/client-app/node_modules/core-js/modules/_is-regexp.js",
+      "./_wks": "/home/kachitachi/client-app/node_modules/core-js/modules/_wks.js",
+      "./_inherit-if-required": "/home/kachitachi/client-app/node_modules/core-js/modules/_inherit-if-required.js",
+      "./_set-species": "/home/kachitachi/client-app/node_modules/core-js/modules/_set-species.js",
       "./_object-gopn": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gopn.js"
     },
     {
@@ -3693,8 +3693,8 @@
   "/home/kachitachi/client-app/node_modules/core-js/modules/es6.set.js": [
     "'use strict';\nvar strong = require('./_collection-strong');\n\n// 23.2 Set Objects\nmodule.exports = require('./_collection')('Set', function(get){\n  return function Set(){ return get(this, arguments.length > 0 ? arguments[0] : undefined); };\n}, {\n  // 23.2.3.1 Set.prototype.add(value)\n  add: function add(value){\n    return strong.def(this, value = value === 0 ? 0 : value, value);\n  }\n}, strong);",
     {
-      "./_collection-strong": "/home/kachitachi/client-app/node_modules/core-js/modules/_collection-strong.js",
-      "./_collection": "/home/kachitachi/client-app/node_modules/core-js/modules/_collection.js"
+      "./_collection": "/home/kachitachi/client-app/node_modules/core-js/modules/_collection.js",
+      "./_collection-strong": "/home/kachitachi/client-app/node_modules/core-js/modules/_collection-strong.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.set.js",
@@ -3922,9 +3922,9 @@
     "// 21.1.3.18 String.prototype.startsWith(searchString [, position ])\n'use strict';\nvar $export     = require('./_export')\n  , toLength    = require('./_to-length')\n  , context     = require('./_string-context')\n  , STARTS_WITH = 'startsWith'\n  , $startsWith = ''[STARTS_WITH];\n\n$export($export.P + $export.F * require('./_fails-is-regexp')(STARTS_WITH), 'String', {\n  startsWith: function startsWith(searchString /*, position = 0 */){\n    var that   = context(this, searchString, STARTS_WITH)\n      , index  = toLength(Math.min(arguments.length > 1 ? arguments[1] : undefined, that.length))\n      , search = String(searchString);\n    return $startsWith\n      ? $startsWith.call(that, search, index)\n      : that.slice(index, index + search.length) === search;\n  }\n});",
     {
       "./_export": "/home/kachitachi/client-app/node_modules/core-js/modules/_export.js",
-      "./_string-context": "/home/kachitachi/client-app/node_modules/core-js/modules/_string-context.js",
+      "./_to-length": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-length.js",
       "./_fails-is-regexp": "/home/kachitachi/client-app/node_modules/core-js/modules/_fails-is-regexp.js",
-      "./_to-length": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-length.js"
+      "./_string-context": "/home/kachitachi/client-app/node_modules/core-js/modules/_string-context.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.starts-with.js",
@@ -3985,35 +3985,35 @@
     "'use strict';\n// ECMAScript 6 symbols shim\nvar global         = require('./_global')\n  , has            = require('./_has')\n  , DESCRIPTORS    = require('./_descriptors')\n  , $export        = require('./_export')\n  , redefine       = require('./_redefine')\n  , META           = require('./_meta').KEY\n  , $fails         = require('./_fails')\n  , shared         = require('./_shared')\n  , setToStringTag = require('./_set-to-string-tag')\n  , uid            = require('./_uid')\n  , wks            = require('./_wks')\n  , wksExt         = require('./_wks-ext')\n  , wksDefine      = require('./_wks-define')\n  , keyOf          = require('./_keyof')\n  , enumKeys       = require('./_enum-keys')\n  , isArray        = require('./_is-array')\n  , anObject       = require('./_an-object')\n  , toIObject      = require('./_to-iobject')\n  , toPrimitive    = require('./_to-primitive')\n  , createDesc     = require('./_property-desc')\n  , _create        = require('./_object-create')\n  , gOPNExt        = require('./_object-gopn-ext')\n  , $GOPD          = require('./_object-gopd')\n  , $DP            = require('./_object-dp')\n  , $keys          = require('./_object-keys')\n  , gOPD           = $GOPD.f\n  , dP             = $DP.f\n  , gOPN           = gOPNExt.f\n  , $Symbol        = global.Symbol\n  , $JSON          = global.JSON\n  , _stringify     = $JSON && $JSON.stringify\n  , PROTOTYPE      = 'prototype'\n  , HIDDEN         = wks('_hidden')\n  , TO_PRIMITIVE   = wks('toPrimitive')\n  , isEnum         = {}.propertyIsEnumerable\n  , SymbolRegistry = shared('symbol-registry')\n  , AllSymbols     = shared('symbols')\n  , OPSymbols      = shared('op-symbols')\n  , ObjectProto    = Object[PROTOTYPE]\n  , USE_NATIVE     = typeof $Symbol == 'function'\n  , QObject        = global.QObject;\n// Don't use setters in Qt Script, https://github.com/zloirock/core-js/issues/173\nvar setter = !QObject || !QObject[PROTOTYPE] || !QObject[PROTOTYPE].findChild;\n\n// fallback for old Android, https://code.google.com/p/v8/issues/detail?id=687\nvar setSymbolDesc = DESCRIPTORS && $fails(function(){\n  return _create(dP({}, 'a', {\n    get: function(){ return dP(this, 'a', {value: 7}).a; }\n  })).a != 7;\n}) ? function(it, key, D){\n  var protoDesc = gOPD(ObjectProto, key);\n  if(protoDesc)delete ObjectProto[key];\n  dP(it, key, D);\n  if(protoDesc && it !== ObjectProto)dP(ObjectProto, key, protoDesc);\n} : dP;\n\nvar wrap = function(tag){\n  var sym = AllSymbols[tag] = _create($Symbol[PROTOTYPE]);\n  sym._k = tag;\n  return sym;\n};\n\nvar isSymbol = USE_NATIVE && typeof $Symbol.iterator == 'symbol' ? function(it){\n  return typeof it == 'symbol';\n} : function(it){\n  return it instanceof $Symbol;\n};\n\nvar $defineProperty = function defineProperty(it, key, D){\n  if(it === ObjectProto)$defineProperty(OPSymbols, key, D);\n  anObject(it);\n  key = toPrimitive(key, true);\n  anObject(D);\n  if(has(AllSymbols, key)){\n    if(!D.enumerable){\n      if(!has(it, HIDDEN))dP(it, HIDDEN, createDesc(1, {}));\n      it[HIDDEN][key] = true;\n    } else {\n      if(has(it, HIDDEN) && it[HIDDEN][key])it[HIDDEN][key] = false;\n      D = _create(D, {enumerable: createDesc(0, false)});\n    } return setSymbolDesc(it, key, D);\n  } return dP(it, key, D);\n};\nvar $defineProperties = function defineProperties(it, P){\n  anObject(it);\n  var keys = enumKeys(P = toIObject(P))\n    , i    = 0\n    , l = keys.length\n    , key;\n  while(l > i)$defineProperty(it, key = keys[i++], P[key]);\n  return it;\n};\nvar $create = function create(it, P){\n  return P === undefined ? _create(it) : $defineProperties(_create(it), P);\n};\nvar $propertyIsEnumerable = function propertyIsEnumerable(key){\n  var E = isEnum.call(this, key = toPrimitive(key, true));\n  if(this === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key))return false;\n  return E || !has(this, key) || !has(AllSymbols, key) || has(this, HIDDEN) && this[HIDDEN][key] ? E : true;\n};\nvar $getOwnPropertyDescriptor = function getOwnPropertyDescriptor(it, key){\n  it  = toIObject(it);\n  key = toPrimitive(key, true);\n  if(it === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key))return;\n  var D = gOPD(it, key);\n  if(D && has(AllSymbols, key) && !(has(it, HIDDEN) && it[HIDDEN][key]))D.enumerable = true;\n  return D;\n};\nvar $getOwnPropertyNames = function getOwnPropertyNames(it){\n  var names  = gOPN(toIObject(it))\n    , result = []\n    , i      = 0\n    , key;\n  while(names.length > i){\n    if(!has(AllSymbols, key = names[i++]) && key != HIDDEN && key != META)result.push(key);\n  } return result;\n};\nvar $getOwnPropertySymbols = function getOwnPropertySymbols(it){\n  var IS_OP  = it === ObjectProto\n    , names  = gOPN(IS_OP ? OPSymbols : toIObject(it))\n    , result = []\n    , i      = 0\n    , key;\n  while(names.length > i){\n    if(has(AllSymbols, key = names[i++]) && (IS_OP ? has(ObjectProto, key) : true))result.push(AllSymbols[key]);\n  } return result;\n};\n\n// 19.4.1.1 Symbol([description])\nif(!USE_NATIVE){\n  $Symbol = function Symbol(){\n    if(this instanceof $Symbol)throw TypeError('Symbol is not a constructor!');\n    var tag = uid(arguments.length > 0 ? arguments[0] : undefined);\n    var $set = function(value){\n      if(this === ObjectProto)$set.call(OPSymbols, value);\n      if(has(this, HIDDEN) && has(this[HIDDEN], tag))this[HIDDEN][tag] = false;\n      setSymbolDesc(this, tag, createDesc(1, value));\n    };\n    if(DESCRIPTORS && setter)setSymbolDesc(ObjectProto, tag, {configurable: true, set: $set});\n    return wrap(tag);\n  };\n  redefine($Symbol[PROTOTYPE], 'toString', function toString(){\n    return this._k;\n  });\n\n  $GOPD.f = $getOwnPropertyDescriptor;\n  $DP.f   = $defineProperty;\n  require('./_object-gopn').f = gOPNExt.f = $getOwnPropertyNames;\n  require('./_object-pie').f  = $propertyIsEnumerable;\n  require('./_object-gops').f = $getOwnPropertySymbols;\n\n  if(DESCRIPTORS && !require('./_library')){\n    redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);\n  }\n\n  wksExt.f = function(name){\n    return wrap(wks(name));\n  }\n}\n\n$export($export.G + $export.W + $export.F * !USE_NATIVE, {Symbol: $Symbol});\n\nfor(var symbols = (\n  // 19.4.2.2, 19.4.2.3, 19.4.2.4, 19.4.2.6, 19.4.2.8, 19.4.2.9, 19.4.2.10, 19.4.2.11, 19.4.2.12, 19.4.2.13, 19.4.2.14\n  'hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables'\n).split(','), i = 0; symbols.length > i; )wks(symbols[i++]);\n\nfor(var symbols = $keys(wks.store), i = 0; symbols.length > i; )wksDefine(symbols[i++]);\n\n$export($export.S + $export.F * !USE_NATIVE, 'Symbol', {\n  // 19.4.2.1 Symbol.for(key)\n  'for': function(key){\n    return has(SymbolRegistry, key += '')\n      ? SymbolRegistry[key]\n      : SymbolRegistry[key] = $Symbol(key);\n  },\n  // 19.4.2.5 Symbol.keyFor(sym)\n  keyFor: function keyFor(key){\n    if(isSymbol(key))return keyOf(SymbolRegistry, key);\n    throw TypeError(key + ' is not a symbol!');\n  },\n  useSetter: function(){ setter = true; },\n  useSimple: function(){ setter = false; }\n});\n\n$export($export.S + $export.F * !USE_NATIVE, 'Object', {\n  // 19.1.2.2 Object.create(O [, Properties])\n  create: $create,\n  // 19.1.2.4 Object.defineProperty(O, P, Attributes)\n  defineProperty: $defineProperty,\n  // 19.1.2.3 Object.defineProperties(O, Properties)\n  defineProperties: $defineProperties,\n  // 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)\n  getOwnPropertyDescriptor: $getOwnPropertyDescriptor,\n  // 19.1.2.7 Object.getOwnPropertyNames(O)\n  getOwnPropertyNames: $getOwnPropertyNames,\n  // 19.1.2.8 Object.getOwnPropertySymbols(O)\n  getOwnPropertySymbols: $getOwnPropertySymbols\n});\n\n// 24.3.2 JSON.stringify(value [, replacer [, space]])\n$JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function(){\n  var S = $Symbol();\n  // MS Edge converts symbol values to JSON as {}\n  // WebKit converts symbol values to JSON as null\n  // V8 throws on boxed symbols\n  return _stringify([S]) != '[null]' || _stringify({a: S}) != '{}' || _stringify(Object(S)) != '{}';\n})), 'JSON', {\n  stringify: function stringify(it){\n    if(it === undefined || isSymbol(it))return; // IE8 returns string on undefined\n    var args = [it]\n      , i    = 1\n      , replacer, $replacer;\n    while(arguments.length > i)args.push(arguments[i++]);\n    replacer = args[1];\n    if(typeof replacer == 'function')$replacer = replacer;\n    if($replacer || !isArray(replacer))replacer = function(key, value){\n      if($replacer)value = $replacer.call(this, key, value);\n      if(!isSymbol(value))return value;\n    };\n    args[1] = replacer;\n    return _stringify.apply($JSON, args);\n  }\n});\n\n// 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)\n$Symbol[PROTOTYPE][TO_PRIMITIVE] || require('./_hide')($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);\n// 19.4.3.5 Symbol.prototype[@@toStringTag]\nsetToStringTag($Symbol, 'Symbol');\n// 20.2.1.9 Math[@@toStringTag]\nsetToStringTag(Math, 'Math', true);\n// 24.3.3 JSON[@@toStringTag]\nsetToStringTag(global.JSON, 'JSON', true);",
     {
       "./_global": "/home/kachitachi/client-app/node_modules/core-js/modules/_global.js",
-      "./_has": "/home/kachitachi/client-app/node_modules/core-js/modules/_has.js",
       "./_fails": "/home/kachitachi/client-app/node_modules/core-js/modules/_fails.js",
+      "./_has": "/home/kachitachi/client-app/node_modules/core-js/modules/_has.js",
       "./_uid": "/home/kachitachi/client-app/node_modules/core-js/modules/_uid.js",
       "./_property-desc": "/home/kachitachi/client-app/node_modules/core-js/modules/_property-desc.js",
+      "./_library": "/home/kachitachi/client-app/node_modules/core-js/modules/_library.js",
       "./_object-pie": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-pie.js",
       "./_object-gops": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gops.js",
-      "./_library": "/home/kachitachi/client-app/node_modules/core-js/modules/_library.js",
-      "./_descriptors": "/home/kachitachi/client-app/node_modules/core-js/modules/_descriptors.js",
       "./_export": "/home/kachitachi/client-app/node_modules/core-js/modules/_export.js",
+      "./_descriptors": "/home/kachitachi/client-app/node_modules/core-js/modules/_descriptors.js",
       "./_redefine": "/home/kachitachi/client-app/node_modules/core-js/modules/_redefine.js",
-      "./_meta": "/home/kachitachi/client-app/node_modules/core-js/modules/_meta.js",
       "./_set-to-string-tag": "/home/kachitachi/client-app/node_modules/core-js/modules/_set-to-string-tag.js",
-      "./_wks": "/home/kachitachi/client-app/node_modules/core-js/modules/_wks.js",
+      "./_meta": "/home/kachitachi/client-app/node_modules/core-js/modules/_meta.js",
       "./_wks-define": "/home/kachitachi/client-app/node_modules/core-js/modules/_wks-define.js",
-      "./_is-array": "/home/kachitachi/client-app/node_modules/core-js/modules/_is-array.js",
-      "./_an-object": "/home/kachitachi/client-app/node_modules/core-js/modules/_an-object.js",
+      "./_wks": "/home/kachitachi/client-app/node_modules/core-js/modules/_wks.js",
       "./_to-iobject": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-iobject.js",
+      "./_an-object": "/home/kachitachi/client-app/node_modules/core-js/modules/_an-object.js",
+      "./_is-array": "/home/kachitachi/client-app/node_modules/core-js/modules/_is-array.js",
       "./_to-primitive": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-primitive.js",
       "./_object-gopn-ext": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gopn-ext.js",
       "./_object-dp": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-dp.js",
       "./_object-gopn": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gopn.js",
       "./_hide": "/home/kachitachi/client-app/node_modules/core-js/modules/_hide.js",
-      "./_object-create": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-create.js",
-      "./_object-gopd": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gopd.js",
       "./_object-keys": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-keys.js",
+      "./_object-gopd": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gopd.js",
+      "./_object-create": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-create.js",
       "./_shared": "/home/kachitachi/client-app/node_modules/core-js/modules/_shared.js",
-      "./_wks-ext": "/home/kachitachi/client-app/node_modules/core-js/modules/_wks-ext.js",
       "./_keyof": "/home/kachitachi/client-app/node_modules/core-js/modules/_keyof.js",
-      "./_enum-keys": "/home/kachitachi/client-app/node_modules/core-js/modules/_enum-keys.js"
+      "./_enum-keys": "/home/kachitachi/client-app/node_modules/core-js/modules/_enum-keys.js",
+      "./_wks-ext": "/home/kachitachi/client-app/node_modules/core-js/modules/_wks-ext.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.symbol.js",
@@ -4187,8 +4187,8 @@
   "/home/kachitachi/client-app/node_modules/core-js/modules/es6.weak-set.js": [
     "'use strict';\nvar weak = require('./_collection-weak');\n\n// 23.4 WeakSet Objects\nrequire('./_collection')('WeakSet', function(get){\n  return function WeakSet(){ return get(this, arguments.length > 0 ? arguments[0] : undefined); };\n}, {\n  // 23.4.3.1 WeakSet.prototype.add(value)\n  add: function add(value){\n    return weak.def(this, value, true);\n  }\n}, weak, false, true);",
     {
-      "./_collection": "/home/kachitachi/client-app/node_modules/core-js/modules/_collection.js",
-      "./_collection-weak": "/home/kachitachi/client-app/node_modules/core-js/modules/_collection-weak.js"
+      "./_collection-weak": "/home/kachitachi/client-app/node_modules/core-js/modules/_collection-weak.js",
+      "./_collection": "/home/kachitachi/client-app/node_modules/core-js/modules/_collection.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.weak-set.js",
@@ -4215,8 +4215,8 @@
     "// https://github.com/rwaldron/tc39-notes/blob/master/es6/2014-09/sept-25.md#510-globalasap-for-enqueuing-a-microtask\nvar $export   = require('./_export')\n  , microtask = require('./_microtask')()\n  , process   = require('./_global').process\n  , isNode    = require('./_cof')(process) == 'process';\n\n$export($export.G, {\n  asap: function asap(fn){\n    var domain = isNode && process.domain;\n    microtask(domain ? domain.bind(fn) : fn);\n  }\n});",
     {
       "./_export": "/home/kachitachi/client-app/node_modules/core-js/modules/_export.js",
-      "./_cof": "/home/kachitachi/client-app/node_modules/core-js/modules/_cof.js",
       "./_global": "/home/kachitachi/client-app/node_modules/core-js/modules/_global.js",
+      "./_cof": "/home/kachitachi/client-app/node_modules/core-js/modules/_cof.js",
       "./_microtask": "/home/kachitachi/client-app/node_modules/core-js/modules/_microtask.js"
     },
     {
@@ -4304,9 +4304,9 @@
     "'use strict';\nvar $export         = require('./_export')\n  , toObject        = require('./_to-object')\n  , aFunction       = require('./_a-function')\n  , $defineProperty = require('./_object-dp');\n\n// B.2.2.2 Object.prototype.__defineGetter__(P, getter)\nrequire('./_descriptors') && $export($export.P + require('./_object-forced-pam'), 'Object', {\n  __defineGetter__: function __defineGetter__(P, getter){\n    $defineProperty.f(toObject(this), P, {get: aFunction(getter), enumerable: true, configurable: true});\n  }\n});",
     {
       "./_export": "/home/kachitachi/client-app/node_modules/core-js/modules/_export.js",
-      "./_to-object": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-object.js",
       "./_a-function": "/home/kachitachi/client-app/node_modules/core-js/modules/_a-function.js",
       "./_object-dp": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-dp.js",
+      "./_to-object": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-object.js",
       "./_descriptors": "/home/kachitachi/client-app/node_modules/core-js/modules/_descriptors.js",
       "./_object-forced-pam": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-forced-pam.js"
     },
@@ -4321,10 +4321,10 @@
     "'use strict';\nvar $export         = require('./_export')\n  , toObject        = require('./_to-object')\n  , aFunction       = require('./_a-function')\n  , $defineProperty = require('./_object-dp');\n\n// B.2.2.3 Object.prototype.__defineSetter__(P, setter)\nrequire('./_descriptors') && $export($export.P + require('./_object-forced-pam'), 'Object', {\n  __defineSetter__: function __defineSetter__(P, setter){\n    $defineProperty.f(toObject(this), P, {set: aFunction(setter), enumerable: true, configurable: true});\n  }\n});",
     {
       "./_export": "/home/kachitachi/client-app/node_modules/core-js/modules/_export.js",
-      "./_to-object": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-object.js",
       "./_a-function": "/home/kachitachi/client-app/node_modules/core-js/modules/_a-function.js",
-      "./_descriptors": "/home/kachitachi/client-app/node_modules/core-js/modules/_descriptors.js",
       "./_object-dp": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-dp.js",
+      "./_descriptors": "/home/kachitachi/client-app/node_modules/core-js/modules/_descriptors.js",
+      "./_to-object": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-object.js",
       "./_object-forced-pam": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-forced-pam.js"
     },
     {
@@ -4367,12 +4367,12 @@
     "'use strict';\nvar $export                  = require('./_export')\n  , toObject                 = require('./_to-object')\n  , toPrimitive              = require('./_to-primitive')\n  , getPrototypeOf           = require('./_object-gpo')\n  , getOwnPropertyDescriptor = require('./_object-gopd').f;\n\n// B.2.2.4 Object.prototype.__lookupGetter__(P)\nrequire('./_descriptors') && $export($export.P + require('./_object-forced-pam'), 'Object', {\n  __lookupGetter__: function __lookupGetter__(P){\n    var O = toObject(this)\n      , K = toPrimitive(P, true)\n      , D;\n    do {\n      if(D = getOwnPropertyDescriptor(O, K))return D.get;\n    } while(O = getPrototypeOf(O));\n  }\n});",
     {
       "./_export": "/home/kachitachi/client-app/node_modules/core-js/modules/_export.js",
-      "./_to-primitive": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-primitive.js",
-      "./_object-gpo": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gpo.js",
-      "./_object-gopd": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gopd.js",
-      "./_descriptors": "/home/kachitachi/client-app/node_modules/core-js/modules/_descriptors.js",
       "./_to-object": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-object.js",
-      "./_object-forced-pam": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-forced-pam.js"
+      "./_descriptors": "/home/kachitachi/client-app/node_modules/core-js/modules/_descriptors.js",
+      "./_object-forced-pam": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-forced-pam.js",
+      "./_object-gopd": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gopd.js",
+      "./_object-gpo": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gpo.js",
+      "./_to-primitive": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-primitive.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.object.lookup-getter.js",
@@ -4385,12 +4385,12 @@
     "'use strict';\nvar $export                  = require('./_export')\n  , toObject                 = require('./_to-object')\n  , toPrimitive              = require('./_to-primitive')\n  , getPrototypeOf           = require('./_object-gpo')\n  , getOwnPropertyDescriptor = require('./_object-gopd').f;\n\n// B.2.2.5 Object.prototype.__lookupSetter__(P)\nrequire('./_descriptors') && $export($export.P + require('./_object-forced-pam'), 'Object', {\n  __lookupSetter__: function __lookupSetter__(P){\n    var O = toObject(this)\n      , K = toPrimitive(P, true)\n      , D;\n    do {\n      if(D = getOwnPropertyDescriptor(O, K))return D.set;\n    } while(O = getPrototypeOf(O));\n  }\n});",
     {
       "./_export": "/home/kachitachi/client-app/node_modules/core-js/modules/_export.js",
-      "./_object-gpo": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gpo.js",
-      "./_descriptors": "/home/kachitachi/client-app/node_modules/core-js/modules/_descriptors.js",
       "./_to-object": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-object.js",
-      "./_object-forced-pam": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-forced-pam.js",
+      "./_to-primitive": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-primitive.js",
+      "./_object-gpo": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gpo.js",
       "./_object-gopd": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-gopd.js",
-      "./_to-primitive": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-primitive.js"
+      "./_descriptors": "/home/kachitachi/client-app/node_modules/core-js/modules/_descriptors.js",
+      "./_object-forced-pam": "/home/kachitachi/client-app/node_modules/core-js/modules/_object-forced-pam.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.object.lookup-setter.js",
@@ -4418,13 +4418,13 @@
       "./_export": "/home/kachitachi/client-app/node_modules/core-js/modules/_export.js",
       "./_global": "/home/kachitachi/client-app/node_modules/core-js/modules/_global.js",
       "./_core": "/home/kachitachi/client-app/node_modules/core-js/modules/_core.js",
+      "./_microtask": "/home/kachitachi/client-app/node_modules/core-js/modules/_microtask.js",
       "./_wks": "/home/kachitachi/client-app/node_modules/core-js/modules/_wks.js",
       "./_a-function": "/home/kachitachi/client-app/node_modules/core-js/modules/_a-function.js",
       "./_an-object": "/home/kachitachi/client-app/node_modules/core-js/modules/_an-object.js",
       "./_an-instance": "/home/kachitachi/client-app/node_modules/core-js/modules/_an-instance.js",
-      "./_microtask": "/home/kachitachi/client-app/node_modules/core-js/modules/_microtask.js",
-      "./_hide": "/home/kachitachi/client-app/node_modules/core-js/modules/_hide.js",
       "./_set-species": "/home/kachitachi/client-app/node_modules/core-js/modules/_set-species.js",
+      "./_hide": "/home/kachitachi/client-app/node_modules/core-js/modules/_hide.js",
       "./_redefine-all": "/home/kachitachi/client-app/node_modules/core-js/modules/_redefine-all.js",
       "./_for-of": "/home/kachitachi/client-app/node_modules/core-js/modules/_for-of.js"
     },
@@ -4589,9 +4589,9 @@
     {
       "./_export": "/home/kachitachi/client-app/node_modules/core-js/modules/_export.js",
       "./_to-length": "/home/kachitachi/client-app/node_modules/core-js/modules/_to-length.js",
-      "./_is-regexp": "/home/kachitachi/client-app/node_modules/core-js/modules/_is-regexp.js",
       "./_flags": "/home/kachitachi/client-app/node_modules/core-js/modules/_flags.js",
       "./_defined": "/home/kachitachi/client-app/node_modules/core-js/modules/_defined.js",
+      "./_is-regexp": "/home/kachitachi/client-app/node_modules/core-js/modules/_is-regexp.js",
       "./_iter-create": "/home/kachitachi/client-app/node_modules/core-js/modules/_iter-create.js"
     },
     {
@@ -4737,8 +4737,8 @@
     "require('./modules/es6.symbol');\nrequire('./modules/es6.object.create');\nrequire('./modules/es6.object.define-property');\nrequire('./modules/es6.object.define-properties');\nrequire('./modules/es6.object.get-own-property-descriptor');\nrequire('./modules/es6.object.get-prototype-of');\nrequire('./modules/es6.object.keys');\nrequire('./modules/es6.object.get-own-property-names');\nrequire('./modules/es6.object.freeze');\nrequire('./modules/es6.object.seal');\nrequire('./modules/es6.object.prevent-extensions');\nrequire('./modules/es6.object.is-frozen');\nrequire('./modules/es6.object.is-sealed');\nrequire('./modules/es6.object.is-extensible');\nrequire('./modules/es6.object.assign');\nrequire('./modules/es6.object.is');\nrequire('./modules/es6.object.set-prototype-of');\nrequire('./modules/es6.object.to-string');\nrequire('./modules/es6.function.bind');\nrequire('./modules/es6.function.name');\nrequire('./modules/es6.function.has-instance');\nrequire('./modules/es6.parse-int');\nrequire('./modules/es6.parse-float');\nrequire('./modules/es6.number.constructor');\nrequire('./modules/es6.number.to-fixed');\nrequire('./modules/es6.number.to-precision');\nrequire('./modules/es6.number.epsilon');\nrequire('./modules/es6.number.is-finite');\nrequire('./modules/es6.number.is-integer');\nrequire('./modules/es6.number.is-nan');\nrequire('./modules/es6.number.is-safe-integer');\nrequire('./modules/es6.number.max-safe-integer');\nrequire('./modules/es6.number.min-safe-integer');\nrequire('./modules/es6.number.parse-float');\nrequire('./modules/es6.number.parse-int');\nrequire('./modules/es6.math.acosh');\nrequire('./modules/es6.math.asinh');\nrequire('./modules/es6.math.atanh');\nrequire('./modules/es6.math.cbrt');\nrequire('./modules/es6.math.clz32');\nrequire('./modules/es6.math.cosh');\nrequire('./modules/es6.math.expm1');\nrequire('./modules/es6.math.fround');\nrequire('./modules/es6.math.hypot');\nrequire('./modules/es6.math.imul');\nrequire('./modules/es6.math.log10');\nrequire('./modules/es6.math.log1p');\nrequire('./modules/es6.math.log2');\nrequire('./modules/es6.math.sign');\nrequire('./modules/es6.math.sinh');\nrequire('./modules/es6.math.tanh');\nrequire('./modules/es6.math.trunc');\nrequire('./modules/es6.string.from-code-point');\nrequire('./modules/es6.string.raw');\nrequire('./modules/es6.string.trim');\nrequire('./modules/es6.string.iterator');\nrequire('./modules/es6.string.code-point-at');\nrequire('./modules/es6.string.ends-with');\nrequire('./modules/es6.string.includes');\nrequire('./modules/es6.string.repeat');\nrequire('./modules/es6.string.starts-with');\nrequire('./modules/es6.string.anchor');\nrequire('./modules/es6.string.big');\nrequire('./modules/es6.string.blink');\nrequire('./modules/es6.string.bold');\nrequire('./modules/es6.string.fixed');\nrequire('./modules/es6.string.fontcolor');\nrequire('./modules/es6.string.fontsize');\nrequire('./modules/es6.string.italics');\nrequire('./modules/es6.string.link');\nrequire('./modules/es6.string.small');\nrequire('./modules/es6.string.strike');\nrequire('./modules/es6.string.sub');\nrequire('./modules/es6.string.sup');\nrequire('./modules/es6.date.now');\nrequire('./modules/es6.date.to-json');\nrequire('./modules/es6.date.to-iso-string');\nrequire('./modules/es6.date.to-string');\nrequire('./modules/es6.date.to-primitive');\nrequire('./modules/es6.array.is-array');\nrequire('./modules/es6.array.from');\nrequire('./modules/es6.array.of');\nrequire('./modules/es6.array.join');\nrequire('./modules/es6.array.slice');\nrequire('./modules/es6.array.sort');\nrequire('./modules/es6.array.for-each');\nrequire('./modules/es6.array.map');\nrequire('./modules/es6.array.filter');\nrequire('./modules/es6.array.some');\nrequire('./modules/es6.array.every');\nrequire('./modules/es6.array.reduce');\nrequire('./modules/es6.array.reduce-right');\nrequire('./modules/es6.array.index-of');\nrequire('./modules/es6.array.last-index-of');\nrequire('./modules/es6.array.copy-within');\nrequire('./modules/es6.array.fill');\nrequire('./modules/es6.array.find');\nrequire('./modules/es6.array.find-index');\nrequire('./modules/es6.array.species');\nrequire('./modules/es6.array.iterator');\nrequire('./modules/es6.regexp.constructor');\nrequire('./modules/es6.regexp.to-string');\nrequire('./modules/es6.regexp.flags');\nrequire('./modules/es6.regexp.match');\nrequire('./modules/es6.regexp.replace');\nrequire('./modules/es6.regexp.search');\nrequire('./modules/es6.regexp.split');\nrequire('./modules/es6.promise');\nrequire('./modules/es6.map');\nrequire('./modules/es6.set');\nrequire('./modules/es6.weak-map');\nrequire('./modules/es6.weak-set');\nrequire('./modules/es6.typed.array-buffer');\nrequire('./modules/es6.typed.data-view');\nrequire('./modules/es6.typed.int8-array');\nrequire('./modules/es6.typed.uint8-array');\nrequire('./modules/es6.typed.uint8-clamped-array');\nrequire('./modules/es6.typed.int16-array');\nrequire('./modules/es6.typed.uint16-array');\nrequire('./modules/es6.typed.int32-array');\nrequire('./modules/es6.typed.uint32-array');\nrequire('./modules/es6.typed.float32-array');\nrequire('./modules/es6.typed.float64-array');\nrequire('./modules/es6.reflect.apply');\nrequire('./modules/es6.reflect.construct');\nrequire('./modules/es6.reflect.define-property');\nrequire('./modules/es6.reflect.delete-property');\nrequire('./modules/es6.reflect.enumerate');\nrequire('./modules/es6.reflect.get');\nrequire('./modules/es6.reflect.get-own-property-descriptor');\nrequire('./modules/es6.reflect.get-prototype-of');\nrequire('./modules/es6.reflect.has');\nrequire('./modules/es6.reflect.is-extensible');\nrequire('./modules/es6.reflect.own-keys');\nrequire('./modules/es6.reflect.prevent-extensions');\nrequire('./modules/es6.reflect.set');\nrequire('./modules/es6.reflect.set-prototype-of');\nrequire('./modules/es7.array.includes');\nrequire('./modules/es7.string.at');\nrequire('./modules/es7.string.pad-start');\nrequire('./modules/es7.string.pad-end');\nrequire('./modules/es7.string.trim-left');\nrequire('./modules/es7.string.trim-right');\nrequire('./modules/es7.string.match-all');\nrequire('./modules/es7.symbol.async-iterator');\nrequire('./modules/es7.symbol.observable');\nrequire('./modules/es7.object.get-own-property-descriptors');\nrequire('./modules/es7.object.values');\nrequire('./modules/es7.object.entries');\nrequire('./modules/es7.object.define-getter');\nrequire('./modules/es7.object.define-setter');\nrequire('./modules/es7.object.lookup-getter');\nrequire('./modules/es7.object.lookup-setter');\nrequire('./modules/es7.map.to-json');\nrequire('./modules/es7.set.to-json');\nrequire('./modules/es7.system.global');\nrequire('./modules/es7.error.is-error');\nrequire('./modules/es7.math.iaddh');\nrequire('./modules/es7.math.isubh');\nrequire('./modules/es7.math.imulh');\nrequire('./modules/es7.math.umulh');\nrequire('./modules/es7.reflect.define-metadata');\nrequire('./modules/es7.reflect.delete-metadata');\nrequire('./modules/es7.reflect.get-metadata');\nrequire('./modules/es7.reflect.get-metadata-keys');\nrequire('./modules/es7.reflect.get-own-metadata');\nrequire('./modules/es7.reflect.get-own-metadata-keys');\nrequire('./modules/es7.reflect.has-metadata');\nrequire('./modules/es7.reflect.has-own-metadata');\nrequire('./modules/es7.reflect.metadata');\nrequire('./modules/es7.asap');\nrequire('./modules/es7.observable');\nrequire('./modules/web.timers');\nrequire('./modules/web.immediate');\nrequire('./modules/web.dom.iterable');\nmodule.exports = require('./modules/_core');",
     {
       "./modules/_core": "/home/kachitachi/client-app/node_modules/core-js/modules/_core.js",
-      "./modules/es6.number.is-finite": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.is-finite.js",
       "./modules/es6.number.is-nan": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.is-nan.js",
+      "./modules/es6.number.is-finite": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.is-finite.js",
       "./modules/es6.number.max-safe-integer": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.max-safe-integer.js",
       "./modules/es6.number.min-safe-integer": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.min-safe-integer.js",
       "./modules/es6.math.asinh": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.math.asinh.js",
@@ -4758,160 +4758,160 @@
       "./modules/es6.date.now": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.date.now.js",
       "./modules/es6.date.to-iso-string": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.date.to-iso-string.js",
       "./modules/es6.reflect.has": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.has.js",
-      "./modules/es7.system.global": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.system.global.js",
       "./modules/es7.error.is-error": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.error.is-error.js",
+      "./modules/es7.system.global": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.system.global.js",
       "./modules/es7.math.iaddh": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.math.iaddh.js",
-      "./modules/es7.math.isubh": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.math.isubh.js",
       "./modules/es7.math.imulh": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.math.imulh.js",
+      "./modules/es7.math.isubh": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.math.isubh.js",
       "./modules/es7.math.umulh": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.math.umulh.js",
       "./modules/es6.object.is": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.is.js",
       "./modules/es6.math.acosh": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.math.acosh.js",
-      "./modules/es6.math.cbrt": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.math.cbrt.js",
       "./modules/es6.math.expm1": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.math.expm1.js",
+      "./modules/es6.math.cbrt": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.math.cbrt.js",
       "./modules/es6.number.epsilon": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.epsilon.js",
-      "./modules/es6.string.fontsize": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.fontsize.js",
-      "./modules/es6.string.italics": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.italics.js",
-      "./modules/es6.string.link": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.link.js",
-      "./modules/es6.string.small": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.small.js",
-      "./modules/es6.string.strike": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.strike.js",
-      "./modules/es6.typed.float64-array": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.float64-array.js",
-      "./modules/es6.string.sub": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.sub.js",
-      "./modules/es6.typed.uint8-array": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.uint8-array.js",
-      "./modules/es6.string.sup": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.sup.js",
-      "./modules/es6.typed.int8-array": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.int8-array.js",
       "./modules/es6.string.anchor": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.anchor.js",
+      "./modules/es6.string.fontsize": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.fontsize.js",
+      "./modules/es6.string.blink": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.blink.js",
+      "./modules/es6.string.fontcolor": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.fontcolor.js",
+      "./modules/es6.string.small": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.small.js",
+      "./modules/es6.typed.int8-array": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.int8-array.js",
+      "./modules/es6.string.strike": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.strike.js",
+      "./modules/es6.typed.uint16-array": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.uint16-array.js",
+      "./modules/es6.string.italics": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.italics.js",
+      "./modules/es6.typed.int16-array": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.int16-array.js",
+      "./modules/es6.string.sup": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.sup.js",
       "./modules/es6.typed.uint8-clamped-array": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.uint8-clamped-array.js",
       "./modules/es6.reflect.apply": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.apply.js",
-      "./modules/es7.reflect.get-own-metadata": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.reflect.get-own-metadata.js",
-      "./modules/es6.string.big": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.big.js",
-      "./modules/es6.typed.int16-array": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.int16-array.js",
-      "./modules/es6.reflect.is-extensible": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.is-extensible.js",
       "./modules/es7.reflect.get-own-metadata-keys": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.reflect.get-own-metadata-keys.js",
-      "./modules/es6.array.some": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.some.js",
-      "./modules/es6.string.blink": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.blink.js",
-      "./modules/es6.typed.uint16-array": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.uint16-array.js",
+      "./modules/es6.string.link": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.link.js",
+      "./modules/es6.typed.int32-array": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.int32-array.js",
+      "./modules/es6.reflect.is-extensible": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.is-extensible.js",
+      "./modules/es7.reflect.get-own-metadata": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.reflect.get-own-metadata.js",
+      "./modules/es6.reflect.get": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.get.js",
+      "./modules/es6.reflect.get-prototype-of": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.get-prototype-of.js",
+      "./modules/es6.array.map": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.map.js",
+      "./modules/es6.string.sub": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.sub.js",
+      "./modules/es6.typed.uint8-array": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.uint8-array.js",
       "./modules/es6.reflect.prevent-extensions": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.prevent-extensions.js",
       "./modules/es7.reflect.has-own-metadata": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.reflect.has-own-metadata.js",
-      "./modules/es6.reflect.get-own-property-descriptor": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.get-own-property-descriptor.js",
-      "./modules/es7.reflect.get-metadata": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.reflect.get-metadata.js",
-      "./modules/es6.array.every": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.every.js",
-      "./modules/es6.string.bold": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.bold.js",
-      "./modules/es6.typed.int32-array": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.int32-array.js",
-      "./modules/es7.reflect.metadata": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.reflect.metadata.js",
       "./modules/es6.object.define-property": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.define-property.js",
+      "./modules/es6.array.every": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.every.js",
+      "./modules/es6.string.big": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.big.js",
+      "./modules/es6.typed.float32-array": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.float32-array.js",
+      "./modules/es7.reflect.metadata": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.reflect.metadata.js",
+      "./modules/es6.reflect.delete-property": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.delete-property.js",
       "./modules/es6.object.is-extensible": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.is-extensible.js",
-      "./modules/es6.object.get-prototype-of": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.get-prototype-of.js",
-      "./modules/es7.object.define-setter": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.object.define-setter.js",
-      "./modules/es7.string.trim-right": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.string.trim-right.js",
-      "./modules/es7.object.lookup-setter": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.object.lookup-setter.js",
-      "./modules/es6.object.freeze": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.freeze.js",
-      "./modules/es6.regexp.match": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.regexp.match.js",
-      "./modules/es6.reflect.set": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.set.js",
-      "./modules/es6.array.for-each": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.for-each.js",
-      "./modules/es6.string.fixed": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.fixed.js",
-      "./modules/es6.typed.uint32-array": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.uint32-array.js",
-      "./modules/es7.reflect.define-metadata": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.reflect.define-metadata.js",
-      "./modules/es6.object.is-frozen": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.is-frozen.js",
       "./modules/es6.array.sort": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.sort.js",
       "./modules/es6.object.seal": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.seal.js",
       "./modules/es6.string.trim": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.trim.js",
+      "./modules/es6.string.ends-with": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.ends-with.js",
       "./modules/es6.date.to-json": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.date.to-json.js",
+      "./modules/es6.regexp.search": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.regexp.search.js",
+      "./modules/es7.object.lookup-setter": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.object.lookup-setter.js",
+      "./modules/es6.object.get-own-property-descriptor": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.get-own-property-descriptor.js",
+      "./modules/es6.function.name": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.function.name.js",
+      "./modules/es7.reflect.has-metadata": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.reflect.has-metadata.js",
+      "./modules/es6.array.some": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.some.js",
+      "./modules/es6.string.bold": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.bold.js",
+      "./modules/es6.typed.float64-array": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.float64-array.js",
+      "./modules/es7.reflect.define-metadata": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.reflect.define-metadata.js",
+      "./modules/es6.object.is-frozen": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.is-frozen.js",
+      "./modules/es6.object.get-prototype-of": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.get-prototype-of.js",
+      "./modules/es6.object.prevent-extensions": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.prevent-extensions.js",
+      "./modules/es6.string.includes": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.includes.js",
+      "./modules/es7.string.trim-right": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.string.trim-right.js",
       "./modules/es6.regexp.replace": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.regexp.replace.js",
       "./modules/es7.object.define-getter": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.object.define-getter.js",
-      "./modules/es6.function.has-instance": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.function.has-instance.js",
-      "./modules/es6.number.to-precision": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.to-precision.js",
-      "./modules/es6.number.is-safe-integer": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.is-safe-integer.js",
-      "./modules/es6.number.parse-float": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.parse-float.js",
-      "./modules/es6.number.parse-int": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.parse-int.js",
+      "./modules/es6.string.raw": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.raw.js",
+      "./modules/es6.reflect.define-property": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.define-property.js",
+      "./modules/es6.array.find-index": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.find-index.js",
+      "./modules/es7.symbol.observable": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.symbol.observable.js",
+      "./modules/es6.object.set-prototype-of": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.set-prototype-of.js",
+      "./modules/es6.function.bind": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.function.bind.js",
+      "./modules/es6.parse-int": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.parse-int.js",
+      "./modules/es6.number.is-integer": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.is-integer.js",
+      "./modules/es6.number.to-fixed": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.to-fixed.js",
       "./modules/es6.string.code-point-at": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.code-point-at.js",
-      "./modules/es6.string.includes": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.includes.js",
-      "./modules/es6.string.repeat": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.repeat.js",
+      "./modules/es6.string.iterator": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.iterator.js",
+      "./modules/es6.array.index-of": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.index-of.js",
+      "./modules/es6.array.species": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.species.js",
+      "./modules/es6.regexp.flags": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.regexp.flags.js",
+      "./modules/es6.array.reduce": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.reduce.js",
+      "./modules/es6.map": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.map.js",
+      "./modules/es6.weak-map": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.weak-map.js",
+      "./modules/es6.regexp.split": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.regexp.split.js",
+      "./modules/es7.string.pad-end": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.string.pad-end.js",
+      "./modules/es7.map.to-json": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.map.to-json.js",
+      "./modules/es7.object.values": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.object.values.js",
+      "./modules/es6.reflect.enumerate": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.enumerate.js",
+      "./modules/es6.reflect.own-keys": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.own-keys.js",
+      "./modules/es6.parse-float": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.parse-float.js",
+      "./modules/es6.array.of": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.of.js",
+      "./modules/es6.function.has-instance": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.function.has-instance.js",
+      "./modules/es6.reflect.set": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.set.js",
+      "./modules/es6.object.create": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.create.js",
+      "./modules/es6.number.constructor": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.constructor.js",
+      "./modules/es6.array.filter": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.filter.js",
+      "./modules/es6.string.fixed": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.fixed.js",
+      "./modules/es6.typed.uint32-array": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.uint32-array.js",
+      "./modules/es7.reflect.delete-metadata": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.reflect.delete-metadata.js",
+      "./modules/es6.object.is-sealed": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.is-sealed.js",
+      "./modules/es7.string.trim-left": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.string.trim-left.js",
+      "./modules/es7.object.define-setter": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.object.define-setter.js",
+      "./modules/es6.object.freeze": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.freeze.js",
       "./modules/es6.string.starts-with": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.starts-with.js",
+      "./modules/es6.regexp.match": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.regexp.match.js",
+      "./modules/es6.array.last-index-of": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.last-index-of.js",
+      "./modules/es7.object.lookup-getter": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.object.lookup-getter.js",
+      "./modules/es6.number.is-safe-integer": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.is-safe-integer.js",
+      "./modules/es6.number.parse-int": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.parse-int.js",
+      "./modules/es6.number.parse-float": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.parse-float.js",
+      "./modules/es6.number.to-precision": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.to-precision.js",
+      "./modules/es6.string.repeat": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.repeat.js",
       "./modules/es6.date.to-string": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.date.to-string.js",
       "./modules/es6.array.reduce-right": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.reduce-right.js",
-      "./modules/es6.array.last-index-of": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.last-index-of.js",
       "./modules/es6.array.find": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.find.js",
       "./modules/es6.regexp.to-string": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.regexp.to-string.js",
-      "./modules/es6.regexp.split": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.regexp.split.js",
-      "./modules/es6.set": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.set.js",
       "./modules/es6.weak-set": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.weak-set.js",
-      "./modules/es6.reflect.set-prototype-of": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.set-prototype-of.js",
+      "./modules/es6.set": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.set.js",
       "./modules/es7.array.includes": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.array.includes.js",
-      "./modules/es7.string.pad-end": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.string.pad-end.js",
+      "./modules/es6.reflect.set-prototype-of": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.set-prototype-of.js",
+      "./modules/es7.string.at": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.string.at.js",
       "./modules/es7.symbol.async-iterator": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.symbol.async-iterator.js",
       "./modules/es7.object.get-own-property-descriptors": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.object.get-own-property-descriptors.js",
-      "./modules/es7.object.entries": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.object.entries.js",
+      "./modules/es7.string.pad-start": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.string.pad-start.js",
       "./modules/es7.set.to-json": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.set.to-json.js",
+      "./modules/es7.object.entries": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.object.entries.js",
       "./modules/es6.array.iterator": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.iterator.js",
       "./modules/es7.string.match-all": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.string.match-all.js",
       "./modules/es6.object.assign": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.assign.js",
-      "./modules/es6.function.bind": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.function.bind.js",
-      "./modules/es6.array.species": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.species.js",
-      "./modules/es6.reflect.get-prototype-of": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.get-prototype-of.js",
-      "./modules/es6.reflect.delete-property": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.delete-property.js",
-      "./modules/es6.object.create": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.create.js",
-      "./modules/es6.number.constructor": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.constructor.js",
-      "./modules/es6.array.map": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.map.js",
-      "./modules/es6.string.fontcolor": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.fontcolor.js",
-      "./modules/es6.typed.float32-array": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.float32-array.js",
-      "./modules/es7.reflect.delete-metadata": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.reflect.delete-metadata.js",
-      "./modules/es6.function.name": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.function.name.js",
-      "./modules/es6.object.is-sealed": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.is-sealed.js",
-      "./modules/es6.object.prevent-extensions": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.prevent-extensions.js",
-      "./modules/es6.regexp.search": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.regexp.search.js",
-      "./modules/es6.reflect.define-property": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.define-property.js",
-      "./modules/es7.string.trim-left": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.string.trim-left.js",
-      "./modules/es7.object.lookup-getter": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.object.lookup-getter.js",
-      "./modules/es6.array.find-index": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.find-index.js",
-      "./modules/es6.regexp.flags": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.regexp.flags.js",
-      "./modules/es7.string.at": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.string.at.js",
-      "./modules/es7.symbol.observable": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.symbol.observable.js",
-      "./modules/es6.object.get-own-property-descriptor": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.get-own-property-descriptor.js",
-      "./modules/es6.object.set-prototype-of": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.set-prototype-of.js",
-      "./modules/es6.parse-float": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.parse-float.js",
-      "./modules/es6.number.to-fixed": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.to-fixed.js",
-      "./modules/es6.number.is-integer": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.number.is-integer.js",
-      "./modules/es6.string.raw": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.raw.js",
-      "./modules/es6.string.iterator": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.iterator.js",
-      "./modules/es6.string.ends-with": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.ends-with.js",
-      "./modules/es6.array.reduce": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.reduce.js",
-      "./modules/es6.array.index-of": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.index-of.js",
-      "./modules/es6.map": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.map.js",
-      "./modules/es6.weak-map": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.weak-map.js",
-      "./modules/es6.reflect.enumerate": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.enumerate.js",
-      "./modules/es6.reflect.own-keys": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.own-keys.js",
-      "./modules/es7.string.pad-start": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.string.pad-start.js",
-      "./modules/es7.object.values": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.object.values.js",
-      "./modules/es7.map.to-json": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.map.to-json.js",
-      "./modules/es6.parse-int": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.parse-int.js",
-      "./modules/es6.array.of": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.of.js",
       "./modules/es6.typed.data-view": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.data-view.js",
       "./modules/es6.string.from-code-point": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.string.from-code-point.js",
-      "./modules/es6.object.keys": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.keys.js",
       "./modules/web.dom.iterable": "/home/kachitachi/client-app/node_modules/core-js/modules/web.dom.iterable.js",
-      "./modules/es7.asap": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.asap.js",
       "./modules/es6.typed.array-buffer": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.typed.array-buffer.js",
       "./modules/es6.object.get-own-property-names": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.get-own-property-names.js",
       "./modules/es6.array.is-array": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.is-array.js",
+      "./modules/es7.asap": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.asap.js",
       "./modules/es7.observable": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.observable.js",
       "./modules/web.immediate": "/home/kachitachi/client-app/node_modules/core-js/modules/web.immediate.js",
+      "./modules/es6.object.keys": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.keys.js",
       "./modules/es6.object.define-properties": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.define-properties.js",
       "./modules/es6.object.to-string": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.object.to-string.js",
       "./modules/es6.date.to-primitive": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.date.to-primitive.js",
-      "./modules/es6.array.from": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.from.js",
-      "./modules/es6.array.join": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.join.js",
       "./modules/es6.array.slice": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.slice.js",
-      "./modules/es6.array.copy-within": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.copy-within.js",
+      "./modules/es6.array.from": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.from.js",
       "./modules/es6.array.fill": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.fill.js",
+      "./modules/es6.array.copy-within": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.copy-within.js",
+      "./modules/es6.array.join": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.join.js",
       "./modules/es6.promise": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.promise.js",
       "./modules/es7.reflect.get-metadata-keys": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.reflect.get-metadata-keys.js",
       "./modules/es6.symbol": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.symbol.js",
-      "./modules/es7.reflect.has-metadata": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.reflect.has-metadata.js",
-      "./modules/es6.reflect.get": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.get.js",
+      "./modules/es6.reflect.get-own-property-descriptor": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.get-own-property-descriptor.js",
+      "./modules/es7.reflect.get-metadata": "/home/kachitachi/client-app/node_modules/core-js/modules/es7.reflect.get-metadata.js",
       "./modules/es6.reflect.construct": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.reflect.construct.js",
       "./modules/es6.regexp.constructor": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.regexp.constructor.js",
       "./modules/web.timers": "/home/kachitachi/client-app/node_modules/core-js/modules/web.timers.js",
-      "./modules/es6.array.filter": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.filter.js"
+      "./modules/es6.array.for-each": "/home/kachitachi/client-app/node_modules/core-js/modules/es6.array.for-each.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/core-js/shim.js",
@@ -5345,8 +5345,8 @@
     {
       "./PathUtils": "/home/kachitachi/client-app/node_modules/history/PathUtils.js",
       "./DOMUtils": "/home/kachitachi/client-app/node_modules/history/DOMUtils.js",
-      "warning": "/home/kachitachi/client-app/node_modules/warning/browser.js",
       "invariant": "/home/kachitachi/client-app/node_modules/invariant/browser.js",
+      "warning": "/home/kachitachi/client-app/node_modules/warning/browser.js",
       "./createTransitionManager": "/home/kachitachi/client-app/node_modules/history/createTransitionManager.js",
       "./LocationUtils": "/home/kachitachi/client-app/node_modules/history/LocationUtils.js"
     },
@@ -5460,10 +5460,10 @@
     "var hashClear = require('./_hashClear'),\n    hashDelete = require('./_hashDelete'),\n    hashGet = require('./_hashGet'),\n    hashHas = require('./_hashHas'),\n    hashSet = require('./_hashSet');\n\n/**\n * Creates a hash object.\n *\n * @private\n * @constructor\n * @param {Array} [entries] The key-value pairs to cache.\n */\nfunction Hash(entries) {\n  var index = -1,\n      length = entries == null ? 0 : entries.length;\n\n  this.clear();\n  while (++index < length) {\n    var entry = entries[index];\n    this.set(entry[0], entry[1]);\n  }\n}\n\n// Add methods to `Hash`.\nHash.prototype.clear = hashClear;\nHash.prototype['delete'] = hashDelete;\nHash.prototype.get = hashGet;\nHash.prototype.has = hashHas;\nHash.prototype.set = hashSet;\n\nmodule.exports = Hash;\n",
     {
       "./_hashDelete": "/home/kachitachi/client-app/node_modules/lodash/_hashDelete.js",
-      "./_hashSet": "/home/kachitachi/client-app/node_modules/lodash/_hashSet.js",
       "./_hashClear": "/home/kachitachi/client-app/node_modules/lodash/_hashClear.js",
       "./_hashGet": "/home/kachitachi/client-app/node_modules/lodash/_hashGet.js",
-      "./_hashHas": "/home/kachitachi/client-app/node_modules/lodash/_hashHas.js"
+      "./_hashHas": "/home/kachitachi/client-app/node_modules/lodash/_hashHas.js",
+      "./_hashSet": "/home/kachitachi/client-app/node_modules/lodash/_hashSet.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/lodash/_Hash.js",
@@ -5476,10 +5476,10 @@
     "var listCacheClear = require('./_listCacheClear'),\n    listCacheDelete = require('./_listCacheDelete'),\n    listCacheGet = require('./_listCacheGet'),\n    listCacheHas = require('./_listCacheHas'),\n    listCacheSet = require('./_listCacheSet');\n\n/**\n * Creates an list cache object.\n *\n * @private\n * @constructor\n * @param {Array} [entries] The key-value pairs to cache.\n */\nfunction ListCache(entries) {\n  var index = -1,\n      length = entries == null ? 0 : entries.length;\n\n  this.clear();\n  while (++index < length) {\n    var entry = entries[index];\n    this.set(entry[0], entry[1]);\n  }\n}\n\n// Add methods to `ListCache`.\nListCache.prototype.clear = listCacheClear;\nListCache.prototype['delete'] = listCacheDelete;\nListCache.prototype.get = listCacheGet;\nListCache.prototype.has = listCacheHas;\nListCache.prototype.set = listCacheSet;\n\nmodule.exports = ListCache;\n",
     {
       "./_listCacheClear": "/home/kachitachi/client-app/node_modules/lodash/_listCacheClear.js",
-      "./_listCacheSet": "/home/kachitachi/client-app/node_modules/lodash/_listCacheSet.js",
       "./_listCacheDelete": "/home/kachitachi/client-app/node_modules/lodash/_listCacheDelete.js",
       "./_listCacheGet": "/home/kachitachi/client-app/node_modules/lodash/_listCacheGet.js",
-      "./_listCacheHas": "/home/kachitachi/client-app/node_modules/lodash/_listCacheHas.js"
+      "./_listCacheHas": "/home/kachitachi/client-app/node_modules/lodash/_listCacheHas.js",
+      "./_listCacheSet": "/home/kachitachi/client-app/node_modules/lodash/_listCacheSet.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/lodash/_ListCache.js",
@@ -5504,10 +5504,10 @@
   "/home/kachitachi/client-app/node_modules/lodash/_MapCache.js": [
     "var mapCacheClear = require('./_mapCacheClear'),\n    mapCacheDelete = require('./_mapCacheDelete'),\n    mapCacheGet = require('./_mapCacheGet'),\n    mapCacheHas = require('./_mapCacheHas'),\n    mapCacheSet = require('./_mapCacheSet');\n\n/**\n * Creates a map cache object to store key-value pairs.\n *\n * @private\n * @constructor\n * @param {Array} [entries] The key-value pairs to cache.\n */\nfunction MapCache(entries) {\n  var index = -1,\n      length = entries == null ? 0 : entries.length;\n\n  this.clear();\n  while (++index < length) {\n    var entry = entries[index];\n    this.set(entry[0], entry[1]);\n  }\n}\n\n// Add methods to `MapCache`.\nMapCache.prototype.clear = mapCacheClear;\nMapCache.prototype['delete'] = mapCacheDelete;\nMapCache.prototype.get = mapCacheGet;\nMapCache.prototype.has = mapCacheHas;\nMapCache.prototype.set = mapCacheSet;\n\nmodule.exports = MapCache;\n",
     {
-      "./_mapCacheSet": "/home/kachitachi/client-app/node_modules/lodash/_mapCacheSet.js",
       "./_mapCacheDelete": "/home/kachitachi/client-app/node_modules/lodash/_mapCacheDelete.js",
       "./_mapCacheGet": "/home/kachitachi/client-app/node_modules/lodash/_mapCacheGet.js",
       "./_mapCacheHas": "/home/kachitachi/client-app/node_modules/lodash/_mapCacheHas.js",
+      "./_mapCacheSet": "/home/kachitachi/client-app/node_modules/lodash/_mapCacheSet.js",
       "./_mapCacheClear": "/home/kachitachi/client-app/node_modules/lodash/_mapCacheClear.js"
     },
     {
@@ -5943,9 +5943,9 @@
     {
       "./identity": "/home/kachitachi/client-app/node_modules/lodash/identity.js",
       "./isArray": "/home/kachitachi/client-app/node_modules/lodash/isArray.js",
-      "./property": "/home/kachitachi/client-app/node_modules/lodash/property.js",
       "./_baseMatches": "/home/kachitachi/client-app/node_modules/lodash/_baseMatches.js",
-      "./_baseMatchesProperty": "/home/kachitachi/client-app/node_modules/lodash/_baseMatchesProperty.js"
+      "./_baseMatchesProperty": "/home/kachitachi/client-app/node_modules/lodash/_baseMatchesProperty.js",
+      "./property": "/home/kachitachi/client-app/node_modules/lodash/property.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/lodash/_baseIteratee.js",
@@ -5986,11 +5986,11 @@
     {
       "./_matchesStrictComparable": "/home/kachitachi/client-app/node_modules/lodash/_matchesStrictComparable.js",
       "./_isKey": "/home/kachitachi/client-app/node_modules/lodash/_isKey.js",
-      "./_isStrictComparable": "/home/kachitachi/client-app/node_modules/lodash/_isStrictComparable.js",
       "./_toKey": "/home/kachitachi/client-app/node_modules/lodash/_toKey.js",
+      "./_isStrictComparable": "/home/kachitachi/client-app/node_modules/lodash/_isStrictComparable.js",
+      "./get": "/home/kachitachi/client-app/node_modules/lodash/get.js",
       "./hasIn": "/home/kachitachi/client-app/node_modules/lodash/hasIn.js",
-      "./_baseIsEqual": "/home/kachitachi/client-app/node_modules/lodash/_baseIsEqual.js",
-      "./get": "/home/kachitachi/client-app/node_modules/lodash/get.js"
+      "./_baseIsEqual": "/home/kachitachi/client-app/node_modules/lodash/_baseIsEqual.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/lodash/_baseMatchesProperty.js",
@@ -6954,8 +6954,8 @@
   "/home/kachitachi/client-app/node_modules/lodash/find.js": [
     "var createFind = require('./_createFind'),\n    findIndex = require('./findIndex');\n\n/**\n * Iterates over elements of `collection`, returning the first element\n * `predicate` returns truthy for. The predicate is invoked with three\n * arguments: (value, index|key, collection).\n *\n * @static\n * @memberOf _\n * @since 0.1.0\n * @category Collection\n * @param {Array|Object} collection The collection to inspect.\n * @param {Function} [predicate=_.identity] The function invoked per iteration.\n * @param {number} [fromIndex=0] The index to search from.\n * @returns {*} Returns the matched element, else `undefined`.\n * @example\n *\n * var users = [\n *   { 'user': 'barney',  'age': 36, 'active': true },\n *   { 'user': 'fred',    'age': 40, 'active': false },\n *   { 'user': 'pebbles', 'age': 1,  'active': true }\n * ];\n *\n * _.find(users, function(o) { return o.age < 40; });\n * // => object for 'barney'\n *\n * // The `_.matches` iteratee shorthand.\n * _.find(users, { 'age': 1, 'active': true });\n * // => object for 'pebbles'\n *\n * // The `_.matchesProperty` iteratee shorthand.\n * _.find(users, ['active', false]);\n * // => object for 'fred'\n *\n * // The `_.property` iteratee shorthand.\n * _.find(users, 'active');\n * // => object for 'barney'\n */\nvar find = createFind(findIndex);\n\nmodule.exports = find;\n",
     {
-      "./findIndex": "/home/kachitachi/client-app/node_modules/lodash/findIndex.js",
-      "./_createFind": "/home/kachitachi/client-app/node_modules/lodash/_createFind.js"
+      "./_createFind": "/home/kachitachi/client-app/node_modules/lodash/_createFind.js",
+      "./findIndex": "/home/kachitachi/client-app/node_modules/lodash/findIndex.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/lodash/find.js",
@@ -6968,8 +6968,8 @@
     "var baseFindIndex = require('./_baseFindIndex'),\n    baseIteratee = require('./_baseIteratee'),\n    toInteger = require('./toInteger');\n\n/* Built-in method references for those with the same name as other `lodash` methods. */\nvar nativeMax = Math.max;\n\n/**\n * This method is like `_.find` except that it returns the index of the first\n * element `predicate` returns truthy for instead of the element itself.\n *\n * @static\n * @memberOf _\n * @since 1.1.0\n * @category Array\n * @param {Array} array The array to inspect.\n * @param {Function} [predicate=_.identity] The function invoked per iteration.\n * @param {number} [fromIndex=0] The index to search from.\n * @returns {number} Returns the index of the found element, else `-1`.\n * @example\n *\n * var users = [\n *   { 'user': 'barney',  'active': false },\n *   { 'user': 'fred',    'active': false },\n *   { 'user': 'pebbles', 'active': true }\n * ];\n *\n * _.findIndex(users, function(o) { return o.user == 'barney'; });\n * // => 0\n *\n * // The `_.matches` iteratee shorthand.\n * _.findIndex(users, { 'user': 'fred', 'active': false });\n * // => 1\n *\n * // The `_.matchesProperty` iteratee shorthand.\n * _.findIndex(users, ['active', false]);\n * // => 0\n *\n * // The `_.property` iteratee shorthand.\n * _.findIndex(users, 'active');\n * // => 2\n */\nfunction findIndex(array, predicate, fromIndex) {\n  var length = array == null ? 0 : array.length;\n  if (!length) {\n    return -1;\n  }\n  var index = fromIndex == null ? 0 : toInteger(fromIndex);\n  if (index < 0) {\n    index = nativeMax(length + index, 0);\n  }\n  return baseFindIndex(array, baseIteratee(predicate, 3), index);\n}\n\nmodule.exports = findIndex;\n",
     {
       "./_baseFindIndex": "/home/kachitachi/client-app/node_modules/lodash/_baseFindIndex.js",
-      "./_baseIteratee": "/home/kachitachi/client-app/node_modules/lodash/_baseIteratee.js",
-      "./toInteger": "/home/kachitachi/client-app/node_modules/lodash/toInteger.js"
+      "./toInteger": "/home/kachitachi/client-app/node_modules/lodash/toInteger.js",
+      "./_baseIteratee": "/home/kachitachi/client-app/node_modules/lodash/_baseIteratee.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/lodash/findIndex.js",
@@ -7341,9 +7341,9 @@
   "/home/kachitachi/client-app/node_modules/prop-types/factoryWithThrowingShims.js": [
     "/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n */\n\n'use strict';\n\nvar emptyFunction = require('fbjs/lib/emptyFunction');\nvar invariant = require('fbjs/lib/invariant');\nvar ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');\n\nmodule.exports = function() {\n  function shim(props, propName, componentName, location, propFullName, secret) {\n    if (secret === ReactPropTypesSecret) {\n      // It is still safe when called from React.\n      return;\n    }\n    invariant(\n      false,\n      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +\n      'Use PropTypes.checkPropTypes() to call them. ' +\n      'Read more at http://fb.me/use-check-prop-types'\n    );\n  };\n  shim.isRequired = shim;\n  function getShim() {\n    return shim;\n  };\n  // Important!\n  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.\n  var ReactPropTypes = {\n    array: shim,\n    bool: shim,\n    func: shim,\n    number: shim,\n    object: shim,\n    string: shim,\n    symbol: shim,\n\n    any: shim,\n    arrayOf: getShim,\n    element: shim,\n    instanceOf: getShim,\n    node: shim,\n    objectOf: getShim,\n    oneOf: getShim,\n    oneOfType: getShim,\n    shape: getShim\n  };\n\n  ReactPropTypes.checkPropTypes = emptyFunction;\n  ReactPropTypes.PropTypes = ReactPropTypes;\n\n  return ReactPropTypes;\n};\n",
     {
+      "./lib/ReactPropTypesSecret": "/home/kachitachi/client-app/node_modules/prop-types/lib/ReactPropTypesSecret.js",
       "fbjs/lib/emptyFunction": "/home/kachitachi/client-app/node_modules/fbjs/lib/emptyFunction.js",
-      "fbjs/lib/invariant": "/home/kachitachi/client-app/node_modules/fbjs/lib/invariant.js",
-      "./lib/ReactPropTypesSecret": "/home/kachitachi/client-app/node_modules/prop-types/lib/ReactPropTypesSecret.js"
+      "fbjs/lib/invariant": "/home/kachitachi/client-app/node_modules/fbjs/lib/invariant.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/prop-types/factoryWithThrowingShims.js",
@@ -7502,15 +7502,15 @@
   "/home/kachitachi/client-app/node_modules/react-dom/lib/ChangeEventPlugin.js": [
     "/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar EventPluginHub = require('./EventPluginHub');\nvar EventPropagators = require('./EventPropagators');\nvar ExecutionEnvironment = require('fbjs/lib/ExecutionEnvironment');\nvar ReactDOMComponentTree = require('./ReactDOMComponentTree');\nvar ReactUpdates = require('./ReactUpdates');\nvar SyntheticEvent = require('./SyntheticEvent');\n\nvar inputValueTracking = require('./inputValueTracking');\nvar getEventTarget = require('./getEventTarget');\nvar isEventSupported = require('./isEventSupported');\nvar isTextInputElement = require('./isTextInputElement');\n\nvar eventTypes = {\n  change: {\n    phasedRegistrationNames: {\n      bubbled: 'onChange',\n      captured: 'onChangeCapture'\n    },\n    dependencies: ['topBlur', 'topChange', 'topClick', 'topFocus', 'topInput', 'topKeyDown', 'topKeyUp', 'topSelectionChange']\n  }\n};\n\nfunction createAndAccumulateChangeEvent(inst, nativeEvent, target) {\n  var event = SyntheticEvent.getPooled(eventTypes.change, inst, nativeEvent, target);\n  event.type = 'change';\n  EventPropagators.accumulateTwoPhaseDispatches(event);\n  return event;\n}\n/**\n * For IE shims\n */\nvar activeElement = null;\nvar activeElementInst = null;\n\n/**\n * SECTION: handle `change` event\n */\nfunction shouldUseChangeEvent(elem) {\n  var nodeName = elem.nodeName && elem.nodeName.toLowerCase();\n  return nodeName === 'select' || nodeName === 'input' && elem.type === 'file';\n}\n\nvar doesChangeEventBubble = false;\nif (ExecutionEnvironment.canUseDOM) {\n  // See `handleChange` comment below\n  doesChangeEventBubble = isEventSupported('change') && (!document.documentMode || document.documentMode > 8);\n}\n\nfunction manualDispatchChangeEvent(nativeEvent) {\n  var event = createAndAccumulateChangeEvent(activeElementInst, nativeEvent, getEventTarget(nativeEvent));\n\n  // If change and propertychange bubbled, we'd just bind to it like all the\n  // other events and have it go through ReactBrowserEventEmitter. Since it\n  // doesn't, we manually listen for the events and so we have to enqueue and\n  // process the abstract event manually.\n  //\n  // Batching is necessary here in order to ensure that all event handlers run\n  // before the next rerender (including event handlers attached to ancestor\n  // elements instead of directly on the input). Without this, controlled\n  // components don't work properly in conjunction with event bubbling because\n  // the component is rerendered and the value reverted before all the event\n  // handlers can run. See https://github.com/facebook/react/issues/708.\n  ReactUpdates.batchedUpdates(runEventInBatch, event);\n}\n\nfunction runEventInBatch(event) {\n  EventPluginHub.enqueueEvents(event);\n  EventPluginHub.processEventQueue(false);\n}\n\nfunction startWatchingForChangeEventIE8(target, targetInst) {\n  activeElement = target;\n  activeElementInst = targetInst;\n  activeElement.attachEvent('onchange', manualDispatchChangeEvent);\n}\n\nfunction stopWatchingForChangeEventIE8() {\n  if (!activeElement) {\n    return;\n  }\n  activeElement.detachEvent('onchange', manualDispatchChangeEvent);\n  activeElement = null;\n  activeElementInst = null;\n}\n\nfunction getInstIfValueChanged(targetInst, nativeEvent) {\n  var updated = inputValueTracking.updateValueIfChanged(targetInst);\n  var simulated = nativeEvent.simulated === true && ChangeEventPlugin._allowSimulatedPassThrough;\n\n  if (updated || simulated) {\n    return targetInst;\n  }\n}\n\nfunction getTargetInstForChangeEvent(topLevelType, targetInst) {\n  if (topLevelType === 'topChange') {\n    return targetInst;\n  }\n}\n\nfunction handleEventsForChangeEventIE8(topLevelType, target, targetInst) {\n  if (topLevelType === 'topFocus') {\n    // stopWatching() should be a noop here but we call it just in case we\n    // missed a blur event somehow.\n    stopWatchingForChangeEventIE8();\n    startWatchingForChangeEventIE8(target, targetInst);\n  } else if (topLevelType === 'topBlur') {\n    stopWatchingForChangeEventIE8();\n  }\n}\n\n/**\n * SECTION: handle `input` event\n */\nvar isInputEventSupported = false;\nif (ExecutionEnvironment.canUseDOM) {\n  // IE9 claims to support the input event but fails to trigger it when\n  // deleting text, so we ignore its input events.\n\n  isInputEventSupported = isEventSupported('input') && (!('documentMode' in document) || document.documentMode > 9);\n}\n\n/**\n * (For IE <=9) Starts tracking propertychange events on the passed-in element\n * and override the value property so that we can distinguish user events from\n * value changes in JS.\n */\nfunction startWatchingForValueChange(target, targetInst) {\n  activeElement = target;\n  activeElementInst = targetInst;\n  activeElement.attachEvent('onpropertychange', handlePropertyChange);\n}\n\n/**\n * (For IE <=9) Removes the event listeners from the currently-tracked element,\n * if any exists.\n */\nfunction stopWatchingForValueChange() {\n  if (!activeElement) {\n    return;\n  }\n  activeElement.detachEvent('onpropertychange', handlePropertyChange);\n\n  activeElement = null;\n  activeElementInst = null;\n}\n\n/**\n * (For IE <=9) Handles a propertychange event, sending a `change` event if\n * the value of the active element has changed.\n */\nfunction handlePropertyChange(nativeEvent) {\n  if (nativeEvent.propertyName !== 'value') {\n    return;\n  }\n  if (getInstIfValueChanged(activeElementInst, nativeEvent)) {\n    manualDispatchChangeEvent(nativeEvent);\n  }\n}\n\nfunction handleEventsForInputEventPolyfill(topLevelType, target, targetInst) {\n  if (topLevelType === 'topFocus') {\n    // In IE8, we can capture almost all .value changes by adding a\n    // propertychange handler and looking for events with propertyName\n    // equal to 'value'\n    // In IE9, propertychange fires for most input events but is buggy and\n    // doesn't fire when text is deleted, but conveniently, selectionchange\n    // appears to fire in all of the remaining cases so we catch those and\n    // forward the event if the value has changed\n    // In either case, we don't want to call the event handler if the value\n    // is changed from JS so we redefine a setter for `.value` that updates\n    // our activeElementValue variable, allowing us to ignore those changes\n    //\n    // stopWatching() should be a noop here but we call it just in case we\n    // missed a blur event somehow.\n    stopWatchingForValueChange();\n    startWatchingForValueChange(target, targetInst);\n  } else if (topLevelType === 'topBlur') {\n    stopWatchingForValueChange();\n  }\n}\n\n// For IE8 and IE9.\nfunction getTargetInstForInputEventPolyfill(topLevelType, targetInst, nativeEvent) {\n  if (topLevelType === 'topSelectionChange' || topLevelType === 'topKeyUp' || topLevelType === 'topKeyDown') {\n    // On the selectionchange event, the target is just document which isn't\n    // helpful for us so just check activeElement instead.\n    //\n    // 99% of the time, keydown and keyup aren't necessary. IE8 fails to fire\n    // propertychange on the first input event after setting `value` from a\n    // script and fires only keydown, keypress, keyup. Catching keyup usually\n    // gets it and catching keydown lets us fire an event for the first\n    // keystroke if user does a key repeat (it'll be a little delayed: right\n    // before the second keystroke). Other input methods (e.g., paste) seem to\n    // fire selectionchange normally.\n    return getInstIfValueChanged(activeElementInst, nativeEvent);\n  }\n}\n\n/**\n * SECTION: handle `click` event\n */\nfunction shouldUseClickEvent(elem) {\n  // Use the `click` event to detect changes to checkbox and radio inputs.\n  // This approach works across all browsers, whereas `change` does not fire\n  // until `blur` in IE8.\n  var nodeName = elem.nodeName;\n  return nodeName && nodeName.toLowerCase() === 'input' && (elem.type === 'checkbox' || elem.type === 'radio');\n}\n\nfunction getTargetInstForClickEvent(topLevelType, targetInst, nativeEvent) {\n  if (topLevelType === 'topClick') {\n    return getInstIfValueChanged(targetInst, nativeEvent);\n  }\n}\n\nfunction getTargetInstForInputOrChangeEvent(topLevelType, targetInst, nativeEvent) {\n  if (topLevelType === 'topInput' || topLevelType === 'topChange') {\n    return getInstIfValueChanged(targetInst, nativeEvent);\n  }\n}\n\nfunction handleControlledInputBlur(inst, node) {\n  // TODO: In IE, inst is occasionally null. Why?\n  if (inst == null) {\n    return;\n  }\n\n  // Fiber and ReactDOM keep wrapper state in separate places\n  var state = inst._wrapperState || node._wrapperState;\n\n  if (!state || !state.controlled || node.type !== 'number') {\n    return;\n  }\n\n  // If controlled, assign the value attribute to the current value on blur\n  var value = '' + node.value;\n  if (node.getAttribute('value') !== value) {\n    node.setAttribute('value', value);\n  }\n}\n\n/**\n * This plugin creates an `onChange` event that normalizes change events\n * across form elements. This event fires at a time when it's possible to\n * change the element's value without seeing a flicker.\n *\n * Supported elements are:\n * - input (see `isTextInputElement`)\n * - textarea\n * - select\n */\nvar ChangeEventPlugin = {\n  eventTypes: eventTypes,\n\n  _allowSimulatedPassThrough: true,\n  _isInputEventSupported: isInputEventSupported,\n\n  extractEvents: function (topLevelType, targetInst, nativeEvent, nativeEventTarget) {\n    var targetNode = targetInst ? ReactDOMComponentTree.getNodeFromInstance(targetInst) : window;\n\n    var getTargetInstFunc, handleEventFunc;\n    if (shouldUseChangeEvent(targetNode)) {\n      if (doesChangeEventBubble) {\n        getTargetInstFunc = getTargetInstForChangeEvent;\n      } else {\n        handleEventFunc = handleEventsForChangeEventIE8;\n      }\n    } else if (isTextInputElement(targetNode)) {\n      if (isInputEventSupported) {\n        getTargetInstFunc = getTargetInstForInputOrChangeEvent;\n      } else {\n        getTargetInstFunc = getTargetInstForInputEventPolyfill;\n        handleEventFunc = handleEventsForInputEventPolyfill;\n      }\n    } else if (shouldUseClickEvent(targetNode)) {\n      getTargetInstFunc = getTargetInstForClickEvent;\n    }\n\n    if (getTargetInstFunc) {\n      var inst = getTargetInstFunc(topLevelType, targetInst, nativeEvent);\n      if (inst) {\n        var event = createAndAccumulateChangeEvent(inst, nativeEvent, nativeEventTarget);\n        return event;\n      }\n    }\n\n    if (handleEventFunc) {\n      handleEventFunc(topLevelType, targetNode, targetInst);\n    }\n\n    // When blurring, set the value attribute for number inputs\n    if (topLevelType === 'topBlur') {\n      handleControlledInputBlur(targetInst, targetNode);\n    }\n  }\n};\n\nmodule.exports = ChangeEventPlugin;",
     {
-      "./EventPluginHub": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPluginHub.js",
-      "./EventPropagators": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPropagators.js",
       "./ReactDOMComponentTree": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
       "./ReactUpdates": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactUpdates.js",
       "./getEventTarget": "/home/kachitachi/client-app/node_modules/react-dom/lib/getEventTarget.js",
       "./isTextInputElement": "/home/kachitachi/client-app/node_modules/react-dom/lib/isTextInputElement.js",
-      "./SyntheticEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticEvent.js",
-      "./isEventSupported": "/home/kachitachi/client-app/node_modules/react-dom/lib/isEventSupported.js",
       "fbjs/lib/ExecutionEnvironment": "/home/kachitachi/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
+      "./isEventSupported": "/home/kachitachi/client-app/node_modules/react-dom/lib/isEventSupported.js",
+      "./EventPluginHub": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPluginHub.js",
+      "./EventPropagators": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPropagators.js",
+      "./SyntheticEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticEvent.js",
       "./inputValueTracking": "/home/kachitachi/client-app/node_modules/react-dom/lib/inputValueTracking.js"
     },
     {
@@ -7601,9 +7601,9 @@
       "_process": "/home/kachitachi/client-app/node_modules/process/browser.js",
       "./reactProdInvariant": "/home/kachitachi/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
       "./DOMLazyTree": "/home/kachitachi/client-app/node_modules/react-dom/lib/DOMLazyTree.js",
-      "fbjs/lib/ExecutionEnvironment": "/home/kachitachi/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
       "fbjs/lib/emptyFunction": "/home/kachitachi/client-app/node_modules/fbjs/lib/emptyFunction.js",
       "fbjs/lib/invariant": "/home/kachitachi/client-app/node_modules/fbjs/lib/invariant.js",
+      "fbjs/lib/ExecutionEnvironment": "/home/kachitachi/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
       "fbjs/lib/createNodesFromMarkup": "/home/kachitachi/client-app/node_modules/fbjs/lib/createNodesFromMarkup.js"
     },
     {
@@ -7626,8 +7626,8 @@
   "/home/kachitachi/client-app/node_modules/react-dom/lib/EnterLeaveEventPlugin.js": [
     "/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar EventPropagators = require('./EventPropagators');\nvar ReactDOMComponentTree = require('./ReactDOMComponentTree');\nvar SyntheticMouseEvent = require('./SyntheticMouseEvent');\n\nvar eventTypes = {\n  mouseEnter: {\n    registrationName: 'onMouseEnter',\n    dependencies: ['topMouseOut', 'topMouseOver']\n  },\n  mouseLeave: {\n    registrationName: 'onMouseLeave',\n    dependencies: ['topMouseOut', 'topMouseOver']\n  }\n};\n\nvar EnterLeaveEventPlugin = {\n  eventTypes: eventTypes,\n\n  /**\n   * For almost every interaction we care about, there will be both a top-level\n   * `mouseover` and `mouseout` event that occurs. Only use `mouseout` so that\n   * we do not extract duplicate events. However, moving the mouse into the\n   * browser from outside will not fire a `mouseout` event. In this case, we use\n   * the `mouseover` top-level event.\n   */\n  extractEvents: function (topLevelType, targetInst, nativeEvent, nativeEventTarget) {\n    if (topLevelType === 'topMouseOver' && (nativeEvent.relatedTarget || nativeEvent.fromElement)) {\n      return null;\n    }\n    if (topLevelType !== 'topMouseOut' && topLevelType !== 'topMouseOver') {\n      // Must not be a mouse in or mouse out - ignoring.\n      return null;\n    }\n\n    var win;\n    if (nativeEventTarget.window === nativeEventTarget) {\n      // `nativeEventTarget` is probably a window object.\n      win = nativeEventTarget;\n    } else {\n      // TODO: Figure out why `ownerDocument` is sometimes undefined in IE8.\n      var doc = nativeEventTarget.ownerDocument;\n      if (doc) {\n        win = doc.defaultView || doc.parentWindow;\n      } else {\n        win = window;\n      }\n    }\n\n    var from;\n    var to;\n    if (topLevelType === 'topMouseOut') {\n      from = targetInst;\n      var related = nativeEvent.relatedTarget || nativeEvent.toElement;\n      to = related ? ReactDOMComponentTree.getClosestInstanceFromNode(related) : null;\n    } else {\n      // Moving to a node from outside the window.\n      from = null;\n      to = targetInst;\n    }\n\n    if (from === to) {\n      // Nothing pertains to our managed components.\n      return null;\n    }\n\n    var fromNode = from == null ? win : ReactDOMComponentTree.getNodeFromInstance(from);\n    var toNode = to == null ? win : ReactDOMComponentTree.getNodeFromInstance(to);\n\n    var leave = SyntheticMouseEvent.getPooled(eventTypes.mouseLeave, from, nativeEvent, nativeEventTarget);\n    leave.type = 'mouseleave';\n    leave.target = fromNode;\n    leave.relatedTarget = toNode;\n\n    var enter = SyntheticMouseEvent.getPooled(eventTypes.mouseEnter, to, nativeEvent, nativeEventTarget);\n    enter.type = 'mouseenter';\n    enter.target = toNode;\n    enter.relatedTarget = fromNode;\n\n    EventPropagators.accumulateEnterLeaveDispatches(leave, enter, from, to);\n\n    return [leave, enter];\n  }\n};\n\nmodule.exports = EnterLeaveEventPlugin;",
     {
-      "./EventPropagators": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPropagators.js",
       "./ReactDOMComponentTree": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
+      "./EventPropagators": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPropagators.js",
       "./SyntheticMouseEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticMouseEvent.js"
     },
     {
@@ -7655,8 +7655,8 @@
       "./forEachAccumulated": "/home/kachitachi/client-app/node_modules/react-dom/lib/forEachAccumulated.js",
       "./ReactErrorUtils": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactErrorUtils.js",
       "fbjs/lib/invariant": "/home/kachitachi/client-app/node_modules/fbjs/lib/invariant.js",
-      "./EventPluginUtils": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPluginUtils.js",
       "./EventPluginRegistry": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPluginRegistry.js",
+      "./EventPluginUtils": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPluginUtils.js",
       "./accumulateInto": "/home/kachitachi/client-app/node_modules/react-dom/lib/accumulateInto.js"
     },
     {
@@ -7702,9 +7702,9 @@
       "_process": "/home/kachitachi/client-app/node_modules/process/browser.js",
       "./EventPluginHub": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPluginHub.js",
       "./EventPluginUtils": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPluginUtils.js",
-      "./accumulateInto": "/home/kachitachi/client-app/node_modules/react-dom/lib/accumulateInto.js",
       "./forEachAccumulated": "/home/kachitachi/client-app/node_modules/react-dom/lib/forEachAccumulated.js",
-      "fbjs/lib/warning": "/home/kachitachi/client-app/node_modules/fbjs/lib/warning.js"
+      "fbjs/lib/warning": "/home/kachitachi/client-app/node_modules/fbjs/lib/warning.js",
+      "./accumulateInto": "/home/kachitachi/client-app/node_modules/react-dom/lib/accumulateInto.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPropagators.js",
@@ -7787,8 +7787,8 @@
       "./EventPluginRegistry": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPluginRegistry.js",
       "./ViewportMetrics": "/home/kachitachi/client-app/node_modules/react-dom/lib/ViewportMetrics.js",
       "object-assign": "/home/kachitachi/client-app/node_modules/object-assign/index.js",
-      "./ReactEventEmitterMixin": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactEventEmitterMixin.js",
       "./isEventSupported": "/home/kachitachi/client-app/node_modules/react-dom/lib/isEventSupported.js",
+      "./ReactEventEmitterMixin": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactEventEmitterMixin.js",
       "./getVendorPrefixedEventName": "/home/kachitachi/client-app/node_modules/react-dom/lib/getVendorPrefixedEventName.js"
     },
     {
@@ -7806,8 +7806,8 @@
       "./instantiateReactComponent": "/home/kachitachi/client-app/node_modules/react-dom/lib/instantiateReactComponent.js",
       "./shouldUpdateReactComponent": "/home/kachitachi/client-app/node_modules/react-dom/lib/shouldUpdateReactComponent.js",
       "./KeyEscapeUtils": "/home/kachitachi/client-app/node_modules/react-dom/lib/KeyEscapeUtils.js",
-      "react/lib/ReactComponentTreeHook": "/home/kachitachi/client-app/node_modules/react/lib/ReactComponentTreeHook.js",
       "fbjs/lib/warning": "/home/kachitachi/client-app/node_modules/fbjs/lib/warning.js",
+      "react/lib/ReactComponentTreeHook": "/home/kachitachi/client-app/node_modules/react/lib/ReactComponentTreeHook.js",
       "./traverseAllChildren": "/home/kachitachi/client-app/node_modules/react-dom/lib/traverseAllChildren.js"
     },
     {
@@ -7820,8 +7820,8 @@
   "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactComponentBrowserEnvironment.js": [
     "/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar DOMChildrenOperations = require('./DOMChildrenOperations');\nvar ReactDOMIDOperations = require('./ReactDOMIDOperations');\n\n/**\n * Abstracts away all functionality of the reconciler that requires knowledge of\n * the browser context. TODO: These callers should be refactored to avoid the\n * need for this injection.\n */\nvar ReactComponentBrowserEnvironment = {\n  processChildrenUpdates: ReactDOMIDOperations.dangerouslyProcessChildrenUpdates,\n\n  replaceNodeWithMarkup: DOMChildrenOperations.dangerouslyReplaceNodeWithMarkup\n};\n\nmodule.exports = ReactComponentBrowserEnvironment;",
     {
-      "./ReactDOMIDOperations": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDOMIDOperations.js",
-      "./DOMChildrenOperations": "/home/kachitachi/client-app/node_modules/react-dom/lib/DOMChildrenOperations.js"
+      "./DOMChildrenOperations": "/home/kachitachi/client-app/node_modules/react-dom/lib/DOMChildrenOperations.js",
+      "./ReactDOMIDOperations": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDOMIDOperations.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactComponentBrowserEnvironment.js",
@@ -7850,8 +7850,8 @@
       "_process": "/home/kachitachi/client-app/node_modules/process/browser.js",
       "./reactProdInvariant": "/home/kachitachi/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
       "./ReactComponentEnvironment": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactComponentEnvironment.js",
-      "./ReactErrorUtils": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactErrorUtils.js",
       "./ReactInstanceMap": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactInstanceMap.js",
+      "./ReactErrorUtils": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactErrorUtils.js",
       "./ReactInstrumentation": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactInstrumentation.js",
       "./ReactNodeTypes": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactNodeTypes.js",
       "./ReactReconciler": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactReconciler.js",
@@ -7860,9 +7860,9 @@
       "react/lib/React": "/home/kachitachi/client-app/node_modules/react/lib/React.js",
       "react/lib/ReactCurrentOwner": "/home/kachitachi/client-app/node_modules/react/lib/ReactCurrentOwner.js",
       "fbjs/lib/emptyObject": "/home/kachitachi/client-app/node_modules/fbjs/lib/emptyObject.js",
+      "fbjs/lib/warning": "/home/kachitachi/client-app/node_modules/fbjs/lib/warning.js",
       "fbjs/lib/invariant": "/home/kachitachi/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/shallowEqual": "/home/kachitachi/client-app/node_modules/fbjs/lib/shallowEqual.js",
-      "fbjs/lib/warning": "/home/kachitachi/client-app/node_modules/fbjs/lib/warning.js",
       "./checkReactTypeSpec": "/home/kachitachi/client-app/node_modules/react-dom/lib/checkReactTypeSpec.js"
     },
     {
@@ -7917,16 +7917,16 @@
       "./DOMNamespaces": "/home/kachitachi/client-app/node_modules/react-dom/lib/DOMNamespaces.js",
       "./escapeTextContentForBrowser": "/home/kachitachi/client-app/node_modules/react-dom/lib/escapeTextContentForBrowser.js",
       "object-assign": "/home/kachitachi/client-app/node_modules/object-assign/index.js",
-      "./validateDOMNesting": "/home/kachitachi/client-app/node_modules/react-dom/lib/validateDOMNesting.js",
       "fbjs/lib/emptyFunction": "/home/kachitachi/client-app/node_modules/fbjs/lib/emptyFunction.js",
       "fbjs/lib/invariant": "/home/kachitachi/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/warning": "/home/kachitachi/client-app/node_modules/fbjs/lib/warning.js",
       "fbjs/lib/shallowEqual": "/home/kachitachi/client-app/node_modules/fbjs/lib/shallowEqual.js",
+      "./validateDOMNesting": "/home/kachitachi/client-app/node_modules/react-dom/lib/validateDOMNesting.js",
       "./ReactDOMOption": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDOMOption.js",
       "./AutoFocusUtils": "/home/kachitachi/client-app/node_modules/react-dom/lib/AutoFocusUtils.js",
-      "./ReactDOMInput": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDOMInput.js",
       "./ReactDOMSelect": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDOMSelect.js",
       "./ReactDOMTextarea": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDOMTextarea.js",
+      "./ReactDOMInput": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDOMInput.js",
       "./DOMPropertyOperations": "/home/kachitachi/client-app/node_modules/react-dom/lib/DOMPropertyOperations.js",
       "./ReactServerRenderingTransaction": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactServerRenderingTransaction.js",
       "./CSSPropertyOperations": "/home/kachitachi/client-app/node_modules/react-dom/lib/CSSPropertyOperations.js",
@@ -8085,8 +8085,8 @@
     "(function (process){\n/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar _assign = require('object-assign');\n\nvar LinkedValueUtils = require('./LinkedValueUtils');\nvar ReactDOMComponentTree = require('./ReactDOMComponentTree');\nvar ReactUpdates = require('./ReactUpdates');\n\nvar warning = require('fbjs/lib/warning');\n\nvar didWarnValueLink = false;\nvar didWarnValueDefaultValue = false;\n\nfunction updateOptionsIfPendingUpdateAndMounted() {\n  if (this._rootNodeID && this._wrapperState.pendingUpdate) {\n    this._wrapperState.pendingUpdate = false;\n\n    var props = this._currentElement.props;\n    var value = LinkedValueUtils.getValue(props);\n\n    if (value != null) {\n      updateOptions(this, Boolean(props.multiple), value);\n    }\n  }\n}\n\nfunction getDeclarationErrorAddendum(owner) {\n  if (owner) {\n    var name = owner.getName();\n    if (name) {\n      return ' Check the render method of `' + name + '`.';\n    }\n  }\n  return '';\n}\n\nvar valuePropNames = ['value', 'defaultValue'];\n\n/**\n * Validation function for `value` and `defaultValue`.\n * @private\n */\nfunction checkSelectPropTypes(inst, props) {\n  var owner = inst._currentElement._owner;\n  LinkedValueUtils.checkPropTypes('select', props, owner);\n\n  if (props.valueLink !== undefined && !didWarnValueLink) {\n    process.env.NODE_ENV !== 'production' ? warning(false, '`valueLink` prop on `select` is deprecated; set `value` and `onChange` instead.') : void 0;\n    didWarnValueLink = true;\n  }\n\n  for (var i = 0; i < valuePropNames.length; i++) {\n    var propName = valuePropNames[i];\n    if (props[propName] == null) {\n      continue;\n    }\n    var isArray = Array.isArray(props[propName]);\n    if (props.multiple && !isArray) {\n      process.env.NODE_ENV !== 'production' ? warning(false, 'The `%s` prop supplied to <select> must be an array if ' + '`multiple` is true.%s', propName, getDeclarationErrorAddendum(owner)) : void 0;\n    } else if (!props.multiple && isArray) {\n      process.env.NODE_ENV !== 'production' ? warning(false, 'The `%s` prop supplied to <select> must be a scalar ' + 'value if `multiple` is false.%s', propName, getDeclarationErrorAddendum(owner)) : void 0;\n    }\n  }\n}\n\n/**\n * @param {ReactDOMComponent} inst\n * @param {boolean} multiple\n * @param {*} propValue A stringable (with `multiple`, a list of stringables).\n * @private\n */\nfunction updateOptions(inst, multiple, propValue) {\n  var selectedValue, i;\n  var options = ReactDOMComponentTree.getNodeFromInstance(inst).options;\n\n  if (multiple) {\n    selectedValue = {};\n    for (i = 0; i < propValue.length; i++) {\n      selectedValue['' + propValue[i]] = true;\n    }\n    for (i = 0; i < options.length; i++) {\n      var selected = selectedValue.hasOwnProperty(options[i].value);\n      if (options[i].selected !== selected) {\n        options[i].selected = selected;\n      }\n    }\n  } else {\n    // Do not set `select.value` as exact behavior isn't consistent across all\n    // browsers for all cases.\n    selectedValue = '' + propValue;\n    for (i = 0; i < options.length; i++) {\n      if (options[i].value === selectedValue) {\n        options[i].selected = true;\n        return;\n      }\n    }\n    if (options.length) {\n      options[0].selected = true;\n    }\n  }\n}\n\n/**\n * Implements a <select> host component that allows optionally setting the\n * props `value` and `defaultValue`. If `multiple` is false, the prop must be a\n * stringable. If `multiple` is true, the prop must be an array of stringables.\n *\n * If `value` is not supplied (or null/undefined), user actions that change the\n * selected option will trigger updates to the rendered options.\n *\n * If it is supplied (and not null/undefined), the rendered options will not\n * update in response to user actions. Instead, the `value` prop must change in\n * order for the rendered options to update.\n *\n * If `defaultValue` is provided, any options with the supplied values will be\n * selected.\n */\nvar ReactDOMSelect = {\n  getHostProps: function (inst, props) {\n    return _assign({}, props, {\n      onChange: inst._wrapperState.onChange,\n      value: undefined\n    });\n  },\n\n  mountWrapper: function (inst, props) {\n    if (process.env.NODE_ENV !== 'production') {\n      checkSelectPropTypes(inst, props);\n    }\n\n    var value = LinkedValueUtils.getValue(props);\n    inst._wrapperState = {\n      pendingUpdate: false,\n      initialValue: value != null ? value : props.defaultValue,\n      listeners: null,\n      onChange: _handleChange.bind(inst),\n      wasMultiple: Boolean(props.multiple)\n    };\n\n    if (props.value !== undefined && props.defaultValue !== undefined && !didWarnValueDefaultValue) {\n      process.env.NODE_ENV !== 'production' ? warning(false, 'Select elements must be either controlled or uncontrolled ' + '(specify either the value prop, or the defaultValue prop, but not ' + 'both). Decide between using a controlled or uncontrolled select ' + 'element and remove one of these props. More info: ' + 'https://fb.me/react-controlled-components') : void 0;\n      didWarnValueDefaultValue = true;\n    }\n  },\n\n  getSelectValueContext: function (inst) {\n    // ReactDOMOption looks at this initial value so the initial generated\n    // markup has correct `selected` attributes\n    return inst._wrapperState.initialValue;\n  },\n\n  postUpdateWrapper: function (inst) {\n    var props = inst._currentElement.props;\n\n    // After the initial mount, we control selected-ness manually so don't pass\n    // this value down\n    inst._wrapperState.initialValue = undefined;\n\n    var wasMultiple = inst._wrapperState.wasMultiple;\n    inst._wrapperState.wasMultiple = Boolean(props.multiple);\n\n    var value = LinkedValueUtils.getValue(props);\n    if (value != null) {\n      inst._wrapperState.pendingUpdate = false;\n      updateOptions(inst, Boolean(props.multiple), value);\n    } else if (wasMultiple !== Boolean(props.multiple)) {\n      // For simplicity, reapply `defaultValue` if `multiple` is toggled.\n      if (props.defaultValue != null) {\n        updateOptions(inst, Boolean(props.multiple), props.defaultValue);\n      } else {\n        // Revert the select back to its default unselected state.\n        updateOptions(inst, Boolean(props.multiple), props.multiple ? [] : '');\n      }\n    }\n  }\n};\n\nfunction _handleChange(event) {\n  var props = this._currentElement.props;\n  var returnValue = LinkedValueUtils.executeOnChange(props, event);\n\n  if (this._rootNodeID) {\n    this._wrapperState.pendingUpdate = true;\n  }\n  ReactUpdates.asap(updateOptionsIfPendingUpdateAndMounted, this);\n  return returnValue;\n}\n\nmodule.exports = ReactDOMSelect;\n}).call(this,require('_process'))\n",
     {
       "_process": "/home/kachitachi/client-app/node_modules/process/browser.js",
-      "./ReactDOMComponentTree": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
       "./ReactUpdates": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactUpdates.js",
+      "./ReactDOMComponentTree": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
       "object-assign": "/home/kachitachi/client-app/node_modules/object-assign/index.js",
       "fbjs/lib/warning": "/home/kachitachi/client-app/node_modules/fbjs/lib/warning.js",
       "./LinkedValueUtils": "/home/kachitachi/client-app/node_modules/react-dom/lib/LinkedValueUtils.js"
@@ -8170,8 +8170,8 @@
     {
       "_process": "/home/kachitachi/client-app/node_modules/process/browser.js",
       "react/lib/ReactComponentTreeHook": "/home/kachitachi/client-app/node_modules/react/lib/ReactComponentTreeHook.js",
-      "./EventPluginRegistry": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPluginRegistry.js",
       "fbjs/lib/warning": "/home/kachitachi/client-app/node_modules/fbjs/lib/warning.js",
+      "./EventPluginRegistry": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPluginRegistry.js",
       "./DOMProperty": "/home/kachitachi/client-app/node_modules/react-dom/lib/DOMProperty.js"
     },
     {
@@ -8225,17 +8225,17 @@
       "./ReactDOMEmptyComponent": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDOMEmptyComponent.js",
       "./ReactDOMTreeTraversal": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDOMTreeTraversal.js",
       "./ReactDefaultBatchingStrategy": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDefaultBatchingStrategy.js",
-      "./SelectEventPlugin": "/home/kachitachi/client-app/node_modules/react-dom/lib/SelectEventPlugin.js",
-      "./ReactDOMTextComponent": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDOMTextComponent.js",
+      "./ReactReconcileTransaction": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactReconcileTransaction.js",
+      "./ReactEventListener": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactEventListener.js",
       "./EnterLeaveEventPlugin": "/home/kachitachi/client-app/node_modules/react-dom/lib/EnterLeaveEventPlugin.js",
       "./ChangeEventPlugin": "/home/kachitachi/client-app/node_modules/react-dom/lib/ChangeEventPlugin.js",
-      "./ReactEventListener": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactEventListener.js",
       "./ReactInjection": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactInjection.js",
-      "./BeforeInputEventPlugin": "/home/kachitachi/client-app/node_modules/react-dom/lib/BeforeInputEventPlugin.js",
+      "./ReactComponentBrowserEnvironment": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactComponentBrowserEnvironment.js",
       "./SimpleEventPlugin": "/home/kachitachi/client-app/node_modules/react-dom/lib/SimpleEventPlugin.js",
-      "./ReactReconcileTransaction": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactReconcileTransaction.js",
+      "./BeforeInputEventPlugin": "/home/kachitachi/client-app/node_modules/react-dom/lib/BeforeInputEventPlugin.js",
+      "./SelectEventPlugin": "/home/kachitachi/client-app/node_modules/react-dom/lib/SelectEventPlugin.js",
       "./ReactDOMComponent": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDOMComponent.js",
-      "./ReactComponentBrowserEnvironment": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactComponentBrowserEnvironment.js"
+      "./ReactDOMTextComponent": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDOMTextComponent.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDefaultInjection.js",
@@ -8345,12 +8345,12 @@
     "/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar DOMProperty = require('./DOMProperty');\nvar EventPluginHub = require('./EventPluginHub');\nvar EventPluginUtils = require('./EventPluginUtils');\nvar ReactComponentEnvironment = require('./ReactComponentEnvironment');\nvar ReactEmptyComponent = require('./ReactEmptyComponent');\nvar ReactBrowserEventEmitter = require('./ReactBrowserEventEmitter');\nvar ReactHostComponent = require('./ReactHostComponent');\nvar ReactUpdates = require('./ReactUpdates');\n\nvar ReactInjection = {\n  Component: ReactComponentEnvironment.injection,\n  DOMProperty: DOMProperty.injection,\n  EmptyComponent: ReactEmptyComponent.injection,\n  EventPluginHub: EventPluginHub.injection,\n  EventPluginUtils: EventPluginUtils.injection,\n  EventEmitter: ReactBrowserEventEmitter.injection,\n  HostComponent: ReactHostComponent.injection,\n  Updates: ReactUpdates.injection\n};\n\nmodule.exports = ReactInjection;",
     {
       "./DOMProperty": "/home/kachitachi/client-app/node_modules/react-dom/lib/DOMProperty.js",
-      "./EventPluginHub": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPluginHub.js",
-      "./EventPluginUtils": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPluginUtils.js",
       "./ReactBrowserEventEmitter": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactBrowserEventEmitter.js",
       "./ReactUpdates": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactUpdates.js",
       "./ReactEmptyComponent": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactEmptyComponent.js",
       "./ReactHostComponent": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactHostComponent.js",
+      "./EventPluginUtils": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPluginUtils.js",
+      "./EventPluginHub": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPluginHub.js",
       "./ReactComponentEnvironment": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactComponentEnvironment.js"
     },
     {
@@ -8440,8 +8440,8 @@
       "react/lib/React": "/home/kachitachi/client-app/node_modules/react/lib/React.js",
       "react/lib/ReactCurrentOwner": "/home/kachitachi/client-app/node_modules/react/lib/ReactCurrentOwner.js",
       "fbjs/lib/emptyObject": "/home/kachitachi/client-app/node_modules/fbjs/lib/emptyObject.js",
-      "fbjs/lib/invariant": "/home/kachitachi/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/warning": "/home/kachitachi/client-app/node_modules/fbjs/lib/warning.js",
+      "fbjs/lib/invariant": "/home/kachitachi/client-app/node_modules/fbjs/lib/invariant.js",
       "./ReactMarkupChecksum": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactMarkupChecksum.js",
       "./ReactUpdateQueue": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactUpdateQueue.js",
       "./setInnerHTML": "/home/kachitachi/client-app/node_modules/react-dom/lib/setInnerHTML.js",
@@ -8469,8 +8469,8 @@
       "react/lib/ReactCurrentOwner": "/home/kachitachi/client-app/node_modules/react/lib/ReactCurrentOwner.js",
       "fbjs/lib/emptyFunction": "/home/kachitachi/client-app/node_modules/fbjs/lib/emptyFunction.js",
       "fbjs/lib/invariant": "/home/kachitachi/client-app/node_modules/fbjs/lib/invariant.js",
-      "./flattenChildren": "/home/kachitachi/client-app/node_modules/react-dom/lib/flattenChildren.js",
-      "./ReactChildReconciler": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactChildReconciler.js"
+      "./ReactChildReconciler": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactChildReconciler.js",
+      "./flattenChildren": "/home/kachitachi/client-app/node_modules/react-dom/lib/flattenChildren.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactMultiChild.js",
@@ -8636,8 +8636,8 @@
       "./ReactReconciler": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactReconciler.js",
       "object-assign": "/home/kachitachi/client-app/node_modules/object-assign/index.js",
       "fbjs/lib/invariant": "/home/kachitachi/client-app/node_modules/fbjs/lib/invariant.js",
-      "./PooledClass": "/home/kachitachi/client-app/node_modules/react-dom/lib/PooledClass.js",
       "./CallbackQueue": "/home/kachitachi/client-app/node_modules/react-dom/lib/CallbackQueue.js",
+      "./PooledClass": "/home/kachitachi/client-app/node_modules/react-dom/lib/PooledClass.js",
       "./Transaction": "/home/kachitachi/client-app/node_modules/react-dom/lib/Transaction.js"
     },
     {
@@ -8670,13 +8670,13 @@
   "/home/kachitachi/client-app/node_modules/react-dom/lib/SelectEventPlugin.js": [
     "/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar EventPropagators = require('./EventPropagators');\nvar ExecutionEnvironment = require('fbjs/lib/ExecutionEnvironment');\nvar ReactDOMComponentTree = require('./ReactDOMComponentTree');\nvar ReactInputSelection = require('./ReactInputSelection');\nvar SyntheticEvent = require('./SyntheticEvent');\n\nvar getActiveElement = require('fbjs/lib/getActiveElement');\nvar isTextInputElement = require('./isTextInputElement');\nvar shallowEqual = require('fbjs/lib/shallowEqual');\n\nvar skipSelectionChangeEvent = ExecutionEnvironment.canUseDOM && 'documentMode' in document && document.documentMode <= 11;\n\nvar eventTypes = {\n  select: {\n    phasedRegistrationNames: {\n      bubbled: 'onSelect',\n      captured: 'onSelectCapture'\n    },\n    dependencies: ['topBlur', 'topContextMenu', 'topFocus', 'topKeyDown', 'topKeyUp', 'topMouseDown', 'topMouseUp', 'topSelectionChange']\n  }\n};\n\nvar activeElement = null;\nvar activeElementInst = null;\nvar lastSelection = null;\nvar mouseDown = false;\n\n// Track whether a listener exists for this plugin. If none exist, we do\n// not extract events. See #3639.\nvar hasListener = false;\n\n/**\n * Get an object which is a unique representation of the current selection.\n *\n * The return value will not be consistent across nodes or browsers, but\n * two identical selections on the same node will return identical objects.\n *\n * @param {DOMElement} node\n * @return {object}\n */\nfunction getSelection(node) {\n  if ('selectionStart' in node && ReactInputSelection.hasSelectionCapabilities(node)) {\n    return {\n      start: node.selectionStart,\n      end: node.selectionEnd\n    };\n  } else if (window.getSelection) {\n    var selection = window.getSelection();\n    return {\n      anchorNode: selection.anchorNode,\n      anchorOffset: selection.anchorOffset,\n      focusNode: selection.focusNode,\n      focusOffset: selection.focusOffset\n    };\n  } else if (document.selection) {\n    var range = document.selection.createRange();\n    return {\n      parentElement: range.parentElement(),\n      text: range.text,\n      top: range.boundingTop,\n      left: range.boundingLeft\n    };\n  }\n}\n\n/**\n * Poll selection to see whether it's changed.\n *\n * @param {object} nativeEvent\n * @return {?SyntheticEvent}\n */\nfunction constructSelectEvent(nativeEvent, nativeEventTarget) {\n  // Ensure we have the right element, and that the user is not dragging a\n  // selection (this matches native `select` event behavior). In HTML5, select\n  // fires only on input and textarea thus if there's no focused element we\n  // won't dispatch.\n  if (mouseDown || activeElement == null || activeElement !== getActiveElement()) {\n    return null;\n  }\n\n  // Only fire when selection has actually changed.\n  var currentSelection = getSelection(activeElement);\n  if (!lastSelection || !shallowEqual(lastSelection, currentSelection)) {\n    lastSelection = currentSelection;\n\n    var syntheticEvent = SyntheticEvent.getPooled(eventTypes.select, activeElementInst, nativeEvent, nativeEventTarget);\n\n    syntheticEvent.type = 'select';\n    syntheticEvent.target = activeElement;\n\n    EventPropagators.accumulateTwoPhaseDispatches(syntheticEvent);\n\n    return syntheticEvent;\n  }\n\n  return null;\n}\n\n/**\n * This plugin creates an `onSelect` event that normalizes select events\n * across form elements.\n *\n * Supported elements are:\n * - input (see `isTextInputElement`)\n * - textarea\n * - contentEditable\n *\n * This differs from native browser implementations in the following ways:\n * - Fires on contentEditable fields as well as inputs.\n * - Fires for collapsed selection.\n * - Fires after user input.\n */\nvar SelectEventPlugin = {\n  eventTypes: eventTypes,\n\n  extractEvents: function (topLevelType, targetInst, nativeEvent, nativeEventTarget) {\n    if (!hasListener) {\n      return null;\n    }\n\n    var targetNode = targetInst ? ReactDOMComponentTree.getNodeFromInstance(targetInst) : window;\n\n    switch (topLevelType) {\n      // Track the input node that has focus.\n      case 'topFocus':\n        if (isTextInputElement(targetNode) || targetNode.contentEditable === 'true') {\n          activeElement = targetNode;\n          activeElementInst = targetInst;\n          lastSelection = null;\n        }\n        break;\n      case 'topBlur':\n        activeElement = null;\n        activeElementInst = null;\n        lastSelection = null;\n        break;\n      // Don't fire the event while the user is dragging. This matches the\n      // semantics of the native select event.\n      case 'topMouseDown':\n        mouseDown = true;\n        break;\n      case 'topContextMenu':\n      case 'topMouseUp':\n        mouseDown = false;\n        return constructSelectEvent(nativeEvent, nativeEventTarget);\n      // Chrome and IE fire non-standard event when selection is changed (and\n      // sometimes when it hasn't). IE's event fires out of order with respect\n      // to key and input events on deletion, so we discard it.\n      //\n      // Firefox doesn't support selectionchange, so check selection status\n      // after each key entry. The selection changes after keydown and before\n      // keyup, but we check on keydown as well in the case of holding down a\n      // key, when multiple keydown events are fired but only one keyup is.\n      // This is also our approach for IE handling, for the reason above.\n      case 'topSelectionChange':\n        if (skipSelectionChangeEvent) {\n          break;\n        }\n      // falls through\n      case 'topKeyDown':\n      case 'topKeyUp':\n        return constructSelectEvent(nativeEvent, nativeEventTarget);\n    }\n\n    return null;\n  },\n\n  didPutListener: function (inst, registrationName, listener) {\n    if (registrationName === 'onSelect') {\n      hasListener = true;\n    }\n  }\n};\n\nmodule.exports = SelectEventPlugin;",
     {
-      "./EventPropagators": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPropagators.js",
       "./ReactDOMComponentTree": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
-      "./SyntheticEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticEvent.js",
       "./isTextInputElement": "/home/kachitachi/client-app/node_modules/react-dom/lib/isTextInputElement.js",
       "fbjs/lib/ExecutionEnvironment": "/home/kachitachi/client-app/node_modules/fbjs/lib/ExecutionEnvironment.js",
       "fbjs/lib/shallowEqual": "/home/kachitachi/client-app/node_modules/fbjs/lib/shallowEqual.js",
       "fbjs/lib/getActiveElement": "/home/kachitachi/client-app/node_modules/fbjs/lib/getActiveElement.js",
+      "./SyntheticEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticEvent.js",
+      "./EventPropagators": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPropagators.js",
       "./ReactInputSelection": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactInputSelection.js"
     },
     {
@@ -8693,19 +8693,19 @@
       "./reactProdInvariant": "/home/kachitachi/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
       "./EventPropagators": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPropagators.js",
       "./ReactDOMComponentTree": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactDOMComponentTree.js",
-      "./SyntheticEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticEvent.js",
       "./SyntheticMouseEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticMouseEvent.js",
-      "./SyntheticUIEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticUIEvent.js",
       "./getEventCharCode": "/home/kachitachi/client-app/node_modules/react-dom/lib/getEventCharCode.js",
       "fbjs/lib/emptyFunction": "/home/kachitachi/client-app/node_modules/fbjs/lib/emptyFunction.js",
       "fbjs/lib/invariant": "/home/kachitachi/client-app/node_modules/fbjs/lib/invariant.js",
+      "./SyntheticEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticEvent.js",
       "fbjs/lib/EventListener": "/home/kachitachi/client-app/node_modules/fbjs/lib/EventListener.js",
+      "./SyntheticUIEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticUIEvent.js",
       "./SyntheticAnimationEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticAnimationEvent.js",
       "./SyntheticClipboardEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticClipboardEvent.js",
       "./SyntheticFocusEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticFocusEvent.js",
       "./SyntheticDragEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticDragEvent.js",
-      "./SyntheticTouchEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticTouchEvent.js",
       "./SyntheticTransitionEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticTransitionEvent.js",
+      "./SyntheticTouchEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticTouchEvent.js",
       "./SyntheticWheelEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticWheelEvent.js",
       "./SyntheticKeyboardEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticKeyboardEvent.js"
     },
@@ -8768,10 +8768,10 @@
     "(function (process){\n/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar _assign = require('object-assign');\n\nvar PooledClass = require('./PooledClass');\n\nvar emptyFunction = require('fbjs/lib/emptyFunction');\nvar warning = require('fbjs/lib/warning');\n\nvar didWarnForAddedNewProperty = false;\nvar isProxySupported = typeof Proxy === 'function';\n\nvar shouldBeReleasedProperties = ['dispatchConfig', '_targetInst', 'nativeEvent', 'isDefaultPrevented', 'isPropagationStopped', '_dispatchListeners', '_dispatchInstances'];\n\n/**\n * @interface Event\n * @see http://www.w3.org/TR/DOM-Level-3-Events/\n */\nvar EventInterface = {\n  type: null,\n  target: null,\n  // currentTarget is set when dispatching; no use in copying it here\n  currentTarget: emptyFunction.thatReturnsNull,\n  eventPhase: null,\n  bubbles: null,\n  cancelable: null,\n  timeStamp: function (event) {\n    return event.timeStamp || Date.now();\n  },\n  defaultPrevented: null,\n  isTrusted: null\n};\n\n/**\n * Synthetic events are dispatched by event plugins, typically in response to a\n * top-level event delegation handler.\n *\n * These systems should generally use pooling to reduce the frequency of garbage\n * collection. The system should check `isPersistent` to determine whether the\n * event should be released into the pool after being dispatched. Users that\n * need a persisted event should invoke `persist`.\n *\n * Synthetic events (and subclasses) implement the DOM Level 3 Events API by\n * normalizing browser quirks. Subclasses do not necessarily have to implement a\n * DOM interface; custom application-specific events can also subclass this.\n *\n * @param {object} dispatchConfig Configuration used to dispatch this event.\n * @param {*} targetInst Marker identifying the event target.\n * @param {object} nativeEvent Native browser event.\n * @param {DOMEventTarget} nativeEventTarget Target node.\n */\nfunction SyntheticEvent(dispatchConfig, targetInst, nativeEvent, nativeEventTarget) {\n  if (process.env.NODE_ENV !== 'production') {\n    // these have a getter/setter for warnings\n    delete this.nativeEvent;\n    delete this.preventDefault;\n    delete this.stopPropagation;\n  }\n\n  this.dispatchConfig = dispatchConfig;\n  this._targetInst = targetInst;\n  this.nativeEvent = nativeEvent;\n\n  var Interface = this.constructor.Interface;\n  for (var propName in Interface) {\n    if (!Interface.hasOwnProperty(propName)) {\n      continue;\n    }\n    if (process.env.NODE_ENV !== 'production') {\n      delete this[propName]; // this has a getter/setter for warnings\n    }\n    var normalize = Interface[propName];\n    if (normalize) {\n      this[propName] = normalize(nativeEvent);\n    } else {\n      if (propName === 'target') {\n        this.target = nativeEventTarget;\n      } else {\n        this[propName] = nativeEvent[propName];\n      }\n    }\n  }\n\n  var defaultPrevented = nativeEvent.defaultPrevented != null ? nativeEvent.defaultPrevented : nativeEvent.returnValue === false;\n  if (defaultPrevented) {\n    this.isDefaultPrevented = emptyFunction.thatReturnsTrue;\n  } else {\n    this.isDefaultPrevented = emptyFunction.thatReturnsFalse;\n  }\n  this.isPropagationStopped = emptyFunction.thatReturnsFalse;\n  return this;\n}\n\n_assign(SyntheticEvent.prototype, {\n  preventDefault: function () {\n    this.defaultPrevented = true;\n    var event = this.nativeEvent;\n    if (!event) {\n      return;\n    }\n\n    if (event.preventDefault) {\n      event.preventDefault();\n      // eslint-disable-next-line valid-typeof\n    } else if (typeof event.returnValue !== 'unknown') {\n      event.returnValue = false;\n    }\n    this.isDefaultPrevented = emptyFunction.thatReturnsTrue;\n  },\n\n  stopPropagation: function () {\n    var event = this.nativeEvent;\n    if (!event) {\n      return;\n    }\n\n    if (event.stopPropagation) {\n      event.stopPropagation();\n      // eslint-disable-next-line valid-typeof\n    } else if (typeof event.cancelBubble !== 'unknown') {\n      // The ChangeEventPlugin registers a \"propertychange\" event for\n      // IE. This event does not support bubbling or cancelling, and\n      // any references to cancelBubble throw \"Member not found\".  A\n      // typeof check of \"unknown\" circumvents this issue (and is also\n      // IE specific).\n      event.cancelBubble = true;\n    }\n\n    this.isPropagationStopped = emptyFunction.thatReturnsTrue;\n  },\n\n  /**\n   * We release all dispatched `SyntheticEvent`s after each event loop, adding\n   * them back into the pool. This allows a way to hold onto a reference that\n   * won't be added back into the pool.\n   */\n  persist: function () {\n    this.isPersistent = emptyFunction.thatReturnsTrue;\n  },\n\n  /**\n   * Checks if this event should be released back into the pool.\n   *\n   * @return {boolean} True if this should not be released, false otherwise.\n   */\n  isPersistent: emptyFunction.thatReturnsFalse,\n\n  /**\n   * `PooledClass` looks for `destructor` on each instance it releases.\n   */\n  destructor: function () {\n    var Interface = this.constructor.Interface;\n    for (var propName in Interface) {\n      if (process.env.NODE_ENV !== 'production') {\n        Object.defineProperty(this, propName, getPooledWarningPropertyDefinition(propName, Interface[propName]));\n      } else {\n        this[propName] = null;\n      }\n    }\n    for (var i = 0; i < shouldBeReleasedProperties.length; i++) {\n      this[shouldBeReleasedProperties[i]] = null;\n    }\n    if (process.env.NODE_ENV !== 'production') {\n      Object.defineProperty(this, 'nativeEvent', getPooledWarningPropertyDefinition('nativeEvent', null));\n      Object.defineProperty(this, 'preventDefault', getPooledWarningPropertyDefinition('preventDefault', emptyFunction));\n      Object.defineProperty(this, 'stopPropagation', getPooledWarningPropertyDefinition('stopPropagation', emptyFunction));\n    }\n  }\n});\n\nSyntheticEvent.Interface = EventInterface;\n\nif (process.env.NODE_ENV !== 'production') {\n  if (isProxySupported) {\n    /*eslint-disable no-func-assign */\n    SyntheticEvent = new Proxy(SyntheticEvent, {\n      construct: function (target, args) {\n        return this.apply(target, Object.create(target.prototype), args);\n      },\n      apply: function (constructor, that, args) {\n        return new Proxy(constructor.apply(that, args), {\n          set: function (target, prop, value) {\n            if (prop !== 'isPersistent' && !target.constructor.Interface.hasOwnProperty(prop) && shouldBeReleasedProperties.indexOf(prop) === -1) {\n              process.env.NODE_ENV !== 'production' ? warning(didWarnForAddedNewProperty || target.isPersistent(), \"This synthetic event is reused for performance reasons. If you're \" + \"seeing this, you're adding a new property in the synthetic event object. \" + 'The property is never released. See ' + 'https://fb.me/react-event-pooling for more information.') : void 0;\n              didWarnForAddedNewProperty = true;\n            }\n            target[prop] = value;\n            return true;\n          }\n        });\n      }\n    });\n    /*eslint-enable no-func-assign */\n  }\n}\n/**\n * Helper to reduce boilerplate when creating subclasses.\n *\n * @param {function} Class\n * @param {?object} Interface\n */\nSyntheticEvent.augmentClass = function (Class, Interface) {\n  var Super = this;\n\n  var E = function () {};\n  E.prototype = Super.prototype;\n  var prototype = new E();\n\n  _assign(prototype, Class.prototype);\n  Class.prototype = prototype;\n  Class.prototype.constructor = Class;\n\n  Class.Interface = _assign({}, Super.Interface, Interface);\n  Class.augmentClass = Super.augmentClass;\n\n  PooledClass.addPoolingTo(Class, PooledClass.fourArgumentPooler);\n};\n\nPooledClass.addPoolingTo(SyntheticEvent, PooledClass.fourArgumentPooler);\n\nmodule.exports = SyntheticEvent;\n\n/**\n  * Helper to nullify syntheticEvent instance properties when destructing\n  *\n  * @param {object} SyntheticEvent\n  * @param {String} propName\n  * @return {object} defineProperty object\n  */\nfunction getPooledWarningPropertyDefinition(propName, getVal) {\n  var isFunction = typeof getVal === 'function';\n  return {\n    configurable: true,\n    set: set,\n    get: get\n  };\n\n  function set(val) {\n    var action = isFunction ? 'setting the method' : 'setting the property';\n    warn(action, 'This is effectively a no-op');\n    return val;\n  }\n\n  function get() {\n    var action = isFunction ? 'accessing the method' : 'accessing the property';\n    var result = isFunction ? 'This is a no-op function' : 'This is set to null';\n    warn(action, result);\n    return getVal;\n  }\n\n  function warn(action, result) {\n    var warningCondition = false;\n    process.env.NODE_ENV !== 'production' ? warning(warningCondition, \"This synthetic event is reused for performance reasons. If you're seeing this, \" + \"you're %s `%s` on a released/nullified synthetic event. %s. \" + 'If you must keep the original synthetic event around, use event.persist(). ' + 'See https://fb.me/react-event-pooling for more information.', action, propName, result) : void 0;\n  }\n}\n}).call(this,require('_process'))\n",
     {
       "_process": "/home/kachitachi/client-app/node_modules/process/browser.js",
+      "./PooledClass": "/home/kachitachi/client-app/node_modules/react-dom/lib/PooledClass.js",
       "object-assign": "/home/kachitachi/client-app/node_modules/object-assign/index.js",
       "fbjs/lib/emptyFunction": "/home/kachitachi/client-app/node_modules/fbjs/lib/emptyFunction.js",
-      "fbjs/lib/warning": "/home/kachitachi/client-app/node_modules/fbjs/lib/warning.js",
-      "./PooledClass": "/home/kachitachi/client-app/node_modules/react-dom/lib/PooledClass.js"
+      "fbjs/lib/warning": "/home/kachitachi/client-app/node_modules/fbjs/lib/warning.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticEvent.js",
@@ -8807,8 +8807,8 @@
   "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticKeyboardEvent.js": [
     "/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar SyntheticUIEvent = require('./SyntheticUIEvent');\n\nvar getEventCharCode = require('./getEventCharCode');\nvar getEventKey = require('./getEventKey');\nvar getEventModifierState = require('./getEventModifierState');\n\n/**\n * @interface KeyboardEvent\n * @see http://www.w3.org/TR/DOM-Level-3-Events/\n */\nvar KeyboardEventInterface = {\n  key: getEventKey,\n  location: null,\n  ctrlKey: null,\n  shiftKey: null,\n  altKey: null,\n  metaKey: null,\n  repeat: null,\n  locale: null,\n  getModifierState: getEventModifierState,\n  // Legacy Interface\n  charCode: function (event) {\n    // `charCode` is the result of a KeyPress event and represents the value of\n    // the actual printable character.\n\n    // KeyPress is deprecated, but its replacement is not yet final and not\n    // implemented in any major browser. Only KeyPress has charCode.\n    if (event.type === 'keypress') {\n      return getEventCharCode(event);\n    }\n    return 0;\n  },\n  keyCode: function (event) {\n    // `keyCode` is the result of a KeyDown/Up event and represents the value of\n    // physical keyboard key.\n\n    // The actual meaning of the value depends on the users' keyboard layout\n    // which cannot be detected. Assuming that it is a US keyboard layout\n    // provides a surprisingly accurate mapping for US and European users.\n    // Due to this, it is left to the user to implement at this time.\n    if (event.type === 'keydown' || event.type === 'keyup') {\n      return event.keyCode;\n    }\n    return 0;\n  },\n  which: function (event) {\n    // `which` is an alias for either `keyCode` or `charCode` depending on the\n    // type of the event.\n    if (event.type === 'keypress') {\n      return getEventCharCode(event);\n    }\n    if (event.type === 'keydown' || event.type === 'keyup') {\n      return event.keyCode;\n    }\n    return 0;\n  }\n};\n\n/**\n * @param {object} dispatchConfig Configuration used to dispatch this event.\n * @param {string} dispatchMarker Marker identifying the event target.\n * @param {object} nativeEvent Native browser event.\n * @extends {SyntheticUIEvent}\n */\nfunction SyntheticKeyboardEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeEventTarget) {\n  return SyntheticUIEvent.call(this, dispatchConfig, dispatchMarker, nativeEvent, nativeEventTarget);\n}\n\nSyntheticUIEvent.augmentClass(SyntheticKeyboardEvent, KeyboardEventInterface);\n\nmodule.exports = SyntheticKeyboardEvent;",
     {
-      "./SyntheticUIEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticUIEvent.js",
       "./getEventCharCode": "/home/kachitachi/client-app/node_modules/react-dom/lib/getEventCharCode.js",
+      "./SyntheticUIEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticUIEvent.js",
       "./getEventModifierState": "/home/kachitachi/client-app/node_modules/react-dom/lib/getEventModifierState.js",
       "./getEventKey": "/home/kachitachi/client-app/node_modules/react-dom/lib/getEventKey.js"
     },
@@ -8822,8 +8822,8 @@
   "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticMouseEvent.js": [
     "/**\n * Copyright 2013-present, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n */\n\n'use strict';\n\nvar SyntheticUIEvent = require('./SyntheticUIEvent');\nvar ViewportMetrics = require('./ViewportMetrics');\n\nvar getEventModifierState = require('./getEventModifierState');\n\n/**\n * @interface MouseEvent\n * @see http://www.w3.org/TR/DOM-Level-3-Events/\n */\nvar MouseEventInterface = {\n  screenX: null,\n  screenY: null,\n  clientX: null,\n  clientY: null,\n  ctrlKey: null,\n  shiftKey: null,\n  altKey: null,\n  metaKey: null,\n  getModifierState: getEventModifierState,\n  button: function (event) {\n    // Webkit, Firefox, IE9+\n    // which:  1 2 3\n    // button: 0 1 2 (standard)\n    var button = event.button;\n    if ('which' in event) {\n      return button;\n    }\n    // IE<9\n    // which:  undefined\n    // button: 0 0 0\n    // button: 1 4 2 (onmouseup)\n    return button === 2 ? 2 : button === 4 ? 1 : 0;\n  },\n  buttons: null,\n  relatedTarget: function (event) {\n    return event.relatedTarget || (event.fromElement === event.srcElement ? event.toElement : event.fromElement);\n  },\n  // \"Proprietary\" Interface.\n  pageX: function (event) {\n    return 'pageX' in event ? event.pageX : event.clientX + ViewportMetrics.currentScrollLeft;\n  },\n  pageY: function (event) {\n    return 'pageY' in event ? event.pageY : event.clientY + ViewportMetrics.currentScrollTop;\n  }\n};\n\n/**\n * @param {object} dispatchConfig Configuration used to dispatch this event.\n * @param {string} dispatchMarker Marker identifying the event target.\n * @param {object} nativeEvent Native browser event.\n * @extends {SyntheticUIEvent}\n */\nfunction SyntheticMouseEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeEventTarget) {\n  return SyntheticUIEvent.call(this, dispatchConfig, dispatchMarker, nativeEvent, nativeEventTarget);\n}\n\nSyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);\n\nmodule.exports = SyntheticMouseEvent;",
     {
-      "./SyntheticUIEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticUIEvent.js",
       "./ViewportMetrics": "/home/kachitachi/client-app/node_modules/react-dom/lib/ViewportMetrics.js",
+      "./SyntheticUIEvent": "/home/kachitachi/client-app/node_modules/react-dom/lib/SyntheticUIEvent.js",
       "./getEventModifierState": "/home/kachitachi/client-app/node_modules/react-dom/lib/getEventModifierState.js"
     },
     {
@@ -8938,9 +8938,9 @@
       "./reactProdInvariant": "/home/kachitachi/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
       "./ReactPropTypesSecret": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactPropTypesSecret.js",
       "./ReactPropTypeLocationNames": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactPropTypeLocationNames.js",
-      "react/lib/ReactComponentTreeHook": "/home/kachitachi/client-app/node_modules/react/lib/ReactComponentTreeHook.js",
       "fbjs/lib/invariant": "/home/kachitachi/client-app/node_modules/fbjs/lib/invariant.js",
-      "fbjs/lib/warning": "/home/kachitachi/client-app/node_modules/fbjs/lib/warning.js"
+      "fbjs/lib/warning": "/home/kachitachi/client-app/node_modules/fbjs/lib/warning.js",
+      "react/lib/ReactComponentTreeHook": "/home/kachitachi/client-app/node_modules/react/lib/ReactComponentTreeHook.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/react-dom/lib/checkReactTypeSpec.js",
@@ -9007,8 +9007,8 @@
     {
       "_process": "/home/kachitachi/client-app/node_modules/process/browser.js",
       "./KeyEscapeUtils": "/home/kachitachi/client-app/node_modules/react-dom/lib/KeyEscapeUtils.js",
-      "react/lib/ReactComponentTreeHook": "/home/kachitachi/client-app/node_modules/react/lib/ReactComponentTreeHook.js",
       "fbjs/lib/warning": "/home/kachitachi/client-app/node_modules/fbjs/lib/warning.js",
+      "react/lib/ReactComponentTreeHook": "/home/kachitachi/client-app/node_modules/react/lib/ReactComponentTreeHook.js",
       "./traverseAllChildren": "/home/kachitachi/client-app/node_modules/react-dom/lib/traverseAllChildren.js"
     },
     {
@@ -9145,9 +9145,9 @@
       "./reactProdInvariant": "/home/kachitachi/client-app/node_modules/react-dom/lib/reactProdInvariant.js",
       "./ReactEmptyComponent": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactEmptyComponent.js",
       "object-assign": "/home/kachitachi/client-app/node_modules/object-assign/index.js",
-      "react/lib/getNextDebugID": "/home/kachitachi/client-app/node_modules/react/lib/getNextDebugID.js",
       "fbjs/lib/invariant": "/home/kachitachi/client-app/node_modules/fbjs/lib/invariant.js",
       "fbjs/lib/warning": "/home/kachitachi/client-app/node_modules/fbjs/lib/warning.js",
+      "react/lib/getNextDebugID": "/home/kachitachi/client-app/node_modules/react/lib/getNextDebugID.js",
       "./ReactHostComponent": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactHostComponent.js",
       "./ReactCompositeComponent": "/home/kachitachi/client-app/node_modules/react-dom/lib/ReactCompositeComponent.js"
     },
@@ -9668,11 +9668,11 @@
     {
       "./sheets": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/sheets.js",
       "./utils/generateClassName": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/utils/generateClassName.js",
-      "./utils/createRule": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/utils/createRule.js",
       "./PluginsRegistry": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/PluginsRegistry.js",
       "./StyleSheet": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/StyleSheet.js",
       "./plugins": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/index.js",
-      "./utils/findRenderer": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/utils/findRenderer.js"
+      "./utils/findRenderer": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/utils/findRenderer.js",
+      "./utils/createRule": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/utils/createRule.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/Jss.js",
@@ -9760,8 +9760,8 @@
       "./SheetsRegistry": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/SheetsRegistry.js",
       "./utils/getDynamicStyles": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/utils/getDynamicStyles.js",
       "./sheets": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/sheets.js",
-      "./Jss": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/Jss.js",
-      "./RulesContainer": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/RulesContainer.js"
+      "./RulesContainer": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/RulesContainer.js",
+      "./Jss": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/Jss.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/index.js",
@@ -9848,8 +9848,8 @@
       "./SimpleRule": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/SimpleRule.js",
       "./KeyframeRule": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/KeyframeRule.js",
       "./ConditionalRule": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/ConditionalRule.js",
-      "./FontFaceRule": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/FontFaceRule.js",
-      "./ViewportRule": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/ViewportRule.js"
+      "./ViewportRule": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/ViewportRule.js",
+      "./FontFaceRule": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/FontFaceRule.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/react-jss/node_modules/jss/lib/plugins/index.js",
@@ -9994,8 +9994,8 @@
     "'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"]) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); } }; }();\n\nexports.default = createClassProxy;\n\nvar _find = require('lodash/find');\n\nvar _find2 = _interopRequireDefault(_find);\n\nvar _createPrototypeProxy = require('./createPrototypeProxy');\n\nvar _createPrototypeProxy2 = _interopRequireDefault(_createPrototypeProxy);\n\nvar _bindAutoBindMethods = require('./bindAutoBindMethods');\n\nvar _bindAutoBindMethods2 = _interopRequireDefault(_bindAutoBindMethods);\n\nvar _deleteUnknownAutoBindMethods = require('./deleteUnknownAutoBindMethods');\n\nvar _deleteUnknownAutoBindMethods2 = _interopRequireDefault(_deleteUnknownAutoBindMethods);\n\nvar _supportsProtoAssignment = require('./supportsProtoAssignment');\n\nvar _supportsProtoAssignment2 = _interopRequireDefault(_supportsProtoAssignment);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }\n\nvar RESERVED_STATICS = ['length', 'displayName', 'name', 'arguments', 'caller', 'prototype', 'toString'];\n\nfunction isEqualDescriptor(a, b) {\n  if (!a && !b) {\n    return true;\n  }\n  if (!a || !b) {\n    return false;\n  }\n  for (var key in a) {\n    if (a[key] !== b[key]) {\n      return false;\n    }\n  }\n  return true;\n}\n\nfunction getDisplayName(Component) {\n  var displayName = Component.displayName || Component.name;\n  return displayName && displayName !== 'ReactComponent' ? displayName : 'Unknown';\n}\n\n// This was originally a WeakMap but we had issues with React Native:\n// https://github.com/gaearon/react-proxy/issues/50#issuecomment-192928066\nvar allProxies = [];\nfunction findProxy(Component) {\n  var pair = (0, _find2.default)(allProxies, function (_ref) {\n    var _ref2 = _slicedToArray(_ref, 1);\n\n    var key = _ref2[0];\n    return key === Component;\n  });\n  return pair ? pair[1] : null;\n}\nfunction addProxy(Component, proxy) {\n  allProxies.push([Component, proxy]);\n}\n\nfunction proxyClass(InitialComponent) {\n  // Prevent double wrapping.\n  // Given a proxy class, return the existing proxy managing it.\n  var existingProxy = findProxy(InitialComponent);\n  if (existingProxy) {\n    return existingProxy;\n  }\n\n  var CurrentComponent = undefined;\n  var ProxyComponent = undefined;\n  var savedDescriptors = {};\n\n  function instantiate(factory, context, params) {\n    var component = factory();\n\n    try {\n      return component.apply(context, params);\n    } catch (err) {\n      (function () {\n        // Native ES6 class instantiation\n        var instance = new (Function.prototype.bind.apply(component, [null].concat(_toConsumableArray(params))))();\n\n        Object.keys(instance).forEach(function (key) {\n          if (RESERVED_STATICS.indexOf(key) > -1) {\n            return;\n          }\n          context[key] = instance[key];\n        });\n      })();\n    }\n  }\n\n  var displayName = getDisplayName(InitialComponent);\n  try {\n    // Create a proxy constructor with matching name\n    ProxyComponent = new Function('factory', 'instantiate', 'return function ' + displayName + '() {\\n         return instantiate(factory, this, arguments);\\n      }')(function () {\n      return CurrentComponent;\n    }, instantiate);\n  } catch (err) {\n    // Some environments may forbid dynamic evaluation\n    ProxyComponent = function ProxyComponent() {\n      return instantiate(function () {\n        return CurrentComponent;\n      }, this, arguments);\n    };\n  }\n  try {\n    Object.defineProperty(ProxyComponent, 'name', {\n      value: displayName\n    });\n  } catch (err) {}\n\n  // Proxy toString() to the current constructor\n  ProxyComponent.toString = function toString() {\n    return CurrentComponent.toString();\n  };\n\n  var prototypeProxy = undefined;\n  if (InitialComponent.prototype && InitialComponent.prototype.isReactComponent) {\n    // Point proxy constructor to the proxy prototype\n    prototypeProxy = (0, _createPrototypeProxy2.default)();\n    ProxyComponent.prototype = prototypeProxy.get();\n  }\n\n  function update(NextComponent) {\n    if (typeof NextComponent !== 'function') {\n      throw new Error('Expected a constructor.');\n    }\n    if (NextComponent === CurrentComponent) {\n      return;\n    }\n\n    // Prevent proxy cycles\n    var existingProxy = findProxy(NextComponent);\n    if (existingProxy) {\n      return update(existingProxy.__getCurrent());\n    }\n\n    // Save the next constructor so we call it\n    var PreviousComponent = CurrentComponent;\n    CurrentComponent = NextComponent;\n\n    // Try to infer displayName\n    displayName = getDisplayName(NextComponent);\n    ProxyComponent.displayName = displayName;\n    try {\n      Object.defineProperty(ProxyComponent, 'name', {\n        value: displayName\n      });\n    } catch (err) {}\n\n    // Set up the same prototype for inherited statics\n    ProxyComponent.__proto__ = NextComponent.__proto__;\n\n    // Copy over static methods and properties added at runtime\n    if (PreviousComponent) {\n      Object.getOwnPropertyNames(PreviousComponent).forEach(function (key) {\n        if (RESERVED_STATICS.indexOf(key) > -1) {\n          return;\n        }\n\n        var prevDescriptor = Object.getOwnPropertyDescriptor(PreviousComponent, key);\n        var savedDescriptor = savedDescriptors[key];\n\n        if (!isEqualDescriptor(prevDescriptor, savedDescriptor)) {\n          Object.defineProperty(NextComponent, key, prevDescriptor);\n        }\n      });\n    }\n\n    // Copy newly defined static methods and properties\n    Object.getOwnPropertyNames(NextComponent).forEach(function (key) {\n      if (RESERVED_STATICS.indexOf(key) > -1) {\n        return;\n      }\n\n      var prevDescriptor = PreviousComponent && Object.getOwnPropertyDescriptor(PreviousComponent, key);\n      var savedDescriptor = savedDescriptors[key];\n\n      // Skip redefined descriptors\n      if (prevDescriptor && savedDescriptor && !isEqualDescriptor(savedDescriptor, prevDescriptor)) {\n        Object.defineProperty(NextComponent, key, prevDescriptor);\n        Object.defineProperty(ProxyComponent, key, prevDescriptor);\n        return;\n      }\n\n      if (prevDescriptor && !savedDescriptor) {\n        Object.defineProperty(ProxyComponent, key, prevDescriptor);\n        return;\n      }\n\n      var nextDescriptor = _extends({}, Object.getOwnPropertyDescriptor(NextComponent, key), {\n        configurable: true\n      });\n      savedDescriptors[key] = nextDescriptor;\n      Object.defineProperty(ProxyComponent, key, nextDescriptor);\n    });\n\n    // Remove static methods and properties that are no longer defined\n    Object.getOwnPropertyNames(ProxyComponent).forEach(function (key) {\n      if (RESERVED_STATICS.indexOf(key) > -1) {\n        return;\n      }\n      // Skip statics that exist on the next class\n      if (NextComponent.hasOwnProperty(key)) {\n        return;\n      }\n      // Skip non-configurable statics\n      var proxyDescriptor = Object.getOwnPropertyDescriptor(ProxyComponent, key);\n      if (proxyDescriptor && !proxyDescriptor.configurable) {\n        return;\n      }\n\n      var prevDescriptor = PreviousComponent && Object.getOwnPropertyDescriptor(PreviousComponent, key);\n      var savedDescriptor = savedDescriptors[key];\n\n      // Skip redefined descriptors\n      if (prevDescriptor && savedDescriptor && !isEqualDescriptor(savedDescriptor, prevDescriptor)) {\n        return;\n      }\n\n      delete ProxyComponent[key];\n    });\n\n    if (prototypeProxy) {\n      // Update the prototype proxy with new methods\n      var mountedInstances = prototypeProxy.update(NextComponent.prototype);\n\n      // Set up the constructor property so accessing the statics work\n      ProxyComponent.prototype.constructor = NextComponent;\n\n      // We might have added new methods that need to be auto-bound\n      mountedInstances.forEach(_bindAutoBindMethods2.default);\n      mountedInstances.forEach(_deleteUnknownAutoBindMethods2.default);\n    }\n  };\n\n  function get() {\n    return ProxyComponent;\n  }\n\n  function getCurrent() {\n    return CurrentComponent;\n  }\n\n  update(InitialComponent);\n\n  var proxy = { get: get, update: update };\n  addProxy(ProxyComponent, proxy);\n\n  Object.defineProperty(proxy, '__getCurrent', {\n    configurable: false,\n    writable: false,\n    enumerable: false,\n    value: getCurrent\n  });\n\n  return proxy;\n}\n\nfunction createFallback(Component) {\n  var CurrentComponent = Component;\n\n  return {\n    get: function get() {\n      return CurrentComponent;\n    },\n    update: function update(NextComponent) {\n      CurrentComponent = NextComponent;\n    }\n  };\n}\n\nfunction createClassProxy(Component) {\n  return Component.__proto__ && (0, _supportsProtoAssignment2.default)() ? proxyClass(Component) : createFallback(Component);\n}",
     {
       "./supportsProtoAssignment": "/home/kachitachi/client-app/node_modules/react-proxy/modules/supportsProtoAssignment.js",
-      "./bindAutoBindMethods": "/home/kachitachi/client-app/node_modules/react-proxy/modules/bindAutoBindMethods.js",
       "./deleteUnknownAutoBindMethods": "/home/kachitachi/client-app/node_modules/react-proxy/modules/deleteUnknownAutoBindMethods.js",
+      "./bindAutoBindMethods": "/home/kachitachi/client-app/node_modules/react-proxy/modules/bindAutoBindMethods.js",
       "./createPrototypeProxy": "/home/kachitachi/client-app/node_modules/react-proxy/modules/createPrototypeProxy.js",
       "lodash/find": "/home/kachitachi/client-app/node_modules/lodash/find.js"
     },
@@ -10058,8 +10058,8 @@
       "_process": "/home/kachitachi/client-app/node_modules/process/browser.js",
       "react": "/home/kachitachi/client-app/node_modules/react/react.js",
       "../utils/warning": "/home/kachitachi/client-app/node_modules/react-redux/lib/utils/warning.js",
-      "prop-types": "/home/kachitachi/client-app/node_modules/prop-types/index.js",
-      "../utils/PropTypes": "/home/kachitachi/client-app/node_modules/react-redux/lib/utils/PropTypes.js"
+      "../utils/PropTypes": "/home/kachitachi/client-app/node_modules/react-redux/lib/utils/PropTypes.js",
+      "prop-types": "/home/kachitachi/client-app/node_modules/prop-types/index.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/react-redux/lib/components/Provider.js",
@@ -10090,8 +10090,8 @@
     {
       "../components/connectAdvanced": "/home/kachitachi/client-app/node_modules/react-redux/lib/components/connectAdvanced.js",
       "../utils/shallowEqual": "/home/kachitachi/client-app/node_modules/react-redux/lib/utils/shallowEqual.js",
-      "./mapStateToProps": "/home/kachitachi/client-app/node_modules/react-redux/lib/connect/mapStateToProps.js",
       "./mapDispatchToProps": "/home/kachitachi/client-app/node_modules/react-redux/lib/connect/mapDispatchToProps.js",
+      "./mapStateToProps": "/home/kachitachi/client-app/node_modules/react-redux/lib/connect/mapStateToProps.js",
       "./selectorFactory": "/home/kachitachi/client-app/node_modules/react-redux/lib/connect/selectorFactory.js",
       "./mergeProps": "/home/kachitachi/client-app/node_modules/react-redux/lib/connect/mergeProps.js"
     },
@@ -10251,9 +10251,9 @@
     "'use strict';\n\nexports.__esModule = true;\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _propTypes = require('prop-types');\n\nvar _propTypes2 = _interopRequireDefault(_propTypes);\n\nvar _createBrowserHistory = require('history/createBrowserHistory');\n\nvar _createBrowserHistory2 = _interopRequireDefault(_createBrowserHistory);\n\nvar _reactRouter = require('react-router');\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\n/**\n * The public API for a <Router> that uses HTML5 history.\n */\nvar BrowserRouter = function (_React$Component) {\n  _inherits(BrowserRouter, _React$Component);\n\n  function BrowserRouter() {\n    var _temp, _this, _ret;\n\n    _classCallCheck(this, BrowserRouter);\n\n    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {\n      args[_key] = arguments[_key];\n    }\n\n    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.history = (0, _createBrowserHistory2.default)(_this.props), _temp), _possibleConstructorReturn(_this, _ret);\n  }\n\n  BrowserRouter.prototype.render = function render() {\n    return _react2.default.createElement(_reactRouter.Router, { history: this.history, children: this.props.children });\n  };\n\n  return BrowserRouter;\n}(_react2.default.Component);\n\nBrowserRouter.propTypes = {\n  basename: _propTypes2.default.string,\n  forceRefresh: _propTypes2.default.bool,\n  getUserConfirmation: _propTypes2.default.func,\n  keyLength: _propTypes2.default.number,\n  children: _propTypes2.default.node\n};\nexports.default = BrowserRouter;",
     {
       "react": "/home/kachitachi/client-app/node_modules/react/react.js",
-      "prop-types": "/home/kachitachi/client-app/node_modules/prop-types/index.js",
+      "react-router": "/home/kachitachi/client-app/node_modules/react-router/index.js",
       "history/createBrowserHistory": "/home/kachitachi/client-app/node_modules/history/createBrowserHistory.js",
-      "react-router": "/home/kachitachi/client-app/node_modules/react-router/index.js"
+      "prop-types": "/home/kachitachi/client-app/node_modules/prop-types/index.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/react-router-dom/BrowserRouter.js",
@@ -10307,8 +10307,8 @@
     {
       "./Link": "/home/kachitachi/client-app/node_modules/react-router-dom/Link.js",
       "react": "/home/kachitachi/client-app/node_modules/react/react.js",
-      "prop-types": "/home/kachitachi/client-app/node_modules/prop-types/index.js",
-      "react-router": "/home/kachitachi/client-app/node_modules/react-router/index.js"
+      "react-router": "/home/kachitachi/client-app/node_modules/react-router/index.js",
+      "prop-types": "/home/kachitachi/client-app/node_modules/prop-types/index.js"
     },
     {
       "id": "/home/kachitachi/client-app/node_modules/react-router-dom/NavLink.js",
@@ -10392,18 +10392,18 @@
   "/home/kachitachi/client-app/node_modules/react-router-dom/index.js": [
     "'use strict';\n\nexports.__esModule = true;\nexports.withRouter = exports.matchPath = exports.Switch = exports.StaticRouter = exports.Router = exports.Route = exports.Redirect = exports.Prompt = exports.NavLink = exports.MemoryRouter = exports.Link = exports.HashRouter = exports.BrowserRouter = undefined;\n\nvar _BrowserRouter2 = require('./BrowserRouter');\n\nvar _BrowserRouter3 = _interopRequireDefault(_BrowserRouter2);\n\nvar _HashRouter2 = require('./HashRouter');\n\nvar _HashRouter3 = _interopRequireDefault(_HashRouter2);\n\nvar _Link2 = require('./Link');\n\nvar _Link3 = _interopRequireDefault(_Link2);\n\nvar _MemoryRouter2 = require('./MemoryRouter');\n\nvar _MemoryRouter3 = _interopRequireDefault(_MemoryRouter2);\n\nvar _NavLink2 = require('./NavLink');\n\nvar _NavLink3 = _interopRequireDefault(_NavLink2);\n\nvar _Prompt2 = require('./Prompt');\n\nvar _Prompt3 = _interopRequireDefault(_Prompt2);\n\nvar _Redirect2 = require('./Redirect');\n\nvar _Redirect3 = _interopRequireDefault(_Redirect2);\n\nvar _Route2 = require('./Route');\n\nvar _Route3 = _interopRequireDefault(_Route2);\n\nvar _Router2 = require('./Router');\n\nvar _Router3 = _interopRequireDefault(_Router2);\n\nvar _StaticRouter2 = require('./StaticRouter');\n\nvar _StaticRouter3 = _interopRequireDefault(_StaticRouter2);\n\nvar _Switch2 = require('./Switch');\n\nvar _Switch3 = _interopRequireDefault(_Switch2);\n\nvar _matchPath2 = require('./matchPath');\n\nvar _matchPath3 = _interopRequireDefault(_matchPath2);\n\nvar _withRouter2 = require('./withRouter');\n\nvar _withRouter3 = _interopRequireDefault(_withRouter2);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.BrowserRouter = _BrowserRouter3.default;\nexports.HashRouter = _HashRouter3.default;\nexports.Link = _Link3.default;\nexports.MemoryRouter = _MemoryRouter3.default;\nexports.NavLink = _NavLink3.default;\nexports.Prompt = _Prompt3.default;\nexports.Redirect = _Redirect3.default;\nexports.Route = _Route3.default;\nexports.Router = _Router3.default;\nexports.StaticRouter = _StaticRouter3.default;\nexports.Switch = _Switch3.default;\nexports.matchPath = _matchPath3.default;\nexports.withRouter = _withRouter3.default;",
     {
-      "./Link": "/home/kachitachi/client-app/node_modules/react-router-dom/Link.js",
-      "./NavLink": "/home/kachitachi/client-app/node_modules/react-router-dom/NavLink.js",
+      "./MemoryRouter": "/home/kachitachi/client-app/node_modules/react-router-dom/MemoryRouter.js",
       "./Prompt": "/home/kachitachi/client-app/node_modules/react-router-dom/Prompt.js",
       "./Redirect": "/home/kachitachi/client-app/node_modules/react-router-dom/Redirect.js",
       "./Route": "/home/kachitachi/client-app/node_modules/react-router-dom/Route.js",
       "./Router": "/home/kachitachi/client-app/node_modules/react-router-dom/Router.js",
       "./StaticRouter": "/home/kachitachi/client-app/node_modules/react-router-dom/StaticRouter.js",
+      "./NavLink": "/home/kachitachi/client-app/node_modules/react-router-dom/NavLink.js",
       "./Switch": "/home/kachitachi/client-app/node_modules/react-router-dom/Switch.js",
-      "./matchPath": "/home/kachitachi/client-app/node_modules/react-router-dom/matchPath.js",
-      "./withRouter": "/home/kachitachi/client-app/node_modules/react-router-dom/withRouter.js",
       "./BrowserRouter": "/home/kachitachi/client-app/node_modules/react-router-dom/BrowserRouter.js",
-      "./MemoryRouter": "/home/kachitachi/client-app/node_modules/react-router-dom/MemoryRouter.js",
+      "./matchPath": "/home/kachitachi/client-app/node_modules/react-router-dom/matchPath.js",
+      "./Link": "/home/kachitachi/client-app/node_modules/react-router-dom/Link.js",
+      "./withRouter": "/home/kachitachi/client-app/node_modules/react-router-dom/withRouter.js",
       "./HashRouter": "/home/kachitachi/client-app/node_modules/react-router-dom/HashRouter.js"
     },
     {
@@ -10675,8 +10675,8 @@
     "(function (process){\nvar invariant = require('fbjs/lib/invariant');\nvar defaultClickRejectionStrategy = require('./defaultClickRejectionStrategy');\n\nvar alreadyInjected = false;\n\nmodule.exports = function injectTapEventPlugin (strategyOverrides) {\n  strategyOverrides = strategyOverrides || {}\n  var shouldRejectClick = strategyOverrides.shouldRejectClick || defaultClickRejectionStrategy;\n\n  if (process.env.NODE_ENV !== 'production') {\n    invariant(\n      !alreadyInjected,\n      'injectTapEventPlugin(): Can only be called once per application lifecycle.\\n\\n\\\nIt is recommended to call injectTapEventPlugin() just before you call \\\nReactDOM.render(). If you are using an external library which calls injectTapEventPlugin() \\\nitself, please contact the maintainer as it shouldn\\'t be called in library code and \\\nshould be injected by the application.'\n    )\n  }\n\n  alreadyInjected = true;\n\n  require('react-dom/lib/EventPluginHub').injection.injectEventPluginsByName({\n    'TapEventPlugin':       require('./TapEventPlugin.js')(shouldRejectClick)\n  });\n};\n\n}).call(this,require('_process'))\n",
     {
       "_process": "/home/kachitachi/client-app/node_modules/process/browser.js",
-      "./defaultClickRejectionStrategy": "/home/kachitachi/client-app/node_modules/react-tap-event-plugin/src/defaultClickRejectionStrategy.js",
       "fbjs/lib/invariant": "/home/kachitachi/client-app/node_modules/fbjs/lib/invariant.js",
+      "./defaultClickRejectionStrategy": "/home/kachitachi/client-app/node_modules/react-tap-event-plugin/src/defaultClickRejectionStrategy.js",
       "react-dom/lib/EventPluginHub": "/home/kachitachi/client-app/node_modules/react-dom/lib/EventPluginHub.js",
       "./TapEventPlugin.js": "/home/kachitachi/client-app/node_modules/react-tap-event-plugin/src/TapEventPlugin.js"
     },
@@ -10726,8 +10726,8 @@
       "./ReactElement": "/home/kachitachi/client-app/node_modules/react/lib/ReactElement.js",
       "./ReactBaseClasses": "/home/kachitachi/client-app/node_modules/react/lib/ReactBaseClasses.js",
       "./ReactChildren": "/home/kachitachi/client-app/node_modules/react/lib/ReactChildren.js",
-      "./ReactElementValidator": "/home/kachitachi/client-app/node_modules/react/lib/ReactElementValidator.js",
       "./createClass": "/home/kachitachi/client-app/node_modules/react/lib/createClass.js",
+      "./ReactElementValidator": "/home/kachitachi/client-app/node_modules/react/lib/ReactElementValidator.js",
       "./ReactPropTypes": "/home/kachitachi/client-app/node_modules/react/lib/ReactPropTypes.js"
     },
     {
@@ -11064,11 +11064,11 @@
     {
       "./style.js": "/home/kachitachi/client-app/node_modules/redbox-react/lib/style.js",
       "./lib": "/home/kachitachi/client-app/node_modules/redbox-react/lib/lib.js",
+      "prop-types": "/home/kachitachi/client-app/node_modules/prop-types/index.js",
       "react": "/home/kachitachi/client-app/node_modules/react/react.js",
       "react-dom": "/home/kachitachi/client-app/node_modules/react-dom/index.js",
       "object-assign": "/home/kachitachi/client-app/node_modules/object-assign/index.js",
       "sourcemapped-stacktrace": "/home/kachitachi/client-app/node_modules/sourcemapped-stacktrace/dist/sourcemapped-stacktrace.js",
-      "prop-types": "/home/kachitachi/client-app/node_modules/prop-types/index.js",
       "error-stack-parser": "/home/kachitachi/client-app/node_modules/error-stack-parser/error-stack-parser.js"
     },
     {
@@ -11368,8 +11368,8 @@
   "/home/kachitachi/client-app/src/js/middleware/localizer.js": [
     "Object.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _localizationSetter = require('../tools/localizationSetter');\n\nvar _localizationSetter2 = _interopRequireDefault(_localizationSetter);\n\nvar _actionTypes = require('../modules/core/actionTypes');\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar localizer = function localizer(store) {\n    return function (next) {\n        return function (action) {\n            if (action.type == _actionTypes.SET_LANGUAGE) {\n                // now apply language localization to all\n                // registered localization components\n                _localizationSetter2.default.setLanguage(action.payload.language);\n            }\n            return next(action);\n        };\n    };\n};\n\nvar _default = localizer;\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n    if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n        return;\n    }\n\n    __REACT_HOT_LOADER__.register(localizer, 'localizer', '/home/kachitachi/client-app/src/js/middleware/localizer.js');\n\n    __REACT_HOT_LOADER__.register(_default, 'default', '/home/kachitachi/client-app/src/js/middleware/localizer.js');\n}();\n\n;\n",
     {
-      "../modules/core/actionTypes": "/home/kachitachi/client-app/src/js/modules/core/actionTypes.js",
-      "../tools/localizationSetter": "/home/kachitachi/client-app/src/js/tools/localizationSetter.js"
+      "../tools/localizationSetter": "/home/kachitachi/client-app/src/js/tools/localizationSetter.js",
+      "../modules/core/actionTypes": "/home/kachitachi/client-app/src/js/modules/core/actionTypes.js"
     },
     {
       "id": "/home/kachitachi/client-app/src/js/middleware/localizer.js",
@@ -11384,9 +11384,9 @@
       "react": "/home/kachitachi/client-app/node_modules/react/react.js",
       "react-redux/lib/components/Provider": "/home/kachitachi/client-app/node_modules/react-redux/lib/components/Provider.js",
       "../tools/appHistory": "/home/kachitachi/client-app/src/js/tools/appHistory.js",
+      "react-router-dom": "/home/kachitachi/client-app/node_modules/react-router-dom/index.js",
       "./core": "/home/kachitachi/client-app/src/js/modules/core/index.js",
       "./sections": "/home/kachitachi/client-app/src/js/modules/sections/index.js",
-      "react-router-dom": "/home/kachitachi/client-app/node_modules/react-router-dom/index.js",
       "react-router-redux/ConnectedRouter": "/home/kachitachi/client-app/node_modules/react-router-redux/ConnectedRouter.js",
       "../store": "/home/kachitachi/client-app/src/js/store.js",
       "./articles": "/home/kachitachi/client-app/src/js/modules/articles/index.js",
@@ -11554,7 +11554,7 @@
     }
   ],
   "/home/kachitachi/client-app/src/js/modules/core/components/Footer.js": [
-    "Object.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRedux = require('react-redux');\n\nvar _reactJss = require('react-jss');\n\nvar _reactJss2 = _interopRequireDefault(_reactJss);\n\nvar _reactRouterDom = require('react-router-dom');\n\nvar _selectors = require('../../sections/selectors');\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar styles = {\n\tFooter: {\n\t\tbackground: '#121212'\n\t},\n\tFooter__Top: {\n\t\tbackground: '#000000',\n\t\twidth: '100%'\n\t},\n\tFooter__Top__Main: {\n\t\tbackground: '#000000',\n\t\tmargin: '0 auto',\n\t\twidth: '1060px'\n\t},\n\tFooter__Bottom: {\n\t\tbackground: '#121212',\n\t\twidth: '100%',\n\t\theight: '417px'\n\t},\n\tFooter__Bottom__Main: {\n\t\tbackground: '#121212',\n\t\tmargin: '0 auto',\n\t\twidth: '1060px'\n\t},\n\tSection: {\n\t\tcolor: '#fffefe',\n\t\tfontSize: '14px',\n\t\tfontFamily: \"Circular Std\",\n\t\tfontStyle: 'normal',\n\t\tfontWeight: '500',\n\t\ttextDecoration: 'none'\n\t},\n\tSubsection: {\n\t\tcolor: '#b6b6b6',\n\t\tfontSize: '13px',\n\t\tfontFamily: 'Circular Std',\n\t\tfontStyle: 'normal',\n\t\tfontWeight: '300',\n\t\ttextDecoration: 'none'\n\t},\n\tSpectator: {\n\t\tcolor: '#ffffff',\n\t\tpadding: '10px 0px',\n\t\tmargin: '0px 0px 10px 0px',\n\t\tfontFamily: 'Old English Text MT',\n\t\tfontSize: '36px',\n\t\tfontWeight: '400',\n\t\ttextAlign: \"left\",\n\t\theight: '43px',\n\t\twidth: '600px'\n\t},\n\tSection__Div: {\n\t\tmargin: '20px 0px 0px 0px'\n\t}\n};\n\nvar Footer = function (_Component) {\n\t_inherits(Footer, _Component);\n\n\tfunction Footer() {\n\t\t_classCallCheck(this, Footer);\n\n\t\treturn _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).apply(this, arguments));\n\t}\n\n\t_createClass(Footer, [{\n\t\tkey: 'render',\n\t\tvalue: function render() {\n\t\t\tvar classes = this.props.classes;\n\n\n\t\t\tvar sectionTree = this.props.sectionTree;\n\n\t\t\tconsole.log(sectionTree);\n\t\t\treturn _react2.default.createElement(\n\t\t\t\t'div',\n\t\t\t\t{ className: classes.Footer },\n\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t'div',\n\t\t\t\t\t{ className: classes.Footer__Top },\n\t\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t\t'div',\n\t\t\t\t\t\t{ className: classes.Footer__Top__Main },\n\t\t\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t\t\t'p',\n\t\t\t\t\t\t\t{ className: classes.Spectator },\n\t\t\t\t\t\t\t'The Spectator'\n\t\t\t\t\t\t)\n\t\t\t\t\t)\n\t\t\t\t),\n\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t'div',\n\t\t\t\t\t{ className: classes.Footer__Bottom },\n\t\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t\t'div',\n\t\t\t\t\t\t{ className: classes.Footer__Bottom__Main },\n\t\t\t\t\t\tsectionTree.map(function (section) {\n\t\t\t\t\t\t\treturn _react2.default.createElement(\n\t\t\t\t\t\t\t\t'div',\n\t\t\t\t\t\t\t\t{ className: classes.Section__Div },\n\t\t\t\t\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t\t\t\t\t_reactRouterDom.Link,\n\t\t\t\t\t\t\t\t\t{ to: '/' + section.slug, className: classes.Section },\n\t\t\t\t\t\t\t\t\tsection.name\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\t_react2.default.createElement('br', null),\n\t\t\t\t\t\t\t\tsection.subsections.map(function (subsection) {\n\t\t\t\t\t\t\t\t\treturn _react2.default.createElement(\n\t\t\t\t\t\t\t\t\t\t'div',\n\t\t\t\t\t\t\t\t\t\tnull,\n\t\t\t\t\t\t\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t\t\t\t\t\t\t_reactRouterDom.Link,\n\t\t\t\t\t\t\t\t\t\t\t{ to: '/' + section.slug + '/' + subsection.slug, className: classes.Subsection },\n\t\t\t\t\t\t\t\t\t\t\tsubsection.name\n\t\t\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\t\t\t_react2.default.createElement('br', null)\n\t\t\t\t\t\t\t\t\t);\n\t\t\t\t\t\t\t\t})\n\t\t\t\t\t\t\t);\n\t\t\t\t\t\t})\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t);\n\t\t}\n\t}]);\n\n\treturn Footer;\n}(_react.Component);\n\nvar mapStateToProps = function mapStateToProps(state) {\n\treturn {\n\t\tsectionTree: (0, _selectors.makeSectionTree)(state)\n\t};\n};\n\nvar _default = (0, _reactRedux.connect)(mapStateToProps)((0, _reactJss2.default)(styles)(Footer));\n\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n\tif (typeof __REACT_HOT_LOADER__ === 'undefined') {\n\t\treturn;\n\t}\n\n\t__REACT_HOT_LOADER__.register(styles, 'styles', '/home/kachitachi/client-app/src/js/modules/core/components/Footer.js');\n\n\t__REACT_HOT_LOADER__.register(Footer, 'Footer', '/home/kachitachi/client-app/src/js/modules/core/components/Footer.js');\n\n\t__REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', '/home/kachitachi/client-app/src/js/modules/core/components/Footer.js');\n\n\t__REACT_HOT_LOADER__.register(_default, 'default', '/home/kachitachi/client-app/src/js/modules/core/components/Footer.js');\n}();\n\n;\n",
+    "Object.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRedux = require('react-redux');\n\nvar _reactJss = require('react-jss');\n\nvar _reactJss2 = _interopRequireDefault(_reactJss);\n\nvar _reactRouterDom = require('react-router-dom');\n\nvar _selectors = require('../../sections/selectors');\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar styles = {\n\tFooter: {\n\t\tbackground: '#121212'\n\t},\n\tFooter__Top: {\n\t\tbackground: '#000000',\n\t\twidth: '100%'\n\t},\n\tFooter__Top__Main: {\n\t\tbackground: '#000000',\n\t\tmargin: '0 auto',\n\t\twidth: '1060px'\n\t},\n\tFooter__Bottom: {\n\t\tbackground: '#121212',\n\t\twidth: '100%',\n\t\theight: '417px'\n\t},\n\tFooter__Bottom__Main: {\n\t\tbackground: '#121212',\n\t\tmargin: '0 auto',\n\t\twidth: '1060px'\n\t},\n\tSection: {\n\t\tcolor: '#fffefe',\n\t\tfontSize: '14px',\n\t\tfontFamily: \"Circular Std\",\n\t\tfontStyle: 'normal',\n\t\tfontWeight: '500',\n\t\ttextDecoration: 'none'\n\t},\n\tSubsection: {\n\t\tcolor: '#b6b6b6',\n\t\tfontSize: '13px',\n\t\tfontFamily: 'Circular Std',\n\t\tfontStyle: 'normal',\n\t\tfontWeight: '300',\n\t\ttextDecoration: 'none'\n\t},\n\tSpectator: {\n\t\tcolor: '#ffffff',\n\t\tpadding: '10px 0px',\n\t\tmargin: '0px 0px 10px 0px',\n\t\tfontFamily: 'Old English Text MT',\n\t\tfontSize: '36px',\n\t\tfontWeight: '400',\n\t\ttextAlign: \"left\",\n\t\theight: '43px',\n\t\twidth: '600px'\n\t},\n\tSection__Div: {\n\t\tmargin: '20px 0px 0px 0px'\n\t}\n};\n\nvar Footer = function Footer(_ref) {\n\tvar classes = _ref.classes,\n\t    sectionTree = _ref.sectionTree;\n\n\treturn _react2.default.createElement(\n\t\t'div',\n\t\t{ className: classes.Footer },\n\t\t_react2.default.createElement(\n\t\t\t'div',\n\t\t\t{ className: classes.Footer__Top },\n\t\t\t_react2.default.createElement(\n\t\t\t\t'div',\n\t\t\t\t{ className: classes.Footer__Top__Main },\n\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t'p',\n\t\t\t\t\t{ className: classes.Spectator },\n\t\t\t\t\t'The Spectator'\n\t\t\t\t)\n\t\t\t)\n\t\t),\n\t\t_react2.default.createElement(\n\t\t\t'div',\n\t\t\t{ className: classes.Footer__Bottom },\n\t\t\t_react2.default.createElement(\n\t\t\t\t'div',\n\t\t\t\t{ className: classes.Footer__Bottom__Main },\n\t\t\t\tsectionTree.map(function (section) {\n\t\t\t\t\treturn _react2.default.createElement(\n\t\t\t\t\t\t'div',\n\t\t\t\t\t\t{ className: classes.Section__Div },\n\t\t\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t\t\t_reactRouterDom.Link,\n\t\t\t\t\t\t\t{ to: '/' + section.slug, className: classes.Section },\n\t\t\t\t\t\t\tsection.name\n\t\t\t\t\t\t),\n\t\t\t\t\t\t_react2.default.createElement('br', null),\n\t\t\t\t\t\tsection.subsections.map(function (subsection) {\n\t\t\t\t\t\t\treturn _react2.default.createElement(\n\t\t\t\t\t\t\t\t'div',\n\t\t\t\t\t\t\t\tnull,\n\t\t\t\t\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t\t\t\t\t_reactRouterDom.Link,\n\t\t\t\t\t\t\t\t\t{ to: '/' + section.slug + '/' + subsection.slug, className: classes.Subsection },\n\t\t\t\t\t\t\t\t\tsubsection.name\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\t_react2.default.createElement('br', null)\n\t\t\t\t\t\t\t);\n\t\t\t\t\t\t})\n\t\t\t\t\t);\n\t\t\t\t})\n\t\t\t)\n\t\t)\n\t);\n};\n\nvar mapStateToProps = function mapStateToProps(state) {\n\treturn {\n\t\tsectionTree: (0, _selectors.makeSectionTree)(state)\n\t};\n};\n\nvar _default = (0, _reactRedux.connect)(mapStateToProps)((0, _reactJss2.default)(styles)(Footer));\n\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n\tif (typeof __REACT_HOT_LOADER__ === 'undefined') {\n\t\treturn;\n\t}\n\n\t__REACT_HOT_LOADER__.register(styles, 'styles', '/home/kachitachi/client-app/src/js/modules/core/components/Footer.js');\n\n\t__REACT_HOT_LOADER__.register(Footer, 'Footer', '/home/kachitachi/client-app/src/js/modules/core/components/Footer.js');\n\n\t__REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', '/home/kachitachi/client-app/src/js/modules/core/components/Footer.js');\n\n\t__REACT_HOT_LOADER__.register(_default, 'default', '/home/kachitachi/client-app/src/js/modules/core/components/Footer.js');\n}();\n\n;\n",
     {
       "../../sections/selectors": "/home/kachitachi/client-app/src/js/modules/sections/selectors.js",
       "react": "/home/kachitachi/client-app/node_modules/react/react.js",
@@ -11564,9 +11564,9 @@
     },
     {
       "id": "/home/kachitachi/client-app/src/js/modules/core/components/Footer.js",
-      "hash": "zXla5g",
+      "hash": "Era0iw",
       "browserifyId": 826,
-      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkZvb3Rlci5qcz92ZXJzaW9uPXpYbGE1ZyJdLCJuYW1lcyI6WyJzdHlsZXMiLCJGb290ZXIiLCJiYWNrZ3JvdW5kIiwiRm9vdGVyX19Ub3AiLCJ3aWR0aCIsIkZvb3Rlcl9fVG9wX19NYWluIiwibWFyZ2luIiwiRm9vdGVyX19Cb3R0b20iLCJoZWlnaHQiLCJGb290ZXJfX0JvdHRvbV9fTWFpbiIsIlNlY3Rpb24iLCJjb2xvciIsImZvbnRTaXplIiwiZm9udEZhbWlseSIsImZvbnRTdHlsZSIsImZvbnRXZWlnaHQiLCJ0ZXh0RGVjb3JhdGlvbiIsIlN1YnNlY3Rpb24iLCJTcGVjdGF0b3IiLCJwYWRkaW5nIiwidGV4dEFsaWduIiwiU2VjdGlvbl9fRGl2IiwiY2xhc3NlcyIsInByb3BzIiwic2VjdGlvblRyZWUiLCJjb25zb2xlIiwibG9nIiwibWFwIiwic2VjdGlvbiIsInNsdWciLCJuYW1lIiwic3Vic2VjdGlvbnMiLCJzdWJzZWN0aW9uIiwibWFwU3RhdGVUb1Byb3BzIiwic3RhdGUiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFBQTs7OztBQUNBOztBQUNBOzs7O0FBQ0E7O0FBQ0E7Ozs7Ozs7Ozs7QUFFQSxJQUFNQSxTQUFRO0FBQ2JDLFNBQVE7QUFDUEMsY0FBWTtBQURMLEVBREs7QUFJYkMsY0FBYTtBQUNaRCxjQUFZLFNBREE7QUFFWkUsU0FBTTtBQUZNLEVBSkE7QUFRYkMsb0JBQW1CO0FBQ2xCSCxjQUFZLFNBRE07QUFFbEJJLFVBQVEsUUFGVTtBQUdsQkYsU0FBTztBQUhXLEVBUk47QUFhYkcsaUJBQWdCO0FBQ2ZMLGNBQVksU0FERztBQUVmRSxTQUFPLE1BRlE7QUFHZkksVUFBUTtBQUhPLEVBYkg7QUFrQmJDLHVCQUFzQjtBQUNyQlAsY0FBWSxTQURTO0FBRXJCSSxVQUFRLFFBRmE7QUFHckJGLFNBQU87QUFIYyxFQWxCVDtBQXVCYk0sVUFBUztBQUNSQyxTQUFPLFNBREM7QUFFUkMsWUFBVSxNQUZGO0FBR1JDLGNBQVksY0FISjtBQUlSQyxhQUFXLFFBSkg7QUFLUkMsY0FBWSxLQUxKO0FBTVJDLGtCQUFnQjtBQU5SLEVBdkJJO0FBK0JiQyxhQUFZO0FBQ1hOLFNBQU8sU0FESTtBQUVYQyxZQUFVLE1BRkM7QUFHWEMsY0FBWSxjQUhEO0FBSVhDLGFBQVcsUUFKQTtBQUtYQyxjQUFZLEtBTEQ7QUFNWEMsa0JBQWdCO0FBTkwsRUEvQkM7QUF1Q2JFLFlBQVc7QUFDVlAsU0FBTyxTQURHO0FBRVZRLFdBQVMsVUFGQztBQUdWYixVQUFRLGtCQUhFO0FBSVZPLGNBQVkscUJBSkY7QUFLVkQsWUFBVSxNQUxBO0FBTVZHLGNBQVksS0FORjtBQU9WSyxhQUFXLE1BUEQ7QUFRVlosVUFBUSxNQVJFO0FBU1ZKLFNBQU87QUFURyxFQXZDRTtBQWtEYmlCLGVBQWM7QUFDYmYsVUFBUTtBQURLO0FBbERELENBQWQ7O0lBdURNTDs7Ozs7Ozs7Ozs7MkJBRUk7QUFBQSxPQUVEcUIsT0FGQyxHQUVVLEtBQUtDLEtBRmYsQ0FFREQsT0FGQzs7O0FBSVIsT0FBTUUsY0FBYyxLQUFLRCxLQUFMLENBQVdDLFdBQS9COztBQUVBQyxXQUFRQyxHQUFSLENBQVlGLFdBQVo7QUFDQSxVQUNFO0FBQUE7QUFBQSxNQUFLLFdBQVdGLFFBQVFyQixNQUF4QjtBQUNDO0FBQUE7QUFBQSxPQUFLLFdBQVdxQixRQUFRbkIsV0FBeEI7QUFDQztBQUFBO0FBQUEsUUFBSyxXQUFXbUIsUUFBUWpCLGlCQUF4QjtBQUNDO0FBQUE7QUFBQSxTQUFHLFdBQVdpQixRQUFRSixTQUF0QjtBQUFBO0FBQUE7QUFERDtBQURELEtBREQ7QUFNQztBQUFBO0FBQUEsT0FBSyxXQUFXSSxRQUFRZixjQUF4QjtBQUNDO0FBQUE7QUFBQSxRQUFLLFdBQVdlLFFBQVFiLG9CQUF4QjtBQUNFZSxrQkFBWUcsR0FBWixDQUFnQixVQUFDQyxPQUFELEVBQWE7QUFDN0IsY0FDRTtBQUFBO0FBQUEsVUFBSyxXQUFXTixRQUFRRCxZQUF4QjtBQUNDO0FBQUE7QUFBQSxXQUFNLElBQUksTUFBS08sUUFBUUMsSUFBdkIsRUFBNkIsV0FBV1AsUUFBUVosT0FBaEQ7QUFDRWtCLGlCQUFRRTtBQURWLFNBREQ7QUFHUSxpREFIUjtBQUlFRixnQkFBUUcsV0FBUixDQUFvQkosR0FBcEIsQ0FBd0IsVUFBQ0ssVUFBRCxFQUFlO0FBQ3ZDLGdCQUNFO0FBQUE7QUFBQTtBQUNBO0FBQUE7QUFBQSxhQUFNLElBQUksTUFBTUosUUFBUUMsSUFBZCxHQUFxQixHQUFyQixHQUEwQkcsV0FBV0gsSUFBL0MsRUFBcUQsV0FBV1AsUUFBUUwsVUFBeEU7QUFDRWUsc0JBQVdGO0FBRGIsV0FEQTtBQUlBO0FBSkEsVUFERjtBQVFBLFNBVEE7QUFKRixRQURGO0FBaUJBLE9BbEJBO0FBREY7QUFERDtBQU5ELElBREY7QUFnQ0E7Ozs7OztBQUdGLElBQU1HLGtCQUFrQixTQUFsQkEsZUFBa0IsQ0FBQ0MsS0FBRDtBQUFBLFFBQVk7QUFDaENWLGVBQWEsZ0NBQWdCVSxLQUFoQjtBQURtQixFQUFaO0FBQUEsQ0FBeEI7O2VBSWUseUJBQ2RELGVBRGMsRUFFYix3QkFBWWpDLE1BQVosRUFBb0JDLE1BQXBCLENBRmE7Ozs7Ozs7Ozs7OytCQXZHVEQ7OytCQXVEQUM7OytCQTRDQWdDIiwiZmlsZSI6IkZvb3Rlci5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSZWFjdCwge0NvbXBvbmVudH0gZnJvbSAncmVhY3QnO1xuaW1wb3J0IHsgY29ubmVjdCB9IGZyb20gJ3JlYWN0LXJlZHV4JztcbmltcG9ydCBpbmplY3RTaGVldCBmcm9tICdyZWFjdC1qc3MnO1xuaW1wb3J0IHsgTGluayB9IGZyb20gJ3JlYWN0LXJvdXRlci1kb20nO1xuaW1wb3J0IHsgbWFrZVNlY3Rpb25UcmVlIH0gZnJvbSAnLi4vLi4vc2VjdGlvbnMvc2VsZWN0b3JzJztcblxuY29uc3Qgc3R5bGVzPSB7XG5cdEZvb3Rlcjoge1xuXHRcdGJhY2tncm91bmQ6ICcjMTIxMjEyJyxcblx0fSxcblx0Rm9vdGVyX19Ub3A6IHtcblx0XHRiYWNrZ3JvdW5kOiAnIzAwMDAwMCcsXG5cdFx0d2lkdGg6JzEwMCUnLFxuXHR9LFxuXHRGb290ZXJfX1RvcF9fTWFpbjoge1xuXHRcdGJhY2tncm91bmQ6ICcjMDAwMDAwJyxcblx0XHRtYXJnaW46ICcwIGF1dG8nLFxuXHRcdHdpZHRoOiAnMTA2MHB4Jyxcblx0fSxcblx0Rm9vdGVyX19Cb3R0b206IHtcblx0XHRiYWNrZ3JvdW5kOiAnIzEyMTIxMicsXG5cdFx0d2lkdGg6ICcxMDAlJyxcblx0XHRoZWlnaHQ6ICc0MTdweCcsXG5cdH0sXG5cdEZvb3Rlcl9fQm90dG9tX19NYWluOiB7XG5cdFx0YmFja2dyb3VuZDogJyMxMjEyMTInLFxuXHRcdG1hcmdpbjogJzAgYXV0bycsXG5cdFx0d2lkdGg6ICcxMDYwcHgnLFxuXHR9LFxuXHRTZWN0aW9uOiB7XG5cdFx0Y29sb3I6ICcjZmZmZWZlJyxcblx0XHRmb250U2l6ZTogJzE0cHgnLFxuXHRcdGZvbnRGYW1pbHk6IFwiQ2lyY3VsYXIgU3RkXCIsXG5cdFx0Zm9udFN0eWxlOiAnbm9ybWFsJyxcblx0XHRmb250V2VpZ2h0OiAnNTAwJyxcblx0XHR0ZXh0RGVjb3JhdGlvbjogJ25vbmUnLFxuXHR9LFxuXHRTdWJzZWN0aW9uOiB7XG5cdFx0Y29sb3I6ICcjYjZiNmI2Jyxcblx0XHRmb250U2l6ZTogJzEzcHgnLFxuXHRcdGZvbnRGYW1pbHk6ICdDaXJjdWxhciBTdGQnLFxuXHRcdGZvbnRTdHlsZTogJ25vcm1hbCcsXG5cdFx0Zm9udFdlaWdodDogJzMwMCcsXG5cdFx0dGV4dERlY29yYXRpb246ICdub25lJyxcblx0fSxcblx0U3BlY3RhdG9yOiB7XG5cdFx0Y29sb3I6ICcjZmZmZmZmJyxcblx0XHRwYWRkaW5nOiAnMTBweCAwcHgnLFxuXHRcdG1hcmdpbjogJzBweCAwcHggMTBweCAwcHgnLFxuXHRcdGZvbnRGYW1pbHk6ICdPbGQgRW5nbGlzaCBUZXh0IE1UJyxcblx0XHRmb250U2l6ZTogJzM2cHgnLFxuXHRcdGZvbnRXZWlnaHQ6ICc0MDAnLFxuXHRcdHRleHRBbGlnbjogXCJsZWZ0XCIsXG5cdFx0aGVpZ2h0OiAnNDNweCcsXG5cdFx0d2lkdGg6ICc2MDBweCdcblx0fSxcblx0U2VjdGlvbl9fRGl2OiB7XG5cdFx0bWFyZ2luOiAnMjBweCAwcHggMHB4IDBweCdcblx0fVxufVxuXG5jbGFzcyBGb290ZXIgZXh0ZW5kcyBDb21wb25lbnQge1xuXG5cdHJlbmRlcigpIHtcblxuXHRcdGNvbnN0IHtjbGFzc2VzfSA9IHRoaXMucHJvcHM7XG5cblx0XHRjb25zdCBzZWN0aW9uVHJlZSA9IHRoaXMucHJvcHMuc2VjdGlvblRyZWU7XG5cblx0XHRjb25zb2xlLmxvZyhzZWN0aW9uVHJlZSlcblx0XHRyZXR1cm4gKFxuXHRcdFx0XHQ8ZGl2IGNsYXNzTmFtZT17Y2xhc3Nlcy5Gb290ZXJ9PlxuXHRcdFx0XHRcdDxkaXYgY2xhc3NOYW1lPXtjbGFzc2VzLkZvb3Rlcl9fVG9wfT5cblx0XHRcdFx0XHRcdDxkaXYgY2xhc3NOYW1lPXtjbGFzc2VzLkZvb3Rlcl9fVG9wX19NYWlufT5cblx0XHRcdFx0XHRcdFx0PHAgY2xhc3NOYW1lPXtjbGFzc2VzLlNwZWN0YXRvcn0+VGhlIFNwZWN0YXRvcjwvcD5cblx0XHRcdFx0XHRcdDwvZGl2PlxuXHRcdFx0XHRcdDwvZGl2PlxuXHRcdFx0XHRcdDxkaXYgY2xhc3NOYW1lPXtjbGFzc2VzLkZvb3Rlcl9fQm90dG9tfT5cblx0XHRcdFx0XHRcdDxkaXYgY2xhc3NOYW1lPXtjbGFzc2VzLkZvb3Rlcl9fQm90dG9tX19NYWlufT5cblx0XHRcdFx0XHRcdFx0e3NlY3Rpb25UcmVlLm1hcCgoc2VjdGlvbikgPT4ge1xuXHRcdFx0XHRcdFx0XHRcdHJldHVybiAoXG5cdFx0XHRcdFx0XHRcdFx0XHRcdDxkaXYgY2xhc3NOYW1lPXtjbGFzc2VzLlNlY3Rpb25fX0Rpdn0+XG5cdFx0XHRcdFx0XHRcdFx0XHRcdFx0PExpbmsgdG89eycvJyArc2VjdGlvbi5zbHVnfSBjbGFzc05hbWU9e2NsYXNzZXMuU2VjdGlvbn0+XG5cdFx0XHRcdFx0XHRcdFx0XHRcdFx0XHR7c2VjdGlvbi5uYW1lfVxuXHRcdFx0XHRcdFx0XHRcdFx0XHRcdDwvTGluaz48YnIgLz5cblx0XHRcdFx0XHRcdFx0XHRcdFx0XHR7c2VjdGlvbi5zdWJzZWN0aW9ucy5tYXAoKHN1YnNlY3Rpb24pPT4ge1xuXHRcdFx0XHRcdFx0XHRcdFx0XHRcdFx0cmV0dXJuIChcblx0XHRcdFx0XHRcdFx0XHRcdFx0XHRcdFx0XHQ8ZGl2PlxuXHRcdFx0XHRcdFx0XHRcdFx0XHRcdFx0XHRcdDxMaW5rIHRvPXsnLycgKyBzZWN0aW9uLnNsdWcgKyAnLycgK3N1YnNlY3Rpb24uc2x1Z30gY2xhc3NOYW1lPXtjbGFzc2VzLlN1YnNlY3Rpb259PlxuXHRcdFx0XHRcdFx0XHRcdFx0XHRcdFx0XHRcdFx0e3N1YnNlY3Rpb24ubmFtZX1cblx0XHRcdFx0XHRcdFx0XHRcdFx0XHRcdFx0XHQ8L0xpbms+XG5cdFx0XHRcdFx0XHRcdFx0XHRcdFx0XHRcdFx0PGJyIC8+XG5cdFx0XHRcdFx0XHRcdFx0XHRcdFx0XHRcdFx0PC9kaXY+XG5cdFx0XHRcdFx0XHRcdFx0XHRcdFx0XHRcdClcblx0XHRcdFx0XHRcdFx0XHRcdFx0XHR9KX1cblx0XHRcdFx0XHRcdFx0XHRcdFx0PC9kaXY+XG5cdFx0XHRcdFx0XHRcdFx0XHQpXG5cdFx0XHRcdFx0XHRcdH0pfVxuXHRcdFx0XHRcdFx0PC9kaXY+XG5cdFx0XHRcdFx0PC9kaXY+XG5cdFx0XHRcdDwvZGl2PlxuXHRcdFx0KVx0XG5cdH1cbn1cblxuY29uc3QgbWFwU3RhdGVUb1Byb3BzID0gKHN0YXRlKSA9PiAoe1xuICAgIHNlY3Rpb25UcmVlOiBtYWtlU2VjdGlvblRyZWUoc3RhdGUpXG59KTtcblxuZXhwb3J0IGRlZmF1bHQgY29ubmVjdChcblx0bWFwU3RhdGVUb1Byb3BzXG4pKGluamVjdFNoZWV0KHN0eWxlcykoRm9vdGVyKSk7Il19"
+      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkZvb3Rlci5qcz92ZXJzaW9uPUVyYTBpdyJdLCJuYW1lcyI6WyJzdHlsZXMiLCJGb290ZXIiLCJiYWNrZ3JvdW5kIiwiRm9vdGVyX19Ub3AiLCJ3aWR0aCIsIkZvb3Rlcl9fVG9wX19NYWluIiwibWFyZ2luIiwiRm9vdGVyX19Cb3R0b20iLCJoZWlnaHQiLCJGb290ZXJfX0JvdHRvbV9fTWFpbiIsIlNlY3Rpb24iLCJjb2xvciIsImZvbnRTaXplIiwiZm9udEZhbWlseSIsImZvbnRTdHlsZSIsImZvbnRXZWlnaHQiLCJ0ZXh0RGVjb3JhdGlvbiIsIlN1YnNlY3Rpb24iLCJTcGVjdGF0b3IiLCJwYWRkaW5nIiwidGV4dEFsaWduIiwiU2VjdGlvbl9fRGl2IiwiY2xhc3NlcyIsInNlY3Rpb25UcmVlIiwibWFwIiwic2VjdGlvbiIsInNsdWciLCJuYW1lIiwic3Vic2VjdGlvbnMiLCJzdWJzZWN0aW9uIiwibWFwU3RhdGVUb1Byb3BzIiwic3RhdGUiXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUE7Ozs7QUFDQTs7QUFDQTs7OztBQUNBOztBQUNBOzs7O0FBRUEsSUFBTUEsU0FBUTtBQUNiQyxTQUFRO0FBQ1BDLGNBQVk7QUFETCxFQURLO0FBSWJDLGNBQWE7QUFDWkQsY0FBWSxTQURBO0FBRVpFLFNBQU07QUFGTSxFQUpBO0FBUWJDLG9CQUFtQjtBQUNsQkgsY0FBWSxTQURNO0FBRWxCSSxVQUFRLFFBRlU7QUFHbEJGLFNBQU87QUFIVyxFQVJOO0FBYWJHLGlCQUFnQjtBQUNmTCxjQUFZLFNBREc7QUFFZkUsU0FBTyxNQUZRO0FBR2ZJLFVBQVE7QUFITyxFQWJIO0FBa0JiQyx1QkFBc0I7QUFDckJQLGNBQVksU0FEUztBQUVyQkksVUFBUSxRQUZhO0FBR3JCRixTQUFPO0FBSGMsRUFsQlQ7QUF1QmJNLFVBQVM7QUFDUkMsU0FBTyxTQURDO0FBRVJDLFlBQVUsTUFGRjtBQUdSQyxjQUFZLGNBSEo7QUFJUkMsYUFBVyxRQUpIO0FBS1JDLGNBQVksS0FMSjtBQU1SQyxrQkFBZ0I7QUFOUixFQXZCSTtBQStCYkMsYUFBWTtBQUNYTixTQUFPLFNBREk7QUFFWEMsWUFBVSxNQUZDO0FBR1hDLGNBQVksY0FIRDtBQUlYQyxhQUFXLFFBSkE7QUFLWEMsY0FBWSxLQUxEO0FBTVhDLGtCQUFnQjtBQU5MLEVBL0JDO0FBdUNiRSxZQUFXO0FBQ1ZQLFNBQU8sU0FERztBQUVWUSxXQUFTLFVBRkM7QUFHVmIsVUFBUSxrQkFIRTtBQUlWTyxjQUFZLHFCQUpGO0FBS1ZELFlBQVUsTUFMQTtBQU1WRyxjQUFZLEtBTkY7QUFPVkssYUFBVyxNQVBEO0FBUVZaLFVBQVEsTUFSRTtBQVNWSixTQUFPO0FBVEcsRUF2Q0U7QUFrRGJpQixlQUFjO0FBQ2JmLFVBQVE7QUFESztBQWxERCxDQUFkOztBQXVEQSxJQUFNTCxTQUFTLFNBQVRBLE1BQVMsT0FBNEI7QUFBQSxLQUExQnFCLE9BQTBCLFFBQTFCQSxPQUEwQjtBQUFBLEtBQWpCQyxXQUFpQixRQUFqQkEsV0FBaUI7O0FBQzFDLFFBQ0U7QUFBQTtBQUFBLElBQUssV0FBV0QsUUFBUXJCLE1BQXhCO0FBQ0E7QUFBQTtBQUFBLEtBQUssV0FBV3FCLFFBQVFuQixXQUF4QjtBQUNDO0FBQUE7QUFBQSxNQUFLLFdBQVdtQixRQUFRakIsaUJBQXhCO0FBQ0M7QUFBQTtBQUFBLE9BQUcsV0FBV2lCLFFBQVFKLFNBQXRCO0FBQUE7QUFBQTtBQUREO0FBREQsR0FEQTtBQU1BO0FBQUE7QUFBQSxLQUFLLFdBQVdJLFFBQVFmLGNBQXhCO0FBQ0M7QUFBQTtBQUFBLE1BQUssV0FBV2UsUUFBUWIsb0JBQXhCO0FBQ0VjLGdCQUFZQyxHQUFaLENBQWdCLFVBQUNDLE9BQUQsRUFBYTtBQUM3QixZQUNDO0FBQUE7QUFBQSxRQUFLLFdBQVdILFFBQVFELFlBQXhCO0FBQ0M7QUFBQTtBQUFBLFNBQU0sSUFBSSxNQUFLSSxRQUFRQyxJQUF2QixFQUE2QixXQUFXSixRQUFRWixPQUFoRDtBQUNFZSxlQUFRRTtBQURWLE9BREQ7QUFHUSwrQ0FIUjtBQUlFRixjQUFRRyxXQUFSLENBQW9CSixHQUFwQixDQUF3QixVQUFDSyxVQUFELEVBQWU7QUFDdkMsY0FDRTtBQUFBO0FBQUE7QUFDQTtBQUFBO0FBQUEsV0FBTSxJQUFJLE1BQU1KLFFBQVFDLElBQWQsR0FBcUIsR0FBckIsR0FBMEJHLFdBQVdILElBQS9DLEVBQXFELFdBQVdKLFFBQVFMLFVBQXhFO0FBQ0VZLG9CQUFXRjtBQURiLFNBREE7QUFJQTtBQUpBLFFBREY7QUFRQSxPQVRBO0FBSkYsTUFERDtBQWlCQSxLQWxCQTtBQURGO0FBREQ7QUFOQSxFQURGO0FBZ0NBLENBakNEOztBQW1DQSxJQUFNRyxrQkFBa0IsU0FBbEJBLGVBQWtCLENBQUNDLEtBQUQ7QUFBQSxRQUFZO0FBQ2hDUixlQUFhLGdDQUFnQlEsS0FBaEI7QUFEbUIsRUFBWjtBQUFBLENBQXhCOztlQUllLHlCQUNkRCxlQURjLEVBRWIsd0JBQVk5QixNQUFaLEVBQW9CQyxNQUFwQixDQUZhOzs7Ozs7Ozs7OzsrQkE5RlREOzsrQkF1REFDOzsrQkFtQ0E2QiIsImZpbGUiOiJGb290ZXIuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QsIHtDb21wb25lbnR9IGZyb20gJ3JlYWN0JztcbmltcG9ydCB7IGNvbm5lY3QgfSBmcm9tICdyZWFjdC1yZWR1eCc7XG5pbXBvcnQgaW5qZWN0U2hlZXQgZnJvbSAncmVhY3QtanNzJztcbmltcG9ydCB7IExpbmsgfSBmcm9tICdyZWFjdC1yb3V0ZXItZG9tJztcbmltcG9ydCB7IG1ha2VTZWN0aW9uVHJlZSB9IGZyb20gJy4uLy4uL3NlY3Rpb25zL3NlbGVjdG9ycyc7XG5cbmNvbnN0IHN0eWxlcz0ge1xuXHRGb290ZXI6IHtcblx0XHRiYWNrZ3JvdW5kOiAnIzEyMTIxMicsXG5cdH0sXG5cdEZvb3Rlcl9fVG9wOiB7XG5cdFx0YmFja2dyb3VuZDogJyMwMDAwMDAnLFxuXHRcdHdpZHRoOicxMDAlJyxcblx0fSxcblx0Rm9vdGVyX19Ub3BfX01haW46IHtcblx0XHRiYWNrZ3JvdW5kOiAnIzAwMDAwMCcsXG5cdFx0bWFyZ2luOiAnMCBhdXRvJyxcblx0XHR3aWR0aDogJzEwNjBweCcsXG5cdH0sXG5cdEZvb3Rlcl9fQm90dG9tOiB7XG5cdFx0YmFja2dyb3VuZDogJyMxMjEyMTInLFxuXHRcdHdpZHRoOiAnMTAwJScsXG5cdFx0aGVpZ2h0OiAnNDE3cHgnLFxuXHR9LFxuXHRGb290ZXJfX0JvdHRvbV9fTWFpbjoge1xuXHRcdGJhY2tncm91bmQ6ICcjMTIxMjEyJyxcblx0XHRtYXJnaW46ICcwIGF1dG8nLFxuXHRcdHdpZHRoOiAnMTA2MHB4Jyxcblx0fSxcblx0U2VjdGlvbjoge1xuXHRcdGNvbG9yOiAnI2ZmZmVmZScsXG5cdFx0Zm9udFNpemU6ICcxNHB4Jyxcblx0XHRmb250RmFtaWx5OiBcIkNpcmN1bGFyIFN0ZFwiLFxuXHRcdGZvbnRTdHlsZTogJ25vcm1hbCcsXG5cdFx0Zm9udFdlaWdodDogJzUwMCcsXG5cdFx0dGV4dERlY29yYXRpb246ICdub25lJyxcblx0fSxcblx0U3Vic2VjdGlvbjoge1xuXHRcdGNvbG9yOiAnI2I2YjZiNicsXG5cdFx0Zm9udFNpemU6ICcxM3B4Jyxcblx0XHRmb250RmFtaWx5OiAnQ2lyY3VsYXIgU3RkJyxcblx0XHRmb250U3R5bGU6ICdub3JtYWwnLFxuXHRcdGZvbnRXZWlnaHQ6ICczMDAnLFxuXHRcdHRleHREZWNvcmF0aW9uOiAnbm9uZScsXG5cdH0sXG5cdFNwZWN0YXRvcjoge1xuXHRcdGNvbG9yOiAnI2ZmZmZmZicsXG5cdFx0cGFkZGluZzogJzEwcHggMHB4Jyxcblx0XHRtYXJnaW46ICcwcHggMHB4IDEwcHggMHB4Jyxcblx0XHRmb250RmFtaWx5OiAnT2xkIEVuZ2xpc2ggVGV4dCBNVCcsXG5cdFx0Zm9udFNpemU6ICczNnB4Jyxcblx0XHRmb250V2VpZ2h0OiAnNDAwJyxcblx0XHR0ZXh0QWxpZ246IFwibGVmdFwiLFxuXHRcdGhlaWdodDogJzQzcHgnLFxuXHRcdHdpZHRoOiAnNjAwcHgnXG5cdH0sXG5cdFNlY3Rpb25fX0Rpdjoge1xuXHRcdG1hcmdpbjogJzIwcHggMHB4IDBweCAwcHgnXG5cdH1cbn1cblxuY29uc3QgRm9vdGVyID0gKHtjbGFzc2VzLCBzZWN0aW9uVHJlZX0pID0+IHtcblx0cmV0dXJuIChcblx0IFx0PGRpdiBjbGFzc05hbWU9e2NsYXNzZXMuRm9vdGVyfT5cblx0XHRcdDxkaXYgY2xhc3NOYW1lPXtjbGFzc2VzLkZvb3Rlcl9fVG9wfT5cblx0XHRcdFx0PGRpdiBjbGFzc05hbWU9e2NsYXNzZXMuRm9vdGVyX19Ub3BfX01haW59PlxuXHRcdFx0XHRcdDxwIGNsYXNzTmFtZT17Y2xhc3Nlcy5TcGVjdGF0b3J9PlRoZSBTcGVjdGF0b3I8L3A+XG5cdFx0XHRcdDwvZGl2PlxuXHRcdFx0PC9kaXY+XG5cdFx0XHQ8ZGl2IGNsYXNzTmFtZT17Y2xhc3Nlcy5Gb290ZXJfX0JvdHRvbX0+XG5cdFx0XHRcdDxkaXYgY2xhc3NOYW1lPXtjbGFzc2VzLkZvb3Rlcl9fQm90dG9tX19NYWlufT5cblx0XHRcdFx0XHR7c2VjdGlvblRyZWUubWFwKChzZWN0aW9uKSA9PiB7XG5cdFx0XHRcdFx0XHRyZXR1cm4gKFxuXHRcdFx0XHRcdFx0XHQ8ZGl2IGNsYXNzTmFtZT17Y2xhc3Nlcy5TZWN0aW9uX19EaXZ9PlxuXHRcdFx0XHRcdFx0XHRcdDxMaW5rIHRvPXsnLycgK3NlY3Rpb24uc2x1Z30gY2xhc3NOYW1lPXtjbGFzc2VzLlNlY3Rpb259PlxuXHRcdFx0XHRcdFx0XHRcdFx0e3NlY3Rpb24ubmFtZX1cblx0XHRcdFx0XHRcdFx0XHQ8L0xpbms+PGJyIC8+XG5cdFx0XHRcdFx0XHRcdFx0e3NlY3Rpb24uc3Vic2VjdGlvbnMubWFwKChzdWJzZWN0aW9uKT0+IHtcblx0XHRcdFx0XHRcdFx0XHRcdHJldHVybiAoXG5cdFx0XHRcdFx0XHRcdFx0XHRcdFx0PGRpdj5cblx0XHRcdFx0XHRcdFx0XHRcdFx0XHQ8TGluayB0bz17Jy8nICsgc2VjdGlvbi5zbHVnICsgJy8nICtzdWJzZWN0aW9uLnNsdWd9IGNsYXNzTmFtZT17Y2xhc3Nlcy5TdWJzZWN0aW9ufT5cblx0XHRcdFx0XHRcdFx0XHRcdFx0XHRcdHtzdWJzZWN0aW9uLm5hbWV9XG5cdFx0XHRcdFx0XHRcdFx0XHRcdFx0PC9MaW5rPlxuXHRcdFx0XHRcdFx0XHRcdFx0XHRcdDxiciAvPlxuXHRcdFx0XHRcdFx0XHRcdFx0XHRcdDwvZGl2PlxuXHRcdFx0XHRcdFx0XHRcdFx0XHQpXG5cdFx0XHRcdFx0XHRcdFx0fSl9XG5cdFx0XHRcdFx0XHRcdDwvZGl2PlxuXHRcdFx0XHRcdFx0XHQpXG5cdFx0XHRcdFx0fSl9XG5cdFx0XHRcdDwvZGl2PlxuXHRcdFx0PC9kaXY+XG5cdFx0PC9kaXY+XG5cdFx0XHQpXG59XG5cbmNvbnN0IG1hcFN0YXRlVG9Qcm9wcyA9IChzdGF0ZSkgPT4gKHtcbiAgICBzZWN0aW9uVHJlZTogbWFrZVNlY3Rpb25UcmVlKHN0YXRlKVxufSk7XG5cbmV4cG9ydCBkZWZhdWx0IGNvbm5lY3QoXG5cdG1hcFN0YXRlVG9Qcm9wc1xuKShpbmplY3RTaGVldChzdHlsZXMpKEZvb3RlcikpOyJdfQ=="
     }
   ],
   "/home/kachitachi/client-app/src/js/modules/core/components/Header.js": [
@@ -11587,9 +11587,9 @@
       "../../sections": "/home/kachitachi/client-app/src/js/modules/sections/index.js",
       "react": "/home/kachitachi/client-app/node_modules/react/react.js",
       "redux": "/home/kachitachi/client-app/node_modules/redux/lib/index.js",
+      "react-router-dom": "/home/kachitachi/client-app/node_modules/react-router-dom/index.js",
       "./Footer": "/home/kachitachi/client-app/src/js/modules/core/components/Footer.js",
       "react-redux": "/home/kachitachi/client-app/node_modules/react-redux/lib/index.js",
-      "react-router-dom": "/home/kachitachi/client-app/node_modules/react-router-dom/index.js",
       "react-jss": "/home/kachitachi/client-app/node_modules/react-jss/lib/index.js"
     },
     {
@@ -11716,10 +11716,10 @@
       "../../sections": "/home/kachitachi/client-app/src/js/modules/sections/index.js",
       "../../articles": "/home/kachitachi/client-app/src/js/modules/articles/index.js",
       "react": "/home/kachitachi/client-app/node_modules/react/react.js",
+      "react-router-dom": "/home/kachitachi/client-app/node_modules/react-router-dom/index.js",
       "redux": "/home/kachitachi/client-app/node_modules/redux/lib/index.js",
       "react-redux": "/home/kachitachi/client-app/node_modules/react-redux/lib/index.js",
-      "react-jss": "/home/kachitachi/client-app/node_modules/react-jss/lib/index.js",
-      "react-router-dom": "/home/kachitachi/client-app/node_modules/react-router-dom/index.js"
+      "react-jss": "/home/kachitachi/client-app/node_modules/react-jss/lib/index.js"
     },
     {
       "id": "/home/kachitachi/client-app/src/js/modules/sections/components/SectionPage.js",
@@ -11794,8 +11794,8 @@
     "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _combineReducers;\n\nvar _combineReducers2 = require('redux/lib/combineReducers');\n\nvar _combineReducers3 = _interopRequireDefault(_combineReducers2);\n\nvar _reducer = require('react-router-redux/reducer');\n\nvar _core = require('./modules/core');\n\nvar _core2 = _interopRequireDefault(_core);\n\nvar _articles = require('./modules/articles');\n\nvar _articles2 = _interopRequireDefault(_articles);\n\nvar _sections = require('./modules/sections');\n\nvar _sections2 = _interopRequireDefault(_sections);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\nvar _default = (0, _combineReducers3.default)((_combineReducers = {}, _defineProperty(_combineReducers, _core2.default.constants.NAME, _core2.default.reducer), _defineProperty(_combineReducers, _articles2.default.constants.NAME, _articles2.default.reducer), _defineProperty(_combineReducers, _sections2.default.constants.NAME, _sections2.default.reducer), _defineProperty(_combineReducers, 'router', _reducer.routerReducer), _combineReducers));\n\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n\n  __REACT_HOT_LOADER__.register(_default, 'default', '/home/kachitachi/client-app/src/js/reducers.js');\n}();\n\n;\n",
     {
       "react-router-redux/reducer": "/home/kachitachi/client-app/node_modules/react-router-redux/reducer.js",
-      "./modules/articles": "/home/kachitachi/client-app/src/js/modules/articles/index.js",
       "./modules/sections": "/home/kachitachi/client-app/src/js/modules/sections/index.js",
+      "./modules/articles": "/home/kachitachi/client-app/src/js/modules/articles/index.js",
       "./modules/core": "/home/kachitachi/client-app/src/js/modules/core/index.js",
       "redux/lib/combineReducers": "/home/kachitachi/client-app/node_modules/redux/lib/combineReducers.js"
     },
@@ -11852,13 +11852,13 @@
     }
   ],
   "/home/kachitachi/client-app/src/js/versionInfo.js": [
-    "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n/**\r\n * Warning : if editing this file, be sure to keep the VERSION variable set to 'X.X.X'\r\n *           without modifying formatting for automation scripts\r\n * @type {{VERSION: string}}\r\n */\nvar VersionInfo = { VERSION: '0.0.777' };\nvar _default = VersionInfo;\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n\n  __REACT_HOT_LOADER__.register(VersionInfo, 'VersionInfo', '/home/kachitachi/client-app/src/js/versionInfo.js');\n\n  __REACT_HOT_LOADER__.register(_default, 'default', '/home/kachitachi/client-app/src/js/versionInfo.js');\n}();\n\n;\n",
+    "Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n/**\r\n * Warning : if editing this file, be sure to keep the VERSION variable set to 'X.X.X'\r\n *           without modifying formatting for automation scripts\r\n * @type {{VERSION: string}}\r\n */\nvar VersionInfo = { VERSION: '0.0.785' };\nvar _default = VersionInfo;\nexports.default = _default;\nmodule.exports = exports['default'];\n;\n\nvar _temp = function () {\n  if (typeof __REACT_HOT_LOADER__ === 'undefined') {\n    return;\n  }\n\n  __REACT_HOT_LOADER__.register(VersionInfo, 'VersionInfo', '/home/kachitachi/client-app/src/js/versionInfo.js');\n\n  __REACT_HOT_LOADER__.register(_default, 'default', '/home/kachitachi/client-app/src/js/versionInfo.js');\n}();\n\n;\n",
     {},
     {
       "id": "/home/kachitachi/client-app/src/js/versionInfo.js",
-      "hash": "eu6L9Q",
+      "hash": "tmWzUg",
       "browserifyId": 848,
-      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZlcnNpb25JbmZvLmpzP3ZlcnNpb249ZXU2TDlRIl0sIm5hbWVzIjpbIlZlcnNpb25JbmZvIiwiVkVSU0lPTiJdLCJtYXBwaW5ncyI6Ijs7OztBQUFBOzs7OztBQUtBLElBQUlBLGNBQWMsRUFBRUMsU0FBVSxTQUFaLEVBQWxCO2VBQ2VEOzs7Ozs7Ozs7O2dDQURYQSIsImZpbGUiOiJ2ZXJzaW9uSW5mby5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxyXG4gKiBXYXJuaW5nIDogaWYgZWRpdGluZyB0aGlzIGZpbGUsIGJlIHN1cmUgdG8ga2VlcCB0aGUgVkVSU0lPTiB2YXJpYWJsZSBzZXQgdG8gJ1guWC5YJ1xyXG4gKiAgICAgICAgICAgd2l0aG91dCBtb2RpZnlpbmcgZm9ybWF0dGluZyBmb3IgYXV0b21hdGlvbiBzY3JpcHRzXHJcbiAqIEB0eXBlIHt7VkVSU0lPTjogc3RyaW5nfX1cclxuICovXHJcbmxldCBWZXJzaW9uSW5mbyA9IHsgVkVSU0lPTiA6ICcwLjAuNzc3JyB9O1xyXG5leHBvcnQgZGVmYXVsdCBWZXJzaW9uSW5mbyJdfQ=="
+      "sourcemap": "//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZlcnNpb25JbmZvLmpzP3ZlcnNpb249dG1XelVnIl0sIm5hbWVzIjpbIlZlcnNpb25JbmZvIiwiVkVSU0lPTiJdLCJtYXBwaW5ncyI6Ijs7OztBQUFBOzs7OztBQUtBLElBQUlBLGNBQWMsRUFBRUMsU0FBVSxTQUFaLEVBQWxCO2VBQ2VEOzs7Ozs7Ozs7O2dDQURYQSIsImZpbGUiOiJ2ZXJzaW9uSW5mby5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxyXG4gKiBXYXJuaW5nIDogaWYgZWRpdGluZyB0aGlzIGZpbGUsIGJlIHN1cmUgdG8ga2VlcCB0aGUgVkVSU0lPTiB2YXJpYWJsZSBzZXQgdG8gJ1guWC5YJ1xyXG4gKiAgICAgICAgICAgd2l0aG91dCBtb2RpZnlpbmcgZm9ybWF0dGluZyBmb3IgYXV0b21hdGlvbiBzY3JpcHRzXHJcbiAqIEB0eXBlIHt7VkVSU0lPTjogc3RyaW5nfX1cclxuICovXHJcbmxldCBWZXJzaW9uSW5mbyA9IHsgVkVSU0lPTiA6ICcwLjAuNzg1JyB9O1xyXG5leHBvcnQgZGVmYXVsdCBWZXJzaW9uSW5mbyJdfQ=="
     }
   ],
   "react-hot-loader/patch": [

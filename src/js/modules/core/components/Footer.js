@@ -59,48 +59,39 @@ const styles= {
 	}
 }
 
-class Footer extends Component {
-
-	render() {
-
-		const {classes} = this.props;
-
-		const sectionTree = this.props.sectionTree;
-
-		console.log(sectionTree)
-		return (
-				<div className={classes.Footer}>
-					<div className={classes.Footer__Top}>
-						<div className={classes.Footer__Top__Main}>
-							<p className={classes.Spectator}>The Spectator</p>
-						</div>
-					</div>
-					<div className={classes.Footer__Bottom}>
-						<div className={classes.Footer__Bottom__Main}>
-							{sectionTree.map((section) => {
-								return (
-										<div className={classes.Section__Div}>
-											<Link to={'/' +section.slug} className={classes.Section}>
-												{section.name}
-											</Link><br />
-											{section.subsections.map((subsection)=> {
-												return (
-														<div>
-														<Link to={'/' + section.slug + '/' +subsection.slug} className={classes.Subsection}>
-															{subsection.name}
-														</Link>
-														<br />
-														</div>
-													)
-											})}
-										</div>
-									)
-							})}
-						</div>
-					</div>
+const Footer = ({classes, sectionTree}) => {
+	return (
+	 	<div className={classes.Footer}>
+			<div className={classes.Footer__Top}>
+				<div className={classes.Footer__Top__Main}>
+					<p className={classes.Spectator}>The Spectator</p>
 				</div>
-			)	
-	}
+			</div>
+			<div className={classes.Footer__Bottom}>
+				<div className={classes.Footer__Bottom__Main}>
+					{sectionTree.map((section) => {
+						return (
+							<div className={classes.Section__Div}>
+								<Link to={'/' +section.slug} className={classes.Section}>
+									{section.name}
+								</Link><br />
+								{section.subsections.map((subsection)=> {
+									return (
+											<div>
+											<Link to={'/' + section.slug + '/' +subsection.slug} className={classes.Subsection}>
+												{subsection.name}
+											</Link>
+											<br />
+											</div>
+										)
+								})}
+							</div>
+							)
+					})}
+				</div>
+			</div>
+		</div>
+			)
 }
 
 const mapStateToProps = (state) => ({
