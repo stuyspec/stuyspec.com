@@ -2,18 +2,6 @@ import React from 'react';
 import injectSheet from 'react-jss';
 import {Link} from 'react-router-dom';
 
-const styles = {};
-
-const PageHeader = ({classes}) => {
-  return (
-    <div>
-      Header
-    </div>
-  )
-};
-
-export default (injectSheet(styles)(PageHeader));
-
 /*
 TODO: Add in direct navigation which leads users directly to some pages. (Exists on all pages)
  These links are both the left-aligned—hamburger menu of sections,
@@ -31,3 +19,16 @@ TODO: Add in site structure navigation which links to the first layer items of t
  heading above it (the Header). On article pages, no such navigation exists; there is
  only direct navigation. On mobile, no such navigation exists; there is only direct navigation.
  */
+
+const styles = {};
+
+const PageHeader = ({classes}) => {
+  return (
+    <div>
+      Header
+    </div>
+  )
+};
+
+export default (injectSheet(styles)(PageHeader));
+

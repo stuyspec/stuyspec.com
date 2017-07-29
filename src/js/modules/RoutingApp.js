@@ -51,13 +51,11 @@ const RoutingApp = () => {
   return (
     <Provider store={store}>
       <ConnectedRouter history={appHistory}>
-         <PageLayout>
           <Switch>
             <Route exact path="/" component={HomePage}/>
             {createSectionRoutes()}
             {createArticleRoutes()}
           </Switch>
-         </PageLayout>
       </ConnectedRouter>
     </Provider>
   );

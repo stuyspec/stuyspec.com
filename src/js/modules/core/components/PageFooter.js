@@ -2,24 +2,27 @@ import React from 'react';
 import injectSheet from 'react-jss';
 import {Link} from 'react-router-dom';
 
+import Container from 'muicss/lib/react/container';
+import Row from 'muicss/lib/react/row';
+import Col from 'muicss/lib/react/col';
+
 const styles = {
   PageFooter: {
     background: '#121212',
-    height: '408px',
+    height: '370px',
     paddingTop: '9px',
   },
   pageFooterMain: {
     margin: '0 auto',
-    width: '1000px',
     display: 'flex',
     flexDirection: 'row',
+    width: '930px',
   },
   sectionFlex: {
     height: '350px',
     display: 'flex',
     flexFlow: 'column wrap',
     flex: '4 0 0',
-    width: '700px',
   },
   sectionBlock: {
     marginTop: '23px',
@@ -47,9 +50,9 @@ const styles = {
       textDecoration: 'underline',
     },
   },
-  fillerDiv: {
-    flex: '1 0 0',
-    marginRight: '20px',
+  filler: {
+    width: '140px',
+    padding: '0px 10px',
   }
 };
 
@@ -85,15 +88,15 @@ const PageFooter = ({classes, sectionsWithSubsections}) => {
   };
 
   return (
-    <div className={classes.PageFooter}>
-      <div className={classes.pageFooterMain}>
-        <div className={classes.fillerDiv}></div>
-        <div className={classes.sectionFlex}>
-         {makeSectionLinks()}
-        </div>
-        <div className={classes.fillerDiv}></div>
-      </div>
-    </div>
+    <Container fluid={true} className={classes.PageFooter}>
+      <Row className={classes.pageFooterMain}>
+        <Col md="2" className={classes.filler}>Hello</Col>
+        <Col md="8" className={classes.sectionFlex}>
+          {makeSectionLinks()}
+        </Col>
+        <Col md="2" className={classes.filler}>Wass Up</Col>
+      </Row>
+    </Container>
   );
 };
 
