@@ -1,7 +1,9 @@
 import { createSelector } from 'reselect';
+import { objectFilter } from '../../utils.js';
+
+Object.filter = objectFilter;
 
 const getSections = (state) => state.sections.sections;
-
 const getSectionByProps = (state, props) => props.section;
 const getSubsectionsByProps = (state, props) => props.subsections;
 
@@ -14,14 +16,6 @@ export const getSectionAndSubsectionSlugs = createSelector(
     return [ section.slug, ...Object.keys(subsections) ];
   }
 );
-
-/* Writes the filter function for objects.
- * predicate is the function which keys/properties must match
- */
-Object.filter = (obj, predicate) =>
-  Object.keys(obj)
-    .filter(key => predicate(obj[ key ]))
-    .reduce((res, key) => (res[ key ] = obj[ key ], res), {});
 
 /**
  * Returns a modified version of state.sections.sections for Routes.
@@ -73,5 +67,43 @@ export const getAllSectionLinksFromHome = createSelector(
       };
     });
     return sectionLinks;
+  }
+);
+
+const getParentSections = createSelector(
+  getSections,
+  (sections) => {
+    return Object.filter(sections, section => {
+      return section.parentSlug === null;
+    });
+  }
+);
+const getSubsections = createSelector(
+  getSections,
+  (sections) => {
+    return Object.filter(sections, section => {
+      return section.parentSlug !== null;
+    });
+  }
+);
+
+/**
+ * Returns a modified version of state.sections.sections for the Footer.
+ * For each section, its subsections are included as a key: object.
+ */
+export const getSectionsWithSubsections = createSelector(
+  [ getParentSections, getSubsections ],
+  (parentSections, allSubsections) => {
+    let sectionsWithSubsections = [];
+    Object.keys(parentSections).map((parentSectionSlug) => {
+      const sectionWithSubsections = {
+        ...parentSections[ parentSectionSlug ],
+        subsections: Object.filter(allSubsections, subsection => {
+          return subsection.parentSlug === parentSectionSlug;
+        }),
+      }
+      sectionsWithSubsections.push(sectionWithSubsections);
+    });
+    return sectionsWithSubsections;
   }
 );

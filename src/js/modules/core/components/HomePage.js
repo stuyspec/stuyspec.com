@@ -3,7 +3,6 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
-
 import sections from "../../sections";
 
 const styles = {
@@ -32,7 +31,6 @@ const HomePage = ({ classes, sectionLinks }) => {
 };
 
 const mapStateToProps = (state) => ({
-  articles: {},
   sectionLinks: sections.selectors.getAllSectionLinksFromHome(state),
 });
 
