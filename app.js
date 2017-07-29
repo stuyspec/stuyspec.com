@@ -74,13 +74,13 @@ console.log(__dirname + '/' + codeDir);
 
 app.get('/', (req,res)=>
 {
-    res.render(__dirname + '/' + codeDir + '/index.html');
+  res.render(__dirname + '/' + codeDir + '/index.html');
 });
 
 
 app.get('*', (req, res)=>
 {
-    res.send('<p>Sorry, the page you requested cannot be found. </p>');
+  res.render(__dirname + '/' + codeDir + '/index.html');
 });
 
 let startServer = ((server)=>
