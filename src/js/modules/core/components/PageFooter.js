@@ -1,15 +1,22 @@
 import React from 'react';
 import injectSheet from 'react-jss';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const styles = {
   PageFooter: {
     background: '#121212',
+    height: '417px',
+  },
+  pageFooterMain: {
+    margin: '0 auto',
+    width: '1060px',
+    display: 'flex',
+    flexDirection: 'column',
   },
   sectionBlock: {
     marginTop: '20px',
   },
-  parentSectionLink: {
+  topLevelSectionLink: {
     color: '#fffefe',
     fontSize: '14px',
     fontFamily: "Circular Std",
@@ -25,21 +32,25 @@ const styles = {
     fontWeight: '300',
     textDecoration: 'none',
   },
+  socialMedia: {
+    width: '30px',
+    height: '30px',
+  },
 };
 
-const PageFooter = ({ classes, sectionsWithSubsections }) => {
+const PageFooter = ({classes, sectionsWithSubsections}) => {
   const makeSectionLinks = () => {
-    return (sectionsWithSubsections.map((parentSection) => {
+    return (sectionsWithSubsections.map((topLevelSection) => {
         return (
-          <div className={classes.sectionBlock} key={parentSection.id}>
-            <Link to={`/${parentSection.slug}`} className={classes.parentSectionLink}>
-              {parentSection.name}
+          <div className={classes.sectionBlock} key={topLevelSection.id}>
+            <Link to={`/${topLevelSection.slug}`} className={classes.topLevelSectionLink}>
+              {topLevelSection.name}
             </Link><br/>
             {
-              Object.keys(parentSection.subsections).map((subsectionSlug) => {
+              Object.keys(topLevelSection.subsections).map((subsectionSlug) => {
                 return makeSubsectionLink(
-                  parentSection.slug,
-                  parentSection.subsections[subsectionSlug]);
+                  topLevelSection.slug,
+                  topLevelSection.subsections[subsectionSlug]);
               })
             }
           </div>
@@ -47,19 +58,22 @@ const PageFooter = ({ classes, sectionsWithSubsections }) => {
       })
     );
   };
-  const makeSubsectionLink = (parentSectionSlug, subsection) => {
+  const makeSubsectionLink = (topLevelSectionSlug, subsection) => {
     return (
       <div>
-        <Link to={`/${parentSectionSlug}/${subsection.slug}`} className={classes.subsectionLink}>
+        <Link to={`/${topLevelSectionSlug}/${subsection.slug}`} className={classes.subsectionLink}>
           {subsection.name}
         </Link>
         <br/>
       </div>
     );
   };
+
   return (
     <div className={classes.PageFooter}>
-      {makeSectionLinks()}
+      <div className={classes.pageFooterMain}>
+        {makeSectionLinks()}
+      </div>
     </div>
   );
 };

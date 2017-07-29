@@ -11,12 +11,12 @@ const styles = {};
 const PageLayout = ({ children, sectionsWithSubsections }) => {
   return (
     <div>
-      <PageHeader/>
+      <PageHeader sectionsWithSubsections={sectionsWithSubsections}/>
       {children}
       <PageFooter sectionsWithSubsections={sectionsWithSubsections}/>
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state) => ({
   sectionsWithSubsections: getSectionsWithSubsections(state),
