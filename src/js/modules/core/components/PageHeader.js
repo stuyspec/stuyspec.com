@@ -2,46 +2,12 @@ import React from 'react';
 import injectSheet from 'react-jss';
 import {Link} from 'react-router-dom';
 
-const styles = {
-  PageHeader: {
-    margin: '0 auto',
-    width: '1060px',
-    textAlign: 'center',
-  },
-  theSpectator: {
-    fontFamily: 'Old English Text MT',
-    fontSize: '80px',
-  },
-  sectionLinksBlock: {
-    fontFamily: 'Circular Std',
-    fontWeight: '500',
-    listStyleType: 'none',
-  },
-  sectionListElement: {
-    display: 'inline',
-    margin: '0px 20px',
-  },
-  sectionLink: {
-    textDecoration: 'none',
-    color: '#000000',
-  },
-};
+const styles = {};
 
-const PageHeader = ({classes, sectionsWithSubsections}) => {
+const PageHeader = ({classes}) => {
   return (
-    <div className={classes.PageHeader}>
-      <div className={classes.theSpectator}>The Spectator</div>
-      <ul className={classes.sectionLinksBlock}>
-        {sectionsWithSubsections.map((topLevelSection)=>{
-          return (
-            <li key={topLevelSection.id} className={classes.sectionListElement}>
-              <Link to={`/${topLevelSection.slug}`} className={classes.sectionLink}>
-                {topLevelSection.name}
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
+    <div>
+      Header
     </div>
   )
 };

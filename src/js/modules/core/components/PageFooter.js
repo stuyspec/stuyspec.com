@@ -5,16 +5,25 @@ import {Link} from 'react-router-dom';
 const styles = {
   PageFooter: {
     background: '#121212',
-    height: '417px',
+    height: '408px',
+    paddingTop: '9px',
   },
   pageFooterMain: {
     margin: '0 auto',
-    width: '1060px',
+    width: '1000px',
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
+  },
+  sectionFlex: {
+    height: '350px',
+    display: 'flex',
+    flexFlow: 'column wrap',
+    flex: '4 0 0',
+    width: '700px',
   },
   sectionBlock: {
-    marginTop: '20px',
+    marginTop: '23px',
+    marginRight: '20px',
   },
   topLevelSectionLink: {
     color: '#fffefe',
@@ -23,6 +32,9 @@ const styles = {
     fontStyle: 'normal',
     fontWeight: '500',
     textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
   },
   subsectionLink: {
     color: '#b6b6b6',
@@ -31,11 +43,14 @@ const styles = {
     fontStyle: 'normal',
     fontWeight: '300',
     textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
   },
-  socialMedia: {
-    width: '30px',
-    height: '30px',
-  },
+  fillerDiv: {
+    flex: '1 0 0',
+    marginRight: '20px',
+  }
 };
 
 const PageFooter = ({classes, sectionsWithSubsections}) => {
@@ -72,7 +87,11 @@ const PageFooter = ({classes, sectionsWithSubsections}) => {
   return (
     <div className={classes.PageFooter}>
       <div className={classes.pageFooterMain}>
-        {makeSectionLinks()}
+        <div className={classes.fillerDiv}></div>
+        <div className={classes.sectionFlex}>
+         {makeSectionLinks()}
+        </div>
+        <div className={classes.fillerDiv}></div>
       </div>
     </div>
   );
