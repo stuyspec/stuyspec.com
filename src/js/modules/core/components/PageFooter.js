@@ -14,15 +14,12 @@ const styles = {
   },
   pageFooterMain: {
     margin: '0 auto',
-    display: 'flex',
-    flexDirection: 'row',
     width: '930px',
   },
   sectionFlex: {
     height: '350px',
     display: 'flex',
     flexFlow: 'column wrap',
-    flex: '4 0 0',
   },
   sectionBlock: {
     marginTop: '23px',
@@ -90,11 +87,9 @@ const PageFooter = ({classes, sectionsWithSubsections}) => {
   return (
     <Container fluid={true} className={classes.PageFooter}>
       <Row className={classes.pageFooterMain}>
-        <Col md="2" className={classes.filler}>Hello</Col>
-        <Col md="8" className={classes.sectionFlex}>
+        <Col md="8" md-offset="2" className={classes.sectionFlex}>
           {makeSectionLinks()}
         </Col>
-        <Col md="2" className={classes.filler}>Wass Up</Col>
       </Row>
     </Container>
   );
