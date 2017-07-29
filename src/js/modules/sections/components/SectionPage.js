@@ -8,7 +8,7 @@ import sections from '../../sections';
 import articles from '../../articles';
 
 const styles = {
-  SectionPage__Header: {
+  SectionPage: {
     color: '#000',
   }
 };
@@ -18,10 +18,10 @@ const styles = {
 
 const SectionPage = ({ classes, articles, subsections, section, match }) => {
   const createSubsectionLinks = () => {
-    return Object.keys(subsections).map(function (key, index) {
+    return Object.keys(subsections).map((key) => {
       const subsection = subsections[ key ];
       return (
-        <li key={`subsectionLink${index}`}>
+        <li key={subsection.id}>
           <Link to={match.url + '/' + subsection.slug}>{subsection.name}</Link>
         </li>
       );
@@ -29,7 +29,7 @@ const SectionPage = ({ classes, articles, subsections, section, match }) => {
   };
   const createArticleLinks = () => {
     console.log(sections);
-    return Object.keys(articles).map(function (key, index) {
+    return Object.keys(articles).map((key) => {
       const article = articles[ key ];
       let pathToArticlePage = article.slug;
       // if article is not a direct child of this section but is that of the section's subsection
@@ -37,15 +37,15 @@ const SectionPage = ({ classes, articles, subsections, section, match }) => {
         pathToArticlePage = article.sectionSlug + '/' + article.slug;
       }
       return (
-        <li key={`articleLink${index}`}>
+        <li key={article.id}>
           <Link to={match.url + '/' + pathToArticlePage}>{article.title}</Link>
         </li>
       );
     });
   };
   return (
-    <div>
-      <h1 className={classes.SectionPage__Header}>{section.name}</h1>
+    <div className={classes.SectionPage}>
+      <h1>{section.name}</h1>
       <p>description: {section.description}</p>
       <hr/>
       <p>subsections</p>
