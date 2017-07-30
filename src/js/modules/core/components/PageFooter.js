@@ -1,6 +1,6 @@
 import React from 'react';
 import injectSheet from 'react-jss';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Container from 'muicss/lib/react/container';
 import Row from 'muicss/lib/react/row';
@@ -53,7 +53,7 @@ const styles = {
   }
 };
 
-const PageFooter = ({classes, sectionsWithSubsections}) => {
+const PageFooter = ({ classes, sectionsWithSubsections }) => {
   const makeSectionLinks = () => {
     return (sectionsWithSubsections.map((topLevelSection) => {
         return (
@@ -67,7 +67,7 @@ const PageFooter = ({classes, sectionsWithSubsections}) => {
               Object.keys(topLevelSection.subsections).map((subsectionSlug) => {
                 return makeSubsectionLink(
                   topLevelSection.slug,
-                  topLevelSection.subsections[subsectionSlug]);
+                  topLevelSection.subsections[ subsectionSlug ]);
               })
             }
           </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import injectSheet from 'react-jss';
 
 import Masthead from './Masthead';
+import MastheadBar from './MastheadBar';
 
 /*
   TODO: Add in direct navigation which leads users directly to some pages. (Exists on all pages)
@@ -13,20 +14,14 @@ import Masthead from './Masthead';
  On mobile, condensed-nav has no search or account dropdown.
 */
 
-/*
-Site structure navigation links to the first layer items of the site
-(the departments, “subscribe”, “more”). On non-article pages (homepage, department pages),
- the site structure navigation is displayed in a horizontal bar with a “The Spectator”
- heading above it (the Header). On article pages, no such navigation exists; there is
- only direct navigation. On mobile, no such navigation exists; there is only direct navigation.
- */
 const styles = {
 };
 
-const PageHeader = ({ sectionsWithSubsections }) => {
+const PageHeader = ({ location, sectionsWithSubsections }) => {
   return (
     <div>
-      <Masthead sectionsWithSubsections={sectionsWithSubsections}/>
+      {/* <Masthead sectionsWithSubsections={sectionsWithSubsections}/> */}
+      <MastheadBar/>
     </div>
   )
 };
