@@ -35,7 +35,6 @@ const styles = {
 };
 
 const ArticleBody = ({ classes, content, featuredMedia }) => {
-  console.log(classes);
   return(
     <div className={ classes.ArticleBody }>
       <ArticleFeaturedMedia featuredMedia={featuredMedia}/>
