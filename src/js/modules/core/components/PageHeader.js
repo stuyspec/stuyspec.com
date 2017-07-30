@@ -21,19 +21,21 @@ TODO: Add in site structure navigation which links to the first layer items of t
  */
 const styles = {
   PageHeader: {
-    margin: '11px auto 42px auto',
     borderBottom: '1px solid black',
-    width: '1060px',
+    margin: '0px auto 24px auto',
+    paddingTop: '11px',
     textAlign: 'center',
+    width: '1060px',
   },
-  theSpectator: {
+  theSpectatorLogo: {
     fontFamily: 'Old English Text MT',
     fontSize: '75px',
+    marginBottom: '22px',
   },
-  sectionLinksBlock: {
+  sectionLinksNav: {
     fontFamily: 'Circular Std',
     listStyleType: 'none',
-    margin: '22px 0px 17px 0px',
+    marginBottom: '16px',
     padding: '0px',
   },
   sectionListElement: {
@@ -41,18 +43,18 @@ const styles = {
     margin: '0px 12px',
   },
   sectionLink: {
-    textDecoration: 'none',
-    color: '#000000',
+    color: '#000',
     fontSize: '14px',
     fontWeight: '500',
+    textDecoration: 'none',
   },
 };
 
 const PageHeader = ({classes, sectionsWithSubsections}) => {
   return (
     <div className={classes.PageHeader}>
-      <div className={classes.theSpectator}>The Spectator</div>
-      <ul className={classes.sectionLinksBlock}>
+      <div className={classes.theSpectatorLogo}>The Spectator</div>
+      <ul className={classes.sectionLinksNav}>
         {sectionsWithSubsections.map((topLevelSection) => {
           return (
             <li key={topLevelSection.id} className={classes.sectionListElement}>

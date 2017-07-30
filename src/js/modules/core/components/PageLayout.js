@@ -7,13 +7,20 @@ import PageHeader from './PageHeader';
 import PageFooter from './PageFooter';
 import {getSectionsWithSubsections} from '../../sections/selectors';
 
-const styles = {};
+const styles = {
+  PageContainer: {
+    margin: '0 auto',
+    width: '1060px',
+  }
+};
 
-const PageLayout = ({children, sectionsWithSubsections}) => {
+const PageLayout = ({classes, children, sectionsWithSubsections}) => {
   return (
     <div>
       <PageHeader sectionsWithSubsections={sectionsWithSubsections}/>
-      {children}
+      <div className={classes.PageContainer}>
+        {children}
+      </div>
       <PageFooter sectionsWithSubsections={sectionsWithSubsections}/>
     </div>
   );
