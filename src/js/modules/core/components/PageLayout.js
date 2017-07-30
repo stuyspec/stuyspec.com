@@ -1,14 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import injectSheet from 'react-jss';
 
 import PageHeader from './PageHeader';
 import PageFooter from './PageFooter';
-import { getSectionsWithSubsections } from '../../sections/selectors';
+import {getSectionsWithSubsections} from '../../sections/selectors';
 
 const styles = {};
 
-const PageLayout = ({ children, sectionsWithSubsections }) => {
+const PageLayout = ({children, sectionsWithSubsections}) => {
   return (
     <div>
       <PageHeader sectionsWithSubsections={sectionsWithSubsections}/>
