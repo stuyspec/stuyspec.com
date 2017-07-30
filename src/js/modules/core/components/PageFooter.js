@@ -1,10 +1,9 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 import {Link} from 'react-router-dom';
-
-import Container from 'muicss/lib/react/container';
-import Row from 'muicss/lib/react/row';
-import Col from 'muicss/lib/react/col';
+import Grid from 'react-bootstrap/lib/Grid';
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
 
 const styles = {
   PageFooter: {
@@ -30,10 +29,10 @@ const styles = {
     fontSize: '14px',
     fontFamily: "Circular Std",
     fontStyle: 'normal',
-    fontWeight: '700',
+    fontWeight: 'bold',
     textDecoration: 'none',
     '&:hover': {
-      textDecoration: 'underline',
+      textDecoration: 'none',
     },
   },
   subsectionLink: {
@@ -41,10 +40,10 @@ const styles = {
     fontSize: '13px',
     fontFamily: 'Circular Std',
     fontStyle: 'normal',
-    fontWeight: '400',
+    fontWeight: '300',
     textDecoration: 'none',
     '&:hover': {
-      textDecoration: 'underline',
+      textDecoration: 'none',
     },
   },
   theSpectator: {
@@ -91,14 +90,16 @@ const PageFooter = ({classes, sectionsWithSubsections}) => {
   };
 
   return (
-    <Container fluid={true} className={classes.PageFooter}>
+    <Grid className={classes.PageFooter}>
       <Row className={classes.pageFooterMain}>
-        <div className={classes.theSpectator}>The Spectator</div>
-        <Col md="8" md-offset="2" className={classes.sectionFlex}>
+        <Col md={8} mdOffset={2} className={classes.theSpectator}>
+          The Spectator
+        </Col>
+        <Col md={8} mdOffset={2} className={classes.sectionFlex}>
           {makeSectionLinks()}
         </Col>
       </Row>
-    </Container>
+    </Grid>
   );
 };
 

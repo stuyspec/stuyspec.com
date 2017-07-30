@@ -31,6 +31,7 @@ const styles = {
     fontFamily: 'Old English Text MT',
     fontSize: '75px',
     marginBottom: '22px',
+    color: '#000000',
   },
   sectionLinksNav: {
     fontFamily: 'Circular Std',
@@ -43,7 +44,7 @@ const styles = {
     margin: '0px 12px',
   },
   sectionLink: {
-    color: '#000',
+    color: '#000000',
     fontSize: '14px',
     fontWeight: '500',
     textDecoration: 'none',
