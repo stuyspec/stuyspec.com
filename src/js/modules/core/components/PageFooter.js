@@ -77,9 +77,8 @@ const PageFooter = ({classes, sectionsWithSubsections}) => {
   };
   const makeSubsectionLink = (topLevelSectionSlug, subsection) => {
     return (
-      <div>
+      <div key={`subsectionLink${subsection.id}`}>
         <Link className={classes.subsectionLink}
-              key={`subsectionLink${subsection.id}`}
               to={`/${topLevelSectionSlug}/${subsection.slug}`}>
           {subsection.name}
         </Link>
