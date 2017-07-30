@@ -1,9 +1,7 @@
 import React from 'react';
 import injectSheet from 'react-jss';
-import {Link} from 'react-router-dom';
-import Grid from 'react-bootstrap/lib/Grid';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
+import { Link } from 'react-router-dom';
+import { Grid, Row, Col } from 'react-bootstrap/lib/';
 
 const styles = {
   PageFooter: {
@@ -56,7 +54,7 @@ const styles = {
   },
 };
 
-const PageFooter = ({classes, sectionsWithSubsections}) => {
+const PageFooter = ({ classes, sectionsWithSubsections }) => {
   const makeSectionLinks = () => {
     return (sectionsWithSubsections.map((topLevelSection) => {
         return (
@@ -70,7 +68,7 @@ const PageFooter = ({classes, sectionsWithSubsections}) => {
               Object.keys(topLevelSection.subsections).map((subsectionSlug) => {
                 return makeSubsectionLink(
                   topLevelSection.slug,
-                  topLevelSection.subsections[subsectionSlug]);
+                  topLevelSection.subsections[ subsectionSlug ]);
               })
             }
           </div>
