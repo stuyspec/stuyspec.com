@@ -9,6 +9,7 @@ const styles = {
     backgroundColor: '#fff',
     height: '40px',
     position: 'fixed',
+    top: '0px',
     width: '100%',
   },
   barContainer: {
@@ -31,6 +32,7 @@ const styles = {
     position: 'absolute',
     textAlign: 'center',
     width: '100%',
+    zIndex: -1,
   },
   brandingLink: {
     color: '#000',

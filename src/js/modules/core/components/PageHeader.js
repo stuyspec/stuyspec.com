@@ -15,13 +15,16 @@ import MastheadBar from './MastheadBar';
 */
 
 const styles = {
+  MastheadBar: {
+
+  }
 };
 
-const PageHeader = ({ location, sectionsWithSubsections }) => {
+const PageHeader = ({ classes, location, sectionsWithSubsections }) => {
   return (
     <div>
       {/* <Masthead sectionsWithSubsections={sectionsWithSubsections}/> */}
-      <MastheadBar/>
+      <MastheadBar className={classes.MastheadBar}/>
     </div>
   )
 };

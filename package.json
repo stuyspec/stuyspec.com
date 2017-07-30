@@ -62,6 +62,7 @@
     "axios": "^0.16.2",
     "cli-table": "^0.3.1",
     "colors": "^1.1.2",
+    "deep-extend": "^0.5.0",
     "ejs": "^2.5.6",
     "envify": "^4.1.0",
     "express": "^4.15.3",
@@ -71,8 +72,10 @@
     "lru-cache": "^4.1.1",
     "mime-db": "^1.29.0",
     "muicss": "^0.9.20",
+    "react-icons": "^2.2.5",
     "reselect": "^3.0.1",
     "sigmund": "^1.0.1",
+    "strip-json-comments": "^2.0.1",
     "yargs": "^8.0.2"
   }
 }

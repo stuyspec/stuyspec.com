@@ -1,6 +1,8 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 
+import { FaBars } from 'react-icons/lib/fa';
+
 // TODO: find sprites
 
 const styles = {
@@ -9,6 +11,9 @@ const styles = {
     borderWidth: '0px',
     margin: '0px',
     padding: '0px',
+    '&:hover': {
+      cursor: 'pointer',
+    }
   },
   sections: {
     // background: sections sprite
@@ -28,8 +33,8 @@ const styles = {
 const NavButton = ({ classes, buttonType }) => {
   return (
     <button className={classes.NavButton}>
-      <i className={classes[ buttonType ]}></i>
-      <span className={classes.buttonText}>{buttonType}</span>
+
+      <span className={classes.buttonText}><FaBars/>{buttonType}</span>
     </button>
   )
 };
