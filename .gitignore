@@ -5,3 +5,4 @@ node_modules
 builds/**
 .idea
 .DS_STORE
+src/js/versionInfo.js
