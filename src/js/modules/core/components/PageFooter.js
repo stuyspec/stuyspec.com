@@ -43,9 +43,11 @@ const PageFooter = ({classes, sectionsWithSubsections}) => {
     return (sectionsWithSubsections.map((topLevelSection) => {
         return (
           <div className={classes.sectionBlock} key={topLevelSection.id}>
-            <Link to={`/${topLevelSection.slug}`} className={classes.topLevelSectionLink}>
+            <Link className={classes.topLevelSectionLink}
+                  key={`topLevelLink${topLevelSection.id}`}
+                  to={`/${topLevelSection.slug}`}>
               {topLevelSection.name}
-            </Link><br/>
+            </Link>
             {
               Object.keys(topLevelSection.subsections).map((subsectionSlug) => {
                 return makeSubsectionLink(
@@ -61,10 +63,11 @@ const PageFooter = ({classes, sectionsWithSubsections}) => {
   const makeSubsectionLink = (topLevelSectionSlug, subsection) => {
     return (
       <div>
-        <Link to={`/${topLevelSectionSlug}/${subsection.slug}`} className={classes.subsectionLink}>
+        <Link className={classes.subsectionLink}
+              key={`subsectionLink${subsection.id}`}
+              to={`/${topLevelSectionSlug}/${subsection.slug}`}>
           {subsection.name}
         </Link>
-        <br/>
       </div>
     );
   };

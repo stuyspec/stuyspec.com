@@ -28,7 +28,7 @@ const SectionPage = ({ classes, articles, subsections, section, match }) => {
     });
   };
   const createArticleLinks = () => {
-    console.log(sections);
+    console.log(articles);
     return Object.keys(articles).map((key) => {
       const article = articles[ key ];
       let pathToArticlePage = article.slug;

@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import injectSheet from 'react-jss';
 
 import PageHeader from './PageHeader';
@@ -22,6 +23,7 @@ const mapStateToProps = (state) => ({
   sectionsWithSubsections: getSectionsWithSubsections(state),
 });
 
-export default connect(
-  mapStateToProps
-)(injectSheet(styles)(PageLayout));
+export default withRouter(
+  connect(mapStateToProps)
+  (injectSheet(styles)(PageLayout))
+);
