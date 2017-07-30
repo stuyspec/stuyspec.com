@@ -2,52 +2,6 @@ import React from 'react';
 import injectSheet from 'react-jss';
 import {Link} from 'react-router-dom';
 
-const styles = {
-  PageHeader: {
-    margin: '0 auto',
-    width: '1060px',
-    textAlign: 'center',
-  },
-  theSpectator: {
-    fontFamily: 'Old English Text MT',
-    fontSize: '80px',
-  },
-  sectionLinksBlock: {
-    fontFamily: 'Circular Std',
-    fontWeight: '500',
-    listStyleType: 'none',
-  },
-  sectionListElement: {
-    display: 'inline',
-    margin: '0px 20px',
-  },
-  sectionLink: {
-    textDecoration: 'none',
-    color: '#000000',
-  },
-};
-
-const PageHeader = ({classes, sectionsWithSubsections}) => {
-  return (
-    <div className={classes.PageHeader}>
-      <div className={classes.theSpectator}>The Spectator</div>
-      <ul className={classes.sectionLinksBlock}>
-        {sectionsWithSubsections.map((topLevelSection)=>{
-          return (
-            <li key={topLevelSection.id} className={classes.sectionListElement}>
-              <Link to={`/${topLevelSection.slug}`} className={classes.sectionLink}>
-                {topLevelSection.name}
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
-    </div>
-  )
-};
-
-export default (injectSheet(styles)(PageHeader));
-
 /*
 TODO: Add in direct navigation which leads users directly to some pages. (Exists on all pages)
  These links are both the left-aligned—hamburger menu of sections,
@@ -65,3 +19,16 @@ TODO: Add in site structure navigation which links to the first layer items of t
  heading above it (the Header). On article pages, no such navigation exists; there is
  only direct navigation. On mobile, no such navigation exists; there is only direct navigation.
  */
+
+const styles = {};
+
+const PageHeader = ({classes}) => {
+  return (
+    <div>
+      Header
+    </div>
+  )
+};
+
+export default (injectSheet(styles)(PageHeader));
+
