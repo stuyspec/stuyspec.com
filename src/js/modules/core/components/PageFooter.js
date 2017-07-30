@@ -8,49 +8,53 @@ import Col from 'muicss/lib/react/col';
 
 const styles = {
   PageFooter: {
-    background: '#121212',
+    background: '#FFFFFF',
     height: '370px',
-    paddingTop: '9px',
   },
   pageFooterMain: {
+    borderTop: '3px solid #dddddd',
     margin: '0 auto',
-    width: '930px',
+    width: '1060px',
   },
   sectionFlex: {
     height: '350px',
     display: 'flex',
     flexFlow: 'column wrap',
+    paddingTop: '6px',
   },
   sectionBlock: {
-    marginTop: '23px',
-    marginRight: '20px',
+    marginTop: '19px',
   },
   topLevelSectionLink: {
-    color: '#fffefe',
+    color: '#000000',
     fontSize: '14px',
     fontFamily: "Circular Std",
     fontStyle: 'normal',
-    fontWeight: '500',
+    fontWeight: '700',
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'underline',
     },
   },
   subsectionLink: {
-    color: '#b6b6b6',
+    color: '#000000',
     fontSize: '13px',
     fontFamily: 'Circular Std',
     fontStyle: 'normal',
-    fontWeight: '300',
+    fontWeight: '400',
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'underline',
     },
   },
-  filler: {
-    width: '140px',
-    padding: '0px 10px',
-  }
+  theSpectator: {
+    color: '#000000',
+    fontFamily: 'Old English Text MT',
+    fontSize: '30px',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    paddingTop: '10px',
+  },
 };
 
 const PageFooter = ({classes, sectionsWithSubsections}) => {
@@ -89,6 +93,7 @@ const PageFooter = ({classes, sectionsWithSubsections}) => {
   return (
     <Container fluid={true} className={classes.PageFooter}>
       <Row className={classes.pageFooterMain}>
+        <div className={classes.theSpectator}>The Spectator</div>
         <Col md="8" md-offset="2" className={classes.sectionFlex}>
           {makeSectionLinks()}
         </Col>
