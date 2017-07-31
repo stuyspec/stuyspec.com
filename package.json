@@ -62,7 +62,7 @@
     "axios": "^0.16.2",
     "cli-table": "^0.3.1",
     "colors": "^1.1.2",
-    "ejs": "^2.5.6",
+    "ejs": "^2.5.7",
     "envify": "^4.1.0",
     "express": "^4.15.3",
     "jss": "^8.1.0",
@@ -70,7 +70,8 @@
     "locate-path": "^2.0.0",
     "lru-cache": "^4.1.1",
     "mime-db": "^1.29.0",
-    "muicss": "^0.9.20",
+    "react-bootstrap": "^0.31.1",
+    "react-router-bootstrap": "^0.24.2",
     "reselect": "^3.0.1",
     "sigmund": "^1.0.1",
     "yargs": "^8.0.2"
