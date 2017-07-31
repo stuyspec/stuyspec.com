@@ -98,8 +98,8 @@ const styles = {
   sectionNameDivider: {
     borderBottom: '2px solid #000000',
     borderTop: '0px',
-    paddingTop: '8px',
     marginBottom: '29.6px',
+    paddingTop: '0px',
   },
   articleDivider: {
     margin: '0px',
