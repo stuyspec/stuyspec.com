@@ -15,7 +15,7 @@ const styles = {
   },
 };
 
-const ArticlePage = ({ classes, article, section, featuredMedia }) => {
+const ArticlePage = ({ classes, article, section, featuredMedia,fetch }) => {
   return (
     <div className={classes.ArticlePage}>
       <ArticleHeader
