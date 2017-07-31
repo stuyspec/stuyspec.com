@@ -1,7 +1,6 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 
-import { FaBars } from 'react-icons/lib/fa';
 
 // TODO: find sprites
 
@@ -34,7 +33,7 @@ const NavButton = ({ classes, buttonType }) => {
   return (
     <button className={classes.NavButton}>
 
-      <span className={classes.buttonText}><FaBars/>{buttonType}</span>
+      <span className={classes.buttonText}>{buttonType}</span>
     </button>
   )
 };

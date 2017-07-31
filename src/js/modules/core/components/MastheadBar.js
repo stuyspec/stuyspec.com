@@ -18,6 +18,7 @@ const styles = {
     margin: '0 auto',
     position: 'relative',
     width: '1320px',
+    textAlign: 'center',
   },
   quickNav: {
     float: 'left',
@@ -26,18 +27,11 @@ const styles = {
       marginRight: '24px',
     },
   },
-  branding: {
-    display: 'block',
-    marginTop: '7px',
-    position: 'absolute',
-    textAlign: 'center',
-    width: '100%',
-    zIndex: -1,
-  },
   brandingLink: {
     color: '#000',
     fontFamily: 'Old English Text MT',
     fontSize: '26px',
+    marginTop: '4px',
     textDecoration: 'none',
   },
   userTools: {
@@ -57,11 +51,9 @@ const MastheadBar = ({ classes }) => {
           <NavButton buttonType="sections" className={classes.leftEdgeNavButton}/>
           <NavButton buttonType="search"/>
         </div>
-        <div className={classes.branding}>
-          <Link className={classes.brandingLink} to="/">
-            The Spectator
-          </Link>
-        </div>
+        <Link className={classes.brandingLink} to="/">
+          The Spectator
+        </Link>
         <div className={classes.userTools}>
           <NavButton buttonType="log in"/>
           <NavButton buttonType="subscribe"/>

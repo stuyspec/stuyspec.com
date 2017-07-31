@@ -15,16 +15,47 @@ import MastheadBar from './MastheadBar';
 */
 
 const styles = {
-  MastheadBar: {
-
-  }
+  PageHeader: {
+    borderBottom: '1px solid black',
+    margin: '0px auto 24px auto',
+    paddingTop: '11px',
+    textAlign: 'center',
+    width: '1060px',
+  },
+  theSpectatorLogo: {
+    fontFamily: 'Old English Text MT',
+    fontSize: '75px',
+    marginBottom: '22px',
+    color: '#000000',
+  },
+  sectionLinksNav: {
+    fontFamily: 'Circular Std',
+    listStyleType: 'none',
+    marginBottom: '16px',
+    padding: '0px',
+  },
+  sectionListElement: {
+    display: 'inline',
+    margin: '0px 12px',
+  },
+  sectionLink: {
+    color: '#000000',
+    fontSize: '14px',
+    fontWeight: '500',
+    textDecoration: 'none',
+  },
 };
 
 const PageHeader = ({ classes, location, sectionsWithSubsections }) => {
   return (
     <div>
-      {/* <Masthead sectionsWithSubsections={sectionsWithSubsections}/> */}
-      <MastheadBar className={classes.MastheadBar}/>
+      {
+        location.pathname === '/' ? (
+          <Masthead sectionsWithSubsections={sectionsWithSubsections}/>
+        ) : (
+          <MastheadBar className={classes.MastheadBar}/>
+        )
+      }
     </div>
   )
 };
