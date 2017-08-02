@@ -1,56 +1,68 @@
 import axios from 'axios';
 import * as t from './actionTypes';
-import { FETCH_ARTICLE_FULFILLED } from "./actionTypes";
-import { FETCH_ARTICLE_REJECTED } from "./actionTypes";
-import { TEST } from "./actionTypes";
+import { getSections } from '../sections/selectors';
 
-const apiUrl = 'http://api.icndb.com/jokes/random';
+const apiUrl = 'https://api.stuyspec.xyz/articles';
 
+//TODO: need a way to call the fetch function
+export const fetch = () => {
+  return (dispatch, getState) => {
+    dispatch({ type: t.FETCH_ARTICLE_PENDING });
+    //axios.get(apiUrl, {'headers': {'X-Key-Inflection': 'camel'}}) TODO: wait until Nic uses olive branch
+    axios.get(apiUrl)
+      .then((info) => {
+        console.log(info);
+        // This current code will dispatch the FETCH_ARTICLE_REJECtED because the API still has null values
+        if (articleValidator(info.data)) {
+          const sections = getSections(getState());
+          dispatch({
+            type: t.FETCH_ARTICLE_FULFILLED,
+            payload: info.data,
+            sections: sections,
+          })
+        } else {
+          dispatch({ type: t.FETCH_ARTICLE_REJECTED, payload: 'Invalid article array' })
+        }
+      })
+      .catch((err) => {
+        dispatch({ type: t.FETCH_ARTICLE_REJECTED, payload: err })
+      })
+  };
+};
 const keyValidator = (articleObject, key, type) => {
   if (key in articleObject) {
-    return (typeof (articleObject[key]) == type );
+    return (typeof (articleObject[ key ]) === type );
   } else {
     return false;
   }
 };
-
 const articleValidator = (articleArray) => {
-  const numberIDs = ['id', 'volume', 'issue'];
-  const stringIDs = ['title', 'slug', 'content', 'date', 'time', 'sectionSlug'];
+  const numberIDs = [ 'id', 'volume', 'issue', 'section_id' ];
+  const stringIDs = [ 'title', 'slug', 'content', "created_at", "updated_at" ];
+  const booleanIDs = [ 'is_draft' ];
+  if (!Array.isArray(articleArray)) {
+    return false;
+  }
   for (articleIndex in articleArray) {
-    const articleObject = articleArray[articleIndex];
+    const articleObject = articleArray[ articleIndex ];
     for (numberIndex in numberIDs) {
-      const numberKey = numberIDs[numberIndex];
+      const numberKey = numberIDs[ numberIndex ];
       if (!keyValidator(articleObject, numberKey, 'number')) {
         return false;
       }
     }
     for (stringIndex in stringIDs) {
-      const stringKey = stringIDs[stringIndex];
+      const stringKey = stringIDs[ stringIndex ];
       if (!keyValidator(articleObject, stringKey, 'string')) {
+        return false;
+      }
+    }
+    for (booleanIndex in booleanIDs) {
+      const booleanKey = booleanIDs[ booleanIndex ];
+      if (!keyValidator(articleObject, booleanKey, 'boolean')) {
         return false;
       }
     }
   }
   return true;
-};
-
-//TODO: Get the correct URL from Nic and adjust the stringIDs and numberIDs
-
-//TODO: Need correct ID to test axios and also need a way to call the fetch function
-export const fetch = () => {
-  return (dispatch) => {
-    dispatch({type:FETCH_ARTICLE_PENDING});
-    axios.get(apiUrl)
-      .then((data) => {
-        if (articleValidator(data)) {
-          dispatch({ type: FETCH_ARTICLE_FULFILLED, payload: data, })
-        } else {
-          dispatch ({type: FETCH_ARTICLE_REJECTED, payload: 'Invalid article array'})
-        }
-      })
-      .catch((err) => {
-        dispatch({type:FETCH_ARTICLE_REJECTED, payload:err})
-      })
-  };
 };

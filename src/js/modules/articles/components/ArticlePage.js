@@ -15,7 +15,7 @@ const styles = {
   },
 };
 
-const ArticlePage = ({ classes, article, section, featuredMedia,fetch }) => {
+const ArticlePage = ({ classes, article, section, featuredMedia }) => {
   return (
     <div className={classes.ArticlePage}>
       <ArticleHeader
@@ -46,4 +46,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)( injectSheet(styles)(ArticlePage) );
+)(injectSheet(styles)(ArticlePage));

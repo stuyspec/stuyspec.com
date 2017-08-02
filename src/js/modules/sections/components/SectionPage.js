@@ -6,6 +6,7 @@ import injectSheet from 'react-jss';
 import sections from '../../sections';
 
 import articles from '../../articles';
+import { fetch } from '../../articles/actions';
 
 const styles = {
   SectionPage: {
@@ -16,7 +17,10 @@ const styles = {
 /* TODO: make subsection tree work for any depth
  */
 
-const SectionPage = ({ classes, articles, subsections, section, match }) => {
+const SectionPage = ({ classes, articles, subsections, section, match, fetch }) => {
+  const handleFetch = () => {
+    fetch();
+  };
   const createSubsectionLinks = () => {
     return Object.keys(subsections).map((key) => {
       const subsection = subsections[ key ];
@@ -45,6 +49,7 @@ const SectionPage = ({ classes, articles, subsections, section, match }) => {
   return (
     <div className={classes.SectionPage}>
       <h1>{section.name}</h1>
+      <button onClick={handleFetch}>Click on me to fetch articles</button>
       <p>description: {section.description}</p>
       <hr/>
       <p>subsections</p>
@@ -66,7 +71,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({ fetch: fetch }, dispatch);
 };
 
 export default connect(
