@@ -3,33 +3,26 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import injectSheet from 'react-jss';
-import { Grid, Row, Col } from 'react-bootstrap/lib/';
+import { Col, Grid, Row } from 'react-bootstrap/lib/';
 
 import articles from '../../articles';
 
 const styles = {
-  SectionPage: {
+  entireSectionPage: {
     color: '#000',
   },
   sectionName: {
-    width: '1080px',
-    height: '43px',
     fontFamily: 'Canela',
     fontSize: '36px',
-    fontWeight: '500',
     textAlign: 'left',
     color: '#000000',
     padding: '0px 0px',
-    paddingLeft: '0px',
-    margin: '0px 0px',
-    marginBottom: '11px',
+    margin: '0px 0px 11px 0px',
   },
   subsectionLink: {
     listStyleType: 'none',
     margin: '0px',
     paddingLeft: '0px',
-    width: '1080px',
-    height: '7px',
     fontFamily: 'Circular Std',
     fontSize: '14px',
     textAlign: 'left',
@@ -40,23 +33,21 @@ const styles = {
     width: '100%',
     margin: '0px',
   },
-  Horizontal: {
+  listOfSubsections: {
     display: 'inline',
-    paddingRight: '16px',
-    paddingTop: '11px',
+    padding: '11px, 16px, 0px, 0px',
+    margin: '0px 16px 0px 0px',
     textDecoration: 'none',
   },
-  linkColor: {
+  subSectionLink: {
     color: '#000000',
   },
   eachArticle: {
     listStyleType: 'none',
-    paddingLeft: '0px',
+    padding: '14px, 0px, 14.4px, 0px',
     marginLeft: '0px',
-    paddingBottom: '14.4px',
-    paddingTop: '14px',
   },
-  image: {
+  imagePerArticle: {
     width: '256px',
     height: '170.6px',
     align: 'left',
@@ -64,7 +55,6 @@ const styles = {
     paddingRight: '14px',
   },
   articleTitle: {
-    width: '526px',
     height: '15px',
     fontFamily: 'MinionPro',
     fontSize: '26px',
@@ -74,7 +64,6 @@ const styles = {
     border: '0px 0px',
   },
   articleDescription: {
-    width: '526px',
     height: '15px',
     fontFamily: 'MinionPro',
     fontSize: '16px',
@@ -85,7 +74,6 @@ const styles = {
     paddingBottom: '0px',
   },
   articleAuthor: {
-    width: '242px',
     height: '0px',
     fontFamily: 'Circular Std',
     fontSize: '12px',
@@ -98,11 +86,11 @@ const styles = {
   sectionNameDivider: {
     borderBottom: '2px solid #000000',
     borderTop: '0px',
+    paddingTop: '7px',
     marginBottom: '29.6px',
-    paddingTop: '0px',
+    marginTop: '0px',
   },
   articleDivider: {
-    margin: '0px',
     paddingTop: '14.4',
     paddingBottom: '14',
   }
@@ -116,8 +104,8 @@ const SectionPage = ({ classes, articles, subsections, section, match, featuredM
     return Object.keys(subsections).map((key) => {
       const subsection = subsections[ key ];
       return (
-        <li key={subsection.id} className={classes.Horizontal}>
-          <Link to={match.url + '/' + subsection.slug} className={classes.linkColor}>{subsection.name}</Link>
+        <li key={subsection.id} className={classes.listOfSubsections}>
+          <Link to={match.url + '/' + subsection.slug} className={classes.subsectionLink}>{subsection.name}</Link>
         </li>
       );
     });
@@ -135,7 +123,7 @@ const SectionPage = ({ classes, articles, subsections, section, match, featuredM
         <Row key={article.id} className={classes.eachArticle}>
           <Col md={3} lg={3}>
             <figure>
-              <img src={featuredMedia.url} className={classes.image}/>
+              <img src={featuredMedia.url} className={classes.imagePerArticle}/>
             </figure>
           </Col>
           <Col md={6} lg={6}>
@@ -150,18 +138,22 @@ const SectionPage = ({ classes, articles, subsections, section, match, featuredM
     });
   };
   return (
-    <div className={classes.SectionPage}>
+    <div className={classes.entireSectionPage}>
       <h1 className={classes.sectionName}>{section.name}</h1>
       {/* <p>description: {section.description}</p> */}
       <ul className={classes.subsectionLink}>
         {createSubsectionLinks()}
       </ul>
       <hr className={classes.sectionNameDivider}/>
-      <Grid className={classes.articleList}>
-        {createArticleLinks()}
-      </Grid>
     </div>
   );
+    const ArticleList = ({ articles, featuredMedia }) => {
+        return (
+          <Grid className={classes.articleList}>
+            {createArticleLinks()}
+          </Grid>
+      );
+    };
 };
 
 
