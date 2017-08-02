@@ -16,11 +16,10 @@ import MastheadBar from './MastheadBar';
 
 const styles = {
   PageHeader: {
-    borderBottom: '1px solid black',
     margin: '0px auto 24px auto',
     paddingTop: '11px',
     textAlign: 'center',
-    width: '1060px',
+    width: '100%',
   },
   theSpectatorLogo: {
     fontFamily: 'Old English Text MT',
@@ -48,7 +47,7 @@ const styles = {
 
 const PageHeader = ({ classes, location, sectionsWithSubsections }) => {
   return (
-    <div>
+    <div className={classes.PageHeader}>
       {
         location.pathname === '/' ? (
           <Masthead sectionsWithSubsections={sectionsWithSubsections}/>

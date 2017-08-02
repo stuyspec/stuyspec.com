@@ -8,21 +8,22 @@ const styles = {
   MastheadBar: {
     backgroundColor: '#fff',
     height: '40px',
+    padding: '0px 60px',
     position: 'fixed',
-    top: '0px',
     width: '100%',
+    top: '0px',
   },
   barContainer: {
     borderBottom: '1px solid #ddd',
     height: '100%',
     margin: '0 auto',
     position: 'relative',
-    width: '1320px',
+    width: '100%',
     textAlign: 'center',
   },
   quickNav: {
     float: 'left',
-    marginTop: '12px',
+    marginTop: '9px',
     '& button': {
       marginRight: '24px',
     },
@@ -36,7 +37,7 @@ const styles = {
   },
   userTools: {
     float: 'right',
-    marginTop: '12px',
+    marginTop: '9px',
     '& button': {
       marginLeft: '24px',
     }
