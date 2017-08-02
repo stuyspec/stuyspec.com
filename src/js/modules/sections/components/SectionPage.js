@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import injectSheet from 'react-jss';
 import { Col, Grid, Row } from 'react-bootstrap/lib/';
+import SectionArticleList from './SectionArticleList';
 
 import articles from '../../articles';
 
@@ -29,11 +30,7 @@ const styles = {
     color: '#000000',
     textTransform: 'uppercase',
   },
-  articleList: {
-    width: '100%',
-    margin: '0px',
-  },
-  listOfSubsections: {
+  subsectionBar: {
     display: 'inline',
     padding: '11px, 16px, 0px, 0px',
     margin: '0px 16px 0px 0px',
@@ -104,36 +101,9 @@ const SectionPage = ({ classes, articles, subsections, section, match, featuredM
     return Object.keys(subsections).map((key) => {
       const subsection = subsections[ key ];
       return (
-        <li key={subsection.id} className={classes.listOfSubsections}>
+        <li key={subsection.id} className={classes.subsectionBar}>
           <Link to={match.url + '/' + subsection.slug} className={classes.subsectionLink}>{subsection.name}</Link>
         </li>
-      );
-    });
-  };
-  const createArticleLinks = () => {
-    return Object.keys(articles).map((key) => {
-      const article = articles[ key ];
-      let pathToArticlePage = article.slug;
-      // if article is not a direct child of this section but is that of the section's subsection
-      if (subsections[ article.sectionSlug ] !== undefined) {
-        pathToArticlePage = article.sectionSlug + '/' + article.slug;
-      }
-      return (
-        <div>
-        <Row key={article.id} className={classes.eachArticle}>
-          <Col md={3} lg={3}>
-            <figure>
-              <img src={featuredMedia.url} className={classes.imagePerArticle}/>
-            </figure>
-          </Col>
-          <Col md={6} lg={6}>
-            <Link to={match.url + '/' + pathToArticlePage} className={classes.articleTitle}>{article.title}</Link>
-            <p className={classes.articleDescription}>Cathy plays a horizontal guitara.</p>
-            <p className={classes.articleAuthor}>Jason Kao</p>
-          </Col>
-        </Row>
-        <hr className={classes.articleDivider}/>
-        </div>
       );
     });
   };
@@ -147,13 +117,6 @@ const SectionPage = ({ classes, articles, subsections, section, match, featuredM
       <hr className={classes.sectionNameDivider}/>
     </div>
   );
-    const ArticleList = ({ articles, featuredMedia }) => {
-        return (
-          <Grid className={classes.articleList}>
-            {createArticleLinks()}
-          </Grid>
-      );
-    };
 };
 
 
