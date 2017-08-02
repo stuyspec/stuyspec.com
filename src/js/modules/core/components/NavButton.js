@@ -29,11 +29,11 @@ const styles = {
   }
 };
 
-const NavButton = ({ classes, buttonType }) => {
+const NavButton = ({ classes, label }) => {
   return (
     <button className={classes.NavButton}>
 
-      <span className={classes.buttonText}>{buttonType}</span>
+      <span className={classes.buttonText}>{label}</span>
     </button>
   )
 };

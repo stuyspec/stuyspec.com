@@ -49,15 +49,15 @@ const MastheadBar = ({ classes }) => {
     <div className={classes.MastheadBar}>
       <div className={classes.barContainer}>
         <div className={classes.quickNav}>
-          <NavButton buttonType="sections" className={classes.leftEdgeNavButton}/>
-          <NavButton buttonType="search"/>
+          <NavButton label="sections" className={classes.leftEdgeNavButton}/>
+          <NavButton label="search"/>
         </div>
         <Link className={classes.brandingLink} to="/">
           The Spectator
         </Link>
         <div className={classes.userTools}>
-          <NavButton buttonType="log in"/>
-          <NavButton buttonType="subscribe"/>
+          <NavButton label="log in"/>
+          <NavButton label="subscribe"/>
         </div>
       </div>
     </div>
