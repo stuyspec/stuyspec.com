@@ -14,8 +14,6 @@ import axios from 'axios';
 const { HomePage, PageLayout } = core.components;
 const { ArticlePage } = articles.components;
 const { SectionPage } = sections.components;
-// TODO: Jason Kao please look into this Layout Thing
-
 
 // TODO: change to mapStateToProps
 const allSectionRoutes = sections.selectors.getAllSectionRoutes(store.getState());
