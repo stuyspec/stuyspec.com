@@ -1,0 +1,67 @@
+{
+  "articles": {
+    "articles": {
+      "apples-rain-in-new-york-city": {
+        "id": 0,
+        "title": "Apples Rain in New York City",
+        "content": "<p>Lorem ipsum</p>",
+        "volume": 108,
+        "issue": 1,
+        "isDraft": true,
+        "createdAt": "2017-07-31T06:14:09.473Z",
+        "updatedAt": "2017-07-31T06:14:09.473Z"
+      }
+    }
+  },
+  "sections": {
+    "sections": {
+      "news": {
+        "id": 1,
+        "name": "News",
+        "description": "All News Fit To Skim",
+        "createdAt": "2017-07-31T06:05:26.497Z",
+        "updatedAt": "2017-07-31T06:05:26.497Z",
+        "parentId": null
+      }
+    }
+  },
+  "media": {
+    "media": {
+      "0": {
+        "url": "https://stuyspec.s3.amazonaws.com/588/apples-in-rain.png",
+        "title": "Apples in Rain",
+        "caption": "Apples falling on a Chinatown Sidewalk.",
+        "isFeatured": true,
+        "type": "photograph",
+        "userSlug": "jason-kao",
+        "articleSlug": "apples-rain-in-new-york-city"
+      }
+    }
+  },
+  "users": {
+    "users": {
+      "jason-kao": {
+        "id": 0,
+        "firstName": "Jason",
+        "lastName": "Kao",
+        "username": "jkao1",
+        "email": "jkao1@stuy.edu",
+        "description": "Jason is a web editor for The Spectator"
+      }
+    },
+    "roles": {
+      "0": {
+        "id": 0,
+        "title": "Contributor",
+        "slug": "contributors",
+        "credentials": 0
+      }
+    },
+    "userRoles": [
+      {
+        "userSlug": "jason-kao",
+        "roleID": 0
+      }
+    ]
+  }
+}
