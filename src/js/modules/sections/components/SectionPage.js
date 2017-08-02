@@ -18,9 +18,6 @@ const styles = {
  */
 
 const SectionPage = ({ classes, articles, subsections, section, match, fetch }) => {
-  const handleFetch = () => {
-    fetch();
-  };
   const createSubsectionLinks = () => {
     return Object.keys(subsections).map((key) => {
       const subsection = subsections[ key ];
@@ -49,7 +46,6 @@ const SectionPage = ({ classes, articles, subsections, section, match, fetch }) 
   return (
     <div className={classes.SectionPage}>
       <h1>{section.name}</h1>
-      <button onClick={handleFetch}>Click on me to fetch articles</button>
       <p>description: {section.description}</p>
       <hr/>
       <p>subsections</p>
@@ -71,7 +67,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetch: fetch }, dispatch);
+  return bindActionCreators({}, dispatch);
 };
 
 export default connect(
