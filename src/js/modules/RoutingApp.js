@@ -8,8 +8,6 @@ import store from '../store';
 import core from './core';
 import articles from './articles';
 import sections from './sections';
-import { FETCH_ARTICLE_FULFILLED, FETCH_ARTICLE_PENDING, FETCH_ARTICLE_REJECTED, TEST } from "./articles/actionTypes";
-import axios from 'axios';
 
 const { HomePage, PageLayout } = core.components;
 const { ArticlePage } = articles.components;

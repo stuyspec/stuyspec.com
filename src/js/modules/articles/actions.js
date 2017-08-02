@@ -11,7 +11,6 @@ export const fetch = () => {
     //axios.get(apiUrl, {'headers': {'X-Key-Inflection': 'camel'}}) TODO: wait until Nic uses olive branch
     axios.get(apiUrl)
       .then((info) => {
-        console.log(info);
         // This current code will dispatch the FETCH_ARTICLE_REJECtED because the API still has null values
         if (articleValidator(info.data)) {
           const sections = getSections(getState());
