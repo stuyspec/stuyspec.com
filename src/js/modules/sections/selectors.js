@@ -47,26 +47,25 @@ export const getAllSectionRoutes = createSelector(
 );
 
 /**
- * Returns a modified version of state.sections.sections for Links from the
- *     home page.
- * For each section, its path to itself is defined.
+ * Returns a modified version of sections with links (used by home page).
  */
-export const getAllSectionLinksFromHome = createSelector(
+export const getSectionsWithLinks = createSelector(
   getSections,
   (sections) => {
-    let sectionLinks = {};
+    let sectionsWithLinks = {};
     Object.keys(sections).map((key) => {
-      const section = sections[ key ];
+      let section = sections[ key ];
       let pathToSectionPage = section.slug;
-      if (section.parentSlug !== null) { // this section is a subsection
-        pathToSectionPage = '/' + section.parentSlug + '/' + section.slug;
+      while (section.parentSlug !== null) {
+        pathToSectionPage = section.parentSlug + '/' + pathToSectionPage;
+        section = sections[ section.parentSlug ];
       }
-      sectionLinks[ key ] = {
+      sectionsWithLinks[ key ] = {
         ...section,
-        pathToSectionPage: pathToSectionPage,
+        pathToSectionPage: `/${pathToSectionPage}`,
       };
     });
-    return sectionLinks;
+    return sectionsWithLinks;
   }
 );
 
