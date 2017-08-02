@@ -11,7 +11,13 @@
         "createdAt": "2017-07-31T06:14:09.473Z",
         "updatedAt": "2017-07-31T06:14:09.473Z"
       }
-    }
+    },
+    "authorship": [
+      {
+        "articleSlug": "apples-rain-in-new-york-city",
+        "userSlug": "jason-kao"
+      }
+    ]
   },
   "sections": {
     "sections": {
@@ -21,7 +27,7 @@
         "description": "All News Fit To Skim",
         "createdAt": "2017-07-31T06:05:26.497Z",
         "updatedAt": "2017-07-31T06:05:26.497Z",
-        "parentId": null
+        "parentSlug": null
       }
     }
   },
@@ -46,7 +52,7 @@
         "lastName": "Kao",
         "username": "jkao1",
         "email": "jkao1@stuy.edu",
-        "description": "Jason is a web editor for The Spectator"
+        "description": "Jason is a web editor for The Spectator."
       }
     },
     "roles": {
