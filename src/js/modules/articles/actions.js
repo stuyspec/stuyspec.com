@@ -1,67 +1,55 @@
 import axios from 'axios';
 import * as t from './actionTypes';
-import { getSections } from '../sections/selectors';
-
-const apiUrl = 'https://api.stuyspec.xyz/articles';
+import API_URL from '../../constants';
 
 //TODO: need a way to call the fetch function
 export const fetch = () => {
   return (dispatch, getState) => {
     dispatch({ type: t.FETCH_ARTICLE_PENDING });
     //axios.get(apiUrl, {'headers': {'X-Key-Inflection': 'camel'}}) TODO: wait until Nic uses olive branch
-    axios.get(apiUrl)
-      .then((info) => {
+    axios.get(API_URL)
+      .then((response) => {
         // This current code will dispatch the FETCH_ARTICLE_REJECtED because the API still has null values
-        if (articleValidator(info.data)) {
-          const sections = getSections(getState());
+        if (articleIsValid(response.data)) {
           dispatch({
             type: t.FETCH_ARTICLE_FULFILLED,
-            payload: info.data,
-            sections: sections,
+            payload: response.data,
           })
         } else {
-          dispatch({ type: t.FETCH_ARTICLE_REJECTED, payload: 'Invalid article array' })
+          dispatch({
+            type: t.FETCH_ARTICLE_REJECTED,
+            payload: 'Invalid article array'
+          })
         }
       })
       .catch((err) => {
-        dispatch({ type: t.FETCH_ARTICLE_REJECTED, payload: err })
+        dispatch({
+          type: t.FETCH_ARTICLE_REJECTED,
+          payload: err
+        })
       })
   };
 };
-const keyValidator = (articleObject, key, type) => {
-  if (key in articleObject) {
-    return (typeof (articleObject[ key ]) === type );
-  } else {
-    return false;
-  }
-};
-const articleValidator = (articleArray) => {
-  const numberIDs = [ 'id', 'volume', 'issue', 'section_id' ];
-  const stringIDs = [ 'title', 'slug', 'content', "created_at", "updated_at" ];
-  const booleanIDs = [ 'is_draft' ];
+const keyIsValid = (articleObject, key, type) => (
+  key in articleObject) && (typeof (articleObjecty[ key ]) === type
+);
+const articleIsValid = (articleArray) => {
+  const integerProperties = [ 'id', 'volume', 'issue', 'section_id' ];
+  const stringProperties = [ 'title', 'slug', 'content', "created_at", "updated_at" ];
+  const booleanProperties = [ 'is_draft' ];
   if (!Array.isArray(articleArray)) {
     return false;
   }
-  for (articleIndex in articleArray) {
-    const articleObject = articleArray[ articleIndex ];
-    for (numberIndex in numberIDs) {
-      const numberKey = numberIDs[ numberIndex ];
-      if (!keyValidator(articleObject, numberKey, 'number')) {
-        return false;
-      }
-    }
-    for (stringIndex in stringIDs) {
-      const stringKey = stringIDs[ stringIndex ];
-      if (!keyValidator(articleObject, stringKey, 'string')) {
-        return false;
-      }
-    }
-    for (booleanIndex in booleanIDs) {
-      const booleanKey = booleanIDs[ booleanIndex ];
-      if (!keyValidator(articleObject, booleanKey, 'boolean')) {
-        return false;
-      }
-    }
-  }
+  articleArray.forEach((articleObject) => {
+    integerProperties.forEach((numberKey) => (
+      keyIsValid(articleObject, numberKey, 'number')
+    ));
+    stringProperties.forEach((stringKey) => (
+      keyIsValid(articleObject, stringKey, 'string')
+    ));
+    booleanProperties.forEach((booleanKey) => (
+      keyIsValid(articleObject, booleanKey, 'boolean')
+    ));
+  })
   return true;
 };

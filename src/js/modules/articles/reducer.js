@@ -2,8 +2,8 @@ import {
   FETCH_ARTICLE_PENDING,
   FETCH_ARTICLE_REJECTED,
   FETCH_ARTICLE_FULFILLED,
-  TEST,
 } from './actionTypes';
+import store from '../../store';
 
 const initialState = {
   isFetching: false,
@@ -26,10 +26,13 @@ const reducer = (state = { ...initialState }, action) => {
         // action.payload already tested in actions to be array
         articles: action.payload.reduce((acc, cur) => {
           const articleSlug = cur.slug;
-          cur.dateline = formatDate(cur.created_at);
-          cur.sectionSlug = slugFinder(cur.section_id, action);
+          const sectionID = cur.section_id;
           delete cur.section_id;
-          acc[ articleSlug ] = cur;
+          acc[ articleSlug ] = {
+            ...cur,
+            dateline: formatDate(cur.created_at),
+            sectionSlug: slugFinder(sectionID, action),
+          };
           return acc;
         }, { ...state.articles }),
       };
@@ -45,34 +48,37 @@ const reducer = (state = { ...initialState }, action) => {
   return state;
 };
 
-const formatDate = (createdAt) => {
-  const articleDateline = new Date(createdAt);
-  const dateOffset = Number(articleDateline.toString().slice(28, 31)) * (-1);
-  articleDateline.setHours(articleDateline.getHours() + dateOffset);
-  //Converts the date object into a string to be used for slicing
-  const adjustedArticleDateline = articleDateline.toString();
-  const currentDate = (new Date()).toString().slice(4, 15);
-  if (currentDate === adjustedArticleDateline.slice(4, 15)) {
-    const options = {
-      weekday: "long", year: "numeric", month: "short",
-      day: "numeric", hour: "2-digit", minute: "2-digit"
-    };
-    // articleDateTime is a string in the format <Wednesday, Aug 30, 2017, 8:03 PM>
-    const articleDateTime = articleDateline.toLocaleDateString("en-us", options);
-    return articleDateTime.slice(articleDateTime.indexOf(' ', 20));
+const formatDate = (string) => {
+  //Removes the Z at the end of the string which eliminates the need to offset the date
+  const newString = string.slice(0, string.length - 1);
+  //articleDateline and currentDate will be in the format:
+  // Tue Aug 01 2017 20:08:54 GMT-0400 (EDT)
+  const articleDateline = new Date(newString);
+  const currentDate = new Date();
+  //formattedDate is in the following format:
+  //August 1, 2017, 8:08 PM
+  const options = {
+    year: "numeric", month: "long", day: "numeric",
+    hour: "2-digit", minute: "2-digit"
+  };
+  const formattedDate = articleDateline.toLocaleDateString("en-us", options);
+  //splitIndex returns the index of the space between the date and time
+  const splitIndex = formattedDate.lastIndexOf(' ', formattedDate.length - 4);
+  //These slices return this part: Aug 01 2017
+  if (currentDate.toString().slice(4, 15) ===
+    articleDateline.toString().slice(4, 15)) {
+    //Returns the "8:08 PM" portion
+    return formattedDate.slice(splitIndex + 1);
   } else {
-    const months = [ "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December" ];
-    return months[ articleDateline.getMonth() ] + ' ' +
-      articleDateline.getDate() + ',' +
-      adjustedArticleDateline.slice(10, 15);
+    //Returns the "August 1, 2017" portion
+    return formattedDate.slice(0, splitIndex - 1);
   }
 };
 
-const slugFinder = (sectionId, action) => {
-  const sections = action.sections;
-  for (sectionIndex in sections) {
-    const sectionObject = sections[ sectionIndex ];
+const slugFinder = (sectionId) => {
+  const allSections = store.getState().sections.sections;
+  for (sectionIndex in allSections) {
+    const sectionObject = allSections [ sectionIndex ];
     if (sectionObject.id === sectionId) {
       return sectionObject.slug;
     }

@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import sections from "../../sections";
+import { fetch } from '../../articles/actions';
 
 const styles = {
-  HomePage__linkList: {
-  },
+  HomePage__linkList: {},
 };
 
-const HomePage = ({ classes, sectionLinks }) => {
+const HomePage = ({ classes, sectionLinks, fetch }) => {
   const createSectionLinks = () => {
     return Object.keys(sectionLinks).map(function (key, index) {
       return (
@@ -35,7 +35,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({}, dispatch);
+  return bindActionCreators({}, dispatch);
 };
 
 export default connect(

@@ -6,7 +6,6 @@ import injectSheet from 'react-jss';
 import sections from '../../sections';
 
 import articles from '../../articles';
-import { fetch } from '../../articles/actions';
 
 const styles = {
   SectionPage: {
