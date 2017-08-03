@@ -16,7 +16,7 @@ const styles = {
 /* TODO: make subsection tree work for any depth
  */
 
-const SectionPage = ({ classes, articles, subsections, section, match, fetch }) => {
+const SectionPage = ({ classes, articles, subsections, section, match}) => {
   const createSubsectionLinks = () => {
     return Object.keys(subsections).map((key) => {
       const subsection = subsections[ key ];
