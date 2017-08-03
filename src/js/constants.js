@@ -1,1 +1,1 @@
-export default API_URL = 'https://api.stuyspec.xyz/articles';
+export default STUY_SPEC_API = 'https://api.stuyspec.xyz';

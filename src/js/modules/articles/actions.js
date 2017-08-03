@@ -1,13 +1,13 @@
 import axios from 'axios';
 import * as t from './actionTypes';
-import API_URL from '../../constants';
+import STUY_SPEC_API from '../../constants';
 
 //TODO: need a way to call the fetch function
 export const fetch = () => {
   return (dispatch, getState) => {
     dispatch({ type: t.FETCH_ARTICLE_PENDING });
     //axios.get(apiUrl, {'headers': {'X-Key-Inflection': 'camel'}}) TODO: wait until Nic uses olive branch
-    axios.get(API_URL)
+    axios.get(STUY_SPEC_API+'/articles')
       .then((response) => {
         // This current code will dispatch the FETCH_ARTICLE_REJECtED because the API still has null values
         if (articleIsValid(response.data)) {
