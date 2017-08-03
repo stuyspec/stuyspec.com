@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import injectSheet from 'react-jss';
 import { Col, Grid, Row } from 'react-bootstrap/lib/';
 import SectionArticleList from './SectionArticleList';
+import sections from '../../sections';
 
 import articles from '../../articles';
 
@@ -39,64 +40,19 @@ const styles = {
   subSectionLink: {
     color: '#000000',
   },
-  eachArticle: {
-    listStyleType: 'none',
-    padding: '14px, 0px, 14.4px, 0px',
-    marginLeft: '0px',
-  },
-  imagePerArticle: {
-    width: '256px',
-    height: '170.6px',
-    align: 'left',
-    marginLeft: '0px',
-    paddingRight: '14px',
-  },
-  articleTitle: {
-    height: '15px',
-    fontFamily: 'MinionPro',
-    fontSize: '26px',
-    textAlign: 'left',
-    color: '#000000',
-    margin: '0px 0px',
-    border: '0px 0px',
-  },
-  articleDescription: {
-    height: '15px',
-    fontFamily: 'MinionPro',
-    fontSize: '16px',
-    lineHeight: '1.13',
-    textAlign: 'left',
-    color: '#000000',
-    paddingTop: '5px',
-    paddingBottom: '0px',
-  },
-  articleAuthor: {
-    height: '0px',
-    fontFamily: 'Circular Std',
-    fontSize: '12px',
-    fontWeight: 'bold',
-    textAlign: 'left',
-    color: '#666666',
-    textTransform: 'uppercase',
-    paddingTop: '9px',
-  },
   sectionNameDivider: {
     borderBottom: '2px solid #000000',
     borderTop: '0px',
     paddingTop: '7px',
     marginBottom: '29.6px',
     marginTop: '0px',
-  },
-  articleDivider: {
-    paddingTop: '14.4',
-    paddingBottom: '14',
   }
 };
 
 /* TODO: make subsection tree work for any depth
  */
 
-const SectionPage = ({ classes, articles, subsections, section, match, featuredMedia }) => {
+const SectionPage = ({ classes, subsections, articles, section, match, featuredMedia}) => {
   const createSubsectionLinks = () => {
     return Object.keys(subsections).map((key) => {
       const subsection = subsections[ key ];
@@ -110,13 +66,13 @@ const SectionPage = ({ classes, articles, subsections, section, match, featuredM
   return (
     <div className={classes.entireSectionPage}>
       <h1 className={classes.sectionName}>{section.name}</h1>
-      {/* <p>description: {section.description}</p> */}
       <ul className={classes.subsectionLink}>
         {createSubsectionLinks()}
       </ul>
       <hr className={classes.sectionNameDivider}/>
+      <SectionArticleList articles={articles} featuredMedia={featuredMedia} subsections={subsections} match={match}/>
     </div>
-  );
+    );
 };
 
 

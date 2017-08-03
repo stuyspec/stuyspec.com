@@ -74,6 +74,7 @@
     "react-bootstrap": "^0.31.1",
     "reselect": "^3.0.1",
     "sigmund": "^1.0.1",
-    "yargs": "^8.0.2"
+    "yargs": "^8.0.2",
+    "zone.js": "^0.8.5"
   }
 }
