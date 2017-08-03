@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import injectSheet from 'react-jss';
 import { Col, Grid, Row } from 'react-bootstrap/lib/';
 import SectionArticleList from './SectionArticleList';
-import sections from '../../sections';
 
 import articles from '../../articles';
 
@@ -19,7 +18,7 @@ const styles = {
     textAlign: 'left',
     color: '#000000',
     padding: '0px 0px',
-    margin: '0px 0px 11px 0px',
+    margin: '0px 0px',
   },
   subsectionLink: {
     listStyleType: 'none',
@@ -33,19 +32,26 @@ const styles = {
   },
   subsectionBar: {
     display: 'inline',
-    padding: '11px, 16px, 0px, 0px',
+    padding: '8px, 16px, 0px, 0px',
     margin: '0px 16px 0px 0px',
     textDecoration: 'none',
   },
   subSectionLink: {
     color: '#000000',
   },
-  sectionNameDivider: {
-    borderBottom: '2px solid #000000',
-    borderTop: '0px',
-    paddingTop: '7px',
-    marginBottom: '29.6px',
-    marginTop: '0px',
+  sectionNameDivider1: {
+    width: '1066px',
+    height: '1px',
+    backgroundColor: '#dddddd',
+    marginTop: '20px',
+    marginBottom: '8px',
+  },
+  sectionNameDivider2: {
+    width: '1066px',
+    height: '1px',
+    backgroundColor: '#dddddd',
+    marginTop: '8px',
+    marginBottom: '28px',
   }
 };
 
@@ -66,10 +72,11 @@ const SectionPage = ({ classes, subsections, articles, section, match, featuredM
   return (
     <div className={classes.entireSectionPage}>
       <h1 className={classes.sectionName}>{section.name}</h1>
+      <hr className={classes.sectionNameDivider1}/>
       <ul className={classes.subsectionLink}>
         {createSubsectionLinks()}
       </ul>
-      <hr className={classes.sectionNameDivider}/>
+      <hr className={classes.sectionNameDivider2}/>
       <SectionArticleList articles={articles} featuredMedia={featuredMedia} subsections={subsections} match={match}/>
     </div>
     );
