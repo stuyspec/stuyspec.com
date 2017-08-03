@@ -58,28 +58,45 @@ const styles = {
 /* TODO: make subsection tree work for any depth
  */
 
-const SectionPage = ({ classes, subsections, articles, section, match, featuredMedia}) => {
+const SectionPage = ({ classes, subsections, articles, section, match, featuredMedia, }) => {
   const createSubsectionLinks = () => {
-    return Object.keys(subsections).map((key) => {
-      const subsection = subsections[ key ];
+    const createLines = (articles, subsections) => {
+      return Object.keys(articles).map((key) => {
+      const article = articles[ key ];
+      if (subsections[ article.sectionSlug ] !== undefined) {
+        return (
+          <div>
+            <hr className={classes.sectionNameDivider1}/>
+            {subSectionLinks()}
+            <hr className={classes.sectionNameDivider2}/>
+          </div>
+        ) }
+      })}
+    const subSectionLinks = () => {
+      return Object.keys(subsections).map((key) => {
+        const subsection = subsections[ key ];
+        return (
+          <li key={subsection.id} className={classes.subsectionBar}>
+            <Link to={match.url + '/' + subsection.slug} className={classes.subsectionLink}>{subsection.name}</Link>
+          </li>
+        );
+      })
+    }
       return (
-        <li key={subsection.id} className={classes.subsectionBar}>
-          <Link to={match.url + '/' + subsection.slug} className={classes.subsectionLink}>{subsection.name}</Link>
-        </li>
+        <div>
+          {createLines (articles, subsections)}
+          <ul className={classes.subsectionLink}>
+          </ul>
+        </div>
       );
-    });
   };
   return (
     <div className={classes.entireSectionPage}>
       <h1 className={classes.sectionName}>{section.name}</h1>
-      <hr className={classes.sectionNameDivider1}/>
-      <ul className={classes.subsectionLink}>
-        {createSubsectionLinks()}
-      </ul>
-      <hr className={classes.sectionNameDivider2}/>
+      {createSubsectionLinks()}
       <SectionArticleList articles={articles} featuredMedia={featuredMedia} subsections={subsections} match={match}/>
     </div>
-    );
+)
 };
 
 
