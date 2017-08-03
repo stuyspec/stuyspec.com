@@ -3,35 +3,54 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
+import articles from "../../articles";
 import sections from "../../sections";
 import { fetch } from '../../articles/actions';
 
 const styles = {
-  HomePage__linkList: {},
+  HomePage: {}
 };
 
-const HomePage = ({ classes, sectionLinks, fetch }) => {
-  const createSectionLinks = () => {
-    return Object.keys(sectionLinks).map(function (key, index) {
+const HomePage = ({ classes, sectionsWithLinks, articles }) => {
+  const createSectionListItems = () => {
+    return Object.keys(sectionsWithLinks).map((key) => {
       return (
-        <li key={`sectionLink${index}`}>
-          <Link to={sectionLinks[ key ].pathToSectionPage}>{sectionLinks[ key ].name}</Link>
+        <li key={key}>
+          <Link to={sectionsWithLinks[ key ].pathToSectionPage}>{sectionsWithLinks[ key ].name}</Link>
+        </li>
+      );
+    });
+  };
+  const createArticleListItems = () => {
+    return Object.keys(articles).map((key) => {
+      const article = articles[ key ];
+      const pathToArticlePage = `${sectionsWithLinks[ article.sectionSlug ]
+        .pathToSectionPage}/${key}`;
+      return (
+        <li key={key}>
+          <Link to={pathToArticlePage}>{article.title}</Link>
         </li>
       );
     });
   };
   return (
-    <div>
+    <div className={classes.HomePage}>
       <h1>Home page</h1>
-      <ul className={classes.HomePage__linkList}>
-        {createSectionLinks()}
+      <h2>Sections</h2>
+      <ul>
+        {createSectionListItems()}
+      </ul>
+      <h2>Articles</h2>
+      <ul>
+        {createArticleListItems()}
       </ul>
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-  sectionLinks: sections.selectors.getAllSectionLinksFromHome(state),
+  articles: articles.selectors.getArticles(state),
+  sectionsWithLinks: sections.selectors.getSectionsWithLinks(state),
 });
 
 const mapDispatchToProps = dispatch => {
