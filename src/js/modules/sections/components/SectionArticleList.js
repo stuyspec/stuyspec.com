@@ -49,18 +49,19 @@ const styles = {
     color: '#000000',
     textTransform: 'uppercase',
     marginRight: '6px',
+    float: 'left',
   },
   articleDivider: {
     paddingTop: '14.4',
     paddingBottom: '14',
   },
-  dateTime: {
+  dateline: {
     fontFamily: 'Circular Std',
     fontSize: '12px',
     fontWeight: 'bold',
     textAlign: 'left',
     color: '#666666',
-    marginLeft: '6px',
+    marginLeft: '0px',
   }
 };
 
@@ -83,7 +84,7 @@ const SectionArticleList = ({classes, match, articles, featuredMedia, subsection
             <Col md={6} lg={6}>
               <Link to={match.url + '/' + pathToArticlePage} className={classes.articleTitle}>{article.title}</Link>
               <p className={classes.articleDescription}>Cathy plays a horizontal guitara.</p>
-              <p className={classes.articleAuthor}>Jason Kao<b className={classes.dateTime}> 9:41 AM</b></p>
+              <p className={classes.dateline}><p className={classes.articleAuthor}>Jason Kao</p>9:41 AM</p>
             </Col>
           </Row>
           <hr className={classes.articleDivider}/>
