@@ -10,8 +10,35 @@ const initialState = {
   error: null,
   request: null,
   users: {
-
+    "jason-kao": {
+      id: 0,
+      firstName: "Jason",
+      lastName: "Kao",
+      username: "jkao1",
+      email: "jkao1@stuy.edu",
+      description: "Jason is a web editor for The Spectator."
+    }
   },
+  roles: {
+    0: {
+      id: 0,
+      title: "Contributor",
+      slug: "contributors",
+      credentials: 0
+    },
+  },
+  userRoles: [
+    {
+      userSlug: "jason-kao",
+      roleID: 0
+    }
+  ],
+  authorship: [
+    {
+      articleSlug: "apples-rain-in-new-york-city",
+      userSlug: "jason-kao"
+    }
+  ]
 };
 
 const reducer = (state = { ...initialState }, action) => {
