@@ -11,13 +11,7 @@
         "createdAt": "2017-07-31T06:14:09.473Z",
         "updatedAt": "2017-07-31T06:14:09.473Z"
       }
-    },
-    "authorship": [
-      {
-        "articleSlug": "apples-rain-in-new-york-city",
-        "userSlug": "jason-kao"
-      }
-    ]
+    }
   },
   "sections": {
     "sections": {
@@ -67,6 +61,12 @@
       {
         "userSlug": "jason-kao",
         "roleID": 0
+      }
+    ],
+    "authorship": [
+      {
+        "articleSlug": "apples-rain-in-new-york-city",
+        "userSlug": "jason-kao"
       }
     ]
   }

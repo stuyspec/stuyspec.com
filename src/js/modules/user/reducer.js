@@ -10,6 +10,7 @@ const initialState = {
   error: null,
   request: null,
   users: {
+
   },
 };
 
