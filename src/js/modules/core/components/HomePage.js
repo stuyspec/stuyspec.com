@@ -3,6 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
+
 import articles from "../../articles";
 import sections from "../../sections";
 import users from "../../users";
@@ -11,35 +12,41 @@ const styles = {
   HomePage: {}
 };
 
-const HomePage = ({ classes, sectionsWithLinks, articles, users }) => {
-  const createSectionListItems = () => {
-    return Object.keys(sectionsWithLinks).map((key) => {
+const HomePage = ({ classes, sections, articles, users, userRoles }) => {
+  const linkToAllSections = () => {
+    return Object.keys(sections).map((sectionSlug, index) => {
       return (
-        <li key={key}>
-          <Link to={sectionsWithLinks[ key ].pathToSectionPage}>{sectionsWithLinks[ key ].name}</Link>
+        <li key={`sectionLink${index}`}>
+          <Link to={sections[ sectionSlug ].permalink}>
+            {sections[ sectionSlug ].name}
+          </Link>
         </li>
       );
     });
   };
-  const createArticleListItems = () => {
-    return Object.keys(articles).map((key) => {
-      const article = articles[ key ];
-      const pathToArticlePage = `${sectionsWithLinks[ article.sectionSlug ]
-        .pathToSectionPage}/${key}`;
+  const linkToAllArticles = () => {
+    return Object.keys(articles).map((articleSlug, index) => {
+      const article = articles[ articleSlug ];
       return (
-        <li key={key}>
-          <Link to={pathToArticlePage}>{article.title}</Link>
+        <li key={`articleLink${index}`}>
+          <Link to={`${sections[ article.sectionSlug ].permalink}/${article.slug}`}>{article.title}</Link>
         </li>
       );
     });
   };
-  const createContributorListItems = () => {
-    return Object.keys(users).map((userSlug) => {
-      return (
-        <li key={userSlug}>
-          <Link to={`/contributors/${userSlug}`}>{users[ userSlug ].lastName}</Link>
-        </li>
-      );
+  const linkToAllContributors = () => {
+    return Object.keys(users).map((userSlug, index) => {
+      if (userRoles.find(userRole => userRole.userSlug === userSlug &&
+          userRole.roleSlug === "contributors")) {
+        const contributor = users[ userSlug ]
+        return (
+          <li key={`contributorLink${index}`}>
+            <Link to={`/contributors/${userSlug}`}>
+              {contributor.firstName + ' ' + contributor.lastName}
+            </Link>
+          </li>
+        );
+      }
     });
   };
   return (
@@ -47,30 +54,29 @@ const HomePage = ({ classes, sectionsWithLinks, articles, users }) => {
       <h1>Home page</h1>
       <h2>Sections</h2>
       <ul>
-        {createSectionListItems()}
+        {linkToAllSections()}
       </ul>
       <h2>Articles</h2>
       <ul>
-        {createArticleListItems()}
+        {linkToAllArticles()}
       </ul>
       <h2>Contributors</h2>
       <ul>
-        {createContributorListItems()}
+        {linkToAllContributors()}
       </ul>
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-
-  //TODO: why is state undefined in users?
   articles: articles.selectors.getArticles(state),
-  sectionsWithLinks: sections.selectors.getSectionsWithLinks(state),
+  sections: sections.selectors.getSections(state),
   users: users.selectors.getUsers(state),
+  userRoles: users.selectors.getUserRoles(state),
 });
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({}, dispatch);
+  return bindActionCreators({}, dispatch);
 };
 
 export default connect(

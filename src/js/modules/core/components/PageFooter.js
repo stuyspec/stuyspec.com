@@ -54,39 +54,32 @@ const styles = {
   },
 };
 
-const PageFooter = ({ classes, sectionsWithSubsections }) => {
-  const makeSectionLinks = () => {
-    return (sectionsWithSubsections.map((topLevelSection) => {
-        return (
-          <div className={classes.sectionBlock} key={topLevelSection.id}>
-            <Link className={classes.topLevelSectionLink}
-                  key={`topLevelLink${topLevelSection.id}`}
-                  to={`/${topLevelSection.slug}`}>
-              {topLevelSection.name}
-            </Link>
-            {
-              Object.keys(topLevelSection.subsections).map((subsectionSlug) => {
-                return makeSubsectionLink(
-                  topLevelSection.slug,
-                  topLevelSection.subsections[ subsectionSlug ]);
-              })
-            }
-          </div>
-        );
-      })
-    );
+const PageFooter = ({ classes, topLevelSectionsWithDirectChildren }) => {
+  const linkToSections = () => {
+    return Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {
+      const topLevelSection = topLevelSectionsWithDirectChildren[ sectionSlug ];
+      return (
+        <div className={classes.sectionBlock} key={topLevelSection.id}>
+          <Link className={classes.topLevelSectionLink}
+                key={`topLevelLink${topLevelSection.id}`}
+                to={topLevelSection.permalink}>
+            {topLevelSection.name}
+          </Link>
+          {
+            Object.keys(topLevelSection.subsections).map(subsectionSlug => {
+              const subsection = topLevelSection.subsections[ subsectionSlug ];
+              return (
+                <Link className={classes.subsectionLink}
+                      to={subsection.permalink}>
+                  {subsection.name}
+                </Link>
+              );
+            })
+          }
+        </div>
+      );
+    });
   };
-  const makeSubsectionLink = (topLevelSectionSlug, subsection) => {
-    return (
-      <div key={`subsectionLink${subsection.id}`}>
-        <Link className={classes.subsectionLink}
-              to={`/${topLevelSectionSlug}/${subsection.slug}`}>
-          {subsection.name}
-        </Link>
-      </div>
-    );
-  };
-
   return (
     <Grid className={classes.PageFooter}>
       <Row className={classes.pageFooterMain}>
@@ -94,7 +87,7 @@ const PageFooter = ({ classes, sectionsWithSubsections }) => {
           The Spectator
         </Col>
         <Col md={8} mdOffset={2} className={classes.sectionFlex}>
-          {makeSectionLinks()}
+          {linkToSections()}
         </Col>
       </Row>
     </Grid>
