@@ -1,8 +1,8 @@
 import { createSelector } from "reselect";
 import { findSectionFromId } from '../sections/selectors';
 import { getSectionAndSubsectionSlugs } from "../sections/selectors";
-// TODO: figure out how to make this^ import correct
-export const getArticles = state => state.articles.articles;
+
+const getArticles = state => state.articles.articles;
 const getRequestedArticleSlug = (state, props) => props.match.params.article_slug;
 const getSectionByProps = (state, props) => props.section;
 

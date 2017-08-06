@@ -1,10 +1,12 @@
 import React from 'react';
 import injectSheet from 'react-jss';
-import {Link} from 'react-router-dom';
+
+import Masthead from './Masthead';
+import MastheadBar from './MastheadBar';
 
 /*
-TODO: Add in direct navigation which leads users directly to some pages. (Exists on all pages)
- These links are both the left-aligned—hamburger menu of sections,
+  TODO: Add in direct navigation which leads users directly to some pages. (Exists on all pages)
+   These links are both the left-aligned—hamburger menu of sections,
  search—and the right-aligned—account dropdown (if signed in, the
  options are to go to profile or logout; if signed out, the dropdown is
  replaced by “log in” and “subscribe” buttons). “The Spectator” occupies the
@@ -12,20 +14,12 @@ TODO: Add in direct navigation which leads users directly to some pages. (Exists
  On mobile, condensed-nav has no search or account dropdown.
 */
 
-/*
-TODO: Add in site structure navigation which links to the first layer items of the site
-(the departments, “subscribe”, “more”). On non-article pages (homepage, department pages),
- the site structure navigation is displayed in a horizontal bar with a “The Spectator”
- heading above it (the Header). On article pages, no such navigation exists; there is
- only direct navigation. On mobile, no such navigation exists; there is only direct navigation.
- */
 const styles = {
   PageHeader: {
-    borderBottom: '1px solid black',
     margin: '0px auto 24px auto',
     paddingTop: '11px',
     textAlign: 'center',
-    width: '1060px',
+    width: '100%',
   },
   theSpectatorLogo: {
     fontFamily: 'Old English Text MT',
@@ -51,21 +45,16 @@ const styles = {
   },
 };
 
-const PageHeader = ({classes, sectionsWithSubsections}) => {
+const PageHeader = ({ classes, location, sectionsWithSubsections }) => {
   return (
     <div className={classes.PageHeader}>
-      <div className={classes.theSpectatorLogo}>The Spectator</div>
-      <ul className={classes.sectionLinksNav}>
-        {sectionsWithSubsections.map((topLevelSection) => {
-          return (
-            <li key={topLevelSection.id} className={classes.sectionListElement}>
-              <Link to={`/${topLevelSection.slug}`} className={classes.sectionLink}>
-                {topLevelSection.name}
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
+      {
+        location.pathname === '/' ? (
+          <Masthead sectionsWithSubsections={sectionsWithSubsections}/>
+        ) : (
+          <MastheadBar className={classes.MastheadBar}/>
+        )
+      }
     </div>
   )
 };

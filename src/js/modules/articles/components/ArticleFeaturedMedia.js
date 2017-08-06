@@ -13,6 +13,7 @@ const styles = {
     fontFamily: 'Minion Pro',
     fontSize: '14px',
     lineHeight: '1.07',
+    marginTop: '7px',
     '& span:last-child': {
       color: '#888'
     },
