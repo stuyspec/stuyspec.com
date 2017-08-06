@@ -1,9 +1,6 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 
-
-// TODO: find sprites
-
 const styles = {
   NavButton: {
     background: 'none',

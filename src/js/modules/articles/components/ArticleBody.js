@@ -17,21 +17,6 @@ const styles = {
       padding: '7px 6px 0px 3px',
     },
   },
-  featuredMedia: {
-    margin: '0px 0px 13px 0px',
-    width: '100%',
-    '& .img': {
-      width: '100%'
-    },
-    '& .caption': {
-      fontFamily: 'Minion Pro',
-      fontSize: '14px',
-      lineHeight: '1.07',
-      '& span:last-child': {
-        color: '#888'
-      },
-    },
-  },
 };
 
 const ArticleBody = ({ classes, content, featuredMedia }) => {

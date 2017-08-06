@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 import appHistory from 'tools/appHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
 import { connect } from 'react-redux';
-import store from '../store';
 
 import core from './core';
 import articles from './articles';
@@ -15,57 +14,51 @@ const { ArticlePage } = articles.components;
 const { SectionPage } = sections.components;
 const { RolePage, UserPage } = users.components;
 
-const RoutingApp = ({ allSectionRoutes, allRoles }) => {
+const { getRoles } = users.selectors;
+const { getSections } = sections.selectors;
+
+const RoutingApp = ({ sections, roles, match }) => {
   const createSectionRoutes = () => {
-    return Object.keys(allSectionRoutes).map((key, index) => {
-      const sectionRoute = allSectionRoutes[ key ];
+    return Object.keys(sections).map((sectionSlug, index) => {
+      const section = sections[ sectionSlug ];
       return <Route
-        exact path={sectionRoute.pathToSectionPage}
+        exact path={section.permalink}
         key={`sectionRoute${index}`}
         render={(props) => (
-          <SectionPage history={props.history}
-                       location={props.location}
-                       match={props.match}
-                       section={sectionRoute}
-                       subsections={sectionRoute.subsections}/>
+          <SectionPage section={section}/>
         )}/>
     });
   };
   const createArticleRoutes = () => {
-    return Object.keys(allSectionRoutes).map((key, index) => {
-      const sectionRoute = allSectionRoutes[ key ];
+    return Object.keys(sections).map((sectionSlug, index) => {
+      const section = sections[ sectionSlug ];
       return <Route
-        exact path={sectionRoute.pathToSectionPage + "/:article_slug"}
+        exact path={`${section.permalink}/:article_slug`}
         key={`articleRoute${index}`}
         render={(props) => (
-          <ArticlePage history={props.history}
-                       location={props.location}
-                       match={props.match}
-                       section={sectionRoute}/>
+          <ArticlePage match={props.match}
+                       section={section}/>
         )}/>
     });
   };
   const createRoleRoutes = () => {
-    return Object.keys(allRoles).map((roleSlug) => {
+    return Object.keys(roles).map((roleSlug, index) => {
       return <Route
         exact path={`/${roleSlug}`}
+        key={`roleRoute${index}`}
         render={(props) => (
-          <RolePage history={props.history}
-                    location={props.location}
-                    match={props.match}
-                    role={allRoles[ roleSlug ]}/>
+          <RolePage role={roles[ roleSlug ]}/>
         )}/>
     })
   }
   const createUserRoutes = () => {
-    return Object.keys(allRoles).map((roleSlug) => {
+    return Object.keys(roles).map((roleSlug, index) => {
       return <Route
         exact path={`/${roleSlug}/:user_slug`}
+        key={`userRoute${index}`}
         render={(props) => (
-          <UserPage history={props.history}
-                    location={props.location}
-                    match={props.match}
-                    role={allRoles[ roleSlug ]}/>
+          <UserPage match={props.match}
+                    role={roles[ roleSlug ]}/>
         )}/>
     })
   }
@@ -85,8 +78,8 @@ const RoutingApp = ({ allSectionRoutes, allRoles }) => {
 };
 
 const mapStateToProps = (state) => ({
-  allSectionRoutes: sections.selectors.getAllSectionRoutes(state),
-  allRoles: users.selectors.getAllRoles(state),
+  sections: getSections(state),
+  roles: getRoles(state),
 });
 
 export default connect(

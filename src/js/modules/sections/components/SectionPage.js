@@ -1,11 +1,10 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import injectSheet from 'react-jss';
-import sections from '../../sections';
 
-import articles from '../../articles';
+import { getArticlesWithinSectionTree } from '../../articles/selectors';
+import { getSections, getDirectChildrenOfSection } from '../../sections/selectors';
 
 const styles = {
   SectionPage: {
@@ -13,31 +12,25 @@ const styles = {
   }
 };
 
-/* TODO: make subsection tree work for any depth
- */
-
-const SectionPage = ({ classes, articles, subsections, section, match }) => {
-  const createSubsectionLinks = () => {
-    return Object.keys(subsections).map((key) => {
-      const subsection = subsections[ key ];
+const SectionPage = ({ classes, articlesWithinSectionTree, directSubsectionChildren, section, sections }) => {
+  const createLinksToDirectSubsectionChildren = () => {
+    return Object.keys(directSubsectionChildren).map((subsectionSlug) => {
+      const subsection = directSubsectionChildren[ subsectionSlug ];
       return (
-        <li key={subsection.id}>
-          <Link to={match.url + '/' + subsection.slug}>{subsection.name}</Link>
+        <li key={`subsectionListItem${subsection.id}`}>
+          <Link to={subsection.permalink}>{subsection.name}</Link>
         </li>
       );
     });
   };
-  const createArticleLinks = () => {
-    return Object.keys(articles).map((key) => {
-      const article = articles[ key ];
-      let pathToArticlePage = article.slug;
-      // if article is not a direct child of this section but is that of the section's subsection
-      if (subsections[ article.sectionSlug ] !== undefined) {
-        pathToArticlePage = article.sectionSlug + '/' + article.slug;
-      }
+  const createLinksToArticlesWithinSectionTree = () => {
+    return Object.keys(articlesWithinSectionTree).map((articleSlug) => {
+      const article = articlesWithinSectionTree[ articleSlug ];
       return (
-        <li key={article.id}>
-          <Link to={match.url + '/' + pathToArticlePage}>{article.title}</Link>
+        <li key={`articleListItem${article.id}`}>
+          <Link to={`${sections[ article.sectionSlug ].permalink}/${article.slug}`}>
+            {article.title}
+          </Link>
         </li>
       );
     });
@@ -49,12 +42,12 @@ const SectionPage = ({ classes, articles, subsections, section, match }) => {
       <hr/>
       <p>subsections</p>
       <ul>
-        {createSubsectionLinks()}
+        {createLinksToDirectSubsectionChildren()}
       </ul>
       <hr/>
       <p>articles</p>
       <ul>
-        {createArticleLinks()}
+        {createLinksToArticlesWithinSectionTree()}
       </ul>
     </div>
   );
@@ -62,14 +55,12 @@ const SectionPage = ({ classes, articles, subsections, section, match }) => {
 
 
 const mapStateToProps = (state, ownProps) => ({
-  articles: articles.selectors.getArticlesWithinSection(state, ownProps),
+  articlesWithinSectionTree: getArticlesWithinSectionTree(state, ownProps),
+  directSubsectionChildren: getDirectChildrenOfSection(state, ownProps),
+  sections: getSections(state),
 });
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({}, dispatch);
-};
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(injectSheet(styles)(SectionPage));

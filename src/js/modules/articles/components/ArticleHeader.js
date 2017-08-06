@@ -32,45 +32,59 @@ const styles = {
     fontSize: '14px',
     color: '#000000',
     margin: '0px',
-    '& span:first-child': {
+    '& div:first-child': {
+      display: 'inline',
       fontWeight: 'bold',
       marginRight: '9px',
+      '& div': {
+        display: 'inline',
+        margin: 0,
+      }
     },
   },
+  contributorContainer: {
+    display: 'inline',
+    margin: 0,
+  },
+  contributorLink: {
+    color: '#000',
+    '&:hover': {
+      color: '#000',
+    }
+  }
 };
 
 const ArticleHeader = ({ classes, section, headline, contributors, dateline }) => {
-  const getLinkToSection = () => {
-    let tempSection = section;
-    let link = tempSection.slug;
-    while (tempSection.parentSlug !== null) {
-      link = `${tempSection.parentSlug}/${link}`
-    }
-    return `/${link}`;
-  };
-  const contributorsToString = () => {
-    let byline = "By ";
-    let separator = "";
-    for (let c = 0, l = contributors.length; c < l; c++) {
-      if (c === 1) {
-        separator = ", ";
-      } else if (c === l - 1) {
-        separator = " & ";
+  const writeLinkedByline = () => {
+    let separator = ', ';
+    return contributors.map((contributor, index) => {
+      if (index === contributors.length - 2) {
+        separator = ' & ';
+      } else if (index === contributors.length - 1) {
+        separator = '';
       }
-      byline += separator + contributors[ c ].firstName + " " + contributors[ c ].lastName;
-    }
-    return byline;
+      return (
+        <div className={classes.contributorContainer}
+             key={`contributor${index}`}>
+          {index === 0 ? 'By ' : ''}
+          <Link className={classes.contributorLink}
+                to={`/contributors/${contributor.slug}`}>
+            {contributor.firstName} {contributor.lastName}
+          </Link>{separator}
+        </div>
+      );
+    });
   };
   return (
     <div className={classes.ArticleHeader}>
-      <Link to={getLinkToSection()} className={classes.rubric}>
+      <Link to={section.permalink} className={classes.rubric}>
         {section.name}
       </Link>
       <h1 className={classes.headline}>{headline}</h1>
-      <p className={classes.metaInfo}>
-        <span>{contributorsToString()}</span>
+      <div className={classes.metaInfo}>
+        <div>{writeLinkedByline()}</div>
         <span>{dateline}</span>
-      </p>
+      </div>
     </div>
   );
 };

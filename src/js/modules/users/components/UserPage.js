@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import injectSheet from 'react-jss';
 
 import { getUserBySlug } from '../selectors';
-import { getUserArticles } from '../../articles/selectors';
+import { getArticlesWrittenByContributor } from '../../articles/selectors';
 import { getSections } from '../../sections/selectors';
 
 const styles = {
@@ -13,19 +13,18 @@ const styles = {
   }
 };
 
-const UserPage = ({ classes, role, user, articles, sections }) => {
-  const createArticleListItems = () => {
-    return Object.keys(articles).map(articleSlug => {
-      const article = articles[ articleSlug ];
-      let pathToArticle = '/' + article.sectionSlug + '/' + article.slug;
-      let section = sections[ article.sectionSlug ];
-      while (section.parentSlug !== null) {
-        pathToArticle = '/' + section.parentSlug + pathToArticle;
-        section = sections[ section.parentSlug ];
-      }
+/**
+ * @param match necessary for retrieving user from slug.
+ */
+const UserPage = ({ classes, role, user, articlesWrittenByContributor, sections, match }) => {
+  const linkToArticlesWrittenByContributor = () => {
+    return Object.keys(articlesWrittenByContributor).map((articleSlug, index) => {
+      const article = articlesWrittenByContributor[ articleSlug ];
       return (
-        <li>
-          <Link to={pathToArticle}>{article.title}</Link>
+        <li key={`article${index}`}>
+          <Link to={`${sections[ article.sectionSlug ].permalink}/${articleSlug}`}>
+            {article.title}
+          </Link>
         </li>
       );
     });
@@ -35,19 +34,28 @@ const UserPage = ({ classes, role, user, articles, sections }) => {
       <h1>{user.firstName} {user.lastName}</h1>
       <p>role: <Link to={`/${role.slug}`}>{role.title}</Link></p>
       <hr/>
-      <p>articles</p>
-      <ul>
-        {createArticleListItems()}
-      </ul>
+      {
+        articlesWrittenByContributor !== null &&
+          <div>
+            <p>articles</p>
+            <ul>
+              {linkToArticlesWrittenByContributor()}
+            </ul>
+          </div>
+      }
     </div>
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  user: getUserBySlug(state, ownProps),
-  articles: getUserArticles(state, ownProps),
-  sections: getSections(state),
-});
+const mapStateToProps = (state, ownProps) => {
+  const userIsContributor = ownProps.role.title === "Contributor";
+  return {
+    user: getUserBySlug(state, ownProps),
+    articlesWrittenByContributor: userIsContributor ?
+      getArticlesWrittenByContributor(state, ownProps) : null,
+    sections: getSections(state),
+  };
+};
 
 export default connect(
   mapStateToProps,

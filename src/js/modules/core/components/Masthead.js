@@ -41,22 +41,24 @@ const styles = {
   },
 };
 
-const Masthead = ({ classes, sectionsWithSubsections }) => {
+const Masthead = ({ classes, topLevelSectionsWithDirectChildren }) => {
+  const linkToTopLevelSections = () => {
+    Object.keys(topLevelSectionsWithDirectChildren).map((sectionSlug) => {
+      const topLevelSection = topLevelSectionsWithDirectChildren[ sectionSlug ];
+      return (
+        <li key={topLevelSection.id} className={classes.sectionListElement}>
+          <Link to={topLevelSection.permalink} className={classes.sectionLink}>
+            {topLevelSection.name}
+          </Link>
+        </li>
+      )
+    })
+  }
   return (
     <div className={classes.Masthead}>
       <div className={classes.theSpectatorLogo}>The Spectator</div>
       <ul className={classes.sectionLinksNav}>
-        {
-          sectionsWithSubsections.map((topLevelSection) => {
-            return (
-              <li key={topLevelSection.id} className={classes.sectionListElement}>
-                <Link to={`/${topLevelSection.slug}`} className={classes.sectionLink}>
-                  {topLevelSection.name}
-                </Link>
-              </li>
-            )
-          })
-        }
+        {linkToTopLevelSections()}
       </ul>
     </div>
   )
