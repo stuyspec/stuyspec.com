@@ -100,10 +100,19 @@ export const getSectionsWithSubsections = createSelector(
         subsections: Object.filter(allSubsections, subsection => {
           return subsection.parentSlug === parentSectionSlug;
         }),
-      }
+      };
       sectionsWithSubsections.push(sectionWithSubsections);
     });
     return sectionsWithSubsections;
   }
 );
 
+export const findSectionFromId = (sectionId, state) => {
+  const allSections = getSections(state);
+  for (sectionIndex in allSections) {
+    const sectionObject = allSections [ sectionIndex ];
+    if (sectionObject.id === sectionId) {
+      return sectionObject.slug;
+    }
+  }
+};

@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import { findSectionFromId } from '../sections/selectors';
 import { getSectionAndSubsectionSlugs } from "../sections/selectors";
 // TODO: figure out how to make this^ import correct
 export const getArticles = state => state.articles.articles;
@@ -24,3 +25,20 @@ export const getArticlesWithinSection = createSelector(
     });
   }
 );
+
+export const processArticleResponseData = (state) => {
+  const data = state.articles.responseData;
+  console.log(data);
+  const processedData = data.reduce((accumulator, current) => {
+    const articleSlug = current.slug;
+    const idOfSection = current.sectionId;
+    delete current.sectionId;
+    accumulator[ articleSlug ] = {
+      ...current,
+      sectionSlug: findSectionFromId(idOfSection, state),
+    };
+    return accumulator;
+  }, { ...state.articles.articles });
+  return processedData;
+};
+

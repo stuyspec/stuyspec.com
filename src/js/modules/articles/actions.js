@@ -1,10 +1,11 @@
 import axios from 'axios';
 import * as t from './actionTypes';
 import {STUY_SPEC_API, HEADER} from '../../constants';
+import { processArticleResponseData } from './selectors';
 
 //TODO: need a way to call the fetch function
 export const fetchArticles = () => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({ type: t.FETCH_ARTICLE_PENDING });
     axios.get(`${STUY_SPEC_API}/articles`, {'headers': HEADER})
       .then((response) => {
@@ -12,18 +13,22 @@ export const fetchArticles = () => {
           dispatch({
             type: t.FETCH_ARTICLE_FULFILLED,
             payload: response.data,
-          })
-        }
-      })
+          });
+        }})
+      .then(dispatch({
+              type: t.ADD_ARTICLES,
+              payload: processArticleResponseData(getState()),
+            })
+        )
       .catch((err) => {
         dispatch({
           type: t.FETCH_ARTICLE_REJECTED,
-          payload: err
+          payload: err,
         })
       })
   };
 };
-const isKeyValid = (articleObject, key, type) => {
+const isArticleKeyValid = (articleObject, key, type) => {
   if (key in articleObject) {
     if (typeof (articleObject[ key ]) === type) {
       return true;
@@ -46,18 +51,18 @@ const isArticleValid = (articleArray) => {
   }
   articleArray.forEach((articleObject) => {
     integerProperties.forEach((numberKey) => {
-      if (!isKeyValid(articleObject, numberKey, 'number')) {
+      if (!isArticleKeyValid(articleObject, numberKey, 'number')) {
         throw 'Error: Key Error'
       }
     });
     stringProperties.forEach((stringKey) => {
-      if (!isKeyValid(articleObject, stringKey, 'string')) {
+      if (!isArticleKeyValid(articleObject, stringKey, 'string')) {
         throw 'Error: Key Error'
       }
     });
     /*
     booleanProperties.forEach((booleanKey) => {
-      if (!isKeyValid(articleObject, booleanKey, 'boolean')) {
+      if (!isArticleKeyValid(articleObject, booleanKey, 'boolean')) {
         throw 'Error: Key Error'
       }
     });
@@ -66,3 +71,4 @@ const isArticleValid = (articleArray) => {
   });
   return true;
 };
+

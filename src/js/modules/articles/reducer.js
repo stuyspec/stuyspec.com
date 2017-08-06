@@ -2,10 +2,8 @@ import {
   FETCH_ARTICLE_PENDING,
   FETCH_ARTICLE_REJECTED,
   FETCH_ARTICLE_FULFILLED,
+  ADD_ARTICLES,
 } from './actionTypes';
-import store from '../../store';
-import { getSections } from "../sections/selectors";
-import { formatDate } from "../../utils"
 
 const initialState = {
   isFetching: false,
@@ -13,6 +11,7 @@ const initialState = {
   error: null,
   request: null,
   articles: {},
+  responseData: {},
 };
 
 const reducer = (state = { ...initialState }, action) => {
@@ -25,18 +24,7 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         isFetching: false,
         isFetched: true,
-        // action.payload already tested in actions to be array
-        articles: action.payload.reduce((accumulator, current) => {
-          const articleSlug = current.slug;
-          const idOfSection = current.sectionId;
-          delete current.sectionId;
-          accumulator[ articleSlug ] = {
-            ...current,
-            dateline: formatDate(current.updatedAt),
-            sectionSlug: sectionSlugFinder(idOfSection, action),
-          };
-          return accumulator;
-        }, { ...state.articles }),
+        requestObject: action.payload,
       };
     }
     case FETCH_ARTICLE_REJECTED: {
@@ -46,20 +34,15 @@ const reducer = (state = { ...initialState }, action) => {
         error: action.payload,
       };
     }
+    case ADD_ARTICLES: {
+      return {
+        ...state,
+        articles: action.payload,
+        responseData: {},
+      }
+    }
   }
   return state;
 };
-
-const sectionSlugFinder = (sectionId) => {
-  const allSections = getSections(store.getState());
-  for (sectionIndex in allSections) {
-    const sectionObject = allSections [ sectionIndex ];
-    if (sectionObject.id === sectionId) {
-      return sectionObject.slug;
-    }
-  }
-  console.error("Section ID of requested article doesn't match")
-};
-
 
 export default reducer;

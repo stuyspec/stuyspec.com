@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import articles from "../../articles";
 import sections from "../../sections";
+import { fetchArticles} from "../../articles/actions"
 
 const styles = {
   HomePage: {}
 };
 
-const HomePage = ({ classes, sectionsWithLinks, articles }) => {
+const HomePage = ({ classes, sectionsWithLinks, articles, fetchArticles }) => {
   const createSectionListItems = () => {
     return Object.keys(sectionsWithLinks).map((key) => {
       return (
@@ -32,9 +33,13 @@ const HomePage = ({ classes, sectionsWithLinks, articles }) => {
       );
     });
   };
+  const handleFetch = () => {
+    fetchArticles();
+  };
   return (
     <div className={classes.HomePage}>
       <h1>Home page</h1>
+      <button onClick = {handleFetch}>Articles </button>
       <h2>Sections</h2>
       <ul>
         {createSectionListItems()}
@@ -54,7 +59,7 @@ const mapStateToProps = (state) => ({
 
 //TODO: Make this mapDispatchToProps actually do something
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({fetchArticles: fetchArticles}, dispatch);
 };
 
 export default connect(
