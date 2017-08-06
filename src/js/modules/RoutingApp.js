@@ -1,8 +1,8 @@
-import Provider from 'react-redux/lib/components/Provider';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import appHistory from 'tools/appHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
+import { connect } from 'react-redux';
 import store from '../store';
 
 import core from './core';
@@ -15,11 +15,7 @@ const { ArticlePage } = articles.components;
 const { SectionPage } = sections.components;
 const { RolePage, UserPage } = users.components;
 
-// TODO: change to mapStateToProps
-const allSectionRoutes = sections.selectors.getAllSectionRoutes(store.getState());
-const allRoles = users.selectors.getAllRoles(store.getState());
-
-const RoutingApp = () => {
+const RoutingApp = ({ allSectionRoutes, allRoles }) => {
   const createSectionRoutes = () => {
     return Object.keys(allSectionRoutes).map((key, index) => {
       const sectionRoute = allSectionRoutes[ key ];
@@ -74,7 +70,6 @@ const RoutingApp = () => {
     })
   }
   return (
-    <Provider store={store}>
       <ConnectedRouter history={appHistory}>
         <PageLayout>
           <Switch>
@@ -86,8 +81,15 @@ const RoutingApp = () => {
           </Switch>
         </PageLayout>
       </ConnectedRouter>
-    </Provider>
   );
 };
 
-export default RoutingApp;
+const mapStateToProps = (state) => ({
+  allSectionRoutes: sections.selectors.getAllSectionRoutes(state),
+  allRoles: users.selectors.getAllRoles(state),
+});
+
+export default connect(
+  mapStateToProps,
+  null
+) (RoutingApp);
