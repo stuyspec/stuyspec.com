@@ -34,6 +34,13 @@
 }
 
 @font-face {
+    font-family: "Circular Std";
+    src: url(/fonts/CircularStd_Bold.otf) format("opentype");
+    font-style: normal;
+    font-weight: bold;
+}
+
+@font-face {
     font-family: "Old English Text MT";
     src: url(/fonts/OldEnglishTextMT.ttf) format("truetype");
     font-style: normal;

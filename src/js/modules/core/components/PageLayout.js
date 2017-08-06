@@ -14,10 +14,10 @@ const styles = {
   }
 };
 
-const PageLayout = ({classes, children, sectionsWithSubsections}) => {
+const PageLayout = ({classes, children, location, sectionsWithSubsections}) => {
   return (
     <div>
-      <PageHeader sectionsWithSubsections={sectionsWithSubsections}/>
+      <PageHeader location={location} sectionsWithSubsections={sectionsWithSubsections}/>
       <div className={classes.PageContainer}>
         {children}
       </div>
