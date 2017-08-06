@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import articles from "../../articles";
 import sections from "../../sections";
-import { fetch } from '../../articles/actions';
 
 const styles = {
   HomePage: {}
@@ -53,6 +52,7 @@ const mapStateToProps = (state) => ({
   sectionsWithLinks: sections.selectors.getSectionsWithLinks(state),
 });
 
+//TODO: Make this mapDispatchToProps actually do something
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({}, dispatch);
 };
