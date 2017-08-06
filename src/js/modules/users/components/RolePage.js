@@ -6,6 +6,9 @@ import injectSheet from 'react-jss';
 import { getUsersInRole } from '../selectors';
 
 const styles = {
+  RolePage: {
+    marginTop: '50px',
+  }
 };
 
 const RolePage = ({ classes, role, usersInRole }) => {

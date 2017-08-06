@@ -9,7 +9,7 @@ import articles from '../../articles';
 
 const styles = {
   SectionPage: {
-    color: '#000',
+    marginTop: '50px',
   }
 };
 

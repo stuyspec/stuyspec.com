@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
-import { getSectionAndSubsectionSlugs } from "../sections/selectors";
 import { getUsers, getUserBySlug } from "../users/selectors";
+import { getSectionAndSubsectionSlugs } from "../sections/selectors";
 
 export const getArticles = state => state.articles.articles;
 const getAuthorships = state => state.articles.authorships;

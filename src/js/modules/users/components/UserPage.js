@@ -8,6 +8,9 @@ import { getUserArticles } from '../../articles/selectors';
 import { getSections } from '../../sections/selectors';
 
 const styles = {
+  UserPage: {
+    marginTop: '50px',
+  }
 };
 
 const UserPage = ({ classes, role, user, articles, sections }) => {

@@ -6,7 +6,7 @@ const styles = {
   ArticleHeader: {
     borderTop: '1px solid #000',
     borderBottom: '1px solid #dedede',
-    marginBottom: '20px',
+    margin: '78px 0px 20px 0px',
     padding: '12px 0px',
   },
   rubric: {
