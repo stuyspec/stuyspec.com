@@ -16,27 +16,60 @@ const initialState = {
       lastName: "Kao",
       username: "jkao1",
       email: "jkao1@stuy.edu",
-      description: "Jason is a web editor for The Spectator."
+      description: "Jason is a web editor for The Spectator.",
+      slug: "jason-kao",
+    },
+    "jason-lin": {
+      id: 0,
+      firstName: "Jason",
+      lastName: "Lin",
+      username: "jasonlin",
+      email: "jasonlin@gmail.com",
+      description: "Jason is a web developer for The Spectator.",
+      slug: "jason-lin",
+    },
+    "cathy-cai": {
+      id: 0,
+      firstName: "Cathy",
+      lastName: "Cai",
+      username: "ccai1",
+      email: "ccai1@stuy.edu",
+      description: "Cathy is a web EIT for The Spectator.",
+      slug: "cathy-cai",
     }
   },
   roles: {
-    0: {
+    "contributors": {
       id: 0,
       title: "Contributor",
+      credentials: 0,
       slug: "contributors",
-      credentials: 0
+    },
+    "illustrators": {
+      id: 0,
+      title: "Illustrator",
+      credentials: 0,
+      slug: "illustrators",
+    },
+    "photographers": {
+      id: 0,
+      title: "Photographer",
+      credentials: 0,
+      slug: "photographers"
     },
   },
   userRoles: [
     {
       userSlug: "jason-kao",
-      roleID: 0
-    }
-  ],
-  authorship: [
+      roleSlug: "contributors",
+    },
     {
-      articleSlug: "apples-rain-in-new-york-city",
-      userSlug: "jason-kao"
+      userSlug: "jason-lin",
+      roleSlug: "contributors",
+    },
+    {
+      userSlug: "cathy-cai",
+      roleSlug: "contributors",
     }
   ]
 };

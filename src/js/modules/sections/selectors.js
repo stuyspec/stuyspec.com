@@ -3,7 +3,7 @@ import { objectFilter } from '../../utils.js';
 
 Object.filter = objectFilter;
 
-const getSections = (state) => state.sections.sections;
+export const getSections = (state) => state.sections.sections;
 const getSectionByProps = (state, props) => props.section;
 const getSubsectionsByProps = (state, props) => props.subsections;
 

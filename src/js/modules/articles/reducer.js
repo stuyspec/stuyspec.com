@@ -99,6 +99,20 @@ const initialState = {
       sectionSlug: "creative-writing",
     },
   },
+  authorships: [
+    {
+      articleSlug: "apples-rain-in-new-york-city",
+      userSlug: "jason-kao"
+    },
+    {
+      articleSlug: "apples-rain-in-new-york-city",
+      userSlug: "jason-lin"
+    },
+    {
+      articleSlug: "apples-rain-in-new-york-city",
+      userSlug: "cathy-cai"
+    }
+  ]
 };
 
 const reducer = (state = { ...initialState }, action) => {

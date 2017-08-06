@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import articles from "../../articles";
 import sections from "../../sections";
+import users from "../../users";
 
 const styles = {
   HomePage: {}
 };
 
-const HomePage = ({ classes, sectionsWithLinks, articles }) => {
+const HomePage = ({ classes, sectionsWithLinks, articles, users }) => {
   const createSectionListItems = () => {
     return Object.keys(sectionsWithLinks).map((key) => {
       return (
@@ -32,6 +33,15 @@ const HomePage = ({ classes, sectionsWithLinks, articles }) => {
       );
     });
   };
+  const createContributorListItems = () => {
+    return Object.keys(users).map((userSlug) => {
+      return (
+        <li key={userSlug}>
+          <Link to={`/contributors/${userSlug}`}>{users[ userSlug ].lastName}</Link>
+        </li>
+      );
+    });
+  };
   return (
     <div className={classes.HomePage}>
       <h1>Home page</h1>
@@ -43,13 +53,20 @@ const HomePage = ({ classes, sectionsWithLinks, articles }) => {
       <ul>
         {createArticleListItems()}
       </ul>
+      <h2>Contributors</h2>
+      <ul>
+        {createContributorListItems()}
+      </ul>
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
+
+  //TODO: why is state undefined in users?
   articles: articles.selectors.getArticles(state),
   sectionsWithLinks: sections.selectors.getSectionsWithLinks(state),
+  users: users.selectors.getUsers(state),
 });
 
 const mapDispatchToProps = dispatch => {

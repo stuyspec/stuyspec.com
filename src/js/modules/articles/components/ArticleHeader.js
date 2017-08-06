@@ -28,6 +28,7 @@ const styles = {
     marginBottom: '15px',
   },
   metaInfo: {
+    fontFamily: 'Minion Pro',
     fontSize: '14px',
     color: '#000000',
     margin: '0px',
@@ -38,16 +39,36 @@ const styles = {
   },
 };
 
-const ArticleHeader = ({ classes, section, headline, byline, dateline }) => {
-  // TODO: make link to section work
+const ArticleHeader = ({ classes, section, headline, contributors, dateline }) => {
+  const getLinkToSection = () => {
+    let tempSection = section;
+    let link = tempSection.slug;
+    while (tempSection.parentSlug !== null) {
+      link = `${tempSection.parentSlug}/${link}`
+    }
+    return `/${link}`;
+  };
+  const contributorsToString = () => {
+    let byline = "By ";
+    let separator = "";
+    for (let c = 0, l = contributors.length; c < l; c++) {
+      if (c === 1) {
+        separator = ", ";
+      } else if (c === l - 1) {
+        separator = " & ";
+      }
+      byline += separator + contributors[ c ].firstName + " " + contributors[ c ].lastName;
+    }
+    return byline;
+  };
   return (
     <div className={classes.ArticleHeader}>
-      <Link to={'/thisLinkNoWork'} className={classes.rubric}>
+      <Link to={getLinkToSection()} className={classes.rubric}>
         {section.name}
       </Link>
       <h1 className={classes.headline}>{headline}</h1>
       <p className={classes.metaInfo}>
-        <span>{byline}</span>
+        <span>{contributorsToString()}</span>
         <span>{dateline}</span>
       </p>
     </div>
