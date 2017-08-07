@@ -1,25 +1,28 @@
 import axios from 'axios';
 import * as t from './actionTypes';
-import {STUY_SPEC_API, HEADER} from '../../constants';
-import { processArticleResponseData } from './selectors';
+import { STUY_SPEC_API, HEADER } from '../../constants';
+import { getProcessedArticleResponseData } from './selectors';
 
 //TODO: need a way to call the fetch function
 export const fetchArticles = () => {
   return (dispatch, getState) => {
     dispatch({ type: t.FETCH_ARTICLE_PENDING });
-    axios.get(`${STUY_SPEC_API}/articles`, {'headers': HEADER})
-      .then((response) => {
+    axios.get(`${STUY_SPEC_API}/articles`, { 'headers': HEADER })
+      .then(response => {
         if (isArticleValid(response.data)) {
+          console.log("vallidd:",response.data);
           dispatch({
             type: t.FETCH_ARTICLE_FULFILLED,
             payload: response.data,
           });
-        }})
-      .then(dispatch({
-              type: t.ADD_ARTICLES,
-              payload: processArticleResponseData(getState()),
-            })
-        )
+        }
+      })
+      .then(response => { // TODO: promise function orders are wonky without response
+        dispatch({
+          type: t.ADD_ARTICLES,
+          payload: getProcessedArticleResponseData(getState()),
+        });
+      })
       .catch((err) => {
         dispatch({
           type: t.FETCH_ARTICLE_REJECTED,
@@ -42,7 +45,7 @@ const isArticleKeyValid = (articleObject, key, type) => {
 const isArticleValid = (articleArray) => {
   //const integerProperties = [ 'id', 'volume', 'issue', 'sectionId' ];
   //TODO: Add this one ^^ back in once volume and issue are not null
-  const integerProperties = ['id', 'sectionId' ];
+  const integerProperties = [ 'id', 'sectionId' ];
   const stringProperties = [ 'title', 'slug', 'content', "createdAt", "updatedAt" ];
   //const booleanProperties = [ 'isDraft' ];
   //TODO: Add this one ^^ back in once isDraft is not null for some of the articles

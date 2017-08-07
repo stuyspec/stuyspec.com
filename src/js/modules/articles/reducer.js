@@ -9,9 +9,8 @@ const initialState = {
   isFetching: false,
   isFetched: false,
   error: null,
-  request: null,
   articles: {},
-  responseData: {},
+  response: {},
 };
 
 const reducer = (state = { ...initialState }, action) => {
@@ -24,7 +23,7 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         isFetching: false,
         isFetched: true,
-        requestObject: action.payload,
+        response: action.payload,
       };
     }
     case FETCH_ARTICLE_REJECTED: {
@@ -37,7 +36,10 @@ const reducer = (state = { ...initialState }, action) => {
     case ADD_ARTICLES: {
       return {
         ...state,
-        articles: action.payload,
+        articles: {
+          ...state.articles,
+          ...action.payload
+        },
         responseData: {},
       }
     }

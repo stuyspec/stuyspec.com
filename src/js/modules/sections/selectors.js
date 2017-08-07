@@ -107,12 +107,12 @@ export const getSectionsWithSubsections = createSelector(
   }
 );
 
-export const findSectionFromId = (sectionId, state) => {
-  const allSections = getSections(state);
-  for (sectionIndex in allSections) {
-    const sectionObject = allSections [ sectionIndex ];
-    if (sectionObject.id === sectionId) {
-      return sectionObject.slug;
+export const getSectionSlugFromId = (state, id) => {
+  const sections = getSections(state);
+  for (sectionSlug in sections) {
+    const section = sections[ sectionSlug ];
+    if (section.id === id) {
+      return section.slug;
     }
   }
 };

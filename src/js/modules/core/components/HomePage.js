@@ -39,7 +39,7 @@ const HomePage = ({ classes, sectionsWithLinks, articles, fetchArticles }) => {
   return (
     <div className={classes.HomePage}>
       <h1>Home page</h1>
-      <button onClick = {handleFetch}>Articles </button>
+      <button onClick={handleFetch}>Articles </button>
       <h2>Sections</h2>
       <ul>
         {createSectionListItems()}
