@@ -1,7 +1,8 @@
 import { createSelector } from "reselect";
+import { getSectionSlugFromId } from "../sections/selectors";
 import { getSectionAndSubsectionSlugs } from "../sections/selectors";
 
-const getArticles = state => state.articles.articles;
+export const getArticles = state => state.articles.articles;
 const getRequestedArticleSlug = (state, props) => props.match.params.article_slug;
 const getSectionByProps = (state, props) => props.section;
 
@@ -24,3 +25,17 @@ export const getArticlesWithinSection = createSelector(
     });
   }
 );
+
+export const getProcessedArticleResponseData = (state) => {
+  const data = state.articles.response;
+  return data.reduce((accumulatedArticles, currentArticle) => {
+    const idOfSection = currentArticle.sectionId;
+    delete currentArticle.sectionId;
+    accumulatedArticles[ currentArticle.slug ] = {
+      ...currentArticle,
+      sectionSlug: getSectionSlugFromId(state, idOfSection),
+    };
+    return accumulatedArticles;
+  }, {});
+};
+

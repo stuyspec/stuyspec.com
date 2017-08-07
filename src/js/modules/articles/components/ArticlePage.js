@@ -46,4 +46,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)( injectSheet(styles)(ArticlePage) );
+)(injectSheet(styles)(ArticlePage));

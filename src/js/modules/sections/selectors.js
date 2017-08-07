@@ -3,7 +3,7 @@ import { objectFilter } from '../../utils.js';
 
 Object.filter = objectFilter;
 
-const getSections = (state) => state.sections.sections;
+export const getSections = (state) => state.sections.sections;
 const getSectionByProps = (state, props) => props.section;
 const getSubsectionsByProps = (state, props) => props.subsections;
 
@@ -100,9 +100,19 @@ export const getSectionsWithSubsections = createSelector(
         subsections: Object.filter(allSubsections, subsection => {
           return subsection.parentSlug === parentSectionSlug;
         }),
-      }
+      };
       sectionsWithSubsections.push(sectionWithSubsections);
     });
     return sectionsWithSubsections;
   }
 );
+
+export const getSectionSlugFromId = (state, id) => {
+  const sections = getSections(state);
+  for (sectionSlug in sections) {
+    const section = sections[ sectionSlug ];
+    if (section.id === id) {
+      return section.slug;
+    }
+  }
+};
