@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as t from './actionTypes';
 import { STUY_SPEC_API, HEADER } from '../../constants';
-import { getProcessedArticleResponseData } from './selectors';
+import { getProcessedArticleResponseData, getAuthorshipsForArticleResponse } from './selectors';
 
 //TODO: need a way to call the fetch function
 export const fetchArticles = () => {
@@ -22,6 +22,12 @@ export const fetchArticles = () => {
           type: t.ADD_ARTICLES,
           payload: getProcessedArticleResponseData(getState()),
         });
+      })
+      .then(response => {
+        dispatch({
+          type: t.ADD_AUTHORSHIPS,
+          payload: getAuthorshipsForArticleResponse(getState()),
+        })
       })
       .catch((err) => {
         dispatch({
