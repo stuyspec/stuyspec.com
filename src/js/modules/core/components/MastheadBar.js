@@ -7,16 +7,17 @@ import NavButton from './NavButton';
 const styles = {
   MastheadBar: {
     backgroundColor: '#fff',
+    boxShadow: '0 2px 4px 0 rgba(0,0,0,.1)',
     height: '40px',
-    padding: '0px 60px',
     position: 'fixed',
     width: '100%',
-    top: '0px',
+    top: 0,
+    zIndex: 9999,
   },
   barContainer: {
-    borderBottom: '1px solid #ddd',
     height: '100%',
     margin: '0 auto',
+    padding: '0px 30px',
     position: 'relative',
     width: '100%',
     textAlign: 'center',

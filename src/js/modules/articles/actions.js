@@ -1,32 +1,30 @@
 import axios from 'axios';
 import * as t from './actionTypes';
 import { STUY_SPEC_API, HEADER } from '../../constants';
-import { getProcessedArticleResponseData, getAuthorshipsForArticleResponse } from './selectors';
+import { getProcessedArticleResponse, getFakeAuthorshipsForArticleResponse } from './selectors';
 
-//TODO: need a way to call the fetch function
 export const fetchArticles = () => {
   return (dispatch, getState) => {
     dispatch({ type: t.FETCH_ARTICLE_PENDING });
     axios.get(`${STUY_SPEC_API}/articles`, { 'headers': HEADER })
       .then(response => {
         if (isArticleValid(response.data)) {
-          console.log("vallidd:",response.data);
           dispatch({
             type: t.FETCH_ARTICLE_FULFILLED,
             payload: response.data,
           });
         }
       })
-      .then(response => { // TODO: promise function orders are wonky without response
+      .then(response => { // TODO: promise function orders are wonky without @param response
         dispatch({
           type: t.ADD_ARTICLES,
-          payload: getProcessedArticleResponseData(getState()),
+          payload: getProcessedArticleResponse(getState()),
         });
       })
       .then(response => {
         dispatch({
           type: t.ADD_AUTHORSHIPS,
-          payload: getAuthorshipsForArticleResponse(getState()),
+          payload: getFakeAuthorshipsForArticleResponse(getState()),
         })
       })
       .catch((err) => {
@@ -37,7 +35,8 @@ export const fetchArticles = () => {
       })
   };
 };
-const isArticleKeyValid = (articleObject, key, type) => {
+
+const checkArticleKeyValidity = (articleObject, key, type) => {
   if (key in articleObject) {
     if (typeof (articleObject[ key ]) === type) {
       return true;
@@ -48,35 +47,25 @@ const isArticleKeyValid = (articleObject, key, type) => {
     throw `Error: The key ${key} is missing in the article object.`
   }
 };
+
+/*
+TODO: Add volume and issue int props after non-null data seeded @nicholas
+TODO: Add isDraft boolean prop after non-null data seeded @nicholas
+TODO: Add boolean key validity after non-null data seeded @nicholas
+ */
 const isArticleValid = (articleArray) => {
-  //const integerProperties = [ 'id', 'volume', 'issue', 'sectionId' ];
-  //TODO: Add this one ^^ back in once volume and issue are not null
   const integerProperties = [ 'id', 'sectionId' ];
   const stringProperties = [ 'title', 'slug', 'content', "createdAt", "updatedAt" ];
-  //const booleanProperties = [ 'isDraft' ];
-  //TODO: Add this one ^^ back in once isDraft is not null for some of the articles
   if (!Array.isArray(articleArray)) {
-    throw 'Error: Response is not an array.'
+    throw 'Error: Article response data is not an array.'
   }
-  articleArray.forEach((articleObject) => {
-    integerProperties.forEach((numberKey) => {
-      if (!isArticleKeyValid(articleObject, numberKey, 'number')) {
-        throw 'Error: Key Error'
-      }
+  articleArray.forEach(articleObject => {
+    integerProperties.forEach(numberKey => {
+      checkArticleKeyValidity(articleObject, numberKey, 'number');
     });
     stringProperties.forEach((stringKey) => {
-      if (!isArticleKeyValid(articleObject, stringKey, 'string')) {
-        throw 'Error: Key Error'
-      }
+      checkArticleKeyValidity(articleObject, stringKey, 'string');
     });
-    /*
-    booleanProperties.forEach((booleanKey) => {
-      if (!isArticleKeyValid(articleObject, booleanKey, 'boolean')) {
-        throw 'Error: Key Error'
-      }
-    });
-    TODO: Add this back in once ALL the values of isDraft is not null
-    */
   });
   return true;
 };

@@ -42,7 +42,6 @@ const reducer = (state = { ...initialState }, action) => {
           ...state.articles,
           ...action.payload
         },
-        responseData: {},
       }
     }
     case ADD_AUTHORSHIPS: {
@@ -51,7 +50,8 @@ const reducer = (state = { ...initialState }, action) => {
         authorships: [
           ...state.authorships,
           ...action.payload
-        ]
+        ],
+        response: [],
       }
     }
   }

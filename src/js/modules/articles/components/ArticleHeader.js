@@ -54,6 +54,8 @@ const styles = {
   }
 };
 
+// TODO: make selector for dateline
+
 const ArticleHeader = ({ classes, section, headline, contributors, dateline }) => {
   const writeLinkedByline = () => {
     let separator = ', ';
@@ -65,7 +67,7 @@ const ArticleHeader = ({ classes, section, headline, contributors, dateline }) =
       }
       return (
         <div className={classes.contributorContainer}
-             key={`contributor${index}`}>
+             key={`contributor${contributor.id}`}>
           {index === 0 ? 'By ' : ''}
           <Link className={classes.contributorLink}
                 to={`/contributors/${contributor.slug}`}>

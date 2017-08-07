@@ -20,7 +20,7 @@ const initialState = {
       slug: "jason-kao",
     },
     "jason-lin": {
-      id: 0,
+      id: 1,
       firstName: "Jason",
       lastName: "Lin",
       username: "jasonlin",
@@ -29,7 +29,7 @@ const initialState = {
       slug: "jason-lin",
     },
     "cathy-cai": {
-      id: 0,
+      id: 2,
       firstName: "Cathy",
       lastName: "Cai",
       username: "ccai1",
@@ -42,19 +42,19 @@ const initialState = {
     "contributors": {
       id: 0,
       title: "Contributor",
-      credentials: 0,
+      credentialLevel: 0,
       slug: "contributors",
     },
     "illustrators": {
-      id: 0,
+      id: 1,
       title: "Illustrator",
-      credentials: 0,
+      credentialLevel: 0,
       slug: "illustrators",
     },
     "photographers": {
-      id: 0,
+      id: 2,
       title: "Photographer",
-      credentials: 0,
+      credentialLevel: 0,
       slug: "photographers"
     },
   },

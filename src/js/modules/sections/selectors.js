@@ -67,8 +67,7 @@ export const getTopLevelSectionsWithDirectChildren = createSelector(
   }
 );
 
-export const getSectionSlugFromId = (state, id) => {
-  const sections = getSections(state);
+export const getSectionSlugFromId = (sections, id) => {
   for (sectionSlug in sections) {
     const section = sections[ sectionSlug ];
     if (section.id === id) {

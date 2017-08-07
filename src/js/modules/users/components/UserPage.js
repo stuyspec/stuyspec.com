@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import injectSheet from 'react-jss';
 
 import { getUserBySlug } from '../selectors';
-import { getArticlesWrittenByContributor } from '../../articles/selectors';
+import { getArticlesByContributor } from '../../articles/selectors';
 import { getSections } from '../../sections/selectors';
 
 const styles = {
@@ -16,10 +16,10 @@ const styles = {
 /**
  * @param match necessary for retrieving user from slug.
  */
-const UserPage = ({ classes, role, user, articlesWrittenByContributor, sections, match }) => {
-  const linkToArticlesWrittenByContributor = () => {
-    return Object.keys(articlesWrittenByContributor).map((articleSlug, index) => {
-      const article = articlesWrittenByContributor[ articleSlug ];
+const UserPage = ({ classes, role, user, articlesByContributor, sections, match }) => {
+  const linkToArticlesByContributor = () => {
+    return Object.keys(articlesByContributor).map((articleSlug, index) => {
+      const article = articlesByContributor[ articleSlug ];
       return (
         <li key={`article${index}`}>
           <Link to={`${sections[ article.sectionSlug ].permalink}/${articleSlug}`}>
@@ -35,11 +35,11 @@ const UserPage = ({ classes, role, user, articlesWrittenByContributor, sections,
       <p>role: <Link to={`/${role.slug}`}>{role.title}</Link></p>
       <hr/>
       {
-        articlesWrittenByContributor !== null &&
+        articlesByContributor !== null &&
           <div>
             <p>articles</p>
             <ul>
-              {linkToArticlesWrittenByContributor()}
+              {linkToArticlesByContributor()}
             </ul>
           </div>
       }
@@ -51,8 +51,8 @@ const mapStateToProps = (state, ownProps) => {
   const userIsContributor = ownProps.role.title === "Contributor";
   return {
     user: getUserBySlug(state, ownProps),
-    articlesWrittenByContributor: userIsContributor ?
-      getArticlesWrittenByContributor(state, ownProps) : null,
+    articlesByContributor: userIsContributor ?
+      getArticlesByContributor(state, ownProps) : null,
     sections: getSections(state),
   };
 };

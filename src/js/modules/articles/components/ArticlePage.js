@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 
-import { getArticleFromSlug, getContributorsOfArticle } from '../selectors';
+import { getArticleFromRequestedSlug, getContributorsOfArticle } from '../selectors';
 import ArticleHeader from './ArticleHeader';
 import ArticleBody from './ArticleBody';
 
@@ -31,7 +31,7 @@ const ArticlePage = ({ classes, article, section, featuredMedia, contributors, m
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  article: getArticleFromSlug(state, ownProps),
+  article: getArticleFromRequestedSlug(state, ownProps),
   contributors: getContributorsOfArticle(state, ownProps),
   featuredMedia: {
     url: 'http://planesandpleasures.com/wp-content/uploads/2016/09/NewYork-Chinatown-7.jpg',

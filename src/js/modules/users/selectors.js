@@ -11,7 +11,7 @@ const getRoleFromProps = (state, props) => props.role;
  * The selector returns true if the user requested from the slug is in the role
  *   requested and returns false if otherwise.
  */
-const requestedUserIsInRequestedRole = createSelector(
+const isRequestedUserInRequestedRole = createSelector(
   [ getRequestedUserSlug, getRoleFromProps, getUserRoles ],
   (requestedUserSlug, requestedRole, userRoles) => {
     return userRoles.filter(userRole => {
@@ -22,10 +22,10 @@ const requestedUserIsInRequestedRole = createSelector(
 );
 
 export const getUserBySlug = createSelector(
-  [ getUsers, getRequestedUserSlug, requestedUserIsInRequestedRole ],
-  (users, requestedUserSlug, requestedUserIsInRequestedRole) => {
+  [ getUsers, getRequestedUserSlug, isRequestedUserInRequestedRole ],
+  (users, requestedUserSlug, isRequestedUserInRequestedRole) => {
     const requestedUser = users[ requestedUserSlug ];
-    if ( requestedUserIsInRequestedRole ) {
+    if ( isRequestedUserInRequestedRole ) {
       return requestedUser;
     }
   }
