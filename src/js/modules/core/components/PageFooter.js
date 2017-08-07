@@ -33,8 +33,10 @@ const styles = {
       textDecoration: 'none',
     },
   },
+  // TODO: footer flexbox fucked again
   subsectionLink: {
     color: '#000000',
+    display: 'block',
     fontSize: '13px',
     fontFamily: 'Circular Std',
     fontStyle: 'normal',
@@ -70,6 +72,7 @@ const PageFooter = ({ classes, topLevelSectionsWithDirectChildren }) => {
               const subsection = topLevelSection.subsections[ subsectionSlug ];
               return (
                 <Link className={classes.subsectionLink}
+                      key={`subsectionLink${subsection.id}`}
                       to={subsection.permalink}>
                   {subsection.name}
                 </Link>

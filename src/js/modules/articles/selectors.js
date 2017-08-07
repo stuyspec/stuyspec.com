@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import { getSectionSlugFromId } from "../sections/selectors";
 import { getUsers, getUserBySlug } from "../users/selectors";
 import { getSectionFromProps, getSlugsInSectionTree } from "../sections/selectors";
 
@@ -28,6 +29,35 @@ export const getArticlesWithinSectionTree = createSelector(
     });
   }
 );
+
+export const getProcessedArticleResponseData = (state) => {
+  const data = state.articles.response;
+  return data.reduce((accumulatedArticles, currentArticle) => {
+    const idOfSection = currentArticle.sectionId;
+    delete currentArticle.sectionId;
+    accumulatedArticles[ currentArticle.slug ] = {
+      ...currentArticle,
+      sectionSlug: getSectionSlugFromId(state, idOfSection),
+    };
+    return accumulatedArticles;
+  }, {});
+};
+
+export const getAuthorshipsForArticleResponse = (state) => {
+  const data = state.articles.response;
+  return data.reduce((accumulatedAuthorships, currentArticle) => {
+    accumulatedAuthorships.push({
+      articleSlug: currentArticle.slug,
+      userSlug: "jason-kao",
+    });
+    accumulatedAuthorships.push({
+      articleSlug: currentArticle.slug,
+      userSlug: "jason-lin",
+    });
+    return accumulatedAuthorships;
+  }, []);
+}
+
 
 /**
  * The selector returns an array of all contributors for a target article

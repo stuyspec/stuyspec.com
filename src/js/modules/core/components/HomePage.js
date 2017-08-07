@@ -7,12 +7,13 @@ import injectSheet from "react-jss";
 import articles from "../../articles";
 import sections from "../../sections";
 import users from "../../users";
+import { fetchArticles} from "../../articles/actions"
 
 const styles = {
   HomePage: {}
 };
 
-const HomePage = ({ classes, sections, articles, users, userRoles }) => {
+const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles }) => {
   const linkToAllSections = () => {
     return Object.keys(sections).map((sectionSlug, index) => {
       return (
@@ -49,9 +50,13 @@ const HomePage = ({ classes, sections, articles, users, userRoles }) => {
       }
     });
   };
+  const handleFetch = () => {
+    fetchArticles();
+  };
   return (
     <div className={classes.HomePage}>
       <h1>Home page</h1>
+      <button onClick={handleFetch}>Articles </button>
       <h2>Sections</h2>
       <ul>
         {linkToAllSections()}
@@ -75,8 +80,9 @@ const mapStateToProps = (state) => ({
   userRoles: users.selectors.getUserRoles(state),
 });
 
+//TODO: Make this mapDispatchToProps actually do something
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({fetchArticles: fetchArticles}, dispatch);
 };
 
 export default connect(

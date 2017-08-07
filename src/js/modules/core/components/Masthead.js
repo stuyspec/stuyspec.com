@@ -41,9 +41,10 @@ const styles = {
   },
 };
 
+// TODO: make <li>'s show up
 const Masthead = ({ classes, topLevelSectionsWithDirectChildren }) => {
   const linkToTopLevelSections = () => {
-    Object.keys(topLevelSectionsWithDirectChildren).map((sectionSlug) => {
+    Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {
       const topLevelSection = topLevelSectionsWithDirectChildren[ sectionSlug ];
       return (
         <li key={topLevelSection.id} className={classes.sectionListElement}>
