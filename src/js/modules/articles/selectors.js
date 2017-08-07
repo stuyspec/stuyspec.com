@@ -1,4 +1,7 @@
+import React from 'react';
 import { createSelector } from "reselect";
+import { Link } from "react-router-dom";
+
 import { getSectionSlugFromId } from "../sections/selectors";
 import { getUsers, getUserBySlug } from "../users/selectors";
 import { getSections, getSectionFromProps, getSlugsInSectionTree } from "../sections/selectors";
@@ -32,21 +35,50 @@ export const getArticlesWithinSectionTree = createSelector(
 );
 
 /**
- * The selector returns an array of all contributors for a target article
- *   (from props).
+ * The selector factory returns a selector that returns an array of all
+ *   contributors for any @param target article.
  */
-export const getContributorsOfArticle = createSelector(
-  [ getArticleFromRequestedSlug, getUsers, getAuthorships ],
-  (targetArticle, users, authorships) => {
-    const matchedAuthorships = authorships.filter(authorship => {
-      return authorship.articleSlug === targetArticle.slug;
-    });
-    return matchedAuthorships.map(authorship => {
-      return users[ authorship.userSlug ];
-    });
-  }
-);
+export const articleContributorsSelectorFactory = (targetArticle) => {
+  return createSelector(
+    [ getUsers, getAuthorships ],
+    (users, authorships) => {
+      const matchedAuthorships = authorships.filter(authorship => {
+        return authorship.articleSlug === targetArticle.slug;
+      });
+      return matchedAuthorships.map(authorship => {
+        return users[ authorship.userSlug ];
+      });
+    }
+  );
+};
 
+/**
+ * The selector factory returns a selector that returns the byline for
+ *   any @param targetArticle.
+ */
+export const articleBylineSelectorFactory = (targetArticle) => {
+  return createSelector(
+    [ articleContributorsSelectorFactory(targetArticle) ],
+    contributors => {
+      let separator = ', ';
+      return contributors.map((contributor, index) => {
+        if (index === contributors.length - 2) {
+          separator = ' & ';
+        } else if (index === contributors.length - 1) {
+          separator = '';
+        }
+        return (
+          <div key={`contributor${contributor.id}`}>
+            {index === 0 ? 'By ' : ''}
+            <Link to={`/contributors/${contributor.slug}`}>
+              {contributor.firstName} {contributor.lastName}
+            </Link>{separator}
+          </div>
+        );
+      });
+    }
+  );
+};
 /**
  * The selector returns a filtered articles object that contains all articles
  *   written by a contributor.

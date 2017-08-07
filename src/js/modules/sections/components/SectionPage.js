@@ -3,101 +3,78 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import injectSheet from 'react-jss';
 import { Col, Grid, Row } from 'react-bootstrap/lib/';
-import SectionArticleList from './SectionArticleList';
+import ArticleList from '../../articles/components/ArticleList';
 
 import { getArticlesWithinSectionTree } from '../../articles/selectors';
 import { getSections, getDirectChildrenOfSection } from '../../sections/selectors';
 
 const styles = {
-  entireSectionPage: {
-    color: '#000',
+  SectionPage: {
+    marginTop: '100px',
+    top: 0,
+    marginBottom: '60px',
   },
   sectionName: {
     fontFamily: 'Canela',
     fontSize: '36px',
-    textAlign: 'left',
-    color: '#000000',
-    padding: '0px 0px',
-    margin: '0px 0px',
-  },
-  subsectionLink: {
-    listStyleType: 'none',
-    margin: '0px',
-    paddingLeft: '0px',
-    fontFamily: 'Circular Std',
-    fontSize: '14px',
-    textAlign: 'left',
-    color: '#000000',
-    textTransform: 'uppercase',
+    fontWeight: 500,
+    color: '#000',
+    margin: '0 0 20px 0',
   },
   subsectionBar: {
+    border: '1px solid #ddd',
+    borderStyle: 'solid none',
+    listStyleType: 'none',
+    marginBottom: '14px',
+    padding: '7px 0 8px 0',
+  },
+  subsectionListItem: {
     display: 'inline',
-    padding: '8px, 16px, 0px, 0px',
-    margin: '0px 16px 0px 0px',
     textDecoration: 'none',
+    marginRight: '26px',
   },
-  subSectionLink: {
-    color: '#000000',
-  },
-  sectionNameDivider1: {
-    width: '1066px',
-    height: '1px',
-    backgroundColor: '#dddddd',
-    marginTop: '20px',
-    marginBottom: '8px',
-  },
-  sectionNameDivider2: {
-    width: '1066px',
-    height: '1px',
-    backgroundColor: '#dddddd',
-    marginTop: '8px',
-    marginBottom: '28px',
-  SectionPage: {
-    marginTop: '50px',
+  subsectionLink: {
+    color: '#000',
+    fontFamily: 'Circular Std',
+    fontSize: '14px',
+    fontWeight: 300,
+    textTransform: 'uppercase',
   }
 };
 
-const SectionPage = ({ classes, articlesWithinSectionTree, directSubsectionChildren, section, sections, featuredMedia }) => {
+const SectionPage = ({ classes,
+                       articlesWithinSectionTree,
+                       directSubsectionChildren,
+                       section,
+                       featuredMedia,
+                       match }) => {
   const createLinksToDirectSubsectionChildren = () => {
     return Object.keys(directSubsectionChildren).map((subsectionSlug) => {
       const subsection = directSubsectionChildren[ subsectionSlug ];
       return (
-        <div>
-          <hr className={classes.sectionNameDivider1}/>
-            <li key={`subsectionListItem${subsection.id}`}>
-              <Link to={subsection.permalink}>{subsection.name}</Link>
-            </li>
-          <hr className={classes.sectionNameDivider2}/>
-        </div>
+        <li className={classes.subsectionListItem}
+            key={`subsectionListItem${subsection.id}`}>
+          <Link className={classes.subsectionLink} to={subsection.permalink}>
+            {subsection.name}
+          </Link>
+        </li>
       );
     });
   };
-  const createLinksToArticlesWithinSectionTree = () => {
-    return Object.keys(articlesWithinSectionTree).map((articleSlug) => {
-      const article = articlesWithinSectionTree[ articleSlug ];
-      return (
-<<<<<<<
-        <li key={`articleListItem${article.id}`}>
-          <Link to={`${sections[ article.sectionSlug ].permalink}/${article.slug}`}>
-            {article.title}
-          </Link>
-        </li>
-=======
-        <div>
-          {createLines (articles, subsections)}
-          <ul className={classes.subsectionLink}>
-          </ul>
-        </div>
->>>>>>>
-      );
-  };
   return (
-    <div className={classes.entireSectionPage}>
+    <div className={classes.SectionPage}>
       <h1 className={classes.sectionName}>{section.name}</h1>
-      {createSubsectionLinks()}
-      <SectionArticleList articles={articles} featuredMedia={featuredMedia} subsections={subsections} match={match}/>
+      {
+        directSubsectionChildren !== null &&
+          <ul className={classes.subsectionBar}>
+            {createLinksToDirectSubsectionChildren()}
+          </ul>
+      }
+      <ArticleList articles={articlesWithinSectionTree}
+                   featuredMedia={featuredMedia}
+                   section={section}/>
     </div>
-)
+  );
 };
 
 

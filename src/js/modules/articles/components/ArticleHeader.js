@@ -42,41 +42,23 @@ const styles = {
       }
     },
   },
-  contributorContainer: {
-    display: 'inline',
-    margin: 0,
+  byline: {
+    '& div': {
+      display: 'inline',
+      margin: 0,
+      '& a': {
+        color: '#000',
+        '&:hover': {
+          color: '#000'
+        },
+      },
+    },
   },
-  contributorLink: {
-    color: '#000',
-    '&:hover': {
-      color: '#000',
-    }
-  }
 };
 
 // TODO: make selector for dateline
 
-const ArticleHeader = ({ classes, section, headline, contributors, dateline }) => {
-  const writeLinkedByline = () => {
-    let separator = ', ';
-    return contributors.map((contributor, index) => {
-      if (index === contributors.length - 2) {
-        separator = ' & ';
-      } else if (index === contributors.length - 1) {
-        separator = '';
-      }
-      return (
-        <div className={classes.contributorContainer}
-             key={`contributor${contributor.id}`}>
-          {index === 0 ? 'By ' : ''}
-          <Link className={classes.contributorLink}
-                to={`/contributors/${contributor.slug}`}>
-            {contributor.firstName} {contributor.lastName}
-          </Link>{separator}
-        </div>
-      );
-    });
-  };
+const ArticleHeader = ({ classes, section, headline, byline, dateline }) => {
   return (
     <div className={classes.ArticleHeader}>
       <Link to={section.permalink} className={classes.rubric}>
@@ -84,7 +66,7 @@ const ArticleHeader = ({ classes, section, headline, contributors, dateline }) =
       </Link>
       <h1 className={classes.headline}>{headline}</h1>
       <div className={classes.metaInfo}>
-        <div>{writeLinkedByline()}</div>
+        <div className={classes.byline}>{byline}</div>
         <span>{dateline}</span>
       </div>
     </div>

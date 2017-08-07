@@ -17,7 +17,7 @@ const { RolePage, UserPage } = users.components;
 const { getRoles } = users.selectors;
 const { getSections } = sections.selectors;
 
-const RoutingApp = ({ sections, roles, match }) => {
+const RoutingApp = ({ sections, roles }) => {
   const createSectionRoutes = () => {
     return Object.keys(sections).map((sectionSlug, index) => {
       const section = sections[ sectionSlug ];
@@ -25,7 +25,8 @@ const RoutingApp = ({ sections, roles, match }) => {
         exact path={section.permalink}
         key={`sectionRoute${index}`}
         render={(props) => (
-          <SectionPage section={section}/>
+          <SectionPage match={props.match}
+                       section={section}/>
         )}/>
     });
   };
