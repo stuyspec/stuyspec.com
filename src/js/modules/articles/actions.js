@@ -8,7 +8,7 @@ export const fetchArticles = () => {
     dispatch({ type: t.FETCH_ARTICLE_PENDING });
     axios.get(`${STUY_SPEC_API}/articles`, { 'headers': HEADER })
       .then(response => {
-        if (isArticleValid(response.data)) {
+        if (areArticlesValid(response.data)) {
           dispatch({
             type: t.FETCH_ARTICLE_FULFILLED,
             payload: response.data,
@@ -54,7 +54,7 @@ TODO: Add volume and issue int props after non-null data seeded @nicholas
 TODO: Add isDraft boolean prop after non-null data seeded @nicholas
 TODO: Add boolean key validity after non-null data seeded @nicholas
  */
-const isArticleValid = (articleArray) => {
+const areArticlesValid = (articleArray) => {
   const integerProperties = [ 'id', 'sectionId' ];
   const stringProperties = [ 'title', 'slug', 'content', "createdAt", "updatedAt" ];
   if (!Array.isArray(articleArray)) {
@@ -70,4 +70,3 @@ const isArticleValid = (articleArray) => {
   });
   return true;
 };
-
