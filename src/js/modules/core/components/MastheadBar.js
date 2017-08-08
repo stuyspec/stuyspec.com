@@ -1,8 +1,6 @@
-import React from 'react';
-import injectSheet from 'react-jss';
-import { Link } from 'react-router-dom';
-
-import NavButton from './NavButton';
+import React from "react";
+import injectSheet from "react-jss";
+import { Link } from "react-router-dom";
 
 const styles = {
   MastheadBar: {
@@ -35,6 +33,14 @@ const styles = {
     fontSize: '26px',
     marginTop: '4px',
     textDecoration: 'none',
+    '&:hover': {
+      color: '#000',
+      textDecoration: 'none',
+    },
+    '&:focus': {
+      color: '#000',
+      textDecoration: 'none',
+    },
   },
   userTools: {
     float: 'right',
@@ -42,15 +48,43 @@ const styles = {
     '& button': {
       marginLeft: '24px',
     }
+  },
+};
+
+const navButtonStyles = {
+  NavButton: {
+    background: 'none',
+    borderWidth: 0,
+    margin: 0,
+    padding: 0,
+    '&:hover': {
+      cursor: 'pointer',
+    }
+  },
+  buttonText: {
+    color: '#000',
+    fontFamily: 'Circular Std',
+    fontSize: '12px',
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
   }
 };
+
+const UnstyledNavButton = ({ classes, label }) => {
+  return (
+    <button className={classes.NavButton}>
+      <span className={classes.buttonText}>{label}</span>
+    </button>
+  );
+};
+const NavButton = injectSheet(navButtonStyles)(UnstyledNavButton);
 
 const MastheadBar = ({ classes }) => {
   return (
     <div className={classes.MastheadBar}>
       <div className={classes.barContainer}>
         <div className={classes.quickNav}>
-          <NavButton label="sections" className={classes.leftEdgeNavButton}/>
+          <NavButton label="sections"/>
           <NavButton label="search"/>
         </div>
         <Link className={classes.brandingLink} to="/">

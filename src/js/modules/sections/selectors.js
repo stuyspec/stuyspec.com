@@ -1,5 +1,5 @@
-import { createSelector } from 'reselect';
-import { objectFilter } from '../../utils.js';
+import { createSelector } from "reselect";
+import { objectFilter } from "../../utils.js";
 
 Object.filter = objectFilter;
 

@@ -1,9 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import injectSheet from 'react-jss';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
 
-import { getUsersWithinRole } from '../selectors';
+import { getUsersWithinRole } from "../selectors";
 
 const styles = {
   RolePage: {
@@ -41,4 +41,4 @@ const mapStateToProps = (state, ownProps) => ({
 export default connect(
   mapStateToProps,
   null
-)( injectSheet(styles)(RolePage) );
+)(injectSheet(styles)(RolePage));

@@ -4,30 +4,13 @@ export const getUsers = state => state.users.users;
 export const getRoles = state => state.users.roles;
 export const getUserRoles = state => state.users.userRoles;
 
-const getRequestedUserSlug = (state, props) => props.match.params.user_slug;
+const getRequestedContributorSlug = (state, props) => props.match.params.contributor_slug;
 const getRoleFromProps = (state, props) => props.role;
 
-/**
- * The selector returns true if the user requested from the slug is in the role
- *   requested and returns false if otherwise.
- */
-const isRequestedUserInRequestedRole = createSelector(
-  [ getRequestedUserSlug, getRoleFromProps, getUserRoles ],
-  (requestedUserSlug, requestedRole, userRoles) => {
-    return userRoles.filter(userRole => {
-      return userRole.userSlug === requestedUserSlug &&
-        userRole.roleSlug === requestedRole.slug;
-    }).length > 0;
-  }
-);
-
-export const getUserBySlug = createSelector(
-  [ getUsers, getRequestedUserSlug, isRequestedUserInRequestedRole ],
-  (users, requestedUserSlug, isRequestedUserInRequestedRole) => {
-    const requestedUser = users[ requestedUserSlug ];
-    if ( isRequestedUserInRequestedRole ) {
-      return requestedUser;
-    }
+export const getContributorFromSlug = createSelector(
+  [ getUsers, getRequestedContributorSlug ],
+  (users, requestedContributorSlug) => {
+    return users[ requestedContributorSlug ];
   }
 );
 
@@ -41,7 +24,7 @@ export const getUsersWithinRole = createSelector(
       .filter(userRole => userRole.roleSlug === role.slug)
       .map(userRole => userRole.userSlug);
     return Object.filter(users, user => {
-      return userSlugsInRole.includes( user.slug );
+      return userSlugsInRole.includes(user.slug);
     });
   }
 );

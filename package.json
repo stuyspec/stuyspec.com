@@ -76,6 +76,7 @@
     "react-router-bootstrap": "^0.24.2",
     "reselect": "^3.0.1",
     "sigmund": "^1.0.1",
-    "yargs": "^8.0.2"
+    "yargs": "^8.0.2",
+    "zone.js": "^0.8.5"
   }
 }

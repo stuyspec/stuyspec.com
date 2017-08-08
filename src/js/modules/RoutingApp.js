@@ -1,23 +1,18 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import appHistory from 'tools/appHistory';
-import ConnectedRouter from 'react-router-redux/ConnectedRouter';
-import { connect } from 'react-redux';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import appHistory from "tools/appHistory";
+import ConnectedRouter from "react-router-redux/ConnectedRouter";
+import { connect } from "react-redux";
 
-import core from './core';
-import articles from './articles';
-import sections from './sections';
-import users from './users';
+import { HomePage, PageLayout } from "./core/components";
+import { ArticlePage } from "./articles/components";
+import { SectionPage } from "./sections/components";
+import { RolePage, ContributorPage } from "./users/components";
 
-const { HomePage, PageLayout } = core.components;
-const { ArticlePage } = articles.components;
-const { SectionPage } = sections.components;
-const { RolePage, UserPage } = users.components;
+import { getSections } from "./sections/selectors";
+import { getRoles } from "./users/selectors";
 
-const { getRoles } = users.selectors;
-const { getSections } = sections.selectors;
-
-const RoutingApp = ({ sections, roles, match }) => {
+const RoutingApp = ({ sections, roles }) => {
   const createSectionRoutes = () => {
     return Object.keys(sections).map((sectionSlug, index) => {
       const section = sections[ sectionSlug ];
@@ -25,7 +20,8 @@ const RoutingApp = ({ sections, roles, match }) => {
         exact path={section.permalink}
         key={`sectionRoute${index}`}
         render={(props) => (
-          <SectionPage section={section}/>
+          <SectionPage match={props.match}
+                       section={section}/>
         )}/>
     });
   };
@@ -51,29 +47,20 @@ const RoutingApp = ({ sections, roles, match }) => {
         )}/>
     })
   }
-  const createUserRoutes = () => {
-    return Object.keys(roles).map((roleSlug, index) => {
-      return <Route
-        exact path={`/${roleSlug}/:user_slug`}
-        key={`userRoute${index}`}
-        render={(props) => (
-          <UserPage match={props.match}
-                    role={roles[ roleSlug ]}/>
-        )}/>
-    })
-  }
   return (
-      <ConnectedRouter history={appHistory}>
-        <PageLayout>
-          <Switch>
-            <Route exact path="/" component={HomePage}/>
-            {createSectionRoutes()}
-            {createArticleRoutes()}
-            {createRoleRoutes()}
-            {createUserRoutes()}
-          </Switch>
-        </PageLayout>
-      </ConnectedRouter>
+    <ConnectedRouter history={appHistory}>
+      <PageLayout>
+        <Switch>
+          <Route exact path="/" component={HomePage}/>
+          {createSectionRoutes()}
+          {createArticleRoutes()}
+          {createRoleRoutes()}
+          <Route exact path={'/contributors/:contributor_slug'}
+                 key={`contributorRoute`}
+                 render={props => <ContributorPage match={props.match} role={roles[ 'contributors' ]}/>}/>
+        </Switch>
+      </PageLayout>
+    </ConnectedRouter>
   );
 };
 
@@ -85,4 +72,4 @@ const mapStateToProps = (state) => ({
 export default connect(
   mapStateToProps,
   null
-) (RoutingApp);
+)(RoutingApp);

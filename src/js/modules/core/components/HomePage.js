@@ -4,27 +4,16 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import articles from "../../articles";
-import sections from "../../sections";
-import users from "../../users";
-import { fetchArticles} from "../../articles/actions"
+import { getArticles } from "../../articles/selectors";
+import { fetchArticles } from "../../articles/actions";
+import { getSections } from "../../sections/selectors";
+import { getUsers, getUserRoles } from "../../users/selectors";
 
 const styles = {
   HomePage: {}
 };
 
 const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles }) => {
-  const linkToAllSections = () => {
-    return Object.keys(sections).map((sectionSlug, index) => {
-      return (
-        <li key={`sectionLink${index}`}>
-          <Link to={sections[ sectionSlug ].permalink}>
-            {sections[ sectionSlug ].name}
-          </Link>
-        </li>
-      );
-    });
-  };
   const linkToAllArticles = () => {
     return Object.keys(articles).map((articleSlug, index) => {
       const article = articles[ articleSlug ];
@@ -56,11 +45,7 @@ const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles
   return (
     <div className={classes.HomePage}>
       <h1>Home page</h1>
-      <button onClick={handleFetch}>Articles </button>
-      <h2>Sections</h2>
-      <ul>
-        {linkToAllSections()}
-      </ul>
+      <button onClick={handleFetch}>fetch articles</button>
       <h2>Articles</h2>
       <ul>
         {linkToAllArticles()}
@@ -74,15 +59,14 @@ const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles
 };
 
 const mapStateToProps = (state) => ({
-  articles: articles.selectors.getArticles(state),
-  sections: sections.selectors.getSections(state),
-  users: users.selectors.getUsers(state),
-  userRoles: users.selectors.getUserRoles(state),
+  articles: getArticles(state),
+  sections: getSections(state),
+  users: getUsers(state),
+  userRoles: getUserRoles(state),
 });
 
-//TODO: Make this mapDispatchToProps actually do something
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({fetchArticles: fetchArticles}, dispatch);
+  return bindActionCreators({ fetchArticles: fetchArticles }, dispatch);
 };
 
 export default connect(

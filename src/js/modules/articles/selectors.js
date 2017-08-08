@@ -1,7 +1,14 @@
+import React from 'react';
 import { createSelector } from "reselect";
-import { getSectionSlugFromId } from "../sections/selectors";
-import { getUsers, getUserBySlug } from "../users/selectors";
-import { getSections, getSectionFromProps, getSlugsInSectionTree } from "../sections/selectors";
+import { Link } from "react-router-dom";
+
+import { getUsers, getContributorFromSlug } from "../users/selectors";
+import {
+  getSections,
+  getSectionFromProps,
+  getSectionSlugFromId,
+  getSlugsInSectionTree,
+} from "../sections/selectors";
 
 export const getArticles = state => state.articles.articles;
 const getAuthorships = state => state.articles.authorships;
@@ -22,7 +29,7 @@ export const getArticleFromRequestedSlug = createSelector(
  * The selector returns a filtered articles object that contains all articles
  *   within the target section (from props) and its tree.
  */
-export const getArticlesWithinSectionTree = createSelector(
+export const getSectionTreeArticles = createSelector(
   [ getArticles, getSlugsInSectionTree ],
   (articles, slugsInSectionTree) => {
     return Object.filter(articles, article => {
@@ -32,30 +39,59 @@ export const getArticlesWithinSectionTree = createSelector(
 );
 
 /**
- * The selector returns an array of all contributors for a target article
- *   (from props).
+ * The selector factory returns a selector that returns an array of all
+ *   contributors for any @param target article.
  */
-export const getContributorsOfArticle = createSelector(
-  [ getArticleFromRequestedSlug, getUsers, getAuthorships ],
-  (targetArticle, users, authorships) => {
-    const matchedAuthorships = authorships.filter(authorship => {
-      return authorship.articleSlug === targetArticle.slug;
-    });
-    return matchedAuthorships.map(authorship => {
-      return users[ authorship.userSlug ];
-    });
-  }
-);
+export const articleContributorsSelectorFactory = (targetArticle) => {
+  return createSelector(
+    [ getUsers, getAuthorships ],
+    (users, authorships) => {
+      const matchedAuthorships = authorships.filter(authorship => {
+        return authorship.articleSlug === targetArticle.slug;
+      });
+      return matchedAuthorships.map(authorship => {
+        return users[ authorship.contributorSlug ];
+      });
+    }
+  );
+};
 
+/**
+ * The selector factory returns a selector that returns the byline for
+ *   any @param targetArticle.
+ */
+export const articleBylineSelectorFactory = (targetArticle) => {
+  return createSelector(
+    [ articleContributorsSelectorFactory(targetArticle) ],
+    contributors => {
+      let separator = ', ';
+      return contributors.map((contributor, index) => {
+        if (index === contributors.length - 2) {
+          separator = ' & ';
+        } else if (index === contributors.length - 1) {
+          separator = '';
+        }
+        return (
+          <div key={`contributor${contributor.id}`}>
+            {index === 0 ? 'By ' : ''}
+            <Link to={`/contributors/${contributor.slug}`}>
+              {contributor.firstName} {contributor.lastName}
+            </Link>{separator}
+          </div>
+        );
+      });
+    }
+  );
+};
 /**
  * The selector returns a filtered articles object that contains all articles
  *   written by a contributor.
  */
 export const getArticlesByContributor = createSelector(
-  [ getUserBySlug, getArticles, getAuthorships ],
-  (user, articles, authorships) => {
+  [ getContributorFromSlug, getArticles, getAuthorships ],
+  (contributor, articles, authorships) => {
     const articleSlugsForTargetArticles = authorships
-      .filter(authorship => authorship.userSlug === user.slug)
+      .filter(authorship => authorship.contributorSlug === contributor.slug)
       .map(authorship => authorship.articleSlug);
     return Object.filter(articles, article => {
       return articleSlugsForTargetArticles.includes(article.slug);
@@ -92,11 +128,11 @@ export const getFakeAuthorshipsForArticleResponse = createSelector(
     return response.reduce((accumulatedAuthorships, currentArticle) => {
       accumulatedAuthorships.push({
         articleSlug: currentArticle.slug,
-        userSlug: "jason-kao",
+        contributorSlug: "jason-kao",
       });
       accumulatedAuthorships.push({
         articleSlug: currentArticle.slug,
-        userSlug: "jason-lin",
+        contributorSlug: "jason-lin",
       });
       return accumulatedAuthorships;
     }, []);

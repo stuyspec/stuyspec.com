@@ -1,11 +1,11 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import injectSheet from 'react-jss';
+import React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import injectSheet from "react-jss";
 
-import PageHeader from './PageHeader';
-import PageFooter from './PageFooter';
-import { getTopLevelSectionsWithDirectChildren } from '../../sections/selectors';
+import PageHeader from "./PageHeader";
+import PageFooter from "./PageFooter";
+import { getTopLevelSectionsWithDirectChildren } from "../../sections/selectors";
 
 const styles = {
   PageContainer: {

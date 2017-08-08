@@ -1,35 +1,66 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import injectSheet from 'react-jss';
+import React from "react";
+import { connect } from "react-redux";
+import { Grid, Row, Col } from "react-bootstrap/lib";
+import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
 
-import { getArticlesWithinSectionTree } from '../../articles/selectors';
-import { getSections, getDirectChildrenOfSection } from '../../sections/selectors';
+import { ArticleList } from "../../articles/components";
+import { getSectionTreeArticles } from "../../articles/selectors";
+import { getSections, getDirectChildrenOfSection } from "../../sections/selectors";
 
 const styles = {
   SectionPage: {
-    marginTop: '50px',
+    marginTop: '100px',
+    top: 0,
+    marginBottom: '60px',
+  },
+  sectionName: {
+    fontFamily: 'Canela',
+    fontSize: '36px',
+    fontWeight: 500,
+    color: '#000',
+    margin: '0 0 20px 0',
+  },
+  subsectionBar: {
+    border: '1px solid #ddd',
+    borderStyle: 'solid none',
+    listStyleType: 'none',
+    marginBottom: '14px',
+    padding: '7px 0 8px 0',
+  },
+  subsectionListItem: {
+    display: 'inline',
+    textDecoration: 'none',
+    marginRight: '26px',
+  },
+  subsectionLink: {
+    color: '#000',
+    fontFamily: 'Circular Std',
+    fontSize: '14px',
+    fontWeight: 300,
+    textTransform: 'uppercase',
   }
 };
 
-const SectionPage = ({ classes, articlesWithinSectionTree, directSubsectionChildren, section, sections }) => {
+/**
+ * @param match is necessary for getting section by slug (through props).
+ */
+const SectionPage = ({
+                       classes,
+                       articlesWithinSectionTree,
+                       directSubsectionChildren,
+                       section,
+                       featuredMedia,
+                       match
+                     }) => {
   const createLinksToDirectSubsectionChildren = () => {
     return Object.keys(directSubsectionChildren).map((subsectionSlug) => {
       const subsection = directSubsectionChildren[ subsectionSlug ];
       return (
-        <li key={`subsectionListItem${subsection.id}`}>
-          <Link to={subsection.permalink}>{subsection.name}</Link>
-        </li>
-      );
-    });
-  };
-  const createLinksToArticlesWithinSectionTree = () => {
-    return Object.keys(articlesWithinSectionTree).map((articleSlug) => {
-      const article = articlesWithinSectionTree[ articleSlug ];
-      return (
-        <li key={`articleListItem${article.id}`}>
-          <Link to={`${sections[ article.sectionSlug ].permalink}/${article.slug}`}>
-            {article.title}
+        <li className={classes.subsectionListItem}
+            key={`subsectionListItem${subsection.id}`}>
+          <Link className={classes.subsectionLink} to={subsection.permalink}>
+            {subsection.name}
           </Link>
         </li>
       );
@@ -37,25 +68,29 @@ const SectionPage = ({ classes, articlesWithinSectionTree, directSubsectionChild
   };
   return (
     <div className={classes.SectionPage}>
-      <h1>{section.name}</h1>
-      <p>description: {section.description}</p>
-      <hr/>
-      <p>subsections</p>
-      <ul>
-        {createLinksToDirectSubsectionChildren()}
-      </ul>
-      <hr/>
-      <p>articles</p>
-      <ul>
-        {createLinksToArticlesWithinSectionTree()}
-      </ul>
+      <h1 className={classes.sectionName}>{section.name}</h1>
+      {
+        directSubsectionChildren !== null &&
+        <ul className={classes.subsectionBar}>
+          {createLinksToDirectSubsectionChildren()}
+        </ul>
+      }
+      <ArticleList articles={articlesWithinSectionTree}
+                   featuredMedia={featuredMedia}
+                   section={section}/>
     </div>
   );
 };
 
 
 const mapStateToProps = (state, ownProps) => ({
-  articlesWithinSectionTree: getArticlesWithinSectionTree(state, ownProps),
+  featuredMedia: {
+    url: 'http://planesandpleasures.com/wp-content/uploads/2016/09/NewYork-Chinatown-7.jpg',
+    caption: 'New York City street after rain is covered in water, dirt, and snow. Pedestrians walk back and forth as post-flood confusion amasses.',
+    type: 'Photograph',
+    credits: 'Ting Ting',
+  },
+  articlesWithinSectionTree: getSectionTreeArticles(state, ownProps),
   directSubsectionChildren: getDirectChildrenOfSection(state, ownProps),
   sections: getSections(state),
 });
