@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as t from "./actionTypes";
 import { STUY_SPEC_API, HEADER } from "../../constants";
-import { getProcessedArticleResponse, getFakeAuthorshipsForArticleResponse } from "./selectors";
+import { getProcessedArticlesResponse, getFakeAuthorshipsForArticleResponse } from "./selectors";
 
 export const fetchArticles = () => {
   return (dispatch, getState) => {
@@ -18,7 +18,7 @@ export const fetchArticles = () => {
       .then(response => { // TODO: promise function orders are wonky without @param response
         dispatch({
           type: t.ADD_ARTICLES,
-          payload: getProcessedArticleResponse(getState()),
+          payload: getProcessedArticlesResponse(getState()),
         });
       })
       .then(response => {
