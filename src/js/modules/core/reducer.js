@@ -1,8 +1,4 @@
-import
-{
-  SET_LANGUAGE,
-  REFRESH_WINDOW_DIMENSIONS,
-} from './actionTypes';
+import { REFRESH_WINDOW_DIMENSIONS } from "./actionTypes";
 
 // getWindowWidth & getWindowHeight was
 // adapted from http://stackoverflow.com/a/8876069/1291659
@@ -15,22 +11,16 @@ const getViewportHeight = () => {
 };
 
 const initialState = {
-  language: 'en',
   viewportWidth: getViewportWidth(),
   viewportHeight: getViewportHeight(),
 };
 
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
-    case SET_LANGUAGE :
-      return Object.assign(
-        { ...state },
-        { language: action.payload.language }
-      );
     case REFRESH_WINDOW_DIMENSIONS :
       let viewportWidth = getViewportWidth(),
         viewportHeight = getViewportHeight();
-      if (state.viewportWidth != viewportWidth || state.viewportHeight != viewportHeight) {
+      if (state.viewportWidth !== viewportWidth || state.viewportHeight !== viewportHeight) {
         // override width/height which will refresh app view
         return Object.assign({ ...state }, { viewportWidth, viewportHeight });
       } else { // otherwise do not mutate

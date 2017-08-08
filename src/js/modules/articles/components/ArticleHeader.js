@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import injectSheet from 'react-jss';
+import React from "react";
+import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
 
 const styles = {
   ArticleHeader: {
@@ -24,14 +24,14 @@ const styles = {
     fontFamily: 'Minion Pro',
     fontSize: '36px',
     fontWeight: 'normal',
-    marginTop: '0px',
+    marginTop: 0,
     marginBottom: '15px',
   },
   metaInfo: {
     fontFamily: 'Minion Pro',
     fontSize: '14px',
-    color: '#000000',
-    margin: '0px',
+    color: '#000',
+    margin: 0,
     '& div:first-child': {
       display: 'inline',
       fontWeight: 'bold',

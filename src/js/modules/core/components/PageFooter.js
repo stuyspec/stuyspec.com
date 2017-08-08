@@ -1,15 +1,15 @@
-import React from 'react';
-import injectSheet from 'react-jss';
-import { Link } from 'react-router-dom';
-import { Grid, Row, Col } from 'react-bootstrap/lib/';
+import React from "react";
+import injectSheet from "react-jss";
+import { Link } from "react-router-dom";
+import { Grid, Row, Col } from "react-bootstrap/lib";
 
 const styles = {
   PageFooter: {
-    background: '#FFFFFF',
+    background: '#fff',
     height: '370px',
   },
   pageFooterMain: {
-    borderTop: '3px solid #dddddd',
+    borderTop: '3px solid #ddd',
     margin: '0 auto',
     width: '1060px',
   },
@@ -23,19 +23,23 @@ const styles = {
     marginTop: '19px',
   },
   topLevelSectionLink: {
-    color: '#000000',
+    color: '#000',
     fontSize: '14px',
-    fontFamily: "Circular Std",
+    fontFamily: 'Circular Std',
     fontStyle: 'normal',
     fontWeight: 'bold',
     textDecoration: 'none',
     '&:hover': {
+      color: '#000',
+      textDecoration: 'none',
+    },
+    '&:focus': {
+      color: '#000',
       textDecoration: 'none',
     },
   },
-  // TODO: footer flexbox fucked again
   subsectionLink: {
-    color: '#000000',
+    color: '#000',
     display: 'block',
     fontSize: '13px',
     fontFamily: 'Circular Std',
@@ -43,15 +47,20 @@ const styles = {
     fontWeight: '300',
     textDecoration: 'none',
     '&:hover': {
+      color: '#000',
+      textDecoration: 'none',
+    },
+    '&:focus': {
+      color: '#000',
       textDecoration: 'none',
     },
   },
   theSpectator: {
-    color: '#000000',
+    color: '#000',
     fontFamily: 'Old English Text MT',
     fontSize: '30px',
     fontStyle: 'normal',
-    fontWeight: '400',
+    fontWeight: 400,
     paddingTop: '10px',
   },
 };

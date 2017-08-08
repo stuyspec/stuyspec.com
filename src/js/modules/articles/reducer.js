@@ -10,20 +10,7 @@ const initialState = {
   isFetching: false,
   isFetched: false,
   error: null,
-  articles: {
-    'hello-there': {
-      'content': '<p>Testing 123, hellow there.</p>',
-      'createdAt': "2017-08-04T22:13:28.630Z",
-      'id': 14,
-      'isDraft': true,
-      'issue': null,
-      'volume': null,
-      'sectionSlug': 'ae',
-      'slug': 'hello-there',
-      'title': "Hello There",
-      'updatedAt': "2017-08-04T22:13:28.630Z",
-    },
-  },
+  articles: {},
   authorships: [],
   response: {},
 };

@@ -1,12 +1,12 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import injectSheet from 'react-jss';
-import { Col, Grid, Row } from 'react-bootstrap/lib/';
-import ArticleList from '../../articles/components/ArticleList';
+import React from "react";
+import { connect } from "react-redux";
+import { Grid, Row, Col } from "react-bootstrap/lib";
+import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
 
-import { getArticlesWithinSectionTree } from '../../articles/selectors';
-import { getSections, getDirectChildrenOfSection } from '../../sections/selectors';
+import { ArticleList } from "../../articles/components";
+import { getSectionTreeArticles } from "../../articles/selectors";
+import { getSections, getDirectChildrenOfSection } from "../../sections/selectors";
 
 const styles = {
   SectionPage: {
@@ -42,12 +42,17 @@ const styles = {
   }
 };
 
-const SectionPage = ({ classes,
+/**
+ * @param match is necessary for getting section by slug (through props).
+ */
+const SectionPage = ({
+                       classes,
                        articlesWithinSectionTree,
                        directSubsectionChildren,
                        section,
                        featuredMedia,
-                       match }) => {
+                       match
+                     }) => {
   const createLinksToDirectSubsectionChildren = () => {
     return Object.keys(directSubsectionChildren).map((subsectionSlug) => {
       const subsection = directSubsectionChildren[ subsectionSlug ];
@@ -66,9 +71,9 @@ const SectionPage = ({ classes,
       <h1 className={classes.sectionName}>{section.name}</h1>
       {
         directSubsectionChildren !== null &&
-          <ul className={classes.subsectionBar}>
-            {createLinksToDirectSubsectionChildren()}
-          </ul>
+        <ul className={classes.subsectionBar}>
+          {createLinksToDirectSubsectionChildren()}
+        </ul>
       }
       <ArticleList articles={articlesWithinSectionTree}
                    featuredMedia={featuredMedia}
@@ -85,7 +90,7 @@ const mapStateToProps = (state, ownProps) => ({
     type: 'Photograph',
     credits: 'Ting Ting',
   },
-  articlesWithinSectionTree: getArticlesWithinSectionTree(state, ownProps),
+  articlesWithinSectionTree: getSectionTreeArticles(state, ownProps),
   directSubsectionChildren: getDirectChildrenOfSection(state, ownProps),
   sections: getSections(state),
 });

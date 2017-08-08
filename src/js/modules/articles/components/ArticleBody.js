@@ -1,7 +1,7 @@
-import React from 'react';
-import injectSheet from 'react-jss';
+import React from "react";
+import injectSheet from "react-jss";
 
-import ArticleFeaturedMedia from './ArticleFeaturedMedia';
+import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 
 const styles = {
   ArticleBody: {
@@ -20,11 +20,10 @@ const styles = {
 };
 
 const ArticleBody = ({ classes, content, featuredMedia }) => {
-  return(
-    <div className={ classes.ArticleBody }>
+  return (
+    <div className={classes.ArticleBody}>
       <ArticleFeaturedMedia featuredMedia={featuredMedia}/>
-      <div dangerouslySetInnerHTML={{ __html: content }}>
-      </div>
+      <div dangerouslySetInnerHTML={{ __html: content }}/>
     </div>
   );
 };

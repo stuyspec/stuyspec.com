@@ -1,10 +1,10 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import injectSheet from 'react-jss';
+import React from "react";
+import { connect } from "react-redux";
+import injectSheet from "react-jss";
 
-import { getArticleFromRequestedSlug, articleBylineSelectorFactory } from '../selectors';
-import ArticleHeader from './ArticleHeader';
-import ArticleBody from './ArticleBody';
+import { getArticleFromRequestedSlug, articleBylineSelectorFactory } from "../selectors";
+import ArticleHeader from "./ArticleHeader";
+import ArticleBody from "./ArticleBody";
 
 const styles = {
   ArticlePage: {
@@ -48,4 +48,4 @@ const mapStateToProps = (state, ownProps) => {
 export default connect(
   mapStateToProps,
   null
-)( injectSheet(styles)(ArticlePage) );
+)(injectSheet(styles)(ArticlePage));

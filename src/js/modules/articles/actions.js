@@ -1,7 +1,7 @@
-import axios from 'axios';
-import * as t from './actionTypes';
-import { STUY_SPEC_API, HEADER } from '../../constants';
-import { getProcessedArticleResponse, getFakeAuthorshipsForArticleResponse } from './selectors';
+import axios from "axios";
+import * as t from "./actionTypes";
+import { STUY_SPEC_API, HEADER } from "../../constants";
+import { getProcessedArticleResponse, getFakeAuthorshipsForArticleResponse } from "./selectors";
 
 export const fetchArticles = () => {
   return (dispatch, getState) => {
@@ -41,10 +41,11 @@ const checkArticleKeyValidity = (articleObject, key, type) => {
     if (typeof (articleObject[ key ]) === type) {
       return true;
     } else {
-      throw `Error: The data type of the key ${key} is incorrect.`
+      throw `EXCEPTION: key ${key} in articleObject is 
+        ${typeof (articleObject[ key ])}, but should be ${type}.`;
     }
   } else {
-    throw `Error: The key ${key} is missing in the article object.`
+    throw `EXCEPTION: key ${key} is undefined in articleObject.`;
   }
 };
 
@@ -57,7 +58,7 @@ const isArticleValid = (articleArray) => {
   const integerProperties = [ 'id', 'sectionId' ];
   const stringProperties = [ 'title', 'slug', 'content', "createdAt", "updatedAt" ];
   if (!Array.isArray(articleArray)) {
-    throw 'Error: Article response data is not an array.'
+    throw 'EXCEPTION: article response is not an array.'
   }
   articleArray.forEach(articleObject => {
     integerProperties.forEach(numberKey => {
