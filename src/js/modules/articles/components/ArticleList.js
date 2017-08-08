@@ -16,6 +16,7 @@ const ArticleList = ({ classes, articles, featuredMedia, section }) => {
       const article = articles[ articleSlug ];
       return <ArticleRow article={article}
                          featuredMedia={featuredMedia}
+                         key={articleSlug}
                          section={section}/>;
     })
   };

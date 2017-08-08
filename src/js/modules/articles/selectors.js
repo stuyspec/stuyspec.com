@@ -103,7 +103,7 @@ export const getArticlesByContributor = createSelector(
  * The selector returns an articles object that contains all articles from Stuy
  *   Spec API's response.
  */
-export const getProcessedArticleResponse = createSelector(
+export const getProcessedArticlesResponse = createSelector(
   [ getArticlesResponse, getSections ],
   (response, sections) => {
     return response.reduce((accumulatedArticles, currentArticle) => {

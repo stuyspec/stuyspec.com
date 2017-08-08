@@ -8,12 +8,13 @@ import { getArticles } from "../../articles/selectors";
 import { fetchArticles } from "../../articles/actions";
 import { getSections } from "../../sections/selectors";
 import { getUsers, getUserRoles } from "../../users/selectors";
+import { fetchUsers } from "../../users/actions";
 
 const styles = {
   HomePage: {}
 };
 
-const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles }) => {
+const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles, fetchUsers }) => {
   const linkToAllArticles = () => {
     return Object.keys(articles).map((articleSlug, index) => {
       const article = articles[ articleSlug ];
@@ -39,13 +40,17 @@ const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles
       }
     });
   };
-  const handleFetch = () => {
+  const handleArticlesFetch = () => {
     fetchArticles();
+  };
+  const handleUsersFetch = () => {
+    fetchUsers();
   };
   return (
     <div className={classes.HomePage}>
       <h1>Home page</h1>
-      <button onClick={handleFetch}>fetch articles</button>
+      <button onClick={handleArticlesFetch}>fetch articles</button>
+      <button onClick={handleUsersFetch}>fetch users</button>
       <h2>Articles</h2>
       <ul>
         {linkToAllArticles()}
@@ -66,7 +71,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchArticles: fetchArticles }, dispatch);
+  return bindActionCreators({
+    fetchArticles: fetchArticles,
+    fetchUsers: fetchUsers,
+  }, dispatch);
 };
 
 export default connect(

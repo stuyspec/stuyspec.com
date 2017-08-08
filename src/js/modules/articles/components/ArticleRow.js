@@ -38,13 +38,17 @@ const styles = {
     marginBottom: '8px'
   },
   byline: {
+    display: 'inline',
     fontFamily: 'Circular Std',
     fontSize: '12px',
     fontWeight: 'bold',
     color: '#000',
     textTransform: 'uppercase',
     marginRight: '6px',
-    '& div': {
+    '&: hover': {
+      color: '#000',
+    },
+    '& div': { // each div child carries a <Link> to a contributor
       display: 'inline',
       margin: 0,
       '& a': {
@@ -80,10 +84,10 @@ const ArticleRow = ({ classes, article, byline, featuredMedia, section }) => {
           when I run gulp. Also, in SectionPage, you've imported SectionArticleList but you don't use it as a component.
           The error appears to be on line 41. Lastly, you've imported a ton of things in SectionArticleList that you
           don't need; delete those.</p>
-        <p>
-          <span className={classes.byline}>{byline}</span>
+        <div>
+          <div className={classes.byline}>{byline}</div>
           <span className={classes.dateline}>July 29, 2017</span>
-        </p>
+        </div>
       </Col>
     </Row>
   );
