@@ -3,6 +3,8 @@ import { Row, Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
+import Byline from "./Byline";
+
 const styles = {
   ArticleRow: {
     borderBottom: '1px solid #ddd',
@@ -34,18 +36,14 @@ const styles = {
     lineHeight: '1.13',
     marginBottom: '8px'
   },
-  byline: {
+  Byline: {
     display: 'inline',
     fontFamily: 'Circular Std',
     fontSize: '12px',
     fontWeight: 'bold',
-    color: '#000',
     textTransform: 'uppercase',
     marginRight: '6px',
-    '&: hover': {
-      color: '#000',
-    },
-    '& div': { // each div child carries a <Link> to a contributor
+    '& p': {
       display: 'inline',
       margin: 0,
       '& a': {
@@ -81,7 +79,7 @@ const ArticleRow = ({ classes, article, featuredMedia, section }) => {
           when I run gulp. Also, in SectionPage, you've imported SectionArticleList but you don't use it as a component.
           The error appears to be on line 41.</p>
         <div>
-          <div className={classes.byline}>{article.byline}</div>
+          <Byline classes={classes} contributors={article.contributors}/>
           <span className={classes.dateline}>{article.dateline}</span>
         </div>
       </Col>

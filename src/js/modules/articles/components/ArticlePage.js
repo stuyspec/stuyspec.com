@@ -19,7 +19,7 @@ const ArticlePage = ({ classes, article, section, featuredMedia }) => {
       <ArticleHeader
         headline={article.title}
         section={section}
-        byline={article.byline}
+        contributors={article.contributors}
         dateline={article.dateline}
       />
       <ArticleBody content={article.content} featuredMedia={featuredMedia}/>
