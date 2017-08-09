@@ -82,7 +82,7 @@ const ArticleRow = ({ classes, article, featuredMedia, section }) => {
           The error appears to be on line 41.</p>
         <div>
           <div className={classes.byline}>{article.byline}</div>
-          <span className={classes.dateline}>July 29, 2017</span>
+          <span className={classes.dateline}>{article.dateline}</span>
         </div>
       </Col>
     </Row>

@@ -116,6 +116,7 @@ export const getProcessedArticlesResponse = createSelector(
       accumulatedArticles[ currentArticle.slug ] = {
         ...currentArticle,
         sectionSlug: getSectionSlugFromId(sections, sectionId),
+        dateline: 'July 31, 2017', // TODO: get Jason L.'s date formatter code
       };
       return accumulatedArticles;
     }, {});
