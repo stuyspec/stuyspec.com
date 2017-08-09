@@ -16,7 +16,7 @@ const getRequestedArticleSlug = (state, props) => props.match.params.article_slu
 
 /**
  * The selector returns an articles object with an additional property for each
- *   article: its byline in JSX.
+ *   article: an array of its contributors.
  */
 const getArticlesWithContributors = createSelector(
   [ getArticles, getUsers, getAuthorships ],
