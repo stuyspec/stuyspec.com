@@ -14,7 +14,7 @@ const styles = {
     width: '1060px',
   },
   sectionFlex: {
-    height: '350px',
+    height: '320px',
     display: 'flex',
     flexFlow: 'column wrap',
     paddingTop: '6px',
@@ -62,10 +62,20 @@ const styles = {
     fontStyle: 'normal',
     fontWeight: 400,
     paddingTop: '10px',
+    '&:hover': {
+      color: '#000',
+      textDecoration: 'none',
+    },
+    '&:focus': {
+      color: '#000',
+      textDecoration: 'none',
+    },
   },
 };
 
-const PageFooter = ({ classes, topLevelSectionsWithDirectChildren }) => {
+const PageFooter = ({ classes,
+                      topLevelSectionsWithDirectChildren,
+                      parentAboutPagesWithChildren }) => {
   const linkToSections = () => {
     return Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {
       const topLevelSection = topLevelSectionsWithDirectChildren[ sectionSlug ];
@@ -92,14 +102,43 @@ const PageFooter = ({ classes, topLevelSectionsWithDirectChildren }) => {
       );
     });
   };
+  const linkToAbout = () => {
+    return Object.keys(parentAboutPagesWithChildren).map(aboutSlug => {
+      const parentAboutPage = parentAboutPagesWithChildren[ aboutSlug ];
+      return (
+        <div className={classes.sectionBlock} key={`about${parentAboutPage.id}`}>
+          <Link className={classes.topLevelSectionLink}
+                key={`topAboutLink${parentAboutPage.id}`}
+                to={parentAboutPage.permalink}>
+            {parentAboutPage.title}
+          </Link>
+          {
+            Object.keys(parentAboutPage.childAboutPages).map(childSlug => {
+              const childAboutPage = parentAboutPage.childAboutPages[ childSlug ];
+              return (
+                <Link className={classes.subsectionLink}
+                      key={`childAboutLink${childAboutPage.id}`}
+                      to={childAboutPage.permalink}>
+                  {childAboutPage.title}
+                </Link>
+              );
+            })
+          }
+        </div>
+      );
+    });
+  };
   return (
     <Grid className={classes.PageFooter}>
       <Row className={classes.pageFooterMain}>
-        <Col md={8} mdOffset={2} className={classes.theSpectator}>
-          The Spectator
+        <Col md={8} mdOffset={2}>
+          <Link to="/" className={classes.theSpectator}>
+            The Spectator
+          </Link>
         </Col>
         <Col md={8} mdOffset={2} className={classes.sectionFlex}>
           {linkToSections()}
+          {linkToAbout()}
         </Col>
       </Row>
     </Grid>

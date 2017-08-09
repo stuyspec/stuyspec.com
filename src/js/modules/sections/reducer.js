@@ -52,13 +52,13 @@ const initialState = {
       parentSlug: null,
       permalink: "/sports"
     },
-    "photo": {
+    "media": {
       id: 6,
-      name: "Photo",
-      slug: "photo",
-      description: "The photo of Stuyvesant.",
+      name: "Media",
+      slug: "media",
+      description: "The media of Stuyvesant.",
       parentSlug: null,
-      permalink: "/photo"
+      permalink: "/media"
     },
     "campaign-coverage": {
       id: 7,
@@ -131,6 +131,94 @@ const initialState = {
       description: "The books of Stuyvesant.",
       parentSlug: "ae",
       permalink: "/ae/books"
+    },
+    "feature": {
+      id: 16,
+      name: "Feature",
+      slug: "feature",
+      description: "The feature of Stuyvesant.",
+      parentSlug: "ae",
+      permalink: "/ae/feature"
+    },
+    "film": {
+      id: 17,
+      name: "Film",
+      slug: "film",
+      description: "The film of Stuyvesant.",
+      parentSlug: "ae",
+      permalink: "/ae/film"
+    },
+    "food": {
+      id: 18,
+      name: "Food",
+      slug: "food",
+      description: "The food of Stuyvesant.",
+      parentSlug: "ae",
+      permalink: "/ae/food"
+    },
+    "live-performances": {
+      id: 19,
+      name: "Live Performances",
+      slug: "live-performances",
+      description: "The live performances of Stuyvesant.",
+      parentSlug: "ae",
+      permalink: "/ae/live-performances"
+    },
+    "music": {
+      id: 20,
+      name: "Music",
+      slug: "music",
+      description: "The music of Stuyvesant.",
+      parentSlug: "ae",
+      permalink: "/ae/music"
+    },
+    "television": {
+      id: 21,
+      name: "Television",
+      slug: "television",
+      description: "The television of Stuyvesant.",
+      parentSlug: "ae",
+      permalink: "/ae/television"
+    },
+    "art": {
+      id: 22,
+      name: "Art",
+      slug: "art",
+      description: "The art of Stuyvesant.",
+      parentSlug: "media",
+      permalink: "/media/art"
+    },
+    "graphics": {
+      id: 23,
+      name: "Graphics",
+      slug: "graphics",
+      description: "The graphics of Stuyvesant.",
+      parentSlug: "media",
+      permalink: "/media/graphics"
+    },
+    "music": {
+      id: 24,
+      name: "Music",
+      slug: "music",
+      description: "The music of Stuyvesant.",
+      parentSlug: "media",
+      permalink: "/media/music"
+    },
+    "photo": {
+      id: 25,
+      name: "Photo",
+      slug: "photo",
+      description: "The photo of Stuyvesant.",
+      parentSlug: "media",
+      permalink: "/media/photo"
+    },
+    "video": {
+      id: 26,
+      name: "Video",
+      slug: "video",
+      description: "The video of Stuyvesant.",
+      parentSlug: "media",
+      permalink: "/media/video"
     },
   }
 };

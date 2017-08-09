@@ -8,11 +8,13 @@ import { HomePage, PageLayout } from "./core/components";
 import { ArticlePage } from "./articles/components";
 import { SectionPage } from "./sections/components";
 import { RolePage, ContributorPage } from "./users/components";
+import { AboutPage } from "./about/components";
 
 import { getSections } from "./sections/selectors";
 import { getRoles } from "./users/selectors";
+import { getAboutPages } from './about/selectors';
 
-const RoutingApp = ({ sections, roles }) => {
+const RoutingApp = ({ sections, roles, about }) => {
   const createSectionRoutes = () => {
     return Object.keys(sections).map(sectionSlug => {
       const section = sections[ sectionSlug ];
@@ -46,7 +48,18 @@ const RoutingApp = ({ sections, roles }) => {
           <RolePage role={roles[ roleSlug ]}/>
         )}/>
     })
-  }
+  };
+  const createAboutRoutes = () => {
+    return Object.keys(about).map(aboutSlug => {
+      const aboutPage = about[aboutSlug];
+      return <Route
+        exact path ={`${aboutPage.permalink}`}
+        key = {`aboutRoutes${aboutPage.id}`}
+        render={props => (
+          <AboutPage  about={aboutPage}/>
+        )}/>
+    })
+  };
   return (
     <ConnectedRouter history={appHistory}>
       <PageLayout>
@@ -55,6 +68,7 @@ const RoutingApp = ({ sections, roles }) => {
           {createSectionRoutes()}
           {createArticleRoutes()}
           {createRoleRoutes()}
+          {createAboutRoutes()}
           <Route exact path={'/contributors/:contributor_slug'}
                  key={`contributorRoute`}
                  render={props => (
@@ -70,6 +84,7 @@ const RoutingApp = ({ sections, roles }) => {
 const mapStateToProps = (state) => ({
   sections: getSections(state),
   roles: getRoles(state),
+  about: getAboutPages(state),
 });
 
 export default connect(

@@ -30,7 +30,7 @@ export const getDirectChildrenOfSection = createSelector(
       return section.parentSlug === targetSection.slug;
     })
   }
-)
+);
 
 /**
  * The selector returns an array of all direct and indirect section children of
