@@ -1,10 +1,7 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Row, Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
-
-import { articleBylineSelectorFactory } from "../selectors";
 
 const styles = {
   ArticleRow: {
@@ -67,7 +64,7 @@ const styles = {
   }
 };
 
-const ArticleRow = ({ classes, article, byline, featuredMedia, section }) => {
+const ArticleRow = ({ classes, article, featuredMedia, section }) => {
   return (
     <Row key={`articleBlock${article.id}`} className={classes.ArticleRow}>
       <Col md={3} lg={3}>
@@ -80,12 +77,11 @@ const ArticleRow = ({ classes, article, byline, featuredMedia, section }) => {
               className={classes.articleTitle}>
           {article.title}
         </Link>
-        <p className={classes.articlePreview}>An angery PR comment for Cathy Cai 'bout a week ago:: Your code breaks
+        <p className={classes.articlePreview}>An angery PR comment for Cathy Cai from a week ago: Your code breaks
           when I run gulp. Also, in SectionPage, you've imported SectionArticleList but you don't use it as a component.
-          The error appears to be on line 41. Lastly, you've imported a ton of things in SectionArticleList that you
-          don't need; delete those.</p>
+          The error appears to be on line 41.</p>
         <div>
-          <div className={classes.byline}>{byline}</div>
+          <div className={classes.byline}>{article.byline}</div>
           <span className={classes.dateline}>July 29, 2017</span>
         </div>
       </Col>
@@ -93,11 +89,4 @@ const ArticleRow = ({ classes, article, byline, featuredMedia, section }) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  const articleBylineSelector = articleBylineSelectorFactory(ownProps.article);
-  return {
-    byline: articleBylineSelector(state),
-  };
-};
-
-export default connect(mapStateToProps)(injectSheet(styles)(ArticleRow));
+export default injectSheet(styles)(ArticleRow);

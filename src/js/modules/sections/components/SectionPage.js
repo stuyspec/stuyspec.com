@@ -42,16 +42,11 @@ const styles = {
   }
 };
 
-/**
- * @param match is necessary for getting section by slug (through props).
- */
-const SectionPage = ({
-                       classes,
-                       articlesWithinSectionTree,
+const SectionPage = ({ classes,
+                       sectionTreeArticles,
                        directSubsectionChildren,
                        section,
                        featuredMedia,
-                       match
                      }) => {
   const createLinksToDirectSubsectionChildren = () => {
     return Object.keys(directSubsectionChildren).map((subsectionSlug) => {
@@ -75,7 +70,7 @@ const SectionPage = ({
           {createLinksToDirectSubsectionChildren()}
         </ul>
       }
-      <ArticleList articles={articlesWithinSectionTree}
+      <ArticleList articles={sectionTreeArticles}
                    featuredMedia={featuredMedia}
                    section={section}/>
     </div>
@@ -90,7 +85,7 @@ const mapStateToProps = (state, ownProps) => ({
     type: 'Photograph',
     credits: 'Ting Ting',
   },
-  articlesWithinSectionTree: getSectionTreeArticles(state, ownProps),
+  sectionTreeArticles: getSectionTreeArticles(state, ownProps),
   directSubsectionChildren: getDirectChildrenOfSection(state, ownProps),
   sections: getSections(state),
 });
