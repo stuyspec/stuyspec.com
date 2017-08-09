@@ -15,10 +15,72 @@ const getAuthorships = state => state.articles.authorships;
 const getArticlesResponse = state => state.articles.response;
 const getRequestedArticleSlug = (state, props) => props.match.params.article_slug;
 
+/**
+ * The selector returns an articles object with an additional property for each
+ *   article: its byline in JSX.
+ */
+const getArticlesWithBylines = createSelector(
+  [ getArticles, getUsers, getAuthorships ],
+  (articles, users, authorships) => {
+    let articlesWithBylines = articles;
+    authorships.map(authorship => {
+      if (articlesWithBylines[ authorship.articleSlug ].contributors === undefined) {
+        articlesWithBylines[ authorship.articleSlug ].contributors = [
+          users[ authorship.contributorSlug ],
+        ];
+      } else {
+        articlesWithBylines[ authorship.articleSlug ].contributors
+          .push(users[ authorship.contributorSlug ]);
+      }
+    });
+    Object.keys(articlesWithBylines).map(articleSlug => {
+      const targetArticle = articlesWithBylines[ articleSlug ];
+      if (targetArticle.contributors < 1) {
+        throw `EXCEPTION: article ${targetArticle.slug} owns no authorships.`
+      }
+      articlesWithBylines[ articleSlug ].byline =
+        contributorsToByline(targetArticle.contributors);
+    });
+    return articlesWithBylines;
+  }
+);
+
+const contributorsToByline = (contributors) => {
+  let separator = ', ';
+  return contributors.map((contributor, index) => {
+    if (index === contributors.length - 2) {
+      separator = ' & ';
+    } else if (index === contributors.length - 1) {
+      separator = '';
+    }
+    return (
+      <div key={`contributor${contributor.id}`}>
+        {index === 0 ? 'By ' : ''}
+        <Link to={`/contributors/${contributor.slug}`}>
+          {contributor.firstName} {contributor.lastName}
+        </Link>{separator}
+      </div>
+    );
+  });
+};
+
+/**
+ * The selector returns a filtered articles object that contains all articles
+ *   and their bylines within the target section (from props) and its tree.
+ */
+export const getSectionTreeArticles = createSelector(
+  [ getArticlesWithBylines, getSlugsInSectionTree ],
+  (articlesWithBylines, slugsInSectionTree) => {
+    return Object.filter(articlesWithBylines, article => {
+      return slugsInSectionTree.includes(article.sectionSlug);
+    });
+  }
+);
+
 export const getArticleFromRequestedSlug = createSelector(
-  [ getArticles, getRequestedArticleSlug, getSectionFromProps ],
-  (articles, articleSlug, section) => {
-    const requestedArticle = articles[ articleSlug ];
+  [ getArticlesWithBylines, getRequestedArticleSlug, getSectionFromProps ],
+  (articlesWithBylines, articleSlug, section) => {
+    const requestedArticle = articlesWithBylines[ articleSlug ];
     if (requestedArticle.sectionSlug === section.slug) {
       return requestedArticle;
     }
@@ -27,74 +89,16 @@ export const getArticleFromRequestedSlug = createSelector(
 
 /**
  * The selector returns a filtered articles object that contains all articles
- *   within the target section (from props) and its tree.
- */
-export const getSectionTreeArticles = createSelector(
-  [ getArticles, getSlugsInSectionTree ],
-  (articles, slugsInSectionTree) => {
-    return Object.filter(articles, article => {
-      return slugsInSectionTree.includes(article.sectionSlug);
-    });
-  }
-);
-
-/**
- * The selector factory returns a selector that returns an array of all
- *   contributors for any @param target article.
- */
-export const articleContributorsSelectorFactory = (targetArticle) => {
-  return createSelector(
-    [ getUsers, getAuthorships ],
-    (users, authorships) => {
-      const matchedAuthorships = authorships.filter(authorship => {
-        return authorship.articleSlug === targetArticle.slug;
-      });
-      return matchedAuthorships.map(authorship => {
-        return users[ authorship.contributorSlug ];
-      });
-    }
-  );
-};
-
-/**
- * The selector factory returns a selector that returns the byline for
- *   any @param targetArticle.
- */
-export const articleBylineSelectorFactory = (targetArticle) => {
-  return createSelector(
-    [ articleContributorsSelectorFactory(targetArticle) ],
-    contributors => {
-      let separator = ', ';
-      return contributors.map((contributor, index) => {
-        if (index === contributors.length - 2) {
-          separator = ' & ';
-        } else if (index === contributors.length - 1) {
-          separator = '';
-        }
-        return (
-          <div key={`contributor${contributor.id}`}>
-            {index === 0 ? 'By ' : ''}
-            <Link to={`/contributors/${contributor.slug}`}>
-              {contributor.firstName} {contributor.lastName}
-            </Link>{separator}
-          </div>
-        );
-      });
-    }
-  );
-};
-/**
- * The selector returns a filtered articles object that contains all articles
  *   written by a contributor.
  */
 export const getArticlesByContributor = createSelector(
-  [ getContributorFromSlug, getArticles, getAuthorships ],
-  (contributor, articles, authorships) => {
-    const articleSlugsForTargetArticles = authorships
+  [ getContributorFromSlug, getArticlesWithBylines, getAuthorships ],
+  (contributor, articlesWithBylines, authorships) => {
+    const articleSlugsForArticlesByContributor = authorships
       .filter(authorship => authorship.contributorSlug === contributor.slug)
       .map(authorship => authorship.articleSlug);
-    return Object.filter(articles, article => {
-      return articleSlugsForTargetArticles.includes(article.slug);
+    return Object.filter(articlesWithBylines, article => {
+      return articleSlugsForArticlesByContributor.includes(article.slug);
     });
   }
 );
@@ -112,6 +116,7 @@ export const getProcessedArticlesResponse = createSelector(
       accumulatedArticles[ currentArticle.slug ] = {
         ...currentArticle,
         sectionSlug: getSectionSlugFromId(sections, sectionId),
+        dateline: 'July 31, 2017', // TODO: get Jason L.'s date formatter code
       };
       return accumulatedArticles;
     }, {});
