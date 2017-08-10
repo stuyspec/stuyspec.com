@@ -49,7 +49,6 @@ const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles
   return (
     <div className={classes.HomePage}>
       <h1>Home page</h1>
-      <Link to="/about">Link</Link>
       <button onClick={handleArticlesFetch}>fetch articles</button>
       <button onClick={handleUsersFetch}>fetch users</button>
       <h2>Articles</h2>

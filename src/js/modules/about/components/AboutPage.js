@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 
@@ -18,11 +17,4 @@ const AboutPage = ({ classes, about }) => {
   );
 };
 
-
-const mapStateToProps = (state) => ({
-  
-});
-
-export default connect(
-  mapStateToProps
-)(injectSheet(styles)(AboutPage));
+export default injectSheet(styles)(AboutPage);

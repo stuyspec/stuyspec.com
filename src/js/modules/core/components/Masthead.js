@@ -39,10 +39,17 @@ const styles = {
     fontSize: '14px',
     fontWeight: 500,
     textDecoration: 'none',
+    '&:hover': {
+      color: '#000',
+      textDecoration: 'none',
+    },
+    '&:focus': {
+      color: '#000',
+      textDecoration: 'none',
+    },
   },
 };
 
-// TODO: make <li>'s show up
 const Masthead = ({ classes, topLevelSectionsWithDirectChildren }) => {
   const linkToTopLevelSections = () => {
     return Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {

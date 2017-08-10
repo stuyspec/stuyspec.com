@@ -75,7 +75,7 @@ const styles = {
 
 const PageFooter = ({ classes,
                       topLevelSectionsWithDirectChildren,
-                      parentAboutPagesWithChildren }) => {
+                      aboutPages}) => {
   const linkToSections = () => {
     return Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {
       const topLevelSection = topLevelSectionsWithDirectChildren[ sectionSlug ];
@@ -103,30 +103,26 @@ const PageFooter = ({ classes,
     });
   };
   const linkToAbout = () => {
-    return Object.keys(parentAboutPagesWithChildren).map(aboutSlug => {
-      const parentAboutPage = parentAboutPagesWithChildren[ aboutSlug ];
+    const infoPageLinks = Object.keys(aboutPages).map((slug) => {
+      const aboutPage = aboutPages[slug];
       return (
-        <div className={classes.sectionBlock} key={`about${parentAboutPage.id}`}>
-          <Link className={classes.topLevelSectionLink}
-                key={`topAboutLink${parentAboutPage.id}`}
-                to={parentAboutPage.permalink}>
-            {parentAboutPage.title}
-          </Link>
-          {
-            Object.keys(parentAboutPage.childAboutPages).map(childSlug => {
-              const childAboutPage = parentAboutPage.childAboutPages[ childSlug ];
-              return (
-                <Link className={classes.subsectionLink}
-                      key={`childAboutLink${childAboutPage.id}`}
-                      to={childAboutPage.permalink}>
-                  {childAboutPage.title}
-                </Link>
-              );
-            })
-          }
-        </div>
-      );
+        <Link className={classes.subsectionLink}
+              key={`about${aboutPage.id}`}
+              to={aboutPage.permalink}>
+          {aboutPage.title}
+        </Link>
+        )
     });
+    return (
+      <div className={classes.sectionBlock} key='about'>
+        <Link className={classes.topLevelSectionLink}
+              key='topLevelAbout'
+              to='/about/our-charter'>
+          About Us
+        </Link>
+        {infoPageLinks}
+      </div>
+    );
   };
   return (
     <Grid className={classes.PageFooter}>
