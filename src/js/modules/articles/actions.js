@@ -2,6 +2,7 @@ import axios from "axios";
 import * as t from "./actionTypes";
 import { STUY_SPEC_API, HEADER } from "../../constants";
 import { getProcessedArticleResponse, getFakeAuthorshipsForArticleResponse } from "./selectors";
+import { checkKeyValidity} from "../../utils"
 
 export const fetchArticles = () => {
   return (dispatch, getState) => {
@@ -36,19 +37,6 @@ export const fetchArticles = () => {
   };
 };
 
-const checkArticleKeyValidity = (articleObject, key, type) => {
-  if (key in articleObject) {
-    if (typeof (articleObject[ key ]) === type) {
-      return true;
-    } else {
-      throw `EXCEPTION: key ${key} in articleObject is 
-        ${typeof (articleObject[ key ])}, but should be ${type}.`;
-    }
-  } else {
-    throw `EXCEPTION: key ${key} is undefined in articleObject.`;
-  }
-};
-
 /*
 TODO: Add volume and issue int props after non-null data seeded @nicholas
 TODO: Add isDraft boolean prop after non-null data seeded @nicholas
@@ -62,10 +50,10 @@ const isArticleValid = (articleArray) => {
   }
   articleArray.forEach(articleObject => {
     integerProperties.forEach(numberKey => {
-      checkArticleKeyValidity(articleObject, numberKey, 'number');
+      checkKeyValidity(articleObject, numberKey, 'number', 'article');
     });
     stringProperties.forEach((stringKey) => {
-      checkArticleKeyValidity(articleObject, stringKey, 'string');
+      checkKeyValidity(articleObject, stringKey, 'string', 'article');
     });
   });
   return true;

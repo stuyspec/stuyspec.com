@@ -40,3 +40,17 @@ export const formatDate = (string) => {
     return formattedDate.slice(0, splitIndex - 1);
   }
 };
+
+
+export const checkKeyValidity = (object, key, type, module) => {
+  if (key in object) {
+    if (typeof (object[ key ]) === type) {
+      return true;
+    } else {
+      throw `EXCEPTION: key ${key} in ${module}Object is 
+        ${typeof (object[ key ])}, but should be ${type}.`;
+    }
+  } else {
+    throw `EXCEPTION: key ${key} is undefined in ${module}Object.`;
+  }
+};
