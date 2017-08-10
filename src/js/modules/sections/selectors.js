@@ -11,11 +11,11 @@ export const getSectionFromProps = (state, props) => props.section;
  *   indirect children of a target section.
  */
 const getSubsectionsInSectionTree = (sections, targetSection) => {
-  return Object.filter(sections, sectionTraversingUpwards => {
-    while (sectionTraversingUpwards.parentSlug !== null) {
-      sectionTraversingUpwards = sections[ sectionTraversingUpwards.parentSlug ];
+  return Object.filter(sections, upwardsTraversingSection => {
+    while (upwardsTraversingSection.parentSlug !== null) {
+      upwardsTraversingSection = sections[ upwardsTraversingSection.parentSlug ];
     }
-    return sectionTraversingUpwards === targetSection;
+    return upwardsTraversingSection === targetSection;
   });
 };
 
