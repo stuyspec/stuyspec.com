@@ -27,7 +27,7 @@ const getArticlesWithContributors = createSelector(
       if (targetArticle.contributors === undefined) {
         targetArticle.contributors = [];
       }
-      targetArticle.contributors.push( users[ authorship.contributorSlug ]);
+      targetArticle.contributors.push(users[ authorship.contributorSlug ]);
     });
     Object.keys(articlesWithContributors).map(articleSlug => {
       const targetArticle = articlesWithContributors[ articleSlug ];
