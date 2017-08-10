@@ -23,11 +23,11 @@ const getSubsectionsInSectionTree = (sections, targetSection) => {
  * The selector returns a filtered sections object which contains direct
  *   children of the props-requested section,
  */
-export const getDirectChildrenOfSection = createSelector(
+export const getDirectSubsections = createSelector(
   [ getSections, getSectionFromProps ],
-  (sections, targetSection) => {
+  (sections, section) => {
     return Object.filter(sections, section => {
-      return section.parentSlug === targetSection.slug;
+      return section.parentSlug === section.slug;
     })
   }
 )

@@ -6,7 +6,7 @@ import injectSheet from "react-jss";
 
 import { ArticleList } from "../../articles/components";
 import { getSectionTreeArticles } from "../../articles/selectors";
-import { getSections, getDirectChildrenOfSection } from "../../sections/selectors";
+import { getSections, getDirectSubsections } from "../../sections/selectors";
 
 const styles = {
   SectionPage: {
@@ -44,13 +44,13 @@ const styles = {
 
 const SectionPage = ({ classes,
                        sectionTreeArticles,
-                       directSubsectionChildren,
+                       directSubsections,
                        section,
                        featuredMedia,
                      }) => {
-  const createLinksToDirectSubsectionChildren = () => {
-    return Object.keys(directSubsectionChildren).map((subsectionSlug) => {
-      const subsection = directSubsectionChildren[ subsectionSlug ];
+  const createLinksToDirectSubsections = () => {
+    return Object.keys(directSubsections).map(subsectionSlug => {
+      const subsection = directSubsections[ subsectionSlug ];
       return (
         <li className={classes.subsectionListItem}
             key={`subsectionListItem${subsection.id}`}>
@@ -65,9 +65,9 @@ const SectionPage = ({ classes,
     <div className={classes.SectionPage}>
       <h1 className={classes.sectionName}>{section.name}</h1>
       {
-        directSubsectionChildren !== null &&
+        directSubsections !== null &&
         <ul className={classes.subsectionBar}>
-          {createLinksToDirectSubsectionChildren()}
+          {createLinksToDirectSubsections()}
         </ul>
       }
       <ArticleList articles={sectionTreeArticles}
@@ -86,7 +86,7 @@ const mapStateToProps = (state, ownProps) => ({
     credits: 'Ting Ting',
   },
   sectionTreeArticles: getSectionTreeArticles(state, ownProps),
-  directSubsectionChildren: getDirectChildrenOfSection(state, ownProps),
+  directSubsections: getDirectSubsections(state, ownProps),
   sections: getSections(state),
 });
 

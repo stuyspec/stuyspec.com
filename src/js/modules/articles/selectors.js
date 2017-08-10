@@ -23,14 +23,11 @@ const getArticlesWithContributors = createSelector(
   (articles, users, authorships) => {
     let articlesWithContributors = articles;
     authorships.map(authorship => {
-      if (articlesWithContributors[ authorship.articleSlug ].contributors === undefined) {
-        articlesWithContributors[ authorship.articleSlug ].contributors = [
-          users[ authorship.contributorSlug ],
-        ];
-      } else {
-        articlesWithContributors[ authorship.articleSlug ].contributors
-          .push(users[ authorship.contributorSlug ]);
+      const targetArticle = articlesWithContributors[ authorship.articleSlug ];
+      if (targetArticle.contributors === undefined) {
+        targetArticle.contributors = [];
       }
+      targetArticle.contributors.push( users[ authorship.contributorSlug ]);
     });
     Object.keys(articlesWithContributors).map(articleSlug => {
       const targetArticle = articlesWithContributors[ articleSlug ];
@@ -72,11 +69,11 @@ export const getArticleFromRequestedSlug = createSelector(
 export const getArticlesByContributor = createSelector(
   [ getContributorFromSlug, getArticlesWithContributors, getAuthorships ],
   (contributor, articlesWithContributors, authorships) => {
-    const articleSlugsForArticlesByContributor = authorships
+    const articleSlugs = authorships
       .filter(authorship => authorship.contributorSlug === contributor.slug)
       .map(authorship => authorship.articleSlug);
     return Object.filter(articlesWithContributors, article => {
-      return articleSlugsForArticlesByContributor.includes(article.slug);
+      return articleSlugs.includes(article.slug);
     });
   }
 );
