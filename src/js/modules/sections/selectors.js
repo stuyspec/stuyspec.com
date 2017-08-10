@@ -25,9 +25,9 @@ const getSubsectionsInSectionTree = (sections, targetSection) => {
  */
 export const getDirectSubsections = createSelector(
   [ getSections, getSectionFromProps ],
-  (sections, section) => {
+  (sections, targetSection) => {
     return Object.filter(sections, section => {
-      return section.parentSlug === section.slug;
+      return section.parentSlug === targetSection.slug;
     })
   }
 )
