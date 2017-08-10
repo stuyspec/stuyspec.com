@@ -1,11 +1,11 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
-import injectSheet from 'react-jss';
+import React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import injectSheet from "react-jss";
 
-import PageHeader from './PageHeader';
-import PageFooter from './PageFooter';
-import {getSectionsWithSubsections} from '../../sections/selectors';
+import PageHeader from "./PageHeader";
+import PageFooter from "./PageFooter";
+import { getTopLevelSectionsWithDirectChildren } from "../../sections/selectors";
 
 const styles = {
   PageContainer: {
@@ -14,20 +14,21 @@ const styles = {
   }
 };
 
-const PageLayout = ({classes, children, location, sectionsWithSubsections}) => {
+const PageLayout = ({ classes, children, location, topLevelSectionsWithDirectChildren }) => {
   return (
     <div>
-      <PageHeader location={location} sectionsWithSubsections={sectionsWithSubsections}/>
+      <PageHeader location={location}
+                  topLevelSectionsWithDirectChildren={topLevelSectionsWithDirectChildren}/>
       <div className={classes.PageContainer}>
         {children}
       </div>
-      <PageFooter sectionsWithSubsections={sectionsWithSubsections}/>
+      <PageFooter topLevelSectionsWithDirectChildren={topLevelSectionsWithDirectChildren}/>
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-  sectionsWithSubsections: getSectionsWithSubsections(state),
+  topLevelSectionsWithDirectChildren: getTopLevelSectionsWithDirectChildren(state),
 });
 
 export default withRouter(

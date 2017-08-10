@@ -1,75 +1,96 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import injectSheet from 'react-jss';
-import sections from '../../sections';
+import React from "react";
+import { connect } from "react-redux";
+import { Grid, Row, Col } from "react-bootstrap/lib";
+import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
 
-import articles from '../../articles';
+import { ArticleList } from "../../articles/components";
+import { getSectionTreeArticles } from "../../articles/selectors";
+import { getSections, getDirectSubsections } from "../../sections/selectors";
 
 const styles = {
   SectionPage: {
+    marginTop: '100px',
+    top: 0,
+    marginBottom: '60px',
+  },
+  sectionName: {
+    fontFamily: 'Canela',
+    fontSize: '36px',
+    fontWeight: 500,
     color: '#000',
+    margin: '0 0 20px 0',
+  },
+  subsectionBar: {
+    border: '1px solid #ddd',
+    borderStyle: 'solid none',
+    listStyleType: 'none',
+    marginBottom: '14px',
+    padding: '7px 0 8px 0',
+  },
+  subsectionListItem: {
+    display: 'inline',
+    textDecoration: 'none',
+    marginRight: '26px',
+  },
+  subsectionLink: {
+    color: '#000',
+    fontFamily: 'Circular Std',
+    fontSize: '14px',
+    fontWeight: 300,
+    textTransform: 'uppercase',
   }
 };
 
-/* TODO: make subsection tree work for any depth
- */
-
-const SectionPage = ({ classes, articles, subsections, section, match }) => {
-  const createSubsectionLinks = () => {
-    return Object.keys(subsections).map((key) => {
-      const subsection = subsections[ key ];
+const SectionPage = ({ classes,
+                       sectionTreeArticles,
+                       directSubsections,
+                       section,
+                       featuredMedia,
+                     }) => {
+  const createLinksToDirectSubsections = () => {
+    return Object.keys(directSubsections).map(subsectionSlug => {
+      const subsection = directSubsections[ subsectionSlug ];
       return (
-        <li key={subsection.id}>
-          <Link to={match.url + '/' + subsection.slug}>{subsection.name}</Link>
-        </li>
-      );
-    });
-  };
-  const createArticleLinks = () => {
-    return Object.keys(articles).map((key) => {
-      const article = articles[ key ];
-      let pathToArticlePage = article.slug;
-      // if article is not a direct child of this section but is that of the section's subsection
-      if (subsections[ article.sectionSlug ] !== undefined) {
-        pathToArticlePage = article.sectionSlug + '/' + article.slug;
-      }
-      return (
-        <li key={article.id}>
-          <Link to={match.url + '/' + pathToArticlePage}>{article.title}</Link>
+        <li className={classes.subsectionListItem}
+            key={`subsectionListItem${subsection.id}`}>
+          <Link className={classes.subsectionLink} to={subsection.permalink}>
+            {subsection.name}
+          </Link>
         </li>
       );
     });
   };
   return (
     <div className={classes.SectionPage}>
-      <h1>{section.name}</h1>
-      <p>description: {section.description}</p>
-      <hr/>
-      <p>subsections</p>
-      <ul>
-        {createSubsectionLinks()}
-      </ul>
-      <hr/>
-      <p>articles</p>
-      <ul>
-        {createArticleLinks()}
-      </ul>
+      <h1 className={classes.sectionName}>{section.name}</h1>
+      {
+        directSubsections !== null &&
+        <ul className={classes.subsectionBar}>
+          {createLinksToDirectSubsections()}
+        </ul>
+      }
+      <ArticleList articles={sectionTreeArticles}
+                   featuredMedia={featuredMedia}
+                   section={section}/>
     </div>
   );
 };
 
 
 const mapStateToProps = (state, ownProps) => ({
-  articles: articles.selectors.getArticlesWithinSection(state, ownProps),
+  featuredMedia: {
+    url: 'http://planesandpleasures.com/wp-content/uploads/2016/09/NewYork-Chinatown-7.jpg',
+    caption: 'New York City street after rain is covered in water, dirt, and snow. Pedestrians walk back and forth as post-flood confusion amasses.',
+    type: 'Photograph',
+    credits: 'Ting Ting',
+  },
+  sectionTreeArticles: getSectionTreeArticles(state, ownProps),
+  directSubsections: getDirectSubsections(state, ownProps),
+  sections: getSections(state),
 });
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({}, dispatch);
-};
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(injectSheet(styles)(SectionPage));

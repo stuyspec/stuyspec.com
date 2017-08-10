@@ -15,7 +15,7 @@
     "authorship": [
       {
         "articleSlug": "apples-rain-in-new-york-city",
-        "userSlug": "jason-kao"
+        "contributorSlug": "jason-kao"
       }
     ]
   },
@@ -60,13 +60,13 @@
         "id": 0,
         "title": "Contributor",
         "slug": "contributors",
-        "credentials": 0
+        "credentialLevel": 0
       }
     },
     "userRoles": [
       {
         "userSlug": "jason-kao",
-        "roleID": 0
+        "roleSlug": 0
       }
     ]
   }

@@ -1,9 +1,3 @@
-import {
-  FETCH_SECTION_PENDING,
-  FETCH_SECTION_REJECTED,
-  FETCH_SECTION_FULFILLED,
-} from './actionTypes';
-
 const initialState = {
   isFetching: false,
   isFetched: false,
@@ -16,6 +10,7 @@ const initialState = {
       slug: "news",
       description: "The news of Stuyvesant.",
       parentSlug: null,
+      permalink: "/news"
     },
     "opinions": {
       id: 1,
@@ -23,6 +18,7 @@ const initialState = {
       slug: "opinions",
       description: "The opinions of Stuyvesant.",
       parentSlug: null,
+      permalink: "/opinions"
     },
     "features": {
       id: 2,
@@ -30,6 +26,7 @@ const initialState = {
       slug: "features",
       description: "The features of Stuyvesant.",
       parentSlug: null,
+      permalink: "/features"
     },
     "humor": {
       id: 3,
@@ -37,6 +34,7 @@ const initialState = {
       slug: "humor",
       description: "The humor of Stuyvesant.",
       parentSlug: null,
+      permalink: "/humor"
     },
     "ae": {
       id: 4,
@@ -44,6 +42,7 @@ const initialState = {
       slug: "ae",
       description: "The arts and entertainment of Stuyvesant.",
       parentSlug: null,
+      permalink: "/ae"
     },
     "sports": {
       id: 5,
@@ -51,6 +50,7 @@ const initialState = {
       slug: "sports",
       description: "The sports of Stuyvesant.",
       parentSlug: null,
+      permalink: "/sports"
     },
     "photo": {
       id: 6,
@@ -58,6 +58,7 @@ const initialState = {
       slug: "photo",
       description: "The photo of Stuyvesant.",
       parentSlug: null,
+      permalink: "/photo"
     },
     "campaign-coverage": {
       id: 7,
@@ -65,6 +66,7 @@ const initialState = {
       slug: "campaign-coverage",
       description: "The campaign coverage of Stuyvesant.",
       parentSlug: "news",
+      permalink: "/news/campaign-coverage"
     },
     "staff-editorials": {
       id: 8,
@@ -72,6 +74,7 @@ const initialState = {
       slug: "staff-editorials",
       description: "The staff editorials of Stuyvesant.",
       parentSlug: "opinions",
+      permalink: "/opinions/staff-editorials"
     },
     "creative-writing": {
       id: 9,
@@ -79,6 +82,7 @@ const initialState = {
       slug: "creative-writing",
       description: "The creative writing of Stuyvesant.",
       parentSlug: "features",
+      permalink: "/features/creative-writing"
     },
     "voices": {
       id: 10,
@@ -86,6 +90,7 @@ const initialState = {
       slug: "voices",
       description: "The voices of Stuyvesant.",
       parentSlug: "features",
+      permalink: "/features/voices"
     },
     "college-essays": {
       id: 11,
@@ -93,6 +98,7 @@ const initialState = {
       slug: "college-essays",
       description: "The college essays of Stuyvesant.",
       parentSlug: "features",
+      permalink: "/features/college-essays"
     },
     "disrespectator": {
       id: 12,
@@ -100,6 +106,7 @@ const initialState = {
       slug: "disrespectator",
       description: "The disrespectator of Stuyvesant.",
       parentSlug: "humor",
+      permalink: "/humor/disrespectator"
     },
     "spooktator": {
       id: 13,
@@ -107,6 +114,7 @@ const initialState = {
       slug: "spooktator",
       description: "The spooktator of Stuyvesant.",
       parentSlug: "humor",
+      permalink: "/humor/spooktator"
     },
     "art": {
       id: 14,
@@ -114,34 +122,20 @@ const initialState = {
       slug: "art",
       description: "The art of Stuyvesant.",
       parentSlug: "ae",
+      permalink: "/ae/art"
     },
     "books": {
       id: 15,
       name: "Books",
       slug: "books",
       description: "The books of Stuyvesant.",
-      parentSlug: "features",
+      parentSlug: "ae",
+      permalink: "/ae/books"
     },
-  },
+  }
 };
 
 const reducer = (state = { ...initialState }, action) => {
-  switch (action.type) {
-    case 'sections/FETCH_SECTION_PENDING': {
-      return { ...state, isFetching: true };
-    }
-    case 'sections/FETCH_SECTION_REJECTED': {
-      return { ...state, isFetching: false, error: action.payload };
-    }
-    case 'sections/FETCH_SECTION_FULFILLED': {
-      return {
-        ...state,
-        isFetching: false,
-        isFetched: true,
-        request: action.payload
-      };
-    }
-  }
   return state;
 };
 

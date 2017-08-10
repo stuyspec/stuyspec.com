@@ -1,64 +1,79 @@
-import Provider from 'react-redux/lib/components/Provider';
-import React from 'react';
-import {Route, Switch} from 'react-router-dom';
-import appHistory from 'tools/appHistory';
-import ConnectedRouter from 'react-router-redux/ConnectedRouter';
-import store from '../store';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import appHistory from "tools/appHistory";
+import ConnectedRouter from "react-router-redux/ConnectedRouter";
+import { connect } from "react-redux";
 
-import core from './core';
-import articles from './articles';
-import sections from './sections';
+import { HomePage, PageLayout } from "./core/components";
+import { ArticlePage } from "./articles/components";
+import { SectionPage } from "./sections/components";
+import { RolePage, ContributorPage } from "./users/components";
 
-const {HomePage, PageLayout} = core.components;
-const {ArticlePage} = articles.components;
-const {SectionPage} = sections.components;
+import { getSections } from "./sections/selectors";
+import { getRoles } from "./users/selectors";
 
-// TODO: change to mapStateToProps
-const allSectionRoutes = sections.selectors.getAllSectionRoutes(store.getState());
-
-const RoutingApp = () => {
+const RoutingApp = ({ sections, roles }) => {
   const createSectionRoutes = () => {
-    return Object.keys(allSectionRoutes).map((key, index) => {
-      const sectionRoute = allSectionRoutes[key];
+    return Object.keys(sections).map(sectionSlug => {
+      const section = sections[ sectionSlug ];
       return <Route
-        exact path={sectionRoute.pathToSectionPage}
-        key={`sectionRoute${index}`}
-        render={(props) => (
-          <SectionPage history={props.history}
-                       location={props.location}
-                       match={props.match}
-                       section={sectionRoute}
-                       subsections={sectionRoute.subsections}/>
+        exact path={section.permalink}
+        key={`sectionRoute${section.id}`}
+        render={props => (
+          <SectionPage match={props.match}
+                       section={section}/>
         )}/>
     });
   };
   const createArticleRoutes = () => {
-    return Object.keys(allSectionRoutes).map((key, index) => {
-      const sectionRoute = allSectionRoutes[key];
+    return Object.keys(sections).map(sectionSlug => {
+      const section = sections[ sectionSlug ];
       return <Route
-        exact path={sectionRoute.pathToSectionPage + "/:article_slug"}
-        key={`articleRoute${index}`}
-        render={(props) => (
-          <ArticlePage history={props.history}
-                       location={props.location}
-                       match={props.match}
-                       section={sectionRoute}/>
+        exact path={`${section.permalink}/:article_slug`}
+        key={`articleRoute${section.id}`}
+        render={props => (
+          <ArticlePage match={props.match}
+                       section={section}/>
         )}/>
     });
   };
+  const createRoleRoutes = () => {
+    return Object.keys(roles).map(roleSlug => {
+      const role = roles[ roleSlug ];
+      return <Route
+        exact path={`/${roleSlug}`}
+        key={`roleRoute${role.id}`}
+        render={props => (
+          <RolePage role={role}/>
+        )}/>
+    })
+  }
   return (
-    <Provider store={store}>
-      <ConnectedRouter history={appHistory}>
-        <PageLayout>
-          <Switch>
-            <Route exact path="/" component={HomePage}/>
-            {createSectionRoutes()}
-            {createArticleRoutes()}
-          </Switch>
-        </PageLayout>
-      </ConnectedRouter>
-    </Provider>
+    <ConnectedRouter history={appHistory}>
+      <PageLayout>
+        <Switch>
+          <Route exact path="/" component={HomePage}/>
+          {createSectionRoutes()}
+          {createArticleRoutes()}
+          {createRoleRoutes()}
+          <Route exact path={'/contributors/:contributor_slug'}
+                 key={`contributorRoute`}
+                 render={props => (
+                   <ContributorPage match={props.match}
+                                    role={roles[ 'contributors' ]}/>
+                   )}/>
+        </Switch>
+      </PageLayout>
+    </ConnectedRouter>
   );
 };
 
-export default RoutingApp;
+const mapStateToProps = (state) => ({
+  sections: getSections(state),
+  roles: getRoles(state),
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(RoutingApp);

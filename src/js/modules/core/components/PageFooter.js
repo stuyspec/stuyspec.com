@@ -1,15 +1,15 @@
-import React from 'react';
-import injectSheet from 'react-jss';
-import { Link } from 'react-router-dom';
-import { Grid, Row, Col } from 'react-bootstrap/lib/';
+import React from "react";
+import injectSheet from "react-jss";
+import { Link } from "react-router-dom";
+import { Grid, Row, Col } from "react-bootstrap/lib";
 
 const styles = {
   PageFooter: {
-    background: '#FFFFFF',
+    background: '#fff',
     height: '370px',
   },
   pageFooterMain: {
-    borderTop: '3px solid #dddddd',
+    borderTop: '3px solid #ddd',
     margin: '0 auto',
     width: '1060px',
   },
@@ -23,70 +23,75 @@ const styles = {
     marginTop: '19px',
   },
   topLevelSectionLink: {
-    color: '#000000',
+    color: '#000',
     fontSize: '14px',
-    fontFamily: "Circular Std",
+    fontFamily: 'Circular Std',
     fontStyle: 'normal',
     fontWeight: 'bold',
     textDecoration: 'none',
     '&:hover': {
+      color: '#000',
+      textDecoration: 'none',
+    },
+    '&:focus': {
+      color: '#000',
       textDecoration: 'none',
     },
   },
   subsectionLink: {
-    color: '#000000',
+    color: '#000',
+    display: 'block',
     fontSize: '13px',
     fontFamily: 'Circular Std',
     fontStyle: 'normal',
     fontWeight: '300',
     textDecoration: 'none',
     '&:hover': {
+      color: '#000',
+      textDecoration: 'none',
+    },
+    '&:focus': {
+      color: '#000',
       textDecoration: 'none',
     },
   },
   theSpectator: {
-    color: '#000000',
+    color: '#000',
     fontFamily: 'Old English Text MT',
     fontSize: '30px',
     fontStyle: 'normal',
-    fontWeight: '400',
+    fontWeight: 400,
     paddingTop: '10px',
   },
 };
 
-const PageFooter = ({ classes, sectionsWithSubsections }) => {
-  const makeSectionLinks = () => {
-    return (sectionsWithSubsections.map((topLevelSection) => {
-        return (
-          <div className={classes.sectionBlock} key={topLevelSection.id}>
-            <Link className={classes.topLevelSectionLink}
-                  key={`topLevelLink${topLevelSection.id}`}
-                  to={`/${topLevelSection.slug}`}>
-              {topLevelSection.name}
-            </Link>
-            {
-              Object.keys(topLevelSection.subsections).map((subsectionSlug) => {
-                return makeSubsectionLink(
-                  topLevelSection.slug,
-                  topLevelSection.subsections[ subsectionSlug ]);
-              })
-            }
-          </div>
-        );
-      })
-    );
+const PageFooter = ({ classes, topLevelSectionsWithDirectChildren }) => {
+  const createLinksToSections = () => {
+    return Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {
+      const topLevelSection = topLevelSectionsWithDirectChildren[ sectionSlug ];
+      return (
+        <div className={classes.sectionBlock} key={topLevelSection.id}>
+          <Link className={classes.topLevelSectionLink}
+                key={`topLevelLink${topLevelSection.id}`}
+                to={topLevelSection.permalink}>
+            {topLevelSection.name}
+          </Link>
+          {
+            Object.keys(topLevelSection.subsections).map(subsectionSlug => {
+              const subsection = topLevelSection.subsections[ subsectionSlug ];
+              return (
+                <Link className={classes.subsectionLink}
+                      key={`subsectionLink${subsection.id}`}
+                      to={subsection.permalink}>
+                  {subsection.name}
+                </Link>
+              );
+            })
+          }
+        </div>
+      );
+    });
   };
-  const makeSubsectionLink = (topLevelSectionSlug, subsection) => {
-    return (
-      <div key={`subsectionLink${subsection.id}`}>
-        <Link className={classes.subsectionLink}
-              to={`/${topLevelSectionSlug}/${subsection.slug}`}>
-          {subsection.name}
-        </Link>
-      </div>
-    );
-  };
-
   return (
     <Grid className={classes.PageFooter}>
       <Row className={classes.pageFooterMain}>
@@ -94,7 +99,7 @@ const PageFooter = ({ classes, sectionsWithSubsections }) => {
           The Spectator
         </Col>
         <Col md={8} mdOffset={2} className={classes.sectionFlex}>
-          {makeSectionLinks()}
+          {createLinksToSections()}
         </Col>
       </Row>
     </Grid>

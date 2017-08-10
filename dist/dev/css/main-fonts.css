@@ -46,3 +46,17 @@
     font-style: normal;
     font-weight: normal;
 }
+
+@font-face {
+    font-family: "Old English Text MT";
+    src: url(/fonts/OldEnglishTextMT.ttf) format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Canela";
+    src: url(/fonts/Canela-Medium.otf) format("opentype");
+    font-style: normal;
+    font-weight: 500;
+}
