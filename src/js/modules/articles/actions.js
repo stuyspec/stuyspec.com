@@ -17,8 +17,6 @@ export const fetchArticles = () => {
           type: t.ADD_ARTICLES,
           payload: getProcessedArticlesResponse(getState()),
         });
-      })
-      .then(response => { // TODO: promise function orders are wonky without @param response
         dispatch({
           type: t.ADD_AUTHORSHIPS,
           payload: getFakeAuthorshipsForArticleResponse(getState()),

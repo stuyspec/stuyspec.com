@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import { getUsersWithinRole } from "../selectors";
+import { getUsersInRole } from "../selectors";
 
 const styles = {
   RolePage: {
@@ -11,10 +11,10 @@ const styles = {
   }
 };
 
-const RolePage = ({ classes, role, usersWithinRole }) => {
+const RolePage = ({ classes, role, usersInRole }) => {
   const createLinksToUsersInRole = () => {
-    return Object.keys(usersWithinRole).map(userSlug => {
-      const user = usersWithinRole[ userSlug ];
+    return Object.keys(usersInRole).map(userSlug => {
+      const user = usersInRole[ userSlug ];
       return (
         <li key={`user${user.id}`}>
           <Link to={`/${role.slug}/${user.slug}`}>
@@ -35,7 +35,7 @@ const RolePage = ({ classes, role, usersWithinRole }) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  usersWithinRole: getUsersWithinRole(state, ownProps)
+  usersInRole: getUsersInRole(state, ownProps)
 });
 
 export default connect(
