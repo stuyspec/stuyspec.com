@@ -25,7 +25,7 @@ const ArticleFeaturedMedia = ({ classes, featuredMedia }) => {
     <figure className={classes.figure}>
       <img className={classes.img} src={featuredMedia.url}/>
       <figcaption className={classes.caption}>
-        <span>{featuredMedia.caption}</span>
+        <span>{featuredMedia.caption} </span>
         <span>{featuredMedia.type} by {featuredMedia.credits}</span>
       </figcaption>
     </figure>

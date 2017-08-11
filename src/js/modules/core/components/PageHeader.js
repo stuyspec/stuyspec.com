@@ -1,5 +1,6 @@
 import React from "react";
 import injectSheet from "react-jss";
+import { slide as Sidebar } from "react-burger-menu";
 
 import Masthead from "./Masthead";
 import MastheadBar from "./MastheadBar";
@@ -7,7 +8,6 @@ import MastheadBar from "./MastheadBar";
 const styles = {
   PageHeader: {
     margin: '0px auto 24px auto',
-    paddingTop: '11px',
     textAlign: 'center',
     width: '100%',
   },
@@ -35,20 +35,50 @@ const styles = {
   },
 };
 
-const PageHeader = ({ classes, location, topLevelSectionsWithDirectChildren }) => {
-  return (
-    <div className={classes.PageHeader}>
-      {
-        location.pathname === '/' ? (
-          <Masthead
-            topLevelSectionsWithDirectChildren={topLevelSectionsWithDirectChildren}/>
-        ) : (
-          <MastheadBar
-            topLevelSectionsWithDirectChildren={topLevelSectionsWithDirectChildren}/>
-        )
-      }
-    </div>
-  )
-};
+const sidebarStyles = {
+  bmMenu: {
+    background: '#fff',
+    zIndex: 9999,
+  }
+}
+
+class PageHeader extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isSidebarOpen: false
+    };
+  }
+
+  toggleSidebar = () => {
+    this.setState({ isSidebarOpen: !this.state.isSidebarOpen });
+  }
+
+  render() {
+    const { classes, location, topLevelSectionsWithDirectChildren } = this.props;
+    return (
+      <div className={classes.PageHeader}>
+        <Sidebar customBurgerIcon={false}
+                 customCrossIcon={false}
+                 isOpen={this.state.isSidebarOpen}
+                 styles={sidebarStyles}>
+          <a id="home" className="menu-item" href="#">Home</a>
+          <a id="about" className="menu-item" href="#">About</a>
+          <a id="contact" className="menu-item" href="#">Contact</a>
+        </Sidebar>
+        {
+          location.pathname === '/' ? (
+            <Masthead
+              topLevelSectionsWithDirectChildren={topLevelSectionsWithDirectChildren}/>
+          ) : (
+            <MastheadBar
+              topLevelSectionsWithDirectChildren={topLevelSectionsWithDirectChildren}
+              toggleSidebar={this.toggleSidebar}/>
+          )
+        }
+      </div>
+    );
+  }
+}
 
 export default (injectSheet(styles)(PageHeader));
