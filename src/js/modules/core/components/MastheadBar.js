@@ -1,8 +1,6 @@
 import React from "react";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
-import FaBars from "react-icons/fa/bars";
-import FaSearch from "react-icons/fa/search";
 
 const styles = {
   MastheadBar: {
