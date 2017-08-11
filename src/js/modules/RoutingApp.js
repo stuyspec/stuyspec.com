@@ -14,36 +14,37 @@ import { getRoles } from "./users/selectors";
 
 const RoutingApp = ({ sections, roles }) => {
   const createSectionRoutes = () => {
-    return Object.keys(sections).map((sectionSlug, index) => {
+    return Object.keys(sections).map(sectionSlug => {
       const section = sections[ sectionSlug ];
       return <Route
         exact path={section.permalink}
-        key={`sectionRoute${index}`}
-        render={(props) => (
+        key={`sectionRoute${section.id}`}
+        render={props => (
           <SectionPage match={props.match}
                        section={section}/>
         )}/>
     });
   };
   const createArticleRoutes = () => {
-    return Object.keys(sections).map((sectionSlug, index) => {
+    return Object.keys(sections).map(sectionSlug => {
       const section = sections[ sectionSlug ];
       return <Route
         exact path={`${section.permalink}/:article_slug`}
-        key={`articleRoute${index}`}
-        render={(props) => (
+        key={`articleRoute${section.id}`}
+        render={props => (
           <ArticlePage match={props.match}
                        section={section}/>
         )}/>
     });
   };
   const createRoleRoutes = () => {
-    return Object.keys(roles).map((roleSlug, index) => {
+    return Object.keys(roles).map(roleSlug => {
+      const role = roles[ roleSlug ];
       return <Route
         exact path={`/${roleSlug}`}
-        key={`roleRoute${index}`}
-        render={(props) => (
-          <RolePage role={roles[ roleSlug ]}/>
+        key={`roleRoute${role.id}`}
+        render={props => (
+          <RolePage role={role}/>
         )}/>
     })
   }
@@ -57,7 +58,10 @@ const RoutingApp = ({ sections, roles }) => {
           {createRoleRoutes()}
           <Route exact path={'/contributors/:contributor_slug'}
                  key={`contributorRoute`}
-                 render={props => <ContributorPage match={props.match} role={roles[ 'contributors' ]}/>}/>
+                 render={props => (
+                   <ContributorPage match={props.match}
+                                    role={roles[ 'contributors' ]}/>
+                   )}/>
         </Switch>
       </PageLayout>
     </ConnectedRouter>

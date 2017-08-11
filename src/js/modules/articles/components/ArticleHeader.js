@@ -2,10 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
+import Byline from "./Byline";
+
 const styles = {
   ArticleHeader: {
     borderTop: '1px solid #000',
     borderBottom: '1px solid #dedede',
+    color: '#000',
+    fontFamily: 'Minion Pro',
     margin: '78px 0px 20px 0px',
     padding: '12px 0px',
   },
@@ -27,23 +31,12 @@ const styles = {
     marginTop: 0,
     marginBottom: '15px',
   },
-  metaInfo: {
-    fontFamily: 'Minion Pro',
+  Byline: {
+    display: 'inline',
     fontSize: '14px',
-    color: '#000',
-    margin: 0,
-    '& div:first-child': {
-      display: 'inline',
-      fontWeight: 'bold',
-      marginRight: '9px',
-      '& div': {
-        display: 'inline',
-        margin: 0,
-      }
-    },
-  },
-  byline: {
-    '& div': {
+    fontWeight: 'bold',
+    marginRight: '9px',
+    '& p': {
       display: 'inline',
       margin: 0,
       '& a': {
@@ -54,21 +47,22 @@ const styles = {
       },
     },
   },
+  dateline: {
+    fontSize: '14px',
+  }
 };
 
 // TODO: make selector for dateline
 
-const ArticleHeader = ({ classes, section, headline, byline, dateline }) => {
+const ArticleHeader = ({ classes, contributors, dateline, headline, section }) => {
   return (
     <div className={classes.ArticleHeader}>
       <Link to={section.permalink} className={classes.rubric}>
         {section.name}
       </Link>
       <h1 className={classes.headline}>{headline}</h1>
-      <div className={classes.metaInfo}>
-        <div className={classes.byline}>{byline}</div>
-        <span>{dateline}</span>
-      </div>
+      <Byline classes={classes} contributors={contributors}/>
+      <span>{dateline}</span>
     </div>
   );
 };

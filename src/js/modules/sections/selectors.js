@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { objectFilter } from "../../utils.js";
+import { objectFilter } from "../../utils";
 
 Object.filter = objectFilter;
 
@@ -11,11 +11,11 @@ export const getSectionFromProps = (state, props) => props.section;
  *   indirect children of a target section.
  */
 const getSubsectionsInSectionTree = (sections, targetSection) => {
-  return Object.filter(sections, sectionTraversingUpwards => {
-    while (sectionTraversingUpwards.parentSlug !== null) {
-      sectionTraversingUpwards = sections[ sectionTraversingUpwards.parentSlug ];
+  return Object.filter(sections, upwardsTraversingSection => {
+    while (upwardsTraversingSection.parentSlug !== null) {
+      upwardsTraversingSection = sections[ upwardsTraversingSection.parentSlug ];
     }
-    return sectionTraversingUpwards === targetSection;
+    return upwardsTraversingSection === targetSection;
   });
 };
 
@@ -23,7 +23,7 @@ const getSubsectionsInSectionTree = (sections, targetSection) => {
  * The selector returns a filtered sections object which contains direct
  *   children of the props-requested section,
  */
-export const getDirectChildrenOfSection = createSelector(
+export const getDirectSubsections = createSelector(
   [ getSections, getSectionFromProps ],
   (sections, targetSection) => {
     return Object.filter(sections, section => {

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import { getUsersWithinRole } from "../selectors";
+import { getUsersInRole } from "../selectors";
 
 const styles = {
   RolePage: {
@@ -11,12 +11,12 @@ const styles = {
   }
 };
 
-const RolePage = ({ classes, role, usersWithinRole }) => {
-  const linkToUsersInRole = () => {
-    return Object.keys(usersWithinRole).map((userSlug, index) => {
-      const user = usersWithinRole[ userSlug ];
+const RolePage = ({ classes, role, usersInRole }) => {
+  const createLinksToUsersInRole = () => {
+    return Object.keys(usersInRole).map(userSlug => {
+      const user = usersInRole[ userSlug ];
       return (
-        <li key={`user${index}`}>
+        <li key={`user${user.id}`}>
           <Link to={`/${role.slug}/${user.slug}`}>
             {user.firstName} {user.lastName}
           </Link>
@@ -28,14 +28,14 @@ const RolePage = ({ classes, role, usersWithinRole }) => {
     <div className={classes.RolePage}>
       <h1>Role page for {`${role.title}s`}</h1>
       <ul>
-        {linkToUsersInRole()}
+        {createLinksToUsersInRole()}
       </ul>
     </div>
   );
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  usersWithinRole: getUsersWithinRole(state, ownProps)
+  usersInRole: getUsersInRole(state, ownProps)
 });
 
 export default connect(

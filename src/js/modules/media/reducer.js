@@ -39,7 +39,8 @@ const reducer = (state = { ...initialState }, action) => {
         media: {
           ...state.media,
           ...action.payload,
-        }
+        },
+        response:{},
       };
     }
   }

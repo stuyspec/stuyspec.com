@@ -8,29 +8,31 @@ import { getArticles } from "../../articles/selectors";
 import { fetchArticles } from "../../articles/actions";
 import { getSections } from "../../sections/selectors";
 import { getUsers, getUserRoles } from "../../users/selectors";
+import { fetchUsers } from "../../users/actions";
+import { fetchMedia} from "../../media/actions";
 
 const styles = {
   HomePage: {}
 };
 
-const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles }) => {
-  const linkToAllArticles = () => {
-    return Object.keys(articles).map((articleSlug, index) => {
+const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles, fetchUsers,fetchMedia }) => {
+  const createLinksToArticles = () => {
+    return Object.keys(articles).map(articleSlug => {
       const article = articles[ articleSlug ];
       return (
-        <li key={`articleLink${index}`}>
+        <li key={`articleLink${article.id}`}>
           <Link to={`${sections[ article.sectionSlug ].permalink}/${article.slug}`}>{article.title}</Link>
         </li>
       );
     });
   };
-  const linkToAllContributors = () => {
-    return Object.keys(users).map((userSlug, index) => {
+  const createLinksToContributors = () => {
+    return Object.keys(users).map(userSlug => {
       if (userRoles.find(userRole => userRole.userSlug === userSlug &&
           userRole.roleSlug === "contributors")) {
         const contributor = users[ userSlug ]
         return (
-          <li key={`contributorLink${index}`}>
+          <li key={`contributorLink${contributor.id}`}>
             <Link to={`/contributors/${userSlug}`}>
               {contributor.firstName + ' ' + contributor.lastName}
             </Link>
@@ -39,20 +41,28 @@ const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles
       }
     });
   };
-  const handleFetch = () => {
+  const handleArticlesFetch = () => {
     fetchArticles();
+  };
+  const handleUsersFetch = () => {
+    fetchUsers();
+  };
+  const handleMediaFetch = () => {
+    fetchMedia();
   };
   return (
     <div className={classes.HomePage}>
       <h1>Home page</h1>
-      <button onClick={handleFetch}>fetch articles</button>
+      <button onClick={handleArticlesFetch}>fetch articles</button>
+      <button onClick={handleUsersFetch}>fetch users</button>
+      <button onClick={handleMediaFetch}>fetch media</button>
       <h2>Articles</h2>
       <ul>
-        {linkToAllArticles()}
+        {createLinksToArticles()}
       </ul>
       <h2>Contributors</h2>
       <ul>
-        {linkToAllContributors()}
+        {createLinksToContributors()}
       </ul>
     </div>
   );
@@ -66,7 +76,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchArticles: fetchArticles }, dispatch);
+  return bindActionCreators({
+    fetchArticles: fetchArticles,
+    fetchUsers: fetchUsers,
+    fetchMedia: fetchMedia,
+  }, dispatch);
 };
 
 export default connect(

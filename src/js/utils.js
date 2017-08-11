@@ -1,5 +1,6 @@
 /**
  * Writes the filter function for objects.
+ * @param obj
  * @param {function} predicate is the function which keys/properties must match.
  */
 export const objectFilter = (obj, predicate) =>
@@ -10,14 +11,14 @@ export const objectFilter = (obj, predicate) =>
 /**
  * Formats date from ISO string to a more readable form
  * If published on same day, return HH:MM AM/PM
- * if publised on different day, return Month Day, Year
- * @param ISO string
+ * if published on different day, return Month Day, Year
+ * @param {ISO} string
  * @returns {string}
  */
 export const formatDate = (string) => {
   //Removes the Z at the end of the string which eliminates the need to offset the date
   const newString = string.slice(0, string.length - 1);
-  //articleDateline and currentDate will be in the format:
+  // articleDateline and currentDate will be in the format:
   // Tue Aug 01 2017 20:08:54 GMT-0400 (EDT)
   const articleDateline = new Date(newString);
   const currentDate = new Date();
