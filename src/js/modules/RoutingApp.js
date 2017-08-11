@@ -40,12 +40,13 @@ const RoutingApp = ({ sections, roles, about }) => {
     });
   };
   const createRoleRoutes = () => {
-    return Object.keys(roles).map((roleSlug, index) => {
+    return Object.keys(roles).map(roleSlug => {
+      const role = roles[ roleSlug ];
       return <Route
         exact path={`/${roleSlug}`}
-        key={`roleRoute${index}`}
+        key={`roleRoute${role.id}`}
         render={props => (
-          <RolePage role={roles[ roleSlug ]}/>
+          <RolePage role={role}/>
         )}/>
     })
   };

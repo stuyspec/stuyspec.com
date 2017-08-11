@@ -51,7 +51,7 @@ const styles = {
 };
 
 const Masthead = ({ classes, topLevelSectionsWithDirectChildren }) => {
-  const linkToTopLevelSections = () => {
+  const createLinksToTopLevelSections = () => {
     return Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {
       const topLevelSection = topLevelSectionsWithDirectChildren[ sectionSlug ];
       return (
@@ -67,7 +67,7 @@ const Masthead = ({ classes, topLevelSectionsWithDirectChildren }) => {
     <div className={classes.Masthead}>
       <Link to="/" className={classes.theSpectatorLogo}>The Spectator</Link>
       <ul className={classes.sectionLinksNav}>
-        {linkToTopLevelSections()}
+        {createLinksToTopLevelSections()}
       </ul>
     </div>
   )

@@ -11,7 +11,13 @@
         "createdAt": "2017-07-31T06:14:09.473Z",
         "updatedAt": "2017-07-31T06:14:09.473Z"
       }
-    }
+    },
+    "authorship": [
+      {
+        "articleSlug": "apples-rain-in-new-york-city",
+        "contributorSlug": "jason-kao"
+      }
+    ]
   },
   "sections": {
     "sections": {
@@ -54,19 +60,13 @@
         "id": 0,
         "title": "Contributor",
         "slug": "contributors",
-        "credentials": 0
+        "credentialLevel": 0
       }
     },
     "userRoles": [
       {
         "userSlug": "jason-kao",
-        "roleID": 0
-      }
-    ],
-    "authorship": [
-      {
-        "articleSlug": "apples-rain-in-new-york-city",
-        "userSlug": "jason-kao"
+        "roleSlug": 0
       }
     ]
   }

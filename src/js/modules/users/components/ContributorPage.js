@@ -13,15 +13,12 @@ const styles = {
   },
 };
 
-/**
- * @param match necessary for retrieving user from slug.
- */
-const ContributorPage = ({ classes, role, contributor, articles, sections, match }) => {
-  const linkToArticlesByContributor = () => {
-    return Object.keys(articles).map((articleSlug, index) => {
+const ContributorPage = ({ classes, role, contributor, articles, sections }) => {
+  const createLinksToArticlesByContributor = () => {
+    return Object.keys(articles).map(articleSlug => {
       const article = articles[ articleSlug ];
       return (
-        <li key={`contributorArticleListItem${index}`}>
+        <li key={`contributorArticleListItem${article.id}`}>
           <Link to={`${sections[ article.sectionSlug ].permalink}/${articleSlug}`}>
             {article.title}
           </Link>
@@ -36,7 +33,7 @@ const ContributorPage = ({ classes, role, contributor, articles, sections, match
       <div>
         <p>articles</p>
         <ul>
-          {linkToArticlesByContributor()}
+          {createLinksToArticlesByContributor()}
         </ul>
       </div>
     </div>

@@ -70,29 +70,29 @@ const navButtonStyles = {
   }
 };
 
-const UnstyledNavButton = ({ classes, label }) => {
+const NavButton = ({ classes, label }) => {
   return (
     <button className={classes.NavButton}>
       <span className={classes.buttonText}>{label}</span>
     </button>
   );
 };
-const NavButton = injectSheet(navButtonStyles)(UnstyledNavButton);
+const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 
 const MastheadBar = ({ classes }) => {
   return (
     <div className={classes.MastheadBar}>
       <div className={classes.barContainer}>
         <div className={classes.quickNav}>
-          <NavButton label="sections"/>
-          <NavButton label="search"/>
+          <StyledNavButton label="sections"/>
+          <StyledNavButton label="search"/>
         </div>
         <Link className={classes.brandingLink} to="/">
           The Spectator
         </Link>
         <div className={classes.userTools}>
-          <NavButton label="log in"/>
-          <NavButton label="subscribe"/>
+          <StyledNavButton label="log in"/>
+          <StyledNavButton label="subscribe"/>
         </div>
       </div>
     </div>

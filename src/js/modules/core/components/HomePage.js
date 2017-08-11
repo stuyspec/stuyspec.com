@@ -15,23 +15,23 @@ const styles = {
 };
 
 const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles, fetchUsers }) => {
-  const linkToAllArticles = () => {
-    return Object.keys(articles).map((articleSlug, index) => {
+  const createLinksToArticles = () => {
+    return Object.keys(articles).map(articleSlug => {
       const article = articles[ articleSlug ];
       return (
-        <li key={`articleLink${index}`}>
+        <li key={`articleLink${article.id}`}>
           <Link to={`${sections[ article.sectionSlug ].permalink}/${article.slug}`}>{article.title}</Link>
         </li>
       );
     });
   };
-  const linkToAllContributors = () => {
-    return Object.keys(users).map((userSlug, index) => {
+  const createLinksToContributors = () => {
+    return Object.keys(users).map(userSlug => {
       if (userRoles.find(userRole => userRole.userSlug === userSlug &&
           userRole.roleSlug === "contributors")) {
         const contributor = users[ userSlug ]
         return (
-          <li key={`contributorLink${index}`}>
+          <li key={`contributorLink${contributor.id}`}>
             <Link to={`/contributors/${userSlug}`}>
               {contributor.firstName + ' ' + contributor.lastName}
             </Link>
@@ -53,11 +53,11 @@ const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles
       <button onClick={handleUsersFetch}>fetch users</button>
       <h2>Articles</h2>
       <ul>
-        {linkToAllArticles()}
+        {createLinksToArticles()}
       </ul>
       <h2>Contributors</h2>
       <ul>
-        {linkToAllContributors()}
+        {createLinksToContributors()}
       </ul>
     </div>
   );

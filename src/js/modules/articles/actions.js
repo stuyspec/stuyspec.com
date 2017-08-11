@@ -1,12 +1,12 @@
 import axios from "axios";
 import * as t from "./actionTypes";
-import { STUY_SPEC_API, HEADER } from "../../constants";
+import { STUY_SPEC_API, STUY_SPEC_API_HEADER } from "../../constants";
 import { getProcessedArticlesResponse, getFakeAuthorshipsForArticleResponse } from "./selectors";
 
 export const fetchArticles = () => {
   return (dispatch, getState) => {
     dispatch({ type: t.FETCH_ARTICLE_PENDING });
-    axios.get(`${STUY_SPEC_API}/articles`, { 'headers': HEADER })
+    axios.get(`${STUY_SPEC_API}/articles`, { 'headers': STUY_SPEC_API_HEADER })
       .then(response => {
         validateArticles(response.data);
         dispatch({
@@ -17,8 +17,6 @@ export const fetchArticles = () => {
           type: t.ADD_ARTICLES,
           payload: getProcessedArticlesResponse(getState()),
         });
-      })
-      .then(response => { // TODO: promise function orders are wonky without @param response
         dispatch({
           type: t.ADD_AUTHORSHIPS,
           payload: getFakeAuthorshipsForArticleResponse(getState()),

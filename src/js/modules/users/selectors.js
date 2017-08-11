@@ -6,7 +6,7 @@ export const getUserRoles = state => state.users.userRoles;
 
 const getRequestedContributorSlug = (state, props) => props.match.params.contributor_slug;
 const getRoleFromProps = (state, props) => props.role;
-const getUsersResponse = state => state.articles.response;
+const getUsersResponse = state => state.users.response;
 
 export const getContributorFromSlug = createSelector(
   [ getUsers, getRequestedContributorSlug ],
@@ -16,9 +16,9 @@ export const getContributorFromSlug = createSelector(
 );
 
 /**
- * The selector returns all users within a role.
+ * The selector returns all users in a role.
  */
-export const getUsersWithinRole = createSelector(
+export const getUsersInRole = createSelector(
   [ getUsers, getRoleFromProps, getUserRoles ],
   (users, role, userRoles) => {
     const userSlugsInRole = userRoles
@@ -31,7 +31,8 @@ export const getUsersWithinRole = createSelector(
 );
 
 /**
- * The selector returns an articles object that contains all articles from Stuy
+ * TODO:
+ * The selector returns a users object that contains all users from Stuy
  *   Spec API's response.
  */
 export const getProcessedUsersResponse = createSelector(
@@ -39,7 +40,7 @@ export const getProcessedUsersResponse = createSelector(
   response => {
     return response.reduce((accumulatedUsers, currentUser) => {
       accumulatedUsers[ currentUser.slug ] = currentUser;
-      return accumulatedArticles;
+      return accumulatedUsers;
     }, {});
   }
 );

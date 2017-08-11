@@ -8,14 +8,11 @@ export const fetchUsers = () => {
     dispatch({ type: t.FETCH_USER_PENDING });
     axios.get(`${STUY_SPEC_API}/users`, { 'headers': HEADER })
       .then(response => {
-        if (areUsersValid(response.data)) {
-          dispatch({
-            type: t.FETCH_USER_FULFILLED,
-            payload: response.data,
-          });
-        }
-      })
-      .then(response => {
+        validateUsers(response.data);
+        dispatch({
+          type: t.FETCH_USER_FULFILLED,
+          payload: response.data,
+        });
         dispatch({
           type: t.ADD_USERS,
           payload: getProcessedUsersResponse(getState()),
@@ -30,7 +27,7 @@ export const fetchUsers = () => {
   };
 };
 
-const checkUserKeyValidity = (userObject, key, type) => {
+const validateUserKey = (userObject, key, type) => {
   if (key in userObject) {
     if (typeof (userObject[ key ]) === type) {
       return true;
@@ -43,7 +40,7 @@ const checkUserKeyValidity = (userObject, key, type) => {
   }
 };
 
-const areUsersValid = (userArray) => {
+const validateUsers = (userArray) => {
   const integerProperties = [ 'id' ];
   const stringProperties = [ 'firstName', 'lastName', 'username', 'email', 'createdAt', 'updatedAt' ];
   if (!Array.isArray(userArray)) {
@@ -51,10 +48,10 @@ const areUsersValid = (userArray) => {
   }
   userArray.forEach(userObject => {
     integerProperties.forEach(numberKey => {
-      checkUserKeyValidity(userObject, numberKey, 'number');
+      validateUserKey(userObject, numberKey, 'number');
     });
     stringProperties.forEach((stringKey) => {
-      checkUserKeyValidity(userObject, stringKey, 'string');
+      validateUserKey(userObject, stringKey, 'string');
     });
   });
   return true;
