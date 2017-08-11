@@ -2,6 +2,7 @@ import React from "react";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 
+
 const styles = {
   MastheadBar: {
     backgroundColor: '#fff',
@@ -69,7 +70,18 @@ const navButtonStyles = {
     textTransform: 'uppercase',
   }
 };
+import Icon from 'react-icon-base'
 
+const FaSearch = props => (
+  <Icon viewBox="0 0 40 40" {...props}>
+    <g><path d="m27.2 18.6q0-4.2-2.9-7.1t-7.1-2.9-7 2.9-3 7.1 2.9 7 7.1 3 7.1-3 2.9-7z m11.4 18.5q0 1.2-0.8 2.1t-2 0.8q-1.2 0-2-0.8l-7.7-7.7q-4 2.8-8.9 2.8-3.2 0-6.1-1.3t-5-3.3-3.4-5-1.2-6.1 1.2-6.1 3.4-5.1 5-3.3 6.1-1.2 6.1 1.2 5 3.3 3.4 5.1 1.2 6.1q0 4.9-2.7 8.9l7.6 7.6q0.8 0.9 0.8 2z"/></g>
+  </Icon>
+)
+const FaBars = props => (
+  <Icon viewBox="0 0 40 40" {...props}>
+    <g><path d="m37.3 30v2.9q0 0.5-0.4 1t-1 0.4h-31.5q-0.6 0-1-0.4t-0.4-1v-2.9q0-0.6 0.4-1t1-0.4h31.5q0.5 0 1 0.4t0.4 1z m0-11.4v2.8q0 0.6-0.4 1t-1 0.5h-31.5q-0.6 0-1-0.5t-0.4-1v-2.8q0-0.6 0.4-1t1-0.5h31.5q0.5 0 1 0.5t0.4 1z m0-11.5v2.9q0 0.6-0.4 1t-1 0.4h-31.5q-0.6 0-1-0.4t-0.4-1v-2.9q0-0.5 0.4-1t1-0.4h31.5q0.5 0 1 0.4t0.4 1z"/></g>
+  </Icon>
+)
 const NavButton = ({ classes, label, onClick }) => {
   const createIcons = () => {
     switch (label) {
