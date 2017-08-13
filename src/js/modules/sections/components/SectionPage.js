@@ -10,9 +10,7 @@ import { getSections, getDirectSubsections } from "../../sections/selectors";
 
 const styles = {
   SectionPage: {
-    marginTop: '100px',
-    top: 0,
-    marginBottom: '60px',
+    top: 0
   },
   sectionName: {
     fontFamily: 'Canela',

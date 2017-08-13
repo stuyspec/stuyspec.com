@@ -1,13 +1,15 @@
 import React from "react";
 import injectSheet from "react-jss";
 import { slide as Sidebar } from "react-burger-menu";
+import { PAGE_HEADER_BOTTOM_MARGIN } from "../../../constants";
 
 import Masthead from "./Masthead";
 import MastheadBar from "./MastheadBar";
 
 const styles = {
   PageHeader: {
-    margin: '0px auto 24px auto',
+    margin: '0 auto',
+    marginBottom: PAGE_HEADER_BOTTOM_MARGIN,
     textAlign: 'center',
     width: '100%',
   },
@@ -33,10 +35,14 @@ const styles = {
     fontWeight: 500,
     textDecoration: 'none',
   },
+  sidebarContainer: {
+    top: `-${PAGE_HEADER_BOTTOM_MARGIN}px`,
+    position: 'relative',
+  }
 };
 
 const sidebarStyles = {
-  bmMenu: {
+  bmMenuWrap: {
     background: '#fff',
     zIndex: 9999,
   }
@@ -58,14 +64,17 @@ class PageHeader extends React.Component {
     const { classes, location, topLevelSectionsWithDirectChildren } = this.props;
     return (
       <div className={classes.PageHeader}>
-        <Sidebar customBurgerIcon={false}
-                 customCrossIcon={false}
-                 isOpen={this.state.isSidebarOpen}
-                 styles={sidebarStyles}>
-          <a id="home" className="menu-item" href="#">Home</a>
-          <a id="about" className="menu-item" href="#">About</a>
-          <a id="contact" className="menu-item" href="#">Contact</a>
-        </Sidebar>
+        <div className={classes.sidebarContainer}>
+          <Sidebar customBurgerIcon={false}
+                   customCrossIcon={false}
+                   onStateChange={this.toggleSidebar}
+                   isOpen={this.state.isSidebarOpen}
+                   styles={sidebarStyles}>
+            <a id="home" className="menu-item" href="#">Home</a>
+            <a id="about" className="menu-item" href="#">About</a>
+            <a id="contact" className="menu-item" href="#">Contact</a>
+          </Sidebar>
+        </div>
         {
           location.pathname === '/' ? (
             <Masthead
