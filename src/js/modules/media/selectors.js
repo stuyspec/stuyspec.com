@@ -16,9 +16,11 @@ export const matchMediaToArticles = createSelector(
       const matchingMedia = Object.filter(medias, media => {
         return media.articleId === articleObject.id;
       });
+      const mediaObject = matchingMedia[Object.keys(matchingMedia)[0]];
       newArticleObject[article] = {
         ...articleObject,
-        featuredMedia: matchingMedia[Object.keys(matchingMedia)[0]],
+        featuredMedia: mediaObject,
+        media: mediaObject.id,
       }
     });
     return newArticleObject;
