@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as t from "./actionTypes";
 import { STUY_SPEC_API, HEADER } from "../../constants"
-import { getProcessedMediaWithCredits, matchMediaToArticles } from "./selectors";
+import { getProcessedMediaWithCredits, matchMediaToArticles, getMediaWithUserSlug } from "./selectors";
 import { checkKeyValidity} from "../../utils"
 
 //TODO: get rid of fakeMedia once there is something in the API for media
@@ -64,6 +64,12 @@ export const fetchMedia = () => {
             payload: fakeMedia,
           });
         }
+      })
+      .then(response => {
+        dispatch({
+          type: t.ADD_MEDIA,
+          payload: getMediaWithUserSlug(getState()),
+        });
       })
       .then(response => {
         dispatch({

@@ -29,19 +29,37 @@ export const matchMediaToArticles = createSelector(
 
 export const getProcessedMediaWithCredits = (state) => {
   const users = getUsers(state);
-  const mediaResponse = state.media.response;
+  const medias = getMedia(state);
   const newMediaObject = {};
+  Object.keys(medias).map((media) => {
+    const mediaObject = medias[media];
+    const userObject = users[mediaObject.userSlug];
+    console.log(userObject);
+    delete mediaObject['userId'];
+       newMediaObject[media] = {
+         ...mediaObject,
+         credits: `${userObject.firstName} ${userObject.lastName}`,
+        }
+    });
+  return newMediaObject;
+};
+
+export const getMediaWithUserSlug = (state) => {
+  const users = getUsers(state);
+  const mediaResponse = state.media.response;
+  const mediaWithUserSlug = {};
   Object.keys(mediaResponse).map((media) => {
     const mediaObject = mediaResponse[media];
     Object.keys(users).map((user) => {
       const userObject = users[user];
       if (userObject.id === mediaObject.userId) {
-        newMediaObject[media] = {
+        mediaWithUserSlug[media] = {
           ...mediaObject,
-          credits: `${userObject.firstName} ${userObject.lastName}`,
+          userSlug: userObject.slug,
         }
       }
     })
   });
-  return newMediaObject;
+  console.log(mediaWithUserSlug);
+  return mediaWithUserSlug;
 };
