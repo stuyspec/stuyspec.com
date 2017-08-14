@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import { slide as Sidebar } from "react-burger-menu";
 import { PAGE_HEADER_BOTTOM_MARGIN } from "../../../constants";
@@ -36,14 +37,17 @@ const styles = {
     textDecoration: 'none',
   },
   sidebarContainer: {
-    top: `-${PAGE_HEADER_BOTTOM_MARGIN}px`,
     position: 'relative',
+    top: -PAGE_HEADER_BOTTOM_MARGIN,
   }
 };
 
 const sidebarStyles = {
   bmMenuWrap: {
     background: '#fff',
+    zIndex: 9999,
+  },
+  bmOverlay: {
     zIndex: 9999,
   }
 }
@@ -56,23 +60,37 @@ class PageHeader extends React.Component {
     };
   }
 
+  sidebarStateWatcher = (sidebarState) => {
+    this.setState({ isSidebarOpen: sidebarState.isOpen });
+  }
+
   toggleSidebar = () => {
     this.setState({ isSidebarOpen: !this.state.isSidebarOpen });
   }
 
   render() {
     const { classes, location, topLevelSectionsWithDirectChildren } = this.props;
+    const createLinksToTopLevelSections = () => {
+      return Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {
+        const section = topLevelSectionsWithDirectChildren[ sectionSlug ];
+        return (
+          <Link className={classes.linkToSection}
+                key={section.id}
+                to={section.permalink}>
+            {section.name}
+          </Link>
+        );
+      });
+    };
     return (
       <div className={classes.PageHeader}>
         <div className={classes.sidebarContainer}>
           <Sidebar customBurgerIcon={false}
                    customCrossIcon={false}
-                   onStateChange={this.toggleSidebar}
+                   onStateChange={this.sidebarStateWatcher}
                    isOpen={this.state.isSidebarOpen}
                    styles={sidebarStyles}>
-            <a id="home" className="menu-item" href="#">Home</a>
-            <a id="about" className="menu-item" href="#">About</a>
-            <a id="contact" className="menu-item" href="#">Contact</a>
+            {createLinksToTopLevelSections()}
           </Sidebar>
         </div>
         {

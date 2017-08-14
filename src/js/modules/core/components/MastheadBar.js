@@ -116,7 +116,6 @@ class MastheadBar extends React.Component {
   };
 
   toggleSidebar = () => {
-    console.log('sidebar toggled from MastheadBar');
     this.props.toggleSidebar();
   }
 
