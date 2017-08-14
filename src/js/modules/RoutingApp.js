@@ -12,9 +12,9 @@ import { AboutPage } from "./about/components";
 
 import { getSections } from "./sections/selectors";
 import { getRoles } from "./users/selectors";
-import { getAboutPages } from './about/selectors';
+import { getAbouts } from './about/selectors';
 
-const RoutingApp = ({ sections, roles, about }) => {
+const RoutingApp = ({ sections, roles, abouts }) => {
   const createSectionRoutes = () => {
     return Object.keys(sections).map(sectionSlug => {
       const section = sections[ sectionSlug ];
@@ -51,10 +51,10 @@ const RoutingApp = ({ sections, roles, about }) => {
     })
   };
   const createAboutRoutes = () => {
-    return Object.keys(about).map(aboutSlug => {
-      const aboutPage = about[aboutSlug];
+    return Object.keys(abouts).map(aboutSlug => {
+      const aboutPage = abouts[aboutSlug];
       return <Route
-        exact path ={`${aboutPage.permalink}`}
+        exact path ={`/about/${aboutPage.slug}`}
         key = {`aboutRoutes${aboutPage.id}`}
         render={props => (
           <AboutPage  about={aboutPage}/>
@@ -85,7 +85,7 @@ const RoutingApp = ({ sections, roles, about }) => {
 const mapStateToProps = (state) => ({
   sections: getSections(state),
   roles: getRoles(state),
-  about: getAboutPages(state),
+  abouts: getAbouts(state),
 });
 
 export default connect(

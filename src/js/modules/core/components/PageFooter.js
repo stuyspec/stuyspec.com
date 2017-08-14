@@ -76,7 +76,7 @@ const styles = {
 const PageFooter = ({ classes,
                       topLevelSectionsWithDirectChildren,
                       aboutPages}) => {
-  const linkToSections = () => {
+  const createLinksToSections = () => {
     return Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {
       const topLevelSection = topLevelSectionsWithDirectChildren[ sectionSlug ];
       return (
@@ -102,13 +102,13 @@ const PageFooter = ({ classes,
       );
     });
   };
-  const linkToAbout = () => {
+  const createLinksToAbouts = () => {
     const infoPageLinks = Object.keys(aboutPages).map((slug) => {
       const aboutPage = aboutPages[slug];
       return (
         <Link className={classes.subsectionLink}
               key={`about${aboutPage.id}`}
-              to={aboutPage.permalink}>
+              to={`/about/${aboutPage.slug}`}>
           {aboutPage.title}
         </Link>
         )
@@ -133,8 +133,8 @@ const PageFooter = ({ classes,
           </Link>
         </Col>
         <Col md={8} mdOffset={2} className={classes.sectionFlex}>
-          {linkToSections()}
-          {linkToAbout()}
+          {createLinksToSections()}
+          {createLinksToAbouts()}
         </Col>
       </Row>
     </Grid>

@@ -6,7 +6,7 @@ import injectSheet from "react-jss";
 import PageHeader from "./PageHeader";
 import PageFooter from "./PageFooter";
 import { getTopLevelSectionsWithDirectChildren } from "../../sections/selectors";
-import { getAboutPages} from "../../about/selectors";
+import { getAbouts} from "../../about/selectors";
 
 const styles = {
   PageContainer: {
@@ -19,7 +19,7 @@ const PageLayout = ({ classes,
                       children,
                       location,
                       topLevelSectionsWithDirectChildren,
-                      aboutPages }) => {
+                      abouts }) => {
   return (
     <div>
       <PageHeader location={location}
@@ -28,14 +28,14 @@ const PageLayout = ({ classes,
         {children}
       </div>
       <PageFooter topLevelSectionsWithDirectChildren={topLevelSectionsWithDirectChildren}
-                  aboutPages={aboutPages}/>
+                  aboutPages={abouts}/>
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
   topLevelSectionsWithDirectChildren: getTopLevelSectionsWithDirectChildren(state),
-  aboutPages: getAboutPages(state),
+  abouts: getAbouts(state),
 });
 
 export default withRouter(

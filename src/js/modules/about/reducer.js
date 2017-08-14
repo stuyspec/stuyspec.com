@@ -16,7 +16,6 @@ const initialState = {
     'id': 0,
     'title': 'Our Charter',
     'slug': 'our-charter',
-    'permalink': '/about/our-charter',
     'content': 'The Charter of The Spectator\n' +
     'Approved September 24, 2016 by The Spectator Editorial Board.\n' +
     'I. Statement of Purpose\n' +
@@ -138,7 +137,6 @@ const initialState = {
     'id': 1,
     'title': 'Advertise',
     'slug': 'advertise',
-    'permalink': '/about/advertise',
     'content': 'Local Advertising\n' +
     'Local advertisers are classified as all those companies either headquartered within New York City or whose New York City local branch is placing an advertisement.The best way to contact an advertising representative is to e-mail the business manager. For information on rates and our publication schedule, please see the advertising forms below.\n' +
     'National Advertising\n' +
@@ -168,7 +166,6 @@ const initialState = {
     'id': 2,
     'title': 'Sponsers',
     'slug': 'sponsers',
-    'permalink': '/about/sponsers',
     'content': 'Mystery Room NYC LogoMystery Room NYC is an escape the room game in which players assume the role of a detective that is trapped and needs to figure out what transpired in the space before they arrived. Teams must work together to uncover clues and piece together components in order to escape. The game is released in chapters and while you don’t have to play each part in order, playing all the chapters allow you to gain greater knowledge of the overall backstory behind each of the rooms, unveiling the mystery.\n' +
     'Become A Sponsor\n' +
     'If you are interested in sponsoring The Spectator to help preserve the tradition of excellence our publication has established heretofore, please contact the business managers at business@stuyspec.com. For benefits of sponsorship, please see the below document.',
@@ -177,14 +174,12 @@ const initialState = {
     'id': 3,
     'title': 'Apparel',
     'slug': 'apparel',
-    'permalink': '/about/apparel',
     'content': 'Apparel page',
   },
   'staff': {
     'id': 4,
     'title': 'Staff',
     'slug': 'staff',
-    'permalink': '/about/staff',
     'content': 'Members of the 2017-2018 Spectator Editorial Board\n' +
     'Editors in Chief\tNews Editors\tFeatures Editors\n' +
     'Matteo Wong*\tShameek Rakshit\tArchi Das\n' +
@@ -220,28 +215,24 @@ const initialState = {
     'id': 5,
     'title': 'Contact',
     'slug': 'contact',
-    'permalink': '/about/contact',
     'content': 'Contact us at stuyspec@gmail.com',
   },
   'subscribe': {
     'id': 6,
     'title': 'Subscribe',
     'slug': 'subscribe',
-    'permalink': '/about/subscribe',
     'content': 'Subscribe page',
   },
   'join-us': {
     'id': 7,
     'title': 'Join Us',
     'slug': 'join-us',
-    'permalink': '/about/join-us',
     'content': 'Join Us page',
   },
   'visual-archives': {
     'id': 8,
     'title': 'Visual Archives',
     'slug': 'visual-archives',
-    'permalink': '/about/visual-archives',
     'content': 'Visual Archives page',
   },
 };

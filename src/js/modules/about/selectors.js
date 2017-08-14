@@ -1,3 +1,1 @@
-import {createSelector} from 'reselect';
-
-export const getAboutPages = state => state.about;
+export const getAbouts = state => state.about;
