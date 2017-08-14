@@ -42,16 +42,6 @@ const styles = {
   }
 };
 
-const sidebarStyles = {
-  bmMenuWrap: {
-    background: '#fff',
-    zIndex: 9999,
-  },
-  bmOverlay: {
-    zIndex: 9999,
-  }
-}
-
 class PageHeader extends React.Component {
   constructor(props) {
     super(props);
@@ -74,8 +64,7 @@ class PageHeader extends React.Component {
       return Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {
         const section = topLevelSectionsWithDirectChildren[ sectionSlug ];
         return (
-          <Link className={classes.linkToSection}
-                key={section.id}
+          <Link key={section.id}
                 to={section.permalink}>
             {section.name}
           </Link>
@@ -89,7 +78,8 @@ class PageHeader extends React.Component {
                    customCrossIcon={false}
                    onStateChange={this.sidebarStateWatcher}
                    isOpen={this.state.isSidebarOpen}
-                   styles={sidebarStyles}>
+                   onClick={this.sidebarStateWatcher}
+                   width={220}>
             {createLinksToTopLevelSections()}
           </Sidebar>
         </div>
