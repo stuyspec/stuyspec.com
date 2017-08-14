@@ -47,7 +47,27 @@ const RoutingApp = ({ sections, roles }) => {
           <RolePage role={role}/>
         )}/>
     })
-  }
+  };
+  /* TODO: Find a way to do this
+  const createUserRoleRoutes = () => {
+    return Object.keys(roles).map(roleSlug => {
+      const role = roles[ roleSlug ];
+      switch (role.title) {
+        case "Photographer": {
+          return
+        }
+      }
+      return (
+        <Route exact path={`/${role.slug}/:contributor_slug`}
+               key={`${role.title}Route`}
+               render={props => (
+                 <ContributorPage match={props.match}
+                                  role={roles[ `${role.slug}` ]}/>
+               )}/>
+      )
+    })
+  };
+  */
   return (
     <ConnectedRouter history={appHistory}>
       <PageLayout>
@@ -56,12 +76,6 @@ const RoutingApp = ({ sections, roles }) => {
           {createSectionRoutes()}
           {createArticleRoutes()}
           {createRoleRoutes()}
-          <Route exact path={'/contributors/:contributor_slug'}
-                 key={`contributorRoute`}
-                 render={props => (
-                   <ContributorPage match={props.match}
-                                    role={roles[ 'contributors' ]}/>
-                   )}/>
         </Switch>
       </PageLayout>
     </ConnectedRouter>

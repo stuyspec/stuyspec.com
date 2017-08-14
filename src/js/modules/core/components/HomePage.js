@@ -56,6 +56,7 @@ const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles
       <button onClick={handleArticlesFetch}>fetch articles</button>
       <button onClick={handleUsersFetch}>fetch users</button>
       <button onClick={handleMediaFetch}>fetch media</button>
+      <Link to="/photographers">Photographers</Link>
       <h2>Articles</h2>
       <ul>
         {createLinksToArticles()}

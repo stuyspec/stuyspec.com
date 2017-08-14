@@ -70,6 +70,10 @@ const initialState = {
     {
       userSlug: "cathy-cai",
       roleSlug: "contributors",
+    },
+    {
+      userSlug: "cathy-cai",
+      roleSlug: "photographers",
     }
   ]
 };
