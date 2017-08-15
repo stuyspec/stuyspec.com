@@ -47,7 +47,7 @@ const RoutingApp = ({ sections, roles }) => {
           <RolePage role={role}/>
         )}/>
     })
-  }
+  };
   return (
     <ConnectedRouter history={appHistory}>
       <PageLayout>
@@ -61,7 +61,7 @@ const RoutingApp = ({ sections, roles }) => {
                  render={props => (
                    <ContributorPage match={props.match}
                                     role={roles[ 'contributors' ]}/>
-                   )}/>
+                 )}/>
         </Switch>
       </PageLayout>
     </ConnectedRouter>
