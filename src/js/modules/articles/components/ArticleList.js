@@ -15,7 +15,6 @@ const ArticleList = ({ classes, articles, featuredMedia, section }) => {
     return Object.keys(articles).map(articleSlug => {
       return <ArticleRow article={articles[ articleSlug ]}
                          featuredMedia={featuredMedia}
-                         key={articleSlug}
                          section={section}/>;
     })
   };
