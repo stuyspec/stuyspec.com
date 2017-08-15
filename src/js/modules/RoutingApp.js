@@ -49,7 +49,7 @@ const RoutingApp = ({ sections, roles }) => {
     })
   }
   return (
-    <ConnectedRouter history={appHistory}>
+    <ConnectedRouter history={appHistory} onUpdate={() => window.scrollTo(0, 0)}>
       <PageLayout>
         <Switch>
           <Route exact path="/" component={HomePage}/>
