@@ -52,48 +52,16 @@ const initialState = {
       parentSlug: null,
       permalink: "/sports"
     },
-    "art": {
+    "media": {
       id: 6,
-      name: "Art",
-      slug: "art",
-      description: "The art of Stuyvesant.",
+      name: "Media",
+      slug: "media",
+      description: "The media of Stuyvesant.",
       parentSlug: null,
-      permalink: "/art"
-    },
-    "graphics": {
-      id: 7,
-      name: "Graphics",
-      slug: "graphics",
-      description: "The graphics of Stuyvesant.",
-      parentSlug: null,
-      permalink: "/graphics"
-    },
-    "music": {
-      id: 8,
-      name: "Music",
-      slug: "music",
-      description: "The music of Stuyvesant.",
-      parentSlug: null,
-      permalink: "/music"
-    },
-    "photo": {
-      id: 9,
-      name: "Photo",
-      slug: "photo",
-      description: "The photo of Stuyvesant.",
-      parentSlug: null,
-      permalink: "/photo"
-    },
-    "video": {
-      id: 10,
-      name: "Video",
-      slug: "video",
-      description: "The video of Stuyvesant.",
-      parentSlug: null,
-      permalink: "/video"
+      permalink: "/media"
     },
     "campaign-coverage": {
-      id: 11,
+      id: 7,
       name: "Campaign Coverage",
       slug: "campaign-coverage",
       description: "The campaign coverage of Stuyvesant.",
@@ -101,7 +69,7 @@ const initialState = {
       permalink: "/news/campaign-coverage"
     },
     "staff-editorials": {
-      id: 12,
+      id: 8,
       name: "Staff Editorials",
       slug: "staff-editorials",
       description: "The staff editorials of Stuyvesant.",
@@ -109,7 +77,7 @@ const initialState = {
       permalink: "/opinions/staff-editorials"
     },
     "creative-writing": {
-      id: 13,
+      id: 9,
       name: "Creative Writing",
       slug: "creative-writing",
       description: "The creative writing of Stuyvesant.",
@@ -117,7 +85,7 @@ const initialState = {
       permalink: "/features/creative-writing"
     },
     "voices": {
-      id: 14,
+      id: 10,
       name: "Voices",
       slug: "voices",
       description: "The voices of Stuyvesant.",
@@ -125,7 +93,7 @@ const initialState = {
       permalink: "/features/voices"
     },
     "college-essays": {
-      id: 15,
+      id: 11,
       name: "College Essays",
       slug: "college-essays",
       description: "The college essays of Stuyvesant.",
@@ -133,7 +101,7 @@ const initialState = {
       permalink: "/features/college-essays"
     },
     "disrespectator": {
-      id: 16,
+      id: 12,
       name: "Disrespectator",
       slug: "disrespectator",
       description: "The disrespectator of Stuyvesant.",
@@ -141,7 +109,7 @@ const initialState = {
       permalink: "/humor/disrespectator"
     },
     "spooktator": {
-      id: 17,
+      id: 13,
       name: "Spooktator",
       slug: "spooktator",
       description: "The spooktator of Stuyvesant.",
@@ -149,7 +117,7 @@ const initialState = {
       permalink: "/humor/spooktator"
     },
     "books": {
-      id: 18,
+      id: 14,
       name: "Books",
       slug: "books",
       description: "The books of Stuyvesant.",
@@ -157,7 +125,7 @@ const initialState = {
       permalink: "/ae/books"
     },
     "feature": {
-      id: 19,
+      id: 15,
       name: "Feature",
       slug: "feature",
       description: "The feature of Stuyvesant.",
@@ -165,7 +133,7 @@ const initialState = {
       permalink: "/ae/feature"
     },
     "film": {
-      id: 20,
+      id: 16,
       name: "Film",
       slug: "film",
       description: "The film of Stuyvesant.",
@@ -173,7 +141,7 @@ const initialState = {
       permalink: "/ae/film"
     },
     "food": {
-      id: 21,
+      id: 17,
       name: "Food",
       slug: "food",
       description: "The food of Stuyvesant.",
@@ -181,7 +149,7 @@ const initialState = {
       permalink: "/ae/food"
     },
     "live-performances": {
-      id: 22,
+      id: 18,
       name: "Live Performances",
       slug: "live-performances",
       description: "The live performances of Stuyvesant.",
@@ -189,12 +157,52 @@ const initialState = {
       permalink: "/ae/live-performances"
     },
     "television": {
-      id: 23,
+      id: 19,
       name: "Television",
       slug: "television",
       description: "The television of Stuyvesant.",
       parentSlug: "ae",
       permalink: "/ae/television"
+    },
+    "art": {
+      id: 20,
+      name: "Art",
+      slug: "art",
+      description: "The art of Stuyvesant.",
+      parentSlug: 'media',
+      permalink: "/art"
+    },
+    "graphics": {
+      id: 21,
+      name: "Graphics",
+      slug: "graphics",
+      description: "The graphics of Stuyvesant.",
+      parentSlug: 'media',
+      permalink: "/graphics"
+    },
+    "music": {
+      id: 22,
+      name: "Music",
+      slug: "music",
+      description: "The music of Stuyvesant.",
+      parentSlug: 'media',
+      permalink: "/music"
+    },
+    "photo": {
+      id: 23,
+      name: "Photo",
+      slug: "photo",
+      description: "The photo of Stuyvesant.",
+      parentSlug: 'media',
+      permalink: "/photo"
+    },
+    "video": {
+      id: 24,
+      name: "Video",
+      slug: "video",
+      description: "The video of Stuyvesant.",
+      parentSlug: 'media',
+      permalink: "/video"
     },
   }
 };
