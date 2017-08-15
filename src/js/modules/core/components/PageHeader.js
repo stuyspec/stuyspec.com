@@ -60,16 +60,28 @@ class PageHeader extends React.Component {
 
   render() {
     const { classes, location, topLevelSectionsWithDirectChildren } = this.props;
-    const createLinksToTopLevelSections = () => {
-      return Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {
+    const createSidebarElements = () => {
+      let sidebarElements = [];
+
+      sidebarElements.push(
+        <Link key={-1} onClick={this.toggleSidebar} to={'/'}>Home</Link>
+      );
+
+      Object.keys(topLevelSectionsWithDirectChildren).forEach(sectionSlug => {
         const section = topLevelSectionsWithDirectChildren[ sectionSlug ];
-        return (
+        sidebarElements.push(
           <Link key={section.id}
+                onClick={this.toggleSidebar}
                 to={section.permalink}>
             {section.name}
           </Link>
         );
+        if (sectionSlug === 'sports' || sectionSlug === 'video') {
+          sidebarElements.push(<hr key={section.id + 100}/>);
+        }
       });
+
+      return sidebarElements;
     };
     return (
       <div className={classes.PageHeader}>
@@ -80,7 +92,7 @@ class PageHeader extends React.Component {
                    isOpen={this.state.isSidebarOpen}
                    onClick={this.sidebarStateWatcher}
                    width={220}>
-            {createLinksToTopLevelSections()}
+            {createSidebarElements()}
           </Sidebar>
         </div>
         {

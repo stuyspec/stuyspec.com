@@ -26,6 +26,11 @@ const styles = {
     marginBottom: '14px',
     padding: '7px 0 8px 0',
   },
+  subsectionBarLine: {
+    background: '#ddd',
+    height: '1px',
+    margin: 0,
+  },
   subsectionListItem: {
     display: 'inline',
     textDecoration: 'none',
@@ -37,6 +42,14 @@ const styles = {
     fontSize: '14px',
     fontWeight: 300,
     textTransform: 'uppercase',
+    '&:hover': {
+      color: '#000',
+      textDecoration: 'none',
+    },
+    '&:focus': {
+      color: '#000',
+      textDecoration: 'none',
+    }
   }
 };
 
@@ -63,10 +76,14 @@ const SectionPage = ({ classes,
     <div className={classes.SectionPage}>
       <h1 className={classes.sectionName}>{section.name}</h1>
       {
-        directSubsections !== null &&
-        <ul className={classes.subsectionBar}>
-          {createLinksToDirectSubsections()}
-        </ul>
+        ( Object.keys(directSubsections).length !== 0 ||
+          directSubsections.constructor !== Object ) ? (
+          <ul className={classes.subsectionBar}>
+            {createLinksToDirectSubsections()}
+          </ul>
+        ) : (
+          <hr className={classes.subsectionBarLine}/>
+        )
       }
       <ArticleList articles={sectionTreeArticles}
                    featuredMedia={featuredMedia}
