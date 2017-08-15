@@ -10,13 +10,12 @@ TODO: The following pages redirect you to something else:
  */
 
 
-
 const initialState = {
   'our-charter': {
     'id': 0,
     'title': 'Our Charter',
     'slug': 'our-charter',
-    'content': 'The Charter of The Spectator\n' +
+    'content': '<p>The Charter of The Spectator\n' +
     'Approved September 24, 2016 by The Spectator Editorial Board.\n' +
     'I. Statement of Purpose\n' +
     'The goal of The Spectator, the school newspaper of Stuyvesant High School, is to inform the Stuyvesant community, including students, teachers, administrators and parents, of the significant events and issues pertaining to the school.\n' +
@@ -131,13 +130,13 @@ const initialState = {
     '\n' +
     'If you have any comments, questions, concerns, or suggestions regarding this webpage or concerning The Spectator in general, please fill out a contact form or e-mail us directly at web@stuyspec.com\n' +
     '\n' +
-    'Please be aware that this webpage is currently a work in progress. We are still working to implement new features and update content. If you have access to past content that you believe should be on this site or know someone who does, please do not hesitate to contact us through the resources mentioned above. We sincerely apologize for any past work that is missing or lacks proper credit, and implore you to email us with any information you believe would assist in resolving this.',
+    'Please be aware that this webpage is currently a work in progress. We are still working to implement new features and update content. If you have access to past content that you believe should be on this site or know someone who does, please do not hesitate to contact us through the resources mentioned above. We sincerely apologize for any past work that is missing or lacks proper credit, and implore you to email us with any information you believe would assist in resolving this.</p>',
   },
   'advertise': {
     'id': 1,
     'title': 'Advertise',
     'slug': 'advertise',
-    'content': 'Local Advertising\n' +
+    'content': '<p>Local Advertising\n' +
     'Local advertisers are classified as all those companies either headquartered within New York City or whose New York City local branch is placing an advertisement.The best way to contact an advertising representative is to e-mail the business manager. For information on rates and our publication schedule, please see the advertising forms below.\n' +
     'National Advertising\n' +
     'Please direct all national advertising orders and questions to our business desk:\n' +
@@ -160,27 +159,27 @@ const initialState = {
     'Email: dtung@stuy.edu\n' +
     'Manager: Saloni Majmudar\n' +
     'Phone: 646.628.0139\n' +
-    'Email: smajmudar@stuy.edu',
+    'Email: smajmudar@stuy.edu</p> ',
   },
-  'sponsers': {
+  'sponsors': {
     'id': 2,
-    'title': 'Sponsers',
-    'slug': 'sponsers',
-    'content': 'Mystery Room NYC LogoMystery Room NYC is an escape the room game in which players assume the role of a detective that is trapped and needs to figure out what transpired in the space before they arrived. Teams must work together to uncover clues and piece together components in order to escape. The game is released in chapters and while you don’t have to play each part in order, playing all the chapters allow you to gain greater knowledge of the overall backstory behind each of the rooms, unveiling the mystery.\n' +
+    'title': 'Sponsors',
+    'slug': 'sponsors',
+    'content': '<p>Mystery Room NYC LogoMystery Room NYC is an escape the room game in which players assume the role of a detective that is trapped and needs to figure out what transpired in the space before they arrived. Teams must work together to uncover clues and piece together components in order to escape. The game is released in chapters and while you don’t have to play each part in order, playing all the chapters allow you to gain greater knowledge of the overall backstory behind each of the rooms, unveiling the mystery.\n' +
     'Become A Sponsor\n' +
-    'If you are interested in sponsoring The Spectator to help preserve the tradition of excellence our publication has established heretofore, please contact the business managers at business@stuyspec.com. For benefits of sponsorship, please see the below document.',
+    'If you are interested in sponsoring The Spectator to help preserve the tradition of excellence our publication has established heretofore, please contact the business managers at business@stuyspec.com. For benefits of sponsorship, please see the below document.</p>',
   },
   'apparel': {
     'id': 3,
     'title': 'Apparel',
     'slug': 'apparel',
-    'content': 'Apparel page',
+    'content': '<p>Apparel page</p>',
   },
   'staff': {
     'id': 4,
     'title': 'Staff',
     'slug': 'staff',
-    'content': 'Members of the 2017-2018 Spectator Editorial Board\n' +
+    'content': '<p>Members of the 2017-2018 Spectator Editorial Board\n' +
     'Editors in Chief\tNews Editors\tFeatures Editors\n' +
     'Matteo Wong*\tShameek Rakshit\tArchi Das\n' +
     'Anne George*\tNishmi Abeyweera\tAsim Kapparova\n' +
@@ -209,35 +208,35 @@ const initialState = {
     '\n' +
     'Web Editors\tFaculty Advisor\t\n' +
     'George Zheng\tKerry Garfinkel\t\n' +
-    'Jason Kao\t\t',
+    'Jason Kao\t\t</p>',
   },
   'contact': {
     'id': 5,
     'title': 'Contact',
     'slug': 'contact',
-    'content': 'Contact us at stuyspec@gmail.com',
+    'content': '<p>Contact us at stuyspec@gmail.com</p>',
   },
   'subscribe': {
     'id': 6,
     'title': 'Subscribe',
     'slug': 'subscribe',
-    'content': 'Subscribe page',
+    'content': '<p>Subscribe page</p>',
   },
   'join-us': {
     'id': 7,
     'title': 'Join Us',
     'slug': 'join-us',
-    'content': 'Join Us page',
+    'content': '<p>Join Us page</p>',
   },
   'visual-archives': {
     'id': 8,
     'title': 'Visual Archives',
     'slug': 'visual-archives',
-    'content': 'Visual Archives page',
+    'content': '<p>Visual Archives page</p>',
   },
 };
 
-const reducer = (state=initialState, action) => {
+const reducer = (state = initialState, action) => {
   return state;
 };
 

@@ -52,12 +52,12 @@ const RoutingApp = ({ sections, roles, abouts }) => {
   };
   const createAboutRoutes = () => {
     return Object.keys(abouts).map(aboutSlug => {
-      const aboutPage = abouts[aboutSlug];
+      const aboutPage = abouts[ aboutSlug ];
       return <Route
-        exact path ={`/about/${aboutPage.slug}`}
-        key = {`aboutRoutes${aboutPage.id}`}
+        exact path={`/about/${aboutPage.slug}`}
+        key={`aboutRoutes${aboutPage.id}`}
         render={props => (
-          <AboutPage  about={aboutPage}/>
+          <AboutPage about={aboutPage}/>
         )}/>
     })
   };
@@ -75,7 +75,7 @@ const RoutingApp = ({ sections, roles, abouts }) => {
                  render={props => (
                    <ContributorPage match={props.match}
                                     role={roles[ 'contributors' ]}/>
-                   )}/>
+                 )}/>
         </Switch>
       </PageLayout>
     </ConnectedRouter>
