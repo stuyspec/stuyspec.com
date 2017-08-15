@@ -1,7 +1,7 @@
 /*
 Sidebar.css is necessary for styling nested HTML elements that cannot be
-  reached with the built-in Javascript styling, for the sidebar in
-  PageHeader.js, that is unable to support nested JSS.
+  reached with react-burger-menu's built-in Javascript styling (in
+  PageHeader.js), as it is unable to support nested JSS.
  */
 
 .bm-menu-wrap {
