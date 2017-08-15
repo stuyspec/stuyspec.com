@@ -5,6 +5,8 @@ export const getRoles = state => state.users.roles;
 export const getUserRoles = state => state.users.userRoles;
 
 const getRequestedContributorSlug = (state, props) => props.match.params.contributor_slug;
+const getRequestedIllustratorSlug = (state, props) => props.match.params.illustrator_slug;
+const getRequestedPhotographerSlug = (state, props) => props.match.params.photographer_slug;
 const getRoleFromProps = (state, props) => props.role;
 const getUsersResponse = state => state.users.response;
 
@@ -12,6 +14,20 @@ export const getContributorFromSlug = createSelector(
   [ getUsers, getRequestedContributorSlug ],
   (users, requestedContributorSlug) => {
     return users[ requestedContributorSlug ];
+  }
+);
+
+export const getPhotographerFromSlug = createSelector(
+  [ getUsers, getRequestedPhotographerSlug],
+  (users, requestedPhotographerSlug) => {
+    return users[ requestedPhotographerSlug ];
+  }
+);
+
+export const getIllustratorFromSlug = createSelector(
+  [ getUsers, getRequestedIllustratorSlug ],
+  (users, requestedIllustratorSlug) => {
+    return users[ requestedIllustratorSlug ];
   }
 );
 

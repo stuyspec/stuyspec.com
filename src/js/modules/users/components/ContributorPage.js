@@ -28,7 +28,7 @@ const ContributorPage = ({ classes, role, contributor, articles, sections }) => 
   };
   return (
     <div className={classes.ContributorPage}>
-      <h1>{contributor.firstName} {contributor.lastName}</h1>
+      <p>{contributor.firstName} {contributor.lastName}</p>
       <p>role: <Link to={`/${role.slug}`}>{role.title}</Link></p>
       <div>
         <p>articles</p>

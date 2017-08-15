@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { HomePage, PageLayout } from "./core/components";
 import { ArticlePage } from "./articles/components";
 import { SectionPage } from "./sections/components";
-import { RolePage, ContributorPage } from "./users/components";
+import { RolePage, ContributorPage, PhotographerPage, IllustratorPage } from "./users/components";
 
 import { getSections } from "./sections/selectors";
 import { getRoles } from "./users/selectors";
@@ -48,26 +48,37 @@ const RoutingApp = ({ sections, roles }) => {
         )}/>
     })
   };
-  /* TODO: Find a way to do this
   const createUserRoleRoutes = () => {
     return Object.keys(roles).map(roleSlug => {
       const role = roles[ roleSlug ];
       switch (role.title) {
+        case "Contributor": {
+          return <Route exact path={`/${role.slug}/:contributor_slug`}
+                        key={`${role.title}Route`}
+                        render={props => (
+                          <ContributorPage match={props.match}
+                                           role={roles[ `${role.slug}` ]}/>
+                        )}/>
+        }
         case "Photographer": {
-          return
+          return <Route exact path={`/${role.slug}/:photographer_slug`}
+                        key={`${role.title}Route`}
+                        render={props => (
+                          <PhotographerPage match={props.match}
+                                            role={roles[ `${role.slug}` ]}/>
+                        )}/>
+        }
+        case "Illustrator": {
+          return <Route exact path={`/${role.slug}/:illustrator_slug`}
+                        key={`${role.title}Route`}
+                        render={props => (
+                          <IllustratorPage match={props.match}
+                                           role={roles[ `${role.slug}` ]}/>
+                        )}/>
         }
       }
-      return (
-        <Route exact path={`/${role.slug}/:contributor_slug`}
-               key={`${role.title}Route`}
-               render={props => (
-                 <ContributorPage match={props.match}
-                                  role={roles[ `${role.slug}` ]}/>
-               )}/>
-      )
-    })
+    });
   };
-  */
   return (
     <ConnectedRouter history={appHistory}>
       <PageLayout>
@@ -76,6 +87,7 @@ const RoutingApp = ({ sections, roles }) => {
           {createSectionRoutes()}
           {createArticleRoutes()}
           {createRoleRoutes()}
+          {createUserRoleRoutes()}
         </Switch>
       </PageLayout>
     </ConnectedRouter>

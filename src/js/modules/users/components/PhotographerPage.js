@@ -3,17 +3,17 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import { getContributorFromSlug } from "../selectors";
+import { getPhotographerFromSlug } from "../selectors";
 import { getArticlesByContributor } from "../../articles/selectors";
 import { getSections } from "../../sections/selectors";
 
 const styles = {
-  ContributorPage: {
+  PhotogrpherPage: {
     marginTop: '50px',
   },
 };
 
-const ContributorPage = ({ classes, role, contributor, articles, sections }) => {
+const PhotographerPage = ({ classes, role, photographer, articles, sections }) => {
   const createLinksToArticlesByContributor = () => {
     return Object.keys(articles).map(articleSlug => {
       const article = articles[ articleSlug ];
@@ -27,8 +27,8 @@ const ContributorPage = ({ classes, role, contributor, articles, sections }) => 
     });
   };
   return (
-    <div className={classes.ContributorPage}>
-      <h1>{contributor.firstName} {contributor.lastName}</h1>
+    <div className={classes.PhotographerPage}>
+      <h1>{photographer.firstName} {photographer.lastName}</h1>
       <p>role: <Link to={`/${role.slug}`}>{role.title}</Link></p>
       <div>
         <p>articles</p>
@@ -41,7 +41,7 @@ const ContributorPage = ({ classes, role, contributor, articles, sections }) => 
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  contributor: getContributorFromSlug(state, ownProps),
+  photographer: getPhotographerFromSlug(state, ownProps),
   articles: getArticlesByContributor(state, ownProps),
   sections: getSections(state),
 });
@@ -49,4 +49,4 @@ const mapStateToProps = (state, ownProps) => ({
 export default connect(
   mapStateToProps,
   null
-)(injectSheet(styles)(ContributorPage));
+)(injectSheet(styles)(PhotographerPage));

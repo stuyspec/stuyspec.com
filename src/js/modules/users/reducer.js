@@ -36,6 +36,15 @@ const initialState = {
       email: "ccai1@stuy.edu",
       description: "Cathy is a web EIT for The Spectator.",
       slug: "cathy-cai",
+    },
+    "nicolas-yang": {
+      id: 3,
+      firstName: "Nicolas",
+      lastName: "Yang",
+      username: "nyang1",
+      email: "nyang1@stuy.edu",
+      description: "Nicolas is a super alumni for The Spectator.",
+      slug: "nicolas-yang",
     }
   },
   roles: {
@@ -74,7 +83,19 @@ const initialState = {
     {
       userSlug: "cathy-cai",
       roleSlug: "photographers",
-    }
+    },
+    {
+      userSlug: "jason-lin",
+      roleSlug: "illustrators",
+    },
+    {
+      userSlug: "nicolas-yang",
+      roleSlug: "illustrators",
+    },
+    {
+      userSlug: "nicolas-yang",
+      roleSlug: "photographers",
+    },
   ]
 };
 
