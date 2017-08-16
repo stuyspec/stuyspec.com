@@ -1,8 +1,5 @@
 import { createSelector } from "reselect";
 
-import { getArticles } from "../articles/selectors";
-import { getMedia } from "../media/selectors";
-
 export const getUsers = state => state.users.users;
 export const getRoles = state => state.users.roles;
 export const getUserRoles = state => state.users.userRoles;
@@ -11,8 +8,8 @@ const getRequestedContributorSlug = (state, props) => props.match.params.contrib
 const getRequestedIllustratorSlug = (state, props) => props.match.params.illustrator_slug;
 const getRequestedPhotographerSlug = (state, props) => props.match.params.photographer_slug;
 
-const getRoleFromProps = (state, props) => props.role;
 const getUsersResponse = state => state.users.response;
+const getRoleFromProps = (state, props) => props.role;
 
 export const getContributorFromSlug = createSelector(
   [ getUsers, getRequestedContributorSlug ],
@@ -28,26 +25,6 @@ export const getPhotographerFromSlug = createSelector(
   }
 );
 
-export const getPhotographerWithArticles = createSelector(
-  [ getPhotographerFromSlug, getMedia, getArticles ],
-  (photographer, media, articles) => {
-    const photographs = Object.filter(media, mediaObject => {
-      return mediaObject.userSlug === photographer.slug &&
-        mediaObject.type === 'photograph';
-    });
-    const articleSlugs = Object.keys(photographs).map(photographId => {
-      const photograph = photographs[ photographId ];
-      return photograph.articleSlug;
-    });
-    return {
-      ...photographer,
-      articles: Object.filter(articles, article => {
-        return articleSlugs.includes(article.slug);
-      }),
-    };
-  }
-);
-
 export const getIllustratorFromSlug = createSelector(
   [ getUsers, getRequestedIllustratorSlug ],
   (users, requestedIllustratorSlug) => {
@@ -55,28 +32,8 @@ export const getIllustratorFromSlug = createSelector(
   }
 );
 
-export const getIllustratorWithArticles = createSelector(
-  [ getIllustratorFromSlug, getMedia, getArticles ],
-  (illustrator, media, articles) => {
-    const illustrations = Object.filter(media, mediaObject => {
-      return mediaObject.userSlug === illustrator.slug &&
-        mediaObject.type === 'illustration';
-    });
-    const articleSlugs = Object.keys(illustrations).map(illustrationId => {
-      const illustration = illustrations[ illustrationId ];
-      return illustration.articleSlug;
-    });
-    return {
-      ...illustrator,
-      articles: Object.filter(articles, article => {
-        return articleSlugs.includes(article.slug);
-      }),
-    };
-  }
-);
-
 /**
- * The selector returns all users in a role.
+ * The selector returns all users for the RolePage.
  */
 export const getUsersInRole = createSelector(
   [ getUsers, getRoleFromProps, getUserRoles ],

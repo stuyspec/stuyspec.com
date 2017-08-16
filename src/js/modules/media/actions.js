@@ -8,7 +8,6 @@ const fakeMedia = [
   {
     id: 0,
     userId: 0,
-    articleId: 12,
     url: 'https://i.ytimg.com/vi/qh7LLydY8eo/maxresdefault.jpg',
     title: 'Bird Die',
     caption: 'A bird is going to die.',
@@ -17,7 +16,6 @@ const fakeMedia = [
   {
     id: 1,
     userId: 2,
-    articleId: 10,
     url: 'https://i.ytimg.com/vi/v6wfobPI2fI/maxresdefault.jpg',
     title: 'Car Crash',
     caption: 'Two cars fight to the death in order to win lifetime supply of tires.',
@@ -26,7 +24,6 @@ const fakeMedia = [
   {
     id: 2,
     userId: 1,
-    articleId: 11,
     url: 'https://i.ytimg.com/vi/qh7LLydY8eo/maxresdefault.jpg',
     title: 'Bird Die',
     caption: 'A bird is going to die.',
@@ -35,7 +32,6 @@ const fakeMedia = [
   {
     id: 3,
     userId: 0,
-    articleId: 13,
     url: 'https://i.ytimg.com/vi/qh7LLydY8eo/maxresdefault.jpg',
     title: 'Bird Die',
     caption: 'A bird is going to die.',
@@ -44,7 +40,6 @@ const fakeMedia = [
   {
     id: 4,
     userId: 2,
-    articleId: 14,
     url: 'https://i.ytimg.com/vi/qh7LLydY8eo/maxresdefault.jpg',
     title: 'Bird Die',
     caption: 'A bird is going to die.',
@@ -80,7 +75,7 @@ export const fetchMedia = () => {
 };
 
 const validateMedia = (mediaArray) => {
-  const integerProperties = [ 'id', 'userId', 'articleId' ];
+  const integerProperties = [ 'id', 'userId' ];
   const stringProperties = [ 'url', 'title', 'caption', 'type' ];
   if (!Array.isArray(mediaArray)) {
     throw 'EXCEPTION: media response is not an array.'

@@ -2,10 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 
-import {
-  getArticleFromRequestedSlug,
-  getFeaturedMediaForArticleWithUser
-} from "../selectors";
+import { getArticleFeaturedMedia, getArticleFromRequestedSlug } from "../selectors";
 import ArticleHeader from "./ArticleHeader";
 import ArticleBody from "./ArticleBody";
 
@@ -16,7 +13,8 @@ const styles = {
   },
 };
 
-const ArticlePage = ({ classes, article, section, featuredMedia }) => {
+const ArticlePage = ({ classes, article, section, media }) => {
+  const featuredMedia = media[ article.mediaId ];
   return (
     <div className={ classes.ArticlePage }>
       <ArticleHeader
@@ -33,7 +31,7 @@ const ArticlePage = ({ classes, article, section, featuredMedia }) => {
 const mapStateToProps = (state, ownProps) => {
   return {
     article: getArticleFromRequestedSlug(state, ownProps),
-    featuredMedia: getFeaturedMediaForArticleWithUser(state, ownProps),
+    featuredMedia: getArticleFeaturedMedia(state, ownProps),
   };
 };
 
