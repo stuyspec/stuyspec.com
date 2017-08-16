@@ -70,6 +70,7 @@
     "jss-preset-default": "^3.0.0",
     "locate-path": "^2.0.0",
     "lru-cache": "^4.1.1",
+    "madge": "^2.0.0",
     "mime-db": "^1.29.0",
     "orchestrator": "^0.3.8",
     "react-bootstrap": "^0.31.1",

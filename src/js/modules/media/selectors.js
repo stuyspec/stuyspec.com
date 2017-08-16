@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 import { objectFilter } from "../../utils";
-import { getArticles } from "../core/selectors";
-import { getUsers } from "../core/selectors";
+import { getArticles } from "../articles/selectors";
+import { getUsers } from "../users/selectors";
 
 Object.filter = objectFilter;
 

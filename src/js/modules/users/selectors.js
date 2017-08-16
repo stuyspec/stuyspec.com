@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 
-import { getArticles } from "../core/selectors";
+import { getArticles } from "../articles/selectors";
 import { getMedia } from "../media/selectors";
 
 export const getUsers = state => state.users.users;
