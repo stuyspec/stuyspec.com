@@ -3,21 +3,21 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import { getPhotographerFromSlug } from "../selectors";
-import { getPhotographsByPhotographer } from "../../media/selectors"
+import { createPhotographerArticles } from "../selectors";
 
 const styles = {
-  PhotogrpherPage: {
+  PhotographerPage: {
     marginTop: '50px',
   },
 };
 
-const PhotographerPage = ({ classes, role, photographer, photographs }) => {
-  const create = () => {
+const PhotographerPage = ({ classes, role, photographerWithArticles }) => {
+  const createPhotographerArticles = () => {
+    const articles = photographerWithArticles.articles;
     return Object.keys(articles).map(articleSlug => {
       const article = articles[ articleSlug ];
       return (
-        <li key={`contributorArticleListItem${article.id}`}>
+        <li key={article.id}>
           <Link to={`${sections[ article.sectionSlug ].permalink}/${articleSlug}`}>
             {article.title}
           </Link>
@@ -40,8 +40,7 @@ const PhotographerPage = ({ classes, role, photographer, photographs }) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  photographer: getPhotographerFromSlug(state, ownProps),
-  photographs: getPhotographsByPhotographer(state, ownProps)
+  photographerWithArticles: getPhotographerWithArticles(state, ownProps),
 });
 
 export default connect(

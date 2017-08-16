@@ -1,11 +1,7 @@
 import { createSelector } from "reselect";
 import { objectFilter } from "../../utils";
 import { getArticles } from "../core/selectors";
-import {
-  getUsers,
-  getIllustratorFromSlug,
-  getPhotographerFromSlug
-} from "../users/selectors";
+import { getUsers } from "../users/selectors";
 
 Object.filter = objectFilter;
 
@@ -36,23 +32,3 @@ export const getProcessedMediaResponse = createSelector(
     }, {});
   }
 );
-
-export const getIllustrationsByIllustrator = createSelector(
-  [ getMedia, getIllustratorFromSlug ],
-  (media, illustrator) => {
-    return Object.filter(media, mediaObject => {
-      return mediaObject.type === 'illustration' &&
-        mediaObject.userSlug === illustrator.slug;
-    });
-  }
-);
-
-export const getPhotographsByPhotographer = createSelector(
-  [ getMedia, getPhotographerFromSlug ],
-  (media, photographer) => {
-    return Object.filter(media, mediaObject => {
-      return mediaObject.type === 'photograph' &&
-        mediaObject.userSlug === photographer.slug;
-    })
-  }
-)
