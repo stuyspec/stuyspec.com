@@ -56,8 +56,9 @@ const IllustratorPage = ({ classes, illustrator, articles }) => {
       <Row>
         <Col md={ 9 }>
           <p className={ classes.name }>{ illustrator.firstName } { illustrator.lastName }</p>
-          <img src={ illustrator.url } alt={ illustrator.lastName }
-               className={ classes.profilePicture }/>
+          <img alt={ photographer.lastName }
+               className={ classes.profilePicture }
+               src={ photographer.url }/>
           <p className={ classes.description }>{ illustrator.description }</p>
           <div className={ classes.allWork }>Illustrations</div>
           { createArticleRows() }
@@ -68,8 +69,8 @@ const IllustratorPage = ({ classes, illustrator, articles }) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  articles: getIllustratorArticles(state, ownProps),
   illustrator: getIllustratorFromSlug(state, ownProps),
+  articles: getIllustratorArticles(state, ownProps),
 });
 
 export default connect(

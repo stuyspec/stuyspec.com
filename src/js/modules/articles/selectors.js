@@ -4,8 +4,6 @@ import { createSelector } from "reselect";
 import {
   getUsers,
   getContributorFromSlug,
-  getIllustratorFromSlug,
-  getPhotographerFromSlug,
 } from "../users/selectors";
 import {
   getSections,
@@ -13,7 +11,11 @@ import {
   getSectionSlugFromId,
   getSlugsInSectionTree,
 } from "../sections/selectors";
-import { getMedia } from "../media/selectors";
+import {
+  getMedia,
+  getIllustratorIllustrations,
+  getPhotographerPhotographs,
+} from "../media/selectors";
 
 export const getArticles = state => state.articles.articles;
 const getAuthorships = state => state.articles.authorships;
@@ -72,10 +74,10 @@ export const getArticleFromRequestedSlug = createSelector(
 );
 
 /**
- * The selector returns a filtered articles object that contains all articles
+ * The selector returns an object that contains all articles
  *   written by a contributor.
  */
-export const getArticlesByContributor = createSelector(
+export const getContributorArticles = createSelector(
   [ getContributorFromSlug, getArticlesWithContributors, getAuthorships ],
   (contributor, articlesWithContributors, authorships) => {
     const articleSlugs = authorships

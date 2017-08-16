@@ -1,18 +1,27 @@
 import { createSelector } from "reselect";
-import { objectFilter } from "../../utils";
+
 import {
   getUsers,
+  getIllustratorFromSlug,
+  getPhotographerFromSlug,
 } from "../users/selectors";
 
-Object.filter = objectFilter;
 
 export const getMedia = state => state.media.media;
 
 const getMediaResponse = state => state.media.response;
 
-export const getPhotographerPhotographs = createSelector(
+export const getIllustratorIllustrations = createSelector(
+  [ getIllustratorFromSlug, getMedia ],
+  (illustrator, media) => Object
+    .filter(media, mediaObject => mediaObject.userSlug === illustrator.slug)
+);
 
-)
+export const getPhotographerPhotographs = createSelector(
+  [ getPhotographerFromSlug, getMedia ],
+  (photographer, media) => Object
+    .filter(media, mediaObject => mediaObject.userSlug === photographer.slug)
+);
 
 export const getProcessedMediaResponse = createSelector(
   [ getMediaResponse, getUsers ],

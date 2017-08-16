@@ -56,8 +56,9 @@ const PhotographerPage = ({ classes, photographer, articles }) => {
       <Row>
         <Col md={ 9 }>
           <p className={ classes.name }>{ photographer.firstName } { photographer.lastName }</p>
-          <img src={ photographer.url } alt={ photographer.lastName }
-               className={ classes.profilePicture }/>
+          <img alt={ photographer.lastName }
+               className={ classes.profilePicture }
+               src={ photographer.url }/>
           <p className={ classes.description }>{ photographer.description }</p>
           <div className={ classes.allWork }>Photographs</div>
           { createArticleRows() }
@@ -68,8 +69,8 @@ const PhotographerPage = ({ classes, photographer, articles }) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  articles: getPhotographerArticles(state, ownProps),
   photographer: getPhotographerFromSlug(state, ownProps),
+  articles: getPhotographerArticles(state, ownProps),
 });
 
 export default connect(

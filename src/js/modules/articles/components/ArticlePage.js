@@ -13,7 +13,8 @@ const styles = {
   },
 };
 
-const ArticlePage = ({ classes, article, section, featuredMedia }) => {
+const ArticlePage = ({ classes, article, section, media }) => {
+  const featuredMedia = media[ article.mediaId ];
   return (
     <div className={ classes.ArticlePage }>
       <ArticleHeader

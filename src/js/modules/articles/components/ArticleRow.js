@@ -69,11 +69,8 @@ const ArticleRow = ({ classes, article, sections, media }) => {
   const matchedSections = Object.filter(sections, sectionObject => {
     return article.sectionSlug === sectionObject.slug;
   });
-  const section = matchedSections[ Object.keys(matchedSections)[0] ];
-  const matchedMedia = Object.filter(media, mediaObject => {
-    return mediaObject.articleSlug === article.slug;
-  });
-  const featuredMedia = matchedMedia[ Object.keys(matchedMedia)[0] ];
+  const section = Object.values(matchedSections)[ 0 ];
+  const featuredMedia = media[ article.mediaId ];
   return (
     <Row key={`articleBlock${article.id}`} className={classes.ArticleRow}>
       <Col md={3} lg={3}>

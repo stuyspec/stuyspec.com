@@ -1,7 +1,4 @@
 import { createSelector } from "reselect";
-import { objectFilter } from "../../utils";
-
-Object.filter = objectFilter;
 
 export const getSections = (state) => state.sections.sections;
 export const getSectionFromProps = (state, props) => props.section;
