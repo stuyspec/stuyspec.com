@@ -1,5 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
+
+import { capitalizeFirstLetter } from "../../../utils";
+import { ROLE_SLUG_OF_MEDIA_TYPE } from "../../../constants";
+import { getUsers } from "../../users/selectors";
 
 const styles = {
   figure: {
@@ -14,22 +20,39 @@ const styles = {
     fontSize: '14px',
     lineHeight: '1.07',
     marginTop: '7px',
-    '& span:last-child': {
-      color: '#888'
-    },
   },
+  creditLine: {
+    color: '#888',
+  }
 };
 
-const ArticleFeaturedMedia = ({ classes, featuredMedia }) => {
+const ArticleFeaturedMedia = ({ classes, featuredMedia, users }) => {
+  const createCreditLine = () => {
+    const creator = users[ featuredMedia.userSlug ];
+    return (
+      <Link className={ classes.creditLine }
+            to={ `/${ROLE_SLUG_OF_MEDIA_TYPE[ featuredMedia.type ]}/${creator.slug}` }>
+        { capitalizeFirstLetter(featuredMedia.type) }
+        &nbsp;by&nbsp;
+        { `${creator.firstName} ${creator.lastName}` }
+      </Link>
+    )
+  }
   return (
-    <figure className={classes.figure}>
-      <img className={classes.img} src={featuredMedia.url}/>
-      <figcaption className={classes.caption}>
-        <span>{featuredMedia.caption}</span>
-        <span>{featuredMedia.type} by {featuredMedia.credits}</span>
+    <figure className={ classes.figure }>
+      <img className={ classes.img } src={ featuredMedia.url }/>
+      <figcaption className={ classes.caption }>
+        <span>{ featuredMedia.caption }&nbsp;</span>
+        { createCreditLine() }
       </figcaption>
     </figure>
   );
 };
 
-export default injectSheet(styles)(ArticleFeaturedMedia);
+const mapStateToProps = (state) => ({
+  users: getUsers(state),
+});
+
+export default connect(
+  mapStateToProps
+)(injectSheet(styles)(ArticleFeaturedMedia));

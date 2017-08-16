@@ -7,6 +7,7 @@ export const getUserRoles = state => state.users.userRoles;
 const getRequestedContributorSlug = (state, props) => props.match.params.contributor_slug;
 const getRequestedIllustratorSlug = (state, props) => props.match.params.illustrator_slug;
 const getRequestedPhotographerSlug = (state, props) => props.match.params.photographer_slug;
+
 const getRoleFromProps = (state, props) => props.role;
 const getUsersResponse = state => state.users.response;
 

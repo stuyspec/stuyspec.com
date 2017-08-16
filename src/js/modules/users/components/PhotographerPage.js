@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
 import { getPhotographerFromSlug } from "../selectors";
-import { getArticlesByContributor } from "../../articles/selectors";
-import { getSections } from "../../sections/selectors";
+import { getPhotographsByPhotographer } from "../../media/selectors"
 
 const styles = {
   PhotogrpherPage: {
@@ -13,8 +12,8 @@ const styles = {
   },
 };
 
-const PhotographerPage = ({ classes, role, photographer, articles, sections }) => {
-  const createLinksToArticlesByContributor = () => {
+const PhotographerPage = ({ classes, role, photographer, photographs }) => {
+  const create = () => {
     return Object.keys(articles).map(articleSlug => {
       const article = articles[ articleSlug ];
       return (
@@ -42,8 +41,7 @@ const PhotographerPage = ({ classes, role, photographer, articles, sections }) =
 
 const mapStateToProps = (state, ownProps) => ({
   photographer: getPhotographerFromSlug(state, ownProps),
-  articles: getArticlesByContributor(state, ownProps),
-  sections: getSections(state),
+  photographs: getPhotographsByPhotographer(state, ownProps)
 });
 
 export default connect(

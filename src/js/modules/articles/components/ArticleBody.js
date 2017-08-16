@@ -21,9 +21,9 @@ const styles = {
 
 const ArticleBody = ({ classes, content, featuredMedia }) => {
   return (
-    <div className={classes.ArticleBody}>
-      <ArticleFeaturedMedia featuredMedia={featuredMedia}/>
-      <div dangerouslySetInnerHTML={{ __html: content }}/>
+    <div className={ classes.ArticleBody }>
+      <ArticleFeaturedMedia featuredMedia={ featuredMedia }/>
+      <div dangerouslySetInnerHTML={ { __html: content } }/>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import {
   getSectionSlugFromId,
   getSlugsInSectionTree,
 } from "../sections/selectors";
+import { getMedia } from "../media/selectors";
 
 export const getArticles = state => state.articles.articles;
 const getAuthorships = state => state.articles.authorships;
@@ -52,6 +53,9 @@ export const getSectionTreeArticles = createSelector(
   }
 );
 
+/**
+ * The selector returns an article object from the requested slug.
+ */
 export const getArticleFromRequestedSlug = createSelector(
   [ getArticlesWithContributors, getRequestedArticleSlug, getSectionFromProps ],
   (articlesWithContributors, articleSlug, section) => {
@@ -75,6 +79,24 @@ export const getArticlesByContributor = createSelector(
     return Object.filter(articlesWithContributors, article => {
       return articleSlugs.includes(article.slug);
     });
+  }
+);
+
+/**
+ * The selector returns a media object for the featured media of a requested
+ *   article.
+ */
+export const getFeaturedMediaForArticleWithUser = createSelector(
+  [ getArticleFromRequestedSlug, getMedia ],
+  (article, media) => {
+    const matchedMedia = Object.filter(media, mediaObject => {
+      return mediaObject.articleSlug === article.slug;
+    });
+    for (const mediaId in matchedMedia) {
+      return {
+        ...matchedMedia[ mediaId ]
+      };
+    }
   }
 );
 
