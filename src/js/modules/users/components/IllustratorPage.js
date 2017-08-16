@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 
-import { getIllustratorWithArticles } from "../selectors";
+import { getIllustratorFromSlug } from "../selectors";
+import { getIllustratorArticles } from "../../articles/selectors";
 import { ArticleRow } from "../../articles/components";
 
 const styles = {
@@ -43,9 +44,8 @@ const styles = {
   },
 };
 
-const IllustratorPage = ({ classes, illustratorWithArticles }) => {
-  const createIllustratorArticles = () => {
-    const articles = illustratorWithArticles.articles;
+const IllustratorPage = ({ classes, illustrator, articles }) => {
+  const createArticleRows = () => {
     return Object.keys(articles).map(articleSlug => {
       const article = articles[ articleSlug ];
       return <ArticleRow key={ article.id } article={ article }/>;
@@ -55,12 +55,12 @@ const IllustratorPage = ({ classes, illustratorWithArticles }) => {
     <Grid className={ classes.IllustratorPage }>
       <Row>
         <Col md={ 9 }>
-          <p className={ classes.name }>{ illustratorWithArticles.firstName } { illustratorWithArticles.lastName }</p>
-          <img src={ illustratorWithArticles.url } alt={ illustratorWithArticles.id }
+          <p className={ classes.name }>{ illustrator.firstName } { illustrator.lastName }</p>
+          <img src={ illustrator.url } alt={ illustrator.lastName }
                className={ classes.profilePicture }/>
-          <p className={ classes.description }>{ illustratorWithArticles.description }</p>
+          <p className={ classes.description }>{ illustrator.description }</p>
           <div className={ classes.allWork }>Illustrations</div>
-          { createIllustratorArticles() }
+          { createArticleRows() }
         </Col>
       </Row>
     </Grid>
@@ -68,7 +68,8 @@ const IllustratorPage = ({ classes, illustratorWithArticles }) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  illustratorWithArticles: getIllustratorWithArticles(state, ownProps),
+  articles: getIllustratorArticles(state, ownProps),
+  illustrator: getIllustratorFromSlug(state, ownProps),
 });
 
 export default connect(

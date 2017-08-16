@@ -2,10 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 
-import {
-  getArticleFromRequestedSlug,
-  getFeaturedMediaForArticleWithUser
-} from "../selectors";
+import { getArticleFeaturedMedia, getArticleFromRequestedSlug } from "../selectors";
 import ArticleHeader from "./ArticleHeader";
 import ArticleBody from "./ArticleBody";
 
@@ -33,7 +30,7 @@ const ArticlePage = ({ classes, article, section, featuredMedia }) => {
 const mapStateToProps = (state, ownProps) => {
   return {
     article: getArticleFromRequestedSlug(state, ownProps),
-    featuredMedia: getFeaturedMediaForArticleWithUser(state, ownProps),
+    featuredMedia: getArticleFeaturedMedia(state, ownProps),
   };
 };
 

@@ -1,7 +1,12 @@
 import React from 'react';
 import { createSelector } from "reselect";
 
-import { getUsers, getContributorFromSlug } from "../users/selectors";
+import {
+  getUsers,
+  getContributorFromSlug,
+  getIllustratorFromSlug,
+  getPhotographerFromSlug,
+} from "../users/selectors";
 import {
   getSections,
   getSectionFromProps,
@@ -86,17 +91,36 @@ export const getArticlesByContributor = createSelector(
  * The selector returns a media object for the featured media of a requested
  *   article.
  */
-export const getFeaturedMediaForArticleWithUser = createSelector(
+export const getArticleFeaturedMedia = createSelector(
   [ getArticleFromRequestedSlug, getMedia ],
-  (article, media) => {
-    const matchedMedia = Object.filter(media, mediaObject => {
-      return mediaObject.articleSlug === article.slug;
+  (article, media) => media[ article.mediaId ]
+);
+
+/**
+ * The selector returns an object that contains all articles an illustrator has
+ *   illustrated for (featured media only).
+ */
+export const getIllustratorArticles = createSelector(
+  [ getIllustratorIllustrations, getArticlesWithContributors ],
+  (illustrations, articles) => {
+    const illustrationIds = Object.keys(illustrations);
+    return Object.filter(articles, articleObject => {
+      return illustrationIds.includes( articleObject.mediaId.toString() );
     });
-    for (const mediaId in matchedMedia) {
-      return {
-        ...matchedMedia[ mediaId ]
-      };
-    }
+  }
+);
+
+/**
+ * The selector returns an object that contains all articles a photographer has
+ *   photographed for (featured media only).
+ */
+export const getPhotographerArticles = createSelector(
+  [ getPhotographerPhotographs, getArticlesWithContributors ],
+  (photographs, articles) => {
+    const photographIds = Object.keys(photographs);
+    return Object.filter(articles, articleObject => {
+      return photographIds.includes( articleObject.mediaId.toString() );
+    });
   }
 );
 
@@ -114,6 +138,7 @@ export const getProcessedArticlesResponse = createSelector(
         ...currentArticle,
         sectionSlug: getSectionSlugFromId(sections, sectionId),
         dateline: 'July 31, 2017', // TODO: get Jason L.'s date formatter code
+        mediaId: 1, // TODO: @nicholas get media id's into API
       };
       return accumulatedArticles;
     }, {});

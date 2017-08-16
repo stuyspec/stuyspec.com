@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 
-import { getPhotographerWithArticles } from "../selectors";
+import { getPhotographerFromSlug } from "../selectors";
+import { getPhotographerArticles } from "../../articles/selectors";
 import { ArticleRow } from "../../articles/components";
 
 const styles = {
@@ -43,9 +44,8 @@ const styles = {
   },
 };
 
-const PhotographerPage = ({ classes, photographerWithArticles }) => {
-  const createPhotographerArticles = () => {
-    const articles = photographerWithArticles.articles;
+const PhotographerPage = ({ classes, photographer, articles }) => {
+  const createArticleRows = () => {
     return Object.keys(articles).map(articleSlug => {
       const article = articles[ articleSlug ];
       return <ArticleRow key={ article.id } article={ article }/>;
@@ -55,12 +55,12 @@ const PhotographerPage = ({ classes, photographerWithArticles }) => {
     <Grid className={ classes.PhotographerPage }>
       <Row>
         <Col md={ 9 }>
-          <p className={ classes.name }>{ photographerWithArticles.firstName } { photographerWithArticles.lastName }</p>
-          <img src={ photographerWithArticles.url } alt={ photographerWithArticles.id }
+          <p className={ classes.name }>{ photographer.firstName } { photographer.lastName }</p>
+          <img src={ photographer.url } alt={ photographer.lastName }
                className={ classes.profilePicture }/>
-          <p className={ classes.description }>{ photographerWithArticles.description }</p>
+          <p className={ classes.description }>{ photographer.description }</p>
           <div className={ classes.allWork }>Photographs</div>
-          { createPhotographerArticles() }
+          { createArticleRows() }
         </Col>
       </Row>
     </Grid>
@@ -68,7 +68,8 @@ const PhotographerPage = ({ classes, photographerWithArticles }) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  photographerWithArticles: getPhotographerWithArticles(state, ownProps),
+  articles: getPhotographerArticles(state, ownProps),
+  photographer: getPhotographerFromSlug(state, ownProps),
 });
 
 export default connect(

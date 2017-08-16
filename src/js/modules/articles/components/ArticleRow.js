@@ -4,8 +4,8 @@ import { Row, Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import { getMedia } from "../../core/selectors";
-import { getSections } from "../../core/selectors";
+import { getMedia } from "../../media/selectors";
+import { getSections } from "../../sections/selectors";
 import Byline from "./Byline";
 
 const styles = {

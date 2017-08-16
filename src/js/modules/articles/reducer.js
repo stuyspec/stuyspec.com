@@ -5,7 +5,6 @@ import {
   ADD_ARTICLES,
   ADD_AUTHORSHIPS
 } from './actionTypes';
-import { MATCH_MEDIA } from "../media/actionTypes";
 
 const initialState = {
   isFetching: false,
@@ -53,15 +52,6 @@ const reducer = (state = { ...initialState }, action) => {
           ...action.payload
         ],
         response: [],
-      }
-    }
-    case MATCH_MEDIA: {
-      return {
-        ...state,
-        articles : {
-          ...state.articles,
-          ...action.payload
-        },
       }
     }
   }

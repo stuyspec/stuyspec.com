@@ -1,7 +1,8 @@
 import { createSelector } from "reselect";
 import { objectFilter } from "../../utils";
-import { getArticles } from "../articles/selectors";
-import { getUsers } from "../users/selectors";
+import {
+  getUsers,
+} from "../users/selectors";
 
 Object.filter = objectFilter;
 
@@ -9,24 +10,22 @@ export const getMedia = state => state.media.media;
 
 const getMediaResponse = state => state.media.response;
 
+export const getPhotographerPhotographs = createSelector(
+
+)
+
 export const getProcessedMediaResponse = createSelector(
-  [ getMediaResponse, getUsers, getArticles ],
-  (mediaResponse, users, articles) => {
+  [ getMediaResponse, getUsers ],
+  (mediaResponse, users) => {
     return mediaResponse.reduce((accumulatedMedia, currentMedia) => {
       const matchedUsers = Object.filter(users, user => {
         return user.id === currentMedia.userId;
       });
       const userSlug = Object.keys(matchedUsers)[ 0 ];
       delete currentMedia[ 'userId' ];
-      const matchedArticles = Object.filter(articles, article => {
-        return article.id === currentMedia.articleId;
-      });
-      const articleSlug = Object.keys(matchedArticles)[ 0 ];
-      delete currentMedia[ 'articleId' ];
       accumulatedMedia[ currentMedia.id ] = {
         ...currentMedia,
-        userSlug: userSlug,
-        articleSlug: articleSlug,
+        userSlug,
       }
       return accumulatedMedia;
     }, {});
