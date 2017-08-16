@@ -62,6 +62,17 @@ const RoutingApp = ({ sections, roles }) => {
                    <ContributorPage match={props.match}
                                     role={roles[ 'contributors' ]}/>
                  )}/>
+          <Route exact path={'/illustrators/:illustrator_slug'}
+                 key={`illustratorRoute`}
+                 render={props => (
+                   <IllustratorPage match={props.match}/>
+                 )}/>
+          <Route exact path={'/photographers/:photographer_slug'}
+                 key={`photographerRoute`}
+                 render={props => (
+                   <PhotographerPage match={props.match}
+                                    role={roles[ 'photographers' ]}/>
+                 )}/>
         </Switch>
       </PageLayout>
     </ConnectedRouter>

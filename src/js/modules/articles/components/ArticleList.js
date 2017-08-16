@@ -10,16 +10,12 @@ const styles = {
   },
 };
 
-const ArticleList = ({ classes, articles, section }) => {
+const ArticleList = ({ classes, articles }) => {
   const createArticleRows = () => {
     return Object.keys(articles).map(articleSlug => {
-      return <ArticleRow article={articles[ articleSlug ]}
-                         featuredMedia={featuredMedia}
       const article = articles[ articleSlug ];
       return <ArticleRow article={article}
-                         featuredMedia={article.featuredMedia}
-                         key={articleSlug}
-                         section={section}/>;
+                         key={articleSlug}/>;
     })
   };
   return (

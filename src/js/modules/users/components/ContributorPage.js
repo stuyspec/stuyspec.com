@@ -5,7 +5,6 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 
 import { getContributorFromSlug } from "../selectors";
 import { getArticlesByContributor } from "../../articles/selectors";
-import { getSections } from "../../sections/selectors";
 import { ArticleRow } from "../../articles/components";
 
 const styles = {
@@ -21,9 +20,9 @@ const styles = {
     textAlign: 'center',
   },
   allWork: {
-    borderBottom: '1px solid #dddddd',
-    borderTop: '1px solid #dddddd',
-    color: '#000000',
+    border: '1px solid #ddd',
+    borderStyle: 'solid none',
+    color: '#000',
     fontFamily: 'Circular Std',
     fontSize: '14px',
     fontWeight: '300',
@@ -41,18 +40,16 @@ const styles = {
     fontFamily: 'Minion Pro',
     fontSize: '18px',
     lineHeight: '1.28',
-    margin: '0px'
+    margin: 0,
   },
 };
 
-const ContributorPage = ({ classes, contributor, articles, sections, featuredMedia }) => {
+const ContributorPage = ({ classes, contributor, articles }) => {
   const createArticleList = () => {
     return Object.keys(articles).map((articleSlug) => {
       const article = articles[ articleSlug ];
       return <ArticleRow article={article}
-                         featuredMedia={featuredMedia}
-                         key={articleSlug}
-                         section={sections[ article.sectionSlug ]}/>
+                         key={articleSlug}/>
     });
   };
   return (
@@ -70,16 +67,10 @@ const ContributorPage = ({ classes, contributor, articles, sections, featuredMed
   );
 };
 
+// TODO: combine the two props below
 const mapStateToProps = (state, ownProps) => ({
   contributor: getContributorFromSlug(state, ownProps),
-  articles: getArticlesByContributor(state, ownProps),
-  sections: getSections(state),
-  featuredMedia: {
-    url: 'http://planesandpleasures.com/wp-content/uploads/2016/09/NewYork-Chinatown-7.jpg',
-    caption: 'New York City street after rain is covered in water, dirt, and snow. Pedestrians walk back and forth as post-flood confusion amasses.',
-    type: 'Photograph',
-    credits: 'Ting Ting',
-  },
+  articles: getArticlesByContributor(state, ownProps)
 });
 
 export default connect(

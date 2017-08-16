@@ -39,9 +39,12 @@ export const getPhotographerWithArticles = createSelector(
       const photograph = photographs[ photographId ];
       return photograph.articleSlug;
     });
-    return Object.filter(articles, article => {
-      return articleSlugs.includes(article.slug);
-    });
+    return {
+      ...photographer,
+      articles: Object.filter(articles, article => {
+        return articleSlugs.includes(article.slug);
+      }),
+    };
   }
 );
 
@@ -63,9 +66,12 @@ export const getIllustratorWithArticles = createSelector(
       const illustration = illustrations[ illustrationId ];
       return illustration.articleSlug;
     });
-    return Object.filter(articles, article => {
-      return articleSlugs.includes(article.slug);
-    });
+    return {
+      ...illustrator,
+      articles: Object.filter(articles, article => {
+        return articleSlugs.includes(article.slug);
+      }),
+    };
   }
 );
 

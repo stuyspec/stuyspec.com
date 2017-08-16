@@ -5,5 +5,5 @@ export const STUY_SPEC_API_HEADER = {
 
 export const ROLE_SLUG_OF_MEDIA_TYPE = {
   'illustration': 'illustrators',
-  'photograph': 'photographer',
+  'photograph': 'photographers',
 }

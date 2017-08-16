@@ -1,49 +1,73 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
+import { Grid, Row, Col } from "react-bootstrap/lib";
 
-import { getIllustratorFromSlug } from "../selectors";
-import { getArticlesByContributor } from "../../articles/selectors";
-import { getSections } from "../../sections/selectors";
+import { getIllustratorWithArticles } from "../selectors";
+import { ArticleRow } from "../../articles/components";
 
 const styles = {
-  ContributorPage: {
-    marginTop: '50px',
+  IllustratorPage: {
+    marginTop: '62px',
+  },
+  name: {
+    color: '#000000',
+    fontFamily: 'Canela',
+    fontSize: '36px',
+    fontWeight: '500',
+    margin: '0px',
+    textAlign: 'center',
+  },
+  allWork: {
+    border: '1px solid #ddd',
+    borderStyle: 'solid none',
+    color: '#000',
+    fontFamily: 'Circular Std',
+    fontSize: '14px',
+    fontWeight: '300',
+    margin: '34px 0px 14px',
+    padding: '8px 0px 7px',
+  },
+  profilePicture: {
+    display: 'block',
+    height: '302px',
+    margin: '18px auto 12px',
+    width: '256px',
+  },
+  description: {
+    color: '#000000',
+    fontFamily: 'Minion Pro',
+    fontSize: '18px',
+    lineHeight: '1.28',
+    margin: 0,
   },
 };
 
-const IllustratorPage = ({ classes, role, illustrator, articles, sections }) => {
-  const createLinksToArticlesByContributor = () => {
+const IllustratorPage = ({ classes, illustratorWithArticles }) => {
+  const createIllustratorArticles = () => {
+    const articles = illustratorWithArticles.articles;
     return Object.keys(articles).map(articleSlug => {
       const article = articles[ articleSlug ];
-      return (
-        <li key={`contributorArticleListItem${article.id}`}>
-          <Link to={`${sections[ article.sectionSlug ].permalink}/${articleSlug}`}>
-            {article.title}
-          </Link>
-        </li>
-      );
+      return <ArticleRow key={article.id} article={article}/>;
     });
   };
   return (
-    <div className={classes.ContributorPage}>
-      <h1>{illustrator.firstName} {illustrator.lastName}</h1>
-      <p>role: <Link to={`/${role.slug}`}>{role.title}</Link></p>
-      <div>
-        <p>articles</p>
-        <ul>
-          {createLinksToArticlesByContributor()}
-        </ul>
-      </div>
-    </div>
+    <Grid className={classes.IllustratorPage}>
+      <Row>
+        <Col md={9}>
+          <p className={classes.name}>{illustratorWithArticles.firstName} {illustratorWithArticles.lastName}</p>
+          <img src={illustratorWithArticles.url} alt={illustratorWithArticles.id} className={classes.profilePicture}/>
+          <p className={classes.description}>{illustratorWithArticles.description}</p>
+          <div className={classes.allWork}>Illustrations</div>
+          {createIllustratorArticles()}
+        </Col>
+      </Row>
+    </Grid>
   );
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  illustrator: getIllustratorFromSlug(state, ownProps),
-  articles: getArticlesByContributor(state, ownProps),
-  sections: getSections(state),
+  illustratorWithArticles: getIllustratorWithArticles(state, ownProps),
 });
 
 export default connect(

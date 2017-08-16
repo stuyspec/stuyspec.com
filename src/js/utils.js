@@ -47,13 +47,13 @@ export const formatDate = (string) => {
 };
 
 
-export const checkKeyValidity = (object, key, type, module) => {
-  if (key in object) {
-    if (typeof (object[ key ]) === type) {
+export const checkKeyValidity = (responseObject, key, type, module) => {
+  if (key in responseObject) {
+    if (typeof (responseObject[ key ]) === type) {
       return true;
     } else {
       throw `EXCEPTION: key ${key} in ${module}Object is 
-        ${typeof (object[ key ])}, but should be ${type}.`;
+        ${typeof (responseObject[ key ])}, but should be ${type}.`;
     }
   } else {
     throw `EXCEPTION: key ${key} is undefined in ${module}Object.`;

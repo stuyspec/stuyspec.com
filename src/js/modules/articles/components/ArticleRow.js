@@ -1,8 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Row, Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
+import { getMedia } from "../../core/selectors";
+import { getSections } from "../../core/selectors";
 import Byline from "./Byline";
 
 const styles = {
@@ -62,7 +65,15 @@ const styles = {
   }
 };
 
-const ArticleRow = ({ classes, article, featuredMedia, section }) => {
+const ArticleRow = ({ classes, article, sections, media }) => {
+  const matchedSections = Object.filter(sections, sectionObject => {
+    return article.sectionSlug === sectionObject.slug;
+  });
+  const section = matchedSections[ Object.keys(matchedSections)[0] ];
+  const matchedMedia = Object.filter(media, mediaObject => {
+    return mediaObject.articleSlug === article.slug;
+  });
+  const featuredMedia = matchedMedia[ Object.keys(matchedMedia)[0] ];
   return (
     <Row key={`articleBlock${article.id}`} className={classes.ArticleRow}>
       <Col md={3} lg={3}>
@@ -87,4 +98,11 @@ const ArticleRow = ({ classes, article, featuredMedia, section }) => {
   );
 };
 
-export default injectSheet(styles)(ArticleRow);
+const mapStateToProps = (state) => ({
+  media: getMedia(state),
+  sections: getSections(state),
+});
+
+export default connect(
+  mapStateToProps
+) (injectSheet(styles)(ArticleRow));
