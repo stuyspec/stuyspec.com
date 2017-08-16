@@ -9,19 +9,19 @@ import { fetchArticles } from "../../articles/actions";
 import { getSections } from "../../sections/selectors";
 import { getUsers, getUserRoles } from "../../users/selectors";
 import { fetchUsers } from "../../users/actions";
-import { fetchMedia} from "../../media/actions";
+import { fetchMedia } from "../../media/actions";
 
 const styles = {
   HomePage: {}
 };
 
-const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles, fetchUsers,fetchMedia }) => {
+const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles, fetchUsers, fetchMedia }) => {
   const createLinksToArticles = () => {
     return Object.keys(articles).map(articleSlug => {
       const article = articles[ articleSlug ];
       return (
-        <li key={`articleLink${article.id}`}>
-          <Link to={`${sections[ article.sectionSlug ].permalink}/${article.slug}`}>{article.title}</Link>
+        <li key={ `articleLink${article.id}` }>
+          <Link to={ `${sections[ article.sectionSlug ].permalink}/${article.slug}` }>{ article.title }</Link>
         </li>
       );
     });
@@ -32,9 +32,9 @@ const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles
           userRole.roleSlug === "contributors")) {
         const contributor = users[ userSlug ]
         return (
-          <li key={`contributorLink${contributor.id}`}>
-            <Link to={`/contributors/${userSlug}`}>
-              {contributor.firstName + ' ' + contributor.lastName}
+          <li key={ `contributorLink${contributor.id}` }>
+            <Link to={ `/contributors/${userSlug}` }>
+              { contributor.firstName + ' ' + contributor.lastName }
             </Link>
           </li>
         );
@@ -51,21 +51,21 @@ const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles
     fetchMedia();
   };
   return (
-    <div className={classes.HomePage}>
+    <div className={ classes.HomePage }>
       <h1>Home page</h1>
-      <button onClick={handleArticlesFetch}>fetch articles</button>
-      <button onClick={handleUsersFetch}>fetch users</button>
-      <button onClick={handleMediaFetch}>fetch media</button>
+      <button onClick={ handleArticlesFetch }>fetch articles</button>
+      <button onClick={ handleUsersFetch }>fetch users</button>
+      <button onClick={ handleMediaFetch }>fetch media</button>
       <Link to="/photographers">Photographers</Link>
       <Link to="/illustrators">Illustrators</Link>
       <Link to="/contributors">Contributors</Link>
       <h2>Articles</h2>
       <ul>
-        {createLinksToArticles()}
+        { createLinksToArticles() }
       </ul>
       <h2>Contributors</h2>
       <ul>
-        {createLinksToContributors()}
+        { createLinksToContributors() }
       </ul>
     </div>
   );

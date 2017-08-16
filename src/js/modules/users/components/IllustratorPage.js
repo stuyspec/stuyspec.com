@@ -48,18 +48,19 @@ const IllustratorPage = ({ classes, illustratorWithArticles }) => {
     const articles = illustratorWithArticles.articles;
     return Object.keys(articles).map(articleSlug => {
       const article = articles[ articleSlug ];
-      return <ArticleRow key={article.id} article={article}/>;
+      return <ArticleRow key={ article.id } article={ article }/>;
     });
   };
   return (
-    <Grid className={classes.IllustratorPage}>
+    <Grid className={ classes.IllustratorPage }>
       <Row>
-        <Col md={9}>
-          <p className={classes.name}>{illustratorWithArticles.firstName} {illustratorWithArticles.lastName}</p>
-          <img src={illustratorWithArticles.url} alt={illustratorWithArticles.id} className={classes.profilePicture}/>
-          <p className={classes.description}>{illustratorWithArticles.description}</p>
-          <div className={classes.allWork}>Illustrations</div>
-          {createIllustratorArticles()}
+        <Col md={ 9 }>
+          <p className={ classes.name }>{ illustratorWithArticles.firstName } { illustratorWithArticles.lastName }</p>
+          <img src={ illustratorWithArticles.url } alt={ illustratorWithArticles.id }
+               className={ classes.profilePicture }/>
+          <p className={ classes.description }>{ illustratorWithArticles.description }</p>
+          <div className={ classes.allWork }>Illustrations</div>
+          { createIllustratorArticles() }
         </Col>
       </Row>
     </Grid>

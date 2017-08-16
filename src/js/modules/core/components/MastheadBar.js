@@ -72,8 +72,8 @@ const navButtonStyles = {
 
 const NavButton = ({ classes, label }) => {
   return (
-    <button className={classes.NavButton}>
-      <span className={classes.buttonText}>{label}</span>
+    <button className={ classes.NavButton }>
+      <span className={ classes.buttonText }>{ label }</span>
     </button>
   );
 };
@@ -81,16 +81,16 @@ const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 
 const MastheadBar = ({ classes }) => {
   return (
-    <div className={classes.MastheadBar}>
-      <div className={classes.barContainer}>
-        <div className={classes.quickNav}>
+    <div className={ classes.MastheadBar }>
+      <div className={ classes.barContainer }>
+        <div className={ classes.quickNav }>
           <StyledNavButton label="sections"/>
           <StyledNavButton label="search"/>
         </div>
-        <Link className={classes.brandingLink} to="/">
+        <Link className={ classes.brandingLink } to="/">
           The Spectator
         </Link>
-        <div className={classes.userTools}>
+        <div className={ classes.userTools }>
           <StyledNavButton label="log in"/>
           <StyledNavButton label="subscribe"/>
         </div>

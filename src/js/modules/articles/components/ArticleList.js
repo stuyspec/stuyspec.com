@@ -14,13 +14,13 @@ const ArticleList = ({ classes, articles }) => {
   const createArticleRows = () => {
     return Object.keys(articles).map(articleSlug => {
       const article = articles[ articleSlug ];
-      return <ArticleRow article={article}
-                         key={articleSlug}/>;
+      return <ArticleRow article={ article }
+                         key={ articleSlug }/>;
     })
   };
   return (
-    <Grid className={classes.ArticleList}>
-      {createArticleRows()}
+    <Grid className={ classes.ArticleList }>
+      { createArticleRows() }
     </Grid>
   )
 };

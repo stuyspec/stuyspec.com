@@ -71,20 +71,20 @@ const PageFooter = ({ classes, topLevelSectionsWithDirectChildren }) => {
     return Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {
       const topLevelSection = topLevelSectionsWithDirectChildren[ sectionSlug ];
       return (
-        <div className={classes.sectionBlock} key={topLevelSection.id}>
-          <Link className={classes.topLevelSectionLink}
-                key={`topLevelLink${topLevelSection.id}`}
-                to={topLevelSection.permalink}>
-            {topLevelSection.name}
+        <div className={ classes.sectionBlock } key={ topLevelSection.id }>
+          <Link className={ classes.topLevelSectionLink }
+                key={ `topLevelLink${topLevelSection.id}` }
+                to={ topLevelSection.permalink }>
+            { topLevelSection.name }
           </Link>
           {
             Object.keys(topLevelSection.subsections).map(subsectionSlug => {
               const subsection = topLevelSection.subsections[ subsectionSlug ];
               return (
-                <Link className={classes.subsectionLink}
-                      key={`subsectionLink${subsection.id}`}
-                      to={subsection.permalink}>
-                  {subsection.name}
+                <Link className={ classes.subsectionLink }
+                      key={ `subsectionLink${subsection.id}` }
+                      to={ subsection.permalink }>
+                  { subsection.name }
                 </Link>
               );
             })
@@ -94,13 +94,13 @@ const PageFooter = ({ classes, topLevelSectionsWithDirectChildren }) => {
     });
   };
   return (
-    <Grid className={classes.PageFooter}>
-      <Row className={classes.pageFooterMain}>
-        <Col md={8} mdOffset={2} className={classes.theSpectator}>
+    <Grid className={ classes.PageFooter }>
+      <Row className={ classes.pageFooterMain }>
+        <Col md={ 8 } mdOffset={ 2 } className={ classes.theSpectator }>
           The Spectator
         </Col>
-        <Col md={8} mdOffset={2} className={classes.sectionFlex}>
-          {createLinksToSections()}
+        <Col md={ 8 } mdOffset={ 2 } className={ classes.sectionFlex }>
+          { createLinksToSections() }
         </Col>
       </Row>
     </Grid>

@@ -40,7 +40,7 @@ const reducer = (state = { ...initialState }, action) => {
           ...state.media,
           ...action.payload,
         },
-        response:{},
+        response: {},
       };
     }
   }

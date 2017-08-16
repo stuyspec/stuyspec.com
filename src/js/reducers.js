@@ -1,10 +1,10 @@
-import combineReducers from 'redux/lib/combineReducers';
-import { routerReducer } from 'react-router-redux/reducer';
-import core from './modules/core';
-import articles from './modules/articles';
-import sections from './modules/sections';
-import users from './modules/users';
-import media from './modules/media';
+import combineReducers from "redux/lib/combineReducers";
+import { routerReducer } from "react-router-redux/reducer";
+import core from "./modules/core";
+import articles from "./modules/articles";
+import sections from "./modules/sections";
+import users from "./modules/users";
+import media from "./modules/media";
 
 export default combineReducers(
   {

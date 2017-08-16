@@ -22,7 +22,7 @@ export const getContributorFromSlug = createSelector(
 );
 
 export const getPhotographerFromSlug = createSelector(
-  [ getUsers, getRequestedPhotographerSlug],
+  [ getUsers, getRequestedPhotographerSlug ],
   (users, requestedPhotographerSlug) => {
     return users[ requestedPhotographerSlug ];
   }

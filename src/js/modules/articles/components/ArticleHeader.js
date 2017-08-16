@@ -56,13 +56,13 @@ const styles = {
 
 const ArticleHeader = ({ classes, contributors, dateline, headline, section }) => {
   return (
-    <div className={classes.ArticleHeader}>
-      <Link to={section.permalink} className={classes.rubric}>
-        {section.name}
+    <div className={ classes.ArticleHeader }>
+      <Link to={ section.permalink } className={ classes.rubric }>
+        { section.name }
       </Link>
-      <h1 className={classes.headline}>{headline}</h1>
-      <Byline classes={classes} contributors={contributors}/>
-      <span>{dateline}</span>
+      <h1 className={ classes.headline }>{ headline }</h1>
+      <Byline classes={ classes } contributors={ contributors }/>
+      <span>{ dateline }</span>
     </div>
   );
 };

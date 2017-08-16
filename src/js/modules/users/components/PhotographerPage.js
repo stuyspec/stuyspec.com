@@ -48,18 +48,19 @@ const PhotographerPage = ({ classes, photographerWithArticles }) => {
     const articles = photographerWithArticles.articles;
     return Object.keys(articles).map(articleSlug => {
       const article = articles[ articleSlug ];
-      return <ArticleRow key={article.id} article={article}/>;
+      return <ArticleRow key={ article.id } article={ article }/>;
     });
   };
   return (
-    <Grid className={classes.PhotographerPage}>
+    <Grid className={ classes.PhotographerPage }>
       <Row>
-        <Col md={9}>
-          <p className={classes.name}>{photographerWithArticles.firstName} {photographerWithArticles.lastName}</p>
-          <img src={photographerWithArticles.url} alt={photographerWithArticles.id} className={classes.profilePicture}/>
-          <p className={classes.description}>{photographerWithArticles.description}</p>
-          <div className={classes.allWork}>Photographs</div>
-          {createPhotographerArticles()}
+        <Col md={ 9 }>
+          <p className={ classes.name }>{ photographerWithArticles.firstName } { photographerWithArticles.lastName }</p>
+          <img src={ photographerWithArticles.url } alt={ photographerWithArticles.id }
+               className={ classes.profilePicture }/>
+          <p className={ classes.description }>{ photographerWithArticles.description }</p>
+          <div className={ classes.allWork }>Photographs</div>
+          { createPhotographerArticles() }
         </Col>
       </Row>
     </Grid>

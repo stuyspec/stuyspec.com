@@ -48,19 +48,19 @@ const Masthead = ({ classes, topLevelSectionsWithDirectChildren }) => {
     return Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {
       const topLevelSection = topLevelSectionsWithDirectChildren[ sectionSlug ];
       return (
-        <li key={`topLevelSection${topLevelSection.id}`} className={classes.sectionListItem}>
-          <Link to={topLevelSection.permalink} className={classes.sectionLink}>
-            {topLevelSection.name}
+        <li key={ `topLevelSection${topLevelSection.id}` } className={ classes.sectionListItem }>
+          <Link to={ topLevelSection.permalink } className={ classes.sectionLink }>
+            { topLevelSection.name }
           </Link>
         </li>
       );
     });
   };
   return (
-    <div className={classes.Masthead}>
-      <Link to="/" className={classes.theSpectatorLogo}>The Spectator</Link>
-      <ul className={classes.sectionLinksNav}>
-        {createLinksToTopLevelSections()}
+    <div className={ classes.Masthead }>
+      <Link to="/" className={ classes.theSpectatorLogo }>The Spectator</Link>
+      <ul className={ classes.sectionLinksNav }>
+        { createLinksToTopLevelSections() }
       </ul>
     </div>
   )

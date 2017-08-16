@@ -17,12 +17,12 @@ const styles = {
 const PageLayout = ({ classes, children, location, topLevelSectionsWithDirectChildren }) => {
   return (
     <div>
-      <PageHeader location={location}
-                  topLevelSectionsWithDirectChildren={topLevelSectionsWithDirectChildren}/>
-      <div className={classes.PageContainer}>
-        {children}
+      <PageHeader location={ location }
+                  topLevelSectionsWithDirectChildren={ topLevelSectionsWithDirectChildren }/>
+      <div className={ classes.PageContainer }>
+        { children }
       </div>
-      <PageFooter topLevelSectionsWithDirectChildren={topLevelSectionsWithDirectChildren}/>
+      <PageFooter topLevelSectionsWithDirectChildren={ topLevelSectionsWithDirectChildren }/>
     </div>
   );
 };
