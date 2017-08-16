@@ -40,14 +40,14 @@ const initialState = {
       slug: "cathy-cai",
       url: "https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/c1.0.747.747/19642653_483407478666053_215916995966084393_n.jpg?oh=3f25abc6c1b24ebc147f13f1b0f73c7b&oe=5A26AC4D"
     },
-    "nicolas-yang": {
+    "nicholas-yang": {
       id: 3,
-      firstName: "Nicolas",
+      firstName: "Nicholas",
       lastName: "Yang",
       username: "nyang1",
       email: "nyang1@stuy.edu",
-      description: "Nicolas is a super alumni for The Spectator.",
-      slug: "nicolas-yang",
+      description: "Nicholas is a super alumni for The Spectator.",
+      slug: "nicholas-yang",
     }
   },
   roles: {
@@ -88,15 +88,7 @@ const initialState = {
       roleSlug: "photographers",
     },
     {
-      userSlug: "jason-lin",
-      roleSlug: "illustrators",
-    },
-    {
-      userSlug: "nicolas-yang",
-      roleSlug: "illustrators",
-    },
-    {
-      userSlug: "nicolas-yang",
+      userSlug: "nicholas-yang",
       roleSlug: "photographers",
     },
   ]
