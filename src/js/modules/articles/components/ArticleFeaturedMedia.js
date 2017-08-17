@@ -28,7 +28,8 @@ const styles = {
 
 const ArticleFeaturedMedia = ({ classes, featuredMedia, users }) => {
   const createCreditLine = () => {
-    const creator = users[ featuredMedia.userSlug ];
+    const creator = Object.values(users)
+      .find(user => user.id === featuredMedia.id);
     return (
       <Link className={ classes.creditLine }
             to={ `/${ROLE_SLUG_OF_MEDIA_TYPE[ featuredMedia.type ]}/${creator.slug}` }>

@@ -90,24 +90,17 @@ export const getContributorArticles = createSelector(
 );
 
 /**
- * The selector returns a media object for the featured media of a requested
- *   article.
- */
-export const getArticleFeaturedMedia = createSelector(
-  [ getArticleFromRequestedSlug, getMedia ],
-  (article, media) => media[ article.mediaId ]
-);
-
-/**
  * The selector returns an object that contains all articles an illustrator has
  *   illustrated for (featured media only).
  */
 export const getIllustratorArticles = createSelector(
   [ getIllustratorIllustrations, getArticlesWithContributors ],
   (illustrations, articles) => {
-    const illustrationIds = Object.keys(illustrations);
+    const articleIds = Object
+      .values(illustrations)
+      .map(illustration => illustration.articleId);
     return Object.filter(articles, articleObject => {
-      return illustrationIds.includes( articleObject.mediaId.toString() );
+      return articleIds.includes(articleObject.id);
     });
   }
 );
@@ -119,10 +112,26 @@ export const getIllustratorArticles = createSelector(
 export const getPhotographerArticles = createSelector(
   [ getPhotographerPhotographs, getArticlesWithContributors ],
   (photographs, articles) => {
-    const photographIds = Object.keys(photographs);
+    const articleIds = Object
+      .values(photographs)
+      .map(photograph => photograph.articleId);
     return Object.filter(articles, articleObject => {
-      return photographIds.includes( articleObject.mediaId.toString() );
+      return articleIds.includes(articleObject.id);
     });
+  }
+);
+
+/**
+ * The selector returns a media object for the featured media of a requested
+ *   article.
+ */
+export const getArticleFeaturedMedia = createSelector(
+  [ getArticleFromRequestedSlug, getMedia ],
+  (article, media) => {
+    const matchedMedia = Object.filter(media, mediaObject => {
+      return mediaObject.isFeatured && mediaObject.articleId === article.id;
+    });
+    return Object.values(matchedMedia)[ 0 ];
   }
 );
 
@@ -140,7 +149,6 @@ export const getProcessedArticlesResponse = createSelector(
         ...currentArticle,
         sectionSlug: getSectionSlugFromId(sections, sectionId),
         dateline: 'July 31, 2017', // TODO: get Jason L.'s date formatter code
-        mediaId: 1, // TODO: @nicholas get media id's into API
       };
       return accumulatedArticles;
     }, {});
