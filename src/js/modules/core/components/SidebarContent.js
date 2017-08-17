@@ -41,15 +41,11 @@ const styles = {
 };
 
 const SidebarContent = ({ classes, topLevelSectionsWithDirectChildren, isSidebarOpen, toggleSidebar }) => {
-  const handleToggleSidebar = () => {
-    toggleSidebar(!isSidebarOpen);
-  };
-
   let sidebarElements = [];
   sidebarElements.push(
     <Link className={ classes.sidebarSectionLink }
           key={ -1 }
-          onClick={ handleToggleSidebar }
+          onClick={ () => toggleSidebar(!isSidebarOpen) }
           to={ '/' }>
       Home
     </Link>
@@ -59,7 +55,7 @@ const SidebarContent = ({ classes, topLevelSectionsWithDirectChildren, isSidebar
     sidebarElements.push(
       <Link className={ classes.sidebarSectionLink }
             key={ section.id }
-            onClick={ handleToggleSidebar }
+            onClick={ () => toggleSidebar(!isSidebarOpen) }
             to={ section.permalink }>
         { section.name }
       </Link>

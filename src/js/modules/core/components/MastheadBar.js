@@ -122,14 +122,11 @@ const NavButton = ({ classes, label, onClick }) => {
 const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 
 const MastheadBar = ({ classes, isSidebarOpen, toggleSidebar }) => {
-  const handleToggleSidebar = () => {
-    toggleSidebar(!isSidebarOpen);
-  };
   return (
     <div className={ classes.MastheadBar }>
       <div className={ classes.barContainer }>
         <div className={ classes.quickNav }>
-          <StyledNavButton label="sections" onClick={ handleToggleSidebar }/>
+          <StyledNavButton label="sections" onClick={ () => toggleSidebar(!isSidebarOpen) }/>
           <StyledNavButton label="search"/>
         </div>
         <Link className={ classes.brandingLink } to="/">

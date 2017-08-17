@@ -1,6 +1,7 @@
 import {
   REFRESH_WINDOW_DIMENSIONS,
-  TOGGLE_SIDEBAR,
+  OPEN_SIDEBAR,
+  CLOSE_SIDEBAR
 } from "./actionTypes";
 
 // getWindowWidth & getWindowHeight was
@@ -31,10 +32,16 @@ const reducer = (state = { ...initialState }, action) => {
         return state;
       }
     }
-    case TOGGLE_SIDEBAR: {
+    case OPEN_SIDEBAR: {
       return {
         ...state,
-        isSidebarOpen: action.payload,
+        isSidebarOpen: true,
+      }
+    }
+    case CLOSE_SIDEBAR: {
+      return {
+        ...state,
+        isSidebarOpen: false,
       }
     }
     default:

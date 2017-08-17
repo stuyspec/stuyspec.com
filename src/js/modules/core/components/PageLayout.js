@@ -41,10 +41,6 @@ const PageLayout = ({
                       isSidebarOpen,
                       toggleSidebar
                     }) => {
-  const handleToggleSidebar = open => {
-    toggleSidebar(open);
-  };
-
   /*
    * TODO: topLevelSectionsWithDirectChildren is flippin' annoying. If only
    *   need sections, move that shit into PageFooter.
@@ -53,7 +49,7 @@ const PageLayout = ({
   return (
     <Sidebar sidebar={ <SidebarContent topLevelSectionsWithDirectChildren={ topLevelSectionsWithDirectChildren }/> }
              open={ isSidebarOpen }
-             onSetOpen={ handleToggleSidebar }
+             onSetOpen={ toggleSidebar }
              styles={ sidebarStyles }>
       <PageHeader location={ location }
                   topLevelSectionsWithDirectChildren={ topLevelSectionsWithDirectChildren }/>
