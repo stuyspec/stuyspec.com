@@ -47,16 +47,21 @@ const PageLayout = ({
    */
 
   return (
-    <Sidebar sidebar={ <SidebarContent topLevelSectionsWithDirectChildren={ topLevelSectionsWithDirectChildren }/> }
+    <Sidebar sidebar={ <SidebarContent topLevelSectionsWithDirectChildren={
+      topLevelSectionsWithDirectChildren }/> }
              open={ isSidebarOpen }
              onSetOpen={ toggleSidebar }
              styles={ sidebarStyles }>
       <PageHeader location={ location }
-                  topLevelSectionsWithDirectChildren={ topLevelSectionsWithDirectChildren }/>
+                  topLevelSectionsWithDirectChildren={
+                    topLevelSectionsWithDirectChildren
+                  }/>
       <div className={ classes.PageContainer }>
         { children }
       </div>
-      <PageFooter topLevelSectionsWithDirectChildren={ topLevelSectionsWithDirectChildren }/>
+      <PageFooter topLevelSectionsWithDirectChildren={
+        topLevelSectionsWithDirectChildren
+      }/>
     </Sidebar>
   );
 };

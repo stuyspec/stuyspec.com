@@ -15,17 +15,19 @@ const styles = {
 };
 
 const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles, fetchUsers }) => {
-  const createLinksToArticles = () => {
+  const createArticleLinks = () => {
     return Object.keys(articles).map(articleSlug => {
       const article = articles[ articleSlug ];
       return (
         <li key={ `articleLink${article.id}` }>
-          <Link to={ `${sections[ article.sectionSlug ].permalink}/${article.slug}` }>{ article.title }</Link>
+          <Link to={ `${sections[ article.sectionSlug ].permalink}/${article.slug}` }>
+            { article.title }
+          </Link>
         </li>
       );
     });
   };
-  const createLinksToContributors = () => {
+  const createContributorLinks = () => {
     return Object.keys(users).map(userSlug => {
       if (userRoles.find(userRole => userRole.userSlug === userSlug &&
           userRole.roleSlug === "contributors")) {
@@ -33,31 +35,25 @@ const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles
         return (
           <li key={ `contributorLink${contributor.id}` }>
             <Link to={ `/contributors/${userSlug}` }>
-              { contributor.firstName + ' ' + contributor.lastName }
+              { `${contributor.firstName} ${contributor.lastName}` }
             </Link>
           </li>
         );
       }
     });
   };
-  const handleArticlesFetch = () => {
-    fetchArticles();
-  };
-  const handleUsersFetch = () => {
-    fetchUsers();
-  };
   return (
     <div className={ classes.HomePage }>
       <h1>Home page</h1>
-      <button onClick={ handleArticlesFetch }>fetch articles</button>
-      <button onClick={ handleUsersFetch }>fetch users</button>
+      <button onClick={ () => fetchArticles() }>fetch articles</button>
+      <button onClick={ () => fetchUsers() }>fetch users</button>
       <h2>Articles</h2>
       <ul>
-        { createLinksToArticles() }
+        { createArticleLinks() }
       </ul>
       <h2>Contributors</h2>
       <ul>
-        { createLinksToContributors() }
+        { createContributorLinks() }
       </ul>
     </div>
   );

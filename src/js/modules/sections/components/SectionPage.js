@@ -4,6 +4,7 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
+import { isObjectEmpty } from "../../../utils";
 import { ArticleList } from "../../articles/components";
 import { getSectionTreeArticles } from "../../articles/selectors";
 import { getSections, getDirectSubsections } from "../../sections/selectors";
@@ -76,8 +77,7 @@ const SectionPage = ({ classes,
     <div className={classes.SectionPage}>
       <h1 className={classes.sectionName}>{section.name}</h1>
       {
-        ( Object.keys(directSubsections).length !== 0 ||
-          directSubsections.constructor !== Object ) ? (
+        isObjectEmpty(directSubsections) ? (
           <ul className={classes.subsectionBar}>
             {createLinksToDirectSubsections()}
           </ul>

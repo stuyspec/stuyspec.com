@@ -40,7 +40,12 @@ const styles = {
   },
 };
 
-const SidebarContent = ({ classes, topLevelSectionsWithDirectChildren, isSidebarOpen, toggleSidebar }) => {
+const SidebarContent = ({
+                          classes,
+                          topLevelSectionsWithDirectChildren,
+                          isSidebarOpen,
+                          toggleSidebar
+                        }) => {
   let sidebarElements = [];
   sidebarElements.push(
     <Link className={ classes.sidebarSectionLink }
@@ -60,6 +65,9 @@ const SidebarContent = ({ classes, topLevelSectionsWithDirectChildren, isSidebar
         { section.name }
       </Link>
     );
+    // We want a line separating the writing sections from the non-writing
+    //   sections and one separating the non-writing sections from the
+    //   user account options.
     if (sectionSlug === 'sports' || sectionSlug === 'video') {
       sidebarElements.push(
         <hr className={ classes.divider } key={ section.id + 100 }/>

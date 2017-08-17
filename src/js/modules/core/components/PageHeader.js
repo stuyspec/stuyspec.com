@@ -1,6 +1,5 @@
 import React from "react";
 import injectSheet from "react-jss";
-import { PAGE_HEADER_BOTTOM_MARGIN } from "../../../constants";
 
 import Masthead from "./Masthead";
 import MastheadBar from "./MastheadBar";
@@ -8,7 +7,7 @@ import MastheadBar from "./MastheadBar";
 const styles = {
   PageHeader: {
     margin: '0 auto',
-    marginBottom: PAGE_HEADER_BOTTOM_MARGIN,
+    marginBottom: '60px',
     textAlign: 'center',
     width: '100%',
   },

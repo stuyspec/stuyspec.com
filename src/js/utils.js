@@ -8,6 +8,9 @@ export const objectFilter = (obj, predicate) =>
     .filter(key => predicate(obj[ key ]))
     .reduce((res, key) => (res[ key ] = obj[ key ], res), {});
 
+export const isObjectEmpty = (obj) => {
+  return Object.keys(obj).length !== 0 || obj.constructor !== Object
+}
 /**
  * Formats date from ISO string to a more readable form
  * If published on same day, return HH:MM AM/PM
