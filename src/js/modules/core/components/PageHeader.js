@@ -1,7 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
-import { slide as Sidebar } from "react-burger-menu";
 import { PAGE_HEADER_BOTTOM_MARGIN } from "../../../constants";
 
 import Masthead from "./Masthead";
@@ -14,100 +12,24 @@ const styles = {
     textAlign: 'center',
     width: '100%',
   },
-  theSpectatorLogo: {
-    fontFamily: 'Old English Text MT',
-    fontSize: '75px',
-    marginBottom: '22px',
-    color: '#000',
-  },
-  sectionLinksNav: {
-    fontFamily: 'Circular Std',
-    listStyleType: 'none',
-    marginBottom: '16px',
-    padding: 0,
-  },
-  sectionListElement: {
-    display: 'inline',
-    margin: '0px 12px',
-  },
-  sectionLink: {
-    color: '#000',
-    fontSize: '14px',
-    fontWeight: 500,
-    textDecoration: 'none',
-  },
-  sidebarContainer: {
-    position: 'relative',
-    top: -PAGE_HEADER_BOTTOM_MARGIN,
-  }
 };
 
-class PageHeader extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isSidebarOpen: false
-    };
-  }
-
-  sidebarStateWatcher = (sidebarState) => {
-    this.setState({ isSidebarOpen: sidebarState.isOpen });
-  }
-
-  toggleSidebar = () => {
-    this.setState({ isSidebarOpen: !this.state.isSidebarOpen });
-  }
-
-  render() {
-    const { classes, location, topLevelSectionsWithDirectChildren } = this.props;
-    const createSidebarElements = () => {
-      let sidebarElements = [];
-
-      sidebarElements.push(
-        <Link key={ -1 } onClick={ this.toggleSidebar } to={ '/' }>Home</Link>
-      );
-
-      Object.keys(topLevelSectionsWithDirectChildren).forEach(sectionSlug => {
-        const section = topLevelSectionsWithDirectChildren[ sectionSlug ];
-        sidebarElements.push(
-          <Link key={ section.id }
-                onClick={ this.toggleSidebar }
-                to={ section.permalink }>
-            { section.name }
-          </Link>
-        );
-        if (sectionSlug === 'sports' || sectionSlug === 'video') {
-          sidebarElements.push(<hr key={ section.id + 100 }/>);
-        }
-      });
-
-      return sidebarElements;
-    };
-    return (
-      <div className={ classes.PageHeader }>
-        <div className={ classes.sidebarContainer }>
-          <Sidebar customBurgerIcon={ false }
-                   customCrossIcon={ false }
-                   onStateChange={ this.sidebarStateWatcher }
-                   isOpen={ this.state.isSidebarOpen }
-                   onClick={ this.sidebarStateWatcher }
-                   width={ 220 }>
-            { createSidebarElements() }
-          </Sidebar>
-        </div>
-        {
-          location.pathname === '/' ? (
-            <Masthead
-              topLevelSectionsWithDirectChildren={ topLevelSectionsWithDirectChildren }/>
-          ) : (
-            <MastheadBar
-              topLevelSectionsWithDirectChildren={ topLevelSectionsWithDirectChildren }
-              toggleSidebar={ this.toggleSidebar }/>
-          )
-        }
-      </div>
-    );
-  }
-}
+const PageHeader = ({ classes, location, topLevelSectionsWithDirectChildren }) => {
+  return (
+    <div className={ classes.PageHeader }>
+      {
+        location.pathname === '/' ? (
+          <Masthead topLevelSectionsWithDirectChildren={
+            topLevelSectionsWithDirectChildren
+          }/>
+        ) : (
+          <MastheadBar topLevelSectionsWithDirectChildren={
+            topLevelSectionsWithDirectChildren
+          }/>
+        )
+      }
+    </div>
+  );
+};
 
 export default (injectSheet(styles)(PageHeader));
