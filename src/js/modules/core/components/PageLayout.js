@@ -39,7 +39,8 @@ const PageLayout = ({
                       location,
                       topLevelSectionsWithDirectChildren,
                       sidebarOpen,
-                      setSidebarOpen }) => {
+                      setSidebarOpen
+                    }) => {
   const handleSetSidebarOpen = open => {
     setSidebarOpen(open);
   };

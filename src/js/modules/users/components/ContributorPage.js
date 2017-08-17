@@ -18,22 +18,22 @@ const ContributorPage = ({ classes, role, contributor, articles, sections }) => 
     return Object.keys(articles).map(articleSlug => {
       const article = articles[ articleSlug ];
       return (
-        <li key={`contributorArticleListItem${article.id}`}>
-          <Link to={`${sections[ article.sectionSlug ].permalink}/${articleSlug}`}>
-            {article.title}
+        <li key={ `contributorArticleListItem${article.id}` }>
+          <Link to={ `${sections[ article.sectionSlug ].permalink}/${articleSlug}` }>
+            { article.title }
           </Link>
         </li>
       );
     });
   };
   return (
-    <div className={classes.ContributorPage}>
-      <h1>{contributor.firstName} {contributor.lastName}</h1>
-      <p>role: <Link to={`/${role.slug}`}>{role.title}</Link></p>
+    <div className={ classes.ContributorPage }>
+      <h1>{ contributor.firstName } { contributor.lastName }</h1>
+      <p>role: <Link to={ `/${role.slug}` }>{ role.title }</Link></p>
       <div>
         <p>articles</p>
         <ul>
-          {createLinksToArticlesByContributor()}
+          { createLinksToArticlesByContributor() }
         </ul>
       </div>
     </div>

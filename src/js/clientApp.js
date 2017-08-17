@@ -20,7 +20,7 @@ console.log('appVersion ->', VERSION);
 
 ReactDOM.render((
   <AppContainer>
-    <Provider store={store}>
+    <Provider store={ store }>
       <RoutingApp/>
     </Provider>
   </AppContainer>), document.getElementById('app'));

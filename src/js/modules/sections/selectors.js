@@ -68,10 +68,7 @@ export const getTopLevelSectionsWithDirectChildren = createSelector(
 );
 
 export const getSectionSlugFromId = (sections, id) => {
-  for (sectionSlug in sections) {
-    const section = sections[ sectionSlug ];
-    if (section.id === id) {
-      return section.slug;
-    }
-  }
+  return Object.entries(
+    Object.filter(sections, section => section.id === id)
+  )[ 0 ];
 };
