@@ -71,10 +71,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    fetchArticles: fetchArticles,
-    fetchUsers: fetchUsers,
-  }, dispatch);
+  return bindActionCreators({ fetchArticles, fetchUsers }, dispatch);
 };
 
 export default connect(

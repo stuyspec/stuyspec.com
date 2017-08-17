@@ -149,9 +149,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    toggleSidebar: toggleSidebar,
-  }, dispatch);
+  return bindActionCreators({ toggleSidebar }, dispatch);
 };
 
 export default connect(

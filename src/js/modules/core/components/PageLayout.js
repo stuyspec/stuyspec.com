@@ -1,6 +1,6 @@
 import React from "react";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import injectSheet from "react-jss";
 import Sidebar from "react-sidebar";
@@ -72,9 +72,7 @@ const mapStateToProps = (state) => ({
 
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    toggleSidebar: toggleSidebar,
-  }, dispatch);
+  return bindActionCreators({ toggleSidebar }, dispatch);
 };
 
 export default withRouter(
