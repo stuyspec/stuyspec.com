@@ -1,6 +1,6 @@
 import {
   REFRESH_WINDOW_DIMENSIONS,
-  SET_SIDEBAR_OPEN,
+  TOGGLE_SIDEBAR,
 } from "./actionTypes";
 
 // getWindowWidth & getWindowHeight was
@@ -16,7 +16,7 @@ const getViewportHeight = () => {
 const initialState = {
   viewportWidth: getViewportWidth(),
   viewportHeight: getViewportHeight(),
-  sidebarOpen: false,
+  isSidebarOpen: false,
 };
 
 const reducer = (state = { ...initialState }, action) => {
@@ -31,10 +31,10 @@ const reducer = (state = { ...initialState }, action) => {
         return state;
       }
     }
-    case SET_SIDEBAR_OPEN: {
+    case TOGGLE_SIDEBAR: {
       return {
         ...state,
-        sidebarOpen: action.payload,
+        isSidebarOpen: action.payload,
       }
     }
     default:

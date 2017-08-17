@@ -5,8 +5,7 @@ import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 import Icon from "react-icon-base";
 
-import { getSidebarOpen } from "../selectors";
-import { setSidebarOpen } from "../actions";
+import { toggleSidebar } from "../actions";
 
 const styles = {
   MastheadBar: {
@@ -103,6 +102,7 @@ const FaSearch = props => (
   </Icon>
 );
 
+// TODO: submodule for icons?
 const NavButton = ({ classes, label, onClick }) => {
   const createIcon = () => {
     switch (label) {
@@ -121,15 +121,15 @@ const NavButton = ({ classes, label, onClick }) => {
 };
 const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 
-const MastheadBar = ({ classes, sidebarOpen, setSidebarOpen }) => {
-  const handleSetSidebarOpen = () => {
-    setSidebarOpen( !sidebarOpen );
+const MastheadBar = ({ classes, isSidebarOpen, toggleSidebar }) => {
+  const handleToggleSidebar = () => {
+    toggleSidebar(!isSidebarOpen);
   };
   return (
     <div className={ classes.MastheadBar }>
       <div className={ classes.barContainer }>
         <div className={ classes.quickNav }>
-          <StyledNavButton label="sections" onClick={ handleSetSidebarOpen }/>
+          <StyledNavButton label="sections" onClick={ handleToggleSidebar }/>
           <StyledNavButton label="search"/>
         </div>
         <Link className={ classes.brandingLink } to="/">
@@ -145,12 +145,12 @@ const MastheadBar = ({ classes, sidebarOpen, setSidebarOpen }) => {
 };
 
 const mapStateToProps = (state) => ({
-  sidebarOpen: getSidebarOpen(state)
+  isSidebarOpen: state.core.isSidebarOpen,
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    setSidebarOpen: setSidebarOpen,
+    toggleSidebar: toggleSidebar,
   }, dispatch);
 };
 

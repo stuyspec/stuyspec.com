@@ -8,9 +8,9 @@ import Sidebar from "react-sidebar";
 import PageHeader from "./PageHeader";
 import PageFooter from "./PageFooter";
 import SidebarContent from "./SidebarContent";
-import { getSidebarOpen } from "../selectors";
+
+import { toggleSidebar } from "../actions";
 import { getTopLevelSectionsWithDirectChildren } from "../../sections/selectors";
-import { setSidebarOpen } from "../actions";
 
 const styles = {
   PageContainer: {
@@ -38,11 +38,11 @@ const PageLayout = ({
                       children,
                       location,
                       topLevelSectionsWithDirectChildren,
-                      sidebarOpen,
-                      setSidebarOpen
+                      isSidebarOpen,
+                      toggleSidebar
                     }) => {
-  const handleSetSidebarOpen = open => {
-    setSidebarOpen(open);
+  const handleToggleSidebar = open => {
+    toggleSidebar(open);
   };
 
   /*
@@ -52,8 +52,8 @@ const PageLayout = ({
 
   return (
     <Sidebar sidebar={ <SidebarContent topLevelSectionsWithDirectChildren={ topLevelSectionsWithDirectChildren }/> }
-             open={ sidebarOpen }
-             onSetOpen={ handleSetSidebarOpen }
+             open={ isSidebarOpen }
+             onSetOpen={ handleToggleSidebar }
              styles={ sidebarStyles }>
       <PageHeader location={ location }
                   topLevelSectionsWithDirectChildren={ topLevelSectionsWithDirectChildren }/>
@@ -67,13 +67,13 @@ const PageLayout = ({
 
 const mapStateToProps = (state) => ({
   topLevelSectionsWithDirectChildren: getTopLevelSectionsWithDirectChildren(state),
-  sidebarOpen: getSidebarOpen(state)
+  isSidebarOpen: state.core.isSidebarOpen,
 });
 
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    setSidebarOpen: setSidebarOpen,
+    toggleSidebar: toggleSidebar,
   }, dispatch);
 };
 

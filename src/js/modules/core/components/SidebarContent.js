@@ -4,8 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import { getSidebarOpen } from "../selectors";
-import { setSidebarOpen } from "../actions";
+import { toggleSidebar } from "../actions";
 
 const styles = {
   divider: {
@@ -41,16 +40,16 @@ const styles = {
   },
 };
 
-const SidebarContent = ({ classes, topLevelSectionsWithDirectChildren, sidebarOpen, setSidebarOpen }) => {
-  const handleSetSidebarOpen = () => {
-    setSidebarOpen(!sidebarOpen);
+const SidebarContent = ({ classes, topLevelSectionsWithDirectChildren, isSidebarOpen, toggleSidebar }) => {
+  const handleToggleSidebar = () => {
+    toggleSidebar(!isSidebarOpen);
   };
 
   let sidebarElements = [];
   sidebarElements.push(
     <Link className={ classes.sidebarSectionLink }
           key={ -1 }
-          onClick={ handleSetSidebarOpen }
+          onClick={ handleToggleSidebar }
           to={ '/' }>
       Home
     </Link>
@@ -60,7 +59,7 @@ const SidebarContent = ({ classes, topLevelSectionsWithDirectChildren, sidebarOp
     sidebarElements.push(
       <Link className={ classes.sidebarSectionLink }
             key={ section.id }
-            onClick={ handleSetSidebarOpen }
+            onClick={ handleToggleSidebar }
             to={ section.permalink }>
         { section.name }
       </Link>
@@ -80,12 +79,12 @@ const SidebarContent = ({ classes, topLevelSectionsWithDirectChildren, sidebarOp
 };
 
 const mapStateToProps = (state) => ({
-  sidebarOpen: getSidebarOpen(state)
+  isSidebarOpen: state.core.isSidebarOpen,
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    setSidebarOpen: setSidebarOpen,
+    toggleSidebar: toggleSidebar,
   }, dispatch);
 };
 
