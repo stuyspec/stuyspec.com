@@ -1,5 +1,6 @@
 import combineReducers from "redux/lib/combineReducers";
 import { routerReducer } from "react-router-redux/reducer";
+import { reducer as formReducer } from "redux-form";
 import core from "./modules/core";
 import articles from "./modules/articles";
 import sections from "./modules/sections";
@@ -13,5 +14,6 @@ export default combineReducers(
     [sections.constants.NAME]: sections.reducer,
     [users.constants.NAME]: users.reducer,
     [media.constants.NAME]: media.reducer,
-    router: routerReducer
+    router: routerReducer,
+    form: formReducer,
   });

@@ -5,6 +5,7 @@ import ConnectedRouter from "react-router-redux/ConnectedRouter";
 import { connect } from "react-redux";
 
 import { HomePage, PageLayout } from "./core/components";
+import { SignUpPage } from "./accounts/components";
 import { ArticlePage } from "./articles/components";
 import { SectionPage } from "./sections/components";
 import { RolePage, ContributorPage, PhotographerPage, IllustratorPage } from "./users/components";
@@ -73,6 +74,7 @@ const RoutingApp = ({ sections, roles }) => {
                    <PhotographerPage match={ props.match }
                                      role={ roles[ 'photographers' ] }/>
                  ) }/>
+          <Route exact path="/myaccount" component={ SignUpPage }/>
         </Switch>
       </PageLayout>
     </ConnectedRouter>

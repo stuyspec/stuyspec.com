@@ -59,6 +59,7 @@ const HomePage = ({
       <button onClick={ fetchArticles }>fetch articles</button>
       <button onClick={ fetchUsers }>fetch users</button>
       <button onClick={ fetchMedia }>fetch media</button>
+      <Link to="/myaccount">myaccount</Link>
       <h2>Articles</h2>
       <ul>
         { createArticleLinks() }

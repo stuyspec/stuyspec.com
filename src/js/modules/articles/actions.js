@@ -23,12 +23,12 @@ export const fetchArticles = () => {
           payload: getFakeAuthorshipsForArticleResponse(getState()),
         })
       })
-      .catch((err) => {
+      .catch(err => {
         dispatch({
           type: t.FETCH_ARTICLE_REJECTED,
           payload: err,
         })
-      })
+      });
   };
 };
 
