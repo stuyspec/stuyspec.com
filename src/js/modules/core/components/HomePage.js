@@ -7,6 +7,7 @@ import injectSheet from "react-jss";
 import { getArticles } from "../../articles/selectors";
 import { getSections } from "../../sections/selectors";
 import { getUsers, getUserRoles } from "../../users/selectors";
+
 import { fetchArticles } from "../../articles/actions";
 import { fetchUsers } from "../../users/actions";
 import { fetchMedia } from "../../media/actions";
@@ -22,7 +23,8 @@ const HomePage = ({
                     users,
                     userRoles,
                     fetchArticles,
-                    fetchUsers
+                    fetchUsers,
+                    fetchMedia
                   }) => {
   const createArticleLinks = () => {
     return Object.keys(articles).map(articleSlug => {
@@ -56,6 +58,7 @@ const HomePage = ({
       <h1>Home page</h1>
       <button onClick={ fetchArticles }>fetch articles</button>
       <button onClick={ fetchUsers }>fetch users</button>
+      <button onClick={ fetchMedia }>fetch media</button>
       <h2>Articles</h2>
       <ul>
         { createArticleLinks() }
@@ -76,7 +79,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchArticles, fetchUsers }, dispatch);
+  return bindActionCreators(
+    { fetchArticles, fetchUsers, fetchMedia },
+    dispatch
+  );
 };
 
 export default connect(

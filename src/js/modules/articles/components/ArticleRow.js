@@ -31,6 +31,9 @@ const styles = {
     color: '#000',
     marginBottom: '5px',
     padding: 0,
+    '&:hover': {
+      color: '#000',
+    }
   },
   articlePreview: {
     color: '#000',

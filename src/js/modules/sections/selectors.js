@@ -18,7 +18,8 @@ const getSubsectionsInSectionTree = (sections, targetSection) => {
 
 /**
  * The selector returns a filtered sections object which contains direct
- *   children of the props-requested section,
+ *   children of a props-requested section. It is used for the subsection bar
+ *   on the SectionPage.
  */
 export const getDirectSubsections = createSelector(
   [ getSections, getSectionFromProps ],
@@ -31,7 +32,8 @@ export const getDirectSubsections = createSelector(
 
 /**
  * The selector returns an array of all direct and indirect section children of
- *   a target section for section and subsection routing.
+ *   a target section for section and subsection routing. It is used for
+ *   getting all articles in a section's tree.
  */
 export const getSlugsInSectionTree = createSelector(
   [ getSections, getSectionFromProps ],
@@ -60,17 +62,13 @@ export const getTopLevelSections = createSelector(
 export const getTopLevelSectionsWithChildren = createSelector(
   [ getSections, getTopLevelSections ],
   (sections, topLevelSections) => {
-    let topLevelSectionsWithChildren = {};
-    Object.keys(topLevelSections).map(sectionSlug => {
-      const topLevelSection = topLevelSections[ sectionSlug ];
-      topLevelSectionsWithChildren[ sectionSlug ] = {
+    return Object.values(topLevelSections).reduce((acc, topLevelSection) => {
+      acc[ topLevelSection.slug ] = {
         ...topLevelSection,
-        subsections: Object.filter(sections, section => {
-          return section.parentSlug === section.slug;
-        }),
+        subsections: getSubsectionsInSectionTree(sections, topLevelSection),
       };
-    });
-    return topLevelSectionsWithChildren;
+      return acc;
+    }, {})
   }
 );
 

@@ -32,7 +32,7 @@ const validateUserKey = (userObject, key, type) => {
     if (typeof (userObject[ key ]) === type) {
       return true;
     } else {
-      throw `EXCEPTION: key ${key} in userObject is 
+      throw `EXCEPTION: key ${key} in userObject is of type
         ${typeof (userObject[ key ])}, but should be ${type}.`;
     }
   } else {
@@ -40,9 +40,10 @@ const validateUserKey = (userObject, key, type) => {
   }
 };
 
+// TODO: Rails API needs real data.
 const validateUsers = (userArray) => {
-  const integerProperties = [ 'id' ];
-  const stringProperties = [ 'firstName', 'lastName', 'username', 'email', 'createdAt', 'updatedAt' ];
+  const integerProperties = [];//[ 'id' ];
+  const stringProperties = [];//[ 'firstName', 'lastName', 'username', 'email', 'createdAt', 'updatedAt' ];
   if (!Array.isArray(userArray)) {
     throw 'EXCEPTION: user response is not an array.'
   }

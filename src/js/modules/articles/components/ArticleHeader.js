@@ -22,6 +22,10 @@ const styles = {
     marginBottom: '18px',
     textDecoration: 'none',
     textTransform: 'uppercase',
+    width: '36px',
+    '&:hover': {
+      color: '#000',
+    },
   },
   headline: {
     color: '#000',
