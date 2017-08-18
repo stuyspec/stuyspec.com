@@ -1,7 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 import { Grid, Row, Col } from "react-bootstrap/lib";
+
+import { getTopLevelSectionsWithChildren } from "../../sections/selectors";
 
 const styles = {
   PageFooter: {
@@ -65,25 +68,23 @@ const styles = {
   },
 };
 
-const PageFooter = ({ classes, topLevelSectionsWithDirectChildren }) => {
-  const createLinksToSections = () => {
-    return Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {
-      const topLevelSection = topLevelSectionsWithDirectChildren[ sectionSlug ];
+const PageFooter = ({ classes, topLevelSectionsWithChildren }) => {
+  const createSectionLinks = () => {
+    return Object.values(topLevelSectionsWithChildren).map(section => {
       return (
-        <div className={classes.sectionBlock} key={topLevelSection.id}>
-          <Link className={classes.topLevelSectionLink}
-                key={`topLevelLink${topLevelSection.id}`}
-                to={topLevelSection.permalink}>
-            {topLevelSection.name}
+        <div className={ classes.sectionBlock } key={ section.id }>
+          <Link className={ classes.topLevelSectionLink }
+                key={ section.id }
+                to={ section.permalink }>
+            { section.name }
           </Link>
           {
-            Object.keys(topLevelSection.subsections).map(subsectionSlug => {
-              const subsection = topLevelSection.subsections[ subsectionSlug ];
+            Object.values(section.subsections).map(subsection => {
               return (
-                <Link className={classes.subsectionLink}
-                      key={`subsectionLink${subsection.id}`}
-                      to={subsection.permalink}>
-                  {subsection.name}
+                <Link className={ classes.subsectionLink }
+                      key={ subsection.id }
+                      to={ subsection.permalink }>
+                  { subsection.name }
                 </Link>
               );
             })
@@ -93,17 +94,24 @@ const PageFooter = ({ classes, topLevelSectionsWithDirectChildren }) => {
     });
   };
   return (
-    <Grid className={classes.PageFooter}>
-      <Row className={classes.pageFooterMain}>
-        <Col md={8} mdOffset={2} className={classes.theSpectator}>
+    <Grid className={ classes.PageFooter }>
+      <Row className={ classes.pageFooterMain }>
+        <Col md={ 8 } mdOffset={ 2 } className={ classes.theSpectator }>
           The Spectator
         </Col>
-        <Col md={8} mdOffset={2} className={classes.sectionFlex}>
-          {createLinksToSections()}
+        <Col md={ 8 } mdOffset={ 2 } className={ classes.sectionFlex }>
+          { createSectionLinks() }
         </Col>
       </Row>
     </Grid>
   );
 };
 
-export default (injectSheet(styles)(PageFooter));
+const mapStateToProps = (state) => ({
+  topLevelSectionsWithChildren: getTopLevelSectionsWithChildren(state),
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(injectSheet(styles)(PageFooter));

@@ -1,6 +1,11 @@
 import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
+
+import { Hamburger, Search } from "../icons";
+import { openSidebar } from "../actions";
 
 const styles = {
   MastheadBar: {
@@ -10,7 +15,7 @@ const styles = {
     position: 'fixed',
     width: '100%',
     top: 0,
-    zIndex: 9999,
+    zIndex: 1000,
   },
   barContainer: {
     height: '100%',
@@ -67,36 +72,54 @@ const navButtonStyles = {
     fontSize: '12px',
     fontWeight: 'bold',
     textTransform: 'uppercase',
-  }
+  },
+  icon: {
+    display: 'inline',
+    marginRight: '4px',
+  },
 };
 
-const NavButton = ({ classes, label }) => {
+const NavButton = ({ classes, children, label, onClick }) => {
   return (
-    <button className={classes.NavButton}>
-      <span className={classes.buttonText}>{label}</span>
+    <button className={ classes.NavButton } onClick={ onClick }>
+      <div className={ classes.icon }>
+        { children }
+      </div>
+      <span className={ classes.buttonText }>{ label }</span>
     </button>
   );
 };
 const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 
-const MastheadBar = ({ classes }) => {
+const MastheadBar = ({ classes, openSidebar }) => {
   return (
-    <div className={classes.MastheadBar}>
-      <div className={classes.barContainer}>
-        <div className={classes.quickNav}>
-          <StyledNavButton label="sections"/>
-          <StyledNavButton label="search"/>
+    <div className={ classes.MastheadBar }>
+      <div className={ classes.barContainer }>
+        <div className={ classes.quickNav }>
+          <StyledNavButton label="sections" onClick={ openSidebar }>
+            <Hamburger/>
+          </StyledNavButton>
+          <StyledNavButton label="search">
+            <Search/>
+          </StyledNavButton>
         </div>
-        <Link className={classes.brandingLink} to="/">
+        <Link className={ classes.brandingLink } to="/">
           The Spectator
         </Link>
-        <div className={classes.userTools}>
+        <div className={ classes.userTools }>
           <StyledNavButton label="log in"/>
           <StyledNavButton label="subscribe"/>
         </div>
       </div>
     </div>
-  )
+  );
 };
 
-export default injectSheet(styles)(MastheadBar);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ openSidebar }, dispatch);
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(injectSheet(styles)(MastheadBar));

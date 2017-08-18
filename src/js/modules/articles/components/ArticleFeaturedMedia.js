@@ -22,11 +22,11 @@ const styles = {
 
 const ArticleFeaturedMedia = ({ classes, featuredMedia }) => {
   return (
-    <figure className={classes.figure}>
-      <img className={classes.img} src={featuredMedia.url}/>
-      <figcaption className={classes.caption}>
-        <span>{featuredMedia.caption}</span>
-        <span>{featuredMedia.type} by {featuredMedia.credits}</span>
+    <figure className={ classes.figure }>
+      <img className={ classes.img } src={ featuredMedia.url }/>
+      <figcaption className={ classes.caption }>
+        <span>{ featuredMedia.caption } </span>
+        <span>{ featuredMedia.type } by { featuredMedia.credits }</span>
       </figcaption>
     </figure>
   );

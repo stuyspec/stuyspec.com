@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "react-bootstrap/lib";
+import Grid from "react-bootstrap/lib/grid";
 import injectSheet from "react-jss";
 
 import ArticleRow from "./ArticleRow";
