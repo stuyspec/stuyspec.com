@@ -13,13 +13,15 @@ const styles = {
   },
 };
 
+// TODO: if getArticlesByContributor is not renaned to getContributorArticles
+//   in feature/media-module, change it.
+
 const ContributorPage = ({ classes, role, contributor, articles, sections }) => {
-  const createLinksToArticlesByContributor = () => {
-    return Object.keys(articles).map(articleSlug => {
-      const article = articles[ articleSlug ];
+  const createContributorArticlesLinks = () => {
+    return Object.values(articles).map(article => {
       return (
         <li key={ `contributorArticleListItem${article.id}` }>
-          <Link to={ `${sections[ article.sectionSlug ].permalink}/${articleSlug}` }>
+          <Link to={ `${sections[ article.sectionSlug ].permalink}/${article.slug}` }>
             { article.title }
           </Link>
         </li>
@@ -33,7 +35,7 @@ const ContributorPage = ({ classes, role, contributor, articles, sections }) => 
       <div>
         <p>articles</p>
         <ul>
-          { createLinksToArticlesByContributor() }
+          { createContributorArticlesLinks() }
         </ul>
       </div>
     </div>

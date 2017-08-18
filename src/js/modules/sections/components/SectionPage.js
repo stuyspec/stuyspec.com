@@ -54,40 +54,40 @@ const styles = {
   }
 };
 
-const SectionPage = ({ classes,
+const SectionPage = ({
+                       classes,
                        sectionTreeArticles,
                        directSubsections,
                        section,
                        featuredMedia,
                      }) => {
-  const createLinksToDirectSubsections = () => {
-    return Object.keys(directSubsections).map(subsectionSlug => {
-      const subsection = directSubsections[ subsectionSlug ];
+  const createDirectSubsectionLinks = () => {
+    return Object.values(directSubsections).map(subsection => {
       return (
-        <li className={classes.subsectionListItem}
-            key={`subsectionListItem${subsection.id}`}>
-          <Link className={classes.subsectionLink} to={subsection.permalink}>
-            {subsection.name}
+        <li className={ classes.subsectionListItem }
+            key={ subsection.id }>
+          <Link className={ classes.subsectionLink } to={ subsection.permalink }>
+            { subsection.name }
           </Link>
         </li>
       );
     });
   };
   return (
-    <div className={classes.SectionPage}>
-      <h1 className={classes.sectionName}>{section.name}</h1>
+    <div className={ classes.SectionPage }>
+      <h1 className={ classes.sectionName }>{ section.name }</h1>
       {
         isObjectEmpty(directSubsections) ? (
-          <ul className={classes.subsectionBar}>
-            {createLinksToDirectSubsections()}
-          </ul>
+          <hr className={ classes.subsectionBarLine }/>
         ) : (
-          <hr className={classes.subsectionBarLine}/>
+          <ul className={ classes.subsectionBar }>
+            { createDirectSubsectionLinks() }
+          </ul>
         )
       }
-      <ArticleList articles={sectionTreeArticles}
-                   featuredMedia={featuredMedia}
-                   section={section}/>
+      <ArticleList articles={ sectionTreeArticles }
+                   featuredMedia={ featuredMedia }
+                   section={ section }/>
     </div>
   );
 };

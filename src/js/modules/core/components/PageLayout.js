@@ -40,8 +40,8 @@ const PageLayout = ({
                       openSidebar,
                       closeSidebar,
                     }) => {
-  const handleSetSidebar = shouldSetSidebarOpen => {
-    if (shouldSetSidebarOpen) {
+  const handleSetOpen = isSidebarOpen => {
+    if (isSidebarOpen) {
       openSidebar();
     } else {
       closeSidebar();
@@ -50,7 +50,7 @@ const PageLayout = ({
   return (
     <Sidebar sidebar={ <SidebarContent/> }
              open={ isSidebarOpen }
-             onSetOpen={ handleSetSidebar }
+             onSetOpen={ handleSetOpen }
              styles={ sidebarStyles }>
       <PageHeader location={ location }/>
       <div className={ classes.PageContainer }>

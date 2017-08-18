@@ -69,7 +69,7 @@ const styles = {
 };
 
 const PageFooter = ({ classes, topLevelSectionsWithChildren }) => {
-  const createLinksToSections = () => {
+  const createSectionLinks = () => {
     return Object.values(topLevelSectionsWithChildren).map(section => {
       return (
         <div className={ classes.sectionBlock } key={ section.id }>
@@ -100,7 +100,7 @@ const PageFooter = ({ classes, topLevelSectionsWithChildren }) => {
           The Spectator
         </Col>
         <Col md={ 8 } mdOffset={ 2 } className={ classes.sectionFlex }>
-          { createLinksToSections() }
+          { createSectionLinks() }
         </Col>
       </Row>
     </Grid>
