@@ -5,16 +5,24 @@ import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
 import { getArticles } from "../../articles/selectors";
-import { fetchArticles } from "../../articles/actions";
 import { getSections } from "../../sections/selectors";
 import { getUsers, getUserRoles } from "../../users/selectors";
+import { fetchArticles } from "../../articles/actions";
 import { fetchUsers } from "../../users/actions";
 
 const styles = {
   HomePage: {}
 };
 
-const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles, fetchUsers }) => {
+const HomePage = ({
+                    classes,
+                    sections,
+                    articles,
+                    users,
+                    userRoles,
+                    fetchArticles,
+                    fetchUsers
+                  }) => {
   const createArticleLinks = () => {
     return Object.keys(articles).map(articleSlug => {
       const article = articles[ articleSlug ];
@@ -45,8 +53,8 @@ const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles
   return (
     <div className={ classes.HomePage }>
       <h1>Home page</h1>
-      <button onClick={ () => fetchArticles() }>fetch articles</button>
-      <button onClick={ () => fetchUsers() }>fetch users</button>
+      <button onClick={ fetchArticles }>fetch articles</button>
+      <button onClick={ fetchUsers }>fetch users</button>
       <h2>Articles</h2>
       <ul>
         { createArticleLinks() }

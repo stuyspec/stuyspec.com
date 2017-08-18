@@ -3,5 +3,5 @@
  * https://github.com/rob2d/generator-react-redux-gulp/issues/7
  */
 
-export { default as FaBars } from "./FaBars";
-export { default as FaSearch } from "./FaSearch";
+export { default as Hamburger } from "./Hamburger";
+export { default as Search } from "./Search";

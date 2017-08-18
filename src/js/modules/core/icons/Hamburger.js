@@ -1,7 +1,8 @@
 import React from "react";
 import Icon from "react-icon-base";
 
-export default FaBars = props => (
+// originally FaBars
+export default Hamburger = props => (
   <Icon viewBox="0 0 40 40" { ...props }>
     <g>
       <path

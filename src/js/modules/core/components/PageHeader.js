@@ -13,19 +13,11 @@ const styles = {
   },
 };
 
-const PageHeader = ({ classes, location, topLevelSectionsWithDirectChildren }) => {
+const PageHeader = ({ classes, location }) => {
   return (
     <div className={ classes.PageHeader }>
       {
-        location.pathname === '/' ? (
-          <Masthead topLevelSectionsWithDirectChildren={
-            topLevelSectionsWithDirectChildren
-          }/>
-        ) : (
-          <MastheadBar topLevelSectionsWithDirectChildren={
-            topLevelSectionsWithDirectChildren
-          }/>
-        )
+        location.pathname === '/' ? <Masthead/> : <MastheadBar/>
       }
     </div>
   );

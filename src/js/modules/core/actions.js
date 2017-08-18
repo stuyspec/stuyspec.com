@@ -5,10 +5,10 @@ export const refreshWindowDimensions = () => ({
   payload: {},
 });
 
-export const toggleSidebar = (isSidebarOpen) => {
-  if (isSidebarOpen) {
-    return { type: t.OPEN_SIDEBAR }
-  } else {
-    return { type: t.CLOSE_SIDEBAR }
-  }
-};
+export const openSidebar = () => ({
+  type: t.OPEN_SIDEBAR
+});
+
+export const closeSidebar = () => ({
+  type: t.CLOSE_SIDEBAR
+})

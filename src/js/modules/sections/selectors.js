@@ -45,25 +45,35 @@ export const getSlugsInSectionTree = createSelector(
 );
 
 /**
+ * The selector returns an object with only top level sections (no parents).
+ */
+export const getTopLevelSections = createSelector(
+  [ getSections ],
+  (sections) => {
+    return Object.filter(sections, section => {
+      return section.parentSlug === null;
+    });
+  }
+)
+
+/**
  * The selector returns a sections object in which all nested section objects
  *   contain the section's direct and indirect section children.
  */
-export const getTopLevelSectionsWithDirectChildren = createSelector(
-  [ getSections ],
-  (sections) => {
-    let topLevelSectionsWithDirectChildren = {};
-    Object.keys(sections).map((sectionSlug) => {
-      const targetSection = sections[ sectionSlug ];
-      if (targetSection.parentSlug === null) {
-        topLevelSectionsWithDirectChildren[ sectionSlug ] = {
-          ...targetSection,
-          subsections: Object.filter(sections, section => {
-            return section.parentSlug === targetSection.slug;
-          })
-        };
-      }
+export const getTopLevelSectionsWithChildren = createSelector(
+  [ getSections, getTopLevelSections ],
+  (sections, topLevelSections) => {
+    let topLevelSectionsWithChildren = {};
+    Object.keys(topLevelSections).map(sectionSlug => {
+      const topLevelSection = topLevelSections[ sectionSlug ];
+      topLevelSectionsWithChildren[ sectionSlug ] = {
+        ...topLevelSection,
+        subsections: Object.filter(sections, section => {
+          return section.parentSlug === section.slug;
+        }),
+      };
     });
-    return topLevelSectionsWithDirectChildren;
+    return topLevelSectionsWithChildren;
   }
 );
 

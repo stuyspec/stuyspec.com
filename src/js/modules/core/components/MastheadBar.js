@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 
-import { FaBars, FaSearch } from "../icons";
-import { toggleSidebar } from "../actions";
+import { Hamburger, Search } from "../icons";
+import { openSidebar } from "../actions";
 
 const styles = {
   MastheadBar: {
@@ -73,39 +73,35 @@ const navButtonStyles = {
     fontWeight: 'bold',
     textTransform: 'uppercase',
   },
-  barsIcon: {
-    marginRight: '6px',
+  icon: {
+    display: 'inline',
+    marginRight: '4px',
   },
-  searchIcon: {
-    marginRight: '3px',
-  }
 };
 
-const NavButton = ({ classes, label, onClick }) => {
-  const createIcon = () => {
-    switch (label) {
-      case "sections":
-        return <FaBars className={ classes.barsIcon }/>;
-      case "search":
-        return <FaSearch className={ classes.searchIcon }/>;
-    }
-  };
+const NavButton = ({ classes, children, label, onClick }) => {
   return (
     <button className={ classes.NavButton } onClick={ onClick }>
-      { createIcon() }
+      <div className={ classes.icon }>
+        { children }
+      </div>
       <span className={ classes.buttonText }>{ label }</span>
     </button>
   );
 };
 const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 
-const MastheadBar = ({ classes, isSidebarOpen, toggleSidebar }) => {
+const MastheadBar = ({ classes, openSidebar }) => {
   return (
     <div className={ classes.MastheadBar }>
       <div className={ classes.barContainer }>
         <div className={ classes.quickNav }>
-          <StyledNavButton label="sections" onClick={ () => toggleSidebar(!isSidebarOpen) }/>
-          <StyledNavButton label="search"/>
+          <StyledNavButton label="sections" onClick={ openSidebar }>
+            <Hamburger/>
+          </StyledNavButton>
+          <StyledNavButton label="search">
+            <Search/>
+          </StyledNavButton>
         </div>
         <Link className={ classes.brandingLink } to="/">
           The Spectator
@@ -119,15 +115,11 @@ const MastheadBar = ({ classes, isSidebarOpen, toggleSidebar }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  isSidebarOpen: state.core.isSidebarOpen,
-});
-
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ toggleSidebar }, dispatch);
+  return bindActionCreators({ openSidebar }, dispatch);
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(injectSheet(styles)(MastheadBar));

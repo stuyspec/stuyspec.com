@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import { toggleSidebar } from "../actions";
+import { closeSidebar } from "../actions";
+import { getTopLevelSections } from "../../sections/selectors";
 
 const styles = {
   divider: {
@@ -40,27 +41,21 @@ const styles = {
   },
 };
 
-const SidebarContent = ({
-                          classes,
-                          topLevelSectionsWithDirectChildren,
-                          isSidebarOpen,
-                          toggleSidebar
-                        }) => {
+const SidebarContent = ({ classes, topLevelSections, closeSidebar }) => {
   let sidebarElements = [];
   sidebarElements.push(
     <Link className={ classes.sidebarSectionLink }
           key={ -1 }
-          onClick={ () => toggleSidebar(!isSidebarOpen) }
+          onClick={ closeSidebar }
           to={ '/' }>
       Home
     </Link>
   );
-  Object.keys(topLevelSectionsWithDirectChildren).forEach(sectionSlug => {
-    const section = topLevelSectionsWithDirectChildren[ sectionSlug ];
+  Object.values(topLevelSections).forEach(section => {
     sidebarElements.push(
       <Link className={ classes.sidebarSectionLink }
             key={ section.id }
-            onClick={ () => toggleSidebar(!isSidebarOpen) }
+            onClick={ closeSidebar }
             to={ section.permalink }>
         { section.name }
       </Link>
@@ -68,7 +63,7 @@ const SidebarContent = ({
     // We want a line separating the writing sections from the non-writing
     //   sections and one separating the non-writing sections from the
     //   user account options.
-    if (sectionSlug === 'sports' || sectionSlug === 'video') {
+    if (section.slug === 'sports' || section.slug === 'video') {
       sidebarElements.push(
         <hr className={ classes.divider } key={ section.id + 100 }/>
       );
@@ -83,11 +78,12 @@ const SidebarContent = ({
 };
 
 const mapStateToProps = (state) => ({
+  topLevelSections: getTopLevelSections(state),
   isSidebarOpen: state.core.isSidebarOpen,
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ toggleSidebar }, dispatch);
+  return bindActionCreators({ closeSidebar }, dispatch);
 };
 
 export default connect(

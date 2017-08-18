@@ -9,8 +9,7 @@ import PageHeader from "./PageHeader";
 import PageFooter from "./PageFooter";
 import SidebarContent from "./SidebarContent";
 
-import { toggleSidebar } from "../actions";
-import { getTopLevelSectionsWithDirectChildren } from "../../sections/selectors";
+import { openSidebar, closeSidebar } from "../actions";
 
 const styles = {
   PageContainer: {
@@ -37,43 +36,38 @@ const PageLayout = ({
                       classes,
                       children,
                       location,
-                      topLevelSectionsWithDirectChildren,
                       isSidebarOpen,
-                      toggleSidebar
+                      openSidebar,
+                      closeSidebar,
                     }) => {
-  /*
-   * TODO: topLevelSectionsWithDirectChildren is flippin' annoying. If only
-   *   need sections, move that shit into PageFooter.
-   */
-
+  const handleSetSidebar = shouldSetSidebarOpen => {
+    if (shouldSetSidebarOpen) {
+      openSidebar();
+    } else {
+      closeSidebar();
+    }
+  };
   return (
-    <Sidebar sidebar={ <SidebarContent topLevelSectionsWithDirectChildren={
-      topLevelSectionsWithDirectChildren }/> }
+    <Sidebar sidebar={ <SidebarContent/> }
              open={ isSidebarOpen }
-             onSetOpen={ toggleSidebar }
+             onSetOpen={ handleSetSidebar }
              styles={ sidebarStyles }>
-      <PageHeader location={ location }
-                  topLevelSectionsWithDirectChildren={
-                    topLevelSectionsWithDirectChildren
-                  }/>
+      <PageHeader location={ location }/>
       <div className={ classes.PageContainer }>
         { children }
       </div>
-      <PageFooter topLevelSectionsWithDirectChildren={
-        topLevelSectionsWithDirectChildren
-      }/>
+      <PageFooter/>
     </Sidebar>
   );
 };
 
 const mapStateToProps = (state) => ({
-  topLevelSectionsWithDirectChildren: getTopLevelSectionsWithDirectChildren(state),
   isSidebarOpen: state.core.isSidebarOpen,
 });
 
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ toggleSidebar }, dispatch);
+  return bindActionCreators({ openSidebar, closeSidebar }, dispatch);
 };
 
 export default withRouter(
