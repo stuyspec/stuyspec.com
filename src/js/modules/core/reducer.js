@@ -1,4 +1,8 @@
-import { REFRESH_WINDOW_DIMENSIONS } from "./actionTypes";
+import {
+  REFRESH_WINDOW_DIMENSIONS,
+  OPEN_SIDEBAR,
+  CLOSE_SIDEBAR
+} from "./actionTypes";
 
 // getWindowWidth & getWindowHeight was
 // adapted from http://stackoverflow.com/a/8876069/1291659
@@ -13,11 +17,12 @@ const getViewportHeight = () => {
 const initialState = {
   viewportWidth: getViewportWidth(),
   viewportHeight: getViewportHeight(),
+  isSidebarOpen: false,
 };
 
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
-    case REFRESH_WINDOW_DIMENSIONS :
+    case REFRESH_WINDOW_DIMENSIONS: {
       let viewportWidth = getViewportWidth(),
         viewportHeight = getViewportHeight();
       if (state.viewportWidth !== viewportWidth || state.viewportHeight !== viewportHeight) {
@@ -26,6 +31,19 @@ const reducer = (state = { ...initialState }, action) => {
       } else { // otherwise do not mutate
         return state;
       }
+    }
+    case OPEN_SIDEBAR: {
+      return {
+        ...state,
+        isSidebarOpen: true,
+      }
+    }
+    case CLOSE_SIDEBAR: {
+      return {
+        ...state,
+        isSidebarOpen: false,
+      }
+    }
     default:
       break;
   }

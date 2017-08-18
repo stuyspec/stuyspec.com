@@ -35,6 +35,5 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 export default connect(
-  mapStateToProps,
-  null
+  mapStateToProps
 )(injectSheet(styles)(ArticlePage));

@@ -12,11 +12,10 @@ const styles = {
 };
 // TODO: FIX
 const RolePage = ({ classes, role, usersInRole }) => {
-  const createLinksToUsersInRole = () => {
-    return Object.keys(usersInRole).map(userSlug => {
-      const user = usersInRole[ userSlug ];
+  const createUsersInRoleLinks = () => {
+    return Object.values(usersInRole).map(user => {
       return (
-        <li key={ `user${user.id}` }>
+        <li key={ user.id }>
           <Link to={ `/${role.slug}/${user.slug}` }>
             { user.firstName } { user.lastName }
           </Link>
@@ -28,7 +27,7 @@ const RolePage = ({ classes, role, usersInRole }) => {
     <div className={ classes.RolePage }>
       <h1>Role page for { `${role.title}s` }</h1>
       <ul>
-        { createLinksToUsersInRole() }
+        { createUsersInRoleLinks() }
       </ul>
     </div>
   );

@@ -4,15 +4,14 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
+import { isObjectEmpty } from "../../../utils";
 import { ArticleList } from "../../articles/components";
 import { getSectionTreeArticles } from "../../articles/selectors";
 import { getSections, getDirectSubsections } from "../../sections/selectors";
 
 const styles = {
   SectionPage: {
-    marginTop: '100px',
-    top: 0,
-    marginBottom: '60px',
+    top: 0
   },
   sectionName: {
     fontFamily: 'Canela',
@@ -28,6 +27,11 @@ const styles = {
     marginBottom: '14px',
     padding: '7px 0 8px 0',
   },
+  subsectionBarLine: {
+    background: '#ddd',
+    height: '1px',
+    margin: 0,
+  },
   subsectionListItem: {
     display: 'inline',
     textDecoration: 'none',
@@ -39,6 +43,14 @@ const styles = {
     fontSize: '14px',
     fontWeight: 300,
     textTransform: 'uppercase',
+    '&:hover': {
+      color: '#000',
+      textDecoration: 'none',
+    },
+    '&:focus': {
+      color: '#000',
+      textDecoration: 'none',
+    }
   }
 };
 
@@ -48,12 +60,11 @@ const SectionPage = ({
                        directSubsections,
                        section
                      }) => {
-  const createLinksToDirectSubsections = () => {
-    return Object.keys(directSubsections).map(subsectionSlug => {
-      const subsection = directSubsections[ subsectionSlug ];
+  const createDirectSubsectionLinks = () => {
+    return Object.values(directSubsections).map(subsection => {
       return (
         <li className={ classes.subsectionListItem }
-            key={ `subsectionListItem${subsection.id}` }>
+            key={ subsection.id }>
           <Link className={ classes.subsectionLink } to={ subsection.permalink }>
             { subsection.name }
           </Link>
@@ -65,10 +76,13 @@ const SectionPage = ({
     <div className={ classes.SectionPage }>
       <h1 className={ classes.sectionName }>{ section.name }</h1>
       {
-        directSubsections !== null &&
-        <ul className={ classes.subsectionBar }>
-          { createLinksToDirectSubsections() }
-        </ul>
+        isObjectEmpty(directSubsections) ? (
+          <hr className={ classes.subsectionBarLine }/>
+        ) : (
+          <ul className={ classes.subsectionBar }>
+            { createDirectSubsectionLinks() }
+          </ul>
+        )
       }
       <ArticleList articles={ sectionTreeArticles }
                    section={ section }/>

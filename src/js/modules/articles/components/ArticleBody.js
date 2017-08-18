@@ -19,6 +19,7 @@ const styles = {
   },
 };
 
+// TODO: italicized contributor blurb underneath the article content (see nyer)
 const ArticleBody = ({ classes, content, featuredMedia }) => {
   return (
     <div className={ classes.ArticleBody }>

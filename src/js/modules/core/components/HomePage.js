@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
 import { getArticles } from "../../articles/selectors";
-import { fetchArticles } from "../../articles/actions";
 import { getSections } from "../../sections/selectors";
 import { getUsers, getUserRoles } from "../../users/selectors";
+import { fetchArticles } from "../../articles/actions";
 import { fetchUsers } from "../../users/actions";
 import { fetchMedia } from "../../media/actions";
 
@@ -15,18 +15,28 @@ const styles = {
   HomePage: {}
 };
 
-const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles, fetchUsers, fetchMedia }) => {
-  const createLinksToArticles = () => {
+const HomePage = ({
+                    classes,
+                    sections,
+                    articles,
+                    users,
+                    userRoles,
+                    fetchArticles,
+                    fetchUsers
+                  }) => {
+  const createArticleLinks = () => {
     return Object.keys(articles).map(articleSlug => {
       const article = articles[ articleSlug ];
       return (
         <li key={ `articleLink${article.id}` }>
-          <Link to={ `${sections[ article.sectionSlug ].permalink}/${article.slug}` }>{ article.title }</Link>
+          <Link to={ `${sections[ article.sectionSlug ].permalink}/${article.slug}` }>
+            { article.title }
+          </Link>
         </li>
       );
     });
   };
-  const createLinksToContributors = () => {
+  const createContributorLinks = () => {
     return Object.keys(users).map(userSlug => {
       if (userRoles.find(userRole => userRole.userSlug === userSlug &&
           userRole.roleSlug === "contributors")) {
@@ -34,38 +44,25 @@ const HomePage = ({ classes, sections, articles, users, userRoles, fetchArticles
         return (
           <li key={ `contributorLink${contributor.id}` }>
             <Link to={ `/contributors/${userSlug}` }>
-              { contributor.firstName + ' ' + contributor.lastName }
+              { `${contributor.firstName} ${contributor.lastName}` }
             </Link>
           </li>
         );
       }
     });
   };
-  const handleArticlesFetch = () => {
-    fetchArticles();
-  };
-  const handleUsersFetch = () => {
-    fetchUsers();
-  };
-  const handleMediaFetch = () => {
-    fetchMedia();
-  };
   return (
     <div className={ classes.HomePage }>
       <h1>Home page</h1>
-      <button onClick={ handleArticlesFetch }>fetch articles</button>
-      <button onClick={ handleUsersFetch }>fetch users</button>
-      <button onClick={ handleMediaFetch }>fetch media</button>
-      <Link to="/photographers">Photographers</Link>
-      <Link to="/illustrators">Illustrators</Link>
-      <Link to="/contributors">Contributors</Link>
+      <button onClick={ fetchArticles }>fetch articles</button>
+      <button onClick={ fetchUsers }>fetch users</button>
       <h2>Articles</h2>
       <ul>
-        { createLinksToArticles() }
+        { createArticleLinks() }
       </ul>
       <h2>Contributors</h2>
       <ul>
-        { createLinksToContributors() }
+        { createContributorLinks() }
       </ul>
     </div>
   );
@@ -79,11 +76,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    fetchArticles: fetchArticles,
-    fetchUsers: fetchUsers,
-    fetchMedia: fetchMedia,
-  }, dispatch);
+  return bindActionCreators({ fetchArticles, fetchUsers }, dispatch);
 };
 
 export default connect(

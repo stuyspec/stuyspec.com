@@ -86,9 +86,10 @@ const ArticleRow = ({ classes, article, sections, media }) => {
               className={ classes.articleTitle }>
           { article.title }
         </Link>
-        <p className={ classes.articlePreview }>An angry PR comment for Cathy Cai from a week ago: Your code breaks
-          when I run gulp. Also, in SectionPage, you've imported SectionArticleList but you don't use it as a component.
-          The error appears to be on line 41.</p>
+        <p className={ classes.articlePreview }>
+          Fake comment: in SectionPage, you've imported SectionArticleList but you
+          don't use it as a component. The error appears to be on line 41.
+        </p>
         <div>
           <Byline classes={ classes } contributors={ article.contributors }/>
           <span className={ classes.dateline }>{ article.dateline }</span>

@@ -6,4 +6,8 @@ appHistory.goTo = function (url) {
   appHistory.replace(url);
 };
 
-export default appHistory;
+appHistory.listen((location, action) => {
+  window.scrollTo(0, 0);
+});
+
+export default appHistory
