@@ -2,7 +2,7 @@ import axios from "axios";
 import * as t from "./actionTypes";
 import { STUY_SPEC_API, STUY_SPEC_API_HEADER } from "../../constants";
 import { getProcessedArticlesResponse, getFakeAuthorshipsForArticleResponse } from "./selectors";
-import { checkKeyValidity } from "../../utils"
+import { checkKeyValidity } from "../../utils";
 
 export const fetchArticles = () => {
   return (dispatch, getState) => {

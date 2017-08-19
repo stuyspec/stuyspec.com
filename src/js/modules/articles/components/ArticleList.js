@@ -12,10 +12,9 @@ const styles = {
 
 const ArticleList = ({ classes, articles }) => {
   const createArticleRows = () => {
-    return Object.keys(articles).map(articleSlug => {
-      const article = articles[ articleSlug ];
+    return Object.values(articles).map(article => {
       return <ArticleRow article={ article }
-                         key={ articleSlug }/>;
+                         key={ article.id }/>;
     })
   };
   return (
