@@ -1,14 +1,16 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
+import injectSheet from "react-jss";
+
+const styles = {
+  errorMessage: {
+    color: 'red',
+  },
+};
 
 const validate = values => {
   const errors = {}
-  if (!values.firstName) {
-    errors.firstName = 'Required';
-  }
-  if (!values.lastName) {
-    errors.lastName = 'Required';
-  }
   if (!values.email) {
     errors.email = 'Required'
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
@@ -44,24 +46,42 @@ const renderField = ({
   );
 };
 
-const SignUpForm = ({ handleSubmit, submitting }) => {
+const SignInForm = ({ classes, handleSubmit, submitting, errors }) => {
   return (
-    <form onSubmit={ handleSubmit }>
-      <Field name="firstName" type="text" component={ renderField } label="First Name"/>
-      <Field name="lastName" type="text" component={ renderField } label="Last Name"/>
-      <Field name="email" type="email" component={ renderField } label="Email"/>
-      <Field name="password" type="text" component={ renderField } label="Password"/>
-      <Field name="passwordConfirmation" type="text" component={ renderField } label="Password Confirmation"/>
-      <div>
-        <button type="submit" disabled={ submitting }>
-          Submit
-        </button>
-      </div>
-    </form>
+    <div>
+      <h1>Sign In Form</h1>
+      <form onSubmit={ handleSubmit }>
+        <Field name="email" type="email" component={ renderField } label="Email"/>
+        <Field name="password" type="text" component={ renderField } label="Password"/>
+        <div>
+          <button type="submit" disabled={ submitting }>
+            Sign In
+          </button>
+        </div>
+      </form>
+      {
+        errors.map((error, index) => {
+          return (
+            <p key={ index } className={ classes.errorMessage }>
+              { error }
+            </p>
+          );
+        })
+      }
+    </div>
   )
 }
 
+const mapStateToProps = state => ({
+  errors: state.accounts.signInErrors,
+});
+
+const SmartSignInForm = connect(
+  mapStateToProps,
+  null,
+)(injectSheet(styles)(SignInForm));
+
 export default reduxForm({
-  form: 'signUp',
+  form: 'signIn',
   validate,
-})(SignUpForm)
+})(SmartSignInForm);

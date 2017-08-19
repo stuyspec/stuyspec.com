@@ -10,13 +10,14 @@ const styles = {
 };
 
 const validate = values => {
-  const errors = {}
-  if (!values.email) {
-    errors.email = 'Required'
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+  const errors = {};
+  if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address';
   }
-  return errors
+  if (values.password !== values.passwordConfirmation) {
+    errors.passwordConfirmation = 'Password and password confirmation do not match.';
+  }
+  return errors;
 };
 
 const renderField = ({
@@ -46,16 +47,19 @@ const renderField = ({
   );
 };
 
-const SignInForm = ({ classes, handleSubmit, submitting, errors }) => {
+const EditProfileForm = ({ classes, handleSubmit, submitting, errors }) => {
   return (
     <div>
-      <h1>Sign In Form</h1>
+      <h1>Edit Profile</h1>
       <form onSubmit={ handleSubmit }>
+        <Field name="firstName" type="text" component={ renderField } label="First Name"/>
+        <Field name="lastName" type="text" component={ renderField } label="Last Name"/>
         <Field name="email" type="email" component={ renderField } label="Email"/>
         <Field name="password" type="text" component={ renderField } label="Password"/>
+        <Field name="passwordConfirmation" type="text" component={ renderField } label="Password Confirmation"/>
         <div>
           <button type="submit" disabled={ submitting }>
-            Sign In
+            Update
           </button>
         </div>
       </form>
@@ -74,14 +78,15 @@ const SignInForm = ({ classes, handleSubmit, submitting, errors }) => {
 
 const mapStateToProps = state => ({
   errors: state.accounts.errors,
+  session: state.accounts.session,
 });
 
-const SmartSignInForm = connect(
+const SmartEditProfileForm = connect(
   mapStateToProps,
   null,
-)(injectSheet(styles)(SignInForm));
+)(injectSheet(styles)(EditProfileForm));
 
 export default reduxForm({
-  form: 'signIn',
+  form: 'updateUser',
   validate,
-})(SmartSignInForm);
+})(SmartEditProfileForm);
