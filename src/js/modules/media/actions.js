@@ -1,7 +1,7 @@
 import axios from "axios";
 import { checkKeyValidity } from "../../utils";
 import * as t from "./actionTypes";
-import { STUY_SPEC_API, STUY_SPEC_API_HEADER } from "../../constants"
+import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADER } from "../../constants"
 import { getMediaResponse } from "./selectors";
 
 const fakeMedia = [
@@ -60,7 +60,7 @@ const fakeMedia = [
 export const fetchMedia = () => {
   return (dispatch, getState) => {
     dispatch({ type: t.FETCH_MEDIA_PENDING });
-    axios.get(`${STUY_SPEC_API}/media`, { 'headers': STUY_SPEC_API_HEADER })
+    axios.get(`${STUY_SPEC_API_URL}/media`, { 'headers': STUY_SPEC_API_HEADER })
       .then(response => { // TODO replace fakeMedia with response.data (real media)
         if (validateMedia(fakeMedia)) {
           dispatch({

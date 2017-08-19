@@ -1,12 +1,12 @@
 import axios from "axios";
 import * as t from "./actionTypes";
-import { STUY_SPEC_API, HEADER } from "../../constants";
+import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADER } from "../../constants";
 import { getProcessedUsersResponse } from "./selectors";
 
 export const fetchUsers = () => {
   return (dispatch, getState) => {
     dispatch({ type: t.FETCH_USER_PENDING });
-    axios.get(`${STUY_SPEC_API}/users`, { 'headers': HEADER })
+    axios.get(`${STUY_SPEC_API_URL}/users`, { 'headers': STUY_SPEC_API_HEADER })
       .then(response => {
         validateUsers(response.data);
         dispatch({

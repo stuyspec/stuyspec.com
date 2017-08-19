@@ -11,24 +11,12 @@ const styles = {
 
 const validate = values => {
   const errors = {}
-  if (!values.firstName) {
-    errors.firstName = 'Required';
-  }
-  if (!values.lastName) {
-    errors.lastName = 'Required';
-  }
   if (!values.email) {
-    errors.email = 'Required';
+    errors.email = 'Required'
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address';
   }
-  if (!values.password) {
-    errors.password = 'Required';
-  }
-  if (values.password !== values.passwordConfirmation) {
-    errors.passwordConfirmation = 'Password and password confirmation do not match.';
-  }
-  return errors;
+  return errors
 };
 
 const renderField = ({
@@ -58,19 +46,16 @@ const renderField = ({
   );
 };
 
-const SignUpForm = ({ classes, handleSubmit, submitting, errors }) => {
+const SignInForm = ({ classes, handleSubmit, submitting, errors }) => {
   return (
     <div>
-      <h1>Sign Up Form</h1>
+      <h1>Sign In Form</h1>
       <form onSubmit={ handleSubmit }>
-        <Field name="firstName" type="text" component={ renderField } label="First Name"/>
-        <Field name="lastName" type="text" component={ renderField } label="Last Name"/>
         <Field name="email" type="email" component={ renderField } label="Email"/>
         <Field name="password" type="text" component={ renderField } label="Password"/>
-        <Field name="passwordConfirmation" type="text" component={ renderField } label="Password Confirmation"/>
         <div>
           <button type="submit" disabled={ submitting }>
-            Sign Up
+            Sign In
           </button>
         </div>
       </form>
@@ -84,19 +69,19 @@ const SignUpForm = ({ classes, handleSubmit, submitting, errors }) => {
         })
       }
     </div>
-  );
-};
+  )
+}
 
 const mapStateToProps = state => ({
-  errors: state.accounts.signUpErrors,
-})
+  errors: state.accounts.errors,
+});
 
-const SmartSignUpForm = connect(
+const SmartSignInForm = connect(
   mapStateToProps,
-  null
-)(injectSheet(styles)(SignUpForm));
+  null,
+)(injectSheet(styles)(SignInForm));
 
 export default reduxForm({
-  form: 'signUp',
+  form: 'signIn',
   validate,
-})(SmartSignUpForm)
+})(SmartSignInForm);

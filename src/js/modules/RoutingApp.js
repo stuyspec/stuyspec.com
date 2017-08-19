@@ -5,10 +5,15 @@ import ConnectedRouter from "react-router-redux/ConnectedRouter";
 import { connect } from "react-redux";
 
 import { HomePage, PageLayout } from "./core/components";
-import { SignUpPage } from "./accounts/components";
+import { SignInPage, ProfilePage, EditProfilePage } from "./accounts/components";
 import { ArticlePage } from "./articles/components";
 import { SectionPage } from "./sections/components";
-import { RolePage, ContributorPage, PhotographerPage, IllustratorPage } from "./users/components";
+import {
+  RolePage,
+  ContributorPage,
+  PhotographerPage,
+  IllustratorPage
+} from "./users/components";
 
 import { getSections } from "./sections/selectors";
 import { getRoles } from "./users/selectors";
@@ -74,7 +79,9 @@ const RoutingApp = ({ sections, roles }) => {
                    <PhotographerPage match={ props.match }
                                      role={ roles[ 'photographers' ] }/>
                  ) }/>
-          <Route exact path="/myaccount" component={ SignUpPage }/>
+          <Route exact path={ '/myaccount' } component={ SignInPage }/>
+          <Route exact path={ '/myaccount/profile' } component={ ProfilePage }/>
+          <Route exact path={ '/myaccount/profile/edit' } component={ EditProfilePage }/>
         </Switch>
       </PageLayout>
     </ConnectedRouter>

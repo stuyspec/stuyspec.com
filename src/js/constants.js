@@ -1,4 +1,4 @@
-export const STUY_SPEC_API = 'https://api.stuyspec.xyz';
+export const STUY_SPEC_API_URL = 'http://localhost:3000';//'https://api.stuyspec.xyz';
 export const STUY_SPEC_API_HEADER = {
   'X-Key-Inflection': 'camel',
 };
