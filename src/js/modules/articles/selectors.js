@@ -26,7 +26,7 @@ const getRequestedArticleSlug = (state, props) => props.match.params.article_slu
  * The selector returns an articles object with an additional property for each
  *   article: an array of its contributors.
  */
-const getArticlesWithContributors = createSelector(
+export const getArticlesWithContributors = createSelector(
   [ getArticles, getUsers, getAuthorships ],
   (articles, users, authorships) => {
     let articlesWithContributors = articles;

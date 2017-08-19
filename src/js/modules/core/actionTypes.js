@@ -1,2 +1,2 @@
 export const REFRESH_WINDOW_DIMENSIONS = 'core/REFRESH_WINDOW_DIMENSIONS';
-
+export const ADD_ROW_HEIGHT = 'core/ADD_ROW_HEIGHT';

@@ -87,7 +87,7 @@ const ArticleRow = ({ classes, article, sections, media }) => {
           when I run gulp. Also, in SectionPage, you've imported SectionArticleList but you don't use it as a component.
           The error appears to be on line 41.</p>
         <div>
-          <Byline classes={classes} contributors={article.contributors}/>
+          <Byline classes={classes} contributors={article.contributors} homepage={false}/>
           <span className={classes.dateline}>{article.dateline}</span>
         </div>
       </Col>

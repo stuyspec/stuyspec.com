@@ -1,4 +1,4 @@
-import { REFRESH_WINDOW_DIMENSIONS } from "./actionTypes";
+import { REFRESH_WINDOW_DIMENSIONS, ADD_ROW_HEIGHT } from "./actionTypes";
 
 // getWindowWidth & getWindowHeight was
 // adapted from http://stackoverflow.com/a/8876069/1291659
@@ -13,10 +13,14 @@ const getViewportHeight = () => {
 const initialState = {
   viewportWidth: getViewportWidth(),
   viewportHeight: getViewportHeight(),
+  rowHeight: '0px',
 };
 
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
+    case ADD_ROW_HEIGHT: {
+      return {...state, rowHeight:action.payload};
+    }
     case REFRESH_WINDOW_DIMENSIONS :
       let viewportWidth = getViewportWidth(),
         viewportHeight = getViewportHeight();

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Byline = ({ classes, contributors }) => {
+const Byline = ({ classes, contributors, homepage }) => {
   let separator = ', ';
   return (
     <div className={ classes.Byline }>
@@ -14,7 +14,7 @@ const Byline = ({ classes, contributors }) => {
           }
           return (
             <p key={ `contributor${contributor.id}` }>
-              { index === 0 ? 'By ' : '' }
+              { (index === 0 && !homepage) ? 'By ' : '' }
               <Link to={ `/contributors/${contributor.slug}` }>
                 { contributor.firstName } { contributor.lastName }
               </Link>{ separator }
