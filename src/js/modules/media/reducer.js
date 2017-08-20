@@ -22,7 +22,6 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         isFetching: false,
-        isFetched: true,
         response: action.payload,
       };
     }
@@ -41,6 +40,7 @@ const reducer = (state = { ...initialState }, action) => {
           ...action.payload,
         },
         response: {},
+        isFetched: true,
       };
     }
   }
