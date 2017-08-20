@@ -6,10 +6,8 @@ import {
   getContributorFromSlug,
 } from "../users/selectors";
 import {
-  getSections,
   getSectionFromProps,
-  getSectionSlugFromId,
-  getSlugsInSectionTree,
+  getSectionTreeIds,
 } from "../sections/selectors";
 import {
   getMedia,
@@ -19,7 +17,6 @@ import {
 
 export const getArticles = state => state.articles.articles;
 const getAuthorships = state => state.articles.authorships;
-const getArticlesResponse = state => state.articles.response;
 const getRequestedArticleSlug = (state, props) => props.match.params.article_slug;
 
 /**
@@ -29,21 +26,14 @@ const getRequestedArticleSlug = (state, props) => props.match.params.article_slu
 const getArticlesWithContributors = createSelector(
   [ getArticles, getUsers, getAuthorships ],
   (articles, users, authorships) => {
-    let articlesWithContributors = articles;
-    authorships.map(authorship => {
-      const targetArticle = articlesWithContributors[ authorship.articleSlug ];
+    return authorships.reduce((acc, authorship) => {
+      const targetArticle = acc[ authorship.articleId ];
       if (targetArticle.contributors === undefined) {
         targetArticle.contributors = [];
       }
-      targetArticle.contributors.push(users[ authorship.contributorSlug ]);
-    });
-    Object.keys(articlesWithContributors).map(articleSlug => {
-      const targetArticle = articlesWithContributors[ articleSlug ];
-      if (targetArticle.contributors < 1) {
-        throw `EXCEPTION: article ${targetArticle.slug} owns no authorships.`
-      }
-    });
-    return articlesWithContributors;
+      targetArticle.contributors.push(users[ authorship.contributorId ]);
+      return acc;
+    }, articles);
   }
 );
 
@@ -52,10 +42,10 @@ const getArticlesWithContributors = createSelector(
  *   and their bylines within the target section (from props) and its tree.
  */
 export const getSectionTreeArticles = createSelector(
-  [ getArticlesWithContributors, getSlugsInSectionTree ],
-  (articlesWithContributors, slugsInSectionTree) => {
-    return Object.filter(articlesWithContributors, article => {
-      return slugsInSectionTree.includes(article.sectionSlug);
+  [ getArticlesWithContributors, getSectionTreeIds ],
+  (articles, sectionTreeIds) => {
+    return Object.filter(articles, article => {
+      return sectionTreeIds.includes(article.sectionId);
     });
   }
 );
@@ -65,11 +55,11 @@ export const getSectionTreeArticles = createSelector(
  */
 export const getArticleFromRequestedSlug = createSelector(
   [ getArticlesWithContributors, getRequestedArticleSlug, getSectionFromProps ],
-  (articlesWithContributors, articleSlug, section) => {
-    const requestedArticle = articlesWithContributors[ articleSlug ];
-    if (requestedArticle.sectionSlug === section.slug) {
-      return requestedArticle;
-    }
+  (articles, requestedArticleSlug, section) => {
+    return Object.values(articles).find(article => {
+      return article.slug === requestedArticleSlug &&
+        article.sectionId === section.id;
+    });
   }
 );
 
@@ -79,13 +69,14 @@ export const getArticleFromRequestedSlug = createSelector(
  */
 export const getContributorArticles = createSelector(
   [ getContributorFromSlug, getArticlesWithContributors, getAuthorships ],
-  (contributor, articlesWithContributors, authorships) => {
-    const articleSlugs = authorships
-      .filter(authorship => authorship.contributorSlug === contributor.slug)
-      .map(authorship => authorship.articleSlug);
-    return Object.filter(articlesWithContributors, article => {
-      return articleSlugs.includes(article.slug);
-    });
+  (contributor, articles, authorships) => {
+    return authorships.reduce((acc, authorship) => {
+      if (authorship.contributorId === contributor.id) {
+        const article = articles[ authorship.articleId ];
+        acc[ article.id ] = article;
+      }
+      return acc;
+    }, {});
   }
 );
 
@@ -96,12 +87,11 @@ export const getContributorArticles = createSelector(
 export const getIllustratorArticles = createSelector(
   [ getIllustratorIllustrations, getArticlesWithContributors ],
   (illustrations, articles) => {
-    const articleIds = Object
-      .values(illustrations)
-      .map(illustration => illustration.articleId);
-    return Object.filter(articles, articleObject => {
-      return articleIds.includes(articleObject.id);
-    });
+    return Object.values(illustrations).reduce((acc, illustration) => {
+      const article = articles[ illustration.articleId ];
+      acc[ article.id ] = article;
+      return acc;
+    }, {});
   }
 );
 
@@ -112,12 +102,11 @@ export const getIllustratorArticles = createSelector(
 export const getPhotographerArticles = createSelector(
   [ getPhotographerPhotographs, getArticlesWithContributors ],
   (photographs, articles) => {
-    const articleIds = Object
-      .values(photographs)
-      .map(photograph => photograph.articleId);
-    return Object.filter(articles, articleObject => {
-      return articleIds.includes(articleObject.id);
-    });
+    return Object.values(photographs).reduce((acc, photograph) => {
+      const article = articles[ photograph.articleId ];
+      acc[ article.id ] = article;
+      return acc;
+    }, {});
   }
 );
 
@@ -126,32 +115,15 @@ export const getPhotographerArticles = createSelector(
  *   article.
  */
 export const getArticleFeaturedMedia = createSelector(
-  [ getArticleFromRequestedSlug, getMedia ],
-  (article, media) => {
-    const matchedMedia = Object.filter(media, mediaObject => {
+  [ getArticleFromRequestedSlug, getMedia, getUsers ],
+  (article, media, users) => {
+    const featuredMedia = Object.values(media).find(mediaObject => {
       return mediaObject.isFeatured && mediaObject.articleId === article.id;
     });
-    return Object.values(matchedMedia)[ 0 ];
-  }
-);
-
-/**
- * The selector returns an articles object that contains all articles from Stuy
- *   Spec API's response.
- */
-export const getProcessedArticlesResponse = createSelector(
-  [ getArticlesResponse, getSections ],
-  (response, sections) => {
-    return response.reduce((accumulatedArticles, currentArticle) => {
-      const { sectionId } = currentArticle;
-      delete currentArticle.sectionId;
-      accumulatedArticles[ currentArticle.slug ] = {
-        ...currentArticle,
-        sectionSlug: getSectionSlugFromId(sections, sectionId),
-        dateline: 'July 31, 2017', // TODO: get Jason L.'s date formatter code
-      };
-      return accumulatedArticles;
-    }, {});
+    return {
+      ...featuredMedia,
+      creator: users[ featuredMedia.userId ],
+    };
   }
 );
 
@@ -160,22 +132,12 @@ export const getProcessedArticlesResponse = createSelector(
  *   Authorships set up.
  */
 export const getFakeAuthorshipsForArticleResponse = createSelector(
-  getArticlesResponse,
-  response => {
-    return response.reduce((accumulatedAuthorships, currentArticle) => {
-      accumulatedAuthorships.push({
-        articleSlug: currentArticle.slug,
-        contributorSlug: "jason-kao",
-      });
-      accumulatedAuthorships.push({
-        articleSlug: currentArticle.slug,
-        contributorSlug: "jason-lin",
-      });
-      accumulatedAuthorships.push({
-        articleSlug: currentArticle.slug,
-        contributorSlug: "cathy-cai",
-      });
-      return accumulatedAuthorships;
-    }, []);
+  [ getArticles ],
+  articles => {
+    return Object.values(articles).reduce((acc, article) => {
+      acc.push({ articleId: article.id, contributorId: 0 });
+      acc.push({ articleId: article.id, contributorId: 1 });
+      return acc;
+    }, [])
   }
 );

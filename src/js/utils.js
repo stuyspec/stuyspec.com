@@ -50,7 +50,7 @@ export const formatDate = (string) => {
 };
 
 
-export const checkKeyValidity = (responseObject, key, type, module) => {
+export const validateKey = (responseObject, key, type, module) => {
   if (key in responseObject) {
     if (typeof (responseObject[ key ]) === type) {
       return true;

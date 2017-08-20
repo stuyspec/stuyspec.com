@@ -46,8 +46,7 @@ const styles = {
 
 const IllustratorPage = ({ classes, illustrator, articles }) => {
   const createArticleRows = () => {
-    return Object.keys(articles).map(articleSlug => {
-      const article = articles[ articleSlug ];
+    return Object.values(articles).map(article => {
       return <ArticleRow key={ article.id } article={ article }/>;
     });
   };
@@ -56,9 +55,9 @@ const IllustratorPage = ({ classes, illustrator, articles }) => {
       <Row>
         <Col md={ 9 }>
           <p className={ classes.name }>{ illustrator.firstName } { illustrator.lastName }</p>
-          <img alt={ photographer.lastName }
+          <img alt={ illustrator.lastName }
                className={ classes.profilePicture }
-               src={ photographer.url }/>
+               src={ illustrator.url }/>
           <p className={ classes.description }>{ illustrator.description }</p>
           <div className={ classes.allWork }>Illustrations</div>
           { createArticleRows() }

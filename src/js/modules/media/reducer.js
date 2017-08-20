@@ -2,7 +2,6 @@ import {
   FETCH_MEDIA_PENDING,
   FETCH_MEDIA_FULFILLED,
   FETCH_MEDIA_REJECTED,
-  ADD_MEDIA,
 } from './actionTypes';
 
 const initialState = {
@@ -10,7 +9,6 @@ const initialState = {
   isFetched: false,
   error: null,
   media: {},
-  response: {},
 };
 
 const reducer = (state = { ...initialState }, action) => {
@@ -23,7 +21,14 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         isFetching: false,
         isFetched: true,
-        response: action.payload,
+        // replacing acc with state.media will block component updates
+        media: {
+          ...state.media,
+          ...action.payload.reduce((acc, mediaObject) => {
+            acc[ mediaObject.id ] = mediaObject;
+            return acc;
+          }, {}),
+        },
       };
     }
     case FETCH_MEDIA_REJECTED: {
@@ -31,16 +36,6 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         isFetching: false,
         error: action.payload,
-      };
-    }
-    case ADD_MEDIA: {
-      return {
-        ...state,
-        media: {
-          ...state.media,
-          ...action.payload,
-        },
-        response: {},
       };
     }
   }

@@ -6,6 +6,7 @@ import injectSheet from "react-jss";
 
 import { getMedia } from "../../media/selectors";
 import { getSections } from "../../sections/selectors";
+import { getUsers } from "../../users/selectors";
 import Byline from "./Byline";
 
 const styles = {
@@ -19,7 +20,7 @@ const styles = {
     },
     '& div:last-child': {
       paddingRight: 0,
-    }
+    },
   },
   featuredImg: {
     width: '100%',
@@ -68,17 +69,14 @@ const styles = {
   }
 };
 
-const ArticleRow = ({ classes, article, sections, media }) => {
-  const matchedSections = Object.filter(sections, sectionObject => {
-    return article.sectionSlug === sectionObject.slug;
+const ArticleRow = ({ classes, article, sections, users, media }) => {
+  const section = sections[ article.sectionId ];
+  const featuredMedia = Object.values(media).find(media => {
+    return media.isFeatured && media.articleId === article.id;
   });
-  const section = Object.values(matchedSections)[ 0 ];
-  const matchedMedia = Object.filter(media, mediaObject => {
-    return mediaObject.isFeatured && mediaObject.articleId === article.id;
-  });
-  const featuredMedia = Object.values(matchedMedia)[ 0 ];
+  featuredMedia.creator = users[ featuredMedia.userId ];
   return (
-    <Row key={ `articleBlock${article.id}` } className={ classes.ArticleRow }>
+    <Row key={ article.id } className={ classes.ArticleRow }>
       <Col md={ 3 } lg={ 3 }>
         <figure>
           <img src={ featuredMedia.url } className={ classes.featuredImg }/>
@@ -90,8 +88,8 @@ const ArticleRow = ({ classes, article, sections, media }) => {
           { article.title }
         </Link>
         <p className={ classes.articlePreview }>
-          Fake comment: in SectionPage, you've imported SectionArticleList but you
-          don't use it as a component. The error appears to be on line 41.
+          Fake comment: in SectionPage, you've imported SectionArticleList but
+          you don't use it as a component. The error appears to be on line 41.
         </p>
         <div>
           <Byline classes={ classes } contributors={ article.contributors }/>
@@ -105,6 +103,7 @@ const ArticleRow = ({ classes, article, sections, media }) => {
 const mapStateToProps = (state) => ({
   media: getMedia(state),
   sections: getSections(state),
+  users: getUsers(state),
 });
 
 export default connect(
