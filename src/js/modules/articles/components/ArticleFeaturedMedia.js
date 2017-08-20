@@ -27,19 +27,24 @@ const styles = {
 const ArticleFeaturedMedia = ({
                                 classes,
                                 featuredMedia: { caption, creator, type, url },
+                                putCaption,
                               }) => {
   return (
     <figure className={ classes.figure }>
       <img className={ classes.img } src={ url }/>
-      <figcaption className={ classes.caption }>
-        <span>{ caption }&nbsp;</span>
-        <Link className={ classes.creditLine }
-              to={ `/${ ROLE_SLUG_OF_MEDIA_TYPE[ type ] }/${creator.slug}` }>
-          { capitalizeFirstLetter(type) }
-          &nbsp;by&nbsp;
-          { `${creator.firstName} ${creator.lastName}` }
-        </Link>
-      </figcaption>
+      {
+        putCaption && (
+          <figcaption className={ classes.caption }>
+            <span>{ caption }&nbsp;</span>
+            <Link className={ classes.creditLine }
+                  to={ `/${ ROLE_SLUG_OF_MEDIA_TYPE[ type ] }/${creator.slug}` }>
+              { capitalizeFirstLetter(type) }
+              &nbsp;by&nbsp;
+              { `${creator.firstName} ${creator.lastName}` }
+            </Link>
+          </figcaption>
+        )
+      }
     </figure>
   );
 };

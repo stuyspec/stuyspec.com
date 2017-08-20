@@ -27,13 +27,14 @@ export const getArticlesWithContributors = createSelector(
   [ getArticles, getUsers, getAuthorships ],
   (articles, users, authorships) => {
     return authorships.reduce((acc, authorship) => {
-      const targetArticle = acc[ authorship.articleId ];
+      targetArticle = articles[ authorship.articleId ];
       if (targetArticle.contributors === undefined) {
         targetArticle.contributors = [];
       }
       targetArticle.contributors.push(users[ authorship.contributorId ]);
+      acc[ targetArticle.id ] = targetArticle;
       return acc;
-    }, articles);
+    }, {});
   }
 );
 

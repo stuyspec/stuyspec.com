@@ -23,7 +23,7 @@ const styles = {
 const ArticleBody = ({ classes, content, featuredMedia }) => {
   return (
     <div className={ classes.ArticleBody }>
-      <ArticleFeaturedMedia featuredMedia={ featuredMedia }/>
+      <ArticleFeaturedMedia featuredMedia={ featuredMedia } putCaption={ true }/>
       <div dangerouslySetInnerHTML={ { __html: content } }/>
     </div>
   );

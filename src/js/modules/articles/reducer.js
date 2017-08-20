@@ -22,7 +22,6 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         isFetching: false,
-        isFetched: true,
         // replacing acc with state.articles will block component updates
         articles: {
           ...state.articles,
