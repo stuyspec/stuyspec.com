@@ -22,8 +22,11 @@ const styles = {
     marginBottom: '18px',
     textDecoration: 'none',
     textTransform: 'uppercase',
-    width: '36px',
+    width: '150px',
     '&:hover': {
+      color: '#000',
+    },
+    '&:focus': {
       color: '#000',
     },
   },

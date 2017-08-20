@@ -56,11 +56,10 @@ export const getSectionTreeArticles = createSelector(
 export const getArticleFromRequestedSlug = createSelector(
   [ getArticlesWithContributors, getRequestedArticleSlug, getSectionFromProps ],
   (articles, requestedArticleSlug, section) => {
-    const requestedArticle = Object.values(articles)
-      .find(article => article.slug === requestedArticleSlug);
-    if (requestedArticle.sectionId === section.id) {
-      return requestedArticle;
-    }
+    return Object.values(articles).find(article => {
+      return article.slug === requestedArticleSlug &&
+        article.sectionId === section.id;
+    });
   }
 );
 
@@ -72,7 +71,7 @@ export const getContributorArticles = createSelector(
   [ getContributorFromSlug, getArticlesWithContributors, getAuthorships ],
   (contributor, articles, authorships) => {
     return authorships.reduce((acc, authorship) => {
-      if (authorship.userId === contributor.id) {
+      if (authorship.contributorId === contributor.id) {
         const article = articles[ authorship.articleId ];
         acc[ article.id ] = article;
       }
@@ -88,8 +87,8 @@ export const getContributorArticles = createSelector(
 export const getIllustratorArticles = createSelector(
   [ getIllustratorIllustrations, getArticlesWithContributors ],
   (illustrations, articles) => {
-    return illustrations.reduce((acc, illustration) => {
-      const article = articles[ illustration.id ];
+    return Object.values(illustrations).reduce((acc, illustration) => {
+      const article = articles[ illustration.articleId ];
       acc[ article.id ] = article;
       return acc;
     }, {});
@@ -103,8 +102,8 @@ export const getIllustratorArticles = createSelector(
 export const getPhotographerArticles = createSelector(
   [ getPhotographerPhotographs, getArticlesWithContributors ],
   (photographs, articles) => {
-    return photographs.reduce((acc, photograph) => {
-      const article = articles[ photograph.id ];
+    return Object.values(photographs).reduce((acc, photograph) => {
+      const article = articles[ photograph.articleId ];
       acc[ article.id ] = article;
       return acc;
     }, {});

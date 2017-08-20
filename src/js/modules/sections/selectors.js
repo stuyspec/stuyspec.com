@@ -43,7 +43,7 @@ export const getSectionTreeIds = createSelector(
       sections,
       targetSection
     );
-    return [ targetSection.slug, ...Object.keys(subsectionsInSectionTree) ];
+    return [ targetSection.id, ...Object.keys(subsectionsInSectionTree) ];
   }
 );
 

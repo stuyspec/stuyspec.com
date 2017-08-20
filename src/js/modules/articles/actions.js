@@ -1,8 +1,9 @@
 import axios from "axios";
 import * as t from "./actionTypes";
+
 import { STUY_SPEC_API, STUY_SPEC_API_HEADER } from "../../constants";
+import { validateKey } from "../../utils";
 import { getFakeAuthorshipsForArticleResponse } from "./selectors";
-import { checkKeyValidity } from "../../utils";
 
 export const fetchArticles = () => {
   return (dispatch, getState) => {
@@ -41,10 +42,10 @@ const validateArticles = (articleArray) => {
   }
   articleArray.forEach(articleObject => {
     integerProperties.forEach(numberKey => {
-      checkKeyValidity(articleObject, numberKey, 'number', 'article');
+      validateKey(articleObject, numberKey, 'number', 'article');
     });
     stringProperties.forEach((stringKey) => {
-      checkKeyValidity(articleObject, stringKey, 'string', 'article');
+      validateKey(articleObject, stringKey, 'string', 'article');
     });
   });
   return true;

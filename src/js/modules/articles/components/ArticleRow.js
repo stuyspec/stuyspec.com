@@ -22,7 +22,7 @@ const styles = {
       paddingRight: 0,
     },
   },
-  featuredMedia: {
+  featuredImg: {
     width: '100%',
   },
   articleTitle: {
@@ -69,8 +69,8 @@ const styles = {
   }
 };
 
-const ArticleRow = ({ classes, article, sections, media }) => {
-  const section = sections[ article.id ];
+const ArticleRow = ({ classes, article, sections, users, media }) => {
+  const section = sections[ article.sectionId ];
   const featuredMedia = Object.values(media).find(media => {
     return media.isFeatured && media.articleId === article.id;
   });
@@ -88,8 +88,8 @@ const ArticleRow = ({ classes, article, sections, media }) => {
           { article.title }
         </Link>
         <p className={ classes.articlePreview }>
-          Fake comment: in SectionPage, you've imported SectionArticleList but you
-          don't use it as a component. The error appears to be on line 41.
+          Fake comment: in SectionPage, you've imported SectionArticleList but
+          you don't use it as a component. The error appears to be on line 41.
         </p>
         <div>
           <Byline classes={ classes } contributors={ article.contributors }/>

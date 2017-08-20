@@ -14,21 +14,21 @@ const getRoleFromProps = (state, props) => props.role;
 export const getContributorFromSlug = createSelector(
   [ getUsers, getRequestedContributorSlug ],
   (users, requestedContributorSlug) => {
-    return users[ requestedContributorSlug ];
-  }
-);
-
-export const getPhotographerFromSlug = createSelector(
-  [ getUsers, getRequestedPhotographerSlug ],
-  (users, requestedPhotographerSlug) => {
-    return users[ requestedPhotographerSlug ];
+    return Object.values(users).find(user => user.slug === requestedContributorSlug);
   }
 );
 
 export const getIllustratorFromSlug = createSelector(
   [ getUsers, getRequestedIllustratorSlug ],
   (users, requestedIllustratorSlug) => {
-    return users[ requestedIllustratorSlug ];
+    return Object.values(users).find(user => user.slug === requestedIllustratorSlug);
+  }
+);
+
+export const getPhotographerFromSlug = createSelector(
+  [ getUsers, getRequestedPhotographerSlug ],
+  (users, requestedPhotographerSlug) => {
+    return Object.values(users).find(user => user.slug === requestedPhotographerSlug);
   }
 );
 

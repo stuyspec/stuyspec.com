@@ -1,5 +1,5 @@
 import axios from "axios";
-import { checkKeyValidity } from "../../utils";
+import { validateKey } from "../../utils";
 import * as t from "./actionTypes";
 import { STUY_SPEC_API, STUY_SPEC_API_HEADER } from "../../constants";
 
@@ -84,10 +84,10 @@ const validateMedia = (mediaArray) => {
   }
   mediaArray.forEach(mediaObject => {
     integerProperties.forEach(numberKey => {
-      checkKeyValidity(mediaObject, numberKey, 'number', 'media');
+      validateKey(mediaObject, numberKey, 'number', 'media');
     });
     stringProperties.forEach((stringKey) => {
-      checkKeyValidity(mediaObject, stringKey, 'string', 'media');
+      validateKey(mediaObject, stringKey, 'string', 'media');
     });
   });
   return true;
