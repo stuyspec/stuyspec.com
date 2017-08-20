@@ -14,6 +14,10 @@ import { fetchMedia } from "../../media/actions";
 import { addRowHeight } from '../../core/actions';
 import { Byline } from "../../articles/components";
 
+
+/**
+ * TODO: Use margins to make image look bigger
+ */
 const styles = {
   HomePage: {
     marginTop: "23px 0px 13px",
@@ -39,7 +43,6 @@ const styles = {
   bigArticle: {
     paddingLeft: "0",
     paddingRight: "13px",
-    borderRight: "solid 2px #ddd",
   },
   bigTitle: {
     color: "#000",
@@ -61,7 +64,6 @@ const styles = {
     width: '512px',
   },
   mediumArticle: {
-    borderRight: "solid 2px #ddd",
     padding: "0px 13px 0px",
     margin: 0,
   },
@@ -127,14 +129,10 @@ const styles = {
   },
 };
 
-const lineStyles = {
-  borderLeft: "2px solid #ddd",
-  lineHeight: 'hi',
-};
-
 class HomePage extends Component {
   constructor(props) {
     super(props);
+    this.doneLoadingRow = false;
   }
   componentDidMount() {
     {
@@ -145,7 +143,7 @@ class HomePage extends Component {
     }
   };
   addRowHeightToState = () => {
-    this.props.addRowHeight(typeof (document.getElementById('homepageRow').clientHeight))
+    this.props.addRowHeight(document.getElementById('homepageRow').clientHeight)
   };
   createBigArticle = () => {
     articleKeys = Object.keys(this.props.articles);
@@ -219,18 +217,25 @@ class HomePage extends Component {
       );
     })
   };
-
   render() {
     const { classes } = this.props;
+    var lineStyle = {};
+    if (this.props.rowHeight !== 0) {
+      lineStyle = {
+        borderRight: "solid 2px #ddd",
+        height: `${this.props.rowHeight}px`,
+        marginRight: "10px",
+      };
+    }
     if (this.props.fetched) {
       return (
         <div className={classes.HomePage}>
           <Grid>
             <Row id="homepageRow" onLoad={this.addRowHeightToState}>
-              <Col md={6} className={classes.bigArticle}>
+              <Col md={6} className={classes.bigArticle} style={lineStyle}>
                 {this.createBigArticle()}
               </Col>
-              <Col md={3} className={classes.mediumArticle}>
+              <Col md={3} className={classes.mediumArticle} style={lineStyle}>
                 {this.createMediumArticles()}
               </Col>
               <Col md={3} className={classes.smallArticle}>
@@ -257,6 +262,7 @@ const mapStateToProps = (state) => ({
   users: getUsers(state),
   media: getMedia(state),
   fetched: state.articles.isFetched && state.media.isFetched,
+  rowHeight: state.core.rowHeight,
 });
 
 const mapDispatchToProps = dispatch => {

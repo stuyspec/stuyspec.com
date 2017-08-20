@@ -13,7 +13,7 @@ const getViewportHeight = () => {
 const initialState = {
   viewportWidth: getViewportWidth(),
   viewportHeight: getViewportHeight(),
-  rowHeight: '0px',
+  rowHeight: 0,
 };
 
 const reducer = (state = { ...initialState }, action) => {
