@@ -12,7 +12,7 @@ import { getMedia } from "../../media/selectors";
 import { fetchArticles } from "../../articles/actions";
 import { fetchMedia } from "../../media/actions";
 import { addRowHeight } from '../../core/actions';
-import { Byline } from "../../articles/components"
+import { Byline } from "../../articles/components";
 
 const styles = {
   HomePage: {
@@ -145,7 +145,7 @@ class HomePage extends Component {
     }
   };
   addRowHeightToState = () => {
-    this.props.addRowHeight(document.getElementById('homepageRow'))
+    this.props.addRowHeight(typeof (document.getElementById('homepageRow').clientHeight))
   };
   createBigArticle = () => {
     articleKeys = Object.keys(this.props.articles);
