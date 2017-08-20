@@ -6,6 +6,7 @@ import injectSheet from "react-jss";
 
 import { getMedia } from "../../media/selectors";
 import { getSections } from "../../sections/selectors";
+import { getUsers } from "../../users/selectors";
 import Byline from "./Byline";
 
 const styles = {
@@ -19,7 +20,7 @@ const styles = {
     },
     '& div:last-child': {
       paddingRight: 0,
-    }
+    },
   },
   featuredImg: {
     width: '100%',
@@ -31,6 +32,9 @@ const styles = {
     color: '#000',
     marginBottom: '5px',
     padding: 0,
+    '&:hover': {
+      color: '#000',
+    }
   },
   articlePreview: {
     color: '#000',
@@ -65,30 +69,31 @@ const styles = {
   }
 };
 
-const ArticleRow = ({ classes, article, sections, media }) => {
-  const matchedSections = Object.filter(sections, sectionObject => {
-    return article.sectionSlug === sectionObject.slug;
+const ArticleRow = ({ classes, article, sections, users, media }) => {
+  const section = sections[ article.sectionId ];
+  const featuredMedia = Object.values(media).find(media => {
+    return media.isFeatured && media.articleId === article.id;
   });
-  const section = Object.values(matchedSections)[ 0 ];
-  const featuredMedia = media[ article.mediaId ];
+  featuredMedia.creator = users[ featuredMedia.userId ];
   return (
-    <Row key={`articleBlock${article.id}`} className={classes.ArticleRow}>
-      <Col md={3} lg={3}>
+    <Row key={ article.id } className={ classes.ArticleRow }>
+      <Col md={ 3 } lg={ 3 }>
         <figure>
-          <img src={featuredMedia.url} className={classes.featuredImg}/>
+          <img src={ featuredMedia.url } className={ classes.featuredImg }/>
         </figure>
       </Col>
-      <Col md={6} lg={6}>
-        <Link to={`${section.permalink}/${article.slug}`}
-              className={classes.articleTitle}>
-          {article.title}
+      <Col md={ 6 } lg={ 6 }>
+        <Link to={ `${section.permalink}/${article.slug}` }
+              className={ classes.articleTitle }>
+          { article.title }
         </Link>
-        <p className={classes.articlePreview}>An angery PR comment for Cathy Cai from a week ago: Your code breaks
-          when I run gulp. Also, in SectionPage, you've imported SectionArticleList but you don't use it as a component.
-          The error appears to be on line 41.</p>
+        <p className={ classes.articlePreview }>
+          Fake comment: in SectionPage, you've imported SectionArticleList but
+          you don't use it as a component. The error appears to be on line 41.
+        </p>
         <div>
-          <Byline classes={classes} contributors={article.contributors} homepage={false}/>
-          <span className={classes.dateline}>{article.dateline}</span>
+          <Byline classes={ classes } contributors={ article.contributors }/>
+          <span className={ classes.dateline }>{ article.dateline }</span>
         </div>
       </Col>
     </Row>
@@ -98,8 +103,9 @@ const ArticleRow = ({ classes, article, sections, media }) => {
 const mapStateToProps = (state) => ({
   media: getMedia(state),
   sections: getSections(state),
+  users: getUsers(state),
 });
 
 export default connect(
   mapStateToProps
-) (injectSheet(styles)(ArticleRow));
+)(injectSheet(styles)(ArticleRow));

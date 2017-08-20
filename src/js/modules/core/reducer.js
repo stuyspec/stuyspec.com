@@ -1,4 +1,9 @@
-import { REFRESH_WINDOW_DIMENSIONS, ADD_ROW_HEIGHT } from "./actionTypes";
+import {
+  REFRESH_WINDOW_DIMENSIONS,
+  OPEN_SIDEBAR,
+  CLOSE_SIDEBAR,
+  ADD_ROW_HEIGHT,
+} from "./actionTypes";
 
 // getWindowWidth & getWindowHeight was
 // adapted from http://stackoverflow.com/a/8876069/1291659
@@ -13,6 +18,7 @@ const getViewportHeight = () => {
 const initialState = {
   viewportWidth: getViewportWidth(),
   viewportHeight: getViewportHeight(),
+  isSidebarOpen: false,
   rowHeight: 0,
 };
 
@@ -30,6 +36,19 @@ const reducer = (state = { ...initialState }, action) => {
       } else { // otherwise do not mutate
         return state;
       }
+    }
+    case OPEN_SIDEBAR: {
+      return {
+        ...state,
+        isSidebarOpen: true,
+      }
+    }
+    case CLOSE_SIDEBAR: {
+      return {
+        ...state,
+        isSidebarOpen: false,
+      }
+    }
     default:
       break;
   }

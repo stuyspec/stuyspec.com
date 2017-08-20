@@ -46,9 +46,8 @@ const styles = {
 
 const ContributorPage = ({ classes, contributor, articles }) => {
   const createArticleRows = () => {
-    return Object.keys(articles).map(articleSlug => {
-      const article = articles[ articleSlug ];
-      return <ArticleRow article={ article } key={ articleSlug }/>;
+    return Object.values(articles).map(article => {
+      return <ArticleRow key={ article.id } article={ article }/>;
     });
   };
   return (

@@ -13,8 +13,8 @@ const Byline = ({ classes, contributors, homepage }) => {
             separator = '';
           }
           return (
-            <p key={ `contributor${contributor.id}` }>
-              { (index === 0 && !homepage) ? 'By ' : '' }
+            <p key={ contributor.id }>
+              { index === 0 ? 'By ' : '' }
               <Link to={ `/contributors/${contributor.slug}` }>
                 { contributor.firstName } { contributor.lastName }
               </Link>{ separator }

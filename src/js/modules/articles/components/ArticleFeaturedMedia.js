@@ -1,11 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
 import { capitalizeFirstLetter } from "../../../utils";
 import { ROLE_SLUG_OF_MEDIA_TYPE } from "../../../constants";
-import { getUsers } from "../../users/selectors";
 
 const styles = {
   figure: {
@@ -26,33 +24,24 @@ const styles = {
   }
 };
 
-const ArticleFeaturedMedia = ({ classes, featuredMedia, users }) => {
-  const createCreditLine = () => {
-    const creator = users[ featuredMedia.userSlug ];
-    return (
-      <Link className={ classes.creditLine }
-            to={ `/${ROLE_SLUG_OF_MEDIA_TYPE[ featuredMedia.type ]}/${creator.slug}` }>
-        { capitalizeFirstLetter(featuredMedia.type) }
-        &nbsp;by&nbsp;
-        { `${creator.firstName} ${creator.lastName}` }
-      </Link>
-    )
-  }
+const ArticleFeaturedMedia = ({
+                                classes,
+                                featuredMedia: { caption, creator, type, url },
+                              }) => {
   return (
     <figure className={ classes.figure }>
-      <img className={ classes.img } src={ featuredMedia.url }/>
+      <img className={ classes.img } src={ url }/>
       <figcaption className={ classes.caption }>
-        <span>{ featuredMedia.caption }&nbsp;</span>
-        { createCreditLine() }
+        <span>{ caption }&nbsp;</span>
+        <Link className={ classes.creditLine }
+              to={ `/${ ROLE_SLUG_OF_MEDIA_TYPE[ type ] }/${creator.slug}` }>
+          { capitalizeFirstLetter(type) }
+          &nbsp;by&nbsp;
+          { `${creator.firstName} ${creator.lastName}` }
+        </Link>
       </figcaption>
     </figure>
   );
 };
 
-const mapStateToProps = (state) => ({
-  users: getUsers(state),
-});
-
-export default connect(
-  mapStateToProps
-)(injectSheet(styles)(ArticleFeaturedMedia));
+export default injectSheet(styles)(ArticleFeaturedMedia);

@@ -7,10 +7,11 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 
 import { getArticlesWithContributors } from "../../articles/selectors";
 import { getSections } from "../../sections/selectors";
-import { getUsers } from "../../users/selectors";
 import { getMedia } from "../../media/selectors";
+
 import { fetchArticles } from "../../articles/actions";
 import { fetchMedia } from "../../media/actions";
+import { fetchUsers } from "../../users/actions";
 import { addRowHeight } from '../../core/actions';
 import { Byline } from "../../articles/components";
 
@@ -216,6 +217,7 @@ class HomePage extends Component {
   componentDidMount() {
     this.props.fetchArticles();
     this.props.fetchMedia();
+    this.props.fetchUsers();
   };
 
   render() {
@@ -269,9 +271,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    fetchArticles: fetchArticles,
-    fetchMedia: fetchMedia,
-    addRowHeight: addRowHeight,
+    fetchArticles,
+    fetchMedia,
+    fetchUsers,
+    addRowHeight,
   }, dispatch);
 };
 

@@ -1,6 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
+
+import { getTopLevelSections } from "../../sections/selectors";
 
 const styles = {
   Masthead: {
@@ -42,15 +45,13 @@ const styles = {
   },
 };
 
-// TODO: make <li>'s show up
-const Masthead = ({ classes, topLevelSectionsWithDirectChildren }) => {
-  const createLinksToTopLevelSections = () => {
-    return Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {
-      const topLevelSection = topLevelSectionsWithDirectChildren[ sectionSlug ];
+const Masthead = ({ classes, topLevelSections }) => {
+  const createSectionLinks = () => {
+    return Object.values(topLevelSections).map(section => {
       return (
-        <li key={ `topLevelSection${topLevelSection.id}` } className={ classes.sectionListItem }>
-          <Link to={ topLevelSection.permalink } className={ classes.sectionLink }>
-            { topLevelSection.name }
+        <li key={ section.id } className={ classes.sectionListItem }>
+          <Link to={ section.permalink } className={ classes.sectionLink }>
+            { section.name }
           </Link>
         </li>
       );
@@ -60,10 +61,17 @@ const Masthead = ({ classes, topLevelSectionsWithDirectChildren }) => {
     <div className={ classes.Masthead }>
       <Link to="/" className={ classes.theSpectatorLogo }>The Spectator</Link>
       <ul className={ classes.sectionLinksNav }>
-        { createLinksToTopLevelSections() }
+        { createSectionLinks() }
       </ul>
     </div>
   )
 };
 
-export default injectSheet(styles)(Masthead);
+const mapStateToProps = state => ({
+  topLevelSections: getTopLevelSections(state),
+})
+
+export default connect(
+  mapStateToProps,
+  null
+) (injectSheet(styles)(Masthead));
