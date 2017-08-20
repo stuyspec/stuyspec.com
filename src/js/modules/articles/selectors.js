@@ -35,7 +35,9 @@ export const getArticlesWithContributors = createSelector(
       if (targetArticle.contributors === undefined) {
         targetArticle.contributors = [];
       }
-      targetArticle.contributors.push(users[ authorship.contributorSlug ]);
+      if (!(targetArticle.contributors.includes(users[ authorship.contributorSlug ]))) {
+        targetArticle.contributors.push(users[ authorship.contributorSlug ]);
+      }
     });
     Object.keys(articlesWithContributors).map(articleSlug => {
       const targetArticle = articlesWithContributors[ articleSlug ];
@@ -107,7 +109,7 @@ export const getIllustratorArticles = createSelector(
   (illustrations, articles) => {
     const illustrationIds = Object.keys(illustrations);
     return Object.filter(articles, articleObject => {
-      return illustrationIds.includes( articleObject.mediaId.toString() );
+      return illustrationIds.includes(articleObject.mediaId.toString());
     });
   }
 );
@@ -121,7 +123,7 @@ export const getPhotographerArticles = createSelector(
   (photographs, articles) => {
     const photographIds = Object.keys(photographs);
     return Object.filter(articles, articleObject => {
-      return photographIds.includes( articleObject.mediaId.toString() );
+      return photographIds.includes(articleObject.mediaId.toString());
     });
   }
 );

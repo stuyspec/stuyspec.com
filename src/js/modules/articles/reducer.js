@@ -47,7 +47,6 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         authorships: [
-          ...state.authorships,
           ...action.payload
         ],
         response: [],

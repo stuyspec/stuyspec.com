@@ -41,7 +41,7 @@ const styles = {
     },
   },
   bigArticle: {
-    paddingLeft: "0",
+    paddingLeft: 0,
     paddingRight: "13px",
   },
   bigTitle: {
@@ -64,8 +64,9 @@ const styles = {
     width: '512px',
   },
   mediumArticle: {
-    padding: "0px 13px 0px",
-    margin: 0,
+    paddingLeft: 0,
+    marginRight: "13px",
+    paddingRight: "13px",
   },
   mediumTitle: {
     color: "#000",
@@ -85,8 +86,8 @@ const styles = {
     marginTop: "2px",
   },
   mediumImage: {
-    height: "150.6px",
-    width: "226px",
+    height: "161.3px",
+    width: "242px",
   },
   mediumBlock: {
     borderBottom: "solid 2px #ddd",
@@ -96,33 +97,35 @@ const styles = {
     marginBottom: 0,
   },
   smallArticle: {
-    paddingLeft: "13px",
-    paddingRight: 0,
+    padding: 0,
   },
   smallTitle: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "17px",
     fontWeight: "bold",
+    marginBottom: "6px",
   },
   smallPreview: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "14px",
     lineHeight: "1.14",
+    marginBottom: "14px",
+    marginTop: "4px",
   },
   smallImage: {
     display: "inline",
     float: 'right',
     height: "47px",
+    margin: "8px 0px 9px 14px",
     width: "72px",
   },
   smallBlock: {
     borderBottom: "solid 2px #ddd",
+    marginBottom: "14px",
   },
-  lastSmallBlock: {
-
-  },
+  lastSmallBlock: {},
   loading: {
     height: "300px",
     width: "300px",
@@ -130,18 +133,6 @@ const styles = {
 };
 
 class HomePage extends Component {
-  constructor(props) {
-    super(props);
-    this.doneLoadingRow = false;
-  }
-  componentDidMount() {
-    {
-      this.props.fetchArticles()
-    }
-    {
-      this.props.fetchMedia()
-    }
-  };
   addRowHeightToState = () => {
     this.props.addRowHeight(document.getElementById('homepageRow').clientHeight)
   };
@@ -154,7 +145,7 @@ class HomePage extends Component {
         <img src={this.props.media[ bigArticle.mediaId ].url} className={classes.bigImage}/>
         <h1 className={classes.bigTitleBlock}>
           <Link to={`${this.props.sections[ bigArticle.sectionSlug ].permalink}/${bigArticle.slug}`}
-                       className={classes.bigTitle}>{bigArticle.title}</Link>
+                className={classes.bigTitle}>{bigArticle.title}</Link>
         </h1>
         <Byline classes={classes} contributors={bigArticle.contributors} homepage={true}/>
         <p className={classes.bigPreview}>
@@ -174,12 +165,12 @@ class HomePage extends Component {
     return mediumArticles.map((mediumArticle, index) => {
       return (
         <div className={index !== 1 ? classes.mediumBlock :
-                                      classes.lastMediumBlock}
+          classes.lastMediumBlock}
              key={mediumArticle.id}>
           <img src={this.props.media[ mediumArticle.mediaId ].url} className={classes.mediumImage}/>
           <h6 className={classes.mediumTitleBlock}>
-          <Link to={`${this.props.sections[ mediumArticle.sectionSlug ].permalink}/${mediumArticle.slug}`}
-                className={classes.mediumTitle}>{mediumArticle.title}</Link>
+            <Link to={`${this.props.sections[ mediumArticle.sectionSlug ].permalink}/${mediumArticle.slug}`}
+                  className={classes.mediumTitle}>{mediumArticle.title}</Link>
           </h6>
           <Byline classes={classes} contributors={mediumArticle.contributors} homepage={true}/>
           <p className={classes.mediumPreview}>
@@ -190,7 +181,6 @@ class HomePage extends Component {
       )
     })
   };
-
   createSmallArticles = () => {
     articleKeys = Object.keys(this.props.articles);
     const { classes } = this.props;
@@ -198,10 +188,10 @@ class HomePage extends Component {
     const smallArticles = smallArticleIndexes.map(index => {
       return this.props.articles[ index ];
     });
-    return smallArticles.map((smallArticle,index) => {
+    return smallArticles.map((smallArticle, index) => {
       return (
-        <div className={index !== 3 ? classes.smallBlock:
-                                      classes.lastSmallBlock}
+        <div className={index !== 3 ? classes.smallBlock :
+          classes.lastSmallBlock}
              key={smallArticle.id}>
           <Link to={`${this.props.sections[ smallArticle.sectionSlug ].permalink}/${smallArticle.slug}`}
                 className={classes.smallTitle}>{smallArticle.title}</Link>
@@ -217,6 +207,21 @@ class HomePage extends Component {
       );
     })
   };
+
+  constructor(props) {
+    super(props);
+    this.doneLoadingRow = false;
+  }
+
+  componentDidMount() {
+    {
+      this.props.fetchArticles()
+    }
+    {
+      this.props.fetchMedia()
+    }
+  };
+
   render() {
     const { classes } = this.props;
     var lineStyle = {};
@@ -248,8 +253,9 @@ class HomePage extends Component {
     } else {
       return (
         <div>
-          <img src="https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/19030585_1210056409103585_1755383162605573147_n.jpg?oh=807f98c5050de9527b08bf52bcff63a2&oe=5A36E66E"
-               className={classes.loading} />
+          <img
+            src="https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/19030585_1210056409103585_1755383162605573147_n.jpg?oh=807f98c5050de9527b08bf52bcff63a2&oe=5A36E66E"
+            className={classes.loading}/>
         </div>
       );
     }

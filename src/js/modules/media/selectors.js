@@ -31,11 +31,10 @@ export const getProcessedMediaResponse = createSelector(
         return user.id === currentMedia.userId;
       });
       const userSlug = Object.keys(matchedUsers)[ 0 ];
-      delete currentMedia[ 'userId' ];
       accumulatedMedia[ currentMedia.id ] = {
         ...currentMedia,
         userSlug,
-      }
+      };
       return accumulatedMedia;
     }, {});
   }

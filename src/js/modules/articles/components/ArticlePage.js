@@ -13,17 +13,16 @@ const styles = {
   },
 };
 
-const ArticlePage = ({ classes, article, section, media }) => {
-  const featuredMedia = media[ article.mediaId ];
+const ArticlePage = ({ classes, article, section, featuredMedia }) => {
   return (
-    <div className={ classes.ArticlePage }>
+    <div className={classes.ArticlePage}>
       <ArticleHeader
-        headline={ article.title }
-        section={ section }
-        contributors={ article.contributors }
-        dateline={ article.dateline }
+        headline={article.title}
+        section={section}
+        contributors={article.contributors}
+        dateline={article.dateline}
       />
-      <ArticleBody content={ article.content } featuredMedia={ featuredMedia }/>
+      <ArticleBody content={article.content} featuredMedia={featuredMedia}/>
     </div>
   );
 };
