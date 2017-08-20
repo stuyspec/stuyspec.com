@@ -155,6 +155,7 @@ class HomePage extends Component {
       </div>
     )
   };
+
   createMediumArticles = () => {
     articleKeys = Object.keys(this.props.articles);
     const { classes } = this.props;
@@ -210,25 +211,20 @@ class HomePage extends Component {
 
   constructor(props) {
     super(props);
-    this.doneLoadingRow = false;
   }
 
   componentDidMount() {
-    {
-      this.props.fetchArticles()
-    }
-    {
-      this.props.fetchMedia()
-    }
+    this.props.fetchArticles();
+    this.props.fetchMedia();
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, rowHeight } = this.props;
     var lineStyle = {};
-    if (this.props.rowHeight !== 0) {
+    if (rowHeight !== 0) {
       lineStyle = {
         borderRight: "solid 2px #ddd",
-        height: `${this.props.rowHeight}px`,
+        height: `${rowHeight}px`,
         marginRight: "10px",
       };
     }
