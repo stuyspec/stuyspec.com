@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as t from "./actionTypes";
 
-import { STUY_SPEC_API, STUY_SPEC_API_HEADER } from "../../constants";
+import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADER } from "../../constants";
 import { validateKey } from "../../utils";
 import { getFakeAuthorshipsForArticleResponse } from "./selectors";
 
