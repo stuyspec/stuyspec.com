@@ -1,3 +1,7 @@
+export const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
 /**
  * Writes the filter function for objects.
  * @param obj
@@ -42,5 +46,19 @@ export const formatDate = (string) => {
   } else {
     //Returns the "August 1, 2017" portion
     return formattedDate.slice(0, splitIndex - 1);
+  }
+};
+
+
+export const validateKey = (responseObject, key, type, module) => {
+  if (key in responseObject) {
+    if (typeof (responseObject[ key ]) === type) {
+      return true;
+    } else {
+      throw `EXCEPTION: key ${key} in ${module}Object is 
+        ${typeof (responseObject[ key ])}, but should be ${type}.`;
+    }
+  } else {
+    throw `EXCEPTION: key ${key} is undefined in ${module}Object.`;
   }
 };

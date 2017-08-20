@@ -58,8 +58,7 @@ const SectionPage = ({
                        classes,
                        sectionTreeArticles,
                        directSubsections,
-                       section,
-                       featuredMedia,
+                       section
                      }) => {
   const createDirectSubsectionLinks = () => {
     return Object.values(directSubsections).map(subsection => {
@@ -86,7 +85,6 @@ const SectionPage = ({
         )
       }
       <ArticleList articles={ sectionTreeArticles }
-                   featuredMedia={ featuredMedia }
                    section={ section }/>
     </div>
   );
@@ -94,12 +92,6 @@ const SectionPage = ({
 
 
 const mapStateToProps = (state, ownProps) => ({
-  featuredMedia: {
-    url: 'http://planesandpleasures.com/wp-content/uploads/2016/09/NewYork-Chinatown-7.jpg',
-    caption: 'New York City street after rain is covered in water, dirt, and snow. Pedestrians walk back and forth as post-flood confusion amasses.',
-    type: 'Photograph',
-    credits: 'Ting Ting',
-  },
   sectionTreeArticles: getSectionTreeArticles(state, ownProps),
   directSubsections: getDirectSubsections(state, ownProps),
   sections: getSections(state),

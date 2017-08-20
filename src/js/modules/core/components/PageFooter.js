@@ -10,6 +10,7 @@ const styles = {
   PageFooter: {
     background: '#fff',
     height: '370px',
+    marginTop: '14px',
   },
   pageFooterMain: {
     borderTop: '3px solid #ddd',

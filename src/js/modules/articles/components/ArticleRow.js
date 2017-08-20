@@ -1,9 +1,12 @@
 import React from "react";
-import Row from "react-bootstrap/lib/row";
-import Col from "react-bootstrap/lib/col";
+import { connect } from "react-redux";
+import { Row, Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
+import { getMedia } from "../../media/selectors";
+import { getSections } from "../../sections/selectors";
+import { getUsers } from "../../users/selectors";
 import Byline from "./Byline";
 
 const styles = {
@@ -17,7 +20,7 @@ const styles = {
     },
     '& div:last-child': {
       paddingRight: 0,
-    }
+    },
   },
   featuredImg: {
     width: '100%',
@@ -29,6 +32,9 @@ const styles = {
     color: '#000',
     marginBottom: '5px',
     padding: 0,
+    '&:hover': {
+      color: '#000',
+    }
   },
   articlePreview: {
     color: '#000',
@@ -63,13 +69,14 @@ const styles = {
   }
 };
 
-/*
-BUG THAT CAUSES LINK TO ARTICLE TO NOT INCLUDE SUBSECTION HAS BEEN FIXED IN FEATURE/MEDIA-MODULE
- */
-
-const ArticleRow = ({ classes, article, featuredMedia, section }) => {
+const ArticleRow = ({ classes, article, sections, users, media }) => {
+  const section = sections[ article.sectionId ];
+  const featuredMedia = Object.values(media).find(media => {
+    return media.isFeatured && media.articleId === article.id;
+  });
+  featuredMedia.creator = users[ featuredMedia.userId ];
   return (
-    <Row key={ `articleBlock${article.id}` } className={ classes.ArticleRow }>
+    <Row key={ article.id } className={ classes.ArticleRow }>
       <Col md={ 3 } lg={ 3 }>
         <figure>
           <img src={ featuredMedia.url } className={ classes.featuredImg }/>
@@ -81,8 +88,8 @@ const ArticleRow = ({ classes, article, featuredMedia, section }) => {
           { article.title }
         </Link>
         <p className={ classes.articlePreview }>
-          Fake comment: in SectionPage, you've imported SectionArticleList but you
-          don't use it as a component. The error appears to be on line 41.
+          Fake comment: in SectionPage, you've imported SectionArticleList but
+          you don't use it as a component. The error appears to be on line 41.
         </p>
         <div>
           <Byline classes={ classes } contributors={ article.contributors }/>
@@ -93,4 +100,12 @@ const ArticleRow = ({ classes, article, featuredMedia, section }) => {
   );
 };
 
-export default injectSheet(styles)(ArticleRow);
+const mapStateToProps = (state) => ({
+  media: getMedia(state),
+  sections: getSections(state),
+  users: getUsers(state),
+});
+
+export default connect(
+  mapStateToProps
+)(injectSheet(styles)(ArticleRow));

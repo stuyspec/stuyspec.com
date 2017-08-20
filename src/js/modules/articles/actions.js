@@ -1,7 +1,9 @@
 import axios from "axios";
 import * as t from "./actionTypes";
+
 import { STUY_SPEC_API, STUY_SPEC_API_HEADER } from "../../constants";
-import { getProcessedArticlesResponse, getFakeAuthorshipsForArticleResponse } from "./selectors";
+import { validateKey } from "../../utils";
+import { getFakeAuthorshipsForArticleResponse } from "./selectors";
 
 export const fetchArticles = () => {
   return (dispatch, getState) => {
@@ -12,10 +14,6 @@ export const fetchArticles = () => {
         dispatch({
           type: t.FETCH_ARTICLE_FULFILLED,
           payload: response.data,
-        });
-        dispatch({
-          type: t.ADD_ARTICLES,
-          payload: getProcessedArticlesResponse(getState()),
         });
         dispatch({
           type: t.ADD_AUTHORSHIPS,
@@ -31,19 +29,6 @@ export const fetchArticles = () => {
   };
 };
 
-const validateArticleKey = (articleObject, key, type) => {
-  if (key in articleObject) {
-    if (typeof (articleObject[ key ]) === type) {
-      return true;
-    } else {
-      throw `EXCEPTION: key ${key} in articleObject is 
-        ${typeof (articleObject[ key ])}, but should be ${type}.`;
-    }
-  } else {
-    throw `EXCEPTION: key ${key} is undefined in articleObject.`;
-  }
-};
-
 /*
 TODO: Add volume and issue int props after non-null data seeded @nicholas
 TODO: Add isDraft boolean prop after non-null data seeded @nicholas
@@ -57,10 +42,10 @@ const validateArticles = (articleArray) => {
   }
   articleArray.forEach(articleObject => {
     integerProperties.forEach(numberKey => {
-      validateArticleKey(articleObject, numberKey, 'number');
+      validateKey(articleObject, numberKey, 'number', 'article');
     });
     stringProperties.forEach((stringKey) => {
-      validateArticleKey(articleObject, stringKey, 'string');
+      validateKey(articleObject, stringKey, 'string', 'article');
     });
   });
   return true;

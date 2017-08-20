@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { HomePage, PageLayout } from "./core/components";
 import { ArticlePage } from "./articles/components";
 import { SectionPage } from "./sections/components";
-import { RolePage, ContributorPage } from "./users/components";
+import { RolePage, ContributorPage, PhotographerPage, IllustratorPage } from "./users/components";
 
 import { getSections } from "./sections/selectors";
 import { getRoles } from "./users/selectors";
@@ -47,9 +47,9 @@ const RoutingApp = ({ sections, roles }) => {
           <RolePage role={ role }/>
         ) }/>
     })
-  }
+  };
   return (
-    <ConnectedRouter history={ appHistory } onUpdate={ () => window.scrollTo(0, 0) }>
+    <ConnectedRouter history={ appHistory }>
       <PageLayout>
         <Switch>
           <Route exact path="/" component={ HomePage }/>
@@ -61,6 +61,17 @@ const RoutingApp = ({ sections, roles }) => {
                  render={ props => (
                    <ContributorPage match={ props.match }
                                     role={ roles[ 'contributors' ] }/>
+                 ) }/>
+          <Route exact path={ '/illustrators/:illustrator_slug' }
+                 key={ `illustratorRoute` }
+                 render={ props => (
+                   <IllustratorPage match={ props.match }/>
+                 ) }/>
+          <Route exact path={ '/photographers/:photographer_slug' }
+                 key={ `photographerRoute` }
+                 render={ props => (
+                   <PhotographerPage match={ props.match }
+                                     role={ roles[ 'photographers' ] }/>
                  ) }/>
         </Switch>
       </PageLayout>

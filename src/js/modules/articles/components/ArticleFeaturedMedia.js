@@ -1,5 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
+
+import { capitalizeFirstLetter } from "../../../utils";
+import { ROLE_SLUG_OF_MEDIA_TYPE } from "../../../constants";
 
 const styles = {
   figure: {
@@ -14,19 +18,27 @@ const styles = {
     fontSize: '14px',
     lineHeight: '1.07',
     marginTop: '7px',
-    '& span:last-child': {
-      color: '#888'
-    },
   },
+  creditLine: {
+    color: '#888',
+  }
 };
 
-const ArticleFeaturedMedia = ({ classes, featuredMedia }) => {
+const ArticleFeaturedMedia = ({
+                                classes,
+                                featuredMedia: { caption, creator, type, url },
+                              }) => {
   return (
     <figure className={ classes.figure }>
-      <img className={ classes.img } src={ featuredMedia.url }/>
+      <img className={ classes.img } src={ url }/>
       <figcaption className={ classes.caption }>
-        <span>{ featuredMedia.caption } </span>
-        <span>{ featuredMedia.type } by { featuredMedia.credits }</span>
+        <span>{ caption }&nbsp;</span>
+        <Link className={ classes.creditLine }
+              to={ `/${ ROLE_SLUG_OF_MEDIA_TYPE[ type ] }/${creator.slug}` }>
+          { capitalizeFirstLetter(type) }
+          &nbsp;by&nbsp;
+          { `${creator.firstName} ${creator.lastName}` }
+        </Link>
       </figcaption>
     </figure>
   );

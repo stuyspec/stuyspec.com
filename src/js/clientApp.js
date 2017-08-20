@@ -15,8 +15,10 @@ try {
 }
 
 import { VERSION } from "./versionInfo";
-
 console.log('appVersion ->', VERSION);
+
+import { objectFilter } from "./utils";
+Object.filter = objectFilter;
 
 ReactDOM.render((
   <AppContainer>

@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 
-import { getContributorFromSlug } from "../selectors";
-import { getContributorArticles } from "../../articles/selectors";
+import { getIllustratorFromSlug } from "../selectors";
+import { getIllustratorArticles } from "../../articles/selectors";
 import { ArticleRow } from "../../articles/components";
 
 const styles = {
-  ContributorPage: {
+  IllustratorPage: {
     marginTop: '62px',
   },
   name: {
@@ -44,22 +44,22 @@ const styles = {
   },
 };
 
-const ContributorPage = ({ classes, contributor, articles }) => {
+const IllustratorPage = ({ classes, illustrator, articles }) => {
   const createArticleRows = () => {
     return Object.values(articles).map(article => {
       return <ArticleRow key={ article.id } article={ article }/>;
     });
   };
   return (
-    <Grid className={ classes.ContributorPage }>
+    <Grid className={ classes.IllustratorPage }>
       <Row>
         <Col md={ 9 }>
-          <p className={ classes.name }>{ contributor.firstName } { contributor.lastName }</p>
-          <img alt={ contributor.lastName }
+          <p className={ classes.name }>{ illustrator.firstName } { illustrator.lastName }</p>
+          <img alt={ illustrator.lastName }
                className={ classes.profilePicture }
-               src={ contributor.url }/>
-          <p className={ classes.description }>{ contributor.description }</p>
-          <div className={ classes.allWork }>All Work</div>
+               src={ illustrator.url }/>
+          <p className={ classes.description }>{ illustrator.description }</p>
+          <div className={ classes.allWork }>Illustrations</div>
           { createArticleRows() }
         </Col>
       </Row>
@@ -68,11 +68,11 @@ const ContributorPage = ({ classes, contributor, articles }) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  contributor: getContributorFromSlug(state, ownProps),
-  articles: getContributorArticles(state, ownProps)
+  illustrator: getIllustratorFromSlug(state, ownProps),
+  articles: getIllustratorArticles(state, ownProps),
 });
 
 export default connect(
   mapStateToProps,
   null
-)(injectSheet(styles)(ContributorPage));
+)(injectSheet(styles)(IllustratorPage));
