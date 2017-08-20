@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as t from "./actionTypes";
 import { STUY_SPEC_API, STUY_SPEC_API_HEADER } from "../../constants";
-import { getProcessedArticlesResponse, getFakeAuthorshipsForArticleResponse } from "./selectors";
+import { getFakeAuthorshipsForArticleResponse } from "./selectors";
 import { checkKeyValidity } from "../../utils";
 
 export const fetchArticles = () => {
@@ -13,10 +13,6 @@ export const fetchArticles = () => {
         dispatch({
           type: t.FETCH_ARTICLE_FULFILLED,
           payload: response.data,
-        });
-        dispatch({
-          type: t.ADD_ARTICLES,
-          payload: getProcessedArticlesResponse(getState()),
         });
         dispatch({
           type: t.ADD_AUTHORSHIPS,

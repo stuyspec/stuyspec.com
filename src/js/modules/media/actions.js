@@ -51,7 +51,7 @@ const fakeMedia = [
     url: 'http://www.stockillustrations.com/Image.aspx?src=medres&name=ALBA1060.jpg&sz=1144&fitw=y',
     title: 'Happy Birthday',
     caption: 'As Charlotte celebrates her thirteenth birthday, she is surprised by two nice rabbits.',
-    type: 'photograph',
+    type: 'illustration',
     isFeatured: true,
   }
 ];

@@ -24,11 +24,10 @@ const HomePage = ({
                     fetchMedia
                   }) => {
   const createArticleLinks = () => {
-    return Object.keys(articles).map(articleSlug => {
-      const article = articles[ articleSlug ];
+    return Object.values(articles).map(article => {
       return (
         <li key={ article.id }>
-          <Link to={ `${sections[ article.sectionSlug ].permalink}/${article.slug}` }>
+          <Link to={ `${sections[ article.sectionId ].permalink}/${article.slug}` }>
             { article.title }
           </Link>
         </li>
