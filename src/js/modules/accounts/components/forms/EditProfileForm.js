@@ -32,7 +32,7 @@ const renderField = ({
         { label }
       </label>
       <div>
-        <input { ...input } placeholder={ label } type={ type }/>
+        <input { ...input } placeholder={ label } type={ type } value={ value }/>
         { touched &&
         ((error &&
           <span>
@@ -47,16 +47,16 @@ const renderField = ({
   );
 };
 
-const EditProfileForm = ({ classes, handleSubmit, submitting, errors }) => {
+const EditProfileForm = ({ classes, handleSubmit, submitting, errors, session }) => {
   return (
     <div>
       <h1>Edit Profile</h1>
       <form onSubmit={ handleSubmit }>
-        <Field name="firstName" type="text" component={ renderField } label="First Name"/>
-        <Field name="lastName" type="text" component={ renderField } label="Last Name"/>
-        <Field name="email" type="email" component={ renderField } label="Email"/>
-        <Field name="password" type="text" component={ renderField } label="Password"/>
-        <Field name="passwordConfirmation" type="text" component={ renderField } label="Password Confirmation"/>
+        <Field name="firstName" value={ session.firstName } type="text" component={ renderField } label="First Name"/>
+        <Field name="lastName" value={ session.lastName } type="text" component={ renderField } label="Last Name"/>
+        <Field name="email" value={ session.email } type="email" component={ renderField } label="Email"/>
+        <Field name="password" value="" type="text" component={ renderField } label="Password"/>
+        <Field name="passwordConfirmation" value="" type="text" component={ renderField } label="Password Confirmation"/>
         <div>
           <button type="submit" disabled={ submitting }>
             Update

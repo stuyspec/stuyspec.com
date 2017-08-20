@@ -52,7 +52,7 @@ const SignInForm = ({ classes, handleSubmit, submitting, errors }) => {
       <h1>Sign In Form</h1>
       <form onSubmit={ handleSubmit }>
         <Field name="email" type="email" component={ renderField } label="Email"/>
-        <Field name="password" type="text" component={ renderField } label="Password"/>
+        <Field name="password" type="password" component={ renderField } label="Password"/>
         <div>
           <button type="submit" disabled={ submitting }>
             Sign In

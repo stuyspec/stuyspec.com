@@ -66,8 +66,8 @@ const SignUpForm = ({ classes, handleSubmit, submitting, errors }) => {
         <Field name="firstName" type="text" component={ renderField } label="First Name"/>
         <Field name="lastName" type="text" component={ renderField } label="Last Name"/>
         <Field name="email" type="email" component={ renderField } label="Email"/>
-        <Field name="password" type="text" component={ renderField } label="Password"/>
-        <Field name="passwordConfirmation" type="text" component={ renderField } label="Password Confirmation"/>
+        <Field name="password" type="password" component={ renderField } label="Password"/>
+        <Field name="passwordConfirmation" type="password" component={ renderField } label="Password Confirmation"/>
         <div>
           <button type="submit" disabled={ submitting }>
             Sign Up

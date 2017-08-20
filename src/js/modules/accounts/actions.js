@@ -49,7 +49,7 @@ export const signIn = values => {
         });
       });
   }
-}
+};
 
 export const signOut = values => {
   return dispatch => {
@@ -68,10 +68,26 @@ export const signOut = values => {
         });
       });
   }
-}
+};
 
 export const updateUser = values => {
   return dispatch => {
+    if (values.password) {
+      dispatch({ type: t.UPDATE_PASSWORD_PENDING });
+      axios.put(`${STUY_SPEC_API_URL}/password`, values, STUY_SPEC_API_HEADER)
+        .then(response => {
+          dispatch({
+            type: t.UPDATE_PASSWORD_FULFILLED,
+            payload: response,
+          });
+        })
+        .catch(err => {
+          dispatch({
+            type: t.UPDATE_PASSWORD_REJECTED,
+            payload: err,
+          });
+        });
+    }
     dispatch({ type: t.UPDATE_USER_PENDING });
     axios.put(`${STUY_SPEC_API_URL}/`, values, STUY_SPEC_API_HEADER)
       .then(response => {
@@ -87,4 +103,4 @@ export const updateUser = values => {
         });
       });
   }
-}
+};
