@@ -10,7 +10,7 @@ const styles = {
     marginTop: '50px',
   }
 };
-// TODO: FIX
+
 const RolePage = ({ classes, role, usersInRole }) => {
   const createUsersInRoleLinks = () => {
     return Object.values(usersInRole).map(user => {

@@ -10,19 +10,19 @@ const initialState = {
   error: null,
   users: {},
   roles: {
-    "contributors": {
+    0: {
       id: 0,
       title: "Contributor",
       credentialLevel: 0,
       slug: "contributors",
     },
-    "illustrators": {
+    1: {
       id: 1,
       title: "Illustrator",
       credentialLevel: 0,
       slug: "illustrators",
     },
-    "photographers": {
+    2: {
       id: 2,
       title: "Photographer",
       credentialLevel: 0,
@@ -30,26 +30,20 @@ const initialState = {
     },
   },
   userRoles: [
-    {
-      userSlug: "jason-kao",
-      roleSlug: "contributors",
-    },
-    {
-      userSlug: "jason-lin",
-      roleSlug: "contributors",
-    },
-    {
-      userSlug: "cathy-cai",
-      roleSlug: "contributors",
-    },
-    {
-      userSlug: "cathy-cai",
-      roleSlug: "photographers",
-    },
-    {
-      userSlug: "nicholas-yang",
-      roleSlug: "photographers",
-    },
+    { userId: 0, roleId: 0 },
+    { userId: 1, roleId: 0 },
+    { userId: 2, roleId: 0 },
+    { userId: 3, roleId: 0 },
+
+    { userId: 0, roleId: 1 },
+    { userId: 1, roleId: 1 },
+    { userId: 2, roleId: 1 },
+    { userId: 3, roleId: 1 },
+
+    { userId: 0, roleId: 2 },
+    { userId: 1, roleId: 2 },
+    { userId: 2, roleId: 2 },
+    { userId: 3, roleId: 2 },
   ]
 };
 

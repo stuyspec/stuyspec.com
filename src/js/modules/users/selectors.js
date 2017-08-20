@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import appHistory from "../../tools/appHistory";
 
 export const getUsers = state => state.users.users;
 export const getRoles = state => state.users.roles;
@@ -8,27 +9,44 @@ const getRequestedContributorSlug = (state, props) => props.match.params.contrib
 const getRequestedIllustratorSlug = (state, props) => props.match.params.illustrator_slug;
 const getRequestedPhotographerSlug = (state, props) => props.match.params.photographer_slug;
 
-const getUsersResponse = state => state.users.response;
 const getRoleFromProps = (state, props) => props.role;
 
 export const getContributorFromSlug = createSelector(
-  [ getUsers, getRequestedContributorSlug ],
-  (users, requestedContributorSlug) => {
-    return Object.values(users).find(user => user.slug === requestedContributorSlug);
+  [ getUsers, getUserRoles, getRequestedContributorSlug ],
+  (users, userRoles, requestedContributorSlug) => {
+    const user = Object.values(users).find(user => {
+      return user.slug === requestedContributorSlug;
+    });
+    if (userRoles.find(userRole => userRole.userId === user.id && userRole.roleId === 0)) {
+      return user;
+    }
+    appHistory.push('/the-uncompleted-404-page');
   }
 );
 
 export const getIllustratorFromSlug = createSelector(
-  [ getUsers, getRequestedIllustratorSlug ],
-  (users, requestedIllustratorSlug) => {
-    return Object.values(users).find(user => user.slug === requestedIllustratorSlug);
+  [ getUsers, getUserRoles, getRequestedIllustratorSlug ],
+  (users, userRoles, requestedIllustratorSlug) => {
+    const user = Object.values(users).find(user => {
+      return user.slug === requestedIllustratorSlug;
+    });
+    if (userRoles.find(userRole => userRole.userId === user.id && userRole.roleId === 1)) {
+      return user;
+    }
+    appHistory.push('/the-uncompleted-404-page');
   }
 );
 
 export const getPhotographerFromSlug = createSelector(
-  [ getUsers, getRequestedPhotographerSlug ],
-  (users, requestedPhotographerSlug) => {
-    return Object.values(users).find(user => user.slug === requestedPhotographerSlug);
+  [ getUsers, getUserRoles, getRequestedPhotographerSlug ],
+  (users, userRoles,requestedPhotographerSlug) => {
+    const user = Object.values(users).find(user => {
+      return user.slug === requestedPhotographerSlug;
+    });
+    if (userRoles.find(userRole => userRole.userId === user.id && userRole.roleId === 2)) {
+      return user;
+    }
+    appHistory.push('/the-uncompleted-404-page');
   }
 );
 
@@ -38,26 +56,12 @@ export const getPhotographerFromSlug = createSelector(
 export const getUsersInRole = createSelector(
   [ getUsers, getRoleFromProps, getUserRoles ],
   (users, role, userRoles) => {
-    const userSlugsInRole = userRoles
-      .filter(userRole => userRole.roleSlug === role.slug)
-      .map(userRole => userRole.userSlug);
-    return Object.filter(users, user => {
-      return userSlugsInRole.includes(user.slug);
-    });
-  }
-);
-
-/**
- * TODO:
- * The selector returns a users object that contains all users from Stuy
- *   Spec API's response.
- */
-export const getProcessedUsersResponse = createSelector(
-  [ getUsersResponse ],
-  response => {
-    return response.reduce((accumulatedUsers, currentUser) => {
-      accumulatedUsers[ currentUser.slug ] = currentUser;
-      return accumulatedUsers;
+    return userRoles.reduce((acc, userRole) => {
+      if (userRole.roleId === role.id) {
+        const user = users[ userRole.userId ];
+        acc[ user.id ] = user;
+      }
+      return acc;
     }, {});
   }
 );
