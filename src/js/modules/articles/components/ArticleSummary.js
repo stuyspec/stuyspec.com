@@ -33,7 +33,9 @@ const primaryStyles = {
 
 const secondaryStyles = {
   ArticleSummary: {
-    borderBottom: "solid 2px #ddd",
+    borderBottom: "solid 1px #ddd",
+    marginBottom: '14px',
+    paddingBottom: '14px',
   },
   featuredMediaContainer: {
     marginBottom: '10px',
@@ -47,19 +49,21 @@ const secondaryStyles = {
     fontSize: '17px',
     fontWeight: 'bold',
   },
-  Byline: {
-  },
   preview: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "14px",
     lineHeight: "1.14",
+    margin: 0,
+    marginTop: '4px',
   },
 };
 
 const ternaryStyles = {
   ArticleSummary: {
-    borderBottom: "solid 2px #ddd",
+    borderBottom: "solid 1px #ddd",
+    marginBottom: '14px',
+    paddingBottom: "14px",
   },
   title: {
     margin: 0,
@@ -77,6 +81,8 @@ const ternaryStyles = {
     fontFamily: "Minion Pro",
     fontSize: "14px",
     lineHeight: "1.14",
+    margin: 0,
+    marginTop: '2px',
   },
   featuredMediaContainer: {
     float: 'right',
@@ -114,14 +120,14 @@ const ArticleSummary = ({ article, media, sections, users, type }) => {
       </h6>
       <Byline style={ styles.Byline }
               contributors={ article.contributors }/>
-      {
-        type === "ternary" && (
-          <div style={ styles.featuredMediaContainer }>
-            <ArticleFeaturedMedia featuredMedia={ featuredMedia }/>
-          </div>
-        )
-      }
       <p style={ styles.preview }>
+        {
+          type === "ternary" && (
+            <div style={ styles.featuredMediaContainer }>
+              <ArticleFeaturedMedia featuredMedia={ featuredMedia }/>
+            </div>
+          )
+        }
         This is a preview of the article. Wow, look at that big image. It is
         HUGE. So how was your day? Did you do anything interesting. Now I need
         more words to fill up space so blah blah blah lobster!
