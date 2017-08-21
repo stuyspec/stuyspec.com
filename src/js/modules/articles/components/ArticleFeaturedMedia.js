@@ -7,7 +7,7 @@ import { ROLE_SLUG_OF_MEDIA_TYPE } from "../../../constants";
 
 const styles = {
   figure: {
-    margin: '0px 0px 13px 0px',
+    margin: 0,
     width: '100%',
   },
   img: {

@@ -20,6 +20,14 @@ const styles = {
   HomePage: {
     marginTop: "23px 0px 13px",
   },
+  primaryCol: {
+    paddingRight: '13px',
+    borderRight: '1px solid #ddd',
+  },
+  secondaryCol: {
+    paddingRight: '13px',
+    borderRight: '1px solid #ddd',
+  },
 };
 
 const HomePage = ({ classes, articles, fetched, fetchArticles, fetchUsers, fetchMedia }) => {
@@ -30,14 +38,14 @@ const HomePage = ({ classes, articles, fetched, fetchArticles, fetchUsers, fetch
 
           <Grid>
             <Row id="homepageRow">
-              <Col lg={6} md={6} sm={12} xs={12}>
-                <ArticleSummary type={ "primary" }   article={ values[0] }/>
+              <Col className={ classes.primaryCol } lg={6} md={6} sm={12} xs={12}>
+                <ArticleSummary type={ "primary" } article={ values[0] }/>
               </Col>
-              <Col lg={3} md={3} sm={12} xs={12}>
+              <Col className={ classes.secondaryCol } lg={3} md={3} sm={12} xs={12}>
                 <ArticleSummary type={ "secondary" } article={ values[1] }/>
                 <ArticleSummary type={ "secondary" } article={ values[2] }/>
               </Col>
-              <Col lg={3} md={3} sm={12} xs={12}>
+              <Col className={ classes.ternaryCol } lg={3} md={3} sm={12} xs={12}>
                 <ArticleSummary type={ "ternary" } article={ values[3] }/>
                 <ArticleSummary type={ "ternary" } article={ values[4] }/>
                 <ArticleSummary type={ "ternary" } article={ values[3] }/>

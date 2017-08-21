@@ -17,13 +17,16 @@ const styles = {
       padding: '7px 6px 0px 3px',
     },
   },
+  featuredImg: {
+    marginBottom: '13px',
+  }
 };
 
 // TODO: italicized contributor blurb underneath the article content (see nyer)
 const ArticleBody = ({ classes, content, featuredMedia }) => {
   return (
     <div className={ classes.ArticleBody }>
-      <ArticleFeaturedMedia featuredMedia={ featuredMedia } putCaption={ true }/>
+      <ArticleFeaturedMedia className={ classes.featuredImg } featuredMedia={ featuredMedia } putCaption={ true }/>
       <div dangerouslySetInnerHTML={ { __html: content } }/>
     </div>
   );
