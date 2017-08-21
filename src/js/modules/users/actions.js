@@ -50,7 +50,7 @@ export const fetchUsers = () => {
   return dispatch => {
     dispatch({ type: t.FETCH_USER_PENDING });
     axios.get(`${STUY_SPEC_API}/users`, { 'headers': HEADER })
-      .then(response => {
+      .then(response => { // TODO: replace with response.data when API ready
         validateUsers(fakeUsers);
         dispatch({
           type: t.FETCH_USER_FULFILLED,

@@ -19,7 +19,7 @@ const styles = {
   },
   creditLine: {
     color: '#888',
-  }
+  },
 };
 
 const ArticleFeaturedMedia = ({ classes, featuredMedia }) => {

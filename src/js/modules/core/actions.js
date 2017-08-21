@@ -6,9 +6,9 @@ export const refreshWindowDimensions = () => ({
 });
 
 export const openSidebar = () => ({
-  type: t.OPEN_SIDEBAR
+  type: t.OPEN_SIDEBAR,
 });
 
 export const closeSidebar = () => ({
-  type: t.CLOSE_SIDEBAR
-})
+  type: t.CLOSE_SIDEBAR,
+});

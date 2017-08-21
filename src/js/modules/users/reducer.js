@@ -13,19 +13,16 @@ const initialState = {
     0: {
       id: 0,
       title: "Contributor",
-      credentialLevel: 0,
       slug: "contributors",
     },
     1: {
       id: 1,
       title: "Illustrator",
-      credentialLevel: 0,
       slug: "illustrators",
     },
     2: {
       id: 2,
       title: "Photographer",
-      credentialLevel: 0,
       slug: "photographers"
     },
   },
@@ -61,7 +58,6 @@ const reducer = (state = { ...initialState }, action) => {
         isFetching: false,
         isFetched: true,
         users: {
-          ...state.users,
           ...action.payload.reduce((acc, user) => {
             acc[ user.id ] = user;
             return acc;

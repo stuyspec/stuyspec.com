@@ -19,7 +19,7 @@ const ArticleList = ({ classes, articles }) => {
         })
       }
     </Grid>
-  )
+  );
 };
 
 export default injectSheet(styles)(ArticleList);
