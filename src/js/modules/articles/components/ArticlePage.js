@@ -2,9 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 
-import { getArticleFeaturedMedia, getArticleFromRequestedSlug } from "../selectors";
 import ArticleHeader from "./ArticleHeader";
 import ArticleBody from "./ArticleBody";
+import {
+  getArticleFromRequestedSlug,
+  getArticleFeaturedMedia,
+} from "../selectors";
 
 const styles = {
   ArticlePage: {
@@ -16,23 +19,16 @@ const styles = {
 const ArticlePage = ({ classes, article, section, featuredMedia }) => {
   return (
     <div className={ classes.ArticlePage }>
-      <ArticleHeader
-        headline={ article.title }
-        section={ section }
-        contributors={ article.contributors }
-        dateline={ article.dateline }
-      />
+      <ArticleHeader article={ article } section={ section }/>
       <ArticleBody content={ article.content } featuredMedia={ featuredMedia }/>
     </div>
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    article: getArticleFromRequestedSlug(state, ownProps),
-    featuredMedia: getArticleFeaturedMedia(state, ownProps),
-  };
-};
+const mapStateToProps = (state, ownProps) => ({
+  article: getArticleFromRequestedSlug(state, ownProps),
+  featuredMedia: getArticleFeaturedMedia(state, ownProps),
+});
 
 export default connect(
   mapStateToProps

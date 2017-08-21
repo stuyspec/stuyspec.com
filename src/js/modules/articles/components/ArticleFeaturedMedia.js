@@ -1,12 +1,7 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import { capitalizeWord } from "../../../utils";
-import { MEDIA_CREATOR_SLUG } from "../../../constants";
-import { getUsers } from "../../users/selectors";
-import { createCreditLine } from "./CreditLine";
+import CreditLine from "./CreditLine";
 
 const styles = {
   figure: {
@@ -27,22 +22,16 @@ const styles = {
   }
 };
 
-const ArticleFeaturedMedia = ({ classes, featuredMedia, users }) => {
+const ArticleFeaturedMedia = ({ classes, featuredMedia }) => {
   return (
     <figure className={ classes.figure }>
       <img className={ classes.img } src={ featuredMedia.url }/>
       <figcaption className={ classes.caption }>
         <span>{ featuredMedia.caption }&nbsp;</span>
-        { createCreditLine() }
+        <CreditLine classes={ classes } featuredMedia={ featuredMedia }/>
       </figcaption>
     </figure>
   );
 };
 
-const mapStateToProps = (state) => ({
-  users: getUsers(state),
-});
-
-export default connect(
-  mapStateToProps
-)(injectSheet(styles)(ArticleFeaturedMedia));
+export default injectSheet(styles)(ArticleFeaturedMedia);

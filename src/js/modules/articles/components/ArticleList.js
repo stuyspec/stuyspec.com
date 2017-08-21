@@ -13,10 +13,11 @@ const styles = {
 const ArticleList = ({ classes, articles }) => {
   return (
     <Grid className={ classes.ArticleList }>
-      {Object.values(articles).map(article => {
-      return <ArticleRow article={ article }
-      key={ article.id }/>;
-    })}
+      {
+        Object.values(articles).map(article => {
+          return <ArticleRow article={ article } key={ article.id }/>;
+        })
+      }
     </Grid>
   )
 };

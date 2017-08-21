@@ -4,6 +4,6 @@
  * @type {{VERSION: string}}
  */
 
-let VersionInfo = { VERSION : '0.0.2815' };
+let VersionInfo = { VERSION : '0.0.3026' };
 
 export default VersionInfo

@@ -22,8 +22,11 @@ const styles = {
     marginBottom: '18px',
     textDecoration: 'none',
     textTransform: 'uppercase',
-    width: '36px',
+    width: '150px',
     '&:hover': {
+      color: '#000',
+    },
+    '&:focus': {
       color: '#000',
     },
   },
@@ -58,13 +61,17 @@ const styles = {
 
 // TODO: make selector for dateline
 
-const ArticleHeader = ({ classes, contributors, dateline, headline, section }) => {
+const ArticleHeader = ({
+                         classes,
+                         article: { contributors, dateline, title },
+                         section,
+                       }) => {
   return (
     <div className={ classes.ArticleHeader }>
       <Link to={ section.permalink } className={ classes.rubric }>
         { section.name }
       </Link>
-      <h1 className={ classes.headline }>{ headline }</h1>
+      <h1 className={ classes.headline }>{ title }</h1>
       <Byline classes={ classes } contributors={ contributors }/>
       <span>{ dateline }</span>
     </div>

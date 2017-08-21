@@ -1,8 +1,9 @@
 import axios from "axios";
 import * as t from "./actionTypes";
+
 import { STUY_SPEC_API, STUY_SPEC_API_HEADER } from "../../constants";
-import { getProcessedArticlesResponse, getFakeAuthorshipsForArticleResponse } from "./selectors";
-import { checkKeyValidity } from "../../utils";
+import { validateKey } from "../../utils";
+import { getFakeAuthorshipsForArticleResponse } from "./selectors";
 
 export const fetchArticles = () => {
   return (dispatch, getState) => {
@@ -13,10 +14,6 @@ export const fetchArticles = () => {
         dispatch({
           type: t.FETCH_ARTICLE_FULFILLED,
           payload: response.data,
-        });
-        dispatch({
-          type: t.ADD_ARTICLES,
-          payload: getProcessedArticlesResponse(getState()),
         });
         dispatch({
           type: t.ADD_AUTHORSHIPS,
@@ -45,10 +42,10 @@ const validateArticles = (articleArray) => {
   }
   articleArray.forEach(articleObject => {
     integerProperties.forEach(numberKey => {
-      checkKeyValidity(articleObject, numberKey, 'number', 'article');
+      validateKey(articleObject, numberKey, 'number', 'article');
     });
     stringProperties.forEach((stringKey) => {
-      checkKeyValidity(articleObject, stringKey, 'string', 'article');
+      validateKey(articleObject, stringKey, 'string', 'article');
     });
   });
   return true;
