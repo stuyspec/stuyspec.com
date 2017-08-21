@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import { capitalizeFirstLetter } from "../../../utils";
-import { ROLE_SLUG_OF_MEDIA_TYPE } from "../../../constants";
+import { capitalizeWord } from "../../../utils";
+import { MEDIA_CREATOR_SLUG } from "../../../constants";
 import { getUsers } from "../../users/selectors";
+import { createCreditLine } from "./CreditLine";
 
 const styles = {
   figure: {
@@ -27,18 +28,6 @@ const styles = {
 };
 
 const ArticleFeaturedMedia = ({ classes, featuredMedia, users }) => {
-  const createCreditLine = () => {
-    const creator = Object.values(users)
-      .find(user => user.id === featuredMedia.userId);
-    return (
-      <Link className={ classes.creditLine }
-            to={ `/${ROLE_SLUG_OF_MEDIA_TYPE[ featuredMedia.type ]}/${creator.slug}` }>
-        { capitalizeFirstLetter(featuredMedia.type) }
-        &nbsp;by&nbsp;
-        { `${creator.firstName} ${creator.lastName}` }
-      </Link>
-    )
-  }
   return (
     <figure className={ classes.figure }>
       <img className={ classes.img } src={ featuredMedia.url }/>

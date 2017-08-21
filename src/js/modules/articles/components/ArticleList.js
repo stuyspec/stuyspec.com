@@ -11,15 +11,12 @@ const styles = {
 };
 
 const ArticleList = ({ classes, articles }) => {
-  const createArticleRows = () => {
-    return Object.values(articles).map(article => {
-      return <ArticleRow article={ article }
-                         key={ article.id }/>;
-    })
-  };
   return (
     <Grid className={ classes.ArticleList }>
-      { createArticleRows() }
+      {Object.values(articles).map(article => {
+      return <ArticleRow article={ article }
+      key={ article.id }/>;
+    })}
     </Grid>
   )
 };

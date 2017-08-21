@@ -3,7 +3,7 @@ export const STUY_SPEC_API_HEADER = {
   'X-Key-Inflection': 'camel',
 };
 
-export const ROLE_SLUG_OF_MEDIA_TYPE = {
+export const MEDIA_CREATOR_SLUG = {
   'illustration': 'illustrators',
   'photograph': 'photographers',
 }
