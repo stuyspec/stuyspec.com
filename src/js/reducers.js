@@ -5,6 +5,7 @@ import articles from "./modules/articles";
 import sections from "./modules/sections";
 import users from "./modules/users";
 import media from "./modules/media";
+import comments from "./modules/comments";
 
 export default combineReducers(
   {
@@ -13,5 +14,6 @@ export default combineReducers(
     [sections.constants.NAME]: sections.reducer,
     [users.constants.NAME]: users.reducer,
     [media.constants.NAME]: media.reducer,
+    [comments.constants.NAME]: comments.reducer,
     router: routerReducer
   });

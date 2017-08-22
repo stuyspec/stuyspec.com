@@ -2,6 +2,7 @@ import React from "react";
 import injectSheet from "react-jss";
 
 import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
+import { CommentBox } from "../../comments/components";
 
 const styles = {
   ArticleBody: {
@@ -25,6 +26,7 @@ const ArticleBody = ({ classes, content, featuredMedia }) => {
     <div className={ classes.ArticleBody }>
       <ArticleFeaturedMedia featuredMedia={ featuredMedia }/>
       <div dangerouslySetInnerHTML={ { __html: content } }/>
+      <CommentBox />
     </div>
   );
 };
