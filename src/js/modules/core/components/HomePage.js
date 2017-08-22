@@ -37,7 +37,7 @@ const HomePage = ({
   return (
     <div className={ classes.HomePage }>
       <h1>Home page</h1>
-      All three buttons must be pressed!<br/>
+      All three buttons must be pressed!(Users,media, then articles)<br/>
       <button onClick={ fetchArticles }>fetch articles</button>
       <button onClick={ fetchUsers }>fetch users</button>
       <button onClick={ fetchMedia }>fetch media</button>

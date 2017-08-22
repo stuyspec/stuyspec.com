@@ -26,6 +26,7 @@ const ArticleBody = ({ classes, content, featuredMedia }) => {
     <div className={ classes.ArticleBody }>
       <ArticleFeaturedMedia featuredMedia={ featuredMedia }/>
       <div dangerouslySetInnerHTML={ { __html: content } }/>
+      <br/>
       <CommentBox />
     </div>
   );
