@@ -14,8 +14,12 @@ import {
   getIllustratorIllustrations,
   getPhotographerPhotographs,
 } from "../media/selectors";
+import {
+  getComments
+} from '../comments/selectors';
 
 export const getArticles = state => state.articles.articles;
+const getArticleFromProps = (state, props) => props.article;
 const getAuthorships = state => state.articles.authorships;
 const getRequestedArticleSlug = (state, props) => props.match.params.article_slug;
 
@@ -139,5 +143,12 @@ export const getFakeAuthorshipsForArticleResponse = createSelector(
       acc.push({ articleId: article.id, contributorId: 1 });
       return acc;
     }, [])
+  }
+);
+
+export const getCommentsFromArticle = createSelector(
+  [ getComments, getArticleFromProps ],
+  (comments, article) => {
+    return Object.filter(comments, comment => comment.articleId === article.id);
   }
 );

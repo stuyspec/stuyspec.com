@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import injectSheet from 'react-jss';
 
+import Comment from './Comment';
+
+import { getCommentsFromArticle } from "../../articles/selectors";
+
 import {
   expandTextBox,
   shrinkTextBox,
@@ -11,29 +15,31 @@ import {
 } from "../action";
 
 const styles = {
-  CommentBox: {
-
-  },
+  CommentBox: {},
   smallBox: {
     height: "20px",
+    marginBottom: "10px",
     width: "300px",
   },
   bigBox: {
     height: "200px",
+    marginBottom: "10px",
     width: "400px",
   }
 };
 
-//TODO:delete comment if changing location
-const CommentBox = ({ classes,
+const CommentBox = ({
+                      classes,
                       expandTextBox,
                       shrinkTextBox,
                       toggleLogIn,
                       updateComment,
+                      article,
                       comments,
                       isExpanded,
                       isUserLoggedIn,
-                      commentText,}) => {
+                      commentText,
+                    }) => {
   const checkUser = () => {
     //TODO: Wait for the account module to be done to implement User check
     if (isUserLoggedIn) {
@@ -55,10 +61,15 @@ const CommentBox = ({ classes,
   const handleLogIn = () => {
     toggleLogIn();
   };
+  const createComments = () => {
+    return Object.values(comments).map(comment => (
+      <Comment comment={comment} key={comment.id}/>
+    ))
+  };
   return (
     <div className={classes.CommentBox}>
       <h1>Comments</h1>
-      <button onClick={handleLogIn}>toggle Log In </button>
+      <button onClick={handleLogIn}>toggle Log In</button>
       <hr/>
       <input type="text"
              placeholder="Comment"
@@ -66,15 +77,15 @@ const CommentBox = ({ classes,
              onChange={changeText}
              onClick={checkUser}
              onBlur={minimizeTextBox}
-             className={isExpanded ? classes.bigBox :
-                                     classes.smallBox}/>
+             className={isExpanded ? classes.bigBox : classes.smallBox}
+      />
+      {createComments()}
     </div>
   )
-  //also, change the className based on expanded or not
 };
-//TODO:put these in selectors
-const mapStateToProps = (state) => ({
-  comments: state.comments.comments,
+
+const mapStateToProps = (state, ownProps) => ({
+  comments: getCommentsFromArticle(state, ownProps),
   isExpanded: state.comments.isExpanded,
   isUserLoggedIn: state.comments.isUserLoggedIn,
   commentText: state.comments.commentText,
@@ -82,7 +93,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { expandTextBox, shrinkTextBox, toggleLogIn, updateComment},
+    { expandTextBox, shrinkTextBox, toggleLogIn, updateComment },
     dispatch
   );
 };

@@ -43,8 +43,9 @@ const fakeUsers = [
     email: "nyang1@stuy.edu",
     description: "Nicholas is a super alumni for The Spectator.",
     slug: "nicholas-yang",
+    url: "https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/19554158_1460778664016583_5843302843123802182_n.jpg?oh=998d236a6c3f29689586b76a9dd3afcf&oe=5A3238E9",
   },
-]
+];
 
 export const fetchUsers = () => {
   return dispatch => {

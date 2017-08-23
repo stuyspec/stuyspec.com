@@ -20,9 +20,26 @@ const initialState = {
       content: "This article changed my life!"
     },
     1: {
-
+      id: 1,
+      userId: 1,
+      articleId: 11,
+      content: "I wished that this article was written better!"
     },
   },
+  replies: {
+    0: {
+      id: 0,
+      userId: 3,
+      commentId: 0,
+      content: "Same, it made me realize how amazing the world is."
+    },
+    1: {
+      id: 1,
+      userId: 0,
+      commentId: 1,
+      content: "I believe that this article was perfectly fine."
+    },
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -38,6 +55,9 @@ const reducer = (state = initialState, action) => {
     }
     case UPDATE_COMMENT: {
       return {...state, commentText: action.payload};
+    }
+    case '@@router/LOCATION_CHANGE': {
+      return {...state, commentText: ''};
     }
   }
   return state;
