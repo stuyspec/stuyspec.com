@@ -23,7 +23,10 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         isFetching: false,
         isFetched: true,
-        // replacing acc with state.articles will block component updates
+        /* Placing state.articles as the initial value will for some reason
+         * inhibit components' updating with the articles state, which is why
+         * the spread operator is required.
+         */
         articles: {
           ...state.articles,
           ...action.payload.reduce((acc, article) => {

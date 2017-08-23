@@ -1,8 +1,6 @@
 import React from "react";
 import injectSheet from "react-jss";
 
-import CreditLine from "./CreditLine";
-
 const styles = {
   figure: {
     margin: '0px 0px 13px 0px',
@@ -28,7 +26,13 @@ const ArticleFeaturedMedia = ({ classes, featuredMedia }) => {
       <img className={ classes.img } src={ featuredMedia.url }/>
       <figcaption className={ classes.caption }>
         <span>{ featuredMedia.caption }&nbsp;</span>
-        <CreditLine classes={ classes } featuredMedia={ featuredMedia }/>
+        <Link className={ classes.creditLine }
+              to={ `/${MEDIA_CREATOR_SLUG[ type ]}/${creator.slug}` }>
+          { capitalizeWord(type) }
+          &nbsp;by&nbsp;
+          { `${creator.firstName} ${creator.lastName}` }
+        </Link>
+        );
       </figcaption>
     </figure>
   );
