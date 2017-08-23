@@ -1,7 +1,7 @@
 {
   "articles": {
     "articles": {
-      "apples-rain-in-new-york-city": {
+      "0": {
         "id": 0,
         "title": "Apples Rain in New York City",
         "content": "<p>Lorem ipsum</p>",
@@ -14,14 +14,16 @@
     },
     "authorship": [
       {
-        "articleSlug": "apples-rain-in-new-york-city",
-        "contributorSlug": "jason-kao"
+        "articleId": 0,
+        "contributorId": 0,
+        "createdAt": "2017-07-31T06:05:26.497Z",
+        "updatedAt": "2017-07-31T06:05:26.497Z"
       }
     ]
   },
   "sections": {
     "sections": {
-      "news": {
+      "1": {
         "id": 1,
         "name": "News",
         "description": "All News Fit To Skim",
@@ -40,19 +42,23 @@
         "isFeatured": true,
         "type": "photograph",
         "userSlug": "jason-kao",
-        "articleSlug": "apples-rain-in-new-york-city"
+        "articleSlug": "apples-rain-in-new-york-city",
+        "createdAt": "2017-07-31T06:05:26.497Z",
+        "updatedAt": "2017-07-31T06:05:26.497Z",
       }
     }
   },
   "users": {
     "users": {
-      "jason-kao": {
+      "0": {
         "id": 0,
         "firstName": "Jason",
         "lastName": "Kao",
         "username": "jkao1",
         "email": "jkao1@stuy.edu",
-        "description": "Jason is a web editor for The Spectator."
+        "description": "Jason is a web editor for The Spectator.",
+        "createdAt": "2017-07-31T06:05:26.497Z",
+        "updatedAt": "2017-07-31T06:05:26.497Z"
       }
     },
     "roles": {
@@ -60,14 +66,35 @@
         "id": 0,
         "title": "Contributor",
         "slug": "contributors",
-        "credentialLevel": 0
+        "createdAt": "2017-07-31T06:05:26.497Z",
+        "updatedAt": "2017-07-31T06:05:26.497Z"
       }
     },
     "userRoles": [
       {
-        "userSlug": "jason-kao",
-        "roleSlug": 0
+        "userId": 0,
+        "roleId": 0,
+        "createdAt": "2017-07-31T06:05:26.497Z",
+        "updatedAt": "2017-07-31T06:05:26.497Z"
       }
     ]
+  },
+  "comments": {
+    "comments": {
+      "0": {
+        "id": 0,
+        "userId": 0,
+        "articleId": 0,
+        "content": "That article was so good!"
+      }
+    },
+    "replies": {
+      "0": {
+        "id": 0,
+        "userId": 0,
+        "commentId": "0",
+        "content": "That comment was so good!"
+      }
+    }
   }
 }
