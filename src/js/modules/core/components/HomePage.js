@@ -18,16 +18,24 @@ import { ArticleSummary } from "../../articles/components";
 
 const styles = {
   HomePage: {
-    marginTop: "23px 0px 13px",
+    marginTop: '23px 0px 13px',
   },
   primaryCol: {
-    paddingRight: '13px',
     borderRight: '1px solid #ddd',
+    paddingRight: '13px',
   },
   secondaryCol: {
-    paddingRight: '13px',
     borderRight: '1px solid #ddd',
+    paddingRight: '13px',
+    '& > div:not(:last-child)': {
+      borderBottom: 'solid 1px #ddd',
+    }
   },
+  ternaryCol: {
+    '& > div:not(:last-child)': {
+      borderBottom: 'solid 1px #ddd',
+    }
+  }
 };
 
 const HomePage = ({ classes, articles, fetched, fetchArticles, fetchUsers, fetchMedia }) => {

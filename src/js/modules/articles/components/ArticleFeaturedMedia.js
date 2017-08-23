@@ -24,6 +24,8 @@ const styles = {
   }
 };
 
+// TODO: add CreditLine from feature/media-modules
+
 const ArticleFeaturedMedia = ({
                                 classes,
                                 featuredMedia: { caption, creator, type, url },

@@ -23,11 +23,14 @@ const styles = {
 };
 
 // TODO: italicized contributor blurb underneath the article content (see nyer)
-const ArticleBody = ({ classes, content, featuredMedia }) => {
+const ArticleBody = ({ classes, article, featuredMedia }) => {
   return (
     <div className={ classes.ArticleBody }>
-      <ArticleFeaturedMedia className={ classes.featuredImg } featuredMedia={ featuredMedia } putCaption={ true }/>
-      <div dangerouslySetInnerHTML={ { __html: content } }/>
+      <ArticleFeaturedMedia className={ classes.featuredImg }
+                            article={ article }
+                            featuredMedia={ featuredMedia }
+                            putCaption={ true }/>
+      <div dangerouslySetInnerHTML={ { __html: article.content } }/>
     </div>
   );
 };

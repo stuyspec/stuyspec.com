@@ -8,6 +8,7 @@ import { getMedia } from "../../media/selectors";
 import { getSections } from "../../sections/selectors";
 import { getUsers } from "../../users/selectors";
 import Byline from "./Byline";
+import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 
 const styles = {
   ArticleRow: {
@@ -41,14 +42,13 @@ const styles = {
     fontFamily: 'MinionPro',
     fontSize: '16px',
     lineHeight: '1.13',
-    marginBottom: '8px'
+    marginBottom: '2px'
   },
   Byline: {
     display: 'inline',
     fontFamily: 'Circular Std',
     fontSize: '12px',
     fontWeight: 'bold',
-    textTransform: 'uppercase',
     marginRight: '6px',
     '& p': {
       display: 'inline',
@@ -78,9 +78,7 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
   return (
     <Row key={ article.id } className={ classes.ArticleRow }>
       <Col md={ 3 } lg={ 3 }>
-        <figure>
-          <img src={ featuredMedia.url } className={ classes.featuredImg }/>
-        </figure>
+        <ArticleFeaturedMedia featuredMedia={ featuredMedia }/>
       </Col>
       <Col md={ 6 } lg={ 6 }>
         <Link to={ `${section.permalink}/${article.slug}` }

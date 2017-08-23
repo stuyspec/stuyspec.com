@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
 
 import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 import Byline from "./Byline";
@@ -8,9 +9,30 @@ import { getMedia } from "../../media/selectors";
 import { getSections } from "../../sections/selectors";
 import { getUsers } from "../../users/selectors";
 
-const primaryStyles = {
+const commonStyles = {
   ArticleSummary: {
+    fontSize: 0, // resets font size to remove unwanted whitespace
   },
+  Byline: {
+    display: 'inline',
+    fontFamily: 'Circular Std',
+    fontSize: '12px',
+    fontWeight: 'bold',
+    marginRight: '6px',
+    '& p': {
+      display: 'inline',
+      margin: 0,
+      '& a': {
+        color: '#000',
+        '&:hover': {
+          color: '#000'
+        },
+      },
+    },
+  },
+};
+
+const primaryStyles = {
   title: {
     fontFamily: 'Minion Pro',
     fontSize: '36px',
@@ -20,10 +42,10 @@ const primaryStyles = {
     color: '#000',
   },
   preview: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "14px",
-    lineHeight: "1.14",
+    color: '#000',
+    fontFamily: 'Minion Pro',
+    fontSize: '14px',
+    lineHeight: '1.14',
     marginTop: '4px',
   },
   featuredMediaContainer: {
@@ -33,7 +55,6 @@ const primaryStyles = {
 
 const secondaryStyles = {
   ArticleSummary: {
-    borderBottom: "solid 1px #ddd",
     marginBottom: '14px',
     paddingBottom: '14px',
   },
@@ -41,7 +62,7 @@ const secondaryStyles = {
     marginBottom: '10px',
   },
   title: {
-    margin: 0,
+    margin: '0 0 4px 0',
   },
   titleLink: {
     color: '#000',
@@ -50,20 +71,18 @@ const secondaryStyles = {
     fontWeight: 'bold',
   },
   preview: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "14px",
-    lineHeight: "1.14",
-    margin: 0,
-    marginTop: '4px',
+    color: '#000',
+    fontFamily: 'Minion Pro',
+    fontSize: '14px',
+    lineHeight: '1.14',
+    margin: '0 0 3px',
   },
 };
 
 const ternaryStyles = {
   ArticleSummary: {
-    borderBottom: "solid 1px #ddd",
     marginBottom: '14px',
-    paddingBottom: "14px",
+    paddingBottom: '14px',
   },
   title: {
     margin: 0,
@@ -74,29 +93,30 @@ const ternaryStyles = {
     fontSize: '17px',
     fontWeight: 'bold',
   },
-  Byline: {
-  },
   preview: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "14px",
-    lineHeight: "1.14",
+    color: '#000',
+    fontFamily: 'Minion Pro',
+    fontSize: '14px',
+    lineHeight: '1.14',
     margin: 0,
     marginTop: '2px',
   },
   featuredMediaContainer: {
     float: 'right',
+    marginLeft: '14px',
     width: '72px',
   },
 };
 
 const stylesObject = {
-  "primary": primaryStyles,
-  "secondary": secondaryStyles,
-  "ternary": ternaryStyles,
+  'primary': primaryStyles,
+  'secondary': secondaryStyles,
+  'ternary': ternaryStyles,
 };
 
-const ArticleSummary = ({ article, media, sections, users, type }) => {
+const ArticleSummary = ({ classes, article, media, sections, users, type }) => {
+  // classes come from the commonStyles object
+  // styles come from the specialized styles
   const styles = stylesObject[ type ];
   const featuredMedia = Object.values(media).find(mediaObject => {
     return mediaObject.isFeatured && mediaObject.articleId === article.id;
@@ -104,7 +124,7 @@ const ArticleSummary = ({ article, media, sections, users, type }) => {
   featuredMedia.creator = users[ featuredMedia.userId ];
 
   return (
-    <div style={ styles.ArticleSummary }>
+    <div className={ classes.ArticleSummary } style={ styles.ArticleSummary }>
       {
         type !== "ternary" && (
           <div style={ styles.featuredMediaContainer }>
@@ -118,9 +138,7 @@ const ArticleSummary = ({ article, media, sections, users, type }) => {
           { article.title }
         </Link>
       </h6>
-      <Byline style={ styles.Byline }
-              contributors={ article.contributors }/>
-      <p style={ styles.preview }>
+      <div style={ styles.preview }>
         {
           type === "ternary" && (
             <div style={ styles.featuredMediaContainer }>
@@ -130,8 +148,9 @@ const ArticleSummary = ({ article, media, sections, users, type }) => {
         }
         This is a preview of the article. Wow, look at that big image. It is
         HUGE. So how was your day? Did you do anything interesting. Now I need
-        more words to fill up space so blah blah blah lobster!
-      </p>
+        more words to fill up space.
+      </div>
+      <Byline classes={ classes } contributors={ article.contributors }/>
     </div>
   );
 };
@@ -144,4 +163,4 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps
-)(ArticleSummary);
+)(injectSheet(commonStyles)(ArticleSummary));

@@ -141,6 +141,6 @@ export const getFakeAuthorshipsForArticleResponse = createSelector(
       acc.push({ articleId: article.id, contributorId: 0 });
       acc.push({ articleId: article.id, contributorId: 1 });
       return acc;
-    }, [])
+    }, []);
   }
 );

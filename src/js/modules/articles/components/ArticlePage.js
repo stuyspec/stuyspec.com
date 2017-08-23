@@ -20,7 +20,7 @@ const ArticlePage = ({ classes, article, section, featuredMedia }) => {
   return (
     <div className={ classes.ArticlePage }>
       <ArticleHeader article={ article } section={ section }/>
-      <ArticleBody content={ article.content } featuredMedia={ featuredMedia }/>
+      <ArticleBody article={ article } featuredMedia={ featuredMedia }/>
     </div>
   );
 };
