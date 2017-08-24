@@ -13,8 +13,6 @@ import { openSidebar, closeSidebar } from "../actions";
 
 const styles = {
   PageContainer: {
-    margin: '0 auto',
-    width: '1060px',
   }
 };
 

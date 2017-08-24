@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
-import Col from "react-bootstrap/lib/col";
+import { Row, Col } from "react-bootstrap/lib";
 
 import Byline from "../Byline";
 import Dateline from "../Dateline";
@@ -11,6 +11,11 @@ import { getSections } from "../../../sections/selectors";
 import { getUsers } from "../../../users/selectors";
 
 const styles = {
+  FeaturedArticle: {
+    borderBottom: '1px solid #ddd',
+    marginBottom: '6px',
+    paddingBottom: '14px',
+  },
   title: {
     color: '#000',
     fontFamily: 'Minion Pro',

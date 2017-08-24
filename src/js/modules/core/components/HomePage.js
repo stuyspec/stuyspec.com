@@ -14,15 +14,12 @@ import { fetchUsers } from "../../users/actions";
 import {
   FeaturedArticle,
   SectionFeature,
+  RecommendedArticles,
 } from "../../articles/components/summaries";
 
 const styles = {
   HomePage: {
     marginTop: '23px 0px 13px',
-  },
-  featuredArticle: {
-    borderBottom: '1px solid #ddd',
-    paddingBottom: '14px',
   },
 };
 
@@ -36,7 +33,8 @@ const HomePage = ({ classes, articles, sections, fetched, fetchArticles, fetchUs
     const articleObjects = Object.values(articles);
     const featuredArticle = articleObjects[ 0 ];
     const sectionFeature = sections[ '0' ];
-    const sectionFeatureArticles = articleObjects.slice(1, 3);
+    const sectionFeatureArticles = articleObjects.slice(0, 2);
+    const recommendedArticles = articleObjects.slice(0, 5);
     return (
       <div>
         <Grid>
@@ -47,6 +45,9 @@ const HomePage = ({ classes, articles, sections, fetched, fetchArticles, fetchUs
               <SectionFeature className={ classes.sectionFeature }
                             section={ sectionFeature }
                             articles={ sectionFeatureArticles }/>
+            </Col>
+            <Col lg={ 3 } md={ 3 }>
+              <RecommendedArticles articles={ recommendedArticles }/>
             </Col>
           </Row>
         </Grid>

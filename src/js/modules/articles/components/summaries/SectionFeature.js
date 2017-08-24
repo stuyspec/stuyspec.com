@@ -9,22 +9,30 @@ import Dateline from "../Dateline";
 import { getMedia } from "../../../media/selectors";
 
 const styles = {
+  SectionFeature: {
+    borderBottom: '1px solid #ddd',
+    paddingBottom: '24px',
+  },
   label: {
     fontFamily: 'Minion Pro',
     fontSize: '12px',
-    margin: '0 0 8px 0',
+    margin: '0 0 6px 0',
     textTransform: 'uppercase',
     width: '100%',
   },
   primaryArticle: {
     borderRight: 'solid 1px #ddd',
-    paddingRight: '14px',
+    padding: '2px 14px 0 0',
+  },
+  secondaryArticle: {
+    paddingTop: '2px',
   },
   title: {
     color: '#000',
     fontFamily: 'Minion Pro',
     fontSize: '16px',
     fontWeight: 'bold',
+    lineHeight: 1,
     marginBottom: '5px',
     '&:active': {
       color: '#000',
