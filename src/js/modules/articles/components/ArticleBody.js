@@ -5,10 +5,12 @@ import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 
 const styles = {
   ArticleBody: {
+    borderBottom: "1px solid #ddd",
     color: '#000',
     fontFamily: 'Minion Pro',
     fontSize: '18px',
     lineHeight: 1.44,
+    paddingBottom: "38px",
     width: '700px',
     '& p:first-child::first-letter': {
       float: 'left',
@@ -25,7 +27,6 @@ const ArticleBody = ({ classes, content, featuredMedia }) => {
     <div className={ classes.ArticleBody }>
       <ArticleFeaturedMedia featuredMedia={ featuredMedia }/>
       <div dangerouslySetInnerHTML={ { __html: content } }/>
-      <br/>
     </div>
   );
 };

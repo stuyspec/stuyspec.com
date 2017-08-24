@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
+import { Grid, Row, Col } from "react-bootstrap/lib";
 
-import Reply from './Reply';
-
+import { getUsers} from "../../users/selectors";
 import { getRepliesFromComment, getUserFromComment } from "../selectors";
 
 
@@ -11,39 +11,71 @@ import { getRepliesFromComment, getUserFromComment } from "../selectors";
 //Might be useful for the images
 const styles = {
   Comment: {
-    border: "solid 2px #000",
-    marginBottom: "3px",
+    marginBottom: "10px",
+    padding: 0,
   },
-  userImg: {
-    float: "left",
-    height: "50px",
-    width: "60px",
+  Reply: {
+    padding: 0,
+    marginBottom: '14px',
   },
   userName: {
-    margin: 0,
+    color: '#000',
+    fontFamily: 'Circular Std',
+    fontSize: '18px',
+    fontWeight: 'bold',
+    margin: '0 0 6px',
   },
   content: {
-    margin: 0,
+    color: '#000',
+    fontFamily: 'Minion Pro',
+    fontSize: '18px',
+    lineHeight: '1.44',
+    margin: '0 0 7px',
+  },
+  mainComment: {
+    marginBottom: '14px',
+    padding: 0,
+  },
+  replyComment: {
+    color: '#3572b7',
+    fontFamily: 'Circular Std',
+    fontSize: '16px',
   },
 };
 
-const Comment = ({ classes, comment, replies, user }) => {
+const Comment = ({ classes, comment, replies, owner, allUsers }) => {
   const createReplies = () => {
-    return replies.map(reply => <Reply reply={reply} key={reply.id}/>);
+    return replies.map(reply => {
+      const user = allUsers[reply.userId];
+      return (
+        <Col mdOffset={1} md={6}
+             lgOffset={1} lg={6}
+             key={reply.id}
+             className={classes.Reply}>
+          <p className={classes.userName}>{user.firstName} {user.lastName}</p>
+          <p className={classes.content}>{reply.content}</p>
+          <p className={classes.replyComment}>Reply</p>
+        </Col>
+      );
+    });
   };
   return (
-    <div className={classes.Comment}>
-      <img src={user.url} className={classes.userImg} alt={user.username}/>
-      <p className={classes.userName}>{user.firstName} {user.lastName}</p>
-      <p className={classes.content}>{comment.content}</p>
+    <Row className={classes.Comment}>
+      <Col md={7} lg={7} className={classes.mainComment}>
+          <p className={classes.userName}>{owner.firstName} {owner.lastName}</p>
+          <p className={classes.content}>{comment.content}</p>
+          <p className={classes.replyComment}>Reply</p>
+      </Col>
+      <Col md={5} lg={5}/>
       {createReplies()}
-    </div>
+    </Row>
   )
 };
 
 const mapStateToProps = (state, ownProps) => ({
   replies: getRepliesFromComment(state, ownProps),
-  user: getUserFromComment(state, ownProps),
+  owner: getUserFromComment(state, ownProps),
+  allUsers: getUsers(state),
 });
 
 export default connect(

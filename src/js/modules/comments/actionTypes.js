@@ -1,4 +1,3 @@
-export const EXPAND_TEXTBOX = 'comments/EXPAND_TEXT_BOX';
-export const SHRINK_TEXTBOX = 'comments/SHRINK_TEXT_BOX';
-export const TOGGLE_LOG_IN = 'comments/TOGGLE_LOG_IN';
-export const UPDATE_COMMENT = 'comments/UPDATE_COMMENT';
+export const POST_COMMENT_PENDING = 'comments/POST_COMMENT';
+export const POST_COMMENT_FULFILLED = 'comments/POST_COMMENT_FULFILLED';
+export const POST_COMMENT_REJECTED = 'comments/POST_COMMENT_REJECTED';

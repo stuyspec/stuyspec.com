@@ -1,13 +1,12 @@
 import {
-  EXPAND_TEXTBOX,
-  SHRINK_TEXTBOX,
-  TOGGLE_LOG_IN,
-  UPDATE_COMMENT,
+  POST_COMMENT_REJECTED,
+  POST_COMMENT_FULFILLED,
+  POST_COMMENT_PENDING,
 } from './actionTypes';
 
 const initialState = {
-  isFetching: false,
-  isFetched: false,
+  isPosting: false,
+  isPosted: false,
   error: null,
   isExpanded: false,
   isUserLoggedIn: false,
@@ -25,6 +24,12 @@ const initialState = {
       articleId: 11,
       content: "I wished that this article was written better!"
     },
+    2: {
+      id: 2,
+      userId: 2,
+      articleId: 11,
+      content: "But if he wants to build the wall, he also promised another country would pay for it. So stop asking Congress for money from Americans. And if he shuts down the government, I mean, isn't he the head of that government? “I’m going to close my business until my competitors treat me better!” How is that even a threat?"
+    },
   },
   replies: {
     0: {
@@ -39,25 +44,29 @@ const initialState = {
       commentId: 1,
       content: "I believe that this article was perfectly fine."
     },
-  }
+    2: {
+      id: 2,
+      userId: 1,
+      commentId: 1,
+      content: "He should be focused on economic upliftment for the jobless and discouraged. The Wall was a vote-getting mechanism, albeit a cynical one - not real workable economic policy. And he knows it."
+    }
+  },
+  response: {}
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case EXPAND_TEXTBOX: {
+    case "@@redux-form/FOCUS": {
       return {...state, isExpanded: true};
     }
-    case SHRINK_TEXTBOX: {
-      return {...state, isExpanded: false};
+    case POST_COMMENT_FULFILLED: {
+      return {...state, isPosting: true, response: action.payload};
     }
-    case TOGGLE_LOG_IN: {
-      return {...state, isUserLoggedIn: !state.isUserLoggedIn};
+    case POST_COMMENT_PENDING: {
+      return {...state, isPosted: true, isPosting: false};
     }
-    case UPDATE_COMMENT: {
-      return {...state, commentText: action.payload};
-    }
-    case '@@router/LOCATION_CHANGE': {
-      return {...state, commentText: ''};
+    case POST_COMMENT_REJECTED: {
+      return {...state, error: action.payload}
     }
   }
   return state;

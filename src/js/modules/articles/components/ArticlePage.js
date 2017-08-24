@@ -4,7 +4,7 @@ import injectSheet from "react-jss";
 
 import ArticleHeader from "./ArticleHeader";
 import ArticleBody from "./ArticleBody";
-import { CommentBox } from "../../comments/components";
+import { CommentThread } from "../../comments/components";
 import {
   getArticleFromRequestedSlug,
   getArticleFeaturedMedia,
@@ -22,7 +22,7 @@ const ArticlePage = ({ classes, article, section, featuredMedia }) => {
     <div className={ classes.ArticlePage }>
       <ArticleHeader article={ article } section={ section }/>
       <ArticleBody content={ article.content } featuredMedia={ featuredMedia }/>
-      <CommentBox article={article}/>
+      <CommentThread article={article}/>
     </div>
   );
 };
