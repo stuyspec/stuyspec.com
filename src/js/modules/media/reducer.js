@@ -2,7 +2,7 @@ import {
   FETCH_MEDIA_PENDING,
   FETCH_MEDIA_FULFILLED,
   FETCH_MEDIA_REJECTED,
-} from './actionTypes';
+} from "./actionTypes";
 
 const initialState = {
   isFetching: false,

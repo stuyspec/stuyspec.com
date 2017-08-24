@@ -15,9 +15,7 @@ const styles = {
 const PageHeader = ({ classes, location }) => {
   return (
     <div className={ classes.PageHeader }>
-      {
-        location.pathname === '/' ? <Masthead/> : <MastheadBar/>
-      }
+      { location.pathname === '/' ? <Masthead/> : <MastheadBar/> }
     </div>
   );
 };

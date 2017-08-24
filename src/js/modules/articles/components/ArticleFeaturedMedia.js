@@ -1,9 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
-
-import { capitalizeFirstLetter } from "../../../utils";
-import { ROLE_SLUG_OF_MEDIA_TYPE } from "../../../constants";
 
 const styles = {
   figure: {
@@ -21,16 +17,10 @@ const styles = {
   },
   creditLine: {
     color: '#888',
-  }
+  },
 };
 
-// TODO: add CreditLine from feature/media-modules
-
-const ArticleFeaturedMedia = ({
-                                classes,
-                                featuredMedia: { caption, creator, type, url },
-                                putCaption,
-                              }) => {
+const ArticleFeaturedMedia = ({ classes, featuredMedia, putCaption }) => {
   return (
     <figure className={ classes.figure }>
       <img className={ classes.img } src={ url }/>

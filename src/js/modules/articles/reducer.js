@@ -3,7 +3,7 @@ import {
   FETCH_ARTICLE_FULFILLED,
   FETCH_ARTICLE_REJECTED,
   ADD_AUTHORSHIPS
-} from './actionTypes';
+} from "./actionTypes";
 
 const initialState = {
   isFetching: false,
@@ -22,7 +22,11 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         isFetching: false,
-        // replacing acc with state.articles will block component updates
+        isFetched: true,
+        /* Placing state.articles as the initial value will for some reason
+         * inhibit components' updating with the articles state, which is why
+         * the spread operator is required.
+         */
         articles: {
           ...state.articles,
           ...action.payload.reduce((acc, article) => {

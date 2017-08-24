@@ -23,7 +23,7 @@ const styles = {
       paddingRight: 0,
     },
   },
-  featuredImg: {
+  featuredMediaContainer: {
     width: '100%',
   },
   articleTitle: {
@@ -77,21 +77,21 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
   featuredMedia.creator = users[ featuredMedia.userId ];
   return (
     <Row key={ article.id } className={ classes.ArticleRow }>
-      <Col md={ 3 } lg={ 3 }>
+      <Col md={ 3 } lg={ 3 } className={ classes.featuredMediaContainer }>
         <ArticleFeaturedMedia featuredMedia={ featuredMedia }/>
       </Col>
-      <Col md={ 6 } lg={ 6 }>
-        <Link to={ `${section.permalink}/${article.slug}` }
-              className={ classes.articleTitle }>
-          { article.title }
+      <Col md={6} lg={6}>
+        <Link to={`${section.permalink}/${article.slug}`}
+              className={classes.articleTitle}>
+          {article.title}
         </Link>
         <p className={ classes.articlePreview }>
           Fake comment: in SectionPage, you've imported SectionArticleList but
           you don't use it as a component. The error appears to be on line 41.
         </p>
         <div>
-          <Byline classes={ classes } contributors={ article.contributors }/>
-          <span className={ classes.dateline }>{ article.dateline }</span>
+          <Byline classes={classes} contributors={article.contributors}/>
+          <span className={classes.dateline}>{article.dateline}</span>
         </div>
       </Col>
     </Row>

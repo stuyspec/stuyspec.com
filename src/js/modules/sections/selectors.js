@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 
 export const getSections = (state) => state.sections.sections;
-export const getSectionFromProps = (state, props) => props.section;
+export const getSectionFromRequestedSlug = (state, props) => props.section;
 
 /**
  * The selector returns a filtered sections object which contains direct and
@@ -23,7 +23,7 @@ const getSubsectionsInSectionTree = (sections, targetSection) => {
  *   on the SectionPage.
  */
 export const getDirectSubsections = createSelector(
-  [ getSections, getSectionFromProps ],
+  [ getSections, getSectionFromRequestedSlug ],
   (sections, targetSection) => {
     return Object.filter(sections, section => {
       return section.parentId === targetSection.id;
@@ -37,7 +37,7 @@ export const getDirectSubsections = createSelector(
  *   getting all articles in a section's tree.
  */
 export const getSectionTreeIds = createSelector(
-  [ getSections, getSectionFromProps ],
+  [ getSections, getSectionFromRequestedSlug ],
   (sections, targetSection) => {
     const subsectionsInSectionTree = getSubsectionsInSectionTree(
       sections,

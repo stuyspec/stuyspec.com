@@ -45,11 +45,6 @@ const styles = {
 };
 
 const PhotographerPage = ({ classes, photographer, articles }) => {
-  const createArticleRows = () => {
-    return Object.values(articles).map(article => {
-      return <ArticleRow key={ article.id } article={ article }/>;
-    });
-  };
   return (
     <Grid className={ classes.PhotographerPage }>
       <Row>
@@ -60,7 +55,11 @@ const PhotographerPage = ({ classes, photographer, articles }) => {
                src={ photographer.url }/>
           <p className={ classes.description }>{ photographer.description }</p>
           <div className={ classes.allWork }>Photographs</div>
-          { createArticleRows() }
+          {
+            Object.values(articles).map(article => {
+              return <ArticleRow key={ article.id } article={ article }/>;
+            })
+          }
         </Col>
       </Row>
     </Grid>

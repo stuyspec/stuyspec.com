@@ -7,7 +7,12 @@ import { connect } from "react-redux";
 import { HomePage, PageLayout } from "./core/components";
 import { ArticlePage } from "./articles/components";
 import { SectionPage } from "./sections/components";
-import { RolePage, ContributorPage, PhotographerPage, IllustratorPage } from "./users/components";
+import {
+  RolePage,
+  ContributorPage,
+  PhotographerPage,
+  IllustratorPage
+} from "./users/components";
 
 import { getSections } from "./sections/selectors";
 import { getRoles } from "./users/selectors";
@@ -53,6 +58,10 @@ const RoutingApp = ({ sections, roles }) => {
       <PageLayout>
         <Switch>
           <Route exact path="/" component={ HomePage }/>
+          /* These routes are created in separate functions, as opposed to
+           * separate components, because nesting <Route>'s in <div>'s will
+           * throw off the <Switch> routing.
+           */
           { createSectionRoutes() }
           { createArticleRoutes() }
           { createRoleRoutes() }

@@ -6,7 +6,7 @@ import {
   getContributorFromSlug,
 } from "../users/selectors";
 import {
-  getSectionFromProps,
+  getSectionFromRequestedSlug,
   getSectionTreeIds,
 } from "../sections/selectors";
 import {
@@ -60,7 +60,7 @@ export const getSectionTreeArticles = createSelector(
  * The selector returns an article object from the requested slug.
  */
 export const getArticleFromRequestedSlug = createSelector(
-  [ getArticlesWithContributors, getRequestedArticleSlug, getSectionFromProps ],
+  [ getArticlesWithContributors, getRequestedArticleSlug, getSectionFromRequestedSlug ],
   (articles, requestedArticleSlug, section) => {
     return Object.values(articles).find(article => {
       return article.slug === requestedArticleSlug &&
