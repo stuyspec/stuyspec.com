@@ -43,8 +43,8 @@ const HomePage = ({ classes, articles, sections, fetched, fetchArticles, fetchUs
               <FeaturedArticle className={ classes.featuredArticle }
                                article={ featuredArticle }/>
               <SectionFeature className={ classes.sectionFeature }
-                            section={ sectionFeature }
-                            articles={ sectionFeatureArticles }/>
+                              section={ sectionFeature }
+                              articles={ sectionFeatureArticles }/>
             </Col>
             <Col lg={ 3 } md={ 3 }>
               <RecommendedArticles articles={ recommendedArticles }/>

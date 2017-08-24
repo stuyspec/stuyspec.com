@@ -29,6 +29,7 @@ const styles = {
   },
   title: {
     color: '#000',
+    display: 'block',
     fontFamily: 'Minion Pro',
     fontSize: '16px',
     fontWeight: 'bold',

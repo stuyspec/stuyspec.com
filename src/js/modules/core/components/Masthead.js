@@ -8,7 +8,7 @@ import { getTopLevelSections } from "../../sections/selectors";
 const styles = {
   Masthead: {
     fontSize: 0, // resets font size to remove unwanted whitespace
-    margin: '8px auto 24px auto',
+    margin: '6px auto 18px auto',
     textAlign: 'center',
     width: '1066px',
   },
@@ -16,7 +16,7 @@ const styles = {
     color: '#000',
     fontFamily: 'Old English Text MT',
     fontSize: '75px',
-    marginBottom: '12px',
+    marginBottom: '10px',
     '&:hover': {
       color: '#000',
       textDecoration: 'none',
