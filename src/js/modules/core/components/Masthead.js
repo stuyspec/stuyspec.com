@@ -7,17 +7,16 @@ import { getTopLevelSections } from "../../sections/selectors";
 
 const styles = {
   Masthead: {
-    borderBottom: '1px solid black',
-    margin: '0px auto 24px auto',
-    paddingTop: '11px',
+    fontSize: 0, // resets font size to remove unwanted whitespace
+    margin: '8px auto 24px auto',
     textAlign: 'center',
-    width: '1060px',
+    width: '1066px',
   },
   theSpectatorLogo: {
     color: '#000',
     fontFamily: 'Old English Text MT',
     fontSize: '75px',
-    marginBottom: '22px',
+    marginBottom: '12px',
     '&:hover': {
       color: '#000',
       textDecoration: 'none',
@@ -28,40 +27,39 @@ const styles = {
     }
   },
   sectionLinksNav: {
+    borderTop: '1px solid black',
     fontFamily: 'Circular Std',
     listStyleType: 'none',
-    marginBottom: '16px',
-    padding: 0,
+    padding: '6px',
   },
   sectionListItem: {
     display: 'inline',
-    margin: '0px 12px',
+    margin: '0px 16px',
   },
   sectionLink: {
     color: '#000',
-    fontSize: '14px',
-    fontWeight: 500,
+    fontSize: '12px',
+    fontWeight: 300,
     textDecoration: 'none',
   },
 };
 
 const Masthead = ({ classes, topLevelSections }) => {
-  const createSectionLinks = () => {
-    return Object.values(topLevelSections).map(section => {
-      return (
-        <li key={ section.id } className={ classes.sectionListItem }>
-          <Link to={ section.permalink } className={ classes.sectionLink }>
-            { section.name }
-          </Link>
-        </li>
-      );
-    });
-  };
   return (
     <div className={ classes.Masthead }>
       <Link to="/" className={ classes.theSpectatorLogo }>The Spectator</Link>
       <ul className={ classes.sectionLinksNav }>
-        { createSectionLinks() }
+        {
+          Object.values(topLevelSections).map(section => {
+            return (
+              <li key={ section.id } className={ classes.sectionListItem }>
+                <Link to={ section.permalink } className={ classes.sectionLink }>
+                  { section.name }
+                </Link>
+              </li>
+            );
+          })
+        }
       </ul>
     </div>
   )

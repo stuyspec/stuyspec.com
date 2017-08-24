@@ -12,75 +12,61 @@ import { getMedia } from "../../media/selectors";
 import { fetchArticles } from "../../articles/actions";
 import { fetchMedia } from "../../media/actions";
 import { fetchUsers } from "../../users/actions";
-import { addRowHeight } from '../../core/actions';
 
-import { ArticleSummary } from "../../articles/components";
+import {
+  FeaturedArticle,
+  SectionFeature,
+} from "../../articles/components/summaries";
 
 const styles = {
   HomePage: {
     marginTop: '23px 0px 13px',
   },
-  primaryCol: {
-    borderRight: '1px solid #ddd',
-    paddingRight: '13px',
+  featuredArticle: {
+    borderBottom: '1px solid #ddd',
+    paddingBottom: '14px',
   },
-  secondaryCol: {
-    borderRight: '1px solid #ddd',
-    paddingRight: '13px',
-    '& > div:not(:last-child)': {
-      borderBottom: 'solid 1px #ddd',
-    }
-  },
-  ternaryCol: {
-    '& > div:not(:last-child)': {
-      borderBottom: 'solid 1px #ddd',
-    }
-  }
 };
 
-const HomePage = ({ classes, articles, fetched, fetchArticles, fetchUsers, fetchMedia }) => {
-    if (fetched) {
-      const values = Object.values(articles);
-      return (
-        <div>
-
-          <Grid>
-            <Row id="homepageRow">
-              <Col className={ classes.primaryCol } lg={6} md={6} sm={12} xs={12}>
-                <ArticleSummary type={ "primary" } article={ values[0] }/>
-              </Col>
-              <Col className={ classes.secondaryCol } lg={3} md={3} sm={12} xs={12}>
-                <ArticleSummary type={ "secondary" } article={ values[1] }/>
-                <ArticleSummary type={ "secondary" } article={ values[2] }/>
-              </Col>
-              <Col className={ classes.ternaryCol } lg={3} md={3} sm={12} xs={12}>
-                <ArticleSummary type={ "ternary" } article={ values[3] }/>
-                <ArticleSummary type={ "ternary" } article={ values[4] }/>
-                <ArticleSummary type={ "ternary" } article={ values[3] }/>
-                <ArticleSummary type={ "ternary" } article={ values[4] }/>
-              </Col>
-            </Row>
-          </Grid>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <button onClick={ fetchArticles }>articles</button>
-          <button onClick={ fetchUsers }>Users</button>
-          <button onClick={ fetchMedia }>Media</button>
-        </div>
-      );
-    }
+const HomePage = ({ classes, articles, sections, fetched, fetchArticles, fetchUsers, fetchMedia }) => {
+  const fetchAll = () => {
+    fetchArticles();
+    fetchUsers();
+    fetchMedia();
   }
+  if (fetched) {
+    const articleObjects = Object.values(articles);
+    const featuredArticle = articleObjects[ 0 ];
+    const sectionFeature = sections[ '0' ];
+    const sectionFeatureArticles = articleObject.slice(1, 3);
+    return (
+      <div>
+        <Grid>
+          <Row>
+            <FeaturedArticle className={ classes.featuredArticle }
+                             article={ featuredArticle }/>
+          </Row>
+          <Row>
+            <SectionFeature className={ classes.sectionFeature }
+                            section={ sectionFeature }
+                            articles={ sectionFeatureArticles }/>
+          </Row>
+        </Grid>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <button onClick={ fetchAll }>fetch all</button>
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = (state) => ({
   articles: getArticlesWithContributors(state),
   sections: getSections(state),
-  media: getMedia(state),
-  users: getUsers(state),
-  fetched: state.articles.isFetched && state.media.isFetched,
-  rowHeight: state.core.rowHeight,
+  fetched: state.articles.isFetched && state.media.isFetched && state.articles.isFetched,
 });
 
 const mapDispatchToProps = dispatch => {
@@ -88,7 +74,6 @@ const mapDispatchToProps = dispatch => {
     fetchArticles,
     fetchMedia,
     fetchUsers,
-    addRowHeight,
   }, dispatch);
 };
 

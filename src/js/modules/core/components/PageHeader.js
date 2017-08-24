@@ -7,7 +7,6 @@ import MastheadBar from "./MastheadBar";
 const styles = {
   PageHeader: {
     margin: '0 auto',
-    marginBottom: '60px',
     textAlign: 'center',
     width: '100%',
   },
