@@ -37,6 +37,7 @@ const HomePage = ({
   return (
     <div className={ classes.HomePage }>
       <h1>Home page</h1>
+      {/* No more three buttons in feature/homepage-design */}
       All three buttons must be pressed!<br/>
       <button onClick={ fetchArticles }>fetch articles</button>
       <button onClick={ fetchUsers }>fetch users</button>

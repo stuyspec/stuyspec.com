@@ -45,22 +45,23 @@ const styles = {
 };
 
 const ContributorPage = ({ classes, contributor, articles }) => {
-  const createArticleRows = () => {
-    return Object.values(articles).map(article => {
-      return <ArticleRow key={ article.id } article={ article }/>;
-    });
-  };
   return (
     <Grid className={ classes.ContributorPage }>
       <Row>
         <Col md={ 9 }>
-          <p className={ classes.name }>{ contributor.firstName } { contributor.lastName }</p>
+          <p className={ classes.name }>
+            { `${contributor.firstName} ${contributor.lastName}` }
+          </p>
           <img alt={ contributor.lastName }
                className={ classes.profilePicture }
                src={ contributor.url }/>
           <p className={ classes.description }>{ contributor.description }</p>
           <div className={ classes.allWork }>All Work</div>
-          { createArticleRows() }
+          {
+            Object.values(articles).map(article => {
+              return <ArticleRow key={ article.id } article={ article }/>;
+            })
+          }
         </Col>
       </Row>
     </Grid>

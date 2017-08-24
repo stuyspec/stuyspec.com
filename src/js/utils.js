@@ -13,7 +13,7 @@ export const objectFilter = (obj, predicate) =>
     .reduce((res, key) => (res[ key ] = obj[ key ], res), {});
 
 export const isObjectEmpty = (obj) => {
-  return Object.keys(obj).length === 0 && obj.constructor === Object;
+  return Object.keys(obj).length === 0 && obj.constructor === Object
 };
 
 // TODO: make formatDate smarter (less string slicing and more formatting).

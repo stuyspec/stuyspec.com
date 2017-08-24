@@ -45,11 +45,6 @@ const styles = {
 };
 
 const IllustratorPage = ({ classes, illustrator, articles }) => {
-  const createArticleRows = () => {
-    return Object.values(articles).map(article => {
-      return <ArticleRow key={ article.id } article={ article }/>;
-    });
-  };
   return (
     <Grid className={ classes.IllustratorPage }>
       <Row>
@@ -60,7 +55,11 @@ const IllustratorPage = ({ classes, illustrator, articles }) => {
                src={ illustrator.url }/>
           <p className={ classes.description }>{ illustrator.description }</p>
           <div className={ classes.allWork }>Illustrations</div>
-          { createArticleRows() }
+          {
+            Object.values(articles).map(article => {
+              return <ArticleRow key={ article.id } article={ article }/>;
+            })
+          };
         </Col>
       </Row>
     </Grid>

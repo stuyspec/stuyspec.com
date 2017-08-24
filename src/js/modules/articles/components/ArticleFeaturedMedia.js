@@ -27,7 +27,7 @@ const ArticleFeaturedMedia = ({ classes, featuredMedia }) => {
       <figcaption className={ classes.caption }>
         <span>{ featuredMedia.caption }&nbsp;</span>
         <Link className={ classes.creditLine }
-              to={ `/${MEDIA_CREATOR_SLUG[ type ]}/${creator.slug}` }>
+              to={ `/${MEDIA_CREATOR_SLUGS[ type ]}/${creator.slug}` }>
           { capitalizeWord(type) }
           &nbsp;by&nbsp;
           { `${creator.firstName} ${creator.lastName}` }
