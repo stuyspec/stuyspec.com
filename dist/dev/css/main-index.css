@@ -20,6 +20,17 @@ body {
     margin-right: 7px;
 }
 
+.row > div[class^="col-lg"]:first-child,
+.row > div[class^="col-md"]:first-child {
+    margin-left: 0;
+}
+
+.row > div[class^="col-lg"]:last-child,
+.row > div[class^="col-md"]:last-child {
+    margin-right: 0;
+}
+
+
 .col-lg-1,
 .col-md-1 {
     width: 76px;

@@ -80,7 +80,7 @@ const FeaturedArticle = ({ classes, article, media, sections }) => {
     return mediaObject.isFeatured && mediaObject.articleId === article.id;
   });
   return (
-    <div className={ classes.FeaturedArticle }>
+    <Row className={ classes.FeaturedArticle }>
       <Col lg={ 3 } md={ 3 }>
         <Link className={ classes.title }
               to={ `${ section.permalink }/${ article.slug}` }>
@@ -98,7 +98,7 @@ const FeaturedArticle = ({ classes, article, media, sections }) => {
           <img src={ featuredMedia.url }/>
         </figure>
       </Col>
-    </div>
+    </Row>
   );
 };
 

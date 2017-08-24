@@ -6,8 +6,6 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 
 import { getArticlesWithContributors } from "../../articles/selectors";
 import { getSections } from "../../sections/selectors";
-import { getUsers } from "../../users/selectors";
-import { getMedia } from "../../media/selectors";
 
 import { fetchArticles } from "../../articles/actions";
 import { fetchMedia } from "../../media/actions";
@@ -38,18 +36,18 @@ const HomePage = ({ classes, articles, sections, fetched, fetchArticles, fetchUs
     const articleObjects = Object.values(articles);
     const featuredArticle = articleObjects[ 0 ];
     const sectionFeature = sections[ '0' ];
-    const sectionFeatureArticles = articleObject.slice(1, 3);
+    const sectionFeatureArticles = articleObjects.slice(1, 3);
     return (
       <div>
         <Grid>
           <Row>
-            <FeaturedArticle className={ classes.featuredArticle }
-                             article={ featuredArticle }/>
-          </Row>
-          <Row>
-            <SectionFeature className={ classes.sectionFeature }
+            <Col lg={ 9 } md={ 9 }>
+              <FeaturedArticle className={ classes.featuredArticle }
+                               article={ featuredArticle }/>
+              <SectionFeature className={ classes.sectionFeature }
                             section={ sectionFeature }
                             articles={ sectionFeatureArticles }/>
+            </Col>
           </Row>
         </Grid>
       </div>
@@ -61,7 +59,7 @@ const HomePage = ({ classes, articles, sections, fetched, fetchArticles, fetchUs
       </div>
     );
   }
-}
+};
 
 const mapStateToProps = (state) => ({
   articles: getArticlesWithContributors(state),
