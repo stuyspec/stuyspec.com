@@ -18,11 +18,9 @@ const styles = {
     padding: 0,
     marginBottom: '14px',
   },
-  userName: {
+  commentInfo: {
     color: '#000',
     fontFamily: 'Circular Std',
-    fontSize: '18px',
-    fontWeight: 'bold',
     margin: '0 0 6px',
   },
   content: {
@@ -38,8 +36,29 @@ const styles = {
   },
   replyComment: {
     color: '#3572b7',
-    fontFamily: 'Circular Std',
     fontSize: '16px',
+    margin: 0,
+  },
+  bulletPoint: {
+    bottom: '1.54px',
+    color: '#ccc',
+    fontSize: '12px',
+    marginLeft: '4px',
+    position: 'relative',
+  },
+  userType: {
+    color: '#a8a8a8',
+    fontSize: '16px',
+    marginLeft: '4px',
+  },
+  dateline: {
+    color: '#a8a8a8',
+    fontSize: '16px',
+    marginLeft: '4px',
+  },
+  userName: {
+    fontSize: '18px',
+    fontWeight: 'bold',
   },
 };
 
@@ -52,7 +71,14 @@ const Comment = ({ classes, comment, replies, owner, allUsers }) => {
              lgOffset={1} lg={6}
              key={reply.id}
              className={classes.Reply}>
-          <p className={classes.userName}>{user.firstName} {user.lastName}</p>
+          <p className={classes.commentInfo}>
+            <span className={classes.userName}>
+              {user.firstName} {user.lastName}
+            </span>
+            <span className={classes.userType}> (article person)</span>
+            <span className={classes.bulletPoint}>&#8226;</span>
+            <span className={classes.dateline}>Monday</span>
+          </p>
           <p className={classes.content}>{reply.content}</p>
           <p className={classes.replyComment}>Reply</p>
         </Col>
@@ -62,7 +88,14 @@ const Comment = ({ classes, comment, replies, owner, allUsers }) => {
   return (
     <Row className={classes.Comment}>
       <Col md={7} lg={7} className={classes.mainComment}>
-          <p className={classes.userName}>{owner.firstName} {owner.lastName}</p>
+          <p className={classes.commentInfo}>
+            <span className={classes.userName}>
+              {owner.firstName} {owner.lastName}
+            </span>
+            <span className={classes.userType}> (article person)</span>
+            <span className={classes.bulletPoint}>&#8226;</span>
+            <span className={classes.dateline}>Monday</span>
+          </p>
           <p className={classes.content}>{comment.content}</p>
           <p className={classes.replyComment}>Reply</p>
       </Col>

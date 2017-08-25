@@ -23,7 +23,7 @@ const fakeUsers = [
     email: "jasonlin@gmail.com",
     description: "Jason is a web developer for The Spectator.",
     slug: "jason-lin",
-    url: "https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/17190808_757980897706195_7544830170558586831_n.jpg?oh=628bfb2a1ce2d86e10e13658fb40ed6d&oe=5A28122E"
+    url: "https://vignette4.wikia.nocookie.net/vsbattles/images/9/90/SSB4_-_Donkey_Kong_Artwork.png/revision/latest?cb=20151116211323"
   },
   {
     id: 2,
