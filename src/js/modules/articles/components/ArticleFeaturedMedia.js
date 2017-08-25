@@ -20,7 +20,11 @@ const styles = {
   },
 };
 
-const ArticleFeaturedMedia = ({ classes, featuredMedia, putCaption }) => {
+const ArticleFeaturedMedia = ({
+                                classes,
+                                featuredMedia: { url, caption, type, creator },
+                                putCaption
+                              }) => {
   return (
     <figure className={ classes.figure }>
       <img className={ classes.img } src={ url }/>

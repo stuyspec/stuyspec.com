@@ -58,18 +58,17 @@ const RoutingApp = ({ sections, roles }) => {
       <PageLayout>
         <Switch>
           <Route exact path="/" component={ HomePage }/>
-          /* These routes are created in separate functions, as opposed to
+          {/* These routes are created in separate functions, as opposed to
            * separate components, because nesting <Route>'s in <div>'s will
            * throw off the <Switch> routing.
-           */
+           */}
           { createSectionRoutes() }
           { createArticleRoutes() }
           { createRoleRoutes() }
           <Route exact path={ '/contributors/:contributor_slug' }
                  key={ `contributorRoute` }
                  render={ props => (
-                   <ContributorPage match={ props.match }
-                                    role={ roles[ 'contributors' ] }/>
+                   <ContributorPage match={ props.match }/>
                  ) }/>
           <Route exact path={ '/illustrators/:illustrator_slug' }
                  key={ `illustratorRoute` }
@@ -79,8 +78,7 @@ const RoutingApp = ({ sections, roles }) => {
           <Route exact path={ '/photographers/:photographer_slug' }
                  key={ `photographerRoute` }
                  render={ props => (
-                   <PhotographerPage match={ props.match }
-                                     role={ roles[ 'photographers' ] }/>
+                   <PhotographerPage match={ props.match }/>
                  ) }/>
         </Switch>
       </PageLayout>
