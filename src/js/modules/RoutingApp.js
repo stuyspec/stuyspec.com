@@ -58,10 +58,10 @@ const RoutingApp = ({ sections, roles }) => {
       <PageLayout>
         <Switch>
           <Route exact path="/" component={ HomePage }/>
-          /* These routes are created in separate functions, as opposed to
+          {/* These routes are created in separate functions, as opposed to
            * separate components, because nesting <Route>'s in <div>'s will
            * throw off the <Switch> routing.
-           */
+           */}
           { createSectionRoutes() }
           { createArticleRoutes() }
           { createRoleRoutes() }
