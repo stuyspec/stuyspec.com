@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 import { Grid, Row, Col } from "react-bootstrap/lib";
 
-import { getUsers} from "../../users/selectors";
+import { getUsers } from "../../users/selectors";
 import { getRepliesFromComment, getUserFromComment } from "../selectors";
 
 
@@ -12,7 +12,6 @@ import { getRepliesFromComment, getUserFromComment } from "../selectors";
 const styles = {
   Comment: {
     marginBottom: "10px",
-    padding: 0,
   },
   Reply: {
     padding: 0,
@@ -62,46 +61,68 @@ const styles = {
   },
 };
 
-const Comment = ({ classes, comment, replies, owner, allUsers }) => {
-  const createReplies = () => {
-    return replies.map(reply => {
-      const user = allUsers[reply.userId];
-      return (
-        <Col mdOffset={1} md={6}
-             lgOffset={1} lg={6}
-             key={reply.id}
-             className={classes.Reply}>
-          <p className={classes.commentInfo}>
+const Comment = ({
+                   classes,
+                   comment,
+                   replies,
+                   owner,
+                   allUsers,
+                   authorships,
+                   media
+                 }) => {
+  const getUserType = (user) => {
+    if (authorships.includes(user.id)) {
+      return '(article contributor)'
+    }
+    if (Object.keys(media).includes(user.id.toString())) {
+      return `(article ${media[ user.id ].slice(0, -1)})`;
+    }
+  };
+  const createComment = (user, comment) => {
+    return (
+      <div>
+        <p className={classes.commentInfo}>
             <span className={classes.userName}>
               {user.firstName} {user.lastName}
             </span>
-            <span className={classes.userType}> (article person)</span>
-            <span className={classes.bulletPoint}>&#8226;</span>
-            <span className={classes.dateline}>Monday</span>
-          </p>
-          <p className={classes.content}>{reply.content}</p>
-          <p className={classes.replyComment}>Reply</p>
-        </Col>
+          <span className={classes.userType}>
+              {getUserType(user)}
+            </span>
+          <span className={classes.bulletPoint}>&#8226;</span>
+          <span className={classes.dateline}>
+            {comment.publishedAt}
+          </span>
+        </p>
+        <p className={classes.content}>{comment.content}</p>
+        <p className={classes.replyComment}>Reply</p>
+      </div>
+    );
+  };
+  const createReplies = () => {
+    return replies.map(reply => {
+      const user = allUsers[ reply.userId ];
+      return (
+        <Row key={reply.id}>
+          <Col mdOffset={1} md={6}
+               lgOffset={1} lg={6}
+               className={classes.Reply}>
+            {createComment(user, reply)}
+          </Col>
+          <Col md={5} lg={5}/>
+        </Row>
       );
     });
   };
   return (
-    <Row className={classes.Comment}>
-      <Col md={7} lg={7} className={classes.mainComment}>
-          <p className={classes.commentInfo}>
-            <span className={classes.userName}>
-              {owner.firstName} {owner.lastName}
-            </span>
-            <span className={classes.userType}> (article person)</span>
-            <span className={classes.bulletPoint}>&#8226;</span>
-            <span className={classes.dateline}>Monday</span>
-          </p>
-          <p className={classes.content}>{comment.content}</p>
-          <p className={classes.replyComment}>Reply</p>
-      </Col>
-      <Col md={5} lg={5}/>
-      {createReplies()}
-    </Row>
+    <Grid className={classes.Comment}>
+      <Row>
+        <Col md={7} lg={7} className={classes.mainComment}>
+          {createComment(owner, comment)}
+        </Col>
+        <Col md={5} lg={5}/>
+      </Row>
+        {createReplies()}
+    </Grid>
   )
 };
 

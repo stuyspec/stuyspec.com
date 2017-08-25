@@ -16,19 +16,22 @@ const initialState = {
       id: 0,
       userId: 2,
       articleId: 11,
-      content: "This article changed my life!"
+      content: "This article changed my life!",
+      publishedAt: 'July 20, 2017',
     },
     1: {
       id: 1,
       userId: 1,
       articleId: 11,
-      content: "I wished that this article was written better!"
+      content: "I wished that this article was written better!",
+      publishedAt: 'July 20, 2017',
     },
     2: {
       id: 2,
       userId: 2,
       articleId: 11,
-      content: "But if he wants to build the wall, he also promised another country would pay for it. So stop asking Congress for money from Americans. And if he shuts down the government, I mean, isn't he the head of that government? “I’m going to close my business until my competitors treat me better!” How is that even a threat?"
+      content: "But if he wants to build the wall, he also promised another country would pay for it. So stop asking Congress for money from Americans. And if he shuts down the government, I mean, isn't he the head of that government? “I’m going to close my business until my competitors treat me better!” How is that even a threat?",
+      publishedAt: '9:30 A.M.',
     },
   },
   replies: {
@@ -36,19 +39,22 @@ const initialState = {
       id: 0,
       userId: 3,
       commentId: 0,
-      content: "Same, it made me realize how amazing the world is."
+      content: "Same, it made me realize how amazing the world is.",
+      publishedAt: 'July 20, 2017',
     },
     1: {
       id: 1,
       userId: 0,
       commentId: 1,
-      content: "I believe that this article was perfectly fine."
+      content: "I believe that this article was perfectly fine.",
+      publishedAt: 'July 20, 2017',
     },
     2: {
       id: 2,
       userId: 1,
       commentId: 1,
-      content: "He should be focused on economic upliftment for the jobless and discouraged. The Wall was a vote-getting mechanism, albeit a cynical one - not real workable economic policy. And he knows it."
+      content: "He should be focused on economic upliftment for the jobless and discouraged. The Wall was a vote-getting mechanism, albeit a cynical one - not real workable economic policy. And he knows it.",
+      publishedAt: '2:35 P.M.',
     }
   },
   response: {}

@@ -6,4 +6,4 @@ export const STUY_SPEC_API_HEADER = {
 export const MEDIA_CREATOR_SLUG = {
   'illustration': 'illustrators',
   'photograph': 'photographers',
-}
+};

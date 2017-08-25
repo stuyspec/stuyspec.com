@@ -17,6 +17,7 @@ import {
 import {
   getComments
 } from '../comments/selectors';
+import {MEDIA_CREATOR_SLUG} from "../../constants";
 
 export const getArticles = state => state.articles.articles;
 const getArticleFromProps = (state, props) => props.article;
@@ -150,5 +151,30 @@ export const getCommentsFromArticle = createSelector(
   [ getComments, getArticleFromProps ],
   (comments, article) => {
     return Object.filter(comments, comment => comment.articleId === article.id);
+  }
+);
+
+export const getAuthorshipsFromArticle = createSelector(
+  [ getAuthorships, getArticleFromProps ],
+  (authorships, article) => {
+    const matchingAuthorships = authorships.filter(authorship => {
+      return authorship.articleId === article.id;
+    });
+    console.log(matchingAuthorships);
+    return matchingAuthorships.map(authorship => authorship.contributorId);
+  }
+);
+
+export const getMediaCreatorFromArticle = createSelector(
+  [ getMedia, getArticleFromProps ],
+  (media, article) => {
+    const filteredMedia = Object.filter(media, mediaObject => {
+      return mediaObject.articleId === article.id;
+    });
+    const mediaCreators = {};
+    Object.values(filteredMedia).map(mediaObject => {
+      mediaCreators[mediaObject.userId] = MEDIA_CREATOR_SLUG[mediaObject.type];
+    });
+    return mediaCreators;
   }
 );
