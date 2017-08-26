@@ -1,1 +1,0 @@
-export const getAbouts = state => state.about;

@@ -8,13 +8,13 @@ import { HomePage, PageLayout } from "./core/components";
 import { ArticlePage } from "./articles/components";
 import { SectionPage } from "./sections/components";
 import { RolePage, ContributorPage } from "./users/components";
-import { AboutPage } from "./about/components";
+import { DescriptionPage } from "./descriptions/components";
 
 import { getSections } from "./sections/selectors";
 import { getRoles } from "./users/selectors";
-import { getAbouts } from './about/selectors';
+import { getDescriptions } from './descriptions/selectors';
 
-const RoutingApp = ({ sections, roles, abouts }) => {
+const RoutingApp = ({ sections, roles, descriptions }) => {
   const createSectionRoutes = () => {
     return Object.keys(sections).map(sectionSlug => {
       const section = sections[ sectionSlug ];
@@ -50,14 +50,14 @@ const RoutingApp = ({ sections, roles, abouts }) => {
         )}/>
     })
   };
-  const createAboutRoutes = () => {
-    return Object.keys(abouts).map(aboutSlug => {
-      const aboutPage = abouts[ aboutSlug ];
+  const createDescriptionRoutes = () => {
+    return Object.keys(descriptions).map(descriptionSlug => {
+      const descriptionPage = descriptions[ descriptionSlug ];
       return <Route
-        exact path={`/about/${aboutPage.slug}`}
-        key={`aboutRoutes${aboutPage.id}`}
+        exact path={`/about/${descriptionPage.slug}`}
+        key={`descriptionRoutes${descriptionPage.id}`}
         render={props => (
-          <AboutPage about={aboutPage}/>
+          <DescriptionPage Page description={descriptionPage}/>
         )}/>
     })
   };
@@ -69,7 +69,7 @@ const RoutingApp = ({ sections, roles, abouts }) => {
           {createSectionRoutes()}
           {createArticleRoutes()}
           {createRoleRoutes()}
-          {createAboutRoutes()}
+          {createDescriptionRoutes()}
           <Route exact path={'/contributors/:contributor_slug'}
                  key={`contributorRoute`}
                  render={props => (
@@ -85,7 +85,7 @@ const RoutingApp = ({ sections, roles, abouts }) => {
 const mapStateToProps = (state) => ({
   sections: getSections(state),
   roles: getRoles(state),
-  abouts: getAbouts(state),
+  descriptions: getDescriptions(state),
 });
 
 export default connect(
