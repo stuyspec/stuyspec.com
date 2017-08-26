@@ -5,24 +5,10 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Field, reduxForm } from 'redux-form'
 
 const styles = {
-  CommentForm: {
-    marginTop: "39px",
+  ReplyForm: {
+    marginTop: "0px",
     marginBottom: "24px",
     padding: 0,
-  },
-  smallBox: {
-    backgroundColor: '#fff',
-    border: 'solid 1px #e2e2e2',
-    boxShadow: 'inset 1px 1px 5px 0 rgba(170, 170, 170, 0.5)',
-    color: '#000',
-    fontFamily: 'Minion Pro',
-    fontSize: '18px',
-    height: '50px',
-    lineHeight: '1.44',
-    marginBottom: '14px',
-    padding: '12px 12px 0',
-    resize: 'none',
-    width: '616px',
   },
   bigBox: {
     backgroundColor: '#fff',
@@ -36,7 +22,7 @@ const styles = {
     marginBottom: '14px',
     padding: '12px 12px 0',
     resize: 'none',
-    width: '616px',
+    width: '526px',
   },
   submitDiv: {
     textAlign: 'right',
@@ -77,35 +63,15 @@ const styles = {
   },
   userInfo: {
     marginBottom: '14px',
-  },
-  notYou: {
-    background: 'none',
-    border: 'none',
-    color: '#a6a6a6',
-    float: 'right',
-    fontFamily: 'Circular Std',
-    fontSize: '16px',
-    margin: 0,
-    padding: 0,
-  },
-  logOut: {
-    background: 'none',
-    border: 'none',
-    color: '#3572b7',
-    float: 'right',
-    fontFamily: 'Circular Std',
-    fontSize: '16px',
-    margin: '0 0 0 4px',
-    padding: 0,
-  },
+  }
 };
 
 const validate = values => {
   const errors = {};
-  if (!values.commentInput) {
-    errors.commentInput = 'No Comment Detected';
-  } else if (values.commentInput.length > 1000) {
-    errors.commentInput = 'Must be 1000 characters or less'
+  if (!values.replyInput) {
+    errors.replyInput = 'No Reply Detected';
+  } else if (values.replyInput.length > 1000) {
+    errors.replyInput = 'Must be 1000 characters or less'
   }
   return errors;
 };
@@ -113,14 +79,12 @@ const validate = values => {
 const renderField = ({
                        input,
                        type,
-                       meta: { touched, error, warning },
-                       isExpanded
+                       meta: { touched, error, warning }
                      }) =>
   <div>
-      <textarea {...input} placeholder="Write a comment..."
+      <textarea {...input} placeholder="Write a reply..."
                 type={type}
-                style={isExpanded ? styles.bigBox :
-                  styles.smallBox}/>
+                style={styles.bigBox}/>
     {touched &&
     ((error &&
       <span style={styles.errorMessage}>
@@ -133,13 +97,12 @@ const renderField = ({
 
   </div>;
 
-const CommentForm = ({
-                       classes,
-                       handleSubmit,
-                       submitting,
-                       activeUser,
-                       isExpanded,
-                     }) => {
+const ReplyForm = ({
+                     classes,
+                     handleSubmit,
+                     submitting,
+                     activeUser,
+                   }) => {
   const editProfile = () => {
     console.log('editing profile');
   };
@@ -152,12 +115,6 @@ const CommentForm = ({
         <button className={classes.editProfile} onClick={editProfile}>
           Edit Profile
         </button>
-        <button className={classes.logOut}>
-          Log Out
-        </button>
-        <p className={classes.notYou}>
-          Not You?
-        </p>
       </div>
     )
   };
@@ -171,31 +128,28 @@ const CommentForm = ({
     );
   };
   return (
-    <Col md={7} lg={7} className={classes.CommentForm}>
-      {isExpanded && createUserInfo()}
+    <Col mdOffset={1} md={6} lgOffset={1} lg={6} className={classes.ReplyForm}>
+      {createUserInfo()}
       <form onSubmit={handleSubmit}>
-        <Field name="commentInput"
+        <Field name="replyInput"
                type="text"
-               component={renderField}
-               isExpanded={isExpanded}/>
+               component={renderField}/>
         <div className={classes.submitDiv}>
-          {isExpanded && createButton()}
+          {createButton()}
         </div>
       </form>
     </Col>
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  isExpanded: state.comments.isExpanded,
-});
+const mapStateToProps = (state, ownProps) => ({});
 
 
-const smartCommentForm = connect(
+const smartReplyForm = connect(
   mapStateToProps,
-)(injectSheet(styles)(CommentForm));
+)(injectSheet(styles)(ReplyForm));
 
 export default reduxForm({
-  form: 'commentForm',
+  form: `replyForm`,
   validate,
-})(smartCommentForm);
+})(smartReplyForm);

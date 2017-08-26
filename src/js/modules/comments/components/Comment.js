@@ -2,13 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 import { Grid, Row, Col } from "react-bootstrap/lib";
+import { bindActionCreators } from "redux";
 
 import { getUsers } from "../../users/selectors";
+import { openReplyBox, postReply } from '../actions';
 import { getRepliesFromComment, getUserFromComment } from "../selectors";
 
+import ReplyForm from './ReplyForm';
 
-//TODO: https://stackoverflow.com/questions/5369301/css-image-scaling-to-fit-within-area-not-distort
-//Might be useful for the images
 const styles = {
   Comment: {
     marginBottom: "10px",
@@ -34,9 +35,12 @@ const styles = {
     padding: 0,
   },
   replyComment: {
+    background: 'none',
+    border: 'none',
     color: '#3572b7',
     fontSize: '16px',
     margin: 0,
+    padding: 0,
   },
   bulletPoint: {
     bottom: '1.54px',
@@ -68,7 +72,11 @@ const Comment = ({
                    owner,
                    allUsers,
                    authorships,
-                   media
+                   media,
+                   openReplyBox,
+                   activeReply,
+                   activeUser,
+                   postReply,
                  }) => {
   const getUserType = (user) => {
     if (authorships.includes(user.id)) {
@@ -77,6 +85,9 @@ const Comment = ({
     if (Object.keys(media).includes(user.id.toString())) {
       return `(article ${media[ user.id ].slice(0, -1)})`;
     }
+  };
+  const openReply = () => {
+    openReplyBox(comment.id);
   };
   const createComment = (user, comment) => {
     return (
@@ -94,7 +105,10 @@ const Comment = ({
           </span>
         </p>
         <p className={classes.content}>{comment.content}</p>
-        <p className={classes.replyComment}>Reply</p>
+        <button className={classes.replyComment}
+                onClick={openReply}>
+          Reply
+        </button>
       </div>
     );
   };
@@ -113,6 +127,9 @@ const Comment = ({
       );
     });
   };
+  const handlePostReply = (values) => {
+    postReply(values, 'replyForm-' + comment.id);
+  };
   return (
     <Grid className={classes.Comment}>
       <Row>
@@ -121,7 +138,21 @@ const Comment = ({
         </Col>
         <Col md={5} lg={5}/>
       </Row>
-        {createReplies()}
+      {createReplies()}
+      <Row>
+        {activeReply.includes(comment.id) &&
+        <ReplyForm form={'replyForm-' + comment.id}
+                   key={comment.id}
+                   comment={comment}
+                   activeUser={activeUser}
+                   initialValues={{
+                     userId: activeUser.id,
+                     commentId: comment.id,
+                   }}
+                   onSubmit={handlePostReply}
+        />}
+        <Col md={5} lg={5}/>
+      </Row>
     </Grid>
   )
 };
@@ -130,8 +161,17 @@ const mapStateToProps = (state, ownProps) => ({
   replies: getRepliesFromComment(state, ownProps),
   owner: getUserFromComment(state, ownProps),
   allUsers: getUsers(state),
+  activeReply: state.comments.openReplyBox,
 });
 
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    { openReplyBox, postReply },
+    dispatch
+  )
+};
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps,
 )(injectSheet(styles)(Comment));

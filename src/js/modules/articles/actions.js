@@ -5,27 +5,28 @@ import { STUY_SPEC_API, STUY_SPEC_API_HEADER } from "../../constants";
 import { validateKey } from "../../utils";
 import { getFakeAuthorshipsForArticleResponse } from "./selectors";
 
-export const fetchArticles = () => {return (dispatch, getState) => {
-  dispatch({ type: t.FETCH_ARTICLE_PENDING });
-  axios.get(`${STUY_SPEC_API}/articles`, { 'headers': STUY_SPEC_API_HEADER })
-    .then(response => {
-      validateArticles(response.data);
-      dispatch({
-        type: t.FETCH_ARTICLE_FULFILLED,
-        payload: response.data,
-      });
-      dispatch({
-        type: t.ADD_AUTHORSHIPS,
-        payload: getFakeAuthorshipsForArticleResponse(getState()),
+export const fetchArticles = () => {
+  return (dispatch, getState) => {
+    dispatch({ type: t.FETCH_ARTICLE_PENDING });
+    axios.get(`${STUY_SPEC_API}/articles`, { 'headers': STUY_SPEC_API_HEADER })
+      .then(response => {
+        validateArticles(response.data);
+        dispatch({
+          type: t.FETCH_ARTICLE_FULFILLED,
+          payload: response.data,
+        });
+        dispatch({
+          type: t.ADD_AUTHORSHIPS,
+          payload: getFakeAuthorshipsForArticleResponse(getState()),
+        })
       })
-    })
-    .catch((err) => {
-      dispatch({
-        type: t.FETCH_ARTICLE_REJECTED,
-        payload: err,
+      .catch((err) => {
+        dispatch({
+          type: t.FETCH_ARTICLE_REJECTED,
+          payload: err,
+        })
       })
-    })
-};
+  };
 };
 
 

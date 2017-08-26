@@ -160,7 +160,6 @@ export const getAuthorshipsFromArticle = createSelector(
     const matchingAuthorships = authorships.filter(authorship => {
       return authorship.articleId === article.id;
     });
-    console.log(matchingAuthorships);
     return matchingAuthorships.map(authorship => authorship.contributorId);
   }
 );

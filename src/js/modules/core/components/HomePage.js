@@ -10,6 +10,7 @@ import { getSections } from "../../sections/selectors";
 import { fetchArticles } from "../../articles/actions";
 import { fetchUsers } from "../../users/actions";
 import { fetchMedia } from "../../media/actions";
+import { fetchComments, fetchReplies } from "../../comments/actions";
 
 const styles = {
   HomePage: {}
@@ -21,7 +22,9 @@ const HomePage = ({
                     articles,
                     fetchArticles,
                     fetchUsers,
-                    fetchMedia
+                    fetchMedia,
+                    fetchComments,
+                    fetchReplies
                   }) => {
   const createArticleLinks = () => {
     return Object.values(articles).map(article => {
@@ -41,6 +44,8 @@ const HomePage = ({
       <button onClick={ fetchArticles }>fetch articles</button>
       <button onClick={ fetchUsers }>fetch users</button>
       <button onClick={ fetchMedia }>fetch media</button>
+      <button onClick={ fetchComments }>fetch comments</button>
+      <button onClick={ fetchReplies }>fetch replies</button>
       <h2>Articles</h2>
       <ul>
         { createArticleLinks() }
@@ -56,7 +61,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { fetchArticles, fetchUsers, fetchMedia },
+    { fetchArticles, fetchUsers, fetchMedia, fetchComments, fetchReplies },
     dispatch
   );
 };
