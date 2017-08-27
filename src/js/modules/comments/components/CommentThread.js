@@ -6,13 +6,14 @@ import { bindActionCreators } from "redux";
 
 import Comment from './Comment';
 import CommentForm from './CommentForm';
+import ModalOverlayLogin from './ModalOverlayLogin';
 
 import {
   getCommentsFromArticle,
   getAuthorshipsFromArticle,
   getMediaCreatorFromArticle,
 } from "../../articles/selectors";
-import { postComment } from "../actions";
+import { postComment, closeModalLogin } from "../actions";
 
 const styles = {
   CommentThread: {
@@ -28,31 +29,51 @@ const CommentThread = ({
                          authorships,
                          media,
                          activeUser,
+                         isModalOpen,
+                         closeModalLogin,
                        }) => {
   return (
     <div className={classes.CommentThread}>
       <Grid>
         <Row>
-          <CommentForm initialValues={{
-            userId: activeUser.id,
-            articleId: article.id
-          }}
-                       activeUser={activeUser}
-                       onSubmit={postComment}/>
+          {activeUser ?
+            <CommentForm initialValues={{
+              userId: activeUser.id,
+              articleId: article.id
+            }}
+                         activeUser={activeUser}
+                         onSubmit={postComment}/> :
+            <CommentForm activeUser={activeUser}/>
+          }
           <Col md={5} lg={5}/>
         </Row>
       </Grid>
+      <ModalOverlayLogin isModalOpen={isModalOpen}
+                         closeModalLogin={closeModalLogin}/>
       {Object.values(comments).map(comment => {
         return <Comment comment={comment}
                         key={comment.id}
                         authorships={authorships}
                         media={media}
-                        activeUser={activeUser}/>;
+                        activeUser={activeUser}
+                        closeModalLogin={closeModalLogin}/>;
       })}
     </div>
   );
 };
 
+/**
+ * activeUser: {
+    id: 1,
+    firstName: "Jason",
+    lastName: "Lin",
+    username: "jasonlin",
+    email: "jasonlin@gmail.com",
+    description: "Jason is a web developer for The Spectator.",
+    slug: "jason-lin",
+    url: "https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/17190808_757980897706195_7544830170558586831_n.jpg?oh=628bfb2a1ce2d86e10e13658fb40ed6d&oe=5A28122E"
+  },
+ */
 const mapStateToProps = (state, ownProps) => ({
   comments: getCommentsFromArticle(state, ownProps),
   authorships: getAuthorshipsFromArticle(state, ownProps),
@@ -67,11 +88,12 @@ const mapStateToProps = (state, ownProps) => ({
     slug: "jason-lin",
     url: "https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/17190808_757980897706195_7544830170558586831_n.jpg?oh=628bfb2a1ce2d86e10e13658fb40ed6d&oe=5A28122E"
   },
+  isModalOpen: state.comments.isModalOpen,
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { postComment },
+    { postComment, closeModalLogin },
     dispatch
   );
 };

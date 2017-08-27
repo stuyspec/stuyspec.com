@@ -55,6 +55,18 @@ export const openReplyBox = (commentId) => (
   }
 );
 
+export const openModalLogin = () => (
+  {
+    type: t.OPEN_MODAL_LOGIN,
+  }
+);
+
+export const closeModalLogin = () => (
+  {
+    type: t.CLOSE_MODAL_LOGIN,
+  }
+);
+
 const fakeComments = [
   {
     id: 0,

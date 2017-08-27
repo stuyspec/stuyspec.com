@@ -12,6 +12,8 @@ import {
   FETCH_REPLIES_FULFILLED,
   FETCH_REPLIES_PENDING,
   FETCH_REPLIES_REJECTED,
+  OPEN_MODAL_LOGIN,
+  CLOSE_MODAL_LOGIN,
 } from './actionTypes';
 
 const initialState = {
@@ -23,6 +25,7 @@ const initialState = {
   isCommentsFetched: false,
   isFetchingReplies: false,
   isRepliesFetched: false,
+  isModalOpen: false,
   error: null,
   isExpanded: false,
   openReplyBox: [],
@@ -37,7 +40,7 @@ const reducer = (state = initialState, action) => {
       return { ...state, isExpanded: true };
     }
     case "@@redux-form/DESTROY": {
-      return { ...state, openReplyBox: [] };
+      return { ...state, openReplyBox: [], isModalOpen: false };
     }
     case POST_COMMENT_FULFILLED: {
       return { ...state, isPostingComment: true, response: action.payload };
@@ -105,6 +108,12 @@ const reducer = (state = initialState, action) => {
     }
     case FETCH_REPLIES_REJECTED: {
       return { ...state, isFetchingReplies: false, error: action.payload };
+    }
+    case OPEN_MODAL_LOGIN: {
+      return {...state, isModalOpen:true};
+    }
+    case CLOSE_MODAL_LOGIN: {
+      return {...state, isModalOpen:false};
     }
   }
   return state;

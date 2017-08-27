@@ -2,7 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 import { Grid, Row, Col } from "react-bootstrap/lib";
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form';
+import { bindActionCreators } from 'redux';
+
+import { openModalLogin, closeModalLogin } from '../actions';
 
 const styles = {
   CommentForm: {
@@ -114,15 +117,19 @@ const renderField = ({
                        input,
                        type,
                        meta: { touched, error, warning },
-                       isExpanded
+                       isExpanded,
+                       activeUser,
+                       checkLogin,
                      }) =>
   <div>
       <textarea {...input} placeholder="Write a comment..."
                 type={type}
-                style={isExpanded ? styles.bigBox :
-                  styles.smallBox}/>
+                style={isExpanded && activeUser ? styles.bigBox :
+                  styles.smallBox}
+                onClick={checkLogin}
+      />
     {touched &&
-    ((error &&
+    ((error && activeUser &&
       <span style={styles.errorMessage}>
             {error}
           </span>) ||
@@ -139,6 +146,8 @@ const CommentForm = ({
                        submitting,
                        activeUser,
                        isExpanded,
+                       openModalLogin,
+                       closeModalLogin,
                      }) => {
   const editProfile = () => {
     console.log('editing profile');
@@ -170,16 +179,28 @@ const CommentForm = ({
       </button>
     );
   };
+  const checkLogin = () => {
+    console.log('hi');
+    if (activeUser === undefined) {
+      console.log('no user');
+      openModalLogin();
+    } else {
+      console.log('yes user');
+      closeModalLogin();
+    }
+  };
   return (
     <Col md={7} lg={7} className={classes.CommentForm}>
-      {isExpanded && createUserInfo()}
+      {isExpanded && activeUser && createUserInfo()}
       <form onSubmit={handleSubmit}>
         <Field name="commentInput"
                type="text"
                component={renderField}
-               isExpanded={isExpanded}/>
+               isExpanded={isExpanded}
+               activeUser={activeUser}
+               checkLogin={checkLogin}/>
         <div className={classes.submitDiv}>
-          {isExpanded && createButton()}
+          {isExpanded && activeUser && createButton()}
         </div>
       </form>
     </Col>
@@ -190,9 +211,16 @@ const mapStateToProps = (state, ownProps) => ({
   isExpanded: state.comments.isExpanded,
 });
 
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    { openModalLogin, closeModalLogin },
+    dispatch
+  )
+};
 
 const smartCommentForm = connect(
   mapStateToProps,
+  mapDispatchToProps,
 )(injectSheet(styles)(CommentForm));
 
 export default reduxForm({

@@ -5,7 +5,11 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 import { bindActionCreators } from "redux";
 
 import { getUsers } from "../../users/selectors";
-import { openReplyBox, postReply } from '../actions';
+import {
+  openReplyBox,
+  postReply,
+  openModalLogin,
+} from '../actions';
 import { getRepliesFromComment, getUserFromComment } from "../selectors";
 
 import ReplyForm from './ReplyForm';
@@ -77,6 +81,8 @@ const Comment = ({
                    activeReply,
                    activeUser,
                    postReply,
+                   openModalLogin,
+                   closeModalLogin,
                  }) => {
   const getUserType = (user) => {
     if (authorships.includes(user.id)) {
@@ -87,7 +93,12 @@ const Comment = ({
     }
   };
   const openReply = () => {
-    openReplyBox(comment.id);
+    if (!activeUser) {
+      openModalLogin();
+    } else {
+      openReplyBox(comment.id);
+      closeModalLogin();
+    }
   };
   const createComment = (user, comment) => {
     return (
@@ -166,7 +177,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { openReplyBox, postReply },
+    { openReplyBox, postReply, openModalLogin },
     dispatch
   )
 };
