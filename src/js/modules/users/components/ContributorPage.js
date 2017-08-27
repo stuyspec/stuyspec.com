@@ -19,7 +19,7 @@ const styles = {
     margin: '0px',
     textAlign: 'center',
   },
-  allWork: {
+  workList: {
     border: '1px solid #ddd',
     borderStyle: 'solid none',
     color: '#000',
@@ -56,7 +56,7 @@ const ContributorPage = ({ classes, contributor, articles }) => {
                className={ classes.profilePicture }
                src={ contributor.url }/>
           <p className={ classes.description }>{ contributor.description }</p>
-          <div className={ classes.allWork }>All Work</div>
+          <div className={ classes.workList }>All Work</div>
           {
             Object.values(articles).map(article => {
               return <ArticleRow key={ article.id } article={ article }/>;

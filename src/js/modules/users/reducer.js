@@ -5,6 +5,9 @@ import {
 } from './actionTypes';
 
 const initialState = {
+  CONTRIBUTOR_ROLE_ID: 0,
+  ILLUSTRATOR_ROLE_ID: 1,
+  PHOTOGRAPHER_ROLE_ID: 2,
   isFetching: false,
   isFetched: false,
   error: null,
@@ -57,12 +60,10 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         isFetching: false,
         isFetched: true,
-        users: {
-          ...action.payload.reduce((acc, user) => {
-            acc[ user.id ] = user;
-            return acc;
-          }, {}),
-        },
+        users: action.payload.reduce((acc, user) => {
+          acc[ user.id ] = user;
+          return acc;
+        }, {}),
       };
     }
   }

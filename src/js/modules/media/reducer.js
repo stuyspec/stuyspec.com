@@ -21,14 +21,10 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         isFetching: false,
         isFetched: true,
-        // replacing acc with state.media will block component updates
-        media: {
-          ...state.media,
-          ...action.payload.reduce((acc, mediaObject) => {
-            acc[ mediaObject.id ] = mediaObject;
-            return acc;
-          }, {}),
-        },
+        media: action.payload.reduce((acc, mediaObject) => {
+          acc[ mediaObject.id ] = mediaObject;
+          return acc;
+        }, {}),
       };
     }
     case FETCH_MEDIA_REJECTED: {

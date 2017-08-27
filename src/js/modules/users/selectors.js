@@ -9,16 +9,15 @@ const getRequestedContributorSlug = (state, props) => props.match.params.contrib
 const getRequestedIllustratorSlug = (state, props) => props.match.params.illustrator_slug;
 const getRequestedPhotographerSlug = (state, props) => props.match.params.photographer_slug;
 
+const getContributorRoleId = state => state.users.CONTRIBUTOR_ROLE_ID;
+const getIllustratorRoleId = state => state.users.ILLUSTRATOR_ROLE_ID;
+const getPhotographerRoleId = state => state.users.PHOTOGRAPHER_ROLE_ID;
+
 const getRoleFromProps = (state, props) => props.role;
 
-const CONTRIBUTOR_ROLE_ID = 0;
-const ILLUSTRATOR_ROLE_ID = 0;
-const PHOTOGRAPHER_ROLE_ID = 0;
-
-
 export const getContributorFromSlug = createSelector(
-  [ getUsers, getUserRoles, getRequestedContributorSlug ],
-  (users, userRoles, requestedContributorSlug) => {
+  [ getUsers, getUserRoles, getRequestedContributorSlug, getContributorRoleId ],
+  (users, userRoles, requestedContributorSlug, CONTRIBUTOR_ROLE_ID) => {
     const user = Object.values(users).find(user => {
       return user.slug === requestedContributorSlug;
     });
@@ -34,8 +33,8 @@ export const getContributorFromSlug = createSelector(
 );
 
 export const getIllustratorFromSlug = createSelector(
-  [ getUsers, getUserRoles, getRequestedIllustratorSlug ],
-  (users, userRoles, requestedIllustratorSlug) => {
+  [ getUsers, getUserRoles, getRequestedIllustratorSlug, getIllustratorRoleId ],
+  (users, userRoles, requestedIllustratorSlug, ILLUSTRATOR_ROLE_ID) => {
     const user = Object.values(users).find(user => {
       return user.slug === requestedIllustratorSlug;
     });
@@ -51,8 +50,8 @@ export const getIllustratorFromSlug = createSelector(
 );
 
 export const getPhotographerFromSlug = createSelector(
-  [ getUsers, getUserRoles, getRequestedPhotographerSlug ],
-  (users, userRoles,requestedPhotographerSlug) => {
+  [ getUsers, getUserRoles, getRequestedPhotographerSlug, getPhotographerRoleId ],
+  (users, userRoles,requestedPhotographerSlug, PHOTOGRAPHER_ROLE_ID) => {
     const user = Object.values(users).find(user => {
       return user.slug === requestedPhotographerSlug;
     });

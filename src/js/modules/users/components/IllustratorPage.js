@@ -19,7 +19,7 @@ const styles = {
     margin: '0px',
     textAlign: 'center',
   },
-  allWork: {
+  workList: {
     border: '1px solid #ddd',
     borderStyle: 'solid none',
     color: '#000',
@@ -54,7 +54,7 @@ const IllustratorPage = ({ classes, illustrator, articles }) => {
                className={ classes.profilePicture }
                src={ illustrator.url }/>
           <p className={ classes.description }>{ illustrator.description }</p>
-          <div className={ classes.allWork }>Illustrations</div>
+          <div className={ classes.workList }>Illustrations</div>
           {
             Object.values(articles).map(article => {
               return <ArticleRow key={ article.id } article={ article }/>;
