@@ -74,10 +74,10 @@ const validateUsers = (userArray) => {
   }
   userArray.forEach(userObject => {
     integerProperties.forEach(numberKey => {
-      validateKey(userObject, numberKey, 'number', 'users');
+      validateKey(userObject, numberKey, 'number');
     });
     stringProperties.forEach((stringKey) => {
-      validateKey(userObject, stringKey, 'string', 'users');
+      validateKey(userObject, stringKey, 'string');
     });
   });
   return true;

@@ -19,14 +19,15 @@ const reducer = (state = { ...initialState }, action) => {
       return { ...state, isFetching: true, };
     }
     case FETCH_ARTICLE_FULFILLED: {
+      const newArticles = action.payload.reduce((acc, article) => {
+        acc[ article.id ] = article;
+        return acc;
+      }, {});
       return {
         ...state,
         isFetching: false,
         isFetched: true,
-        articles: action.payload.reduce((acc, article) => {
-          acc[ article.id ] = article;
-          return acc;
-        }, {}),
+        articles: { ...state.articles, newArticles },
       };
     }
     case FETCH_ARTICLE_REJECTED: {

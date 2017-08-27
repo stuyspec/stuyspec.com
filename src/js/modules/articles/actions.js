@@ -25,7 +25,7 @@ export const fetchArticles = () => {
           type: t.FETCH_ARTICLE_REJECTED,
           payload: err,
         })
-      })
+      });
   };
 };
 
@@ -36,7 +36,7 @@ TODO: Add boolean key validity after non-null data seeded @nicholas
  */
 const validateArticles = (articleArray) => {
   const integerProperties = [ 'id', 'sectionId' ];
-  const stringProperties = [ 'title', 'slug', 'content', "createdAt", "updatedAt" ];
+  const stringProperties = [ 'title', 'slug', 'content', 'createdAt', 'updatedAt' ];
   if (!Array.isArray(articleArray)) {
     throw 'EXCEPTION: article response is not an array.'
   }
@@ -50,3 +50,6 @@ const validateArticles = (articleArray) => {
   });
   return true;
 };
+
+
+

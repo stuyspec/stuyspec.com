@@ -51,13 +51,12 @@ export const formatDate = (string) => {
   }
 };
 
-
-export const validateKey = (responseObject, key, type, module) => {
+export const validateKey = (responseObject, key, type) => {
   if (key in responseObject) {
     if (typeof (responseObject[ key ]) === type) {
       return true;
     } else {
-      throw `EXCEPTION: key ${key} in ${module}Object is 
+      throw `EXCEPTION: key ${key} in response data is 
         ${typeof (responseObject[ key ])}, but should be ${type}.`;
     }
   } else {

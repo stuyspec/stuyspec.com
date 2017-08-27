@@ -84,10 +84,10 @@ const validateMedia = (mediaArray) => {
   }
   mediaArray.forEach(mediaObject => {
     integerProperties.forEach(numberKey => {
-      validateKey(mediaObject, numberKey, 'number', 'media');
+      validateKey(mediaObject, numberKey, 'number');
     });
     stringProperties.forEach((stringKey) => {
-      validateKey(mediaObject, stringKey, 'string', 'media');
+      validateKey(mediaObject, stringKey, 'string');
     });
   });
   return true;
