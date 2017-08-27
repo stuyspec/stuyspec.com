@@ -4,8 +4,6 @@ import appHistory from "../../tools/appHistory";
 import * as t from "./actionTypes";
 import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from "../../constants";
 
-// 'X-Key-Inflection': 'camel' will transform camelCase to snake_case
-
 export const signUp = values => {
   return dispatch => {
     dispatch({
@@ -18,6 +16,24 @@ export const signUp = values => {
           type: t.SIGN_UP_FULFILLED,
           payload: response,
         });
+        const user = response.data.data;
+        axios.put(`${STUY_SPEC_API_URL}/users/${user.id}`, values, STUY_SPEC_API_HEADERS)
+          .then(response => {
+            dispatch({
+              type: t.UPDATE_USER_FULFILLED,
+              payload: response,
+            });
+            dispatch({
+              type: t.SIGN_UP_FULFILLED,
+              payload: response,
+            });
+          })
+          .catch(err => {
+            dispatch({
+              type: t.UPDATE_USER_REJECTED,
+              payload: err,
+            });
+          });
       })
       .catch(err => {
         dispatch({
