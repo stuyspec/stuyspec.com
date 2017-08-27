@@ -12,7 +12,7 @@ import { DescriptionPage } from "./descriptions/components";
 
 import { getSections } from "./sections/selectors";
 import { getRoles } from "./users/selectors";
-import { getDescriptions } from './descriptions/selectors';
+import { getDescriptions } from "./descriptions/selectors";
 
 const RoutingApp = ({ sections, roles, descriptions }) => {
   const createSectionRoutes = () => {

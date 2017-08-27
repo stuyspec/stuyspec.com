@@ -1,12 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import injectSheet from "react-jss";
 
 import PageHeader from "./PageHeader";
 import PageFooter from "./PageFooter";
-import { getTopLevelSectionsWithDirectChildren } from "../../sections/selectors";
-import { getDescriptions} from "../../descriptions/selectors";
 
 const styles = {
   PageContainer: {
@@ -15,31 +12,16 @@ const styles = {
   }
 };
 
-const PageLayout = ({ classes,
-                      children,
-                      location,
-                      topLevelSectionsWithDirectChildren,
-                      descriptions
-                    }) => {
+const PageLayout = ({ classes, children, location }) => {
   return (
     <div>
-      <PageHeader location={location}
-                  topLevelSectionsWithDirectChildren={topLevelSectionsWithDirectChildren}/>
-      <div className={classes.PageContainer}>
-        {children}
+      <PageHeader location={ location }/>
+      <div className={ classes.PageContainer }>
+        { children }
       </div>
-      <PageFooter topLevelSectionsWithDirectChildren={topLevelSectionsWithDirectChildren}
-                  descriptionPages={descriptions}/>
+      <PageFooter/>
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
-  topLevelSectionsWithDirectChildren: getTopLevelSectionsWithDirectChildren(state),
-  descriptions: getDescriptions(state),
-});
-
-export default withRouter(
-  connect(mapStateToProps)
-  (injectSheet(styles)(PageLayout))
-);
+export default withRouter((injectSheet(styles)(PageLayout)));

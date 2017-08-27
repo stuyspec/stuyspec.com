@@ -1,7 +1,11 @@
 import React from "react";
-import injectSheet from "react-jss";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Grid, Row, Col } from "react-bootstrap/lib";
+import injectSheet from "react-jss";
+
+import { getTopLevelSectionsWithDirectChildren } from "../../sections/selectors";
+import { getDescriptions } from "../../descriptions/selectors";
 
 const styles = {
   PageFooter: {
@@ -76,26 +80,26 @@ const styles = {
 const PageFooter = ({
                       classes,
                       topLevelSectionsWithDirectChildren,
-                      descriptionPages
+                      descriptions,
                     }) => {
   const createLinksToSections = () => {
     return Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {
       const topLevelSection = topLevelSectionsWithDirectChildren[ sectionSlug ];
       return (
-        <div className={classes.sectionBlock} key={topLevelSection.id}>
-          <Link className={classes.topLevelSectionLink}
-                key={`topLevelLink${topLevelSection.id}`}
-                to={topLevelSection.permalink}>
-            {topLevelSection.name}
+        <div className={ classes.sectionBlock } key={ topLevelSection.id }>
+          <Link className={ classes.topLevelSectionLink }
+                key={ `topLevelLink${topLevelSection.id}` }
+                to={ topLevelSection.permalink }>
+            { topLevelSection.name }
           </Link>
           {
             Object.keys(topLevelSection.subsections).map(subsectionSlug => {
               const subsection = topLevelSection.subsections[ subsectionSlug ];
               return (
-                <Link className={classes.subsectionLink}
-                      key={`subsectionLink${subsection.id}`}
-                      to={subsection.permalink}>
-                  {subsection.name}
+                <Link className={ classes.subsectionLink }
+                      key={ `subsectionLink${subsection.id}` }
+                      to={ subsection.permalink }>
+                  { subsection.name }
                 </Link>
               );
             })
@@ -105,42 +109,46 @@ const PageFooter = ({
     });
   };
   const createDescriptionLinks = () => {
-    const descriptionLinks = Object.values(descriptionPages)
-      .map(description => {
-        return (
-          <Link className={classes.subsectionLink}
-                key={`about${description.id}`}
-                to={`/about/${description.slug}`}>
-            {description.title}
-          </Link>
-        );
-      });
+    const descriptionLinks = Object.values(descriptions).map(description => {
+      return (
+        <Link className={ classes.subsectionLink }
+              key={ description.id }
+              to={ `/about/${description.slug}` }>
+          { description.title }
+        </Link>
+      );
+    });
     return (
-      <div className={classes.sectionBlock} key='about'>
-        <Link className={classes.topLevelSectionLink}
-              key='topLevelDescription'
+      <div className={ classes.sectionBlock } key='about'>
+        <Link className={ classes.topLevelSectionLink }
+              key={ -1 }
               to='/about/our-charter'>
           About Us
         </Link>
-        {descriptionLinks}
+        { descriptionLinks }
       </div>
     );
   };
   return (
-    <Grid className={classes.PageFooter}>
-      <Row className={classes.pageFooterMain}>
-        <Col md={8} mdOffset={2}>
-          <Link to="/" className={classes.theSpectator}>
+    <Grid className={ classes.PageFooter }>
+      <Row className={ classes.pageFooterMain }>
+        <Col md={ 8 } mdOffset={ 2 }>
+          <Link to="/" className={ classes.theSpectator }>
             The Spectator
           </Link>
         </Col>
-        <Col md={8} mdOffset={2} className={classes.sectionFlex}>
-          {createLinksToSections()}
-          {createDescriptionLinks()}
+        <Col md={ 8 } mdOffset={ 2 } className={ classes.sectionFlex }>
+          { createLinksToSections() }
+          { createDescriptionLinks() }
         </Col>
       </Row>
     </Grid>
   );
 };
 
-export default (injectSheet(styles)(PageFooter));
+const mapStateToProps = (state) => ({
+  topLevelSectionsWithDirectChildren: getTopLevelSectionsWithDirectChildren(state),
+  descriptions: getDescriptions(state),
+});
+
+export default connect(mapStateToProps)(injectSheet(styles)(PageFooter));

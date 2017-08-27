@@ -1,6 +1,9 @@
 import React from "react";
-import injectSheet from "react-jss";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
+
+import { getSections } from "../../sections/selectors";
 
 const styles = {
   Masthead: {
@@ -50,27 +53,32 @@ const styles = {
   },
 };
 
-const Masthead = ({ classes, topLevelSectionsWithDirectChildren }) => {
-  const createLinksToTopLevelSections = () => {
-    return Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {
-      const topLevelSection = topLevelSectionsWithDirectChildren[ sectionSlug ];
-      return (
-        <li key={`topLevelSection${topLevelSection.id}`} className={classes.sectionListItem}>
-          <Link to={topLevelSection.permalink} className={classes.sectionLink}>
-            {topLevelSection.name}
-          </Link>
-        </li>
-      );
-    });
-  };
+const Masthead = ({ classes, sections }) => {
+  // TODO: change to !section.parentId after refactor
+  const topLevelSections = Object.filter(sections, section => !section.parentSlug);
   return (
-    <div className={classes.Masthead}>
-      <Link to="/" className={classes.theSpectatorLogo}>The Spectator</Link>
-      <ul className={classes.sectionLinksNav}>
-        {createLinksToTopLevelSections()}
+    <div className={ classes.Masthead }>
+      <Link to="/" className={ classes.theSpectatorLogo }>The Spectator</Link>
+      <ul className={ classes.sectionLinksNav }>
+        {
+          Object.values(topLevelSections).map(section => {
+            return (
+              <li key={ section.id } className={ classes.sectionListItem }>
+                <Link to={ section.permalink }
+                      className={ classes.sectionLink }>
+                  { section.name }
+                </Link>
+              </li>
+            );
+          })
+        }
       </ul>
     </div>
   )
 };
 
-export default injectSheet(styles)(Masthead);
+const mapStateToProps = state => ({
+  sections: getSections(state),
+});
+
+export default connect(mapStateToProps)(injectSheet(styles)(Masthead));
