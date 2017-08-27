@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
 
-import { getTopLevelSections } from "../../sections/selectors";
+import { getSections } from "../../sections/selectors";
 
 const styles = {
   Masthead: {
@@ -42,36 +42,43 @@ const styles = {
     fontSize: '14px',
     fontWeight: 500,
     textDecoration: 'none',
+    '&:hover': {
+      color: '#000',
+      textDecoration: 'none',
+    },
+    '&:focus': {
+      color: '#000',
+      textDecoration: 'none',
+    },
   },
 };
 
-const Masthead = ({ classes, topLevelSections }) => {
-  const createSectionLinks = () => {
-    return Object.values(topLevelSections).map(section => {
-      return (
-        <li key={ section.id } className={ classes.sectionListItem }>
-          <Link to={ section.permalink } className={ classes.sectionLink }>
-            { section.name }
-          </Link>
-        </li>
-      );
-    });
-  };
+const Masthead = ({ classes, sections }) => {
+  // TODO: check if parentSlug => parentId still works
+  const topLevelSections = Object.filter(sections, section => !section.parentId);
   return (
     <div className={ classes.Masthead }>
       <Link to="/" className={ classes.theSpectatorLogo }>The Spectator</Link>
       <ul className={ classes.sectionLinksNav }>
-        { createSectionLinks() }
+        {
+          Object.values(topLevelSections).map(section => {
+            return (
+              <li key={ section.id } className={ classes.sectionListItem }>
+                <Link to={ section.permalink }
+                      className={ classes.sectionLink }>
+                  { section.name }
+                </Link>
+              </li>
+            );
+          })
+        }
       </ul>
     </div>
   )
 };
 
 const mapStateToProps = state => ({
-  topLevelSections: getTopLevelSections(state),
-})
-
-export default connect(
-  mapStateToProps,
-  null
-) (injectSheet(styles)(Masthead));
+  sections: getSections(state),
+});
+// TODO: remove getTopLevelSections(state)
+export default connect(mapStateToProps)(injectSheet(styles)(Masthead));
