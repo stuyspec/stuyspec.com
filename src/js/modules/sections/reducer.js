@@ -128,6 +128,78 @@ const initialState = {
       parentId: 4,
       permalink: "/ae/books"
     },
+    15: {
+      id: 16,
+      name: "Film",
+      slug: "film",
+      description: "The film of Stuyvesant.",
+      parentSlug: "ae",
+      permalink: "/ae/film"
+    },
+    16: {
+      id: 17,
+      name: "Food",
+      slug: "food",
+      description: "The food of Stuyvesant.",
+      parentSlug: "ae",
+      permalink: "/ae/food"
+    },
+    18: {
+      id: 18,
+      name: "Live Performances",
+      slug: "live-performances",
+      description: "The live performances of Stuyvesant.",
+      parentSlug: "ae",
+      permalink: "/ae/live-performances"
+    },
+    19: {
+      id: 19,
+      name: "Television",
+      slug: "television",
+      description: "The television of Stuyvesant.",
+      parentSlug: "ae",
+      permalink: "/ae/television"
+    },
+    20: {
+      id: 20,
+      name: "Art",
+      slug: "art",
+      description: "The art of Stuyvesant.",
+      parentSlug: 'media',
+      permalink: "/art"
+    },
+    21: {
+      id: 21,
+      name: "Graphics",
+      slug: "graphics",
+      description: "The graphics of Stuyvesant.",
+      parentSlug: 'media',
+      permalink: "/graphics"
+    },
+    22: {
+      id: 22,
+      name: "Music",
+      slug: "music",
+      description: "The music of Stuyvesant.",
+      parentSlug: 'media',
+      permalink: "/music"
+    },
+    23: {
+      id: 23,
+      name: "Photo",
+      slug: "photo",
+      description: "The photo of Stuyvesant.",
+      parentSlug: 'media',
+      permalink: "/photo"
+    },
+    23: {
+      id: 24,
+      name: "Video",
+      slug: "video",
+      description: "The video of Stuyvesant.",
+      parentSlug: 'media',
+      permalink: "/video"
+    },
   }
 };
 
