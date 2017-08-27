@@ -4,6 +4,7 @@ import core from './modules/core';
 import articles from './modules/articles';
 import sections from './modules/sections';
 import users from './modules/users';
+import descriptions from './modules/descriptions';
 
 export default combineReducers(
   {
@@ -11,5 +12,6 @@ export default combineReducers(
     [articles.constants.NAME]: articles.reducer,
     [sections.constants.NAME]: sections.reducer,
     [users.constants.NAME]: users.reducer,
+    [descriptions.constants.NAME]: descriptions.reducer,
     router: routerReducer
   });

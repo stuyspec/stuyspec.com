@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 import { Grid, Row, Col } from "react-bootstrap/lib";
+import injectSheet from "react-jss";
 
+import { getDescriptions } from "../../descriptions/selectors";
 import { getTopLevelSectionsWithChildren } from "../../sections/selectors";
 
 const styles = {
@@ -17,7 +18,7 @@ const styles = {
     width: '1060px',
   },
   sectionFlex: {
-    height: '350px',
+    height: '320px',
     display: 'flex',
     flexFlow: 'column wrap',
     paddingTop: '6px',
@@ -65,10 +66,18 @@ const styles = {
     fontStyle: 'normal',
     fontWeight: 400,
     paddingTop: '10px',
+    '&:hover': {
+      color: '#000',
+      textDecoration: 'none',
+    },
+    '&:focus': {
+      color: '#000',
+      textDecoration: 'none',
+    },
   },
 };
 
-const PageFooter = ({ classes, topLevelSectionsWithChildren }) => {
+const PageFooter = ({ classes, topLevelSectionsWithChildren, descriptions }) => {
   const createSectionLinks = () => {
     return Object.values(topLevelSectionsWithChildren).map(section => {
       return (
@@ -93,14 +102,38 @@ const PageFooter = ({ classes, topLevelSectionsWithChildren }) => {
       );
     });
   };
+  const createDescriptionLinks = () => {
+    const descriptionLinks = Object.values(descriptions).map(description => {
+      return (
+        <Link className={ classes.subsectionLink }
+              key={ description.id }
+              to={ `/about/${description.slug}` }>
+          { description.title }
+        </Link>
+      );
+    });
+    return (
+      <div className={ classes.sectionBlock } key='about'>
+        <Link className={ classes.topLevelSectionLink }
+              key={ -1 }
+              to='/about/our-charter'>
+          About Us
+        </Link>
+        { descriptionLinks }
+      </div>
+    );
+  };
   return (
     <Grid className={ classes.PageFooter }>
       <Row className={ classes.pageFooterMain }>
-        <Col md={ 8 } mdOffset={ 2 } className={ classes.theSpectator }>
-          The Spectator
+        <Col md={ 8 } mdOffset={ 2 }>
+          <Link to="/" className={ classes.theSpectator }>
+            The Spectator
+          </Link>
         </Col>
         <Col md={ 8 } mdOffset={ 2 } className={ classes.sectionFlex }>
           { createSectionLinks() }
+          { createDescriptionLinks() }
         </Col>
       </Row>
     </Grid>
@@ -109,9 +142,7 @@ const PageFooter = ({ classes, topLevelSectionsWithChildren }) => {
 
 const mapStateToProps = (state) => ({
   topLevelSectionsWithChildren: getTopLevelSectionsWithChildren(state),
+descriptions: getDescriptions(state),
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(injectSheet(styles)(PageFooter));
+export default connect(mapStateToProps)(injectSheet(styles)(PageFooter));

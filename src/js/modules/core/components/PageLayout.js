@@ -41,11 +41,8 @@ const PageLayout = ({
                       closeSidebar,
                     }) => {
   const handleSetOpen = isSidebarOpen => {
-    if (isSidebarOpen) {
-      openSidebar();
-    } else {
-      closeSidebar();
-    }
+    // TODO: rename to setSidebarOpen?
+    isSidebarOpen ? openSidebar() : closeSidebar();
   };
   return (
     <Sidebar sidebar={ <SidebarContent/> }
@@ -61,7 +58,7 @@ const PageLayout = ({
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   isSidebarOpen: state.core.isSidebarOpen,
 });
 
