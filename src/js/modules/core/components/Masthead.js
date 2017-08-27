@@ -54,8 +54,8 @@ const styles = {
 };
 
 const Masthead = ({ classes, sections }) => {
-  // TODO: change to !section.parentId after refactor
-  const topLevelSections = Object.filter(sections, section => !section.parentSlug);
+  // TODO: check if parentSlug => parentId still works
+  const topLevelSections = Object.filter(sections, section => !section.parentId);
   return (
     <div className={ classes.Masthead }>
       <Link to="/" className={ classes.theSpectatorLogo }>The Spectator</Link>
@@ -80,5 +80,5 @@ const Masthead = ({ classes, sections }) => {
 const mapStateToProps = state => ({
   sections: getSections(state),
 });
-
+// TODO: remove getTopLevelSections(state)
 export default connect(mapStateToProps)(injectSheet(styles)(Masthead));

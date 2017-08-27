@@ -19,35 +19,35 @@ const RoutingApp = ({ sections, roles, descriptions }) => {
     return Object.keys(sections).map(sectionSlug => {
       const section = sections[ sectionSlug ];
       return <Route
-        exact path={section.permalink}
-        key={`sectionRoute${section.id}`}
-        render={props => (
-          <SectionPage match={props.match}
-                       section={section}/>
-        )}/>
+        exact path={ section.permalink }
+        key={ `sectionRoute${section.id}` }
+        render={ props => (
+          <SectionPage match={ props.match }
+                       section={ section }/>
+        ) }/>
     });
   };
   const createArticleRoutes = () => {
     return Object.keys(sections).map(sectionSlug => {
       const section = sections[ sectionSlug ];
       return <Route
-        exact path={`${section.permalink}/:article_slug`}
-        key={`articleRoute${section.id}`}
-        render={props => (
-          <ArticlePage match={props.match}
-                       section={section}/>
-        )}/>
+        exact path={ `${section.permalink}/:article_slug` }
+        key={ `articleRoute${section.id}` }
+        render={ props => (
+          <ArticlePage match={ props.match }
+                       section={ section }/>
+        ) }/>
     });
   };
   const createRoleRoutes = () => {
     return Object.keys(roles).map(roleSlug => {
       const role = roles[ roleSlug ];
       return <Route
-        exact path={`/${roleSlug}`}
-        key={`roleRoute${role.id}`}
-        render={props => (
-          <RolePage role={role}/>
-        )}/>
+        exact path={ `/${roleSlug}` }
+        key={ `roleRoute${role.id}` }
+        render={ props => (
+          <RolePage role={ role }/>
+        ) }/>
     })
   };
   const createDescriptionRoutes = () => {
@@ -62,7 +62,7 @@ const RoutingApp = ({ sections, roles, descriptions }) => {
     })
   };
   return (
-    <ConnectedRouter history={appHistory}>
+    <ConnectedRouter history={ appHistory } onUpdate={ () => window.scrollTo(0, 0) }>
       <PageLayout>
         <Switch>
           <Route exact path="/" component={HomePage}/>

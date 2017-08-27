@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 
-import { getTopLevelSectionsWithDirectChildren } from "../../sections/selectors";
 import { getDescriptions } from "../../descriptions/selectors";
+import { getTopLevelSectionsWithChildren } from "../../sections/selectors";
 
 const styles = {
   PageFooter: {
@@ -77,13 +77,9 @@ const styles = {
   },
 };
 
-const PageFooter = ({
-                      classes,
-                      topLevelSectionsWithDirectChildren,
-                      descriptions,
-                    }) => {
-  const createLinksToSections = () => {
-    return Object.values(topLevelSectionsWithDirectChildren).map(section => {
+const PageFooter = ({ classes, topLevelSectionsWithChildren, descriptions }) => {
+  const createSectionLinks = () => {
+    return Object.values(topLevelSectionsWithChildren).map(section => {
       return (
         <div className={ classes.sectionBlock } key={ section.id }>
           <Link className={ classes.topLevelSectionLink }
@@ -136,7 +132,7 @@ const PageFooter = ({
           </Link>
         </Col>
         <Col md={ 8 } mdOffset={ 2 } className={ classes.sectionFlex }>
-          { createLinksToSections() }
+          { createSectionLinks() }
           { createDescriptionLinks() }
         </Col>
       </Row>
@@ -145,8 +141,8 @@ const PageFooter = ({
 };
 
 const mapStateToProps = (state) => ({
-  topLevelSectionsWithDirectChildren: getTopLevelSectionsWithDirectChildren(state),
-  descriptions: getDescriptions(state),
+  topLevelSectionsWithChildren: getTopLevelSectionsWithChildren(state),
+descriptions: getDescriptions(state),
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(PageFooter));
