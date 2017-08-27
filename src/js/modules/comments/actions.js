@@ -1,19 +1,22 @@
 import * as t from './actionTypes';
-import { STUY_SPEC_API_HEADER, STUY_SPEC_API } from "../../constants";
+import { STUY_SPEC_API_HEADER, STUY_SPEC_API_URL } from "../../constants";
 import axios from 'axios';
 import { reset } from 'redux-form';
 import {validateKey} from "../../utils";
 
 export const postComment = (values) => {
   return (dispatch) => {
+    /*
+    - pending payload: values
+    -
+     */
     dispatch({ type: t.POST_COMMENT_PENDING });
     //TODO: ONCE COMMENT API IS MERGED THEN DO THIS
-    //axios.get(`${STUY_SPEC_API}/comments`,values, { 'headers': STUY_SPEC_API_HEADER })
-    axios.get(`${STUY_SPEC_API}/articles`, { 'headers': STUY_SPEC_API_HEADER })
+    //axios.post(`${STUY_SPEC_API_URL}/comments`,values, { 'headers': STUY_SPEC_API_HEADER })
+    axios.get(`${STUY_SPEC_API_URL}/articles`, { 'headers': STUY_SPEC_API_HEADER })
       .then(response => {
         dispatch({
           type: t.POST_COMMENT_FULFILLED,
-          payload: values,
         });
         dispatch(reset('commentForm'));
       })
@@ -30,8 +33,8 @@ export const postReply = (values, formName) => {
   return (dispatch) => {
     dispatch({ type: t.POST_REPLY_PENDING });
     //TODO: ONCE COMMENT API IS MERGED THEN DO THIS
-    //axios.get(`${STUY_SPEC_API}/reply`,values, { 'headers': STUY_SPEC_API_HEADER })
-    axios.get(`${STUY_SPEC_API}/articles`, { 'headers': STUY_SPEC_API_HEADER })
+    //axios.post(`${STUY_SPEC_API_URL}/reply`,values, { 'headers': STUY_SPEC_API_HEADER })
+    axios.get(`${STUY_SPEC_API_URL}/articles`, { 'headers': STUY_SPEC_API_HEADER })
       .then(response => {
         dispatch({
           type: t.POST_REPLY_FULFILLED,
@@ -134,8 +137,8 @@ const fakeReplies = [
 export const fetchComments = () => {
   return (dispatch) => {
     dispatch({ type: t.FETCH_COMMENTS_PENDING });
-    //axios.get(`${STUY_SPEC_API}/comments`, { 'headers': STUY_SPEC_API_HEADER })
-    axios.get(`${STUY_SPEC_API}/articles`, { 'headers': STUY_SPEC_API_HEADER })
+    //axios.get(`${STUY_SPEC_API_URL}/comments`, { 'headers': STUY_SPEC_API_HEADER })
+    axios.get(`${STUY_SPEC_API_URL}/articles`, { 'headers': STUY_SPEC_API_HEADER })
       .then(response => {
         validateComments(fakeComments);
         dispatch({
@@ -155,8 +158,8 @@ export const fetchComments = () => {
 export const fetchReplies = () => {
   return (dispatch) => {
     dispatch({ type: t.FETCH_REPLIES_PENDING });
-    //axios.get(`${STUY_SPEC_API}/replies`, { 'headers': STUY_SPEC_API_HEADER })
-    axios.get(`${STUY_SPEC_API}/articles`, { 'headers': STUY_SPEC_API_HEADER })
+    //axios.get(`${STUY_SPEC_API_URL}/replies`, { 'headers': STUY_SPEC_API_HEADER })
+    axios.get(`${STUY_SPEC_API_URL}/articles`, { 'headers': STUY_SPEC_API_HEADER })
       .then(response => {
         validateReplies(fakeReplies);
         dispatch({

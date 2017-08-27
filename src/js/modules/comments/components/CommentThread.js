@@ -28,7 +28,7 @@ const CommentThread = ({
                          article,
                          authorships,
                          media,
-                         activeUser,
+                         session,
                          isModalOpen,
                          closeModalLogin,
                        }) => {
@@ -36,14 +36,14 @@ const CommentThread = ({
     <div className={classes.CommentThread}>
       <Grid>
         <Row>
-          {activeUser ?
+          {session ?
             <CommentForm initialValues={{
-              userId: activeUser.id,
+              userId: session.id,
               articleId: article.id
             }}
-                         activeUser={activeUser}
+                         session={session}
                          onSubmit={postComment}/> :
-            <CommentForm activeUser={activeUser}/>
+            <CommentForm session={session}/>
           }
           <Col md={5} lg={5}/>
         </Row>
@@ -55,7 +55,7 @@ const CommentThread = ({
                         key={comment.id}
                         authorships={authorships}
                         media={media}
-                        activeUser={activeUser}
+                        session={session}
                         closeModalLogin={closeModalLogin}/>;
       })}
     </div>
@@ -78,16 +78,7 @@ const mapStateToProps = (state, ownProps) => ({
   comments: getCommentsFromArticle(state, ownProps),
   authorships: getAuthorshipsFromArticle(state, ownProps),
   media: getMediaCreatorFromArticle(state, ownProps),
-  activeUser: {
-    id: 1,
-    firstName: "Jason",
-    lastName: "Lin",
-    username: "jasonlin",
-    email: "jasonlin@gmail.com",
-    description: "Jason is a web developer for The Spectator.",
-    slug: "jason-lin",
-    url: "https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/17190808_757980897706195_7544830170558586831_n.jpg?oh=628bfb2a1ce2d86e10e13658fb40ed6d&oe=5A28122E"
-  },
+  session: state.accounts.session,
   isModalOpen: state.comments.isModalOpen,
 });
 

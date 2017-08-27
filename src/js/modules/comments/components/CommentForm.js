@@ -118,18 +118,18 @@ const renderField = ({
                        type,
                        meta: { touched, error, warning },
                        isExpanded,
-                       activeUser,
+                       session,
                        checkLogin,
                      }) =>
   <div>
       <textarea {...input} placeholder="Write a comment..."
                 type={type}
-                style={isExpanded && activeUser ? styles.bigBox :
+                style={isExpanded && session ? styles.bigBox :
                   styles.smallBox}
                 onClick={checkLogin}
       />
     {touched &&
-    ((error && activeUser &&
+    ((error && session &&
       <span style={styles.errorMessage}>
             {error}
           </span>) ||
@@ -144,7 +144,7 @@ const CommentForm = ({
                        classes,
                        handleSubmit,
                        submitting,
-                       activeUser,
+                       session,
                        isExpanded,
                        openModalLogin,
                        closeModalLogin,
@@ -156,7 +156,7 @@ const CommentForm = ({
     return (
       <div className={classes.userInfo}>
         <p className={classes.userName}>
-          {activeUser.firstName} {activeUser.lastName}
+          {session.firstName} {session.lastName}
         </p>
         <button className={classes.editProfile} onClick={editProfile}>
           Edit Profile
@@ -181,7 +181,7 @@ const CommentForm = ({
   };
   const checkLogin = () => {
     console.log('hi');
-    if (activeUser === undefined) {
+    if (session === undefined) {
       console.log('no user');
       openModalLogin();
     } else {
@@ -191,16 +191,16 @@ const CommentForm = ({
   };
   return (
     <Col md={7} lg={7} className={classes.CommentForm}>
-      {isExpanded && activeUser && createUserInfo()}
+      {isExpanded && session && createUserInfo()}
       <form onSubmit={handleSubmit}>
         <Field name="commentInput"
                type="text"
                component={renderField}
                isExpanded={isExpanded}
-               activeUser={activeUser}
+               session={session}
                checkLogin={checkLogin}/>
         <div className={classes.submitDiv}>
-          {isExpanded && activeUser && createButton()}
+          {isExpanded && session && createButton()}
         </div>
       </form>
     </Col>

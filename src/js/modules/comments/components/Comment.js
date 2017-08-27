@@ -79,7 +79,7 @@ const Comment = ({
                    media,
                    openReplyBox,
                    activeReply,
-                   activeUser,
+                   session,
                    postReply,
                    openModalLogin,
                    closeModalLogin,
@@ -93,7 +93,7 @@ const Comment = ({
     }
   };
   const openReply = () => {
-    if (!activeUser) {
+    if (!session) {
       openModalLogin();
     } else {
       openReplyBox(comment.id);
@@ -155,9 +155,9 @@ const Comment = ({
         <ReplyForm form={'replyForm-' + comment.id}
                    key={comment.id}
                    comment={comment}
-                   activeUser={activeUser}
+                   session={session}
                    initialValues={{
-                     userId: activeUser.id,
+                     userId: session.id,
                      commentId: comment.id,
                    }}
                    onSubmit={handlePostReply}

@@ -101,7 +101,7 @@ const ReplyForm = ({
                      classes,
                      handleSubmit,
                      submitting,
-                     activeUser,
+                     session,
                    }) => {
   const editProfile = () => {
     console.log('editing profile');
@@ -110,7 +110,8 @@ const ReplyForm = ({
     return (
       <div className={classes.userInfo}>
         <p className={classes.userName}>
-          {activeUser.firstName} {activeUser.lastName}
+          {/*TODO:{session.firstName} {session.lastName}*/}
+          {session.email}
         </p>
         <button className={classes.editProfile} onClick={editProfile}>
           Edit Profile

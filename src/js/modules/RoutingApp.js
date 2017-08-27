@@ -77,6 +77,7 @@ const RoutingApp = ({ sections, roles, descriptions }) => {
           { createSectionRoutes() }
           { createArticleRoutes() }
           { createRoleRoutes() }
+          { createDescriptionRoutes() }
           <Route exact path={ '/contributors/:contributor_slug' }
                  key={ `contributorRoute` }
                  render={ props => (
