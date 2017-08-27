@@ -83,21 +83,19 @@ const PageFooter = ({
                       descriptions,
                     }) => {
   const createLinksToSections = () => {
-    return Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {
-      const topLevelSection = topLevelSectionsWithDirectChildren[ sectionSlug ];
+    return Object.values(topLevelSectionsWithDirectChildren).map(section => {
       return (
-        <div className={ classes.sectionBlock } key={ topLevelSection.id }>
+        <div className={ classes.sectionBlock } key={ section.id }>
           <Link className={ classes.topLevelSectionLink }
-                key={ `topLevelLink${topLevelSection.id}` }
-                to={ topLevelSection.permalink }>
-            { topLevelSection.name }
+                key={ section.id }
+                to={ section.permalink }>
+            { section.name }
           </Link>
           {
-            Object.keys(topLevelSection.subsections).map(subsectionSlug => {
-              const subsection = topLevelSection.subsections[ subsectionSlug ];
+            Object.values(section.subsections).map(subsection => {
               return (
                 <Link className={ classes.subsectionLink }
-                      key={ `subsectionLink${subsection.id}` }
+                      key={ subsection.id }
                       to={ subsection.permalink }>
                   { subsection.name }
                 </Link>
