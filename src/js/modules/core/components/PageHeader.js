@@ -21,4 +21,4 @@ const PageHeader = ({ classes, location }) => {
   );
 };
 
-export default (injectSheet(styles)(PageHeader));
+export default injectSheet(styles)(PageHeader);

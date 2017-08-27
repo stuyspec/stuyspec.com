@@ -13,11 +13,13 @@ import {
   PhotographerPage,
   IllustratorPage
 } from "./users/components";
+import { DescriptionPage } from "./descriptions/components";
 
 import { getSections } from "./sections/selectors";
 import { getRoles } from "./users/selectors";
+import { getDescriptions } from "./descriptions/selectors";
 
-const RoutingApp = ({ sections, roles }) => {
+const RoutingApp = ({ sections, roles, descriptions }) => {
   const createSectionRoutes = () => {
     return Object.keys(sections).map(sectionSlug => {
       const section = sections[ sectionSlug ];
@@ -51,6 +53,17 @@ const RoutingApp = ({ sections, roles }) => {
         render={ props => (
           <RolePage role={ role }/>
         ) }/>
+    })
+  };
+  const createDescriptionRoutes = () => {
+    return Object.keys(descriptions).map(descriptionSlug => {
+      const description = descriptions[ descriptionSlug ];
+      return <Route
+        exact path={`/about/${descriptionSlug}`}
+        key={`descriptionRoutes${description.id}`}
+        render={props => (
+          <DescriptionPage description={description}/>
+        )}/>
     })
   };
   return (
@@ -91,6 +104,7 @@ const RoutingApp = ({ sections, roles }) => {
 const mapStateToProps = (state) => ({
   sections: getSections(state),
   roles: getRoles(state),
+  descriptions: getDescriptions(state),
 });
 
 export default connect(
