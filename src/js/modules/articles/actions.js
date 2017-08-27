@@ -1,14 +1,14 @@
 import axios from "axios";
 import * as t from "./actionTypes";
 
-import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADER } from "../../constants";
+import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from "../../constants";
 import { validateKey } from "../../utils";
 import { getFakeAuthorshipsForArticleResponse } from "./selectors";
 
 export const fetchArticles = () => {
   return (dispatch, getState) => {
     dispatch({ type: t.FETCH_ARTICLE_PENDING });
-    axios.get(`${STUY_SPEC_API_URL}/articles`, { 'headers': STUY_SPEC_API_HEADER })
+    axios.get(`${STUY_SPEC_API_URL}/articles`, STUY_SPEC_API_HEADERS)
       .then(response => {
         validateArticles(response.data);
         dispatch({

@@ -41,7 +41,7 @@ const styles = {
   },
 };
 
-const SidebarContent = ({ classes, topLevelSections, closeSidebar }) => {
+const SidebarContent = ({ classes, session, topLevelSections, closeSidebar }) => {
   let sidebarElements = [];
   sidebarElements.push(
     <Link className={ classes.sidebarSectionLink }
@@ -51,7 +51,7 @@ const SidebarContent = ({ classes, topLevelSections, closeSidebar }) => {
       Home
     </Link>
   );
-  Object.values(topLevelSections).forEach(section => {
+  Object.values(topLevelSections).map(section => {
     sidebarElements.push(
       <Link className={ classes.sidebarSectionLink }
             key={ section.id }
@@ -60,16 +60,44 @@ const SidebarContent = ({ classes, topLevelSections, closeSidebar }) => {
         { section.name }
       </Link>
     );
-    // We want a line separating the writing sections from the non-writing
-    //   sections and one separating the non-writing sections from the
-    //   user account options.
-    if (section.slug === 'sports' || section.slug === 'video') {
+    /* We want a line separating the writing sections from the non-writing
+     * sections and one separating the non-writing sections from the user
+     * account options.
+     */
+    if (section.name === 'Sports' || section.name === 'Video') {
       sidebarElements.push(
         <hr className={ classes.divider } key={ section.id + 100 }/>
       );
     }
   });
-
+  if (session) {
+    sidebarElements.push(
+      <Link className={ classes.sidebarSectionLink }
+            key={ -2 }
+            onClick={ closeSidebar }
+            to="/myaccount/profile" >
+        Profile
+      </Link>
+    );
+    // TODO: logout
+  } else {
+    sidebarElements.push(
+      <Link className={ classes.sidebarSectionLink }
+            key={ -2 }
+            onClick={ closeSidebar }
+            to="/myaccount" >
+        Log In
+      </Link>
+    );
+    sidebarElements.push(
+      <Link className={ classes.sidebarSectionLink }
+            key={ -3 }
+            onClick={ closeSidebar }
+            to="/myaccount" >
+        Sign Up
+      </Link>
+    );
+  }
   return (
     <div>
       { sidebarElements }
@@ -78,8 +106,9 @@ const SidebarContent = ({ classes, topLevelSections, closeSidebar }) => {
 };
 
 const mapStateToProps = (state) => ({
-  topLevelSections: getTopLevelSections(state),
   isSidebarOpen: state.core.isSidebarOpen,
+  session: state.accounts.session,
+  topLevelSections: getTopLevelSections(state),
 });
 
 const mapDispatchToProps = dispatch => {
