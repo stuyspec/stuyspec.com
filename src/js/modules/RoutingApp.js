@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { HomePage, PageLayout } from "./core/components";
 import { ArticlePage } from "./articles/components";
 import { SectionPage } from "./sections/components";
+
 import {
   RolePage,
   ContributorPage,
@@ -14,10 +15,13 @@ import {
   IllustratorPage
 } from "./users/components";
 
+import { DescriptionPage } from "./descriptions/components";
+
 import { getSections } from "./sections/selectors";
 import { getRoles } from "./users/selectors";
+import { getDescriptions } from "./descriptions/selectors";
 
-const RoutingApp = ({ sections, roles }) => {
+const RoutingApp = ({ sections, roles, descriptions }) => {
   const createSectionRoutes = () => {
     return Object.keys(sections).map(sectionSlug => {
       const section = sections[ sectionSlug ];
@@ -53,6 +57,17 @@ const RoutingApp = ({ sections, roles }) => {
         )}/>
     })
   };
+  const createDescriptionRoutes = () => {
+    return Object.keys(descriptions).map(descriptionSlug => {
+      const description = descriptions[ descriptionSlug ];
+      return <Route
+        exact path={`/about/${descriptionSlug}`}
+        key={`descriptionRoutes${description.id}`}
+        render={props => (
+          <DescriptionPage description={description}/>
+        )}/>
+    })
+  };
   return (
     <ConnectedRouter history={appHistory}>
       <PageLayout>
@@ -61,6 +76,7 @@ const RoutingApp = ({ sections, roles }) => {
           {createSectionRoutes()}
           {createArticleRoutes()}
           {createRoleRoutes()}
+          {createDescriptionRoutes()}
           <Route exact path={'/contributors/:contributor_slug'}
                  key={`contributorRoute`}
                  render={props => (
@@ -87,6 +103,7 @@ const RoutingApp = ({ sections, roles }) => {
 const mapStateToProps = (state) => ({
   sections: getSections(state),
   roles: getRoles(state),
+  descriptions: getDescriptions(state),
 });
 
 export default connect(
