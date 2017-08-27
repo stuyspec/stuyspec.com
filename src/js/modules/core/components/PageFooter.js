@@ -73,9 +73,11 @@ const styles = {
   },
 };
 
-const PageFooter = ({ classes,
+const PageFooter = ({
+                      classes,
                       topLevelSectionsWithDirectChildren,
-                      descriptionPages}) => {
+                      descriptionPages
+                    }) => {
   const createLinksToSections = () => {
     return Object.keys(topLevelSectionsWithDirectChildren).map(sectionSlug => {
       const topLevelSection = topLevelSectionsWithDirectChildren[ sectionSlug ];
@@ -102,17 +104,17 @@ const PageFooter = ({ classes,
       );
     });
   };
-  const createLinksToDescriptions = () => {
-    const descriptionPageLinks = Object.values(descriptionPages)
-      .map(descriptionPage => {
-      return (
-        <Link className={classes.subsectionLink}
-              key={`about${descriptionPage.id}`}
-              to={`/about/${descriptionPage.slug}`}>
-          {descriptionPage.title}
-        </Link>
+  const createDescriptionLinks = () => {
+    const descriptionLinks = Object.values(descriptionPages)
+      .map(description => {
+        return (
+          <Link className={classes.subsectionLink}
+                key={`about${description.id}`}
+                to={`/about/${description.slug}`}>
+            {description.title}
+          </Link>
         );
-    });
+      });
     return (
       <div className={classes.sectionBlock} key='about'>
         <Link className={classes.topLevelSectionLink}
@@ -120,7 +122,7 @@ const PageFooter = ({ classes,
               to='/about/our-charter'>
           About Us
         </Link>
-        {descriptionPageLinks}
+        {descriptionLinks}
       </div>
     );
   };
@@ -134,7 +136,7 @@ const PageFooter = ({ classes,
         </Col>
         <Col md={8} mdOffset={2} className={classes.sectionFlex}>
           {createLinksToSections()}
-          {createLinksToDescriptions()}
+          {createDescriptionLinks()}
         </Col>
       </Row>
     </Grid>

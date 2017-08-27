@@ -52,12 +52,12 @@ const RoutingApp = ({ sections, roles, descriptions }) => {
   };
   const createDescriptionRoutes = () => {
     return Object.keys(descriptions).map(descriptionSlug => {
-      const descriptionPage = descriptions[ descriptionSlug ];
+      const description = descriptions[ descriptionSlug ];
       return <Route
-        exact path={`/about/${descriptionPage.slug}`}
-        key={`descriptionRoutes${descriptionPage.id}`}
+        exact path={`/about/${descriptionSlug}`}
+        key={`descriptionRoutes${description.id}`}
         render={props => (
-          <DescriptionPage Page description={descriptionPage}/>
+          <DescriptionPage description={description}/>
         )}/>
     })
   };
