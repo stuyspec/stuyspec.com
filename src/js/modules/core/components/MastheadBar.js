@@ -91,7 +91,7 @@ const NavButton = ({ classes, children, label, onClick }) => {
 };
 const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 
-const MastheadBar = ({ classes, openSidebar }) => {
+const MastheadBar = ({ classes, openSidebar, session }) => {
   return (
     <div className={ classes.MastheadBar }>
       <div className={ classes.barContainer }>
@@ -106,20 +106,31 @@ const MastheadBar = ({ classes, openSidebar }) => {
         <Link className={ classes.brandingLink } to="/">
           The Spectator
         </Link>
-        <div className={ classes.userTools }>
-          <StyledNavButton label="log in"/>
-          <StyledNavButton label="subscribe"/>
-        </div>
+        {
+          session ? (
+            <StyledNavButton label="profile"/>
+          ) :  (
+            <div className={ classes.userTools }>
+              <StyledNavButton label="log in"/>
+              <StyledNavButton label="subscribe"/>
+            </div>
+          )
+        }
+
       </div>
     </div>
   );
 };
+
+const mapStateToProps = state => ({
+  session: state.accounts.session,
+});
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ openSidebar }, dispatch);
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(injectSheet(styles)(MastheadBar));

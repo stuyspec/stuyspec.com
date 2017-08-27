@@ -5,9 +5,9 @@ import ConnectedRouter from "react-router-redux/ConnectedRouter";
 import { connect } from "react-redux";
 
 import { HomePage, PageLayout } from "./core/components";
+import { SignInPage, ProfilePage, EditProfilePage } from "./accounts/components";
 import { ArticlePage } from "./articles/components";
 import { SectionPage } from "./sections/components";
-
 import {
   RolePage,
   ContributorPage,
@@ -73,28 +73,30 @@ const RoutingApp = ({ sections, roles, descriptions }) => {
                      onUpdate={ () => window.scrollTo(0, 0) }>
       <PageLayout>
         <Switch>
-          <Route exact path="/" component={HomePage}/>
-          {createSectionRoutes()}
-          {createArticleRoutes()}
-          {createRoleRoutes()}
-          {createDescriptionRoutes()}
-          <Route exact path={'/contributors/:contributor_slug'}
-                 key={`contributorRoute`}
-                 render={props => (
-                   <ContributorPage match={props.match}
-                                    role={roles[ 'contributors' ]}/>
-                 )}/>
-          <Route exact path={'/illustrators/:illustrator_slug'}
-                 key={`illustratorRoute`}
-                 render={props => (
-                   <IllustratorPage match={props.match}/>
-                 )}/>
-          <Route exact path={'/photographers/:photographer_slug'}
-                 key={`photographerRoute`}
-                 render={props => (
-                   <PhotographerPage match={props.match}
-                                     role={roles[ 'photographers' ]}/>
-                 )}/>
+          <Route exact path="/" component={ HomePage }/>
+          { createSectionRoutes() }
+          { createArticleRoutes() }
+          { createRoleRoutes() }
+          <Route exact path={ '/contributors/:contributor_slug' }
+                 key={ `contributorRoute` }
+                 render={ props => (
+                   <ContributorPage match={ props.match }
+                                    role={ roles[ 'contributors' ] }/>
+                 ) }/>
+          <Route exact path={ '/illustrators/:illustrator_slug' }
+                 key={ `illustratorRoute` }
+                 render={ props => (
+                   <IllustratorPage match={ props.match }/>
+                 ) }/>
+          <Route exact path={ '/photographers/:photographer_slug' }
+                 key={ `photographerRoute` }
+                 render={ props => (
+                   <PhotographerPage match={ props.match }
+                                     role={ roles[ 'photographers' ] }/>
+                 ) }/>
+          <Route exact path={ '/myaccount' } component={ SignInPage }/>
+          <Route exact path={ '/myaccount/profile' } component={ ProfilePage }/>
+          <Route exact path={ '/myaccount/profile/edit' } component={ EditProfilePage }/>
         </Switch>
       </PageLayout>
     </ConnectedRouter>

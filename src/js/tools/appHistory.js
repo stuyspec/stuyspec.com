@@ -10,4 +10,4 @@ appHistory.listen((location, action) => {
   window.scrollTo(0, 0);
 });
 
-export default appHistory
+export default appHistory;

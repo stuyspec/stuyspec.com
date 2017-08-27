@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as t from "./actionTypes";
 
-import { STUY_SPEC_API, HEADER } from "../../constants";
+import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from "../../constants";
 import { validateKey } from "../../utils";
 
 const fakeUsers = [
@@ -50,7 +50,7 @@ const fakeUsers = [
 export const fetchUsers = () => {
   return dispatch => {
     dispatch({ type: t.FETCH_USER_PENDING });
-    axios.get(`${STUY_SPEC_API}/users`, { 'headers': HEADER })
+    axios.get(`${STUY_SPEC_API_URL}/users`, STUY_SPEC_API_HEADERS)
       .then(response => {
         validateUsers(fakeUsers);
         dispatch({
