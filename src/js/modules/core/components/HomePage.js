@@ -15,25 +15,7 @@ const styles = {
   HomePage: {}
 };
 
-const HomePage = ({
-                    classes,
-                    sections,
-                    articles,
-                    fetchArticles,
-                    fetchUsers,
-                    fetchMedia
-                  }) => {
-  const createArticleLinks = () => {
-    return Object.values(articles).map(article => {
-      return (
-        <li key={ article.id }>
-          <Link to={ `${sections[ article.sectionId ].permalink}/${article.slug}` }>
-            { article.title }
-          </Link>
-        </li>
-      );
-    });
-  };
+const HomePage = ({ classes, sections, articles, fetchArticles, fetchUsers, fetchMedia }) => {
   return (
     <div className={ classes.HomePage }>
       <h1>Home page</h1>
@@ -44,7 +26,17 @@ const HomePage = ({
       <button onClick={ fetchMedia }>fetch media</button>
       <h2>Articles</h2>
       <ul>
-        { createArticleLinks() }
+        {
+          Object.values(articles).map(article => {
+            return (
+              <li key={ article.id }>
+                <Link to={ `${sections[ article.sectionId ].permalink}/${article.slug}` }>
+                  { article.title }
+                </Link>
+              </li>
+            );
+          })
+        }
       </ul>
     </div>
   );

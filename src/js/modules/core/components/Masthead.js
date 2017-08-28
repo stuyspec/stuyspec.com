@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import { getSections } from "../../sections/selectors";
+import { getTopLevelSections } from "../../sections/selectors";
 
 const styles = {
   Masthead: {
@@ -54,14 +54,12 @@ const styles = {
 };
 
 const Masthead = ({ classes, sections }) => {
-  // TODO: check if parentSlug => parentId still works
-  const topLevelSections = Object.filter(sections, section => !section.parentId);
   return (
     <div className={ classes.Masthead }>
       <Link to="/" className={ classes.theSpectatorLogo }>The Spectator</Link>
       <ul className={ classes.sectionLinksNav }>
         {
-          Object.values(topLevelSections).map(section => {
+          Object.values(sections).map(section => {
             return (
               <li key={ section.id } className={ classes.sectionListItem }>
                 <Link to={ section.permalink }
@@ -78,7 +76,7 @@ const Masthead = ({ classes, sections }) => {
 };
 
 const mapStateToProps = state => ({
-  sections: getSections(state),
+  sections: getTopLevelSections(state),
 });
-// TODO: remove getTopLevelSections(state)
+
 export default connect(mapStateToProps)(injectSheet(styles)(Masthead));

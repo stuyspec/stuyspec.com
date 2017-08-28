@@ -27,7 +27,7 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         isFetching: false,
         isFetched: true,
-        articles: { ...state.articles, newArticles },
+        articles: { ...state.articles, ...newArticles },
       };
     }
     case FETCH_ARTICLE_REJECTED: {

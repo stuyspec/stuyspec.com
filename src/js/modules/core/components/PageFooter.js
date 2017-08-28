@@ -114,7 +114,7 @@ const PageFooter = ({ classes, topLevelSectionsWithChildren, descriptions }) => 
       );
     });
     return (
-      <div className={ classes.sectionBlock } key='about'>
+      <div className={ classes.sectionBlock } key="about">
         <Link className={ classes.topLevelSectionLink }
               key={ -1 }
               to='/about/our-charter'>
@@ -143,7 +143,7 @@ const PageFooter = ({ classes, topLevelSectionsWithChildren, descriptions }) => 
 
 const mapStateToProps = (state) => ({
   topLevelSectionsWithChildren: getTopLevelSectionsWithChildren(state),
-descriptions: getDescriptions(state),
+  descriptions: getDescriptions(state),
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(PageFooter));

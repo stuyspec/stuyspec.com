@@ -128,20 +128,20 @@ const initialState = {
       parentId: 4,
       permalink: "/ae/books"
     },
-    15: {
+    16: {
       id: 16,
       name: "Film",
       slug: "film",
       description: "The film of Stuyvesant.",
-      parentSlug: "ae",
+      parentId: 4,
       permalink: "/ae/film"
     },
-    16: {
+    17: {
       id: 17,
       name: "Food",
       slug: "food",
       description: "The food of Stuyvesant.",
-      parentSlug: "ae",
+      parentId: 4,
       permalink: "/ae/food"
     },
     18: {
@@ -149,7 +149,7 @@ const initialState = {
       name: "Live Performances",
       slug: "live-performances",
       description: "The live performances of Stuyvesant.",
-      parentSlug: "ae",
+      parentId: 4,
       permalink: "/ae/live-performances"
     },
     19: {
@@ -157,7 +157,7 @@ const initialState = {
       name: "Television",
       slug: "television",
       description: "The television of Stuyvesant.",
-      parentSlug: "ae",
+      parentId: 4,
       permalink: "/ae/television"
     },
     20: {
@@ -165,7 +165,7 @@ const initialState = {
       name: "Art",
       slug: "art",
       description: "The art of Stuyvesant.",
-      parentSlug: 'media',
+      parentId: 25,
       permalink: "/art"
     },
     21: {
@@ -173,7 +173,7 @@ const initialState = {
       name: "Graphics",
       slug: "graphics",
       description: "The graphics of Stuyvesant.",
-      parentSlug: 'media',
+      parentId: 25,
       permalink: "/graphics"
     },
     22: {
@@ -181,7 +181,7 @@ const initialState = {
       name: "Music",
       slug: "music",
       description: "The music of Stuyvesant.",
-      parentSlug: 'media',
+      parentId: 25,
       permalink: "/music"
     },
     23: {
@@ -189,17 +189,25 @@ const initialState = {
       name: "Photo",
       slug: "photo",
       description: "The photo of Stuyvesant.",
-      parentSlug: 'media',
+      parentId: 25,
       permalink: "/photo"
     },
-    23: {
+    24: {
       id: 24,
       name: "Video",
       slug: "video",
       description: "The video of Stuyvesant.",
-      parentSlug: 'media',
+      parentId: 25,
       permalink: "/video"
     },
+    25: {
+      id: 25,
+      name: "Media",
+      slug: "media",
+      description: "The media of Stuyvesant.",
+      parentId: null,
+      permalink: "/media"
+    }
   }
 };
 
