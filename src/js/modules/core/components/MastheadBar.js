@@ -108,7 +108,9 @@ const MastheadBar = ({ classes, openSidebar, session }) => {
         </Link>
         {
           session ? (
-            <StyledNavButton label="profile"/>
+            <div className={ classes.userTools }>
+              <StyledNavButton label="profile"/>
+            </div>
           ) :  (
             <div className={ classes.userTools }>
               <StyledNavButton label="log in"/>

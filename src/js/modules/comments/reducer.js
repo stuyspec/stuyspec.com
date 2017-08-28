@@ -15,6 +15,10 @@ const initialState = {
   isFetched: true,
   isModalOpen: false,
   comments: {},
+  message: {
+    status: null,
+    text: null,
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -36,8 +40,26 @@ const reducer = (state = initialState, action) => {
     case FETCH_COMMENTS_REJECTED: {
       return { ...state, error: action.payload };
     }
+    case CREATE_COMMENT_PENDING: {
+      return { ...state };
+    }
+    case CREATE_COMMENT_FULFILLED: {
+      return {
+        ...state,
+        message: {
+          status: "fulfilled",
+          text: `Comment submitted for review at ${ action.payload.data.createdAt }`,
+        }
+      };
+    }
     case CREATE_COMMENT_REJECTED: {
-      return { error: action.payload };
+      return {
+        ...state,
+        message: {
+          status: "rejected",
+          text: `Comment failed to post (${ action.payload })`
+        },
+      };
     }
     case OPEN_LOGIN_MODAL: {
       return { ...state, isModalOpen: true };

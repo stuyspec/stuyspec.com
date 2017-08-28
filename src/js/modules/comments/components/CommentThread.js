@@ -17,13 +17,20 @@ const styles = {
   },
 };
 
-const CommentThread = ({ classes, comments, article, session, isModalOpen, closeLoginModal }) => {
+const CommentThread = ({
+                         classes,
+                         comments,
+                         article,
+                         createComment,
+                         closeLoginModal,
+                         isModalOpen,
+                         session,
+                       }) => {
   const handleSubmit = values => {
-    console.log(3);
     createComment({
       ...values,
       articleId: article.id,
-      userId: session.data.data.id // left off at VM37700:52 Uncaught TypeError: Cannot read property 'data' of null
+      userId: 1, //session.data.data.id // left off at VM37700:52 Uncaught TypeError: Cannot read property 'data' of null
     });
   };
   return (
@@ -32,7 +39,8 @@ const CommentThread = ({ classes, comments, article, session, isModalOpen, close
         <CommentForm session={ session } onSubmit={ handleSubmit }/>
         <Col md={ 5 } lg={ 5 }/>
       </Row>
-      <LoginModalOverlay isModalOpen={ isModalOpen } closeModalLogin={ closeLoginModal }/>
+      <LoginModalOverlay isModalOpen={ isModalOpen }
+                         closeModalLogin={ closeLoginModal }/>
       {
         Object.values(comments).map(comment => {
           return <Comment comment={ comment } key={ comment.id }/>;
@@ -44,8 +52,8 @@ const CommentThread = ({ classes, comments, article, session, isModalOpen, close
 
 const mapStateToProps = (state, ownProps) => ({
   comments: getRequestedArticleComments(state, ownProps),
-  session: state.accounts.session,
   isModalOpen: state.comments.isModalOpen,
+  session: state.accounts.session,
 });
 
 const mapDispatchToProps = dispatch => {

@@ -44,6 +44,7 @@ const fakeComments = [
 ];
 
 export const createComment = values => {
+  console.log(values);
   return dispatch => {
     dispatch({
       type: t.CREATE_COMMENT_PENDING,
@@ -53,7 +54,7 @@ export const createComment = values => {
       .then(response => {
         dispatch({
           type: t.CREATE_COMMENT_FULFILLED,
-          payload: fakeComments,
+          payload: response,
         });
         dispatch(reset('createComment'));
       })

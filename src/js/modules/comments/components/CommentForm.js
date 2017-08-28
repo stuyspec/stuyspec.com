@@ -1,9 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
-import injectSheet from "react-jss";
-import { Grid, Row, Col } from "react-bootstrap/lib";
-import { Field, reduxForm } from "redux-form";
 import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { Field, reduxForm } from "redux-form";
+import { Grid, Row, Col } from "react-bootstrap/lib";
+import injectSheet from "react-jss";
 
 import { openLoginModal, closeLoginModal } from "../actions";
 
@@ -64,6 +65,7 @@ const styles = {
     display: 'inline',
     fontSize: '18px',
     fontWeight: 'bold',
+    marginRight: '4px',
   },
   userInfo: {
     marginBottom: '13px',
@@ -81,17 +83,22 @@ const styles = {
     color: '#3572b7',
     display: 'inline',
     fontSize: '16px',
-    margin: '0 0 0 4px',
     padding: 0,
   },
+  fulfilled: {
+    color: 'green',
+  },
+  rejected: {
+    color: 'red',
+  }
 };
 
 const validate = values => {
   const errors = {};
-  if (!values.comment) {
-    errors.comment = 'Required';
-  } else if (values.comment.length > 1000) {
-    errors.comment = 'Must be 1000 characters or less';
+  if (!values.content) {
+    errors.content = 'Required';
+  } else if (values.content.length > 1000) {
+    errors.content = 'Must be 1000 characters or less';
   }
   return errors;
 };
@@ -114,7 +121,7 @@ const renderField = ({ input, meta: { touched, error }, checkLogin }) => {
   );
 };
 
-const CommentForm = ({ classes, handleSubmit, submitting, session, openLoginModal, closeLoginModal }) => {
+const CommentForm = ({ classes, handleSubmit, submitting, session, openLoginModal, closeLoginModal, message }) => {
   const checkLogin = () => {
     if (!session) {
       openLoginModal();
@@ -130,9 +137,9 @@ const CommentForm = ({ classes, handleSubmit, submitting, session, openLoginModa
             { session.data.data.firstName } { session.data.data.lastName }
           </p>
           <span className={ classes.bulletPoint }>&#8226;</span>
-          <button className={ classes.optOut }>
+          <Link className={ classes.optOut } to="/myaccount/profile">
             Edit Profile
-          </button>
+          </Link>
           <span className={ classes.bulletPoint }>&#8226;</span>
           <button className={ classes.optOut }>
             Log Out
@@ -149,6 +156,13 @@ const CommentForm = ({ classes, handleSubmit, submitting, session, openLoginModa
           </button>
           <p className={ classes.moderationWarning }>
             Comments are moderated.
+            <br/>
+            { message.status === "fulfilled" && (
+              <span className={ classes.fulfilled }>{ message.text }</span>
+            ) }
+            { message.status === "rejected" && (
+              <span className={ classes.rejected }>{ message.text }</span>
+            ) }
           </p>
         </div>
       </form>
@@ -157,6 +171,7 @@ const CommentForm = ({ classes, handleSubmit, submitting, session, openLoginModa
 };
 
 const mapStateToProps = state => ({
+  message: state.comments.message,
   session: state.accounts.session,
 });
 

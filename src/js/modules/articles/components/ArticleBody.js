@@ -10,7 +10,8 @@ const styles = {
     fontFamily: 'Minion Pro',
     fontSize: '18px',
     lineHeight: 1.44,
-    paddingBottom: "38px",
+    marginBottom: '38px',
+    paddingBottom: '38px',
     width: '700px',
     '& p:first-child::first-letter': {
       float: 'left',
@@ -21,7 +22,6 @@ const styles = {
   },
 };
 
-// TODO: italicized contributor blurb underneath the article content (see nyer)
 const ArticleBody = ({ classes, content, featuredMedia }) => {
   return (
     <div className={ classes.ArticleBody }>
