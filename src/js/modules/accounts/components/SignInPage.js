@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => {
     { signIn, signUp },
     dispatch
   );
-}
+};
 
 export default connect(
   null,

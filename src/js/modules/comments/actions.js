@@ -70,7 +70,7 @@ export const createComment = values => {
 export const fetchComments = () => {
   return (dispatch) => {
     dispatch({ type: t.FETCH_COMMENTS_PENDING });
-    axios.get(`${STUY_SPEC_API_URL}/comments`, STUY_SPEC_API_HEADERS)
+    axios.get(`${STUY_SPEC_API_URL}/articles`, STUY_SPEC_API_HEADERS)
       .then(response => {
         validateComments(fakeComments);
         dispatch({
