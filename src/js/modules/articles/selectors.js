@@ -147,15 +147,10 @@ export const getFakeAuthorshipsForArticleResponse = createSelector(
   }
 );
 
-export const getCommentsFromArticle = createSelector(
-  [ getArticleFromProps, getComments, getReplies ],
-  (article, comments, replies) => {
-    return Object.values(comments).reduce((acc, comment) => {
-      acc.push(comment);
-      acc.push(
-        ...Object.values(replies.filter(reply => reply.commentId === commentId))
-      );
-    }, []);
+export const getRequestedArticleComments = createSelector(
+  [ getArticleFromProps, getComments ],
+  (article, comments) => {
+    return Object.filter(comments, comment => comment.articleId === article.id);
   }
 );
 

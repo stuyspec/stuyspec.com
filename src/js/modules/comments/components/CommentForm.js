@@ -1,11 +1,11 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import injectSheet from 'react-jss';
+import React from "react";
+import { connect } from "react-redux";
+import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
-import { Field, reduxForm } from 'redux-form';
-import { bindActionCreators } from 'redux';
+import { Field, reduxForm } from "redux-form";
+import { bindActionCreators } from "redux";
 
-import { openModalLogin, closeModalLogin } from '../actions';
+import { openLoginModal, closeLoginModal } from "../actions";
 
 const styles = {
   CommentForm: {
@@ -105,125 +105,79 @@ const styles = {
 
 const validate = values => {
   const errors = {};
-  if (!values.commentInput) {
-    errors.commentInput = 'No Comment Detected';
-  } else if (values.commentInput.length > 1000) {
-    errors.commentInput = 'Must be 1000 characters or less'
+  if (!values.comment) {
+    errors.comment = 'Required';
+  } else if (values.comment.length > 1000) {
+    errors.comment = 'Must be 1000 characters or less';
   }
   return errors;
 };
 
-const renderField = ({
-                       input,
-                       type,
-                       meta: { touched, error, warning },
-                       isExpanded,
-                       session,
-                       checkLogin,
-                     }) =>
-  <div>
-      <textarea {...input} placeholder="Write a comment..."
-                type={type}
-                style={isExpanded && session ? styles.bigBox :
-                  styles.smallBox}
-                onClick={checkLogin}
-      />
-    {touched &&
-    ((error && session &&
-      <span style={styles.errorMessage}>
+const renderField = ({ input, meta: { touched, error }, checkLogin }) => {
+  return (
+    <div>
+      <textarea { ...input }
+                placeholder="Comment"
+                style={ styles.bigBox }
+                onClick={ checkLogin }/>
+      { touched && (
+        ( error &&
+          <span style={ styles.errorMessage }>
             {error}
-          </span>) ||
-      (warning &&
-        <span>
-              {warning}
-            </span>))}
+          </span>
+        )
+      ) }
+    </div>
+  );
+};
 
-  </div>;
-
-const CommentForm = ({
-                       classes,
-                       handleSubmit,
-                       submitting,
-                       session,
-                       isExpanded,
-                       openModalLogin,
-                       closeModalLogin,
-                     }) => {
-  const editProfile = () => {
-    console.log('editing profile');
-  };
-  const createUserInfo = () => {
-    return (
-      <div className={classes.userInfo}>
-        <p className={classes.userName}>
-          {session.firstName} {session.lastName}
-        </p>
-        <button className={classes.editProfile} onClick={editProfile}>
-          Edit Profile
-        </button>
-        <button className={classes.logOut}>
-          Log Out
-        </button>
-        <p className={classes.notYou}>
-          Not You?
-        </p>
-      </div>
-    )
-  };
-  const createButton = () => {
-    return (
-      <button type="submit"
-              disabled={submitting}
-              className={classes.submitButton}>
-        Submit
-      </button>
-    );
-  };
+const CommentForm = ({ classes, handleSubmit, submitting, session, openLoginModal, closeLoginModal }) => {
   const checkLogin = () => {
-    console.log('hi');
-    if (session === undefined) {
-      console.log('no user');
-      openModalLogin();
+    if (!session) {
+      openLoginModal();
     } else {
-      console.log('yes user');
-      closeModalLogin();
+      closeLoginModal();
     }
   };
   return (
-    <Col md={7} lg={7} className={classes.CommentForm}>
-      {isExpanded && session && createUserInfo()}
-      <form onSubmit={handleSubmit}>
-        <Field name="commentInput"
-               type="text"
-               component={renderField}
-               isExpanded={isExpanded}
-               session={session}
-               checkLogin={checkLogin}/>
-        <div className={classes.submitDiv}>
-          {isExpanded && session && createButton()}
+    <Col md={ 7 } lg={ 7 } className={ classes.CommentForm }>
+      { session && (
+        <div className={ classes.userInfo }>
+          <p className={ classes.userName }>
+            { session.firstName } { session.lastName }
+          </p>
+          <button className={ classes.editProfile }>
+            Edit Profile
+          </button>
+          <button className={ classes.logOut }>
+            Log Out
+          </button>
+        </div>
+      ) }
+      <form onSubmit={ handleSubmit }>
+        <Field name="comment" component={ renderField } checkLogin={ checkLogin }/>
+        <div className={ classes.submitDiv }>
+          <button type="submit"
+                  disabled={ !session && submitting }
+                  className={ classes.submitButton }>
+            Submit
+          </button>
         </div>
       </form>
     </Col>
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  isExpanded: state.comments.isExpanded,
-});
-
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    { openModalLogin, closeModalLogin },
-    dispatch
-  )
+  return bindActionCreators({ openLoginModal, closeLoginModal }, dispatch);
 };
 
-const smartCommentForm = connect(
-  mapStateToProps,
+const SmartCommentForm = connect(
+  null,
   mapDispatchToProps,
 )(injectSheet(styles)(CommentForm));
 
 export default reduxForm({
-  form: 'commentForm',
+  form: 'createComment',
   validate,
-})(smartCommentForm);
+})(SmartCommentForm);

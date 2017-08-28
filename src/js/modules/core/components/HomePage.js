@@ -10,7 +10,7 @@ import { getSections } from "../../sections/selectors";
 import { fetchArticles } from "../../articles/actions";
 import { fetchUsers } from "../../users/actions";
 import { fetchMedia } from "../../media/actions";
-import { fetchComments, fetchReplies } from "../../comments/actions";
+import { fetchComments } from "../../comments/actions";
 
 const styles = {
   HomePage: {}
@@ -24,7 +24,6 @@ const HomePage = ({
                     fetchUsers,
                     fetchMedia,
                     fetchComments,
-                    fetchReplies
                   }) => {
   const createArticleLinks = () => {
     return Object.values(articles).map(article => {
@@ -42,7 +41,6 @@ const HomePage = ({
     fetchUsers();
     fetchMedia();
     fetchComments();
-    fetchReplies();
   }
   return (
     <div className={ classes.HomePage }>
@@ -64,7 +62,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { fetchArticles, fetchUsers, fetchMedia, fetchComments, fetchReplies },
+    { fetchArticles, fetchUsers, fetchMedia, fetchComments },
     dispatch
   );
 };

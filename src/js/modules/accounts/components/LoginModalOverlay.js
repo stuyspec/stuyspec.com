@@ -1,5 +1,5 @@
-import React from 'react';
-import injectSheet from 'react-jss';
+import React from "react";
+import injectSheet from "react-jss";
 import { Modal } from "react-bootstrap/lib";
 
 const styles = {
@@ -11,10 +11,10 @@ const styles = {
   },
 };
 
-const ModalOverlayLogin = ({ classes, isModalOpen, closeModalLogin }) => {
+const LoginModalOverlay = ({ classes, isModalOpen, closeModalLogin }) => {
   return (
     <Modal
-      aria-labelledby='app'
+      aria-labelledby="app"
       dialogClassName={classes.modalStyle}
       show={isModalOpen}
       onHide={closeModalLogin}
@@ -26,4 +26,4 @@ const ModalOverlayLogin = ({ classes, isModalOpen, closeModalLogin }) => {
   )
 };
 
-export default injectSheet(styles)(ModalOverlayLogin);
+export default injectSheet(styles)(LoginModalOverlay);

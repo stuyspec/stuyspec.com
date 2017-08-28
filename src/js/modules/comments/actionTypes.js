@@ -6,5 +6,7 @@ export const FETCH_COMMENTS_PENDING = 'comments/FETCH_COMMENTS_PENDING';
 export const FETCH_COMMENTS_FULFILLED = 'comments/FETCH_COMMENTS_FULFILLED';
 export const FETCH_COMMENTS_REJECTED = 'comments/FETCH_COMMENTS_REJECTED';
 
-export const OPEN_MODAL_LOGIN = 'comments/OPEN_MODAL_LOGIN';
-export const CLOSE_MODAL_LOGIN = 'comments/CLOSE_MODAL_LOGIN';
+export const OPEN_LOGIN_MODAL = 'comments/OPEN_LOGIN_MODAL';
+export const CLOSE_LOGIN_MODAL = 'comments/CLOSE_LOGIN_MODAL';
+
+// TODO: move modal to articles

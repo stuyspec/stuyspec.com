@@ -1,17 +1,15 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import injectSheet from 'react-jss';
+import React from "react";
+import { connect } from "react-redux";
+import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { bindActionCreators } from "redux";
 
-import Comment from './Comment';
-import CommentForm from './CommentForm';
-import ModalOverlayLogin from './ModalOverlayLogin';
+import Comment from "./Comment";
+import CommentForm from "./CommentForm";
+import LoginModalOverlay from "../../accounts/components/LoginModalOverlay";
 
-import {
-  getCommentsFromArticle
-} from "../../articles/selectors";
-import { postComment, closeModalLogin } from "../actions";
+import { createComment, closeLoginModal } from "../actions";
+import { getRequestedArticleComments } from "../../articles/selectors";
 
 const styles = {
   CommentThread: {
@@ -19,51 +17,38 @@ const styles = {
   },
 };
 
-const CommentThread = ({
-                         classes,
-                         comments,
-                         article,
-                         session,
-                         isModalOpen,
-                         closeModalLogin,
-                       }) => {
+const CommentThread = ({ classes, comments, article, session, isModalOpen, closeLoginModal }) => {
   const handleSubmit = values => {
-    createComment({ ...values, userId: session.id, articleId: article.id });
+    createComment({
+      ...values,
+      articleId: article.id,
+      userId: session.data.data.id
+    });
   };
   return (
-    <div className={ classes.CommentThread }>
-      <Grid>
-        <Row>
-          <CommentForm session={ session } onSubmit={ handleSubmit }/>
-          <Col md={ 5 } lg={ 5 }/>
-        </Row>
-      </Grid>
-      { /* TODO: rename to login modal*/ }
-      <ModalOverlayLogin isModalOpen={ isModalOpen } closeModalLogin={ closeModalLogin }/>
+    <Grid className={ classes.CommentThread }>
+      <Row>
+        <CommentForm session={ session } onSubmit={ handleSubmit }/>
+        <Col md={ 5 } lg={ 5 }/>
+      </Row>
+      <LoginModalOverlay isModalOpen={ isModalOpen } closeModalLogin={ closeLoginModal }/>
       {
         Object.values(comments).map(comment => {
-          return <Comment article={ article }
-                          comment={ comment }
-                          key={ comment.id }
-                          session={ session }
-                          closeModalLogin={ closeModalLogin }/>;
+          return <Comment comment={ comment } key={ comment.id }/>;
         })
       }
-      </div>
+    </Grid>
   );
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  comments: getCommentsFromArticle(state, ownProps),
+  comments: getRequestedArticleComments(state, ownProps),
   session: state.accounts.session,
   isModalOpen: state.comments.isModalOpen,
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    { postComment, closeModalLogin },
-    dispatch
-  );
+  return bindActionCreators({ createComment, closeLoginModal }, dispatch);
 };
 
 export default connect(
