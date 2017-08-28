@@ -9,6 +9,7 @@ import CommentForm from "./CommentForm";
 import LoginModalOverlay from "../../accounts/components/LoginModalOverlay";
 
 import { createComment, closeLoginModal } from "../actions";
+import { signIn } from "../../accounts/actions";
 import { getRequestedArticleComments } from "../../articles/selectors";
 
 const styles = {
@@ -25,6 +26,7 @@ const CommentThread = ({
                          closeLoginModal,
                          isModalOpen,
                          session,
+                         signIn,
                        }) => {
   const handleSubmit = values => {
     createComment({
@@ -40,7 +42,8 @@ const CommentThread = ({
         <Col md={ 5 } lg={ 5 }/>
       </Row>
       <LoginModalOverlay isModalOpen={ isModalOpen }
-                         closeModalLogin={ closeLoginModal }/>
+                         closeModalLogin={ closeLoginModal }
+                         signIn={signIn}/>
       {
         Object.values(comments).map(comment => {
           return <Comment comment={ comment } key={ comment.id }/>;
@@ -57,7 +60,9 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ createComment, closeLoginModal }, dispatch);
+  return bindActionCreators(
+    { createComment, closeLoginModal, signIn },
+    dispatch);
 };
 
 export default connect(
