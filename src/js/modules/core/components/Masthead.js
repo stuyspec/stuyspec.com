@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import { getSections } from "../../sections/selectors";
+import { getTopLevelSections } from "../../sections/selectors";
 
 const styles = {
   Masthead: {
@@ -53,9 +53,7 @@ const styles = {
   },
 };
 
-const Masthead = ({ classes, sections }) => {
-  // TODO: check if parentSlug => parentId still works
-  const topLevelSections = Object.filter(sections, section => !section.parentId);
+const Masthead = ({ classes, topLevelSections }) => {
   return (
     <div className={ classes.Masthead }>
       <Link to="/" className={ classes.theSpectatorLogo }>The Spectator</Link>
@@ -74,11 +72,11 @@ const Masthead = ({ classes, sections }) => {
         }
       </ul>
     </div>
-  )
+  );
 };
 
 const mapStateToProps = state => ({
-  sections: getSections(state),
+  topLevelSections: getTopLevelSections(state),
 });
-// TODO: remove getTopLevelSections(state)
+
 export default connect(mapStateToProps)(injectSheet(styles)(Masthead));

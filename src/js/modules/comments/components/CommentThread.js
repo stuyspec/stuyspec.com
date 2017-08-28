@@ -30,7 +30,7 @@ const CommentThread = ({
     createComment({
       ...values,
       articleId: article.id,
-      userId: 1, //session.data.data.id // left off at VM37700:52 Uncaught TypeError: Cannot read property 'data' of null
+      userId: session.data.data.id
     });
   };
   return (

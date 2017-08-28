@@ -8,7 +8,7 @@ import { getFakeAuthorshipsForArticleResponse } from "./selectors";
 export const fetchArticles = () => {
   return (dispatch, getState) => {
     dispatch({ type: t.FETCH_ARTICLE_PENDING });
-    axios.get(`https://api.stuyspec.xyz/articles`, STUY_SPEC_API_HEADERS)
+    axios.get(`${STUY_SPEC_API_URL}/articles`, STUY_SPEC_API_HEADERS)
       .then(response => {
         validateArticles(response.data);
         dispatch({

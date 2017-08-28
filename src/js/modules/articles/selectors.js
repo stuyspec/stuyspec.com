@@ -125,10 +125,12 @@ export const getArticleFeaturedMedia = createSelector(
     const featuredMedia = Object.values(media).find(mediaObject => {
       return mediaObject.isFeatured && mediaObject.articleId === article.id;
     });
-    return {
-      ...featuredMedia,
-      creator: users[ featuredMedia.userId ],
-    };
+    if (featuredMedia) {
+      return {
+        ...featuredMedia,
+        creator: users[ featuredMedia.userId ],
+      };
+    }
   }
 );
 

@@ -4,7 +4,7 @@ import injectSheet from "react-jss";
 
 import ArticleHeader from "./ArticleHeader";
 import ArticleBody from "./ArticleBody";
-import { CommentThread } from "../../comments/components";
+import CommentThread from "../../comments/components/CommentThread";
 import {
   getArticleFromRequestedSlug,
   getArticleFeaturedMedia,
