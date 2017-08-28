@@ -1,6 +1,5 @@
 import React from "react";
-import Row from "react-bootstrap/lib/row";
-import Col from "react-bootstrap/lib/col";
+import { Row, Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
