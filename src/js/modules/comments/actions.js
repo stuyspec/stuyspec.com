@@ -2,15 +2,13 @@ import * as t from './actionTypes';
 import { STUY_SPEC_API_HEADER, STUY_SPEC_API_URL } from "../../constants";
 import axios from 'axios';
 import { reset } from 'redux-form';
-import {validateKey} from "../../utils";
+import { validateKey } from "../../utils";
 
-export const postComment = (values) => {
-  return (dispatch) => {
-    /*
-    - pending payload: values
-    -
-     */
-    dispatch({ type: t.POST_COMMENT_PENDING });
+export const createComment = values => {
+  return dispatch => {
+    dispatch({
+      type: t.CREATE_COMMENT_PENDING
+    });
     //TODO: ONCE COMMENT API IS MERGED THEN DO THIS
     //axios.post(`${STUY_SPEC_API_URL}/comments`,values, { 'headers': STUY_SPEC_API_HEADER })
     axios.get(`${STUY_SPEC_API_URL}/articles`, { 'headers': STUY_SPEC_API_HEADER })
@@ -178,7 +176,7 @@ export const fetchReplies = () => {
 
 const validateComments = (commentsArray) => {
   const integerProperties = [ 'id', 'userId', 'articleId' ];
-  const stringProperties = [ 'content', 'publishedAt'];
+  const stringProperties = [ 'content', 'publishedAt' ];
   if (!Array.isArray(commentsArray)) {
     throw 'EXCEPTION: comments response is not an array.'
   }
@@ -195,7 +193,7 @@ const validateComments = (commentsArray) => {
 
 const validateReplies = (repliesArray) => {
   const integerProperties = [ 'id', 'userId', 'commentId' ];
-  const stringProperties = [ 'content', 'publishedAt'];
+  const stringProperties = [ 'content', 'publishedAt' ];
   if (!Array.isArray(repliesArray)) {
     throw 'EXCEPTION: comments response is not an array.'
   }

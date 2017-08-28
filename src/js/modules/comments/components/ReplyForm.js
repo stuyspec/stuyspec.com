@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import injectSheet from 'react-jss';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from "redux-form";
 
 const styles = {
   ReplyForm: {
@@ -17,7 +17,6 @@ const styles = {
     color: '#000',
     fontFamily: 'Minion Pro',
     fontSize: '18px',
-    height: '222px',
     lineHeight: '1.44',
     marginBottom: '14px',
     padding: '12px 12px 0',
@@ -79,70 +78,89 @@ const validate = values => {
 const renderField = ({
                        input,
                        type,
+                       height
                        meta: { touched, error, warning }
-                     }) =>
-  <div>
-      <textarea {...input} placeholder="Write a reply..."
-                type={type}
-                style={styles.bigBox}/>
-    {touched &&
-    ((error &&
-      <span style={styles.errorMessage}>
-            {error}
-          </span>) ||
-      (warning &&
-        <span>
-              {warning}
-            </span>))}
-
-  </div>;
-
-const ReplyForm = ({
-                     classes,
-                     handleSubmit,
-                     submitting,
-                     session,
-                   }) => {
-  const editProfile = () => {
-    console.log('editing profile');
-  };
-  const createUserInfo = () => {
-    return (
-      <div className={classes.userInfo}>
-        <p className={classes.userName}>
-          {/*TODO:{session.firstName} {session.lastName}*/}
-          {session.email}
-        </p>
-        <button className={classes.editProfile} onClick={editProfile}>
-          Edit Profile
-        </button>
-      </div>
-    )
-  };
-  const createButton = () => {
-    return (
-      <button type="submit"
-              disabled={submitting}
-              className={classes.submitButton}>
-        Submit
-      </button>
-    );
-  };
+                     }) => {
   return (
-    <Col mdOffset={1} md={6} lgOffset={1} lg={6} className={classes.ReplyForm}>
-      {createUserInfo()}
-      <form onSubmit={handleSubmit}>
-        <Field name="replyInput"
-               type="text"
-               component={renderField}/>
-        <div className={classes.submitDiv}>
-          {createButton()}
-        </div>
-      </form>
-    </Col>
-  );
-};
+    <div>
+      <textarea { ...input }
+                placeholder="Write a comment..."
+                style={ {
+                  ...styles.bigBox,
+                  height
+                } }/>
+    {
+      touched &&
+      ((error &&
+        <span style={ styles.errorMessage }>
+            { error }
+          </span>) ||
+        (warning &&
+          <span>
+              { warning }
+            </span>))
+    }
 
+    </div>
+  );
+}
+
+
+class ReplyForm extends Component {
+  constructor(props) {
+    super(props);
+    this.setState({ height: '0px' });
+  }
+
+  open = () => {
+    this.setState({ height: '222px' });
+  }
+  close = () => {
+    this.setState({ height: '0px' });
+  }
+
+  render() {
+    const { classes, handleSubmit, submitting, session } = this.props;
+    const user = session.data.data;
+    return (
+      <Col mdOffset={ 1 } md={ 6 } lgOffset={ 1 } lg={ 6 }
+           className={ classes.ReplyForm }>
+        <div className={ classes.userInfo }>
+          <p className={ classes.userName }>
+            { user.firstName } { user.lastName }
+          </p>
+          <button className={ classes.editProfile } onClick={ editProfile }>
+            Edit Profile
+          </button>
+          <button className={ classes.logOut }>
+            Log Out
+          </button>
+          <p className={ classes.notYou }>
+            Not You?
+          </p>
+        </div>
+        <form onSubmit={ handleSubmit }>
+          <Field name="content" type="text" height={ this.state.height } component={ renderField }/>
+          <div className={ classes.submitDiv }>
+            <button type="submit"
+                    disabled={ submitting }
+                    className={ classes.submitButton }>
+              Submit
+            </button>
+          </div>
+        </form>
+      </Col>
+    );
+  }
+}
+
+const openReply = () => {
+  if (!session) {
+    openModalLogin();
+  } else {
+    closeModalLogin();
+  }
+};
 const mapStateToProps = (state, ownProps) => ({});
 
 

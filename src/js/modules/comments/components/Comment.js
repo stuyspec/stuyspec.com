@@ -4,7 +4,7 @@ import injectSheet from 'react-jss';
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { bindActionCreators } from "redux";
 
-import { getUsers } from "../../users/selectors";
+import { getRoles, getUserRoles, getUsers } from "../../users/selectors";
 import {
   openReplyBox,
   postReply,
@@ -69,110 +69,54 @@ const styles = {
   },
 };
 
-const Comment = ({
-                   classes,
-                   comment,
-                   replies,
-                   owner,
-                   allUsers,
-                   authorships,
-                   media,
-                   openReplyBox,
-                   activeReply,
-                   session,
-                   postReply,
-                   openModalLogin,
-                   closeModalLogin,
-                 }) => {
-  const getUserType = (user) => {
-    if (authorships.includes(user.id)) {
-      return '(article contributor)'
-    }
-    if (Object.keys(media).includes(user.id.toString())) {
-      return `(article ${media[ user.id ].slice(0, -1)})`;
-    }
-  };
-  const openReply = () => {
-    if (!session) {
-      openModalLogin();
+const Comment = ({ classes, comment, users, session }) => {
+  const handleSubmit = values => {
+    if (comment.commentId) {
+      createReply({...values, commentId: comment.commentId, userId: session.data.data.id });
     } else {
-      openReplyBox(comment.id);
-      closeModalLogin();
+      createComment({ ...values, articleId: article.id, userId: session.data.data.id });
     }
   };
-  const createComment = (user, comment) => {
-    return (
-      <div>
-        <p className={classes.commentInfo}>
-            <span className={classes.userName}>
-              {user.firstName} {user.lastName}
-            </span>
-          <span className={classes.userType}>
-              {getUserType(user)}
-            </span>
-          <span className={classes.bulletPoint}>&#8226;</span>
-          <span className={classes.dateline}>
-            {comment.publishedAt}
-          </span>
-        </p>
-        <p className={classes.content}>{comment.content}</p>
-        <button className={classes.replyComment}
-                onClick={openReply}>
-          Reply
-        </button>
-      </div>
-    );
-  };
-  const createReplies = () => {
-    return replies.map(reply => {
-      const user = allUsers[ reply.userId ];
-      return (
-        <Row key={reply.id}>
-          <Col mdOffset={1} md={6}
-               lgOffset={1} lg={6}
-               className={classes.Reply}>
-            {createComment(user, reply)}
-          </Col>
-          <Col md={5} lg={5}/>
-        </Row>
-      );
-    });
-  };
-  const handlePostReply = (values) => {
-    postReply(values, 'replyForm-' + comment.id);
-  };
+  const user = users[ comment.userId ];
+  const offset = comment.parentId ? 1 : 0;
   return (
-    <Grid className={classes.Comment}>
+    <Grid className={ classes.Comment }>
       <Row>
-        <Col md={7} lg={7} className={classes.mainComment}>
-          {createComment(owner, comment)}
+        <Col mdOffset={ offset } lgOffset={ offset } md={ 7 - offset } lg={ 7 - offset }>
+          <p className={ classes.commentInfo }>
+            <span className={ classes.userName }>
+              { user.firstName } { user.lastName }
+            </span>
+            <span className={ classes.bulletPoint }>&#8226;</span>
+            <span className={ classes.dateline }>{ comment.publishedAt }</span>
+          </p>
+          <p className={ classes.content }>{ comment.content }</p>
+          {
+            !comment.commentId && (
+              <Row>
+                <Col mdOffset={ offset } lgOffset={ offset } md={ 7 - offset } lg={ 7 - offset }>
+                  <button className={ classes.replyComment } onClick={ openReply }>
+                    Reply
+                  </button>
+                  <ReplyForm form={ 'replyForm-' + comment.id }
+                             key={ comment.id }
+                             session={ session }
+                             onSubmit={ handleSubmit }
+                  />
+                </Col>
+                <Col md={ 5 } lg={ 5 }/>
+              </Row>
+            )
+          }
         </Col>
-        <Col md={5} lg={5}/>
-      </Row>
-      {createReplies()}
-      <Row>
-        {activeReply.includes(comment.id) &&
-        <ReplyForm form={'replyForm-' + comment.id}
-                   key={comment.id}
-                   comment={comment}
-                   session={session}
-                   initialValues={{
-                     userId: session.id,
-                     commentId: comment.id,
-                   }}
-                   onSubmit={handlePostReply}
-        />}
-        <Col md={5} lg={5}/>
+        <Col md={ 5 } lg={ 5 }/>
       </Row>
     </Grid>
-  )
+  );
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  replies: getRepliesFromComment(state, ownProps),
-  owner: getUserFromComment(state, ownProps),
-  allUsers: getUsers(state),
-  activeReply: state.comments.openReplyBox,
+  users: getUsers(state),
 });
 
 const mapDispatchToProps = dispatch => {

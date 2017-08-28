@@ -15,9 +15,9 @@ import {
   getPhotographerPhotographs,
 } from "../media/selectors";
 import {
-  getComments
+  getComments,
+  getReplies
 } from '../comments/selectors';
-import {MEDIA_CREATOR_SLUG} from "../../constants";
 
 export const getArticles = state => state.articles.articles;
 const getArticleFromProps = (state, props) => props.article;
@@ -148,9 +148,14 @@ export const getFakeAuthorshipsForArticleResponse = createSelector(
 );
 
 export const getCommentsFromArticle = createSelector(
-  [ getComments, getArticleFromProps ],
-  (comments, article) => {
-    return Object.filter(comments, comment => comment.articleId === article.id);
+  [ getArticleFromProps, getComments, getReplies ],
+  (article, comments, replies) => {
+    return Object.values(comments).reduce((acc, comment) => {
+      acc.push(comment);
+      acc.push(
+        ...Object.values(replies.filter(reply => reply.commentId === commentId))
+      );
+    }, []);
   }
 );
 
@@ -164,16 +169,14 @@ export const getAuthorshipsFromArticle = createSelector(
   }
 );
 
-export const getMediaCreatorFromArticle = createSelector(
-  [ getMedia, getArticleFromProps ],
-  (media, article) => {
-    const filteredMedia = Object.filter(media, mediaObject => {
-      return mediaObject.articleId === article.id;
-    });
-    const mediaCreators = {};
-    Object.values(filteredMedia).map(mediaObject => {
-      mediaCreators[mediaObject.userId] = MEDIA_CREATOR_SLUG[mediaObject.type];
-    });
-    return mediaCreators;
+export const getArticleMediaCreators = createSelector(
+  [ getArticleFromProps, getMedia, getUsers ],
+  (article, media, users) => {
+    return Object.values(media).reduce((acc, mediaObject) => {
+      if (article.id === mediaObject.articleId) {
+        acc[ mediaObject.userId ] = users[ mediaObject.userId ];
+      }
+      return acc;
+    }, {});
   }
 );

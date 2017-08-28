@@ -9,9 +9,7 @@ import CommentForm from './CommentForm';
 import ModalOverlayLogin from './ModalOverlayLogin';
 
 import {
-  getCommentsFromArticle,
-  getAuthorshipsFromArticle,
-  getMediaCreatorFromArticle,
+  getCommentsFromArticle
 } from "../../articles/selectors";
 import { postComment, closeModalLogin } from "../actions";
 
@@ -24,60 +22,39 @@ const styles = {
 const CommentThread = ({
                          classes,
                          comments,
-                         postComment,
                          article,
-                         authorships,
-                         media,
                          session,
                          isModalOpen,
                          closeModalLogin,
                        }) => {
+  const handleSubmit = values => {
+    createComment({ ...values, userId: session.id, articleId: article.id });
+  };
   return (
-    <div className={classes.CommentThread}>
+    <div className={ classes.CommentThread }>
       <Grid>
         <Row>
-          {session ?
-            <CommentForm initialValues={{
-              userId: session.id,
-              articleId: article.id
-            }}
-                         session={session}
-                         onSubmit={postComment}/> :
-            <CommentForm session={session}/>
-          }
-          <Col md={5} lg={5}/>
+          <CommentForm session={ session } onSubmit={ handleSubmit }/>
+          <Col md={ 5 } lg={ 5 }/>
         </Row>
       </Grid>
-      <ModalOverlayLogin isModalOpen={isModalOpen}
-                         closeModalLogin={closeModalLogin}/>
-      {Object.values(comments).map(comment => {
-        return <Comment comment={comment}
-                        key={comment.id}
-                        authorships={authorships}
-                        media={media}
-                        session={session}
-                        closeModalLogin={closeModalLogin}/>;
-      })}
-    </div>
+      { /* TODO: rename to login modal*/ }
+      <ModalOverlayLogin isModalOpen={ isModalOpen } closeModalLogin={ closeModalLogin }/>
+      {
+        Object.values(comments).map(comment => {
+          return <Comment article={ article }
+                          comment={ comment }
+                          key={ comment.id }
+                          session={ session }
+                          closeModalLogin={ closeModalLogin }/>;
+        })
+      }
+      </div>
   );
 };
 
-/**
- * activeUser: {
-    id: 1,
-    firstName: "Jason",
-    lastName: "Lin",
-    username: "jasonlin",
-    email: "jasonlin@gmail.com",
-    description: "Jason is a web developer for The Spectator.",
-    slug: "jason-lin",
-    url: "https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/17190808_757980897706195_7544830170558586831_n.jpg?oh=628bfb2a1ce2d86e10e13658fb40ed6d&oe=5A28122E"
-  },
- */
 const mapStateToProps = (state, ownProps) => ({
   comments: getCommentsFromArticle(state, ownProps),
-  authorships: getAuthorshipsFromArticle(state, ownProps),
-  media: getMediaCreatorFromArticle(state, ownProps),
   session: state.accounts.session,
   isModalOpen: state.comments.isModalOpen,
 });

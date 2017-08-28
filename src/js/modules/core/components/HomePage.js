@@ -37,15 +37,17 @@ const HomePage = ({
       );
     });
   };
+  const loadAll = () => {
+    fetchArticles();
+    fetchUsers();
+    fetchMedia();
+    fetchComments();
+    fetchReplies();
+  }
   return (
     <div className={ classes.HomePage }>
       <h1>Home page</h1>
-      All three buttons must be pressed!(Users,media, then articles)<br/>
-      <button onClick={ fetchArticles }>fetch articles</button>
-      <button onClick={ fetchUsers }>fetch users</button>
-      <button onClick={ fetchMedia }>fetch media</button>
-      <button onClick={ fetchComments }>fetch comments</button>
-      <button onClick={ fetchReplies }>fetch replies</button>
+      <button onClick={ loadAll }>load all</button>
       <Link to="/myaccount">myaccount</Link>
       <h2>Articles</h2>
       <ul>

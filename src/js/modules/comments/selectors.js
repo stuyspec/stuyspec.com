@@ -4,7 +4,7 @@ import { getUsers } from "../users/selectors";
 export const getComments = (state) => state.comments.comments;
 const getCommentFromProps = (state, props) => props.comment;
 const getReplyFromProps = (state,props) => props.reply;
-const getReplies = (state) => state.comments.replies;
+export const getReplies = (state) => state.comments.replies;
 
 export const getRepliesFromComment = createSelector(
   [ getCommentFromProps, getReplies ],
