@@ -7,57 +7,33 @@ import { getUsers } from "../../users/selectors";
 
 const styles = {
   Comment: {
-    marginBottom: "10px",
-  },
-  Reply: {
-    padding: 0,
-    marginBottom: '14px',
+    fontFamily: 'Minion Pro',
+    marginBottom: '18px',
   },
   commentInfo: {
+    marginBottom: '2px',
+  },
+  userName: {
+    fontSize: '18px',
+    fontWeight: 'bold',
     color: '#000',
-    fontFamily: 'Circular Std',
-    margin: '0 0 6px',
   },
   content: {
     color: '#000',
-    fontFamily: 'Minion Pro',
-    fontSize: '18px',
-    lineHeight: '1.44',
-    margin: '0 0 7px',
-  },
-  mainComment: {
-    marginBottom: '14px',
-    padding: 0,
-  },
-  replyComment: {
-    background: 'none',
-    border: 'none',
-    color: '#3572b7',
     fontSize: '16px',
+    lineHeight: '1.5',
     margin: 0,
-    padding: 0,
   },
   bulletPoint: {
-    bottom: '1.54px',
     color: '#ccc',
     fontSize: '12px',
-    marginLeft: '4px',
+    margin: '0 4px',
     position: 'relative',
-  },
-  userType: {
-    color: '#a8a8a8',
-    fontSize: '16px',
-    marginLeft: '4px',
   },
   publishedAt: {
     color: '#a8a8a8',
     fontSize: '16px',
     fontWeight: 300,
-    marginLeft: '4px',
-  },
-  userName: {
-    fontSize: '18px',
-    fontWeight: 'bold',
   },
 };
 

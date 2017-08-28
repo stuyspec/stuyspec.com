@@ -19,10 +19,11 @@ const styles = {
 
 const CommentThread = ({ classes, comments, article, session, isModalOpen, closeLoginModal }) => {
   const handleSubmit = values => {
+    console.log(3);
     createComment({
       ...values,
       articleId: article.id,
-      userId: session.data.data.id
+      userId: session.data.data.id // left off at VM37700:52 Uncaught TypeError: Cannot read property 'data' of null
     });
   };
   return (
