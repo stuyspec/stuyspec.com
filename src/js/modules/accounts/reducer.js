@@ -13,8 +13,8 @@ import {
 
   UPDATE_PASSWORD_PENDING,
   UPDATE_USER_FULFILLED,
-  UPDATE_USER_REJECTED,
-} from "./actionTypes";
+  UPDATE_USER_REJECTED, UPDATE_USER_PENDING,
+} from './actionTypes'
 
 const initialState = {
   status: {
@@ -111,6 +111,38 @@ const reducer = (state = { ...initialState }, action) => {
           errors: action.payload.response.data.errors,
           message: null,
           form: "signOut",
+        },
+      };
+    }
+
+    case UPDATE_USER_PENDING: {
+      return {
+        ...state,
+        status: {
+          errors: [],
+          message: null,
+          form: null,
+        },
+      }
+    }
+    case UPDATE_USER_FULFILLED: {
+      return {
+        ...state,
+        session: action.payload,
+        status: {
+          errors: [],
+          message: "Your changes have been saved.",
+          form: "editUser",
+        },
+      }
+    }
+    case UPDATE_USER_REJECTED: {
+      return {
+        ...state,
+        status: {
+          errors: action.payload.response.data.errors,
+          message: null,
+          form: "editUser",
         },
       };
     }

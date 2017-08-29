@@ -21,7 +21,10 @@ const ProfilePage = ({ session, signOut }) => {
       "uid": session.headers.uid,
     });
   };
-  const user = session.data.data;
+  let user = session.data.data; // how session looks after signing in
+  if (!user) {
+    user = session.data // how session looks after updating profile
+  }
   return (
     <div>
       <p>first name: {user.firstName}</p>

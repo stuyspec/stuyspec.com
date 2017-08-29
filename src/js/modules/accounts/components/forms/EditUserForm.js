@@ -62,7 +62,7 @@ const EditUserForm = ({ classes, handleSubmit, submitting, status }) => {
           name="email"
           type="email"
           component={renderField}
-          label="Email"
+          label="Email (if this field is changed, a confirmation email will be sent to the new email)"
         />
         <div>
           <button type="submit" disabled={submitting}>
@@ -70,22 +70,26 @@ const EditUserForm = ({ classes, handleSubmit, submitting, status }) => {
           </button>
         </div>
       </form>
-      <p key="success" className={classes.successMessage}>
-        {status.message}
-      </p>
-      {status.errors.map((error, index) => {
-        return (
-          <p key={index} className={classes.errorMessage}>
-            {error}
+      {status.form === "editUser" && (
+        <div>
+          <p key="success" className={classes.successMessage}>
+            {status.message}
           </p>
-        );
-      })}
+          {status.errors.map((error, index) => {
+            return (
+              <p key={index} className={classes.errorMessage}>
+                {error}
+              </p>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  status: state.accounts.updateUserStatus,
+  status: state.accounts.status,
 });
 
 const SmartEditUserForm = connect(mapStateToProps, null)(
