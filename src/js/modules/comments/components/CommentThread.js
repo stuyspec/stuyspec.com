@@ -10,7 +10,7 @@ import LoginModalOverlay from "../../accounts/components/LoginModalOverlay";
 
 import { createComment, closeLoginModal } from "../actions";
 import { signIn } from "../../accounts/actions";
-import { getRequestedArticleComments } from "../../articles/selectors";
+import { getRequestedArticleComments } from "../selectors";
 
 const styles = {
   CommentThread: {

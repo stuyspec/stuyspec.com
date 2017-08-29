@@ -1,13 +1,12 @@
 import {
-  FETCH_USER_PENDING,
-  FETCH_USER_REJECTED,
-  FETCH_USER_FULFILLED,
+  FETCH_USERS_PENDING,
+  FETCH_USERS_REJECTED,
+  FETCH_USERS_FULFILLED,
+  FETCH_USER_ROLES_FULFILLED,
+  FETCH_ROLES_FULFILLED,
 } from "./actionTypes";
 
 const initialState = {
-  CONTRIBUTOR_ROLE_ID: 0,
-  ILLUSTRATOR_ROLE_ID: 1,
-  PHOTOGRAPHER_ROLE_ID: 2,
   isFetching: false,
   isFetched: false,
   error: null,
@@ -18,10 +17,10 @@ const initialState = {
 
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
-    case FETCH_USER_PENDING: {
+    case FETCH_USERS_PENDING: {
       return { ...state, isFetching: true };
     }
-    case FETCH_USER_FULFILLED: {
+    case FETCH_USERS_FULFILLED: {
       return {
         ...state,
         isFetching: false,
@@ -32,8 +31,22 @@ const reducer = (state = { ...initialState }, action) => {
         }, {}),
       };
     }
-    case FETCH_USER_REJECTED: {
+    case FETCH_USERS_REJECTED: {
       return { ...state, isFetching: false, error: action.payload };
+    }
+    case FETCH_USER_ROLES_FULFILLED: {
+      return { ...state, userRoles: action.payload }
+    }
+    case FETCH_ROLES_FULFILLED: {
+      console.log(action.payload)
+      return {
+        ...state,
+        roles: action.payload.reduce((acc, role) => {
+          console.log(role);
+          acc[role.id] = role;
+          return acc;
+        }),
+      }
     }
   }
   return state;
