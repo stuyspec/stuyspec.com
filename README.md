@@ -20,7 +20,27 @@ npm install
 gulp
 ```
 
-## Webstorm
-1. Get a free student license at [JetBrains](https://www.jetbrains.com/student/)
-2. Download and install WebStorm, JetBrains' JavaScript IDE.
-3. We need to add [Prettier](https://github.com/prettier/prettier) to Webstorm to make sure all developers have a uniform coding style. Before you proceed with this step, make sure that when adding the parameters of Prettier into WebStorm, do NOT use the parameter `--single-quote`. Use [this guide](https://medium.com/@jm90mm/adding-prettier-to-webstorm-a218eeec04d2) to add Prettier to Webstorm.
+## Coding environment
+**WebStorm**: the smartest JavaScript IDE (powerful, but will lag on weak computers). Get a free student license at [JetBrains](https://www.jetbrains.com/student/), then download and install WebStorm.
+**Prettier**: we need to add [Prettier](https://github.com/prettier/prettier) to Webstorm to make sure all developers have a uniform coding style.
+In the Terminal, add Prettier with yarn: `yarn global add prettier`.  
+
+In Webstorm, navigate to `WebStorm > Preferences > Tools > External Tools`.  
+
+Click on the `+` icon to add a new external tool. Then fill out the `Name` and under the Tool Settings, fill out `Program`, `Parameters` , and `Working directory`.  
+
+```
+Program: /usr/local/lib/node_modules/prettier/bin/prettier.js
+Parameters: --write --trailing-comma all $FilePathRelativeToProjectRoot$
+Working directory: $ProjectFileDir$
+```
+
+<img src="https://cdn-images-1.medium.com/max/1600/1*anZPX6XaHHBJQUC4Zz6aSA.png"/>
+
+To set the keybindings for Prettier, navigate to `WebStorm > Preferences > Keymap`. Under `Keymap`, use the search input box to search for `prettier`.
+
+<img src="https://cdn-images-1.medium.com/max/1600/1*rwhqT811uuR2X4ftQpWOPA.png"/>
+
+Double click on Prettier and add keyboard shortcut. I am on a Mac and I personally use `command + shift + p`.  
+
+You are now good to go, now any file that you want to prettify, just go to that specific file in WebStorm and then press your set keybinding and it should automatically prettify the file that you are currently viewing.
