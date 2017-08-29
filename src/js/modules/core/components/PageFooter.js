@@ -127,12 +127,12 @@ const PageFooter = ({ classes, topLevelSectionsWithChildren, descriptions }) => 
   return (
     <Grid className={ classes.PageFooter }>
       <Row className={ classes.pageFooterMain }>
-        <Col md={ 8 } mdOffset={ 2 }>
+        <Col lg={ 8 } lgOffset={ 2 }>
           <Link to="/" className={ classes.theSpectator }>
             The Spectator
           </Link>
         </Col>
-        <Col md={ 8 } mdOffset={ 2 } className={ classes.sectionFlex }>
+        <Col lg={ 8 } lgOffset={ 2 } className={ classes.sectionFlex }>
           { createSectionLinks() }
           { createDescriptionLinks() }
         </Col>

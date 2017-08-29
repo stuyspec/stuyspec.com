@@ -1,5 +1,4 @@
 # client-app
-Client facing application written in React
+Client facing application written in React.  
 
-## Resources
-- <a href="https://www.npmjs.com/package/slugify">Slugify</a>
+200 commits!
