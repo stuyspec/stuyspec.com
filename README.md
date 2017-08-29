@@ -43,4 +43,9 @@ To set the keybindings for Prettier, navigate to `WebStorm > Preferences > Keyma
 
 Double click on Prettier and add keyboard shortcut. I am on a Mac and I personally use `command + shift + p`.  
 
-You are now good to go, now any file that you want to prettify, just go to that specific file in WebStorm and then press your set keybinding and it should automatically prettify the file that you are currently viewing.
+You are now good to go, now any file that you want to prettify, just go to that specific file in WebStorm and then press your set keybinding and it should automatically prettify the file that you are currently viewing.  
+
+To run Prettier on the entire projects, `cd` to the root of client-app and run
+```
+find ./src/js/modules -type f -name "*.js" | xargs prettier --write --trailing-comma all
+```
