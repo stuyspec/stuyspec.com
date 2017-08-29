@@ -1,10 +1,9 @@
 import {
   FETCH_ARTICLE_PENDING,
-  FETCH_ARTICLE_REJECTED,
   FETCH_ARTICLE_FULFILLED,
-  ADD_ARTICLES,
+  FETCH_ARTICLE_REJECTED,
   ADD_AUTHORSHIPS
-} from './actionTypes';
+} from "./actionTypes";
 
 const initialState = {
   isFetching: false,
@@ -12,7 +11,6 @@ const initialState = {
   error: null,
   articles: {},
   authorships: [],
-  response: {},
 };
 
 const reducer = (state = { ...initialState }, action) => {
@@ -21,11 +19,15 @@ const reducer = (state = { ...initialState }, action) => {
       return { ...state, isFetching: true, };
     }
     case FETCH_ARTICLE_FULFILLED: {
+      const newArticles = action.payload.reduce((acc, article) => {
+        acc[ article.id ] = article;
+        return acc;
+      }, {});
       return {
         ...state,
         isFetching: false,
         isFetched: true,
-        response: action.payload,
+        articles: { ...state.articles, ...newArticles },
       };
     }
     case FETCH_ARTICLE_REJECTED: {
@@ -34,15 +36,6 @@ const reducer = (state = { ...initialState }, action) => {
         isFetching: false,
         error: action.payload,
       };
-    }
-    case ADD_ARTICLES: {
-      return {
-        ...state,
-        articles: {
-          ...state.articles,
-          ...action.payload
-        },
-      }
     }
     case ADD_AUTHORSHIPS: {
       return {

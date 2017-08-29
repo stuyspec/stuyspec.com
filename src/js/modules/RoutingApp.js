@@ -7,7 +7,12 @@ import { connect } from "react-redux";
 import { HomePage, PageLayout } from "./core/components";
 import { ArticlePage } from "./articles/components";
 import { SectionPage } from "./sections/components";
-import { RolePage, ContributorPage } from "./users/components";
+import {
+  RolePage,
+  ContributorPage,
+  PhotographerPage,
+  IllustratorPage
+} from "./users/components";
 import { DescriptionPage } from "./descriptions/components";
 
 import { getSections } from "./sections/selectors";
@@ -62,20 +67,34 @@ const RoutingApp = ({ sections, roles, descriptions }) => {
     })
   };
   return (
-    <ConnectedRouter history={ appHistory } onUpdate={ () => window.scrollTo(0, 0) }>
+    <ConnectedRouter history={ appHistory }>
       <PageLayout>
         <Switch>
-          <Route exact path="/" component={HomePage}/>
-          {createSectionRoutes()}
-          {createArticleRoutes()}
-          {createRoleRoutes()}
-          {createDescriptionRoutes()}
-          <Route exact path={'/contributors/:contributor_slug'}
-                 key={`contributorRoute`}
-                 render={props => (
-                   <ContributorPage match={props.match}
-                                    role={roles[ 'contributors' ]}/>
-                 )}/>
+          <Route exact path="/" component={ HomePage }/>
+          {/* These routes are created in separate functions, as opposed to
+           * separate components, because nesting <Route>'s in <div>'s will
+           * throw off the <Switch> routing.
+           */}
+          { createSectionRoutes() }
+          { createArticleRoutes() }
+          { createRoleRoutes() }
+          <Route exact path={ '/contributors/:contributor_slug' }
+                 key={ `contributorRoute` }
+                 render={ props => (
+                   <ContributorPage match={ props.match }
+                                    role={ roles[ 'contributors' ] }/>
+                 ) }/>
+          <Route exact path={ '/illustrators/:illustrator_slug' }
+                 key={ `illustratorRoute` }
+                 render={ props => (
+                   <IllustratorPage match={ props.match }/>
+                 ) }/>
+          <Route exact path={ '/photographers/:photographer_slug' }
+                 key={ `photographerRoute` }
+                 render={ props => (
+                   <PhotographerPage match={ props.match }
+                                     role={ roles[ 'photographers' ] }/>
+                 ) }/>
         </Switch>
       </PageLayout>
     </ConnectedRouter>

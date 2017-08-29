@@ -1,5 +1,8 @@
 import React from "react";
 import injectSheet from "react-jss";
+import { Link } from "react-router-dom";
+import { MEDIA_CREATOR_SLUGS } from "../../../constants";
+import { capitalizeWord } from "../../../utils";
 
 const styles = {
   figure: {
@@ -14,19 +17,26 @@ const styles = {
     fontSize: '14px',
     lineHeight: '1.07',
     marginTop: '7px',
-    '& span:last-child': {
-      color: '#888'
-    },
+  },
+  creditLine: {
+    color: '#888',
   },
 };
 
 const ArticleFeaturedMedia = ({ classes, featuredMedia }) => {
+  const { creator } = featuredMedia;
   return (
     <figure className={ classes.figure }>
       <img className={ classes.img } src={ featuredMedia.url }/>
       <figcaption className={ classes.caption }>
-        <span>{ featuredMedia.caption } </span>
-        <span>{ featuredMedia.type } by { featuredMedia.credits }</span>
+        <span>{ featuredMedia.caption }&nbsp;</span>
+        <Link className={ classes.creditLine }
+              to={ `/${MEDIA_CREATOR_SLUGS[ featuredMedia.type ]}/${creator.slug}` }>
+          { capitalizeWord(featuredMedia.type) }
+          &nbsp;by&nbsp;
+          { `${creator.firstName} ${creator.lastName}` }
+        </Link>
+        .
       </figcaption>
     </figure>
   );

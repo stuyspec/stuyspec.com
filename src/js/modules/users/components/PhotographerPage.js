@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 
-import { getContributorFromSlug } from "../selectors";
-import { getContributorArticles } from "../../articles/selectors";
+import { getPhotographerFromSlug } from "../selectors";
+import { getPhotographerArticles } from "../../articles/selectors";
 import { ArticleRow } from "../../articles/components";
 
 const styles = {
-  ContributorPage: {
+  PhotographerPage: {
     marginTop: '62px',
   },
   name: {
@@ -44,19 +44,17 @@ const styles = {
   },
 };
 
-const ContributorPage = ({ classes, contributor, articles }) => {
+const PhotographerPage = ({ classes, photographer, articles }) => {
   return (
-    <Grid className={ classes.ContributorPage }>
+    <Grid className={ classes.PhotographerPage }>
       <Row>
         <Col md={ 9 }>
-          <p className={ classes.name }>
-            { `${contributor.firstName} ${contributor.lastName}` }
-          </p>
-          <img alt={ contributor.lastName }
+          <p className={ classes.name }>{ photographer.firstName } { photographer.lastName }</p>
+          <img alt={ photographer.lastName }
                className={ classes.profilePicture }
-               src={ contributor.url }/>
-          <p className={ classes.description }>{ contributor.description }</p>
-          <div className={ classes.workList }>All Work</div>
+               src={ photographer.url }/>
+          <p className={ classes.description }>{ photographer.description }</p>
+          <div className={ classes.workList }>Photographs</div>
           {
             Object.values(articles).map(article => {
               return <ArticleRow key={ article.id } article={ article }/>;
@@ -69,11 +67,11 @@ const ContributorPage = ({ classes, contributor, articles }) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  contributor: getContributorFromSlug(state, ownProps),
-  articles: getContributorArticles(state, ownProps)
+  photographer: getPhotographerFromSlug(state, ownProps),
+  articles: getPhotographerArticles(state, ownProps),
 });
 
 export default connect(
   mapStateToProps,
   null
-)(injectSheet(styles)(ContributorPage));
+)(injectSheet(styles)(PhotographerPage));

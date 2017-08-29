@@ -5,72 +5,45 @@ import {
 } from './actionTypes';
 
 const initialState = {
+  CONTRIBUTOR_ROLE_ID: 0,
+  ILLUSTRATOR_ROLE_ID: 1,
+  PHOTOGRAPHER_ROLE_ID: 2,
   isFetching: false,
   isFetched: false,
   error: null,
-  request: null,
-  users: {
-    "jason-kao": {
-      id: 0,
-      firstName: "Jason",
-      lastName: "Kao",
-      username: "jkao1",
-      email: "jkao1@stuy.edu",
-      description: "Jason is a web editor for The Spectator.",
-      slug: "jason-kao",
-    },
-    "jason-lin": {
-      id: 1,
-      firstName: "Jason",
-      lastName: "Lin",
-      username: "jasonlin",
-      email: "jasonlin@gmail.com",
-      description: "Jason is a web developer for The Spectator.",
-      slug: "jason-lin",
-    },
-    "cathy-cai": {
-      id: 2,
-      firstName: "Cathy",
-      lastName: "Cai",
-      username: "ccai1",
-      email: "ccai1@stuy.edu",
-      description: "Cathy is a web EIT for The Spectator.",
-      slug: "cathy-cai",
-    }
-  },
+  users: {},
   roles: {
-    "contributors": {
+    0: {
       id: 0,
       title: "Contributor",
-      credentialLevel: 0,
       slug: "contributors",
     },
-    "illustrators": {
+    1: {
       id: 1,
       title: "Illustrator",
-      credentialLevel: 0,
       slug: "illustrators",
     },
-    "photographers": {
+    2: {
       id: 2,
       title: "Photographer",
-      credentialLevel: 0,
       slug: "photographers"
     },
   },
   userRoles: [
-    {
-      userSlug: "jason-kao",
-      roleSlug: "contributors",
-    },
-    {
-      userSlug: "jason-lin",
-      roleSlug: "contributors",
-    },
-    {
-      userSlug: "cathy-cai",
-      roleSlug: "contributors",
-    }
+    { userId: 0, roleId: 0 },
+    { userId: 1, roleId: 0 },
+    { userId: 2, roleId: 0 },
+    { userId: 3, roleId: 0 },
+
+    { userId: 0, roleId: 1 },
+    { userId: 1, roleId: 1 },
+    { userId: 2, roleId: 1 },
+    { userId: 3, roleId: 1 },
+
+    { userId: 0, roleId: 2 },
+    { userId: 1, roleId: 2 },
+    { userId: 2, roleId: 2 },
+    { userId: 3, roleId: 2 },
   ]
 };
 
@@ -87,7 +60,10 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         isFetching: false,
         isFetched: true,
-        request: action.payload,
+        users: action.payload.reduce((acc, user) => {
+          acc[ user.id ] = user;
+          return acc;
+        }, {}),
       };
     }
   }

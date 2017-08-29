@@ -1,7 +1,9 @@
 import axios from "axios";
 import * as t from "./actionTypes";
+
 import { STUY_SPEC_API, STUY_SPEC_API_HEADER } from "../../constants";
-import { getProcessedArticlesResponse, getFakeAuthorshipsForArticleResponse } from "./selectors";
+import { validateKey } from "../../utils";
+import { getFakeAuthorshipsForArticleResponse } from "./selectors";
 
 export const fetchArticles = () => {
   return (dispatch, getState) => {
@@ -14,10 +16,6 @@ export const fetchArticles = () => {
           payload: response.data,
         });
         dispatch({
-          type: t.ADD_ARTICLES,
-          payload: getProcessedArticlesResponse(getState()),
-        });
-        dispatch({
           type: t.ADD_AUTHORSHIPS,
           payload: getFakeAuthorshipsForArticleResponse(getState()),
         })
@@ -27,21 +25,8 @@ export const fetchArticles = () => {
           type: t.FETCH_ARTICLE_REJECTED,
           payload: err,
         })
-      })
+      });
   };
-};
-
-const validateArticleKey = (articleObject, key, type) => {
-  if (key in articleObject) {
-    if (typeof (articleObject[ key ]) === type) {
-      return true;
-    } else {
-      throw `EXCEPTION: key ${key} in articleObject is 
-        ${typeof (articleObject[ key ])}, but should be ${type}.`;
-    }
-  } else {
-    throw `EXCEPTION: key ${key} is undefined in articleObject.`;
-  }
 };
 
 /*
@@ -51,17 +36,20 @@ TODO: Add boolean key validity after non-null data seeded @nicholas
  */
 const validateArticles = (articleArray) => {
   const integerProperties = [ 'id', 'sectionId' ];
-  const stringProperties = [ 'title', 'slug', 'content', "createdAt", "updatedAt" ];
+  const stringProperties = [ 'title', 'slug', 'content', 'createdAt', 'updatedAt' ];
   if (!Array.isArray(articleArray)) {
     throw 'EXCEPTION: article response is not an array.'
   }
   articleArray.forEach(articleObject => {
     integerProperties.forEach(numberKey => {
-      validateArticleKey(articleObject, numberKey, 'number');
+      validateKey(articleObject, numberKey, 'number', 'article');
     });
     stringProperties.forEach((stringKey) => {
-      validateArticleKey(articleObject, stringKey, 'string');
+      validateKey(articleObject, stringKey, 'string', 'article');
     });
   });
   return true;
 };
+
+
+

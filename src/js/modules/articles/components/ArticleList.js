@@ -10,20 +10,16 @@ const styles = {
   },
 };
 
-const ArticleList = ({ classes, articles, featuredMedia, section }) => {
-  const createArticleRows = () => {
-    return Object.keys(articles).map(articleSlug => {
-      return <ArticleRow article={articles[ articleSlug ]}
-                         featuredMedia={featuredMedia}
-                         key={articleSlug}
-                         section={section}/>;
-    })
-  };
+const ArticleList = ({ classes, articles }) => {
   return (
-    <Grid className={classes.ArticleList}>
-      {createArticleRows()}
+    <Grid className={ classes.ArticleList }>
+      {
+        Object.values(articles).map(article => {
+          return <ArticleRow article={ article } key={ article.id }/>;
+        })
+      }
     </Grid>
-  )
+  );
 };
 
 export default injectSheet(styles)(ArticleList);

@@ -1,217 +1,217 @@
 const initialState = {
-  isFetching: false,
-  isFetched: false,
-  error: null,
-  request: null,
   sections: {
-    "news": {
+    0: {
       id: 0,
       name: "News",
       slug: "news",
       description: "The news of Stuyvesant.",
-      parentSlug: null,
+      parentId: null,
       permalink: "/news"
     },
-    "opinions": {
+    1: {
       id: 1,
       name: "Opinions",
       slug: "opinions",
       description: "The opinions of Stuyvesant.",
-      parentSlug: null,
+      parentId: null,
       permalink: "/opinions"
     },
-    "features": {
+    2: {
       id: 2,
       name: "Features",
       slug: "features",
       description: "The features of Stuyvesant.",
-      parentSlug: null,
+      parentId: null,
       permalink: "/features"
     },
-    "humor": {
+    3: {
       id: 3,
       name: "Humor",
       slug: "humor",
       description: "The humor of Stuyvesant.",
-      parentSlug: null,
+      parentId: null,
       permalink: "/humor"
     },
-    "ae": {
+    4: {
       id: 4,
       name: "Arts & Entertainment",
       slug: "ae",
       description: "The arts and entertainment of Stuyvesant.",
-      parentSlug: null,
+      parentId: null,
       permalink: "/ae"
     },
-    "sports": {
+    5: {
       id: 5,
       name: "Sports",
       slug: "sports",
       description: "The sports of Stuyvesant.",
-      parentSlug: null,
+      parentId: null,
       permalink: "/sports"
     },
-    "media": {
+    6: {
       id: 6,
-      name: "Media",
-      slug: "media",
-      description: "The media of Stuyvesant.",
-      parentSlug: null,
-      permalink: "/media"
+      name: "Photo",
+      slug: "photo",
+      description: "The photo of Stuyvesant.",
+      parentId: null,
+      permalink: "/photo"
     },
-    "campaign-coverage": {
+    7: {
       id: 7,
       name: "Campaign Coverage",
       slug: "campaign-coverage",
       description: "The campaign coverage of Stuyvesant.",
-      parentSlug: "news",
+      parentId: 0,
       permalink: "/news/campaign-coverage"
     },
-    "staff-editorials": {
+    8: {
       id: 8,
       name: "Staff Editorials",
       slug: "staff-editorials",
       description: "The staff editorials of Stuyvesant.",
-      parentSlug: "opinions",
+      parentId: 1,
       permalink: "/opinions/staff-editorials"
     },
-    "creative-writing": {
+    9: {
       id: 9,
       name: "Creative Writing",
       slug: "creative-writing",
       description: "The creative writing of Stuyvesant.",
-      parentSlug: "features",
+      parentId: 2,
       permalink: "/features/creative-writing"
     },
-    "voices": {
+    10: {
       id: 10,
       name: "Voices",
       slug: "voices",
       description: "The voices of Stuyvesant.",
-      parentSlug: "features",
+      parentId: 2,
       permalink: "/features/voices"
     },
-    "college-essays": {
+    11: {
       id: 11,
       name: "College Essays",
       slug: "college-essays",
       description: "The college essays of Stuyvesant.",
-      parentSlug: "features",
+      parentId: 2,
       permalink: "/features/college-essays"
     },
-    "disrespectator": {
+    12: {
       id: 12,
       name: "Disrespectator",
       slug: "disrespectator",
       description: "The disrespectator of Stuyvesant.",
-      parentSlug: "humor",
+      parentId: 3,
       permalink: "/humor/disrespectator"
     },
-    "spooktator": {
+    13: {
       id: 13,
       name: "Spooktator",
       slug: "spooktator",
       description: "The spooktator of Stuyvesant.",
-      parentSlug: "humor",
+      parentId: 3,
       permalink: "/humor/spooktator"
     },
-    "books": {
+    14: {
       id: 14,
+      name: "Art",
+      slug: "art",
+      description: "The art of Stuyvesant.",
+      parentId: 4,
+      permalink: "/ae/art"
+    },
+    15: {
+      id: 15,
       name: "Books",
       slug: "books",
       description: "The books of Stuyvesant.",
-      parentSlug: "ae",
+      parentId: 4,
       permalink: "/ae/books"
     },
-    "feature": {
-      id: 15,
-      name: "Feature",
-      slug: "feature",
-      description: "The feature of Stuyvesant.",
-      parentSlug: "ae",
-      permalink: "/ae/feature"
-    },
-    "film": {
+    16: {
       id: 16,
       name: "Film",
       slug: "film",
       description: "The film of Stuyvesant.",
-      parentSlug: "ae",
+      parentId: 4,
       permalink: "/ae/film"
     },
-    "food": {
+    17: {
       id: 17,
       name: "Food",
       slug: "food",
       description: "The food of Stuyvesant.",
-      parentSlug: "ae",
+      parentId: 4,
       permalink: "/ae/food"
     },
-    "live-performances": {
+    18: {
       id: 18,
       name: "Live Performances",
       slug: "live-performances",
       description: "The live performances of Stuyvesant.",
-      parentSlug: "ae",
+      parentId: 4,
       permalink: "/ae/live-performances"
     },
-    "television": {
+    19: {
       id: 19,
       name: "Television",
       slug: "television",
       description: "The television of Stuyvesant.",
-      parentSlug: "ae",
+      parentId: 4,
       permalink: "/ae/television"
     },
-    "art": {
+    20: {
       id: 20,
       name: "Art",
       slug: "art",
       description: "The art of Stuyvesant.",
-      parentSlug: 'media',
+      parentId: 25,
       permalink: "/art"
     },
-    "graphics": {
+    21: {
       id: 21,
       name: "Graphics",
       slug: "graphics",
       description: "The graphics of Stuyvesant.",
-      parentSlug: 'media',
+      parentId: 25,
       permalink: "/graphics"
     },
-    "music": {
+    22: {
       id: 22,
       name: "Music",
       slug: "music",
       description: "The music of Stuyvesant.",
-      parentSlug: 'media',
+      parentId: 25,
       permalink: "/music"
     },
-    "photo": {
+    23: {
       id: 23,
       name: "Photo",
       slug: "photo",
       description: "The photo of Stuyvesant.",
-      parentSlug: 'media',
+      parentId: 25,
       permalink: "/photo"
     },
-    "video": {
+    24: {
       id: 24,
       name: "Video",
       slug: "video",
       description: "The video of Stuyvesant.",
-      parentSlug: 'media',
+      parentId: 25,
       permalink: "/video"
     },
+    25: {
+      id: 25,
+      name: "Media",
+      slug: "media",
+      description: "The media of Stuyvesant.",
+      parentId: null,
+      permalink: "/media"
+    }
   }
 };
 
 const reducer = (state = { ...initialState }, action) => {
-  switch (action.type) {
-    default:
-      break;
-  }
   return state;
 };
 
