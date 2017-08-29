@@ -6,39 +6,25 @@ import injectSheet from "react-jss";
 
 import { getArticles } from "../../articles/selectors";
 import { getSections } from "../../sections/selectors";
-
-import { fetchArticles } from "../../articles/actions";
-import { fetchUsers } from "../../users/actions";
-import { fetchMedia } from "../../media/actions";
+import { loadAll } from "../actions";
 
 const styles = {
   HomePage: {},
 };
 
-const HomePage = ({
-  classes,
-  sections,
-  articles,
-  fetchArticles,
-  fetchUsers,
-  fetchMedia,
-}) => {
+const HomePage = ({ classes, sections, articles, loadAll }) => {
   return (
     <div className={classes.HomePage}>
       <h1>Home page</h1>
-      {/* No more three buttons in feature/homepage-design */}
-      All three buttons must be pressed!<br />
-      <button onClick={fetchArticles}>fetch articles</button>
-      <button onClick={fetchUsers}>fetch users</button>
-      <button onClick={fetchMedia}>fetch media</button>
+      {/* No more loadAll button in feature/homepage-design */}
+      <button onClick={loadAll}>load all</button>
       <h2>Articles</h2>
       <ul>
         {Object.values(articles).map(article => {
+          const section = sections[article.sectionId];
           return (
             <li key={article.id}>
-              <Link
-                to={`${sections[article.sectionId].permalink}/${article.slug}`}
-              >
+              <Link to={`${section.permalink}/${article.slug}`}>
                 {article.title}
               </Link>
             </li>
@@ -55,10 +41,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    { fetchArticles, fetchUsers, fetchMedia },
-    dispatch,
-  );
+  return bindActionCreators({ loadAll }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
