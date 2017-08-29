@@ -5,25 +5,25 @@ import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 
 const styles = {
   ArticleBody: {
-    color: '#000',
-    fontFamily: 'Minion Pro',
-    fontSize: '18px',
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "18px",
     lineHeight: 1.44,
-    width: '700px',
-    '& p:first-child::first-letter': {
-      float: 'left',
-      fontSize: '58px',
-      lineHeight: '43px',
-      padding: '7px 6px 0px 3px',
+    width: "700px",
+    "& p:first-child::first-letter": {
+      float: "left",
+      fontSize: "58px",
+      lineHeight: "43px",
+      padding: "7px 6px 0px 3px",
     },
   },
 };
 
 const ArticleBody = ({ classes, content, featuredMedia }) => {
   return (
-    <div className={ classes.ArticleBody }>
-      <ArticleFeaturedMedia featuredMedia={ featuredMedia }/>
-      <div dangerouslySetInnerHTML={ { __html: content } }/>
+    <div className={classes.ArticleBody}>
+      <ArticleFeaturedMedia featuredMedia={featuredMedia} />
+      <div dangerouslySetInnerHTML={{ __html: content }} />
     </div>
   );
 };

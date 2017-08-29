@@ -2,7 +2,7 @@ import {
   FETCH_ARTICLE_PENDING,
   FETCH_ARTICLE_FULFILLED,
   FETCH_ARTICLE_REJECTED,
-  ADD_AUTHORSHIPS
+  ADD_AUTHORSHIPS,
 } from "./actionTypes";
 
 const initialState = {
@@ -16,11 +16,11 @@ const initialState = {
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     case FETCH_ARTICLE_PENDING: {
-      return { ...state, isFetching: true, };
+      return { ...state, isFetching: true };
     }
     case FETCH_ARTICLE_FULFILLED: {
       const newArticles = action.payload.reduce((acc, article) => {
-        acc[ article.id ] = article;
+        acc[article.id] = article;
         return acc;
       }, {});
       return {
@@ -40,12 +40,9 @@ const reducer = (state = { ...initialState }, action) => {
     case ADD_AUTHORSHIPS: {
       return {
         ...state,
-        authorships: [
-          ...state.authorships,
-          ...action.payload
-        ],
+        authorships: [...state.authorships, ...action.payload],
         response: [],
-      }
+      };
     }
   }
   return state;

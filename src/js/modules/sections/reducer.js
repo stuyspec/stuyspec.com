@@ -6,7 +6,7 @@ const initialState = {
       slug: "news",
       description: "The news of Stuyvesant.",
       parentId: null,
-      permalink: "/news"
+      permalink: "/news",
     },
     1: {
       id: 1,
@@ -14,7 +14,7 @@ const initialState = {
       slug: "opinions",
       description: "The opinions of Stuyvesant.",
       parentId: null,
-      permalink: "/opinions"
+      permalink: "/opinions",
     },
     2: {
       id: 2,
@@ -22,7 +22,7 @@ const initialState = {
       slug: "features",
       description: "The features of Stuyvesant.",
       parentId: null,
-      permalink: "/features"
+      permalink: "/features",
     },
     3: {
       id: 3,
@@ -30,7 +30,7 @@ const initialState = {
       slug: "humor",
       description: "The humor of Stuyvesant.",
       parentId: null,
-      permalink: "/humor"
+      permalink: "/humor",
     },
     4: {
       id: 4,
@@ -38,7 +38,7 @@ const initialState = {
       slug: "ae",
       description: "The arts and entertainment of Stuyvesant.",
       parentId: null,
-      permalink: "/ae"
+      permalink: "/ae",
     },
     5: {
       id: 5,
@@ -46,7 +46,7 @@ const initialState = {
       slug: "sports",
       description: "The sports of Stuyvesant.",
       parentId: null,
-      permalink: "/sports"
+      permalink: "/sports",
     },
     6: {
       id: 6,
@@ -54,7 +54,7 @@ const initialState = {
       slug: "photo",
       description: "The photo of Stuyvesant.",
       parentId: null,
-      permalink: "/photo"
+      permalink: "/photo",
     },
     7: {
       id: 7,
@@ -62,7 +62,7 @@ const initialState = {
       slug: "campaign-coverage",
       description: "The campaign coverage of Stuyvesant.",
       parentId: 0,
-      permalink: "/news/campaign-coverage"
+      permalink: "/news/campaign-coverage",
     },
     8: {
       id: 8,
@@ -70,7 +70,7 @@ const initialState = {
       slug: "staff-editorials",
       description: "The staff editorials of Stuyvesant.",
       parentId: 1,
-      permalink: "/opinions/staff-editorials"
+      permalink: "/opinions/staff-editorials",
     },
     9: {
       id: 9,
@@ -78,7 +78,7 @@ const initialState = {
       slug: "creative-writing",
       description: "The creative writing of Stuyvesant.",
       parentId: 2,
-      permalink: "/features/creative-writing"
+      permalink: "/features/creative-writing",
     },
     10: {
       id: 10,
@@ -86,7 +86,7 @@ const initialState = {
       slug: "voices",
       description: "The voices of Stuyvesant.",
       parentId: 2,
-      permalink: "/features/voices"
+      permalink: "/features/voices",
     },
     11: {
       id: 11,
@@ -94,7 +94,7 @@ const initialState = {
       slug: "college-essays",
       description: "The college essays of Stuyvesant.",
       parentId: 2,
-      permalink: "/features/college-essays"
+      permalink: "/features/college-essays",
     },
     12: {
       id: 12,
@@ -102,7 +102,7 @@ const initialState = {
       slug: "disrespectator",
       description: "The disrespectator of Stuyvesant.",
       parentId: 3,
-      permalink: "/humor/disrespectator"
+      permalink: "/humor/disrespectator",
     },
     13: {
       id: 13,
@@ -110,7 +110,7 @@ const initialState = {
       slug: "spooktator",
       description: "The spooktator of Stuyvesant.",
       parentId: 3,
-      permalink: "/humor/spooktator"
+      permalink: "/humor/spooktator",
     },
     14: {
       id: 14,
@@ -118,7 +118,7 @@ const initialState = {
       slug: "art",
       description: "The art of Stuyvesant.",
       parentId: 4,
-      permalink: "/ae/art"
+      permalink: "/ae/art",
     },
     15: {
       id: 15,
@@ -126,7 +126,7 @@ const initialState = {
       slug: "books",
       description: "The books of Stuyvesant.",
       parentId: 4,
-      permalink: "/ae/books"
+      permalink: "/ae/books",
     },
     16: {
       id: 16,
@@ -134,7 +134,7 @@ const initialState = {
       slug: "film",
       description: "The film of Stuyvesant.",
       parentId: 4,
-      permalink: "/ae/film"
+      permalink: "/ae/film",
     },
     17: {
       id: 17,
@@ -142,7 +142,7 @@ const initialState = {
       slug: "food",
       description: "The food of Stuyvesant.",
       parentId: 4,
-      permalink: "/ae/food"
+      permalink: "/ae/food",
     },
     18: {
       id: 18,
@@ -150,7 +150,7 @@ const initialState = {
       slug: "live-performances",
       description: "The live performances of Stuyvesant.",
       parentId: 4,
-      permalink: "/ae/live-performances"
+      permalink: "/ae/live-performances",
     },
     19: {
       id: 19,
@@ -158,7 +158,7 @@ const initialState = {
       slug: "television",
       description: "The television of Stuyvesant.",
       parentId: 4,
-      permalink: "/ae/television"
+      permalink: "/ae/television",
     },
     20: {
       id: 20,
@@ -166,7 +166,7 @@ const initialState = {
       slug: "art",
       description: "The art of Stuyvesant.",
       parentId: 25,
-      permalink: "/art"
+      permalink: "/art",
     },
     21: {
       id: 21,
@@ -174,7 +174,7 @@ const initialState = {
       slug: "graphics",
       description: "The graphics of Stuyvesant.",
       parentId: 25,
-      permalink: "/graphics"
+      permalink: "/graphics",
     },
     22: {
       id: 22,
@@ -182,7 +182,7 @@ const initialState = {
       slug: "music",
       description: "The music of Stuyvesant.",
       parentId: 25,
-      permalink: "/music"
+      permalink: "/music",
     },
     23: {
       id: 23,
@@ -190,7 +190,7 @@ const initialState = {
       slug: "photo",
       description: "The photo of Stuyvesant.",
       parentId: 25,
-      permalink: "/photo"
+      permalink: "/photo",
     },
     24: {
       id: 24,
@@ -198,7 +198,7 @@ const initialState = {
       slug: "video",
       description: "The video of Stuyvesant.",
       parentId: 25,
-      permalink: "/video"
+      permalink: "/video",
     },
     25: {
       id: 25,
@@ -206,9 +206,9 @@ const initialState = {
       slug: "media",
       description: "The media of Stuyvesant.",
       parentId: null,
-      permalink: "/media"
-    }
-  }
+      permalink: "/media",
+    },
+  },
 };
 
 const reducer = (state = { ...initialState }, action) => {

@@ -8,21 +8,25 @@ import {
 export const getMedia = state => state.media.media;
 
 export const getIllustratorIllustrations = createSelector(
-  [ getIllustratorFromSlug, getMedia ],
+  [getIllustratorFromSlug, getMedia],
   (illustrator, media) => {
     return Object.filter(media, mediaObject => {
-      return mediaObject.userId === illustrator.id &&
-        mediaObject.type === "illustration";
+      return (
+        mediaObject.userId === illustrator.id &&
+        mediaObject.type === "illustration"
+      );
     });
-  }
+  },
 );
 
 export const getPhotographerPhotographs = createSelector(
-  [ getPhotographerFromSlug, getMedia ],
+  [getPhotographerFromSlug, getMedia],
   (photographer, media) => {
     return Object.filter(media, mediaObject => {
-      return mediaObject.userId === photographer.id &&
-        mediaObject.type === "photograph";
+      return (
+        mediaObject.userId === photographer.id &&
+        mediaObject.type === "photograph"
+      );
     });
-  }
+  },
 );

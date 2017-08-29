@@ -11,88 +11,90 @@ import Byline from "./Byline";
 
 const styles = {
   ArticleRow: {
-    borderBottom: '1px solid #ddd',
-    listStyleType: 'none',
+    borderBottom: "1px solid #ddd",
+    listStyleType: "none",
     margin: 0,
-    padding: '14px 0',
-    '& div:first-child': {
+    padding: "14px 0",
+    "& div:first-child": {
       paddingLeft: 0,
     },
-    '& div:last-child': {
+    "& div:last-child": {
       paddingRight: 0,
     },
   },
   featuredImg: {
-    width: '100%',
+    width: "100%",
   },
   articleTitle: {
-    display: 'block',
-    fontFamily: 'MinionPro',
-    fontSize: '26px',
-    color: '#000',
-    marginBottom: '5px',
+    display: "block",
+    fontFamily: "MinionPro",
+    fontSize: "26px",
+    color: "#000",
+    marginBottom: "5px",
     padding: 0,
-    '&:hover': {
-      color: '#000',
-    }
+    "&:hover": {
+      color: "#000",
+    },
   },
   articlePreview: {
-    color: '#000',
-    fontFamily: 'MinionPro',
-    fontSize: '16px',
-    lineHeight: '1.13',
-    marginBottom: '8px'
+    color: "#000",
+    fontFamily: "MinionPro",
+    fontSize: "16px",
+    lineHeight: "1.13",
+    marginBottom: "8px",
   },
   Byline: {
-    display: 'inline',
-    fontFamily: 'Circular Std',
-    fontSize: '12px',
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
-    marginRight: '6px',
-    '& p': {
-      display: 'inline',
+    display: "inline",
+    fontFamily: "Circular Std",
+    fontSize: "12px",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    marginRight: "6px",
+    "& p": {
+      display: "inline",
       margin: 0,
-      '& a': {
-        color: '#000',
-        '&:hover': {
-          color: '#000'
+      "& a": {
+        color: "#000",
+        "&:hover": {
+          color: "#000",
         },
       },
     },
   },
   dateline: {
-    fontFamily: 'Circular Std',
-    fontSize: '12px',
-    fontWeight: 'bold',
-    color: '#666',
-  }
+    fontFamily: "Circular Std",
+    fontSize: "12px",
+    fontWeight: "bold",
+    color: "#666",
+  },
 };
 
 const ArticleRow = ({ classes, article, sections, users, media }) => {
-  const section = sections[ article.sectionId ];
+  const section = sections[article.sectionId];
   const featuredMedia = Object.values(media).find(media => {
     return media.isFeatured && media.articleId === article.id;
   });
-  featuredMedia.creator = users[ featuredMedia.userId ];
+  featuredMedia.creator = users[featuredMedia.userId];
   return (
-    <Row key={ article.id } className={ classes.ArticleRow }>
-      <Col md={ 3 } lg={ 3 }>
+    <Row key={article.id} className={classes.ArticleRow}>
+      <Col md={3} lg={3}>
         <figure>
-          <img src={featuredMedia.url} className={classes.featuredImg}/>
+          <img src={featuredMedia.url} className={classes.featuredImg} />
         </figure>
       </Col>
       <Col md={6} lg={6}>
-        <Link to={`${section.permalink}/${article.slug}`}
-              className={classes.articleTitle}>
+        <Link
+          to={`${section.permalink}/${article.slug}`}
+          className={classes.articleTitle}
+        >
           {article.title}
         </Link>
-        <p className={ classes.articlePreview }>
+        <p className={classes.articlePreview}>
           Fake comment: in SectionPage, you've imported SectionArticleList but
           you don't use it as a component. The error appears to be on line 41.
         </p>
         <div>
-          <Byline classes={classes} contributors={article.contributors}/>
+          <Byline classes={classes} contributors={article.contributors} />
           <span className={classes.dateline}>{article.dateline}</span>
         </div>
       </Col>
@@ -100,12 +102,10 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   media: getMedia(state),
   sections: getSections(state),
   users: getUsers(state),
 });
 
-export default connect(
-  mapStateToProps
-)(injectSheet(styles)(ArticleRow));
+export default connect(mapStateToProps)(injectSheet(styles)(ArticleRow));

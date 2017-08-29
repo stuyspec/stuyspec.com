@@ -14,7 +14,7 @@ const initialState = {
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     case FETCH_MEDIA_PENDING: {
-      return { ...state, isFetching: true, };
+      return { ...state, isFetching: true };
     }
     case FETCH_MEDIA_FULFILLED: {
       return {
@@ -22,7 +22,7 @@ const reducer = (state = { ...initialState }, action) => {
         isFetching: false,
         isFetched: true,
         media: action.payload.reduce((acc, mediaObject) => {
-          acc[ mediaObject.id ] = mediaObject;
+          acc[mediaObject.id] = mediaObject;
           return acc;
         }, {}),
       };

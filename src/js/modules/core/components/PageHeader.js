@@ -6,17 +6,17 @@ import MastheadBar from "./MastheadBar";
 
 const styles = {
   PageHeader: {
-    margin: '0 auto',
-    marginBottom: '60px',
-    textAlign: 'center',
-    width: '100%',
+    margin: "0 auto",
+    marginBottom: "60px",
+    textAlign: "center",
+    width: "100%",
   },
 };
 
 const PageHeader = ({ classes, location }) => {
   return (
-    <div className={ classes.PageHeader }>
-      { location.pathname === '/' ? <Masthead/> : <MastheadBar/> }
+    <div className={classes.PageHeader}>
+      {location.pathname === "/" ? <Masthead /> : <MastheadBar />}
     </div>
   );
 };

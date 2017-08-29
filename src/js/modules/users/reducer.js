@@ -2,7 +2,7 @@ import {
   FETCH_USER_PENDING,
   FETCH_USER_REJECTED,
   FETCH_USER_FULFILLED,
-} from './actionTypes';
+} from "./actionTypes";
 
 const initialState = {
   CONTRIBUTOR_ROLE_ID: 0,
@@ -26,7 +26,7 @@ const initialState = {
     2: {
       id: 2,
       title: "Photographer",
-      slug: "photographers"
+      slug: "photographers",
     },
   },
   userRoles: [
@@ -44,7 +44,7 @@ const initialState = {
     { userId: 1, roleId: 2 },
     { userId: 2, roleId: 2 },
     { userId: 3, roleId: 2 },
-  ]
+  ],
 };
 
 const reducer = (state = { ...initialState }, action) => {
@@ -61,7 +61,7 @@ const reducer = (state = { ...initialState }, action) => {
         isFetching: false,
         isFetched: true,
         users: action.payload.reduce((acc, user) => {
-          acc[ user.id ] = user;
+          acc[user.id] = user;
           return acc;
         }, {}),
       };
