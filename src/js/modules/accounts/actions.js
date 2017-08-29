@@ -52,7 +52,6 @@ export const signIn = values => {
     });
     axios.post(`${STUY_SPEC_API_URL}/auth/sign_in`, values, STUY_SPEC_API_HEADERS)
       .then(response => {
-        console.log(response.headers);
         dispatch({
           type: t.SIGN_IN_FULFILLED,
           payload: response,
