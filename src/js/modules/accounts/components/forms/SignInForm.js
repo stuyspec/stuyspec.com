@@ -61,19 +61,26 @@ const SignInForm = ({ classes, handleSubmit, submitting, status }) => {
           </button>
         </div>
       </form>
-      {status.errors.map((error, index) => {
-        return (
-          <p key={index} className={classes.errorMessage}>
-            {error}
+      {status.form === "signIn" && (
+        <div>
+          <p key="success" className={classes.successMessage}>
+            {status.message}
           </p>
-        );
-      })}
+          {status.errors.map((error, index) => {
+            return (
+              <p key={index} className={classes.errorMessage}>
+                {error}
+              </p>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  status: state.accounts.signInStatus,
+  status: state.accounts.status,
 });
 
 const SmartSignInForm = connect(mapStateToProps)(

@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
@@ -56,12 +56,7 @@ const renderField = ({
   );
 };
 
-const SignUpForm = ({
-  classes,
-  handleSubmit,
-  submitting,
-  status,
-}) => {
+const SignUpForm = ({ classes, handleSubmit, submitting, status }) => {
   return (
     <div>
       <h1>Sign Up Form</h1>
@@ -102,22 +97,26 @@ const SignUpForm = ({
           </button>
         </div>
       </form>
-      <p key="success" className={classes.successMessage}>
-        {status.message}
-      </p>
-      {status.errors.map((error, index) => {
-        return (
-          <p key={index} className={classes.errorMessage}>
-            {error}
+      {status.form === "signUp" && (
+        <div>
+          <p key="success" className={classes.successMessage}>
+            {status.message}
           </p>
-        );
-      })}
+          {status.errors.map((error, index) => {
+            return (
+              <p key={index} className={classes.errorMessage}>
+                {error}
+              </p>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  status: state.accounts.signUpStatus,
+  status: state.accounts.status,
 });
 
 const SmartSignUpForm = connect(mapStateToProps, null)(

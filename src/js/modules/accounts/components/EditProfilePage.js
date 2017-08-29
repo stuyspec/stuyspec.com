@@ -3,16 +3,24 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
 
-import { EditUserForm } from "./forms";
-import { updateUser } from "../actions";
+import { EditUserForm, EditPasswordForm } from "./forms";
+import { updateUser, updatePassword } from "../actions";
 
-const EditProfilePage = ({ session, updateUser }) => {
+const EditProfilePage = ({ session, updateUser, updatePassword }) => {
   if (session === null) {
     return <p>You are not signed in. <Link to="/myaccount">Sign in.</Link></p>;
   }
+  const user = session.data.data;
+  const handleUpdateUser = values => {
+    updateUser(values, user.id);
+  }
+  const handleUpdatePassword = values => {
+    updatePassword(values, user.id);
+  }
   return (
     <div>
-      <EditUserForm onSubmit={ updateUser }/>
+      <EditUserForm onSubmit={ handleUpdateUser }/>
+      {/*<EditPasswordForm onSubmit={handleUpdatePassword}/>*/}
     </div>
   )
 };
@@ -23,7 +31,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { updateUser },
+    { updateUser, updatePassword },
     dispatch
   );
 }

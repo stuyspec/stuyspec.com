@@ -2,26 +2,25 @@ import {
   SIGN_IN_PENDING,
   SIGN_IN_FULFILLED,
   SIGN_IN_REJECTED,
+
   SIGN_UP_FULFILLED,
   SIGN_UP_REJECTED,
   SIGN_UP_PENDING,
+
   SIGN_OUT_PENDING,
   SIGN_OUT_FULFILLED,
   SIGN_OUT_REJECTED,
+
+  UPDATE_PASSWORD_PENDING,
+  UPDATE_USER_FULFILLED,
+  UPDATE_USER_REJECTED,
 } from "./actionTypes";
 
 const initialState = {
-  signInStatus: {
+  status: {
     errors: [],
     message: null,
-  },
-  signUpStatus: {
-    errors: [],
-    message: null,
-  },
-  signOutStatus: {
-    errors: [],
-    message: null,
+    form: null,
   },
   session: null,
 };
@@ -31,9 +30,10 @@ const reducer = (state = { ...initialState }, action) => {
     case SIGN_IN_PENDING: {
       return {
         ...state,
-        signInStatus: {
+        status: {
           errors: [],
           message: null,
+          form: null,
         },
       };
     }
@@ -43,17 +43,20 @@ const reducer = (state = { ...initialState }, action) => {
     case SIGN_IN_REJECTED: {
       return {
         ...state,
-        signInStatus: {
+        status: {
           errors: action.payload.response.data.errors,
+          form: "signIn",
           message: null,
         },
       };
     }
+
     case SIGN_UP_PENDING: {
       return {
         ...state,
-        signUpStatus: {
+        status: {
           errors: [],
+          form: null,
           message: null
         }
       }
@@ -61,8 +64,9 @@ const reducer = (state = { ...initialState }, action) => {
     case SIGN_UP_FULFILLED: {
       return {
         ...state,
-        signUpStatus: {
+        status: {
           errors: [],
+          form: "signUp",
           message:
             "Welcome! You can confirm your account through the link sent to the email you signed up with.",
         },
@@ -71,27 +75,31 @@ const reducer = (state = { ...initialState }, action) => {
     case SIGN_UP_REJECTED: {
       return {
         ...state,
-        signUpStatus: {
+        status: {
           errors: action.payload.response.data.errors.fullMessages,
+          form: "signUp",
           message: null,
         },
       };
     }
+
     case SIGN_OUT_PENDING: {
       return {
         ...state,
-        signOutStatus: {
+        status: {
           errors: [],
-          message: null
+          form: null,
+          message: null,
         }
       }
     }
     case SIGN_OUT_FULFILLED: {
       return {
         ...state,
-        signOutStatus: {
+        status: {
           errors: [],
           message: "You have signed out.",
+          form: "signOut",
         },
         session: null
       };
@@ -99,12 +107,14 @@ const reducer = (state = { ...initialState }, action) => {
     case SIGN_OUT_REJECTED: {
       return {
         ...state,
-        signOutStatus: {
+        status: {
           errors: action.payload.response.data.errors,
           message: null,
+          form: "signOut",
         },
       };
     }
+
     case "@@redux-form/DESTROY": {
       return {
         ...initialState,

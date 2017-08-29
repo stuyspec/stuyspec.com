@@ -27,6 +27,7 @@ const ProfilePage = ({ session, signOut }) => {
       <p>first name: {user.firstName}</p>
       <p>last name: {user.lastName}</p>
       <p>email: {user.email}</p>
+      <Link to="/myaccount/profile/edit">Edit Profile</Link>
       <SignOutForm onSubmit={handleSignOut} />
     </div>
   );

@@ -25,22 +25,26 @@ const SignOutForm = ({ classes, handleSubmit, submitting, status }) => {
           </button>
         </div>
       </form>
-      <p key="success" className={classes.successMessage}>
-        {status.message}
-      </p>
-      {status.errors.map((error, index) => {
-        return (
-          <p key={index} className={classes.errorMessage}>
-            {error}
+      {status.form === "signOut" && (
+        <div>
+          <p key="success" className={classes.successMessage}>
+            {status.message}
           </p>
-        );
-      })}
+          {status.errors.map((error, index) => {
+            return (
+              <p key={index} className={classes.errorMessage}>
+                {error}
+              </p>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  status: state.accounts.signOutStatus,
+  status: state.accounts.status,
 });
 
 const SmartSignOutForm = connect(mapStateToProps, null)(

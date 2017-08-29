@@ -95,14 +95,37 @@ export const signOut = headers => {
   };
 };
 
-export const updateUser = values => {
+export const updateUser = (values, id) => {
   return dispatch => {
     dispatch({
       type: t.UPDATE_USER_PENDING,
       payload: values,
     });
     axios
-      .put(`${STUY_SPEC_API_URL}/`, values, STUY_SPEC_API_HEADERS)
+      .put(`${STUY_SPEC_API_URL}/users/${id}`, values, STUY_SPEC_API_HEADERS)
+      .then(response => {
+        dispatch({
+          type: t.UPDATE_USER_FULFILLED,
+          payload: response,
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: t.UPDATE_USER_REJECTED,
+          payload: err,
+        });
+      });
+  };
+};
+
+export const updatePassword = (values, id) => {
+  return dispatch => {
+    dispatch({
+      type: t.UPDATE_USER_PENDING,
+      payload: values,
+    });
+    axios
+      .put(`${STUY_SPEC_API_URL}/users/${id}`, values, STUY_SPEC_API_HEADERS)
       .then(response => {
         dispatch({
           type: t.UPDATE_USER_FULFILLED,

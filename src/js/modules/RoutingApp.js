@@ -5,7 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import ConnectedRouter from "react-router-redux/ConnectedRouter";
 import appHistory from "tools/appHistory";
 
-import { SignInPage, ProfilePage } from "./accounts/components";
+import { SignInPage, ProfilePage, EditProfilePage } from "./accounts/components";
 import { ArticlePage } from "./articles/components";
 import { HomePage, PageLayout } from "./core/components";
 import { DescriptionPage } from "./descriptions/components";
@@ -121,6 +121,12 @@ class RoutingApp extends Component {
                 path={"/myaccount/profile"}
                 key={"profile"}
                 component={ProfilePage}
+              />
+              <Route
+                exact
+                path={"/myaccount/profile/edit"}
+                key={"editProfile"}
+                component={EditProfilePage}
               />
             </Switch>
           ) : (
