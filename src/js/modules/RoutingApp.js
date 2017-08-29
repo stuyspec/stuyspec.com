@@ -1,11 +1,12 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
-import appHistory from "tools/appHistory";
-import ConnectedRouter from "react-router-redux/ConnectedRouter";
 import { connect } from "react-redux";
+import { Route, Switch } from "react-router-dom";
+import ConnectedRouter from "react-router-redux/ConnectedRouter";
+import appHistory from "tools/appHistory";
 
-import { HomePage, PageLayout } from "./core/components";
 import { ArticlePage } from "./articles/components";
+import { HomePage, PageLayout } from "./core/components";
+import { DescriptionPage } from "./descriptions/components";
 import { SectionPage } from "./sections/components";
 import {
   RolePage,
@@ -13,16 +14,14 @@ import {
   PhotographerPage,
   IllustratorPage,
 } from "./users/components";
-import { DescriptionPage } from "./descriptions/components";
 
-import { getSections } from "./sections/selectors";
-import { getRoles } from "./users/selectors";
 import { getDescriptions } from "./descriptions/selectors";
+import { getRoles } from "./users/selectors";
+import { getSections } from "./sections/selectors";
 
 const RoutingApp = ({ sections, roles, descriptions }) => {
   const createSectionRoutes = () => {
-    return Object.keys(sections).map(sectionSlug => {
-      const section = sections[sectionSlug];
+    return Object.values(sections).map(section => {
       return (
         <Route
           exact
@@ -36,8 +35,7 @@ const RoutingApp = ({ sections, roles, descriptions }) => {
     });
   };
   const createArticleRoutes = () => {
-    return Object.keys(sections).map(sectionSlug => {
-      const section = sections[sectionSlug];
+    return Object.values(sections).map(section => {
       return (
         <Route
           exact
@@ -51,12 +49,11 @@ const RoutingApp = ({ sections, roles, descriptions }) => {
     });
   };
   const createRoleRoutes = () => {
-    return Object.keys(roles).map(roleSlug => {
-      const role = roles[roleSlug];
+    return Object.values(roles).map(role => {
       return (
         <Route
           exact
-          path={`/${roleSlug}`}
+          path={`/${role.slug}`}
           key={`roleRoute${role.id}`}
           render={props => <RolePage role={role} />}
         />
@@ -64,12 +61,11 @@ const RoutingApp = ({ sections, roles, descriptions }) => {
     });
   };
   const createDescriptionRoutes = () => {
-    return Object.keys(descriptions).map(descriptionSlug => {
-      const description = descriptions[descriptionSlug];
+    return Object.values(descriptions).map(description => {
       return (
         <Route
           exact
-          path={`/about/${descriptionSlug}`}
+          path={`/about/${description.slug}`}
           key={`descriptionRoutes${description.id}`}
           render={props => <DescriptionPage description={description} />}
         />
@@ -83,7 +79,7 @@ const RoutingApp = ({ sections, roles, descriptions }) => {
           <Route exact path="/" component={HomePage} />
           {/* These routes are created in separate functions, as opposed to
            * separate components, because nesting <Route>'s in <div>'s will
-           * throw off the <Switch> routing.
+           * throw off <Switch> routing.
            */}
           {createSectionRoutes()}
           {createArticleRoutes()}
@@ -92,7 +88,7 @@ const RoutingApp = ({ sections, roles, descriptions }) => {
           <Route
             exact
             path={"/contributors/:contributor_slug"}
-            key={`contributorRoute`}
+            key={"contributorRoute"}
             render={props => (
               <ContributorPage
                 match={props.match}
@@ -103,13 +99,13 @@ const RoutingApp = ({ sections, roles, descriptions }) => {
           <Route
             exact
             path={"/illustrators/:illustrator_slug"}
-            key={`illustratorRoute`}
+            key={"illustratorRoute"}
             render={props => <IllustratorPage match={props.match} />}
           />
           <Route
             exact
             path={"/photographers/:photographer_slug"}
-            key={`photographerRoute`}
+            key={"photographerRoute"}
             render={props => (
               <PhotographerPage
                 match={props.match}
@@ -124,9 +120,9 @@ const RoutingApp = ({ sections, roles, descriptions }) => {
 };
 
 const mapStateToProps = state => ({
-  sections: getSections(state),
-  roles: getRoles(state),
   descriptions: getDescriptions(state),
+  roles: getRoles(state),
+  sections: getSections(state),
 });
 
-export default connect(mapStateToProps, null)(RoutingApp);
+export default connect(mapStateToProps)(RoutingApp);
