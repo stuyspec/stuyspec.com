@@ -107,11 +107,15 @@ const MastheadBar = ({ classes, openSidebar, session }) => {
         {
           session ? (
             <div className={ classes.userTools }>
-              <StyledNavButton label="profile"/>
+              <Link to="/myaccount/profile">
+                <StyledNavButton label="profile"/>
+              </Link>
             </div>
           ) :  (
             <div className={ classes.userTools }>
-              <StyledNavButton label="log in"/>
+              <Link to="/myaccount/">
+                <StyledNavButton label="log in"/>
+              </Link>
               <StyledNavButton label="subscribe"/>
             </div>
           )

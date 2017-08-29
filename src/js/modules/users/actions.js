@@ -9,6 +9,7 @@ export const fetchUsers = () => {
     axios
       .get(`${STUY_SPEC_API_URL}/users`, STUY_SPEC_API_HEADERS)
       .then(response => {
+        console.log(response)
         validateUsers(response.data);
         dispatch({
           type: t.FETCH_USERS_FULFILLED,
@@ -69,7 +70,6 @@ const validateUsers = userArray => {
   const stringProperties = [
     "firstName",
     "lastName",
-    "username",
     "email",
     "createdAt",
     "updatedAt",

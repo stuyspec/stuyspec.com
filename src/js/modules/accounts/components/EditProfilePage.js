@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
 
-import { EditProfileForm } from "./forms";
+import { EditUserForm } from "./forms";
 import { updateUser } from "../actions";
 
 const EditProfilePage = ({ session, updateUser }) => {
@@ -12,7 +12,7 @@ const EditProfilePage = ({ session, updateUser }) => {
   }
   return (
     <div>
-      <EditProfileForm onSubmit={ updateUser }/>
+      <EditUserForm onSubmit={ updateUser }/>
     </div>
   )
 };
