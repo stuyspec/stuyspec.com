@@ -19,10 +19,10 @@ const styles = {
 
 const ArticlePage = ({ classes, article, section, featuredMedia }) => {
   return (
-    <div className={ classes.ArticlePage }>
-      <ArticleHeader article={ article } section={ section }/>
-      <ArticleBody content={ article.content } featuredMedia={ featuredMedia }/>
-      <CommentThread article={article}/>
+    <div className={classes.ArticlePage}>
+      <ArticleHeader article={article} section={section} />
+      <ArticleBody content={article.content} featuredMedia={featuredMedia} />
+      <CommentThread article={article} />
     </div>
   );
 };

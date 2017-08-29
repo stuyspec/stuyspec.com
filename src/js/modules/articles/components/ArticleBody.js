@@ -16,7 +16,7 @@ const styles = {
     "& p": {
       marginBottom: "20px",
     },
-    '& p:first-child': {
+    "& p:first-child": {
       marginTop: "28px",
     },
     "& p:first-child::first-letter": {

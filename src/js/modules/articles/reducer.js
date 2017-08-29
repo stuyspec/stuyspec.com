@@ -3,7 +3,7 @@ import {
   FETCH_ARTICLES_FULFILLED,
   FETCH_ARTICLES_REJECTED,
   FETCH_AUTHORSHIPS_FULFILLED,
-} from './actionTypes'
+} from "./actionTypes";
 
 const initialState = {
   isFetching: false,

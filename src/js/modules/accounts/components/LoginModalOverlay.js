@@ -1,18 +1,23 @@
 import React from "react";
 import injectSheet from "react-jss";
 import { Modal } from "react-bootstrap/lib";
-import SignInForm from './forms/SignInForm';
+import SignInForm from "./forms/SignInForm";
 
 const styles = {
   modalStyle: {
-    width: '50%',
+    width: "50%",
   },
   modalContent: {
-    fontSize: '30px',
+    fontSize: "30px",
   },
 };
 
-const LoginModalOverlay = ({ classes, isModalOpen, closeModalLogin, signIn }) => {
+const LoginModalOverlay = ({
+  classes,
+  isModalOpen,
+  closeModalLogin,
+  signIn,
+}) => {
   return (
     <Modal
       aria-labelledby="app"
@@ -21,10 +26,10 @@ const LoginModalOverlay = ({ classes, isModalOpen, closeModalLogin, signIn }) =>
       onHide={closeModalLogin}
     >
       <div className={classes.modalContent}>
-        <SignInForm onSubmit={signIn}/>
+        <SignInForm onSubmit={signIn} />
       </div>
     </Modal>
-  )
+  );
 };
 
 export default injectSheet(styles)(LoginModalOverlay);

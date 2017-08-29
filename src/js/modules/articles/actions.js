@@ -3,7 +3,6 @@ import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from "../../constants";
 import { validateKey } from "../../utils";
 import * as t from "./actionTypes";
 
-
 export const fetchArticles = () => {
   return dispatch => {
     dispatch({ type: t.FETCH_ARTICLES_PENDING });

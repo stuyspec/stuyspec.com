@@ -2,19 +2,17 @@ import {
   SIGN_IN_PENDING,
   SIGN_IN_FULFILLED,
   SIGN_IN_REJECTED,
-
   SIGN_UP_FULFILLED,
   SIGN_UP_REJECTED,
   SIGN_UP_PENDING,
-
   SIGN_OUT_PENDING,
   SIGN_OUT_FULFILLED,
   SIGN_OUT_REJECTED,
-
   UPDATE_PASSWORD_PENDING,
   UPDATE_USER_FULFILLED,
-  UPDATE_USER_REJECTED, UPDATE_USER_PENDING,
-} from './actionTypes'
+  UPDATE_USER_REJECTED,
+  UPDATE_USER_PENDING,
+} from "./actionTypes";
 
 const initialState = {
   status: {
@@ -57,9 +55,9 @@ const reducer = (state = { ...initialState }, action) => {
         status: {
           errors: [],
           form: null,
-          message: null
-        }
-      }
+          message: null,
+        },
+      };
     }
     case SIGN_UP_FULFILLED: {
       return {
@@ -90,8 +88,8 @@ const reducer = (state = { ...initialState }, action) => {
           errors: [],
           form: null,
           message: null,
-        }
-      }
+        },
+      };
     }
     case SIGN_OUT_FULFILLED: {
       return {
@@ -101,7 +99,7 @@ const reducer = (state = { ...initialState }, action) => {
           message: "You have signed out.",
           form: "signOut",
         },
-        session: null
+        session: null,
       };
     }
     case SIGN_OUT_REJECTED: {
@@ -123,7 +121,7 @@ const reducer = (state = { ...initialState }, action) => {
           message: null,
           form: null,
         },
-      }
+      };
     }
     case UPDATE_USER_FULFILLED: {
       return {
@@ -134,7 +132,7 @@ const reducer = (state = { ...initialState }, action) => {
           message: "Your changes have been saved.",
           form: "editUser",
         },
-      }
+      };
     }
     case UPDATE_USER_REJECTED: {
       return {
@@ -150,8 +148,8 @@ const reducer = (state = { ...initialState }, action) => {
     case "@@redux-form/DESTROY": {
       return {
         ...initialState,
-        session: state.session
-      }
+        session: state.session,
+      };
     }
   }
   return state;

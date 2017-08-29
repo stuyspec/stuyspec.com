@@ -35,7 +35,7 @@ const reducer = (state = { ...initialState }, action) => {
       return { ...state, isFetching: false, error: action.payload };
     }
     case FETCH_USER_ROLES_FULFILLED: {
-      return { ...state, userRoles: action.payload }
+      return { ...state, userRoles: action.payload };
     }
     case FETCH_ROLES_FULFILLED: {
       return {
@@ -44,7 +44,7 @@ const reducer = (state = { ...initialState }, action) => {
           acc[role.id] = role;
           return acc;
         }, {}),
-      }
+      };
     }
   }
   return state;

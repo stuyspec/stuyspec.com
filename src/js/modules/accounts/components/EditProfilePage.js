@@ -8,18 +8,22 @@ import { updateUser } from "../actions";
 
 const EditProfilePage = ({ session, updateUser }) => {
   if (session === null) {
-    return <p>You are not signed in. <Link to="/myaccount">Sign in.</Link></p>;
+    return (
+      <p>
+        You are not signed in. <Link to="/myaccount">Sign in.</Link>
+      </p>
+    );
   }
   const user = session.data.data;
   const handleUpdateUser = values => {
     updateUser(values, user.id);
-  }
+  };
   return (
     <div>
       <Link to="/myaccount/profile">Back to profile</Link>
-      <EditUserForm onSubmit={ handleUpdateUser }/>
+      <EditUserForm onSubmit={handleUpdateUser} />
     </div>
-  )
+  );
 };
 
 const mapStateToProps = state => ({
@@ -27,13 +31,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    { updateUser },
-    dispatch
-  );
-}
+  return bindActionCreators({ updateUser }, dispatch);
+};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(EditProfilePage);
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfilePage);

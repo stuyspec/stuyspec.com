@@ -17,13 +17,13 @@ const ProfilePage = ({ session, signOut }) => {
   const handleSignOut = () => {
     signOut({
       "access-token": session.headers["access-token"], // dashes are invalid in JS variables,
-      "client": session.headers.client,
-      "uid": session.headers.uid,
+      client: session.headers.client,
+      uid: session.headers.uid,
     });
   };
   let user = session.data.data; // how session looks after signing in
   if (!user) {
-    user = session.data // how session looks after updating profile
+    user = session.data; // how session looks after updating profile
   }
   return (
     <div>

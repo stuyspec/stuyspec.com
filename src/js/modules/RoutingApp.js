@@ -5,7 +5,11 @@ import { Route, Switch } from "react-router-dom";
 import ConnectedRouter from "react-router-redux/ConnectedRouter";
 import appHistory from "tools/appHistory";
 
-import { SignInPage, ProfilePage, EditProfilePage } from "./accounts/components";
+import {
+  SignInPage,
+  ProfilePage,
+  EditProfilePage,
+} from "./accounts/components";
 import { ArticlePage } from "./articles/components";
 import { HomePage, PageLayout } from "./core/components";
 import { DescriptionPage } from "./descriptions/components";

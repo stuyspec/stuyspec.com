@@ -8,21 +8,15 @@ import { signIn, signUp } from "../actions";
 const SignInPage = ({ signIn, signUp }) => {
   return (
     <div>
-      <SignInForm onSubmit={ signIn }/>
-      <hr/>
-      <SignUpForm onSubmit={ signUp }/>
+      <SignInForm onSubmit={signIn} />
+      <hr />
+      <SignUpForm onSubmit={signUp} />
     </div>
-  )
-};
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    { signIn, signUp },
-    dispatch
   );
 };
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(SignInPage);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ signIn, signUp }, dispatch);
+};
+
+export default connect(null, mapDispatchToProps)(SignInPage);

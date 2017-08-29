@@ -41,7 +41,12 @@ const styles = {
   },
 };
 
-const SidebarContent = ({ classes, session, topLevelSections, closeSidebar }) => {
+const SidebarContent = ({
+  classes,
+  session,
+  topLevelSections,
+  closeSidebar,
+}) => {
   let sidebarElements = [];
   sidebarElements.push(
     <Link
@@ -68,7 +73,7 @@ const SidebarContent = ({ classes, session, topLevelSections, closeSidebar }) =>
      * sections and one separating the non-writing sections from the user
      * account options.
      */
-    if (section.name === 'Sports' || section.name === 'Video') {
+    if (section.name === "Sports" || section.name === "Video") {
       sidebarElements.push(
         <hr className={classes.divider} key={section.id + 100} />,
       );
@@ -76,40 +81,42 @@ const SidebarContent = ({ classes, session, topLevelSections, closeSidebar }) =>
   });
   if (session) {
     sidebarElements.push(
-      <Link className={ classes.sidebarSectionLink }
-            key={ -2 }
-            onClick={ closeSidebar }
-            to="/myaccount/profile" >
+      <Link
+        className={classes.sidebarSectionLink}
+        key={-2}
+        onClick={closeSidebar}
+        to="/myaccount/profile"
+      >
         Profile
-      </Link>
+      </Link>,
     );
     // TODO: logout
   } else {
     sidebarElements.push(
-      <Link className={ classes.sidebarSectionLink }
-            key={ -2 }
-            onClick={ closeSidebar }
-            to="/myaccount" >
+      <Link
+        className={classes.sidebarSectionLink}
+        key={-2}
+        onClick={closeSidebar}
+        to="/myaccount"
+      >
         Log In
-      </Link>
+      </Link>,
     );
     sidebarElements.push(
-      <Link className={ classes.sidebarSectionLink }
-            key={ -3 }
-            onClick={ closeSidebar }
-            to="/myaccount" >
+      <Link
+        className={classes.sidebarSectionLink}
+        key={-3}
+        onClick={closeSidebar}
+        to="/myaccount"
+      >
         Sign Up
-      </Link>
+      </Link>,
     );
   }
-  return (
-    <div>
-      { sidebarElements }
-    </div>
-  );
+  return <div>{sidebarElements}</div>;
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   isSidebarOpen: state.core.isSidebarOpen,
   session: state.accounts.session,
   topLevelSections: getTopLevelSections(state),

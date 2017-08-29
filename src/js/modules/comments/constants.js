@@ -1,4 +1,3 @@
-export default
-{
-  NAME :  'comments',
+export default {
+  NAME: "comments",
 };

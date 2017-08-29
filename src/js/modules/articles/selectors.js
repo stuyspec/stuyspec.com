@@ -133,8 +133,8 @@ export const getArticleFeaturedMedia = createSelector(
     if (featuredMedia) {
       return {
         ...featuredMedia,
-        creator: users[ featuredMedia.userId ],
+        creator: users[featuredMedia.userId],
       };
     }
-  }
+  },
 );

@@ -104,23 +104,20 @@ const MastheadBar = ({ classes, openSidebar, session }) => {
         <Link className={classes.brandingLink} to="/">
           The Spectator
         </Link>
-        {
-          session ? (
-            <div className={ classes.userTools }>
-              <Link to="/myaccount/profile">
-                <StyledNavButton label="profile"/>
-              </Link>
-            </div>
-          ) :  (
-            <div className={ classes.userTools }>
-              <Link to="/myaccount/">
-                <StyledNavButton label="log in"/>
-              </Link>
-              <StyledNavButton label="subscribe"/>
-            </div>
-          )
-        }
-
+        {session ? (
+          <div className={classes.userTools}>
+            <Link to="/myaccount/profile">
+              <StyledNavButton label="profile" />
+            </Link>
+          </div>
+        ) : (
+          <div className={classes.userTools}>
+            <Link to="/myaccount/">
+              <StyledNavButton label="log in" />
+            </Link>
+            <StyledNavButton label="subscribe" />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -134,7 +131,6 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ openSidebar }, dispatch);
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(injectSheet(styles)(MastheadBar));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  injectSheet(styles)(MastheadBar),
+);

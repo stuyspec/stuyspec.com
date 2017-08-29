@@ -32,7 +32,7 @@ const reducer = (state = initialState, action) => {
         isFetching: false,
         isFetched: true,
         comments: action.payload.reduce((acc, comment) => {
-          acc[ comment.id ] = comment;
+          acc[comment.id] = comment;
           return acc;
         }, {}),
       };
@@ -48,8 +48,9 @@ const reducer = (state = initialState, action) => {
         ...state,
         message: {
           status: "fulfilled",
-          text: `Comment submitted for review at ${ action.payload.data.createdAt }`,
-        }
+          text: `Comment submitted for review at ${action.payload.data
+            .createdAt}`,
+        },
       };
     }
     case CREATE_COMMENT_REJECTED: {
@@ -57,7 +58,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         message: {
           status: "rejected",
-          text: `Comment failed to post (${ action.payload })`
+          text: `Comment failed to post (${action.payload})`,
         },
       };
     }

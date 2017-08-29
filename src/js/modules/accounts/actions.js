@@ -78,7 +78,7 @@ export const signOut = headers => {
   return dispatch => {
     dispatch({ type: t.SIGN_OUT_PENDING, payload: headers });
     axios
-      .delete(`${STUY_SPEC_API_URL}/auth/sign_out`, {headers})
+      .delete(`${STUY_SPEC_API_URL}/auth/sign_out`, { headers })
       .then(response => {
         console.log(response);
         dispatch({
