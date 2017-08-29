@@ -19,3 +19,8 @@ npm install
 ```
 gulp
 ```
+
+## Webstorm
+1. Get a free student license at [JetBrains](https://www.jetbrains.com/student/)
+2. Download and install WebStorm, JetBrains' JavaScript IDE.
+3. Use [this guide](https://medium.com/@jm90mm/adding-prettier-to-webstorm-a218eeec04d2) to add [Prettier](https://github.com/prettier/prettier) to WebStorm.
