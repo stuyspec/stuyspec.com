@@ -1,42 +1,51 @@
 import axios from "axios";
+import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from "../../constants";
+import { validateKey } from "../../utils";
 import * as t from "./actionTypes";
 
-import { STUY_SPEC_API, STUY_SPEC_API_HEADER } from "../../constants";
-import { validateKey } from "../../utils";
-import { getFakeAuthorshipsForArticleResponse } from "./selectors";
-
 export const fetchArticles = () => {
-  return (dispatch, getState) => {
-    dispatch({ type: t.FETCH_ARTICLE_PENDING });
+  return dispatch => {
+    dispatch({ type: t.FETCH_ARTICLES_PENDING });
     axios
-      .get(`${STUY_SPEC_API}/articles`, { headers: STUY_SPEC_API_HEADER })
+      .get(`${STUY_SPEC_API_URL}/articles`, STUY_SPEC_API_HEADERS)
       .then(response => {
         validateArticles(response.data);
         dispatch({
-          type: t.FETCH_ARTICLE_FULFILLED,
+          type: t.FETCH_ARTICLES_FULFILLED,
           payload: response.data,
-        });
-        dispatch({
-          type: t.ADD_AUTHORSHIPS,
-          payload: getFakeAuthorshipsForArticleResponse(getState()),
         });
       })
       .catch(err => {
         dispatch({
-          type: t.FETCH_ARTICLE_REJECTED,
+          type: t.FETCH_ARTICLES_REJECTED,
           payload: err,
         });
       });
   };
 };
 
-/*
-TODO: Add volume and issue int props after non-null data seeded @nicholas
-TODO: Add isDraft boolean prop after non-null data seeded @nicholas
-TODO: Add boolean key validity after non-null data seeded @nicholas
- */
+export const fetchAuthorships = () => {
+  return dispatch => {
+    dispatch({ type: t.FETCH_AUTHORSHIPS_PENDING });
+    axios
+      .get(`${STUY_SPEC_API_URL}/authorships`, STUY_SPEC_API_HEADERS)
+      .then(response => {
+        dispatch({
+          type: t.FETCH_AUTHORSHIPS_FULFILLED,
+          payload: response.data,
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: t.FETCH_AUTHORSHIPS_REJECTED,
+          payload: err,
+        });
+      });
+  };
+};
+
 const validateArticles = articleArray => {
-  const integerProperties = ["id", "sectionId"];
+  const integerProperties = ["id", "volume", "issue", "sectionId"];
   const stringProperties = [
     "title",
     "slug",
@@ -47,13 +56,14 @@ const validateArticles = articleArray => {
   if (!Array.isArray(articleArray)) {
     throw "EXCEPTION: article response is not an array.";
   }
-  articleArray.forEach(articleObject => {
+  articleArray.forEach(article => {
     integerProperties.forEach(numberKey => {
-      validateKey(articleObject, numberKey, "number", "article");
+      validateKey(article, numberKey, "number", "article");
     });
     stringProperties.forEach(stringKey => {
-      validateKey(articleObject, stringKey, "string", "article");
+      validateKey(article, stringKey, "string", "article");
     });
+    validateKey(article, "isPublished", "boolean", "article");
   });
   return true;
 };

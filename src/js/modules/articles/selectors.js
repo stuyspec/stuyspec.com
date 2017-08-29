@@ -134,18 +134,3 @@ export const getArticleFeaturedMedia = createSelector(
     };
   },
 );
-
-/**
- * The selector returns a fake authorships array while Stuy Spec API gets the
- *   Authorships set up.
- */
-export const getFakeAuthorshipsForArticleResponse = createSelector(
-  [getArticles],
-  articles => {
-    return Object.values(articles).reduce((acc, article) => {
-      acc.push({ articleId: article.id, contributorId: 0 });
-      acc.push({ articleId: article.id, contributorId: 1 });
-      return acc;
-    }, []);
-  },
-);

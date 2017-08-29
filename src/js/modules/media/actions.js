@@ -1,13 +1,13 @@
 import axios from "axios";
 import { validateKey } from "../../utils";
 import * as t from "./actionTypes";
-import { STUY_SPEC_API, STUY_SPEC_API_HEADER } from "../../constants";
+import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from "../../constants";
 
 const fakeMedia = [
   {
     id: 0,
     userId: 0,
-    articleId: 10,
+    articleId: 0,
     url: "https://i.ytimg.com/vi/qh7LLydY8eo/maxresdefault.jpg",
     title: "A Bird Will Die.",
     caption:
@@ -18,7 +18,7 @@ const fakeMedia = [
   {
     id: 1,
     userId: 2,
-    articleId: 11,
+    articleId: 1,
     url: "https://i.ytimg.com/vi/v6wfobPI2fI/maxresdefault.jpg",
     title: "Car Crash",
     caption:
@@ -29,7 +29,7 @@ const fakeMedia = [
   {
     id: 2,
     userId: 1,
-    articleId: 12,
+    articleId: 2,
     url:
       "https://images.unsplash.com/photo-1441794016917-7b6933969960?dpr=2&auto=format&fit=crop&w=1080&h=720&q=80&cs=tinysrgb&crop=",
     title: "Beach Day",
@@ -41,7 +41,7 @@ const fakeMedia = [
   {
     id: 3,
     userId: 0,
-    articleId: 13,
+    articleId: 3,
     url:
       "https://images.unsplash.com/photo-1489619547086-641e1c87c3ff?dpr=2&auto=format&fit=crop&w=1080&h=750&q=80&cs=tinysrgb&crop=",
     title: "Pocket Watch",
@@ -53,7 +53,7 @@ const fakeMedia = [
   {
     id: 4,
     userId: 2,
-    articleId: 14,
+    articleId: 4,
     url:
       "http://www.stockillustrations.com/Image.aspx?src=medres&name=ALBA1060.jpg&sz=1144&fitw=y",
     title: "Happy Birthday",
@@ -67,14 +67,18 @@ const fakeMedia = [
 export const fetchMedia = () => {
   return dispatch => {
     dispatch({ type: t.FETCH_MEDIA_PENDING });
+    dispatch({
+      type: t.FETCH_MEDIA_FULFILLED,
+      payload: fakeMedia,
+    });
+    /*
     axios
-      .get(`${STUY_SPEC_API}/media`, { headers: STUY_SPEC_API_HEADER })
+      .get(`${STUY_SPEC_API_URL}/media`, STUY_SPEC_API_HEADERS)
       .then(response => {
-        // TODO replace fakeMedia with response.data (real media)
-        validateMedia(fakeMedia);
+        validateMedia(response.data);
         dispatch({
           type: t.FETCH_MEDIA_FULFILLED,
-          payload: fakeMedia,
+          payload: response.data,
         });
       })
       .catch(err => {
@@ -83,6 +87,7 @@ export const fetchMedia = () => {
           payload: err,
         });
       });
+    */
   };
 };
 
