@@ -11,13 +11,8 @@ import {
   getIllustratorIllustrations,
   getPhotographerPhotographs,
 } from "../media/selectors";
-import {
-  getComments,
-  getReplies
-} from '../comments/selectors';
 
 export const getArticles = state => state.articles.articles;
-const getArticleFromProps = (state, props) => props.article;
 const getAuthorships = state => state.articles.authorships;
 const getRequestedArticleSlug = (state, props) =>
   props.match.params.article_slug;
@@ -37,7 +32,9 @@ export const getArticlesWithContributors = createSelector(
       if (targetArticle.contributors === undefined) {
         targetArticle.contributors = [];
       }
-      targetArticle.contributors.push(users[authorship.contributorId]);
+      if (!targetArticle.contributors.includes(users[authorship.userId])) {
+        targetArticle.contributors.push(users[authorship.userId]);
+      }
       acc[targetArticle.id] = targetArticle;
       return acc;
     }, {});
@@ -84,7 +81,7 @@ export const getContributorArticles = createSelector(
   [getContributorFromSlug, getArticlesWithContributors, getAuthorships],
   (contributor, articles, authorships) => {
     return authorships.reduce((acc, authorship) => {
-      if (authorship.contributorId === contributor.id) {
+      if (authorship.userId === contributor.id) {
         const article = articles[authorship.articleId];
         acc[article.id] = article;
       }

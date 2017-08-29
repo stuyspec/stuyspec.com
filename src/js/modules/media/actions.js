@@ -2,13 +2,12 @@ import axios from "axios";
 import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from "../../constants";
 import { validateKey } from "../../utils";
 import * as t from "./actionTypes";
-import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from "../../constants";
 
 const fakeMedia = [
   {
-    id: 0,
-    userId: 0,
-    articleId: 0,
+    id: 5,
+    userId: 5,
+    articleId: 5,
     url: "https://i.ytimg.com/vi/qh7LLydY8eo/maxresdefault.jpg",
     title: "A Bird Will Die.",
     caption:
@@ -41,7 +40,7 @@ const fakeMedia = [
   },
   {
     id: 3,
-    userId: 0,
+    userId: 1,
     articleId: 3,
     url:
       "https://images.unsplash.com/photo-1489619547086-641e1c87c3ff?dpr=2&auto=format&fit=crop&w=1080&h=750&q=80&cs=tinysrgb&crop=",

@@ -1,8 +1,9 @@
 import * as t from "./actionTypes";
 import { fetchArticles, fetchAuthorships } from "../articles/actions";
+import { fetchComments } from "../comments/actions";
 import { fetchMedia } from "../media/actions";
 import { fetchSections } from "../sections/actions";
-import { fetchUsers } from "../users/actions";
+import { fetchUsers, fetchUserRoles, fetchRoles } from "../users/actions";
 
 export const refreshWindowDimensions = () => ({
   type: t.REFRESH_WINDOW_DIMENSIONS,
@@ -20,8 +21,11 @@ export const loadAll = () => {
   return dispatch => {
     dispatch(fetchArticles());
     dispatch(fetchAuthorships());
+    dispatch(fetchComments());
     dispatch(fetchMedia());
     dispatch(fetchSections());
     dispatch(fetchUsers());
-  }
-}
+    dispatch(fetchUserRoles());
+    dispatch(fetchRoles());
+  };
+};
