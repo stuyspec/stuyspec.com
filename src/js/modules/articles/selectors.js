@@ -23,17 +23,21 @@ const getRequestedArticleSlug = (state, props) => props.match.params.article_slu
  * The selector returns an articles object with an additional property for each
  *   article: an array of its contributors.
  */
-const getArticlesWithContributors = createSelector(
+export const getArticlesWithContributors = createSelector(
   [ getArticles, getUsers, getAuthorships ],
-  (articles, users, authorships) => {
+  (originalArticles, users, authorships) => {
+    // efficient and readable method of deep cloning an object.
+    // https://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-deep-clone-an-object-in-javascript
+    let articles = JSON.parse(JSON.stringify(originalArticles));
     return authorships.reduce((acc, authorship) => {
-      const targetArticle = acc[ authorship.articleId ];
+      let targetArticle = articles[ authorship.articleId ];
       if (targetArticle.contributors === undefined) {
         targetArticle.contributors = [];
       }
       targetArticle.contributors.push(users[ authorship.contributorId ]);
+      acc[ targetArticle.id ] = targetArticle;
       return acc;
-    }, articles);
+    }, {});
   }
 );
 
