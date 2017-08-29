@@ -6,68 +6,44 @@ import injectSheet from "react-jss";
 
 import { getArticles } from "../../articles/selectors";
 import { getSections } from "../../sections/selectors";
-
-import { fetchArticles } from "../../articles/actions";
-import { fetchUsers } from "../../users/actions";
-import { fetchMedia } from "../../media/actions";
-import { fetchComments } from "../../comments/actions";
+import { loadAll } from "../actions";
 
 const styles = {
-  HomePage: {}
+  HomePage: {},
 };
 
-const HomePage = ({
-                    classes,
-                    sections,
-                    articles,
-                    fetchArticles,
-                    fetchUsers,
-                    fetchMedia,
-                    fetchComments,
-                  }) => {
-  const createArticleLinks = () => {
-    return Object.values(articles).map(article => {
-      return (
-        <li key={ article.id }>
-          <Link to={ `${sections[ article.sectionId ].permalink}/${article.slug}` }>
-            { article.title }
-          </Link>
-        </li>
-      );
-    });
-  };
-  const loadAll = () => {
-    fetchArticles();
-    fetchUsers();
-    fetchMedia();
-    fetchComments();
-  }
+const HomePage = ({ classes, sections, articles, loadAll }) => {
   return (
-    <div className={ classes.HomePage }>
+    <div className={classes.HomePage}>
       <h1>Home page</h1>
-      <button onClick={ loadAll }>load all</button>
-      <Link to="/myaccount">myaccount</Link>
+      {/* No more loadAll button in feature/homepage-design */}
+      <button onClick={loadAll}>load all</button>
       <h2>Articles</h2>
       <ul>
-        { createArticleLinks() }
+        {Object.values(articles).map(article => {
+          const section = sections[article.sectionId];
+          return (
+            <li key={article.id}>
+              <Link to={`${section.permalink}/${article.slug}`}>
+                {article.title}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   articles: getArticles(state),
   sections: getSections(state),
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    { fetchArticles, fetchUsers, fetchMedia, fetchComments },
-    dispatch
-  );
+  return bindActionCreators({ loadAll }, dispatch);
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(injectSheet(styles)(HomePage));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  injectSheet(styles)(HomePage),
+);

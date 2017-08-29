@@ -15,14 +15,16 @@ try {
 }
 
 import { VERSION } from "./versionInfo";
-console.log('appVersion ->', VERSION);
+console.log("appVersion ->", VERSION);
 
 import { objectFilter } from "./utils";
 Object.filter = objectFilter;
 
-ReactDOM.render((
+ReactDOM.render(
   <AppContainer>
-    <Provider store={ store }>
-      <RoutingApp/>
+    <Provider store={store}>
+      <RoutingApp />
     </Provider>
-  </AppContainer>), document.getElementById('app'));
+  </AppContainer>,
+  document.getElementById("app"),
+);

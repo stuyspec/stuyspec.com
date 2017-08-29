@@ -1,5 +1,5 @@
 /**
- * Warning : if editing this file, be sure to keep the VERSION variable set to 'X.X.X'
+ * Warning: if editing this file, be sure to keep the VERSION variable set to 'X.X.X'
  *           without modifying formatting for automation scripts
  * @type {{VERSION: string}}
  */

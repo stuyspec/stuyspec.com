@@ -1,4 +1,3 @@
-export default
-{
-  NAME: 'media',
-}
+export default {
+  NAME: "media",
+};

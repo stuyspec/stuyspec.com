@@ -12,8 +12,8 @@ import {
 
 const styles = {
   ArticlePage: {
-    margin: '0 auto',
-    width: '1060px',
+    margin: "0 auto",
+    width: "1060px",
   },
 };
 
@@ -32,6 +32,4 @@ const mapStateToProps = (state, ownProps) => ({
   featuredMedia: getArticleFeaturedMedia(state, ownProps),
 });
 
-export default connect(
-  mapStateToProps
-)(injectSheet(styles)(ArticlePage));
+export default connect(mapStateToProps)(injectSheet(styles)(ArticlePage));

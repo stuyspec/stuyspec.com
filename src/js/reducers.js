@@ -9,7 +9,6 @@ import users from "./modules/users";
 import media from "./modules/media";
 import comments from "./modules/comments";
 import descriptions from './modules/descriptions';
-
 export default combineReducers(
   {
     [core.constants.NAME]: core.reducer,
