@@ -14,6 +14,8 @@ const HomePage = ({ classes, sections, articles }) => {
   return (
     <div className={classes.HomePage}>
       <h1>Home page</h1>
+      <Link to="/recommended">Recommended</Link>
+      <Link to="/latest">Latest</Link>
       {/* No more article list in feature/homepage-design */}
       <h2>Articles</h2>
       <ul>
