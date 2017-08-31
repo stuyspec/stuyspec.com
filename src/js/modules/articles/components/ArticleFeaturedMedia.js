@@ -1,46 +1,45 @@
 import React from "react";
 import injectSheet from "react-jss";
+import { Link } from "react-router-dom";
+import { MEDIA_CREATOR_SLUG } from "../../../constants";
+import { capitalizeWord } from "../../../utils";
 
 const styles = {
   figure: {
-    margin: 0,
-    width: '100%',
+    margin: "0px 0px 13px 0px",
+    width: "100%",
   },
   img: {
-    width: '100%',
+    width: "100%",
   },
   caption: {
-    fontFamily: 'Minion Pro',
-    fontSize: '14px',
-    lineHeight: '1.07',
-    marginTop: '7px',
+    fontFamily: "Minion Pro",
+    fontSize: "14px",
+    lineHeight: "1.07",
+    marginTop: "7px",
   },
   creditLine: {
-    color: '#888',
+    color: "#888",
   },
 };
 
-const ArticleFeaturedMedia = ({
-                                classes,
-                                featuredMedia: { url, caption, type, creator },
-                                putCaption
-                              }) => {
+const ArticleFeaturedMedia = ({ classes, featuredMedia }) => {
+  const { creator } = featuredMedia;
   return (
-    <figure className={ classes.figure }>
-      <img className={ classes.img } src={ url }/>
-      {
-        putCaption && (
-          <figcaption className={ classes.caption }>
-            <span>{ caption }&nbsp;</span>
-            <Link className={ classes.creditLine }
-                  to={ `/${ ROLE_SLUG_OF_MEDIA_TYPE[ type ] }/${creator.slug}` }>
-              { capitalizeFirstLetter(type) }
-              &nbsp;by&nbsp;
-              { `${creator.firstName} ${creator.lastName}` }
-            </Link>
-          </figcaption>
-        )
-      }
+    <figure className={classes.figure}>
+      <img className={classes.img} src={featuredMedia.url} />
+      <figcaption className={classes.caption}>
+        <span>{featuredMedia.caption}&nbsp;</span>
+        <Link
+          className={classes.creditLine}
+          to={`/${MEDIA_CREATOR_SLUG[featuredMedia.type]}/${creator.slug}`}
+        >
+          {capitalizeWord(featuredMedia.type)}
+          &nbsp;by&nbsp;
+          {`${creator.firstName} ${creator.lastName}`}
+        </Link>
+        .
+      </figcaption>
     </figure>
   );
 };

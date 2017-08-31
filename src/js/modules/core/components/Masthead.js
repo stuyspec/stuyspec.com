@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
 
 import { getTopLevelSections } from "../../sections/selectors";
 
@@ -21,10 +21,10 @@ const styles = {
       color: '#000',
       textDecoration: 'none',
     },
-    '&:focus': {
-      color: '#000',
-      textDecoration: 'none',
-    }
+    "&:focus": {
+      color: "#000",
+      textDecoration: "none",
+    },
   },
   sectionLinksNav: {
     borderTop: '1px solid black',
@@ -42,45 +42,36 @@ const styles = {
     fontWeight: 300,
     textDecoration: 'none',
   },
-  subscribeLink: {
-    color: '#f00',
-    fontSize: '12px',
-    fontWeight: 300,
-    textDecoration: 'none',
-  },
 };
 
-const Masthead = ({ classes, topLevelSections }) => {
+const Masthead = ({ classes, sections }) => {
   return (
-    <div className={ classes.Masthead }>
-      <Link to="/" className={ classes.theSpectatorLogo }>The Spectator</Link>
-      <ul className={ classes.sectionLinksNav }>
-        {
-          Object.values(topLevelSections).map(section => {
-            return (
-              <li key={ section.id } className={ classes.sectionListItem }>
-                <Link to={ section.permalink } className={ classes.sectionLink }>
-                  { section.name }
-                </Link>
-              </li>
-            );
-          })
-        }
+    <div className={classes.Masthead}>
+      <Link to="/" className={classes.theSpectatorLogo}>
+        The Spectator
+      </Link>
+      <ul className={classes.sectionLinksNav}>
+        {Object.values(sections).map(section => {
+          return (
+            <li key={section.id} className={classes.sectionListItem}>
+              <Link to={section.permalink} className={classes.sectionLink}>
+                {section.name}
+              </Link>
+            </li>
+          );
+        })}
         <li key={ -1 } className={ classes.sectionListItem }>
-          <Link to={ "/maybe-we-should-pop-up-the-subscribe-modal" } className={ classes.subscribeLink }>
+          <Link to={ "/maybe-we-should-pop-up-the-subscribe-modal" } className={classes.sectionLink}>
             Subscribe
-          </Link>
         </li>
+          </Link>
       </ul>
     </div>
-  )
+  );
 };
 
 const mapStateToProps = state => ({
-  topLevelSections: getTopLevelSections(state),
-})
+  sections: getTopLevelSections(state),
+});
 
-export default connect(
-  mapStateToProps,
-  null
-) (injectSheet(styles)(Masthead));
+export default connect(mapStateToProps)(injectSheet(styles)(Masthead));

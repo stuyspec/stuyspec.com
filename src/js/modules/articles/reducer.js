@@ -1,8 +1,8 @@
 import {
-  FETCH_ARTICLE_PENDING,
-  FETCH_ARTICLE_FULFILLED,
-  FETCH_ARTICLE_REJECTED,
-  ADD_AUTHORSHIPS
+  FETCH_ARTICLES_PENDING,
+  FETCH_ARTICLES_FULFILLED,
+  FETCH_ARTICLES_REJECTED,
+  FETCH_AUTHORSHIPS_FULFILLED,
 } from "./actionTypes";
 
 const initialState = {
@@ -15,43 +15,33 @@ const initialState = {
 
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
-    case FETCH_ARTICLE_PENDING: {
-      return { ...state, isFetching: true, };
+    case FETCH_ARTICLES_PENDING: {
+      return { ...state, isFetching: true };
     }
-    case FETCH_ARTICLE_FULFILLED: {
+    case FETCH_ARTICLES_FULFILLED: {
+      const newArticles = action.payload.reduce((acc, article) => {
+        acc[article.id] = article;
+        return acc;
+      }, {});
       return {
         ...state,
         isFetching: false,
         isFetched: true,
-        /* Placing state.articles as the initial value will for some reason
-         * inhibit components' updating with the articles state, which is why
-         * the spread operator is required.
-         */
-        articles: {
-          ...state.articles,
-          ...action.payload.reduce((acc, article) => {
-            acc[ article.id ] = article;
-            return acc;
-          }, {}),
-        },
+        articles: newArticles,
       };
     }
-    case FETCH_ARTICLE_REJECTED: {
+    case FETCH_ARTICLES_REJECTED: {
       return {
         ...state,
         isFetching: false,
         error: action.payload,
       };
     }
-    case ADD_AUTHORSHIPS: {
+    case FETCH_AUTHORSHIPS_FULFILLED: {
       return {
         ...state,
-        authorships: [
-          ...action.payload
-        ],
-        response: [],
-        isFetched: true,
-      }
+        authorships: action.payload,
+      };
     }
   }
   return state;

@@ -1,4 +1,3 @@
-export default
-{
-    NAME :  'core',
+export default {
+  NAME: "core",
 };

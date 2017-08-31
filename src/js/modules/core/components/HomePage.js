@@ -1,15 +1,10 @@
 import React from "react";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 
 import { getArticlesWithContributors } from "../../articles/selectors";
 import { getSections } from "../../sections/selectors";
-
-import { fetchArticles } from "../../articles/actions";
-import { fetchMedia } from "../../media/actions";
-import { fetchUsers } from "../../users/actions";
 
 import {
   FeaturedArticle,
@@ -23,13 +18,7 @@ const styles = {
   },
 };
 
-const HomePage = ({ classes, articles, sections, fetched, fetchArticles, fetchUsers, fetchMedia }) => {
-  const fetchAll = () => {
-    fetchArticles();
-    fetchUsers();
-    fetchMedia();
-  }
-  if (fetched) {
+const HomePage = ({ classes, sections, articles }) => {
     const articleObjects = Object.values(articles);
     const featuredArticle = articleObjects[ 0 ];
     const sectionFeature = sections[ '0' ];
@@ -53,30 +42,11 @@ const HomePage = ({ classes, articles, sections, fetched, fetchArticles, fetchUs
         </Grid>
       </div>
     );
-  } else {
-    return (
-      <div>
-        <button onClick={ fetchAll }>fetch all</button>
-      </div>
-    );
-  }
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   articles: getArticlesWithContributors(state),
   sections: getSections(state),
-  fetched: state.articles.isFetched && state.media.isFetched && state.articles.isFetched,
 });
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    fetchArticles,
-    fetchMedia,
-    fetchUsers,
-  }, dispatch);
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(injectSheet(styles)(HomePage));
+export default connect(mapStateToProps)(injectSheet(styles)(HomePage));

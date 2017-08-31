@@ -1,7 +1,5 @@
-export default
-{
-    main :
-    {
-        languageAbbr : 'EN'
-    }
-}
+export default {
+  main: {
+    languageAbbr: "EN",
+  },
+};

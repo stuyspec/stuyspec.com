@@ -5,16 +5,25 @@ import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 
 const styles = {
   ArticleBody: {
-    color: '#000',
-    fontFamily: 'Minion Pro',
-    fontSize: '18px',
+    borderBottom: "1px solid #ddd",
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "18px",
     lineHeight: 1.44,
-    width: '700px',
-    '& p:first-child::first-letter': {
-      float: 'left',
-      fontSize: '58px',
-      lineHeight: '43px',
-      padding: '7px 6px 0px 3px',
+    marginBottom: "38px",
+    paddingBottom: "38px",
+    width: "700px",
+    "& p": {
+      marginBottom: "20px",
+    },
+    "& p:first-child": {
+      marginTop: "28px",
+    },
+    "& p:first-child::first-letter": {
+      float: "left",
+      fontSize: "58px",
+      lineHeight: "43px",
+      padding: "7px 6px 0px 3px",
     },
   },
   content: {
@@ -22,14 +31,11 @@ const styles = {
   }
 };
 
-const ArticleBody = ({ classes, article, featuredMedia }) => {
+const ArticleBody = ({ classes, content, featuredMedia }) => {
   return (
-    <div className={ classes.ArticleBody }>
-      <ArticleFeaturedMedia article={ article }
-                            featuredMedia={ featuredMedia }
-                            putCaption={ true }/>
-      <div className={ classes.content }
-           dangerouslySetInnerHTML={ { __html: article.content } }/>
+    <div className={classes.ArticleBody}>
+      {featuredMedia && <ArticleFeaturedMedia featuredMedia={featuredMedia} />}
+      <div dangerouslySetInnerHTML={{ __html: content }} />
     </div>
   );
 };

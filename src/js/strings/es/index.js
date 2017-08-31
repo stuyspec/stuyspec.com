@@ -1,3 +1,3 @@
-import menus from './es-menus'
+import menus from "./es-menus";
 
-export { menus }
+export { menus };

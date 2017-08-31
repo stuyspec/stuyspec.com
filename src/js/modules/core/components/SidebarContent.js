@@ -9,84 +9,123 @@ import { getTopLevelSections } from "../../sections/selectors";
 
 const styles = {
   divider: {
-    background: '#ddd',
+    background: "#ddd",
     border: 0,
-    height: '1px',
+    height: "1px",
     margin: 0,
   },
   sidebarSectionLink: {
-    borderRadius: '3px',
-    color: '#000',
-    display: 'block',
-    fontFamily: 'Circular Std',
-    fontSize: '15px',
-    fontWeight: '500',
-    margin: '8px 0',
-    padding: '8px 0 8px 11px',
-    textAlign: 'left',
-    width: '100%',
-    '&:active': {
-      color: '#000',
-      textDecoration: 'none',
+    borderRadius: "3px",
+    color: "#000",
+    display: "block",
+    fontFamily: "Circular Std",
+    fontSize: "15px",
+    fontWeight: "500",
+    margin: "8px 0",
+    padding: "8px 0 8px 11px",
+    textAlign: "left",
+    width: "100%",
+    "&:active": {
+      color: "#000",
+      textDecoration: "none",
     },
-    '&:focus': {
-      color: '#000',
-      textDecoration: 'none',
+    "&:focus": {
+      color: "#000",
+      textDecoration: "none",
     },
-    '&:hover': {
-      background: 'rgba(84, 153, 232, 0.26)',
-      color: '#000',
-      textDecoration: 'none',
-    }
+    "&:hover": {
+      background: "rgba(84, 153, 232, 0.26)",
+      color: "#000",
+      textDecoration: "none",
+    },
   },
 };
 
-const SidebarContent = ({ classes, topLevelSections, closeSidebar }) => {
+const SidebarContent = ({
+  classes,
+  session,
+  topLevelSections,
+  closeSidebar,
+}) => {
   let sidebarElements = [];
   sidebarElements.push(
-    <Link className={ classes.sidebarSectionLink }
-          key={ -1 }
-          onClick={ closeSidebar }
-          to={ '/' }>
+    <Link
+      className={classes.sidebarSectionLink}
+      key={-1}
+      onClick={closeSidebar}
+      to={"/"}
+    >
       Home
-    </Link>
+    </Link>,
   );
-  Object.values(topLevelSections).forEach(section => {
+  Object.values(topLevelSections).map(section => {
     sidebarElements.push(
-      <Link className={ classes.sidebarSectionLink }
-            key={ section.id }
-            onClick={ closeSidebar }
-            to={ section.permalink }>
-        { section.name }
-      </Link>
+      <Link
+        className={classes.sidebarSectionLink}
+        key={section.id}
+        onClick={closeSidebar}
+        to={section.permalink}
+      >
+        {section.name}
+      </Link>,
     );
-    // We want a line separating the writing sections from the non-writing
-    //   sections and one separating the non-writing sections from the
-    //   user account options.
-    if (section.slug === 'sports' || section.slug === 'video') {
+    /* We want a line separating the writing sections from the non-writing
+     * sections and one separating the non-writing sections from the user
+     * account options.
+     */
+    if (section.name === "Sports" || section.name === "Video") {
       sidebarElements.push(
-        <hr className={ classes.divider } key={ section.id + 100 }/>
+        <hr className={classes.divider} key={section.id + 100} />,
       );
     }
   });
-
-  return (
-    <div>
-      { sidebarElements }
-    </div>
-  );
+  if (session) {
+    sidebarElements.push(
+      <Link
+        className={classes.sidebarSectionLink}
+        key={-2}
+        onClick={closeSidebar}
+        to="/myaccount/profile"
+      >
+        Profile
+      </Link>,
+    );
+    // TODO: logout
+  } else {
+    sidebarElements.push(
+      <Link
+        className={classes.sidebarSectionLink}
+        key={-2}
+        onClick={closeSidebar}
+        to="/myaccount"
+      >
+        Log In
+      </Link>,
+    );
+    sidebarElements.push(
+      <Link
+        className={classes.sidebarSectionLink}
+        key={-3}
+        onClick={closeSidebar}
+        to="/myaccount"
+      >
+        Sign Up
+      </Link>,
+    );
+  }
+  return <div>{sidebarElements}</div>;
 };
 
-const mapStateToProps = (state) => ({
-  topLevelSections: getTopLevelSections(state),
+const mapStateToProps = state => ({
   isSidebarOpen: state.core.isSidebarOpen,
+  session: state.accounts.session,
+  topLevelSections: getTopLevelSections(state),
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ closeSidebar }, dispatch);
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(injectSheet(styles)(SidebarContent));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  injectSheet(styles)(SidebarContent),
+);
