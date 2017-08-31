@@ -6,10 +6,9 @@ import { bindActionCreators } from "redux";
 
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
-import SignInModal from "../../accounts/components/SignInModal";
+import { SignInModal } from "../../accounts/components";
 
-import { createComment, closeLoginModal } from "../actions";
-import { signIn } from "../../accounts/actions";
+import { createComment } from "../actions";
 import { getRequestedArticleComments } from "../selectors";
 
 const styles = {
@@ -23,10 +22,7 @@ const CommentThread = ({
   comments,
   article,
   createComment,
-  closeLoginModal,
-  isModalOpen,
   session,
-  signIn,
 }) => {
   const handleCreateComment = values => {
     createComment({
@@ -51,15 +47,11 @@ const CommentThread = ({
 
 const mapStateToProps = (state, ownProps) => ({
   comments: getRequestedArticleComments(state, ownProps),
-  isModalOpen: state.comments.isModalOpen,
   session: state.accounts.session,
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    { createComment, closeLoginModal, signIn },
-    dispatch,
-  );
+  return bindActionCreators({ createComment }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(

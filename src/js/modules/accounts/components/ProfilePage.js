@@ -28,15 +28,7 @@ const ProfilePage = ({ classes, session, signOut, status }) => {
     return (
       <p>You are not signed in. <Link to="/myaccount">Sign in</Link> or go back to the <Link to="/">home page</Link></p>
     )
-  } 
-  const handleSignOut = () => {
-    signOut({
-      // dashes are invalid in JS variables
-      "access-token": session.headers["access-token"],
-      client: session.headers.client,
-      uid: session.headers.uid,
-    });
-  };
+  }
 
   const { user } = session;
   return (
@@ -51,7 +43,7 @@ const ProfilePage = ({ classes, session, signOut, status }) => {
       <p>.</p>)
     }
     {/* We keep the SignOutForm to display the success message */}
-      <SignOutForm onSubmit={handleSignOut} />
+      <SignOutForm onSubmit={() => signOut(session)} />
     </div>
   );
 };

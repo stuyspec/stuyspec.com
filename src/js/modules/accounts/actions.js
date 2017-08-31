@@ -35,7 +35,8 @@ export const signUp = values => {
   };
 };
 
-export const signIn = values => {
+export const signIn = (values, isInModal) => {
+  console.log(isInModal);
   return dispatch => {
     dispatch({
       type: t.SIGN_IN_PENDING,
@@ -48,7 +49,9 @@ export const signIn = values => {
           type: t.SIGN_IN_FULFILLED,
           payload: response,
         });
-        appHistory.push("/myaccount/profile");
+        if (isInModal !== true) {
+          appHistory.push("/myaccount/profile");
+        }
       })
       .catch(err => {
         dispatch({
@@ -59,7 +62,12 @@ export const signIn = values => {
   };
 };
 
-export const signOut = headers => {
+export const signOut = session => {
+  const headers = {
+      "access-token": session.headers["access-token"],
+      client: session.headers.client,
+      uid: session.headers.uid,
+    };
   return dispatch => {
     dispatch({ type: t.SIGN_OUT_PENDING, payload: headers });
     axios

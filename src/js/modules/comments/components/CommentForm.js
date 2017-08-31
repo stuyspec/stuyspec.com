@@ -6,7 +6,7 @@ import { Field, reduxForm } from "redux-form";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 
-import { openSignInModal, closeSignInModal } from "../../accounts/actions";
+import { openSignInModal, signOut } from "../../accounts/actions";
 
 const styles = {
   CommentForm: {
@@ -124,6 +124,7 @@ const CommentForm = ({
   session,
   openSignInModal,
   status,
+  signOut
 }) => {
   return (
     <Col md={7} lg={7} className={classes.CommentForm}>
@@ -137,9 +138,11 @@ const CommentForm = ({
             Edit Profile
           </Link>
           <span className={classes.bulletPoint}>&#8226;</span>
-          <button className={classes.optOut}>Log Out</button>
+          <button className={classes.optOut} onClick={() => signOut(session)}>Log Out</button>
         </div>
       )}
+
+    {/* TODO: DISABLE FIELDS */}
       <form onSubmit={handleSubmit}>
         <Field name="content" component={renderField} checkLogin={() => !session.user && openSignInModal()} />
         <div className={classes.submitDiv}>
@@ -172,7 +175,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ openSignInModal, closeSignInModal }, dispatch);
+  return bindActionCreators({ openSignInModal, signOut }, dispatch);
 };
 
 const SmartCommentForm = connect(mapStateToProps, mapDispatchToProps)(

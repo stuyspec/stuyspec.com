@@ -21,8 +21,12 @@ const SignInModal = ({
   isSignInModalOpen,
   closeSignInModal,
   signIn,
+  status
 }) => {
-  console.log('hi');
+  if (status.form === "signIn" && status.errors.length === 0) {
+    // The form has been successfully submitted, so the modal can be closed.
+    // closeSignInModal();
+  }
   return (
     <Modal
       aria-labelledby="app"
@@ -31,7 +35,9 @@ const SignInModal = ({
       onHide={closeSignInModal}
     >
       <div className={classes.modalContent}>
-        <SignInForm onSubmit={signIn} />
+        {/* If second param of signIn is true, the form will not redirect
+        to the profile page because it knows it is in a modal */}
+        <SignInForm onSubmit={values => signIn(values, true)}/>
       </div>
     </Modal>
   );
@@ -39,6 +45,7 @@ const SignInModal = ({
 
 const mapStateToProps = state => ({
   isSignInModalOpen: state.accounts.isSignInModalOpen,
+  status: state.accounts.status,
 });
 
 const mapDispatchToProps = dispatch => {

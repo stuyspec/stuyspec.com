@@ -1,9 +1,10 @@
 import React from "react";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { reduxForm } from "redux-form";
 import injectSheet from "react-jss";
 
-// TODO isolate forms completely (move submit handling into forms)
+import { signOut } from "../../actions";
 
 const styles = {
   successMessage: {
@@ -41,10 +42,11 @@ const SignOutForm = ({ classes, handleSubmit, submitting, status }) => {
 };
 
 const mapStateToProps = state => ({
+  session: state.accounts.session,
   status: state.accounts.status,
 });
 
-const SmartSignOutForm = connect(mapStateToProps, null)(
+const SmartSignOutForm = connect(mapStateToProps)(
   injectSheet(styles)(SignOutForm),
 );
 

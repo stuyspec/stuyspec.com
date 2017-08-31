@@ -5,8 +5,3 @@ export const CREATE_COMMENT_REJECTED = "comments/CREATE_COMMENT_REJECTED";
 export const FETCH_COMMENTS_PENDING = "comments/FETCH_COMMENTS_PENDING";
 export const FETCH_COMMENTS_FULFILLED = "comments/FETCH_COMMENTS_FULFILLED";
 export const FETCH_COMMENTS_REJECTED = "comments/FETCH_COMMENTS_REJECTED";
-
-export const OPEN_LOGIN_MODAL = "comments/OPEN_LOGIN_MODAL";
-export const CLOSE_LOGIN_MODAL = "comments/CLOSE_LOGIN_MODAL";
-
-// TODO: move modal to accounts?

@@ -46,7 +46,13 @@ const reducer = (state = { ...initialState }, action) => {
         session: {
           user: action.payload.data.data,
           headers: action.payload.headers,
-        }
+        },
+        status: {
+          errors: [],
+          form: "signIn",
+          message:
+            "Successfully signed in.",
+        },
       };
     }
     case SIGN_IN_REJECTED: {
