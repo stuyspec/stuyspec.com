@@ -29,9 +29,6 @@ const initialState = {
 
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
-    case ADD_ROW_HEIGHT: {
-      return {...state, rowHeight:action.payload};
-    }
     case REFRESH_WINDOW_DIMENSIONS: {
       let viewportWidth = getViewportWidth(),
         viewportHeight = getViewportHeight();

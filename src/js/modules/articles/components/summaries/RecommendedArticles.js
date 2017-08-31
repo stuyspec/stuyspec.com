@@ -63,6 +63,7 @@ const styles = {
 };
 
 const RecommendedArticles = ({ classes, articles, sections }) => {
+  // NESTED IN <Col lg={3} md={3}>
   return (
     <div className={ classes.RecommendedArticles }>
       <p className={ classes.label }>Recommended</p>

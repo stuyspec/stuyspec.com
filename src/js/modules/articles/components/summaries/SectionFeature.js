@@ -88,10 +88,12 @@ const SectionFeature = ({ classes, articles, section, media }) => {
   const featuredMedia = Object.values(media).find(mediaObject => {
     return mediaObject.isFeatured && mediaObject.articleId === secondaryArticle.id;
   });
+
+  // NESTED IN <Col lg={9}>
   return (
     <Row className={ classes.SectionFeature }>
       <p className={ classes.label }>{ section.name }</p>
-      <Col lg={ 3 } md={ 3 } className={ classes.primaryArticle }>
+      <Col lg={ 4 } md={ 4 } className={ classes.primaryArticle }>
         <Link className={ classes.title }
               to={ `${ section.permalink }/${ primaryArticle.slug}` }>
           { primaryArticle.title }
@@ -102,7 +104,7 @@ const SectionFeature = ({ classes, articles, section, media }) => {
         <Byline classes={ classes } contributors={ primaryArticle.contributors }/>
         <Dateline classes={ classes } article={ primaryArticle }/>
       </Col>
-      <Col lg={ 3 } md={ 3 } className={ classes.secondaryArticle }>
+      <Col lg={ 4 } md={ 4 } className={ classes.secondaryArticle }>
         <Link className={ classes.title }
               to={ `${ section.permalink }/${ secondaryArticle.slug}` }>
           { secondaryArticle.title }
@@ -113,7 +115,7 @@ const SectionFeature = ({ classes, articles, section, media }) => {
         <Byline classes={ classes } contributors={ secondaryArticle.contributors }/>
         <Dateline classes={ classes } article={ secondaryArticle }/>
       </Col>
-      <Col lg={ 3 } md={ 3 } className={ classes.featuredMediaContainer }>
+      <Col lg={ 4 } md={ 4 } className={ classes.featuredMediaContainer }>
         <figure className={ classes.figure }>
           <img src={ featuredMedia.url }/>
         </figure>

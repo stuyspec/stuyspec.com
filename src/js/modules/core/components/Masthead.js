@@ -63,8 +63,8 @@ const Masthead = ({ classes, sections }) => {
         <li key={ -1 } className={ classes.sectionListItem }>
           <Link to={ "/maybe-we-should-pop-up-the-subscribe-modal" } className={classes.sectionLink}>
             Subscribe
-        </li>
           </Link>
+        </li>
       </ul>
     </div>
   );

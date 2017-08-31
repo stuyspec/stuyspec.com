@@ -21,7 +21,7 @@ const styles = {
 const HomePage = ({ classes, sections, articles }) => {
     const articleObjects = Object.values(articles);
     const featuredArticle = articleObjects[ 0 ];
-    const sectionFeature = sections[ '0' ];
+    const sectionFeature = sections[ '1' ];
     const sectionFeatureArticles = articleObjects.slice(0, 2);
     const recommendedArticles = articleObjects.slice(0, 5);
     return (
