@@ -4,7 +4,7 @@ import injectSheet from "react-jss";
 
 import ArticleList from "./ArticleList";
 
-import { getRecommendedArticles } from "../selectors";
+import { getArticlesWithContributors } from "../selectors";
 
 const styles = {
   RecommendedPage: {
@@ -13,17 +13,17 @@ const styles = {
   },
 };
 
-const RecommendedPage = ({ classes, recommendedArticles }) => {
+const RecommendedPage = ({ classes, articles }) => {
   return (
     <div className={classes.RecommendedPage}>
       <h1>Recommended Articles</h1>
-      <ArticleList articles={recommendedArticles} />
+      <ArticleList articles={articles} />
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  recommendedArticles: getRecommendedArticles(state),
+  articles: getArticlesWithContributors(state),
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(RecommendedPage));

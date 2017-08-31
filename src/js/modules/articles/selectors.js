@@ -5,7 +5,6 @@ import { getUsers, getContributorFromSlug } from "../users/selectors";
 import {
   getSectionFromRequestedSlug,
   getSectionTreeIds,
-  getSections,
 } from "../sections/selectors";
 import {
   getMedia,
@@ -140,33 +139,15 @@ export const getArticleFeaturedMedia = createSelector(
   },
 );
 
-export const getRecommendedArticles = createSelector(
-  [getArticlesWithContributors, getSections],
-  (articles, sections) => {
-    console.log(articles);
-    const recommendedArticleArray = Object.values(articles).sort((a,b) => {
-      const firstArticleRank = 1.5*(sections[a.sectionId].rank) +
-        a.rank + 5*(a.volume + a.issue);
-      const secondArticleRank = 1.5*(sections[b.sectionId].rank) +
-        b.rank + 5*(b.volume + b.issue);
-      return firstArticleRank - secondArticleRank;
-    });
-    return recommendedArticleArray.reduce((acc,currentArticle) => {
-      acc[currentArticle.id] = currentArticle;
-      return acc;
-    }, {});
-  }
-);
-
 export const getLatestArticles = createSelector(
   [getArticlesWithContributors],
-  (articles) => {
-    const latestArticleArray = Object.values(articles).sort((a,b) => {
+  articles => {
+    const latestArticleArray = Object.values(articles).sort((a, b) => {
       return new Date(a) - new Date(b);
     });
-    return latestArticleArray.reduce((acc,currentArticle) => {
+    return latestArticleArray.reduce((acc, currentArticle) => {
       acc[currentArticle.id] = currentArticle;
       return acc;
     }, {});
-  }
+  },
 );

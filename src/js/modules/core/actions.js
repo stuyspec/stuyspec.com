@@ -19,13 +19,13 @@ export const closeSidebar = () => ({
 
 export const loadAll = () => {
   return dispatch => {
-    dispatch(fetchArticles());
-    dispatch(fetchAuthorships());
     dispatch(fetchComments());
     dispatch(fetchMedia());
     dispatch(fetchSections());
     dispatch(fetchUsers());
     dispatch(fetchUserRoles());
     dispatch(fetchRoles());
+    dispatch(fetchArticles());
+    dispatch(fetchAuthorships());
   };
 };
