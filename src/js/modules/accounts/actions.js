@@ -24,7 +24,11 @@ export const signUp = values => {
          * name to editUser, which will prevent success text from rendering
          * on the signUpForm.
          */
-        axios.put(`${STUY_SPEC_API_URL}/users/${user.id}`, values, STUY_SPEC_API_HEADERS)
+        axios.put(
+          `${STUY_SPEC_API_URL}/users/${user.id}`,
+          values,
+          STUY_SPEC_API_HEADERS,
+        );
       })
       .catch(err => {
         dispatch({
@@ -64,10 +68,10 @@ export const signIn = (values, isInModal) => {
 
 export const signOut = session => {
   const headers = {
-      "access-token": session.headers["access-token"],
-      client: session.headers.client,
-      uid: session.headers.uid,
-    };
+    "access-token": session.headers["access-token"],
+    client: session.headers.client,
+    uid: session.headers.uid,
+  };
   return dispatch => {
     dispatch({ type: t.SIGN_OUT_PENDING, payload: headers });
     axios

@@ -41,9 +41,9 @@ const styles = {
     textAlign: "center",
     width: "70px",
     "&:disabled": {
-      background: '#ddd',
-      borderColor: '#ddd',
-      color: '#888',
+      background: "#ddd",
+      borderColor: "#ddd",
+      color: "#888",
     },
   },
   moderationWarning: {
@@ -108,7 +108,12 @@ const validate = values => {
   return errors;
 };
 
-const renderField = ({ input, disabled, meta: { touched, error }, checkLogin }) => {
+const renderField = ({
+  input,
+  disabled,
+  meta: { touched, error },
+  checkLogin,
+}) => {
   return (
     <div>
       <textarea
@@ -129,7 +134,7 @@ const CommentForm = ({
   session,
   openSignInModal,
   status,
-  signOut
+  signOut,
 }) => {
   return (
     <Col md={7} lg={7} className={classes.CommentForm}>
@@ -143,13 +148,19 @@ const CommentForm = ({
             Edit Profile
           </Link>
           <span className={classes.bulletPoint}>&#8226;</span>
-          <button className={classes.optOut} onClick={() => signOut(session)}>Log Out</button>
+          <button className={classes.optOut} onClick={() => signOut(session)}>
+            Log Out
+          </button>
         </div>
       )}
 
-    {/* TODO: DISABLE FIELDS */}
+      {/* TODO: DISABLE FIELDS */}
       <form onSubmit={handleSubmit}>
-        <Field name="content" component={renderField} checkLogin={() => !session.user && openSignInModal()} />
+        <Field
+          name="content"
+          component={renderField}
+          checkLogin={() => !session.user && openSignInModal()}
+        />
         <div className={classes.submitDiv}>
           <button
             type="submit"

@@ -11,38 +11,43 @@ const styles = {
   successMessage: {
     color: "green",
   },
-}
+};
 
-const ProfilePage = ({ classes, session, signOut, status }) => {   
+const ProfilePage = ({ classes, session, signOut, status }) => {
   if (status.form === "signOut" && status.errors.length === 0) {
     return (
       <div>
         <p className={classes.successMessage}>{status.message}</p>
-        <Link to="/myaccount">Sign in</Link> or go back to the <Link to="/">home page</Link>
+        <Link to="/myaccount">Sign in</Link> or go back to the{" "}
+        <Link to="/">home page</Link>
       </div>
-    )
+    );
   }
   // The last if statement includes the following condition. This next if block
   // is a message for those who directly visit myaccount/profile.
   if (!session.user) {
     return (
-      <p>You are not signed in. <Link to="/myaccount">Sign in</Link> or go back to the <Link to="/">home page</Link></p>
-    )
+      <p>
+        You are not signed in. <Link to="/myaccount">Sign in</Link> or go back
+        to the <Link to="/">home page</Link>
+      </p>
+    );
   }
 
   const { user } = session;
   return (
     <div>
-    {user ? (
-      <div>
-        <p>first name: {user.firstName}</p>
-        <p>last name: {user.lastName}</p>
-        <p>email: {user.email}</p>
-        <Link to="/myaccount/profile/edit">Edit Profile</Link></div>
+      {user ? (
+        <div>
+          <p>first name: {user.firstName}</p>
+          <p>last name: {user.lastName}</p>
+          <p>email: {user.email}</p>
+          <Link to="/myaccount/profile/edit">Edit Profile</Link>
+        </div>
       ) : (
-      <p>.</p>)
-    }
-    {/* We keep the SignOutForm to display the success message */}
+        <p>.</p>
+      )}
+      {/* We keep the SignOutForm to display the success message */}
       <SignOutForm onSubmit={() => signOut(session)} />
     </div>
   );
@@ -57,4 +62,6 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ signOut }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(ProfilePage));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  injectSheet(styles)(ProfilePage),
+);

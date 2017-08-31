@@ -27,7 +27,9 @@ const SignOutForm = ({ classes, handleSubmit, submitting, status }) => {
       </form>
       {status.form === "signOut" && (
         <div>
-          <p key="success" className={classes.successMessage}>{status.message}</p>
+          <p key="success" className={classes.successMessage}>
+            {status.message}
+          </p>
           {status.errors.map((error, index) => {
             return (
               <p key={index} className={classes.errorMessage}>

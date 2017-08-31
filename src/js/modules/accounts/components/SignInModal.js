@@ -21,7 +21,7 @@ const SignInModal = ({
   isSignInModalOpen,
   closeSignInModal,
   signIn,
-  status
+  status,
 }) => {
   if (status.form === "signIn" && status.errors.length === 0) {
     // The form has been successfully submitted, so the modal can be closed.
@@ -37,7 +37,7 @@ const SignInModal = ({
       <div className={classes.modalContent}>
         {/* If second param of signIn is true, the form will not redirect
         to the profile page because it knows it is in a modal */}
-        <SignInForm onSubmit={values => signIn(values, true)}/>
+        <SignInForm onSubmit={values => signIn(values, true)} />
       </div>
     </Modal>
   );
@@ -49,7 +49,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ signIn, closeSignInModal }, dispatch)
-}
+  return bindActionCreators({ signIn, closeSignInModal }, dispatch);
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(SignInModal));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  injectSheet(styles)(SignInModal),
+);

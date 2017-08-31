@@ -41,7 +41,7 @@ const reducer = (state = { ...initialState }, action) => {
       };
     }
     case SIGN_IN_FULFILLED: {
-      return { 
+      return {
         ...state,
         session: {
           user: action.payload.data.data,
@@ -50,8 +50,7 @@ const reducer = (state = { ...initialState }, action) => {
         status: {
           errors: [],
           form: "signIn",
-          message:
-            "Successfully signed in.",
+          message: "Successfully signed in.",
         },
       };
     }
@@ -168,12 +167,12 @@ const reducer = (state = { ...initialState }, action) => {
       };
     }
 
-    case OPEN_SIGN_IN_MODAL: { 
-      return { ...state, isSignInModalOpen: true }; 
-    } 
-    case CLOSE_SIGN_IN_MODAL: { 
-      return { ...state, isSignInModalOpen: false }; 
-    } 
+    case OPEN_SIGN_IN_MODAL: {
+      return { ...state, isSignInModalOpen: true };
+    }
+    case CLOSE_SIGN_IN_MODAL: {
+      return { ...state, isSignInModalOpen: false };
+    }
 
     case "@@redux-form/DESTROY": {
       if (action.meta.form.includes("signOut")) {

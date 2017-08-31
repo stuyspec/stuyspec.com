@@ -37,7 +37,7 @@ const CommentThread = ({
         <CommentForm session={session} onSubmit={handleCreateComment} />
         <Col md={5} lg={5} />
       </Row>
-      <SignInModal/>
+      <SignInModal />
       {Object.values(comments).map(comment => {
         return <Comment comment={comment} key={comment.id} />;
       })}
