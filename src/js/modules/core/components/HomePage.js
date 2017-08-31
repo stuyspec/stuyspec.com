@@ -27,7 +27,7 @@ const HomePage = ({ classes, sections, articles }) => {
     return (
       <div>
         <Grid>
-          <Row>
+          <Row style={{borderBottom: 'solid 1px #ddd'}}>
             <Col lg={ 9 } md={ 9 }>
               <FeaturedArticle className={ classes.featuredArticle }
                                article={ featuredArticle }/>
@@ -35,7 +35,7 @@ const HomePage = ({ classes, sections, articles }) => {
                               section={ sectionFeature }
                               articles={ sectionFeatureArticles }/>
             </Col>
-            <Col lg={ 3 } md={ 3 }>
+            <Col lg={ 3 } md={ 3 } style={{paddingRight: 0}}>
               <RecommendedArticles articles={ recommendedArticles }/>
             </Col>
           </Row>

@@ -10,19 +10,18 @@ import { getMedia } from "../../../media/selectors";
 
 const styles = {
   SectionFeature: {
-    borderBottom: '1px solid #ddd',
-    paddingBottom: '24px',
+    paddingBottom: '20px',
   },
   label: {
     fontFamily: 'Minion Pro',
     fontSize: '12px',
-    margin: '0 0 6px 0',
+    margin: '0 0 6px 7px',
     textTransform: 'uppercase',
     width: '100%',
   },
   primaryArticle: {
     borderRight: 'solid 1px #ddd',
-    padding: '2px 14px 0 0',
+    padding: '2px 14px 0 7px',
   },
   secondaryArticle: {
     paddingTop: '2px',
@@ -80,6 +79,9 @@ const styles = {
       width: '100%',
     }
   },
+  featuredMediaContainer: {
+    paddingRight: '14px',
+  }
 };
 
 const SectionFeature = ({ classes, articles, section, media }) => {

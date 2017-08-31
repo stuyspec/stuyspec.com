@@ -12,11 +12,12 @@ const styles = {
     background: "#fff",
     height: "370px",
     marginTop: "14px",
+    padding: 0,
   },
   pageFooterMain: {
     borderTop: "3px solid #ddd",
     margin: "0 auto",
-    width: "1060px",
+    width: "1066px",
   },
   sectionFlex: {
     height: "320px",

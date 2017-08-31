@@ -75,6 +75,9 @@ const styles = {
       margin: 0,
     },
   },
+  featuredMediaContainer: {
+    paddingRight: '14px',
+  }
 };
 
 const FeaturedArticle = ({ classes, article, media, sections }) => {
