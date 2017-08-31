@@ -4,14 +4,6 @@ import axios from "axios";
 import { reset } from "redux-form";
 import { validateKey } from "../../utils";
 
-export const openLoginModal = () => ({
-  type: t.OPEN_LOGIN_MODAL,
-});
-
-export const closeLoginModal = () => ({
-  type: t.CLOSE_LOGIN_MODAL,
-});
-
 export const createComment = values => {
   return dispatch => {
     dispatch({

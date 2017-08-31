@@ -13,3 +13,6 @@ export const SIGN_OUT_REJECTED = "accounts/SIGN_OUT_REJECTED";
 export const UPDATE_USER_PENDING = "accounts/UPDATE_USER_PENDING";
 export const UPDATE_USER_FULFILLED = "accounts/UPDATE_USER_FULFILLED";
 export const UPDATE_USER_REJECTED = "accounts/UPDATE_USER_REJECTED";
+
+export const OPEN_SIGN_IN_MODAL = "accounts/OPEN_SIGN_IN_MODAL";
+export const CLOSE_SIGN_IN_MODAL = "accounts/CLOSE_SIGN_IN_MODAL";

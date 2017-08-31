@@ -6,7 +6,7 @@ import { Field, reduxForm } from "redux-form";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 
-import { openLoginModal, closeLoginModal } from "../actions";
+import { openSignInModal, closeSignInModal } from "../../accounts/actions";
 
 const styles = {
   CommentForm: {
@@ -122,8 +122,7 @@ const CommentForm = ({
   handleSubmit,
   submitting,
   session,
-  openLoginModal,
-  closeLoginModal,
+  openSignInModal,
   status,
 }) => {
   return (
@@ -142,7 +141,7 @@ const CommentForm = ({
         </div>
       )}
       <form onSubmit={handleSubmit}>
-        <Field name="content" component={renderField} checkLogin={() => !session.user && openLoginModal()} />
+        <Field name="content" component={renderField} checkLogin={() => !session.user && openSignInModal()} />
         <div className={classes.submitDiv}>
           <button
             type="submit"
@@ -173,7 +172,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ openLoginModal, closeLoginModal }, dispatch);
+  return bindActionCreators({ openSignInModal, closeSignInModal }, dispatch);
 };
 
 const SmartCommentForm = connect(mapStateToProps, mapDispatchToProps)(

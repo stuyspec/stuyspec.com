@@ -11,6 +11,8 @@ import {
   UPDATE_USER_FULFILLED,
   UPDATE_USER_REJECTED,
   UPDATE_USER_PENDING,
+  OPEN_SIGN_IN_MODAL,
+  CLOSE_SIGN_IN_MODAL,
 } from "./actionTypes";
 
 const initialState = {
@@ -19,6 +21,7 @@ const initialState = {
     message: null,
     form: null,
   },
+  isSignInModalOpen: false,
   session: {
     user: null,
     headers: null,
@@ -158,6 +161,13 @@ const reducer = (state = { ...initialState }, action) => {
         },
       };
     }
+
+    case OPEN_SIGN_IN_MODAL: { 
+      return { ...state, isSignInModalOpen: true }; 
+    } 
+    case CLOSE_SIGN_IN_MODAL: { 
+      return { ...state, isSignInModalOpen: false }; 
+    } 
 
     case "@@redux-form/DESTROY": {
       if (action.meta.form.includes("signOut")) {

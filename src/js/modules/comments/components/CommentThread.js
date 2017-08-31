@@ -6,7 +6,7 @@ import { bindActionCreators } from "redux";
 
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
-import LoginModalOverlay from "../../accounts/components/LoginModalOverlay";
+import SignInModal from "../../accounts/components/SignInModal";
 
 import { createComment, closeLoginModal } from "../actions";
 import { signIn } from "../../accounts/actions";
@@ -41,11 +41,7 @@ const CommentThread = ({
         <CommentForm session={session} onSubmit={handleCreateComment} />
         <Col md={5} lg={5} />
       </Row>
-      <LoginModalOverlay
-        isModalOpen={isModalOpen}
-        closeModalLogin={closeLoginModal}
-        signIn={signIn}
-      />
+      <SignInModal/>
       {Object.values(comments).map(comment => {
         return <Comment comment={comment} key={comment.id} />;
       })}

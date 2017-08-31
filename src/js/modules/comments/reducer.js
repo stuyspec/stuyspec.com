@@ -5,8 +5,6 @@ import {
   FETCH_COMMENTS_PENDING,
   FETCH_COMMENTS_FULFILLED,
   FETCH_COMMENTS_REJECTED,
-  OPEN_LOGIN_MODAL,
-  CLOSE_LOGIN_MODAL,
 } from "./actionTypes";
 
 const initialState = {
@@ -14,7 +12,6 @@ const initialState = {
   isFetching: false,
   isFetched: true,
   comments: {},
-  isModalOpen: false,
   status: {
     type: null,
     message: null,
@@ -62,12 +59,6 @@ const reducer = (state = initialState, action) => {
         },
       };
     }
-    case OPEN_LOGIN_MODAL: { 
-      return { ...state, isModalOpen: true }; 
-    } 
-    case CLOSE_LOGIN_MODAL: { 
-      return { ...state, isModalOpen: false }; 
-    } 
   }
   return state;
 };

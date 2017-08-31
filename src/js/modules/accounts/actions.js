@@ -101,3 +101,11 @@ export const updateUser = (values, id) => {
       });
   };
 };
+
+export const openSignInModal = () => ({
+  type: t.OPEN_SIGN_IN_MODAL,
+});
+
+export const closeSignInModal = () => ({
+  type: t.CLOSE_SIGN_IN_MODAL,
+});
