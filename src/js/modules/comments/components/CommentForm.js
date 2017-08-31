@@ -124,21 +124,14 @@ const CommentForm = ({
   session,
   openLoginModal,
   closeLoginModal,
-  message,
+  status,
 }) => {
-  const checkLogin = () => {
-    if (!session) {
-      openLoginModal();
-    } else {
-      closeLoginModal();
-    }
-  };
   return (
     <Col md={7} lg={7} className={classes.CommentForm}>
-      {session && (
+      {session.user && (
         <div className={classes.userInfo}>
           <p className={classes.userName}>
-            {session.data.data.firstName} {session.data.data.lastName}
+            {session.user.firstName} {session.user.lastName}
           </p>
           <span className={classes.bulletPoint}>&#8226;</span>
           <Link className={classes.optOut} to="/myaccount/profile">
@@ -149,7 +142,7 @@ const CommentForm = ({
         </div>
       )}
       <form onSubmit={handleSubmit}>
-        <Field name="content" component={renderField} checkLogin={checkLogin} />
+        <Field name="content" component={renderField} checkLogin={() => !session.user && openLoginModal()} />
         <div className={classes.submitDiv}>
           <button
             type="submit"
@@ -161,11 +154,11 @@ const CommentForm = ({
           <p className={classes.moderationWarning}>
             Comments are moderated.
             <br />
-            {message.status === "fulfilled" && (
-              <span className={classes.fulfilled}>{message.text}</span>
+            {status.type === "fulfilled" && (
+              <span className={classes.fulfilled}>{status.message}</span>
             )}
-            {message.status === "rejected" && (
-              <span className={classes.rejected}>{message.text}</span>
+            {status.type === "rejected" && (
+              <span className={classes.rejected}>{status.message}</span>
             )}
           </p>
         </div>
@@ -175,7 +168,7 @@ const CommentForm = ({
 };
 
 const mapStateToProps = state => ({
-  message: state.comments.message,
+  status: state.comments.status,
   session: state.accounts.session,
 });
 

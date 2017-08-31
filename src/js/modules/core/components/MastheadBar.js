@@ -104,7 +104,7 @@ const MastheadBar = ({ classes, openSidebar, session }) => {
         <Link className={classes.brandingLink} to="/">
           The Spectator
         </Link>
-        {session ? (
+        {session.user ? (
           <div className={classes.userTools}>
             <Link to="/myaccount/profile">
               <StyledNavButton label="profile" />

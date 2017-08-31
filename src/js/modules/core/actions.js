@@ -17,7 +17,6 @@ export const closeSidebar = () => ({
   type: t.CLOSE_SIDEBAR,
 });
 
-export const loadAll = () => {
 export const fetchAllData = () => {
   return dispatch => {
     dispatch(fetchArticles());

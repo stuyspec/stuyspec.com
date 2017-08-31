@@ -36,7 +36,7 @@ class RoutingApp extends Component {
   }
 
   render() {
-    const { sections, roles, descriptions, loaded } = this.props;
+    const { sections, roles, descriptions, isAllDataFetched } = this.props;
     return (
       <ConnectedRouter history={appHistory}>
         <PageLayout>

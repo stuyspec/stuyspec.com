@@ -19,7 +19,10 @@ const initialState = {
     message: null,
     form: null,
   },
-  session: null,
+  session: {
+    user: null,
+    headers: null,
+  },
 };
 
 const reducer = (state = { ...initialState }, action) => {
@@ -35,7 +38,13 @@ const reducer = (state = { ...initialState }, action) => {
       };
     }
     case SIGN_IN_FULFILLED: {
-      return { ...state, session: action.payload };
+      return { 
+        ...state,
+        session: {
+          user: action.payload.data.data,
+          headers: action.payload.headers,
+        }
+      };
     }
     case SIGN_IN_REJECTED: {
       return {
@@ -95,10 +104,13 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         status: {
           errors: [],
-          message: "You have signed out. <a href='/'>Home</a>",
+          message: "You have been successfully signed out.",
           form: "signOut",
         },
-        session: null,
+        session: {
+          user: null,
+          headers: null,
+        },
       };
     }
     case SIGN_OUT_REJECTED: {
@@ -125,7 +137,10 @@ const reducer = (state = { ...initialState }, action) => {
     case UPDATE_USER_FULFILLED: {
       return {
         ...state,
-        session: action.payload,
+        session: {
+          user: action.payload.data,
+          headers: state.session.headers, // headers remain the same
+        },
         status: {
           errors: [],
           message: "Your changes have been saved.",
@@ -145,6 +160,9 @@ const reducer = (state = { ...initialState }, action) => {
     }
 
     case "@@redux-form/DESTROY": {
+      if (action.meta.form.includes("signOut")) {
+        return state;
+      }
       return {
         ...initialState,
         session: state.session,

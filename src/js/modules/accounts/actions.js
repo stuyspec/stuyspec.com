@@ -18,12 +18,13 @@ export const signUp = values => {
           payload: response,
         });
         const user = response.data.data;
-        // as Devise only accepts email/passwords, we need a separate update
-        // for other user properties.
-        dispatch(updateUser({
-          firstName: values.firstName,
-          lastName: values.lastName,
-        }, user.id))
+        /* As Devise only accepts email/passwords, we need a separate update
+         * for other user properties. Note that we are not simply dispatching
+         * an UPDATE_USER because that will change the status's current form
+         * name to editUser, which will prevent success text from rendering
+         * on the signUpForm.
+         */
+        axios.put(`${STUY_SPEC_API_URL}/users/${user.id}`, values, STUY_SPEC_API_HEADERS)
       })
       .catch(err => {
         dispatch({

@@ -28,18 +28,16 @@ const CommentThread = ({
   session,
   signIn,
 }) => {
-  const handleSubmit = values => {
   const handleCreateComment = values => {
     createComment({
       ...values,
       articleId: article.id,
-      userId: session.data.data.id,
+      userId: session.user.id,
     });
   };
   return (
     <Grid className={classes.CommentThread}>
       <Row>
-        <CommentForm session={session} onSubmit={handleSubmit} />
         <CommentForm session={session} onSubmit={handleCreateComment} />
         <Col md={5} lg={5} />
       </Row>

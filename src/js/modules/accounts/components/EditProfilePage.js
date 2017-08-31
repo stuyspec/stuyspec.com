@@ -7,16 +7,15 @@ import { EditUserForm } from "./forms";
 import { updateUser } from "../actions";
 
 const EditProfilePage = ({ session, updateUser }) => {
-  if (!session) {
+  if (!session.user) {
     return (
       <p>
         You are not signed in. <Link to="/myaccount">Sign in.</Link>
       </p>
     );
   }
-  const user = session.data.data;
   const handleUpdateUser = values => {
-    updateUser(values, user.id);
+    updateUser(values, session.user.id);
   };
   return (
     <div>
