@@ -40,6 +40,11 @@ const styles = {
     height: "32px",
     textAlign: "center",
     width: "70px",
+    "&:disabled": {
+      background: '#ddd',
+      borderColor: '#ddd',
+      color: '#888',
+    },
   },
   moderationWarning: {
     bottom: "7px",
@@ -103,7 +108,7 @@ const validate = values => {
   return errors;
 };
 
-const renderField = ({ input, meta: { touched, error }, checkLogin }) => {
+const renderField = ({ input, disabled, meta: { touched, error }, checkLogin }) => {
   return (
     <div>
       <textarea
@@ -148,7 +153,7 @@ const CommentForm = ({
         <div className={classes.submitDiv}>
           <button
             type="submit"
-            disabled={!session && submitting}
+            disabled={!session.user || submitting}
             className={classes.submitButton}
           >
             Submit
