@@ -62,7 +62,7 @@ const EditUserForm = ({ classes, handleSubmit, submitting, status }) => {
           name="email"
           type="email"
           component={renderField}
-          label="Email (if this field is changed, a confirmation email will be sent to the new email)"
+          label="Email (if this field is changed, a confirmation will be sent to the new email)"
         />
         <div>
           <button type="submit" disabled={submitting}>

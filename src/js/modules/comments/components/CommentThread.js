@@ -29,6 +29,7 @@ const CommentThread = ({
   signIn,
 }) => {
   const handleSubmit = values => {
+  const handleCreateComment = values => {
     createComment({
       ...values,
       articleId: article.id,
@@ -39,6 +40,7 @@ const CommentThread = ({
     <Grid className={classes.CommentThread}>
       <Row>
         <CommentForm session={session} onSubmit={handleSubmit} />
+        <CommentForm session={session} onSubmit={handleCreateComment} />
         <Col md={5} lg={5} />
       </Row>
       <LoginModalOverlay

@@ -18,6 +18,7 @@ export const closeSidebar = () => ({
 });
 
 export const loadAll = () => {
+export const fetchAllData = () => {
   return dispatch => {
     dispatch(fetchArticles());
     dispatch(fetchAuthorships());

@@ -95,7 +95,7 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         status: {
           errors: [],
-          message: "You have signed out.",
+          message: "You have signed out. <a href='/'>Home</a>",
           form: "signOut",
         },
         session: null,

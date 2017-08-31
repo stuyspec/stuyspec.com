@@ -21,7 +21,7 @@ import {
   IllustratorPage,
 } from "./users/components";
 
-import { loadAll } from "./core/actions";
+import { fetchAllData } from "./core/actions";
 import { getDescriptions } from "./descriptions/selectors";
 import { getRoles } from "./users/selectors";
 import { getSections } from "./sections/selectors";
@@ -32,23 +32,20 @@ class RoutingApp extends Component {
   }
 
   componentDidMount() {
-    this.props.loadAll();
+    this.props.fetchAllData();
   }
 
   render() {
     const { sections, roles, descriptions, loaded } = this.props;
     return (
-      <ConnectedRouter
-        history={appHistory}
-        onUpdate={() => window.scrollTo(0, 0)}
-      >
+      <ConnectedRouter history={appHistory}>
         <PageLayout>
-          {loaded ? (
+          {isAllDataFetched ? (
             <Switch>
               <Route exact path="/" component={HomePage} />
               {/* These routes are created in separate functions, as opposed to
-             * separate components, because nesting <Route>'s in <div>'s will
-             * throw off <Switch> routing.
+               separate components, because nesting <Route>'s in <div>'s will
+               throw off <Switch> routing.
              */}
               {Object.values(sections).map(section => {
                 return (
@@ -146,7 +143,7 @@ const mapStateToProps = state => ({
   descriptions: getDescriptions(state),
   roles: getRoles(state),
   sections: getSections(state),
-  loaded:
+  isAllDataFetched:
     state.articles.isFetched &&
     state.comments.isFetched &&
     state.media.isFetched &&
@@ -155,7 +152,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ loadAll }, dispatch);
+  return bindActionCreators({ fetchAllData }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoutingApp);

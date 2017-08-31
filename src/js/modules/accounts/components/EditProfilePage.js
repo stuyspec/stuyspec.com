@@ -7,7 +7,7 @@ import { EditUserForm } from "./forms";
 import { updateUser } from "../actions";
 
 const EditProfilePage = ({ session, updateUser }) => {
-  if (session === null) {
+  if (!session) {
     return (
       <p>
         You are not signed in. <Link to="/myaccount">Sign in.</Link>

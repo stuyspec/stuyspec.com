@@ -13,11 +13,11 @@ const initialState = {
   error: null,
   isFetching: false,
   isFetched: true,
-  isModalOpen: false,
   comments: {},
-  message: {
-    status: null,
-    text: null,
+  isModalOpen: false,
+  status: {
+    type: null,
+    message: null,
   },
 };
 
@@ -46,9 +46,9 @@ const reducer = (state = initialState, action) => {
     case CREATE_COMMENT_FULFILLED: {
       return {
         ...state,
-        message: {
-          status: "fulfilled",
-          text: `Comment submitted for review at ${action.payload.data
+        status: {
+          type: "fulfilled",
+          message: `Comment submitted for review at ${action.payload.data
             .createdAt}`,
         },
       };
@@ -56,18 +56,18 @@ const reducer = (state = initialState, action) => {
     case CREATE_COMMENT_REJECTED: {
       return {
         ...state,
-        message: {
-          status: "rejected",
-          text: `Comment failed to post (${action.payload})`,
+        status: {
+          type: "rejected",
+          message: `Comment failed to post (${action.payload})`,
         },
       };
     }
-    case OPEN_LOGIN_MODAL: {
-      return { ...state, isModalOpen: true };
-    }
-    case CLOSE_LOGIN_MODAL: {
-      return { ...state, isModalOpen: false };
-    }
+    case OPEN_LOGIN_MODAL: { 
+      return { ...state, isModalOpen: true }; 
+    } 
+    case CLOSE_LOGIN_MODAL: { 
+      return { ...state, isModalOpen: false }; 
+    } 
   }
   return state;
 };

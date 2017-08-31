@@ -7,7 +7,7 @@ import { SignOutForm } from "./forms";
 import { signOut } from "../actions";
 
 const ProfilePage = ({ session, signOut }) => {
-  if (session === null) {
+  if (!session) {
     return (
       <p>
         You are not signed in. <Link to="/myaccount">Sign in.</Link>
@@ -16,14 +16,18 @@ const ProfilePage = ({ session, signOut }) => {
   }
   const handleSignOut = () => {
     signOut({
-      "access-token": session.headers["access-token"], // dashes are invalid in JS variables,
+      // dashes are invalid in JS variables
+      "access-token": session.headers["access-token"],
       client: session.headers.client,
       uid: session.headers.uid,
     });
   };
-  let user = session.data.data; // how session looks after signing in
+  // session structure after signing in
+  let user = session.data.data;
+  // session structure after updating profile
+  // TODO: does this affect anything else? what else uses session?
   if (!user) {
-    user = session.data; // how session looks after updating profile
+    user = session.data;
   }
   return (
     <div>

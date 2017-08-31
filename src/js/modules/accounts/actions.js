@@ -18,28 +18,12 @@ export const signUp = values => {
           payload: response,
         });
         const user = response.data.data;
-        axios
-          .put(
-            `${STUY_SPEC_API_URL}/users/${user.id}`,
-            values,
-            STUY_SPEC_API_HEADERS,
-          )
-          .then(response => {
-            dispatch({
-              type: t.UPDATE_USER_FULFILLED,
-              payload: response,
-            });
-            dispatch({
-              type: t.SIGN_UP_FULFILLED,
-              payload: response,
-            });
-          })
-          .catch(err => {
-            dispatch({
-              type: t.UPDATE_USER_REJECTED,
-              payload: err,
-            });
-          });
+        // as Devise only accepts email/passwords, we need a separate update
+        // for other user properties.
+        dispatch(updateUser({
+          firstName: values.firstName,
+          lastName: values.lastName,
+        }, user.id))
       })
       .catch(err => {
         dispatch({
@@ -80,7 +64,6 @@ export const signOut = headers => {
     axios
       .delete(`${STUY_SPEC_API_URL}/auth/sign_out`, { headers })
       .then(response => {
-        console.log(response);
         dispatch({
           type: t.SIGN_OUT_FULFILLED,
           payload: response,
