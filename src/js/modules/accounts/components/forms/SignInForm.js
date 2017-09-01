@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
-import { EMAIL_REGEX } from '../../../../constants';
+import { EMAIL_REGEX } from "../../../../constants";
 
 const styles = {
   errorMessage: {
@@ -10,7 +10,7 @@ const styles = {
   },
   successMessage: {
     color: "green",
-  }
+  },
 };
 
 const validate = formValues => {

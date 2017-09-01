@@ -11,8 +11,10 @@ const EditProfilePage = ({ session, updateUser }) => {
     <div>
       {session.user ? (
         <div>
-          <Link to="/myaccount/profile">Back to profile</Link>          
-          <EditUserForm onSubmit={values => updateUser(values, session.user.id)} />
+          <Link to="/myaccount/profile">Back to profile</Link>
+          <EditUserForm
+            onSubmit={values => updateUser(values, session.user.id)}
+          />
         </div>
       ) : (
         <p>

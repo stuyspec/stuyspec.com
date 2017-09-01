@@ -10,7 +10,7 @@ import { signIn, signUp, closeSignInModal } from "../actions";
 const styles = {
   modalStyle: {
     width: "50%",
-  }
+  },
 };
 
 const SignInModal = ({

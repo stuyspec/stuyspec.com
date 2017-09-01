@@ -43,10 +43,6 @@ class RoutingApp extends Component {
           {isAllDataFetched ? (
             <Switch>
               <Route exact path="/" component={HomePage} />
-              {/* These routes are created in separate functions, as opposed to
-               separate components, because nesting <Route>'s in <div>'s will
-               throw off <Switch> routing.
-             */}
               {Object.values(sections).map(section => {
                 return (
                   <Route

@@ -11,8 +11,15 @@ export const signUp = registrationParams => {
       payload: registrationParams,
     });
 
-    const deviseParams = (({ email, password, passwordConfirmation }) => ({ email, password, passwordConfirmation }))(registrationParams);
-    const additionalParams = (({ firstName, lastName }) => ({ firstName, lastName }))(registrationParams);
+    const deviseParams = (({ email, password, passwordConfirmation }) => ({
+      email,
+      password,
+      passwordConfirmation,
+    }))(registrationParams);
+    const additionalParams = (({ firstName, lastName }) => ({
+      firstName,
+      lastName,
+    }))(registrationParams);
 
     axios
       .post(`${STUY_SPEC_API_URL}/auth`, deviseParams, STUY_SPEC_API_HEADERS)
@@ -50,13 +57,18 @@ export const signIn = (signInParams, isInModal) => {
       payload: signInParams,
     });
     axios
-      .post(`${STUY_SPEC_API_URL}/auth/sign_in`, signInParams, STUY_SPEC_API_HEADERS)
+      .post(
+        `${STUY_SPEC_API_URL}/auth/sign_in`,
+        signInParams,
+        STUY_SPEC_API_HEADERS,
+      )
       .then(response => {
         dispatch({
           type: t.SIGN_IN_FULFILLED,
           payload: response,
         });
-        if (isInModal !== true) { // isInModal may be falsey
+        if (isInModal !== true) {
+          // isInModal may be falsey
           appHistory.push("/myaccount/profile");
         }
       })
@@ -101,7 +113,11 @@ export const updateUser = (userParams, id) => {
       payload: userParams,
     });
     axios
-      .put(`${STUY_SPEC_API_URL}/users/${id}`, userParams, STUY_SPEC_API_HEADERS)
+      .put(
+        `${STUY_SPEC_API_URL}/users/${id}`,
+        userParams,
+        STUY_SPEC_API_HEADERS,
+      )
       .then(response => {
         dispatch({
           type: t.UPDATE_USER_FULFILLED,

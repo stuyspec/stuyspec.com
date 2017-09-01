@@ -61,7 +61,7 @@ const reducer = (state = initialState, action) => {
     }
 
     case "@@redux-form/DESTROY": {
-      // Clears status data so the success message will not appear on other 
+      // Clears status data so the success message will not appear on other
       // articles' comment threads.
       return {
         ...initialState,
