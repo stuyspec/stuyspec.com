@@ -24,7 +24,7 @@ const styles = {
     },
   },
   featuredMediaContainer: {
-    width: '100%',
+    width: "100%",
   },
   articleTitle: {
     display: "block",
@@ -38,20 +38,20 @@ const styles = {
     },
   },
   articlePreview: {
-    color: '#000',
-    fontFamily: 'MinionPro',
-    fontSize: '16px',
-    lineHeight: '1.13',
-    marginBottom: '2px'
+    color: "#000",
+    fontFamily: "MinionPro",
+    fontSize: "16px",
+    lineHeight: "1.13",
+    marginBottom: "2px",
   },
   Byline: {
-    display: 'inline',
-    fontFamily: 'Circular Std',
-    fontSize: '12px',
-    fontWeight: 'bold',
-    marginRight: '6px',
-    '& p': {
-      display: 'inline',
+    display: "inline",
+    fontFamily: "Circular Std",
+    fontSize: "12px",
+    fontWeight: "bold",
+    marginRight: "6px",
+    "& p": {
+      display: "inline",
       margin: 0,
       "& a": {
         color: "#000",
@@ -76,9 +76,9 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
   });
   featuredMedia.creator = users[featuredMedia.userId];
   return (
-    <Row key={ article.id } className={ classes.ArticleRow }>
-      <Col md={ 3 } lg={ 3 } className={ classes.featuredMediaContainer }>
-        <ArticleFeaturedMedia featuredMedia={ featuredMedia }/>
+    <Row key={article.id} className={classes.ArticleRow}>
+      <Col md={3} lg={3} className={classes.featuredMediaContainer}>
+        <ArticleFeaturedMedia featuredMedia={featuredMedia} />
       </Col>
       <Col md={6} lg={6}>
         <Link

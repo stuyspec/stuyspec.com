@@ -12,8 +12,7 @@ import SidebarContent from "./SidebarContent";
 import { openSidebar, closeSidebar } from "../actions";
 
 const styles = {
-  PageContainer: {
-  }
+  PageContainer: {},
 };
 
 const sidebarStyles = {

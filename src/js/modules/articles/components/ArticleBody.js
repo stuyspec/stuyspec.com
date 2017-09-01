@@ -27,8 +27,8 @@ const styles = {
     },
   },
   content: {
-    marginTop: '13px',
-  }
+    marginTop: "13px",
+  },
 };
 
 const ArticleBody = ({ classes, content, featuredMedia }) => {

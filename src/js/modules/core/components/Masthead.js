@@ -8,18 +8,18 @@ import { getTopLevelSections } from "../../sections/selectors";
 const styles = {
   Masthead: {
     fontSize: 0, // resets font size to remove unwanted whitespace
-    margin: '6px auto 18px auto',
-    textAlign: 'center',
-    width: '1066px',
+    margin: "6px auto 19px auto",
+    textAlign: "center",
+    width: "1066px",
   },
   theSpectatorLogo: {
-    color: '#000',
-    fontFamily: 'Old English Text MT',
-    fontSize: '75px',
-    marginBottom: '10px',
-    '&:hover': {
-      color: '#000',
-      textDecoration: 'none',
+    color: "#000",
+    fontFamily: "Old English Text MT",
+    fontSize: "75px",
+    marginBottom: "10px",
+    "&:hover": {
+      color: "#000",
+      textDecoration: "none",
     },
     "&:focus": {
       color: "#000",
@@ -27,20 +27,20 @@ const styles = {
     },
   },
   sectionLinksNav: {
-    borderTop: '1px solid black',
-    fontFamily: 'Circular Std',
-    listStyleType: 'none',
-    padding: '6px',
+    borderTop: "1px solid black",
+    fontFamily: "Circular Std",
+    listStyleType: "none",
+    padding: "6px",
   },
   sectionListItem: {
-    display: 'inline',
-    margin: '0px 16px',
+    display: "inline",
+    margin: "0px 16px",
   },
   sectionLink: {
-    color: '#000',
-    fontSize: '12px',
+    color: "#000",
+    fontSize: "12px",
     fontWeight: 300,
-    textDecoration: 'none',
+    textDecoration: "none",
   },
 };
 
@@ -60,8 +60,11 @@ const Masthead = ({ classes, sections }) => {
             </li>
           );
         })}
-        <li key={ -1 } className={ classes.sectionListItem }>
-          <Link to={ "/maybe-we-should-pop-up-the-subscribe-modal" } className={classes.sectionLink}>
+        <li key={-1} className={classes.sectionListItem}>
+          <Link
+            to={"/maybe-we-should-pop-up-the-subscribe-modal"}
+            className={classes.sectionLink}
+          >
             Subscribe
           </Link>
         </li>

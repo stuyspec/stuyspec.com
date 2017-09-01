@@ -12,72 +12,75 @@ import { getUsers } from "../../../users/selectors";
 
 const styles = {
   FeaturedArticle: {
-    borderBottom: '1px solid #ddd',
-    marginBottom: '6px',
-    paddingBottom: '14px',
+    paddingBottom: "24px",
   },
   title: {
-    color: '#000',
-    fontFamily: 'Minion Pro',
-    fontSize: '30px',
-    fontWeight: 'bold',
-    marginBottom: '7px',
-    '&:active': {
-      color: '#000',
+    color: "#000",
+    fontFamily: "Canela",
+    fontSize: "30px",
+    fontWeight: "500",
+    marginBottom: "7px",
+    "&:active": {
+      color: "#000",
     },
-    '&:focus': {
-      color: '#000',
+    "&:focus": {
+      color: "#000",
     },
-    '&:hover': {
-      color: '#000',
+    "&:hover": {
+      color: "#000",
     },
   },
   rubric: {
-    color: '#000',
-    fontFamily: 'Circular Std',
-    fontSize: '13px',
+    color: "#000",
+    fontFamily: "Circular Std",
+    fontSize: "13px",
     fontWeight: 300,
-    margin: '0 0 7px 0',
-    textTransform: 'uppercase',
+    margin: "6px 0 9px 0",
+    textTransform: "uppercase",
   },
   focus: {
-    fontFamily: 'Minion Pro',
-    fontSize: '14px',
-    lineHeight: 1.21,
-    margin: '0 0 6px 0',
+    fontFamily: "Minion Pro",
+    fontSize: "14px",
+    lineHeight: 1.29,
+    margin: "0 0 17px 0",
   },
   figure: {
-    '& img': {
-      width: '100%',
-    }
+    "& img": {
+      width: "100%",
+    },
   },
   Byline: {
-    fontFamily: 'Circular Std',
-    fontSize: '13px',
-    '& p': {
-      display: 'inline',
-      margin: '0 0 2px 0',
-      '& a': {
-        color: '#000',
-        '&:hover': {
-          color: '#000'
+    color: "#000",
+    fontFamily: "Circular Std",
+    fontSize: "13px",
+    fontWeight: "500",
+    "& p": {
+      display: "inline",
+      margin: "0 0 2px 0",
+      "& a": {
+        color: "#000",
+        "&:hover": {
+          color: "#000",
         },
       },
     },
   },
   Dateline: {
-    display: 'inline',
-    fontFamily: 'Circular Std',
-    fontSize: '13px',
-    '& p': {
-      color: '#000',
-      display: 'inline',
+    color: "#000",
+    display: "inline",
+    fontFamily: "Circular Std",
+    fontSize: "13px",
+    fontWeight: "500",
+    "& p": {
+      color: "#000",
+      display: "inline",
       margin: 0,
     },
   },
   featuredMediaContainer: {
-    paddingRight: '14px',
-  }
+    paddingRight: "14px",
+    paddingTop: "6px",
+  },
 };
 
 const FeaturedArticle = ({ classes, article, media, sections }) => {
@@ -87,25 +90,28 @@ const FeaturedArticle = ({ classes, article, media, sections }) => {
   const featuredMedia = Object.values(media).find(mediaObject => {
     return mediaObject.isFeatured && mediaObject.articleId === article.id;
   });
-
   // NESTED IN <Col lg={9}>
   return (
-    <Row className={ classes.FeaturedArticle }>
-      <Col lg={ 4 } md={ 4 }>
-        <Link className={ classes.title }
-              to={ `${ section.permalink }/${ article.slug}` }>
-          { article.title }
+    <Row className={classes.FeaturedArticle}>
+      <Col lg={4} md={4}>
+        <Link
+          className={classes.title}
+          to={`${section.permalink}/${article.slug}`}
+        >
+          {article.title}
         </Link>
-        <p className={ classes.rubric }>{ section.name }</p>
-        <p className={ classes.focus }>StuyHacks held its fourth hackathon,
-          StuyHacks IV, on Saturday, May 27, and Sunday, May 28. The event
-          provided an opportunity for 175 high schools.</p>
-        <Byline classes={ classes } contributors={ article.contributors }/>
-        <Dateline classes={ classes } article={ article }/>
+        <p className={classes.rubric}>{section.name}</p>
+        <p className={classes.focus}>
+          StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
+          27, and Sunday, May 28. The event provided an opportunity for 175 high
+          schools.
+        </p>
+        <Byline classes={classes} contributors={article.contributors} />
+        <Dateline classes={classes} article={article} />
       </Col>
-      <Col lg={ 8 } md={ 8 } className={ classes.featuredMediaContainer }>
-        <figure className={ classes.figure }>
-          <img src={ featuredMedia.url }/>
+      <Col lg={8} md={8} className={classes.featuredMediaContainer}>
+        <figure className={classes.figure}>
+          <img src={featuredMedia.url} />
         </figure>
       </Col>
     </Row>
@@ -118,6 +124,4 @@ const mapStateToProps = state => ({
   users: getUsers(state),
 });
 
-export default connect(
-  mapStateToProps
-)(injectSheet(styles)(FeaturedArticle));
+export default connect(mapStateToProps)(injectSheet(styles)(FeaturedArticle));
