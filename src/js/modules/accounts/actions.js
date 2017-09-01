@@ -40,7 +40,6 @@ export const signUp = values => {
 };
 
 export const signIn = (values, isInModal) => {
-  console.log(isInModal);
   return dispatch => {
     dispatch({
       type: t.SIGN_IN_PENDING,
