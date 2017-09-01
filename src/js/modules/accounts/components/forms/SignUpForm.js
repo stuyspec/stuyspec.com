@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
+import { EMAIL_REGEX } from '../../../../constants';
 
 const styles = {
   successMessage: {
@@ -12,25 +13,25 @@ const styles = {
   },
 };
 
-const validate = values => {
+const validate = formValues => {
   const errors = {};
-  if (!values.firstName) {
+  if (!formValues.firstName) {
     errors.firstName = "Required";
   }
-  if (!values.lastName) {
+  if (!formValues.lastName) {
     errors.lastName = "Required";
   }
-  if (!values.email) {
+  if (!formValues.email) {
     errors.email = "Required";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+  } else if (!EMAIL_REGEX.test(formValues.email)) {
     errors.email = "Invalid email address";
   }
-  if (!values.password) {
+  if (!formValues.password) {
     errors.password = "Required";
-  } else if (values.password.length < 8) {
+  } else if (formValues.password.length < 8) {
     errors.password = "Password is too short (minimum is 8 characters).";
   }
-  if (values.password !== values.passwordConfirmation) {
+  if (formValues.password !== formValues.passwordConfirmation) {
     errors.passwordConfirmation =
       "Password and password confirmation do not match.";
   }
@@ -119,11 +120,11 @@ const mapStateToProps = state => ({
   status: state.accounts.status,
 });
 
-const SmartSignUpForm = connect(mapStateToProps, null)(
+const ConnectedSignUpForm = connect(mapStateToProps, null)(
   injectSheet(styles)(SignUpForm),
 );
 
 export default reduxForm({
   form: "signUp",
   validate,
-})(SmartSignUpForm);
+})(ConnectedSignUpForm);

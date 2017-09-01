@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
+import { EMAIL_REGEX } from '../../../../constants';
 
 const styles = {
   successMessage: {
@@ -12,12 +13,9 @@ const styles = {
   },
 };
 
-const validate = values => {
+const validate = formValues => {
   const errors = {};
-  if (
-    values.email &&
-    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-  ) {
+  if (formValues.email && !EMAIL_REGEX.test(formValues.email)) {
     errors.email = "Invalid email address";
   }
   return errors;
@@ -92,11 +90,11 @@ const mapStateToProps = state => ({
   status: state.accounts.status,
 });
 
-const SmartEditUserForm = connect(mapStateToProps, null)(
+const ConnectedEditUserForm = connect(mapStateToProps, null)(
   injectSheet(styles)(EditUserForm),
 );
 
 export default reduxForm({
   form: "editUser",
   validate,
-})(SmartEditUserForm);
+})(ConnectedEditUserForm);

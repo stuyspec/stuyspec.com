@@ -18,8 +18,9 @@ const ProfilePage = ({ classes, session, signOut, status }) => {
     return (
       <div>
         <p className={classes.successMessage}>{status.message}</p>
-        <Link to="/myaccount">Sign in</Link> or go back to the{" "}
-        <Link to="/">home page</Link>
+        <Link to="/myaccount">Sign in</Link>
+        &nbsp;or go back to the&nbsp;
+        <Link to="/">home page</Link>.
       </div>
     );
   }

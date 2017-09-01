@@ -48,10 +48,10 @@ const mapStateToProps = state => ({
   status: state.accounts.status,
 });
 
-const SmartSignOutForm = connect(mapStateToProps)(
+const ConnectedSignOutForm = connect(mapStateToProps)(
   injectSheet(styles)(SignOutForm),
 );
 
 export default reduxForm({
   form: "signOut",
-})(SmartSignOutForm);
+})(ConnectedSignOutForm);

@@ -194,11 +194,11 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ openSignInModal, signOut }, dispatch);
 };
 
-const SmartCommentForm = connect(mapStateToProps, mapDispatchToProps)(
+const ConnectedCommentForm = connect(mapStateToProps, mapDispatchToProps)(
   injectSheet(styles)(CommentForm),
 );
 
 export default reduxForm({
   form: "createComment",
   validate,
-})(SmartCommentForm);
+})(ConnectedCommentForm);
