@@ -35,10 +35,10 @@ jobs:
       - deploy:
           name: Deploy to AWS S3
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              aws s3 sync ~/client-app/dist/prod s3://stuyspec.xyz
-            elif [ "${CIRCLE_BRANCH}" == "jason" ]; then
-              aws s3 sync ~/client-app/dist/prod s3://jason.stuyspec.xyz
+            if [ "${CIRCLE_BRANCH}" == "staging" ]; then
+              aws s3 sync ~/client-app/dist/prod s3://stuyspec
+            else
+              echo "Not staging so not deploying"
             fi
 
 
