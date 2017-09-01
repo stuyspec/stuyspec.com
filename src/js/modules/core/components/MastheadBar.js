@@ -36,8 +36,11 @@ const styles = {
     color: "#000",
     fontFamily: "Old English Text MT",
     fontSize: "26px",
+    left: "50%",
     marginTop: "4px",
+    position: "absolute",
     textDecoration: "none",
+    transform: "translate(-50%,0)",
     "&:hover": {
       color: "#000",
       textDecoration: "none",
