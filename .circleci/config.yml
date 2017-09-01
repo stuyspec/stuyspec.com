@@ -36,7 +36,7 @@ jobs:
           name: Deploy to AWS S3
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              aws s3 sync ~/client-app/dist/prod s3://stuyspec.s3-website.us-east-2.amazonaws.com/
+              aws s3 sync ~/client-app/dist/prod s3://stuyspec
             else
               echo "Not master so not deploying"
             fi
