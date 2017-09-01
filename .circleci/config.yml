@@ -29,7 +29,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: sudo apt-get install python-dev python-pip
-      - run: sudo pip install awscli --update -user
+      - run: sudo pip install awscli
       - run: sudo npm install -g gulp-cli
       - run: gulp build
       - deploy:
