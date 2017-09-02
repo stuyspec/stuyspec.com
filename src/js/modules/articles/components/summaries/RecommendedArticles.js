@@ -8,59 +8,59 @@ import { getSections } from "../../../sections/selectors";
 
 const styles = {
   RecommendedArticles: {
-    padding: "0 0 10px 14px",
+    padding: '0 0 10px 14px',
   },
   label: {
-    borderTop: "1px solid #000",
-    borderBottom: "1px solid #ddd",
-    color: "#000",
-    fontFamily: "Circular Std",
-    fontSize: "13px",
+    borderTop: '1px solid #000',
+    borderBottom: '1px solid #ddd',
+    color: '#000',
+    fontFamily: 'Circular Std',
+    fontSize: '13px',
     fontWeight: 300,
     margin: 0,
-    padding: "4px 0",
+    padding: '4px 0',
   },
   numberLabel: {
-    color: "#000",
-    float: "left",
-    fontFamily: "Circular Std",
-    fontSize: "13px",
+    color: '#000',
+    float: 'left',
+    fontFamily: 'Circular Std',
+    fontSize: '13px',
     fontWeight: 300,
     margin: 0,
   },
   articleItem: {
-    padding: "9px 0 0 12px",
-    "&:not(:last-child)": {
-      borderBottom: "solid 1px #ddd",
+    padding: '12px 0 12px 12px',
+    '&:not(:last-child)': {
+      borderBottom: 'solid 1px #ddd',
     },
   },
   articleSummary: {
-    paddingLeft: "21px",
+    paddingLeft: '21px',
   },
   title: {
-    color: "#000",
-    display: "block",
-    fontFamily: "Minion Pro",
-    fontSize: "14px",
-    fontWeight: "bold",
+    color: '#000',
+    display: 'block',
+    fontFamily: 'Minion Pro',
+    fontSize: '14px',
+    fontWeight: 'bold',
     lineHeight: 1,
-    marginBottom: "8px",
-    "&:active": {
-      color: "#000",
+    marginBottom: '8px',
+    '&:active': {
+      color: '#000',
     },
-    "&:focus": {
-      color: "#000",
+    '&:focus': {
+      color: '#000',
     },
-    "&:hover": {
-      color: "#000",
+    '&:hover': {
+      color: '#000',
     },
   },
   focus: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "14px",
+    color: '#000',
+    fontFamily: 'Minion Pro',
+    fontSize: '14px',
     lineHeight: 1.21,
-    marginBottom: "12px",
+    margin: 0,
   },
 };
 

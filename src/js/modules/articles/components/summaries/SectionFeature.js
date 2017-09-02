@@ -11,86 +11,86 @@ import { getMedia } from "../../../media/selectors";
 const styles = {
   SectionFeature: {},
   label: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "12px",
-    margin: "0 0 3px 7px",
-    textTransform: "uppercase",
-    width: "100%",
+    color: '#000',
+    fontFamily: 'Minion Pro',
+    fontSize: '12px',
+    margin: '0 0 3px 7px',
+    textTransform: 'uppercase',
+    width: '100%',
   },
   primaryArticle: {
-    borderRight: "solid 1px #ddd",
-    padding: "2px 14px 0 7px",
-    marginBottom: "19px",
+    borderRight: 'solid 1px #ddd',
+    padding: '0 13px 0 7px',
+    marginBottom: '19px',
   },
   secondaryArticle: {
-    padding: "2px 7px 0 14px",
-    marginBottom: "19px",
+    padding: '0 7px 0 13px',
+    marginBottom: '19px',
   },
   title: {
-    color: "#000",
-    display: "block",
-    fontFamily: "Minion Pro",
-    fontSize: "16px",
-    fontWeight: "bold",
+    color: '#000',
+    display: 'block',
+    fontFamily: 'Minion Pro',
+    fontSize: '16px',
+    fontWeight: 'bold',
     lineHeight: 1.25,
-    marginBottom: "9px",
-    "&:active": {
-      color: "#000",
+    marginBottom: '7px',
+    '&:active': {
+      color: '#000',
     },
-    "&:focus": {
-      color: "#000",
+    '&:focus': {
+      color: '#000',
     },
-    "&:hover": {
-      color: "#000",
+    '&:hover': {
+      color: '#000',
     },
   },
   focus: {
-    fontFamily: "Minion Pro",
-    fontSize: "14px",
+    fontFamily: 'Minion Pro',
+    fontSize: '14px',
     lineHeight: 1.29,
-    margin: "0 0 15px 0",
+    margin: '0 0 12px 0',
   },
   Byline: {
-    color: "#000",
-    fontFamily: "Circular Std",
-    fontSize: "13px",
-    fontWeight: "500",
-    "& p": {
-      display: "inline",
-      margin: "0 0 2px 0",
-      "& a": {
-        color: "#000",
-        "&:hover": {
-          color: "#000",
+    color: '#000',
+    fontFamily: 'Circular Std',
+    fontSize: '13px',
+    fontWeight: '500',
+    '& p': {
+      display: 'inline',
+      margin: '0 0 2px 0',
+      '& a': {
+        color: '#000',
+        '&:hover': {
+          color: '#000',
         },
       },
     },
   },
   Dateline: {
-    color: "#000",
-    display: "inline",
-    fontFamily: "Circular Std",
-    fontSize: "13px",
-    fontWeight: "500",
-    "& p": {
-      color: "#000",
-      display: "inline",
+    color: '#000',
+    display: 'inline',
+    fontFamily: 'Circular Std',
+    fontSize: '13px',
+    fontWeight: '500',
+    '& p': {
+      color: '#000',
+      display: 'inline',
       margin: 0,
     },
   },
   figure: {
-    "& img": {
-      width: "100%",
+    '& img': {
+      width: '100%',
     },
   },
   featuredMediaContainer: {
-    paddingRight: "14px",
+    paddingRight: '14px',
   },
   hr: {
-    borderColor: "#ddd",
-    margin: "0 0 6px 7px",
-    width: "794px",
+    borderColor: '#ddd',
+    margin: '0 0 6px 7px',
+    width: '786px',
   },
 };
 

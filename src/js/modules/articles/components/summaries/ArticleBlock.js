@@ -7,52 +7,53 @@ import { getMedia } from "../../../media/selectors";
 
 const styles = {
   ArticleBlock: {
-    float: "left",
-    height: "59px",
-    marginTop: "12px",
-    overflow: "hidden",
-    paddingRight: "12.5px",
-    width: "20%",
-    "&:not(:last-child)": {
-      borderRight: "solid 1px #ddd",
+    float: 'left',
+    height: '59px',
+    marginTop: '9px',
+    marginBottom: '11px',
+    overflow: 'hidden',
+    paddingRight: '12.5px',
+    width: '20%',
+    '&:not(:last-child)': {
+      borderRight: 'solid 1px #ddd',
     },
-    "&:not(:first-child)": {
-      paddingLeft: "12.5px",
+    '&:not(:first-child)': {
+      paddingLeft: '12.5px',
     },
   },
   label: {
-    color: "#a8a8a8",
-    fontFamily: "Circular Std",
-    fontSize: "11px",
-    letterSpacing: "0.5px",
-    marginBottom: "1px",
-    textTransform: "uppercase",
+    color: '#a8a8a8',
+    fontFamily: 'Circular Std',
+    fontSize: '11px',
+    letterSpacing: '0.5px',
+    marginBottom: '1px',
+    textTransform: 'uppercase',
   },
   title: {
-    color: "#000",
-    display: "block",
-    fontFamily: "Minion Pro",
-    fontSize: "12px",
-    fontWeight: "bold",
-    letterSpacing: "0.5px",
+    color: '#000',
+    display: 'block',
+    fontFamily: 'Minion Pro',
+    fontSize: '12px',
+    fontWeight: 'bold',
+    letterSpacing: '0.5px',
     lineHeight: 1.17,
     margin: 0,
-    "&:active": {
-      color: "#000",
+    '&:active': {
+      color: '#000',
     },
-    "&:focus": {
-      color: "#000",
+    '&:focus': {
+      color: '#000',
     },
-    "&:hover": {
-      color: "#000",
+    '&:hover': {
+      color: '#000',
     },
   },
   figure: {
-    float: "left",
-    margin: "3px 8px 0 0",
-    width: "75px",
-    "& img": {
-      width: "100%",
+    float: 'left',
+    margin: '3px 8px 0 0',
+    width: '75px',
+    '& img': {
+      width: '100%',
     },
   },
 };

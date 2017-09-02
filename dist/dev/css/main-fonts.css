@@ -60,3 +60,10 @@
     font-style: normal;
     font-weight: 500;
 }
+
+@font-face {
+    font-family: "Canela";
+    src: url('/fonts/Canela-Regular.otf') format("opentype");
+    font-style: normal;
+    font-weight: 300;
+}
