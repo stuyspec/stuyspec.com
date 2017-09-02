@@ -5,6 +5,8 @@ import {
   FETCH_AUTHORSHIPS_FULFILLED,
 } from "./actionTypes";
 
+import { getSections } from "../sections/selectors";
+
 const initialState = {
   isFetching: false,
   isFetched: false,
@@ -19,10 +21,7 @@ const reducer = (state = { ...initialState }, action) => {
       return { ...state, isFetching: true };
     }
     case FETCH_ARTICLES_FULFILLED: {
-      const newArticles = action.payload.reduce((acc, article) => {
-        acc[article.id] = article;
-        return acc;
-      }, {});
+      const newArticles = getRecommendedArticles(action.payload, action.state);
       return {
         ...state,
         isFetching: false,
@@ -45,6 +44,21 @@ const reducer = (state = { ...initialState }, action) => {
     }
   }
   return state;
+};
+
+const getRecommendedArticles = (articles, state) => {
+  const sections = getSections(state);
+  const newArticlesArray = articles.sort((a, b) => {
+    const firstArticleRank =
+      1.5 * sections[a.sectionId].rank + a.rank + 5 * (a.volume + a.issue);
+    const secondArticleRank =
+      1.5 * sections[b.sectionId].rank + b.rank + 5 * (b.volume + b.issue);
+    return firstArticleRank - secondArticleRank;
+  });
+  return newArticlesArray.reduce((acc, article) => {
+    acc[article.id] = article;
+    return acc;
+  }, {});
 };
 
 export default reducer;

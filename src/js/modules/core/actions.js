@@ -19,13 +19,14 @@ export const closeSidebar = () => ({
 
 export const fetchAllData = () => {
   return dispatch => {
-    dispatch(fetchArticles());
-    dispatch(fetchAuthorships());
     dispatch(fetchComments());
     dispatch(fetchMedia());
     dispatch(fetchSections());
     dispatch(fetchRoles());
     dispatch(fetchUsers());
     dispatch(fetchUserRoles());
+    dispatch(fetchRoles());
+    dispatch(fetchArticles());
+    dispatch(fetchAuthorships());
   };
 };

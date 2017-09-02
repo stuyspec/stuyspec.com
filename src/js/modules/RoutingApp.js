@@ -10,7 +10,7 @@ import {
   ProfilePage,
   EditProfilePage,
 } from "./accounts/components";
-import { ArticlePage } from "./articles/components";
+import { ArticlePage, RecommendedPage, LatestPage } from "./articles/components";
 import { HomePage, PageLayout } from "./core/components";
 import { DescriptionPage } from "./descriptions/components";
 import { SectionPage } from "./sections/components";
@@ -128,6 +128,18 @@ class RoutingApp extends Component {
                 path={"/myaccount/profile/edit"}
                 key={"editProfile"}
                 component={EditProfilePage}
+              />
+              <Route
+                exact
+                path={"/recommended"}
+                key={"recommended"}
+                component={RecommendedPage}
+              />
+              <Route
+                exact
+                path={"/latest"}
+                key={"latest"}
+                component={LatestPage}
               />
             </Switch>
           ) : (

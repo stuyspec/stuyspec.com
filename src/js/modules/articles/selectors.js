@@ -140,3 +140,16 @@ export const getArticleFeaturedMedia = createSelector(
     }
   },
 );
+
+export const getLatestArticles = createSelector(
+  [getArticlesWithContributors],
+  articles => {
+    const latestArticleArray = Object.values(articles).sort((a, b) => {
+      return new Date(a) - new Date(b);
+    });
+    return latestArticleArray.reduce((acc, currentArticle) => {
+      acc[currentArticle.id] = currentArticle;
+      return acc;
+    }, {});
+  },
+);
