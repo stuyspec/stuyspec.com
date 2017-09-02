@@ -12,74 +12,74 @@ import { getUsers } from "../../../users/selectors";
 
 const styles = {
   FeaturedArticle: {
-    paddingBottom: '24px',
+    paddingBottom: "24px",
   },
   title: {
-    color: '#000',
-    fontFamily: 'Canela',
-    fontSize: '30px',
-    fontWeight: '300',
-    lineHeight: '1.25',
-    '&:active': {
-      color: '#000',
+    color: "#000",
+    fontFamily: "Canela",
+    fontSize: "30px",
+    fontWeight: "300",
+    lineHeight: "1.25",
+    "&:active": {
+      color: "#000",
     },
-    '&:focus': {
-      color: '#000',
+    "&:focus": {
+      color: "#000",
     },
-    '&:hover': {
-      color: '#000',
+    "&:hover": {
+      color: "#000",
     },
   },
   rubric: {
-    color: '#000',
-    fontFamily: 'Circular Std',
-    fontSize: '13px',
+    color: "#000",
+    fontFamily: "Circular Std",
+    fontSize: "13px",
     fontWeight: 300,
-    margin: '6px 0 9px 0',
-    textTransform: 'uppercase',
+    margin: "6px 0 9px 0",
+    textTransform: "uppercase",
   },
   focus: {
-    fontFamily: 'Minion Pro',
-    fontSize: '14px',
+    fontFamily: "Minion Pro",
+    fontSize: "14px",
     lineHeight: 1.29,
-    margin: '0 0 14px 0',
+    margin: "0 0 14px 0",
   },
   figure: {
-    '& img': {
-      width: '100%',
+    "& img": {
+      width: "100%",
     },
   },
   Byline: {
-    color: '#000',
-    fontFamily: 'Circular Std',
-    fontSize: '13px',
-    fontWeight: '500',
-    '& p': {
-      display: 'inline',
-      margin: '0 0 2px 0',
-      '& a': {
-        color: '#000',
-        '&:hover': {
-          color: '#000',
+    color: "#000",
+    fontFamily: "Circular Std",
+    fontSize: "13px",
+    fontWeight: "500",
+    "& p": {
+      display: "inline",
+      margin: "0 0 2px 0",
+      "& a": {
+        color: "#000",
+        "&:hover": {
+          color: "#000",
         },
       },
     },
   },
   Dateline: {
-    color: '#000',
-    display: 'inline',
-    fontFamily: 'Circular Std',
-    fontSize: '13px',
-    fontWeight: '500',
-    '& p': {
-      color: '#000',
-      display: 'inline',
+    color: "#000",
+    display: "inline",
+    fontFamily: "Circular Std",
+    fontSize: "13px",
+    fontWeight: "500",
+    "& p": {
+      color: "#000",
+      display: "inline",
       margin: 0,
     },
   },
   featuredMediaContainer: {
-    paddingRight: '14px',
-    paddingTop: '6px',
+    paddingRight: "14px",
+    paddingTop: "6px",
   },
 };
 

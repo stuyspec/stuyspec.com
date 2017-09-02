@@ -15,20 +15,20 @@ import {
 
 const styles = {
   HomePage: {
-    marginTop: '23px 0px 13px',
+    marginTop: "23px 0px 13px",
   },
   sectionArticles: {
-    borderTop: 'solid 1px #ddd',
-    borderBottom: 'solid 1px #ddd',
+    borderTop: "solid 1px #ddd",
+    borderBottom: "solid 1px #ddd",
     padding: 0,
   },
   recommendedArticles: {
     padding: 0,
   },
   featured: {
-    borderRight: 'solid 1px #ddd',
-    marginBottom: '19px',
-    paddingRight: '14px',
+    borderRight: "solid 1px #ddd",
+    marginBottom: "19px",
+    paddingRight: "14px",
   },
 };
 
