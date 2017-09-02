@@ -9,11 +9,11 @@ import { updateUser } from "../actions";
 const EditProfilePage = ({ session, updateUser }) => {
   return (
     <div>
-      {session.user ? (
+      {session.userId ? (
         <div>
           <Link to="/myaccount/profile">Back to profile</Link>
           <EditUserForm
-            onSubmit={values => updateUser(values, session.user.id)}
+            onSubmit={values => updateUser(values, session.userId)}
           />
         </div>
       ) : (

@@ -4,6 +4,7 @@ import {
   FETCH_USERS_FULFILLED,
   FETCH_USER_ROLES_FULFILLED,
   FETCH_ROLES_FULFILLED,
+  CREATE_USER_FULFILLED,
 } from "./actionTypes";
 
 const initialState = {
@@ -45,6 +46,15 @@ const reducer = (state = { ...initialState }, action) => {
           return acc;
         }, {}),
       };
+    }
+    case CREATE_USER_FULFILLED: {
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          action.payload.id: action.payload,
+        }
+      }
     }
   }
   return state;

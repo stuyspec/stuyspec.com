@@ -2,6 +2,7 @@ import axios from "axios";
 import appHistory from "../../tools/appHistory";
 
 import * as t from "./actionTypes";
+import { CREATE_USER_FULFILLED } from "../users/actionTypes";
 import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from "../../constants";
 
 export const signUp = registrationParams => {
@@ -41,6 +42,12 @@ export const signUp = registrationParams => {
           STUY_SPEC_API_HEADERS,
         );
       })
+      .then(repsonse => {
+        dispatch({
+          type: CREATE_USER_FULFILLED,
+          payload: response,
+        });
+      })
       .catch(err => {
         dispatch({
           type: t.SIGN_UP_REJECTED,
@@ -68,7 +75,7 @@ export const signIn = (signInParams, isInModal) => {
           payload: response,
         });
         if (isInModal !== true) {
-          // isInModal may be falsey
+          // Explicit equality necessary because isInModal may also be null, which is falsey.
           appHistory.push("/myaccount/profile");
         }
       })

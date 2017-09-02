@@ -23,7 +23,7 @@ const initialState = {
   },
   isSignInModalOpen: false,
   session: {
-    user: null,
+    userId: null,
     headers: null,
   },
 };
@@ -44,7 +44,7 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         session: {
-          user: action.payload.data.data,
+          userId: action.payload.data.data.id,
           headers: action.payload.headers,
         },
         status: {
@@ -116,7 +116,7 @@ const reducer = (state = { ...initialState }, action) => {
           form: "signOut",
         },
         session: {
-          user: null,
+          userId: null,
           headers: null,
         },
       };
@@ -146,7 +146,7 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         session: {
-          user: action.payload.data,
+          userId: action.payload.data.id,
           headers: state.session.headers, // headers remain the same
         },
         status: {

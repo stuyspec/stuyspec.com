@@ -13,7 +13,7 @@ const styles = {
   },
 };
 
-const ProfilePage = ({ classes, session, signOut, status }) => {
+const ProfilePage = ({ classes, session, signOut, status, users }) => {
   if (status.form === "signOut" && status.errors.length === 0) {
     return (
       <div>
@@ -26,7 +26,7 @@ const ProfilePage = ({ classes, session, signOut, status }) => {
   }
   // The last if statement includes the following condition. This next if block
   // is a message for those who directly visit myaccount/profile.
-  if (!session.user) {
+  if (!session.userId) {
     return (
       <p>
         You are not signed in. <Link to="/myaccount">Sign in</Link> or go back
@@ -35,7 +35,7 @@ const ProfilePage = ({ classes, session, signOut, status }) => {
     );
   }
 
-  const { user } = session;
+  const user = users[session.userId]
   return (
     <div>
       {user ? (
@@ -57,6 +57,7 @@ const ProfilePage = ({ classes, session, signOut, status }) => {
 const mapStateToProps = state => ({
   session: state.accounts.session,
   status: state.accounts.status,
+  users: state.users.users,
 });
 
 const mapDispatchToProps = dispatch => {
