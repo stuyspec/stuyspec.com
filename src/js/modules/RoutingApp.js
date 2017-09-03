@@ -125,6 +125,12 @@ class RoutingApp extends Component {
                 key={"editProfile"}
                 component={EditProfilePage}
               />
+              <Route
+                exact
+                path={"/newspapers"}
+                key={"newspaperviewer"}
+                component={IssuuViewer}
+              />
             </Switch>
           ) : (
             <p>loading...</p>
@@ -144,7 +150,8 @@ const mapStateToProps = state => ({
     state.comments.isFetched &&
     state.media.isFetched &&
     state.sections.isFetched &&
-    state.users.isFetched,
+    state.users.isFetched &&
+    state.newspapers.isFetched,
 });
 
 const mapDispatchToProps = dispatch => {

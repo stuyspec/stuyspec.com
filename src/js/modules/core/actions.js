@@ -27,5 +27,6 @@ export const fetchAllData = () => {
     dispatch(fetchUsers());
     dispatch(fetchUserRoles());
     dispatch(fetchRoles());
+    dispatch(fetchNewspapers());
   };
 };

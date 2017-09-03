@@ -10,11 +10,6 @@ const initialState = {
   newspapers: []
 }
 
-obj = {hi : 3}
-modified = {
-  ...obj,
-  hi: 4
-}
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     case FETCH_NEWSPAPERS_PENDING: {
