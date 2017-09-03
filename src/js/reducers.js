@@ -9,6 +9,8 @@ import users from "./modules/users";
 import media from "./modules/media";
 import comments from "./modules/comments";
 import descriptions from "./modules/descriptions";
+import newspapers from "./modules/newspapers";
+
 export default combineReducers({
   [core.constants.NAME]: core.reducer,
   [accounts.constants.NAME]: accounts.reducer,
@@ -18,6 +20,7 @@ export default combineReducers({
   [users.constants.NAME]: users.reducer,
   [comments.constants.NAME]: comments.reducer,
   [descriptions.constants.NAME]: descriptions.reducer,
+  [newspapers.constants.NAME]: newspapers.reducer,
   router: routerReducer,
   form: formReducer,
 });
