@@ -8,7 +8,9 @@ import {
 
 const initialState = {
   isFetching: false,
-  isFetched: false,
+  areUsersFetched: false,
+  areUserRolesFetched: false,
+  areRolesFetched: false,
   error: null,
   users: {},
   roles: {},
@@ -24,7 +26,7 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         isFetching: false,
-        isFetched: true,
+        areUsersFetched: true,
         users: action.payload.reduce((acc, user) => {
           acc[user.id] = user;
           return acc;
@@ -35,11 +37,12 @@ const reducer = (state = { ...initialState }, action) => {
       return { ...state, isFetching: false, error: action.payload };
     }
     case FETCH_USER_ROLES_FULFILLED: {
-      return { ...state, userRoles: action.payload };
+      return { ...state, userRoles: action.payload, areUserRolesFetched: true };
     }
     case FETCH_ROLES_FULFILLED: {
       return {
         ...state,
+        areRolesFetched: true,
         roles: action.payload.reduce((acc, role) => {
           acc[role.id] = role;
           return acc;

@@ -12,26 +12,16 @@ import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 
 const styles = {
   ArticleRow: {
-    borderBottom: "1px solid #ddd",
-    listStyleType: "none",
     margin: 0,
-    padding: "14px 0",
-    "& div:first-child": {
-      paddingLeft: 0,
-    },
-    "& div:last-child": {
-      paddingRight: 0,
-    },
-  },
-  featuredMediaContainer: {
-    width: "100%",
   },
   articleTitle: {
     display: "block",
-    fontFamily: "MinionPro",
-    fontSize: "26px",
+    fontFamily: "Canela",
+    fontSize: "20px",
+    fontWeight: "300",
     color: "#000",
-    marginBottom: "5px",
+    lineHeight: "1.2",
+    marginBottom: "4px",
     padding: 0,
     "&:hover": {
       color: "#000",
@@ -39,17 +29,17 @@ const styles = {
   },
   articlePreview: {
     color: "#000",
-    fontFamily: "MinionPro",
-    fontSize: "16px",
-    lineHeight: "1.13",
-    marginBottom: "2px",
+    fontFamily: "Minion Pro",
+    fontSize: "15px",
+    lineHeight: "1.2",
+    marginBottom: "6px",
   },
   Byline: {
-    display: "inline",
+    color: "#000",
+    display: "block",
     fontFamily: "Circular Std",
     fontSize: "12px",
-    fontWeight: "bold",
-    marginRight: "6px",
+    fontWeight: "300",
     "& p": {
       display: "inline",
       margin: 0,
@@ -67,6 +57,18 @@ const styles = {
     fontWeight: "bold",
     color: "#666",
   },
+  featuredMediaContainer: {
+    float: "left",
+    marginRight: "14px",
+    width: "166px",
+  },
+  rowBlock: {
+    borderBottom: "solid 1px #ddd",
+    padding: "14px 0",
+  },
+  rowContent: {
+    overflow: "hidden",
+  },
 };
 
 const ArticleRow = ({ classes, article, sections, users, media }) => {
@@ -77,25 +79,27 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
   featuredMedia.creator = users[featuredMedia.userId];
   return (
     <Row key={article.id} className={classes.ArticleRow}>
-      <Col md={3} lg={3} className={classes.featuredMediaContainer}>
-        <ArticleFeaturedMedia featuredMedia={featuredMedia} />
-      </Col>
-      <Col md={6} lg={6}>
-        <Link
-          to={`${section.permalink}/${article.slug}`}
-          className={classes.articleTitle}
-        >
-          {article.title}
-        </Link>
-        <p className={classes.articlePreview}>
-          Fake comment: in SectionPage, you've imported SectionArticleList but
-          you don't use it as a component. The error appears to be on line 41.
-        </p>
-        <div>
+      <Col md={7} lg={7} className={classes.rowBlock}>
+        {featuredMedia && (
+          <div className={classes.featuredMediaContainer}>
+            <ArticleFeaturedMedia featuredMedia={featuredMedia} />
+          </div>
+        )}
+        <div className={classes.rowContent}>
+          <Link
+            to={`${section.permalink}/${article.slug}`}
+            className={classes.articleTitle}
+          >
+            {article.title}
+          </Link>
+          <p className={classes.articlePreview}>
+            Unfortunately, all good things must come to an end. We came into
+            Stuyvesant last September, saved from the unstructured summer.
+          </p>
           <Byline classes={classes} contributors={article.contributors} />
-          <span className={classes.dateline}>{article.dateline}</span>
         </div>
       </Col>
+      <Col md={5} lg={5} />
     </Row>
   );
 };

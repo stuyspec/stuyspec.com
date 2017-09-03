@@ -11,38 +11,28 @@ import { getSections, getDirectSubsections } from "../../sections/selectors";
 
 const styles = {
   SectionPage: {
-    top: 0,
-  },
-  sectionName: {
-    fontFamily: "Canela",
-    fontSize: "36px",
-    fontWeight: 500,
-    color: "#000",
-    margin: "0 0 20px 0",
+    margin: "50px auto 0",
+    width: "1066px",
   },
   subsectionBar: {
-    border: "1px solid #ddd",
-    borderStyle: "solid none",
-    listStyleType: "none",
-    marginBottom: "14px",
-    padding: "7px 0 8px 0",
-  },
-  subsectionBarLine: {
-    background: "#ddd",
-    height: "1px",
-    margin: 0,
+    margin: "0 0 28px 0",
+    padding: 0,
+    textAlign: "center",
   },
   subsectionListItem: {
+    borderBottom: "solid 1px #ddd",
     display: "inline",
     textDecoration: "none",
-    marginRight: "26px",
+    padding: "0 26px 10px 0",
+    "&:last-child": {
+      paddingRight: 0,
+    },
   },
   subsectionLink: {
     color: "#000",
     fontFamily: "Circular Std",
-    fontSize: "14px",
+    fontSize: "12px",
     fontWeight: 300,
-    textTransform: "uppercase",
     "&:hover": {
       color: "#000",
       textDecoration: "none",
@@ -51,6 +41,15 @@ const styles = {
       color: "#000",
       textDecoration: "none",
     },
+  },
+  latest: {
+    borderBottom: "solid 1px #ddd",
+    borderTop: "solid 1px #000",
+    color: "#000",
+    fontFamily: "Circular Std",
+    fontSize: "13px",
+    fontWeight: "300",
+    padding: "4px 0",
   },
 };
 
@@ -73,14 +72,12 @@ const SectionPage = ({
   };
   return (
     <div className={classes.SectionPage}>
-      <h1 className={classes.sectionName}>{section.name}</h1>
-      {isObjectEmpty(directSubsections) ? (
-        <hr className={classes.subsectionBarLine} />
-      ) : (
+      {!isObjectEmpty(directSubsections) && (
         <ul className={classes.subsectionBar}>
           {createDirectSubsectionLinks()}
         </ul>
       )}
+      <div className={classes.latest}>Latest</div>
       <ArticleList articles={sectionTreeArticles} section={section} />
     </div>
   );

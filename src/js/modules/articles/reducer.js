@@ -9,7 +9,8 @@ import { getSections } from "../sections/selectors";
 
 const initialState = {
   isFetching: false,
-  isFetched: false,
+  areArticlesFetched: false,
+  areAuthorshipsFetched: false,
   error: null,
   articles: {},
   authorships: [],
@@ -25,7 +26,7 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         isFetching: false,
-        isFetched: true,
+        areArticlesFetched: true,
         articles: newArticles,
       };
     }
@@ -39,6 +40,7 @@ const reducer = (state = { ...initialState }, action) => {
     case FETCH_AUTHORSHIPS_FULFILLED: {
       return {
         ...state,
+        areAuthorshipsFetched: true,
         authorships: action.payload,
       };
     }

@@ -8,8 +8,8 @@ import { getArticlesWithContributors } from "../selectors";
 
 const styles = {
   RecommendedPage: {
-    margin: "0 auto",
-    width: "1060px",
+    margin: "50px auto 0",
+    width: "1066px",
   },
 };
 

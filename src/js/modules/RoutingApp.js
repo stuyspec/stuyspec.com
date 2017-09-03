@@ -10,7 +10,11 @@ import {
   ProfilePage,
   EditProfilePage,
 } from "./accounts/components";
-import { ArticlePage, RecommendedPage, LatestPage } from "./articles/components";
+import {
+  ArticlePage,
+  RecommendedPage,
+  LatestPage,
+} from "./articles/components";
 import { HomePage, PageLayout } from "./core/components";
 import { DescriptionPage } from "./descriptions/components";
 import { SectionPage } from "./sections/components";
@@ -156,11 +160,14 @@ const mapStateToProps = state => ({
   roles: getRoles(state),
   sections: getSections(state),
   isAllDataFetched:
-    state.articles.isFetched &&
+    state.articles.areArticlesFetched &&
+    state.articles.areAuthorshipsFetched &&
     state.comments.isFetched &&
     state.media.isFetched &&
     state.sections.isFetched &&
-    state.users.isFetched,
+    state.users.areUsersFetched &&
+    state.users.areUserRolesFetched &&
+    state.users.areRolesFetched,
 });
 
 const mapDispatchToProps = dispatch => {

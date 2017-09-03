@@ -14,6 +14,7 @@ const styles = {
     borderTop: "1px solid #000",
     borderBottom: "1px solid #ddd",
     color: "#000",
+    display: "block",
     fontFamily: "Circular Std",
     fontSize: "13px",
     fontWeight: 300,
@@ -68,7 +69,9 @@ const RecommendedArticles = ({ classes, articles, sections }) => {
   // NESTED IN <Col lg={3} md={3}>
   return (
     <div className={classes.RecommendedArticles}>
-      <p className={classes.label}>Recommended</p>
+      <Link to="/recommended" className={classes.label}>
+        Recommended
+      </Link>
       {articles.map((article, index) => {
         const section = Object.values(sections).find(section => {
           return section.id === article.sectionId;

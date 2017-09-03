@@ -36,13 +36,7 @@ export const getTopLevelSectionsWithChildren = createSelector(
       acc[topLevelSection.id] = {
         ...topLevelSection,
         subsections: Object.filter(sections, section => {
-          if (section === topLevelSection) {
-            return false;
-          }
-          while (section.parentId !== null) {
-            section = sections[section.parentId];
-          }
-          return section === topLevelSection;
+          return section.parentId === topLevelSection.id;
         }),
       };
       return acc;
@@ -59,10 +53,7 @@ export const getSectionTreeIds = createSelector(
   [getSections, getSectionFromRequestedSlug],
   (sections, targetSection) => {
     const subsectionsInSectionTree = Object.filter(sections, section => {
-      while (section.parentId !== null) {
-        section = sections[section.parentId];
-      }
-      return section === targetSection;
+      return section.parentId === targetSection.id;
     });
     return [targetSection.id, ...Object.keys(subsectionsInSectionTree)];
   },
