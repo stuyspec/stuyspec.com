@@ -6,6 +6,8 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 import { getArticlesWithContributors } from "../../articles/selectors";
 import { getSections } from "../../sections/selectors";
 
+import { convertToRoman } from "../../../utils";
+
 import {
   FeaturedArticle,
   SectionFeature,
