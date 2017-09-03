@@ -17,12 +17,6 @@ export const closeSidebar = () => ({
   type: t.CLOSE_SIDEBAR,
 });
 
-/*
-  The reason why fetchArticles is placed so far away from fetchSections is
-  because the FETCH_ARTICLES_FULFILLED case in the article reducer requires that
-  sections be already fetched, so by making those fetches so far apart, it will
-  give time for sections to be done fetching
- */
 export const fetchAllData = () => {
   return dispatch => {
     dispatch(fetchSections());

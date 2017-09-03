@@ -3,10 +3,11 @@ import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 
-import { getArticlesWithContributors } from "../../articles/selectors";
+import {
+  getArticlesWithContributors,
+  getLatestArticles,
+} from "../../articles/selectors";
 import { getSections } from "../../sections/selectors";
-
-import { convertToRoman } from "../../../utils";
 
 import {
   FeaturedArticle,
@@ -34,12 +35,13 @@ const styles = {
   },
 };
 
-const HomePage = ({ classes, sections, articles }) => {
+const HomePage = ({ classes, sections, articles, latestArticles }) => {
   const articleObjects = Object.values(articles);
   const featuredArticle = articleObjects[0];
   const sectionFeature = sections["1"];
   const sectionFeatureArticles = articleObjects.slice(0, 2);
   const recommendedArticles = articleObjects.slice(0, 5);
+  const topFiveLatest = Object.values(latestArticles).slice(0, 5);
   return (
     <div>
       <Grid>
@@ -61,7 +63,7 @@ const HomePage = ({ classes, sections, articles }) => {
               //in the future, this will display an article from each section
               //but right now, it is just displaying the articles in the state
             }
-            {articleObjects.map(article => {
+            {topFiveLatest.map(article => {
               return (
                 <ArticleBlock
                   article={article}
@@ -80,6 +82,7 @@ const HomePage = ({ classes, sections, articles }) => {
 const mapStateToProps = state => ({
   articles: getArticlesWithContributors(state),
   sections: getSections(state),
+  latestArticles: getLatestArticles(state),
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(HomePage));

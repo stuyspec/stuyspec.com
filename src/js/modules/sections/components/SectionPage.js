@@ -51,6 +51,11 @@ const styles = {
     fontWeight: "300",
     padding: "4px 0",
   },
+  emptySpace: {
+    height: "20px",
+    margin: 0,
+    padding: 0,
+  },
 };
 
 const SectionPage = ({
@@ -72,7 +77,9 @@ const SectionPage = ({
   };
   return (
     <div className={classes.SectionPage}>
-      {!isObjectEmpty(directSubsections) && (
+      {isObjectEmpty(directSubsections) ? (
+        <div className={classes.emptySpace} />
+      ) : (
         <ul className={classes.subsectionBar}>
           {createDirectSubsectionLinks()}
         </ul>
