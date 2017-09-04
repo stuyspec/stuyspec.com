@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 import { Grid, Row, Col } from "react-bootstrap/lib";
+import { getCurrentUser } from '../../accounts/selectors'
 import injectSheet from "react-jss";
 
 import { openSignInModal, signOut } from "../../accounts/actions";
@@ -131,17 +132,17 @@ const CommentForm = ({
   classes,
   handleSubmit,
   submitting,
-  session,
+  currentUser,
   openSignInModal,
   status,
   signOut,
 }) => {
   return (
     <Col md={7} lg={7} className={classes.CommentForm}>
-      {session.user && (
+      {currentUser && (
         <div className={classes.userInfo}>
           <p className={classes.userName}>
-            {session.user.firstName} {session.user.lastName}
+            {currentUser.firstName} {currentUser.lastName}
           </p>
           <span className={classes.bulletPoint}>&#8226;</span>
           <Link className={classes.optOut} to="/myaccount/profile">
@@ -159,12 +160,12 @@ const CommentForm = ({
         <Field
           name="content"
           component={renderField}
-          checkLogin={() => !session.user && openSignInModal()}
+          checkLogin={() => !currentUser && openSignInModal()}
         />
         <div className={classes.submitDiv}>
           <button
             type="submit"
-            disabled={!session.user || submitting}
+            disabled={!currentUser || submitting}
             className={classes.submitButton}
           >
             Submit
@@ -187,7 +188,8 @@ const CommentForm = ({
 
 const mapStateToProps = state => ({
   status: state.comments.status,
-  session: state.accounts.session,
+  currentUser: getCurrentUser(state),
+  sessionHeaders: state.accounts.session.headers
 });
 
 const mapDispatchToProps = dispatch => {

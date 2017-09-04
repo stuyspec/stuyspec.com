@@ -93,11 +93,11 @@ export const signIn = (signInParams, isInModal) => {
   };
 };
 
-export const signOut = session => {
+export const signOut = sessionHeaders => {
   const headers = {
-    "access-token": session.headers["access-token"],
-    client: session.headers.client,
-    uid: session.headers.uid,
+    "access-token": sessionHeaders["access-token"],
+    client: sessionHeaders.client,
+    uid: sessionHeaders.uid,
   };
   return dispatch => {
     dispatch({ type: t.SIGN_OUT_PENDING, payload: headers });
