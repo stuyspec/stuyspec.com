@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
-
+import { getCurrentUser } from '../../accounts/selectors'
 import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
 
@@ -92,7 +92,7 @@ const NavButton = ({ classes, children, label, onClick }) => {
 };
 const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 
-const MastheadBar = ({ classes, openSidebar, session }) => {
+const MastheadBar = ({ classes, openSidebar, currentUser }) => {
   return (
     <div className={classes.MastheadBar}>
       <div className={classes.barContainer}>
@@ -107,7 +107,7 @@ const MastheadBar = ({ classes, openSidebar, session }) => {
         <Link className={classes.brandingLink} to="/">
           The Spectator
         </Link>
-        {session.user ? (
+        {currentUser ? (
           <div className={classes.userTools}>
             <Link to="/myaccount/profile">
               <StyledNavButton label="profile" />
@@ -127,7 +127,7 @@ const MastheadBar = ({ classes, openSidebar, session }) => {
 };
 
 const mapStateToProps = state => ({
-  session: state.accounts.session,
+  currentUser: getCurrentUser(state)
 });
 
 const mapDispatchToProps = dispatch => {

@@ -81,7 +81,6 @@ export const signIn = (signInParams, isInModal) => {
           payload: response,
         });
         if (!isInModal) {
-          // Explicit equality necessary because isInModal may also be null, which is falsey.
           appHistory.push("/myaccount/profile");
         }
       })
