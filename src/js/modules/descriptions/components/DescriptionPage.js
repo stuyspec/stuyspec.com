@@ -4,7 +4,8 @@ import injectSheet from "react-jss";
 
 const styles = {
   DescriptionPage: {
-    marginTop: "100px",
+    margin: "78px auto 0",
+    width: "1066px",
   },
   descriptionTitle: {
     fontFamily: "Canela",
