@@ -12,6 +12,12 @@ export const signUp = registrationParams => {
       payload: registrationParams,
     });
 
+    /* As Devise only accepts email/passwords, we need a separate update
+     * for other user properties. Note that we are not simply dispatching
+     * an UPDATE_USER because that will change the form name in the status
+     * of the accounts state slice to editUser, which will prevent success
+     * text from rendering on the signUpForm.
+     */
     const deviseParams = (({ email, password, passwordConfirmation }) => ({
       email,
       password,
@@ -29,20 +35,17 @@ export const signUp = registrationParams => {
           type: t.SIGN_UP_FULFILLED,
           payload: response,
         });
-        const userId = response.data.data.id;
-        /* As Devise only accepts email/passwords, we need a separate update
-         * for other user properties. Note that we are not simply dispatching
-         * an UPDATE_USER because that will change the form name in the status
-         * of the accounts state slice to editUser, which will prevent success
-         * text from rendering on the signUpForm.
-         */
-        axios.put(
-          `${STUY_SPEC_API_URL}/users/${userId}`,
-          additionalParams,
-          STUY_SPEC_API_HEADERS,
-        );
+        return response.data.data.id;
       })
-      .then(repsonse => {
+      .then(userId => {
+        return axios
+          .put(
+            `${STUY_SPEC_API_URL}/users/${userId}`,
+            additionalParams,
+            STUY_SPEC_API_HEADERS,
+          );
+      })
+      .then(response => {
         dispatch({
           type: CREATE_USER_FULFILLED,
           payload: response,
@@ -58,6 +61,9 @@ export const signUp = registrationParams => {
 };
 
 export const signIn = (signInParams, isInModal) => {
+  if (!isInModal) {
+    isInModal = false;
+  }
   return dispatch => {
     dispatch({
       type: t.SIGN_IN_PENDING,
@@ -74,7 +80,7 @@ export const signIn = (signInParams, isInModal) => {
           type: t.SIGN_IN_FULFILLED,
           payload: response,
         });
-        if (isInModal !== true) {
+        if (!isInModal) {
           // Explicit equality necessary because isInModal may also be null, which is falsey.
           appHistory.push("/myaccount/profile");
         }
