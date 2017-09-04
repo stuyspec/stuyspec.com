@@ -474,6 +474,7 @@ gulp.task('create-js-build', function()
     {
         return scripts({ watch : false })
             .pipe(buffer())
+            .pipe(replace('http://localhost:3000','https://api.stuyspec.xyz'))
             .pipe(uglify().on('error', gulpUtil.log))
             .pipe(gulp.dest(Paths.DEST_PROD));
     }
@@ -481,6 +482,7 @@ gulp.task('create-js-build', function()
     {
         return scripts({ watch : false })
             .pipe(buffer())
+            .pipe(replace('http://localhost:3000','https://api.stuyspec.xyz'))
             .pipe(uglify().on('error', gulpUtil.log))
             .pipe(stripDebug())                         //remove console logging
             .pipe(gulp.dest(Paths.DEST_PROD));
