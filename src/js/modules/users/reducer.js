@@ -52,7 +52,7 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         users: {
           ...state.users,
-          [action.payload.id]: action.payload,
+          [action.payload.data.id]: action.payload.data,
         },
       };
     }

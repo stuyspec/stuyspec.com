@@ -112,7 +112,7 @@ const validate = values => {
 const renderField = ({
   input,
   disabled,
-  meta: { touched, error, warning },
+  meta: { touched, error },
   checkLogin,
 }) => {
   return (
@@ -133,6 +133,7 @@ const CommentForm = ({
   handleSubmit,
   submitting,
   currentUser,
+  session,
   openSignInModal,
   status,
   signOut,
@@ -155,7 +156,6 @@ const CommentForm = ({
         </div>
       )}
 
-      {/* TODO: DISABLE FIELDS */}
       <form onSubmit={handleSubmit}>
         <Field
           name="content"
@@ -189,7 +189,7 @@ const CommentForm = ({
 const mapStateToProps = state => ({
   status: state.comments.status,
   currentUser: getCurrentUser(state),
-  sessionHeaders: state.accounts.session.headers,
+  session: state.accounts.session,
 });
 
 const mapDispatchToProps = dispatch => {
