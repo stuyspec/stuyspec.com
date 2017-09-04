@@ -14,7 +14,7 @@ const styles = {
 };
 
 const ProfilePage = ({ classes, session, signOut, status, users }) => {
-  if (status.form === "signOut" && status.errors.length === 0) {
+  if (status.formName === "signOut" && status.errors.length === 0) {
     return (
       <div>
         <p className={classes.successMessage}>{status.message}</p>
@@ -35,7 +35,7 @@ const ProfilePage = ({ classes, session, signOut, status, users }) => {
     );
   }
 
-  const user = users[session.userId]
+  const user = users[session.userId];
   return (
     <div>
       {user ? (

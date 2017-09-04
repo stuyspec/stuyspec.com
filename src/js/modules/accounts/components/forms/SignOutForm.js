@@ -25,7 +25,7 @@ const SignOutForm = ({ classes, handleSubmit, submitting, status }) => {
           </button>
         </div>
       </form>
-      {status.form === "signOut" && (
+      {status.formName === "signOut" && (
         <div>
           <p key="success" className={classes.successMessage}>
             {status.message}

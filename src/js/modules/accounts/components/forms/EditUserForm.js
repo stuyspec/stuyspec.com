@@ -68,7 +68,7 @@ const EditUserForm = ({ classes, handleSubmit, submitting, status }) => {
           </button>
         </div>
       </form>
-      {status.form === "editUser" && (
+      {status.formName === "editUser" && (
         <div>
           <p key="success" className={classes.successMessage}>
             {status.message}

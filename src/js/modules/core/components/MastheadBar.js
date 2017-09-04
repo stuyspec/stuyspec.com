@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
-import { getCurrentUser } from '../../accounts/selectors'
+import { getCurrentUser } from "../../accounts/selectors";
 import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
 
@@ -127,7 +127,7 @@ const MastheadBar = ({ classes, openSidebar, currentUser }) => {
 };
 
 const mapStateToProps = state => ({
-  currentUser: getCurrentUser(state)
+  currentUser: getCurrentUser(state),
 });
 
 const mapDispatchToProps = dispatch => {

@@ -65,7 +65,7 @@ const SignInForm = ({ classes, handleSubmit, submitting, status }) => {
           </button>
         </div>
       </form>
-      {status.form === "signIn" && (
+      {status.formName === "signIn" && (
         <div>
           <p key="success" className={classes.successMessage}>
             {status.message}

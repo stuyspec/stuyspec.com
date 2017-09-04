@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 import { Grid, Row, Col } from "react-bootstrap/lib";
-import { getCurrentUser } from '../../accounts/selectors'
+import { getCurrentUser } from "../../accounts/selectors";
 import injectSheet from "react-jss";
 
 import { openSignInModal, signOut } from "../../accounts/actions";
@@ -112,7 +112,7 @@ const validate = values => {
 const renderField = ({
   input,
   disabled,
-  meta: { touched, error },
+  meta: { touched, error, warning },
   checkLogin,
 }) => {
   return (
@@ -189,7 +189,7 @@ const CommentForm = ({
 const mapStateToProps = state => ({
   status: state.comments.status,
   currentUser: getCurrentUser(state),
-  sessionHeaders: state.accounts.session.headers
+  sessionHeaders: state.accounts.session.headers,
 });
 
 const mapDispatchToProps = dispatch => {

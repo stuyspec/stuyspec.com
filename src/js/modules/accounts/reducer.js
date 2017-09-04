@@ -19,7 +19,7 @@ const initialState = {
   status: {
     errors: [],
     message: null,
-    form: null,
+    formName: null,
   },
   isSignInModalOpen: false,
   session: {
@@ -36,7 +36,7 @@ const reducer = (state = { ...initialState }, action) => {
         status: {
           errors: [],
           message: null,
-          form: null,
+          formName: null,
         },
       };
     }
@@ -49,7 +49,7 @@ const reducer = (state = { ...initialState }, action) => {
         },
         status: {
           errors: [],
-          form: "signIn",
+          formName: "signIn",
           message: "Successfully signed in.",
         },
       };
@@ -59,7 +59,7 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         status: {
           errors: action.payload.response.data.errors,
-          form: "signIn",
+          formName: "signIn",
           message: null,
         },
       };
@@ -70,7 +70,7 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         status: {
           errors: [],
-          form: null,
+          formName: null,
           message: null,
         },
       };
@@ -80,7 +80,7 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         status: {
           errors: [],
-          form: "signUp",
+          formName: "signUp",
           message:
             "Welcome! You can confirm your account through the link sent to the email you signed up with.",
         },
@@ -91,7 +91,7 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         status: {
           errors: action.payload.response.data.errors.fullMessages,
-          form: "signUp",
+          formName: "signUp",
           message: null,
         },
       };
@@ -102,7 +102,7 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         status: {
           errors: [],
-          form: null,
+          formName: null,
           message: null,
         },
       };
@@ -113,7 +113,7 @@ const reducer = (state = { ...initialState }, action) => {
         status: {
           errors: [],
           message: "You have been successfully signed out.",
-          form: "signOut",
+          formName: "signOut",
         },
         session: {
           userId: null,
@@ -127,7 +127,7 @@ const reducer = (state = { ...initialState }, action) => {
         status: {
           errors: action.payload.response.data.errors,
           message: null,
-          form: "signOut",
+          formName: "signOut",
         },
       };
     }
@@ -138,7 +138,7 @@ const reducer = (state = { ...initialState }, action) => {
         status: {
           errors: [],
           message: null,
-          form: null,
+          formName: null,
         },
       };
     }
@@ -152,7 +152,7 @@ const reducer = (state = { ...initialState }, action) => {
         status: {
           errors: [],
           message: "Your changes have been saved.",
-          form: "editUser",
+          formName: "editUser",
         },
       };
     }
@@ -162,7 +162,7 @@ const reducer = (state = { ...initialState }, action) => {
         status: {
           errors: action.payload.response.data.errors,
           message: null,
-          form: "editUser",
+          formName: "editUser",
         },
       };
     }

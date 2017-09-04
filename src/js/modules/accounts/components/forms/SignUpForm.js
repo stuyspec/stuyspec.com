@@ -98,7 +98,7 @@ const SignUpForm = ({ classes, handleSubmit, submitting, status }) => {
           </button>
         </div>
       </form>
-      {status.form === "signUp" && (
+      {status.formName === "signUp" && (
         <div>
           <p key="success" className={classes.successMessage}>
             {status.message}

@@ -21,7 +21,7 @@ const SignInModal = ({
   signUp,
   status,
 }) => {
-  if (status.form === "signIn" && status.errors.length === 0) {
+  if (status.formName === "signIn" && status.errors.length === 0) {
     // The form has been successfully submitted, so the modal can be closed.
     closeSignInModal();
   }

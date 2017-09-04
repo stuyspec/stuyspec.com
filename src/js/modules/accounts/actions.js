@@ -38,12 +38,11 @@ export const signUp = registrationParams => {
         return response.data.data.id;
       })
       .then(userId => {
-        return axios
-          .put(
-            `${STUY_SPEC_API_URL}/users/${userId}`,
-            additionalParams,
-            STUY_SPEC_API_HEADERS,
-          );
+        return axios.put(
+          `${STUY_SPEC_API_URL}/users/${userId}`,
+          additionalParams,
+          STUY_SPEC_API_HEADERS,
+        );
       })
       .then(response => {
         dispatch({
