@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import injectSheet from "react-jss";
 import Sidebar from "react-sidebar";
+import Favicon from "react-favicon";
 
 import PageHeader from "./PageHeader";
 import PageFooter from "./PageFooter";
@@ -49,6 +50,7 @@ const PageLayout = ({
       styles={sidebarStyles}
     >
       <PageHeader location={location} />
+      <Favicon url='https://i.imgur.com/CxNoalR.png'/>
       <div className={classes.PageContainer}>{children}</div>
       <PageFooter />
     </Sidebar>
