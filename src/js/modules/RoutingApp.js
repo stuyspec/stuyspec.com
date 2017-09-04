@@ -20,6 +20,7 @@ import {
   PhotographerPage,
   IllustratorPage,
 } from "./users/components";
+import {IssuuViewer} from "./newspapers/components";
 
 import { fetchAllData } from "./core/actions";
 import { getDescriptions } from "./descriptions/selectors";
@@ -127,8 +128,8 @@ class RoutingApp extends Component {
               />
               <Route
                 exact
-                path={"/newspapers"}
-                key={"newspaperviewer"}
+                path={"/newspaper"}
+                key={"newspaper"}
                 component={IssuuViewer}
               />
             </Switch>
