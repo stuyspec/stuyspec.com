@@ -58,3 +58,11 @@ export const getSectionTreeIds = createSelector(
     return [targetSection.id, ...Object.keys(subsectionsInSectionTree)];
   },
 );
+
+/**
+ * Return an array with all the sectionSlugs
+ */
+
+export const getSectionSlugs = createSelector([getSections], sections => {
+  return Object.values(sections).map(section => section.slug);
+});

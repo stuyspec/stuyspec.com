@@ -63,9 +63,11 @@ const initialState = {
 const addPermalinksToSections = sections => {
   return Object.values(sections).reduce((acc, section) => {
     let permalink = "/" + section.slug;
-    while (section.parentId !== null) {
-      section = sections[section.parentId];
-      permalink = "/" + section.slug + permalink;
+    let upwardsTraversingSection = { ...section };
+    while (upwardsTraversingSection.parentId) {
+      upwardsTraversingSection =
+        sections[upwardsTraversingSection.parentId - 1];
+      permalink = "/" + upwardsTraversingSection.slug + permalink;
     }
     acc[section.id] = {
       ...section,

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
+import { getSections, getSectionSlugs } from "../../sections/selectors";
 
 const styles = {
   MastheadBar: {
@@ -54,6 +55,18 @@ const styles = {
       marginLeft: "24px",
     },
   },
+  sectionName: {
+    borderLeft: "solid 1px #000",
+    bottom: "4px",
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "15px",
+    fontWeight: "bold",
+    lineHeight: "0.93",
+    marginLeft: "7.5px",
+    padding: "2.5px 0 0 7.5px",
+    position: "relative",
+  },
 };
 
 const navButtonStyles = {
@@ -89,7 +102,16 @@ const NavButton = ({ classes, children, label, onClick }) => {
 };
 const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 
-const MastheadBar = ({ classes, openSidebar, session }) => {
+const MastheadBar = ({
+  classes,
+  openSidebar,
+  session,
+  location,
+  sectionSlugs,
+  sections,
+}) => {
+  const sectionSlugArray = location.pathname.split("/");
+  const sectionSlug = sectionSlugArray[sectionSlugArray.length - 1];
   return (
     <div className={classes.MastheadBar}>
       <div className={classes.barContainer}>
@@ -103,6 +125,15 @@ const MastheadBar = ({ classes, openSidebar, session }) => {
         </div>
         <Link className={classes.brandingLink} to="/">
           The Spectator
+          {sectionSlugs.includes(sectionSlug) && (
+            <span className={classes.sectionName}>
+              {
+                Object.values(sections).find(
+                  section => section.slug === sectionSlug,
+                ).name
+              }
+            </span>
+          )}
         </Link>
         {session.user ? (
           <div className={classes.userTools}>
@@ -125,6 +156,8 @@ const MastheadBar = ({ classes, openSidebar, session }) => {
 
 const mapStateToProps = state => ({
   session: state.accounts.session,
+  sectionSlugs: getSectionSlugs(state),
+  sections: getSections(state),
 });
 
 const mapDispatchToProps = dispatch => {

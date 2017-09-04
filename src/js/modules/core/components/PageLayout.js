@@ -50,7 +50,7 @@ const PageLayout = ({
       styles={sidebarStyles}
     >
       <PageHeader location={location} />
-      <Favicon url='https://i.imgur.com/CxNoalR.png'/>
+      <Favicon url="https://i.imgur.com/CxNoalR.png" />
       <div className={classes.PageContainer}>{children}</div>
       <PageFooter />
     </Sidebar>
