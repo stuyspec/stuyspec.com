@@ -5,7 +5,7 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 
 import { getPhotographerFromSlug } from "../selectors";
 import { getPhotographerArticles } from "../../articles/selectors";
-import { ArticleRow } from "../../articles/components";
+import { ArticleList } from "../../articles/components";
 
 const styles = {
   PhotographerPage: {
@@ -59,9 +59,7 @@ const PhotographerPage = ({ classes, photographer, articles }) => {
           />
           <p className={classes.description}>{photographer.description}</p>
           <div className={classes.workList}>Photographs</div>
-          {Object.values(articles).map(article => {
-            return <ArticleRow key={article.id} article={article} />;
-          })}
+          <ArticleList articles={articles} />
         </Col>
       </Row>
     </Grid>

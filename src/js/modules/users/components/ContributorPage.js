@@ -5,7 +5,7 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 
 import { getContributorFromSlug } from "../selectors";
 import { getContributorArticles } from "../../articles/selectors";
-import { ArticleRow } from "../../articles/components";
+import { ArticleList } from "../../articles/components";
 
 const styles = {
   ContributorPage: {
@@ -59,9 +59,7 @@ const ContributorPage = ({ classes, contributor, articles }) => {
           />
           <p className={classes.description}>{contributor.description}</p>
           <div className={classes.workList}>All Work</div>
-          {Object.values(articles).map(article => {
-            return <ArticleRow key={article.id} article={article} />;
-          })}
+          <ArticleList articles={articles} />
         </Col>
       </Row>
     </Grid>

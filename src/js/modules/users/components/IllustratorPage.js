@@ -5,7 +5,7 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 
 import { getIllustratorFromSlug } from "../selectors";
 import { getIllustratorArticles } from "../../articles/selectors";
-import { ArticleRow } from "../../articles/components";
+import { ArticleList } from "../../articles/components";
 
 const styles = {
   IllustratorPage: {
@@ -59,9 +59,7 @@ const IllustratorPage = ({ classes, illustrator, articles }) => {
           />
           <p className={classes.description}>{illustrator.description}</p>
           <div className={classes.workList}>Illustrations</div>
-          {Object.values(articles).map(article => {
-            return <ArticleRow key={article.id} article={article} />;
-          })};
+          <ArticleList articles={articles} />
         </Col>
       </Row>
     </Grid>
@@ -73,6 +71,4 @@ const mapStateToProps = (state, ownProps) => ({
   articles: getIllustratorArticles(state, ownProps),
 });
 
-export default connect(mapStateToProps, null)(
-  injectSheet(styles)(IllustratorPage),
-);
+export default connect(mapStateToProps)(injectSheet(styles)(IllustratorPage));

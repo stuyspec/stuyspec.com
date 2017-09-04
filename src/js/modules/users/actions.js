@@ -24,12 +24,51 @@ export const fetchUsers = () => {
   };
 };
 
+export const fetchRoles = () => {
+  return dispatch => {
+    dispatch({ type: t.FETCH_ROLES_PENDING });
+    axios
+      .get(`${STUY_SPEC_API_URL}/roles`, STUY_SPEC_API_HEADERS)
+      .then(response => {
+        dispatch({
+          type: t.FETCH_ROLES_FULFILLED,
+          payload: response.data,
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: t.FETCH_ROLES_REJECTED,
+          payload: err,
+        });
+      });
+  };
+};
+
+export const fetchUserRoles = () => {
+  return dispatch => {
+    dispatch({ type: t.FETCH_USER_ROLES_PENDING });
+    axios
+      .get(`${STUY_SPEC_API_URL}/user_roles`, STUY_SPEC_API_HEADERS)
+      .then(response => {
+        dispatch({
+          type: t.FETCH_USER_ROLES_FULFILLED,
+          payload: response.data,
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: t.FETCH_USER_ROLES_REJECTED,
+          payload: err,
+        });
+      });
+  };
+};
+
 const validateUsers = userArray => {
   const integerProperties = ["id"];
   const stringProperties = [
     "firstName",
     "lastName",
-    "username",
     "email",
     "createdAt",
     "updatedAt",

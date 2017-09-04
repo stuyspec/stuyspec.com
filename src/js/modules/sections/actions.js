@@ -9,7 +9,6 @@ export const fetchSections = () => {
     axios
       .get(`${STUY_SPEC_API_URL}/sections`, STUY_SPEC_API_HEADERS)
       .then(response => {
-        console.log(response);
         validateSections(response.data);
         dispatch({
           type: t.FETCH_SECTIONS_FULFILLED,
