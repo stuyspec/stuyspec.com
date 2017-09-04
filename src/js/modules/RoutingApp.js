@@ -126,12 +126,14 @@ class RoutingApp extends Component {
                 key={"editProfile"}
                 component={EditProfilePage}
               />
+              {/* Will be designed in School Amble.
               <Route
                 exact
                 path={"/newspaper"}
                 key={"newspaper"}
                 component={IssuuViewer}
               />
+            */}
             </Switch>
           ) : (
             <p>loading...</p>
