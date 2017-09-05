@@ -25,7 +25,12 @@ const styles = {
     marginBottom: "19px",
   },
   secondaryArticle: {
-    padding: "0 7px 0 13px",
+    padding: "0 14px 0 13px",
+    marginBottom: "19px",
+  },
+  ternaryArticle: {
+    padding: '0 14px 0 13px',
+    borderLeft: 'solid 1px #ddd',
     marginBottom: "19px",
   },
   title: {
@@ -86,6 +91,7 @@ const styles = {
     },
   },
   featuredMediaContainer: {
+    paddingLeft: 0,
     paddingRight: "14px",
   },
   hr: {
@@ -99,6 +105,7 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
   const sectionArticles = Object.values(articles);
   const primaryArticle = sectionArticles[0];
   const secondaryArticle = sectionArticles[1];
+  const ternaryArticle = sectionArticles[1]; //Make it number 2 after we have real articles
   const featuredMedia = Object.values(media).find(mediaObject => {
     return (
       mediaObject.isFeatured && mediaObject.articleId === secondaryArticle.id
@@ -145,13 +152,33 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
         />
         <Dateline classes={classes} article={secondaryArticle} />
       </Col>
-      <Col lg={4} md={4} className={classes.featuredMediaContainer}>
-        {featuredMedia && (
+      {featuredMedia ? (
+        <Col lg={4} md={4} className={classes.featuredMediaContainer}>
           <figure className={classes.figure}>
             <img src={featuredMedia.url} />
           </figure>
-        )}
-      </Col>
+        </Col>
+      ) : (
+        <Col lg={4} md={4} className={classes.ternaryArticle}>
+          <Link
+            className={classes.title}
+            to={`${sections[ternaryArticle.sectionId]
+              .permalink}/${ternaryArticle.slug}`}
+          >
+            {ternaryArticle.title}
+          </Link>
+          <p className={classes.focus}>
+            StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
+            27, and Sunday, May 28. The event provided an opportunity for 175
+            high schools.
+          </p>
+          <Byline
+            classes={classes}
+            contributors={ternaryArticle.contributors}
+          />
+          <Dateline classes={classes} article={ternaryArticle} />
+        </Col>
+      )}
     </Row>
   );
 };

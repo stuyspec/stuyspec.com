@@ -153,3 +153,12 @@ export const getLatestArticles = createSelector(
     }, {});
   },
 );
+
+export const getArticlesFromSection = createSelector(
+  [getArticlesWithContributors, getSectionFromRequestedSlug],
+  (articles, section) => {
+    return Object.values(articles).filter(
+      article => article.sectionId === section.id,
+    );
+  },
+);

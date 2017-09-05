@@ -62,6 +62,18 @@ const fakeMedia = [
     type: "illustration",
     isFeatured: true,
   },
+  {
+    id: 5,
+    userId: 2,
+    articleId: 7,
+    url:
+      "http://www.stockillustrations.com/Image.aspx?src=medres&name=ALBA1060.jpg&sz=1144&fitw=y",
+    title: "Happy Birthday",
+    caption:
+      "As Charlotte celebrates her thirteenth birthday, she is surprised by two nice rabbits.",
+    type: "illustration",
+    isFeatured: true,
+  },
 ];
 
 export const fetchMedia = () => {

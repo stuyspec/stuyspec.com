@@ -5,7 +5,7 @@ import injectSheet from "react-jss";
 
 import { getMedia } from "../../../media/selectors";
 import { getSections } from "../../../sections/selectors";
-import { getSectionTreeArticles } from "../../selectors";
+import { getArticlesFromSection } from "../../selectors";
 import Dateline from "../Dateline";
 import Byline from "../Byline";
 
@@ -135,7 +135,7 @@ const SectionBlock = ({ classes, articles, section, media, allSections }) => {
 
 const mapStateToProps = (state, ownProps) => ({
   media: getMedia(state),
-  articles: getSectionTreeArticles(state, ownProps),
+  articles: getArticlesFromSection(state, ownProps),
   allSections: getSections(state),
 });
 
