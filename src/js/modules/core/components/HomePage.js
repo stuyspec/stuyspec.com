@@ -13,7 +13,8 @@ import {
   FeaturedArticle,
   SectionFeature,
   RecommendedArticles,
-  ArticleBlock,
+  LatestArticleBlock,
+  ArticleBlocks,
 } from "../../articles/components/summaries";
 
 const styles = {
@@ -37,11 +38,13 @@ const styles = {
 
 const HomePage = ({ classes, sections, articles, latestArticles }) => {
   const articleObjects = Object.values(articles);
+  console.log(articleObjects);
   const featuredArticle = articleObjects[0];
   const sectionFeature = sections["1"];
   const sectionFeatureArticles = articleObjects.slice(0, 2);
   const recommendedArticles = articleObjects.slice(0, 5);
   const topFiveLatest = Object.values(latestArticles).slice(0, 5);
+  const randomArticles = articleObjects.slice(3, 9);
   return (
     <div>
       <Grid>
@@ -65,7 +68,7 @@ const HomePage = ({ classes, sections, articles, latestArticles }) => {
             }
             {topFiveLatest.map(article => {
               return (
-                <ArticleBlock
+                <LatestArticleBlock
                   article={article}
                   section={sections[article.sectionId]}
                   key={article.id}
@@ -74,6 +77,7 @@ const HomePage = ({ classes, sections, articles, latestArticles }) => {
             })}
           </Col>
         </Row>
+        <ArticleBlocks articles={randomArticles} sections={sections} />
       </Grid>
     </div>
   );

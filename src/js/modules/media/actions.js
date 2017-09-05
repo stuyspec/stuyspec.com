@@ -13,7 +13,7 @@ const fakeMedia = [
     caption:
       "As the snake reaches up to kill the bird, the bird has deja vu of that visit to the Gucci store.",
     type: "photograph",
-    isFeatured: true,
+    isFeatured: false,
   },
   {
     id: 1,

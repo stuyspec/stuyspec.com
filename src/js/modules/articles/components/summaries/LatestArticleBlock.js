@@ -6,7 +6,7 @@ import injectSheet from "react-jss";
 import { getMedia } from "../../../media/selectors";
 
 const styles = {
-  ArticleBlock: {
+  LatestArticleBlock: {
     float: "left",
     height: "59px",
     marginTop: "9px",
@@ -58,12 +58,12 @@ const styles = {
   },
 };
 
-const ArticleBlock = ({ classes, article, section, media }) => {
+const LatestArticleBlock = ({ classes, article, section, media }) => {
   const featuredMedia = Object.values(media).find(mediaObject => {
     return mediaObject.isFeatured && mediaObject.articleId === article.id;
   });
   return (
-    <div className={classes.ArticleBlock}>
+    <div className={classes.LatestArticleBlock}>
       {featuredMedia && (
         <div>
           <figure className={classes.figure}>
@@ -88,4 +88,6 @@ const mapStateToProps = state => ({
   media: getMedia(state),
 });
 
-export default connect(mapStateToProps)(injectSheet(styles)(ArticleBlock));
+export default connect(mapStateToProps)(
+  injectSheet(styles)(LatestArticleBlock),
+);
