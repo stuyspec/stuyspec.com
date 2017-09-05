@@ -52,7 +52,7 @@ const styles = {
     margin: "0 0 12px 0",
   },
   Byline: {
-    color: "#000",
+    color: "#000000",
     fontFamily: "Circular Std",
     fontSize: "13px",
     fontWeight: "500",
