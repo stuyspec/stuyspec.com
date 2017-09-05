@@ -66,6 +66,8 @@
     "ejs": "^2.5.7",
     "envify": "^4.1.0",
     "express": "^4.15.3",
+    "http-errors": "^1.6.2",
+    "jsesc": "^2.5.1",
     "jss": "^8.1.0",
     "jss-preset-default": "^3.0.0",
     "locate-path": "^2.0.0",
@@ -78,8 +80,11 @@
     "react-icons": "^2.2.5",
     "react-router-bootstrap": "^0.24.2",
     "react-sidebar": "^2.3.2",
+    "redux-form": "^7.0.3",
+    "redux-persist": "^4.9.1",
     "reselect": "^3.0.1",
     "sigmund": "^1.0.1",
+    "unpipe": "^1.0.0",
     "yargs": "^8.0.2",
     "zone.js": "^0.8.5"
   }

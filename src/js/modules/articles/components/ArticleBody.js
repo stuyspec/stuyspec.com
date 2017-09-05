@@ -5,11 +5,20 @@ import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 
 const styles = {
   ArticleBody: {
+    borderBottom: "1px solid #ddd",
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "18px",
     lineHeight: 1.44,
+    marginBottom: "38px",
+    paddingBottom: "38px",
     width: "700px",
+    "& p": {
+      marginBottom: "20px",
+    },
+    "& p:first-child": {
+      marginTop: "28px",
+    },
     "& p:first-child::first-letter": {
       float: "left",
       fontSize: "58px",
@@ -22,7 +31,7 @@ const styles = {
 const ArticleBody = ({ classes, content, featuredMedia }) => {
   return (
     <div className={classes.ArticleBody}>
-      <ArticleFeaturedMedia featuredMedia={featuredMedia} />
+      {featuredMedia && <ArticleFeaturedMedia featuredMedia={featuredMedia} />}
       <div dangerouslySetInnerHTML={{ __html: content }} />
     </div>
   );

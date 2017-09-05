@@ -32,7 +32,9 @@ export const getArticlesWithContributors = createSelector(
       if (targetArticle.contributors === undefined) {
         targetArticle.contributors = [];
       }
-      targetArticle.contributors.push(users[authorship.contributorId]);
+      if (!targetArticle.contributors.includes(users[authorship.userId])) {
+        targetArticle.contributors.push(users[authorship.userId]);
+      }
       acc[targetArticle.id] = targetArticle;
       return acc;
     }, {});
@@ -79,7 +81,7 @@ export const getContributorArticles = createSelector(
   [getContributorFromSlug, getArticlesWithContributors, getAuthorships],
   (contributor, articles, authorships) => {
     return authorships.reduce((acc, authorship) => {
-      if (authorship.contributorId === contributor.id) {
+      if (authorship.userId === contributor.id) {
         const article = articles[authorship.articleId];
         acc[article.id] = article;
       }
@@ -128,9 +130,11 @@ export const getArticleFeaturedMedia = createSelector(
     const featuredMedia = Object.values(media).find(mediaObject => {
       return mediaObject.isFeatured && mediaObject.articleId === article.id;
     });
-    return {
-      ...featuredMedia,
-      creator: users[featuredMedia.userId],
-    };
+    if (featuredMedia) {
+      return {
+        ...featuredMedia,
+        creator: users[featuredMedia.userId],
+      };
+    }
   },
 );

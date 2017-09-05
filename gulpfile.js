@@ -52,7 +52,7 @@ const Flags =
     },
     error_sound       :
     {
-        defaultValue : true,
+        defaultValue : false,
         description  : 'Play a sound when there is an error'
     },
     build_js_debug    :
