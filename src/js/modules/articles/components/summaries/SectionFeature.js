@@ -7,6 +7,7 @@ import { Row, Col } from "react-bootstrap/lib";
 import Byline from "../Byline";
 import Dateline from "../Dateline";
 import { getMedia } from "../../../media/selectors";
+import { getSectionTreeArticles } from "../../selectors";
 
 const styles = {
   SectionFeature: {},
@@ -94,9 +95,10 @@ const styles = {
   },
 };
 
-const SectionFeature = ({ classes, articles, section, media }) => {
-  const primaryArticle = articles[0];
-  const secondaryArticle = articles[1];
+const SectionFeature = ({ classes, articles, section, media, sections }) => {
+  const sectionArticles = Object.values(articles);
+  const primaryArticle = sectionArticles[0];
+  const secondaryArticle = sectionArticles[1];
   const featuredMedia = Object.values(media).find(mediaObject => {
     return (
       mediaObject.isFeatured && mediaObject.articleId === secondaryArticle.id
@@ -111,7 +113,8 @@ const SectionFeature = ({ classes, articles, section, media }) => {
       <Col lg={4} md={4} className={classes.primaryArticle}>
         <Link
           className={classes.title}
-          to={`${section.permalink}/${primaryArticle.slug}`}
+          to={`${sections[primaryArticle.sectionId]
+            .permalink}/${primaryArticle.slug}`}
         >
           {primaryArticle.title}
         </Link>
@@ -126,7 +129,8 @@ const SectionFeature = ({ classes, articles, section, media }) => {
       <Col lg={4} md={4} className={classes.secondaryArticle}>
         <Link
           className={classes.title}
-          to={`${section.permalink}/${secondaryArticle.slug}`}
+          to={`${sections[secondaryArticle.sectionId]
+            .permalink}/${secondaryArticle.slug}`}
         >
           {secondaryArticle.title}
         </Link>
@@ -142,16 +146,19 @@ const SectionFeature = ({ classes, articles, section, media }) => {
         <Dateline classes={classes} article={secondaryArticle} />
       </Col>
       <Col lg={4} md={4} className={classes.featuredMediaContainer}>
-        <figure className={classes.figure}>
-          <img src={featuredMedia.url} />
-        </figure>
+        {featuredMedia && (
+          <figure className={classes.figure}>
+            <img src={featuredMedia.url} />
+          </figure>
+        )}
       </Col>
     </Row>
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   media: getMedia(state),
+  articles: getSectionTreeArticles(state, ownProps),
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(SectionFeature));

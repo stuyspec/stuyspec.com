@@ -76,7 +76,9 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
   const featuredMedia = Object.values(media).find(media => {
     return media.isFeatured && media.articleId === article.id;
   });
-  featuredMedia.creator = users[featuredMedia.userId];
+  if (featuredMedia) {
+    featuredMedia.creator = users[featuredMedia.userId];
+  }
   return (
     <Row key={article.id} className={classes.ArticleRow}>
       <Col md={7} lg={7} className={classes.rowBlock}>

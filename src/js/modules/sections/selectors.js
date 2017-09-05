@@ -55,7 +55,12 @@ export const getSectionTreeIds = createSelector(
     const subsectionsInSectionTree = Object.filter(sections, section => {
       return section.parentId === targetSection.id;
     });
-    return [targetSection.id, ...Object.keys(subsectionsInSectionTree)];
+    const subsectionIds = Object.values(
+      subsectionsInSectionTree,
+    ).map(subsection => {
+      return subsection.id;
+    });
+    return [targetSection.id, ...subsectionIds];
   },
 );
 
@@ -65,4 +70,20 @@ export const getSectionTreeIds = createSelector(
 
 export const getSectionSlugs = createSelector([getSections], sections => {
   return Object.values(sections).map(section => section.slug);
+});
+
+export const getColumnSections = createSelector([getSections], sections => {
+  const columnSectionNames = [
+    "Opinions",
+    "Features",
+    "Humor",
+    "Staff Editorials",
+    "Arts & Entertainment",
+    "Sports",
+  ];
+  return columnSectionNames.map(name =>
+    Object.values(sections).find(section => {
+      return section.name === name;
+    }),
+  );
 });

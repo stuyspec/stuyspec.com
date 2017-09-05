@@ -7,13 +7,13 @@ const fakeMedia = [
   {
     id: 5,
     userId: 5,
-    articleId: 5,
+    articleId: 10,
     url: "https://i.ytimg.com/vi/qh7LLydY8eo/maxresdefault.jpg",
     title: "A Bird Will Die.",
     caption:
       "As the snake reaches up to kill the bird, the bird has deja vu of that visit to the Gucci store.",
     type: "photograph",
-    isFeatured: false,
+    isFeatured: true,
   },
   {
     id: 1,
