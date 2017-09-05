@@ -13,6 +13,8 @@ const styles = {
   },
 };
 
+// TODO: add warnings to specific forms
+
 const validate = formValues => {
   const errors = {};
   if (formValues.email && !EMAIL_REGEX.test(formValues.email)) {
