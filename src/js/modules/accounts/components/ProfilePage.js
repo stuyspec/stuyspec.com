@@ -21,7 +21,7 @@ const styles = {
 const ProfilePage = ({ classes, session, signOut, status, users }) => {
   if (status.formName === "signOut" && status.errors.length === 0) {
     return (
-      <Grid className={classes.ProfilePage}>
+      <div className={classes.ProfilePage}>
         <p className={classes.successMessage}>{status.message}</p>
         <Link to="/myaccount">Sign in</Link>
         &nbsp;or go back to the&nbsp;

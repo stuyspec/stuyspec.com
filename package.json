@@ -84,8 +84,10 @@
     "redux-form": "^7.0.3",
     "redux-persist": "^4.9.1",
     "reselect": "^3.0.1",
+    "resolve-pathname": "^2.2.0",
     "sigmund": "^1.0.1",
     "unpipe": "^1.0.0",
+    "value-equal": "^0.4.0",
     "yargs": "^8.0.2",
     "zone.js": "^0.8.17"
   }
