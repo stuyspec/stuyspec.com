@@ -5,12 +5,11 @@ import {
   FETCH_AUTHORSHIPS_FULFILLED,
 } from "./actionTypes";
 
-import { getSections } from "../sections/selectors";
+import { isObjectEmpty } from "../../utils";
 
 const initialState = {
   isFetching: false,
-  areArticlesFetched: false,
-  areAuthorshipsFetched: false,
+  isFetched: false,
   error: null,
   articles: {},
   authorships: [],
@@ -29,7 +28,7 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         isFetching: false,
-        areArticlesFetched: true,
+        isFetched: state.authorships.length !== 0,
         articles: newArticles,
       };
     }
@@ -43,7 +42,7 @@ const reducer = (state = { ...initialState }, action) => {
     case FETCH_AUTHORSHIPS_FULFILLED: {
       return {
         ...state,
-        areAuthorshipsFetched: true,
+        isFetched: !isObjectEmpty(state.articles),
         authorships: action.payload,
       };
     }

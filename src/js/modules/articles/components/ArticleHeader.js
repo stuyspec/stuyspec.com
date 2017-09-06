@@ -4,6 +4,7 @@ import injectSheet from "react-jss";
 import { Row, Col } from "react-bootstrap/lib";
 
 import Byline from "./Byline";
+import Dateline from "./Dateline";
 
 const styles = {
   ArticleHeader: {
@@ -55,27 +56,25 @@ const styles = {
       },
     },
   },
-  dateline: {
+  Dateline: {
+    color: "#000",
+    display: "inline",
     fontSize: "14px",
   },
 };
 
 // TODO: make selector for dateline
 
-const ArticleHeader = ({
-  classes,
-  article: { contributors, dateline, title },
-  section,
-}) => {
+const ArticleHeader = ({ classes, article, section }) => {
   return (
     <Row>
       <Col md={8} lg={8} className={classes.ArticleHeader}>
         <Link to={section.permalink} className={classes.rubric}>
           {section.name}
         </Link>
-        <h1 className={classes.headline}>{title}</h1>
-        <Byline classes={classes} contributors={contributors} />
-        <span>{dateline}</span>
+        <h1 className={classes.headline}>{article.title}</h1>
+        <Byline classes={classes} contributors={article.contributors} />
+        <Dateline classes={classes} article={article} />
       </Col>
       <Col md={4} lg={4} />
     </Row>

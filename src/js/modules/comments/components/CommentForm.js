@@ -24,11 +24,11 @@ const styles = {
     lineHeight: "1.5",
     marginBottom: "10px",
     padding: "12px",
-    width: "100%"
+    width: "100%",
   },
   submitDiv: {
     textAlign: "right",
-    clear: "both"
+    clear: "both",
   },
   submitButton: {
     backgroundColor: "#3472b7",
@@ -44,18 +44,18 @@ const styles = {
     "&:disabled": {
       background: "#ddd",
       borderColor: "#ddd",
-      color: "#888"
-    }
+      color: "#888",
+    },
   },
   moderationWarning: {
     bottom: "7px",
     float: "right",
     fontSize: "15px",
     fontStyle: "italic",
-    position: "relative"
+    position: "relative",
   },
   errorMessage: {
-    color: "red"
+    color: "red",
   },
   editProfile: {
     background: "none",
@@ -65,23 +65,23 @@ const styles = {
     fontFamily: "Circular Std",
     fontSize: "16px",
     margin: 0,
-    padding: 0
+    padding: 0,
   },
   userName: {
     display: "inline",
     fontSize: "18px",
     fontWeight: "bold",
-    marginRight: "4px"
+    marginRight: "4px",
   },
   userInfo: {
-    marginBottom: "13px"
+    marginBottom: "13px",
   },
   bulletPoint: {
     color: "#ccc",
     fontFamily: "Circular Std",
     fontSize: "12px",
     margin: "0 4px",
-    position: "relative"
+    position: "relative",
   },
   optOut: {
     background: "none",
@@ -89,14 +89,14 @@ const styles = {
     color: "#3572b7",
     display: "inline",
     fontSize: "16px",
-    padding: 0
+    padding: 0,
   },
   fulfilled: {
-    color: "green"
+    color: "green",
   },
   rejected: {
-    color: "red"
-  }
+    color: "red",
+  },
 };
 
 const validate = values => {
@@ -114,7 +114,7 @@ const renderField = ({
   input,
   disabled,
   meta: { touched, error },
-  checkLogin
+  checkLogin,
 }) => {
   return (
     <div>
@@ -124,11 +124,7 @@ const renderField = ({
         style={styles.textarea}
         onClick={checkLogin}
       />
-      {touched &&
-        (error &&
-          <span style={styles.errorMessage}>
-            {error}
-          </span>)}
+      {touched && (error && <span style={styles.errorMessage}>{error}</span>)}
     </div>
   );
 };
@@ -141,11 +137,11 @@ const CommentForm = ({
   session,
   openSignInModal,
   status,
-  signOut
+  signOut,
 }) => {
   return (
     <Col md={7} lg={7} className={classes.CommentForm}>
-      {currentUser &&
+      {currentUser && (
         <div className={classes.userInfo}>
           <p className={classes.userName}>
             {currentUser.firstName} {currentUser.lastName}
@@ -158,7 +154,8 @@ const CommentForm = ({
           <button className={classes.optOut} onClick={() => signOut(session)}>
             Log Out
           </button>
-        </div>}
+        </div>
+      )}
 
       <form onSubmit={handleSubmit}>
         <Field
@@ -177,14 +174,12 @@ const CommentForm = ({
           <p className={classes.moderationWarning}>
             Comments are moderated.
             <br />
-            {status.type === "fulfilled" &&
-              <span className={classes.fulfilled}>
-                {status.message}
-              </span>}
-            {status.type === "rejected" &&
-              <span className={classes.rejected}>
-                {status.message}
-              </span>}
+            {status.type === "fulfilled" && (
+              <span className={classes.fulfilled}>{status.message}</span>
+            )}
+            {status.type === "rejected" && (
+              <span className={classes.rejected}>{status.message}</span>
+            )}
           </p>
         </div>
       </form>
@@ -195,7 +190,7 @@ const CommentForm = ({
 const mapStateToProps = state => ({
   status: state.comments.status,
   currentUser: getCurrentUser(state),
-  session: state.accounts.session
+  session: state.accounts.session,
 });
 
 const mapDispatchToProps = dispatch => {
@@ -203,10 +198,10 @@ const mapDispatchToProps = dispatch => {
 };
 
 const ConnectedCommentForm = connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(CommentForm)
+  injectSheet(styles)(CommentForm),
 );
 
 export default reduxForm({
   form: "createComment",
-  validate
+  validate,
 })(ConnectedCommentForm);

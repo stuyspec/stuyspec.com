@@ -7,7 +7,7 @@ const styles = {
     color: "#888",
     fontFamily: "Circular Std",
     fontSize: "12px",
-    fontWeight: '300',
+    fontWeight: "300",
     "& p": {
       display: "inline",
       margin: "0 0 2px 0",

@@ -156,14 +156,11 @@ const mapStateToProps = state => ({
   roles: getRoles(state),
   sections: getSections(state),
   isAllDataFetched:
-    state.articles.areArticlesFetched &&
-    state.articles.areAuthorshipsFetched &&
+    state.articles.isFetched &&
     state.comments.isFetched &&
     state.media.isFetched &&
     state.sections.isFetched &&
-    state.users.areUsersFetched &&
-    state.users.areUserRolesFetched &&
-    state.users.areRolesFetched,
+    state.users.isFetched,
 });
 
 const mapDispatchToProps = dispatch => {

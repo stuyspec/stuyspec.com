@@ -138,7 +138,7 @@ const MastheadBar = ({
             </span>
           )}
         </Link>
-        {currentUser ? (
+        {session.userId ? (
           <div className={classes.userTools}>
             <Link to="/myaccount/profile">
               <StyledNavButton label="profile" />

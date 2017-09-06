@@ -11,12 +11,8 @@ const styles = {
 };
 
 // TODO: format dates
-const Dateline = ({ classes, article, customStyle }) => {
-  return (
-    <p className={customStyle ? customStyle.Dateline : classes.Dateline}>
-      7:20 A.M.
-    </p>
-  );
+const Dateline = ({ classes, article }) => {
+  return <p className={classes.Dateline}>7:20 A.M.</p>;
 };
 
 export default injectSheet(styles)(Dateline);
