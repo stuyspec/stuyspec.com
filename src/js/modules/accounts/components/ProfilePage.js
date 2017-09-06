@@ -18,19 +18,20 @@ const styles = {
   },
 };
 
-const ProfilePage = ({ classes, session, signOut, status }) => {
-  if (status.form === "signOut" && status.errors.length === 0) {
+const ProfilePage = ({ classes, session, signOut, status, users }) => {
+  if (status.formName === "signOut" && status.errors.length === 0) {
     return (
       <Grid className={classes.ProfilePage}>
         <p className={classes.successMessage}>{status.message}</p>
-        <Link to="/myaccount">Sign in</Link> or go back to the{" "}
-        <Link to="/">home page</Link>
-      </Grid>
+        <Link to="/myaccount">Sign in</Link>
+        &nbsp;or go back to the&nbsp;
+        <Link to="/">home page</Link>.
+      </div>
     );
   }
   // The last if statement includes the following condition. This next if block
   // is a message for those who directly visit myaccount/profile.
-  if (!session.user) {
+  if (!session.userId) {
     return (
       <Grid className={classes.ProfilePage}>
         You are not signed in. <Link to="/myaccount">Sign in</Link> or go back
@@ -39,7 +40,7 @@ const ProfilePage = ({ classes, session, signOut, status }) => {
     );
   }
 
-  const { user } = session;
+  const user = users[session.userId];
   return (
     <Grid className={classes.ProfilePage}>
       {user ? (
@@ -61,6 +62,7 @@ const ProfilePage = ({ classes, session, signOut, status }) => {
 const mapStateToProps = state => ({
   session: state.accounts.session,
   status: state.accounts.status,
+  users: state.users.users,
 });
 
 const mapDispatchToProps = dispatch => {

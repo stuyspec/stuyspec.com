@@ -2,18 +2,22 @@ import React from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
+import { EMAIL_REGEX } from "../../../../constants";
 
 const styles = {
   errorMessage: {
     color: "red",
   },
+  successMessage: {
+    color: "green",
+  },
 };
 
-const validate = values => {
+const validate = formValues => {
   const errors = {};
-  if (!values.email) {
+  if (!formValues.email) {
     errors.email = "Required";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+  } else if (!EMAIL_REGEX.test(formValues.email)) {
     errors.email = "Invalid email address";
   }
   return errors;
@@ -61,7 +65,7 @@ const SignInForm = ({ classes, handleSubmit, submitting, status }) => {
           </button>
         </div>
       </form>
-      {status.form === "signIn" && (
+      {status.formName === "signIn" && (
         <div>
           <p key="success" className={classes.successMessage}>
             {status.message}
@@ -83,11 +87,11 @@ const mapStateToProps = state => ({
   status: state.accounts.status,
 });
 
-const SmartSignInForm = connect(mapStateToProps)(
+const ConnectedSignInForm = connect(mapStateToProps)(
   injectSheet(styles)(SignInForm),
 );
 
 export default reduxForm({
   form: "signIn",
   validate,
-})(SmartSignInForm);
+})(ConnectedSignInForm);

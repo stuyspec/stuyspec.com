@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 import { Grid, Row, Col } from "react-bootstrap/lib";
+import { getCurrentUser } from "../../accounts/selectors";
 import injectSheet from "react-jss";
 
 import { openSignInModal, signOut } from "../../accounts/actions";
@@ -23,11 +24,11 @@ const styles = {
     lineHeight: "1.5",
     marginBottom: "10px",
     padding: "12px",
-    width: "100%",
+    width: "100%"
   },
   submitDiv: {
     textAlign: "right",
-    clear: "both",
+    clear: "both"
   },
   submitButton: {
     backgroundColor: "#3472b7",
@@ -43,18 +44,18 @@ const styles = {
     "&:disabled": {
       background: "#ddd",
       borderColor: "#ddd",
-      color: "#888",
-    },
+      color: "#888"
+    }
   },
   moderationWarning: {
     bottom: "7px",
     float: "right",
     fontSize: "15px",
     fontStyle: "italic",
-    position: "relative",
+    position: "relative"
   },
   errorMessage: {
-    color: "red",
+    color: "red"
   },
   editProfile: {
     background: "none",
@@ -64,23 +65,23 @@ const styles = {
     fontFamily: "Circular Std",
     fontSize: "16px",
     margin: 0,
-    padding: 0,
+    padding: 0
   },
   userName: {
     display: "inline",
     fontSize: "18px",
     fontWeight: "bold",
-    marginRight: "4px",
+    marginRight: "4px"
   },
   userInfo: {
-    marginBottom: "13px",
+    marginBottom: "13px"
   },
   bulletPoint: {
     color: "#ccc",
     fontFamily: "Circular Std",
     fontSize: "12px",
     margin: "0 4px",
-    position: "relative",
+    position: "relative"
   },
   optOut: {
     background: "none",
@@ -88,14 +89,14 @@ const styles = {
     color: "#3572b7",
     display: "inline",
     fontSize: "16px",
-    padding: 0,
+    padding: 0
   },
   fulfilled: {
-    color: "green",
+    color: "green"
   },
   rejected: {
-    color: "red",
-  },
+    color: "red"
+  }
 };
 
 const validate = values => {
@@ -103,7 +104,8 @@ const validate = values => {
   if (!values.content) {
     errors.content = "Required";
   } else if (values.content.length > 1000) {
-    errors.content = "Must be 1000 characters or less";
+    errors.content = `Must be 1000 characters or less. Currently 
+    ${values.content.length} characters`;
   }
   return errors;
 };
@@ -112,7 +114,7 @@ const renderField = ({
   input,
   disabled,
   meta: { touched, error },
-  checkLogin,
+  checkLogin
 }) => {
   return (
     <div>
@@ -122,7 +124,11 @@ const renderField = ({
         style={styles.textarea}
         onClick={checkLogin}
       />
-      {touched && (error && <span style={styles.errorMessage}>{error}</span>)}
+      {touched &&
+        (error &&
+          <span style={styles.errorMessage}>
+            {error}
+          </span>)}
     </div>
   );
 };
@@ -131,17 +137,18 @@ const CommentForm = ({
   classes,
   handleSubmit,
   submitting,
+  currentUser,
   session,
   openSignInModal,
   status,
-  signOut,
+  signOut
 }) => {
   return (
-    <Col md={8} lg={8} className={classes.CommentForm}>
-      {session.user && (
+    <Col md={7} lg={7} className={classes.CommentForm}>
+      {currentUser &&
         <div className={classes.userInfo}>
           <p className={classes.userName}>
-            {session.user.firstName} {session.user.lastName}
+            {currentUser.firstName} {currentUser.lastName}
           </p>
           <span className={classes.bulletPoint}>&#8226;</span>
           <Link className={classes.optOut} to="/myaccount/profile">
@@ -151,20 +158,18 @@ const CommentForm = ({
           <button className={classes.optOut} onClick={() => signOut(session)}>
             Log Out
           </button>
-        </div>
-      )}
+        </div>}
 
-      {/* TODO: DISABLE FIELDS */}
       <form onSubmit={handleSubmit}>
         <Field
           name="content"
           component={renderField}
-          checkLogin={() => !session.user && openSignInModal()}
+          checkLogin={() => !currentUser && openSignInModal()}
         />
         <div className={classes.submitDiv}>
           <button
             type="submit"
-            disabled={!session.user || submitting}
+            disabled={!currentUser || submitting}
             className={classes.submitButton}
           >
             Submit
@@ -172,12 +177,14 @@ const CommentForm = ({
           <p className={classes.moderationWarning}>
             Comments are moderated.
             <br />
-            {status.type === "fulfilled" && (
-              <span className={classes.fulfilled}>{status.message}</span>
-            )}
-            {status.type === "rejected" && (
-              <span className={classes.rejected}>{status.message}</span>
-            )}
+            {status.type === "fulfilled" &&
+              <span className={classes.fulfilled}>
+                {status.message}
+              </span>}
+            {status.type === "rejected" &&
+              <span className={classes.rejected}>
+                {status.message}
+              </span>}
           </p>
         </div>
       </form>
@@ -187,18 +194,19 @@ const CommentForm = ({
 
 const mapStateToProps = state => ({
   status: state.comments.status,
-  session: state.accounts.session,
+  currentUser: getCurrentUser(state),
+  session: state.accounts.session
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ openSignInModal, signOut }, dispatch);
 };
 
-const SmartCommentForm = connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(CommentForm),
+const ConnectedCommentForm = connect(mapStateToProps, mapDispatchToProps)(
+  injectSheet(styles)(CommentForm)
 );
 
 export default reduxForm({
   form: "createComment",
-  validate,
-})(SmartCommentForm);
+  validate
+})(ConnectedCommentForm);
