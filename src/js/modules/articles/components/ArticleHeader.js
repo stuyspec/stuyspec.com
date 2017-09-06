@@ -39,6 +39,7 @@ const styles = {
     marginBottom: "20px",
   },
   Byline: {
+    color: "#000",
     display: "inline",
     fontSize: "14px",
     fontWeight: "bold",

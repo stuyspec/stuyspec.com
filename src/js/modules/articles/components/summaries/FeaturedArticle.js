@@ -49,34 +49,6 @@ const styles = {
       width: "100%",
     },
   },
-  Byline: {
-    color: "#000",
-    fontFamily: "Circular Std",
-    fontSize: "13px",
-    fontWeight: "500",
-    "& p": {
-      display: "inline",
-      margin: "0 0 2px 0",
-      "& a": {
-        color: "#000",
-        "&:hover": {
-          color: "#000",
-        },
-      },
-    },
-  },
-  Dateline: {
-    color: "#000",
-    display: "inline",
-    fontFamily: "Circular Std",
-    fontSize: "13px",
-    fontWeight: "500",
-    "& p": {
-      color: "#000",
-      display: "inline",
-      margin: 0,
-    },
-  },
   featuredMediaContainer: {
     paddingRight: "14px",
     paddingTop: "6px",
@@ -106,8 +78,8 @@ const FeaturedArticle = ({ classes, article, media, sections }) => {
           27, and Sunday, May 28. The event provided an opportunity for 175 high
           schools.
         </p>
-        <Byline classes={classes} contributors={article.contributors} />
-        <Dateline classes={classes} article={article} />
+        <Byline contributors={article.contributors} />
+        <Dateline article={article} />
       </Col>
       <Col lg={8} md={8} className={classes.featuredMediaContainer}>
         <figure className={classes.figure}>
