@@ -143,11 +143,9 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
             27, and Sunday, May 28. The event provided an opportunity for 175
             high schools.
           </p>
-          <Byline
-            classes={classes}
-            contributors={ternaryArticle.contributors}
+          <Byline contributors={ternaryArticle.contributors}
           />
-          <Dateline classes={classes} article={ternaryArticle} />
+          <Dateline article={ternaryArticle} />
         </Col>
       )}
     </Row>
