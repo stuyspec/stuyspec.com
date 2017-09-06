@@ -4,7 +4,7 @@ import { validateKey } from "../../utils";
 import * as t from "./actionTypes";
 
 export const fetchArticles = () => {
-  return (dispatch, getState) => {
+  return dispatch => {
     dispatch({ type: t.FETCH_ARTICLES_PENDING });
     axios
       .get(`${STUY_SPEC_API_URL}/articles`, STUY_SPEC_API_HEADERS)
@@ -13,7 +13,6 @@ export const fetchArticles = () => {
         dispatch({
           type: t.FETCH_ARTICLES_FULFILLED,
           payload: response.data,
-          state: getState(),
         });
       })
       .catch(err => {

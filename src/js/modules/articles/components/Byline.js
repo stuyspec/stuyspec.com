@@ -21,10 +21,10 @@ const styles = {
   },
 };
 
-const Byline = ({ classes, contributors, customStyle }) => {
+const Byline = ({ classes, contributors }) => {
   let separator = ", ";
   return (
-    <div className={customStyle ? customStyle.Byline : classes.Byline}>
+    <div className={classes.Byline}>
       {contributors.map((contributor, index) => {
         if (index === contributors.length - 2) {
           separator = " & ";
@@ -32,10 +32,7 @@ const Byline = ({ classes, contributors, customStyle }) => {
           separator = "";
         }
         return (
-          <p
-            key={contributor.id}
-            className={customStyle ? customStyle.Byline : classes.Byline}
-          >
+          <p key={contributor.id} className={classes.Byline}>
             {index === 0 ? "By " : ""}
             <Link to={`/contributors/${contributor.slug}`}>
               {contributor.firstName} {contributor.lastName}
