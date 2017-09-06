@@ -28,7 +28,7 @@ const CommentThread = ({
     createComment({
       ...values,
       articleId: article.id,
-      userId: session.user.id,
+      userId: session.userId,
     });
   };
   return (

@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
-
+import { getCurrentUser } from "../../accounts/selectors";
 import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
 import { getSections, getSectionSlugs } from "../../sections/selectors";
@@ -37,8 +37,11 @@ const styles = {
     color: "#000",
     fontFamily: "Old English Text MT",
     fontSize: "26px",
+    left: "50%",
     marginTop: "4px",
+    position: "absolute",
     textDecoration: "none",
+    transform: "translate(-50%,0)",
     "&:hover": {
       color: "#000",
       textDecoration: "none",
@@ -135,7 +138,7 @@ const MastheadBar = ({
             </span>
           )}
         </Link>
-        {session.user ? (
+        {currentUser ? (
           <div className={classes.userTools}>
             <Link to="/myaccount/profile">
               <StyledNavButton label="profile" />
