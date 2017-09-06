@@ -3,11 +3,16 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
+import { Grid, Row, Col } from "react-bootstrap/lib";
 
 import { SignOutForm } from "./forms";
 import { signOut } from "../actions";
 
 const styles = {
+  ProfilePage: {
+    margin: "78px auto 0",
+    width: "1066px",
+  },
   successMessage: {
     color: "green",
   },
@@ -16,27 +21,27 @@ const styles = {
 const ProfilePage = ({ classes, session, signOut, status }) => {
   if (status.form === "signOut" && status.errors.length === 0) {
     return (
-      <div>
+      <Grid className={classes.ProfilePage}>
         <p className={classes.successMessage}>{status.message}</p>
         <Link to="/myaccount">Sign in</Link> or go back to the{" "}
         <Link to="/">home page</Link>
-      </div>
+      </Grid>
     );
   }
   // The last if statement includes the following condition. This next if block
   // is a message for those who directly visit myaccount/profile.
   if (!session.user) {
     return (
-      <p>
+      <Grid className={classes.ProfilePage}>
         You are not signed in. <Link to="/myaccount">Sign in</Link> or go back
         to the <Link to="/">home page</Link>
-      </p>
+      </Grid>
     );
   }
 
   const { user } = session;
   return (
-    <div>
+    <Grid className={classes.ProfilePage}>
       {user ? (
         <div>
           <p>first name: {user.firstName}</p>
@@ -49,7 +54,7 @@ const ProfilePage = ({ classes, session, signOut, status }) => {
       )}
       {/* We keep the SignOutForm to display the success message */}
       <SignOutForm onSubmit={() => signOut(session)} />
-    </div>
+    </Grid>
   );
 };
 

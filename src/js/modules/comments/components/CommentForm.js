@@ -13,7 +13,7 @@ const styles = {
     color: "#000",
     fontFamily: "Minion Pro",
     marginBottom: "28px",
-    padding: 0,
+    padding: "0 20px 0 0",
   },
   textarea: {
     backgroundColor: "#fff",
@@ -137,7 +137,7 @@ const CommentForm = ({
   signOut,
 }) => {
   return (
-    <Col md={7} lg={7} className={classes.CommentForm}>
+    <Col md={8} lg={8} className={classes.CommentForm}>
       {session.user && (
         <div className={classes.userInfo}>
           <p className={classes.userName}>

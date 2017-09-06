@@ -1,5 +1,6 @@
 import React from "react";
 import injectSheet from "react-jss";
+import { Row, Col } from "react-bootstrap/lib";
 
 import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 
@@ -10,9 +11,7 @@ const styles = {
     fontFamily: "Minion Pro",
     fontSize: "18px",
     lineHeight: 1.44,
-    marginBottom: "38px",
-    paddingBottom: "38px",
-    width: "700px",
+    padding: "0 0 38px",
     "& p": {
       marginBottom: "20px",
     },
@@ -33,12 +32,18 @@ const styles = {
 
 const ArticleBody = ({ classes, content, featuredMedia }) => {
   return (
-    <div className={classes.ArticleBody}>
-      {featuredMedia && (
-        <ArticleFeaturedMedia featuredMedia={featuredMedia} isCaption={true} />
-      )}
-      <div dangerouslySetInnerHTML={{ __html: content }} />
-    </div>
+    <Row>
+      <Col md={8} lg={8} className={classes.ArticleBody}>
+        {featuredMedia && (
+          <ArticleFeaturedMedia
+            featuredMedia={featuredMedia}
+            isCaption={true}
+          />
+        )}
+        <div dangerouslySetInnerHTML={{ __html: content }} />
+      </Col>
+      <Col md={4} lg={4} />
+    </Row>
   );
 };
 

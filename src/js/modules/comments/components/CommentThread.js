@@ -35,7 +35,7 @@ const CommentThread = ({
     <Grid className={classes.CommentThread}>
       <Row>
         <CommentForm session={session} onSubmit={handleCreateComment} />
-        <Col md={5} lg={5} />
+        <Col md={4} lg={4} />
       </Row>
       <SignInModal />
       {Object.values(comments).map(comment => {

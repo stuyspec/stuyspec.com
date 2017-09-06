@@ -1,17 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
+import { Row, Col } from "react-bootstrap/lib";
 
 import Byline from "./Byline";
 
 const styles = {
   ArticleHeader: {
-    borderTop: "1px solid #000",
     borderBottom: "1px solid #dedede",
     color: "#000",
     fontFamily: "Minion Pro",
-    margin: "78px 0px 20px 0px",
-    padding: "12px 0px",
+    marginBottom: "20px",
+    padding: "10px 0 11px",
   },
   rubric: {
     color: "#000",
@@ -19,7 +19,7 @@ const styles = {
     fontFamily: "Circular Std",
     fontSize: "12px",
     fontWeight: 500,
-    marginBottom: "18px",
+    marginBottom: "20px",
     textDecoration: "none",
     textTransform: "uppercase",
     width: "150px",
@@ -36,7 +36,7 @@ const styles = {
     fontSize: "36px",
     fontWeight: "normal",
     marginTop: 0,
-    marginBottom: "15px",
+    marginBottom: "20px",
   },
   Byline: {
     display: "inline",
@@ -67,14 +67,17 @@ const ArticleHeader = ({
   section,
 }) => {
   return (
-    <div className={classes.ArticleHeader}>
-      <Link to={section.permalink} className={classes.rubric}>
-        {section.name}
-      </Link>
-      <h1 className={classes.headline}>{title}</h1>
-      <Byline classes={classes} contributors={contributors} />
-      <span>{dateline}</span>
-    </div>
+    <Row>
+      <Col md={8} lg={8} className={classes.ArticleHeader}>
+        <Link to={section.permalink} className={classes.rubric}>
+          {section.name}
+        </Link>
+        <h1 className={classes.headline}>{title}</h1>
+        <Byline classes={classes} contributors={contributors} />
+        <span>{dateline}</span>
+      </Col>
+      <Col md={4} lg={4} />
+    </Row>
   );
 };
 

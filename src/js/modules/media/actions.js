@@ -65,7 +65,7 @@ const fakeMedia = [
   {
     id: 5,
     userId: 2,
-    articleId: 7,
+    articleId: 9,
     url:
       "http://www.stockillustrations.com/Image.aspx?src=medres&name=ALBA1060.jpg&sz=1144&fitw=y",
     title: "Happy Birthday",

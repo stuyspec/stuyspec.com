@@ -29,8 +29,8 @@ const styles = {
     marginBottom: "19px",
   },
   ternaryArticle: {
-    padding: '0 14px 0 13px',
-    borderLeft: 'solid 1px #ddd',
+    padding: "0 14px 0 13px",
+    borderLeft: "solid 1px #ddd",
     marginBottom: "19px",
   },
   title: {
