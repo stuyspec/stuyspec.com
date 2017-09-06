@@ -51,34 +51,6 @@ const styles = {
     lineHeight: 1.29,
     margin: "0 0 12px 0",
   },
-  Byline: {
-    color: "#000000",
-    fontFamily: "Circular Std",
-    fontSize: "13px",
-    fontWeight: "500",
-    "& p": {
-      display: "inline",
-      margin: "0 0 2px 0",
-      "& a": {
-        color: "#000",
-        "&:hover": {
-          color: "#000",
-        },
-      },
-    },
-  },
-  Dateline: {
-    color: "#000",
-    display: "inline",
-    fontFamily: "Circular Std",
-    fontSize: "13px",
-    fontWeight: "500",
-    "& p": {
-      color: "#000",
-      display: "inline",
-      margin: 0,
-    },
-  },
   figure: {
     "& img": {
       width: "100%",
@@ -120,8 +92,8 @@ const SectionFeature = ({ classes, articles, section, media }) => {
           27, and Sunday, May 28. The event provided an opportunity for 175 high
           schools.
         </p>
-        <Byline classes={classes} contributors={primaryArticle.contributors} />
-        <Dateline classes={classes} article={primaryArticle} />
+        <Byline contributors={primaryArticle.contributors} />
+        <Dateline article={primaryArticle} />
       </Col>
       <Col lg={4} md={4} className={classes.secondaryArticle}>
         <Link
@@ -136,10 +108,9 @@ const SectionFeature = ({ classes, articles, section, media }) => {
           schools.
         </p>
         <Byline
-          classes={classes}
           contributors={secondaryArticle.contributors}
         />
-        <Dateline classes={classes} article={secondaryArticle} />
+        <Dateline article={secondaryArticle} />
       </Col>
       <Col lg={4} md={4} className={classes.featuredMediaContainer}>
         <figure className={classes.figure}>

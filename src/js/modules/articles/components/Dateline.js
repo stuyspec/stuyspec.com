@@ -1,8 +1,22 @@
 import React from "react";
+import injectSheet from "react-jss";
 
-// TODO: format dates
-const Dateline = ({ classes, article }) => {
-  return <p className={classes.Dateline}>7:20 A.M.</p>;
+const styles = {
+  Dateline: {
+    color: "#888888",
+    fontFamily: "Circular Std",
+    fontSize: "12px",
+    fontWeight: "300",
+  },
 };
 
-export default Dateline;
+// TODO: format dates
+const Dateline = ({ classes, article, customStyle }) => {
+  return (
+    <p className={customStyle ? customStyle.Dateline : classes.Dateline}>
+      7:20 A.M.
+    </p>
+  );
+};
+
+export default injectSheet(styles)(Dateline);
