@@ -20,6 +20,13 @@
 }
 
 @font-face {
+    font-family: "Minion Pro";
+    src: url('/fonts/MinionPro_Bold_Italic.ttf') format("truetype");
+    font-style: italic;
+    font-weight: bold;
+}
+
+@font-face {
     font-family: "Circular Std";
     src: url('/fonts/CircularStd_Book.otf') format("opentype");
     font-style: normal;
