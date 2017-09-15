@@ -87,7 +87,6 @@ const styles = {
 };
 
 const SectionBlock = ({ classes, articles, section, media }) => {
-  console.log(articles, section.id);
   const sectionArticles = Object.values(
     Object.filter(articles, article => article.sectionId === section.id),
   );

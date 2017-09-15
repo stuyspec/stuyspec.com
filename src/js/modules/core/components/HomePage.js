@@ -12,7 +12,8 @@ import {
   FeaturedArticle,
   RecommendedArticles,
   LatestArticleBlock,
-  ArticleBlocks,
+  LeftColumn,
+  RightColumn,
 } from "../../articles/components/summaries";
 
 import { SectionFeature, SectionColumn } from "../../sections/components";
@@ -48,7 +49,6 @@ const HomePage = ({ classes, sections, articles, latestArticles }) => {
   );
   const recommendedArticles = Object.values(articles).slice(0, 5);
   const topFiveLatest = Object.values(latestArticles).slice(0, 5);
-  const randomArticles = Object.values(articles).slice(3, 9);
 
   const firstColumnSections = [
     "Opinions",
@@ -95,12 +95,11 @@ const HomePage = ({ classes, sections, articles, latestArticles }) => {
           </Col>
         </Row>
         <Row>
-          <Col md={3} lg={3} className={classes.filler} />
+          <LeftColumn />
           <SectionColumn sections={firstColumnSections} />
           <SectionColumn sections={secondColumnSections} />
-          <Col md={3} lg={3} />
+          <RightColumn />
         </Row>
-        <ArticleBlocks articles={randomArticles} sections={sections} />
       </Grid>
     </div>
   );
