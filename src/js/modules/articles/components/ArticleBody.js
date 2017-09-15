@@ -11,7 +11,7 @@ const styles = {
     fontFamily: "Minion Pro",
     fontSize: "18px",
     lineHeight: 1.44,
-    padding: "0 0 38px",
+    padding: "0 0 18px",
     "& p": {
       marginBottom: "20px",
     },

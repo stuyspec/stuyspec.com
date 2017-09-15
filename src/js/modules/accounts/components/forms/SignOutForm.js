@@ -44,7 +44,6 @@ const SignOutForm = ({ classes, handleSubmit, submitting, status }) => {
 };
 
 const mapStateToProps = state => ({
-  session: state.accounts.session,
   status: state.accounts.status,
 });
 

@@ -68,7 +68,7 @@ const styles = {
 const ArticleHeader = ({ classes, article, section }) => {
   return (
     <Row>
-      <Col md={8} lg={8} className={classes.ArticleHeader}>
+      <Col md={12} lg={12} className={classes.ArticleHeader}>
         <Link to={section.permalink} className={classes.rubric}>
           {section.name}
         </Link>
@@ -76,7 +76,6 @@ const ArticleHeader = ({ classes, article, section }) => {
         <Byline classes={classes} contributors={article.contributors} />
         <Dateline classes={classes} article={article} />
       </Col>
-      <Col md={4} lg={4} />
     </Row>
   );
 };

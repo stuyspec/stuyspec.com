@@ -45,6 +45,7 @@ const styles = {
 };
 
 const Masthead = ({ classes, sections }) => {
+  const unwantedSectionNames = ['Video','Photo','Art']
   return (
     <div className={classes.Masthead}>
       <Link to="/" className={classes.theSpectatorLogo}>
@@ -52,20 +53,30 @@ const Masthead = ({ classes, sections }) => {
       </Link>
       <ul className={classes.sectionLinksNav}>
         {Object.values(sections).map(section => {
-          return (
-            <li key={section.id} className={classes.sectionListItem}>
-              <Link to={section.permalink} className={classes.sectionLink}>
-                {section.name}
-              </Link>
-            </li>
-          );
+          if (!unwantedSectionNames.includes(section.name)) {
+            return (
+              <li key={section.id} className={classes.sectionListItem}>
+                <Link to={section.permalink} className={classes.sectionLink}>
+                  {section.name}
+                </Link>
+              </li>
+            );
+          }
         })}
         <li key={-1} className={classes.sectionListItem}>
           <Link
             to={"/maybe-we-should-pop-up-the-subscribe-modal"}
             className={classes.sectionLink}
           >
-            Subscribe
+            Newsletter
+          </Link>
+        </li>
+        <li key={-2} className={classes.sectionListItem}>
+          <Link
+            to={"/paper"}
+            className={classes.sectionLink}
+          >
+            The Paper
           </Link>
         </li>
       </ul>

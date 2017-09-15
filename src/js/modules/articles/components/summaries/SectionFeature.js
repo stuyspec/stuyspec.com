@@ -73,7 +73,7 @@ const styles = {
   },
 };
 
-const SectionFeature = ({ classes, articles, section, media, sections }) => {
+const SectionFeature = ({classes, articles, section, media, sections}) => {
   const sectionArticles = Object.values(articles);
   const primaryArticle = sectionArticles[0];
   const secondaryArticle = sectionArticles[1];
@@ -86,65 +86,65 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
 
   // NESTED IN <Col lg={9}>
   return (
-    <Row className={classes.SectionFeature}>
-      <hr className={classes.hr} />
-      <p className={classes.label}>{section.name}</p>
-      <Col lg={4} md={4} className={classes.primaryArticle}>
+    <Row className={ classes.SectionFeature }>
+      <hr className={ classes.hr }/>
+      <p className={ classes.label }>{ section.name }</p>
+      <Col lg={ 4 } md={ 4 } className={ classes.primaryArticle }>
         <Link
-          className={classes.title}
-          to={`${sections[primaryArticle.sectionId]
-            .permalink}/${primaryArticle.slug}`}
+          className={ classes.title }
+          to={ `${sections[primaryArticle.sectionId]
+            .permalink}/${primaryArticle.slug}` }
         >
-          {primaryArticle.title}
+          { primaryArticle.title }
         </Link>
-        <p className={classes.focus}>
+        <p className={ classes.focus }>
           StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
           27, and Sunday, May 28. The event provided an opportunity for 175 high
           schools.
         </p>
-        <Byline contributors={primaryArticle.contributors} />
-        <Dateline article={primaryArticle} />
+        <Byline contributors={ primaryArticle.contributors }/>
+        <Dateline article={ primaryArticle }/>
       </Col>
-      <Col lg={4} md={4} className={classes.secondaryArticle}>
+      <Col lg={ 4 } md={ 4 } className={ classes.secondaryArticle }>
         <Link
-          className={classes.title}
-          to={`${sections[secondaryArticle.sectionId]
-            .permalink}/${secondaryArticle.slug}`}
+          className={ classes.title }
+          to={ `${sections[secondaryArticle.sectionId]
+            .permalink}/${secondaryArticle.slug}` }
         >
-          {secondaryArticle.title}
+          { secondaryArticle.title }
         </Link>
-        <p className={classes.focus}>
+        <p className={ classes.focus }>
           StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
           27, and Sunday, May 28. The event provided an opportunity for 175 high
           schools.
         </p>
-        <Byline contributors={secondaryArticle.contributors} />
-        <Dateline article={secondaryArticle} />
+        <Byline contributors={ secondaryArticle.contributors }/>
+        <Dateline article={ secondaryArticle }/>
       </Col>
-      {featuredMedia ? (
-        <Col lg={4} md={4} className={classes.featuredMediaContainer}>
-          <figure className={classes.figure}>
-            <img src={featuredMedia.url} />
+      { featuredMedia ? (
+        <Col lg={ 4 } md={ 4 } className={ classes.featuredMediaContainer }>
+          <figure className={ classes.figure }>
+            <img src={ featuredMedia.url }/>
           </figure>
         </Col>
       ) : (
-        <Col lg={4} md={4} className={classes.ternaryArticle}>
+        <Col lg={ 4 } md={ 4 } className={ classes.ternaryArticle }>
           <Link
-            className={classes.title}
-            to={`${sections[ternaryArticle.sectionId]
-              .permalink}/${ternaryArticle.slug}`}
+            className={ classes.title }
+            to={ `${sections[ternaryArticle.sectionId]
+              .permalink}/${ternaryArticle.slug}` }
           >
-            {ternaryArticle.title}
+            { ternaryArticle.title }
           </Link>
-          <p className={classes.focus}>
+          <p className={ classes.focus }>
             StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
             27, and Sunday, May 28. The event provided an opportunity for 175
             high schools.
           </p>
-          <Byline contributors={ternaryArticle.contributors} />
-          <Dateline article={ternaryArticle} />
+          <Byline contributors={ ternaryArticle.contributors }/>
+          <Dateline article={ ternaryArticle }/>
         </Col>
-      )}
+      ) }
     </Row>
   );
 };

@@ -3,7 +3,6 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
-import { getCurrentUser } from "../../accounts/selectors";
 import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
 import { getSections, getSectionSlugs } from "../../sections/selectors";

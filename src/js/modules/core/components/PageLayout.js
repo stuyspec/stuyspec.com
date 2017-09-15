@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
@@ -30,32 +30,38 @@ const sidebarStyles = {
   },
 };
 
-const PageLayout = ({
-  classes,
-  children,
-  location,
-  isSidebarOpen,
-  openSidebar,
-  closeSidebar,
-}) => {
-  const handleSetOpen = isSidebarOpen => {
-    // TODO: rename to setSidebarOpen?
-    isSidebarOpen ? openSidebar() : closeSidebar();
+class PageLayout extends Component {
+  componentDidUpdate() {
+    console.log('trying to scroll');
+    window.scrollTo(0, 0);
+  }
+
+  handleSetOpen = isSidebarOpen => {
+    isSidebarOpen ? this.props.openSidebar() : this.props.closeSidebar();
   };
-  return (
-    <Sidebar
-      sidebar={<SidebarContent />}
-      open={isSidebarOpen}
-      onSetOpen={handleSetOpen}
-      styles={sidebarStyles}
-    >
-      <PageHeader location={location} />
-      <Favicon url="https://i.imgur.com/CxNoalR.png" />
-      <div className={classes.PageContainer}>{children}</div>
-      <PageFooter />
-    </Sidebar>
-  );
-};
+
+  render() {
+    const {
+      classes,
+      children,
+      location,
+      isSidebarOpen,
+    } = this.props;
+    return (
+      <Sidebar
+        sidebar={<SidebarContent />}
+        open={isSidebarOpen}
+        onSetOpen={isSidebarOpen => this.handleSetOpen(isSidebarOpen)}
+        styles={sidebarStyles}
+      >
+        <PageHeader location={location} />
+        <Favicon url="https://i.imgur.com/CxNoalR.png" />
+        <div className={classes.PageContainer}>{children}</div>
+        <PageFooter />
+      </Sidebar>
+    )
+  }
+}
 
 const mapStateToProps = state => ({
   isSidebarOpen: state.core.isSidebarOpen,

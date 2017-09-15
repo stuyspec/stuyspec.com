@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
 import { getMedia } from "../../../media/selectors";
-import { getSections } from "../../../sections/selectors";
-import { getArticlesFromSection } from "../../selectors";
+import { getArticlesWithContributors } from "../../selectors";
 import Dateline from "../Dateline";
 import Byline from "../Byline";
 
@@ -85,8 +84,11 @@ const styles = {
   },
 };
 
-const SectionBlock = ({ classes, articles, section, media, allSections }) => {
-  const articleArray = Object.values(articles);
+const SectionBlock = ({ classes, articles, section, media }) => {
+  console.log(articles, section);
+  const articleArray = Object.values(
+    Object.filter(articles, article => article.sectionId === section.id)
+  );
   const bigArticle = articleArray[0];
   const nextThreeArticles = articleArray.slice(1, 4);
   return (
@@ -94,8 +96,7 @@ const SectionBlock = ({ classes, articles, section, media, allSections }) => {
       <p className={classes.label}>{section.name}</p>
       <div className={classes.article}>
         <Link
-          to={`${allSections[bigArticle.sectionId]
-            .permalink}/${bigArticle.slug}`}
+          to={`${section.permalink}/${bigArticle.slug}`}
           className={classes.bigTitle}
         >
           {bigArticle.title}
@@ -120,7 +121,7 @@ const SectionBlock = ({ classes, articles, section, media, allSections }) => {
               </figure>
             )}
             <Link
-              to={`${allSections[article.sectionId].permalink}/${article.slug}`}
+              to={`${section.permalink}/${article.slug}`}
               className={classes.smallTitle}
             >
               {article.title}
@@ -135,8 +136,7 @@ const SectionBlock = ({ classes, articles, section, media, allSections }) => {
 
 const mapStateToProps = (state, ownProps) => ({
   media: getMedia(state),
-  articles: getArticlesFromSection(state, ownProps),
-  allSections: getSections(state),
+  articles: getArticlesWithContributors(state),
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(SectionBlock));

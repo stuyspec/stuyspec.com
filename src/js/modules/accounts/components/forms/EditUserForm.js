@@ -92,7 +92,7 @@ const mapStateToProps = state => ({
   status: state.accounts.status,
 });
 
-const ConnectedEditUserForm = connect(mapStateToProps, null)(
+const ConnectedEditUserForm = connect(mapStateToProps)(
   injectSheet(styles)(EditUserForm),
 );
 

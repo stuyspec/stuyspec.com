@@ -60,9 +60,6 @@ export const signUp = registrationParams => {
 };
 
 export const signIn = (signInParams, isInModal) => {
-  if (!isInModal) {
-    isInModal = false;
-  }
   return dispatch => {
     dispatch({
       type: t.SIGN_IN_PENDING,
@@ -79,7 +76,7 @@ export const signIn = (signInParams, isInModal) => {
           type: t.SIGN_IN_FULFILLED,
           payload: response,
         });
-        if (!isInModal) {
+        if (isInModal !== true) {
           appHistory.push("/myaccount/profile");
         }
       })
@@ -92,7 +89,8 @@ export const signIn = (signInParams, isInModal) => {
   };
 };
 
-export const signOut = sessionHeaders => {
+export const signOut = session => {
+  const sessionHeaders = session.headers;
   const headers = {
     "access-token": sessionHeaders["access-token"],
     client: sessionHeaders.client,

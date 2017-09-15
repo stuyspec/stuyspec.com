@@ -15,8 +15,8 @@ const styles = {
   },
 };
 
-const EditProfilePage = ({ classes, session, updateUser }) => {
-  if (!session.user) {
+const EditProfilePage = ({ classes, session, users, updateUser }) => {
+  if (!session.userId) {
     return (
       <Grid className={classes.EditProfilePage}>
         <p>
@@ -26,7 +26,7 @@ const EditProfilePage = ({ classes, session, updateUser }) => {
     );
   }
   const handleUpdateUser = values => {
-    updateUser(values, session.user.id);
+    updateUser(values, session.userId);
   };
   return (
     <Grid className={classes.EditProfilePage}>
@@ -43,6 +43,7 @@ const EditProfilePage = ({ classes, session, updateUser }) => {
 
 const mapStateToProps = state => ({
   session: state.accounts.session,
+  users: state.users.users,
 });
 
 const mapDispatchToProps = dispatch => {
