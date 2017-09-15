@@ -7,7 +7,8 @@ import { EMAIL_REGEX } from "../../../../constants";
 const styles = {
   SignInForm: {
     fontFamily: "Minion Pro",
-    "& form div": { // each Field
+    "& form div": {
+      // each Field
       marginBottom: "7px",
     },
   },
@@ -82,7 +83,11 @@ const SignInForm = ({ classes, handleSubmit, submitting, status }) => {
           label="Password"
         />
         <div>
-          <button type="submit" disabled={submitting} className={classes.submitButton}>
+          <button
+            type="submit"
+            disabled={submitting}
+            className={classes.submitButton}
+          >
             Sign In
           </button>
         </div>

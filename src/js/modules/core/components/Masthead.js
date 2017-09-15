@@ -45,7 +45,7 @@ const styles = {
 };
 
 const Masthead = ({ classes, sections }) => {
-  const unwantedSectionNames = ['Video','Photo','Art']
+  const unwantedSectionNames = ["Video", "Photo", "Art"];
   return (
     <div className={classes.Masthead}>
       <Link to="/" className={classes.theSpectatorLogo}>
@@ -72,10 +72,7 @@ const Masthead = ({ classes, sections }) => {
           </Link>
         </li>
         <li key={-2} className={classes.sectionListItem}>
-          <Link
-            to={"/paper"}
-            className={classes.sectionLink}
-          >
+          <Link to={"/paper"} className={classes.sectionLink}>
             The Paper
           </Link>
         </li>

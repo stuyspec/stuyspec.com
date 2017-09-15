@@ -25,7 +25,7 @@ const styles = {
     },
     "&:focus": {
       color: "#000",
-    }
+    },
   },
   numberLabel: {
     color: "#000",

@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import { Row, Col } from "react-bootstrap/lib";
 
-import Byline from "../Byline";
-import Dateline from "../Dateline";
-import { getArticlesWithContributors } from "../../selectors";
+import Byline from "../../articles/components/Byline";
+import Dateline from "../../articles/components/Dateline";
+import { getArticlesWithContributors } from "../../articles/selectors";
 
 const styles = {
   SectionFeature: {},
@@ -18,8 +18,8 @@ const styles = {
     margin: "0 0 3px 7px",
     textTransform: "uppercase",
     width: "100%",
-    "&:hover":{color: "#000",textDecoration: "none"},
-    "&:focus":{color: "#000",textDecoration: "none"}
+    "&:hover": { color: "#000", textDecoration: "none" },
+    "&:focus": { color: "#000", textDecoration: "none" },
   },
   primaryArticle: {
     borderRight: "solid 1px #ddd",
@@ -75,12 +75,17 @@ const styles = {
   },
 };
 
-const SectionFeature = ({classes, articles, section, media, sections}) => {
-  const sectionArticles = Object.values(Object.filter(articles, article => article.sectionId === section.id));
+const SectionFeature = ({ classes, articles, section, media, sections }) => {
+  const sectionArticles = Object.values(
+    Object.filter(articles, article => article.sectionId === section.id),
+  );
   const primaryArticle = sectionArticles[0];
   let featuredMedia = null;
   const secondaryArticle = sectionArticles.slice(1).find(article => {
-    const mediaObject = Object.values(media).find(mediaObject => mediaObject.articleId === article.id && mediaObject.isFeatured);
+    const mediaObject = Object.values(media).find(
+      mediaObject =>
+        mediaObject.articleId === article.id && mediaObject.isFeatured,
+    );
     if (mediaObject) {
       featuredMedia = mediaObject;
     }
@@ -89,44 +94,46 @@ const SectionFeature = ({classes, articles, section, media, sections}) => {
 
   // NESTED IN <Col lg={9}>
   return (
-    <Row className={ classes.SectionFeature }>
-      <hr className={ classes.hr }/>
-      <Link to={section.permalink} className={ classes.sectionLabel }>{ section.name }</Link>
-      <Col lg={ 4 } md={ 4 } className={ classes.primaryArticle }>
+    <Row className={classes.SectionFeature}>
+      <hr className={classes.hr} />
+      <Link to={section.permalink} className={classes.sectionLabel}>
+        {section.name}
+      </Link>
+      <Col lg={4} md={4} className={classes.primaryArticle}>
         <Link
-          className={ classes.title }
-          to={ `${sections[primaryArticle.sectionId]
-            .permalink}/${primaryArticle.slug}` }
+          className={classes.title}
+          to={`${sections[primaryArticle.sectionId]
+            .permalink}/${primaryArticle.slug}`}
         >
-          { primaryArticle.title }
+          {primaryArticle.title}
         </Link>
-        <p className={ classes.focus }>
+        <p className={classes.focus}>
           StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
           27, and Sunday, May 28. The event provided an opportunity for 175 high
           schools.
         </p>
-        <Byline contributors={ primaryArticle.contributors }/>
-        <Dateline article={ primaryArticle }/>
+        <Byline contributors={primaryArticle.contributors} />
+        <Dateline article={primaryArticle} />
       </Col>
-      <Col lg={ 4 } md={ 4 } className={ classes.secondaryArticle }>
+      <Col lg={4} md={4} className={classes.secondaryArticle}>
         <Link
-          className={ classes.title }
-          to={ `${sections[secondaryArticle.sectionId]
-            .permalink}/${secondaryArticle.slug}` }
+          className={classes.title}
+          to={`${sections[secondaryArticle.sectionId]
+            .permalink}/${secondaryArticle.slug}`}
         >
-          { secondaryArticle.title }
+          {secondaryArticle.title}
         </Link>
-        <p className={ classes.focus }>
+        <p className={classes.focus}>
           StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
           27, and Sunday, May 28. The event provided an opportunity for 175 high
           schools.
         </p>
-        <Byline contributors={ secondaryArticle.contributors }/>
-        <Dateline article={ secondaryArticle }/>
+        <Byline contributors={secondaryArticle.contributors} />
+        <Dateline article={secondaryArticle} />
       </Col>
-      <Col lg={ 4 } md={ 4 } className={ classes.featuredMediaContainer }>
-        <figure className={ classes.figure }>
-          <img src={ featuredMedia.url }/>
+      <Col lg={4} md={4} className={classes.featuredMediaContainer}>
+        <figure className={classes.figure}>
+          <img src={featuredMedia.url} />
         </figure>
       </Col>
     </Row>

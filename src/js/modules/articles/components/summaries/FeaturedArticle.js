@@ -40,8 +40,8 @@ const styles = {
     fontWeight: 300,
     margin: "6px 0 9px 0",
     textTransform: "uppercase",
-    "&:hover":{color: "#000",textDecoration: "none"},
-    "&:focus":{color: "#000",textDecoration: "none"}
+    "&:hover": { color: "#000", textDecoration: "none" },
+    "&:focus": { color: "#000", textDecoration: "none" },
   },
   focus: {
     fontFamily: "Minion Pro",
@@ -78,7 +78,9 @@ const FeaturedArticle = ({ classes, articles, media, sections }) => {
         >
           {article.title}
         </Link>
-        <Link to={section.permalink} className={classes.sectionLabel}>{section.name}</Link>
+        <Link to={section.permalink} className={classes.sectionLabel}>
+          {section.name}
+        </Link>
         <p className={classes.focus}>
           StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
           27, and Sunday, May 28. The event provided an opportunity for 175 high

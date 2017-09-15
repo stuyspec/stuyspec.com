@@ -7,9 +7,7 @@ import {
   CREATE_USER_FULFILLED,
 } from "./actionTypes";
 
-import {
-  UPDATE_USER_FULFILLED,
-} from "../accounts/actionTypes";
+import { UPDATE_USER_FULFILLED } from "../accounts/actionTypes";
 
 import { isObjectEmpty } from "../../utils";
 
@@ -75,8 +73,8 @@ const reducer = (state = { ...initialState }, action) => {
         users: {
           ...state.users,
           [updatedUser.id]: updatedUser,
-        }
-      }
+        },
+      };
     }
   }
   return state;

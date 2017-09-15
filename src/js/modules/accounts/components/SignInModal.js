@@ -11,7 +11,7 @@ const styles = {
   SignInModal: {
     width: "50%",
   },
-  modalContent: {    
+  modalContent: {
     padding: "12px",
   },
   formTitle: {
@@ -19,11 +19,11 @@ const styles = {
     fontSize: "26px",
   },
   signInForm: {
-    display: "inline-block",    
+    display: "inline-block",
   },
   signOutForm: {
-    display: "inline-block",    
-  }
+    display: "inline-block",
+  },
 };
 
 const SignInModal = ({
@@ -50,7 +50,7 @@ const SignInModal = ({
         <div className={classes.signInForm}>
           <h3 className={classes.formTitle}>Sign in</h3>
           <SignInForm onSubmit={values => signIn(values, true)} />
-        </div>  
+        </div>
         <div className={classes.signUpForm}>
           <h3 className={classes.formTitle}>Don't have an account? Sign up.</h3>
           <SignUpForm onSubmit={signUp} />

@@ -40,12 +40,7 @@ class PageLayout extends Component {
   };
 
   render() {
-    const {
-      classes,
-      children,
-      location,
-      isSidebarOpen,
-    } = this.props;
+    const { classes, children, location, isSidebarOpen } = this.props;
     return (
       <Sidebar
         sidebar={<SidebarContent />}
@@ -58,7 +53,7 @@ class PageLayout extends Component {
         <div className={classes.PageContainer}>{children}</div>
         <PageFooter />
       </Sidebar>
-    )
+    );
   }
 }
 

@@ -26,18 +26,17 @@ export const getArticlesWithContributors = createSelector(
   (originalArticles, users, authorships) => {
     // efficient and readable method of deep cloning an object.
     // https://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-deep-clone-an-object-in-javascript
-    let articles = JSON.parse(JSON.stringify(originalArticles));
-    return authorships.reduce((acc, authorship) => {
-      let targetArticle = articles[authorship.articleId];
-      if (targetArticle.contributors === undefined) {
-        targetArticle.contributors = [];
+    const articles = JSON.parse(JSON.stringify(originalArticles));
+    Object.keys(articles).map(articleId => {
+      const targetArticle = articles[articleId];
+      targetArticle.contributors = [];
+      for (const authorship in authorships) {
+        if (authorships.articleId === articleId) {
+          targetArticle.contributors.push(users[authorship.userId]);
+        }
       }
-      if (!targetArticle.contributors.includes(users[authorship.userId])) {
-        targetArticle.contributors.push(users[authorship.userId]);
-      }
-      acc[targetArticle.id] = targetArticle;
-      return acc;
-    }, {});
+    });
+    return articles;
   },
 );
 

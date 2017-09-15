@@ -42,7 +42,10 @@ class RoutingApp extends Component {
   render() {
     const { sections, roles, descriptions, isAllDataFetched } = this.props;
     return (
-      <ConnectedRouter onUpdate={() => window.scrollTo(0, 0)} history={appHistory}>
+      <ConnectedRouter
+        onUpdate={() => window.scrollTo(0, 0)}
+        history={appHistory}
+      >
         <PageLayout>
           {isAllDataFetched ? (
             <Switch>

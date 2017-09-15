@@ -3,10 +3,9 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import { getMedia } from "../../../media/selectors";
-import { getArticlesWithContributors } from "../../selectors";
-import Dateline from "../Dateline";
-import Byline from "../Byline";
+import Dateline from "../../articles/components/Dateline";
+import Byline from "../../articles/components/Byline";
+import { getArticlesWithContributors } from "../../articles/selectors";
 
 const styles = {
   SectionBlock: {
@@ -38,8 +37,8 @@ const styles = {
     fontSize: "12px",
     marginBottom: "6px",
     textTransform: "uppercase",
-    "&:hover":{color: "#000",textDecoration: "none"},
-    "&:focus":{color: "#000",textDecoration: "none"}
+    "&:hover": { color: "#000", textDecoration: "none" },
+    "&:focus": { color: "#000", textDecoration: "none" },
   },
   figure: {
     float: "right",
@@ -88,14 +87,17 @@ const styles = {
 };
 
 const SectionBlock = ({ classes, articles, section, media }) => {
-  const articleArray = Object.values(
-    Object.filter(articles, article => article.sectionId === section.id)
+  console.log(articles, section.id);
+  const sectionArticles = Object.values(
+    Object.filter(articles, article => article.sectionId === section.id),
   );
-  const bigArticle = articleArray[0];
-  const nextThreeArticles = articleArray.slice(1, 4);
+  const bigArticle = sectionArticles[0];
+  const nextThreeArticles = sectionArticles.slice(1, 4);
   return (
     <div className={classes.SectionBlock}>
-      <Link to={section.permalink} className={classes.sectionLabel}>{section.name}</Link>
+      <Link to={section.permalink} className={classes.sectionLabel}>
+        {section.name}
+      </Link>
       <div className={classes.article}>
         <Link
           to={`${section.permalink}/${bigArticle.slug}`}
@@ -137,7 +139,7 @@ const SectionBlock = ({ classes, articles, section, media }) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  media: getMedia(state),
+  media: state.media.media,
   articles: getArticlesWithContributors(state),
 });
 

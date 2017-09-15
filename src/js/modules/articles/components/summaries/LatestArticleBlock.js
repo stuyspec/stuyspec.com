@@ -29,8 +29,8 @@ const styles = {
     letterSpacing: "0.5px",
     marginBottom: "1px",
     textTransform: "uppercase",
-    "&:hover":{color: "#a8a8a8",textDecoration: "none"},
-    "&:focus":{color: "#a8a8a8",textDecoration: "none"}
+    "&:hover": { color: "#a8a8a8", textDecoration: "none" },
+    "&:focus": { color: "#a8a8a8", textDecoration: "none" },
   },
   title: {
     color: "#000",

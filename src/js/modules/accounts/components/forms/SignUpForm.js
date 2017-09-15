@@ -7,9 +7,10 @@ import { EMAIL_REGEX } from "../../../../constants";
 const styles = {
   SignUpForm: {
     fontFamily: "Minion Pro",
-    "& form div": { // each Field
+    "& form div": {
+      // each Field
       marginBottom: "7px",
-    }
+    },
   },
   successMessage: {
     color: "green",
@@ -115,7 +116,11 @@ const SignUpForm = ({ classes, handleSubmit, submitting, status }) => {
           label="Password Confirmation"
         />
         <div>
-          <button type="submit" disabled={submitting} className={classes.submitButton}>
+          <button
+            type="submit"
+            disabled={submitting}
+            className={classes.submitButton}
+          >
             Sign Up
           </button>
         </div>

@@ -10,12 +10,12 @@ import {
 
 import {
   FeaturedArticle,
-  SectionFeature,
   RecommendedArticles,
   LatestArticleBlock,
   ArticleBlocks,
-  SectionColumn,
 } from "../../articles/components/summaries";
+
+import { SectionFeature, SectionColumn } from "../../sections/components";
 
 const styles = {
   HomePage: {
@@ -42,19 +42,28 @@ const styles = {
 
 //The filler column should have a borderRight. Wait until there is something there first
 
-const HomePage = ({
-  classes,
-  sections,
-  articles,
-  latestArticles,
-}) => {
-  const sectionFeature = Object.values(sections).find(section => section.name === "News");
+const HomePage = ({ classes, sections, articles, latestArticles }) => {
+  const sectionFeature = Object.values(sections).find(
+    section => section.name === "News",
+  );
   const recommendedArticles = Object.values(articles).slice(0, 5);
   const topFiveLatest = Object.values(latestArticles).slice(0, 5);
   const randomArticles = Object.values(articles).slice(3, 9);
 
-  const firstColumnSections = ['Opinions','Features','Humor'].map(sectionName => Object.values(sections).find(section => section.name === sectionName));
-  const secondColumnSections = ['Staff Editorials','Arts & Entertainment','Sports'].map(sectionName => Object.values(sections).find(section => section.name === sectionName));
+  const firstColumnSections = [
+    "Opinions",
+    "Features",
+    "Humor",
+  ].map(sectionName =>
+    Object.values(sections).find(section => section.name === sectionName),
+  );
+  const secondColumnSections = [
+    "Staff Editorials",
+    "Arts & Entertainment",
+    "Sports",
+  ].map(sectionName =>
+    Object.values(sections).find(section => section.name === sectionName),
+  );
   return (
     <div>
       <Grid>
