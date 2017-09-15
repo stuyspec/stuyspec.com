@@ -1,3 +1,7 @@
+/* The FeaturedArticle component displays the highest-rated article. It is
+ * currently nested in a <Col md={9} lg={9}>.
+ */
+
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -6,9 +10,7 @@ import { Row, Col } from "react-bootstrap/lib";
 
 import Byline from "../Byline";
 import Dateline from "../Dateline";
-import { getMedia } from "../../../media/selectors";
-import { getSections } from "../../../sections/selectors";
-import { getUsers } from "../../../users/selectors";
+import { getArticlesWithContributors } from "../../selectors";
 
 const styles = {
   FeaturedArticle: {
@@ -30,13 +32,16 @@ const styles = {
       color: "#000",
     },
   },
-  rubric: {
+  sectionLabel: {
     color: "#000",
+    display: "blocK",
     fontFamily: "Circular Std",
     fontSize: "13px",
     fontWeight: 300,
     margin: "6px 0 9px 0",
     textTransform: "uppercase",
+    "&:hover":{color: "#000",textDecoration: "none"},
+    "&:focus":{color: "#000",textDecoration: "none"}
   },
   focus: {
     fontFamily: "Minion Pro",
@@ -55,7 +60,8 @@ const styles = {
   },
 };
 
-const FeaturedArticle = ({ classes, article, media, sections }) => {
+const FeaturedArticle = ({ classes, articles, media, sections }) => {
+  const article = Object.values(articles)[0];
   const section = Object.values(sections).find(section => {
     return section.id === article.sectionId;
   });
@@ -72,7 +78,7 @@ const FeaturedArticle = ({ classes, article, media, sections }) => {
         >
           {article.title}
         </Link>
-        <p className={classes.rubric}>{section.name}</p>
+        <Link to={section.permalink} className={classes.sectionLabel}>{section.name}</Link>
         <p className={classes.focus}>
           StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
           27, and Sunday, May 28. The event provided an opportunity for 175 high
@@ -91,9 +97,10 @@ const FeaturedArticle = ({ classes, article, media, sections }) => {
 };
 
 const mapStateToProps = state => ({
-  media: getMedia(state),
-  sections: getSections(state),
-  users: getUsers(state),
+  articles: getArticlesWithContributors(state),
+  media: state.media.media,
+  sections: state.sections.sections,
+  users: state.users.users,
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(FeaturedArticle));

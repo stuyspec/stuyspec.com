@@ -6,18 +6,20 @@ import { Row, Col } from "react-bootstrap/lib";
 
 import Byline from "../Byline";
 import Dateline from "../Dateline";
-import { getMedia } from "../../../media/selectors";
-import { getSectionTreeArticles } from "../../selectors";
+import { getArticlesWithContributors } from "../../selectors";
 
 const styles = {
   SectionFeature: {},
-  label: {
+  sectionLabel: {
     color: "#000",
+    display: "block",
     fontFamily: "Minion Pro",
     fontSize: "12px",
     margin: "0 0 3px 7px",
     textTransform: "uppercase",
     width: "100%",
+    "&:hover":{color: "#000",textDecoration: "none"},
+    "&:focus":{color: "#000",textDecoration: "none"}
   },
   primaryArticle: {
     borderRight: "solid 1px #ddd",
@@ -74,21 +76,22 @@ const styles = {
 };
 
 const SectionFeature = ({classes, articles, section, media, sections}) => {
-  const sectionArticles = Object.values(articles);
+  const sectionArticles = Object.values(Object.filter(articles, article => article.sectionId === section.id));
   const primaryArticle = sectionArticles[0];
-  const secondaryArticle = sectionArticles[1];
-  const ternaryArticle = sectionArticles[1]; //Make it number 2 after we have real articles
-  const featuredMedia = Object.values(media).find(mediaObject => {
-    return (
-      mediaObject.isFeatured && mediaObject.articleId === secondaryArticle.id
-    );
+  let featuredMedia = null;
+  const secondaryArticle = sectionArticles.slice(1).find(article => {
+    const mediaObject = Object.values(media).find(mediaObject => mediaObject.articleId === article.id && mediaObject.isFeatured);
+    if (mediaObject) {
+      featuredMedia = mediaObject;
+    }
+    return mediaObject;
   });
 
   // NESTED IN <Col lg={9}>
   return (
     <Row className={ classes.SectionFeature }>
       <hr className={ classes.hr }/>
-      <p className={ classes.label }>{ section.name }</p>
+      <Link to={section.permalink} className={ classes.sectionLabel }>{ section.name }</Link>
       <Col lg={ 4 } md={ 4 } className={ classes.primaryArticle }>
         <Link
           className={ classes.title }
@@ -121,37 +124,19 @@ const SectionFeature = ({classes, articles, section, media, sections}) => {
         <Byline contributors={ secondaryArticle.contributors }/>
         <Dateline article={ secondaryArticle }/>
       </Col>
-      { featuredMedia ? (
-        <Col lg={ 4 } md={ 4 } className={ classes.featuredMediaContainer }>
-          <figure className={ classes.figure }>
-            <img src={ featuredMedia.url }/>
-          </figure>
-        </Col>
-      ) : (
-        <Col lg={ 4 } md={ 4 } className={ classes.ternaryArticle }>
-          <Link
-            className={ classes.title }
-            to={ `${sections[ternaryArticle.sectionId]
-              .permalink}/${ternaryArticle.slug}` }
-          >
-            { ternaryArticle.title }
-          </Link>
-          <p className={ classes.focus }>
-            StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
-            27, and Sunday, May 28. The event provided an opportunity for 175
-            high schools.
-          </p>
-          <Byline contributors={ ternaryArticle.contributors }/>
-          <Dateline article={ ternaryArticle }/>
-        </Col>
-      ) }
+      <Col lg={ 4 } md={ 4 } className={ classes.featuredMediaContainer }>
+        <figure className={ classes.figure }>
+          <img src={ featuredMedia.url }/>
+        </figure>
+      </Col>
     </Row>
   );
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  media: getMedia(state),
-  articles: getSectionTreeArticles(state, ownProps),
+  articles: getArticlesWithContributors(state),
+  media: state.media.media,
+  sections: state.sections.sections,
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(SectionFeature));

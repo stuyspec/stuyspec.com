@@ -21,13 +21,16 @@ const styles = {
       paddingLeft: "12.5px",
     },
   },
-  label: {
+  sectionLabel: {
     color: "#a8a8a8",
     fontFamily: "Circular Std",
     fontSize: "11px",
+    fontWeight: 300,
     letterSpacing: "0.5px",
     marginBottom: "1px",
     textTransform: "uppercase",
+    "&:hover":{color: "#a8a8a8",textDecoration: "none"},
+    "&:focus":{color: "#a8a8a8",textDecoration: "none"}
   },
   title: {
     color: "#000",
@@ -71,9 +74,9 @@ const LatestArticleBlock = ({ classes, article, section, media }) => {
           </figure>
         </div>
       )}
-      <p className={classes.label}>
+      <Link to={section.permalink} className={classes.sectionLabel}>
         {section.name === "Arts & Entertainment" ? "A&E" : section.name}
-      </p>
+      </Link>
       <Link
         to={`${section.permalink}/${article.slug}`}
         className={classes.title}

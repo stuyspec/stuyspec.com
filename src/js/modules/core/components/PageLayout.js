@@ -32,7 +32,6 @@ const sidebarStyles = {
 
 class PageLayout extends Component {
   componentDidUpdate() {
-    console.log('trying to scroll');
     window.scrollTo(0, 0);
   }
 

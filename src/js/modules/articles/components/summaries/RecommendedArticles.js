@@ -20,6 +20,12 @@ const styles = {
     fontWeight: 300,
     margin: 0,
     padding: "4px 0",
+    "&:hover": {
+      color: "#000",
+    },
+    "&:focus": {
+      color: "#000",
+    }
   },
   numberLabel: {
     color: "#000",

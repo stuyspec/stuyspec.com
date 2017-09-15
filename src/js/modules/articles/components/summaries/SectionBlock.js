@@ -31,12 +31,15 @@ const styles = {
     fontSize: "16px",
     lineHeight: "1.25",
   },
-  label: {
+  sectionLabel: {
     color: "#000",
+    display: "block",
     fontFamily: "Minion Pro",
     fontSize: "12px",
     marginBottom: "6px",
     textTransform: "uppercase",
+    "&:hover":{color: "#000",textDecoration: "none"},
+    "&:focus":{color: "#000",textDecoration: "none"}
   },
   figure: {
     float: "right",
@@ -85,7 +88,6 @@ const styles = {
 };
 
 const SectionBlock = ({ classes, articles, section, media }) => {
-  console.log(articles, section);
   const articleArray = Object.values(
     Object.filter(articles, article => article.sectionId === section.id)
   );
@@ -93,7 +95,7 @@ const SectionBlock = ({ classes, articles, section, media }) => {
   const nextThreeArticles = articleArray.slice(1, 4);
   return (
     <div className={classes.SectionBlock}>
-      <p className={classes.label}>{section.name}</p>
+      <Link to={section.permalink} className={classes.sectionLabel}>{section.name}</Link>
       <div className={classes.article}>
         <Link
           to={`${section.permalink}/${bigArticle.slug}`}
