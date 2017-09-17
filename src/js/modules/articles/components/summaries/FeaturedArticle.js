@@ -50,7 +50,7 @@ const styles = {
     fontFamily: "Minion Pro",
     fontSize: "14px",
     lineHeight: 1.29,
-    margin: "0 0 14px 0",
+    margin: "0 0 8px 0",
   },
   featuredMediaContainer: {
     padding: "0 0 0 14px !important",
@@ -83,11 +83,7 @@ const FeaturedArticle = ({ classes, articles, media, sections }) => {
         <Link to={section.permalink} className={classes.sectionLabel}>
           {section.name}
         </Link>
-        <p className={classes.focus}>
-          StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
-          27, and Sunday, May 28. The event provided an opportunity for 175 high
-          schools.
-        </p>
+        <p className={classes.focus}>{article.summary}</p>
         <Byline contributors={article.contributors} />
         <Dateline article={article} />
       </Col>

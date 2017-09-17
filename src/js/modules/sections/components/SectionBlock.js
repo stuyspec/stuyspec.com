@@ -104,11 +104,7 @@ const SectionBlock = ({ classes, articles, section, media }) => {
         >
           {bigArticle.title}
         </Link>
-        <p className={classes.preview}>
-          Motivational speaker and personal Trainer Carlos Bernal visited
-          Stuyvesant on May 26, 2017, at the request of Stuyvesant Amnesty
-          International.
-        </p>
+        <p className={classes.preview}>{bigArticle.summary}</p>
         <Byline classes={classes} contributors={bigArticle.contributors} />
         <Dateline classes={classes} article={bigArticle} />
       </div>

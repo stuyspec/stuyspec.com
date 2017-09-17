@@ -107,11 +107,7 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
         >
           {primaryArticle.title}
         </Link>
-        <p className={classes.focus}>
-          StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
-          27, and Sunday, May 28. The event provided an opportunity for 175 high
-          schools.
-        </p>
+        <p className={classes.focus}>{primaryArticle.summary}</p>
         <Byline contributors={primaryArticle.contributors} />
         <Dateline article={primaryArticle} />
       </Col>
@@ -123,11 +119,7 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
         >
           {secondaryArticle.title}
         </Link>
-        <p className={classes.focus}>
-          StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
-          27, and Sunday, May 28. The event provided an opportunity for 175 high
-          schools.
-        </p>
+        <p className={classes.focus}>{secondaryArticle.summary}</p>
         <Byline contributors={secondaryArticle.contributors} />
         <Dateline article={secondaryArticle} />
       </Col>

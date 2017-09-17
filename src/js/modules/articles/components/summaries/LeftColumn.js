@@ -73,7 +73,7 @@ const styles = {
     fontWeight: "bold",
     fontSize: "18px",
     lineHeight: 1.22,
-    marginBottom: "4px",
+    marginBottom: "1px",
     "&:hover": {
       color: "#000",
     },
@@ -104,9 +104,7 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
         <Link to={sections[primaryArticle.sectionId].permalink} className={classes.sectionLabel}>
           {sections[primaryArticle.sectionId].title}
         </Link>
-        <p className={classes.articleSummary}>
-          StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May 27, and Sunday, May 28. The event provided an opportunity for 175 high schools.
-        </p>
+        <p className={classes.articleSummary}>{primaryArticle.summary}</p>
         <Byline contributors={primaryArticle.contributors} />
         <Dateline article={primaryArticle} />
       </div>
@@ -126,9 +124,7 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
           {secondaryArticle.title}
         </Link>
         <Byline contributors={secondaryArticle.contributors} />
-        <p className={classes.articleSummary}>
-          StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May 27, and Sunday, May 28. The event provided an opportunity for 175 high schools.
-        </p>
+        <p className={classes.articleSummary}>{secondaryArticle.summary}</p>
         <Dateline article={secondaryArticle} />
       </div>
 
@@ -147,9 +143,7 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
           {outquoteArticle.title}
         </Link>
         <Outquote quote={outquoteArticle.outquotes[0]} />
-        <p className={classes.articleSummary}>
-          StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May 27, and Sunday, May 28. The event provided an opportunity for 175 high schools.
-        </p>
+        <p className={classes.articleSummary}>{outquoteArticle.summary}</p>
         <Byline contributors={outquoteArticle.contributors} />
         <Dateline article={outquoteArticle} />
       </div>

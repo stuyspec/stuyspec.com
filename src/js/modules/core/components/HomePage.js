@@ -13,7 +13,6 @@ import {
   RecommendedArticles,
   LatestArticleBlock,
   LeftColumn,
-  RightColumn,
 } from "../../articles/components/summaries";
 
 import { SectionFeature, SectionColumn } from "../../sections/components";
