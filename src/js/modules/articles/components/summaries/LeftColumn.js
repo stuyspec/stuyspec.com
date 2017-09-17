@@ -11,6 +11,12 @@ import Outquote from "../Outquote";
 
 const styles = {
   LeftColumn: {
+    paddingRight: "14px !important",
+    "& > div": {
+      borderBottom: "1px solid #ddd",
+      marginBottom: "14px",
+      paddingBottom: "14px !important",
+    }
   },
   figure: {
     margin: "0 0 12px 0",
@@ -21,8 +27,6 @@ const styles = {
   },
   primaryArticle: {
     borderBottom: "1px solid #ddd",
-    marginBottom: "14px",
-    paddingBottom: "14px",
   },
   primaryTitle: {
     color: "#000",
@@ -46,7 +50,8 @@ const styles = {
     fontFamily: "Circular Std",
     fontWeight: 300,
     fontSize: "12px",
-    marginBottom: "4px",
+    marginBottom: "2px",
+    textTransform: "uppercase",
     "&:hover": {
       color: "#000",
     },
@@ -66,7 +71,7 @@ const styles = {
     display: "block",
     fontFamily: "Minion Pro",
     fontWeight: "bold",
-    fontSize: "12px",
+    fontSize: "18px",
     lineHeight: 1.22,
     marginBottom: "4px",
     "&:hover": {
@@ -115,7 +120,7 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
           </div>
         )}
         <Link to={sections[secondaryArticle.sectionId].permalink} className={classes.sectionLabel}>
-          {sections[secondaryArticle.sectionId].title}
+          {sections[secondaryArticle.sectionId].name}
         </Link>
         <Link to={`${sections[secondaryArticle.sectionId].permalink}/${secondaryArticle.slug}`} className={classes.articleTitle}>
           {secondaryArticle.title}
@@ -135,13 +140,13 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
             </figure>
           </div>
         )}
-        <Outquote quote={outquoteArticle.outquotes[0]} />
         <Link to={sections[outquoteArticle.sectionId].permalink} className={classes.sectionLabel}>
-          {sections[outquoteArticle.sectionId].title}
+          {sections[outquoteArticle.sectionId].name}
         </Link>
         <Link to={`${sections[outquoteArticle.sectionId].permalink}/${outquoteArticle.slug}`} className={classes.articleTitle}>
           {outquoteArticle.title}
         </Link>
+        <Outquote quote={outquoteArticle.outquotes[0]} />
         <p className={classes.articleSummary}>
           StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May 27, and Sunday, May 28. The event provided an opportunity for 175 high schools.
         </p>
