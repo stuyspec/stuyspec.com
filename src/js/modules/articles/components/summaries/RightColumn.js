@@ -10,8 +10,7 @@ import Dateline from "../Dateline";
 import Outquote from "../Outquote";
 
 const styles = {
-  RightColumn: {
-  },
+  RightColumn: {},
   figure: {
     margin: "0 0 12px 0",
     width: "100%",
@@ -79,9 +78,18 @@ const styles = {
 };
 
 const RightColumn = ({ classes, articles, media, sections }) => {
-  const [primaryArticle, secondaryArticle, outquoteArticle] = Object.values(articles).slice(0, 3);
-  [primaryMedia, secondaryMedia, outquoteMedia] = [primaryArticle, secondaryArticle, outquoteArticle].map(article => {
-    return Object.values(media).find(mediaObject => mediaObject.articleId === article.id && mediaObject.isFeatured);
+  const [primaryArticle, secondaryArticle, outquoteArticle] = Object.values(
+    articles,
+  ).slice(0, 3);
+  [primaryMedia, secondaryMedia, outquoteMedia] = [
+    primaryArticle,
+    secondaryArticle,
+    outquoteArticle,
+  ].map(article => {
+    return Object.values(media).find(
+      mediaObject =>
+        mediaObject.articleId === article.id && mediaObject.isFeatured,
+    );
   });
   return (
     <Col md={3} lg={3} className={classes.RightColumn}>
@@ -93,14 +101,23 @@ const RightColumn = ({ classes, articles, media, sections }) => {
             </figure>
           </div>
         )}
-        <Link to={`${sections[primaryArticle.sectionId].permalink}/${primaryArticle.slug}`} className={classes.primaryTitle}>
+        <Link
+          to={`${sections[primaryArticle.sectionId]
+            .permalink}/${primaryArticle.slug}`}
+          className={classes.primaryTitle}
+        >
           {primaryArticle.title}
         </Link>
-        <Link to={sections[primaryArticle.sectionId].permalink} className={classes.sectionLabel}>
+        <Link
+          to={sections[primaryArticle.sectionId].permalink}
+          className={classes.sectionLabel}
+        >
           {sections[primaryArticle.sectionId].title}
         </Link>
         <p className={classes.articleSummary}>
-          StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May 27, and Sunday, May 28. The event provided an opportunity for 175 high schools.
+          StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
+          27, and Sunday, May 28. The event provided an opportunity for 175 high
+          schools.
         </p>
         <Byline contributors={primaryArticle.contributors} />
         <Dateline article={primaryArticle} />
@@ -114,15 +131,24 @@ const RightColumn = ({ classes, articles, media, sections }) => {
             </figure>
           </div>
         )}
-        <Link to={sections[secondaryArticle.sectionId].permalink} className={classes.sectionLabel}>
+        <Link
+          to={sections[secondaryArticle.sectionId].permalink}
+          className={classes.sectionLabel}
+        >
           {sections[secondaryArticle.sectionId].title}
         </Link>
-        <Link to={`${sections[secondaryArticle.sectionId].permalink}/${secondaryArticle.slug}`} className={classes.articleTitle}>
+        <Link
+          to={`${sections[secondaryArticle.sectionId]
+            .permalink}/${secondaryArticle.slug}`}
+          className={classes.articleTitle}
+        >
           {secondaryArticle.title}
         </Link>
         <Byline contributors={secondaryArticle.contributors} />
         <p className={classes.articleSummary}>
-          StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May 27, and Sunday, May 28. The event provided an opportunity for 175 high schools.
+          StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
+          27, and Sunday, May 28. The event provided an opportunity for 175 high
+          schools.
         </p>
         <Dateline article={secondaryArticle} />
       </div>
@@ -136,14 +162,23 @@ const RightColumn = ({ classes, articles, media, sections }) => {
           </div>
         )}
         <Outquote quote={outquoteArticle.outquotes[0]} />
-        <Link to={sections[outquoteArticle.sectionId].permalink} className={classes.sectionLabel}>
+        <Link
+          to={sections[outquoteArticle.sectionId].permalink}
+          className={classes.sectionLabel}
+        >
           {sections[outquoteArticle.sectionId].title}
         </Link>
-        <Link to={`${sections[outquoteArticle.sectionId].permalink}/${outquoteArticle.slug}`} className={classes.articleTitle}>
+        <Link
+          to={`${sections[outquoteArticle.sectionId]
+            .permalink}/${outquoteArticle.slug}`}
+          className={classes.articleTitle}
+        >
           {outquoteArticle.title}
         </Link>
         <p className={classes.articleSummary}>
-          StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May 27, and Sunday, May 28. The event provided an opportunity for 175 high schools.
+          StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
+          27, and Sunday, May 28. The event provided an opportunity for 175 high
+          schools.
         </p>
         <Byline contributors={outquoteArticle.contributors} />
         <Dateline article={outquoteArticle} />

@@ -56,7 +56,7 @@ const styles = {
     marginBottom: "22px",
   },
   latestArticles: {
-    padding: '0 13px 0 0',
+    padding: "0 13px 0 0",
   },
   emptySpace: {
     height: "20px",
@@ -73,35 +73,35 @@ const styles = {
     fontFamily: "Circular Std",
     fontSize: "12px",
     fontWeight: "300",
-    float: 'left',
+    float: "left",
     marginRight: "19px",
   },
   summary: {
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   figure: {
-    float: 'right',
+    float: "right",
     marginLeft: "29px",
-    width: '166px',
+    width: "166px",
     "& img": {
       width: "100%",
     },
   },
   title: {
-    display: 'block',
+    display: "block",
     fontFamily: "Minion Pro",
     fontSize: "24px",
     color: "#000",
-    lineHeight: '1',
-    marginBottom: '2px',
-    paddingTop: '2px',
+    lineHeight: "1",
+    marginBottom: "2px",
+    paddingTop: "2px",
   },
   preview: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "16px",
-    lineHeight: '1.13',
-  }
+    lineHeight: "1.13",
+  },
 };
 
 const SectionPage = ({
@@ -111,7 +111,7 @@ const SectionPage = ({
   section,
   media,
 }) => {
-  const threeSubsections = Object.values(directSubsections).slice(0,3);
+  const threeSubsections = Object.values(directSubsections).slice(0, 3);
   return (
     <div className={classes.SectionPage}>
       {isObjectEmpty(directSubsections) ? (
@@ -119,14 +119,17 @@ const SectionPage = ({
       ) : (
         <ul className={classes.subsectionBar}>
           {Object.values(directSubsections).map(subsection => {
-      return (
-        <li className={classes.subsectionListItem} key={subsection.id}>
-          <Link className={classes.subsectionLink} to={subsection.permalink}>
-            {subsection.name}
-          </Link>
-        </li>
-      );
-    })}
+            return (
+              <li className={classes.subsectionListItem} key={subsection.id}>
+                <Link
+                  className={classes.subsectionLink}
+                  to={subsection.permalink}
+                >
+                  {subsection.name}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       )}
       <Grid>
@@ -135,29 +138,40 @@ const SectionPage = ({
             <div className={classes.latest}>Latest</div>
             {Object.values(sectionTreeArticles).map(article => {
               const featuredMedia = Object.values(media).find(mediaObject => {
-                return mediaObject.isFeatured && mediaObject.articleId === article.id;
-                });
-              return (<div className={classes.articleBlock} key={article.id}>
-                <p className={classes.Dateline}>
-                  August 24, 2017
-                </p>
-                <div className={classes.summary}>
-                {featuredMedia &&
-                  <figure className={classes.figure}>
-                    <img src={featuredMedia.url} alt={featuredMedia.title} />
-                  </figure>}
-                <Link to={`${section.permalink}/${article.slug}`} className={classes.title}>
-                  {article.title}
-                </Link>
-                <p className={classes.preview}>
-                  Unfortunately, all good things must come to an end. We came into Stuyvesant last September, saved from the unstructured summer.
-                </p>
-                <Byline contributors={article.contributors} />
+                return (
+                  mediaObject.isFeatured && mediaObject.articleId === article.id
+                );
+              });
+              return (
+                <div className={classes.articleBlock} key={article.id}>
+                  <p className={classes.Dateline}>August 24, 2017</p>
+                  <div className={classes.summary}>
+                    {featuredMedia && (
+                      <figure className={classes.figure}>
+                        <img
+                          src={featuredMedia.url}
+                          alt={featuredMedia.title}
+                        />
+                      </figure>
+                    )}
+                    <Link
+                      to={`${section.permalink}/${article.slug}`}
+                      className={classes.title}
+                    >
+                      {article.title}
+                    </Link>
+                    <p className={classes.preview}>
+                      Unfortunately, all good things must come to an end. We
+                      came into Stuyvesant last September, saved from the
+                      unstructured summer.
+                    </p>
+                    <Byline contributors={article.contributors} />
+                  </div>
                 </div>
-              </div>);
+              );
             })}
           </Col>
-          <SectionColumn sections={threeSubsections}/>
+          <SectionColumn sections={threeSubsections} />
         </Row>
       </Grid>
     </div>

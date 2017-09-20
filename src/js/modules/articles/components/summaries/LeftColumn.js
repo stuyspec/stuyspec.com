@@ -16,7 +16,7 @@ const styles = {
       borderBottom: "1px solid #ddd",
       marginBottom: "14px",
       paddingBottom: "14px !important",
-    }
+    },
   },
   figure: {
     margin: "0 0 12px 0",
@@ -84,9 +84,18 @@ const styles = {
 };
 
 const LeftColumn = ({ classes, articles, media, sections }) => {
-  const [primaryArticle, secondaryArticle, outquoteArticle] = Object.values(articles).slice(0, 3);
-  [primaryMedia, secondaryMedia, outquoteMedia] = [primaryArticle, secondaryArticle, outquoteArticle].map(article => {
-    return Object.values(media).find(mediaObject => mediaObject.articleId === article.id && mediaObject.isFeatured);
+  const [primaryArticle, secondaryArticle, outquoteArticle] = Object.values(
+    articles,
+  ).slice(0, 3);
+  [primaryMedia, secondaryMedia, outquoteMedia] = [
+    primaryArticle,
+    secondaryArticle,
+    outquoteArticle,
+  ].map(article => {
+    return Object.values(media).find(
+      mediaObject =>
+        mediaObject.articleId === article.id && mediaObject.isFeatured,
+    );
   });
   return (
     <Col md={3} lg={3} className={classes.LeftColumn}>
@@ -98,10 +107,17 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
             </figure>
           </div>
         )}
-        <Link to={`${sections[primaryArticle.sectionId].permalink}/${primaryArticle.slug}`} className={classes.primaryTitle}>
-        {primaryArticle.title}
-      </Link>
-        <Link to={sections[primaryArticle.sectionId].permalink} className={classes.sectionLabel}>
+        <Link
+          to={`${sections[primaryArticle.sectionId]
+            .permalink}/${primaryArticle.slug}`}
+          className={classes.primaryTitle}
+        >
+          {primaryArticle.title}
+        </Link>
+        <Link
+          to={sections[primaryArticle.sectionId].permalink}
+          className={classes.sectionLabel}
+        >
           {sections[primaryArticle.sectionId].title}
         </Link>
         <p className={classes.articleSummary}>{primaryArticle.summary}</p>
@@ -117,10 +133,17 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
             </figure>
           </div>
         )}
-        <Link to={sections[secondaryArticle.sectionId].permalink} className={classes.sectionLabel}>
+        <Link
+          to={sections[secondaryArticle.sectionId].permalink}
+          className={classes.sectionLabel}
+        >
           {sections[secondaryArticle.sectionId].name}
         </Link>
-        <Link to={`${sections[secondaryArticle.sectionId].permalink}/${secondaryArticle.slug}`} className={classes.articleTitle}>
+        <Link
+          to={`${sections[secondaryArticle.sectionId]
+            .permalink}/${secondaryArticle.slug}`}
+          className={classes.articleTitle}
+        >
           {secondaryArticle.title}
         </Link>
         <Byline contributors={secondaryArticle.contributors} />
@@ -136,10 +159,17 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
             </figure>
           </div>
         )}
-        <Link to={sections[outquoteArticle.sectionId].permalink} className={classes.sectionLabel}>
+        <Link
+          to={sections[outquoteArticle.sectionId].permalink}
+          className={classes.sectionLabel}
+        >
           {sections[outquoteArticle.sectionId].name}
         </Link>
-        <Link to={`${sections[outquoteArticle.sectionId].permalink}/${outquoteArticle.slug}`} className={classes.articleTitle}>
+        <Link
+          to={`${sections[outquoteArticle.sectionId]
+            .permalink}/${outquoteArticle.slug}`}
+          className={classes.articleTitle}
+        >
           {outquoteArticle.title}
         </Link>
         <Outquote quote={outquoteArticle.outquotes[0]} />
