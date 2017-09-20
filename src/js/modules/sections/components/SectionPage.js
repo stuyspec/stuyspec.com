@@ -57,51 +57,22 @@ const styles = {
   },
   latestArticles: {
     padding: "0 13px 0 0",
+    borderRight: "solid 1px #ddd",
+    "& > div:last-child": { // articleBlocks
+      border: "none",
+      margin: 0
+    }
   },
   emptySpace: {
     height: "20px",
     margin: 0,
     padding: 0,
   },
-  articleBlock: {
-    borderBottom: "solid 1px #ddd",
-    marginBottom: "22px",
-    paddingBottom: "20px",
-  },
-  Dateline: {
-    color: "#888",
-    fontFamily: "Circular Std",
-    fontSize: "12px",
-    fontWeight: "300",
-    float: "left",
-    marginRight: "19px",
-  },
-  summary: {
-    overflow: "hidden",
-  },
-  figure: {
-    float: "right",
-    marginLeft: "29px",
-    width: "166px",
-    "& img": {
-      width: "100%",
-    },
-  },
-  title: {
-    display: "block",
-    fontFamily: "Minion Pro",
-    fontSize: "24px",
-    color: "#000",
-    lineHeight: "1",
-    marginBottom: "2px",
-    paddingTop: "2px",
-  },
-  preview: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "16px",
-    lineHeight: "1.13",
-  },
+  sectionColumnContainer: {
+    "& > div": {
+      borderLeft: "none",
+    }
+  }
 };
 
 const SectionPage = ({
@@ -136,42 +107,11 @@ const SectionPage = ({
         <Row>
           <Col md={9} lg={9} className={classes.latestArticles}>
             <div className={classes.latest}>Latest</div>
-            {Object.values(sectionTreeArticles).map(article => {
-              const featuredMedia = Object.values(media).find(mediaObject => {
-                return (
-                  mediaObject.isFeatured && mediaObject.articleId === article.id
-                );
-              });
-              return (
-                <div className={classes.articleBlock} key={article.id}>
-                  <p className={classes.Dateline}>August 24, 2017</p>
-                  <div className={classes.summary}>
-                    {featuredMedia && (
-                      <figure className={classes.figure}>
-                        <img
-                          src={featuredMedia.url}
-                          alt={featuredMedia.title}
-                        />
-                      </figure>
-                    )}
-                    <Link
-                      to={`${section.permalink}/${article.slug}`}
-                      className={classes.title}
-                    >
-                      {article.title}
-                    </Link>
-                    <p className={classes.preview}>
-                      Unfortunately, all good things must come to an end. We
-                      came into Stuyvesant last September, saved from the
-                      unstructured summer.
-                    </p>
-                    <Byline contributors={article.contributors} />
-                  </div>
-                </div>
-              );
-            })}
+            <ArticleList articles={sectionTreeArticles} />
           </Col>
-          <SectionColumn sections={threeSubsections} />
+          <div className={classes.sectionColumnContainer}>
+            <SectionColumn sections={threeSubsections} />
+          </div>
         </Row>
       </Grid>
     </div>

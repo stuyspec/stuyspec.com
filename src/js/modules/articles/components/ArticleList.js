@@ -7,6 +7,7 @@ import ArticleRow from "./ArticleRow";
 const styles = {
   ArticleList: {
     padding: 0,
+    width: "100%",
   },
 };
 
