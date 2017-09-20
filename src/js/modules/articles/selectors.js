@@ -29,12 +29,9 @@ export const getArticlesWithContributors = createSelector(
     const articles = JSON.parse(JSON.stringify(originalArticles));
     Object.keys(articles).map(articleId => {
       const targetArticle = articles[articleId];
-      targetArticle.contributors = [];
-      for (const authorship in authorships) {
-        if (authorships.articleId === articleId) {
-          targetArticle.contributors.push(users[authorship.userId]);
-        }
-      }
+      targetArticle.contributors = authorships
+        .filter(authorship => authorship.articleId === parseInt(articleId))
+        .map(authorship => users[authorship.userId]);
     });
     return articles;
   },

@@ -13,7 +13,6 @@ import {
   RecommendedArticles,
   LatestArticleBlock,
   LeftColumn,
-  RightColumn,
 } from "../../articles/components/summaries";
 
 import { SectionFeature, SectionColumn } from "../../sections/components";
@@ -98,7 +97,7 @@ const HomePage = ({ classes, sections, articles, latestArticles }) => {
           <LeftColumn />
           <SectionColumn sections={firstColumnSections} />
           <SectionColumn sections={secondColumnSections} />
-          <RightColumn />
+          <Col md={3} lg={3} />
         </Row>
       </Grid>
     </div>

@@ -43,20 +43,22 @@ const styles = {
     "&:hover": { color: "#000", textDecoration: "none" },
     "&:focus": { color: "#000", textDecoration: "none" },
   },
+  headline: {
+    paddingRight: "0 !important",
+  },
   focus: {
     fontFamily: "Minion Pro",
     fontSize: "14px",
     lineHeight: 1.29,
-    margin: "0 0 14px 0",
+    margin: "0 0 8px 0",
+  },
+  featuredMediaContainer: {
+    padding: "0 0 0 14px !important",
   },
   figure: {
     "& img": {
       width: "100%",
     },
-  },
-  featuredMediaContainer: {
-    paddingRight: "14px",
-    paddingTop: "6px",
   },
 };
 
@@ -71,7 +73,7 @@ const FeaturedArticle = ({ classes, articles, media, sections }) => {
   // NESTED IN <Col lg={9}>
   return (
     <Row className={classes.FeaturedArticle}>
-      <Col lg={4} md={4}>
+      <Col lg={4} md={4} className={classes.headline}>
         <Link
           className={classes.title}
           to={`${section.permalink}/${article.slug}`}
@@ -81,11 +83,7 @@ const FeaturedArticle = ({ classes, articles, media, sections }) => {
         <Link to={section.permalink} className={classes.sectionLabel}>
           {section.name}
         </Link>
-        <p className={classes.focus}>
-          StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
-          27, and Sunday, May 28. The event provided an opportunity for 175 high
-          schools.
-        </p>
+        <p className={classes.focus}>{article.summary}</p>
         <Byline contributors={article.contributors} />
         <Dateline article={article} />
       </Col>

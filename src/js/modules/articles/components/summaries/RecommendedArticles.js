@@ -92,10 +92,7 @@ const RecommendedArticles = ({ classes, articles, sections }) => {
               >
                 {article.title}
               </Link>
-              <p className={classes.focus}>
-                Unfortunately, all good things must come to an end. We came into
-                Stuyvesant last September, saved from the unstructured summer.
-              </p>
+              <p className={classes.focus}>{article.summary}</p>
             </div>
           </div>
         );

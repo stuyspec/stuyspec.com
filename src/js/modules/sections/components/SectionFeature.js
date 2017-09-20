@@ -15,7 +15,7 @@ const styles = {
     display: "block",
     fontFamily: "Minion Pro",
     fontSize: "12px",
-    margin: "0 0 3px 7px",
+    marginBottom: "3px",
     textTransform: "uppercase",
     width: "100%",
     "&:hover": { color: "#000", textDecoration: "none" },
@@ -23,11 +23,12 @@ const styles = {
   },
   primaryArticle: {
     borderRight: "solid 1px #ddd",
-    padding: "0 13px 0 7px",
+    paddingRight: "14px",
     marginBottom: "19px",
   },
   secondaryArticle: {
-    padding: "0 14px 0 13px",
+    paddingLeft: "13px !important",
+    paddingRight: "7px",
     marginBottom: "19px",
   },
   ternaryArticle: {
@@ -65,12 +66,11 @@ const styles = {
     },
   },
   featuredMediaContainer: {
-    paddingLeft: 0,
-    paddingRight: "14px",
+    paddingRight: 0,
   },
   hr: {
     borderColor: "#ddd",
-    margin: "0 0 6px 7px",
+    margin: "0 0 6px 0px",
     width: "786px",
   },
 };
@@ -107,11 +107,7 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
         >
           {primaryArticle.title}
         </Link>
-        <p className={classes.focus}>
-          StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
-          27, and Sunday, May 28. The event provided an opportunity for 175 high
-          schools.
-        </p>
+        <p className={classes.focus}>{primaryArticle.summary}</p>
         <Byline contributors={primaryArticle.contributors} />
         <Dateline article={primaryArticle} />
       </Col>
@@ -123,11 +119,7 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
         >
           {secondaryArticle.title}
         </Link>
-        <p className={classes.focus}>
-          StuyHacks held its fourth hackathon, StuyHacks IV, on Saturday, May
-          27, and Sunday, May 28. The event provided an opportunity for 175 high
-          schools.
-        </p>
+        <p className={classes.focus}>{secondaryArticle.summary}</p>
         <Byline contributors={secondaryArticle.contributors} />
         <Dateline article={secondaryArticle} />
       </Col>

@@ -15,9 +15,8 @@ const styles = {
   },
 };
 
-// TODO: format dates
-const Outquote = ({ classes, article }) => {
-  return <p className={classes.Outquote}>7:20 A.M.</p>;
+const Outquote = ({ classes, quote }) => {
+  return <p className={classes.Outquote}>{quote}</p>;
 };
 
 export default injectSheet(styles)(Outquote);

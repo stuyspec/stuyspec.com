@@ -7,7 +7,7 @@ import SectionBlock from "./SectionBlock";
 const styles = {
   SectionColumn: {
     borderLeft: "solid 1px #ddd",
-    padding: "0 13px",
+    padding: "0 13px !important",
   },
 };
 
