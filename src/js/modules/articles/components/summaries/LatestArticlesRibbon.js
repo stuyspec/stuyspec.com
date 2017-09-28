@@ -8,7 +8,7 @@ import { getLatestArticles } from "../../selectors";
 const LATEST_ARTICLES_SHOWN = 5;
 
 const styles = {
-  LatestArticlesRibbon: {
+  RibbonComponent: {
     float: "left",
     height: "59px",
     marginTop: "9px",
@@ -69,28 +69,9 @@ const styles = {
   },
 };
 
-topFiveLatest.map(article => {
+const RibbonComponent = ({ classes, article, section, featuredMedia }) => {
   return (
-    <LatestArticlesRibbon
-      article={article}
-      section={sections[article.sectionId]}
-      key={article.id}
-    />
-  );
-})
-
-const LatestArticlesRibbon = ({ classes, articles, section, media }) => {
-  const latestArticles = Object.values(articles).slice(0, LATEST_ARTICLES_SHOWN);
-  return (
-    latestArticles.map(article => {
-
-    })
-  )
-  const featuredMedia = Object.values(media).find(mediaObject => {
-    return mediaObject.isFeatured && mediaObject.articleId === article.id;
-  });
-  return (
-    <div className={classes.LatestArticlesRibbon}>
+    <div className={classes.RibbonComponent}>
       {featuredMedia && (
         <div>
           <figure className={classes.figure}>
@@ -109,10 +90,36 @@ const LatestArticlesRibbon = ({ classes, articles, section, media }) => {
       </Link>
     </div>
   );
+}
+
+const LatestArticlesRibbon = ({ classes, articles, media, sections }) => {
+  const latestArticles = articles.slice(0, LATEST_ARTICLES_SHOWN);
+  return (
+    <div>
+    {
+      latestArticles.map(article => {
+        const featuredMedia = Object.values(media).find(mediaObject => {
+          return mediaObject.isFeatured && mediaObject.articleId === article.id;
+        });
+        return (
+          <RibbonComponent
+            article={article}
+            classes={classes}
+            section={sections[article.sectionId]}
+            featuredMedia={featuredMedia}
+            key={article.id}
+          />
+        );
+      })
+    }
+    </div>
+  );
 };
 
 const mapStateToProps = state => ({
+  articles: getLatestArticles(state),
   media: state.media.media,
+  sections: state.sections.sections,
 });
 
 export default connect(mapStateToProps)(
