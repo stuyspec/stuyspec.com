@@ -3,10 +3,12 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import { getMedia } from "../../../media/selectors";
+import { getLatestArticles } from "../../selectors";
+
+const LATEST_ARTICLES_SHOWN = 5;
 
 const styles = {
-  LatestArticleBlock: {
+  LatestArticlesRibbon: {
     float: "left",
     height: "59px",
     marginTop: "9px",
@@ -29,8 +31,14 @@ const styles = {
     letterSpacing: "0.5px",
     marginBottom: "1px",
     textTransform: "uppercase",
-    "&:hover": { color: "#a8a8a8", textDecoration: "none" },
-    "&:focus": { color: "#a8a8a8", textDecoration: "none" },
+    "&:hover": {
+      color: "#a8a8a8",
+      textDecoration: "none"
+    },
+    "&:focus": {
+      color: "#a8a8a8",
+      textDecoration: "none"
+    },
   },
   title: {
     color: "#000",
@@ -61,12 +69,28 @@ const styles = {
   },
 };
 
-const LatestArticleBlock = ({ classes, article, section, media }) => {
+topFiveLatest.map(article => {
+  return (
+    <LatestArticlesRibbon
+      article={article}
+      section={sections[article.sectionId]}
+      key={article.id}
+    />
+  );
+})
+
+const LatestArticlesRibbon = ({ classes, articles, section, media }) => {
+  const latestArticles = Object.values(articles).slice(0, LATEST_ARTICLES_SHOWN);
+  return (
+    latestArticles.map(article => {
+
+    })
+  )
   const featuredMedia = Object.values(media).find(mediaObject => {
     return mediaObject.isFeatured && mediaObject.articleId === article.id;
   });
   return (
-    <div className={classes.LatestArticleBlock}>
+    <div className={classes.LatestArticlesRibbon}>
       {featuredMedia && (
         <div>
           <figure className={classes.figure}>
@@ -88,9 +112,9 @@ const LatestArticleBlock = ({ classes, article, section, media }) => {
 };
 
 const mapStateToProps = state => ({
-  media: getMedia(state),
+  media: state.media.media,
 });
 
 export default connect(mapStateToProps)(
-  injectSheet(styles)(LatestArticleBlock),
+  injectSheet(styles)(LatestArticlesRibbon),
 );

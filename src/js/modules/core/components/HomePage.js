@@ -5,13 +5,12 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 
 import {
   getArticlesWithContributors,
-  getLatestArticles,
 } from "../../articles/selectors";
 
 import {
   FeaturedArticle,
   RecommendedArticles,
-  LatestArticleBlock,
+  LatestArticlesRibbon,
   LeftColumn,
 } from "../../articles/components/summaries";
 
@@ -42,12 +41,11 @@ const styles = {
 
 //The filler column should have a borderRight. Wait until there is something there first
 
-const HomePage = ({ classes, sections, articles, latestArticles }) => {
+const HomePage = ({ classes, sections, articles }) => {
   const sectionFeature = Object.values(sections).find(
     section => section.name === "News",
   );
   const recommendedArticles = Object.values(articles).slice(0, 5);
-  const topFiveLatest = Object.values(latestArticles).slice(0, 5);
 
   const firstColumnSections = [
     "Opinions",
@@ -82,15 +80,7 @@ const HomePage = ({ classes, sections, articles, latestArticles }) => {
               //in the future, this will display an article from each section
               //but right now, it is just displaying the articles in the state
             }
-            {topFiveLatest.map(article => {
-              return (
-                <LatestArticleBlock
-                  article={article}
-                  section={sections[article.sectionId]}
-                  key={article.id}
-                />
-              );
-            })}
+            <LatestArticlesRibbon />
           </Col>
         </Row>
         <Row>
@@ -107,7 +97,6 @@ const HomePage = ({ classes, sections, articles, latestArticles }) => {
 const mapStateToProps = state => ({
   articles: getArticlesWithContributors(state),
   sections: state.sections.sections,
-  latestArticles: getLatestArticles(state),
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(HomePage));

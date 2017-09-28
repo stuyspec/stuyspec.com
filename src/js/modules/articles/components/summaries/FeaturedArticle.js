@@ -6,7 +6,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
-import { Row, Col } from "react-bootstrap/lib";
+import Row from "react-bootstrap/lib/Row";
+import Col from "react-bootstrap/lib/Col";
 
 import Byline from "../Byline";
 import Dateline from "../Dateline";
@@ -70,7 +71,6 @@ const FeaturedArticle = ({ classes, articles, media, sections }) => {
   const featuredMedia = Object.values(media).find(mediaObject => {
     return mediaObject.isFeatured && mediaObject.articleId === article.id;
   });
-  // NESTED IN <Col lg={9}>
   return (
     <Row className={classes.FeaturedArticle}>
       <Col lg={4} md={4} className={classes.headline}>

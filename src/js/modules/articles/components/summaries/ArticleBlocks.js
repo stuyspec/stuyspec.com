@@ -2,12 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
-import { Row, Col } from "react-bootstrap/lib";
+import Row from "react-bootstrap/lib/Row";
+import Col from "react-bootstrap/lib/Col";
 
 import { getMedia } from "../../../media/selectors";
 
 const styles = {
-  ArticleBlocks: {},
+  ArticleBlock: {},
   articleBlock: {
     borderRight: "solid 1px #ddd",
     height: "174px",
@@ -71,9 +72,9 @@ const styles = {
   },
 };
 
-const ArticleBlocks = ({ classes, articles, sections, media }) => {
+const ArticleBlock = ({ classes, articles, sections, media }) => {
   return (
-    <Row className={classes.ArticleBlocks}>
+    <Row className={classes.ArticleBlock}>
       {articles.map(article => {
         const featuredMedia = Object.values(media).find(mediaObject => {
           return mediaObject.isFeatured && mediaObject.articleId === article.id;
@@ -127,4 +128,4 @@ const mapStateToProps = state => ({
   media: getMedia(state),
 });
 
-export default connect(mapStateToProps)(injectSheet(styles)(ArticleBlocks));
+export default connect(mapStateToProps)(injectSheet(styles)(ArticleBlock));
