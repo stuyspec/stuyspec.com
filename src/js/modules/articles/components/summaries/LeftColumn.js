@@ -19,7 +19,7 @@ const styles = {
     },
   },
   figure: {
-    margin: "0 0 12px 0",
+    margin: "0 0 13px 0",
     width: "100%",
     "& img": {
       width: "100%",
@@ -50,7 +50,7 @@ const styles = {
     fontFamily: "Circular Std",
     fontWeight: 300,
     fontSize: "12px",
-    marginBottom: "2px",
+    marginBottom: "3px",
     textTransform: "uppercase",
     "&:hover": {
       color: "#000",
@@ -73,7 +73,7 @@ const styles = {
     fontWeight: "bold",
     fontSize: "18px",
     lineHeight: 1.22,
-    marginBottom: "1px",
+    marginBottom: "4px",
     "&:hover": {
       color: "#000",
     },

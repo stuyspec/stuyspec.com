@@ -10,6 +10,7 @@ const styles = {
     fontSize: "16px",
     fontStyle: "italic",
     lineHeight: 1.25,
+    margin: "10px 0 12px",
     padding: "7px 35px",
     textAlign: "center",
   },
