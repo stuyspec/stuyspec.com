@@ -1,18 +1,34 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
+import { Link } from "react-router-dom";
+import Col from "react-bootstrap/lib/Col";
 
-import Dateline from "../../articles/components/Dateline";
-import Byline from "../../articles/components/Byline";
-import { getArticlesWithContributors } from "../../articles/selectors";
+import Byline from "./Byline";
+import { getArticlesWithContributors } from "../selectors";
+
+const NUMBER_OF_RAIL_ARTICLES = 5;
 
 const styles = {
-  SectionBlock: {
-    "& > div:last-child": { // targets last article
-      border: "none",
-      paddingBottom: 0,
-    }
+  RightRail: {
+
+  },
+  label: {
+    borderTop: "1px solid #000",
+    borderBottom: "1px solid #ddd",
+    color: "#000",
+    display: "block",
+    fontFamily: "Circular Std",
+    fontSize: "13px",
+    fontWeight: 300,
+    margin: 0,
+    padding: "4px 0",
+    "&:hover": {
+      color: "#000",
+    },
+    "&:focus": {
+      color: "#000",
+    },
   },
   article: {
     borderBottom: "solid 1px #ddd",
@@ -89,32 +105,17 @@ const styles = {
   },
 };
 
-const SectionBlock = ({ classes, articles, section, media }) => {
-  const sectionArticles = Object.values(
-    Object.filter(articles, article => article.sectionId === section.id),
-  );
-  const bigArticle = sectionArticles[0];
-  const nextThreeArticles = sectionArticles.slice(1, 4);
+const RightRail = ({ classes, articles, sections, media }) => {
   return (
-    <div className={classes.SectionBlock}>
-      <Link to={section.permalink} className={classes.sectionLabel}>
-        {section.name}
+    <Col md={3} lg={3} className={classes.RightRail}>
+      <Link to="/recommended" className={classes.label}>
+        Recommended
       </Link>
-      <div className={classes.article}>
-        <Link
-          to={`${section.permalink}/${bigArticle.slug}`}
-          className={classes.bigTitle}
-        >
-          {bigArticle.title}
-        </Link>
-        <p className={classes.preview}>{bigArticle.summary}</p>
-        <Byline classes={classes} contributors={bigArticle.contributors} />
-        <Dateline classes={classes} article={bigArticle} />
-      </div>
-      {nextThreeArticles.map(article => {
-        const featuredMedia = Object.values(media).find(mediaObject => {
-          return mediaObject.isFeatured && mediaObject.articleId === article.id;
-        });
+      {Object.values(articles).slice(0, NUMBER_OF_RAIL_ARTICLES).map(article => {
+        const featuredMedia = Object.values(media)
+          .find(mediaObject => mediaObject.articleId === article.id);
+        const section = Object.values(sections)
+          .find(section => article.sectionId === section.id);
         return (
           <div className={classes.article} key={article.id}>
             {featuredMedia && (
@@ -132,13 +133,16 @@ const SectionBlock = ({ classes, articles, section, media }) => {
           </div>
         );
       })}
-    </div>
+    </Col>
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  media: state.media.media,
+const mapStateToProps = state => ({
   articles: getArticlesWithContributors(state),
+  media: state.media.media,
+  sections: state.sections.sections,
 });
 
-export default connect(mapStateToProps)(injectSheet(styles)(SectionBlock));
+export default connect(
+  mapStateToProps
+)(injectSheet(styles)(RightRail));

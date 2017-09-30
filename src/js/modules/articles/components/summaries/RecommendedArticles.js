@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import { Row, Col } from "react-bootstrap/lib";
 
-import { getSections } from "../../../sections/selectors";
-
 const styles = {
   RecommendedArticles: {
     padding: "0 0 10px 14px",
@@ -102,7 +100,7 @@ const RecommendedArticles = ({ classes, articles, sections }) => {
 };
 
 const mapStateToProps = state => ({
-  sections: getSections(state),
+  sections: state.sections.sections,
 });
 
 export default connect(mapStateToProps)(

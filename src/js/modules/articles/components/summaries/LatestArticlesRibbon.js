@@ -8,8 +8,14 @@ import { getLatestArticles } from "../../selectors";
 const LATEST_ARTICLES_SHOWN = 5;
 
 const styles = {
+  LatestArticlesRibbon: {    
+    borderTop: "1px solid #ddd",
+    borderBottom: "1px solid #ddd",
+    fontSize: 0,
+    marginBottom: "22px",
+  },
   RibbonComponent: {
-    float: "left",
+    display: "inline-block",
     height: "59px",
     marginTop: "9px",
     marginBottom: "11px",
@@ -95,7 +101,7 @@ const RibbonComponent = ({ classes, article, section, featuredMedia }) => {
 const LatestArticlesRibbon = ({ classes, articles, media, sections }) => {
   const latestArticles = articles.slice(0, LATEST_ARTICLES_SHOWN);
   return (
-    <div>
+    <div className={classes.LatestArticlesRibbon}>
     {
       latestArticles.map(article => {
         const featuredMedia = Object.values(media).find(mediaObject => {

@@ -1,8 +1,10 @@
 import React from "react";
 import injectSheet from "react-jss";
-import { Row, Col } from "react-bootstrap/lib";
+import Row from "react-bootstrap/lib/Row";
+import Col from "react-bootstrap/lib/Col";
 
 import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
+import RightRail from "./RightRail";
 
 const styles = {
   ArticleBody: {
@@ -42,7 +44,8 @@ const ArticleBody = ({ classes, content, featuredMedia }) => {
         )}
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </Col>
-      <Col md={4} lg={4} />
+      <Col md={1} lg={1} />
+      <RightRail /> {/* RightRail is Col md=3 lg=3 */}
     </Row>
   );
 };

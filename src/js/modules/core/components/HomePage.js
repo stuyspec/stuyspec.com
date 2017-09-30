@@ -12,6 +12,7 @@ import {
   RecommendedArticles,
   LatestArticlesRibbon,
   LeftColumn,
+  RightColumn,
 } from "../../articles/components/summaries";
 
 import { SectionFeature, SectionColumn } from "../../sections/components";
@@ -20,22 +21,13 @@ const styles = {
   HomePage: {
     marginTop: "23px 0px 13px",
   },
-  sectionArticles: {
-    borderTop: "solid 1px #ddd",
-    borderBottom: "solid 1px #ddd",
-    padding: 0,
-  },
   recommendedArticles: {
     padding: 0,
   },
-  featured: {
+  primaryComponents: {
     borderRight: "solid 1px #ddd",
     marginBottom: "19px",
     paddingRight: "14px",
-  },
-  filler: {},
-  recentArticles: {
-    marginBottom: "22px",
   },
 };
 
@@ -65,7 +57,7 @@ const HomePage = ({ classes, sections, articles }) => {
     <div>
       <Grid>
         <Row>
-          <Col lg={9} md={9} className={classes.featured}>
+          <Col lg={9} md={9} className={classes.primaryComponents}>
             <FeaturedArticle />
             <SectionFeature section={sectionFeature} sections={sections} />
           </Col>
@@ -73,21 +65,12 @@ const HomePage = ({ classes, sections, articles }) => {
             <RecommendedArticles articles={recommendedArticles} />
           </Col>
         </Row>
-        <Row className={classes.recentArticles}>
-          <Col md={12} lg={12} className={classes.sectionArticles}>
-            {
-              //TODO: move the mapping to inside LatestArticleBlock
-              //in the future, this will display an article from each section
-              //but right now, it is just displaying the articles in the state
-            }
-            <LatestArticlesRibbon />
-          </Col>
-        </Row>
+        <LatestArticlesRibbon className={classes.latestArticlesRibbon}/>
         <Row>
           <LeftColumn />
           <SectionColumn sections={firstColumnSections} />
           <SectionColumn sections={secondColumnSections} />
-          <Col md={3} lg={3} />
+          <RightColumn />
         </Row>
       </Grid>
     </div>
