@@ -1,4 +1,5 @@
 import React from "react";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
@@ -17,6 +18,8 @@ import {
 
 import { SectionFeature, SectionColumn } from "../../sections/components";
 
+import {openSubscriptionModal} from "../../accounts/actions";
+
 const styles = {
   HomePage: {
     marginTop: "23px 0px 13px",
@@ -33,7 +36,7 @@ const styles = {
 
 //The filler column should have a borderRight. Wait until there is something there first
 
-const HomePage = ({ classes, sections, articles }) => {
+const HomePage = ({ classes, sections, articles, openSubscriptionModal}) => {
   const sectionFeature = Object.values(sections).find(
     section => section.name === "News",
   );
@@ -55,6 +58,7 @@ const HomePage = ({ classes, sections, articles }) => {
   );
   return (
     <div>
+      <button onClick={()=>openSubscriptionModal()}>Subscribe</button>
       <Grid>
         <Row>
           <Col lg={9} md={9} className={classes.primaryComponents}>
@@ -82,4 +86,11 @@ const mapStateToProps = state => ({
   sections: state.sections.sections,
 });
 
-export default connect(mapStateToProps)(injectSheet(styles)(HomePage));
+/*
+Just for testing the subscription modal
+*/
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ openSubscriptionModal }, dispatch);
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(injectSheet(styles)(HomePage));

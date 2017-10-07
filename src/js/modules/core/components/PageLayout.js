@@ -9,6 +9,7 @@ import Favicon from "react-favicon";
 import PageHeader from "./PageHeader";
 import PageFooter from "./PageFooter";
 import SidebarContent from "./SidebarContent";
+import SubscriptionModal from "../../accounts/components/SubscriptionModal";
 
 import { openSidebar, closeSidebar } from "../actions";
 
@@ -51,6 +52,7 @@ class PageLayout extends Component {
         <PageHeader location={location} />
         <Favicon url="https://i.imgur.com/CxNoalR.png" />
         <div className={classes.PageContainer}>{children}</div>
+        <SubscriptionModal/>
         <PageFooter />
       </Sidebar>
     );

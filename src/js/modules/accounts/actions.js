@@ -149,3 +149,38 @@ export const openSignInModal = () => ({
 export const closeSignInModal = () => ({
   type: t.CLOSE_SIGN_IN_MODAL,
 });
+
+export const openSubscriptionModal = () => ({
+  type: t.OPEN_SUBSCRIPTION_MODAL
+});
+
+export const closeSubscriptionModal = () => ({
+  type: t.CLOSE_SUBSCRIPTION_MODAL,
+});
+
+export const subscribe = values => {
+  alert(values.email);
+  return dispatch => {
+    dispatch({
+      type: t.CREATE_SUBSCRIBER_PENDING,
+      payload: values,
+    })
+    axios
+      //IDK where to post to. Right now, it works but just gives error for posting.
+      .post(`${STUY_SPEC_API_URL}/subscription`, values, STUY_SPEC_API_HEADERS)
+      .then(response => {
+        dispatch({
+          type: t.CREATE_SUBSCRIBER_FULFILLED,
+          payload: response,
+        });
+        // Destroys the inputs in the form createComment
+        dispatch(reset("Subscription"));
+      })
+      .catch(err => {
+        dispatch({
+          type: t.CREATE_SUBSCRIBER_REJECTED,
+          payload: err,
+        });
+      });
+  };
+};
