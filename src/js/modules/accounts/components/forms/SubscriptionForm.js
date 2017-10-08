@@ -19,7 +19,8 @@ const styles = {
   },
   submitButton: {
     backgroundColor: "#e2130b",
-    borderRadius: "2px",
+    border: "none",
+    borderRadius: "3px",
     color: "#fff",
     fontFamily: "Circular Std",
     fontSize: "15px",
@@ -35,7 +36,8 @@ const styles = {
   },
   email: {
     backgroundColor: "#eee",
-    borderRadius: "2px",
+    border: "none",
+    borderRadius: "3px",
     fontFamily: "Circular Std",
     fontSize: "15px",
     fontWeight: "300",

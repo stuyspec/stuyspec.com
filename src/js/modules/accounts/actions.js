@@ -159,21 +159,22 @@ export const closeSubscriptionModal = () => ({
 });
 
 export const subscribe = values => {
-  alert(values.email);
+  alert(values.email + "has subscribed");
   return dispatch => {
     dispatch({
       type: t.CREATE_SUBSCRIBER_PENDING,
       payload: values,
     })
+    dispatch({type:t.CLOSE_SUBSCRIPTION_MODAL});
     axios
       //IDK where to post to. Right now, it works but just gives error for posting.
-      .post(`${STUY_SPEC_API_URL}/subscription`, values, STUY_SPEC_API_HEADERS)
+      .post(`${STUY_SPEC_API_URL}/Subscription`, values, STUY_SPEC_API_HEADERS)
       .then(response => {
         dispatch({
           type: t.CREATE_SUBSCRIBER_FULFILLED,
           payload: response,
         });
-        // Destroys the inputs in the form createComment
+        // Destroys the inputs in the form Subscription
         dispatch(reset("Subscription"));
       })
       .catch(err => {

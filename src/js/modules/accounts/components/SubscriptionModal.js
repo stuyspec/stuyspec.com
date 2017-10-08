@@ -35,8 +35,8 @@ const styles = {
   },
   notInterested: {
     backgroundColor: "#ccc",
-    borderColor: "#ccc",
-    borderRadius: "2px",
+    border: "none",
+    borderRadius: "3px",
     color: "#888",  
     fontFamily: "Circular Std",
     fontSize: "15px",
