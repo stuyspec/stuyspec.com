@@ -9,58 +9,60 @@ import { ArticleList } from "../../articles/components";
 
 const styles = {
   ContributorPage: {
-    marginTop: "62px",
+    marginTop: "100px",
   },
   name: {
-    color: "#000000",
+    color: "#000",
     fontFamily: "Canela",
-    fontSize: "36px",
-    fontWeight: "500",
-    margin: "0px",
-    textAlign: "center",
+    fontSize: "48px",
+    fontWeight: "bold",
+    lineHeight: 1,
+    marginBottom: "8px",
   },
   workList: {
-    border: "1px solid #ddd",
+    borderTop: "1px solid #000",
+    borderBottom: "1px solid #ddd",
     borderStyle: "solid none",
     color: "#000",
     fontFamily: "Circular Std",
-    fontSize: "14px",
+    fontSize: "13px",
     fontWeight: "300",
-    margin: "34px 0px 14px",
-    padding: "8px 0px 7px",
-  },
-  profilePicture: {
-    display: "block",
-    height: "302px",
-    margin: "18px auto 12px",
-    width: "256px",
+    marginBottom: "22px",
+    padding: "4px 0px",
   },
   description: {
-    color: "#000000",
+    color: "#666",
     fontFamily: "Minion Pro",
-    fontSize: "18px",
-    lineHeight: "1.28",
-    margin: 0,
+    fontSize: "20px",
+    lineHeight: "1.3",
+    marginBottom: "27px",
   },
+  mailTo: {
+    color: "#3084df",
+    display: "block",
+    fontFamily: "Minion Pro",
+    fontSize: "20px",
+    marginBottom: "8px",
+  }
 };
 
 const ContributorPage = ({ classes, contributor, articles }) => {
+  console.log(articles);
   return (
     <Grid className={classes.ContributorPage}>
       <Row>
-        <Col md={9}>
+        <Col md={9} lg={9}>
           <p className={classes.name}>
             {`${contributor.firstName} ${contributor.lastName}`}
           </p>
-          <img
-            alt={contributor.lastName}
-            className={classes.profilePicture}
-            src={contributor.url}
-          />
+          <a href={`mailto:${contributor.email}`} className={classes.mailTo}>
+            {contributor.email}
+          </a>
           <p className={classes.description}>{contributor.description}</p>
-          <div className={classes.workList}>All Work</div>
-          <ArticleList articles={articles} />
+          <div className={classes.workList}>Latest</div>
+          <ArticleList articles={articles}/>
         </Col>
+        <Col md={3} lg={3}/>
       </Row>
     </Grid>
   );
