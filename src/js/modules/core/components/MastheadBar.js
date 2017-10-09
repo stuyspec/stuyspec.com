@@ -7,6 +7,8 @@ import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
 import { getSections, getSectionSlugs } from "../../sections/selectors";
 
+import {openSubscriptionModal} from "../../accounts/actions";
+
 const styles = {
   MastheadBar: {
     backgroundColor: "#fff",
@@ -107,6 +109,7 @@ const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 const MastheadBar = ({
   classes,
   openSidebar,
+  openSubscriptionModal,
   session,
   location,
   sectionSlugs,
@@ -148,7 +151,7 @@ const MastheadBar = ({
             <Link to="/myaccount/">
               <StyledNavButton label="log in" />
             </Link>
-            <StyledNavButton label="subscribe" />
+            <StyledNavButton label="subscribe" onClick={openSubscriptionModal}/>
           </div>
         )}
       </div>
@@ -163,7 +166,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ openSidebar }, dispatch);
+  return bindActionCreators({ openSidebar, openSubscriptionModal }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(

@@ -18,8 +18,6 @@ import {
 
 import { SectionFeature, SectionColumn } from "../../sections/components";
 
-import {openSubscriptionModal} from "../../accounts/actions";
-
 const styles = {
   HomePage: {
     marginTop: "23px 0px 13px",
@@ -36,7 +34,7 @@ const styles = {
 
 //The filler column should have a borderRight. Wait until there is something there first
 
-const HomePage = ({ classes, sections, articles, openSubscriptionModal}) => {
+const HomePage = ({ classes, sections, articles}) => {
   const sectionFeature = Object.values(sections).find(
     section => section.name === "News",
   );
@@ -58,7 +56,6 @@ const HomePage = ({ classes, sections, articles, openSubscriptionModal}) => {
   );
   return (
     <div>
-      <button onClick={()=>openSubscriptionModal()}>Subscribe</button>
       <Grid>
         <Row>
           <Col lg={9} md={9} className={classes.primaryComponents}>
@@ -86,11 +83,4 @@ const mapStateToProps = state => ({
   sections: state.sections.sections,
 });
 
-/*
-Just for testing the subscription modal
-*/
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ openSubscriptionModal }, dispatch);
-};
-
-export default connect(mapStateToProps,mapDispatchToProps)(injectSheet(styles)(HomePage));
+export default connect(mapStateToProps)(injectSheet(styles)(HomePage));
