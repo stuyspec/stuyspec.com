@@ -16,7 +16,7 @@ const styles = {
   theSpectatorLogo: {
     color: "#000",
     fontFamily: "Old English Text MT",
-    fontSize: window.innerWidth >= 768 ? "75px" : "42px",
+    fontSize: "42px",
     marginBottom: "22px",
     "&:hover": {
       color: "#000",
@@ -26,6 +26,9 @@ const styles = {
       color: "#000",
       textDecoration: "none",
     },
+    "@media (min-width: 768px)": {
+      fontSize: "75px"
+    }
   },
   sectionLinksNav: {
     fontFamily: "Circular Std",
