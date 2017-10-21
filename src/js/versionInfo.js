@@ -3,5 +3,5 @@
  *           without modifying formatting for automation scripts
  * @type {{VERSION: string}}
  */
-let VersionInfo = { VERSION : '0.0.4399' };
+let VersionInfo = { VERSION : '0.0.4400' };
 export default VersionInfo;
