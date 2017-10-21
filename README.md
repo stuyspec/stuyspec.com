@@ -47,5 +47,5 @@ You are now good to go, now any file that you want to prettify, just go to that 
 
 To run Prettier on the entire projects, `cd` to the root of client-app and run
 ```
-find ./src/js/modules -type f -name "*.js" | xargs prettier --write --trailing-comma all
+find ./src/js/modules -type f -name '*.js' | xargs prettier --write --trailing-comma all
 ```
