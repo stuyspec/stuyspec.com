@@ -11,12 +11,12 @@ const styles = {
     margin: "0px auto 24px auto",
     paddingTop: "11px",
     textAlign: "center",
-    width: "1060px",
+    maxWidth: "1060px",
   },
   theSpectatorLogo: {
     color: "#000",
     fontFamily: "Old English Text MT",
-    fontSize: "75px",
+    fontSize: window.innerWidth >= 768 ? "75px" : "42px",
     marginBottom: "22px",
     "&:hover": {
       color: "#000",
