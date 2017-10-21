@@ -54,15 +54,16 @@ const HomePage = ({ classes, sections, articles}) => {
   ].map(sectionName =>
     Object.values(sections).find(section => section.name === sectionName),
   );
+  // TODO: big components should be moved out of Col's and have their own
   return (
     <div>
       <Grid>
         <Row>
-          <Col lg={9} md={9} className={classes.primaryComponents}>
+          <Col md={9} lg={9} className={classes.primaryComponents}>
             <FeaturedArticle />
             <SectionFeature section={sectionFeature} sections={sections} />
           </Col>
-          <Col lg={3} md={3} className={classes.recommendedArticles}>
+          <Col md={3} lg={3} className={classes.recommendedArticles}>
             <RecommendedArticles articles={recommendedArticles} />
           </Col>
         </Row>

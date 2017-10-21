@@ -73,7 +73,7 @@ const FeaturedArticle = ({ classes, articles, media, sections }) => {
   });
   return (
     <Row className={classes.FeaturedArticle}>
-      <Col lg={4} md={4} className={classes.headline}>
+      <Col xs={12} sm={4} md={4} lg={4} className={classes.headline}>
         <Link
           className={classes.title}
           to={`${section.permalink}/${article.slug}`}
@@ -87,7 +87,7 @@ const FeaturedArticle = ({ classes, articles, media, sections }) => {
         <Byline contributors={article.contributors} />
         <Dateline article={article} />
       </Col>
-      <Col lg={8} md={8} className={classes.featuredMediaContainer}>
+      <Col xs={12} sm={8} md={8} lg={8}  className={classes.featuredMediaContainer}>
         <figure className={classes.figure}>
           <img src={featuredMedia.url} />
         </figure>

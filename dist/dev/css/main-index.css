@@ -21,6 +21,7 @@ gutters on the first- and last-child columns.
     }
 
     .container {
+        width: 99%;
     }
 
 }
@@ -31,6 +32,7 @@ gutters on the first- and last-child columns.
     }
 
     .container {
+        width: 98%;
     }
 
 }
@@ -41,6 +43,7 @@ gutters on the first- and last-child columns.
     }
 
     .container {
+        width: 97%;
     }
 
 }
