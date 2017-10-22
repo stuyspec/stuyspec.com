@@ -1,5 +1,5 @@
 # client-app
-The Client-facing Application of The Stuyvesant Spectator is a modern website, built on [ReactJS](https://github.com/facebook/react).
+The Client-facing Application of The Stuyvesant Spectator is a modern website, built on [ReactJS](https://github.com/facebook/react). For the home page design, see [Behance](https://www.behance.net/gallery/58000077/The-SpectatorA-New-Look).
 
 ## Getting started
 _Requirement: [Git](https://help.github.com/articles/set-up-git/)_
