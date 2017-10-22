@@ -11,12 +11,12 @@ const styles = {
     margin: "0px auto 24px auto",
     paddingTop: "11px",
     textAlign: "center",
-    width: "1060px",
+    maxWidth: "1060px",
   },
   theSpectatorLogo: {
     color: "#000",
     fontFamily: "Old English Text MT",
-    fontSize: "75px",
+    fontSize: "42px",
     marginBottom: "22px",
     "&:hover": {
       color: "#000",
@@ -26,6 +26,9 @@ const styles = {
       color: "#000",
       textDecoration: "none",
     },
+    "@media (min-width: 768px)": {
+      fontSize: "75px"
+    }
   },
   sectionLinksNav: {
     fontFamily: "Circular Std",

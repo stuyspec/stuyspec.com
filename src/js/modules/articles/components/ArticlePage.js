@@ -13,7 +13,7 @@ import {
 const styles = {
   ArticlePage: {
     margin: "0 auto",
-    width: "1060px",
+    maxWidth: "1060px",
   },
 };
 
