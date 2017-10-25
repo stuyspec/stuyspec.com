@@ -15,6 +15,14 @@ gutters on the first- and last-child columns.
     margin: 0;
 }
 
+.container {
+    padding: 0;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
 @media (max-width: 768px) {
     .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7,
     .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
@@ -35,11 +43,11 @@ gutters on the first- and last-child columns.
     }
 
     .container {
-        padding: 14px;
+        padding: 0 14px;
     }
 
     .container-fluid {
-        padding: 14px;
+        padding: 0 14px;
     }
 }
 
@@ -49,7 +57,12 @@ gutters on the first- and last-child columns.
     }
 
     .container {
-        width: 95%;
+        width: 100%;
+        padding: 0 14px;
+    }
+
+    .container-fluid {
+        padding: 0 14px;
     }
 
 }
@@ -71,14 +84,6 @@ gutters on the first- and last-child columns.
         width: 1066px;
     }
 
-}
-
-.container {
-    padding: 0;
-}
-
-.container-fluid {
-    padding: 0;
 }
 
 /* Picking out first and last columns in a row is documented in
