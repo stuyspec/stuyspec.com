@@ -73,6 +73,11 @@ const styles = {
       width: "100%",
     },
   },
+  "@media (max-width: 991px)": {
+    figure: {
+      width: "42%",
+    }
+  }
 };
 
 const RibbonComponent = ({ classes, article, section, featuredMedia }) => {
