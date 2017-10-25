@@ -98,7 +98,7 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
     );
   });
   return (
-    <Col md={3} lg={3} className={classes.LeftColumn}>
+    <Col sm={3} md={3} lg={3} className={classes.LeftColumn}>
       <div className={classes.primaryArticle}>
         {primaryMedia && (
           <div>

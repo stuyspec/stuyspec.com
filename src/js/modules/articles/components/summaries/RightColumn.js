@@ -100,7 +100,7 @@ const RightColumn = ({ classes, articles, media, sections }) => {
     );
   });
   return (
-    <Col md={3} lg={3} className={classes.RightColumn}>
+    <Col sm={3} md={3} lg={3} className={classes.RightColumn}>
       <div className={classes.primaryArticle}>
         {primaryMedia && (
           <div>

@@ -96,7 +96,7 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
       <Link to={section.permalink} className={classes.sectionLabel}>
         {section.name}
       </Link>
-      <Col lg={4} md={4} className={classes.primaryArticle}>
+      <Col sm={4} md={4} lg={4} className={classes.primaryArticle}>
         <Link
           className={classes.title}
           to={`${sections[primaryArticle.sectionId]
@@ -108,7 +108,7 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
         <Byline contributors={primaryArticle.contributors} />
         <Dateline article={primaryArticle} />
       </Col>
-      <Col lg={4} md={4} className={classes.secondaryArticle}>
+      <Col sm={4} md={4} lg={4} className={classes.secondaryArticle}>
         <Link
           className={classes.title}
           to={`${sections[secondaryArticle.sectionId]
@@ -120,7 +120,7 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
         <Byline contributors={secondaryArticle.contributors} />
         <Dateline article={secondaryArticle} />
       </Col>
-      <Col lg={4} md={4} className={classes.featuredMediaContainer}>
+      <Col sm={4} md={4} lg={4} className={classes.featuredMediaContainer}>
         <figure className={classes.figure}>
           <img src={featuredMedia.url} />
         </figure>

@@ -30,6 +30,12 @@ const styles = {
     marginBottom: "19px",
     paddingRight: "14px",
   },
+  "@media (min-width: 768px)": {
+    primaryComponents: {    
+      borderRight: "none",
+      paddingRight: 0,
+    },
+  },
 };
 
 //The filler column should have a borderRight. Wait until there is something there first
@@ -57,13 +63,13 @@ const HomePage = ({ classes, sections, articles}) => {
   // TODO: big components should be moved out of Col's and have their own
   return (
     <div>
-      <Grid>
+      <Grid fluid>
         <Row>
-          <Col md={9} lg={9} className={classes.primaryComponents}>
+          <Col sm={12} md={9} lg={9} className={classes.primaryComponents}>
             <FeaturedArticle />
             <SectionFeature section={sectionFeature} sections={sections} />
           </Col>
-          <Col md={3} lg={3} className={classes.recommendedArticles}>
+          <Col xsHidden smHidden md={3} lg={3} className={classes.recommendedArticles}>
             <RecommendedArticles articles={recommendedArticles} />
           </Col>
         </Row>

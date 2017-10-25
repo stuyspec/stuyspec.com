@@ -17,7 +17,7 @@ const styles = {
 
 const SectionColumn = ({ classes, sections }) => {
   return (
-    <Col md={3} lg={3} className={classes.SectionColumn}>
+    <Col sm={3} md={3} lg={3} className={classes.SectionColumn}>
       {sections.map(section => {
         return (
           <SectionBlock section={section} key={section.id} />
