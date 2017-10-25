@@ -46,6 +46,7 @@ const styles = {
   },
   headline: {
     paddingRight: "0 !important",
+    paddingLeft: "0 !important",
   },
   focus: {
     fontFamily: "Minion Pro",

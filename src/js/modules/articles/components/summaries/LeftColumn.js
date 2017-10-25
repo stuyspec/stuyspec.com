@@ -81,6 +81,9 @@ const styles = {
       color: "#000",
     },
   },
+  bylineContaienr: {
+    marginBottom: "4px",
+  },
   "@media (max-width: 768px)": {
     LeftColumn: {
       paddingRight: "0 !important",
@@ -151,7 +154,9 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
         >
           {secondaryArticle.title}
         </Link>
-        <Byline contributors={secondaryArticle.contributors} />
+        <div className={classes.bylineContainer}>
+          <Byline contributors={secondaryArticle.contributors} />
+        </div>
         <p className={classes.articleSummary}>{secondaryArticle.summary}</p>
         <Dateline article={secondaryArticle} />
       </div>
@@ -179,7 +184,9 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
         </Link>
         <Outquote quote={outquoteArticle.outquotes[0]} />
         <p className={classes.articleSummary}>{outquoteArticle.summary}</p>
-        <Byline contributors={outquoteArticle.contributors} />
+        <div className={classes.bylineContainer}>
+          <Byline contributors={outquoteArticle.contributors} />
+        </div>
         <Dateline article={outquoteArticle} />
       </div>
     </Col>

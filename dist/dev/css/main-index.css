@@ -67,9 +67,17 @@ gutters on the first- and last-child columns.
         width: 1066px;
     }
 
+    .container-fluid {
+        width: 1066px;
+    }
+
 }
 
 .container {
+    padding: 0;
+}
+
+.container-fluid {
     padding: 0;
 }
 
