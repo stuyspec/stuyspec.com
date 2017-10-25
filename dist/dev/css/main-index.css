@@ -29,11 +29,11 @@ gutters on the first- and last-child columns.
     }
 
     .container {
-        padding: 14px;
+        padding: 0 14px;
     }
 
     .container-fluid {
-        padding: 14px;
+        padding: 0 14px;
     }    
 }
 
