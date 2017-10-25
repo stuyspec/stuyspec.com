@@ -12,7 +12,6 @@ const styles = {
     background: "#fff",
     height: "370px",
     marginTop: "14px",
-    padding: 0,
   },
   pageFooterMain: {
     borderTop: "3px solid #ddd",
