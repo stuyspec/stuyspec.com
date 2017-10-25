@@ -83,6 +83,12 @@ const styles = {
       color: "#000",
     },
   },
+  "@media (max-width: 768px)": {
+    RightColumn: {
+      borderLeft: "none",
+      paddingLeft: "0 !important",
+    },
+  },
 };
 
 const RightColumn = ({ classes, articles, media, sections }) => {
