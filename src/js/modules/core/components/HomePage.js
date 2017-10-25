@@ -80,8 +80,12 @@ const HomePage = ({ classes, sections, articles}) => {
         </Row>
         <Row>
           <LeftColumn />
-          <SectionColumn sections={firstColumnSections} />
-          <SectionColumn sections={secondColumnSections} />
+          <Col xs={12} sm={3} md={3} lg={3}>
+            <SectionColumn sections={firstColumnSections} />
+          </Col>
+          <Col xs={12} sm={3} md={3} lg={3}>
+            <SectionColumn sections={secondColumnSections} />
+          </Col>
           <RightColumn />
         </Row>
       </Grid>

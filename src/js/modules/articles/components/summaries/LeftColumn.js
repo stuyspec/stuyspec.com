@@ -11,7 +11,7 @@ import Outquote from "../Outquote";
 
 const styles = {
   LeftColumn: {
-    paddingRight: "14px !important",
+    paddingRight: "7px !important", // adds to the 7px in Col = 14px
     "& > div": {
       borderBottom: "1px solid #ddd",
       marginBottom: "14px",
