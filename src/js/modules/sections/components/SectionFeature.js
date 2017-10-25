@@ -71,6 +71,16 @@ const styles = {
   featuredMediaContainer: {
     paddingRight: 0,
   },
+  "@media (max-width: 767px)": {
+    SectionFeature: {
+      borderBottom: "1px solid #ddd",
+      paddingBottom: "6px",
+    },
+    secondaryArticle: {
+      padding: "0px !important",
+      marginBottom: 0,
+    },
+  }
 };
 
 const SectionFeature = ({ classes, articles, section, media, sections }) => {
@@ -96,7 +106,7 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
       <Link to={section.permalink} className={classes.sectionLabel}>
         {section.name}
       </Link>
-      <Col sm={4} md={4} lg={4} className={classes.primaryArticle}>
+      <Col xsHidden sm={4} md={4} lg={4} className={classes.primaryArticle}>
         <Link
           className={classes.title}
           to={`${sections[primaryArticle.sectionId]
@@ -108,7 +118,7 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
         <Byline contributors={primaryArticle.contributors} />
         <Dateline article={primaryArticle} />
       </Col>
-      <Col sm={4} md={4} lg={4} className={classes.secondaryArticle}>
+      <Col xs={6} sm={4} md={4} lg={4} className={classes.secondaryArticle}>
         <Link
           className={classes.title}
           to={`${sections[secondaryArticle.sectionId]
@@ -120,7 +130,7 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
         <Byline contributors={secondaryArticle.contributors} />
         <Dateline article={secondaryArticle} />
       </Col>
-      <Col sm={4} md={4} lg={4} className={classes.featuredMediaContainer}>
+      <Col xs={6} sm={4} md={4} lg={4} className={classes.featuredMediaContainer}>
         <figure className={classes.figure}>
           <img src={featuredMedia.url} />
         </figure>

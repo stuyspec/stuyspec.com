@@ -30,7 +30,7 @@ const styles = {
     marginBottom: "19px",
     paddingRight: "14px",
   },
-  "@media (min-width: 768px)": {
+  "@media (max-width: 991px)": {
     primaryComponents: {    
       borderRight: "none",
       paddingRight: 0,
@@ -65,7 +65,7 @@ const HomePage = ({ classes, sections, articles}) => {
     <div>
       <Grid fluid>
         <Row>
-          <Col sm={12} md={9} lg={9} className={classes.primaryComponents}>
+          <Col xs={12} sm={12} md={9} lg={9} className={classes.primaryComponents}>
             <FeaturedArticle />
             <SectionFeature section={sectionFeature} sections={sections} />
           </Col>
@@ -73,7 +73,11 @@ const HomePage = ({ classes, sections, articles}) => {
             <RecommendedArticles articles={recommendedArticles} />
           </Col>
         </Row>
-        <LatestArticlesRibbon className={classes.latestArticlesRibbon}/>
+        <Row>
+          <Col xsHidden sm={12} md={12} lg={12}>
+            <LatestArticlesRibbon className={classes.latestArticlesRibbon}/>
+          </Col>
+        </Row>
         <Row>
           <LeftColumn />
           <SectionColumn sections={firstColumnSections} />

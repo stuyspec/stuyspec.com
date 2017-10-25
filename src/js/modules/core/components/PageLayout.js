@@ -14,7 +14,7 @@ import SubscriptionModal from "../../accounts/components/SubscriptionModal";
 import { openSidebar, closeSidebar } from "../actions";
 
 const styles = {
-  "@media (min-width: 768px)": {
+  "@media (max-width: 991px)": {
     PageContainer: {    
       marginTop: "60px",
     },

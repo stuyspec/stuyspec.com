@@ -81,6 +81,11 @@ const styles = {
       color: "#000",
     },
   },
+  "@media (max-width: 768px)": {
+    LeftColumn: {
+      paddingRight: "0 !important",
+    },
+  },
 };
 
 const LeftColumn = ({ classes, articles, media, sections }) => {
