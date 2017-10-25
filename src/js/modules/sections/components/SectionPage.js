@@ -13,7 +13,7 @@ import SectionColumn from "./SectionColumn";
 
 const styles = {
   SectionPage: {
-    margin: "50px auto 0",
+    marginTop: "-16px", // counters PageContainer.marginTop = 60px
   },
   subsectionBar: {
     margin: "0 0 28px 0",
