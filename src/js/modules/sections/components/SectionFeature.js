@@ -9,7 +9,10 @@ import Dateline from "../../articles/components/Dateline";
 import { getArticlesWithContributors } from "../../articles/selectors";
 
 const styles = {
-  SectionFeature: {},
+  SectionFeature: {
+    borderTop: "1px solid #ddd",
+    paddingTop: "6px",
+  },
   sectionLabel: {
     color: "#000",
     display: "block",
@@ -68,11 +71,6 @@ const styles = {
   featuredMediaContainer: {
     paddingRight: 0,
   },
-  hr: {
-    borderColor: "#ddd",
-    margin: "0 0 6px 0px",
-    width: "786px",
-  },
 };
 
 const SectionFeature = ({ classes, articles, section, media, sections }) => {
@@ -95,7 +93,6 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
   // NESTED IN <Col lg={9}>
   return (
     <Row className={classes.SectionFeature}>
-      <hr className={classes.hr} />
       <Link to={section.permalink} className={classes.sectionLabel}>
         {section.name}
       </Link>
