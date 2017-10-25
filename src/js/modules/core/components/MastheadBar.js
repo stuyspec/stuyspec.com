@@ -95,6 +95,11 @@ const navButtonStyles = {
     display: "inline",
     marginRight: "4px",
   },
+  "@media (max-width: 768px)": {
+    buttonText: {
+      display: "none",
+    }
+  }
 };
 
 const NavButton = ({ classes, children, label, onClick }) => {

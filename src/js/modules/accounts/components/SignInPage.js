@@ -8,22 +8,20 @@ import { SignInForm, SignUpForm } from "./forms";
 import { signIn, signUp } from "../actions";
 
 const styles = {
-  SignInPage: {
-    margin: "78px auto 0",
-    width: "1066px",
+  "@media (min-width: 992px)": {
+    SignInPage: {
+      marginTop: "60px",
+    },
   },
 };
 
 const SignInPage = ({ classes, signIn, signUp }) => {
   return (
-    <Grid className={classes.SignInPage}>
+    <Grid fluid className={classes.SignInPage}>
       <Row>
-        <Col md={6} lg={6}>
+        <Col xs={12} sm={6} smOffset={3} md={6} mdOffset={3} lg={6} lgOffset={3}>
           <SignInForm onSubmit={signIn} />
-          <hr />
-          <SignUpForm onSubmit={signUp} />
         </Col>
-        <Col md={6} lg={6} />
       </Row>
     </Grid>
   );
