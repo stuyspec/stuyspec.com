@@ -12,9 +12,6 @@ import { getMedia } from "../../media/selectors";
 import SectionColumn from "./SectionColumn";
 
 const styles = {
-  SectionPage: {
-    marginTop: "-16px", // counters PageContainer.marginTop = 60px
-  },
   subsectionBar: {
     margin: "0 0 28px 0",
     padding: 0,
@@ -71,12 +68,22 @@ const styles = {
       borderLeft: "none",
     }
   },
+  "@media (min-width: 992px)": {
+    SectionPage: {
+      marginTop: "46px",
+    }
+  },
+  "@media (max-width: 991px)": {
+    SectionPage: {
+      marginTop: "-16px", // counters PageContainer.marginTop = 60px
+    },
+  },
   "@media (max-width: 768px)": {
     latestArticles: {
       borderRight: "none",
       paddingRight: 0,
-    }
-  }
+    },
+  },
 };
 
 const SectionPage = ({

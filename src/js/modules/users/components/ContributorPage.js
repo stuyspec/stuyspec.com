@@ -15,11 +15,18 @@ const styles = {
     color: "#000",
     fontFamily: "Canela",
     fontSize: "48px",
-    fontWeight: "bold",
+    fontWeight: 500,
     lineHeight: 1,
-    marginBottom: "8px",
+    marginBottom: "11px",
   },
-  workList: {
+  email: {
+    color: "#3084df",
+    display: "block",
+    fontFamily: "Minion Pro",
+    fontSize: "17px",
+    marginBottom: "7px",
+  },
+  latest: {
     borderTop: "1px solid #000",
     borderBottom: "1px solid #ddd",
     borderStyle: "solid none",
@@ -31,23 +38,14 @@ const styles = {
     padding: "4px 0px",
   },
   description: {
-    color: "#666",
     fontFamily: "Minion Pro",
-    fontSize: "20px",
-    lineHeight: "1.3",
-    marginBottom: "27px",
+    fontSize: "16px",
+    lineHeight: "1.5",
+    marginBottom: "26px",
   },
-  mailTo: {
-    color: "#3084df",
-    display: "block",
-    fontFamily: "Minion Pro",
-    fontSize: "20px",
-    marginBottom: "8px",
-  }
 };
 
 const ContributorPage = ({ classes, contributor, articles }) => {
-  console.log(articles);
   return (
     <Grid className={classes.ContributorPage}>
       <Row>
@@ -55,11 +53,11 @@ const ContributorPage = ({ classes, contributor, articles }) => {
           <p className={classes.name}>
             {`${contributor.firstName} ${contributor.lastName}`}
           </p>
-          <a href={`mailto:${contributor.email}`} className={classes.mailTo}>
+          <a href={`mailto:${contributor.email}`} className={classes.email}>
             {contributor.email}
           </a>
           <p className={classes.description}>{contributor.description}</p>
-          <div className={classes.workList}>Latest</div>
+          <div className={classes.latest}>Latest</div>
           <ArticleList articles={articles}/>
         </Col>
         <Col md={3} lg={3}/>
