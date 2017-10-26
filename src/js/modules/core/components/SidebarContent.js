@@ -73,13 +73,13 @@ const SidebarContent = ({
      * sections and one separating the non-writing sections from the user
      * account options.
      */
-    if (section.name === "Sports" || section.name === "Video") {
+    if (section.name === "Sports" || section.name === "Photo") {
       sidebarElements.push(
         <hr className={classes.divider} key={section.id + 100} />,
       );
     }
   });
-  if (session) {
+  if (session.userId) {
     sidebarElements.push(
       <Link
         className={classes.sidebarSectionLink}

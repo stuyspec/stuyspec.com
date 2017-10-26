@@ -113,7 +113,14 @@ const styles = {
     },
     sectionNameMobile: {
       display: "inline",
-    }
+    },
+    quickNav: {
+      float: "left",
+      marginTop: "9px",
+      "& button": {
+        marginRight: "12px",
+      },
+    },
   }
 };
 
@@ -166,7 +173,7 @@ const MastheadBar = ({
 }) => {
   const sectionSlugArray = location.pathname.split("/");
   const sectionSlug = sectionSlugArray[sectionSlugArray.length - 1];
-  let brandingSection = "";
+  let brandingSection = null;
   if (sectionSlugs.includes(sectionSlug)) {
     brandingSection = Object.values(sections).find(section => section.slug === sectionSlug).name;
   }
@@ -183,14 +190,15 @@ const MastheadBar = ({
         </div>
         <Link className={classes.brandingLink} to="/">
           The Spectator
-          {brandingSection === "Arts & Entertainment" ? (
+          {brandingSection === "Arts & Entertainment" && (
             <span className={classes.responsiveSectionNameContainer}>
               <span className={classes.sectionNameDesktop}>
                 {brandingSection}
               </span>
               <span className={classes.sectionNameMobile}>A&E</span>
             </span>
-          ) : (
+          )}
+          {brandingSection && brandingSection !== "Arts & Entertainment" && (
             <span className={classes.sectionName}>
               {brandingSection}
             </span>
