@@ -47,7 +47,7 @@ const styles = {
   error: {
     color: "red",
     margin: 0,
-  }
+  },
 };
 
 const validate = formValues => {
@@ -70,7 +70,12 @@ const renderField = ({
   return (
     <div>
       <div>
-        <input {...input} placeholder={label} type={type} className={classes.email}/>
+        <input
+          {...input}
+          placeholder={label}
+          type={type}
+          className={classes.email}
+        />
         {touched &&
           ((error && <p className={classes.error}>{error}</p>) ||
             (warning && <p>{warning}</p>))}
@@ -79,7 +84,7 @@ const renderField = ({
   );
 };
 
-const SubscriptionForm= ({ classes, handleSubmit, submitting }) => {
+const SubscriptionForm = ({ classes, handleSubmit, submitting }) => {
   return (
     <div className={classes.SubscriptionForm}>
       <form onSubmit={handleSubmit}>
@@ -96,7 +101,7 @@ const SubscriptionForm= ({ classes, handleSubmit, submitting }) => {
             disabled={submitting}
             className={classes.submitButton}
           >
-          Subscribe
+            Subscribe
           </button>
         </div>
       </form>

@@ -20,7 +20,7 @@ const styles = {
     fontWeight: 300,
     marginBottom: "22px",
     padding: "4px 0",
-  }
+  },
 };
 
 const RecommendedPage = ({ classes, articles }) => {

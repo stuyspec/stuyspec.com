@@ -66,15 +66,15 @@ const styles = {
     },
     DatelineMobile: {
       display: "block",
-    }
+    },
   },
   "@media (max-width: 575px)": {
     figure: {
       float: "none",
       margin: "0 0 14px 0",
       width: "100%",
-    }
-  }
+    },
+  },
 };
 
 const ArticleRow = ({ classes, article, sections, users, media }) => {
@@ -92,10 +92,7 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
         <div className={classes.summary}>
           {featuredMedia && (
             <figure className={classes.figure}>
-              <img
-                src={featuredMedia.url}
-                alt={featuredMedia.title}
-              />
+              <img src={featuredMedia.url} alt={featuredMedia.title} />
             </figure>
           )}
           <Link
@@ -105,9 +102,8 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
             {article.title}
           </Link>
           <p className={classes.preview}>
-            Unfortunately, all good things must come to an end. We
-            came into Stuyvesant last September, saved from the
-            unstructured summer.
+            Unfortunately, all good things must come to an end. We came into
+            Stuyvesant last September, saved from the unstructured summer.
           </p>
           <Byline contributors={article.contributors} />
           <p className={classes.DatelineMobile}>August 24, 2017</p>

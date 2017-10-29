@@ -8,7 +8,8 @@ const styles = {
   SectionColumn: {
     borderLeft: "solid 1px #ddd",
     padding: "0 0 0 7px !important",
-    "& > div:not(:last-child)": { // targets each SectionBlock
+    "& > div:not(:last-child)": {
+      // targets each SectionBlock
       borderBottom: "solid 1px #ddd",
       marginBottom: "24px",
     },
@@ -17,17 +18,15 @@ const styles = {
     SectionColumn: {
       borderLeft: "none",
       padding: "0 !important",
-    }
-  }
+    },
+  },
 };
 
 const SectionColumn = ({ classes, sections }) => {
   return (
     <div className={classes.SectionColumn}>
       {sections.map(section => {
-        return (
-          <SectionBlock section={section} key={section.id} />
-        );
+        return <SectionBlock section={section} key={section.id} />;
       })}
     </div>
   );

@@ -69,7 +69,7 @@ const styles = {
     },
     headline: {
       padding: "0 !important",
-    }
+    },
   },
 };
 
@@ -83,12 +83,30 @@ const FeaturedArticle = ({ classes, articles, media, sections }) => {
   });
   return (
     <Row className={classes.FeaturedArticle}>
-      <Col xs={12} sm={8} md={8} lg={8} smPush={4} mdPush={4} lgPush={4} className={classes.featuredMediaContainer}>
+      <Col
+        xs={12}
+        sm={8}
+        md={8}
+        lg={8}
+        smPush={4}
+        mdPush={4}
+        lgPush={4}
+        className={classes.featuredMediaContainer}
+      >
         <figure className={classes.figure}>
           <img src={featuredMedia.url} />
         </figure>
       </Col>
-      <Col xs={12} sm={4} md={4} lg={4} smPull={8} mdPull={8} lgPull={8} className={classes.headline}>
+      <Col
+        xs={12}
+        sm={4}
+        md={4}
+        lg={4}
+        smPull={8}
+        mdPull={8}
+        lgPull={8}
+        className={classes.headline}
+      >
         <Link
           className={classes.title}
           to={`${section.permalink}/${article.slug}`}

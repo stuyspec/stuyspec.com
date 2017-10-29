@@ -38,14 +38,20 @@ const SignUpPage = ({ classes, signUp }) => {
   return (
     <Grid fluid className={classes.SignInPage}>
       <Row>
-        <Col xs={12} sm={6} smOffset={3} md={6} mdOffset={3} lg={6} lgOffset={3}>
-          <p className={classes.pageTitle}>
-            Create an Account
-          </p>
+        <Col
+          xs={12}
+          sm={6}
+          smOffset={3}
+          md={6}
+          mdOffset={3}
+          lg={6}
+          lgOffset={3}
+        >
+          <p className={classes.pageTitle}>Create an Account</p>
           <Link to={"/myaccount"} className={classes.signUpRedirect}>
             Already have an account? Log in »
           </Link>
-          <hr className={classes.hr}/>
+          <hr className={classes.hr} />
           <SignUpForm onSubmit={signUp} />
         </Col>
       </Row>

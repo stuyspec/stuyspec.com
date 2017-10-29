@@ -80,7 +80,7 @@ const styles = {
       padding: "0px !important",
       marginBottom: 0,
     },
-  }
+  },
 };
 
 const SectionFeature = ({ classes, articles, section, media, sections }) => {
@@ -130,7 +130,13 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
         <Byline contributors={secondaryArticle.contributors} />
         <Dateline article={secondaryArticle} />
       </Col>
-      <Col xs={6} sm={4} md={4} lg={4} className={classes.featuredMediaContainer}>
+      <Col
+        xs={6}
+        sm={4}
+        md={4}
+        lg={4}
+        className={classes.featuredMediaContainer}
+      >
         <figure className={classes.figure}>
           <img src={featuredMedia.url} />
         </figure>

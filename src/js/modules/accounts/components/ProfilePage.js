@@ -71,15 +71,22 @@ const ProfilePage = ({ classes, session, signOut, status, users }) => {
   const user = users[session.userId];
   if (user) {
     return (
-      <Grid fluid className={ classes.ProfilePage }>
+      <Grid fluid className={classes.ProfilePage}>
         <Row>
-          <Col xs={ 12 } sm={ 6 } smOffset={ 3 } md={ 6 } mdOffset={ 3 }
-               lg={ 6 } lgOffset={ 3 }>
-            <p className={ classes.pageTitle }>
-              Welcome, { user.firstName }.
-            </p>
-            <Link to={ "/myaccount/profile/edit" }
-                  className={ classes.editRedirect }>
+          <Col
+            xs={12}
+            sm={6}
+            smOffset={3}
+            md={6}
+            mdOffset={3}
+            lg={6}
+            lgOffset={3}
+          >
+            <p className={classes.pageTitle}>Welcome, {user.firstName}.</p>
+            <Link
+              to={"/myaccount/profile/edit"}
+              className={classes.editRedirect}
+            >
               Edit Profile
             </Link>
             <div className={classes.dataTable}>
@@ -87,21 +94,21 @@ const ProfilePage = ({ classes, session, signOut, status, users }) => {
                 <tbody>
                   <tr>
                     <td>First Name</td>
-                    <td>{ user.firstName }</td>
+                    <td>{user.firstName}</td>
                   </tr>
                   <tr>
                     <td>Last Name</td>
-                    <td>{ user.lastName }</td>
+                    <td>{user.lastName}</td>
                   </tr>
                   <tr>
                     <td>E-mail Address</td>
-                    <td>{ user.email }</td>
+                    <td>{user.email}</td>
                   </tr>
                 </tbody>
               </Table>
             </div>
-            { /* We keep the SignOutForm to display the success message */ }
-            <SignOutForm onSubmit={ () => signOut(session) }/>
+            {/* We keep the SignOutForm to display the success message */}
+            <SignOutForm onSubmit={() => signOut(session)} />
           </Col>
         </Row>
       </Grid>

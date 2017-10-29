@@ -9,10 +9,11 @@ import { getArticlesWithContributors } from "../../articles/selectors";
 
 const styles = {
   SectionBlock: {
-    "& > div:last-child": { // targets last article
+    "& > div:last-child": {
+      // targets last article
       border: "none",
       paddingBottom: 0,
-    }
+    },
   },
   article: {
     borderBottom: "solid 1px #ddd",

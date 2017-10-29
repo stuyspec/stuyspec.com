@@ -41,7 +41,13 @@ class RoutingApp extends Component {
   }
 
   render() {
-    const { sections, roles, descriptions, session, isAllDataFetched } = this.props;
+    const {
+      sections,
+      roles,
+      descriptions,
+      session,
+      isAllDataFetched,
+    } = this.props;
     return (
       <ConnectedRouter
         onUpdate={() => window.scrollTo(0, 0)}
@@ -115,34 +121,50 @@ class RoutingApp extends Component {
                 key={"photographers"}
                 render={props => <PhotographerPage match={props.match} />}
               />
-              <Route exact path={"/myaccount"} key={"signIn"} render={() => (
-                session.userId ? (
-                  <Redirect to="/myaccount/profile"/>
-                ) : (
-                  <SignInPage/>
-                )
-              )}/>
-              <Route exact path="/myaccount/sign-up" key={"signUp"} render={() => (
-                session.userId ? (
-                  <Redirect to="/myaccount/profile"/>
-                ) : (
-                  <SignUpPage/>
-                )
-              )}/>
-              <Route exact path="/myaccount/profile" key={"profile"} render={() => (
-                session.userId ? (
-                  <ProfilePage/>
-                ) : (
-                  <Redirect to="/myaccount"/>
-                )
-              )}/>
-              <Route exact path="/myaccount/profile/edit" key={"editProfile"} render={() => (
-                session.userId ? (
-                  <EditProfilePage/>
-                ) : (
-                  <Redirect to="/myaccount"/>
-                )
-              )}/>
+              <Route
+                exact
+                path={"/myaccount"}
+                key={"signIn"}
+                render={() =>
+                  session.userId ? (
+                    <Redirect to="/myaccount/profile" />
+                  ) : (
+                    <SignInPage />
+                  )}
+              />
+              <Route
+                exact
+                path="/myaccount/sign-up"
+                key={"signUp"}
+                render={() =>
+                  session.userId ? (
+                    <Redirect to="/myaccount/profile" />
+                  ) : (
+                    <SignUpPage />
+                  )}
+              />
+              <Route
+                exact
+                path="/myaccount/profile"
+                key={"profile"}
+                render={() =>
+                  session.userId ? (
+                    <ProfilePage />
+                  ) : (
+                    <Redirect to="/myaccount" />
+                  )}
+              />
+              <Route
+                exact
+                path="/myaccount/profile/edit"
+                key={"editProfile"}
+                render={() =>
+                  session.userId ? (
+                    <EditProfilePage />
+                  ) : (
+                    <Redirect to="/myaccount" />
+                  )}
+              />
               <Route
                 exact
                 path={"/recommended"}

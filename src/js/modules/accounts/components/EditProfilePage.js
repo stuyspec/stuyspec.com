@@ -31,15 +31,19 @@ const EditProfilePage = ({ classes, session, users, updateUser }) => {
     updateUser(values, session.userId);
   };
   return (
-    <Grid fluid className={ classes.EditProfilePage }>
+    <Grid fluid className={classes.EditProfilePage}>
       <Row>
-        <Col xs={ 12 } sm={ 6 } smOffset={ 3 } md={ 6 } mdOffset={ 3 }
-             lg={ 6 } lgOffset={ 3 }>
-          <p className={ classes.pageTitle }>
-            Edit Profile
-          </p>
-          <Link to={ "/myaccount/profile" }
-                className={ classes.backRedirect }>
+        <Col
+          xs={12}
+          sm={6}
+          smOffset={3}
+          md={6}
+          mdOffset={3}
+          lg={6}
+          lgOffset={3}
+        >
+          <p className={classes.pageTitle}>Edit Profile</p>
+          <Link to={"/myaccount/profile"} className={classes.backRedirect}>
             Back to Profile
           </Link>
           <EditUserForm onSubmit={handleUpdateUser} />

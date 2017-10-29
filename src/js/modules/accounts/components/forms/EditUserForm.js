@@ -44,7 +44,12 @@ const renderField = ({
   return (
     <div>
       <div>
-        <input {...input} placeholder={label} type={type} style={{width: "100%"}}/>
+        <input
+          {...input}
+          placeholder={label}
+          type={type}
+          style={{ width: "100%" }}
+        />
         {touched &&
           ((error && <span>{error}</span>) ||
             (warning && <span>{warning}</span>))}
@@ -60,33 +65,39 @@ const EditUserForm = ({ classes, handleSubmit, submitting, status }) => {
         <div className={classes.dataTable}>
           <Table responsive>
             <tbody>
-            <tr>
-              <td>First Name</td>
-              <td><Field
-                name="firstName"
-                type="text"
-                component={renderField}
-                label="First Name"
-              /></td>
-            </tr>
-            <tr>
-              <td>Last Name</td>
-              <td><Field
-                name="lastName"
-                type="text"
-                component={renderField}
-                label="Last Name"
-              /></td>
-            </tr>
-            <tr>
-              <td>E-mail Address</td>
-              <td><Field
-                name="email"
-                type="email"
-                component={renderField}
-                label="Email"
-              /></td>
-            </tr>
+              <tr>
+                <td>First Name</td>
+                <td>
+                  <Field
+                    name="firstName"
+                    type="text"
+                    component={renderField}
+                    label="First Name"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Last Name</td>
+                <td>
+                  <Field
+                    name="lastName"
+                    type="text"
+                    component={renderField}
+                    label="Last Name"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>E-mail Address</td>
+                <td>
+                  <Field
+                    name="email"
+                    type="email"
+                    component={renderField}
+                    label="Email"
+                  />
+                </td>
+              </tr>
             </tbody>
           </Table>
         </div>

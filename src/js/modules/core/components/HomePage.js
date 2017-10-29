@@ -4,9 +4,7 @@ import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 
-import {
-  getArticlesWithContributors,
-} from "../../articles/selectors";
+import { getArticlesWithContributors } from "../../articles/selectors";
 
 import {
   FeaturedArticle,
@@ -31,7 +29,7 @@ const styles = {
     paddingRight: "14px",
   },
   "@media (max-width: 991px)": {
-    primaryComponents: {    
+    primaryComponents: {
       borderRight: "none",
       paddingRight: 0,
     },
@@ -40,7 +38,7 @@ const styles = {
 
 //The filler column should have a borderRight. Wait until there is something there first
 
-const HomePage = ({ classes, sections, articles}) => {
+const HomePage = ({ classes, sections, articles }) => {
   const sectionFeature = Object.values(sections).find(
     section => section.name === "News",
   );
@@ -65,17 +63,29 @@ const HomePage = ({ classes, sections, articles}) => {
     <div>
       <Grid fluid>
         <Row>
-          <Col xs={12} sm={12} md={9} lg={9} className={classes.primaryComponents}>
+          <Col
+            xs={12}
+            sm={12}
+            md={9}
+            lg={9}
+            className={classes.primaryComponents}
+          >
             <FeaturedArticle />
             <SectionFeature section={sectionFeature} sections={sections} />
           </Col>
-          <Col xsHidden smHidden md={3} lg={3} className={classes.recommendedArticles}>
+          <Col
+            xsHidden
+            smHidden
+            md={3}
+            lg={3}
+            className={classes.recommendedArticles}
+          >
             <RecommendedArticles articles={recommendedArticles} />
           </Col>
         </Row>
         <Row>
           <Col xsHidden sm={12} md={12} lg={12}>
-            <LatestArticlesRibbon className={classes.latestArticlesRibbon}/>
+            <LatestArticlesRibbon className={classes.latestArticlesRibbon} />
           </Col>
         </Row>
         <Row>

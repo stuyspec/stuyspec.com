@@ -7,7 +7,7 @@ import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
 import { getSections, getSectionSlugs } from "../../sections/selectors";
 
-import {openSubscriptionModal} from "../../accounts/actions";
+import { openSubscriptionModal } from "../../accounts/actions";
 
 const styles = {
   MastheadBar: {
@@ -17,7 +17,7 @@ const styles = {
     left: 0,
     position: "fixed",
     width: "100%",
-    top: 0,    
+    top: 0,
     zIndex: 1000,
   },
   barContainer: {
@@ -121,7 +121,7 @@ const styles = {
         marginRight: "12px",
       },
     },
-  }
+  },
 };
 
 const navButtonStyles = {
@@ -148,8 +148,8 @@ const navButtonStyles = {
   "@media (max-width: 768px)": {
     buttonText: {
       display: "none",
-    }
-  }
+    },
+  },
 };
 
 const NavButton = ({ classes, children, label, onClick }) => {
@@ -175,7 +175,9 @@ const MastheadBar = ({
   const sectionSlug = sectionSlugArray[sectionSlugArray.length - 1];
   let brandingSection = null;
   if (sectionSlugs.includes(sectionSlug)) {
-    brandingSection = Object.values(sections).find(section => section.slug === sectionSlug).name;
+    brandingSection = Object.values(sections).find(
+      section => section.slug === sectionSlug,
+    ).name;
   }
   return (
     <div className={classes.MastheadBar}>
@@ -198,10 +200,9 @@ const MastheadBar = ({
               <span className={classes.sectionNameMobile}>A&E</span>
             </span>
           )}
-          {brandingSection && brandingSection !== "Arts & Entertainment" && (
-            <span className={classes.sectionName}>
-              {brandingSection}
-            </span>
+          {brandingSection &&
+          brandingSection !== "Arts & Entertainment" && (
+            <span className={classes.sectionName}>{brandingSection}</span>
           )}
         </Link>
         {session.userId ? (
@@ -215,7 +216,10 @@ const MastheadBar = ({
             <Link to="/myaccount">
               <StyledNavButton label="log in" />
             </Link>
-            <StyledNavButton label="subscribe" onClick={openSubscriptionModal}/>
+            <StyledNavButton
+              label="subscribe"
+              onClick={openSubscriptionModal}
+            />
           </div>
         )}
       </div>

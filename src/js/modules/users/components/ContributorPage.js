@@ -58,9 +58,9 @@ const ContributorPage = ({ classes, contributor, articles }) => {
           </a>
           <p className={classes.description}>{contributor.description}</p>
           <div className={classes.latest}>Latest</div>
-          <ArticleList articles={articles}/>
+          <ArticleList articles={articles} />
         </Col>
-        <Col md={3} lg={3}/>
+        <Col md={3} lg={3} />
       </Row>
     </Grid>
   );

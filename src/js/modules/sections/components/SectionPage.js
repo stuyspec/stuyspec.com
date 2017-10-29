@@ -53,10 +53,11 @@ const styles = {
   latestArticles: {
     padding: "0 13px 0 0",
     borderRight: "solid 1px #ddd",
-    "& > div:last-child": { // articleBlocks
+    "& > div:last-child": {
+      // articleBlocks
       border: "none",
-      margin: 0
-    }
+      margin: 0,
+    },
   },
   emptySpace: {
     height: "20px",
@@ -66,12 +67,12 @@ const styles = {
   sectionColumnContainer: {
     "& > div": {
       borderLeft: "none",
-    }
+    },
   },
   "@media (min-width: 992px)": {
     SectionPage: {
       marginTop: "46px",
-    }
+    },
   },
   "@media (max-width: 991px)": {
     SectionPage: {

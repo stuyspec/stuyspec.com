@@ -8,7 +8,7 @@ import { getLatestArticles } from "../../selectors";
 const LATEST_ARTICLES_SHOWN = 5;
 
 const styles = {
-  LatestArticlesRibbon: {    
+  LatestArticlesRibbon: {
     borderTop: "1px solid #ddd",
     borderBottom: "1px solid #ddd",
     fontSize: 0,
@@ -39,11 +39,11 @@ const styles = {
     textTransform: "uppercase",
     "&:hover": {
       color: "#a8a8a8",
-      textDecoration: "none"
+      textDecoration: "none",
     },
     "&:focus": {
       color: "#a8a8a8",
-      textDecoration: "none"
+      textDecoration: "none",
     },
   },
   title: {
@@ -76,8 +76,8 @@ const styles = {
   "@media (max-width: 991px)": {
     figure: {
       width: "42%",
-    }
-  }
+    },
+  },
 };
 
 const RibbonComponent = ({ classes, article, section, featuredMedia }) => {
@@ -101,14 +101,13 @@ const RibbonComponent = ({ classes, article, section, featuredMedia }) => {
       </Link>
     </div>
   );
-}
+};
 
 const LatestArticlesRibbon = ({ classes, articles, media, sections }) => {
   const latestArticles = articles.slice(0, LATEST_ARTICLES_SHOWN);
   return (
     <div className={classes.LatestArticlesRibbon}>
-    {
-      latestArticles.map(article => {
+      {latestArticles.map(article => {
         const featuredMedia = Object.values(media).find(mediaObject => {
           return mediaObject.isFeatured && mediaObject.articleId === article.id;
         });
@@ -121,8 +120,7 @@ const LatestArticlesRibbon = ({ classes, articles, media, sections }) => {
             key={article.id}
           />
         );
-      })
-    }
+      })}
     </div>
   );
 };

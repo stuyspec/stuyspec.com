@@ -10,9 +10,7 @@ import { getArticlesWithContributors } from "../selectors";
 const NUMBER_OF_RAIL_ARTICLES = 5;
 
 const styles = {
-  RightRail: {
-
-  },
+  RightRail: {},
   label: {
     borderTop: "1px solid #000",
     borderBottom: "1px solid #ddd",
@@ -111,28 +109,32 @@ const RightRail = ({ classes, articles, sections, media }) => {
       <Link to="/recommended" className={classes.label}>
         Recommended
       </Link>
-      {Object.values(articles).slice(0, NUMBER_OF_RAIL_ARTICLES).map(article => {
-        const featuredMedia = Object.values(media)
-          .find(mediaObject => mediaObject.articleId === article.id);
-        const section = Object.values(sections)
-          .find(section => article.sectionId === section.id);
-        return (
-          <div className={classes.article} key={article.id}>
-            {featuredMedia && (
-              <figure className={classes.figure}>
-                <img src={featuredMedia.url} />
-              </figure>
-            )}
-            <Link
-              to={`${section.permalink}/${article.slug}`}
-              className={classes.smallTitle}
-            >
-              {article.title}
-            </Link>
-            <Byline classes={classes} contributors={article.contributors} />
-          </div>
-        );
-      })}
+      {Object.values(articles)
+        .slice(0, NUMBER_OF_RAIL_ARTICLES)
+        .map(article => {
+          const featuredMedia = Object.values(media).find(
+            mediaObject => mediaObject.articleId === article.id,
+          );
+          const section = Object.values(sections).find(
+            section => article.sectionId === section.id,
+          );
+          return (
+            <div className={classes.article} key={article.id}>
+              {featuredMedia && (
+                <figure className={classes.figure}>
+                  <img src={featuredMedia.url} />
+                </figure>
+              )}
+              <Link
+                to={`${section.permalink}/${article.slug}`}
+                className={classes.smallTitle}
+              >
+                {article.title}
+              </Link>
+              <Byline classes={classes} contributors={article.contributors} />
+            </div>
+          );
+        })}
     </Col>
   );
 };
@@ -143,6 +145,4 @@ const mapStateToProps = state => ({
   sections: state.sections.sections,
 });
 
-export default connect(
-  mapStateToProps
-)(injectSheet(styles)(RightRail));
+export default connect(mapStateToProps)(injectSheet(styles)(RightRail));
