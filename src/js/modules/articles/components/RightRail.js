@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
-import Col from "react-bootstrap/lib/Col";
 
 import Byline from "./Byline";
 import { getArticlesWithContributors } from "../selectors";
@@ -10,7 +9,9 @@ import { getArticlesWithContributors } from "../selectors";
 const NUMBER_OF_RAIL_ARTICLES = 5;
 
 const styles = {
-  RightRail: {},
+  RightRail: {
+    marginTop: "28px",
+  },
   label: {
     borderTop: "1px solid #000",
     borderBottom: "1px solid #ddd",
@@ -19,7 +20,7 @@ const styles = {
     fontFamily: "Circular Std",
     fontSize: "13px",
     fontWeight: 300,
-    margin: 0,
+    margin: "0 0 12px 0",
     padding: "4px 0",
     "&:hover": {
       color: "#000",
@@ -103,9 +104,10 @@ const styles = {
   },
 };
 
+// inside a Col
 const RightRail = ({ classes, articles, sections, media }) => {
   return (
-    <Col md={3} lg={3} className={classes.RightRail}>
+    <div className={classes.RightRail}>
       <Link to="/recommended" className={classes.label}>
         Recommended
       </Link>
@@ -135,7 +137,7 @@ const RightRail = ({ classes, articles, sections, media }) => {
             </div>
           );
         })}
-    </Col>
+    </div>
   );
 };
 

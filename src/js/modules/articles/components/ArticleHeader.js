@@ -8,6 +8,7 @@ import Dateline from "./Dateline";
 
 const styles = {
   ArticleHeader: {
+    borderTop: "solid 1px #000",
     borderBottom: "1px solid #dedede",
     color: "#000",
     fontFamily: "Minion Pro",

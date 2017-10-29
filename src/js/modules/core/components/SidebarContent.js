@@ -90,7 +90,6 @@ const SidebarContent = ({
         Profile
       </Link>,
     );
-    // TODO: logout
   } else {
     sidebarElements.push(
       <Link
@@ -100,16 +99,6 @@ const SidebarContent = ({
         to="/myaccount"
       >
         Log In
-      </Link>,
-    );
-    sidebarElements.push(
-      <Link
-        className={classes.sidebarSectionLink}
-        key={-3}
-        onClick={closeSidebar}
-        to="/myaccount"
-      >
-        Sign Up
       </Link>,
     );
   }

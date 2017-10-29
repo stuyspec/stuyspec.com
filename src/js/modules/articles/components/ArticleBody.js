@@ -45,7 +45,9 @@ const ArticleBody = ({ classes, content, featuredMedia }) => {
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </Col>
       <Col md={1} lg={1} />
-      <RightRail /> {/* RightRail is Col md=3 lg=3 */}
+      <Col md={3} lg={3}>
+        <RightRail />
+      </Col>
     </Row>
   );
 };
