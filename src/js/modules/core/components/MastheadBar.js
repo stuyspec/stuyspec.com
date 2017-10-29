@@ -212,7 +212,7 @@ const MastheadBar = ({
           </div>
         ) : (
           <div className={classes.userTools}>
-            <Link to="/myaccount/">
+            <Link to="/myaccount">
               <StyledNavButton label="log in" />
             </Link>
             <StyledNavButton label="subscribe" onClick={openSubscriptionModal}/>

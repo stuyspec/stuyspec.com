@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 
-import { SignInForm } from "./forms";
-import { signIn } from "../actions";
+import { SignUpForm } from "./forms";
+import { signUp } from "../actions";
 
 const styles = {
   pageTitle: {
@@ -34,19 +34,19 @@ const styles = {
   },
 };
 
-const SignInPage = ({ classes, signIn }) => {
+const SignUpPage = ({ classes, signUp }) => {
   return (
     <Grid fluid className={classes.SignInPage}>
       <Row>
         <Col xs={12} sm={6} smOffset={3} md={6} mdOffset={3} lg={6} lgOffset={3}>
           <p className={classes.pageTitle}>
-            Log In
+            Create an Account
           </p>
-          <Link to={"/myaccount/sign-up"} className={classes.signUpRedirect}>
-            Don't have an account? Create one »
+          <Link to={"/myaccount"} className={classes.signUpRedirect}>
+            Already have an account? Log in »
           </Link>
           <hr className={classes.hr}/>
-          <SignInForm onSubmit={signIn} />
+          <SignUpForm onSubmit={signUp} />
         </Col>
       </Row>
     </Grid>
@@ -54,9 +54,9 @@ const SignInPage = ({ classes, signIn }) => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ signIn }, dispatch);
+  return bindActionCreators({ signUp }, dispatch);
 };
 
 export default connect(null, mapDispatchToProps)(
-  injectSheet(styles)(SignInPage),
+  injectSheet(styles)(SignUpPage),
 );
