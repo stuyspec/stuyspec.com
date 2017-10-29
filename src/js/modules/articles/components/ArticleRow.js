@@ -16,8 +16,18 @@ const styles = {
     marginBottom: "22px",
     paddingBottom: "20px",
   },
-  Dateline: {
+  DatelineDesktop: {
     color: "#888",
+    display: "block",
+    fontFamily: "Circular Std",
+    fontSize: "12px",
+    fontWeight: "300",
+    float: "left",
+    marginRight: "19px",
+  },
+  DatelineMobile: {
+    color: "#888",
+    display: "none",
     fontFamily: "Circular Std",
     fontSize: "12px",
     fontWeight: "300",
@@ -50,6 +60,21 @@ const styles = {
     fontSize: "16px",
     lineHeight: "1.13",
   },
+  "@media (max-width: 767px)": {
+    DatelineDesktop: {
+      display: "none",
+    },
+    DatelineMobile: {
+      display: "block",
+    }
+  },
+  "@media (max-width: 575px)": {
+    figure: {
+      float: "none",
+      margin: "0 0 14px 0",
+      width: "100%",
+    }
+  }
 };
 
 const ArticleRow = ({ classes, article, sections, users, media }) => {
@@ -63,7 +88,7 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
   return (
     <Row key={article.id} className={classes.ArticleRow}>
       <div className={classes.articleBlock} key={article.id}>
-        <p className={classes.Dateline}>August 24, 2017</p>
+        <p className={classes.DatelineDesktop}>August 24, 2017</p>
         <div className={classes.summary}>
           {featuredMedia && (
             <figure className={classes.figure}>
@@ -85,6 +110,7 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
             unstructured summer.
           </p>
           <Byline contributors={article.contributors} />
+          <p className={classes.DatelineMobile}>August 24, 2017</p>
         </div>
       </div>
     </Row>

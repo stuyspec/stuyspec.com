@@ -20,6 +20,7 @@ export const getContributorFromSlug = createSelector(
     const user = Object.values(users).find(user => {
       return user.slug === requestedContributorSlug;
     });
+    console.log(user);
     if (
       userRoles.find(userRole => {
         return (
