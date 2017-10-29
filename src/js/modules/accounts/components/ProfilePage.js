@@ -28,10 +28,14 @@ const styles = {
     marginBottom: "14px",
   },
   dataTable: {
-    "& .table-responsiveness table > tbody > tr > td": {
+    "& .table-responsive table > tbody > tr > td": {
       fontFamily: "Minion Pro",
       fontSize: "17px",
       padding: "8px 0",
+    },
+    "& .table-responsive table > tbody > tr > td:first-child": {
+      paddingRight: "12px",
+      width: "120px",
     },
   },
   "@media (min-width: 992px)": {
