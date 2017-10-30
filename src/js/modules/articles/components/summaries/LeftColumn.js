@@ -154,10 +154,10 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
         >
           {secondaryArticle.title}
         </Link>
+        <p className={classes.articleSummary}>{secondaryArticle.summary}</p>
         <div className={classes.bylineContainer}>
           <Byline contributors={secondaryArticle.contributors} />
         </div>
-        <p className={classes.articleSummary}>{secondaryArticle.summary}</p>
         <Dateline article={secondaryArticle} />
       </div>
 
