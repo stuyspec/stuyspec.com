@@ -14,11 +14,6 @@ import {
 } from "../selectors";
 
 const styles = {
-  ArticlePage: {
-    borderTop: "solid 1px #000",
-    margin: "78px auto 0",
-    width: "1066px",
-  },
   descriptionRow: {
     marginBottom: "24px",
   },
@@ -52,7 +47,7 @@ const styles = {
 
 const ArticlePage = ({ classes, article, section, featuredMedia }) => {
   return (
-    <Grid className={classes.ArticlePage}>
+    <Grid fluid className={classes.ArticlePage}>
       <ArticleHeader article={article} section={section} />
       <ArticleBody content={article.content} featuredMedia={featuredMedia} />
       <Row className={classes.descriptionRow}>
