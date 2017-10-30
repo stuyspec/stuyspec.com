@@ -18,12 +18,11 @@ const styles = {
     SectionColumn: {
       borderLeft: "none",
       padding: "0 !important",
-    },
-    "& > div:last-child": {
-      // targets last SectionBlock since all SectionColumns are stacked.
-      THIS DOESNT WORK
-      borderBottom: "solid 1px #ddd",
-      marginBottom: "24px",
+      "& > div:last-child": {
+        // targets last SectionBlock since all SectionColumns are stacked.
+        borderBottom: "solid 1px #ddd",
+        marginBottom: "24px",
+      },
     },
   },
 };
