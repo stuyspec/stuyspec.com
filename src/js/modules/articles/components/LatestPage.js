@@ -38,7 +38,7 @@ const LatestPage = ({ classes, articles }) => {
       <Row>
         <Col xs={12} sm={12} md={9} lg={9}>
           <p className={classes.pageTitle}>Latest Articles</p>
-          <p className={classes.latest}></p>
+          <p className={classes.latest} />
           <ArticleList articles={articles} />
         </Col>
       </Row>

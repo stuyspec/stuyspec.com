@@ -38,7 +38,7 @@ const RecommendedPage = ({ classes, articles }) => {
       <Row>
         <Col xs={12} sm={12} md={9} lg={9}>
           <p className={classes.pageTitle}>Recommended Articles</p>
-          <p className={classes.recommended}></p>
+          <p className={classes.recommended} />
           <ArticleList articles={articles} />
         </Col>
       </Row>

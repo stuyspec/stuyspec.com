@@ -109,9 +109,10 @@ const styles = {
 };
 
 const RightColumn = ({ classes, articles, media, sections }) => {
-  const [primaryArticle, secondaryArticle] = Object.values(
-    articles,
-  ).slice(3, 5); // [0, 3) taken by Left Column... we need a better system.
+  const [primaryArticle, secondaryArticle] = Object.values(articles).slice(
+    3,
+    5,
+  ); // [0, 3) taken by Left Column... we need a better system.
   /*
   [primaryMedia, secondaryMedia] = [
     primaryArticle,
@@ -139,7 +140,9 @@ const RightColumn = ({ classes, articles, media, sections }) => {
         >
           {primaryArticle.title}
         </Link>
-        {primaryArticle.outquotes.length > 0 && <Outquote quote={primaryArticle.outquotes[0]}/>}
+        {primaryArticle.outquotes.length > 0 && (
+          <Outquote quote={primaryArticle.outquotes[0]} />
+        )}
         <p className={classes.articleSummary}>{primaryArticle.summary}</p>
         <Byline contributors={primaryArticle.contributors} />
         <Dateline article={primaryArticle} />
@@ -166,7 +169,13 @@ const RightColumn = ({ classes, articles, media, sections }) => {
       <Link to="/" className={classes.label}>
         SING! 2017 Senior Playlist
       </Link>
-      <iframe src="https://open.spotify.com/embed/user/spec.ae/playlist/4FrJhYPbWrWF3fYkzGZPy1" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+      <iframe
+        src="https://open.spotify.com/embed/user/spec.ae/playlist/4FrJhYPbWrWF3fYkzGZPy1"
+        width="300"
+        height="380"
+        frameborder="0"
+        allowtransparency="true"
+      />
     </Col>
   );
 };
