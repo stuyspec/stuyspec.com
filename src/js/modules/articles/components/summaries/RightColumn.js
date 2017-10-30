@@ -15,8 +15,6 @@ const styles = {
     paddingLeft: "14px !important",
     paddingRight: 0,
     "& > div": {
-      borderBottom: "1px solid #ddd",
-      marginBottom: "14px",
       paddingBottom: "14px !important",
     },
   },
@@ -29,22 +27,7 @@ const styles = {
   },
   primaryArticle: {
     borderBottom: "1px solid #ddd",
-  },
-  primaryTitle: {
-    color: "#000",
-    display: "block",
-    fontFamily: "Minion Pro",
-    fontWeight: "bold",
-    fontSize: "30px",
-    fontStyle: "italic",
-    lineHeight: 1.13,
-    marginBottom: "12px",
-    "&:hover": {
-      color: "#000",
-    },
-    "&:focus": {
-      color: "#000",
-    },
+    marginBottom: "14px",
   },
   sectionLabel: {
     color: "#000",
@@ -91,7 +74,7 @@ const styles = {
     fontFamily: "Circular Std",
     fontSize: "13px",
     fontWeight: 300,
-    margin: 0,
+    margin: "0 0 12px 0",
     padding: "4px 0",
     "&:hover": {
       color: "#000",
@@ -99,6 +82,11 @@ const styles = {
     "&:focus": {
       color: "#000",
     },
+  },
+  spotifyEmbed: {
+    border: 0,
+    height: 340,
+    width: "100%",
   },
   "@media (max-width: 768px)": {
     RightColumn: {
@@ -170,9 +158,8 @@ const RightColumn = ({ classes, articles, media, sections }) => {
         SING! 2017 Senior Playlist
       </Link>
       <iframe
+        className={classes.spotifyEmbed}
         src="https://open.spotify.com/embed/user/spec.ae/playlist/4FrJhYPbWrWF3fYkzGZPy1"
-        width="300"
-        height="380"
         frameborder="0"
         allowtransparency="true"
       />
