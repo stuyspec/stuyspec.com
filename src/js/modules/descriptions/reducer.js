@@ -188,7 +188,7 @@ const initialState = {
   },
   "join-us": {
     id: 7,
-    title: "Join Us",
+    title: "It's Cathy Cai's time to shine! (Change this back to 'Join Us' when you see this).",
     slug: "join-us",
     content:
       '<p><center><a href="http://www.stuyspec.com/recruiting/">Join Us</a><br></center></p>',
