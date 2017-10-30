@@ -7,7 +7,7 @@ import SectionBlock from "./SectionBlock";
 const styles = {
   SectionColumn: {
     borderLeft: "solid 1px #ddd",
-    padding: "0 0 0 7px !important",
+    padding: "0 0 0 14px !important",
     "& > div:not(:last-child)": {
       // targets each SectionBlock
       borderBottom: "solid 1px #ddd",
@@ -18,6 +18,12 @@ const styles = {
     SectionColumn: {
       borderLeft: "none",
       padding: "0 !important",
+    },
+    "& > div:last-child": {
+      // targets last SectionBlock since all SectionColumns are stacked.
+      THIS DOESNT WORK
+      borderBottom: "solid 1px #ddd",
+      marginBottom: "24px",
     },
   },
 };

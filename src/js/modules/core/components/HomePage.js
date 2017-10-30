@@ -1,5 +1,4 @@
 import React from "react";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
@@ -32,6 +31,11 @@ const styles = {
     primaryComponents: {
       borderRight: "none",
       paddingRight: 0,
+    },
+  },
+  "@media (max-width: 768px)": {
+    skinnyCol: {
+      padding: "0 !important",
     },
   },
 };
@@ -90,10 +94,10 @@ const HomePage = ({ classes, sections, articles }) => {
         </Row>
         <Row>
           <LeftColumn />
-          <Col xs={12} sm={3} md={3} lg={3}>
+          <Col xs={12} sm={3} md={3} lg={3} className={classes.skinnyCol}>
             <SectionColumn sections={firstColumnSections} />
           </Col>
-          <Col xs={12} sm={3} md={3} lg={3}>
+          <Col xs={12} sm={3} md={3} lg={3} className={classes.skinnyCol}>
             <SectionColumn sections={secondColumnSections} />
           </Col>
           <RightColumn />
