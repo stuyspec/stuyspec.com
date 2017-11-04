@@ -45,6 +45,11 @@ const styles = {
       padding: "0 12%",
     },
   },
+  "@media (max-width: 767px)": {
+    descriptionRow: {
+      padding: 0,
+    }
+  }
 };
 
 const ArticlePage = ({ classes, article, section, featuredMedia }) => {

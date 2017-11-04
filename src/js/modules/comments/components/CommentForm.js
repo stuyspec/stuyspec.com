@@ -99,7 +99,7 @@ const styles = {
   },
   "@media (max-width: 991px)": {
     CommentForm: {
-      padding: "0 2% !important",
+      paddingRight: "0 !important",
     },
   },
 };

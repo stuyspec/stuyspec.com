@@ -13,6 +13,9 @@ const styles = {
     fontSize: "18px",
     lineHeight: 1.44,
     padding: "0 0 18px",
+    "& figure:first-child figcaption": {
+      lineHeight: 1.3
+    },
     "& p": {
       marginBottom: "20px",
     },
@@ -37,6 +40,24 @@ const styles = {
     },
     innerHTML: {
       padding: "0 12%",
+    },
+  },
+  "@media (max-width: 767px)": {
+    ArticleBody: {
+      "& figure:first-child": {
+        padding: 0,
+      },
+    },
+    innerHTML: {
+      padding: 0,
+    },
+  },
+  "@media (max-width: 667px)": { // this breakpoint is arbitrary
+    ArticleBody: {
+      "& figure:first-child img": {
+        marginLeft: "-14px", // ArticleBody.paddingLeft = 14px
+        width: "100vw",
+      },
     },
   },
 };

@@ -12,8 +12,15 @@ import { createComment } from "../actions";
 import { getRequestedArticleComments } from "../selectors";
 
 const styles = {
-  CommentThread: {
-    padding: 0,
+  "@media (max-width: 991px)": {
+    CommentThread: {
+      padding: "0 12%",
+    },
+  },
+  "@media (max-width: 767px)": {
+    CommentThread: {
+      padding: 0,
+    },
   },
 };
 
