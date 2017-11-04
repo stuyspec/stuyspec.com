@@ -42,11 +42,13 @@ const styles = {
   },
   "@media (max-width: 1199px)": {
     ArticlePage: {
-      marginTop: "60px",
       padding: "0 8%",
     },
   },
   "@media (max-width: 991px)": {
+    ArticlePage: {
+      padding: 0,
+    },
     descriptionRow: {
       padding: "0 12%",
     },

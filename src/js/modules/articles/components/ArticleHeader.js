@@ -70,11 +70,6 @@ const styles = {
       padding: "0 2%",
     },
   },
-  "@media (max-width: 767px)": {
-    headerRow: {
-      padding: 0,
-    }
-  }
 };
 
 // TODO: make selector for dateline
