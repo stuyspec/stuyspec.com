@@ -54,7 +54,7 @@ const ContributorPage = ({ classes, contributor, articles }) => {
   return (
     <Grid className={classes.ContributorPage}>
       <Row>
-        <Col md={9} lg={9}>
+        <Col xs={12} sm={12} md={9} lg={9}>
           <p className={classes.name}>
             {`${contributor.firstName} ${contributor.lastName}`}
           </p>
@@ -65,7 +65,6 @@ const ContributorPage = ({ classes, contributor, articles }) => {
           <div className={classes.latest}>Latest</div>
           <ArticleList articles={articles} />
         </Col>
-        <Col md={3} lg={3} />
       </Row>
     </Grid>
   );

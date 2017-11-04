@@ -53,7 +53,7 @@ const IllustratorPage = ({ classes, illustrator, articles }) => {
   return (
     <Grid className={classes.IllustratorPage}>
       <Row>
-        <Col md={9}>
+        <Col xs={12} sm={12} md={9} lg={9}>
           <p className={classes.name}>
             {illustrator.firstName} {illustrator.lastName}
           </p>

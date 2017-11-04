@@ -53,7 +53,7 @@ const PhotographerPage = ({ classes, photographer, articles }) => {
   return (
     <Grid className={classes.PhotographerPage}>
       <Row>
-        <Col md={9}>
+        <Col xs={12} sm={12} md={9} lg={9}>
           <p className={classes.name}>
             {photographer.firstName} {photographer.lastName}
           </p>
