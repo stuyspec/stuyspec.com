@@ -8,7 +8,6 @@ import RightRail from "./RightRail";
 
 const styles = {
   ArticleBody: {
-    borderBottom: "1px solid #ddd",
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "18px",
@@ -20,7 +19,7 @@ const styles = {
     "& p:first-child": {
       marginTop: "28px",
     },
-    "& p:first-child::first-letter": {
+    "& p:first-child::first-letter": { // dropcap
       float: "left",
       fontSize: "58px",
       lineHeight: "43px",
@@ -30,14 +29,21 @@ const styles = {
   content: {
     marginTop: "13px",
   },
-  innerHTML: {
-    padding: "0 12%",
+  "@media (max-width: 991px)": {
+    ArticleBody: {
+      "& figure:first-child": { // featured media
+        padding: "0 2%",
+      },
+    },
+    innerHTML: {
+      padding: "0 12%",
+    },
   },
 };
 
 const ArticleBody = ({ classes, content, featuredMedia }) => {
   return (
-    <Row>IN THE MIDDLE OF DOING OFFSET, CENTERED LIKE THE OPEN NYTIMES ARTICLE
+    <Row>
       <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
         {featuredMedia && (
           <ArticleFeaturedMedia

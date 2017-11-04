@@ -16,6 +16,7 @@ const styles = {
   recommendedList: {
     borderBottom: "solid 1px #ddd",
     padding: "0 0 24px",
+
   },
   label: {
     color: "#000",
@@ -23,6 +24,13 @@ const styles = {
     fontSize: "12px",
     fontWeight: "300",
     marginBottom: "3px",
+    textTransform: "uppercase",
+  },
+  recommendedText: {
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "12px",
+    marginBottom: "12px",
     textTransform: "uppercase",
   },
   preview: {
@@ -72,13 +80,19 @@ const styles = {
       paddingRight: 0,
     },
   },
+  "@media (max-width: 991px)": {
+    RecommendedRow: {
+      padding: "0 12%",
+    },
+  },
 };
 
 const RecommendedRow = ({ classes, media, section, articles, sections }) => {
   const recommendedArticles = Object.values(articles).slice(0, 4);
   return (
     <Row className={classes.RecommendedRow}>
-      <Col xs={12} sm={9} md={9} lg={9} className={classes.recommendedList}>
+      <p className={classes.recommendedText}>Recommended</p>
+      <Col xs={12} sm={12} md={9} lg={9} className={classes.recommendedList}>
         {recommendedArticles.map(article => {
           const featuredMedia = Object.values(media).find(mediaObject => {
             return (
@@ -121,7 +135,7 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
           }
         })}
       </Col>
-      <Col xsHidden sm={3} md={3} lg={3} />
+      <Col xsHidden smHidden md={3} lg={3} />
     </Row>
   );
 };
