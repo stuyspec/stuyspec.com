@@ -35,29 +35,22 @@ const styles = {
   "@media (max-width: 991px)": {
     ArticleBody: {
       "& figure:first-child": { // featured media
-        padding: "0 2%",
+        padding: "0 10%",
       },
     },
     innerHTML: {
-      padding: "0 12%",
+      padding: "0 10%",
     },
   },
   "@media (max-width: 767px)": {
-    ArticleBody: {
-      "& figure:first-child": {
-        padding: 0,
-      },
-    },
-    innerHTML: {
-      padding: 0,
-    },
-  },
-  "@media (max-width: 667px)": { // this breakpoint is arbitrary
     ArticleBody: {
       "& figure:first-child img": {
         marginLeft: "-14px", // ArticleBody.paddingLeft = 14px
         width: "100vw",
       },
+    },
+    innerHTML: {
+      padding: "0 2%",
     },
   },
 };

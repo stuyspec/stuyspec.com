@@ -93,12 +93,12 @@ const styles = {
   },
   "@media (max-width: 991px)": {
     RecommendedRow: {
-      padding: "0 12%",
+      padding: "0 10%",
     },
   },
   "@media (max-width: 767px)": {
     RecommendedRow: {
-      padding: 0,
+      padding: "0 2%",
     },
   },
   "@media (max-width: 575px)": {

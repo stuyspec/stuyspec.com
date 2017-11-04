@@ -67,6 +67,11 @@ const styles = {
   },
   "@media (max-width: 991px)": {
     headerRow: {
+      padding: "0 8%",
+    },
+  },
+  "@media (max-width: 768px)": {
+    headerRow: {
       padding: "0 2%",
     },
   },

@@ -50,12 +50,12 @@ const styles = {
       padding: 0,
     },
     descriptionRow: {
-      padding: "0 12%",
+      padding: "0 10%",
     },
   },
   "@media (max-width: 767px)": {
     descriptionRow: {
-      padding: 0,
+      padding: "0 2%",
     }
   }
 };
