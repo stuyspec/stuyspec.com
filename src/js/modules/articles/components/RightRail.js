@@ -31,8 +31,8 @@ const styles = {
   },
   article: {
     borderBottom: "solid 1px #ddd",
-    paddingBottom: "12px",
-    marginBottom: "10px",
+    paddingBottom: "9px",
+    marginBottom: "7px",
   },
   bigTitle: {
     color: "#000",
@@ -45,7 +45,7 @@ const styles = {
   smallTitle: {
     color: "#000",
     fontFamily: "Minion Pro",
-    fontSize: "16px",
+    fontSize: "15px",
     lineHeight: "1.25",
   },
   sectionLabel: {
@@ -102,6 +102,11 @@ const styles = {
       display: "inline",
     },
   },
+  "@media (max-width: 991px)": {
+    RightRail: {
+      paddingLeft: "1.5vw"
+    }
+  }
 };
 
 // inside a Col

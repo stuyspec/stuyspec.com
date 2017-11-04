@@ -56,7 +56,7 @@ const styles = {
   },
   figure: {
     marginBottom: "4.1px",
-    width: "166px",
+    width: "100%",
     "& img": {
       width: "100%",
     },
@@ -78,7 +78,7 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
   const recommendedArticles = Object.values(articles).slice(0, 4);
   return (
     <Row className={classes.RecommendedRow}>
-      <Col md={8} lg={8} className={classes.recommendedList}>
+      <Col xs={12} sm={9} md={9} lg={9} className={classes.recommendedList}>
         {recommendedArticles.map(article => {
           const featuredMedia = Object.values(media).find(mediaObject => {
             return (
@@ -121,7 +121,7 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
           }
         })}
       </Col>
-      <Col md={4} lg={4} />
+      <Col xsHidden sm={3} md={3} lg={3} />
     </Row>
   );
 };

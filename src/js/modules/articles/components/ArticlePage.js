@@ -14,6 +14,9 @@ import {
 } from "../selectors";
 
 const styles = {
+  ArticlePage: {
+    marginTop: "60px",
+  },
   descriptionRow: {
     marginBottom: "24px",
   },
@@ -51,7 +54,7 @@ const ArticlePage = ({ classes, article, section, featuredMedia }) => {
       <ArticleHeader article={article} section={section} />
       <ArticleBody content={article.content} featuredMedia={featuredMedia} />
       <Row className={classes.descriptionRow}>
-        <Col md={8} lg={8} className={classes.description}>
+        <Col xs={12} sm={9} md={9} lg={9} className={classes.description}>
           The Pulse of the Student Body:&nbsp;
           <Link
             to={"/maybe-we-should-pop-up-the-subscribe-modal"}
@@ -61,7 +64,7 @@ const ArticlePage = ({ classes, article, section, featuredMedia }) => {
           </Link>
           &nbsp;to <em>The Stuyvesant Spectator</em>’s biweekly newsletter.
         </Col>
-        <Col md={4} lg={4} />
+        <Col xsHidden smHidden md={3} lg={3} />
       </Row>
       <Row>
         <p className={classes.recommendedText}>Recommended</p>

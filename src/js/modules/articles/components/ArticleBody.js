@@ -30,22 +30,24 @@ const styles = {
   content: {
     marginTop: "13px",
   },
+  innerHTML: {
+    padding: "0 12%",
+  },
 };
 
 const ArticleBody = ({ classes, content, featuredMedia }) => {
   return (
-    <Row>
-      <Col md={8} lg={8} className={classes.ArticleBody}>
+    <Row>IN THE MIDDLE OF DOING OFFSET, CENTERED LIKE THE OPEN NYTIMES ARTICLE
+      <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
         {featuredMedia && (
           <ArticleFeaturedMedia
             featuredMedia={featuredMedia}
             isCaption={true}
           />
         )}
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <div className={classes.innerHTML} dangerouslySetInnerHTML={{ __html: content }} />
       </Col>
-      <Col md={1} lg={1} />
-      <Col md={3} lg={3}>
+      <Col xsHidden smHidden mdOffset={1} md={3} lgOffset={1} lg={3}>
         <RightRail />
       </Col>
     </Row>
