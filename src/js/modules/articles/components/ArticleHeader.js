@@ -65,6 +65,11 @@ const styles = {
     display: "inline",
     fontSize: "14px",
   },
+  "@media (max-width: 1199px)": {
+    headerRow: {
+      padding: "0 10%",
+    },
+  },
   "@media (max-width: 991px)": {
     headerRow: {
       padding: "0 2%",
@@ -82,7 +87,7 @@ const styles = {
 const ArticleHeader = ({ classes, article, section }) => {
   return (
     <Row className={classes.headerRow}>
-      <Col md={12} lg={12} className={classes.ArticleHeader}>
+      <Col xs={12} sm={12} md={12} lg={12} className={classes.ArticleHeader}>
         <Link to={section.permalink} className={classes.rubric}>
           {section.name}
         </Link>

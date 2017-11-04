@@ -12,6 +12,11 @@ import { createComment } from "../actions";
 import { getRequestedArticleComments } from "../selectors";
 
 const styles = {
+  CommentThread: {
+    "& textarea": {
+      resize: "vertical", // only allows vertical resizing
+    },
+  },
   "@media (max-width: 991px)": {
     CommentThread: {
       padding: "0 12%",
