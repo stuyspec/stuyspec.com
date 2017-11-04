@@ -65,11 +65,6 @@ const styles = {
     display: "inline",
     fontSize: "14px",
   },
-  "@media (max-width: 1199px)": {
-    headerRow: {
-      padding: "0 10%",
-    },
-  },
   "@media (max-width: 991px)": {
     headerRow: {
       padding: "0 2%",
