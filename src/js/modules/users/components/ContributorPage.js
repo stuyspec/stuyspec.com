@@ -43,6 +43,11 @@ const styles = {
     lineHeight: "1.5",
     marginBottom: "26px",
   },
+  "@media (max-width: 1199px) and (min-width: 992px)": {
+    ContributorPage: {
+      paddingLeft: "10%",
+    },
+  },
 };
 
 const ContributorPage = ({ classes, contributor, articles }) => {

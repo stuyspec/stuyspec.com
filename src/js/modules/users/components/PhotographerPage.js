@@ -42,6 +42,11 @@ const styles = {
     lineHeight: "1.28",
     margin: 0,
   },
+  "@media (max-width: 1199px) and (min-width: 992px)": {
+    PhotographerPage: {
+      paddingLeft: "10%",
+    },
+  },
 };
 
 const PhotographerPage = ({ classes, photographer, articles }) => {
