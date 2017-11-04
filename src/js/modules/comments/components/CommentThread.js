@@ -32,7 +32,7 @@ const CommentThread = ({
     });
   };
   return (
-    <Grid className={classes.CommentThread}>
+    <Grid fluid className={classes.CommentThread}>
       <Row>
         <CommentForm session={session} onSubmit={handleCreateComment} />
         <Col md={4} lg={4} />
