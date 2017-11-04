@@ -44,10 +44,13 @@ const styles = {
   },
   "@media (max-width: 767px)": {
     ArticleBody: {
-      "& figure:first-child img": {
-        marginLeft: "-14px", // ArticleBody.paddingLeft = 14px
-        width: "100vw",
-      },
+      "& figure:first-child": {
+        padding: "0 2%",
+        "& img": {
+          marginLeft: "-14px", // ArticleBody.paddingLeft = 14px
+          width: "100vw",
+        },
+      }
     },
     innerHTML: {
       padding: "0 2%",

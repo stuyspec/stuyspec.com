@@ -13,6 +13,7 @@ import { getRequestedArticleComments } from "../selectors";
 
 const styles = {
   CommentThread: {
+    padding: 0,
     "& textarea": {
       resize: "vertical", // only allows vertical resizing
     },
