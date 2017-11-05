@@ -32,7 +32,7 @@ const Byline = ({ classes, contributors }) => {
           separator = "";
         }
         return (
-          <p key={contributor.id} className={classes.Byline}>
+          <p key={index} className={classes.Byline}>
             {index === 0 ? "By " : ""}
             <Link to={`/contributors/${contributor.slug}`}>
               {contributor.firstName} {contributor.lastName}
