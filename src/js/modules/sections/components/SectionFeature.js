@@ -80,26 +80,33 @@ const styles = {
       padding: "0px !important",
       marginBottom: 0,
     },
+    ternaryArticle: {
+      padding: "0px !important",
+      marginBottom: 0,
+    },
   },
 };
 
 const SectionFeature = ({ classes, articles, section, media, sections }) => {
+  // TODO: SECTIONA RTICLES IS TURNING UP UNDEFINED
   const sectionArticles = Object.values(
     Object.filter(articles, article => article.sectionId === section.id),
   );
   const primaryArticle = sectionArticles[0];
   let featuredMedia = null;
-  const secondaryArticle = sectionArticles.slice(1).find(article => {
+  const secondaryArticle = sectionArticles.slice(1, 10).find(article => {
+    // find a TOP 10 Article within the section with media
     const mediaObject = Object.values(media).find(
       mediaObject =>
-        mediaObject.articleId === article.id && mediaObject.isFeatured,
+        mediaObject.articleId === article.id
     );
     if (mediaObject) {
       featuredMedia = mediaObject;
     }
     return mediaObject;
-  });
-
+  }) || sectionArticles[1]; // if none such article found, default is the second
+  const possibleTernaryArticle = sectionArticles
+    .slice(1, 10).find(article => article != secondaryArticle);
   // NESTED IN <Col lg={9}>
   return (
     <Row className={classes.SectionFeature}>
@@ -130,17 +137,33 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
         <Byline contributors={secondaryArticle.contributors} />
         <Dateline article={secondaryArticle} />
       </Col>
-      <Col
-        xs={6}
-        sm={4}
-        md={4}
-        lg={4}
-        className={classes.featuredMediaContainer}
-      >
-        <figure className={classes.figure}>
-          <img src={featuredMedia.url} />
-        </figure>
+      {featuredMedia ? (
+        <Col
+          xs={6}
+          sm={4}
+          md={4}
+          lg={4}
+          className={classes.featuredMediaContainer}
+        >
+          <figure className={classes.figure}>
+            <img src={featuredMedia.url} />
+          </figure>
+        </Col>
+      ) : (
+        <Col xs={6} sm={4} md={4} lg={4} className={classes.ternaryArticle}>
+        <Link
+          className={classes.title}
+          to={`${sections[possibleTernaryArticle.sectionId]
+            .permalink}/${possibleTernaryArticle.slug}`}
+        >
+          {possibleTernaryArticle.title}
+        </Link>
+        <p className={classes.focus}>{possibleTernaryArticle.summary}</p>
+        <Byline contributors={possibleTernaryArticle.contributors} />
+        <Dateline article={possibleTernaryArticle} />
       </Col>
+      )}
+      
     </Row>
   );
 };
