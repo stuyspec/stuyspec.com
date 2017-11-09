@@ -178,10 +178,10 @@ const reducer = (state = { ...initialState }, action) => {
     }
 
     case OPEN_SUBSCRIPTION_MODAL: {
-      return {...state, isSubscriptionModalOpen:true};
+      return { ...state, isSubscriptionModalOpen: true };
     }
     case CLOSE_SUBSCRIPTION_MODAL: {
-      return {...state, isSubscriptionModalOpen: false};
+      return { ...state, isSubscriptionModalOpen: false };
     }
 
     case "@@redux-form/DESTROY": {

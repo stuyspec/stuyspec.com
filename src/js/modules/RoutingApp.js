@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 import ConnectedRouter from "react-router-redux/ConnectedRouter";
 import appHistory from "tools/appHistory";
 
 import {
   SignInPage,
+  SignUpPage,
   ProfilePage,
   EditProfilePage,
 } from "./accounts/components";
@@ -40,7 +41,13 @@ class RoutingApp extends Component {
   }
 
   render() {
-    const { sections, roles, descriptions, isAllDataFetched } = this.props;
+    const {
+      sections,
+      roles,
+      descriptions,
+      session,
+      isAllDataFetched,
+    } = this.props;
     return (
       <ConnectedRouter
         onUpdate={() => window.scrollTo(0, 0)}
@@ -117,20 +124,46 @@ class RoutingApp extends Component {
               <Route
                 exact
                 path={"/myaccount"}
-                key={"myaccount"}
-                component={SignInPage}
+                key={"signIn"}
+                render={() =>
+                  session.userId ? (
+                    <Redirect to="/myaccount/profile" />
+                  ) : (
+                    <SignInPage />
+                  )}
               />
               <Route
                 exact
-                path={"/myaccount/profile"}
+                path="/myaccount/sign-up"
+                key={"signUp"}
+                render={() =>
+                  session.userId ? (
+                    <Redirect to="/myaccount/profile" />
+                  ) : (
+                    <SignUpPage />
+                  )}
+              />
+              <Route
+                exact
+                path="/myaccount/profile"
                 key={"profile"}
-                component={ProfilePage}
+                render={() =>
+                  session.userId ? (
+                    <ProfilePage />
+                  ) : (
+                    <Redirect to="/myaccount" />
+                  )}
               />
               <Route
                 exact
-                path={"/myaccount/profile/edit"}
+                path="/myaccount/profile/edit"
                 key={"editProfile"}
-                component={EditProfilePage}
+                render={() =>
+                  session.userId ? (
+                    <EditProfilePage />
+                  ) : (
+                    <Redirect to="/myaccount" />
+                  )}
               />
               <Route
                 exact
@@ -155,9 +188,10 @@ class RoutingApp extends Component {
 }
 
 const mapStateToProps = state => ({
-  descriptions: getDescriptions(state),
-  roles: getRoles(state),
-  sections: getSections(state),
+  descriptions: state.descriptions,
+  roles: state.users.roles,
+  sections: state.sections.sections,
+  session: state.accounts.session,
   isAllDataFetched:
     state.articles.isFetched &&
     state.comments.isFetched &&

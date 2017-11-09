@@ -9,33 +9,45 @@ import { EditUserForm } from "./forms";
 import { updateUser } from "../actions";
 
 const styles = {
-  EditProfilePage: {
-    margin: "78px auto 0",
-    width: "1066px",
+  pageTitle: {
+    color: "#000",
+    fontFamily: "Canela",
+    fontSize: "48px",
+    fontWeight: 500,
+    lineHeight: 1,
+    marginBottom: "11px",
+  },
+  backRedirect: {
+    color: "#3084df",
+    display: "block",
+    fontFamily: "Minion Pro",
+    fontSize: "17px",
+    marginBottom: "14px",
   },
 };
 
 const EditProfilePage = ({ classes, session, users, updateUser }) => {
-  if (!session.userId) {
-    return (
-      <Grid className={classes.EditProfilePage}>
-        <p>
-          You are not signed in. <Link to="/myaccount">Sign in.</Link>
-        </p>
-      </Grid>
-    );
-  }
   const handleUpdateUser = values => {
     updateUser(values, session.userId);
   };
   return (
-    <Grid className={classes.EditProfilePage}>
+    <Grid fluid className={classes.EditProfilePage}>
       <Row>
-        <Col md={6} lg={6}>
-          <Link to="/myaccount/profile">Back to profile</Link>
+        <Col
+          xs={12}
+          sm={6}
+          smOffset={3}
+          md={6}
+          mdOffset={3}
+          lg={6}
+          lgOffset={3}
+        >
+          <p className={classes.pageTitle}>Edit Profile</p>
+          <Link to={"/myaccount/profile"} className={classes.backRedirect}>
+            Back to Profile
+          </Link>
           <EditUserForm onSubmit={handleUpdateUser} />
         </Col>
-        <Col md={6} lg={6} />
       </Row>
     </Grid>
   );

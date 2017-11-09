@@ -7,23 +7,33 @@ import SectionBlock from "./SectionBlock";
 const styles = {
   SectionColumn: {
     borderLeft: "solid 1px #ddd",
-    padding: "0 13px !important",
-    "& > div:not(:last-child)": { // targets each SectionBlock
+    padding: "0 0 0 14px !important",
+    "& > div:not(:last-child)": {
+      // targets each SectionBlock
       borderBottom: "solid 1px #ddd",
       marginBottom: "24px",
+    },
+  },
+  "@media (max-width: 768px)": {
+    SectionColumn: {
+      borderLeft: "none",
+      padding: "0 !important",
+      "& > div:last-child": {
+        // targets last SectionBlock since all SectionColumns are stacked.
+        borderBottom: "solid 1px #ddd",
+        marginBottom: "24px",
+      },
     },
   },
 };
 
 const SectionColumn = ({ classes, sections }) => {
   return (
-    <Col md={3} lg={3} className={classes.SectionColumn}>
+    <div className={classes.SectionColumn}>
       {sections.map(section => {
-        return (
-          <SectionBlock section={section} key={section.id} />
-        );
+        return <SectionBlock section={section} key={section.id} />;
       })}
-    </Col>
+    </div>
   );
 };
 

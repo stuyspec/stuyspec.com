@@ -9,14 +9,9 @@ import { ArticleList } from "../../articles/components";
 import { getSectionTreeArticles } from "../../articles/selectors";
 import { getSections, getDirectSubsections } from "../../sections/selectors";
 import { getMedia } from "../../media/selectors";
-import { Byline } from "../../articles/components";
 import SectionColumn from "./SectionColumn";
 
 const styles = {
-  SectionPage: {
-    margin: "50px auto 0",
-    width: "1066px",
-  },
   subsectionBar: {
     margin: "0 0 28px 0",
     padding: 0,
@@ -58,10 +53,11 @@ const styles = {
   latestArticles: {
     padding: "0 13px 0 0",
     borderRight: "solid 1px #ddd",
-    "& > div:last-child": { // articleBlocks
+    "& > div:last-child": {
+      // articleBlocks
       border: "none",
-      margin: 0
-    }
+      margin: 0,
+    },
   },
   emptySpace: {
     height: "20px",
@@ -71,8 +67,24 @@ const styles = {
   sectionColumnContainer: {
     "& > div": {
       borderLeft: "none",
-    }
-  }
+    },
+  },
+  "@media (min-width: 992px)": {
+    SectionPage: {
+      marginTop: "46px",
+    },
+  },
+  "@media (max-width: 991px)": {
+    SectionPage: {
+      marginTop: "-16px", // counters PageContainer.marginTop = 60px
+    },
+  },
+  "@media (max-width: 768px)": {
+    latestArticles: {
+      borderRight: "none",
+      paddingRight: 0,
+    },
+  },
 };
 
 const SectionPage = ({
@@ -84,7 +96,7 @@ const SectionPage = ({
 }) => {
   const threeSubsections = Object.values(directSubsections).slice(0, 3);
   return (
-    <div className={classes.SectionPage}>
+    <Grid fluid className={classes.SectionPage}>
       {isObjectEmpty(directSubsections) ? (
         <div className={classes.emptySpace} />
       ) : (
@@ -103,18 +115,18 @@ const SectionPage = ({
           })}
         </ul>
       )}
-      <Grid>
-        <Row>
-          <Col md={9} lg={9} className={classes.latestArticles}>
-            <div className={classes.latest}>Latest</div>
-            <ArticleList articles={sectionTreeArticles} />
-          </Col>
+      <Row>
+        <Col xs={12} sm={9} md={9} lg={9} className={classes.latestArticles}>
+          <div className={classes.latest}>Latest</div>
+          <ArticleList articles={sectionTreeArticles} />
+        </Col>
+        <Col xsHidden sm={3} md={3} lg={3}>
           <div className={classes.sectionColumnContainer}>
             <SectionColumn sections={threeSubsections} />
           </div>
-        </Row>
-      </Grid>
-    </div>
+        </Col>
+      </Row>
+    </Grid>
   );
 };
 

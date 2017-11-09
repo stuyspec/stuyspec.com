@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
-import Col from "react-bootstrap/lib/Col";
 
 import Byline from "./Byline";
 import { getArticlesWithContributors } from "../selectors";
@@ -11,7 +10,7 @@ const NUMBER_OF_RAIL_ARTICLES = 5;
 
 const styles = {
   RightRail: {
-
+    marginTop: "28px",
   },
   label: {
     borderTop: "1px solid #000",
@@ -21,7 +20,7 @@ const styles = {
     fontFamily: "Circular Std",
     fontSize: "13px",
     fontWeight: 300,
-    margin: 0,
+    margin: "0 0 12px 0",
     padding: "4px 0",
     "&:hover": {
       color: "#000",
@@ -32,8 +31,8 @@ const styles = {
   },
   article: {
     borderBottom: "solid 1px #ddd",
-    paddingBottom: "12px",
-    marginBottom: "10px",
+    paddingBottom: "9px",
+    marginBottom: "7px",
   },
   bigTitle: {
     color: "#000",
@@ -46,7 +45,7 @@ const styles = {
   smallTitle: {
     color: "#000",
     fontFamily: "Minion Pro",
-    fontSize: "16px",
+    fontSize: "15px",
     lineHeight: "1.25",
   },
   sectionLabel: {
@@ -103,37 +102,47 @@ const styles = {
       display: "inline",
     },
   },
+  "@media (max-width: 991px)": {
+    RightRail: {
+      paddingLeft: "1.5vw"
+    }
+  }
 };
 
+// inside a Col
 const RightRail = ({ classes, articles, sections, media }) => {
   return (
-    <Col md={3} lg={3} className={classes.RightRail}>
+    <div className={classes.RightRail}>
       <Link to="/recommended" className={classes.label}>
         Recommended
       </Link>
-      {Object.values(articles).slice(0, NUMBER_OF_RAIL_ARTICLES).map(article => {
-        const featuredMedia = Object.values(media)
-          .find(mediaObject => mediaObject.articleId === article.id);
-        const section = Object.values(sections)
-          .find(section => article.sectionId === section.id);
-        return (
-          <div className={classes.article} key={article.id}>
-            {featuredMedia && (
-              <figure className={classes.figure}>
-                <img src={featuredMedia.url} />
-              </figure>
-            )}
-            <Link
-              to={`${section.permalink}/${article.slug}`}
-              className={classes.smallTitle}
-            >
-              {article.title}
-            </Link>
-            <Byline classes={classes} contributors={article.contributors} />
-          </div>
-        );
-      })}
-    </Col>
+      {Object.values(articles)
+        .slice(0, NUMBER_OF_RAIL_ARTICLES)
+        .map(article => {
+          const featuredMedia = Object.values(media).find(
+            mediaObject => mediaObject.articleId === article.id,
+          );
+          const section = Object.values(sections).find(
+            section => article.sectionId === section.id,
+          );
+          return (
+            <div className={classes.article} key={article.id}>
+              {featuredMedia && (
+                <figure className={classes.figure}>
+                  <img src={featuredMedia.url} />
+                </figure>
+              )}
+              <Link
+                to={`${section.permalink}/${article.slug}`}
+                className={classes.smallTitle}
+              >
+                {article.title}
+              </Link>
+              <Byline classes={classes} contributors={article.contributors} />
+            </div>
+          );
+        })}
+    </div>
   );
 };
 
@@ -143,6 +152,4 @@ const mapStateToProps = state => ({
   sections: state.sections.sections,
 });
 
-export default connect(
-  mapStateToProps
-)(injectSheet(styles)(RightRail));
+export default connect(mapStateToProps)(injectSheet(styles)(RightRail));

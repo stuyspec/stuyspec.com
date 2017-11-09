@@ -16,13 +16,22 @@ const styles = {
   recommendedList: {
     borderBottom: "solid 1px #ddd",
     padding: "0 0 24px",
+
   },
   label: {
     color: "#000",
+    display: "block",
     fontFamily: "Circular Std",
     fontSize: "12px",
     fontWeight: "300",
     marginBottom: "3px",
+    textTransform: "uppercase",
+  },
+  recommendedText: {
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "12px",
+    marginBottom: "12px",
     textTransform: "uppercase",
   },
   preview: {
@@ -49,14 +58,24 @@ const styles = {
   },
   titleWithoutImage: {
     color: "#000",
+    display: "block",
     fontFamily: "Canela",
-    fontSize: "16px",
+    fontSize: "19px",
     lineHeight: "1.38",
     marginBottom: "2px",
+    "&:active": {
+      color: "#000",
+    },
+    "&:focus": {
+      color: "#000",
+    },
+    "&:hover": {
+      color: "#000",
+    },
   },
   figure: {
     marginBottom: "4.1px",
-    width: "166px",
+    width: "100%",
     "& img": {
       width: "100%",
     },
@@ -72,13 +91,43 @@ const styles = {
       paddingRight: 0,
     },
   },
+  "@media (max-width: 991px)": {
+    RecommendedRow: {
+      padding: "0 10%",
+    },
+  },
+  "@media (max-width: 767px)": {
+    RecommendedRow: {
+      padding: "0 2%",
+    },
+  },
+  "@media (max-width: 575px)": {
+    recommendedBlock: {
+      width: "50%",
+      marginBottom: "7px",
+    },
+    recommendedList: {
+      /* recommendedBlocks are structured in a block form,
+           1  2
+           3  4,
+         rendering these next padding removals necessary.
+       */
+      "& > div:nth-child(2)": { // 2nd recommendedBlock
+        paddingRight: "0 !important",
+      },
+      "& > div:nth-child(3)": { // 3rd recommendedBlock
+        paddingLeft: "0 !important",
+      },
+    }
+  }
 };
 
 const RecommendedRow = ({ classes, media, section, articles, sections }) => {
   const recommendedArticles = Object.values(articles).slice(0, 4);
   return (
     <Row className={classes.RecommendedRow}>
-      <Col md={8} lg={8} className={classes.recommendedList}>
+      <p className={classes.recommendedText}>Recommended</p>
+      <Col xs={12} sm={12} md={9} lg={9} className={classes.recommendedList}>
         {recommendedArticles.map(article => {
           const featuredMedia = Object.values(media).find(mediaObject => {
             return (
@@ -91,10 +140,14 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
                 <figure className={classes.figure}>
                   <img src={featuredMedia.url} />
                 </figure>
-                <p className={classes.label}>{section.name}</p>
                 <Link
-                  to={`${sections[article.sectionId]
-                    .permalink}/${article.slug}`}
+                  to={`${section.permalink}`}
+                  className={classes.label}
+                >
+                  {section.name}
+                </Link>
+                <Link
+                  to={`${section.permalink}/${article.slug}`}
                   className={classes.titleWithImage}
                 >
                   {article.title}
@@ -105,23 +158,27 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
             return (
               <div key={article.id} className={classes.recommendedBlock}>
                 <Link
-                  to={`${sections[article.sectionId]
-                    .permalink}/${article.slug}`}
+                  to={`${section.permalink}`}
+                  className={classes.label}
+                >
+                  {section.name}
+                </Link>
+                <Link
+                  to={`${section.permalink}/${article.slug}`}
                   className={classes.titleWithoutImage}
                 >
                   {article.title}
                 </Link>
                 <p className={classes.preview}>
-                  Unfortunately, all good things must come to an end. We came
-                  into Stuyvesant last September, saved from the unstructured
-                  summer.
+                  Unfortunately, this is a fake article preview. See
+                  RecommendedRow.js to remove this message.
                 </p>
               </div>
             );
           }
         })}
       </Col>
-      <Col md={4} lg={4} />
+      <Col xsHidden smHidden md={3} lg={3} />
     </Row>
   );
 };

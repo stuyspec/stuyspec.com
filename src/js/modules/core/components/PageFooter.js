@@ -12,12 +12,10 @@ const styles = {
     background: "#fff",
     height: "370px",
     marginTop: "14px",
-    padding: 0,
   },
   pageFooterMain: {
     borderTop: "3px solid #ddd",
     margin: "0 auto",
-    width: "1066px",
   },
   sectionFlex: {
     height: "320px",
@@ -136,7 +134,7 @@ const PageFooter = ({
     );
   };
   return (
-    <Grid className={classes.PageFooter}>
+    <Grid fluid className={classes.PageFooter}>
       <Row className={classes.pageFooterMain}>
         <Col lg={8} lgOffset={2}>
           <Link to="/" className={classes.theSpectator}>

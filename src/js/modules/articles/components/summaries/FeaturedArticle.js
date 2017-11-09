@@ -46,6 +46,7 @@ const styles = {
   },
   headline: {
     paddingRight: "0 !important",
+    paddingLeft: "0 !important",
   },
   focus: {
     fontFamily: "Minion Pro",
@@ -61,6 +62,15 @@ const styles = {
       width: "100%",
     },
   },
+  "@media (max-width: 768px)": {
+    featuredMediaContainer: {
+      marginBottom: "14px",
+      padding: "0 !important",
+    },
+    headline: {
+      padding: "0 !important",
+    },
+  },
 };
 
 const FeaturedArticle = ({ classes, articles, media, sections }) => {
@@ -73,7 +83,30 @@ const FeaturedArticle = ({ classes, articles, media, sections }) => {
   });
   return (
     <Row className={classes.FeaturedArticle}>
-      <Col lg={4} md={4} className={classes.headline}>
+      <Col
+        xs={12}
+        sm={8}
+        md={8}
+        lg={8}
+        smPush={4}
+        mdPush={4}
+        lgPush={4}
+        className={classes.featuredMediaContainer}
+      >
+        <figure className={classes.figure}>
+          <img src={featuredMedia.url} />
+        </figure>
+      </Col>
+      <Col
+        xs={12}
+        sm={4}
+        md={4}
+        lg={4}
+        smPull={8}
+        mdPull={8}
+        lgPull={8}
+        className={classes.headline}
+      >
         <Link
           className={classes.title}
           to={`${section.permalink}/${article.slug}`}
@@ -86,11 +119,6 @@ const FeaturedArticle = ({ classes, articles, media, sections }) => {
         <p className={classes.focus}>{article.summary}</p>
         <Byline contributors={article.contributors} />
         <Dateline article={article} />
-      </Col>
-      <Col lg={8} md={8} className={classes.featuredMediaContainer}>
-        <figure className={classes.figure}>
-          <img src={featuredMedia.url} />
-        </figure>
       </Col>
     </Row>
   );

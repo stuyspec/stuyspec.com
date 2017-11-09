@@ -11,7 +11,7 @@ import Outquote from "../Outquote";
 
 const styles = {
   LeftColumn: {
-    paddingRight: "14px !important",
+    paddingRight: "7px !important", // adds to the 7px in Col = 14px
     "& > div": {
       borderBottom: "1px solid #ddd",
       marginBottom: "14px",
@@ -81,6 +81,14 @@ const styles = {
       color: "#000",
     },
   },
+  bylineContaienr: {
+    marginBottom: "4px",
+  },
+  "@media (max-width: 768px)": {
+    LeftColumn: {
+      paddingRight: "0 !important",
+    },
+  },
 };
 
 const LeftColumn = ({ classes, articles, media, sections }) => {
@@ -98,7 +106,7 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
     );
   });
   return (
-    <Col md={3} lg={3} className={classes.LeftColumn}>
+    <Col sm={3} md={3} lg={3} className={classes.LeftColumn}>
       <div className={classes.primaryArticle}>
         {primaryMedia && (
           <div>
@@ -146,8 +154,10 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
         >
           {secondaryArticle.title}
         </Link>
-        <Byline contributors={secondaryArticle.contributors} />
         <p className={classes.articleSummary}>{secondaryArticle.summary}</p>
+        <div className={classes.bylineContainer}>
+          <Byline contributors={secondaryArticle.contributors} />
+        </div>
         <Dateline article={secondaryArticle} />
       </div>
 
@@ -174,7 +184,9 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
         </Link>
         <Outquote quote={outquoteArticle.outquotes[0]} />
         <p className={classes.articleSummary}>{outquoteArticle.summary}</p>
-        <Byline contributors={outquoteArticle.contributors} />
+        <div className={classes.bylineContainer}>
+          <Byline contributors={outquoteArticle.contributors} />
+        </div>
         <Dateline article={outquoteArticle} />
       </div>
     </Col>

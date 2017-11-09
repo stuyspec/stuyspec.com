@@ -10,7 +10,6 @@ const styles = {
     fontSize: 0, // resets font size to remove unwanted whitespace
     margin: "6px auto 19px auto",
     textAlign: "center",
-    width: "1066px",
   },
   theSpectatorLogo: {
     color: "#000",
@@ -25,6 +24,9 @@ const styles = {
       color: "#000",
       textDecoration: "none",
     },
+    "@media (min-width: 768px)": {
+      fontSize: "75px"
+    }
   },
   sectionLinksNav: {
     borderTop: "1px solid black",

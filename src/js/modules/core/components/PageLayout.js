@@ -14,7 +14,11 @@ import SubscriptionModal from "../../accounts/components/SubscriptionModal";
 import { openSidebar, closeSidebar } from "../actions";
 
 const styles = {
-  PageContainer: {},
+  "@media (max-width: 991px)": {
+    PageContainer: {
+      marginTop: "60px",
+    },
+  },
 };
 
 const sidebarStyles = {
@@ -52,7 +56,7 @@ class PageLayout extends Component {
         <PageHeader location={location} />
         <Favicon url="https://i.imgur.com/CxNoalR.png" />
         <div className={classes.PageContainer}>{children}</div>
-        <SubscriptionModal/>
+        <SubscriptionModal />
         <PageFooter />
       </Sidebar>
     );

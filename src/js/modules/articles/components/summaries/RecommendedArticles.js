@@ -6,7 +6,7 @@ import { Row, Col } from "react-bootstrap/lib";
 
 const styles = {
   RecommendedArticles: {
-    padding: "0 0 10px 14px",
+    padding: "0 0 10px 7px",
   },
   label: {
     borderTop: "1px solid #000",

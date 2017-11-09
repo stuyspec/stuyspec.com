@@ -1,12 +1,9 @@
 import React from "react";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 
-import {
-  getArticlesWithContributors,
-} from "../../articles/selectors";
+import { getArticlesWithContributors } from "../../articles/selectors";
 
 import {
   FeaturedArticle,
@@ -30,11 +27,22 @@ const styles = {
     marginBottom: "19px",
     paddingRight: "14px",
   },
+  "@media (max-width: 991px)": {
+    primaryComponents: {
+      borderRight: "none",
+      paddingRight: 0,
+    },
+  },
+  "@media (max-width: 768px)": {
+    skinnyCol: {
+      padding: "0 !important",
+    },
+  },
 };
 
 //The filler column should have a borderRight. Wait until there is something there first
 
-const HomePage = ({ classes, sections, articles}) => {
+const HomePage = ({ classes, sections, articles }) => {
   const sectionFeature = Object.values(sections).find(
     section => section.name === "News",
   );
@@ -54,23 +62,44 @@ const HomePage = ({ classes, sections, articles}) => {
   ].map(sectionName =>
     Object.values(sections).find(section => section.name === sectionName),
   );
+  // TODO: big components should be moved out of Col's and have their own
   return (
     <div>
-      <Grid>
+      <Grid fluid>
         <Row>
-          <Col lg={9} md={9} className={classes.primaryComponents}>
+          <Col
+            xs={12}
+            sm={12}
+            md={9}
+            lg={9}
+            className={classes.primaryComponents}
+          >
             <FeaturedArticle />
             <SectionFeature section={sectionFeature} sections={sections} />
           </Col>
-          <Col lg={3} md={3} className={classes.recommendedArticles}>
+          <Col
+            xsHidden
+            smHidden
+            md={3}
+            lg={3}
+            className={classes.recommendedArticles}
+          >
             <RecommendedArticles articles={recommendedArticles} />
           </Col>
         </Row>
-        <LatestArticlesRibbon className={classes.latestArticlesRibbon}/>
+        <Row>
+          <Col xsHidden sm={12} md={12} lg={12}>
+            <LatestArticlesRibbon className={classes.latestArticlesRibbon} />
+          </Col>
+        </Row>
         <Row>
           <LeftColumn />
-          <SectionColumn sections={firstColumnSections} />
-          <SectionColumn sections={secondColumnSections} />
+          <Col xs={12} sm={3} md={3} lg={3} className={classes.skinnyCol}>
+            <SectionColumn sections={firstColumnSections} />
+          </Col>
+          <Col xs={12} sm={3} md={3} lg={3} className={classes.skinnyCol}>
+            <SectionColumn sections={secondColumnSections} />
+          </Col>
           <RightColumn />
         </Row>
       </Grid>

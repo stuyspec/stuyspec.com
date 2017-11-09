@@ -9,10 +9,11 @@ import { getArticlesWithContributors } from "../../articles/selectors";
 
 const styles = {
   SectionBlock: {
-    "& > div:last-child": { // targets last article
+    "& > div:last-child": {
+      // targets last article
       border: "none",
       paddingBottom: 0,
-    }
+    },
   },
   article: {
     borderBottom: "solid 1px #ddd",
@@ -94,24 +95,26 @@ const SectionBlock = ({ classes, articles, section, media }) => {
     Object.filter(articles, article => article.sectionId === section.id),
   );
   const bigArticle = sectionArticles[0];
-  const nextThreeArticles = sectionArticles.slice(1, 4);
+  const rowArticles = sectionArticles.slice(1, 4);
   return (
     <div className={classes.SectionBlock}>
       <Link to={section.permalink} className={classes.sectionLabel}>
         {section.name}
       </Link>
-      <div className={classes.article}>
-        <Link
-          to={`${section.permalink}/${bigArticle.slug}`}
-          className={classes.bigTitle}
-        >
-          {bigArticle.title}
-        </Link>
-        <p className={classes.preview}>{bigArticle.summary}</p>
-        <Byline classes={classes} contributors={bigArticle.contributors} />
-        <Dateline classes={classes} article={bigArticle} />
-      </div>
-      {nextThreeArticles.map(article => {
+      {bigArticle && (
+        <div className={classes.article}>
+          <Link
+            to={`${section.permalink}/${bigArticle.slug}`}
+            className={classes.bigTitle}
+          >
+            {bigArticle.title}
+          </Link>
+          <p className={classes.preview}>{bigArticle.summary}</p>
+          <Byline classes={classes} contributors={bigArticle.contributors} />
+          <Dateline classes={classes} article={bigArticle} />
+        </div>
+      )} 
+      {rowArticles.length > 0 && rowArticles.map(article => {
         const featuredMedia = Object.values(media).find(mediaObject => {
           return mediaObject.isFeatured && mediaObject.articleId === article.id;
         });

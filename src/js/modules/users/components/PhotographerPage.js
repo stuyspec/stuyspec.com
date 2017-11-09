@@ -42,13 +42,18 @@ const styles = {
     lineHeight: "1.28",
     margin: 0,
   },
+  "@media (max-width: 1199px) and (min-width: 992px)": {
+    PhotographerPage: {
+      paddingLeft: "10%",
+    },
+  },
 };
 
 const PhotographerPage = ({ classes, photographer, articles }) => {
   return (
     <Grid className={classes.PhotographerPage}>
       <Row>
-        <Col md={9}>
+        <Col xs={12} sm={12} md={9} lg={9}>
           <p className={classes.name}>
             {photographer.firstName} {photographer.lastName}
           </p>

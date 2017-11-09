@@ -5,7 +5,7 @@ import injectSheet from "react-jss";
 import { Modal } from "react-bootstrap/lib";
 
 import SubscriptionForm from "./forms/SubscriptionForm";
-import {closeSubscriptionModal,subscribe} from "../actions";
+import { closeSubscriptionModal, subscribe } from "../actions";
 
 const styles = {
   SubscriptionModal: {
@@ -19,7 +19,7 @@ const styles = {
     display: "block",
     height: "89px",
     marginLeft: "40%",
-    width: "164px"
+    width: "164px",
   },
   playlist: {
     height: "108px",
@@ -31,13 +31,13 @@ const styles = {
     display: "block",
     height: "145px",
     margin: "0 0 30px 25%",
-    width: "234px"
+    width: "234px",
   },
   notInterested: {
     backgroundColor: "#ccc",
     border: "none",
     borderRadius: "3px",
-    color: "#888",  
+    color: "#888",
     fontFamily: "Circular Std",
     fontSize: "15px",
     fontWeight: "300",
@@ -56,30 +56,45 @@ const styles = {
     fontFamily: "Minion Pro",
     fontSize: "21px",
     margin: "0 0 24px 0",
-  }
+  },
 };
 
 const SubscriptionModal = ({
   classes,
   isSubscriptionModalOpen,
   closeSubscriptionModal,
-  subscribe
+  subscribe,
 }) => {
- return (
+  return (
     <Modal
       dialogClassName={classes.SubscriptionModal}
       show={isSubscriptionModalOpen}
     >
-      <img className={classes.borough} src="https://i.imgur.com/wV15x03.png" alt="borough"/>
-      <img className={classes.playlist} src="https://i.imgur.com/rwQjPuw.png" alt="playlist"/>
+      <img
+        className={classes.borough}
+        src="https://i.imgur.com/wV15x03.png"
+        alt="borough"
+      />
+      <img
+        className={classes.playlist}
+        src="https://i.imgur.com/rwQjPuw.png"
+        alt="playlist"
+      />
       <p className={classes.newsletter}>Get The Spectator Newsletter.</p>
       <p className={classes.inbox}>Delivered directly to your inbox.</p>
       <SubscriptionForm onSubmit={values => subscribe(values)} />
-      <button onClick={closeSubscriptionModal} className={classes.notInterested}>
+      <button
+        onClick={closeSubscriptionModal}
+        className={classes.notInterested}
+      >
         I am not interested.
       </button>
-      <br/>
-      <img className={classes.film} src="https://i.imgur.com/yvNIHtG.png" alt="film"/>
+      <br />
+      <img
+        className={classes.film}
+        src="https://i.imgur.com/yvNIHtG.png"
+        alt="film"
+      />
     </Modal>
   );
 };
@@ -89,7 +104,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ closeSubscriptionModal, subscribe}, dispatch);
+  return bindActionCreators({ closeSubscriptionModal, subscribe }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(

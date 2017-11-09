@@ -151,7 +151,7 @@ export const closeSignInModal = () => ({
 });
 
 export const openSubscriptionModal = () => ({
-  type: t.OPEN_SUBSCRIPTION_MODAL
+  type: t.OPEN_SUBSCRIPTION_MODAL,
 });
 
 export const closeSubscriptionModal = () => ({
@@ -164,8 +164,8 @@ export const subscribe = values => {
     dispatch({
       type: t.CREATE_SUBSCRIBER_PENDING,
       payload: values,
-    })
-    dispatch({type:t.CLOSE_SUBSCRIPTION_MODAL});
+    });
+    dispatch({ type: t.CLOSE_SUBSCRIPTION_MODAL });
     axios
       //IDK where to post to. Right now, it works but just gives error for posting.
       .post(`${STUY_SPEC_API_URL}/Subscription`, values, STUY_SPEC_API_HEADERS)

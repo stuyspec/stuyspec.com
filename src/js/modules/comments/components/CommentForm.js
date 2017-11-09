@@ -97,6 +97,11 @@ const styles = {
   rejected: {
     color: "red",
   },
+  "@media (max-width: 991px)": {
+    CommentForm: {
+      paddingRight: "0 !important",
+    },
+  },
 };
 
 const validate = values => {

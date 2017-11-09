@@ -8,19 +8,21 @@ import RightRail from "./RightRail";
 
 const styles = {
   ArticleBody: {
-    borderBottom: "1px solid #ddd",
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "18px",
     lineHeight: 1.44,
     padding: "0 0 18px",
+    "& figure:first-child figcaption": {
+      lineHeight: 1.3
+    },
     "& p": {
       marginBottom: "20px",
     },
     "& p:first-child": {
       marginTop: "28px",
     },
-    "& p:first-child::first-letter": {
+    "& p:first-child::first-letter": { // dropcap
       float: "left",
       fontSize: "58px",
       lineHeight: "43px",
@@ -30,22 +32,47 @@ const styles = {
   content: {
     marginTop: "13px",
   },
+  "@media (max-width: 991px)": {
+    ArticleBody: {
+      "& figure:first-child": { // featured media
+        padding: "0 10%",
+      },
+    },
+    innerHTML: {
+      padding: "0 10%",
+    },
+  },
+  "@media (max-width: 767px)": {
+    ArticleBody: {
+      "& figure:first-child": {
+        padding: "0 2%",
+        "& img": {
+          marginLeft: "-14px", // ArticleBody.paddingLeft = 14px
+          width: "100vw",
+        },
+      }
+    },
+    innerHTML: {
+      padding: "0 2%",
+    },
+  },
 };
 
 const ArticleBody = ({ classes, content, featuredMedia }) => {
   return (
     <Row>
-      <Col md={8} lg={8} className={classes.ArticleBody}>
+      <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
         {featuredMedia && (
           <ArticleFeaturedMedia
             featuredMedia={featuredMedia}
             isCaption={true}
           />
         )}
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <div className={classes.innerHTML} dangerouslySetInnerHTML={{ __html: content }} />
       </Col>
-      <Col md={1} lg={1} />
-      <RightRail /> {/* RightRail is Col md=3 lg=3 */}
+      <Col xsHidden smHidden mdOffset={1} md={3} lgOffset={1} lg={3}>
+        <RightRail />
+      </Col>
     </Row>
   );
 };

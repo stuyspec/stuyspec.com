@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
+import { Table } from "react-bootstrap/lib";
 import { EMAIL_REGEX } from "../../../../constants";
 
 const styles = {
@@ -10,6 +11,17 @@ const styles = {
   },
   errorMessage: {
     color: "red",
+  },
+  dataTable: {
+    "& .table-responsive table > tbody > tr > td": {
+      fontFamily: "Minion Pro",
+      fontSize: "17px",
+      padding: "8px 0",
+    },
+    "& .table-responsive table > tbody > tr > td:first-child": {
+      paddingRight: "12px",
+      width: "120px",
+    },
   },
 };
 
@@ -31,9 +43,13 @@ const renderField = ({
 }) => {
   return (
     <div>
-      <label>{label}</label>
       <div>
-        <input {...input} placeholder={label} type={type} />
+        <input
+          {...input}
+          placeholder={label}
+          type={type}
+          style={{ width: "100%" }}
+        />
         {touched &&
           ((error && <span>{error}</span>) ||
             (warning && <span>{warning}</span>))}
@@ -46,24 +62,45 @@ const EditUserForm = ({ classes, handleSubmit, submitting, status }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <Field
-          name="firstName"
-          type="text"
-          component={renderField}
-          label="First Name"
-        />
-        <Field
-          name="lastName"
-          type="text"
-          component={renderField}
-          label="Last Name"
-        />
-        <Field
-          name="email"
-          type="email"
-          component={renderField}
-          label="Email (if this field is changed, a confirmation will be sent to the new email)"
-        />
+        <div className={classes.dataTable}>
+          <Table responsive>
+            <tbody>
+              <tr>
+                <td>First Name</td>
+                <td>
+                  <Field
+                    name="firstName"
+                    type="text"
+                    component={renderField}
+                    label="First Name"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Last Name</td>
+                <td>
+                  <Field
+                    name="lastName"
+                    type="text"
+                    component={renderField}
+                    label="Last Name"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>E-mail Address</td>
+                <td>
+                  <Field
+                    name="email"
+                    type="email"
+                    component={renderField}
+                    label="Email"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </Table>
+        </div>
         <div>
           <button type="submit" disabled={submitting}>
             Save
