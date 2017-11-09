@@ -1,6 +1,6 @@
 {
-  "name": "awesome-react-app",
-  "displayName": "awesome-react-app",
+  "name": "client-app",
+  "displayName": "client-app",
   "version": "0.0.1",
   "description": "Time to get to making stuff!",
   "main": "app.js",

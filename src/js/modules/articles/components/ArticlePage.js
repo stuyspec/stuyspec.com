@@ -14,11 +14,15 @@ import {
 } from "../selectors";
 
 const styles = {
+  ArticlePage: {
+    marginTop: "60px",
+  },
   descriptionRow: {
     marginBottom: "24px",
   },
   description: {
-    borderBottom: "solid 1px #ddd",
+    border: "1px solid #ddd",
+    borderStyle: "solid none", // only top-bottom borders
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "16px",
@@ -36,13 +40,24 @@ const styles = {
       color: "#3572b7",
     },
   },
-  recommendedText: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "12px",
-    marginBottom: "12px",
-    textTransform: "uppercase",
+  "@media (max-width: 1199px)": {
+    ArticlePage: {
+      padding: "0 8%",
+    },
   },
+  "@media (max-width: 991px)": {
+    ArticlePage: {
+      padding: 0,
+    },
+    descriptionRow: {
+      padding: "0 10%",
+    },
+  },
+  "@media (max-width: 767px)": {
+    descriptionRow: {
+      padding: "0 2%",
+    }
+  }
 };
 
 const ArticlePage = ({ classes, article, section, featuredMedia }) => {
@@ -51,7 +66,7 @@ const ArticlePage = ({ classes, article, section, featuredMedia }) => {
       <ArticleHeader article={article} section={section} />
       <ArticleBody content={article.content} featuredMedia={featuredMedia} />
       <Row className={classes.descriptionRow}>
-        <Col md={8} lg={8} className={classes.description}>
+        <Col xs={12} sm={12} md={9} lg={9} className={classes.description}>
           The Pulse of the Student Body:&nbsp;
           <Link
             to={"/maybe-we-should-pop-up-the-subscribe-modal"}
@@ -61,10 +76,9 @@ const ArticlePage = ({ classes, article, section, featuredMedia }) => {
           </Link>
           &nbsp;to <em>The Stuyvesant Spectator</em>’s biweekly newsletter.
         </Col>
-        <Col md={4} lg={4} />
+        <Col xsHidden smHidden md={3} lg={3} />
       </Row>
       <Row>
-        <p className={classes.recommendedText}>Recommended</p>
       </Row>
       <RecommendedRow section={section} />
       <CommentThread article={article} />

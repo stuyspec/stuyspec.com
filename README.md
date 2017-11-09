@@ -1,5 +1,5 @@
 # client-app
-The Client-facing Application of The Stuyvesant Spectator is a modern website, built on [ReactJS](https://github.com/facebook/react).
+The client-facing application of The Stuyvesant Spectator is built with [ReactJS](https://github.com/facebook/react). For the home page design, see [Behance](https://www.behance.net/gallery/58000077/The-SpectatorA-New-Look).
 
 ## Getting started
 _Requirement: [Git](https://help.github.com/articles/set-up-git/)_
@@ -19,6 +19,9 @@ npm install
 ```
 gulp
 ```
+
+### Setting up the server (yes, we are working on getting Docker set up)
+To set up the server, follow the instructions on our the README of our [API](https://github.com/stuyspec/stuy-spec-api).
 
 ## Coding environment
 **WebStorm**: the smartest JavaScript IDE (powerful, but will lag on weak computers). Get a free student license at [JetBrains](https://www.jetbrains.com/student/), then download and install WebStorm.

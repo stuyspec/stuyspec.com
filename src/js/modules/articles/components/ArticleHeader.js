@@ -7,6 +7,9 @@ import Byline from "./Byline";
 import Dateline from "./Dateline";
 
 const styles = {
+  headerRow: {
+
+  },
   ArticleHeader: {
     borderTop: "solid 1px #000",
     borderBottom: "1px solid #dedede",
@@ -62,14 +65,24 @@ const styles = {
     display: "inline",
     fontSize: "14px",
   },
+  "@media (max-width: 991px)": {
+    headerRow: {
+      padding: "0 10%",
+    },
+  },
+  "@media (max-width: 768px)": {
+    headerRow: {
+      padding: "0 2%",
+    },
+  },
 };
 
 // TODO: make selector for dateline
 
 const ArticleHeader = ({ classes, article, section }) => {
   return (
-    <Row>
-      <Col md={12} lg={12} className={classes.ArticleHeader}>
+    <Row className={classes.headerRow}>
+      <Col xs={12} sm={12} md={12} lg={12} className={classes.ArticleHeader}>
         <Link to={section.permalink} className={classes.rubric}>
           {section.name}
         </Link>
