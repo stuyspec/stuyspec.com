@@ -59,7 +59,7 @@ const styles = {
       color: "#000",
     },
   },
-  articleSummary: {
+  summary: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "14px",
@@ -81,12 +81,24 @@ const styles = {
       color: "#000",
     },
   },
-  bylineContaienr: {
+  bylineContainer: {
     marginBottom: "4px",
   },
   "@media (max-width: 768px)": {
     LeftColumn: {
       paddingRight: "0 !important",
+    },
+    figure: {
+      "& img": {
+        marginLeft: "-14px",
+        width: "100vw",
+      },
+    },
+    primaryTitle: {
+      fontSize: "28px",
+      fontWeight: "bold",
+      fontStyle: "normal",
+      lineHeight: "30px",
     },
   },
 };
@@ -128,7 +140,7 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
         >
           {sections[primaryArticle.sectionId].title}
         </Link>
-        <p className={classes.articleSummary}>{primaryArticle.summary}</p>
+        <p className={classes.summary}>{primaryArticle.summary}</p>
         <Byline contributors={primaryArticle.contributors} />
         <Dateline article={primaryArticle} />
       </div>
@@ -154,7 +166,7 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
         >
           {secondaryArticle.title}
         </Link>
-        <p className={classes.articleSummary}>{secondaryArticle.summary}</p>
+        <p className={classes.summary}>{secondaryArticle.summary}</p>
         <div className={classes.bylineContainer}>
           <Byline contributors={secondaryArticle.contributors} />
         </div>
@@ -183,7 +195,7 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
           {outquoteArticle.title}
         </Link>
         <Outquote quote={outquoteArticle.outquotes[0]} />
-        <p className={classes.articleSummary}>{outquoteArticle.summary}</p>
+        <p className={classes.summary}>{outquoteArticle.summary}</p>
         <div className={classes.bylineContainer}>
           <Byline contributors={outquoteArticle.contributors} />
         </div>

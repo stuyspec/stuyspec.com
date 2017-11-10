@@ -48,7 +48,7 @@ const styles = {
     paddingRight: "0 !important",
     paddingLeft: "0 !important",
   },
-  focus: {
+  summary: {
     fontFamily: "Minion Pro",
     fontSize: "14px",
     lineHeight: 1.29,
@@ -69,6 +69,12 @@ const styles = {
     },
     headline: {
       padding: "0 !important",
+    },
+    figure: {
+      "& img": {
+        marginLeft: "-14px",
+        width: "100vw",
+      },
     },
   },
 };
@@ -116,7 +122,7 @@ const FeaturedArticle = ({ classes, articles, media, sections }) => {
         <Link to={section.permalink} className={classes.sectionLabel}>
           {section.name}
         </Link>
-        <p className={classes.focus}>{article.summary}</p>
+        <p className={classes.summary}>{article.summary}</p>
         <Byline contributors={article.contributors} />
         <Dateline article={article} />
       </Col>

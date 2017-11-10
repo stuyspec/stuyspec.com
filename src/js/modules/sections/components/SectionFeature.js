@@ -57,7 +57,7 @@ const styles = {
       color: "#000",
     },
   },
-  focus: {
+  summary: {
     fontFamily: "Minion Pro",
     fontSize: "14px",
     lineHeight: 1.29,
@@ -70,6 +70,23 @@ const styles = {
   },
   featuredMediaContainer: {
     paddingRight: 0,
+  },
+  mobileArticleTitle1: {
+    borderTop: "1px solid #ddd",
+    marginTop: "14px",
+    padding: "12px 7px 8px 7px",
+    "& a": {
+      fontSize: "22px",
+      marginBottom: 0,
+    },
+  },
+  mobileArticleTitle2: {
+    borderTop: "1px solid #ddd",
+    padding: "12px 7px 2px 7px",
+    "& a": {
+      fontSize: "22px",
+      marginBottom: 0,
+    },
   },
   "@media (max-width: 767px)": {
     SectionFeature: {
@@ -88,7 +105,6 @@ const styles = {
 };
 
 const SectionFeature = ({ classes, articles, section, media, sections }) => {
-  // TODO: SECTIONA RTICLES IS TURNING UP UNDEFINED
   const sectionArticles = Object.values(
     Object.filter(articles, article => article.sectionId === section.id),
   );
@@ -106,7 +122,7 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
     return mediaObject;
   }) || sectionArticles[1]; // if none such article found, default is the second
   const possibleTernaryArticle = sectionArticles
-    .slice(1, 10).find(article => article != secondaryArticle);
+    .slice(1, 10).find(article => article !== secondaryArticle);
   // NESTED IN <Col lg={9}>
   return (
     <Row className={classes.SectionFeature}>
@@ -116,24 +132,22 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
       <Col xsHidden sm={4} md={4} lg={4} className={classes.primaryArticle}>
         <Link
           className={classes.title}
-          to={`${sections[primaryArticle.sectionId]
-            .permalink}/${primaryArticle.slug}`}
+          to={`${section.permalink}/${primaryArticle.slug}`}
         >
           {primaryArticle.title}
         </Link>
-        <p className={classes.focus}>{primaryArticle.summary}</p>
+        <p className={classes.summary}>{primaryArticle.summary}</p>
         <Byline contributors={primaryArticle.contributors} />
         <Dateline article={primaryArticle} />
       </Col>
       <Col xs={6} sm={4} md={4} lg={4} className={classes.secondaryArticle}>
         <Link
           className={classes.title}
-          to={`${sections[secondaryArticle.sectionId]
-            .permalink}/${secondaryArticle.slug}`}
+          to={`${section.permalink}/${secondaryArticle.slug}`}
         >
           {secondaryArticle.title}
         </Link>
-        <p className={classes.focus}>{secondaryArticle.summary}</p>
+        <p className={classes.summary}>{secondaryArticle.summary}</p>
         <Byline contributors={secondaryArticle.contributors} />
         <Dateline article={secondaryArticle} />
       </Col>
@@ -150,20 +164,35 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
           </figure>
         </Col>
       ) : (
-        <Col xs={6} sm={4} md={4} lg={4} className={classes.ternaryArticle}>
+        <Col xsHidden sm={4} md={4} lg={4} className={classes.ternaryArticle}>
         <Link
           className={classes.title}
-          to={`${sections[possibleTernaryArticle.sectionId]
-            .permalink}/${possibleTernaryArticle.slug}`}
+          to={`${section.permalink}/${possibleTernaryArticle.slug}`}
         >
           {possibleTernaryArticle.title}
         </Link>
-        <p className={classes.focus}>{possibleTernaryArticle.summary}</p>
+        <p className={classes.summary}>{possibleTernaryArticle.summary}</p>
         <Byline contributors={possibleTernaryArticle.contributors} />
         <Dateline article={possibleTernaryArticle} />
       </Col>
       )}
-      
+      <Col xs={12} smHidden mdHidden lgHidden className={classes.mobileArticleTitle1}>
+        <Link
+          className={classes.title}
+          to={`${section.permalink}/${primaryArticle.slug}`}
+        >
+          {primaryArticle.title}
+        </Link>
+      </Col>
+      <Col xs={12} smHidden mdHidden lgHidden className={classes.mobileArticleTitle2}>
+        <Link
+          className={classes.title}
+          to={`${section.permalink}/${possibleTernaryArticle.slug}`}
+        >
+          {possibleTernaryArticle.title}
+        </Link>
+      </Col>
+
     </Row>
   );
 };
