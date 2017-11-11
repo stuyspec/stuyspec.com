@@ -52,7 +52,7 @@ const styles = {
       width: "100%",
     },
   },
-  preview: {
+  summary: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "14px",
@@ -109,7 +109,7 @@ const SectionBlock = ({ classes, articles, section, media }) => {
           >
             {bigArticle.title}
           </Link>
-          <p className={classes.preview}>{bigArticle.summary}</p>
+          <p className={classes.summary}>{bigArticle.summary}</p>
           <Byline classes={classes} contributors={bigArticle.contributors} />
           <Dateline classes={classes} article={bigArticle} />
         </div>
