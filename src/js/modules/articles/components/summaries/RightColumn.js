@@ -44,7 +44,7 @@ const styles = {
       color: "#000",
     },
   },
-  articleSummary: {
+  summary: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "14px",
@@ -131,7 +131,7 @@ const RightColumn = ({ classes, articles, media, sections }) => {
         {primaryArticle.outquotes.length > 0 && (
           <Outquote quote={primaryArticle.outquotes[0]} />
         )}
-        <p className={classes.articleSummary}>{primaryArticle.summary}</p>
+        <p className={classes.summary}>{primaryArticle.summary}</p>
         <Byline contributors={primaryArticle.contributors} />
         <Dateline article={primaryArticle} />
       </div>
@@ -150,7 +150,7 @@ const RightColumn = ({ classes, articles, media, sections }) => {
         >
           {secondaryArticle.title}
         </Link>
-        <p className={classes.articleSummary}>{secondaryArticle.summary}</p>
+        <p className={classes.summary}>{secondaryArticle.summary}</p>
         <Byline contributors={secondaryArticle.contributors} />
         <Dateline article={secondaryArticle} />
       </div>

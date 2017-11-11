@@ -66,13 +66,6 @@ const styles = {
       width: "100%",
     },
   },
-  preview: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "14px",
-    lineHeight: "1.29",
-    marginBottom: "13px",
-  },
   Byline: {
     color: "#888",
     fontFamily: "Circular Std",

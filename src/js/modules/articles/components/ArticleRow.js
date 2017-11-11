@@ -34,7 +34,7 @@ const styles = {
     float: "left",
     marginRight: "19px",
   },
-  summary: {
+  preview: {
     overflow: "hidden",
   },
   figure: {
@@ -54,7 +54,7 @@ const styles = {
     marginBottom: "2px",
     paddingTop: "2px",
   },
-  preview: {
+  summary: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "16px",
@@ -89,7 +89,7 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
     <Row key={article.id} className={classes.ArticleRow}>
       <div className={classes.articleBlock} key={article.id}>
         <p className={classes.DatelineDesktop}>August 24, 2017</p>
-        <div className={classes.summary}>
+        <div className={classes.preview}>
           {featuredMedia && (
             <figure className={classes.figure}>
               <img src={featuredMedia.url} alt={featuredMedia.title} />
@@ -101,9 +101,8 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
           >
             {article.title}
           </Link>
-          <p className={classes.preview}>
-            Unfortunately, all good things must come to an end. We came into
-            Stuyvesant last September, saved from the unstructured summer.
+          <p className={classes.summary}>
+            {article.summary}
           </p>
           <Byline contributors={article.contributors} />
           <p className={classes.DatelineMobile}>August 24, 2017</p>
