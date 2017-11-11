@@ -13,6 +13,19 @@ const styles = {
   errorMessage: {
     color: "red",
   },
+  signOutButton: {
+    backgroundColor: "#3472b7",
+    border: "1px solid #3472b7",
+    borderRadius: "3px",
+    color: "#fff",
+    fontFamily: "Minion Pro",
+    fontSize: "15px",
+    fontStyle: "italic",
+    height: "32px",
+    marginTop: "15px",
+    textAlign: "center",
+    width: "85px"
+  },
 };
 
 const SignOutForm = ({ classes, handleSubmit, submitting, status }) => {
@@ -20,7 +33,7 @@ const SignOutForm = ({ classes, handleSubmit, submitting, status }) => {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <button type="submit" disabled={submitting}>
+          <button type="submit" disabled={submitting} className={classes.signOutButton}>
             Sign Out
           </button>
         </div>
