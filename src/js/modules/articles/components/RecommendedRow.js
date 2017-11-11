@@ -34,7 +34,7 @@ const styles = {
     marginBottom: "12px",
     textTransform: "uppercase",
   },
-  preview: {
+  summary: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "14px",
@@ -169,9 +169,8 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
                 >
                   {article.title}
                 </Link>
-                <p className={classes.preview}>
-                  Unfortunately, this is a fake article preview. See
-                  RecommendedRow.js to remove this message.
+                <p className={classes.summary}>
+                 {article.summary}
                 </p>
               </div>
             );

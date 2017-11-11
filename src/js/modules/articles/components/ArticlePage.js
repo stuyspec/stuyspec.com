@@ -60,6 +60,7 @@ const styles = {
   }
 };
 
+//TODO: pop it up
 const ArticlePage = ({ classes, article, section, featuredMedia }) => {
   return (
     <Grid fluid className={classes.ArticlePage}>

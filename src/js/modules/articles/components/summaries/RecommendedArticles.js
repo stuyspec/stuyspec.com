@@ -60,7 +60,7 @@ const styles = {
       color: "#000",
     },
   },
-  focus: {
+  summary: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "14px",
@@ -90,7 +90,7 @@ const RecommendedArticles = ({ classes, articles, sections }) => {
               >
                 {article.title}
               </Link>
-              <p className={classes.focus}>{article.summary}</p>
+              <p className={classes.summary}>{article.summary}</p>
             </div>
           </div>
         );
