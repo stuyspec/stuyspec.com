@@ -14,9 +14,11 @@ const styles = {
 
 // TODO: format dates
 const Dateline = ({ classes, article }) => {
-  return (<p className={classes.Dateline}>
+  return (
+  <p className={classes.Dateline}>
   	{formatDate(article.createdAt)}
-  </p>);
+  </p>
+  );
 };
 
 export default injectSheet(styles)(Dateline);
