@@ -9,6 +9,7 @@ import { getSections } from "../../sections/selectors";
 import { getUsers } from "../../users/selectors";
 import Byline from "./Byline";
 import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
+import Dateline from "./Dateline";
 
 const styles = {
   articleBlock: {
@@ -88,7 +89,9 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
   return (
     <Row key={article.id} className={classes.ArticleRow}>
       <div className={classes.articleBlock} key={article.id}>
-        <p className={classes.DatelineDesktop}>August 24, 2017</p>
+        <p className={classes.DatelineDesktop}>
+          <Dateline article={article}/>
+        </p>
         <div className={classes.preview}>
           {featuredMedia && (
             <figure className={classes.figure}>
