@@ -18,7 +18,7 @@ const styles = {
     margin: "0 auto",
   },
   sectionFlex: {
-    height: "320px",
+    height: "264px",
     display: "flex",
     flexFlow: "column wrap",
     paddingTop: "6px",
@@ -73,6 +73,68 @@ const styles = {
     "&:focus": {
       color: "#000",
       textDecoration: "none",
+    },
+  },
+  aboutNavLinksMobile: {
+    "& > div": { // the surrounding section block
+      border: 0,
+    },
+    "& > div > a": { // each about-us link
+      display: "inline-block",
+      color: "#aaa",
+      fontSize: "12px",
+      padding: "0 16px 6px 0",
+      "&:active": {
+        color: "#aaa",
+        textDecoration: "underline",
+      },
+      "&:focus": {
+        color: "#aaa",
+        textDecoration: "underline",
+      },
+      "&:hover": {
+        color: "#aaa",
+        textDecoration: "underline",
+      },
+    },
+  },
+  "@media (max-width: 767px)": {
+    PageFooter: {
+      marginBottom: "30px",
+    },
+    sectionFlex: {
+      flexWrap: "nowrap",
+      height: "auto",
+      "& > div:nth-child(6) ~ div": { // shows first six section blocks
+        display: "none",
+      },
+      "& > div:nth-child(6)": {
+        borderBottom: "1px solid #ddd",
+      },
+    },
+    sectionBlock: {
+      margin: 0,
+      padding: "10px 0",
+      borderTop: "1px solid #ddd",
+    },
+    topLevelSectionLink: {
+      fontSize: "15px",
+      fontWeight: "500",
+      "&:active": {
+        color: "#000",
+        textDecoration: "none",
+      },
+      "&:focus": {
+        color: "#000",
+        textDecoration: "none",
+      },
+      "&:hover": {
+        color: "#000",
+        textDecoration: "none",
+      },
+    },
+    subsectionLink: {
+      display: "none",
     },
   },
 };
@@ -136,13 +198,16 @@ const PageFooter = ({
   return (
     <Grid fluid className={classes.PageFooter}>
       <Row className={classes.pageFooterMain}>
-        <Col lg={8} lgOffset={2}>
+        <Col xs={12} sm={10} smOffset={1} md={8} mdOffset={2} lg={8} lgOffset={2}>
           <Link to="/" className={classes.theSpectator}>
             The Spectator
           </Link>
         </Col>
-        <Col lg={8} lgOffset={2} className={classes.sectionFlex}>
+        <Col xs={12} sm={10} smOffset={1} md={8} mdOffset={2} lg={8} lgOffset={2} className={classes.sectionFlex}>
           {createSectionLinks()}
+          {createDescriptionLinks()}
+        </Col>
+        <Col xs={12} smHidden mdHidden lgHidden className={classes.aboutNavLinksMobile}>
           {createDescriptionLinks()}
         </Col>
       </Row>
