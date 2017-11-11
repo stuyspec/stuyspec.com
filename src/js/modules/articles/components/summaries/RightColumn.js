@@ -113,7 +113,7 @@ const RightColumn = ({ classes, articles, media, sections }) => {
   });
   */
   return (
-    <Col sm={3} md={3} lg={3} className={classes.RightColumn}>
+    <Col xs={12} sm={3} md={3} lg={3} className={classes.RightColumn}>
       <div className={classes.primaryArticle}>
         <Link
           to={sections[primaryArticle.sectionId].permalink}
