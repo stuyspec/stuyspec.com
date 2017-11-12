@@ -1,5 +1,0 @@
-{
-    "tools"      : "src/js/tools",
-    "middleware" : "src/js/middleware",
-    "modules"    : "src/js/modules"
-}
