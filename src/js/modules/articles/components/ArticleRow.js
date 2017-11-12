@@ -89,9 +89,9 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
   return (
     <Row key={article.id} className={classes.ArticleRow}>
       <div className={classes.articleBlock} key={article.id}>
-        <p className={classes.DatelineDesktop}>
+        <div className={classes.DatelineDesktop}>
           <Dateline article={article}/>
-        </p>
+        </div>
         <div className={classes.preview}>
           {featuredMedia && (
             <figure className={classes.figure}>
@@ -108,7 +108,7 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
             {article.summary}
           </p>
           <Byline contributors={article.contributors} />
-          <p className={classes.DatelineMobile}>August 24, 2017</p>
+          <p className={classes.DatelineMobile}><Dateline article={article}/></p>
         </div>
       </div>
     </Row>

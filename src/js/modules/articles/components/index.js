@@ -4,3 +4,4 @@ export { default as ArticleRow } from "./ArticleRow";
 export { default as RecommendedPage } from "./RecommendedPage";
 export { default as LatestPage } from "./LatestPage";
 export { default as Byline } from "./Byline";
+export { default as Dateline } from "./Dateline";
