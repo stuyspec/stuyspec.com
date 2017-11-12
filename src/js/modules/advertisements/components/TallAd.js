@@ -15,7 +15,7 @@ const TallAd = ({ classes }) => {
   return (
     <div className={classes.TallAd}>
       <Link to="http://apple.com">
-        <img className={classes.img} src="https://imgur.com/OQ9X2wp"/>
+        <img className={classes.img} src="https://imgur.com/OQ9X2wp.png"/>
       </Link>
     </div>
   );

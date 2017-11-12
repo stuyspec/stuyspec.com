@@ -4,32 +4,29 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import { isObjectEmpty, capitalizeWord } from "../../../utils";
-import { MEDIA_CREATOR_SLUGS } from "../../../constants";
+import { isObjectEmpty } from "../../../utils";
 import { ArticleList } from "../../articles/components";
 import { getSectionTreeArticles } from "../../articles/selectors";
 import { getDirectSubsections } from "../../sections/selectors";
 import SectionColumn from "./SectionColumn";
 import LatestArticlesRibbon from "../../articles/components/summaries/LatestArticlesRibbon";
 import { Dateline, Byline } from "../../articles/components/index";
+import SectionFeature from "./SectionFeature";
+import { TallAd } from "../../advertisements/components/index";
 
 const styles = {
-  SectionPage: {
-    "& a": {
-      color: "#000",
-      "&:hover": {color: "#000"},
-      "&:active": {color: "#000"},
-      "&:focus": {color: "#000"},
-    },
-  },
   subsectionBar: {
     margin: "0 0 28px 0",
     padding: 0,
     textAlign: "center",
   },
+  featuredRow: {
+    borderBottom: "1px solid #ddd",
+    paddingBottom: "18px",
+  },
   featuredMedia: {
     "& figure": {
-      margin: "0",
+      margiSection: "0",
       width: "100%",
       "& img": {
         width: "100%",
@@ -41,6 +38,12 @@ const styles = {
     paddingTop: "35px",
     textAlign: "center",
     width: "325px",
+    "& a": {
+      color: "#000",
+      "&:hover": {color: "#000"},
+      "&:active": {color: "#000"},
+      "&:focus": {color: "#000"},
+    },
   },
   featuredArticleSection: {
     display: "block",
@@ -63,6 +66,17 @@ const styles = {
     fontSize: "16px",
     lineHeight: 1.25,
     marginBottom: "18px",
+  },
+  SectionFeatureContainer: {
+    paddingRight: "14px !important",
+    "& div": {
+      borderTop: "none",
+    },
+  },
+  TallAdContainer: {
+    borderLeft: "1px solid #ddd",
+    marginTop: "24px",
+    paddingLeft: "14px !important",
   },
 
 
@@ -157,7 +171,6 @@ const SectionPage = ({
   sectionTreeArticles,
   directSubsections,
   section,
-  users,
   media,
 }) => {
   let featuredMedia = null;
@@ -175,7 +188,7 @@ const SectionPage = ({
   if (!featuredArticleSection) {
     featuredArticleSection = section;
   }
-  const featuredMediaArtist = Object.values(users).find(user => featuredMedia.userId === user.id);
+  const featuredSubsection = section; //Object.values(directSubsections)[0];
   return (
     <Grid fluid className={classes.SectionPage}>
       {isObjectEmpty(directSubsections) ? (
@@ -196,7 +209,7 @@ const SectionPage = ({
           })}
         </ul>
       )}
-      <Row>
+      <Row className={classes.featuredRow}>
         <Col xs={12} sm={7} md={7} lg={7} className={classes.featuredMedia}>
           <figure className={classes.figure}>
             <img className={classes.img} src={featuredMedia.url} />
@@ -216,6 +229,14 @@ const SectionPage = ({
           </p>
           <Byline contributors={featuredArticle.contributors} />
           <Dateline article={featuredArticle}/>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12} sm={12} md={9} lg={9} className={classes.SectionFeatureContainer}>
+          <SectionFeature section={featuredSubsection}/>
+        </Col>
+        <Col xsHidden smHidden md={3} lg={3} className={classes.TallAdContainer}>
+          <TallAd/>
         </Col>
       </Row>
       <Row>
@@ -243,7 +264,6 @@ const mapStateToProps = (state, ownProps) => ({
   directSubsections: getDirectSubsections(state, ownProps),
   sections: state.sections.sections,
   media: state.media.media,
-  users: state.users.users,
 });
 
 export default connect(mapStateToProps, null)(injectSheet(styles)(SectionPage));
