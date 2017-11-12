@@ -36,15 +36,6 @@ const styles = {
       },
     },
   },
-  featuredMediaCaption: {
-    fontFamily: "Minion Pro",
-    fontSize: "14px",
-    lineHeight: "1.07",
-    marginTop: "7px",
-  },
-  featuredMediaCredits: {
-    color: "#888 !important",
-  },
   featuredArticle: {
     marginLeft: "55px",
     paddingTop: "35px",
@@ -209,17 +200,6 @@ const SectionPage = ({
         <Col xs={12} sm={7} md={7} lg={7} className={classes.featuredMedia}>
           <figure className={classes.figure}>
             <img className={classes.img} src={featuredMedia.url} />
-            <figcaption className={classes.featuredMediaCaption}>
-              <Link
-                className={classes.featuredMediaCredits}
-                to={`/${MEDIA_CREATOR_SLUGS[featuredMedia.type]}/${featuredMediaArtist.slug}`}
-              >
-                {capitalizeWord(featuredMedia.type)}
-                &nbsp;by&nbsp;
-                {`${featuredMediaArtist.firstName} ${featuredMediaArtist.lastName}`}
-              </Link>
-              .
-            </figcaption>
           </figure>
         </Col>
         <Col xs={12} sm={5} md={5} lg={5} className={classes.featuredArticle}>
