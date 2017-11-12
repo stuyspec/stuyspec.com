@@ -60,7 +60,7 @@ const styles = {
   },
   figure: {
     float: "right",
-    margin: "0",
+    marginLeft: "5px",
     width: "62px",
     "& img": {
       width: "100%",

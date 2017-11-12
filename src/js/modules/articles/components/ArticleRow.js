@@ -21,10 +21,11 @@ const styles = {
     color: "#888",
     display: "block",
     fontFamily: "Circular Std",
-    fontSize: "12px",
+    fontSize: "13px",
     fontWeight: "300",
     float: "left",
     marginRight: "19px",
+    width: "110px",
   },
   DatelineMobile: {
     color: "#888",
@@ -47,19 +48,20 @@ const styles = {
     },
   },
   title: {
+    color: "#000",
     display: "block",
     fontFamily: "Minion Pro",
     fontSize: "24px",
-    color: "#000",
-    lineHeight: "1",
-    marginBottom: "2px",
+    fontWeight: 700,
+    lineHeight: "1.05",
+    marginBottom: "5px",
     paddingTop: "2px",
   },
   summary: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "16px",
-    lineHeight: "1.13",
+    lineHeight: "1.25",
   },
   "@media (max-width: 767px)": {
     DatelineDesktop: {
@@ -68,8 +70,6 @@ const styles = {
     DatelineMobile: {
       display: "block",
     },
-  },
-  "@media (max-width: 575px)": {
     figure: {
       float: "none",
       margin: "0 0 14px 0",

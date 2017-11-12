@@ -22,6 +22,7 @@ const styles = {
   },
   bigTitle: {
     color: "#000",
+    display: "block",
     fontFamily: "Minion Pro",
     fontSize: "18px",
     fontWeight: "bold",
@@ -46,7 +47,7 @@ const styles = {
   },
   figure: {
     float: "right",
-    margin: "0",
+    marginLeft: "6px",
     width: "62px",
     "& img": {
       width: "100%",
