@@ -14,6 +14,11 @@ import { Dateline, Byline } from "../../articles/components/index";
 import SectionFeature from "./SectionFeature";
 import { TallAd } from "../../advertisements/components/index";
 
+
+
+// TODO: STYLE SECONDARY ARTICLE. consider setting a max height
+
+
 const styles = {
   subsectionBar: {
     margin: "0 0 28px 0",
@@ -68,6 +73,7 @@ const styles = {
     marginBottom: "18px",
   },
   SectionFeatureContainer: {
+    borderBottom: "1px solid #ddd",
     paddingRight: "14px !important",
     "& div": {
       borderTop: "none",
@@ -78,6 +84,7 @@ const styles = {
     marginTop: "24px",
     paddingLeft: "14px !important",
   },
+
 
 
   latestArticleRibbon: {
@@ -188,6 +195,24 @@ const SectionPage = ({
   if (!featuredArticleSection) {
     featuredArticleSection = section;
   }
+
+
+  let secondaryMedia = null;
+  const secondaryArticle = Object.values(sectionTreeArticles).find(article => {
+    const mediaObject = Object.values(media).find(
+      mediaObject =>
+        mediaObject.articleId === article.id
+    );
+    if (mediaObject) {
+      secondaryMedia = mediaObject;
+    }
+    return mediaObject;
+  });
+  let secondaryArticleSection = Object.values(directSubsections).find(subsection => subsection.articleId === secondaryArticle.id);
+  if (!secondaryArticleSection) {
+    secondaryArticleSection = section;
+  }
+
   const featuredSubsection = section; //Object.values(directSubsections)[0];
   return (
     <Grid fluid className={classes.SectionPage}>
@@ -211,8 +236,8 @@ const SectionPage = ({
       )}
       <Row className={classes.featuredRow}>
         <Col xs={12} sm={7} md={7} lg={7} className={classes.featuredMedia}>
-          <figure className={classes.figure}>
-            <img className={classes.img} src={featuredMedia.url} />
+          <figure>
+            <img src={featuredMedia.url} />
           </figure>
         </Col>
         <Col xs={12} sm={5} md={5} lg={5} className={classes.featuredArticle}>
@@ -232,8 +257,32 @@ const SectionPage = ({
         </Col>
       </Row>
       <Row>
-        <Col xs={12} sm={12} md={9} lg={9} className={classes.SectionFeatureContainer}>
-          <SectionFeature section={featuredSubsection}/>
+        <Col xs={12} sm={12} md={9} lg={9}>
+          <div className={classes.SectionFeatureContainer}>
+            <SectionFeature section={featuredSubsection}/>
+          </div>
+          <Row className={classes.secondaryArticle}>
+            <Col xs={12} sm={4} md={4} lg={4}>
+              <Link className={classes.secondaryArticleSection}
+                    to={secondaryArticleSection.permalink}>
+                {secondaryArticleSection.name}
+              </Link>
+              <Link className={classes.secondaryArticleTitle}
+                    to={`${secondaryArticleSection.permalink}/${secondaryArticle.slug}`}>
+                {secondaryArticle.title}
+              </Link>
+              <p className={classes.secondaryArticleSummary}>
+                {secondaryArticle.summary}
+              </p>
+              <Byline contributors={secondaryArticle.contributors} />
+              <Dateline article={secondaryArticle}/>
+            </Col>
+            <Col xs={12} sm={8} md={8} lg={8} className={classes.secondaryMedia}>
+              <figure>
+                <img src={secondaryMedia.url} />
+              </figure>
+            </Col>
+          </Row>
         </Col>
         <Col xsHidden smHidden md={3} lg={3} className={classes.TallAdContainer}>
           <TallAd/>
