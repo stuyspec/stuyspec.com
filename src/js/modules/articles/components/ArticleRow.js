@@ -70,10 +70,17 @@ const styles = {
     DatelineMobile: {
       display: "block",
     },
+    preview: {
+      overflow: "visible",
+    },
     figure: {
       float: "none",
       margin: "0 0 14px 0",
       width: "100%",
+      "& img": {
+        marginLeft: "-14px",
+        width: "100vw",
+      },
     },
   },
 };

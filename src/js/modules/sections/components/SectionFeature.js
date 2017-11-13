@@ -72,7 +72,7 @@ const styles = {
     paddingRight: "14px !important",
   },
   mobileArticleTitle1: {
-    borderTop: "1px solid #ddd",
+    borderTop: "1px solid #ddd !important",
     marginTop: "14px",
     padding: "12px 7px 8px 7px",
     "& a": {
@@ -81,7 +81,7 @@ const styles = {
     },
   },
   mobileArticleTitle2: {
-    borderTop: "1px solid #ddd",
+    borderTop: "1px solid #ddd !important",
     padding: "12px 7px 2px 7px",
     "& a": {
       fontSize: "22px",
@@ -101,6 +101,10 @@ const styles = {
       padding: "0px !important",
       marginBottom: 0,
     },
+    featuredMediaContainer: {
+      borderRight: 0,
+      paddingRight: "0 !important",
+    },
   },
 };
 
@@ -114,14 +118,14 @@ const SectionFeature = ({
 }) => {
   let sectionArticles = [];
   if (recursive) {
+    subsectionIds = Object.values(sections).filter(
+      subsection => subsection.parentId === section.id,
+    ).map(subsection => subsection.id);
     sectionArticles = Object.values(
-      Object.filter(articles, article => {
-        // ONLY GOES TO DEPTH = 2. GOOD ENOUGH FOR LAUNCH.
-        const subsection = Object.values(sections).find(
-          section => section.parentId === section.id,
-        );
-        return article.sectionId === section.id || subsection;
-      }),
+      Object.filter(articles, article =>
+        subsectionIds.includes(article.sectionId) ||
+        article.sectionId === section.id
+      )
     );
   } else {
     sectionArticles = Object.values(

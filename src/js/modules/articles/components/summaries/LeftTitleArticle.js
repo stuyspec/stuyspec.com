@@ -52,17 +52,28 @@ const styles = {
   },
   featuredMedia: {
     paddingRight: "14px !important",
+    height: "310px",
+    overflow: "hidden",
     "& > figure > img": {
       width: "100%",
     },
   },
-  "@media (min-width: 768px)": {
-    height: "310px",
-    width: "100%",
-    overflow: "hidden",
-  },
   "@media (max-width: 991px)": {
-    paddingRight: "0 !important",
+    featuredMedia: {
+      paddingRight: "0 !important",
+    }
+  },
+  "@media (max-width: 767px)": {
+    featuredMedia: {
+      height: "auto",
+      overflow: "visible",
+      paddingLeft: "0 !important",
+      paddingTop: "14px",
+      "& figure img": {
+        marginLeft: "-14px",
+        width: "100vw",
+      },
+    },
   },
 };
 
@@ -74,6 +85,7 @@ const LeftTitleArticle = ({ classes, article, media, sections }) => {
     section => article.sectionId === section.id,
   );
   return (
+    TODO: SWITCH ORDER OF TITLE AND FEATURED MEDIA IN MOBILE
     <Row className={classes.article}>
       <Col xs={12} sm={4} md={4} lg={4}>
         <Link className={classes.section} to={section.permalink}>

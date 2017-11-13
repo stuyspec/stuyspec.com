@@ -82,7 +82,6 @@ const styles = {
     paddingRight: "0 !important",
   },
   SectionFeatureContainer: {
-    borderBottom: "1px solid #ddd",
     marginBottom: "18px",
     marginRight: "14px !important",
     "& div": {
@@ -171,10 +170,25 @@ const styles = {
       width: "80%",
     },
   },
-  "@media (max-width: 768px)": {
+  "@media (max-width: 767px)": {
     latestArticles: {
       borderRight: "none",
       paddingRight: 0,
+    },
+    featuredMedia: {
+      paddingRight: "0 !important",
+      "& figure img": {
+        marginLeft: "-14px",
+        width: "100vw",
+      },
+    },
+    featuredArticle: {
+      padding: "14px 0 0 0 !important",
+      width: "100%",
+    },
+    SectionFeatureContainer: {
+      borderRight: 0,
+      marginRight: "0 !important",
     },
   },
 };
@@ -263,7 +277,7 @@ const SectionPage = ({
       <Row className={classes.secondaryRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.secondaryCol}>
           <div className={classes.SectionFeatureContainer}>
-            <SectionFeature section={section} recursive />
+            <SectionFeature section={section} recursive={true} />
           </div>
           <LeftTitleArticle article={secondaryArticle} />
         </Col>
