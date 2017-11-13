@@ -64,6 +64,14 @@ export const getSectionTreeIds = createSelector(
   },
 );
 
+export const getFeaturedSubsection = createSelector(
+  [getSections, getSectionFromRequestedSlug],
+  (sections, parentSection) => {
+    return Object.values(sections)
+      .find(section => section.parentId === parentSection.id);
+  }
+);
+
 /**
  * Return an array with all the sectionSlugs
  */

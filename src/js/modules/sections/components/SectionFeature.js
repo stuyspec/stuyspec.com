@@ -26,16 +26,16 @@ const styles = {
     "&:focus": { color: "#000", textDecoration: "none" },
   },
   primaryArticle: {
-    borderRight: "solid 1px #ddd",
-    paddingRight: "14px",
+    paddingLeft: "13px !important",
+    paddingRight: "0 !important",
   },
   secondaryArticle: {
-    paddingLeft: "13px !important",
     paddingRight: "7px",
   },
   ternaryArticle: {
     padding: "0 14px 0 13px !important",
-    borderLeft: "solid 1px #ddd",
+    borderRight: "solid 1px #ddd",
+    paddingRight: "13px !important",
   },
   title: {
     color: "#000",
@@ -67,7 +67,9 @@ const styles = {
     },
   },
   featuredMediaContainer: {
-    paddingRight: 0,
+    borderRight: "solid 1px #ddd",
+    paddingLeft: "13px !important",
+    paddingRight: "14px !important",
   },
   mobileArticleTitle1: {
     borderTop: "1px solid #ddd",
@@ -102,11 +104,22 @@ const styles = {
   },
 };
 
-const SectionFeature = ({ classes, articles, section, media }) => {
-  const sectionArticles = Object.values(
-    Object.filter(articles, article => article.sectionId === section.id),
-  );
-  console.log(sectionArticles, section);
+const SectionFeature = ({ classes, articles, section, sections, media, recursive }) => {
+  let sectionArticles = [];
+  if (recursive) {
+    sectionArticles = Object.values(
+      Object.filter(articles, article => {
+        // ONLY GOES TO DEPTH = 2. GOOD ENOUGH FOR LAUNCH.
+        const subsection = Object.values(sections)
+          .find(section => section.parentId === section.id);
+        return article.sectionId === section.id || subsection;
+      })
+    );
+  } else {
+    sectionArticles = Object.values(
+      Object.filter(articles, article => article.sectionId === section.id),
+    );
+  }
   const primaryArticle = sectionArticles[0];
   let featuredMedia = null;
   const secondaryArticle = sectionArticles.slice(1, 10).find(article => {
@@ -123,34 +136,24 @@ const SectionFeature = ({ classes, articles, section, media }) => {
   const possibleTernaryArticle = sectionArticles
     .slice(1, 10).find(article => article !== secondaryArticle);
   // NESTED IN <Col lg={9}>
-  console.log(primaryArticle, secondaryArticle, possibleTernaryArticle);
   return (
     <Row className={classes.SectionFeature}>
       <Link to={section.permalink} className={classes.sectionLabel}>
         {section.name}
       </Link>
-      <Col xsHidden sm={4} md={4} lg={4} className={classes.primaryArticle}>
-        <Link
-          className={classes.title}
-          to={`${section.permalink}/${primaryArticle.slug}`}
-        >
-          {primaryArticle.title}
-        </Link>
-        <p className={classes.summary}>{primaryArticle.summary}</p>
-        <Byline contributors={primaryArticle.contributors} />
-        <Dateline article={primaryArticle} />
-      </Col>
-      <Col xs={6} sm={4} md={4} lg={4} className={classes.secondaryArticle}>
-        <Link
-          className={classes.title}
-          to={`${section.permalink}/${secondaryArticle.slug}`}
-        >
-          {secondaryArticle.title}
-        </Link>
-        <p className={classes.summary}>{secondaryArticle.summary}</p>
-        <Byline contributors={secondaryArticle.contributors} />
-        <Dateline article={secondaryArticle} />
-      </Col>
+      {secondaryArticle && (
+        <Col xs={6} sm={4} md={4} lg={4} className={classes.secondaryArticle}>
+          <Link
+            className={classes.title}
+            to={`${section.permalink}/${secondaryArticle.slug}`}
+          >
+            {secondaryArticle.title}
+          </Link>
+          <p className={classes.summary}>{secondaryArticle.summary}</p>
+          <Byline contributors={secondaryArticle.contributors} />
+          <Dateline article={secondaryArticle} />
+        </Col>
+      )}
       {featuredMedia ? (
         <Col
           xs={6}
@@ -163,7 +166,7 @@ const SectionFeature = ({ classes, articles, section, media }) => {
             <img src={featuredMedia.url} />
           </figure>
         </Col>
-      ) : (
+      ) : possibleTernaryArticle && (
         <Col xsHidden sm={4} md={4} lg={4} className={classes.ternaryArticle}>
         <Link
           className={classes.title}
@@ -176,23 +179,39 @@ const SectionFeature = ({ classes, articles, section, media }) => {
         <Dateline article={possibleTernaryArticle} />
       </Col>
       )}
-      <Col xs={12} smHidden mdHidden lgHidden className={classes.mobileArticleTitle1}>
-        <Link
-          className={classes.title}
-          to={`${section.permalink}/${primaryArticle.slug}`}
-        >
-          {primaryArticle.title}
-        </Link>
-      </Col>
-      <Col xs={12} smHidden mdHidden lgHidden className={classes.mobileArticleTitle2}>
-        <Link
-          className={classes.title}
-          to={`${section.permalink}/${possibleTernaryArticle.slug}`}
-        >
-          {possibleTernaryArticle.title}
-        </Link>
-      </Col>
-
+      {primaryArticle && (
+        <Col xsHidden sm={4} md={4} lg={4} className={classes.primaryArticle}>
+          <Link
+            className={classes.title}
+            to={`${section.permalink}/${primaryArticle.slug}`}
+          >
+            {primaryArticle.title}
+          </Link>
+          <p className={classes.summary}>{primaryArticle.summary}</p>
+          <Byline contributors={primaryArticle.contributors} />
+          <Dateline article={primaryArticle} />
+        </Col>
+      )}
+      {primaryArticle && (
+        <Col xs={12} smHidden mdHidden lgHidden className={classes.mobileArticleTitle1}>
+          <Link
+            className={classes.title}
+            to={`${section.permalink}/${primaryArticle.slug}`}
+          >
+            {primaryArticle.title}
+          </Link>
+        </Col>
+      )}
+      {possibleTernaryArticle && (
+        <Col xs={12} smHidden mdHidden lgHidden className={classes.mobileArticleTitle2}>
+          <Link
+            className={classes.title}
+            to={`${section.permalink}/${possibleTernaryArticle.slug}`}
+          >
+            {possibleTernaryArticle.title}
+          </Link>
+        </Col>
+      )}
     </Row>
   );
 };

@@ -7,7 +7,10 @@ import injectSheet from "react-jss";
 import { isObjectEmpty } from "../../../utils";
 import { ArticleList } from "../../articles/components";
 import { getSectionTreeArticles } from "../../articles/selectors";
-import { getDirectSubsections } from "../../sections/selectors";
+import {
+  getDirectSubsections,
+  getFeaturedSubsection
+} from "../../sections/selectors";
 import SectionColumn from "./SectionColumn";
 import { LatestArticlesRibbon, LeftTitleArticle } from "../../articles/components/summaries";
 import { Dateline, Byline } from "../../articles/components/index";
@@ -81,7 +84,7 @@ const styles = {
   SectionFeatureContainer: {
     borderBottom: "1px solid #ddd",
     marginBottom: "18px",
-    paddingRight: "14px !important",
+    marginRight: "14px !important",
     "& div": {
       borderTop: "none",
     },
@@ -185,6 +188,7 @@ const SectionPage = ({
   sectionTreeArticles,
   directSubsections,
   section,
+  featuredSubsection,
   media,
 }) => {
   let featuredMedia = null;
@@ -209,7 +213,6 @@ const SectionPage = ({
     );
   });
 
-  const featuredSubsection = Object.values(directSubsections)[1];
   return (
     <Grid fluid className={classes.SectionPage}>
       {isObjectEmpty(directSubsections) ? (
@@ -255,7 +258,7 @@ const SectionPage = ({
       <Row className={classes.secondaryRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.secondaryCol}>
           <div className={classes.SectionFeatureContainer}>
-            <SectionFeature section={featuredSubsection}/>
+            <SectionFeature section={section} recursive/>
           </div>
           <LeftTitleArticle article={secondaryArticle}/>
         </Col>
@@ -285,6 +288,7 @@ const SectionPage = ({
 
 const mapStateToProps = (state, ownProps) => ({
   sectionTreeArticles: getSectionTreeArticles(state, ownProps),
+  featuredSubsection: getFeaturedSubsection(state, ownProps),
   directSubsections: getDirectSubsections(state, ownProps),
   sections: state.sections.sections,
   media: state.media.media,
