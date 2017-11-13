@@ -53,7 +53,7 @@ const styles = {
     fontFamily: "Minion Pro",
     fontSize: "24px",
     fontWeight: 700,
-    lineHeight: "1.05",
+    lineHeight: "1.12",
     marginBottom: "5px",
     paddingTop: "2px",
   },

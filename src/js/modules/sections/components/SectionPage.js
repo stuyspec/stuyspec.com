@@ -82,8 +82,9 @@ const styles = {
     paddingRight: "0 !important",
   },
   SectionFeatureContainer: {
+    borderBottom: "1px solid #ddd",
     marginBottom: "18px",
-    marginRight: "14px !important",
+    marginRight: "14px",
     "& div": {
       borderTop: "none",
     },
@@ -92,6 +93,7 @@ const styles = {
     borderLeft: "1px solid #ddd",
     marginTop: "24px",
     paddingLeft: "14px !important",
+    paddingRight: "0 !important",
   },
 
   latestArticleRibbon: {},
@@ -118,16 +120,6 @@ const styles = {
       textDecoration: "none",
     },
   },
-  latest: {
-    borderBottom: "solid 1px #ddd",
-    borderTop: "solid 1px #000",
-    color: "#000",
-    fontFamily: "Circular Std",
-    fontSize: "13px",
-    fontWeight: "300",
-    padding: "4px 0",
-    marginBottom: "22px",
-  },
   latestArticles: {
     padding: "0 13px 0 0",
     borderRight: "solid 1px #ddd",
@@ -147,9 +139,23 @@ const styles = {
       borderLeft: "none",
     },
   },
+  SubsectionPage: {
+    marginTop: "80px",
+    "& div > div": {
+      borderRight: 0,
+    },
+  },
   "@media (min-width: 992px)": {
     SectionPage: {
       marginTop: "46px",
+    },
+    SectionFeatureContainer: {
+      marginRight: "14px !important",
+    },
+  },
+  "@media (min-width: 768px)": {
+    SectionFeatureContainer: {
+      marginRight: 0,
     },
   },
   "@media (max-width: 991px)": {
@@ -187,6 +193,7 @@ const styles = {
       width: "100%",
     },
     SectionFeatureContainer: {
+      borderBottom: 0,
       borderRight: 0,
       marginRight: "0 !important",
     },
@@ -201,6 +208,37 @@ const SectionPage = ({
   featuredSubsection,
   media,
 }) => {
+  if (section.parentId) {
+    return (
+      <Grid fluid className={classes.SubsectionPage}>
+        <Row>
+          <Col
+            xs={12}
+            sm={9}
+            md={9}
+            lg={9}
+            className={classes.latestArticles}
+          >
+            <ArticleList
+              articles={sectionTreeArticles}
+              title={section.name}
+              label="Latest"
+            />
+          </Col>
+          <Col
+            xsHidden
+            sm={3}
+            md={3}
+            lg={3}
+            className={classes.TallAdContainer}
+            style={{marginTop: "57px"}}
+          >
+            <TallAd />
+          </Col>
+        </Row>
+      </Grid>
+    );
+  }
   let featuredMedia = null;
   const featuredArticle = Object.values(sectionTreeArticles).find(article => {
     const mediaObject = Object.values(media).find(
@@ -244,6 +282,7 @@ const SectionPage = ({
           })}
         </ul>
       )}
+
       <Row className={classes.featuredRow}>
         <Col xs={12} sm={7} md={7} lg={7} className={classes.featuredMedia}>
           <figure>
@@ -274,8 +313,9 @@ const SectionPage = ({
           <Dateline article={featuredArticle} />
         </Col>
       </Row>
+
       <Row className={classes.secondaryRow}>
-        <Col xs={12} sm={12} md={9} lg={9} className={classes.secondaryCol}>
+        <Col xsHidden sm={12} md={9} lg={9} className={classes.secondaryCol}>
           <div className={classes.SectionFeatureContainer}>
             <SectionFeature section={section} recursive={true} />
           </div>
@@ -291,15 +331,16 @@ const SectionPage = ({
           <TallAd />
         </Col>
       </Row>
+
       <Row>
         <Col xsHidden sm={12} md={12} lg={12}>
           <LatestArticlesRibbon className={classes.latestArticlesRibbon} />
         </Col>
       </Row>
+
       <Row>
         <Col xs={12} sm={9} md={9} lg={9} className={classes.latestArticles}>
-          <div className={classes.latest}>Latest</div>
-          <ArticleList articles={sectionTreeArticles} />
+          <ArticleList articles={sectionTreeArticles} label="Latest"/>
         </Col>
         <Col xsHidden sm={3} md={3} lg={3}>
           <div className={classes.sectionColumnContainer}>

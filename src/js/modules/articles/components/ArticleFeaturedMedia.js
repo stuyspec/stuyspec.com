@@ -37,7 +37,8 @@ const ArticleFeaturedMedia = ({ classes, featuredMedia, isCaption }) => {
           >
             {capitalizeWord(featuredMedia.type)}
             &nbsp;by&nbsp;
-            {`${creator.firstName} ${creator.lastName}`}
+            {creator.firstName}
+            {creator.lastName !== '' && ' ' + creator.lastName}
           </Link>
           .
         </figcaption>

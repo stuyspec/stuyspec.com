@@ -27,6 +27,9 @@ const styles = {
       color: "#000",
     },
   },
+  header: {
+    paddingLeft: "0 !important",
+  },
   title: {
     color: "#000",
     display: "block",
@@ -58,10 +61,15 @@ const styles = {
       width: "100%",
     },
   },
+  "@media (min-width: 992px and max-width: )": {
+    featuredMedia: {
+      paddingLeft: "14px",
+    },
+  },
   "@media (max-width: 991px)": {
     featuredMedia: {
       paddingRight: "0 !important",
-    }
+    },
   },
   "@media (max-width: 767px)": {
     featuredMedia: {
@@ -85,12 +93,34 @@ const LeftTitleArticle = ({ classes, article, media, sections }) => {
     section => article.sectionId === section.id,
   );
   return (
-    TODO: SWITCH ORDER OF TITLE AND FEATURED MEDIA IN MOBILE
     <Row className={classes.article}>
-      <Col xs={12} sm={4} md={4} lg={4}>
-        <Link className={classes.section} to={section.permalink}>
-          {section.name}
-        </Link>
+      <Link className={classes.section} to={section.permalink}>
+        {section.name}
+      </Link>
+      <Col
+        xs={12}
+        smPush={4}
+        sm={8}
+        mdPush={4}
+        md={8}
+        lgPush={4}
+        lg={8}
+        className={classes.featuredMedia}
+      >
+        <figure>
+          <img src={featuredMedia.url} />
+        </figure>
+      </Col>
+      <Col
+        xs={12}
+        smPull={8}
+        sm={4}
+        mdPull={8}
+        md={4}
+        lgPull={8}
+        lg={4}
+        className={classes.header}
+      >
         <Link
           className={classes.title}
           to={`${section.permalink}/${article.slug}`}
@@ -100,11 +130,6 @@ const LeftTitleArticle = ({ classes, article, media, sections }) => {
         <p className={classes.summary}>{article.summary}</p>
         <Byline contributors={article.contributors} />
         <Dateline article={article} />
-      </Col>
-      <Col xs={12} sm={8} md={8} lg={8} className={classes.featuredMedia}>
-        <figure>
-          <img src={featuredMedia.url} />
-        </figure>
       </Col>
     </Row>
   );
