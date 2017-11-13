@@ -112,9 +112,7 @@ const ArticleBlock = ({ classes, articles, sections, media }) => {
               >
                 {article.title}
               </Link>
-              <p className={classes.summary}>
-                {article.summary}
-              </p>
+              <p className={classes.summary}>{article.summary}</p>
             </Col>
           );
         }

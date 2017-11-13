@@ -76,10 +76,12 @@ const styles = {
     },
   },
   aboutNavLinksMobile: {
-    "& > div": { // the surrounding section block
+    "& > div": {
+      // the surrounding section block
       border: 0,
     },
-    "& > div > a": { // each about-us link
+    "& > div > a": {
+      // each about-us link
       display: "inline-block",
       color: "#aaa",
       fontSize: "12px",
@@ -105,7 +107,8 @@ const styles = {
     sectionFlex: {
       flexWrap: "nowrap",
       height: "auto",
-      "& > div:nth-child(6) ~ div": { // shows first six section blocks
+      "& > div:nth-child(6) ~ div": {
+        // shows first six section blocks
         display: "none",
       },
       "& > div:nth-child(6)": {
@@ -198,16 +201,39 @@ const PageFooter = ({
   return (
     <Grid fluid className={classes.PageFooter}>
       <Row className={classes.pageFooterMain}>
-        <Col xs={12} sm={10} smOffset={1} md={8} mdOffset={2} lg={8} lgOffset={2}>
+        <Col
+          xs={12}
+          sm={10}
+          smOffset={1}
+          md={8}
+          mdOffset={2}
+          lg={8}
+          lgOffset={2}
+        >
           <Link to="/" className={classes.theSpectator}>
             The Spectator
           </Link>
         </Col>
-        <Col xs={12} sm={10} smOffset={1} md={8} mdOffset={2} lg={8} lgOffset={2} className={classes.sectionFlex}>
+        <Col
+          xs={12}
+          sm={10}
+          smOffset={1}
+          md={8}
+          mdOffset={2}
+          lg={8}
+          lgOffset={2}
+          className={classes.sectionFlex}
+        >
           {createSectionLinks()}
           {createDescriptionLinks()}
         </Col>
-        <Col xs={12} smHidden mdHidden lgHidden className={classes.aboutNavLinksMobile}>
+        <Col
+          xs={12}
+          smHidden
+          mdHidden
+          lgHidden
+          className={classes.aboutNavLinksMobile}
+        >
           {createDescriptionLinks()}
         </Col>
       </Row>

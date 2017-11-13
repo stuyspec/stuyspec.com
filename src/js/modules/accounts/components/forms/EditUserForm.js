@@ -22,7 +22,7 @@ const styles = {
       paddingRight: "12px",
       width: "120px",
     },
-  },  
+  },
   saveButton: {
     backgroundColor: "#3472b7",
     border: "1px solid #3472b7",
@@ -34,7 +34,7 @@ const styles = {
     height: "32px",
     marginTop: "15px",
     textAlign: "center",
-    width: "85px"
+    width: "85px",
   },
 };
 
@@ -115,7 +115,11 @@ const EditUserForm = ({ classes, handleSubmit, submitting, status }) => {
           </Table>
         </div>
         <div>
-          <button type="submit" disabled={submitting} className={classes.saveButton}>
+          <button
+            type="submit"
+            disabled={submitting}
+            className={classes.saveButton}
+          >
             Save
           </button>
         </div>

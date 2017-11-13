@@ -37,7 +37,7 @@ const sidebarStyles = {
 
 class PageLayout extends Component {
   componentDidUpdate() {
-    console.log('i did update');
+    console.log("i did update");
     //window.scrollTo(0, 0);
   }
 

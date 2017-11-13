@@ -114,28 +114,31 @@ const SectionBlock = ({ classes, articles, section, media }) => {
           <Byline classes={classes} contributors={bigArticle.contributors} />
           <Dateline classes={classes} article={bigArticle} />
         </div>
-      )} 
-      {rowArticles.length > 0 && rowArticles.map(article => {
-        const featuredMedia = Object.values(media).find(mediaObject => {
-          return mediaObject.isFeatured && mediaObject.articleId === article.id;
-        });
-        return (
-          <div className={classes.article} key={article.id}>
-            {featuredMedia && (
-              <figure className={classes.figure}>
-                <img src={featuredMedia.url} />
-              </figure>
-            )}
-            <Link
-              to={`${section.permalink}/${article.slug}`}
-              className={classes.smallTitle}
-            >
-              {article.title}
-            </Link>
-            <Byline classes={classes} contributors={article.contributors} />
-          </div>
-        );
-      })}
+      )}
+      {rowArticles.length > 0 &&
+        rowArticles.map(article => {
+          const featuredMedia = Object.values(media).find(mediaObject => {
+            return (
+              mediaObject.isFeatured && mediaObject.articleId === article.id
+            );
+          });
+          return (
+            <div className={classes.article} key={article.id}>
+              {featuredMedia && (
+                <figure className={classes.figure}>
+                  <img src={featuredMedia.url} />
+                </figure>
+              )}
+              <Link
+                to={`${section.permalink}/${article.slug}`}
+                className={classes.smallTitle}
+              >
+                {article.title}
+              </Link>
+              <Byline classes={classes} contributors={article.contributors} />
+            </div>
+          );
+        })}
     </div>
   );
 };

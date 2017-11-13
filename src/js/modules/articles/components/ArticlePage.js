@@ -56,8 +56,8 @@ const styles = {
   "@media (max-width: 767px)": {
     descriptionRow: {
       padding: "0 2%",
-    }
-  }
+    },
+  },
 };
 
 //TODO: pop it up
@@ -79,8 +79,7 @@ const ArticlePage = ({ classes, article, section, featuredMedia }) => {
         </Col>
         <Col xsHidden smHidden md={3} lg={3} />
       </Row>
-      <Row>
-      </Row>
+      <Row />
       <RecommendedRow section={section} />
       <CommentThread article={article} />
     </Grid>

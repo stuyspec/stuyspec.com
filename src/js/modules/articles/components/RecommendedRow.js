@@ -16,7 +16,6 @@ const styles = {
   recommendedList: {
     borderBottom: "solid 1px #ddd",
     padding: "0 0 24px",
-
   },
   label: {
     color: "#000",
@@ -112,14 +111,16 @@ const styles = {
            3  4,
          rendering these next padding removals necessary.
        */
-      "& > div:nth-child(2)": { // 2nd recommendedBlock
+      "& > div:nth-child(2)": {
+        // 2nd recommendedBlock
         paddingRight: "0 !important",
       },
-      "& > div:nth-child(3)": { // 3rd recommendedBlock
+      "& > div:nth-child(3)": {
+        // 3rd recommendedBlock
         paddingLeft: "0 !important",
       },
-    }
-  }
+    },
+  },
 };
 
 const RecommendedRow = ({ classes, media, section, articles, sections }) => {
@@ -140,10 +141,7 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
                 <figure className={classes.figure}>
                   <img src={featuredMedia.url} />
                 </figure>
-                <Link
-                  to={`${section.permalink}`}
-                  className={classes.label}
-                >
+                <Link to={`${section.permalink}`} className={classes.label}>
                   {section.name}
                 </Link>
                 <Link
@@ -157,10 +155,7 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
           } else {
             return (
               <div key={article.id} className={classes.recommendedBlock}>
-                <Link
-                  to={`${section.permalink}`}
-                  className={classes.label}
-                >
+                <Link to={`${section.permalink}`} className={classes.label}>
                   {section.name}
                 </Link>
                 <Link
@@ -169,9 +164,7 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
                 >
                   {article.title}
                 </Link>
-                <p className={classes.summary}>
-                 {article.summary}
-                </p>
+                <p className={classes.summary}>{article.summary}</p>
               </div>
             );
           }

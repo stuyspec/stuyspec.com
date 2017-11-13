@@ -25,8 +25,8 @@ const styles = {
       textDecoration: "none",
     },
     "@media (min-width: 768px)": {
-      fontSize: "75px"
-    }
+      fontSize: "75px",
+    },
   },
   sectionLinksNav: {
     borderTop: "1px solid black",

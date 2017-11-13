@@ -18,7 +18,7 @@ const styles = {
   "@media (min-width: 992px)": {
     DescriptionPage: {
       marginTop: "60px",
-    }
+    },
   },
 };
 

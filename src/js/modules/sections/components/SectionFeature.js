@@ -104,16 +104,24 @@ const styles = {
   },
 };
 
-const SectionFeature = ({ classes, articles, section, sections, media, recursive }) => {
+const SectionFeature = ({
+  classes,
+  articles,
+  section,
+  sections,
+  media,
+  recursive,
+}) => {
   let sectionArticles = [];
   if (recursive) {
     sectionArticles = Object.values(
       Object.filter(articles, article => {
         // ONLY GOES TO DEPTH = 2. GOOD ENOUGH FOR LAUNCH.
-        const subsection = Object.values(sections)
-          .find(section => section.parentId === section.id);
+        const subsection = Object.values(sections).find(
+          section => section.parentId === section.id,
+        );
         return article.sectionId === section.id || subsection;
-      })
+      }),
     );
   } else {
     sectionArticles = Object.values(
@@ -122,19 +130,20 @@ const SectionFeature = ({ classes, articles, section, sections, media, recursive
   }
   const primaryArticle = sectionArticles[0];
   let featuredMedia = null;
-  const secondaryArticle = sectionArticles.slice(1, 10).find(article => {
-    // find a TOP 10 Article within the section with media
-    const mediaObject = Object.values(media).find(
-      mediaObject =>
-        mediaObject.articleId === article.id
-    );
-    if (mediaObject) {
-      featuredMedia = mediaObject;
-    }
-    return mediaObject;
-  }) || sectionArticles[1]; // if none such article found, default is the second
+  const secondaryArticle =
+    sectionArticles.slice(1, 10).find(article => {
+      // find a TOP 10 Article within the section with media
+      const mediaObject = Object.values(media).find(
+        mediaObject => mediaObject.articleId === article.id,
+      );
+      if (mediaObject) {
+        featuredMedia = mediaObject;
+      }
+      return mediaObject;
+    }) || sectionArticles[1]; // if none such article found, default is the second
   const possibleTernaryArticle = sectionArticles
-    .slice(1, 10).find(article => article !== secondaryArticle);
+    .slice(1, 10)
+    .find(article => article !== secondaryArticle);
   // NESTED IN <Col lg={9}>
   return (
     <Row className={classes.SectionFeature}>
@@ -166,18 +175,20 @@ const SectionFeature = ({ classes, articles, section, sections, media, recursive
             <img src={featuredMedia.url} />
           </figure>
         </Col>
-      ) : possibleTernaryArticle && (
-        <Col xsHidden sm={4} md={4} lg={4} className={classes.ternaryArticle}>
-        <Link
-          className={classes.title}
-          to={`${section.permalink}/${possibleTernaryArticle.slug}`}
-        >
-          {possibleTernaryArticle.title}
-        </Link>
-        <p className={classes.summary}>{possibleTernaryArticle.summary}</p>
-        <Byline contributors={possibleTernaryArticle.contributors} />
-        <Dateline article={possibleTernaryArticle} />
-      </Col>
+      ) : (
+        possibleTernaryArticle && (
+          <Col xsHidden sm={4} md={4} lg={4} className={classes.ternaryArticle}>
+            <Link
+              className={classes.title}
+              to={`${section.permalink}/${possibleTernaryArticle.slug}`}
+            >
+              {possibleTernaryArticle.title}
+            </Link>
+            <p className={classes.summary}>{possibleTernaryArticle.summary}</p>
+            <Byline contributors={possibleTernaryArticle.contributors} />
+            <Dateline article={possibleTernaryArticle} />
+          </Col>
+        )
       )}
       {primaryArticle && (
         <Col xsHidden sm={4} md={4} lg={4} className={classes.primaryArticle}>
@@ -193,7 +204,13 @@ const SectionFeature = ({ classes, articles, section, sections, media, recursive
         </Col>
       )}
       {primaryArticle && (
-        <Col xs={12} smHidden mdHidden lgHidden className={classes.mobileArticleTitle1}>
+        <Col
+          xs={12}
+          smHidden
+          mdHidden
+          lgHidden
+          className={classes.mobileArticleTitle1}
+        >
           <Link
             className={classes.title}
             to={`${section.permalink}/${primaryArticle.slug}`}
@@ -203,7 +220,13 @@ const SectionFeature = ({ classes, articles, section, sections, media, recursive
         </Col>
       )}
       {possibleTernaryArticle && (
-        <Col xs={12} smHidden mdHidden lgHidden className={classes.mobileArticleTitle2}>
+        <Col
+          xs={12}
+          smHidden
+          mdHidden
+          lgHidden
+          className={classes.mobileArticleTitle2}
+        >
           <Link
             className={classes.title}
             to={`${section.permalink}/${possibleTernaryArticle.slug}`}

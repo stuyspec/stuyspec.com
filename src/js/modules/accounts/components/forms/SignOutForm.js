@@ -24,7 +24,7 @@ const styles = {
     height: "32px",
     marginTop: "15px",
     textAlign: "center",
-    width: "85px"
+    width: "85px",
   },
 };
 
@@ -33,7 +33,11 @@ const SignOutForm = ({ classes, handleSubmit, submitting, status }) => {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <button type="submit" disabled={submitting} className={classes.signOutButton}>
+          <button
+            type="submit"
+            disabled={submitting}
+            className={classes.signOutButton}
+          >
             Sign Out
           </button>
         </div>

@@ -63,30 +63,31 @@ const styles = {
   },
   "@media (max-width: 991px)": {
     paddingRight: "0 !important",
-  }
+  },
 };
 
 const LeftTitleArticle = ({ classes, article, media, sections }) => {
-  const featuredMedia = Object.values(media)
-    .find(mediaObject => mediaObject.articleId === article.id);
-  const section = Object.values(sections)
-    .find(section => article.sectionId === section.id);
+  const featuredMedia = Object.values(media).find(
+    mediaObject => mediaObject.articleId === article.id,
+  );
+  const section = Object.values(sections).find(
+    section => article.sectionId === section.id,
+  );
   return (
     <Row className={classes.article}>
       <Col xs={12} sm={4} md={4} lg={4}>
-        <Link className={classes.section}
-              to={section.permalink}>
+        <Link className={classes.section} to={section.permalink}>
           {section.name}
         </Link>
-        <Link className={classes.title}
-              to={`${section.permalink}/${article.slug}`}>
+        <Link
+          className={classes.title}
+          to={`${section.permalink}/${article.slug}`}
+        >
           {article.title}
         </Link>
-        <p className={classes.summary}>
-          {article.summary}
-        </p>
+        <p className={classes.summary}>{article.summary}</p>
         <Byline contributors={article.contributors} />
-        <Dateline article={article}/>
+        <Dateline article={article} />
       </Col>
       <Col xs={12} sm={8} md={8} lg={8} className={classes.featuredMedia}>
         <figure>

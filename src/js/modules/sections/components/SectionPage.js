@@ -9,18 +9,18 @@ import { ArticleList } from "../../articles/components";
 import { getSectionTreeArticles } from "../../articles/selectors";
 import {
   getDirectSubsections,
-  getFeaturedSubsection
+  getFeaturedSubsection,
 } from "../../sections/selectors";
 import SectionColumn from "./SectionColumn";
-import { LatestArticlesRibbon, LeftTitleArticle } from "../../articles/components/summaries";
+import {
+  LatestArticlesRibbon,
+  LeftTitleArticle,
+} from "../../articles/components/summaries";
 import { Dateline, Byline } from "../../articles/components/index";
 import SectionFeature from "./SectionFeature";
 import { TallAd } from "../../advertisements/components/index";
 
-
-
 // TODO: STYLE SECONDARY ARTICLE. consider setting a max height
-
 
 const styles = {
   subsectionBar: {
@@ -48,9 +48,9 @@ const styles = {
     width: "325px",
     "& a": {
       color: "#000",
-      "&:hover": {color: "#000"},
-      "&:active": {color: "#000"},
-      "&:focus": {color: "#000"},
+      "&:hover": { color: "#000" },
+      "&:active": { color: "#000" },
+      "&:focus": { color: "#000" },
     },
   },
   featuredArticleSection: {
@@ -95,11 +95,7 @@ const styles = {
     paddingLeft: "14px !important",
   },
 
-
-
-  latestArticleRibbon: {
-
-  },
+  latestArticleRibbon: {},
   subsectionListItem: {
     borderBottom: "solid 1px #ddd",
     display: "inline",
@@ -194,22 +190,23 @@ const SectionPage = ({
   let featuredMedia = null;
   const featuredArticle = Object.values(sectionTreeArticles).find(article => {
     const mediaObject = Object.values(media).find(
-      mediaObject =>
-        mediaObject.articleId === article.id
+      mediaObject => mediaObject.articleId === article.id,
     );
     if (mediaObject) {
       featuredMedia = mediaObject;
     }
     return mediaObject;
   });
-  let featuredArticleSection = Object.values(directSubsections).find(subsection => subsection.articleId === featuredArticle.id);
+  let featuredArticleSection = Object.values(directSubsections).find(
+    subsection => subsection.articleId === featuredArticle.id,
+  );
   if (!featuredArticleSection) {
     featuredArticleSection = section;
   }
 
   const secondaryArticle = Object.values(sectionTreeArticles).find(article => {
-    return Object.values(media).find(mediaObject =>
-        mediaObject.articleId === article.id
+    return Object.values(media).find(
+      mediaObject => mediaObject.articleId === article.id,
     );
   });
 
@@ -240,30 +237,44 @@ const SectionPage = ({
           </figure>
         </Col>
         <Col xs={12} sm={5} md={5} lg={5} className={classes.featuredArticle}>
-          <Link className={classes.featuredArticleSection}
-                to={featuredArticleSection.permalink}>
-            {featuredArticleSection.name === "Arts & Entertainment" ? "A&E" : featuredArticleSection.name}
+          <Link
+            className={classes.featuredArticleSection}
+            to={featuredArticleSection.permalink}
+          >
+            {featuredArticleSection.name === "Arts & Entertainment" ? (
+              "A&E"
+            ) : (
+              featuredArticleSection.name
+            )}
           </Link>
-          <Link className={classes.featuredArticleTitle}
-                to={`${featuredArticleSection.permalink}/${featuredArticle.slug}`}>
+          <Link
+            className={classes.featuredArticleTitle}
+            to={`${featuredArticleSection.permalink}/${featuredArticle.slug}`}
+          >
             {featuredArticle.title}
           </Link>
           <p className={classes.featuredArticleSummary}>
             {featuredArticle.summary}
           </p>
           <Byline contributors={featuredArticle.contributors} />
-          <Dateline article={featuredArticle}/>
+          <Dateline article={featuredArticle} />
         </Col>
       </Row>
       <Row className={classes.secondaryRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.secondaryCol}>
           <div className={classes.SectionFeatureContainer}>
-            <SectionFeature section={section} recursive/>
+            <SectionFeature section={section} recursive />
           </div>
-          <LeftTitleArticle article={secondaryArticle}/>
+          <LeftTitleArticle article={secondaryArticle} />
         </Col>
-        <Col xsHidden smHidden md={3} lg={3} className={classes.TallAdContainer}>
-          <TallAd/>
+        <Col
+          xsHidden
+          smHidden
+          md={3}
+          lg={3}
+          className={classes.TallAdContainer}
+        >
+          <TallAd />
         </Col>
       </Row>
       <Row>

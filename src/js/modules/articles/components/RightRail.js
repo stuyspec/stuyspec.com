@@ -97,9 +97,9 @@ const styles = {
   },
   "@media (max-width: 991px)": {
     RightRail: {
-      paddingLeft: "1.5vw"
-    }
-  }
+      paddingLeft: "1.5vw",
+    },
+  },
 };
 
 // inside a Col

@@ -21,22 +21,30 @@ export const fetchAllData = () => {
   return dispatch => {
     fetchDataPromise = new Promise((resolve, reject) => {
       resolve(dispatch(fetchSections()));
-    }).then(response => {
-      dispatch(fetchComments());
-    }).then(response => {
-      dispatch(fetchMedia());
-    }).then(response => {
-      dispatch(fetchRoles());
-    }).then(response => {
-      dispatch(fetchUsers());
-    }).then(response => {
-      dispatch(fetchUserRoles());
-    }).then(response => {
-      dispatch(fetchRoles());
-    }).then(response => {
-      dispatch(fetchAuthorships());
-    }).then(response => {
-      dispatch(fetchArticles());
-    });
+    })
+      .then(response => {
+        dispatch(fetchComments());
+      })
+      .then(response => {
+        dispatch(fetchMedia());
+      })
+      .then(response => {
+        dispatch(fetchRoles());
+      })
+      .then(response => {
+        dispatch(fetchUsers());
+      })
+      .then(response => {
+        dispatch(fetchUserRoles());
+      })
+      .then(response => {
+        dispatch(fetchRoles());
+      })
+      .then(response => {
+        dispatch(fetchAuthorships());
+      })
+      .then(response => {
+        dispatch(fetchArticles());
+      });
   };
 };
