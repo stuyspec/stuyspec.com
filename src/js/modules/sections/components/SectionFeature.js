@@ -102,10 +102,11 @@ const styles = {
   },
 };
 
-const SectionFeature = ({ classes, articles, section, media, sections }) => {
+const SectionFeature = ({ classes, articles, section, media }) => {
   const sectionArticles = Object.values(
     Object.filter(articles, article => article.sectionId === section.id),
   );
+  console.log(sectionArticles, section);
   const primaryArticle = sectionArticles[0];
   let featuredMedia = null;
   const secondaryArticle = sectionArticles.slice(1, 10).find(article => {
@@ -122,6 +123,7 @@ const SectionFeature = ({ classes, articles, section, media, sections }) => {
   const possibleTernaryArticle = sectionArticles
     .slice(1, 10).find(article => article !== secondaryArticle);
   // NESTED IN <Col lg={9}>
+  console.log(primaryArticle, secondaryArticle, possibleTernaryArticle);
   return (
     <Row className={classes.SectionFeature}>
       <Link to={section.permalink} className={classes.sectionLabel}>

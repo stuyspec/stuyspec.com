@@ -72,6 +72,9 @@ const styles = {
     lineHeight: 1.25,
     marginBottom: "18px",
   },
+  secondaryRow: {
+    marginBottom: "18px",
+  },
   secondaryCol: {
     paddingRight: "0 !important",
   },
@@ -206,7 +209,7 @@ const SectionPage = ({
     );
   });
 
-  const featuredSubsection = section; //Object.values(directSubsections)[0];
+  const featuredSubsection = Object.values(directSubsections)[1];
   return (
     <Grid fluid className={classes.SectionPage}>
       {isObjectEmpty(directSubsections) ? (
@@ -249,7 +252,7 @@ const SectionPage = ({
           <Dateline article={featuredArticle}/>
         </Col>
       </Row>
-      <Row>
+      <Row className={classes.secondaryRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.secondaryCol}>
           <div className={classes.SectionFeatureContainer}>
             <SectionFeature section={featuredSubsection}/>

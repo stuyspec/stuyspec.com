@@ -51,9 +51,15 @@ const styles = {
     lineHeight: 1.29,
   },
   featuredMedia: {
+    paddingRight: "14px !important",
     "& > figure > img": {
       width: "100%",
     },
+  },
+  "@media (min-width: 768px)": {
+    height: "310px",
+    width: "100%",
+    overflow: "hidden",
   },
   "@media (max-width: 991px)": {
     paddingRight: "0 !important",
