@@ -12,6 +12,7 @@ const styles = {
   SectionFeature: {
     borderTop: "1px solid #ddd",
     paddingTop: "6px",
+    paddingBottom: "18px",
   },
   sectionLabel: {
     color: "#000",
@@ -27,17 +28,14 @@ const styles = {
   primaryArticle: {
     borderRight: "solid 1px #ddd",
     paddingRight: "14px",
-    marginBottom: "19px",
   },
   secondaryArticle: {
     paddingLeft: "13px !important",
     paddingRight: "7px",
-    marginBottom: "19px",
   },
   ternaryArticle: {
     padding: "0 14px 0 13px !important",
     borderLeft: "solid 1px #ddd",
-    marginBottom: "19px",
   },
   title: {
     color: "#000",

@@ -200,7 +200,7 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
         >
           {outquoteArticle.title}
         </Link>
-        <Outquote quote={outquoteArticle.outquotes[0]} />
+        {/*<Outquote quote={outquoteArticle.outquotes[0]} />*/}
         <p className={classes.summary}>{outquoteArticle.summary}</p>
         <div className={classes.bylineContainer}>
           <Byline contributors={outquoteArticle.contributors} />

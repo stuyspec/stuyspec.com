@@ -128,9 +128,9 @@ const RightColumn = ({ classes, articles, media, sections }) => {
         >
           {primaryArticle.title}
         </Link>
-        {primaryArticle.outquotes.length > 0 && (
+        {/*primaryArticle.outquotes.length > 0 && (
           <Outquote quote={primaryArticle.outquotes[0]} />
-        )}
+        )*/}
         <p className={classes.summary}>{primaryArticle.summary}</p>
         <Byline contributors={primaryArticle.contributors} />
         <Dateline article={primaryArticle} />
@@ -160,8 +160,8 @@ const RightColumn = ({ classes, articles, media, sections }) => {
       <iframe
         className={classes.spotifyEmbed}
         src="https://open.spotify.com/embed/user/spec.ae/playlist/4FrJhYPbWrWF3fYkzGZPy1"
-        frameborder="0"
-        allowtransparency="true"
+        frameBorder="0"
+        allowTransparency="true"
       />
     </Col>
   );

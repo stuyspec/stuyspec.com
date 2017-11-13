@@ -9,7 +9,7 @@ import { ArticleList } from "../../articles/components";
 import { getSectionTreeArticles } from "../../articles/selectors";
 import { getDirectSubsections } from "../../sections/selectors";
 import SectionColumn from "./SectionColumn";
-import LatestArticlesRibbon from "../../articles/components/summaries/LatestArticlesRibbon";
+import { LatestArticlesRibbon, LeftTitleArticle } from "../../articles/components/summaries";
 import { Dateline, Byline } from "../../articles/components/index";
 import SectionFeature from "./SectionFeature";
 import { TallAd } from "../../advertisements/components/index";
@@ -72,8 +72,12 @@ const styles = {
     lineHeight: 1.25,
     marginBottom: "18px",
   },
+  secondaryCol: {
+    paddingRight: "0 !important",
+  },
   SectionFeatureContainer: {
     borderBottom: "1px solid #ddd",
+    marginBottom: "18px",
     paddingRight: "14px !important",
     "& div": {
       borderTop: "none",
@@ -196,22 +200,11 @@ const SectionPage = ({
     featuredArticleSection = section;
   }
 
-
-  let secondaryMedia = null;
   const secondaryArticle = Object.values(sectionTreeArticles).find(article => {
-    const mediaObject = Object.values(media).find(
-      mediaObject =>
+    return Object.values(media).find(mediaObject =>
         mediaObject.articleId === article.id
     );
-    if (mediaObject) {
-      secondaryMedia = mediaObject;
-    }
-    return mediaObject;
   });
-  let secondaryArticleSection = Object.values(directSubsections).find(subsection => subsection.articleId === secondaryArticle.id);
-  if (!secondaryArticleSection) {
-    secondaryArticleSection = section;
-  }
 
   const featuredSubsection = section; //Object.values(directSubsections)[0];
   return (
@@ -257,32 +250,11 @@ const SectionPage = ({
         </Col>
       </Row>
       <Row>
-        <Col xs={12} sm={12} md={9} lg={9}>
+        <Col xs={12} sm={12} md={9} lg={9} className={classes.secondaryCol}>
           <div className={classes.SectionFeatureContainer}>
             <SectionFeature section={featuredSubsection}/>
           </div>
-          <Row className={classes.secondaryArticle}>
-            <Col xs={12} sm={4} md={4} lg={4}>
-              <Link className={classes.secondaryArticleSection}
-                    to={secondaryArticleSection.permalink}>
-                {secondaryArticleSection.name}
-              </Link>
-              <Link className={classes.secondaryArticleTitle}
-                    to={`${secondaryArticleSection.permalink}/${secondaryArticle.slug}`}>
-                {secondaryArticle.title}
-              </Link>
-              <p className={classes.secondaryArticleSummary}>
-                {secondaryArticle.summary}
-              </p>
-              <Byline contributors={secondaryArticle.contributors} />
-              <Dateline article={secondaryArticle}/>
-            </Col>
-            <Col xs={12} sm={8} md={8} lg={8} className={classes.secondaryMedia}>
-              <figure>
-                <img src={secondaryMedia.url} />
-              </figure>
-            </Col>
-          </Row>
+          <LeftTitleArticle article={secondaryArticle}/>
         </Col>
         <Col xsHidden smHidden md={3} lg={3} className={classes.TallAdContainer}>
           <TallAd/>
