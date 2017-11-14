@@ -12,7 +12,7 @@ import { openSubscriptionModal } from "../../accounts/actions";
 const styles = {
   MastheadBar: {
     backgroundColor: "#fff",
-    boxShadow: "0 2px 4px 0 rgba(0,0,0,.1)",
+    boxShadow: "0 2px 4px 0 rgba(0,0,0,.2)",
     height: "40px",
     left: 0,
     position: "fixed",

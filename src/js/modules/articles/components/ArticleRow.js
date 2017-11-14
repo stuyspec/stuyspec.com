@@ -9,6 +9,7 @@ import { getSections } from "../../sections/selectors";
 import { getUsers } from "../../users/selectors";
 import Byline from "./Byline";
 import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
+import Dateline from "./Dateline";
 
 const styles = {
   articleBlock: {
@@ -20,10 +21,11 @@ const styles = {
     color: "#888",
     display: "block",
     fontFamily: "Circular Std",
-    fontSize: "12px",
+    fontSize: "13px",
     fontWeight: "300",
     float: "left",
     marginRight: "19px",
+    width: "110px",
   },
   DatelineMobile: {
     color: "#888",
@@ -34,7 +36,7 @@ const styles = {
     float: "left",
     marginRight: "19px",
   },
-  summary: {
+  preview: {
     overflow: "hidden",
   },
   figure: {
@@ -46,19 +48,20 @@ const styles = {
     },
   },
   title: {
+    color: "#000",
     display: "block",
     fontFamily: "Minion Pro",
     fontSize: "24px",
-    color: "#000",
-    lineHeight: "1",
-    marginBottom: "2px",
+    fontWeight: 700,
+    lineHeight: "1.12",
+    marginBottom: "5px",
     paddingTop: "2px",
   },
-  preview: {
+  summary: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "16px",
-    lineHeight: "1.13",
+    lineHeight: "1.25",
   },
   "@media (max-width: 767px)": {
     DatelineDesktop: {
@@ -67,12 +70,17 @@ const styles = {
     DatelineMobile: {
       display: "block",
     },
-  },
-  "@media (max-width: 575px)": {
+    preview: {
+      overflow: "visible",
+    },
     figure: {
       float: "none",
       margin: "0 0 14px 0",
       width: "100%",
+      "& img": {
+        marginLeft: "-14px",
+        width: "100vw",
+      },
     },
   },
 };
@@ -88,8 +96,10 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
   return (
     <Row key={article.id} className={classes.ArticleRow}>
       <div className={classes.articleBlock} key={article.id}>
-        <p className={classes.DatelineDesktop}>August 24, 2017</p>
-        <div className={classes.summary}>
+        <div className={classes.DatelineDesktop}>
+          <Dateline article={article} />
+        </div>
+        <div className={classes.preview}>
           {featuredMedia && (
             <figure className={classes.figure}>
               <img src={featuredMedia.url} alt={featuredMedia.title} />
@@ -101,12 +111,11 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
           >
             {article.title}
           </Link>
-          <p className={classes.preview}>
-            Unfortunately, all good things must come to an end. We came into
-            Stuyvesant last September, saved from the unstructured summer.
-          </p>
+          <p className={classes.summary}>{article.summary}</p>
           <Byline contributors={article.contributors} />
-          <p className={classes.DatelineMobile}>August 24, 2017</p>
+          <p className={classes.DatelineMobile}>
+            <Dateline article={article} />
+          </p>
         </div>
       </div>
     </Row>

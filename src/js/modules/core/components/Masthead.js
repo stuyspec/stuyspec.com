@@ -27,8 +27,8 @@ const styles = {
       textDecoration: "none",
     },
     "@media (min-width: 768px)": {
-      fontSize: "75px"
-    }
+      fontSize: "75px",
+    },
   },
   userTools: {
     float: "right",

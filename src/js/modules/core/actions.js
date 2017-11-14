@@ -19,14 +19,32 @@ export const closeSidebar = () => ({
 
 export const fetchAllData = () => {
   return dispatch => {
-    dispatch(fetchSections());
-    dispatch(fetchComments());
-    dispatch(fetchMedia());
-    dispatch(fetchRoles());
-    dispatch(fetchUsers());
-    dispatch(fetchUserRoles());
-    dispatch(fetchRoles());
-    dispatch(fetchAuthorships());
-    dispatch(fetchArticles());
+    fetchDataPromise = new Promise((resolve, reject) => {
+      resolve(dispatch(fetchSections()));
+    })
+      .then(response => {
+        dispatch(fetchComments());
+      })
+      .then(response => {
+        dispatch(fetchMedia());
+      })
+      .then(response => {
+        dispatch(fetchRoles());
+      })
+      .then(response => {
+        dispatch(fetchUsers());
+      })
+      .then(response => {
+        dispatch(fetchUserRoles());
+      })
+      .then(response => {
+        dispatch(fetchRoles());
+      })
+      .then(response => {
+        dispatch(fetchAuthorships());
+      })
+      .then(response => {
+        dispatch(fetchArticles());
+      });
   };
 };

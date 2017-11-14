@@ -7,9 +7,7 @@ import Byline from "./Byline";
 import Dateline from "./Dateline";
 
 const styles = {
-  headerRow: {
-
-  },
+  headerRow: {},
   ArticleHeader: {
     borderTop: "solid 1px #000",
     borderBottom: "1px solid #dedede",

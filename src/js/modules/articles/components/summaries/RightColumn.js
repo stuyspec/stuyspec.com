@@ -44,7 +44,7 @@ const styles = {
       color: "#000",
     },
   },
-  articleSummary: {
+  summary: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "14px",
@@ -113,7 +113,7 @@ const RightColumn = ({ classes, articles, media, sections }) => {
   });
   */
   return (
-    <Col sm={3} md={3} lg={3} className={classes.RightColumn}>
+    <Col xs={12} sm={3} md={3} lg={3} className={classes.RightColumn}>
       <div className={classes.primaryArticle}>
         <Link
           to={sections[primaryArticle.sectionId].permalink}
@@ -128,10 +128,10 @@ const RightColumn = ({ classes, articles, media, sections }) => {
         >
           {primaryArticle.title}
         </Link>
-        {primaryArticle.outquotes.length > 0 && (
+        {/*primaryArticle.outquotes.length > 0 && (
           <Outquote quote={primaryArticle.outquotes[0]} />
-        )}
-        <p className={classes.articleSummary}>{primaryArticle.summary}</p>
+        )*/}
+        <p className={classes.summary}>{primaryArticle.summary}</p>
         <Byline contributors={primaryArticle.contributors} />
         <Dateline article={primaryArticle} />
       </div>
@@ -150,7 +150,7 @@ const RightColumn = ({ classes, articles, media, sections }) => {
         >
           {secondaryArticle.title}
         </Link>
-        <p className={classes.articleSummary}>{secondaryArticle.summary}</p>
+        <p className={classes.summary}>{secondaryArticle.summary}</p>
         <Byline contributors={secondaryArticle.contributors} />
         <Dateline article={secondaryArticle} />
       </div>
@@ -160,8 +160,8 @@ const RightColumn = ({ classes, articles, media, sections }) => {
       <iframe
         className={classes.spotifyEmbed}
         src="https://open.spotify.com/embed/user/spec.ae/playlist/4FrJhYPbWrWF3fYkzGZPy1"
-        frameborder="0"
-        allowtransparency="true"
+        frameBorder="0"
+        allowTransparency="true"
       />
     </Col>
   );

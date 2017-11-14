@@ -39,7 +39,7 @@ const styles = {
     },
   },
   "@media (min-width: 992px)": {
-    SignInPage: {
+    ProfilePage: {
       marginTop: "60px",
     },
   },

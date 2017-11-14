@@ -60,18 +60,11 @@ const styles = {
   },
   figure: {
     float: "right",
-    margin: "0",
+    marginLeft: "5px",
     width: "62px",
     "& img": {
       width: "100%",
     },
-  },
-  preview: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "14px",
-    lineHeight: "1.29",
-    marginBottom: "13px",
   },
   Byline: {
     color: "#888",
@@ -104,9 +97,9 @@ const styles = {
   },
   "@media (max-width: 991px)": {
     RightRail: {
-      paddingLeft: "1.5vw"
-    }
-  }
+      paddingLeft: "1.5vw",
+    },
+  },
 };
 
 // inside a Col

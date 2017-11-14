@@ -14,7 +14,7 @@ const styles = {
     lineHeight: 1.44,
     padding: "0 0 18px",
     "& figure:first-child figcaption": {
-      lineHeight: 1.3
+      lineHeight: 1.3,
     },
     "& p": {
       marginBottom: "20px",
@@ -22,7 +22,8 @@ const styles = {
     "& p:first-child": {
       marginTop: "28px",
     },
-    "& p:first-child::first-letter": { // dropcap
+    "& p:first-child::first-letter": {
+      // dropcap
       float: "left",
       fontSize: "58px",
       lineHeight: "43px",
@@ -34,7 +35,8 @@ const styles = {
   },
   "@media (max-width: 991px)": {
     ArticleBody: {
-      "& figure:first-child": { // featured media
+      "& figure:first-child": {
+        // featured media
         padding: "0 10%",
       },
     },
@@ -50,7 +52,7 @@ const styles = {
           marginLeft: "-14px", // ArticleBody.paddingLeft = 14px
           width: "100vw",
         },
-      }
+      },
     },
     innerHTML: {
       padding: "0 2%",
@@ -68,7 +70,10 @@ const ArticleBody = ({ classes, content, featuredMedia }) => {
             isCaption={true}
           />
         )}
-        <div className={classes.innerHTML} dangerouslySetInnerHTML={{ __html: content }} />
+        <div
+          className={classes.innerHTML}
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
       </Col>
       <Col xsHidden smHidden mdOffset={1} md={3} lgOffset={1} lg={3}>
         <RightRail />

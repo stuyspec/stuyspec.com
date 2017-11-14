@@ -39,6 +39,11 @@ gutters on the first- and last-child columns.
     .table-responsive {
         border: none !important;
     }
+
+    p[class^="summary-"], p[class*=" summary-"] {
+        font-size: 16px;
+    }
+
 }
 
 @media (min-width: 768px) {

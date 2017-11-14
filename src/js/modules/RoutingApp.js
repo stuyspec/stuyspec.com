@@ -27,9 +27,6 @@ import {
 } from "./users/components";
 
 import { fetchAllData } from "./core/actions";
-import { getDescriptions } from "./descriptions/selectors";
-import { getRoles } from "./users/selectors";
-import { getSections } from "./sections/selectors";
 
 class RoutingApp extends Component {
   constructor(props) {

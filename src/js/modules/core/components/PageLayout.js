@@ -37,7 +37,8 @@ const sidebarStyles = {
 
 class PageLayout extends Component {
   componentDidUpdate() {
-    window.scrollTo(0, 0);
+    console.log("i did update");
+    //window.scrollTo(0, 0);
   }
 
   handleSetOpen = isSidebarOpen => {

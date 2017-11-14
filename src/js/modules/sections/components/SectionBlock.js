@@ -22,6 +22,7 @@ const styles = {
   },
   bigTitle: {
     color: "#000",
+    display: "block",
     fontFamily: "Minion Pro",
     fontSize: "18px",
     fontWeight: "bold",
@@ -46,13 +47,13 @@ const styles = {
   },
   figure: {
     float: "right",
-    margin: "0",
+    marginLeft: "6px",
     width: "62px",
     "& img": {
       width: "100%",
     },
   },
-  preview: {
+  summary: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "14px",
@@ -109,32 +110,35 @@ const SectionBlock = ({ classes, articles, section, media }) => {
           >
             {bigArticle.title}
           </Link>
-          <p className={classes.preview}>{bigArticle.summary}</p>
+          <p className={classes.summary}>{bigArticle.summary}</p>
           <Byline classes={classes} contributors={bigArticle.contributors} />
           <Dateline classes={classes} article={bigArticle} />
         </div>
-      )} 
-      {rowArticles.length > 0 && rowArticles.map(article => {
-        const featuredMedia = Object.values(media).find(mediaObject => {
-          return mediaObject.isFeatured && mediaObject.articleId === article.id;
-        });
-        return (
-          <div className={classes.article} key={article.id}>
-            {featuredMedia && (
-              <figure className={classes.figure}>
-                <img src={featuredMedia.url} />
-              </figure>
-            )}
-            <Link
-              to={`${section.permalink}/${article.slug}`}
-              className={classes.smallTitle}
-            >
-              {article.title}
-            </Link>
-            <Byline classes={classes} contributors={article.contributors} />
-          </div>
-        );
-      })}
+      )}
+      {rowArticles.length > 0 &&
+        rowArticles.map(article => {
+          const featuredMedia = Object.values(media).find(mediaObject => {
+            return (
+              mediaObject.isFeatured && mediaObject.articleId === article.id
+            );
+          });
+          return (
+            <div className={classes.article} key={article.id}>
+              {featuredMedia && (
+                <figure className={classes.figure}>
+                  <img src={featuredMedia.url} />
+                </figure>
+              )}
+              <Link
+                to={`${section.permalink}/${article.slug}`}
+                className={classes.smallTitle}
+              >
+                {article.title}
+              </Link>
+              <Byline classes={classes} contributors={article.contributors} />
+            </div>
+          );
+        })}
     </div>
   );
 };

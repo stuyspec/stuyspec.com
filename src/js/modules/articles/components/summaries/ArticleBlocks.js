@@ -64,7 +64,7 @@ const styles = {
       width: "100%",
     },
   },
-  preview: {
+  summary: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "14px",
@@ -112,10 +112,7 @@ const ArticleBlock = ({ classes, articles, sections, media }) => {
               >
                 {article.title}
               </Link>
-              <p className={classes.preview}>
-                Unfortunately, all good things must come to an end. We came into
-                Stuyvesant last September, saved from the unstructured summer.
-              </p>
+              <p className={classes.summary}>{article.summary}</p>
             </Col>
           );
         }

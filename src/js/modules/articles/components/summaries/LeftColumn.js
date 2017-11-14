@@ -100,6 +100,12 @@ const styles = {
       fontStyle: "normal",
       lineHeight: "30px",
     },
+    articleTitle: {
+      fontSize: "28px",
+      fontWeight: "bold",
+      fontStyle: "normal",
+      lineHeight: "30px",
+    },
   },
 };
 
@@ -118,7 +124,7 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
     );
   });
   return (
-    <Col sm={3} md={3} lg={3} className={classes.LeftColumn}>
+    <Col xs={12} sm={3} md={3} lg={3} className={classes.LeftColumn}>
       <div className={classes.primaryArticle}>
         {primaryMedia && (
           <div>
@@ -194,7 +200,7 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
         >
           {outquoteArticle.title}
         </Link>
-        <Outquote quote={outquoteArticle.outquotes[0]} />
+        {/*<Outquote quote={outquoteArticle.outquotes[0]} />*/}
         <p className={classes.summary}>{outquoteArticle.summary}</p>
         <div className={classes.bylineContainer}>
           <Byline contributors={outquoteArticle.contributors} />
