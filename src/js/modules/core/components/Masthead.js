@@ -103,7 +103,7 @@ const styles = {
 };
 
 const SectionStyles = {
-  SectionButton: {
+  Sec: {
     position: "relative",
     left: "-160px",
     top: "-50px",
@@ -116,7 +116,7 @@ const SectionStyles = {
 };
 
 const SubscribeStyles = {
-  SubscribeButton: {
+  Sub: {
     width: "116px",
     height: "39px",
     borderRadius: "4px",
@@ -129,7 +129,7 @@ const SubscribeStyles = {
 };
 
 const SignInStyles = {
-  SignInButton: {
+  Sign: {
     borderRadius: "4px",
     backgroundColor: "#ffffff",
     border: "solid 1.5px #dddddd",
