@@ -1,12 +1,11 @@
 import React from "react";
-import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import injectSheet from "react-jss";
-import { Hamburger } from "../icons";
+import { Link } from "react-router-dom";
+import { getCurrentUser } from "../../accounts/selectors";
+import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
-
-import { getTopLevelSections } from "../../sections/selectors";
 
 const styles = {
   Masthead: {
@@ -34,6 +33,13 @@ const styles = {
     },
     textAlign: "center",
   },
+  userTools: {
+    float: "right",
+    marginTop: "9px",
+    "& button": {
+      marginLeft: "24px",
+    },
+  },
   sectionLinksNav: {
     fontFamily: "Circular Std",
     listStyleType: "none",
@@ -58,23 +64,6 @@ const styles = {
       textDecoration: "none",
     },
   },
-  sectionButton: {
-    position: "relative",
-    left: "-605px",
-    top: "-50px",
-    width: "103px",
-    height: "39px",
-    borderRadius: "3px",
-    border: "solid 1.5px #dddddd",
-    backgroundColor: "white",
-  },
-  buttonName: {
-    fontFamily: "Circular Std",
-    fontSize: "14px",
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "#000000",
-  },
   hamburger: {
     display: "inline",
     width: "25px",
@@ -82,15 +71,12 @@ const styles = {
     opacity: "0.48",
     marginRight: "4px",
   },
-  subscribeButton: {
-    width: "116px",
-    height: "39px",
-    borderRadius: "4px",
-    backgroundColor: "#4e6a9e",
-    position: "relative",
-    left: "175px",
-    top: "-50px",
-    border: "solid 1.5px #4e6a9e",
+  buttonName: {
+    fontFamily: "Circular Std",
+    fontSize: "14px",
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#000000",
   },
   subscribeText: {
     fontFamily: "Circular Std",
@@ -107,60 +93,110 @@ const styles = {
     textAlign: "center",
     color: "#ffffff",
   },
-  signIn: {
-    borderRadius: "4px",
-    backgroundColor: "#ffffff",
-    border: "solid 1.5px #dddddd",
-    position: "relative",
-    left: "170px",
-    top: "-46px",
-    zIndex: "-1",
-    height: "39px",
-    width: "66px",
-  },
   signInText: {
     fontFamily: "Circular Std",
     fontSize: "14px",
     fontWeight: "bold",
     textAlign: "center",
     color: "#000000",
+  },
+};
+
+const SectionStyles = {
+  SectionButton: {
+    position: "relative",
+    left: "-160px",
+    top: "-50px",
+    width: "103px",
+    height: "39px",
+    borderRadius: "3px",
+    border: "solid 1.5px #dddddd",
+    backgroundColor: "white",
+  },
+};
+
+const SubscribeStyles = {
+  SubscribeButton: {
+    width: "116px",
+    height: "39px",
+    borderRadius: "4px",
+    backgroundColor: "#4e6a9e",
+    position: "relative",
+    left: "191px",
+    top: "-50px",
+    border: "solid 1.5px #4e6a9e",
   }
 };
 
-const Masthead = ({ classes, sections, openSideBar }) => {
+const SignInStyles = {
+  SignInButton: {
+    borderRadius: "4px",
+    backgroundColor: "#ffffff",
+    border: "solid 1.5px #dddddd",
+    position: "relative",
+    left: "3px",
+    top: "2px",
+    zIndex: "-1",
+    height: "39px",
+    width: "66px",
+  }
+};
+
+const SecNavButton = ({ children, onClick, classes}) => {
+  return (
+    <button onClick={onClick} className={classes.SectionButton}>
+      <div>{children}</div>
+    </button>
+  );
+};
+
+const SubNavButton = ({ children, onClick, classes}) => {
+  return (
+    <button onClick={onClick} className={classes.SubscribeButton}>
+      <div>{children}</div>
+    </button>
+  );
+};
+
+const SignNavButton = ({ children, onClick, classes}) => {
+  return (
+    <button onClick={onClick} className={classes.SignInButton}>
+      <div>{children}</div>
+    </button>
+  );
+};
+
+const StyledSectionButton = injectSheet(SectionStyles)(SecNavButton);
+const StyledSubscribeButton = injectSheet(SubscribeStyles)(SubNavButton);
+const StyledSignInButton = injectSheet(SignInStyles)(SignNavButton);
+
+const Masthead = ({ classes, openSidebar, }) => {
   return (
     <div className={classes.Masthead}>
-      <Link to="/" className={classes.theSpectatorLogo}>
-        The Spectator
-      </Link>
-      <button className={classes.sectionButton} onClick={openSideBar}>
+      <StyledSectionButton onClick={openSidebar}>
         <Hamburger className={classes.hamburger}/>
         <span className={classes.buttonName}>Sections</span>
-      </button>
-      <button className={classes.subscribeButton}>
+      </StyledSectionButton>
+      <Link className={classes.theSpectatorLogo} to="/">
+        The Spectator
+      </Link>
+      <StyledSubscribeButton>
         <span className={classes.subscribeText}>Subscribe</span><br/>
         <span className={classes.subscribeTo}>to our newsletter</span>
-      </button>
-      <button className={classes.signIn}>
-        <span className={classes.signInText}>Sign In</span><br/>
-      </button>
-      <ul className={classes.sectionLinksNav}>
-        {Object.values(sections).map(section => {
-          return (
-            <li key={section.id} className={classes.sectionListItem}>
-              <Link to={section.permalink} className={classes.sectionLink}>
-                {section.name}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      </StyledSubscribeButton>
+      <div className={classes.userTools}>
+        <Link to="/myaccount/profile">
+          <StyledSignInButton>
+            <span className={classes.signInText}>Sign In</span>
+          </StyledSignInButton>
+        </Link>
+      </div>
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  sections: getTopLevelSections(state),
+  currentUser: getCurrentUser(state),
 });
 
 const mapDispatchToProps = dispatch => {
