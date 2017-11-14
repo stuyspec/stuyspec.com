@@ -20,6 +20,7 @@ export const getContributorFromSlug = createSelector(
     const user = Object.values(users).find(user => {
       return user.slug === requestedContributorSlug;
     });
+    console.log(user);
     if (
       userRoles.find(userRole => {
         return (
@@ -30,7 +31,7 @@ export const getContributorFromSlug = createSelector(
     ) {
       return user;
     }
-    appHistory.push("/the-uncompleted-404-page?ref=contributors");
+    //appHistory.push("/the-uncompleted-404-page?ref=contributors");
   },
 );
 
@@ -50,7 +51,7 @@ export const getIllustratorFromSlug = createSelector(
     ) {
       return user;
     }
-    appHistory.push("/the-uncompleted-404-page?ref=illustrators");
+    //appHistory.push("/the-uncompleted-404-page?ref=illustrators");
   },
 );
 
@@ -70,7 +71,7 @@ export const getPhotographerFromSlug = createSelector(
     ) {
       return user;
     }
-    appHistory.push("/the-uncompleted-404-page?ref=photographers");
+    //appHistory.push("/the-uncompleted-404-page?ref=photographers");
   },
 );
 

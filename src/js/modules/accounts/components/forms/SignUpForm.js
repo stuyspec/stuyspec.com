@@ -5,11 +5,35 @@ import injectSheet from "react-jss";
 import { EMAIL_REGEX } from "../../../../constants";
 
 const styles = {
+  SignUpForm: {
+    fontFamily: "Minion Pro",
+    "& form div": {
+      // each Field
+      marginBottom: "7px",
+    },
+  },
   successMessage: {
     color: "green",
   },
   errorMessage: {
     color: "red",
+  },
+  submitButton: {
+    backgroundColor: "#3472b7",
+    border: "1px solid #3472b7",
+    borderRadius: "3px",
+    color: "#fff",
+    fontSize: "15px",
+    fontStyle: "italic",
+    height: "32px",
+    marginTop: "10px",
+    textAlign: "center",
+    width: "70px",
+    "&:disabled": {
+      background: "#ddd",
+      borderColor: "#ddd",
+      color: "#888",
+    },
   },
 };
 
@@ -48,7 +72,12 @@ const renderField = ({
     <div>
       <label>{label}</label>
       <div>
-        <input {...input} placeholder={label} type={type} />
+        <input
+          style={{ width: "100%" }}
+          {...input}
+          placeholder={label}
+          type={type}
+        />
         {touched &&
           ((error && <span>{error}</span>) ||
             (warning && <span>{warning}</span>))}
@@ -59,8 +88,7 @@ const renderField = ({
 
 const SignUpForm = ({ classes, handleSubmit, submitting, status }) => {
   return (
-    <div>
-      <h1>Sign Up Form</h1>
+    <div className={classes.SignUpForm}>
       <form onSubmit={handleSubmit}>
         <Field
           name="firstName"
@@ -93,7 +121,11 @@ const SignUpForm = ({ classes, handleSubmit, submitting, status }) => {
           label="Password Confirmation"
         />
         <div>
-          <button type="submit" disabled={submitting}>
+          <button
+            type="submit"
+            disabled={submitting}
+            className={classes.submitButton}
+          >
             Sign Up
           </button>
         </div>

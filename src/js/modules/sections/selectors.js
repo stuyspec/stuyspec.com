@@ -36,13 +36,7 @@ export const getTopLevelSectionsWithChildren = createSelector(
       acc[topLevelSection.id] = {
         ...topLevelSection,
         subsections: Object.filter(sections, section => {
-          if (section === topLevelSection) {
-            return false;
-          }
-          while (section.parentId !== null) {
-            section = sections[section.parentId];
-          }
-          return section === topLevelSection;
+          return section.parentId === topLevelSection.id;
         }),
       };
       return acc;
@@ -59,11 +53,46 @@ export const getSectionTreeIds = createSelector(
   [getSections, getSectionFromRequestedSlug],
   (sections, targetSection) => {
     const subsectionsInSectionTree = Object.filter(sections, section => {
-      while (section.parentId !== null) {
-        section = sections[section.parentId];
-      }
-      return section === targetSection;
+      return section.parentId === targetSection.id;
     });
-    return [targetSection.id, ...Object.keys(subsectionsInSectionTree)];
+    const subsectionIds = Object.values(
+      subsectionsInSectionTree,
+    ).map(subsection => {
+      return subsection.id;
+    });
+    return [targetSection.id, ...subsectionIds];
   },
 );
+
+export const getFeaturedSubsection = createSelector(
+  [getSections, getSectionFromRequestedSlug],
+  (sections, parentSection) => {
+    return Object.values(sections).find(
+      section => section.parentId === parentSection.id,
+    );
+  },
+);
+
+/**
+ * Return an array with all the sectionSlugs
+ */
+
+export const getSectionSlugs = createSelector([getSections], sections => {
+  return Object.values(sections).map(section => section.slug);
+});
+
+export const getColumnSections = createSelector([getSections], sections => {
+  const columnSectionNames = [
+    "Opinions",
+    "Features",
+    "Humor",
+    "Staff Editorials",
+    "Arts & Entertainment",
+    "Sports",
+  ];
+  return columnSectionNames.map(name =>
+    Object.values(sections).find(section => {
+      return section.name === name;
+    }),
+  );
+});

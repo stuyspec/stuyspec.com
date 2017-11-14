@@ -1,16 +1,21 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 import ConnectedRouter from "react-router-redux/ConnectedRouter";
 import appHistory from "tools/appHistory";
 
 import {
   SignInPage,
+  SignUpPage,
   ProfilePage,
   EditProfilePage,
 } from "./accounts/components";
-import { ArticlePage } from "./articles/components";
+import {
+  ArticlePage,
+  RecommendedPage,
+  LatestPage,
+} from "./articles/components";
 import { HomePage, PageLayout } from "./core/components";
 import { DescriptionPage } from "./descriptions/components";
 import { SectionPage } from "./sections/components";
@@ -22,9 +27,6 @@ import {
 } from "./users/components";
 
 import { fetchAllData } from "./core/actions";
-import { getDescriptions } from "./descriptions/selectors";
-import { getRoles } from "./users/selectors";
-import { getSections } from "./sections/selectors";
 
 class RoutingApp extends Component {
   constructor(props) {
@@ -36,9 +38,18 @@ class RoutingApp extends Component {
   }
 
   render() {
-    const { sections, roles, descriptions, isAllDataFetched } = this.props;
+    const {
+      sections,
+      roles,
+      descriptions,
+      session,
+      isAllDataFetched,
+    } = this.props;
     return (
-      <ConnectedRouter history={appHistory}>
+      <ConnectedRouter
+        onUpdate={() => window.scrollTo(0, 0)}
+        history={appHistory}
+      >
         <PageLayout>
           {isAllDataFetched ? (
             <Switch>
@@ -110,20 +121,58 @@ class RoutingApp extends Component {
               <Route
                 exact
                 path={"/myaccount"}
-                key={"myaccount"}
-                component={SignInPage}
+                key={"signIn"}
+                render={() =>
+                  session.userId ? (
+                    <Redirect to="/myaccount/profile" />
+                  ) : (
+                    <SignInPage />
+                  )}
               />
               <Route
                 exact
-                path={"/myaccount/profile"}
+                path="/myaccount/sign-up"
+                key={"signUp"}
+                render={() =>
+                  session.userId ? (
+                    <Redirect to="/myaccount/profile" />
+                  ) : (
+                    <SignUpPage />
+                  )}
+              />
+              <Route
+                exact
+                path="/myaccount/profile"
                 key={"profile"}
-                component={ProfilePage}
+                render={() =>
+                  session.userId ? (
+                    <ProfilePage />
+                  ) : (
+                    <Redirect to="/myaccount" />
+                  )}
               />
               <Route
                 exact
-                path={"/myaccount/profile/edit"}
+                path="/myaccount/profile/edit"
                 key={"editProfile"}
-                component={EditProfilePage}
+                render={() =>
+                  session.userId ? (
+                    <EditProfilePage />
+                  ) : (
+                    <Redirect to="/myaccount" />
+                  )}
+              />
+              <Route
+                exact
+                path={"/recommended"}
+                key={"recommended"}
+                component={RecommendedPage}
+              />
+              <Route
+                exact
+                path={"/latest"}
+                key={"latest"}
+                component={LatestPage}
               />
             </Switch>
           ) : (
@@ -136,15 +185,17 @@ class RoutingApp extends Component {
 }
 
 const mapStateToProps = state => ({
-  descriptions: getDescriptions(state),
-  roles: getRoles(state),
-  sections: getSections(state),
+  descriptions: state.descriptions,
+  roles: state.users.roles,
+  sections: state.sections.sections,
+  session: state.accounts.session,
   isAllDataFetched:
     state.articles.isFetched &&
     state.comments.isFetched &&
     state.media.isFetched &&
     state.sections.isFetched &&
-    state.users.isFetched,
+    state.users.isFetched &&
+    state.outquotes.isFetched
 });
 
 const mapDispatchToProps = dispatch => {

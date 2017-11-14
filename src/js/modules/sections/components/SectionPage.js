@@ -7,42 +7,110 @@ import injectSheet from "react-jss";
 import { isObjectEmpty } from "../../../utils";
 import { ArticleList } from "../../articles/components";
 import { getSectionTreeArticles } from "../../articles/selectors";
-import { getSections, getDirectSubsections } from "../../sections/selectors";
+import {
+  getDirectSubsections,
+  getFeaturedSubsection,
+} from "../../sections/selectors";
+import SectionColumn from "./SectionColumn";
+import {
+  LatestArticlesRibbon,
+  LeftTitleArticle,
+} from "../../articles/components/summaries";
+import { Dateline, Byline } from "../../articles/components/index";
+import SectionFeature from "./SectionFeature";
+import { TallAd } from "../../advertisements/components/index";
+
+// TODO: STYLE SECONDARY ARTICLE. consider setting a max height
 
 const styles = {
-  SectionPage: {
-    top: 0,
-  },
-  sectionName: {
-    fontFamily: "Canela",
-    fontSize: "36px",
-    fontWeight: 500,
-    color: "#000",
-    margin: "0 0 20px 0",
-  },
   subsectionBar: {
-    border: "1px solid #ddd",
-    borderStyle: "solid none",
-    listStyleType: "none",
-    marginBottom: "14px",
-    padding: "7px 0 8px 0",
+    margin: "0 0 28px 0",
+    padding: 0,
+    textAlign: "center",
   },
-  subsectionBarLine: {
-    background: "#ddd",
-    height: "1px",
-    margin: 0,
+  featuredRow: {
+    borderBottom: "1px solid #ddd",
+    paddingBottom: "18px",
   },
+  featuredMedia: {
+    "& figure": {
+      margiSection: "0",
+      width: "100%",
+      "& img": {
+        width: "100%",
+      },
+    },
+  },
+  featuredArticle: {
+    marginLeft: "55px",
+    paddingTop: "35px",
+    textAlign: "center",
+    width: "325px",
+    "& a": {
+      color: "#000",
+      "&:hover": { color: "#000" },
+      "&:active": { color: "#000" },
+      "&:focus": { color: "#000" },
+    },
+  },
+  featuredArticleSection: {
+    display: "block",
+    fontFamily: "Circular Std",
+    fontSize: "13px",
+    fontWeight: 300,
+    marginBottom: "8px",
+    textTransform: "uppercase",
+  },
+  featuredArticleTitle: {
+    display: "block",
+    fontFamily: "Canela",
+    fontSize: "40px",
+    fontWeight: 300,
+    lineHeight: "48px",
+    marginBottom: "13px",
+  },
+  featuredArticleSummary: {
+    fontFamily: "Minion Pro",
+    fontSize: "16px",
+    lineHeight: 1.25,
+    marginBottom: "18px",
+  },
+  secondaryRow: {
+    marginBottom: "18px",
+  },
+  secondaryCol: {
+    paddingRight: "0 !important",
+  },
+  SectionFeatureContainer: {
+    borderBottom: "1px solid #ddd",
+    marginBottom: "18px",
+    marginRight: "14px",
+    "& div": {
+      borderTop: "none",
+    },
+  },
+  TallAdContainer: {
+    borderLeft: "1px solid #ddd",
+    marginTop: "24px",
+    paddingLeft: "14px !important",
+    paddingRight: "0 !important",
+  },
+
+  latestArticleRibbon: {},
   subsectionListItem: {
+    borderBottom: "solid 1px #ddd",
     display: "inline",
     textDecoration: "none",
-    marginRight: "26px",
+    padding: "0 26px 10px 0",
+    "&:last-child": {
+      paddingRight: 0,
+    },
   },
   subsectionLink: {
     color: "#000",
     fontFamily: "Circular Std",
-    fontSize: "14px",
+    fontSize: "12px",
     fontWeight: 300,
-    textTransform: "uppercase",
     "&:hover": {
       color: "#000",
       textDecoration: "none",
@@ -52,6 +120,84 @@ const styles = {
       textDecoration: "none",
     },
   },
+  latestArticles: {
+    padding: "0 13px 0 0",
+    borderRight: "solid 1px #ddd",
+    "& > div:last-child": {
+      // articleBlocks
+      border: "none",
+      margin: 0,
+    },
+  },
+  emptySpace: {
+    height: "20px",
+    margin: 0,
+    padding: 0,
+  },
+  sectionColumnContainer: {
+    "& > div": {
+      borderLeft: "none",
+    },
+  },
+  SubsectionPage: {
+    marginTop: "80px",
+    "& div > div": {
+      borderRight: 0,
+    },
+  },
+  "@media (min-width: 992px)": {
+    SectionPage: {
+      marginTop: "46px",
+    },
+    SectionFeatureContainer: {
+      marginRight: "14px !important",
+    },
+  },
+  "@media (min-width: 768px)": {
+    SectionFeatureContainer: {
+      marginRight: 0,
+    },
+  },
+  "@media (max-width: 991px)": {
+    SectionPage: {
+      marginTop: "-16px", // counters PageContainer.marginTop = 60px
+    },
+    featuredArticle: {
+      marginLeft: 0,
+      paddingTop: "3vw",
+      width: "41.666666%", // col-sm-5
+    },
+    featuredArticleTitle: {
+      fontSize: "4vw",
+      lineHeight: "4.4vw",
+    },
+    featuredArticleSummary: {
+      margin: "0 auto 18px auto",
+      width: "80%",
+    },
+  },
+  "@media (max-width: 767px)": {
+    latestArticles: {
+      borderRight: "none",
+      paddingRight: 0,
+    },
+    featuredMedia: {
+      paddingRight: "0 !important",
+      "& figure img": {
+        marginLeft: "-14px",
+        width: "100vw",
+      },
+    },
+    featuredArticle: {
+      padding: "14px 0 0 0 !important",
+      width: "100%",
+    },
+    SectionFeatureContainer: {
+      borderBottom: 0,
+      borderRight: 0,
+      marginRight: "0 !important",
+    },
+  },
 };
 
 const SectionPage = ({
@@ -59,37 +205,159 @@ const SectionPage = ({
   sectionTreeArticles,
   directSubsections,
   section,
+  featuredSubsection,
+  media,
 }) => {
-  const createDirectSubsectionLinks = () => {
-    return Object.values(directSubsections).map(subsection => {
-      return (
-        <li className={classes.subsectionListItem} key={subsection.id}>
-          <Link className={classes.subsectionLink} to={subsection.permalink}>
-            {subsection.name}
-          </Link>
-        </li>
-      );
-    });
-  };
+  if (section.parentId) {
+    return (
+      <Grid fluid className={classes.SubsectionPage}>
+        <Row>
+          <Col
+            xs={12}
+            sm={9}
+            md={9}
+            lg={9}
+            className={classes.latestArticles}
+          >
+            <ArticleList
+              articles={sectionTreeArticles}
+              title={section.name}
+              label="Latest"
+            />
+          </Col>
+          <Col
+            xsHidden
+            sm={3}
+            md={3}
+            lg={3}
+            className={classes.TallAdContainer}
+            style={{marginTop: "57px"}}
+          >
+            <TallAd />
+          </Col>
+        </Row>
+      </Grid>
+    );
+  }
+  let featuredMedia = null;
+  const featuredArticle = Object.values(sectionTreeArticles).find(article => {
+    const mediaObject = Object.values(media).find(
+      mediaObject => mediaObject.articleId === article.id,
+    );
+    if (mediaObject) {
+      featuredMedia = mediaObject;
+    }
+    return mediaObject;
+  });
+  let featuredArticleSection = Object.values(directSubsections).find(
+    subsection => subsection.articleId === featuredArticle.id,
+  );
+  if (!featuredArticleSection) {
+    featuredArticleSection = section;
+  }
+
+  const secondaryArticle = Object.values(sectionTreeArticles).find(article => {
+    return Object.values(media).find(
+      mediaObject => mediaObject.articleId === article.id,
+    );
+  });
+
   return (
-    <div className={classes.SectionPage}>
-      <h1 className={classes.sectionName}>{section.name}</h1>
+    <Grid fluid className={classes.SectionPage}>
       {isObjectEmpty(directSubsections) ? (
-        <hr className={classes.subsectionBarLine} />
+        <div className={classes.emptySpace} />
       ) : (
         <ul className={classes.subsectionBar}>
-          {createDirectSubsectionLinks()}
+          {Object.values(directSubsections).map(subsection => {
+            return (
+              <li className={classes.subsectionListItem} key={subsection.id}>
+                <Link
+                  className={classes.subsectionLink}
+                  to={subsection.permalink}
+                >
+                  {subsection.name}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       )}
-      <ArticleList articles={sectionTreeArticles} section={section} />
-    </div>
+
+      <Row className={classes.featuredRow}>
+        <Col xs={12} sm={7} md={7} lg={7} className={classes.featuredMedia}>
+          <figure>
+            <img src={featuredMedia.url} />
+          </figure>
+        </Col>
+        <Col xs={12} sm={5} md={5} lg={5} className={classes.featuredArticle}>
+          <Link
+            className={classes.featuredArticleSection}
+            to={featuredArticleSection.permalink}
+          >
+            {featuredArticleSection.name === "Arts & Entertainment" ? (
+              "A&E"
+            ) : (
+              featuredArticleSection.name
+            )}
+          </Link>
+          <Link
+            className={classes.featuredArticleTitle}
+            to={`${featuredArticleSection.permalink}/${featuredArticle.slug}`}
+          >
+            {featuredArticle.title}
+          </Link>
+          <p className={classes.featuredArticleSummary}>
+            {featuredArticle.summary}
+          </p>
+          <Byline contributors={featuredArticle.contributors} />
+          <Dateline article={featuredArticle} />
+        </Col>
+      </Row>
+
+      <Row className={classes.secondaryRow}>
+        <Col xsHidden sm={12} md={9} lg={9} className={classes.secondaryCol}>
+          <div className={classes.SectionFeatureContainer}>
+            <SectionFeature section={section} recursive={true} />
+          </div>
+          <LeftTitleArticle article={secondaryArticle} />
+        </Col>
+        <Col
+          xsHidden
+          smHidden
+          md={3}
+          lg={3}
+          className={classes.TallAdContainer}
+        >
+          <TallAd />
+        </Col>
+      </Row>
+
+      <Row>
+        <Col xsHidden sm={12} md={12} lg={12}>
+          <LatestArticlesRibbon className={classes.latestArticlesRibbon} />
+        </Col>
+      </Row>
+
+      <Row>
+        <Col xs={12} sm={9} md={9} lg={9} className={classes.latestArticles}>
+          <ArticleList articles={sectionTreeArticles} label="Latest"/>
+        </Col>
+        <Col xsHidden sm={3} md={3} lg={3}>
+          <div className={classes.sectionColumnContainer}>
+            <SectionColumn sections={Object.values(directSubsections)} />
+          </div>
+        </Col>
+      </Row>
+    </Grid>
   );
 };
 
 const mapStateToProps = (state, ownProps) => ({
   sectionTreeArticles: getSectionTreeArticles(state, ownProps),
+  featuredSubsection: getFeaturedSubsection(state, ownProps),
   directSubsections: getDirectSubsections(state, ownProps),
-  sections: getSections(state),
+  sections: state.sections.sections,
+  media: state.media.media,
 });
 
 export default connect(mapStateToProps, null)(injectSheet(styles)(SectionPage));

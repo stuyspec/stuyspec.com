@@ -6,7 +6,7 @@ import { capitalizeWord } from "../../../utils";
 
 const styles = {
   figure: {
-    margin: "0px 0px 13px 0px",
+    margin: "0",
     width: "100%",
   },
   img: {
@@ -23,23 +23,26 @@ const styles = {
   },
 };
 
-const ArticleFeaturedMedia = ({ classes, featuredMedia }) => {
+const ArticleFeaturedMedia = ({ classes, featuredMedia, isCaption }) => {
   const { creator } = featuredMedia;
   return (
     <figure className={classes.figure}>
       <img className={classes.img} src={featuredMedia.url} />
-      <figcaption className={classes.caption}>
-        <span>{featuredMedia.caption}&nbsp;</span>
-        <Link
-          className={classes.creditLine}
-          to={`/${MEDIA_CREATOR_SLUGS[featuredMedia.type]}/${creator.slug}`}
-        >
-          {capitalizeWord(featuredMedia.type)}
-          &nbsp;by&nbsp;
-          {`${creator.firstName} ${creator.lastName}`}
-        </Link>
-        .
-      </figcaption>
+      {isCaption && (
+        <figcaption className={classes.caption}>
+          <span>{featuredMedia.caption}&nbsp;</span>
+          <Link
+            className={classes.creditLine}
+            to={`/${MEDIA_CREATOR_SLUGS[featuredMedia.type]}/${creator.slug}`}
+          >
+            {capitalizeWord(featuredMedia.type)}
+            &nbsp;by&nbsp;
+            {creator.firstName}
+            {creator.lastName !== '' && ' ' + creator.lastName}
+          </Link>
+          .
+        </figcaption>
+      )}
     </figure>
   );
 };

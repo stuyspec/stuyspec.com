@@ -29,6 +29,7 @@ const middleware =
         ),
       );
 
+/*
 const store = createStore(
   reducer,
   undefined,
@@ -36,3 +37,6 @@ const store = createStore(
 );
 persistStore(store);
 export default store;
+*/
+
+export default createStore(reducer, middleware);

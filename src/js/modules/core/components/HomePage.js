@@ -1,40 +1,115 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
+import { Grid, Row, Col } from "react-bootstrap/lib";
 
-import { getArticles } from "../../articles/selectors";
-import { getSections } from "../../sections/selectors";
+import { getArticlesWithContributors } from "../../articles/selectors";
+
+import {
+  FeaturedArticle,
+  RecommendedArticles,
+  LatestArticlesRibbon,
+  LeftColumn,
+  RightColumn,
+} from "../../articles/components/summaries";
+
+import { SectionFeature, SectionColumn } from "../../sections/components";
 
 const styles = {
-  HomePage: {},
+  HomePage: {
+    marginTop: "23px 0px 13px",
+  },
+  recommendedArticles: {
+    padding: 0,
+  },
+  primaryComponents: {
+    borderRight: "solid 1px #ddd",
+    marginBottom: "19px",
+    paddingRight: "14px",
+  },
+  "@media (max-width: 991px)": {
+    primaryComponents: {
+      borderRight: "none",
+      paddingRight: 0,
+    },
+  },
+  "@media (max-width: 768px)": {
+    skinnyCol: {
+      padding: "0 !important",
+    },
+  },
 };
 
+//The filler column should have a borderRight. Wait until there is something there first
+
 const HomePage = ({ classes, sections, articles }) => {
+  const sectionFeature = Object.values(sections).find(
+    section => section.name === "News",
+  );
+  const recommendedArticles = Object.values(articles).slice(0, 5);
+
+  const firstColumnSections = [
+    "Opinions",
+    "Features",
+    "Humor",
+  ].map(sectionName =>
+    Object.values(sections).find(section => section.name === sectionName),
+  );
+  const secondColumnSections = [
+    "Staff Editorials",
+    "Arts & Entertainment",
+    "Sports",
+  ].map(sectionName =>
+    Object.values(sections).find(section => section.name === sectionName),
+  );
+  // TODO: big components should be moved out of Col's and have their own
   return (
-    <div className={classes.HomePage}>
-      <h1>Home page</h1>
-      {/* No more article list in feature/homepage-design */}
-      <h2>Articles</h2>
-      <ul>
-        {Object.values(articles).map(article => {
-          const section = sections[article.sectionId];
-          return (
-            <li key={article.id}>
-              <Link to={`${section.permalink}/${article.slug}`}>
-                {article.title}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+    <div>
+      <Grid fluid>
+        <Row>
+          <Col
+            xs={12}
+            sm={12}
+            md={9}
+            lg={9}
+            className={classes.primaryComponents}
+          >
+            <FeaturedArticle />
+            <SectionFeature section={sectionFeature} sections={sections} />
+          </Col>
+          <Col
+            xsHidden
+            smHidden
+            md={3}
+            lg={3}
+            className={classes.recommendedArticles}
+          >
+            <RecommendedArticles articles={recommendedArticles} />
+          </Col>
+        </Row>
+        <Row>
+          <Col xsHidden sm={12} md={12} lg={12}>
+            <LatestArticlesRibbon className={classes.latestArticlesRibbon} />
+          </Col>
+        </Row>
+        <Row>
+          <LeftColumn />
+          <Col xs={12} sm={3} md={3} lg={3} className={classes.skinnyCol}>
+            <SectionColumn sections={firstColumnSections} />
+          </Col>
+          <Col xs={12} sm={3} md={3} lg={3} className={classes.skinnyCol}>
+            <SectionColumn sections={secondColumnSections} />
+          </Col>
+          <RightColumn />
+        </Row>
+      </Grid>
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  articles: getArticles(state),
-  sections: getSections(state),
+  articles: getArticlesWithContributors(state),
+  sections: state.sections.sections,
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(HomePage));

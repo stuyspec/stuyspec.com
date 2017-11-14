@@ -3,9 +3,6 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 
 const styles = {
-  DescriptionPage: {
-    marginTop: "100px",
-  },
   descriptionTitle: {
     fontFamily: "Canela",
     fontSize: "36px",
@@ -18,17 +15,22 @@ const styles = {
     fontSize: "18px",
     color: "#000000",
   },
+  "@media (min-width: 992px)": {
+    DescriptionPage: {
+      marginTop: "60px",
+    },
+  },
 };
 
 const DescriptionPage = ({ classes, description }) => {
   return (
-    <div className={classes.DescriptionPage}>
+    <Grid fluid className={classes.DescriptionPage}>
       <p className={classes.descriptionTitle}>{description.title}</p>
       <div
         className={classes.descriptionContent}
         dangerouslySetInnerHTML={{ __html: description.content }}
       />
-    </div>
+    </Grid>
   );
 };
 

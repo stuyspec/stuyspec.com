@@ -20,6 +20,13 @@
 }
 
 @font-face {
+    font-family: "Minion Pro";
+    src: url('/fonts/Minion_Pro_Bold_ Italic.ttf') format("truetype");
+    font-style: italic;
+    font-weight: bold;
+}
+
+@font-face {
     font-family: "Circular Std";
     src: url('/fonts/CircularStd_Book.otf') format("opentype");
     font-style: normal;
@@ -59,4 +66,11 @@
     src: url('/fonts/Canela-Medium.otf') format("opentype");
     font-style: normal;
     font-weight: 500;
+}
+
+@font-face {
+    font-family: "Canela";
+    src: url('/fonts/Canela-Regular.otf') format("opentype");
+    font-style: normal;
+    font-weight: 300;
 }

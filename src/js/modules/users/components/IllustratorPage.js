@@ -42,13 +42,18 @@ const styles = {
     lineHeight: "1.28",
     margin: 0,
   },
+  "@media (max-width: 1199px) and (min-width: 992px)": {
+    IllustratorPage: {
+      paddingLeft: "10%",
+    },
+  },
 };
 
 const IllustratorPage = ({ classes, illustrator, articles }) => {
   return (
     <Grid className={classes.IllustratorPage}>
       <Row>
-        <Col md={9}>
+        <Col xs={12} sm={12} md={9} lg={9}>
           <p className={classes.name}>
             {illustrator.firstName} {illustrator.lastName}
           </p>

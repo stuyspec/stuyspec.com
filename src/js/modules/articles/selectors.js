@@ -26,20 +26,18 @@ export const getArticlesWithContributors = createSelector(
   (originalArticles, users, authorships) => {
     // efficient and readable method of deep cloning an object.
     // https://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-deep-clone-an-object-in-javascript
-    let articles = JSON.parse(JSON.stringify(originalArticles));
-    return authorships.reduce((acc, authorship) => {
-      let targetArticle = articles[authorship.articleId];
-      if (targetArticle.contributors === undefined) {
-        targetArticle.contributors = [];
-      }
-      if (!targetArticle.contributors.includes(users[authorship.userId])) {
-        targetArticle.contributors.push(users[authorship.userId]);
-      }
-      acc[targetArticle.id] = targetArticle;
-      return acc;
-    }, {});
+    const articles = JSON.parse(JSON.stringify(originalArticles));
+    Object.keys(articles).map(articleId => {
+      const targetArticle = articles[articleId];
+      targetArticle.contributors = authorships
+        .filter(authorship => authorship.articleId === parseInt(articleId))
+        .map(authorship => users[authorship.userId]);
+    });
+    return articles;
   },
 );
+
+// TODO: make authorships an object because of duplication error, might need to do that for other things too
 
 /**
  * The selector returns a filtered articles object that contains all articles
@@ -136,5 +134,23 @@ export const getArticleFeaturedMedia = createSelector(
         creator: users[featuredMedia.userId],
       };
     }
+  },
+);
+
+export const getLatestArticles = createSelector(
+  [getArticlesWithContributors],
+  articles => {
+    return Object.values(articles).sort((a, b) => {
+      return new Date(a) - new Date(b);
+    });
+  },
+);
+
+export const getArticlesFromSection = createSelector(
+  [getArticlesWithContributors, getSectionFromRequestedSlug],
+  (articles, section) => {
+    return Object.values(articles).filter(
+      article => article.sectionId === section.id,
+    );
   },
 );

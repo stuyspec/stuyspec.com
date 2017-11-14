@@ -1,20 +1,23 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import injectSheet from "react-jss";
 import Sidebar from "react-sidebar";
+import Favicon from "react-favicon";
 
 import PageHeader from "./PageHeader";
 import PageFooter from "./PageFooter";
 import SidebarContent from "./SidebarContent";
+import SubscriptionModal from "../../accounts/components/SubscriptionModal";
 
 import { openSidebar, closeSidebar } from "../actions";
 
 const styles = {
-  PageContainer: {
-    margin: "0 auto",
-    maxWidth: "1060px",
+  "@media (max-width: 991px)": {
+    PageContainer: {
+      marginTop: "60px",
+    },
   },
 };
 
@@ -32,31 +35,34 @@ const sidebarStyles = {
   },
 };
 
-const PageLayout = ({
-  classes,
-  children,
-  location,
-  isSidebarOpen,
-  openSidebar,
-  closeSidebar,
-}) => {
-  const handleSetOpen = isSidebarOpen => {
-    // TODO: rename to setSidebarOpen?
-    isSidebarOpen ? openSidebar() : closeSidebar();
+class PageLayout extends Component {
+  componentDidUpdate() {
+    console.log("i did update");
+    //window.scrollTo(0, 0);
+  }
+
+  handleSetOpen = isSidebarOpen => {
+    isSidebarOpen ? this.props.openSidebar() : this.props.closeSidebar();
   };
-  return (
-    <Sidebar
-      sidebar={<SidebarContent />}
-      open={isSidebarOpen}
-      onSetOpen={handleSetOpen}
-      styles={sidebarStyles}
-    >
-      <PageHeader location={location} />
-      <div className={classes.PageContainer}>{children}</div>
-      <PageFooter />
-    </Sidebar>
-  );
-};
+
+  render() {
+    const { classes, children, location, isSidebarOpen } = this.props;
+    return (
+      <Sidebar
+        sidebar={<SidebarContent />}
+        open={isSidebarOpen}
+        onSetOpen={isSidebarOpen => this.handleSetOpen(isSidebarOpen)}
+        styles={sidebarStyles}
+      >
+        <PageHeader location={location} />
+        <Favicon url="https://i.imgur.com/CxNoalR.png" />
+        <div className={classes.PageContainer}>{children}</div>
+        <SubscriptionModal />
+        <PageFooter />
+      </Sidebar>
+    );
+  }
+}
 
 const mapStateToProps = state => ({
   isSidebarOpen: state.core.isSidebarOpen,
