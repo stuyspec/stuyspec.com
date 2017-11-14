@@ -194,7 +194,8 @@ const mapStateToProps = state => ({
     state.comments.isFetched &&
     state.media.isFetched &&
     state.sections.isFetched &&
-    state.users.isFetched,
+    state.users.isFetched &&
+    state.outquotes.isFetched
 });
 
 const mapDispatchToProps = dispatch => {

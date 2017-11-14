@@ -4,6 +4,7 @@ import { fetchComments } from "../comments/actions";
 import { fetchMedia } from "../media/actions";
 import { fetchSections } from "../sections/actions";
 import { fetchUsers, fetchUserRoles, fetchRoles } from "../users/actions";
+import { fetchOutquotes } from "../outquotes/actions";
 
 export const refreshWindowDimensions = () => ({
   type: t.REFRESH_WINDOW_DIMENSIONS,
@@ -45,6 +46,9 @@ export const fetchAllData = () => {
       })
       .then(response => {
         dispatch(fetchArticles());
+      })
+      .then(response => {
+        dispatch(fetchOutquotes());
       });
   };
 };
