@@ -142,51 +142,35 @@ const SignInStyles = {
   }
 };
 
-const SecNavButton = ({ children, onClick, classes}) => {
+const NavButton = ({ children, onClick, classes, type}) => {
   return (
-    <button onClick={onClick} className={classes.SectionButton}>
+    <button onClick={onClick} className={classes[type]}>
       <div>{children}</div>
     </button>
   );
 };
 
-const SubNavButton = ({ children, onClick, classes}) => {
-  return (
-    <button onClick={onClick} className={classes.SubscribeButton}>
-      <div>{children}</div>
-    </button>
-  );
-};
-
-const SignNavButton = ({ children, onClick, classes}) => {
-  return (
-    <button onClick={onClick} className={classes.SignInButton}>
-      <div>{children}</div>
-    </button>
-  );
-};
-
-const StyledSectionButton = injectSheet(SectionStyles)(SecNavButton);
-const StyledSubscribeButton = injectSheet(SubscribeStyles)(SubNavButton);
-const StyledSignInButton = injectSheet(SignInStyles)(SignNavButton);
+const StyledSectionButton = injectSheet(SectionStyles)(NavButton);
+const StyledSubscribeButton = injectSheet(SubscribeStyles)(NavButton);
+const StyledSignInButton = injectSheet(SignInStyles)(NavButton);
 
 const Masthead = ({ classes, openSidebar, }) => {
   return (
     <div className={classes.Masthead}>
-      <StyledSectionButton onClick={openSidebar}>
+      <StyledSectionButton onClick={openSidebar} type="Sec">
         <Hamburger className={classes.hamburger}/>
         <span className={classes.buttonName}>Sections</span>
       </StyledSectionButton>
       <Link className={classes.theSpectatorLogo} to="/">
         The Spectator
       </Link>
-      <StyledSubscribeButton>
+      <StyledSubscribeButton type="Sub">
         <span className={classes.subscribeText}>Subscribe</span><br/>
         <span className={classes.subscribeTo}>to our newsletter</span>
       </StyledSubscribeButton>
       <div className={classes.userTools}>
         <Link to="/myaccount/profile">
-          <StyledSignInButton>
+          <StyledSignInButton type="Sign">
             <span className={classes.signInText}>Sign In</span>
           </StyledSignInButton>
         </Link>
