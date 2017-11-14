@@ -9,17 +9,15 @@ import { openSidebar } from "../actions";
 
 const styles = {
   Masthead: {
-    borderBottom: "1px solid black",
-    margin: "0px auto 24px auto",
-    paddingTop: "11px",
+    fontSize: 0, // resets font size to remove unwanted whitespace
+    margin: "6px auto 19px auto",
     textAlign: "center",
-    maxWidth: "1060px",
   },
   theSpectatorLogo: {
     color: "#000",
     fontFamily: "Old English Text MT",
-    fontSize: "42px",
-    marginBottom: "22px",
+    fontSize: "75px",
+    marginBottom: "10px",
     "&:hover": {
       color: "#000",
       textDecoration: "none",
@@ -30,8 +28,7 @@ const styles = {
     },
     "@media (min-width: 768px)": {
       fontSize: "75px"
-    },
-    textAlign: "center",
+    }
   },
   userTools: {
     float: "right",
@@ -41,28 +38,20 @@ const styles = {
     },
   },
   sectionLinksNav: {
+    borderTop: "1px solid black",
     fontFamily: "Circular Std",
     listStyleType: "none",
-    marginBottom: "16px",
-    padding: 0,
+    padding: "6px",
   },
   sectionListItem: {
     display: "inline",
-    margin: "0px 12px",
+    margin: "0px 16px",
   },
   sectionLink: {
     color: "#000",
-    fontSize: "14px",
-    fontWeight: 500,
+    fontSize: "12px",
+    fontWeight: 300,
     textDecoration: "none",
-    "&:hover": {
-      color: "#000",
-      textDecoration: "none",
-    },
-    "&:focus": {
-      color: "#000",
-      textDecoration: "none",
-    },
   },
   hamburger: {
     display: "inline",
@@ -183,10 +172,4 @@ const mapStateToProps = state => ({
   currentUser: getCurrentUser(state),
 });
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ openSidebar }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(Masthead),
-);
+export default connect(mapStateToProps)(injectSheet(styles)(Masthead));
