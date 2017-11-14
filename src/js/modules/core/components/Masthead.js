@@ -1,9 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
 import { getTopLevelSections } from "../../sections/selectors";
+import { openSubscriptionModal } from "../../accounts/actions";
 
 const styles = {
   Masthead: {
@@ -36,17 +38,26 @@ const styles = {
   },
   sectionListItem: {
     display: "inline",
-    margin: "0px 16px",
+    margin: "0px 13px",
   },
   sectionLink: {
     color: "#000",
-    fontSize: "12px",
+    fontSize: "13px",
     fontWeight: 300,
     textDecoration: "none",
+    "&:hover": {
+      color: "#000",
+    },
+    "&:active": {
+      color: "#000",
+    },
+    "&:focus": {
+      color: "#000",
+    },
   },
 };
 
-const Masthead = ({ classes, sections }) => {
+const Masthead = ({ classes, sections, openSubscriptionModal }) => {
   const unwantedSectionNames = ["Video", "Photo", "Art"];
   return (
     <div className={classes.Masthead}>
@@ -67,7 +78,8 @@ const Masthead = ({ classes, sections }) => {
         })}
         <li key={-1} className={classes.sectionListItem}>
           <Link
-            to={"/maybe-we-should-pop-up-the-subscribe-modal"}
+            onClick={openSubscriptionModal}
+            to={"/"}
             className={classes.sectionLink}
           >
             Newsletter
@@ -87,4 +99,7 @@ const mapStateToProps = state => ({
   sections: getTopLevelSections(state),
 });
 
-export default connect(mapStateToProps)(injectSheet(styles)(Masthead));
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ openSubscriptionModal }, dispatch);
+};
+export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(Masthead));
