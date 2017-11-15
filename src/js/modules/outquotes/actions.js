@@ -9,7 +9,6 @@ export const fetchOutquotes = () => {
     axios
       .get(`${STUY_SPEC_API_URL}/outquotes`, STUY_SPEC_API_HEADERS)
       .then(response => {
-        console.log(response);
         validateOutquotes(response.data);
         dispatch({
           type: t.FETCH_OUTQUOTES_FULFILLED,
@@ -26,7 +25,7 @@ export const fetchOutquotes = () => {
 };
 
 const validateOutquotes = outquoteArray => {
-  const integerProperties = ["id", "articleID"];
+  const integerProperties = ["id", "articleId"];
   const stringProperties = ["text"];
   if (!Array.isArray(outquoteArray)) {
     throw "EXCEPTION: outquotes response is not an array.";
