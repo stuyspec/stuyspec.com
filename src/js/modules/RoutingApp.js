@@ -82,7 +82,7 @@ class RoutingApp extends Component {
                   />
                 );
               })}
-              {Object.values(roles).map(role => {
+              {/*Object.values(roles).map(role => {
                 return (
                   <Route
                     exact
@@ -91,7 +91,7 @@ class RoutingApp extends Component {
                     render={props => <RolePage role={role} />}
                   />
                 );
-              })}
+              })*/}
               {Object.values(descriptions).map(description => {
                 return (
                   <Route
@@ -181,7 +181,6 @@ class RoutingApp extends Component {
               <Route path="*" key={"notFound"} component={NotFoundPage} />
             </Switch>
           ) : (
-            <p>loading...</p>
           )}
         </PageLayout>
       </ConnectedRouter>
