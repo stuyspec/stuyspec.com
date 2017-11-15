@@ -16,11 +16,7 @@ import {
   RecommendedPage,
   LatestPage,
 } from "./articles/components";
-import {
-  HomePage,
-  PageLayout,
-  NotFoundPage
-} from "./core/components";
+import { HomePage, PageLayout, NotFoundPage } from "./core/components";
 import { DescriptionPage } from "./descriptions/components";
 import { SectionPage } from "./sections/components";
 import {
@@ -181,7 +177,7 @@ class RoutingApp extends Component {
               <Route path="*" key={"notFound"} component={NotFoundPage} />
             </Switch>
           ) : (
-            <p></p>
+            <p />
           )}
         </PageLayout>
       </ConnectedRouter>
@@ -200,7 +196,7 @@ const mapStateToProps = state => ({
     state.media.isFetched &&
     state.sections.isFetched &&
     state.users.isFetched &&
-    state.outquotes.isFetched
+    state.outquotes.isFetched,
 });
 
 const mapDispatchToProps = dispatch => {

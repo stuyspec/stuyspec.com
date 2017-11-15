@@ -42,8 +42,10 @@ const NotFoundPage = ({ classes }) => {
     <Grid className={classes.NotFoundPage}>
       <h1>Page Not Found.</h1>
       <p>Our apologies, you have reached a page that Does Not Exist.</p>
-      <p>Please try a modified query, or visit our <Link to="/">home page</Link>.</p>
-      <img src="/img/404.jpg" className={classes.img}/>
+      <p>
+        Please try a modified query, or visit our <Link to="/">home page</Link>.
+      </p>
+      <img src="/img/404.jpg" className={classes.img} />
     </Grid>
   );
 };

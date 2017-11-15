@@ -2,10 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 
 import ArticleList from "./ArticleList";
-import { TallAd } from "../../advertisements/components/index"
+import { TallAd } from "../../advertisements/components/index";
 import { getLatestArticles } from "../selectors";
 
 const styles = {
@@ -31,20 +31,16 @@ const LatestPage = ({ classes, articles }) => {
   return (
     <Grid fluid className={classes.LatestPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-        <title>
-          The Latest
-        </title>
-        <meta>
-
-        </meta>
+        <title>The Latest</title>
+        <meta />
       </Helmet>
       <Row>
         <Col xs={12} sm={12} md={9} lg={9}>
-          <ArticleList articles={articles} title="Latest" label="Articles"/>
+          <ArticleList articles={articles} title="Latest" label="Articles" />
         </Col>
       </Row>
       <Col xsHidden smHidden md={3} lg={3} className={classes.tallAdContainer}>
-        <TallAd/>
+        <TallAd />
       </Col>
     </Grid>
   );

@@ -70,7 +70,10 @@ const styles = {
 };
 
 const RecommendedArticles = ({ classes, articles, sections, indexFrom }) => {
-  const recommendedArticles = Object.values(articles).slice(indexFrom, indexFrom + 5);
+  const recommendedArticles = Object.values(articles).slice(
+    indexFrom,
+    indexFrom + 5,
+  );
   // NESTED IN <Col lg={3} md={3}>
   return (
     <div className={classes.RecommendedArticles}>

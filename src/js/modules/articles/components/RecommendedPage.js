@@ -2,10 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 
 import ArticleList from "./ArticleList";
-import { TallAd } from "../../advertisements/components/index"
+import { TallAd } from "../../advertisements/components/index";
 import { getArticlesWithContributors } from "../selectors";
 
 const styles = {
@@ -32,26 +32,32 @@ const styles = {
     articleList: {
       paddingRight: "0 !important",
     },
-  }
+  },
 };
 
 const RecommendedPage = ({ classes, articles }) => {
   return (
     <Grid fluid className={classes.RecommendedPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-        <title>
-          Most Recommended
-        </title>
-        <meta>
-
-        </meta>
+        <title>Most Recommended</title>
+        <meta />
       </Helmet>
       <Row>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.articleList}>
-          <ArticleList articles={articles} title="Recommended" label="Articles"/>
+          <ArticleList
+            articles={articles}
+            title="Recommended"
+            label="Articles"
+          />
         </Col>
-        <Col xsHidden smHidden md={3} lg={3} className={classes.tallAdContainer}>
-          <TallAd/>
+        <Col
+          xsHidden
+          smHidden
+          md={3}
+          lg={3}
+          className={classes.tallAdContainer}
+        >
+          <TallAd />
         </Col>
       </Row>
     </Grid>

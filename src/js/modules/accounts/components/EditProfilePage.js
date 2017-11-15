@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 
 import { EditUserForm } from "./forms";
 import { updateUser } from "../actions";
@@ -34,12 +34,8 @@ const EditProfilePage = ({ classes, session, users, updateUser }) => {
   return (
     <Grid fluid className={classes.EditProfilePage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-        <title>
-          Edit Profile
-        </title>
-        <meta>
-
-        </meta>
+        <title>Edit Profile</title>
+        <meta />
       </Helmet>
       <Row>
         <Col

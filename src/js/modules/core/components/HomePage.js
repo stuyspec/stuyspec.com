@@ -74,7 +74,7 @@ const HomePage = ({ classes, sections, articles }) => {
             lg={9}
             className={classes.primaryComponents}
           >
-            <FeaturedArticle article={featuredArticle}/>
+            <FeaturedArticle article={featuredArticle} />
             <SectionFeature section={newsSection} />
           </Col>
           <Col

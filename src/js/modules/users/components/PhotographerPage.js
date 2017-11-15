@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 
 import { getPhotographerFromSlug } from "../selectors";
 import { getPhotographerArticles } from "../../articles/selectors";
@@ -57,9 +57,7 @@ const PhotographerPage = ({ classes, photographer, articles }) => {
         <title>
           {photographer.firstName} {photographer.lastName}
         </title>
-        <meta>
-
-        </meta>
+        <meta />
       </Helmet>
       <Row>
         <Col xs={12} sm={12} md={9} lg={9}>

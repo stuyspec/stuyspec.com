@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 
 import ArticleHeader from "./ArticleHeader";
 import ArticleBody from "./ArticleBody";
@@ -66,12 +66,8 @@ const ArticlePage = ({ classes, article, section, featuredMedia }) => {
   return (
     <Grid fluid className={classes.ArticlePage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-        <title>
-          {article.title}
-        </title>
-        <meta>
-
-        </meta>
+        <title>{article.title}</title>
+        <meta />
       </Helmet>
       <ArticleHeader article={article} section={section} />
       <ArticleBody content={article.content} featuredMedia={featuredMedia} />

@@ -102,4 +102,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ openSubscriptionModal }, dispatch);
 };
-export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(Masthead));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  injectSheet(styles)(Masthead),
+);

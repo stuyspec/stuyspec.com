@@ -134,7 +134,10 @@ const SectionFeature = ({
       Object.filter(articles, article => article.sectionId === section.id),
     );
   }
-  const primaryArticle = sectionArticles[0] === Object.values(articles)[0] ? sectionArticles[1] : sectionArticles[0];
+  const primaryArticle =
+    sectionArticles[0] === Object.values(articles)[0]
+      ? sectionArticles[1]
+      : sectionArticles[0];
   let featuredMedia = null;
   const secondaryArticle =
     sectionArticles.slice(1, 10).find(article => {

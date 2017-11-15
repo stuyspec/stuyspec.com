@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 
 import { getContributorFromSlug } from "../selectors";
 import { getContributorArticles } from "../../articles/selectors";
@@ -58,9 +58,7 @@ const ContributorPage = ({ classes, contributor, articles }) => {
         <title>
           {contributor.firstName} {contributor.lastName}
         </title>
-        <meta>
-
-        </meta>
+        <meta />
       </Helmet>
       <Row>
         <Col xs={12} sm={12} md={9} lg={9}>

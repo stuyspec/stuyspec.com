@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 
 import { getIllustratorFromSlug } from "../selectors";
 import { getIllustratorArticles } from "../../articles/selectors";
@@ -57,9 +57,7 @@ const IllustratorPage = ({ classes, illustrator, articles }) => {
         <title>
           {illustrator.firstName} {illustrator.lastName}
         </title>
-        <meta>
-
-        </meta>
+        <meta />
       </Helmet>
       <Row>
         <Col xs={12} sm={12} md={9} lg={9}>

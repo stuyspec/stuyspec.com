@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 
 import { isObjectEmpty } from "../../../utils";
 import { ArticleList } from "../../articles/components";
@@ -213,21 +213,11 @@ const SectionPage = ({
     return (
       <Grid fluid className={classes.SubsectionPage}>
         <Helmet>
-        <title>
-          {section.name} | The Stuyvesant Spectator
-        </title>
-        <meta>
-
-        </meta>
-      </Helmet>
+          <title>{section.name} | The Stuyvesant Spectator</title>
+          <meta />
+        </Helmet>
         <Row>
-          <Col
-            xs={12}
-            sm={9}
-            md={9}
-            lg={9}
-            className={classes.latestArticles}
-          >
+          <Col xs={12} sm={9} md={9} lg={9} className={classes.latestArticles}>
             <ArticleList
               articles={sectionTreeArticles}
               title={section.name}
@@ -240,7 +230,7 @@ const SectionPage = ({
             md={3}
             lg={3}
             className={classes.TallAdContainer}
-            style={{marginTop: "57px"}}
+            style={{ marginTop: "57px" }}
           >
             <TallAd />
           </Col>
@@ -273,12 +263,8 @@ const SectionPage = ({
   return (
     <Grid fluid className={classes.SectionPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-        <title>
-          {section.name}
-        </title>
-        <meta>
-
-        </meta>
+        <title>{section.name}</title>
+        <meta />
       </Helmet>
       {isObjectEmpty(directSubsections) ? (
         <div className={classes.emptySpace} />
@@ -356,7 +342,7 @@ const SectionPage = ({
 
       <Row>
         <Col xs={12} sm={9} md={9} lg={9} className={classes.latestArticles}>
-          <ArticleList articles={sectionTreeArticles} label="Latest"/>
+          <ArticleList articles={sectionTreeArticles} label="Latest" />
         </Col>
         <Col xsHidden sm={3} md={3} lg={3}>
           <div className={classes.sectionColumnContainer}>

@@ -109,9 +109,10 @@ const styles = {
 };
 
 const LeftColumn = ({ classes, articles, media, sections }) => {
-  const [primaryArticle, secondaryArticle] = Object.values(
-    articles,
-  ).slice(6, 8);
+  const [primaryArticle, secondaryArticle] = Object.values(articles).slice(
+    6,
+    8,
+  );
 
   const outquoteArticle = Object.values(articles).slice(9)[0];
   /*
