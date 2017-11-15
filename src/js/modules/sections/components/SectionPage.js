@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
+import {Helmet} from "react-helmet";
 
 import { isObjectEmpty } from "../../../utils";
 import { ArticleList } from "../../articles/components";
@@ -211,6 +212,14 @@ const SectionPage = ({
   if (section.parentId) {
     return (
       <Grid fluid className={classes.SubsectionPage}>
+        <Helmet>
+        <title>
+          {section.name} | The Stuyvesant Spectator
+        </title>
+        <meta>
+
+        </meta>
+      </Helmet>
         <Row>
           <Col
             xs={12}
@@ -261,9 +270,16 @@ const SectionPage = ({
       mediaObject => mediaObject.articleId === article.id,
     );
   });
-
   return (
     <Grid fluid className={classes.SectionPage}>
+      <Helmet titleTemplate="%s | The Stuyvesant Spectator">
+        <title>
+          {section.name}
+        </title>
+        <meta>
+
+        </meta>
+      </Helmet>
       {isObjectEmpty(directSubsections) ? (
         <div className={classes.emptySpace} />
       ) : (
