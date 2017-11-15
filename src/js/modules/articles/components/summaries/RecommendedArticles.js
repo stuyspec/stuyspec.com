@@ -69,17 +69,16 @@ const styles = {
   },
 };
 
-const RecommendedArticles = ({ classes, articles, sections }) => {
+const RecommendedArticles = ({ classes, articles, sections, indexFrom }) => {
+  const recommendedArticles = Object.values(articles).slice(indexFrom, indexFrom + 5);
   // NESTED IN <Col lg={3} md={3}>
   return (
     <div className={classes.RecommendedArticles}>
       <Link to="/recommended" className={classes.label}>
         Recommended
       </Link>
-      {articles.map((article, index) => {
-        const section = Object.values(sections).find(section => {
-          return section.id === article.sectionId;
-        });
+      {recommendedArticles.map((article, index) => {
+        const section = sections[article.id];
         return (
           <div className={classes.articleItem} key={article.id}>
             <p className={classes.numberLabel}>{index + 1}.</p>
@@ -100,6 +99,7 @@ const RecommendedArticles = ({ classes, articles, sections }) => {
 };
 
 const mapStateToProps = state => ({
+  articles: state.articles.articles,
   sections: state.sections.sections,
 });
 

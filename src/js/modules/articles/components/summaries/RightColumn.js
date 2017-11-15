@@ -98,9 +98,9 @@ const styles = {
 
 const RightColumn = ({ classes, articles, media, sections }) => {
   const [primaryArticle, secondaryArticle] = Object.values(articles).slice(
-    3,
-    5,
-  ); // [0, 3) taken by Left Column... we need a better system.
+    10,
+    11    
+  );
   /*
   [primaryMedia, secondaryMedia] = [
     primaryArticle,
@@ -116,46 +116,51 @@ const RightColumn = ({ classes, articles, media, sections }) => {
     <Col xs={12} sm={3} md={3} lg={3} className={classes.RightColumn}>
       <div dangerouslySetInnerHTML={{__html: '<iframe style="width:100%; height:309px;" src="//e.issuu.com/embed.html#9521608/55321841" frameborder="0" allowfullscreen></iframe>' }}>
       </div>
-      <div className={classes.primaryArticle}>
-        <Link
-          to={sections[primaryArticle.sectionId].permalink}
-          className={classes.sectionLabel}
-        >
-          {sections[primaryArticle.sectionId].name}
-        </Link>
-        <Link
-          to={`${sections[primaryArticle.sectionId]
-            .permalink}/${primaryArticle.slug}`}
-          className={classes.articleTitle}
-        >
-          {primaryArticle.title}
-        </Link>
-        {/*primaryArticle.outquotes.length > 0 && (
-          <Outquote quote={primaryArticle.outquotes[0]} />
-        )*/}
-        <p className={classes.summary}>{primaryArticle.summary}</p>
-        <Byline contributors={primaryArticle.contributors} />
-        <Dateline article={primaryArticle} />
-      </div>
+      {primaryArticle && (
+        <div className={classes.primaryArticle}>
+          <Link
+            to={sections[primaryArticle.sectionId].permalink}
+            className={classes.sectionLabel}
+          >
+            {sections[primaryArticle.sectionId].name}
+          </Link>
+          <Link
+            to={`${sections[primaryArticle.sectionId]
+              .permalink}/${primaryArticle.slug}`}
+            className={classes.articleTitle}
+          >
+            {primaryArticle.title}
+          </Link>
+          {/*primaryArticle.outquotes.length > 0 && (
+            <Outquote quote={primaryArticle.outquotes[0]} />
+          )*/}
+          <p className={classes.summary}>{primaryArticle.summary}</p>
+          <Byline contributors={primaryArticle.contributors} />
+          <Dateline article={primaryArticle} />
+        </div>
+      )}
 
-      <div className={classes.secondaryArticle}>
-        <Link
-          to={sections[secondaryArticle.sectionId].permalink}
-          className={classes.sectionLabel}
-        >
-          {sections[secondaryArticle.sectionId].name}
-        </Link>
-        <Link
-          to={`${sections[secondaryArticle.sectionId]
-            .permalink}/${secondaryArticle.slug}`}
-          className={classes.articleTitle}
-        >
-          {secondaryArticle.title}
-        </Link>
-        <p className={classes.summary}>{secondaryArticle.summary}</p>
-        <Byline contributors={secondaryArticle.contributors} />
-        <Dateline article={secondaryArticle} />
-      </div>
+      {secondaryArticle && (
+        <div className={classes.secondaryArticle}>
+          <Link
+            to={sections[secondaryArticle.sectionId].permalink}
+            className={classes.sectionLabel}
+          >
+            {sections[secondaryArticle.sectionId].name}
+          </Link>
+          <Link
+            to={`${sections[secondaryArticle.sectionId]
+              .permalink}/${secondaryArticle.slug}`}
+            className={classes.articleTitle}
+          >
+            {secondaryArticle.title}
+          </Link>
+          <p className={classes.summary}>{secondaryArticle.summary}</p>
+          <Byline contributors={secondaryArticle.contributors} />
+          <Dateline article={secondaryArticle} />
+        </div>
+      )}
+      
       <Link to="/" className={classes.label}>
         SING! 2017 Senior Playlist
       </Link>

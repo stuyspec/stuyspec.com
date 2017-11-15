@@ -181,6 +181,7 @@ class RoutingApp extends Component {
               <Route path="*" key={"notFound"} component={NotFoundPage} />
             </Switch>
           ) : (
+            <p></p>
           )}
         </PageLayout>
       </ConnectedRouter>
