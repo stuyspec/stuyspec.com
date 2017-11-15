@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
+import {Helmet} from "react-helmet";
 
 import ArticleList from "./ArticleList";
 import { TallAd } from "../../advertisements/components/index"
@@ -29,6 +30,14 @@ const styles = {
 const RecommendedPage = ({ classes, articles }) => {
   return (
     <Grid fluid className={classes.RecommendedPage}>
+      <Helmet titleTemplate="%s | The Stuyvesant Spectator">
+        <title>
+          Most Recommended
+        </title>
+        <meta>
+
+        </meta>
+      </Helmet>
       <Row>
         <Col xs={12} sm={12} md={9} lg={9}>
           <ArticleList articles={articles} title="Recommended" label="Articles"/>
