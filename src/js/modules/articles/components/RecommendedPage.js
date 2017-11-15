@@ -10,7 +10,7 @@ import { getArticlesWithContributors } from "../selectors";
 
 const styles = {
   RecommendedPage: {
-    marginTop: "20px",
+    marginTop: "80px",
   },
   pageTitle: {
     color: "#000",
@@ -20,11 +20,19 @@ const styles = {
     lineHeight: 1,
     marginBottom: "11px",
   },
-  "@media (min-width: 992px)": {
-    RecommendedPage: {
-      marginTop: "80px",
-    },
+  articleList: {
+    paddingRight: "14px !important",
   },
+  tallAdContainer: {
+    paddingLeft: "14px !important",
+    marginTop: "57px",
+    borderLeft: "1px solid #ddd",
+  },
+  "@media (max-width: 991px)": {
+    articleList: {
+      paddingRight: "0 !important",
+    },
+  }
 };
 
 const RecommendedPage = ({ classes, articles }) => {
@@ -39,7 +47,7 @@ const RecommendedPage = ({ classes, articles }) => {
         </meta>
       </Helmet>
       <Row>
-        <Col xs={12} sm={12} md={9} lg={9}>
+        <Col xs={12} sm={12} md={9} lg={9} className={classes.articleList}>
           <ArticleList articles={articles} title="Recommended" label="Articles"/>
         </Col>
         <Col xsHidden smHidden md={3} lg={3} className={classes.tallAdContainer}>

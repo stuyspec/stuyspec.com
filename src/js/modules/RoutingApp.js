@@ -16,7 +16,11 @@ import {
   RecommendedPage,
   LatestPage,
 } from "./articles/components";
-import { HomePage, PageLayout } from "./core/components";
+import {
+  HomePage,
+  PageLayout,
+  NotFoundPage
+} from "./core/components";
 import { DescriptionPage } from "./descriptions/components";
 import { SectionPage } from "./sections/components";
 import {
@@ -78,7 +82,7 @@ class RoutingApp extends Component {
                   />
                 );
               })}
-              {Object.values(roles).map(role => {
+              {/*Object.values(roles).map(role => {
                 return (
                   <Route
                     exact
@@ -87,7 +91,7 @@ class RoutingApp extends Component {
                     render={props => <RolePage role={role} />}
                   />
                 );
-              })}
+              })*/}
               {Object.values(descriptions).map(description => {
                 return (
                   <Route
@@ -174,9 +178,9 @@ class RoutingApp extends Component {
                 key={"latest"}
                 component={LatestPage}
               />
+              <Route path="*" key={"notFound"} component={NotFoundPage} />
             </Switch>
           ) : (
-            <p>loading...</p>
           )}
         </PageLayout>
       </ConnectedRouter>

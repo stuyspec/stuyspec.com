@@ -114,6 +114,8 @@ const RightColumn = ({ classes, articles, media, sections }) => {
   */
   return (
     <Col xs={12} sm={3} md={3} lg={3} className={classes.RightColumn}>
+      <div dangerouslySetInnerHTML={{__html: '<iframe style="width:100%; height:309px;" src="//e.issuu.com/embed.html#9521608/55321841" frameborder="0" allowfullscreen></iframe>' }}>
+      </div>
       <div className={classes.primaryArticle}>
         <Link
           to={sections[primaryArticle.sectionId].permalink}
