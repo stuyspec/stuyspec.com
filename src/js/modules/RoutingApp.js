@@ -49,9 +49,9 @@ class RoutingApp extends Component {
       <ConnectedRouter
         onUpdate={() => window.scrollTo(0, 0)}
         history={appHistory}
-      >
-        <PageLayout>
-          {isAllDataFetched ? (
+      >        
+        {isAllDataFetched && (
+          <PageLayout>
             <Switch>
               <Route exact path="/" component={HomePage} />
               {Object.values(sections).map(section => {
@@ -176,10 +176,8 @@ class RoutingApp extends Component {
               />
               <Route path="*" key={"notFound"} component={NotFoundPage} />
             </Switch>
-          ) : (
-            <p />
-          )}
-        </PageLayout>
+          </PageLayout>
+        )}        
       </ConnectedRouter>
     );
   }

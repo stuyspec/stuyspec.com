@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
@@ -13,6 +14,7 @@ import {
   getArticleFromRequestedSlug,
   getArticleFeaturedMedia,
 } from "../selectors";
+import { openSubscriptionModal } from "../../accounts/actions";
 
 const styles = {
   ArticlePage: {
@@ -61,8 +63,7 @@ const styles = {
   },
 };
 
-//TODO: pop it up
-const ArticlePage = ({ classes, article, section, featuredMedia }) => {
+const ArticlePage = ({ classes, article, section, featuredMedia, openSubscriptionModal }) => {
   return (
     <Grid fluid className={classes.ArticlePage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -74,12 +75,12 @@ const ArticlePage = ({ classes, article, section, featuredMedia }) => {
       <Row className={classes.descriptionRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.description}>
           The Pulse of the Student Body:&nbsp;
-          <Link
-            to={"/maybe-we-should-pop-up-the-subscribe-modal"}
+          <span
             className={classes.subscribe}
+            onClick={openSubscriptionModal}
           >
             Subscribe
-          </Link>
+          </span>
           &nbsp;to <em>The Stuyvesant Spectator</em>’s biweekly newsletter.
         </Col>
         <Col xsHidden smHidden md={3} lg={3} />
@@ -96,4 +97,8 @@ const mapStateToProps = (state, ownProps) => ({
   featuredMedia: getArticleFeaturedMedia(state, ownProps),
 });
 
-export default connect(mapStateToProps)(injectSheet(styles)(ArticlePage));
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ openSubscriptionModal }, dispatch);
+};
+
+export default connect(mapStateToProps, bindActionCreators)(injectSheet(styles)(ArticlePage));
