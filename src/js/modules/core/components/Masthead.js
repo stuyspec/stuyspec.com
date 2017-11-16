@@ -39,7 +39,10 @@ const styles = {
   userTools: {
     float: "right",
     margin: "0",
-    padding: "0"
+    padding: "0",
+    "&:hover a": {
+      textDecoration: "none",
+    },
   },
   sectionLinksNav: {
     borderTop: "1px solid black",
@@ -158,6 +161,12 @@ const SignInStyles = {
     width: "66px",
     display: "inline",
     position: "relative",
+    "& span": {
+      transitionDuration: ".3s",
+    },
+    "&:hover span": {
+      color: "#888",
+    }
     // top: "19px",
   }
 };
