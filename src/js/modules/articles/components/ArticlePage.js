@@ -16,7 +16,7 @@ import {
 
 const styles = {
   ArticlePage: {
-    marginTop: "60px",
+    marginTop: "80px",
   },
   descriptionRow: {
     marginBottom: "24px",

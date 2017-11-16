@@ -121,8 +121,9 @@ const styles = {
     },
   },
   latestArticles: {
-    padding: "0 13px 0 0",
     borderRight: "solid 1px #ddd",
+    marginTop: "8px",
+    padding: "0 13px 0 0",
     "& > div:last-child": {
       // articleBlocks
       border: "none",
@@ -254,7 +255,7 @@ const SectionPage = ({
   }
 
   const secondaryArticle = Object.values(sectionTreeArticles).find(article => {
-    return Object.values(media).find(
+    return article !== featuredArticle && Object.values(media).find(
       mediaObject => mediaObject.articleId === article.id,
     );
   });
@@ -320,9 +321,11 @@ const SectionPage = ({
 
       <Row className={classes.secondaryRow}>
         <Col xsHidden sm={12} md={9} lg={9} className={classes.secondaryCol}>
+        {featuredSubsection && (
           <div className={classes.SectionFeatureContainer}>
             <SectionFeature section={featuredSubsection} recursive={true} />
           </div>
+          )} 
           <LeftTitleArticle article={secondaryArticle} />
         </Col>
         <Col

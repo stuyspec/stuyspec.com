@@ -71,7 +71,7 @@ export const getPhotographerFromSlug = createSelector(
     ) {
       return user;
     }
-    //appHistory.push("/the-uncompleted-404-page?ref=photographers");
+    appHistory.push("/404-not-found?ref=photographers");
   },
 );
 

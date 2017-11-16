@@ -87,6 +87,9 @@ const styles = {
 
 const ArticleRow = ({ classes, article, sections, users, media }) => {
   const section = sections[article.sectionId];
+  if (!section) {
+    console.log(article.sectionId)
+  }
   const featuredMedia = Object.values(media).find(media => {
     return media.isFeatured && media.articleId === article.id;
   });
