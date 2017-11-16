@@ -29,13 +29,12 @@ const styles = {
     "@media (min-width: 768px)": {
       fontSize: "75px",
     },
+    zIndex: "-1",
   },
   userTools: {
     float: "right",
-    marginTop: "9px",
-    "& button": {
-      marginLeft: "24px",
-    },
+    margin: "0",
+    padding: "0"
   },
   sectionLinksNav: {
     borderTop: "1px solid black",
@@ -52,6 +51,7 @@ const styles = {
     fontSize: "12px",
     fontWeight: 300,
     textDecoration: "none",
+    float: "right"
   },
   hamburger: {
     display: "inline",
@@ -59,6 +59,7 @@ const styles = {
     height: "23px",
     opacity: "0.48",
     marginRight: "4px",
+    float: "left"
   },
   buttonName: {
     fontFamily: "Circular Std",
@@ -89,18 +90,27 @@ const styles = {
     textAlign: "center",
     color: "#000000",
   },
+  positioning: {
+    float: "right",
+    overflow: "visible",
+    display: "inline",
+    position: "relative",
+    left: "-20vh",
+    top: "0.9vh",
+  }
 };
 
 const SectionStyles = {
   Sec: {
     position: "relative",
-    left: "-160px",
-    top: "-50px",
+    left: "35vh",
+    top: "3vh",
     width: "103px",
     height: "39px",
     borderRadius: "3px",
     border: "solid 1.5px #dddddd",
     backgroundColor: "white",
+    float: "left",
   },
 };
 
@@ -110,10 +120,8 @@ const SubscribeStyles = {
     height: "39px",
     borderRadius: "4px",
     backgroundColor: "#4e6a9e",
-    position: "relative",
-    left: "191px",
-    top: "-50px",
     border: "solid 1.5px #4e6a9e",
+    display: "inline",
   }
 };
 
@@ -122,12 +130,13 @@ const SignInStyles = {
     borderRadius: "4px",
     backgroundColor: "#ffffff",
     border: "solid 1.5px #dddddd",
-    position: "relative",
-    left: "3px",
-    top: "2px",
-    zIndex: "-1",
     height: "39px",
     width: "66px",
+    zIndex: "-1",
+    display: "inline",
+    position: "relative",
+    top: "19px",
+    left: "-5px"
   }
 };
 
@@ -153,17 +162,23 @@ const Masthead = ({ classes, openSidebar, }) => {
       <Link className={classes.theSpectatorLogo} to="/">
         The Spectator
       </Link>
-      <StyledSubscribeButton type="Sub">
-        <span className={classes.subscribeText}>Subscribe</span><br/>
-        <span className={classes.subscribeTo}>to our newsletter</span>
-      </StyledSubscribeButton>
-      <div className={classes.userTools}>
-        <Link to="/myaccount/profile">
-          <StyledSignInButton type="Sign">
-            <span className={classes.signInText}>Sign In</span>
-          </StyledSignInButton>
-        </Link>
-      </div>
+      <table className={classes.positioning}>
+        <th>
+          <StyledSubscribeButton type="Sub">
+            <span className={classes.subscribeText}>Subscribe</span><br/>
+            <span className={classes.subscribeTo}>to our newsletter</span>
+          </StyledSubscribeButton>
+        </th>
+        <th>
+          <div className={classes.userTools}>
+            <Link to="/myaccount/profile">
+              <StyledSignInButton type="Sign">
+                <span className={classes.signInText}>Sign In</span>
+              </StyledSignInButton>
+            </Link>
+          </div>
+        </th>
+      </table>
     </div>
   );
 };
