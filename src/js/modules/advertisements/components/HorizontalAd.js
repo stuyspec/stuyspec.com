@@ -1,6 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
+
+import { pathToAds } from "../constants";
 
 const styles = {
   HorizontalAd: {
@@ -11,14 +14,21 @@ const styles = {
   },
 };
 
-const HorizontalAd = ({ classes }) => {
+const HorizontalAd = ({ classes, advertisements, ad }) => {
+  if (!ad) {
+    ad = advertisements[1];
+  }
   return (
     <div className={classes.HorizontalAd}>
-      <Link to="http://apple.com">
-        <img className={classes.img} src="https://imgur.com/OQ9X2wp.png" />
+      <Link to={ad.url} target="_blank">
+        <img className={classes.img} src={pathToAds + ad.filename} />
       </Link>
     </div>
   );
 };
 
-export default injectSheet(styles)(HorizontalAd);
+const mapStateToProps = state => ({
+  advertisements: state.advertisements,
+});
+
+export default connect(mapStateToProps)(injectSheet(styles)(HorizontalAd));
