@@ -5,19 +5,42 @@ import { withRouter } from "react-router-dom";
 import injectSheet from "react-jss";
 import Sidebar from "react-sidebar";
 import Favicon from "react-favicon";
+import { Grid } from "react-bootstrap/lib";
 import { Helmet } from "react-helmet";
 
 import PageHeader from "./PageHeader";
 import PageFooter from "./PageFooter";
 import SidebarContent from "./SidebarContent";
 import SubscriptionModal from "../../accounts/components/SubscriptionModal";
-
+import { HorizontalAd } from "../../advertisements/components";
 import { openSidebar, closeSidebar } from "../actions";
 
 const styles = {
+  horizontalAdContainer: {
+    margin: "20px 0",
+    "& > div > a": {
+      display: "block",
+      margin: "0 auto",
+      width: "75%",
+    },
+  },
   "@media (max-width: 991px)": {
     PageContainer: {
       marginTop: "60px",
+    },
+    footerAd: {
+      padding: 0,
+    },
+    horizontalAdContainer: {
+      padding: "0 10%",
+      "& > div > a": {
+        width: "100%",
+      },
+    },
+  },
+  "@media (max-width: 767px)": {
+    horizontalAdContainer: {
+      padding: "0 2%",
     },
   },
 };
@@ -68,7 +91,14 @@ class PageLayout extends Component {
           />
         </Helmet>
         <Favicon url="https://i.imgur.com/CxNoalR.png" />
-        <div className={classes.PageContainer}>{children}</div>
+        <div className={classes.PageContainer}>
+          {children}
+          <Grid fluid className={classes.footerAd}>
+            <div className={classes.horizontalAdContainer}>
+              <HorizontalAd/>
+            </div>
+          </Grid>
+        </div>
         <SubscriptionModal />
         <PageFooter />
       </Sidebar>
