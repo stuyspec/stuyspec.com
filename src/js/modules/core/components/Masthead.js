@@ -128,6 +128,8 @@ const SectionStyles = {
     backgroundColor: "white",
     float: "left",
     "& span": {
+      position: "relative",
+      top: "2px",
       transitionDuration: ".3s",
     },
     "&:hover span": {

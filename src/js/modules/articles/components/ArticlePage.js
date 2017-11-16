@@ -63,7 +63,8 @@ const styles = {
   },
 };
 
-const ArticlePage = ({ classes, article, section, featuredMedia, openSubscriptionModal }) => {
+const ArticlePage = ({ classes, article, section, featuredMedia,  }) => {
+  console.log('entered');
   return (
     <Grid fluid className={classes.ArticlePage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -77,7 +78,7 @@ const ArticlePage = ({ classes, article, section, featuredMedia, openSubscriptio
           The Pulse of the Student Body:&nbsp;
           <span
             className={classes.subscribe}
-            onClick={openSubscriptionModal}
+            // onClick={openSubscriptionModal}
           >
             Subscribe
           </span>
@@ -85,7 +86,6 @@ const ArticlePage = ({ classes, article, section, featuredMedia, openSubscriptio
         </Col>
         <Col xsHidden smHidden md={3} lg={3} />
       </Row>
-      <Row />
       <RecommendedRow section={section} />
       <CommentThread article={article} />
     </Grid>
@@ -98,7 +98,10 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ openSubscriptionModal }, dispatch);
+  console.log('mapped');
+  let hi = bindActionCreators({ openSubscriptionModal }, dispatch);
+  console.log('mapped2')
+  return hi;
 };
 
 export default connect(mapStateToProps, bindActionCreators)(injectSheet(styles)(ArticlePage));
