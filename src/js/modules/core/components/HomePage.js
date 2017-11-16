@@ -43,11 +43,11 @@ const styles = {
 //The filler column should have a borderRight. Wait until there is something there first
 
 const HomePage = ({ classes, sections, articles }) => {
-  const sectionFeature = Object.values(sections).find(
+  const newsSection = Object.values(sections).find(
     section => section.name === "News",
   );
   const recommendedArticles = Object.values(articles).slice(0, 5);
-
+  const featuredArticle = Object.values(articles)[0];
   const firstColumnSections = [
     "Opinions",
     "Features",
@@ -74,8 +74,8 @@ const HomePage = ({ classes, sections, articles }) => {
             lg={9}
             className={classes.primaryComponents}
           >
-            <FeaturedArticle />
-            <SectionFeature section={sectionFeature} sections={sections} />
+            <FeaturedArticle article={featuredArticle} />
+            <SectionFeature section={newsSection} />
           </Col>
           <Col
             xsHidden
@@ -84,7 +84,7 @@ const HomePage = ({ classes, sections, articles }) => {
             lg={3}
             className={classes.recommendedArticles}
           >
-            <RecommendedArticles articles={recommendedArticles} />
+            <RecommendedArticles indexFrom={1} />
           </Col>
         </Row>
         <Row>

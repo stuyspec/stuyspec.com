@@ -94,9 +94,11 @@ const LeftTitleArticle = ({ classes, article, media, sections }) => {
   );
   return (
     <Row className={classes.article}>
+      {/*
       <Link className={classes.section} to={section.permalink}>
         {section.name}
       </Link>
+    */}
       <Col
         xs={12}
         smPush={4}

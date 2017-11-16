@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
+import { Helmet } from "react-helmet";
 
 import { getPhotographerFromSlug } from "../selectors";
 import { getPhotographerArticles } from "../../articles/selectors";
@@ -52,6 +53,12 @@ const styles = {
 const PhotographerPage = ({ classes, photographer, articles }) => {
   return (
     <Grid className={classes.PhotographerPage}>
+      <Helmet titleTemplate="%s | The Stuyvesant Spectator">
+        <title>
+          {photographer.firstName} {photographer.lastName}
+        </title>
+        <meta />
+      </Helmet>
       <Row>
         <Col xs={12} sm={12} md={9} lg={9}>
           <p className={classes.name}>

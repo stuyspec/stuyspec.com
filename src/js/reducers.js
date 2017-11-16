@@ -10,6 +10,7 @@ import media from "./modules/media";
 import comments from "./modules/comments";
 import descriptions from "./modules/descriptions";
 import advertisements from "./modules/advertisements";
+import outquotes from "./modules/outquotes";
 
 export default combineReducers({
   [core.constants.NAME]: core.reducer,
@@ -21,6 +22,7 @@ export default combineReducers({
   [comments.constants.NAME]: comments.reducer,
   [descriptions.constants.NAME]: descriptions.reducer,
   [advertisements.constants.NAME]: advertisements.reducer,
+  [outquotes.constants.NAME]: outquotes.reducer,
   router: routerReducer,
   form: formReducer,
 });

@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
+import { Helmet } from "react-helmet";
 
 import { getContributorFromSlug } from "../selectors";
 import { getContributorArticles } from "../../articles/selectors";
@@ -53,6 +54,12 @@ const styles = {
 const ContributorPage = ({ classes, contributor, articles }) => {
   return (
     <Grid className={classes.ContributorPage}>
+      <Helmet titleTemplate="%s | The Stuyvesant Spectator">
+        <title>
+          {contributor.firstName} {contributor.lastName}
+        </title>
+        <meta />
+      </Helmet>
       <Row>
         <Col xs={12} sm={12} md={9} lg={9}>
           <p className={classes.name}>

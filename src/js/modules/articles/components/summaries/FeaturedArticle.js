@@ -11,7 +11,6 @@ import Col from "react-bootstrap/lib/Col";
 
 import Byline from "../Byline";
 import Dateline from "../Dateline";
-import { getArticlesWithContributors } from "../../selectors";
 
 const styles = {
   FeaturedArticle: {
@@ -79,8 +78,7 @@ const styles = {
   },
 };
 
-const FeaturedArticle = ({ classes, articles, media, sections }) => {
-  const article = Object.values(articles)[0];
+const FeaturedArticle = ({ classes, media, sections, article }) => {
   const section = Object.values(sections).find(section => {
     return section.id === article.sectionId;
   });
@@ -131,7 +129,6 @@ const FeaturedArticle = ({ classes, articles, media, sections }) => {
 };
 
 const mapStateToProps = state => ({
-  articles: getArticlesWithContributors(state),
   media: state.media.media,
   sections: state.sections.sections,
   users: state.users.users,

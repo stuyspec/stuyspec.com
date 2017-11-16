@@ -16,7 +16,7 @@ import {
   RecommendedPage,
   LatestPage,
 } from "./articles/components";
-import { HomePage, PageLayout } from "./core/components";
+import { HomePage, PageLayout, NotFoundPage } from "./core/components";
 import { DescriptionPage } from "./descriptions/components";
 import { SectionPage } from "./sections/components";
 import {
@@ -49,9 +49,9 @@ class RoutingApp extends Component {
       <ConnectedRouter
         onUpdate={() => window.scrollTo(0, 0)}
         history={appHistory}
-      >
-        <PageLayout>
-          {isAllDataFetched ? (
+      >        
+        {isAllDataFetched && (
+          <PageLayout>
             <Switch>
               <Route exact path="/" component={HomePage} />
               {Object.values(sections).map(section => {
@@ -78,7 +78,7 @@ class RoutingApp extends Component {
                   />
                 );
               })}
-              {Object.values(roles).map(role => {
+              {/*Object.values(roles).map(role => {
                 return (
                   <Route
                     exact
@@ -87,7 +87,7 @@ class RoutingApp extends Component {
                     render={props => <RolePage role={role} />}
                   />
                 );
-              })}
+              })*/}
               {Object.values(descriptions).map(description => {
                 return (
                   <Route
@@ -174,11 +174,10 @@ class RoutingApp extends Component {
                 key={"latest"}
                 component={LatestPage}
               />
+              <Route path="*" key={"notFound"} component={NotFoundPage} />
             </Switch>
-          ) : (
-            <p>loading...</p>
-          )}
-        </PageLayout>
+          </PageLayout>
+        )}        
       </ConnectedRouter>
     );
   }
@@ -194,7 +193,8 @@ const mapStateToProps = state => ({
     state.comments.isFetched &&
     state.media.isFetched &&
     state.sections.isFetched &&
-    state.users.isFetched,
+    state.users.isFetched &&
+    state.outquotes.isFetched,
 });
 
 const mapDispatchToProps = dispatch => {

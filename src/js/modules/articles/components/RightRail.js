@@ -6,11 +6,18 @@ import { Link } from "react-router-dom";
 import Byline from "./Byline";
 import { getArticlesWithContributors } from "../selectors";
 
+import { TallAd } from "../../advertisements/components";
+
 const NUMBER_OF_RAIL_ARTICLES = 5;
 
 const styles = {
   RightRail: {
     marginTop: "28px",
+  },
+  Recommended: {
+    "& div:last-child": {
+      borderBottom: 0.
+    },
   },
   label: {
     borderTop: "1px solid #000",
@@ -95,6 +102,9 @@ const styles = {
       display: "inline",
     },
   },
+  tallAdContainer: {
+    marginTop: "100px",
+  },
   "@media (max-width: 991px)": {
     RightRail: {
       paddingLeft: "1.5vw",
@@ -103,44 +113,51 @@ const styles = {
 };
 
 // inside a Col
-const RightRail = ({ classes, articles, sections, media }) => {
+const RightRail = ({ classes, articles, sections, media, ads }) => {
+  const ad = ads[0];
   return (
     <div className={classes.RightRail}>
-      <Link to="/recommended" className={classes.label}>
-        Recommended
-      </Link>
-      {Object.values(articles)
-        .slice(0, NUMBER_OF_RAIL_ARTICLES)
-        .map(article => {
-          const featuredMedia = Object.values(media).find(
-            mediaObject => mediaObject.articleId === article.id,
-          );
-          const section = Object.values(sections).find(
-            section => article.sectionId === section.id,
-          );
-          return (
-            <div className={classes.article} key={article.id}>
-              {featuredMedia && (
-                <figure className={classes.figure}>
-                  <img src={featuredMedia.url} />
-                </figure>
-              )}
-              <Link
-                to={`${section.permalink}/${article.slug}`}
-                className={classes.smallTitle}
-              >
-                {article.title}
-              </Link>
-              <Byline classes={classes} contributors={article.contributors} />
-            </div>
-          );
-        })}
+      <div className={classes.Recommended}>
+        <Link to="/recommended" className={classes.label}>
+          Recommended
+        </Link>
+        {Object.values(articles)
+          .slice(0, NUMBER_OF_RAIL_ARTICLES)
+          .map(article => {
+            const featuredMedia = Object.values(media).find(
+              mediaObject => mediaObject.articleId === article.id,
+            );
+            const section = Object.values(sections).find(
+              section => article.sectionId === section.id,
+            );
+            return (
+              <div className={classes.article} key={article.id}>
+                {featuredMedia && (
+                  <figure className={classes.figure}>
+                    <img src={featuredMedia.url} />
+                  </figure>
+                )}
+                <Link
+                  to={`${section.permalink}/${article.slug}`}
+                  className={classes.smallTitle}
+                >
+                  {article.title}
+                </Link>
+                <Byline classes={classes} contributors={article.contributors} />
+              </div>
+            );
+          })}
+        </div>
+        <div className={classes.tallAdContainer}>
+          <TallAd ad={ad} />
+        </div>
     </div>
   );
 };
 
 const mapStateToProps = state => ({
   articles: getArticlesWithContributors(state),
+  ads: state.advertisements,
   media: state.media.media,
   sections: state.sections.sections,
 });

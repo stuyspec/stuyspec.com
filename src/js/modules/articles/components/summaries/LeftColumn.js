@@ -34,9 +34,8 @@ const styles = {
     fontFamily: "Minion Pro",
     fontWeight: "bold",
     fontSize: "30px",
-    fontStyle: "italic",
     lineHeight: 1.13,
-    marginBottom: "12px",
+    marginBottom: "6px",
     "&:hover": {
       color: "#000",
     },
@@ -50,7 +49,7 @@ const styles = {
     fontFamily: "Circular Std",
     fontWeight: 300,
     fontSize: "12px",
-    marginBottom: "3px",
+    marginBottom: "7px",
     textTransform: "uppercase",
     "&:hover": {
       color: "#000",
@@ -110,9 +109,17 @@ const styles = {
 };
 
 const LeftColumn = ({ classes, articles, media, sections }) => {
-  const [primaryArticle, secondaryArticle, outquoteArticle] = Object.values(
-    articles,
-  ).slice(0, 3);
+  const [primaryArticle, secondaryArticle] = Object.values(articles).slice(
+    6,
+    8,
+  );
+
+  const outquoteArticle = Object.values(articles).slice(9)[0];
+  /*
+  const outquoteArticle = Object.values(articles).slice(9).find(article => {
+    return Object.find(outquotes, outquote => outquote.articleId === article.id)
+  });*/
+
   [primaryMedia, secondaryMedia, outquoteMedia] = [
     primaryArticle,
     secondaryArticle,
@@ -144,7 +151,7 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
           to={sections[primaryArticle.sectionId].permalink}
           className={classes.sectionLabel}
         >
-          {sections[primaryArticle.sectionId].title}
+          {sections[primaryArticle.sectionId].name}
         </Link>
         <p className={classes.summary}>{primaryArticle.summary}</p>
         <Byline contributors={primaryArticle.contributors} />

@@ -6,7 +6,7 @@ import injectSheet from "react-jss";
 import { pathToAds } from "../constants";
 
 const styles = {
-  TallAd: {
+  HorizontalAd: {
     width: "100%",
   },
   img: {
@@ -14,12 +14,12 @@ const styles = {
   },
 };
 
-const TallAd = ({ classes, advertisements, ad }) => {
+const HorizontalAd = ({ classes, advertisements, ad }) => {
   if (!ad) {
-    ad = advertisements[0];
+    ad = advertisements[1];
   }
   return (
-    <div className={classes.TallAd}>
+    <div className={classes.HorizontalAd}>
       <Link to={ad.url} target="_blank">
         <img className={classes.img} src={pathToAds + ad.filename} />
       </Link>
@@ -31,4 +31,4 @@ const mapStateToProps = state => ({
   advertisements: state.advertisements,
 });
 
-export default connect(mapStateToProps)(injectSheet(styles)(TallAd));
+export default connect(mapStateToProps)(injectSheet(styles)(HorizontalAd));

@@ -134,10 +134,16 @@ const SectionFeature = ({
       Object.filter(articles, article => article.sectionId === section.id),
     );
   }
-  const primaryArticle = sectionArticles[0];
+  const primaryArticle =
+    sectionArticles[0] === Object.values(articles)[0]
+      ? sectionArticles[1]
+      : sectionArticles[0];
   let featuredMedia = null;
   const secondaryArticle =
     sectionArticles.slice(1, 10).find(article => {
+      if (article === primaryArticle) {
+        return false;
+      }
       // find a TOP 10 Article within the section with media
       const mediaObject = Object.values(media).find(
         mediaObject => mediaObject.articleId === article.id,
@@ -146,7 +152,7 @@ const SectionFeature = ({
         featuredMedia = mediaObject;
       }
       return mediaObject;
-    }) || sectionArticles[1]; // if none such article found, default is the second
+    }) || sectionArticles[2]; // if none such article found, default is the second
   const possibleTernaryArticle = sectionArticles
     .slice(1, 10)
     .find(article => article !== secondaryArticle);

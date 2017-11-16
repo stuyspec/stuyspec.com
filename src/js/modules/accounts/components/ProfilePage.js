@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import { Grid, Row, Col, Table } from "react-bootstrap/lib";
+import { Helmet } from "react-helmet";
 
 import { SignOutForm } from "./forms";
 import { signOut } from "../actions";
@@ -72,6 +73,10 @@ const ProfilePage = ({ classes, session, signOut, status, users }) => {
   if (user) {
     return (
       <Grid fluid className={classes.ProfilePage}>
+        <Helmet titleTemplate="%s | The Stuyvesant Spectator">
+          <title>Profile</title>
+          <meta />
+        </Helmet>
         <Row>
           <Col
             xs={12}

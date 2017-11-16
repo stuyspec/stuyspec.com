@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
+import { Helmet } from "react-helmet";
 
 import { SignInForm } from "./forms";
 import { signIn } from "../actions";
@@ -37,6 +38,10 @@ const styles = {
 const SignInPage = ({ classes, signIn }) => {
   return (
     <Grid fluid className={classes.SignInPage}>
+      <Helmet titleTemplate="%s | The Stuyvesant Spectator">
+        <title>Sign In</title>
+        <meta />
+      </Helmet>
       <Row>
         <Col
           xs={12}
