@@ -1,13 +1,12 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 
 import { getCurrentUser } from "../../accounts/selectors";
 import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
-import { openSubscriptionModal } from "../../accounts/actions";
 import { getTopLevelSections } from "../../sections/selectors";
 import { openSubscriptionModal } from "../../accounts/actions";
 
