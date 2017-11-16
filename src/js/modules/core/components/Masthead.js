@@ -3,15 +3,21 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
+
 import { getCurrentUser } from "../../accounts/selectors";
 import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
+import { openSubscriptionModal } from "../../accounts/actions";
+import { getTopLevelSections } from "../../sections/selectors";
 
 const styles = {
   Masthead: {
     fontSize: 0, // resets font size to remove unwanted whitespace
-    margin: "6px auto 19px auto",
+    margin: "12px auto 19px auto",
     textAlign: "center",
+    "& button:focus": {
+      outline: 0,
+    },
   },
   theSpectatorLogo: {
     color: "#000",
@@ -29,7 +35,6 @@ const styles = {
     "@media (min-width: 768px)": {
       fontSize: "75px",
     },
-    zIndex: "-1",
   },
   userTools: {
     float: "right",
@@ -51,7 +56,6 @@ const styles = {
     fontSize: "12px",
     fontWeight: 300,
     textDecoration: "none",
-    float: "right"
   },
   hamburger: {
     display: "inline",
@@ -95,15 +99,15 @@ const styles = {
     overflow: "visible",
     display: "inline",
     position: "relative",
-    left: "-20vh",
-    top: "0.9vh",
+    // left: "-20vh",
+    top: "3vh",
   }
 };
 
 const SectionStyles = {
   Sec: {
     position: "relative",
-    left: "35vh",
+    // left: "35vh",
     top: "3vh",
     width: "103px",
     height: "39px",
@@ -111,6 +115,12 @@ const SectionStyles = {
     border: "solid 1.5px #dddddd",
     backgroundColor: "white",
     float: "left",
+    "& span": {
+      transitionDuration: ".3s",
+    },
+    "&:hover span": {
+      color: "#888",
+    },
   },
 };
 
@@ -118,7 +128,9 @@ const SubscribeStyles = {
   Sub: {
     width: "116px",
     height: "39px",
-    borderRadius: "4px",
+    borderRadius: 0,
+    borderTopLeftRadius: "4px",
+    borderBottomLeftRadius: "4px",
     backgroundColor: "#4e6a9e",
     border: "solid 1.5px #4e6a9e",
     display: "inline",
@@ -127,16 +139,17 @@ const SubscribeStyles = {
 
 const SignInStyles = {
   Sign: {
-    borderRadius: "4px",
+    borderRadius: 0,
+    borderTopRightRadius: "4px",
+    borderBottomRightRadius: "4px",
     backgroundColor: "#ffffff",
     border: "solid 1.5px #dddddd",
+    borderLeft: 0,
     height: "39px",
     width: "66px",
-    zIndex: "-1",
     display: "inline",
     position: "relative",
-    top: "19px",
-    left: "-5px"
+    // top: "19px",
   }
 };
 
@@ -152,7 +165,8 @@ const StyledSectionButton = injectSheet(SectionStyles)(NavButton);
 const StyledSubscribeButton = injectSheet(SubscribeStyles)(NavButton);
 const StyledSignInButton = injectSheet(SignInStyles)(NavButton);
 
-const Masthead = ({ classes, openSidebar, }) => {
+const Masthead = ({ classes, openSidebar, sections, openSubscriptionModal }) => {
+  const unwantedSectionNames = ["Art", "Photo", "Video"];
   return (
     <div className={classes.Masthead}>
       <StyledSectionButton onClick={openSidebar} type="Sec">
@@ -164,7 +178,7 @@ const Masthead = ({ classes, openSidebar, }) => {
       </Link>
       <table className={classes.positioning}>
         <th>
-          <StyledSubscribeButton type="Sub">
+          <StyledSubscribeButton onClick={openSubscriptionModal} type="Sub">
             <span className={classes.subscribeText}>Subscribe</span><br/>
             <span className={classes.subscribeTo}>to our newsletter</span>
           </StyledSubscribeButton>
@@ -179,12 +193,46 @@ const Masthead = ({ classes, openSidebar, }) => {
           </div>
         </th>
       </table>
+      <ul className={classes.sectionLinksNav}>
+        {Object.values(sections).map(section => {
+          if (!unwantedSectionNames.includes(section.name)) {
+            return (
+              <li key={section.id} className={classes.sectionListItem}>
+                <Link to={section.permalink} className={classes.sectionLink}>
+                  {section.name}
+                </Link>
+              </li>
+            );
+          }
+        })}
+        <li key={-1} className={classes.sectionListItem}>
+          <Link
+            onClick={openSubscriptionModal}
+            to={"/"}
+            className={classes.sectionLink}
+          >
+            Newsletter
+          </Link>
+        </li>
+        <li key={-2} className={classes.sectionListItem}>
+          <Link to={"/paper"} className={classes.sectionLink}>
+            The Paper
+          </Link>
+        </li>
+      </ul>
     </div>
   );
 };
 
 const mapStateToProps = state => ({
   currentUser: getCurrentUser(state),
+  sections: getTopLevelSections(state),
 });
 
-export default connect(mapStateToProps)(injectSheet(styles)(Masthead));
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ openSubscriptionModal, openSidebar }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  injectSheet(styles)(Masthead),
+);
