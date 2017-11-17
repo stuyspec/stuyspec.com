@@ -67,7 +67,6 @@ const HomePage = ({ classes, sections, articles }) => {
   return (
     <div>
       <Grid fluid>
-        <Link to={`/opinions/kdsfd`}>a link</Link>
         <Row>
           <Col
             xs={12}
