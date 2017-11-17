@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
+import { Link } from "react-router-dom";
 
 import { getArticlesWithContributors } from "../../articles/selectors";
 

@@ -7,7 +7,7 @@ const initialState = [
   {
     "company": "Sticker Mule",
     "filename": "sticker-mule-leaderboard.png",
-    "url": "https://www.stickermule.com/hi/uses/laptop-stickers",
+    "url": "https://www.stickermule.com/uses/laptop-stickers",
   }
 ];
 
