@@ -10,6 +10,7 @@ import ArticleHeader from "./ArticleHeader";
 import ArticleBody from "./ArticleBody";
 import RecommendedRow from "./RecommendedRow";
 import CommentThread from "../../comments/components/CommentThread";
+import NotFoundPage from "../../core/components/NotFoundPage";
 import {
   getArticleFromRequestedSlug,
   getArticleFeaturedMedia,
@@ -64,6 +65,9 @@ const styles = {
 };
 
 const ArticlePage = ({ classes, article, section, featuredMedia, openSubscriptionModal }) => {
+  if (!article){
+    return <NotFoundPage />;
+  }
   return (
     <Grid fluid className={classes.ArticlePage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">

@@ -125,6 +125,9 @@ export const getPhotographerArticles = createSelector(
 export const getArticleFeaturedMedia = createSelector(
   [getArticleFromRequestedSlug, getMedia, getUsers],
   (article, media, users) => {
+    if (!article){
+      return null;
+    }
     const featuredMedia = Object.values(media).find(mediaObject => {
       return mediaObject.isFeatured && mediaObject.articleId === article.id;
     });
