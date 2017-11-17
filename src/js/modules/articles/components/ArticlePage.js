@@ -42,6 +42,7 @@ const styles = {
     },
     "&:hover": {
       color: "#3572b7",
+      cursor: "pointer",
     },
   },
   "@media (max-width: 1199px)": {
@@ -89,7 +90,6 @@ const ArticlePage = ({ classes, article, section, featuredMedia, openSubscriptio
         </Col>
         <Col xsHidden smHidden md={3} lg={3} />
       </Row>
-      <Row />
       <RecommendedRow section={section} />
       <CommentThread article={article} />
     </Grid>
