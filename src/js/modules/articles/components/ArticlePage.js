@@ -42,6 +42,7 @@ const styles = {
     },
     "&:hover": {
       color: "#3572b7",
+      cursor: "pointer",
     },
   },
   "@media (max-width: 1199px)": {
