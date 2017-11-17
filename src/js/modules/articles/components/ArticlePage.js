@@ -10,6 +10,7 @@ import ArticleHeader from "./ArticleHeader";
 import ArticleBody from "./ArticleBody";
 import RecommendedRow from "./RecommendedRow";
 import CommentThread from "../../comments/components/CommentThread";
+import NotFoundPage from "../../core/components/NotFoundPage";
 import {
   getArticleFromRequestedSlug,
   getArticleFeaturedMedia,
@@ -63,8 +64,10 @@ const styles = {
   },
 };
 
-const ArticlePage = ({ classes, article, section, featuredMedia,  }) => {
-  console.log('entered');
+const ArticlePage = ({ classes, article, section, featuredMedia, openSubscriptionModal }) => {
+  if (!article){
+    return <NotFoundPage />;
+  }
   return (
     <Grid fluid className={classes.ArticlePage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -104,4 +107,4 @@ const mapDispatchToProps = dispatch => {
   return hi;
 };
 
-export default connect(mapStateToProps, bindActionCreators)(injectSheet(styles)(ArticlePage));
+export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(ArticlePage));
