@@ -81,7 +81,7 @@ const ArticlePage = ({ classes, article, section, featuredMedia, openSubscriptio
           The Pulse of the Student Body:&nbsp;
           <span
             className={classes.subscribe}
-            // onClick={openSubscriptionModal}
+            onClick={openSubscriptionModal}
           >
             Subscribe
           </span>
@@ -101,10 +101,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  console.log('mapped');
-  let hi = bindActionCreators({ openSubscriptionModal }, dispatch);
-  console.log('mapped2')
-  return hi;
+  return bindActionCreators({ openSubscriptionModal }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(ArticlePage));
