@@ -72,10 +72,13 @@ export const signIn = (signInParams, isInModal) => {
         STUY_SPEC_API_HEADERS,
       )
       .then(response => {
+        console.log(response);
         dispatch({
           type: t.SIGN_IN_FULFILLED,
           payload: response,
         });
+        const sessionObject = {userId:response.data.data.id, headers: response.headers};
+        localStorage.setItem("session",JSON.stringify(sessionObject));
         if (isInModal !== true) {
           appHistory.push("/myaccount/profile");
         }
@@ -101,6 +104,7 @@ export const signOut = session => {
     axios
       .delete(`${STUY_SPEC_API_URL}/auth/sign_out`, { headers })
       .then(response => {
+        localStorage.clear();
         dispatch({
           type: t.SIGN_OUT_FULFILLED,
           payload: response,
@@ -185,3 +189,12 @@ export const subscribe = values => {
       });
   };
 };
+
+export const sessionfy = sessionObject => {
+  return dispatch => {
+    dispatch({
+      type: t.SESSIONFY,
+      payload: sessionObject
+    })
+  }
+}

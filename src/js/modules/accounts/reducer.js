@@ -15,6 +15,7 @@ import {
   CLOSE_SIGN_IN_MODAL,
   OPEN_SUBSCRIPTION_MODAL,
   CLOSE_SUBSCRIPTION_MODAL,
+  SESSIONFY
 } from "./actionTypes";
 
 const initialState = {
@@ -182,6 +183,11 @@ const reducer = (state = { ...initialState }, action) => {
     }
     case CLOSE_SUBSCRIPTION_MODAL: {
       return { ...state, isSubscriptionModalOpen: false };
+    }
+
+    case SESSIONFY: {
+      console.log(action.payload);
+      return {...state, session: action.payload};
     }
 
     case "@@redux-form/DESTROY": {

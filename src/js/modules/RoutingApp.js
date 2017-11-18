@@ -27,6 +27,7 @@ import {
 } from "./users/components";
 
 import { fetchAllData } from "./core/actions";
+import { sessionfy } from "./accounts/actions";
 
 class RoutingApp extends Component {
   constructor(props) {
@@ -35,6 +36,12 @@ class RoutingApp extends Component {
 
   componentDidMount() {
     this.props.fetchAllData();
+    console.log(localStorage);
+    const session = localStorage.getItem("session");
+    if (session) {
+      console.log(JSON.parse(session));
+      this.props.sessionfy(JSON.parse(session));
+    }
   }
 
   render() {
@@ -44,6 +51,7 @@ class RoutingApp extends Component {
       descriptions,
       session,
       isAllDataFetched,
+      sessionfy
     } = this.props;
     return (
       <ConnectedRouter
@@ -198,7 +206,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchAllData }, dispatch);
+  return bindActionCreators({ fetchAllData, sessionfy }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoutingApp);
