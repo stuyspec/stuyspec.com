@@ -72,12 +72,12 @@ const SubscriptionModal = ({
     >
       <img
         className={classes.borough}
-        src="https://i.imgur.com/wV15x03.png"
+        src="https://i.imgur.com/4dYhg6S.png"
         alt="borough"
       />
       <img
         className={classes.playlist}
-        src="https://i.imgur.com/rwQjPuw.png"
+        src="https://i.imgur.com/zEV6AQ5.png"
         alt="playlist"
       />
       <p className={classes.newsletter}>Get The Spectator Newsletter.</p>
@@ -92,7 +92,7 @@ const SubscriptionModal = ({
       <br />
       <img
         className={classes.film}
-        src="https://i.imgur.com/yvNIHtG.png"
+        src="https://i.imgur.com/CY9Xf3s.png"
         alt="film"
       />
     </Modal>
