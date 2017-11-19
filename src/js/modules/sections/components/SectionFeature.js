@@ -155,7 +155,7 @@ const SectionFeature = ({
     }) || sectionArticles[2]; // if none such article found, default is the second
   const possibleTernaryArticle = sectionArticles
     .slice(1, 10)
-    .find(article => article !== secondaryArticle);
+    .find(article => article !== secondaryArticle && article !== primaryArticle);
   // NESTED IN <Col lg={9}>
   return (
     <Row className={classes.SectionFeature}>

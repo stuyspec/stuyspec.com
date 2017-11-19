@@ -20,7 +20,6 @@ export const getContributorFromSlug = createSelector(
     const user = Object.values(users).find(user => {
       return user.slug === requestedContributorSlug;
     });
-    console.log(user);
     if (
       userRoles.find(userRole => {
         return (
@@ -63,6 +62,7 @@ export const getPhotographerFromSlug = createSelector(
     });
     if (
       userRoles.find(userRole => {
+        console.log(userRole);
         return (
           userRole.userId === user.id &&
           roles[userRole.roleId].title === "Photographer"

@@ -62,6 +62,7 @@ const styles = {
     fontFamily: "Minion Pro",
     fontSize: "16px",
     lineHeight: "1.25",
+    marginBottom: "3px",
   },
   "@media (max-width: 767px)": {
     DatelineDesktop: {

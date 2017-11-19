@@ -96,6 +96,7 @@ export const getIllustratorArticles = createSelector(
   [getIllustratorIllustrations, getArticlesWithContributors],
   (illustrations, articles) => {
     return Object.values(illustrations).reduce((acc, illustration) => {
+      console.log(illustrations);
       const article = articles[illustration.articleId];
       acc[article.id] = article;
       return acc;
@@ -110,7 +111,9 @@ export const getIllustratorArticles = createSelector(
 export const getPhotographerArticles = createSelector(
   [getPhotographerPhotographs, getArticlesWithContributors],
   (photographs, articles) => {
+    console.log(photographs)
     return Object.values(photographs).reduce((acc, photograph) => {
+      console.log(photograph);
       const article = articles[photograph.articleId];
       acc[article.id] = article;
       return acc;

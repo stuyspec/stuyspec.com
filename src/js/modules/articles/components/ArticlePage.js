@@ -65,7 +65,7 @@ const styles = {
   },
 };
 
-const ArticlePage = ({ classes, article, section, featuredMedia, openSubscriptionModal }) => {
+const ArticlePage = ({ classes, article, section, featuredMedia, media, openSubscriptionModal }) => {
   if (!article){
     return <NotFoundPage />;
   }
@@ -99,6 +99,7 @@ const ArticlePage = ({ classes, article, section, featuredMedia, openSubscriptio
 const mapStateToProps = (state, ownProps) => ({
   article: getArticleFromRequestedSlug(state, ownProps),
   featuredMedia: getArticleFeaturedMedia(state, ownProps),
+  media: state.media.media,
 });
 
 const mapDispatchToProps = dispatch => {
