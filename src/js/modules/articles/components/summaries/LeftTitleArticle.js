@@ -109,9 +109,11 @@ const LeftTitleArticle = ({ classes, article, media, sections }) => {
         lg={8}
         className={classes.featuredMedia}
       >
+      {featuredMedia && (
         <figure>
           <img src={featuredMedia.url} />
         </figure>
+        )}
       </Col>
       <Col
         xs={12}

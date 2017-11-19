@@ -33,9 +33,9 @@ const ArticleFeaturedMedia = ({ classes, featuredMedia, isCaption }) => {
           <span>{featuredMedia.caption}&nbsp;</span>
           <Link
             className={classes.creditLine}
-            to={`/${MEDIA_CREATOR_SLUGS[featuredMedia.type]}/${creator.slug}`}
+            to={`/${MEDIA_CREATOR_SLUGS[featuredMedia.mediaType]}/${creator.slug}`}
           >
-            {capitalizeWord(featuredMedia.type)}
+            {capitalizeWord(featuredMedia.mediaType)}
             &nbsp;by&nbsp;
             {creator.firstName}
             {creator.lastName !== "" && " " + creator.lastName}

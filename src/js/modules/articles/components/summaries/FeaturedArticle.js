@@ -97,9 +97,11 @@ const FeaturedArticle = ({ classes, media, sections, article }) => {
         lgPush={4}
         className={classes.featuredMediaContainer}
       >
-        <figure className={classes.figure}>
-          <img src={featuredMedia.url} />
-        </figure>
+        {featuredMedia && (
+          <figure className={classes.figure}>
+            <img src={featuredMedia.url} />
+          </figure>
+        )}
       </Col>
       <Col
         xs={12}

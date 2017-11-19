@@ -10,38 +10,39 @@ import { ArticleList } from "../../articles/components";
 
 const styles = {
   PhotographerPage: {
-    marginTop: "62px",
+    marginTop: "100px",
   },
   name: {
-    color: "#000000",
+    color: "#000",
     fontFamily: "Canela",
-    fontSize: "36px",
-    fontWeight: "500",
-    margin: "0px",
-    textAlign: "center",
+    fontSize: "48px",
+    fontWeight: 500,
+    lineHeight: 1,
+    marginBottom: "11px",
   },
-  workList: {
-    border: "1px solid #ddd",
+  email: {
+    color: "#3084df",
+    display: "block",
+    fontFamily: "Minion Pro",
+    fontSize: "17px",
+    marginBottom: "7px",
+  },
+  latest: {
+    borderTop: "1px solid #000",
+    borderBottom: "1px solid #ddd",
     borderStyle: "solid none",
     color: "#000",
     fontFamily: "Circular Std",
-    fontSize: "14px",
+    fontSize: "13px",
     fontWeight: "300",
-    margin: "34px 0px 14px",
-    padding: "8px 0px 7px",
-  },
-  profilePicture: {
-    display: "block",
-    height: "302px",
-    margin: "18px auto 12px",
-    width: "256px",
+    marginBottom: "22px",
+    padding: "4px 0px",
   },
   description: {
-    color: "#000000",
     fontFamily: "Minion Pro",
-    fontSize: "18px",
-    lineHeight: "1.28",
-    margin: 0,
+    fontSize: "16px",
+    lineHeight: "1.5",
+    marginBottom: "26px",
   },
   "@media (max-width: 1199px) and (min-width: 992px)": {
     PhotographerPage: {
@@ -51,26 +52,25 @@ const styles = {
 };
 
 const PhotographerPage = ({ classes, photographer, articles }) => {
+  console.log(photographer, articles);
   return (
     <Grid className={classes.PhotographerPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>
-          {photographer.firstName} {photographer.lastName}
+          {`${photographer.firstName} ${photographer.lastName}`}
         </title>
         <meta />
       </Helmet>
       <Row>
         <Col xs={12} sm={12} md={9} lg={9}>
           <p className={classes.name}>
-            {photographer.firstName} {photographer.lastName}
+            {`${photographer.firstName} ${photographer.lastName}`}
           </p>
-          <img
-            alt={photographer.lastName}
-            className={classes.profilePicture}
-            src={photographer.url}
-          />
+          <a href={`mailto:${photographer.email}`} className={classes.email}>
+            {photographer.email}
+          </a>
           <p className={classes.description}>{photographer.description}</p>
-          <div className={classes.workList}>Photographs</div>
+          <div className={classes.latest}>Latest</div>
           <ArticleList articles={articles} />
         </Col>
       </Row>

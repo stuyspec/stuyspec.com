@@ -61,6 +61,23 @@ const styles = {
 };
 
 const ArticleBody = ({ classes, content, featuredMedia }) => {
+  /*
+  const generateFigure = (match, string, offset) => {
+    const image = media[parseInt(string)];
+    return (
+      <figure>
+        <img src={image.attachmentUrl} alt={image.title}/>
+        <figcaption>{image.caption}</figcaption>
+      </figure>
+    );
+  };
+  // overlap of first spec-img afind = 0; and regular figure and artifletaeuerdmedia
+  specImgPattern = /<spec-img id=(\d)\/>/;
+  while (specImgPattern.test(content)) {
+    content = content.replace(specImgPattern, generateFigure);
+  }
+  */
+//  featuredMedia = Object.values(articleMedia).find(image => image.isFeatured);
   return (
     <Row>
       <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>

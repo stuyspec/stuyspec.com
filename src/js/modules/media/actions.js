@@ -27,11 +27,6 @@ for (let i = 0; i < 37; i++) {
 export const fetchMedia = () => {
   return dispatch => {
     dispatch({ type: t.FETCH_MEDIA_PENDING });
-    dispatch({
-      type: t.FETCH_MEDIA_FULFILLED,
-      payload: fakeMedia,
-    });
-    /*
     axios
       .get(`${STUY_SPEC_API_URL}/media`, STUY_SPEC_API_HEADERS)
       .then(response => {
@@ -47,13 +42,12 @@ export const fetchMedia = () => {
           payload: err,
         });
       });
-    */
   };
 };
 
 const validateMedia = mediaArray => {
   const integerProperties = ["id", "userId"];
-  const stringProperties = ["url", "title", "caption", "type"];
+  const stringProperties = ["url", "title", "caption", "mediaType"];
   if (!Array.isArray(mediaArray)) {
     throw "EXCEPTION: media response is not an array.";
   }

@@ -208,7 +208,7 @@ const SectionPage = ({
   section,
   media,
 }) => {
-  if (section.parentId) {
+  if (section.parentId || section.name == 'Humor') {
     return (
       <Grid fluid className={classes.SubsectionPage}>
         <Helmet>
@@ -237,16 +237,10 @@ const SectionPage = ({
       </Grid>
     );
   }
-  let featuredMedia = null;
-  const featuredArticle = Object.values(sectionTreeArticles).find(article => {
-    const mediaObject = Object.values(media).find(
-      mediaObject => mediaObject.articleId === article.id,
-    );
-    if (mediaObject) {
-      featuredMedia = mediaObject;
-    }
-    return mediaObject;
-  });
+  const featuredArticle = Object.values(sectionTreeArticles)[0];
+  const featuredMedia = Object.values(media).find(
+    image => image.articleId === featuredArticle.id
+  );
   let featuredArticleSection = Object.values(directSubsections).find(
     subsection => subsection.id === featuredArticle.sectionId
   );
@@ -254,11 +248,14 @@ const SectionPage = ({
     featuredArticleSection = section;
   }
 
-  const secondaryArticle = Object.values(sectionTreeArticles).find(article => {
+  let secondaryArticle = Object.values(sectionTreeArticles).find(article => {
     return article !== featuredArticle && Object.values(media).find(
       mediaObject => mediaObject.articleId === article.id,
     );
   });
+  if (!secondaryArticle) {
+    secondaryArticle = Object.values(sectionTreeArticles)[1];
+  }
   const featuredSubsection = Object.values(directSubsections).find(
     subsection => subsection.id !== featuredArticle.sectionId
   );
@@ -289,11 +286,13 @@ const SectionPage = ({
       )}
 
       <Row className={classes.featuredRow}>
+      {featuredMedia && (
         <Col xs={12} sm={7} md={7} lg={7} className={classes.featuredMedia}>
           <figure>
             <img src={featuredMedia.url} />
           </figure>
         </Col>
+        )}
         <Col xs={12} sm={5} md={5} lg={5} className={classes.featuredArticle}>
           <Link
             className={classes.featuredArticleSection}

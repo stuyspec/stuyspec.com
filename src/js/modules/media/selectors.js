@@ -13,7 +13,7 @@ export const getIllustratorIllustrations = createSelector(
     return Object.filter(media, mediaObject => {
       return (
         mediaObject.userId === illustrator.id &&
-        mediaObject.type === "illustration"
+        mediaObject.mediaType === "illustration"
       );
     });
   },
@@ -25,7 +25,7 @@ export const getPhotographerPhotographs = createSelector(
     return Object.filter(media, mediaObject => {
       return (
         mediaObject.userId === photographer.id &&
-        mediaObject.type === "photograph"
+        mediaObject.mediaType === "photograph"
       );
     });
   },
