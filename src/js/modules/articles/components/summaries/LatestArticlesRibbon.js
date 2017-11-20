@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
+import RibbonComponent from "./RibbonComponent";
 import { getLatestArticles } from "../../selectors";
 
 const LATEST_ARTICLES_SHOWN = 5;
@@ -78,29 +79,6 @@ const styles = {
       width: "42%",
     },
   },
-};
-
-const RibbonComponent = ({ classes, article, section, featuredMedia }) => {
-  return (
-    <div className={classes.RibbonComponent}>
-      {featuredMedia && (
-        <div>
-          <figure className={classes.figure}>
-            <img src={featuredMedia.thumbAttachmentUrl} />
-          </figure>
-        </div>
-      )}
-      <Link to={section.permalink} className={classes.sectionLabel}>
-        {section.name === "Arts & Entertainment" ? "A&E" : section.name}
-      </Link>
-      <Link
-        to={`${section.permalink}/${article.slug}`}
-        className={classes.title}
-      >
-        {article.title}
-      </Link>
-    </div>
-  );
 };
 
 const LatestArticlesRibbon = ({ classes, articles, media, sections }) => {
