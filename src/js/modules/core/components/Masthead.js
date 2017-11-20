@@ -13,7 +13,7 @@ import { openSubscriptionModal } from "../../accounts/actions";
 const styles = {
   Masthead: {
     fontSize: 0, // resets font size to remove unwanted whitespace
-    margin: "12px auto 19px auto",
+    margin: "24px auto 19px auto",
     textAlign: "center",
     "& button:focus": {
       outline: 0,
@@ -21,6 +21,7 @@ const styles = {
   },
   theSpectatorLogo: {
     color: "#000",
+    display: "inline-block",
     fontFamily: "Old English Text MT",
     fontSize: "75px",
     marginBottom: "10px",
@@ -189,6 +190,7 @@ const Masthead = ({
   classes,
   openSidebar,
   sections,
+  session,
   openSubscriptionModal,
 }) => {
   const unwantedSectionNames = ["Art", "Photo", "Video"];
@@ -201,6 +203,7 @@ const Masthead = ({
       <Link className={classes.theSpectatorLogo} to="/">
         The Spectator
       </Link>
+      {!session.userId && (
       <table className={classes.positioning}>
         <th>
           <StyledSubscribeButton onClick={openSubscriptionModal} type="Sub">
@@ -219,6 +222,7 @@ const Masthead = ({
           </div>
         </th>
       </table>
+      )}
       <ul className={classes.sectionLinksNav}>
         {Object.values(sections).map(section => {
           if (!unwantedSectionNames.includes(section.name)) {
@@ -251,6 +255,7 @@ const Masthead = ({
 };
 
 const mapStateToProps = state => ({
+  session: state.accounts.session,
   currentUser: getCurrentUser(state),
   sections: getTopLevelSections(state),
 });

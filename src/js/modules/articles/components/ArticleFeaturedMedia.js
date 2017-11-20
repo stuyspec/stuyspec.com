@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 
@@ -48,20 +48,28 @@ class ArticleFeaturedMedia extends Component {
     };
   }
   componentDidMount() {
-    const img = new Image()
+    const img = new Image();
     img.src = this.props.featuredMedia.attachmentUrl;
     img.onload = () => {
       this.setState({
         imgHeight: img.height,
         imgWidth: img.width,
       });
-    }
+    };
   }
   render() {
     const { classes, featuredMedia, isCaption } = this.props;
     const { creator } = featuredMedia;
     return (
-      <figure className={this.state.imgHeight > this.state.imgWidth * 1.2 ? classes.tallFigure : classes.figure}>
+      <figure
+        className={
+          this.state.imgHeight > this.state.imgWidth * 1.2 ? (
+            classes.tallFigure
+          ) : (
+            classes.figure
+          )
+        }
+      >
         <img className={classes.img} src={featuredMedia.attachmentUrl} />
         {isCaption && (
           <figcaption className={classes.caption}>

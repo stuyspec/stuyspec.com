@@ -116,12 +116,15 @@ const SectionFeature = ({
   section,
   sections,
   media,
-  without
+  without,
 }) => {
   let sectionArticles = [];
   sectionArticles = Object.values(
-    Object.filter(articles, article => article.sectionId === section.id && article !== without),
-  )
+    Object.filter(
+      articles,
+      article => article.sectionId === section.id && article !== without,
+    ),
+  );
   const primaryArticle =
     sectionArticles[0] === Object.values(articles)[0]
       ? sectionArticles[1]
