@@ -136,7 +136,7 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
         {primaryMedia && (
           <div>
             <figure className={classes.figure}>
-              <img src={primaryMedia.url} />
+              <img src={primaryMedia.mediumAttachmentUrl} />
             </figure>
           </div>
         )}
@@ -162,7 +162,7 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
         {secondaryMedia && (
           <div>
             <figure className={classes.figure}>
-              <img src={secondaryMedia.url} />
+              <img src={secondaryMedia.mediumAttachmentUrl} />
             </figure>
           </div>
         )}
@@ -190,7 +190,7 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
         {outquoteMedia && (
           <div>
             <figure className={classes.figure}>
-              <img src={outquoteMedia.url} />
+              <img src={outquoteMedia.mediumAttachmentUrl} />
             </figure>
           </div>
         )}

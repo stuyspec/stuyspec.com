@@ -10,6 +10,9 @@ import { EditUserForm } from "./forms";
 import { updateUser } from "../actions";
 
 const styles = {
+  EditProfilePage: {
+    marginTop: "60px",
+  },
   pageTitle: {
     color: "#000",
     fontFamily: "Canela",
@@ -24,6 +27,11 @@ const styles = {
     fontFamily: "Minion Pro",
     fontSize: "17px",
     marginBottom: "14px",
+  },
+  "@media (max-width: 991px)": {
+    EditProfilePage: {
+      marginTop: 0,
+    },
   },
 };
 

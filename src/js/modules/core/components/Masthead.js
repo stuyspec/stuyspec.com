@@ -75,7 +75,7 @@ const styles = {
     height: "23px",
     opacity: "0.48",
     marginRight: "4px",
-    float: "left"
+    float: "left",
   },
   buttonName: {
     fontFamily: "Circular Std",
@@ -113,7 +113,7 @@ const styles = {
     position: "relative",
     // left: "-20vh",
     top: "3vh",
-  }
+  },
 };
 
 const SectionStyles = {
@@ -148,7 +148,7 @@ const SubscribeStyles = {
     backgroundColor: "#4e6a9e",
     border: "solid 1.5px #4e6a9e",
     display: "inline",
-  }
+  },
 };
 
 const SignInStyles = {
@@ -168,12 +168,12 @@ const SignInStyles = {
     },
     "&:hover span": {
       color: "#888",
-    }
+    },
     // top: "19px",
-  }
+  },
 };
 
-const NavButton = ({ children, onClick, classes, type}) => {
+const NavButton = ({ children, onClick, classes, type }) => {
   return (
     <button onClick={onClick} className={classes[type]}>
       <div>{children}</div>
@@ -185,12 +185,17 @@ const StyledSectionButton = injectSheet(SectionStyles)(NavButton);
 const StyledSubscribeButton = injectSheet(SubscribeStyles)(NavButton);
 const StyledSignInButton = injectSheet(SignInStyles)(NavButton);
 
-const Masthead = ({ classes, openSidebar, sections, openSubscriptionModal }) => {
+const Masthead = ({
+  classes,
+  openSidebar,
+  sections,
+  openSubscriptionModal,
+}) => {
   const unwantedSectionNames = ["Art", "Photo", "Video"];
   return (
     <div className={classes.Masthead}>
       <StyledSectionButton onClick={openSidebar} type="Sec">
-        <Hamburger className={classes.hamburger}/>
+        <Hamburger className={classes.hamburger} />
         <span className={classes.buttonName}>Sections</span>
       </StyledSectionButton>
       <Link className={classes.theSpectatorLogo} to="/">
@@ -199,7 +204,8 @@ const Masthead = ({ classes, openSidebar, sections, openSubscriptionModal }) => 
       <table className={classes.positioning}>
         <th>
           <StyledSubscribeButton onClick={openSubscriptionModal} type="Sub">
-            <span className={classes.subscribeText}>Subscribe</span><br/>
+            <span className={classes.subscribeText}>Subscribe</span>
+            <br />
             <span className={classes.subscribeTo}>to our newsletter</span>
           </StyledSubscribeButton>
         </th>

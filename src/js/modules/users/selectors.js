@@ -30,7 +30,7 @@ export const getContributorFromSlug = createSelector(
     ) {
       return user;
     }
-    //appHistory.push("/the-uncompleted-404-page?ref=contributors");
+    appHistory.push("/404-page-not-found");
   },
 );
 
@@ -50,7 +50,7 @@ export const getIllustratorFromSlug = createSelector(
     ) {
       return user;
     }
-    //appHistory.push("/the-uncompleted-404-page?ref=illustrators");
+    appHistory.push("/404-page-not-found");
   },
 );
 
@@ -71,7 +71,7 @@ export const getPhotographerFromSlug = createSelector(
     ) {
       return user;
     }
-    appHistory.push("/404-not-found?ref=photographers");
+    appHistory.push("/404-page-not-found");
   },
 );
 

@@ -52,13 +52,10 @@ const styles = {
 };
 
 const PhotographerPage = ({ classes, photographer, articles }) => {
-  console.log(photographer, articles);
   return (
     <Grid className={classes.PhotographerPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-        <title>
-          {`${photographer.firstName} ${photographer.lastName}`}
-        </title>
+        <title>{`${photographer.firstName} ${photographer.lastName}`}</title>
         <meta />
       </Helmet>
       <Row>

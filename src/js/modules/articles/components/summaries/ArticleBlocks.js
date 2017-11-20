@@ -88,7 +88,7 @@ const ArticleBlock = ({ classes, articles, sections, media }) => {
               key={article.id}
             >
               <figure className={classes.figure}>
-                <img src={featuredMedia.url} />
+                <img src={featuredMedia.mediumAttachmentUrl} />
               </figure>
               <Link
                 to={`${sections[article.sectionId].permalink}/${article.slug}`}

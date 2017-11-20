@@ -99,7 +99,7 @@ const FeaturedArticle = ({ classes, media, sections, article }) => {
       >
         {featuredMedia && (
           <figure className={classes.figure}>
-            <img src={featuredMedia.url} />
+            <img src={featuredMedia.attachmentUrl} />
           </figure>
         )}
       </Col>

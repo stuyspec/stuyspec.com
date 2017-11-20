@@ -27,13 +27,15 @@ const ArticleFeaturedMedia = ({ classes, featuredMedia, isCaption }) => {
   const { creator } = featuredMedia;
   return (
     <figure className={classes.figure}>
-      <img className={classes.img} src={featuredMedia.url} />
+      <img className={classes.img} src={featuredMedia.attachmentUrl} />
       {isCaption && (
         <figcaption className={classes.caption}>
           <span>{featuredMedia.caption}&nbsp;</span>
           <Link
             className={classes.creditLine}
-            to={`/${MEDIA_CREATOR_SLUGS[featuredMedia.mediaType]}/${creator.slug}`}
+            to={`/${MEDIA_CREATOR_SLUGS[
+              featuredMedia.mediaType
+            ]}/${creator.slug}`}
           >
             {capitalizeWord(featuredMedia.mediaType)}
             &nbsp;by&nbsp;

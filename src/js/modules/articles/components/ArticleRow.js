@@ -88,9 +88,6 @@ const styles = {
 
 const ArticleRow = ({ classes, article, sections, users, media }) => {
   const section = sections[article.sectionId];
-  if (!section) {
-    console.log(article.sectionId)
-  }
   const featuredMedia = Object.values(media).find(media => {
     return media.isFeatured && media.articleId === article.id;
   });
@@ -106,7 +103,10 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
         <div className={classes.preview}>
           {featuredMedia && (
             <figure className={classes.figure}>
-              <img src={featuredMedia.url} alt={featuredMedia.title} />
+              <img
+                src={featuredMedia.mediumAttachmentUrl}
+                alt={featuredMedia.title}
+              />
             </figure>
           )}
           <Link

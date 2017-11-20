@@ -139,7 +139,7 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
             return (
               <div key={article.id} className={classes.recommendedBlock}>
                 <figure className={classes.figure}>
-                  <img src={featuredMedia.url} />
+                  <img src={featuredMedia.mediumAttachmentUrl} />
                 </figure>
                 <Link to={`${section.permalink}`} className={classes.label}>
                   {section.name}

@@ -62,6 +62,8 @@ const styles = {
     margin: "0 0 12px 0",
   },
   figure: {
+    height: "240px",
+    overflow: "hidden",
     "& img": {
       width: "100%",
     },
@@ -155,7 +157,9 @@ const SectionFeature = ({
     }) || sectionArticles[2]; // if none such article found, default is the second
   const possibleTernaryArticle = sectionArticles
     .slice(1, 10)
-    .find(article => article !== secondaryArticle && article !== primaryArticle);
+    .find(
+      article => article !== secondaryArticle && article !== primaryArticle,
+    );
   // NESTED IN <Col lg={9}>
   return (
     <Row className={classes.SectionFeature}>
@@ -184,7 +188,7 @@ const SectionFeature = ({
           className={classes.featuredMediaContainer}
         >
           <figure className={classes.figure}>
-            <img src={featuredMedia.url} />
+            <img src={featuredMedia.mediumAttachmentUrl} />
           </figure>
         </Col>
       ) : (

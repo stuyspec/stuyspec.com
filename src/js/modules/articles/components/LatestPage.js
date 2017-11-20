@@ -46,7 +46,13 @@ const LatestPage = ({ classes, articles }) => {
         <Col xs={12} sm={12} md={9} lg={9} className={classes.articleList}>
           <ArticleList articles={articles} title="Latest" label="Articles" />
         </Col>
-        <Col xsHidden smHidden md={3} lg={3} className={classes.tallAdContainer}>
+        <Col
+          xsHidden
+          smHidden
+          md={3}
+          lg={3}
+          className={classes.tallAdContainer}
+        >
           <TallAd />
         </Col>
       </Row>

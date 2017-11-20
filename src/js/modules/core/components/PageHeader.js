@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 
@@ -13,16 +13,27 @@ const styles = {
   },
 };
 
+const MastheadContainer = ({ displayFixedBar, location }) => {
+  return (
+    <div>
+      {location.pathname === "/" ? (
+        <Masthead />
+      ) : (
+        <MastheadBar location={location} />
+      )}
+    </div>
+  );
+};
+
 const PageHeader = ({ classes, location }) => {
   return (
     <Grid>
       <Row>
         <Col xsHidden smHidden md={12} lg={12}>
-          {location.pathname === "/" ? (
-            <Masthead />
-          ) : (
-            <MastheadBar location={location} />
-          )}
+          <MastheadContainer
+            displayFixedBar={document.body.scrollTop > 160}
+            location={location}
+          />
         </Col>
       </Row>
       <Row>

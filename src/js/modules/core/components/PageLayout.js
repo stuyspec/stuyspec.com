@@ -95,7 +95,7 @@ class PageLayout extends Component {
           {children}
           <Grid fluid className={classes.footerAd}>
             <div className={classes.horizontalAdContainer}>
-              <HorizontalAd/>
+              <HorizontalAd />
             </div>
           </Grid>
         </div>

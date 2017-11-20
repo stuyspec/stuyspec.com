@@ -55,9 +55,7 @@ const ContributorPage = ({ classes, contributor, articles }) => {
   return (
     <Grid className={classes.ContributorPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-        <title>
-          {`${contributor.firstName} ${contributor.lastName}`}
-        </title>
+        <title>{`${contributor.firstName} ${contributor.lastName}`}</title>
         <meta />
       </Helmet>
       <Row>

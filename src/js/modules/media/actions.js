@@ -47,7 +47,14 @@ export const fetchMedia = () => {
 
 const validateMedia = mediaArray => {
   const integerProperties = ["id", "userId"];
-  const stringProperties = ["url", "title", "caption", "mediaType"];
+  const stringProperties = [
+    "attachmentUrl",
+    "mediumAttachmentUrl",
+    "thumbAttachmentUrl",
+    "title",
+    "caption",
+    "mediaType",
+  ];
   if (!Array.isArray(mediaArray)) {
     throw "EXCEPTION: media response is not an array.";
   }
