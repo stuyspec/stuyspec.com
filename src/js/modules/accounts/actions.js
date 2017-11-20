@@ -166,7 +166,6 @@ export const closeSubscriptionModal = () => ({
 });
 
 export const subscribe = values => {
-  alert(values.email + "has subscribed");
   return dispatch => {
     dispatch({
       type: t.CREATE_SUBSCRIBER_PENDING,
@@ -174,8 +173,7 @@ export const subscribe = values => {
     });
     dispatch({ type: t.CLOSE_SUBSCRIPTION_MODAL });
     axios
-      //IDK where to post to. Right now, it works but just gives error for posting.
-      .post(`${STUY_SPEC_API_URL}/Subscription`, values, STUY_SPEC_API_HEADERS)
+      .post(`${STUY_SPEC_API_URL}/subscribers`, values, STUY_SPEC_API_HEADERS)
       .then(response => {
         dispatch({
           type: t.CREATE_SUBSCRIBER_FULFILLED,

@@ -203,18 +203,13 @@ const Masthead = ({
       <Link className={classes.theSpectatorLogo} to="/">
         The Spectator
       </Link>
+      {!session.userId && (
       <table className={classes.positioning}>
         <th>
           <StyledSubscribeButton onClick={openSubscriptionModal} type="Sub">
-            {session.userId ? (
-              <span className={classes.subscribeText}>My Account</span>
-            ) : (
-              <div>
-                <span className={classes.subscribeText}>Subscribe</span>
-                <br />
-                <span className={classes.subscribeTo}>to our newsletter</span>
-              </div>
-            )}
+            <span className={classes.subscribeText}>Subscribe</span>
+            <br />
+            <span className={classes.subscribeTo}>to our newsletter</span>
           </StyledSubscribeButton>
         </th>
         <th>
@@ -227,6 +222,7 @@ const Masthead = ({
           </div>
         </th>
       </table>
+      )}
       <ul className={classes.sectionLinksNav}>
         {Object.values(sections).map(section => {
           if (!unwantedSectionNames.includes(section.name)) {
