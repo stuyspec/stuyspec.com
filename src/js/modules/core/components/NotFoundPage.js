@@ -25,6 +25,7 @@ const styles = {
     },
   },
   img: {
+    height: "75vh",
     width: "50%",
     marginTop: "25px",
   },
@@ -51,7 +52,7 @@ const NotFoundPage = ({ classes }) => {
       <p>
         Please try a modified query, or visit our <Link to="/">home page</Link>.
       </p>
-      <img src="/img/404.jpg" className={classes.img} />
+      <img src="https://i.imgur.com/TqAkThR.png" className={classes.img} />
     </Grid>
   );
 };
