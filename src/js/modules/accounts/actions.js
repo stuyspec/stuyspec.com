@@ -60,9 +60,6 @@ export const signUp = registrationParams => {
 };
 
 export const signIn = (signInParams, isInModal) => {
-  if (!isInModal) {
-    isInModal = false;
-  }
   return dispatch => {
     dispatch({
       type: t.SIGN_IN_PENDING,
@@ -75,11 +72,17 @@ export const signIn = (signInParams, isInModal) => {
         STUY_SPEC_API_HEADERS,
       )
       .then(response => {
+        console.log(response);
         dispatch({
           type: t.SIGN_IN_FULFILLED,
           payload: response,
         });
-        if (!isInModal) {
+        const sessionObject = {
+          userId: response.data.data.id,
+          headers: response.headers,
+        };
+        localStorage.setItem("session", JSON.stringify(sessionObject));
+        if (isInModal !== true) {
           appHistory.push("/myaccount/profile");
         }
       })
@@ -92,7 +95,8 @@ export const signIn = (signInParams, isInModal) => {
   };
 };
 
-export const signOut = sessionHeaders => {
+export const signOut = session => {
+  const sessionHeaders = session.headers;
   const headers = {
     "access-token": sessionHeaders["access-token"],
     client: sessionHeaders.client,
@@ -103,6 +107,7 @@ export const signOut = sessionHeaders => {
     axios
       .delete(`${STUY_SPEC_API_URL}/auth/sign_out`, { headers })
       .then(response => {
+        localStorage.clear();
         dispatch({
           type: t.SIGN_OUT_FULFILLED,
           payload: response,
@@ -151,3 +156,46 @@ export const openSignInModal = () => ({
 export const closeSignInModal = () => ({
   type: t.CLOSE_SIGN_IN_MODAL,
 });
+
+export const openSubscriptionModal = () => ({
+  type: t.OPEN_SUBSCRIPTION_MODAL,
+});
+
+export const closeSubscriptionModal = () => ({
+  type: t.CLOSE_SUBSCRIPTION_MODAL,
+});
+
+export const subscribe = values => {
+  return dispatch => {
+    dispatch({
+      type: t.CREATE_SUBSCRIBER_PENDING,
+      payload: values,
+    });
+    dispatch({ type: t.CLOSE_SUBSCRIPTION_MODAL });
+    axios
+      .post(`${STUY_SPEC_API_URL}/subscribers`, values, STUY_SPEC_API_HEADERS)
+      .then(response => {
+        dispatch({
+          type: t.CREATE_SUBSCRIBER_FULFILLED,
+          payload: response,
+        });
+        // Destroys the inputs in the form Subscription
+        dispatch(reset("Subscription"));
+      })
+      .catch(err => {
+        dispatch({
+          type: t.CREATE_SUBSCRIBER_REJECTED,
+          payload: err,
+        });
+      });
+  };
+};
+
+export const sessionfy = sessionObject => {
+  return dispatch => {
+    dispatch({
+      type: t.SESSIONFY,
+      payload: sessionObject,
+    });
+  };
+};

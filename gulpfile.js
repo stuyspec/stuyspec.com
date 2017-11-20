@@ -467,6 +467,8 @@ gulp.task('welcome-dev-notice', function()
     Log.startNotice('dev');
 });
 
+const STUY_SPEC_API_PROD_ENDPOINT = 'http://stuyspec-api-prod.us-east-1.elasticbeanstalk.com/';
+
 gulp.task('create-js-build', function()
 {
     _global.DEV_MODE = false;
@@ -474,7 +476,7 @@ gulp.task('create-js-build', function()
     {
         return scripts({ watch : false })
             .pipe(buffer())
-            .pipe(replace('http://localhost:3000','https://api.stuyspec.xyz'))
+            .pipe(replace('http://localhost:3000', STUY_SPEC_API_PROD_ENDPOINT))
             .pipe(uglify().on('error', gulpUtil.log))
             .pipe(gulp.dest(Paths.DEST_PROD));
     }
@@ -482,7 +484,7 @@ gulp.task('create-js-build', function()
     {
         return scripts({ watch : false })
             .pipe(buffer())
-            .pipe(replace('http://localhost:3000','https://api.stuyspec.xyz'))
+            .pipe(replace('http://localhost:3000', STUY_SPEC_API_PROD_ENDPOINT))
             .pipe(uglify().on('error', gulpUtil.log))
             .pipe(stripDebug())                         //remove console logging
             .pipe(gulp.dest(Paths.DEST_PROD));

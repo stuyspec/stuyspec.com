@@ -13,6 +13,9 @@ import {
   UPDATE_USER_PENDING,
   OPEN_SIGN_IN_MODAL,
   CLOSE_SIGN_IN_MODAL,
+  OPEN_SUBSCRIPTION_MODAL,
+  CLOSE_SUBSCRIPTION_MODAL,
+  SESSIONFY,
 } from "./actionTypes";
 
 const initialState = {
@@ -26,6 +29,7 @@ const initialState = {
     userId: null,
     headers: null,
   },
+  isSubscriptionModalOpen: false,
 };
 
 const reducer = (state = { ...initialState }, action) => {
@@ -172,6 +176,18 @@ const reducer = (state = { ...initialState }, action) => {
     }
     case CLOSE_SIGN_IN_MODAL: {
       return { ...state, isSignInModalOpen: false };
+    }
+
+    case OPEN_SUBSCRIPTION_MODAL: {
+      return { ...state, isSubscriptionModalOpen: true };
+    }
+    case CLOSE_SUBSCRIPTION_MODAL: {
+      return { ...state, isSubscriptionModalOpen: false };
+    }
+
+    case SESSIONFY: {
+      console.log(action.payload);
+      return { ...state, session: action.payload };
     }
 
     case "@@redux-form/DESTROY": {

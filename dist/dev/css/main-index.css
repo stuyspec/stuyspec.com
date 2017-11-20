@@ -7,12 +7,41 @@ body {
     margin: 0;
 }
 
-@media (max-width: 768px) {
+/* Bootstrap's negative margins on either side of a row are for balancing out
+gutters on those sides, but we have already accomplished this by removing
+gutters on the first- and last-child columns.
+ */
+.row {
+    margin: 0;
+}
+
+.container {
+    padding: 0;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+@media (max-width: 767px) {
     .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7,
     .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
     }
 
     .container {
+        padding: 0 14px;
+    }
+
+    .container-fluid {
+        padding: 0 14px;
+    }
+
+    .table-responsive {
+        border: none !important;
+    }
+
+    p[class^="summary-"], p[class*=" summary-"] {
+        font-size: 16px;
     }
 
 }
@@ -23,8 +52,12 @@ body {
     }
 
     .container {
+        padding: 0 14px;
     }
 
+    .container-fluid {
+        padding: 0 14px;
+    }
 }
 
 @media (min-width: 992px) {
@@ -33,6 +66,12 @@ body {
     }
 
     .container {
+        width: 100%;
+        padding: 0 14px;
+    }
+
+    .container-fluid {
+        padding: 0 14px;
     }
 
 }
@@ -50,4 +89,27 @@ body {
         width: 1066px;
     }
 
+    .container-fluid {
+        width: 1066px;
+    }
+
+}
+
+/* Picking out first and last columns in a row is documented in
+https://stackoverflow.com/a/8539107/6174302
+*/
+
+.row > div[class*="col-lg"],
+.row > div[class*="col-md"] {
+    padding-left: 0;
+}
+.row > div[class*="col-lg"] ~ div[class*="col-lg"],
+.row > div[class*="col-md"] ~ div[class*="col-md"] {
+    padding-left: 7px;
+}
+
+/* Will not work in certain cases: see client-app Issue #28 */
+.row > div[class^="col-lg"]:last-child,
+.row > div[class^="col-md"]:last-child {
+    padding-right: 0;
 }

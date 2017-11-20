@@ -7,6 +7,10 @@ import {
   CREATE_USER_FULFILLED,
 } from "./actionTypes";
 
+import { UPDATE_USER_FULFILLED } from "../accounts/actionTypes";
+
+import { isObjectEmpty } from "../../utils";
+
 const initialState = {
   isFetching: false,
   isFetched: false,
@@ -25,7 +29,7 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         isFetching: false,
-        isFetched: true,
+        isFetched: !isObjectEmpty(state.roles) && state.userRoles !== 0,
         users: action.payload.reduce((acc, user) => {
           acc[user.id] = user;
           return acc;
@@ -36,11 +40,16 @@ const reducer = (state = { ...initialState }, action) => {
       return { ...state, isFetching: false, error: action.payload };
     }
     case FETCH_USER_ROLES_FULFILLED: {
-      return { ...state, userRoles: action.payload };
+      return {
+        ...state,
+        userRoles: action.payload,
+        isFetched: !isObjectEmpty(state.users) && state.userRoles !== 0,
+      };
     }
     case FETCH_ROLES_FULFILLED: {
       return {
         ...state,
+        isFetched: !isObjectEmpty(state.users) && !isObjectEmpty(state.roles),
         roles: action.payload.reduce((acc, role) => {
           acc[role.id] = role;
           return acc;
@@ -53,6 +62,17 @@ const reducer = (state = { ...initialState }, action) => {
         users: {
           ...state.users,
           [action.payload.data.id]: action.payload.data,
+        },
+      };
+    }
+
+    case UPDATE_USER_FULFILLED: {
+      const updatedUser = action.payload.data;
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          [updatedUser.id]: updatedUser,
         },
       };
     }

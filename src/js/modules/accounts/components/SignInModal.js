@@ -8,8 +8,21 @@ import { SignInForm, SignUpForm } from "./forms";
 import { signIn, signUp, closeSignInModal } from "../actions";
 
 const styles = {
-  modalStyle: {
+  SignInModal: {
     width: "50%",
+  },
+  modalContent: {
+    padding: "12px",
+  },
+  formTitle: {
+    fontFamily: "Minion Pro",
+    fontSize: "26px",
+  },
+  signInForm: {
+    display: "inline-block",
+  },
+  signOutForm: {
+    display: "inline-block",
   },
 };
 
@@ -27,16 +40,21 @@ const SignInModal = ({
   }
   return (
     <Modal
-      dialogClassName={classes.modalStyle}
+      dialogClassName={classes.SignInModal}
       show={isSignInModalOpen}
       onHide={closeSignInModal}
     >
       <div className={classes.modalContent}>
         {/* If second param of signIn is true, the form will not redirect
         to the profile page because it knows it is in a modal */}
-        <SignInForm onSubmit={values => signIn(values, true)} />
-        Don't have an account?
-        <SignUpForm onSubmit={signUp} />
+        <div className={classes.signInForm}>
+          <h3 className={classes.formTitle}>Sign in</h3>
+          <SignInForm onSubmit={values => signIn(values, true)} />
+        </div>
+        <div className={classes.signUpForm}>
+          <h3 className={classes.formTitle}>Don't have an account? Sign up.</h3>
+          <SignUpForm onSubmit={signUp} />
+        </div>
       </div>
     </Modal>
   );

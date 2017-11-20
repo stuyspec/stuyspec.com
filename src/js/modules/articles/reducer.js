@@ -5,6 +5,8 @@ import {
   FETCH_AUTHORSHIPS_FULFILLED,
 } from "./actionTypes";
 
+import { isObjectEmpty } from "../../utils";
+
 const initialState = {
   isFetching: false,
   isFetched: false,
@@ -26,7 +28,7 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         isFetching: false,
-        isFetched: true,
+        isFetched: state.authorships.length !== 0,
         articles: newArticles,
       };
     }
@@ -40,6 +42,7 @@ const reducer = (state = { ...initialState }, action) => {
     case FETCH_AUTHORSHIPS_FULFILLED: {
       return {
         ...state,
+        isFetched: !isObjectEmpty(state.articles),
         authorships: action.payload,
       };
     }

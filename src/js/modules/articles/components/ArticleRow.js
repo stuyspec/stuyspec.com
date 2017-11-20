@@ -8,64 +8,84 @@ import { getMedia } from "../../media/selectors";
 import { getSections } from "../../sections/selectors";
 import { getUsers } from "../../users/selectors";
 import Byline from "./Byline";
+import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
+import Dateline from "./Dateline";
 
 const styles = {
-  ArticleRow: {
-    borderBottom: "1px solid #ddd",
-    listStyleType: "none",
-    margin: 0,
-    padding: "14px 0",
-    "& div:first-child": {
-      paddingLeft: 0,
-    },
-    "& div:last-child": {
-      paddingRight: 0,
-    },
+  articleBlock: {
+    borderBottom: "solid 1px #ddd",
+    marginBottom: "22px",
+    paddingBottom: "20px",
   },
-  featuredImg: {
-    width: "100%",
-  },
-  articleTitle: {
+  DatelineDesktop: {
+    color: "#888",
     display: "block",
-    fontFamily: "MinionPro",
-    fontSize: "26px",
-    color: "#000",
-    marginBottom: "5px",
-    padding: 0,
-    "&:hover": {
-      color: "#000",
-    },
+    fontFamily: "Circular Std",
+    fontSize: "13px",
+    fontWeight: "300",
+    float: "left",
+    marginRight: "19px",
+    width: "110px",
   },
-  articlePreview: {
-    color: "#000",
-    fontFamily: "MinionPro",
-    fontSize: "16px",
-    lineHeight: "1.13",
-    marginBottom: "8px",
-  },
-  Byline: {
-    display: "inline",
+  DatelineMobile: {
+    color: "#888",
+    display: "none",
     fontFamily: "Circular Std",
     fontSize: "12px",
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    marginRight: "6px",
-    "& p": {
-      display: "inline",
-      margin: 0,
-      "& a": {
-        color: "#000",
-        "&:hover": {
-          color: "#000",
-        },
+    fontWeight: "300",
+    marginRight: "19px",
+  },
+  preview: {
+    overflow: "hidden",
+  },
+  figure: {
+    float: "right",
+    height: "130px",
+    marginLeft: "29px",
+    width: "166px",
+    "& img": {
+      width: "100%",
+    },
+  },
+  title: {
+    color: "#000",
+    display: "block",
+    fontFamily: "Minion Pro",
+    fontSize: "24px",
+    fontWeight: 700,
+    lineHeight: "1.12",
+    marginBottom: "5px",
+    paddingTop: "2px",
+  },
+  summary: {
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "16px",
+    lineHeight: "1.25",
+    marginBottom: "3px",
+  },
+  "@media (max-width: 767px)": {
+    DatelineDesktop: {
+      display: "none",
+    },
+    DatelineMobile: {
+      display: "block",
+    },
+    preview: {
+      overflow: "visible",
+    },
+    figure: {
+      float: "none",
+      margin: "0 0 14px 0",
+      height: "auto",
+      maxHeight: "80vw",
+      overflow: "hidden",
+      width: "100%",
+      "& img": {
+        marginLeft: "-14px",
+        width: "100vw",
       },
     },
-  },
-  dateline: {
-    fontFamily: "Circular Std",
-    fontSize: "12px",
-    fontWeight: "bold",
-    color: "#666",
   },
 };
 
@@ -74,30 +94,37 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
   const featuredMedia = Object.values(media).find(media => {
     return media.isFeatured && media.articleId === article.id;
   });
-  featuredMedia.creator = users[featuredMedia.userId];
+  if (featuredMedia) {
+    featuredMedia.creator = users[featuredMedia.userId];
+  }
   return (
     <Row key={article.id} className={classes.ArticleRow}>
-      <Col md={3} lg={3}>
-        <figure>
-          <img src={featuredMedia.url} className={classes.featuredImg} />
-        </figure>
-      </Col>
-      <Col md={6} lg={6}>
-        <Link
-          to={`${section.permalink}/${article.slug}`}
-          className={classes.articleTitle}
-        >
-          {article.title}
-        </Link>
-        <p className={classes.articlePreview}>
-          Fake comment: in SectionPage, you've imported SectionArticleList but
-          you don't use it as a component. The error appears to be on line 41.
-        </p>
-        <div>
-          <Byline classes={classes} contributors={article.contributors} />
-          <span className={classes.dateline}>{article.dateline}</span>
+      <div className={classes.articleBlock} key={article.id}>
+        <div className={classes.DatelineDesktop}>
+          <Dateline article={article} />
         </div>
-      </Col>
+        <div className={classes.preview}>
+          {featuredMedia && (
+            <figure className={classes.figure}>
+              <img
+                src={featuredMedia.attachmentUrl}
+                alt={featuredMedia.title}
+              />
+            </figure>
+          )}
+          <Link
+            to={`${section.permalink}/${article.slug}`}
+            className={classes.title}
+          >
+            {article.title}
+          </Link>
+          <p className={classes.summary}>{article.summary}</p>
+          <Byline contributors={article.contributors} />
+          <p className={classes.DatelineMobile}>
+            <Dateline article={article} />
+          </p>
+        </div>
+      </div>
     </Row>
   );
 };

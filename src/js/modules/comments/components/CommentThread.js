@@ -14,6 +14,19 @@ import { getRequestedArticleComments } from "../selectors";
 const styles = {
   CommentThread: {
     padding: 0,
+    "& textarea": {
+      resize: "vertical", // only allows vertical resizing
+    },
+  },
+  "@media (max-width: 991px)": {
+    CommentThread: {
+      padding: "0 10%",
+    },
+  },
+  "@media (max-width: 767px)": {
+    CommentThread: {
+      padding: "0 2%",
+    },
   },
 };
 
@@ -32,10 +45,10 @@ const CommentThread = ({
     });
   };
   return (
-    <Grid className={classes.CommentThread}>
+    <Grid fluid className={classes.CommentThread}>
       <Row>
         <CommentForm session={session} onSubmit={handleCreateComment} />
-        <Col md={5} lg={5} />
+        <Col md={4} lg={4} />
       </Row>
       <SignInModal />
       {Object.values(comments).map(comment => {

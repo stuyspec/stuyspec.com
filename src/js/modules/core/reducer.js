@@ -24,6 +24,7 @@ const initialState = {
   viewportWidth: getViewportWidth(),
   viewportHeight: getViewportHeight(),
   isSidebarOpen: false,
+  rowHeight: 0,
 };
 
 const reducer = (state = { ...initialState }, action) => {
