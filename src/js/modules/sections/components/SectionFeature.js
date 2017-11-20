@@ -62,6 +62,8 @@ const styles = {
     margin: "0 0 12px 0",
   },
   figure: {
+    height: "240px",
+    overflow: "hidden",
     "& img": {
       width: "100%",
     },
@@ -114,26 +116,12 @@ const SectionFeature = ({
   section,
   sections,
   media,
-  recursive,
+  without
 }) => {
   let sectionArticles = [];
-  if (recursive) {
-    subsectionIds = Object.values(sections)
-      .filter(subsection => subsection.parentId === section.id)
-      .map(subsection => subsection.id);
-    sectionArticles = Object.values(
-      Object.filter(
-        articles,
-        article =>
-          subsectionIds.includes(article.sectionId) ||
-          article.sectionId === section.id,
-      ),
-    );
-  } else {
-    sectionArticles = Object.values(
-      Object.filter(articles, article => article.sectionId === section.id),
-    );
-  }
+  sectionArticles = Object.values(
+    Object.filter(articles, article => article.sectionId === section.id && article !== without),
+  )
   const primaryArticle =
     sectionArticles[0] === Object.values(articles)[0]
       ? sectionArticles[1]
@@ -155,7 +143,9 @@ const SectionFeature = ({
     }) || sectionArticles[2]; // if none such article found, default is the second
   const possibleTernaryArticle = sectionArticles
     .slice(1, 10)
-    .find(article => article !== secondaryArticle && article !== primaryArticle);
+    .find(
+      article => article !== secondaryArticle && article !== primaryArticle,
+    );
   // NESTED IN <Col lg={9}>
   return (
     <Row className={classes.SectionFeature}>
@@ -184,7 +174,7 @@ const SectionFeature = ({
           className={classes.featuredMediaContainer}
         >
           <figure className={classes.figure}>
-            <img src={featuredMedia.url} />
+            <img src={featuredMedia.mediumAttachmentUrl} />
           </figure>
         </Col>
       ) : (

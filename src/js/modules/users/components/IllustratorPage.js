@@ -55,9 +55,7 @@ const IllustratorPage = ({ classes, illustrator, articles }) => {
   return (
     <Grid className={classes.IllustratorPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-        <title>
-          {`${illustrator.firstName} ${illustrator.lastName}`}
-        </title>
+        <title>{`${illustrator.firstName} ${illustrator.lastName}`}</title>
         <meta />
       </Helmet>
       <Row>

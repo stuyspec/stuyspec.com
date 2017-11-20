@@ -126,7 +126,7 @@ const SectionBlock = ({ classes, articles, section, media }) => {
             <div className={classes.article} key={article.id}>
               {featuredMedia && (
                 <figure className={classes.figure}>
-                  <img src={featuredMedia.url} />
+                  <img src={featuredMedia.thumbAttachmentUrl} />
                 </figure>
               )}
               <Link

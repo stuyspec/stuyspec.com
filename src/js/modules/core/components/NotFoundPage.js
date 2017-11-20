@@ -48,7 +48,11 @@ const NotFoundPage = ({ classes }) => {
       </Helmet>
       <h1>Page Not Found.</h1>
       <p>Our apologies, you have reached a page that Does Not Exist.</p>
-      <p>If you were looking for an article, just know that we are currently transfering all of the articles<br/> from the old website to this one. Please be patient and enjoy the rest of our website. </p>
+      <p>
+        If you were looking for an article, just know that we are currently
+        transfering all of the articles<br /> from the old website to this one.
+        Please be patient and enjoy the rest of our website.{" "}
+      </p>
       <p>
         Please try a modified query, or visit our <Link to="/">home page</Link>.
       </p>

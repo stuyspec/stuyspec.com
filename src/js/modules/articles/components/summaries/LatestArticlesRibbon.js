@@ -86,7 +86,7 @@ const RibbonComponent = ({ classes, article, section, featuredMedia }) => {
       {featuredMedia && (
         <div>
           <figure className={classes.figure}>
-            <img src={featuredMedia.url} />
+            <img src={featuredMedia.thumbAttachmentUrl} />
           </figure>
         </div>
       )}

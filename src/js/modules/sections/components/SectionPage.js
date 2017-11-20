@@ -8,9 +8,7 @@ import { Helmet } from "react-helmet";
 import { isObjectEmpty } from "../../../utils";
 import { ArticleList } from "../../articles/components";
 import { getSectionTreeArticles } from "../../articles/selectors";
-import {
-  getDirectSubsections,
-} from "../../sections/selectors";
+import { getDirectSubsections } from "../../sections/selectors";
 import SectionColumn from "./SectionColumn";
 import {
   LatestArticlesRibbon,
@@ -34,7 +32,9 @@ const styles = {
   },
   featuredMedia: {
     "& figure": {
-      margiSection: "0",
+      margin: 0,
+      maxHeight: "500px",
+      overflow: "hidden",
       width: "100%",
       "& img": {
         width: "100%",
@@ -48,9 +48,15 @@ const styles = {
     width: "325px",
     "& a": {
       color: "#000",
-      "&:hover": { color: "#000" },
-      "&:active": { color: "#000" },
-      "&:focus": { color: "#000" },
+      "&:hover": {
+        color: "#000",
+      },
+      "&:active": {
+        color: "#000",
+      },
+      "&:focus": {
+        color: "#000",
+      },
     },
   },
   featuredArticleSection: {
@@ -93,7 +99,8 @@ const styles = {
   },
   TallAdContainer: {
     borderLeft: "1px solid #ddd",
-    marginTop: "24px",
+    marginTop: "24px",    
+    minHeight: "450px",
     paddingLeft: "14px !important",
     paddingRight: "0 !important",
   },
@@ -184,6 +191,9 @@ const styles = {
     },
     featuredMedia: {
       paddingRight: "0 !important",
+      "& figure": {
+        maxHeight: "50vh",
+      },
       "& figure img": {
         marginLeft: "-14px",
         width: "100vw",
@@ -208,7 +218,7 @@ const SectionPage = ({
   section,
   media,
 }) => {
-  if (section.parentId || section.name == 'Humor') {
+  if (section.parentId || section.name == "Humor") {
     return (
       <Grid fluid className={classes.SubsectionPage}>
         <Helmet>
@@ -237,28 +247,37 @@ const SectionPage = ({
       </Grid>
     );
   }
-  const featuredArticle = Object.values(sectionTreeArticles)[0];
+  const featuredArticle = Object.values(sectionTreeArticles).find(article =>
+    Object.values(media).find(
+      mediaObject => mediaObject.articleId === article.id,
+    ),
+  );
   const featuredMedia = Object.values(media).find(
-    image => image.articleId === featuredArticle.id
+    image => image.articleId === featuredArticle.id,
   );
   let featuredArticleSection = Object.values(directSubsections).find(
-    subsection => subsection.id === featuredArticle.sectionId
+    subsection => subsection.id === featuredArticle.sectionId,
   );
   if (!featuredArticleSection) {
     featuredArticleSection = section;
   }
 
-  let secondaryArticle = Object.values(sectionTreeArticles).find(article => {
-    return article !== featuredArticle && Object.values(media).find(
-      mediaObject => mediaObject.articleId === article.id,
-    );
-  });
+  let secondaryArticle = Object.values(sectionTreeArticles).find(
+    article =>
+      article !== featuredArticle &&
+      Object.values(media).find(
+        mediaObject => mediaObject.articleId === article.id,
+      ),
+  );
   if (!secondaryArticle) {
     secondaryArticle = Object.values(sectionTreeArticles)[1];
   }
-  const featuredSubsection = Object.values(directSubsections).find(
-    subsection => subsection.id !== featuredArticle.sectionId
+  let featuredSubsection = Object.values(directSubsections).find(
+    subsection => subsection.id !== featuredArticle.sectionId,
   );
+  if (section.slug == "ae") {
+    featuredSubsection = Object.values(directSubsections)[1];
+  }
 
   return (
     <Grid fluid className={classes.SectionPage}>
@@ -286,12 +305,12 @@ const SectionPage = ({
       )}
 
       <Row className={classes.featuredRow}>
-      {featuredMedia && (
-        <Col xs={12} sm={7} md={7} lg={7} className={classes.featuredMedia}>
-          <figure>
-            <img src={featuredMedia.url} />
-          </figure>
-        </Col>
+        {featuredMedia && (
+          <Col xs={12} sm={7} md={7} lg={7} className={classes.featuredMedia}>
+            <figure>
+              <img src={featuredMedia.attachmentUrl} />
+            </figure>
+          </Col>
         )}
         <Col xs={12} sm={5} md={5} lg={5} className={classes.featuredArticle}>
           <Link
@@ -320,11 +339,11 @@ const SectionPage = ({
 
       <Row className={classes.secondaryRow}>
         <Col xsHidden sm={12} md={9} lg={9} className={classes.secondaryCol}>
-        {featuredSubsection && (
-          <div className={classes.SectionFeatureContainer}>
-            <SectionFeature section={featuredSubsection} recursive={true} />
-          </div>
-          )} 
+          {featuredSubsection && (
+            <div className={classes.SectionFeatureContainer}>
+              <SectionFeature section={featuredSubsection} without={featuredArticle} />
+            </div>
+          )}
           <LeftTitleArticle article={secondaryArticle} />
         </Col>
         <Col
@@ -340,7 +359,11 @@ const SectionPage = ({
 
       <Row>
         <Col xs={12} sm={9} md={9} lg={9} className={classes.latestArticles}>
-          <ArticleList articles={sectionTreeArticles} title="Latest" label="Latest" />
+          <ArticleList
+            articles={sectionTreeArticles}
+            title="Latest"
+            label="Latest"
+          />
         </Col>
         <Col xsHidden sm={3} md={3} lg={3}>
           <div className={classes.sectionColumnContainer}>

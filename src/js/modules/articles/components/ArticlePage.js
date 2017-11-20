@@ -65,8 +65,15 @@ const styles = {
   },
 };
 
-const ArticlePage = ({ classes, article, section, featuredMedia, media, openSubscriptionModal }) => {
-  if (!article){
+const ArticlePage = ({
+  classes,
+  article,
+  section,
+  featuredMedia,
+  media,
+  openSubscriptionModal,
+}) => {
+  if (!article) {
     return <NotFoundPage />;
   }
   return (
@@ -80,10 +87,7 @@ const ArticlePage = ({ classes, article, section, featuredMedia, media, openSubs
       <Row className={classes.descriptionRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.description}>
           The Pulse of the Student Body:&nbsp;
-          <span
-            className={classes.subscribe}
-            onClick={openSubscriptionModal}
-          >
+          <span className={classes.subscribe} onClick={openSubscriptionModal}>
             Subscribe
           </span>
           &nbsp;to <em>The Stuyvesant Spectator</em>’s biweekly newsletter.
@@ -106,4 +110,6 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ openSubscriptionModal }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(ArticlePage));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  injectSheet(styles)(ArticlePage),
+);

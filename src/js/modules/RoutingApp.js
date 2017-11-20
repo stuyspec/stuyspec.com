@@ -57,7 +57,7 @@ class RoutingApp extends Component {
       <ConnectedRouter
         onUpdate={() => window.scrollTo(0, 0)}
         history={appHistory}
-      >        
+      >
         {isAllDataFetched && (
           <PageLayout>
             <Switch>
@@ -182,10 +182,15 @@ class RoutingApp extends Component {
                 key={"latest"}
                 component={LatestPage}
               />
-              <Route path="*" key={"notFound"} component={NotFoundPage} />
+              <Route
+                path="*"
+                key={"notFound"}
+                component={NotFoundPage}
+                render={() => <Redirect to="/404-page-not-found" />}
+              />
             </Switch>
           </PageLayout>
-        )}        
+        )}
       </ConnectedRouter>
     );
   }

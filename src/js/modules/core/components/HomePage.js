@@ -43,12 +43,18 @@ const styles = {
 
 //The filler column should have a borderRight. Wait until there is something there first
 
-const HomePage = ({ classes, sections, articles }) => {
+const HomePage = ({ classes, sections, articles, media }) => {
   const newsSection = Object.values(sections).find(
     section => section.name === "News",
   );
   const recommendedArticles = Object.values(articles).slice(0, 5);
-  const featuredArticle = Object.values(articles)[0];
+  const featuredArticle = Object.values(articles).find(
+    article =>
+      sections[article.sectionId]["name"] != "News" &&
+      Object.values(media).find(
+        media => media.articleId === article.id && media.isFeatured,
+      ),
+  );
   const firstColumnSections = [
     "Opinions",
     "Features",
@@ -110,6 +116,7 @@ const HomePage = ({ classes, sections, articles }) => {
 
 const mapStateToProps = state => ({
   articles: getArticlesWithContributors(state),
+  media: state.media.media,
   sections: state.sections.sections,
 });
 

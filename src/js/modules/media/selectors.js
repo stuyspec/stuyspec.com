@@ -10,6 +10,9 @@ export const getMedia = state => state.media.media;
 export const getIllustratorIllustrations = createSelector(
   [getIllustratorFromSlug, getMedia],
   (illustrator, media) => {
+    if (!illustrator) {
+      return {};
+    }
     return Object.filter(media, mediaObject => {
       return (
         mediaObject.userId === illustrator.id &&
@@ -22,6 +25,9 @@ export const getIllustratorIllustrations = createSelector(
 export const getPhotographerPhotographs = createSelector(
   [getPhotographerFromSlug, getMedia],
   (photographer, media) => {
+    if (!photographer) {
+      return {};
+    }
     return Object.filter(media, mediaObject => {
       return (
         mediaObject.userId === photographer.id &&

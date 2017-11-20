@@ -41,6 +41,7 @@ const styles = {
   },
   figure: {
     float: "right",
+    height: "130px",
     marginLeft: "29px",
     width: "166px",
     "& img": {
@@ -77,6 +78,9 @@ const styles = {
     figure: {
       float: "none",
       margin: "0 0 14px 0",
+      height: "auto",
+      maxHeight: "80vw",
+      overflow: "hidden",
       width: "100%",
       "& img": {
         marginLeft: "-14px",
@@ -88,9 +92,6 @@ const styles = {
 
 const ArticleRow = ({ classes, article, sections, users, media }) => {
   const section = sections[article.sectionId];
-  if (!section) {
-    console.log(article.sectionId)
-  }
   const featuredMedia = Object.values(media).find(media => {
     return media.isFeatured && media.articleId === article.id;
   });
@@ -106,7 +107,10 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
         <div className={classes.preview}>
           {featuredMedia && (
             <figure className={classes.figure}>
-              <img src={featuredMedia.url} alt={featuredMedia.title} />
+              <img
+                src={featuredMedia.attachmentUrl}
+                alt={featuredMedia.title}
+              />
             </figure>
           )}
           <Link

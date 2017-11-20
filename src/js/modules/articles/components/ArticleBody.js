@@ -77,7 +77,7 @@ const ArticleBody = ({ classes, content, featuredMedia }) => {
     content = content.replace(specImgPattern, generateFigure);
   }
   */
-//  featuredMedia = Object.values(articleMedia).find(image => image.isFeatured);
+  //  featuredMedia = Object.values(articleMedia).find(image => image.isFeatured);
   return (
     <Row>
       <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>

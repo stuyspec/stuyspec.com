@@ -16,7 +16,7 @@ const styles = {
   },
   Recommended: {
     "& div:last-child": {
-      borderBottom: 0.
+      borderBottom: 0,
     },
   },
   label: {
@@ -67,7 +67,9 @@ const styles = {
   },
   figure: {
     float: "right",
+    height: "62px",
     marginLeft: "5px",
+    overflow: "hidden",
     width: "62px",
     "& img": {
       width: "100%",
@@ -134,7 +136,7 @@ const RightRail = ({ classes, articles, sections, media, ads }) => {
               <div className={classes.article} key={article.id}>
                 {featuredMedia && (
                   <figure className={classes.figure}>
-                    <img src={featuredMedia.url} />
+                    <img src={featuredMedia.thumbAttachmentUrl} />
                   </figure>
                 )}
                 <Link
@@ -147,10 +149,10 @@ const RightRail = ({ classes, articles, sections, media, ads }) => {
               </div>
             );
           })}
-        </div>
-        <div className={classes.tallAdContainer}>
-          <TallAd ad={ad} />
-        </div>
+      </div>
+      <div className={classes.tallAdContainer}>
+        <TallAd ad={ad} />
+      </div>
     </div>
   );
 };

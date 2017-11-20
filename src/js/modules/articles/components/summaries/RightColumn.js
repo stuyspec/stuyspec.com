@@ -104,7 +104,7 @@ const styles = {
 const RightColumn = ({ classes, articles, media, sections }) => {
   const [primaryArticle, secondaryArticle] = Object.values(articles).slice(
     10,
-    12
+    12,
   );
   /*
   [primaryMedia, secondaryMedia] = [

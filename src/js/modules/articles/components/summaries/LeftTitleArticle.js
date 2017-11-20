@@ -50,7 +50,7 @@ const styles = {
   },
   summary: {
     fontFamily: "Minion Pro",
-    fontSize: "14px",
+    fontSize: "16px",
     lineHeight: 1.29,
   },
   featuredMedia: {
@@ -109,10 +109,10 @@ const LeftTitleArticle = ({ classes, article, media, sections }) => {
         lg={8}
         className={classes.featuredMedia}
       >
-      {featuredMedia && (
-        <figure>
-          <img src={featuredMedia.url} />
-        </figure>
+        {featuredMedia && (
+          <figure>
+            <img src={featuredMedia.attachmentUrl} />
+          </figure>
         )}
       </Col>
       <Col
