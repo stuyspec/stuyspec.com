@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 
@@ -39,15 +39,63 @@ const styles = {
   },
 };
 
+class ArticleFeaturedMedia extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      imgHeight: 0,
+      imgWidth: 0,
+    };
+  }
+  componentDidMount() {
+    const img = new Image()
+    img.src = this.props.featuredMedia.attachmentUrl;
+    img.onload = () => {
+      this.setState({
+        imgHeight: img.height,
+        imgWidth: img.width,
+      });
+    }
+  }
+  render() {
+    const { classes, featuredMedia, isCaption } = this.props;
+    const { creator } = featuredMedia;
+    return (
+      <figure className={this.state.imgHeight > this.state.imgWidth * 1.2 ? classes.tallFigure : classes.figure}>
+        <img className={classes.img} src={featuredMedia.attachmentUrl} />
+        {isCaption && (
+          <figcaption className={classes.caption}>
+            <span>{featuredMedia.caption}&nbsp;</span>
+            <Link
+              className={classes.creditLine}
+              to={`/${MEDIA_CREATOR_SLUGS[
+                featuredMedia.mediaType
+              ]}/${creator.slug}`}
+            >
+              {capitalizeWord(featuredMedia.mediaType)}
+              &nbsp;by&nbsp;
+              {creator.firstName}
+              {creator.lastName !== "" && " " + creator.lastName}
+            </Link>
+            .
+          </figcaption>
+        )}
+      </figure>
+    );
+  }
+}
+/*
 const ArticleFeaturedMedia = ({ classes, featuredMedia, isCaption }) => {
   const { creator } = featuredMedia;
 
-  let figureIsTall = false;
+  var figureIsTall = false;
   const img = new Image();
+  let dimensions = []
   img.src = featuredMedia.attachmentUrl;
-  img.onload = () => (figureIsTall = true); //img.height > img.width * 1.2;
-  figureIsTall = true;
-  console.log(figureIsTall);
+  return img.onload = () => {
+    return <p>hj</p>
+  }
+  console.log(dimensions);
 
   return (
     <figure className={figureIsTall ? classes.tallFigure : classes.figure}>
@@ -72,5 +120,5 @@ const ArticleFeaturedMedia = ({ classes, featuredMedia, isCaption }) => {
     </figure>
   );
 };
-
+*/
 export default injectSheet(styles)(ArticleFeaturedMedia);

@@ -50,7 +50,7 @@ const styles = {
   },
   summary: {
     fontFamily: "Minion Pro",
-    fontSize: "14px",
+    fontSize: "16px",
     lineHeight: 1.29,
   },
   featuredMedia: {

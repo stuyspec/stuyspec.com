@@ -110,7 +110,6 @@ export const getIllustratorArticles = createSelector(
 export const getPhotographerArticles = createSelector(
   [getPhotographerPhotographs, getArticlesWithContributors],
   (photographs, articles) => {
-    console.log(photographs);
     return Object.values(photographs).reduce((acc, photograph) => {
       const article = articles[photograph.articleId];
       acc[article.id] = article;

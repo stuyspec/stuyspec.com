@@ -116,26 +116,12 @@ const SectionFeature = ({
   section,
   sections,
   media,
-  recursive,
+  without
 }) => {
   let sectionArticles = [];
-  if (recursive) {
-    subsectionIds = Object.values(sections)
-      .filter(subsection => subsection.parentId === section.id)
-      .map(subsection => subsection.id);
-    sectionArticles = Object.values(
-      Object.filter(
-        articles,
-        article =>
-          subsectionIds.includes(article.sectionId) ||
-          article.sectionId === section.id,
-      ),
-    );
-  } else {
-    sectionArticles = Object.values(
-      Object.filter(articles, article => article.sectionId === section.id),
-    );
-  }
+  sectionArticles = Object.values(
+    Object.filter(articles, article => article.sectionId === section.id && article !== without),
+  )
   const primaryArticle =
     sectionArticles[0] === Object.values(articles)[0]
       ? sectionArticles[1]

@@ -99,7 +99,8 @@ const styles = {
   },
   TallAdContainer: {
     borderLeft: "1px solid #ddd",
-    marginTop: "24px",
+    marginTop: "24px",    
+    minHeight: "450px",
     paddingLeft: "14px !important",
     paddingRight: "0 !important",
   },
@@ -340,7 +341,7 @@ const SectionPage = ({
         <Col xsHidden sm={12} md={9} lg={9} className={classes.secondaryCol}>
           {featuredSubsection && (
             <div className={classes.SectionFeatureContainer}>
-              <SectionFeature section={featuredSubsection} recursive={true} />
+              <SectionFeature section={featuredSubsection} without={featuredArticle} />
             </div>
           )}
           <LeftTitleArticle article={secondaryArticle} />
