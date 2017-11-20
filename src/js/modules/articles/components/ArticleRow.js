@@ -33,7 +33,6 @@ const styles = {
     fontFamily: "Circular Std",
     fontSize: "12px",
     fontWeight: "300",
-    float: "left",
     marginRight: "19px",
   },
   preview: {

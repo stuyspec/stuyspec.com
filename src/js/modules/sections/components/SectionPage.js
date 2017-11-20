@@ -338,7 +338,7 @@ const SectionPage = ({
       </Row>
 
       <Row className={classes.secondaryRow}>
-        <Col xsHidden sm={12} md={9} lg={9} className={classes.secondaryCol}>
+        <Col xs={12} sm={12} md={9} lg={9} className={classes.secondaryCol}>
           {featuredSubsection && (
             <div className={classes.SectionFeatureContainer}>
               <SectionFeature
