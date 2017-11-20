@@ -77,8 +77,11 @@ export const signIn = (signInParams, isInModal) => {
           type: t.SIGN_IN_FULFILLED,
           payload: response,
         });
-        const sessionObject = {userId:response.data.data.id, headers: response.headers};
-        localStorage.setItem("session",JSON.stringify(sessionObject));
+        const sessionObject = {
+          userId: response.data.data.id,
+          headers: response.headers,
+        };
+        localStorage.setItem("session", JSON.stringify(sessionObject));
         if (isInModal !== true) {
           appHistory.push("/myaccount/profile");
         }
@@ -194,7 +197,7 @@ export const sessionfy = sessionObject => {
   return dispatch => {
     dispatch({
       type: t.SESSIONFY,
-      payload: sessionObject
-    })
-  }
-}
+      payload: sessionObject,
+    });
+  };
+};

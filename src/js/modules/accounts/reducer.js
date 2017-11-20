@@ -15,7 +15,7 @@ import {
   CLOSE_SIGN_IN_MODAL,
   OPEN_SUBSCRIPTION_MODAL,
   CLOSE_SUBSCRIPTION_MODAL,
-  SESSIONFY
+  SESSIONFY,
 } from "./actionTypes";
 
 const initialState = {
@@ -187,7 +187,7 @@ const reducer = (state = { ...initialState }, action) => {
 
     case SESSIONFY: {
       console.log(action.payload);
-      return {...state, session: action.payload};
+      return { ...state, session: action.payload };
     }
 
     case "@@redux-form/DESTROY": {

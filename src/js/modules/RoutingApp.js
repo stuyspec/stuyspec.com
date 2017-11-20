@@ -51,7 +51,7 @@ class RoutingApp extends Component {
       descriptions,
       session,
       isAllDataFetched,
-      sessionfy
+      sessionfy,
     } = this.props;
     return (
       <ConnectedRouter
