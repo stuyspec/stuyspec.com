@@ -55,7 +55,7 @@ const styles = {
   },
   featuredMedia: {
     paddingRight: "14px !important",
-    height: "310px",
+    height: "360px",
     overflow: "hidden",
     "& > figure > img": {
       width: "100%",

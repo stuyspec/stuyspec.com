@@ -13,27 +13,16 @@ const styles = {
   },
 };
 
-const MastheadContainer = ({ displayFixedBar, location }) => {
-  return (
-    <div>
-      {location.pathname === "/" ? (
-        <Masthead />
-      ) : (
-        <MastheadBar location={location} />
-      )}
-    </div>
-  );
-};
-
 const PageHeader = ({ classes, location }) => {
   return (
     <Grid>
       <Row>
         <Col xsHidden smHidden md={12} lg={12}>
-          <MastheadContainer
-            displayFixedBar={document.body.scrollTop > 160}
-            location={location}
-          />
+          {location.pathname === "/" || location.pathname === "/404-page-not-found" ? (
+            <Masthead />
+          ) : (
+            <MastheadBar location={location} />
+          )}
         </Col>
       </Row>
       <Row>

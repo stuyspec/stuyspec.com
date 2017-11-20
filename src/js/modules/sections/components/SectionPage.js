@@ -100,7 +100,6 @@ const styles = {
   TallAdContainer: {
     borderLeft: "1px solid #ddd",
     marginTop: "24px",
-    minHeight: "450px",
     paddingLeft: "14px !important",
     paddingRight: "0 !important",
   },

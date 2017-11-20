@@ -182,10 +182,14 @@ class RoutingApp extends Component {
                 key={"latest"}
                 component={LatestPage}
               />
-              <Route
-                path="*"
+               <Route
+                path="/404-page-not-found"
                 key={"notFound"}
                 component={NotFoundPage}
+              />
+              <Route
+                path="*"
+                key={"404"}
                 render={() => <Redirect to="/404-page-not-found" />}
               />
             </Switch>
