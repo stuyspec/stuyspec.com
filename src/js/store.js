@@ -5,7 +5,6 @@ import thunk from "redux-thunk";
 import promise from "redux-promise-middleware";
 import reducer from "./reducers";
 import localizer from "middleware/localizer";
-import { persistStore, autoRehydrate } from "redux-persist";
 import logger from "redux-logger";
 import routerMiddleware from "react-router-redux/middleware";
 import appHistory from "tools/appHistory";
