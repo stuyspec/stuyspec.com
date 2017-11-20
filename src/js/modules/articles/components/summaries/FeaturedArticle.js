@@ -57,11 +57,13 @@ const styles = {
     padding: "0 0 0 14px !important",
   },
   figure: {
+    maxHeight: "480px",
+    overflow: "hidden",
     "& img": {
       width: "100%",
     },
   },
-  "@media (max-width: 768px)": {
+  "@media (max-width: 767px)": {
     featuredMediaContainer: {
       marginBottom: "14px",
       padding: "0 !important",
@@ -70,6 +72,7 @@ const styles = {
       padding: "0 !important",
     },
     figure: {
+      maxHeight: "50vw",
       "& img": {
         marginLeft: "-14px",
         width: "100vw",

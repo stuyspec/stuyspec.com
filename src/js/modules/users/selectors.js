@@ -62,7 +62,6 @@ export const getPhotographerFromSlug = createSelector(
     });
     if (
       userRoles.find(userRole => {
-        console.log(userRole);
         return (
           userRole.userId === user.id &&
           roles[userRole.roleId].title === "Photographer"

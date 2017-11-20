@@ -32,7 +32,9 @@ const styles = {
   },
   featuredMedia: {
     "& figure": {
-      margiSection: "0",
+      margin: 0,
+      maxHeight: "500px",
+      overflow: "hidden",
       width: "100%",
       "& img": {
         width: "100%",
@@ -188,6 +190,9 @@ const styles = {
     },
     featuredMedia: {
       paddingRight: "0 !important",
+      "& figure": {
+        maxHeight: "50vh",
+      },
       "& figure img": {
         marginLeft: "-14px",
         width: "100vw",
@@ -241,7 +246,11 @@ const SectionPage = ({
       </Grid>
     );
   }
-  const featuredArticle = Object.values(sectionTreeArticles)[0];
+  const featuredArticle = Object.values(sectionTreeArticles).find(article =>
+    Object.values(media).find(
+      mediaObject => mediaObject.articleId === article.id,
+    ),
+  );
   const featuredMedia = Object.values(media).find(
     image => image.articleId === featuredArticle.id,
   );
@@ -252,20 +261,22 @@ const SectionPage = ({
     featuredArticleSection = section;
   }
 
-  let secondaryArticle = Object.values(sectionTreeArticles).find(article => {
-    return (
+  let secondaryArticle = Object.values(sectionTreeArticles).find(
+    article =>
       article !== featuredArticle &&
       Object.values(media).find(
         mediaObject => mediaObject.articleId === article.id,
-      )
-    );
-  });
+      ),
+  );
   if (!secondaryArticle) {
     secondaryArticle = Object.values(sectionTreeArticles)[1];
   }
-  const featuredSubsection = Object.values(directSubsections).find(
+  let featuredSubsection = Object.values(directSubsections).find(
     subsection => subsection.id !== featuredArticle.sectionId,
   );
+  if (section.slug == "ae") {
+    featuredSubsection = Object.values(directSubsections)[1];
+  }
 
   return (
     <Grid fluid className={classes.SectionPage}>

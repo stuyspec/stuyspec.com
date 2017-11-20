@@ -20,6 +20,9 @@ const styles = {
     lineHeight: 1,
     marginBottom: "11px",
   },
+  articleList: {
+    padding: 0,
+  },
   "@media (min-width: 992px)": {
     LatestPage: {
       marginTop: "80px",

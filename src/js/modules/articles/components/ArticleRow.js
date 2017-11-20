@@ -41,6 +41,7 @@ const styles = {
   },
   figure: {
     float: "right",
+    height: "130px",
     marginLeft: "29px",
     width: "166px",
     "& img": {
@@ -77,6 +78,9 @@ const styles = {
     figure: {
       float: "none",
       margin: "0 0 14px 0",
+      height: "auto",
+      maxHeight: "80vw",
+      overflow: "hidden",
       width: "100%",
       "& img": {
         marginLeft: "-14px",
@@ -104,7 +108,7 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
           {featuredMedia && (
             <figure className={classes.figure}>
               <img
-                src={featuredMedia.mediumAttachmentUrl}
+                src={featuredMedia.attachmentUrl}
                 alt={featuredMedia.title}
               />
             </figure>

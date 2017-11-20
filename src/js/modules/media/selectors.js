@@ -22,6 +22,7 @@ export const getIllustratorIllustrations = createSelector(
 export const getPhotographerPhotographs = createSelector(
   [getPhotographerFromSlug, getMedia],
   (photographer, media) => {
+    console.log(photographer);
     return Object.filter(media, mediaObject => {
       return (
         mediaObject.userId === photographer.id &&
