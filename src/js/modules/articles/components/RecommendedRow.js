@@ -74,6 +74,8 @@ const styles = {
   },
   figure: {
     marginBottom: "4.1px",
+    height: "170px",
+    overflow: "hidden",
     width: "100%",
     "& img": {
       width: "100%",
@@ -98,6 +100,9 @@ const styles = {
   "@media (max-width: 767px)": {
     RecommendedRow: {
       padding: "0 2%",
+    },
+    figure: {
+      height: "270px",
     },
   },
   "@media (max-width: 575px)": {

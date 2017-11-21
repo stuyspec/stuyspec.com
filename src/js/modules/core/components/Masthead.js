@@ -244,11 +244,13 @@ const Masthead = ({
             Newsletter
           </Link>
         </li>
+        {/*
         <li key={-2} className={classes.sectionListItem}>
           <Link to={"/paper"} className={classes.sectionLink}>
             The Paper
           </Link>
         </li>
+      */}
       </ul>
     </div>
   );

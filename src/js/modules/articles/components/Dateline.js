@@ -12,9 +12,21 @@ const styles = {
   },
 };
 
-// TODO: format dates
 const Dateline = ({ classes, article }) => {
-  return <p className={classes.Dateline}>{formatDate(article.createdAt)}</p>;
+  let dateText = "";
+  if (article.issue == 1) {
+    dateText = "September 11, 2017";
+  } else if (article.issue == 2) {
+    dateText = "September 29, 2017";
+  } else if (article.issue == 3) {
+    dateText = "October 10, 2017";
+  } else if (article.issue == 4) {
+    dateText = "October 31, 2017";
+  } else if (article.issue == 5) {
+    dateText = "November 10, 2017";
+  }
+  // return <p className={classes.Dateline}>{formatDate(article.createdAt)}</p>;
+  return <p className={classes.Dateline}>{dateText}</p>
 };
 
 export default injectSheet(styles)(Dateline);
