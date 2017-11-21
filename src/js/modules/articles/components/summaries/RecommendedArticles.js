@@ -69,11 +69,7 @@ const styles = {
   },
 };
 
-const RecommendedArticles = ({ classes, articles, sections, indexFrom }) => {
-  const recommendedArticles = Object.values(articles).slice(
-    indexFrom,
-    indexFrom + 5,
-  );
+const RecommendedArticles = ({ classes, recommendedArticles, sections }) => {
   // NESTED IN <Col lg={3} md={3}>
   return (
     <div className={classes.RecommendedArticles}>
@@ -109,7 +105,6 @@ const RecommendedArticles = ({ classes, articles, sections, indexFrom }) => {
 };
 
 const mapStateToProps = state => ({
-  articles: state.articles.articles,
   sections: state.sections.sections,
 });
 

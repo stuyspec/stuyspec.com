@@ -113,12 +113,9 @@ const LeftColumn = ({ classes, articles, media, sections }) => {
     6,
     8,
   );
-
-  const outquoteArticle = Object.values(articles).slice(9)[0];
-  /*
   const outquoteArticle = Object.values(articles).slice(9).find(article => {
     return Object.find(outquotes, outquote => outquote.articleId === article.id)
-  });*/
+  });
 
   [primaryMedia, secondaryMedia, outquoteMedia] = [
     primaryArticle,

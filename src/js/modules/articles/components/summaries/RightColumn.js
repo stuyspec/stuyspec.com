@@ -102,21 +102,16 @@ const styles = {
 };
 
 const RightColumn = ({ classes, articles, media, sections }) => {
-  const [primaryArticle, secondaryArticle] = Object.values(articles).slice(
-    10,
-    12,
-  );
-  /*
-  [primaryMedia, secondaryMedia] = [
-    primaryArticle,
-    secondaryArticle,
-  ].map(article => {
-    return Object.values(media).find(
-      mediaObject =>
-        mediaObject.articleId === article.id && mediaObject.isFeatured,
-    );
+  let availableArticles = [];
+  Object.values(articles).slice(9).find(article => {
+    if (availableArticles.length >= 2) {
+      return true;
+    }
+    if (!Object.find(outquotes, outquote => outquote.articleId === article.id)) {
+      availableArticles.push(article);
+    }
   });
-  */
+  const [primaryArticle, secondaryArticle] = availableArticles;
   return (
     <Col xs={12} sm={3} md={3} lg={3} className={classes.RightColumn}>
       <div

@@ -47,14 +47,22 @@ const HomePage = ({ classes, sections, articles, media }) => {
   const newsSection = Object.values(sections).find(
     section => section.name === "News",
   );
-  const recommendedArticles = Object.values(articles).slice(0, 5);
   const featuredArticle = Object.values(articles).find(
     article =>
-      sections[article.sectionId]["name"] != "News" &&
+      sections[article.sectionId]["name"] !== "News" &&
       Object.values(media).find(
         media => media.articleId === article.id && media.isFeatured,
       ),
   );
+  let recommendedArticles = [];
+  for (article of Object.values(articles)) {
+    if (recommendedArticles.length >= 5) {
+      break;
+    }
+    if (article !== featuredArticle && article.sectionId !== newsSection.id) {
+      recommendedArticles.push(article)
+    }
+  }
   const firstColumnSections = [
     "Opinions",
     "Features",
@@ -91,7 +99,7 @@ const HomePage = ({ classes, sections, articles, media }) => {
             lg={3}
             className={classes.recommendedArticles}
           >
-            <RecommendedArticles indexFrom={1} />
+            <RecommendedArticles indexFrom={3} />
           </Col>
         </Row>
         <Row>
