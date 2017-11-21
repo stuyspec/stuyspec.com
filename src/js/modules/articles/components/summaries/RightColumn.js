@@ -101,13 +101,13 @@ const styles = {
   },
 };
 
-const RightColumn = ({ classes, articles, media, sections }) => {
+const RightColumn = ({ classes, articles, media, sections, outquotes }) => {
   let availableArticles = [];
   Object.values(articles).slice(9).find(article => {
     if (availableArticles.length >= 2) {
       return true;
     }
-    if (!Object.find(outquotes, outquote => outquote.articleId === article.id)) {
+    if (!Object.values(outquotes).find(outquote => outquote.articleId === article.id)) {
       availableArticles.push(article);
     }
   });
@@ -183,6 +183,7 @@ const mapStateToProps = state => ({
   articles: getArticlesWithContributors(state),
   media: state.media.media,
   sections: state.sections.sections,
+  outquotes: state.outquotes.outquotes
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(RightColumn));

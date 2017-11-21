@@ -108,13 +108,13 @@ const styles = {
   },
 };
 
-const LeftColumn = ({ classes, articles, media, sections }) => {
+const LeftColumn = ({ classes, articles, media, sections, outquotes }) => {
   const [primaryArticle, secondaryArticle] = Object.values(articles).slice(
     6,
     8,
   );
   const outquoteArticle = Object.values(articles).slice(9).find(article => {
-    return Object.find(outquotes, outquote => outquote.articleId === article.id)
+    return Object.values(outquotes).find(outquote => outquote.articleId === article.id)
   });
 
   [primaryMedia, secondaryMedia, outquoteMedia] = [
@@ -219,6 +219,7 @@ const mapStateToProps = state => ({
   articles: getArticlesWithContributors(state),
   media: state.media.media,
   sections: state.sections.sections,
+  outquotes: state.outquotes.outquotes,
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(LeftColumn));

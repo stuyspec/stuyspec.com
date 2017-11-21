@@ -99,7 +99,7 @@ const HomePage = ({ classes, sections, articles, media }) => {
             lg={3}
             className={classes.recommendedArticles}
           >
-            <RecommendedArticles indexFrom={3} />
+            <RecommendedArticles recommendedArticles={recommendedArticles} />
           </Col>
         </Row>
         <Row>
