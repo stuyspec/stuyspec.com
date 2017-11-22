@@ -217,7 +217,7 @@ const SectionPage = ({
   section,
   media,
 }) => {
-  if (section.parentId || section.name == "Humor") {
+  if (section.parentId || section.name === "Humor" || section.name === "News") {
     return (
       <Grid fluid className={classes.SubsectionPage}>
         <Helmet>

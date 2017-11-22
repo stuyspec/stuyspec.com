@@ -61,10 +61,11 @@ const sidebarStyles = {
 
 class PageLayout extends Component {
   componentDidUpdate(prevProps) {
-    if (document.getElementById('scroll-reset-assistant')) { // onChange called once before my-page renders
-      document.getElementById('scroll-reset-assistant').parentNode.scrollTop = 0;
+    if (this.props.location !== prevProps.location) {
+      if (document.getElementById('scroll-reset-assistant')) { // onChange called once before my-page renders
+        document.getElementById('scroll-reset-assistant').parentNode.scrollTop = 0;
+      }
     }
-    document.scrollingElement.scrollTop = 0;
   }
 
   handleSetOpen = isSidebarOpen => {
