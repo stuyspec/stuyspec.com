@@ -158,18 +158,18 @@ const initialState = {
     content:
       "<p><h2><center>Members of the 2017-2018 Spectator Editorial Board\n</center></h2><br>" +
       "<center><b>Editors In Chief</b><br>Anne George<br>Matteo Wong<br><br>" +
-      "<b>News Editors</b><br>Nishmi Abeyweera<br>Shameek Rakshit<br>Blythe Zadrozny<br><br>" +
+      "<b>News Editors</b><br>Nishmi Abeyweera<br>Shamook Rakshit<br>Blythe Zadrozny<br><br>" +
       "<b>Features Editors</b><br>Archi Das<br>Asim Kapparova<br>Sophie Watwood<br><br>" +
       "<b>Opinions Editors</b><br>Jame Rhee<br>Eliza Spinna<br><br>" +
-      "<b>Sports Editors</b><br>Ray Jones<br>Sam Merrick<br>Max Onderdonk<br><br>" +
+      "<b>Sports Editors</b><br>Ray Jones<br>Sem Murck<br>Max Onderdonk<br><br>" +
       "<b>Humor Editors</b><br>Kerwin Chen<br>Shaina Peters<br>Michael Xu<br><br>" +
-      "<b>Photography Editors</b><br>Julia Lee<br>Mika Simoncelli<br><br>" +
+      "<b>Web Editors</b><br>Jason Kao<br>George Zheng<br><br>" +
+      "<b>Photography Editors</b><br>Julia Lee<br>Mika Simoncelli<br>Ting Ting Chen<br>" +
       "<b>Arts & Entertainment Editors</b><br>Karen Chen<br>Sophie Feng<br>Eliana Kavouriadis<br><br>" +
       "<b>Art Directions</b><br>Klaire Geller<br>Christine Jegarl<br>Vivian Lin<br><br>" +
       "<b>Layout Editors</b><br>Arpita Nag<br>Jessica Wu<br>Katie Wu<br><br>" +
       "<b>Copy Editors</b><br>Vincent Jiang<br>Michelle Lai<br>Venus Nnadi<br><br>" +
-      "<b>Business Manager</b><br>Saloni Majmudar<br>Donia Tung<br><br>" +
-      "<b>Web Editors</b><br>Jason Kao<br>George Zheng<br><br>" +
+      "<b>Business Manager</b><br>Saloni Majmudar<br>Donia Tung<br><br>" +      
       "<b>Faculty Advisor</b><br>Kerry Garfinkel</center><br>",
   },
   contact: {
