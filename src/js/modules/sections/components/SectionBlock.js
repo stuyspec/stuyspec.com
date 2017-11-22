@@ -91,10 +91,21 @@ const styles = {
   },
 };
 
-const SectionBlock = ({ classes, articles, section, media }) => {
-  const sectionArticles = Object.values(
-    Object.filter(articles, article => article.sectionId === section.id),
-  );
+const SectionBlock = ({ classes, articles, section, sections, media }) => {
+  let sectionArticles = [];
+  if (section.name === "Sports") { // most sports articles are in subsections
+    const subsectionIds = Object
+      .values(sections)
+      .filter(subsection => subsection.parentId === section.id)
+      .map(subsection => subsection.id)
+    sectionArticles = Object.values(
+      Object.filter(articles, article => subsectionIds.includes(article.sectionId))
+    );
+  } else {
+    sectionArticles = Object.values(
+      Object.filter(articles, article => article.sectionId === section.id),
+    );
+  }
   const bigArticle = sectionArticles[0];
   const rowArticles = sectionArticles.slice(1, 4);
   return (
@@ -146,6 +157,7 @@ const SectionBlock = ({ classes, articles, section, media }) => {
 const mapStateToProps = (state, ownProps) => ({
   media: state.media.media,
   articles: getArticlesWithContributors(state),
+  sections: state.sections.sections,
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(SectionBlock));
