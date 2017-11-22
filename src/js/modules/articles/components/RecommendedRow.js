@@ -74,7 +74,7 @@ const styles = {
   },
   figure: {
     marginBottom: "4.1px",
-    height: "170px",
+    maxHeight: "170px",
     overflow: "hidden",
     width: "100%",
     "& img": {
@@ -102,7 +102,7 @@ const styles = {
       padding: "0 2%",
     },
     figure: {
-      height: "270px",
+      maxHeight: "270px",
     },
   },
   "@media (max-width: 575px)": {
@@ -140,6 +140,11 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
               mediaObject.isFeatured && mediaObject.articleId === article.id
             );
           });
+          let linkToArticle = section.permalink + '/' + article.slug;
+          if (section.parentId) {
+            linkToArticle = sections[section.parentId] + linkToArticle;
+          }
+
           if (featuredMedia) {
             return (
               <div key={article.id} className={classes.recommendedBlock}>
@@ -164,7 +169,7 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
                   {section.name}
                 </Link>
                 <Link
-                  to={`${section.permalink}/${article.slug}`}
+                  to={linkToArticle}
                   className={classes.titleWithoutImage}
                 >
                   {article.title}
