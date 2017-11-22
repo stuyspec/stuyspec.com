@@ -33,8 +33,12 @@ const ArticleList = ({ classes, articles, title, label }) => {
   let rowArticles = articles;
   if (title !== "Recommended") {
     rowArticles = Object.values(articles).sort((a, b) => {
-      return new Date(a) - new Date(b);
+      return new Date(b.createdAt) - new Date(a.createdAt);
     });
+    console.log(rowArticles);
+  }
+  else {
+    rowArticles = Object.values(articles);
   }
   return (
     <Grid className={classes.ArticleList}>
