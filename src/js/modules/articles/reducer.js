@@ -1,9 +1,11 @@
 import {
-  FETCH_ARTICLE_PENDING,
-  FETCH_ARTICLE_FULFILLED,
-  FETCH_ARTICLE_REJECTED,
-  ADD_AUTHORSHIPS,
+  FETCH_ARTICLES_PENDING,
+  FETCH_ARTICLES_FULFILLED,
+  FETCH_ARTICLES_REJECTED,
+  FETCH_AUTHORSHIPS_FULFILLED,
 } from "./actionTypes";
+
+import { isObjectEmpty, shortenSummary } from "../../utils";
 
 const initialState = {
   isFetching: false,
@@ -15,33 +17,35 @@ const initialState = {
 
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
-    case FETCH_ARTICLE_PENDING: {
+    case FETCH_ARTICLES_PENDING: {
       return { ...state, isFetching: true };
     }
-    case FETCH_ARTICLE_FULFILLED: {
+    case FETCH_ARTICLES_FULFILLED: {
       const newArticles = action.payload.reduce((acc, article) => {
+        article["originalSummary"] = article["summary"];
+        article["summary"] = shortenSummary(article);
         acc[article.id] = article;
         return acc;
       }, {});
       return {
         ...state,
         isFetching: false,
-        isFetched: true,
-        articles: { ...state.articles, ...newArticles },
+        isFetched: state.authorships.length !== 0,
+        articles: newArticles,
       };
     }
-    case FETCH_ARTICLE_REJECTED: {
+    case FETCH_ARTICLES_REJECTED: {
       return {
         ...state,
         isFetching: false,
         error: action.payload,
       };
     }
-    case ADD_AUTHORSHIPS: {
+    case FETCH_AUTHORSHIPS_FULFILLED: {
       return {
         ...state,
-        authorships: [...state.authorships, ...action.payload],
-        response: [],
+        isFetched: !isObjectEmpty(state.articles),
+        authorships: action.payload,
       };
     }
   }

@@ -26,18 +26,18 @@ export const getArticlesWithContributors = createSelector(
   (originalArticles, users, authorships) => {
     // efficient and readable method of deep cloning an object.
     // https://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-deep-clone-an-object-in-javascript
-    let articles = JSON.parse(JSON.stringify(originalArticles));
-    return authorships.reduce((acc, authorship) => {
-      let targetArticle = articles[authorship.articleId];
-      if (targetArticle.contributors === undefined) {
-        targetArticle.contributors = [];
-      }
-      targetArticle.contributors.push(users[authorship.contributorId]);
-      acc[targetArticle.id] = targetArticle;
-      return acc;
-    }, {});
+    const articles = JSON.parse(JSON.stringify(originalArticles));
+    Object.keys(articles).map(articleId => {
+      const targetArticle = articles[articleId];
+      targetArticle.contributors = authorships
+        .filter(authorship => authorship.articleId === parseInt(articleId))
+        .map(authorship => users[authorship.userId]);
+    });
+    return articles;
   },
 );
+
+// TODO: make authorships an object because of duplication error, might need to do that for other things too
 
 /**
  * The selector returns a filtered articles object that contains all articles
@@ -79,7 +79,7 @@ export const getContributorArticles = createSelector(
   [getContributorFromSlug, getArticlesWithContributors, getAuthorships],
   (contributor, articles, authorships) => {
     return authorships.reduce((acc, authorship) => {
-      if (authorship.contributorId === contributor.id) {
+      if (contributor && authorship.userId === contributor.id) {
         const article = articles[authorship.articleId];
         acc[article.id] = article;
       }
@@ -125,12 +125,35 @@ export const getPhotographerArticles = createSelector(
 export const getArticleFeaturedMedia = createSelector(
   [getArticleFromRequestedSlug, getMedia, getUsers],
   (article, media, users) => {
+    if (!article) {
+      return null;
+    }
     const featuredMedia = Object.values(media).find(mediaObject => {
       return mediaObject.isFeatured && mediaObject.articleId === article.id;
     });
-    return {
-      ...featuredMedia,
-      creator: users[featuredMedia.userId],
-    };
+    if (featuredMedia) {
+      return {
+        ...featuredMedia,
+        creator: users[featuredMedia.userId],
+      };
+    }
+  },
+);
+
+export const getLatestArticles = createSelector(
+  [getArticlesWithContributors],
+  articles => {
+    return Object.values(articles).sort((a, b) => {
+      return new Date(b) - new Date(a);
+    });
+  },
+);
+
+export const getArticlesFromSection = createSelector(
+  [getArticlesWithContributors, getSectionFromRequestedSlug],
+  (articles, section) => {
+    return Object.values(articles).filter(
+      article => article.sectionId === section.id,
+    );
   },
 );

@@ -1,11 +1,22 @@
-import React from "react";
+import React, { Component } from "react";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 import ConnectedRouter from "react-router-redux/ConnectedRouter";
 import appHistory from "tools/appHistory";
 
-import { ArticlePage } from "./articles/components";
-import { HomePage, PageLayout } from "./core/components";
+import {
+  SignInPage,
+  SignUpPage,
+  ProfilePage,
+  EditProfilePage,
+} from "./accounts/components";
+import {
+  ArticlePage,
+  RecommendedPage,
+  LatestPage,
+} from "./articles/components";
+import { HomePage, PageLayout, NotFoundPage } from "./core/components";
 import { DescriptionPage } from "./descriptions/components";
 import { SectionPage } from "./sections/components";
 import {
@@ -15,114 +26,194 @@ import {
   IllustratorPage,
 } from "./users/components";
 
-import { getDescriptions } from "./descriptions/selectors";
-import { getRoles } from "./users/selectors";
-import { getSections } from "./sections/selectors";
+import { fetchAllData } from "./core/actions";
+import { sessionfy } from "./accounts/actions";
 
-const RoutingApp = ({ sections, roles, descriptions }) => {
-  const createSectionRoutes = () => {
-    return Object.values(sections).map(section => {
-      return (
-        <Route
-          exact
-          path={section.permalink}
-          key={`sectionRoute${section.id}`}
-          render={props => (
-            <SectionPage match={props.match} section={section} />
-          )}
-        />
-      );
-    });
-  };
-  const createArticleRoutes = () => {
-    return Object.values(sections).map(section => {
-      return (
-        <Route
-          exact
-          path={`${section.permalink}/:article_slug`}
-          key={`articleRoute${section.id}`}
-          render={props => (
-            <ArticlePage match={props.match} section={section} />
-          )}
-        />
-      );
-    });
-  };
-  const createRoleRoutes = () => {
-    return Object.values(roles).map(role => {
-      return (
-        <Route
-          exact
-          path={`/${role.slug}`}
-          key={`roleRoute${role.id}`}
-          render={props => <RolePage role={role} />}
-        />
-      );
-    });
-  };
-  const createDescriptionRoutes = () => {
-    return Object.values(descriptions).map(description => {
-      return (
-        <Route
-          exact
-          path={`/about/${description.slug}`}
-          key={`descriptionRoutes${description.id}`}
-          render={props => <DescriptionPage description={description} />}
-        />
-      );
-    });
-  };
-  return (
-    <ConnectedRouter history={appHistory}>
-      <PageLayout>
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          {/* These routes are created in separate functions, as opposed to
-           * separate components, because nesting <Route>'s in <div>'s will
-           * throw off <Switch> routing.
-           */}
-          {createSectionRoutes()}
-          {createArticleRoutes()}
-          {createRoleRoutes()}
-          {createDescriptionRoutes()}
-          <Route
-            exact
-            path={"/contributors/:contributor_slug"}
-            key={"contributorRoute"}
-            render={props => (
-              <ContributorPage
-                match={props.match}
-                role={roles["contributors"]}
+class RoutingApp extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    this.props.fetchAllData();
+    const session = localStorage.getItem("session");
+    if (session) {
+      this.props.sessionfy(JSON.parse(session));
+    }
+  }
+
+  render() {
+    const {
+      sections,
+      roles,
+      descriptions,
+      session,
+      isAllDataFetched,
+      sessionfy,
+    } = this.props;
+    return (
+      <ConnectedRouter
+        onUpdate={() => window.scrollTo(0, 0)}
+        history={appHistory}
+      >
+        {isAllDataFetched && (
+          <PageLayout>
+            <Switch>
+              <Route exact path="/" component={HomePage} />
+              {Object.values(sections).map(section => {
+                return (
+                  <Route
+                    exact
+                    path={section.permalink}
+                    key={`section${section.id}`}
+                    render={props => (
+                      <SectionPage match={props.match} section={section} />
+                    )}
+                  />
+                );
+              })}
+              {Object.values(sections).map(section => {
+                return (
+                  <Route
+                    exact
+                    path={`${section.permalink}/:article_slug`}
+                    key={`article${section.id}`}
+                    render={props => (
+                      <ArticlePage match={props.match} section={section} />
+                    )}
+                  />
+                );
+              })}
+              {/*Object.values(roles).map(role => {
+                return (
+                  <Route
+                    exact
+                    path={`/${role.slug}`}
+                    key={`role${role.id}`}
+                    render={props => <RolePage role={role} />}
+                  />
+                );
+              })*/}
+              {Object.values(descriptions).map(description => {
+                return (
+                  <Route
+                    exact
+                    path={`/about/${description.slug}`}
+                    key={`description${description.id}`}
+                    render={props => (
+                      <DescriptionPage description={description} />
+                    )}
+                  />
+                );
+              })}
+              <Route
+                exact
+                path={"/contributors/:contributor_slug"}
+                key={"contributors"}
+                render={props => <ContributorPage match={props.match} />}
               />
-            )}
-          />
-          <Route
-            exact
-            path={"/illustrators/:illustrator_slug"}
-            key={"illustratorRoute"}
-            render={props => <IllustratorPage match={props.match} />}
-          />
-          <Route
-            exact
-            path={"/photographers/:photographer_slug"}
-            key={"photographerRoute"}
-            render={props => (
-              <PhotographerPage
-                match={props.match}
-                role={roles["photographers"]}
+              <Route
+                exact
+                path={"/illustrators/:illustrator_slug"}
+                key={"illustrators"}
+                render={props => <IllustratorPage match={props.match} />}
               />
-            )}
-          />
-        </Switch>
-      </PageLayout>
-    </ConnectedRouter>
-  );
-};
+              <Route
+                exact
+                path={"/photographers/:photographer_slug"}
+                key={"photographers"}
+                render={props => <PhotographerPage match={props.match} />}
+              />
+              <Route
+                exact
+                path={"/myaccount"}
+                key={"signIn"}
+                render={() =>
+                  session.userId ? (
+                    <Redirect to="/myaccount/profile" />
+                  ) : (
+                    <SignInPage />
+                  )}
+              />
+              <Route
+                exact
+                path="/myaccount/sign-up"
+                key={"signUp"}
+                render={() =>
+                  session.userId ? (
+                    <Redirect to="/myaccount/profile" />
+                  ) : (
+                    <SignUpPage />
+                  )}
+              />
+              <Route
+                exact
+                path="/myaccount/profile"
+                key={"profile"}
+                render={() =>
+                  session.userId ? (
+                    <ProfilePage />
+                  ) : (
+                    <Redirect to="/myaccount" />
+                  )}
+              />
+              <Route
+                exact
+                path="/myaccount/profile/edit"
+                key={"editProfile"}
+                render={() =>
+                  session.userId ? (
+                    <EditProfilePage />
+                  ) : (
+                    <Redirect to="/myaccount" />
+                  )}
+              />
+              <Route
+                exact
+                path={"/recommended"}
+                key={"recommended"}
+                component={RecommendedPage}
+              />
+              <Route
+                exact
+                path={"/latest"}
+                key={"latest"}
+                component={LatestPage}
+              />
+              <Route
+                path="/404-page-not-found"
+                key={"notFound"}
+                component={NotFoundPage}
+              />
+              <Route
+                path="*"
+                key={"404"}
+                render={() => <Redirect to="/404-page-not-found" />}
+              />
+            </Switch>
+          </PageLayout>
+        )}
+      </ConnectedRouter>
+    );
+  }
+}
 
 const mapStateToProps = state => ({
-  descriptions: getDescriptions(state),
-  roles: getRoles(state),
-  sections: getSections(state),
+  descriptions: state.descriptions,
+  roles: state.users.roles,
+  sections: state.sections.sections,
+  session: state.accounts.session,
+  isAllDataFetched:
+    state.articles.isFetched &&
+    state.comments.isFetched &&
+    state.media.isFetched &&
+    state.sections.isFetched &&
+    state.users.isFetched &&
+    state.outquotes.isFetched,
 });
 
-export default connect(mapStateToProps)(RoutingApp);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ fetchAllData, sessionfy }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RoutingApp);

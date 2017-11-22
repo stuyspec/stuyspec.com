@@ -1,49 +1,131 @@
 import React from "react";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
+import { Grid, Row, Col } from "react-bootstrap/lib";
+import { Link } from "react-router-dom";
 
-import { getArticles } from "../../articles/selectors";
-import { getSections } from "../../sections/selectors";
-import { loadAll } from "../actions";
+import { getArticlesWithContributors } from "../../articles/selectors";
+
+import {
+  FeaturedArticle,
+  RecommendedArticles,
+  LatestArticlesRibbon,
+  LeftColumn,
+  RightColumn,
+} from "../../articles/components/summaries";
+
+import { SectionFeature, SectionColumn } from "../../sections/components";
 
 const styles = {
-  HomePage: {},
+  HomePage: {
+    marginTop: "23px 0px 13px",
+  },
+  recommendedArticles: {
+    padding: 0,
+  },
+  primaryComponents: {
+    borderRight: "solid 1px #ddd",
+    marginBottom: "19px",
+    paddingRight: "14px",
+  },
+  "@media (max-width: 991px)": {
+    primaryComponents: {
+      borderRight: "none",
+      paddingRight: 0,
+    },
+  },
+  "@media (max-width: 768px)": {
+    skinnyCol: {
+      padding: "0 !important",
+    },
+  },
 };
 
-const HomePage = ({ classes, sections, articles, loadAll }) => {
+//The filler column should have a borderRight. Wait until there is something there first
+
+const HomePage = ({ classes, sections, articles, media }) => {
+  const newsSection = Object.values(sections).find(
+    section => section.name === "News",
+  );
+  const featuredArticle = Object.values(articles).find(
+    article =>
+      sections[article.sectionId]["name"] !== "News" &&
+      Object.values(media).find(
+        media => media.articleId === article.id && media.isFeatured,
+      ),
+  );
+  let recommendedArticles = [];
+  for (article of Object.values(articles)) {
+    if (recommendedArticles.length >= 5) {
+      break;
+    }
+    if (article !== featuredArticle && article.sectionId !== newsSection.id) {
+      recommendedArticles.push(article);
+    }
+  }
+  const firstColumnSections = [
+    "Opinions",
+    "Features",
+    "Humor",
+  ].map(sectionName =>
+    Object.values(sections).find(section => section.name === sectionName),
+  );
+  const secondColumnSections = [
+    "Staff Editorials",
+    "Arts & Entertainment",
+    "Sports",
+  ].map(sectionName =>
+    Object.values(sections).find(section => section.name === sectionName),
+  );
+  // TODO: big components should be moved out of Col's and have their own
   return (
-    <div className={classes.HomePage}>
-      <h1>Home page</h1>
-      {/* No more loadAll button in feature/homepage-design */}
-      <button onClick={loadAll}>load all</button>
-      <h2>Articles</h2>
-      <ul>
-        {Object.values(articles).map(article => {
-          const section = sections[article.sectionId];
-          return (
-            <li key={article.id}>
-              <Link to={`${section.permalink}/${article.slug}`}>
-                {article.title}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+    <div>
+      <Grid fluid>
+        <Row>
+          <Col
+            xs={12}
+            sm={12}
+            md={9}
+            lg={9}
+            className={classes.primaryComponents}
+          >
+            <FeaturedArticle article={featuredArticle} />
+            <SectionFeature section={newsSection} />
+          </Col>
+          <Col
+            xsHidden
+            smHidden
+            md={3}
+            lg={3}
+            className={classes.recommendedArticles}
+          >
+            <RecommendedArticles recommendedArticles={recommendedArticles} />
+          </Col>
+        </Row>
+        <Row>
+          <Col xsHidden sm={12} md={12} lg={12}>
+            <LatestArticlesRibbon className={classes.latestArticlesRibbon} />
+          </Col>
+        </Row>
+        <Row>
+          <LeftColumn />
+          <Col xs={12} sm={3} md={3} lg={3} className={classes.skinnyCol}>
+            <SectionColumn sections={firstColumnSections} />
+          </Col>
+          <Col xs={12} sm={3} md={3} lg={3} className={classes.skinnyCol}>
+            <SectionColumn sections={secondColumnSections} />
+          </Col>
+          <RightColumn />
+        </Row>
+      </Grid>
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  articles: getArticles(state),
-  sections: getSections(state),
+  articles: getArticlesWithContributors(state),
+  media: state.media.media,
+  sections: state.sections.sections,
 });
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ loadAll }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(HomePage),
-);
+export default connect(mapStateToProps)(injectSheet(styles)(HomePage));

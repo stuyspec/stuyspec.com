@@ -2,6 +2,22 @@ export const capitalizeWord = string => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
+export const shortenSummary = article => {
+  if (article.content === undefined || article.summary === undefined) {
+    console.error(`Article: ${article}. Missing content or summary field in shortenSummary.`);
+    return null;
+  }
+  let articleSummary = article.summary.split(" ");
+  if (articleSummary.length > 25) {
+    articleSummary = articleSummary.slice(0, 24).join(" ") + "...";
+  } else if (article.summary === '') {
+    articleSummary = article.content.replace('<p>', ' ').replace('</p>', ' ').split(" ").slice(0, 24).join(" ") + "...";
+  } else {
+    articleSummary = articleSummary.join(" ");
+  }
+  return articleSummary;
+}
+
 /**
  * Writes the filter function for objects.
  * @param obj
@@ -67,4 +83,53 @@ export const validateKey = (responseObject, key, type) => {
   } else {
     throw `EXCEPTION: key ${key} is undefined in ${module}Object.`;
   }
+};
+
+/*
+# Mr. Brooks's version
+
+def Conv_Num_to_Roman(n):
+    ones=['I','II','III','IV','V','VI','VII','VIII','IX']
+    tens=['X','XX','XXX','XL','L','LX','LXX','LXXX','XC']
+    huns=['C','CC','CCC','CD','D','DC','DCC','DCCC','CM']
+    thos=['M','MM']
+
+    s=''
+    if n>=1000:
+        s+=thos[n/1000 - 1]
+        n%=1000
+    if n>=100:
+        s+=huns[n/100 - 1]
+        n%=100
+    if n>=10:
+        s+=tens[n/10 - 1]
+        n%=10
+    if n>0:
+        s+=ones[n - 1]
+    return s
+ */
+//Credit to Mr.Brooks
+export const convertToRoman = number => {
+  const ones = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
+  const tens = ["X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"];
+  const huns = ["C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"];
+  const thos = ["M", "MM"];
+  let arabicNum = number;
+  let romanString = "";
+  if (arabicNum >= 1000) {
+    romanString += thos[Math.floor(arabicNum / 1000) - 1];
+    arabicNum %= 1000;
+  }
+  if (arabicNum >= 100) {
+    romanString += huns[Math.floor(arabicNum / 100) - 1];
+    arabicNum %= 100;
+  }
+  if (arabicNum >= 10) {
+    romanString += tens[Math.floor(arabicNum / 10) - 1];
+    arabicNum %= 10;
+  }
+  if (arabicNum > 0) {
+    romanString += ones[Math.floor(arabicNum) - 1];
+  }
+  return romanString;
 };

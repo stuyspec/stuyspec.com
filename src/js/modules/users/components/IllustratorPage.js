@@ -2,66 +2,77 @@ import React from "react";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
+import { Helmet } from "react-helmet";
 
 import { getIllustratorFromSlug } from "../selectors";
 import { getIllustratorArticles } from "../../articles/selectors";
-import { ArticleRow } from "../../articles/components";
+import { ArticleList } from "../../articles/components";
+import { NotFoundPage } from "../../core/components";
 
 const styles = {
   IllustratorPage: {
-    marginTop: "62px",
+    marginTop: "100px",
   },
   name: {
-    color: "#000000",
+    color: "#000",
     fontFamily: "Canela",
-    fontSize: "36px",
-    fontWeight: "500",
-    margin: "0px",
-    textAlign: "center",
+    fontSize: "48px",
+    fontWeight: 500,
+    lineHeight: 1,
+    marginBottom: "11px",
   },
-  workList: {
-    border: "1px solid #ddd",
+  email: {
+    color: "#3084df",
+    display: "block",
+    fontFamily: "Minion Pro",
+    fontSize: "17px",
+    marginBottom: "7px",
+  },
+  latest: {
+    borderTop: "1px solid #000",
+    borderBottom: "1px solid #ddd",
     borderStyle: "solid none",
     color: "#000",
     fontFamily: "Circular Std",
-    fontSize: "14px",
+    fontSize: "13px",
     fontWeight: "300",
-    margin: "34px 0px 14px",
-    padding: "8px 0px 7px",
-  },
-  profilePicture: {
-    display: "block",
-    height: "302px",
-    margin: "18px auto 12px",
-    width: "256px",
+    marginBottom: "22px",
+    padding: "4px 0px",
   },
   description: {
-    color: "#000000",
     fontFamily: "Minion Pro",
-    fontSize: "18px",
-    lineHeight: "1.28",
-    margin: 0,
+    fontSize: "16px",
+    lineHeight: "1.5",
+    marginBottom: "26px",
+  },
+  "@media (max-width: 1199px) and (min-width: 992px)": {
+    IllustratorPage: {
+      paddingLeft: "10%",
+    },
   },
 };
 
 const IllustratorPage = ({ classes, illustrator, articles }) => {
+  if (!illustrator) {
+    return <NotFoundPage />;
+  }
   return (
     <Grid className={classes.IllustratorPage}>
+      <Helmet titleTemplate="%s | The Stuyvesant Spectator">
+        <title>{`${illustrator.firstName} ${illustrator.lastName}`}</title>
+        <meta />
+      </Helmet>
       <Row>
-        <Col md={9}>
+        <Col xs={12} sm={12} md={9} lg={9}>
           <p className={classes.name}>
-            {illustrator.firstName} {illustrator.lastName}
+            {`${illustrator.firstName} ${illustrator.lastName}`}
           </p>
-          <img
-            alt={illustrator.lastName}
-            className={classes.profilePicture}
-            src={illustrator.url}
-          />
+          <a href={`mailto:${illustrator.email}`} className={classes.email}>
+            {illustrator.email}
+          </a>
           <p className={classes.description}>{illustrator.description}</p>
-          <div className={classes.workList}>Illustrations</div>
-          {Object.values(articles).map(article => {
-            return <ArticleRow key={article.id} article={article} />;
-          })};
+          <div className={classes.latest}>Latest</div>
+          <ArticleList articles={articles} />
         </Col>
       </Row>
     </Grid>

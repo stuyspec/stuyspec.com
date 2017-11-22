@@ -1,5 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
+
+const styles = {
+  Byline: {
+    color: "#888",
+    fontFamily: "Circular Std",
+    fontSize: "12px",
+    fontWeight: "300",
+    "& p": {
+      display: "inline",
+      margin: "0 0 2px 0",
+      "& a": {
+        color: "#888",
+        "&:hover": {
+          color: "#888",
+        },
+      },
+    },
+  },
+};
 
 const Byline = ({ classes, contributors }) => {
   let separator = ", ";
@@ -12,7 +32,7 @@ const Byline = ({ classes, contributors }) => {
           separator = "";
         }
         return (
-          <p key={contributor.id}>
+          <p key={index} className={classes.Byline}>
             {index === 0 ? "By " : ""}
             <Link to={`/contributors/${contributor.slug}`}>
               {contributor.firstName} {contributor.lastName}
@@ -25,4 +45,4 @@ const Byline = ({ classes, contributors }) => {
   );
 };
 
-export default Byline;
+export default injectSheet(styles)(Byline);

@@ -12,67 +12,62 @@ const getRequestedIllustratorSlug = (state, props) =>
 const getRequestedPhotographerSlug = (state, props) =>
   props.match.params.photographer_slug;
 
-const getContributorRoleId = state => state.users.CONTRIBUTOR_ROLE_ID;
-const getIllustratorRoleId = state => state.users.ILLUSTRATOR_ROLE_ID;
-const getPhotographerRoleId = state => state.users.PHOTOGRAPHER_ROLE_ID;
-
 const getRoleFromProps = (state, props) => props.role;
 
 export const getContributorFromSlug = createSelector(
-  [getUsers, getUserRoles, getRequestedContributorSlug, getContributorRoleId],
-  (users, userRoles, requestedContributorSlug, CONTRIBUTOR_ROLE_ID) => {
+  [getUsers, getUserRoles, getRequestedContributorSlug, getRoles],
+  (users, userRoles, requestedContributorSlug, roles) => {
     const user = Object.values(users).find(user => {
       return user.slug === requestedContributorSlug;
     });
-    if (
+    if (user &&
       userRoles.find(userRole => {
         return (
-          userRole.userId === user.id && userRole.roleId === CONTRIBUTOR_ROLE_ID
+          userRole.userId === user.id &&
+          roles[userRole.roleId].title === "Contributor"
         );
       })
     ) {
       return user;
     }
-    appHistory.push("/the-uncompleted-404-page");
   },
 );
 
 export const getIllustratorFromSlug = createSelector(
-  [getUsers, getUserRoles, getRequestedIllustratorSlug, getIllustratorRoleId],
-  (users, userRoles, requestedIllustratorSlug, ILLUSTRATOR_ROLE_ID) => {
+  [getUsers, getUserRoles, getRequestedIllustratorSlug, getRoles],
+  (users, userRoles, requestedIllustratorSlug, roles) => {
     const user = Object.values(users).find(user => {
       return user.slug === requestedIllustratorSlug;
     });
-    if (
+    if (user &&
       userRoles.find(userRole => {
         return (
-          userRole.userId === user.id && userRole.roleId === ILLUSTRATOR_ROLE_ID
+          userRole.userId === user.id &&
+          roles[userRole.roleId].title === "Illustrator"
         );
       })
     ) {
       return user;
     }
-    appHistory.push("/the-uncompleted-404-page");
   },
 );
 
 export const getPhotographerFromSlug = createSelector(
-  [getUsers, getUserRoles, getRequestedPhotographerSlug, getPhotographerRoleId],
-  (users, userRoles, requestedPhotographerSlug, PHOTOGRAPHER_ROLE_ID) => {
+  [getUsers, getUserRoles, getRequestedPhotographerSlug, getRoles],
+  (users, userRoles, requestedPhotographerSlug, roles) => {
     const user = Object.values(users).find(user => {
       return user.slug === requestedPhotographerSlug;
     });
-    if (
+    if (user &&
       userRoles.find(userRole => {
         return (
           userRole.userId === user.id &&
-          userRole.roleId === PHOTOGRAPHER_ROLE_ID
+          roles[userRole.roleId].title === "Photographer"
         );
       })
     ) {
       return user;
     }
-    appHistory.push("/the-uncompleted-404-page");
   },
 );
 

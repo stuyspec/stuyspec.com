@@ -5,6 +5,9 @@ import {
 } from "./actionTypes";
 import { getSectionsWithPermalinks } from "./selectors";
 
+/*
+  TODO: Remove the hardcoded subsections once done
+ */
 const initialState = {
   isFetching: false,
   isFetched: false,
@@ -15,14 +18,18 @@ const initialState = {
 const addPermalinksToSections = sections => {
   return Object.values(sections).reduce((acc, section) => {
     let permalink = "/" + section.slug;
-    while (section.parentId !== null) {
-      section = sections[section.parentId];
-      permalink = "/" + section.slug + permalink;
+    let upwardsTraversingSection = { ...section };
+    while (upwardsTraversingSection.parentId) {
+      upwardsTraversingSection =
+        sections[upwardsTraversingSection.parentId - 1];
+      permalink = "/" + upwardsTraversingSection.slug + permalink;
     }
-    acc[section.id] = {
-      ...section,
-      permalink,
-    };
+    if (!"Art Photo".includes(section.name)) {
+      acc[section.id] = {
+        ...section,
+        permalink,
+      };
+    }
     return acc;
   }, {});
 };
@@ -37,7 +44,10 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         isFetching: false,
         isFetched: true,
-        sections: addPermalinksToSections(action.payload),
+        sections: {
+          ...state.sections,
+          ...addPermalinksToSections(action.payload),
+        },
       };
     }
     case FETCH_SECTIONS_REJECTED: {

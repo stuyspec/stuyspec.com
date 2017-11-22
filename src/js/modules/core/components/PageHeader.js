@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
 import injectSheet from "react-jss";
+import { Grid, Row, Col } from "react-bootstrap/lib";
 
 import Masthead from "./Masthead";
 import MastheadBar from "./MastheadBar";
@@ -7,7 +8,6 @@ import MastheadBar from "./MastheadBar";
 const styles = {
   PageHeader: {
     margin: "0 auto",
-    marginBottom: "60px",
     textAlign: "center",
     width: "100%",
   },
@@ -15,9 +15,23 @@ const styles = {
 
 const PageHeader = ({ classes, location }) => {
   return (
-    <div className={classes.PageHeader}>
-      {location.pathname === "/" ? <Masthead /> : <MastheadBar />}
-    </div>
+    <Grid>
+      <Row>
+        <Col xsHidden smHidden md={12} lg={12}>
+          {location.pathname === "/" ||
+          location.pathname === "/404-page-not-found" ? (
+            <Masthead />
+          ) : (
+            <MastheadBar location={location} />
+          )}
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12} sm={12} mdHidden lgHidden>
+          <MastheadBar location={location} />
+        </Col>
+      </Row>
+    </Grid>
   );
 };
 
