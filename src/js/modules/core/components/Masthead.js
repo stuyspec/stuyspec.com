@@ -55,6 +55,10 @@ const styles = {
     display: "inline",
     margin: "0px 13px",
   },
+  navSearchButton: {
+    top: "-1px",
+    position: "relative",
+  },
   sectionLink: {
     color: "#000",
     fontSize: "13px",
@@ -242,6 +246,15 @@ const Masthead = ({
           </Link>
         </li>
       */}
+        <li key={-3} className={classes.sectionListItem}>
+          <Link
+            onClick={openSubscriptionModal}
+            to={"/"}
+            className={classes.sectionLink}
+          >
+            <Search className={classes.navSearchButton} />
+          </Link>
+        </li>
       </ul>
     </div>
   );

@@ -140,17 +140,14 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
               mediaObject.isFeatured && mediaObject.articleId === article.id
             );
           });
-          let linkToArticle = section.permalink + "/" + article.slug;
-          if (section.parentId) {
-            linkToArticle = sections[section.parentId] + linkToArticle;
-          }
-
           if (featuredMedia) {
             return (
               <div key={article.id} className={classes.recommendedBlock}>
-                <figure className={classes.figure}>
-                  <img src={featuredMedia.mediumAttachmentUrl} />
-                </figure>
+                <Link to={`${section.permalink}/${article.slug}`}>
+                  <figure className={classes.figure}>
+                    <img src={featuredMedia.mediumAttachmentUrl} />
+                  </figure>
+                </Link>
                 <Link to={`${section.permalink}`} className={classes.label}>
                   {section.name}
                 </Link>
@@ -168,7 +165,7 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
                 <Link to={`${section.permalink}`} className={classes.label}>
                   {section.name}
                 </Link>
-                <Link to={linkToArticle} className={classes.titleWithoutImage}>
+                <Link to={`${section.permalink}/${article.slug}`} className={classes.titleWithoutImage}>
                   {article.title}
                 </Link>
                 <p className={classes.summary}>{article.summary}</p>

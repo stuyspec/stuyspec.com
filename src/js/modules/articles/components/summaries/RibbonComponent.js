@@ -9,15 +9,11 @@ const RibbonComponent = ({
   sections,
   featuredMedia,
 }) => {
-  let linkToArticle = section.permalink + "/" + article.slug;
-  if (section.parentId) {
-    linkToArticle = sections[section.parentId] + linkToArticle;
-  }
   return (
     <div className={classes.RibbonComponent}>
       {featuredMedia && (
         <div>
-          <Link to={linkToArticle} className={classes.title}>
+          <Link to={`${section.permalink}/${article.slug}`} className={classes.title}>
             <figure className={classes.figure}>
               <img src={featuredMedia.thumbAttachmentUrl} />
             </figure>
@@ -27,7 +23,7 @@ const RibbonComponent = ({
       <Link to={section.permalink} className={classes.sectionLabel}>
         {section.name === "Arts & Entertainment" ? "A&E" : section.name}
       </Link>
-      <Link to={linkToArticle} className={classes.title}>
+      <Link to={`${section.permalink}/${article.slug}`} className={classes.title}>
         {article.title}
       </Link>
     </div>

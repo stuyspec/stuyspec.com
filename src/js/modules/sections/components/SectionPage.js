@@ -308,9 +308,11 @@ const SectionPage = ({
       <Row className={classes.featuredRow}>
         {featuredMedia && (
           <Col xs={12} sm={7} md={7} lg={7} className={classes.featuredMedia}>
-            <figure>
-              <img src={featuredMedia.attachmentUrl} />
-            </figure>
+            <Link to={`${featuredArticleSection.permalink}/${featuredArticle.slug}`}>
+              <figure>
+                <img src={featuredMedia.attachmentUrl} />
+              </figure>
+            </Link>
           </Col>
         )}
         <Col xs={12} sm={5} md={5} lg={5} className={classes.featuredArticle}>

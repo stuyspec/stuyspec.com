@@ -177,9 +177,11 @@ const SectionFeature = ({
           lg={4}
           className={classes.featuredMediaContainer}
         >
-          <figure className={classes.figure}>
-            <img src={featuredMedia.mediumAttachmentUrl} />
-          </figure>
+          <Link to={`${section.permalink}/${secondaryArticle.slug}`}>
+            <figure className={classes.figure}>
+              <img src={featuredMedia.mediumAttachmentUrl} />
+            </figure>
+          </Link>
         </Col>
       ) : (
         possibleTernaryArticle && (
