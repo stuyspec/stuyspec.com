@@ -93,13 +93,15 @@ const styles = {
 
 const SectionBlock = ({ classes, articles, section, sections, media }) => {
   let sectionArticles = [];
-  if (section.name === "Sports") { // most sports articles are in subsections
-    const subsectionIds = Object
-      .values(sections)
+  if (section.name === "Sports") {
+    // most sports articles are in subsections
+    const subsectionIds = Object.values(sections)
       .filter(subsection => subsection.parentId === section.id)
-      .map(subsection => subsection.id)
+      .map(subsection => subsection.id);
     sectionArticles = Object.values(
-      Object.filter(articles, article => subsectionIds.includes(article.sectionId))
+      Object.filter(articles, article =>
+        subsectionIds.includes(article.sectionId),
+      ),
     );
   } else {
     sectionArticles = Object.values(

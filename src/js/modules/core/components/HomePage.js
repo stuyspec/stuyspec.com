@@ -60,7 +60,7 @@ const HomePage = ({ classes, sections, articles, media }) => {
       break;
     }
     if (article !== featuredArticle && article.sectionId !== newsSection.id) {
-      recommendedArticles.push(article)
+      recommendedArticles.push(article);
     }
   }
   const firstColumnSections = [

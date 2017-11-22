@@ -202,7 +202,13 @@ const MastheadBar = ({
           )}
           {brandingSection &&
           brandingSection !== "Arts & Entertainment" && (
-            <span className={classes.sectionName}>{brandingSection === "At Stuyvesant" ? "Sports at Stuyvesant" : brandingSection}</span>
+            <span className={classes.sectionName}>
+              {brandingSection === "At Stuyvesant" ? (
+                "Sports at Stuyvesant"
+              ) : (
+                brandingSection
+              )}
+            </span>
           )}
         </Link>
         {session.userId ? (

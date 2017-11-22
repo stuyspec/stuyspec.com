@@ -18,7 +18,8 @@ const PageHeader = ({ classes, location }) => {
     <Grid>
       <Row>
         <Col xsHidden smHidden md={12} lg={12}>
-          {location.pathname === "/" || location.pathname === "/404-page-not-found" ? (
+          {location.pathname === "/" ||
+          location.pathname === "/404-page-not-found" ? (
             <Masthead />
           ) : (
             <MastheadBar location={location} />

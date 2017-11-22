@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 import { getContributorFromSlug } from "../selectors";
 import { getContributorArticles } from "../../articles/selectors";
 import { ArticleList } from "../../articles/components";
+import { NotFoundPage } from "../../core/components";
 
 const styles = {
   ContributorPage: {
@@ -52,6 +53,9 @@ const styles = {
 };
 
 const ContributorPage = ({ classes, contributor, articles }) => {
+  if (!contributor) {
+    return <NotFoundPage />;
+  }
   return (
     <Grid className={classes.ContributorPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">

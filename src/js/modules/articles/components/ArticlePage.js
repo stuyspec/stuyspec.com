@@ -69,6 +69,7 @@ const ArticlePage = ({
   classes,
   article,
   section,
+  sections,
   featuredMedia,
   media,
   openSubscriptionModal,
@@ -94,7 +95,9 @@ const ArticlePage = ({
         </Col>
         <Col xsHidden smHidden md={3} lg={3} />
       </Row>
-      <RecommendedRow section={section} />
+      <RecommendedRow
+        section={section.parentId ? sections[section.parentId] : section}
+      />
       <CommentThread article={article} />
     </Grid>
   );
@@ -102,6 +105,7 @@ const ArticlePage = ({
 
 const mapStateToProps = (state, ownProps) => ({
   article: getArticleFromRequestedSlug(state, ownProps),
+  sections: state.sections.sections,
   featuredMedia: getArticleFeaturedMedia(state, ownProps),
   media: state.media.media,
 });

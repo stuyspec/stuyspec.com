@@ -26,7 +26,7 @@ const Dateline = ({ classes, article }) => {
     dateText = "November 10, 2017";
   }
   // return <p className={classes.Dateline}>{formatDate(article.createdAt)}</p>;
-  return <p className={classes.Dateline}>{dateText}</p>
+  return <p className={classes.Dateline}>{dateText}</p>;
 };
 
 export default injectSheet(styles)(Dateline);

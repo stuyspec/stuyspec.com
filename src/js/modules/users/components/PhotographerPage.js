@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 import { getPhotographerFromSlug } from "../selectors";
 import { getPhotographerArticles } from "../../articles/selectors";
 import { ArticleList } from "../../articles/components";
+import { NotFoundPage } from "../../core/components";
 
 const styles = {
   PhotographerPage: {
@@ -52,6 +53,9 @@ const styles = {
 };
 
 const PhotographerPage = ({ classes, photographer, articles }) => {
+  if (!photographer) {
+    return <NotFoundPage />;
+  }
   return (
     <Grid className={classes.PhotographerPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">

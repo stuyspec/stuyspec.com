@@ -217,7 +217,7 @@ const SectionPage = ({
   section,
   media,
 }) => {
-  if (section.parentId || section.name == "Humor") {
+  if (section.parentId || section.name === "Humor" || section.name === "News") {
     return (
       <Grid fluid className={classes.SubsectionPage}>
         <Helmet>
@@ -275,7 +275,9 @@ const SectionPage = ({
     subsection => subsection.id !== featuredArticle.sectionId,
   );
   if (section.slug == "ae") {
-    featuredSubsection = Object.values(directSubsections).find(ds => ds.name === "Music");
+    featuredSubsection = Object.values(directSubsections).find(
+      ds => ds.name === "Music",
+    );
   }
 
   return (

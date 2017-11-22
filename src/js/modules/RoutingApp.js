@@ -180,7 +180,7 @@ class RoutingApp extends Component {
                 key={"latest"}
                 component={LatestPage}
               />
-               <Route
+              <Route
                 path="/404-page-not-found"
                 key={"notFound"}
                 component={NotFoundPage}

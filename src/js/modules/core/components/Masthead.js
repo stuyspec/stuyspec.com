@@ -204,24 +204,24 @@ const Masthead = ({
         The Spectator
       </Link>
       {!session.userId && (
-      <table className={classes.positioning}>
-        <th>
-          <StyledSubscribeButton onClick={openSubscriptionModal} type="Sub">
-            <span className={classes.subscribeText}>Subscribe</span>
-            <br />
-            <span className={classes.subscribeTo}>to our newsletter</span>
-          </StyledSubscribeButton>
-        </th>
-        <th>
-          <div className={classes.userTools}>
-            <Link to="/myaccount/profile">
-              <StyledSignInButton type="Sign">
-                <span className={classes.signInText}>Sign In</span>
-              </StyledSignInButton>
-            </Link>
-          </div>
-        </th>
-      </table>
+        <table className={classes.positioning}>
+          <th>
+            <StyledSubscribeButton onClick={openSubscriptionModal} type="Sub">
+              <span className={classes.subscribeText}>Subscribe</span>
+              <br />
+              <span className={classes.subscribeTo}>to our newsletter</span>
+            </StyledSubscribeButton>
+          </th>
+          <th>
+            <div className={classes.userTools}>
+              <Link to="/myaccount/profile">
+                <StyledSignInButton type="Sign">
+                  <span className={classes.signInText}>Sign In</span>
+                </StyledSignInButton>
+              </Link>
+            </div>
+          </th>
+        </table>
       )}
       <ul className={classes.sectionLinksNav}>
         {Object.values(sections).map(section => {
