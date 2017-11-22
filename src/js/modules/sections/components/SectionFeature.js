@@ -183,13 +183,7 @@ const SectionFeature = ({
         </Col>
       ) : (
         possibleTernaryArticle && (
-          <Col
-            xsHidden
-            sm={4} 
-            md={4} 
-            lg={4} 
-            className={classes.ternaryArticle}
-          >
+          <Col xsHidden sm={4} md={4} lg={4} className={classes.ternaryArticle}>
             <Link
               className={classes.title}
               to={`${section.permalink}/${possibleTernaryArticle.slug}`}
@@ -237,7 +231,7 @@ const SectionFeature = ({
           smHidden
           mdHidden
           lgHidden
-          className={classes.mobileArticleTitle2}          
+          className={classes.mobileArticleTitle2}
         >
           <Link
             className={classes.title}

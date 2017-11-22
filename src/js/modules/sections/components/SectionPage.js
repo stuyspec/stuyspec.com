@@ -275,7 +275,9 @@ const SectionPage = ({
     subsection => subsection.id !== featuredArticle.sectionId,
   );
   if (section.slug == "ae") {
-    featuredSubsection = Object.values(directSubsections).find(ds => ds.name === "Music");
+    featuredSubsection = Object.values(directSubsections).find(
+      ds => ds.name === "Music",
+    );
   }
 
   return (

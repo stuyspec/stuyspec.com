@@ -140,7 +140,7 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
               mediaObject.isFeatured && mediaObject.articleId === article.id
             );
           });
-          let linkToArticle = section.permalink + '/' + article.slug;
+          let linkToArticle = section.permalink + "/" + article.slug;
           if (section.parentId) {
             linkToArticle = sections[section.parentId] + linkToArticle;
           }
@@ -168,10 +168,7 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
                 <Link to={`${section.permalink}`} className={classes.label}>
                   {section.name}
                 </Link>
-                <Link
-                  to={linkToArticle}
-                  className={classes.titleWithoutImage}
-                >
+                <Link to={linkToArticle} className={classes.titleWithoutImage}>
                   {article.title}
                 </Link>
                 <p className={classes.summary}>{article.summary}</p>

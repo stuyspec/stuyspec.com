@@ -73,7 +73,10 @@ class ArticleFeaturedMedia extends Component {
         <img className={classes.img} src={featuredMedia.attachmentUrl} />
         {isCaption && (
           <figcaption className={classes.caption}>
-            <span>{featuredMedia.caption}{featuredMedia.caption !== "" && "&nbsp;"}</span>
+            <span>
+              {featuredMedia.caption}
+              {featuredMedia.caption !== "" && "&nbsp;"}
+            </span>
             <Link
               className={classes.creditLine}
               to={`/${MEDIA_CREATOR_SLUGS[
