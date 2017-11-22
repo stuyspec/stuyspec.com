@@ -7,7 +7,6 @@ appHistory.goTo = function(url) {
 };
 
 appHistory.listen((location, action) => {
-  console.log(document, document.scrollingElement, document.scrollingElement.scrollTop);
   document.scrollingElement.scrollTop=0;
 });
 

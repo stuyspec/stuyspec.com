@@ -149,6 +149,7 @@ const SectionFeature = ({
     .find(
       article => article !== secondaryArticle && article !== primaryArticle,
     );
+
   // NESTED IN <Col lg={9}>
   return (
     <Row className={classes.SectionFeature}>

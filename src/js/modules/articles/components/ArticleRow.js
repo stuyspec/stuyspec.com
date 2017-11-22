@@ -97,14 +97,6 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
   if (featuredMedia) {
     featuredMedia.creator = users[featuredMedia.userId];
   }
-  let articleSummary = article.summary.split(" ");
-  if (articleSummary.length > 25) {
-    articleSummary = articleSummary.slice(0, 24).join(" ") + "...";
-  } else if (article.summary === '') {
-    articleSummary = article.content.replace('<p>', '').replace('</p>', '').split(" ").slice(0, 24).join(" ") + "...";
-  } else {
-    articleSummary = articleSummary.join(" ");
-  }
   return (
     <Row key={article.id} className={classes.ArticleRow}>
       <div className={classes.articleBlock} key={article.id}>
@@ -126,7 +118,7 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
           >
             {article.title}
           </Link>
-          <p className={classes.summary}>{articleSummary}</p>
+          <p className={classes.summary}>{article.summary}</p>
           <Byline contributors={article.contributors} />
           <p className={classes.DatelineMobile}>
             <Dateline article={article} />
