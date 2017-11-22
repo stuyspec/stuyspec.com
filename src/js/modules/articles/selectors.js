@@ -144,7 +144,7 @@ export const getLatestArticles = createSelector(
   [getArticlesWithContributors],
   articles => {
     return Object.values(articles).sort((a, b) => {
-      return new Date(a) - new Date(b);
+      return new Date(b) - new Date(a);
     });
   },
 );

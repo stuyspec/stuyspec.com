@@ -34,7 +34,9 @@ const ArticleList = ({ classes, articles, title, label }) => {
     <Grid className={classes.ArticleList}>
       {title && <p className={classes.title}>{title}</p>}
       {label && <p className={classes.label}>{label}</p>}
-      {Object.values(articles).map(article => {
+      {Object.values(articles).sort((a, b) => {
+        return new Date(b) - new Date(a);
+       }).map(article => {
         return <ArticleRow article={article} key={article.id} />;
       })}
     </Grid>
