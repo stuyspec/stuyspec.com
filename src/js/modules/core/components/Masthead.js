@@ -72,7 +72,7 @@ const styles = {
   },
   hamburger: {
     display: "inline",
-    width: "25px",
+    width: "24px",
     height: "23px",
     opacity: "0.48",
     marginRight: "4px",
