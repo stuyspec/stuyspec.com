@@ -61,6 +61,9 @@ const sidebarStyles = {
 
 class PageLayout extends Component {
   componentDidUpdate(prevProps) {
+    if (document.getElementById('scroll-reset-assistant')) { // onChange called once before my-page renders
+      document.getElementById('scroll-reset-assistant').parentNode.scrollTop = 0;
+    }
     document.scrollingElement.scrollTop = 0;
   }
 
@@ -77,29 +80,31 @@ class PageLayout extends Component {
         onSetOpen={isSidebarOpen => this.handleSetOpen(isSidebarOpen)}
         styles={sidebarStyles}
       >
-        <PageHeader location={location} />
-        <Helmet>
-          <title>The Stuyvesant Spectator</title>
-          <meta
-            name="description"
-            content="The Stuyvesant Spectator is a newspaper published by Stuyvesant High School students every two weeks. It contains sections such as news, features, opinions, arts & entertainment, humor, sports, photography, art, layout, copy, business, and web. This website is basically the best high school newspaper website in New York because it uses React and Redux with a Rails API and utilizes modern technology to spread knowledge of current events and opinions on pressing issues. The Stuyvesant Spectator informs the Stuyvesant student body about what has been going on lately in the school, especially those students who do nothing but study 24/7, so this newspaper basically keeps everyone up to date. During certain parts of the year, The Stuyvesant Spectator publishes special editions written exclusively by the wonderful and intelligent students at Stuyvesant High School. With such a wide range of topics, readers would never run out of reading material, which makes this newspaper awesome!"
-          />
-          <meta
-            name="keywords"
-            content="newspaper,news,Stuyvesant,stuyvesant,highschool,humor,opinions,sports,arts,entertainment,articles,Spectator,spectator,knowledge,intelligence,pulse,manhattan,specialized,writers,photos"
-          />
-        </Helmet>
-        <Favicon url="https://i.imgur.com/CxNoalR.png" />
-        <div className={classes.PageContainer}>
-          {children}
-          <Grid fluid className={classes.footerAd}>
-            <div className={classes.horizontalAdContainer}>
-              <HorizontalAd />
-            </div>
-          </Grid>
+        <div id="scroll-reset-assistant">
+          <PageHeader location={location} />
+          <Helmet>
+            <title>The Stuyvesant Spectator</title>
+            <meta
+              name="description"
+              content="The Stuyvesant Spectator is a newspaper published by Stuyvesant High School students every two weeks. It contains sections such as news, features, opinions, arts & entertainment, humor, sports, photography, art, layout, copy, business, and web. This website is basically the best high school newspaper website in New York because it uses React and Redux with a Rails API and utilizes modern technology to spread knowledge of current events and opinions on pressing issues. The Stuyvesant Spectator informs the Stuyvesant student body about what has been going on lately in the school, especially those students who do nothing but study 24/7, so this newspaper basically keeps everyone up to date. During certain parts of the year, The Stuyvesant Spectator publishes special editions written exclusively by the wonderful and intelligent students at Stuyvesant High School. With such a wide range of topics, readers would never run out of reading material, which makes this newspaper awesome!"
+            />
+            <meta
+              name="keywords"
+              content="newspaper,news,Stuyvesant,stuyvesant,highschool,humor,opinions,sports,arts,entertainment,articles,Spectator,spectator,knowledge,intelligence,pulse,manhattan,specialized,writers,photos"
+            />
+          </Helmet>
+          <Favicon url="https://i.imgur.com/CxNoalR.png" />
+          <div className={classes.PageContainer}>
+            {children}
+            <Grid fluid className={classes.footerAd}>
+              <div className={classes.horizontalAdContainer}>
+                <HorizontalAd />
+              </div>
+            </Grid>
+          </div>
+          <SubscriptionModal />
+          <PageFooter />
         </div>
-        <SubscriptionModal />
-        <PageFooter />
       </Sidebar>
     );
   }
