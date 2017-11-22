@@ -117,8 +117,8 @@ const styles = {
   },
 };
 
-const SectionStyles = {
-  Sec: {
+const navButtonStyles = {
+  Sections: {
     position: "relative",
     // left: "35vh",
     top: "3vh",
@@ -137,23 +137,17 @@ const SectionStyles = {
       color: "#888",
     },
   },
-};
-
-const SubscribeStyles = {
-  Sub: {
+  Subscribe: {
     width: "116px",
     height: "39px",
     borderRadius: 0,
     borderTopLeftRadius: "4px",
     borderBottomLeftRadius: "4px",
-    backgroundColor: "#4e6a9e",
-    border: "solid 1.5px #4e6a9e",
+    backgroundColor: "#DB2B39",
+    border: "solid 1.5px #DB2B39",
     display: "inline",
   },
-};
-
-const SignInStyles = {
-  Sign: {
+  SignIn: {
     borderRadius: 0,
     borderTopRightRadius: "4px",
     borderBottomRightRadius: "4px",
@@ -170,7 +164,6 @@ const SignInStyles = {
     "&:hover span": {
       color: "#888",
     },
-    // top: "19px",
   },
 };
 
@@ -182,9 +175,7 @@ const NavButton = ({ children, onClick, classes, type }) => {
   );
 };
 
-const StyledSectionButton = injectSheet(SectionStyles)(NavButton);
-const StyledSubscribeButton = injectSheet(SubscribeStyles)(NavButton);
-const StyledSignInButton = injectSheet(SignInStyles)(NavButton);
+const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 
 const Masthead = ({
   classes,
@@ -196,28 +187,28 @@ const Masthead = ({
   const unwantedSectionNames = ["Art", "Photo", "Video"];
   return (
     <div className={classes.Masthead}>
-      <StyledSectionButton onClick={openSidebar} type="Sec">
+      <StyledNavButton onClick={openSidebar} type="Sections">
         <Hamburger className={classes.hamburger} />
         <span className={classes.buttonName}>Sections</span>
-      </StyledSectionButton>
+      </StyledNavButton>
       <Link className={classes.theSpectatorLogo} to="/">
         The Spectator
       </Link>
       {!session.userId && (
         <table className={classes.positioning}>
           <th>
-            <StyledSubscribeButton onClick={openSubscriptionModal} type="Sub">
+            <StyledNavButton onClick={openSubscriptionModal} type="Subscribe">
               <span className={classes.subscribeText}>Subscribe</span>
               <br />
               <span className={classes.subscribeTo}>to our newsletter</span>
-            </StyledSubscribeButton>
+            </StyledNavButton>
           </th>
           <th>
             <div className={classes.userTools}>
               <Link to="/myaccount/profile">
-                <StyledSignInButton type="Sign">
+                <StyledNavButton type="SignIn">
                   <span className={classes.signInText}>Sign In</span>
-                </StyledSignInButton>
+                </StyledNavButton>
               </Link>
             </div>
           </th>
