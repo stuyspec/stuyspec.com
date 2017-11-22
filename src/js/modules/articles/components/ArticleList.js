@@ -30,13 +30,17 @@ const styles = {
 };
 
 const ArticleList = ({ classes, articles, title, label }) => {
+  let rowArticles = articles;
+  if (title !== "Recommended") {
+    rowArticles = Object.values(articles).sort((a, b) => {
+      return new Date(a) - new Date(b);
+    });
+  }
   return (
     <Grid className={classes.ArticleList}>
       {title && <p className={classes.title}>{title}</p>}
       {label && <p className={classes.label}>{label}</p>}
-      {Object.values(articles).sort((a, b) => {
-        return new Date(b) - new Date(a);
-       }).map(article => {
+      {rowArticles.map(article => {
         return <ArticleRow article={article} key={article.id} />;
       })}
     </Grid>
