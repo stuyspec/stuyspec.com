@@ -5,7 +5,7 @@ import {
   FETCH_AUTHORSHIPS_FULFILLED,
 } from "./actionTypes";
 
-import { isObjectEmpty } from "../../utils";
+import { isObjectEmpty, shortenSummary } from "../../utils";
 
 const initialState = {
   isFetching: false,
@@ -22,6 +22,8 @@ const reducer = (state = { ...initialState }, action) => {
     }
     case FETCH_ARTICLES_FULFILLED: {
       const newArticles = action.payload.reduce((acc, article) => {
+        article['originalSummary'] = article['summary'];
+        article['summary'] = shortenSummary(article);
         acc[article.id] = article;
         return acc;
       }, {});

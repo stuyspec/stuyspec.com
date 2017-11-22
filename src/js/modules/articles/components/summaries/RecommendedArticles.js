@@ -78,13 +78,6 @@ const RecommendedArticles = ({ classes, recommendedArticles, sections }) => {
       </Link>
       {recommendedArticles.map((article, index) => {
         const section = sections[article.sectionId];
-        let articleSummary = article.summary;
-        // let articleSummary = article.summary.split(" ");
-        // if (articleSummary.length > 15) {
-        //   articleSummary = articleSummary.slice(0, 12).join(" ") + "...";
-        // } else {
-        //   articleSummary = articleSummary.join(" ");
-        // }
         return (
           <div className={classes.articleItem} key={article.id}>
             <p className={classes.numberLabel}>{index + 1}.</p>
@@ -95,7 +88,7 @@ const RecommendedArticles = ({ classes, recommendedArticles, sections }) => {
               >
                 {article.title}
               </Link>
-              <p className={classes.summary}>{articleSummary}</p>
+              <p className={classes.summary}>{article.summary}</p>
             </div>
           </div>
         );
