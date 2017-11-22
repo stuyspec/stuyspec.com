@@ -20,7 +20,7 @@ export const getContributorFromSlug = createSelector(
     const user = Object.values(users).find(user => {
       return user.slug === requestedContributorSlug;
     });
-    if (
+    if (user &&
       userRoles.find(userRole => {
         return (
           userRole.userId === user.id &&
@@ -30,7 +30,6 @@ export const getContributorFromSlug = createSelector(
     ) {
       return user;
     }
-    appHistory.push("/404-page-not-found");
   },
 );
 
@@ -40,7 +39,7 @@ export const getIllustratorFromSlug = createSelector(
     const user = Object.values(users).find(user => {
       return user.slug === requestedIllustratorSlug;
     });
-    if (
+    if (user &&
       userRoles.find(userRole => {
         return (
           userRole.userId === user.id &&
@@ -50,7 +49,6 @@ export const getIllustratorFromSlug = createSelector(
     ) {
       return user;
     }
-    appHistory.push("/404-page-not-found");
   },
 );
 
@@ -60,7 +58,7 @@ export const getPhotographerFromSlug = createSelector(
     const user = Object.values(users).find(user => {
       return user.slug === requestedPhotographerSlug;
     });
-    if (
+    if (user &&
       userRoles.find(userRole => {
         return (
           userRole.userId === user.id &&
@@ -70,7 +68,6 @@ export const getPhotographerFromSlug = createSelector(
     ) {
       return user;
     }
-    appHistory.push("/404-page-not-found");
   },
 );
 

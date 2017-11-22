@@ -79,7 +79,7 @@ export const getContributorArticles = createSelector(
   [getContributorFromSlug, getArticlesWithContributors, getAuthorships],
   (contributor, articles, authorships) => {
     return authorships.reduce((acc, authorship) => {
-      if (authorship.userId === contributor.id) {
+      if (contributor && authorship.userId === contributor.id) {
         const article = articles[authorship.articleId];
         acc[article.id] = article;
       }

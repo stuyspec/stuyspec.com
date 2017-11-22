@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 import { getIllustratorFromSlug } from "../selectors";
 import { getIllustratorArticles } from "../../articles/selectors";
 import { ArticleList } from "../../articles/components";
+import { NotFoundPage } from "../../core/components";
 
 const styles = {
   IllustratorPage: {
@@ -52,6 +53,9 @@ const styles = {
 };
 
 const IllustratorPage = ({ classes, illustrator, articles }) => {
+  if (!illustrator) {
+    return <NotFoundPage />;
+  }
   return (
     <Grid className={classes.IllustratorPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
