@@ -72,7 +72,6 @@ export const signIn = (signInParams, isInModal) => {
         STUY_SPEC_API_HEADERS,
       )
       .then(response => {
-        console.log(response);
         dispatch({
           type: t.SIGN_IN_FULFILLED,
           payload: response,

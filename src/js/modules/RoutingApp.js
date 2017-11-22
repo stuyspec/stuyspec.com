@@ -36,10 +36,8 @@ class RoutingApp extends Component {
 
   componentDidMount() {
     this.props.fetchAllData();
-    console.log(localStorage);
     const session = localStorage.getItem("session");
     if (session) {
-      console.log(JSON.parse(session));
       this.props.sessionfy(JSON.parse(session));
     }
   }

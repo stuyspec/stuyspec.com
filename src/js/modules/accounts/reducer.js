@@ -186,7 +186,6 @@ const reducer = (state = { ...initialState }, action) => {
     }
 
     case SESSIONFY: {
-      console.log(action.payload);
       return { ...state, session: action.payload };
     }
 
