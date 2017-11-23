@@ -71,7 +71,7 @@ const PhotographerPage = ({ classes, photographer, articles }) => {
             {photographer.email}
           </a>
           <p className={classes.description}>{photographer.description}</p>
-          <div className={classes.latest}>Articles Contributed Towards</div>
+          <div className={classes.latest}>Photos</div>
           <ArticleList articles={articles} />
         </Col>
       </Row>

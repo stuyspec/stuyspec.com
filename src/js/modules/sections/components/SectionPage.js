@@ -217,7 +217,7 @@ const SectionPage = ({
   section,
   media,
 }) => {
-  if (section.parentId || section.name === "Humor" || section.name === "News") {
+  if (section.parentId || section.name === "HumorNOT" || section.name === "News") {
     return (
       <Grid fluid className={classes.SubsectionPage}>
         <Helmet>
@@ -246,11 +246,16 @@ const SectionPage = ({
       </Grid>
     );
   }
-  const featuredArticle = Object.values(sectionTreeArticles).find(article =>
-    Object.values(media).find(
-      mediaObject => mediaObject.articleId === article.id,
-    ),
-  );
+  const featuredArticle = Object.values(sectionTreeArticles).find(article => {
+    if (section.name === "Humor") {
+      if (directSubsections[article.sectionId] && directSubsections[article.sectionId].name === "Spooktator") {
+        return false;
+      }
+    }
+    return Object.values(media).find(
+      medium => medium.articleId === article.id,
+    );
+  });
   const featuredMedia = Object.values(media).find(
     image => image.articleId === featuredArticle.id,
   );
@@ -265,20 +270,26 @@ const SectionPage = ({
     article =>
       article !== featuredArticle &&
       Object.values(media).find(
-        mediaObject => mediaObject.articleId === article.id,
+        medium => medium.articleId === article.id,
       ),
   );
   if (!secondaryArticle) {
     secondaryArticle = Object.values(sectionTreeArticles)[1];
   }
-  let featuredSubsection = Object.values(directSubsections).find(
-    subsection => subsection.id !== featuredArticle.sectionId,
-  );
-  if (section.slug == "ae") {
-    featuredSubsection = Object.values(directSubsections).find(
-      ds => ds.name === "Music",
-    );
+
+  let hardcodedSubsection = null;
+  if (section.name === "Arts & Entertainment") {
+    hardcodedSubsection = "Music";
+  } else if (section.name === "Humor") {
+    hardcodedSubsection = "Spooktator";
   }
+  const featuredSubsection = Object.values(directSubsections).find(subsection => {
+    if (hardcodedSubsection) {
+      return subsection.name === hardcodedSubsection;
+    } else {
+      return subsection.id !== featuredArticle.sectionId;
+    }
+  });
 
   return (
     <Grid fluid className={classes.SectionPage}>
