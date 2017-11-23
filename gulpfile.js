@@ -467,7 +467,7 @@ gulp.task('welcome-dev-notice', function()
     Log.startNotice('dev');
 });
 
-const STUY_SPEC_API_PROD_ENDPOINT = 'http://stuyspec-api-prod.us-east-1.elasticbeanstalk.com';
+const STUY_SPEC_API_PROD_ENDPOINT = 'https://api.stuyspec.com';
 
 gulp.task('create-js-build', function()
 {
