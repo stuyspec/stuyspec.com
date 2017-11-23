@@ -57,7 +57,7 @@ const styles = {
     paddingRight: "14px !important",
     height: "360px",
     overflow: "hidden",
-    "& > figure > img": {
+    "& > a >figure > img": {
       width: "100%",
     },
   },
@@ -110,9 +110,11 @@ const LeftTitleArticle = ({ classes, article, media, sections }) => {
         className={classes.featuredMedia}
       >
         {featuredMedia && (
-          <figure>
-            <img src={featuredMedia.attachmentUrl} />
-          </figure>
+          <Link to={`${section.permalink}/${article.slug}`}>
+            <figure>
+              <img src={featuredMedia.attachmentUrl} />
+            </figure>
+          </Link>
         )}
       </Col>
       <Col

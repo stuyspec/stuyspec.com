@@ -122,21 +122,15 @@ export const getPhotographerArticles = createSelector(
  * The selector returns a media object for the featured media of a requested
  *   article.
  */
-export const getArticleFeaturedMedia = createSelector(
+export const getArticleMedia = createSelector(
   [getArticleFromRequestedSlug, getMedia, getUsers],
   (article, media, users) => {
     if (!article) {
       return null;
     }
-    const featuredMedia = Object.values(media).find(mediaObject => {
-      return mediaObject.isFeatured && mediaObject.articleId === article.id;
-    });
-    if (featuredMedia) {
-      return {
-        ...featuredMedia,
-        creator: users[featuredMedia.userId],
-      };
-    }
+    return Object
+      .values(media)
+      .filter(image => image.articleId === article.id);
   },
 );
 
