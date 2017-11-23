@@ -228,8 +228,8 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
   Members of the 2017-2018 Spectator Editorial Board
 </h2>
 <b>Editors In Chief</b><br>
-Anne George<br>
-Matteo Wong<br>
+Anne George*<br>
+Matteo Wong*<br>
 <br>
 <b>News Editors</b><br>
 Nishmi Abeyweera<br>
@@ -239,26 +239,26 @@ Blythe Zadrozny<br>
 <b>Features Editors</b><br>
 Archi Das<br>
 Asim Kapparova<br>
-Sophie Watwood<br>
+Sophie Watwood*<br>
 <br>
 <b>Opinions Editors</b><br>
 Jame Rhee<br>
 Eliza Spinna<br>
 <br>
 <b>Arts & Entertainment Editors</b><br>
-Karen Chen<br>
+Karen Chen*<br>
 Sophie Feng<br>
 Eliana Kavouriadis<br>
 <br>
 <b>Humor Editors</b><br>
 Kerwin Chen<br>
 Shaina Peters<br>
-Michael Xu<br>
+Michael Xu*<br>
 <br>
 <b>Sports Editors</b><br>
 Ray Jones<br>
 Sem Murck<br>
-Max Onderdonk<br>
+Max Onderdonk*<br>
 <br>
 <b>Web Editors</b><br>
 Jason Kao<br>
@@ -291,6 +291,10 @@ Donia Tung<br>
 <b>Faculty Advisor</b><br>
 Kerry Garfinkel
 </center>
+<br>
+<p style="text-align: right; width: 100%">
+  <i>*Managing Board members</i>
+</p>
 `
   },
   contact: {
