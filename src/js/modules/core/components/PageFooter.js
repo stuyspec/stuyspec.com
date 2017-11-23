@@ -77,8 +77,8 @@ const styles = {
   },
   aboutNavLinksMobile: {
     "& > div": {
-      // the surrounding section block
       border: 0,
+      paddingBottom: "1px",
     },
     "& > div > a": {
       // each about-us link
@@ -97,6 +97,24 @@ const styles = {
       "&:hover": {
         color: "#aaa",
         textDecoration: "underline",
+      },
+    },
+  },
+  creditLine: {
+    color: "#aaa",
+    fontSize: "12px",
+    padding: "0 15px !important",
+    "& a": {
+      color: "#aaa",
+      textDecoration: "underline",
+      "&:active": {
+        color: "#aaa",
+      },
+      "&:focus": {
+        color: "#aaa",
+      },
+      "&:hover": {
+        color: "#aaa",
       },
     },
   },
@@ -123,6 +141,10 @@ const styles = {
     topLevelSectionLink: {
       fontSize: "15px",
       fontWeight: "500",
+      "&:active": {
+        color: "#000",
+        textDecoration: "none",
+      },
       "&:active": {
         color: "#000",
         textDecoration: "none",
@@ -235,6 +257,10 @@ const PageFooter = ({
           className={classes.aboutNavLinksMobile}
         >
           {createDescriptionLinks()}
+        </Col>
+        {/*<Col xs={12} sm={10} smOffset={1} md={8} mdOffset={2} lg={8} lgOffset={2} className={classes.creditLine}>*/}
+        <Col xs={12} smHidden mdHidden lgHidden className={classes.creditLine}>
+          Created by <Link to="https://github.com/stuyspec" target="_blank">The Spectator Web Department</Link>, 2017.
         </Col>
       </Row>
     </Grid>
