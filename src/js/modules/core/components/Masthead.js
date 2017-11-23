@@ -121,10 +121,12 @@ const styles = {
   },
 };
 
+const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+const isFirefox = navigator.userAgent.indexOf('Firefox') > -1;
+
 const navButtonStyles = {
   Sections: {
     position: "relative",
-    // left: "35vh",
     top: "3vh",
     width: "103px",
     height: "39px",
@@ -144,12 +146,14 @@ const navButtonStyles = {
   Subscribe: {
     width: "116px",
     height: "39px",
+    position: "relative",
     borderRadius: 0,
     borderTopLeftRadius: "4px",
     borderBottomLeftRadius: "4px",
     backgroundColor: "#DB2B39",
     border: "solid 1.5px #DB2B39",
     display: "inline",
+    top: isSafari ? "-20px" : (isFirefox ? "-4px" : "0"),
   },
   SignIn: {
     borderRadius: 0,
@@ -200,7 +204,7 @@ const Masthead = ({
       </Link>
       {!session.userId && (
         <table className={classes.positioning}>
-          <th>
+          <th id="problematic-subscribe-button-container-in-moz">
             <StyledNavButton onClick={openSubscriptionModal} type="Subscribe">
               <span className={classes.subscribeText}>Subscribe</span>
               <br />
