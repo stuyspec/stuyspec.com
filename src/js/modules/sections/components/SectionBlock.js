@@ -135,17 +135,20 @@ const SectionBlock = ({ classes, articles, section, sections, media }) => {
               mediaObject.isFeatured && mediaObject.articleId === article.id
             );
           });
+          // In the links, we index sections again because the Sports
+          // SectionBlock finds articles in not only the given section prop,
+          // but also its subsections.
           return (
             <div className={classes.article} key={article.id}>
               {featuredMedia && (
-                <Link to={`${section.permalink}/${article.slug}`}>
+                <Link to={`${sections[article.sectionId].permalink}/${article.slug}`}>
                   <figure className={classes.figure}>
                     <img src={featuredMedia.thumbAttachmentUrl} />
                   </figure>
                 </Link>
               )}
               <Link
-                to={`${section.permalink}/${article.slug}`}
+                to={`${sections[article.sectionId].permalink}/${article.slug}`}
                 className={classes.smallTitle}
               >
                 {article.title}

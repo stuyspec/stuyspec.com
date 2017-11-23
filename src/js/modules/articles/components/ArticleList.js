@@ -35,7 +35,6 @@ const ArticleList = ({ classes, articles, title, label }) => {
     rowArticles = Object.values(articles).sort((a, b) => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
-    console.log(rowArticles);
   }
   return (
     <Grid className={classes.ArticleList}>

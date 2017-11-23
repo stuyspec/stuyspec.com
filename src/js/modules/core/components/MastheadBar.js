@@ -173,12 +173,16 @@ const MastheadBar = ({
 }) => {
   const sectionSlugArray = location.pathname.split("/");
   const sectionSlug = sectionSlugArray[sectionSlugArray.length - 1];
-  let brandingSection = null;
+  let section = null;
   if (sectionSlugs.includes(sectionSlug)) {
-    brandingSection = Object.values(sections).find(
-      section => section.slug === sectionSlug,
-    ).name;
+    section = Object.values(sections).find(section => section.slug === sectionSlug);
   }
+
+  let mastheadSectionName = null;
+  if (section && section.parentId) {
+    mastheadSectionName = sections[section.parentId].name;
+  }
+
   return (
     <div className={classes.MastheadBar}>
       <div className={classes.barContainer}>
@@ -190,25 +194,17 @@ const MastheadBar = ({
             <Search />
           </StyledNavButton>
         </div>
-        <Link className={classes.brandingLink} to="/">
+        <Link className={classes.brandingLink} to={(section && section.parentId) ? sections[section.parentId].permalink : "/"}>
           The Spectator
-          {brandingSection === "Arts & Entertainment" && (
+          {mastheadSectionName === "Arts & Entertainment" ? (
             <span className={classes.responsiveSectionNameContainer}>
               <span className={classes.sectionNameDesktop}>
-                {brandingSection}
+                {mastheadSectionName}
               </span>
               <span className={classes.sectionNameMobile}>A&E</span>
             </span>
-          )}
-          {brandingSection &&
-          brandingSection !== "Arts & Entertainment" && (
-            <span className={classes.sectionName}>
-              {brandingSection === "At Stuyvesant" ? (
-                "Sports at Stuyvesant"
-              ) : (
-                brandingSection
-              )}
-            </span>
+          ) : (
+            mastheadSectionName && <span className={classes.sectionName}>{mastheadSectionName}</span>
           )}
         </Link>
         {session.userId ? (

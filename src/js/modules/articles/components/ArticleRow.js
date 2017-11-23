@@ -105,12 +105,14 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
         </div>
         <div className={classes.preview}>
           {featuredMedia && (
-            <figure className={classes.figure}>
-              <img
-                src={featuredMedia.attachmentUrl}
-                alt={featuredMedia.title}
-              />
-            </figure>
+            <Link to={`${section.permalink}/${article.slug}`}>
+              <figure className={classes.figure}>
+                <img
+                  src={featuredMedia.attachmentUrl}
+                  alt={featuredMedia.title}
+                />
+              </figure>
+            </Link>
           )}
           <Link
             to={`${section.permalink}/${article.slug}`}
