@@ -13,7 +13,7 @@ import CommentThread from "../../comments/components/CommentThread";
 import NotFoundPage from "../../core/components/NotFoundPage";
 import {
   getArticleFromRequestedSlug,
-  getArticleFeaturedMedia,
+  getArticleMedia,
 } from "../selectors";
 import { openSubscriptionModal } from "../../accounts/actions";
 
@@ -70,7 +70,6 @@ const ArticlePage = ({
   article,
   section,
   sections,
-  featuredMedia,
   media,
   openSubscriptionModal,
 }) => {
@@ -84,7 +83,7 @@ const ArticlePage = ({
         <meta />
       </Helmet>
       <ArticleHeader article={article} section={section} />
-      <ArticleBody content={article.content} featuredMedia={featuredMedia} />
+      <ArticleBody content={article.content} media={media} />
       <Row className={classes.descriptionRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.description}>
           The Pulse of the Student Body:&nbsp;
@@ -106,8 +105,7 @@ const ArticlePage = ({
 const mapStateToProps = (state, ownProps) => ({
   article: getArticleFromRequestedSlug(state, ownProps),
   sections: state.sections.sections,
-  featuredMedia: getArticleFeaturedMedia(state, ownProps),
-  media: state.media.media,
+  media: getArticleMedia(state, ownProps),
 });
 
 const mapDispatchToProps = dispatch => {

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 
@@ -58,8 +59,9 @@ class ArticleFeaturedMedia extends Component {
     };
   }
   render() {
-    const { classes, featuredMedia, isCaption } = this.props;
-    const { creator } = featuredMedia;
+    const { classes, featuredMedia, isCaption, users } = this.props;
+    const creator = users[featuredMedia.userId];
+
     return (
       <figure
         className={
@@ -71,7 +73,7 @@ class ArticleFeaturedMedia extends Component {
         }
       >
         <img className={classes.img} src={featuredMedia.attachmentUrl} />
-        {isCaption && (
+        {isCaption && creator && (
           <figcaption className={classes.caption}>
             <span>
               {featuredMedia.caption}
@@ -132,4 +134,9 @@ const ArticleFeaturedMedia = ({ classes, featuredMedia, isCaption }) => {
   );
 };
 */
-export default injectSheet(styles)(ArticleFeaturedMedia);
+
+const mapStateToProps = state => ({
+  users: state.users.users
+});
+
+export default connect(mapStateToProps)(injectSheet(styles)(ArticleFeaturedMedia));

@@ -60,7 +60,7 @@ const styles = {
   },
 };
 
-const ArticleBody = ({ classes, content, featuredMedia }) => {
+const ArticleBody = ({ classes, content, media }) => {
   /*
   const generateFigure = (match, string, offset) => {
     const image = media[parseInt(string)];
@@ -78,6 +78,7 @@ const ArticleBody = ({ classes, content, featuredMedia }) => {
   }
   */
   //  featuredMedia = Object.values(articleMedia).find(image => image.isFeatured);
+  const featuredMedia = media.find(medium => medium.isFeatured);
   return (
     <Row>
       <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
