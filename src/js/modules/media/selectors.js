@@ -31,7 +31,7 @@ export const getPhotographerPhotographs = createSelector(
     return Object.filter(media, mediaObject => {
       return (
         mediaObject.userId === photographer.id &&
-        mediaObject.mediaType === "photograph"
+        mediaObject.mediaType === "photo"
       );
     });
   },
