@@ -140,19 +140,22 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
               mediaObject.isFeatured && mediaObject.articleId === article.id
             );
           });
+          const articleSection = Object.values(sections).find(sectionObject => {
+            return sectionObject.id == article.sectionId;
+          })
           if (featuredMedia) {
             return (
               <div key={article.id} className={classes.recommendedBlock}>
-                <Link to={`${section.permalink}/${article.slug}`}>
+                <Link to={`${articleSection.permalink}/${article.slug}`}>
                   <figure className={classes.figure}>
                     <img src={featuredMedia.mediumAttachmentUrl} />
                   </figure>
                 </Link>
-                <Link to={`${section.permalink}`} className={classes.label}>
+                <Link to={`${articleSection.permalink}`} className={classes.label}>
                   {section.name}
                 </Link>
                 <Link
-                  to={`${section.permalink}/${article.slug}`}
+                  to={`${articleSection.permalink}/${article.slug}`}
                   className={classes.titleWithImage}
                 >
                   {article.title}
@@ -162,10 +165,10 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
           } else {
             return (
               <div key={article.id} className={classes.recommendedBlock}>
-                <Link to={`${section.permalink}`} className={classes.label}>
+                <Link to={`${articleSection.permalink}`} className={classes.label}>
                   {section.name}
                 </Link>
-                <Link to={`${section.permalink}/${article.slug}`} className={classes.titleWithoutImage}>
+                <Link to={`${articleSection.permalink}/${article.slug}`} className={classes.titleWithoutImage}>
                   {article.title}
                 </Link>
                 <p className={classes.summary}>{article.summary}</p>
