@@ -139,6 +139,11 @@ const initialState = {
     title: "Sponsors",
     slug: "sponsors",
     content:
+      '<center><a href="https://www.asphaltgreen.org/bpc?utm_medium=referral&utm_source=stuyvesant%20spectator&utm_campaign=website%20referral"><img src=/img/sponsors/AsphaltGreen.png alt="AsphaltGreen" style="margin-bottom:50px"></a><br>'+
+      '<a href="http://static.escapetheroomnyc.com/"><img src=/img/sponsors/Escape.png alt="Escape" style="margin-bottom:50px"></a><br>'+
+      '<a href="http://foxmanagementconsulting.com/"><img src=/img/sponsors/FoxManagement.png alt="FoxManagement" style="margin-bottom:50px"></a><br>'+
+      '<a href="http://www.mysteryroomnyc.com/"><img src=/img/sponsors/MysteryRoom.png alt="MysteryRoom" style="margin-bottom:50px; width:320px; height:181px"></a><br>'+
+      '<a href="http://thinkshirt.com/"><img src=/img/sponsors/ThinkShirt.png alt="ThinkShirt" style="margin-bottom:50px"></a><br></center>'+
       "<p>Mystery Room NYC LogoMystery Room NYC is an escape the room game in which players assume the role of a detective that is trapped and needs to figure out what transpired in the space before they arrived. Teams must work together to uncover clues and piece together components in order to escape. The game is released in chapters and while you don’t have to play each part in order, playing all the chapters allow you to gain greater knowledge of the overall backstory behind each of the rooms, unveiling the mystery.\n<hr>" +
       "<h2>Become A Sponsor\n</h2>" +
       'If you are interested in sponsoring <i>The Spectator</i> to help preserve the tradition of excellence our publication has established heretofore, please contact the business managers at <a href="mailto:specbusiness@gmail.com">business@stuyspec.com</a>. For benefits of sponsorship, please see the below document.</p><br>' +
