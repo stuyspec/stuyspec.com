@@ -41,8 +41,8 @@ const styles = {
     "& span#article-reefer": {
       display: "block",
       fontStyle: "italic",
-      marginTop: "8px",
-      marginBottom: "20px",
+      marginTop: "12px",
+      marginBottom: "24px",
       "& a#reefer-link": {
         color: "#000",
         textDecoration: "underline",
