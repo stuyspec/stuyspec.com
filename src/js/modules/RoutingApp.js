@@ -181,6 +181,12 @@ class RoutingApp extends Component {
                 component={LatestPage}
               />
               <Route
+                exact
+                path={"/search"}
+                key={"search"}
+                component={SearchPage}
+              />
+              <Route
                 path="/404-page-not-found"
                 key={"notFound"}
                 component={NotFoundPage}
