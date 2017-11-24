@@ -163,10 +163,16 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
           } else {
             return (
               <div key={article.id} className={classes.recommendedBlock}>
-                <Link to={`${articleSection.permalink}`} className={classes.label}>
+                <Link
+                  to={`${articleSection.permalink}`}
+                  className={classes.label}
+                >
                   {articleSection.name}
                 </Link>
-                <Link to={`${articleSection.permalink}/${article.slug}`} className={classes.titleWithoutImage}>
+                <Link
+                  to={`${articleSection.permalink}/${article.slug}`}
+                  className={classes.titleWithoutImage}
+                >
                   {article.title}
                 </Link>
                 <p className={classes.summary}>{article.summary}</p>

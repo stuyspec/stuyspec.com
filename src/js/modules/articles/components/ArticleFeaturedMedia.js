@@ -73,7 +73,8 @@ class ArticleFeaturedMedia extends Component {
         }
       >
         <img className={classes.img} src={featuredMedia.attachmentUrl} />
-        {isCaption && creator && (
+        {isCaption &&
+        creator && (
           <figcaption className={classes.caption}>
             <span>
               {featuredMedia.caption}
@@ -136,7 +137,9 @@ const ArticleFeaturedMedia = ({ classes, featuredMedia, isCaption }) => {
 */
 
 const mapStateToProps = state => ({
-  users: state.users.users
+  users: state.users.users,
 });
 
-export default connect(mapStateToProps)(injectSheet(styles)(ArticleFeaturedMedia));
+export default connect(mapStateToProps)(
+  injectSheet(styles)(ArticleFeaturedMedia),
+);

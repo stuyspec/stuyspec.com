@@ -260,7 +260,10 @@ const PageFooter = ({
         </Col>
         {/*<Col xs={12} sm={10} smOffset={1} md={8} mdOffset={2} lg={8} lgOffset={2} className={classes.creditLine}>*/}
         <Col xs={12} smHidden mdHidden lgHidden className={classes.creditLine}>
-          Created by <Link to="https://github.com/stuyspec" target="_blank">The Spectator Web Department</Link>, 2017.
+          Created by{" "}
+          <Link to="https://github.com/stuyspec" target="_blank">
+            The Spectator Web Department
+          </Link>, 2017.
         </Col>
       </Row>
     </Grid>

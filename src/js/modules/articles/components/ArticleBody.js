@@ -4,6 +4,7 @@ import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
+import { SPEC_REEFER_PATTERN } from "../../../constants";
 
 import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 import RightRail from "./RightRail";
@@ -114,7 +115,7 @@ const ArticleBody = ({ classes, articles, sections, content, media }) => {
   */
   //  featuredMedia = Object.values(articleMedia).find(image => image.isFeatured);
   const generateArticleReefer = content => {
-    const match = specReeferPattern.exec(content);
+    const match = SPEC_REEFER_PATTERN.exec(content);
     const article = articles[parseInt(match[1])];
     if (article) {
       return (
@@ -133,7 +134,6 @@ const ArticleBody = ({ classes, articles, sections, content, media }) => {
       );
     }
   };
-  const specReeferPattern = /<spec-reefer id=(\d*)><\/spec-reefer>/;
   const featuredMedia = media.find(medium => medium.isFeatured);
   return (
     <Row>
@@ -144,7 +144,7 @@ const ArticleBody = ({ classes, articles, sections, content, media }) => {
             isCaption={true}
           />
         )}
-        {specReeferPattern.test(content) && generateArticleReefer(content)}
+        {SPEC_REEFER_PATTERN.test(content) && generateArticleReefer(content)}
         <div
           className={classes.innerHTML}
           dangerouslySetInnerHTML={{ __html: content }}

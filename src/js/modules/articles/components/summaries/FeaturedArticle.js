@@ -91,7 +91,7 @@ const FeaturedArticle = ({ classes, media, sections, article }) => {
   let linkToArticle = section.permalink + "/" + article.slug;
   if (section.parentId) {
     linkToArticle = sections[section.parentId].slug + linkToArticle;
-  } 
+  }
   return (
     <Row className={classes.FeaturedArticle}>
       <Col

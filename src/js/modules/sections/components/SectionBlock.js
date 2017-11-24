@@ -141,7 +141,10 @@ const SectionBlock = ({ classes, articles, section, sections, media }) => {
           return (
             <div className={classes.article} key={article.id}>
               {featuredMedia && (
-                <Link to={`${sections[article.sectionId].permalink}/${article.slug}`}>
+                <Link
+                  to={`${sections[article.sectionId]
+                    .permalink}/${article.slug}`}
+                >
                   <figure className={classes.figure}>
                     <img src={featuredMedia.thumbAttachmentUrl} />
                   </figure>

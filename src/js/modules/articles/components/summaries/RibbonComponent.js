@@ -13,7 +13,10 @@ const RibbonComponent = ({
     <div className={classes.RibbonComponent}>
       {featuredMedia && (
         <div>
-          <Link to={`${section.permalink}/${article.slug}`} className={classes.title}>
+          <Link
+            to={`${section.permalink}/${article.slug}`}
+            className={classes.title}
+          >
             <figure className={classes.figure}>
               <img src={featuredMedia.thumbAttachmentUrl} />
             </figure>
@@ -23,7 +26,10 @@ const RibbonComponent = ({
       <Link to={section.permalink} className={classes.sectionLabel}>
         {section.name === "Arts & Entertainment" ? "A&E" : section.name}
       </Link>
-      <Link to={`${section.permalink}/${article.slug}`} className={classes.title}>
+      <Link
+        to={`${section.permalink}/${article.slug}`}
+        className={classes.title}
+      >
         {article.title}
       </Link>
     </div>

@@ -128,9 +128,7 @@ export const getArticleMedia = createSelector(
     if (!article) {
       return null;
     }
-    return Object
-      .values(media)
-      .filter(image => image.articleId === article.id);
+    return Object.values(media).filter(image => image.articleId === article.id);
   },
 );
 
