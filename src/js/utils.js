@@ -11,7 +11,13 @@ export const shortenSummary = article => {
   if (articleSummary.length > 25) {
     articleSummary = articleSummary.slice(0, 24).join(" ") + "...";
   } else if (article.summary === '') {
-    articleSummary = article.content.replace('<p>', ' ').replace('</p>', ' ').split(" ").slice(0, 24).join(" ") + "...";
+    const specReeferPattern = /<spec-refeer id=(\d*)\/>/;
+
+    articleSummary = article.content
+      .replace(specReeferPattern, '')
+      .replace('<p>', ' ')
+      .replace('</p>', ' ')
+      .split(" ").slice(0, 24).join(" ") + "...";
   } else {
     articleSummary = articleSummary.join(" ");
   }
