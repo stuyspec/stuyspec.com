@@ -117,7 +117,9 @@ const ArticleBody = ({ classes, articles, sections, content, media }) => {
   const generateArticleReefer = content => {
     const match = SPEC_REEFER_PATTERN.exec(content);
     const article = articles[parseInt(match[1])];
+    console.log(article.title)
     if (article) {
+      const title = article.title.replace('“', '‘').replace('”', '’');
       return (
         <span id="article-reefer">
           This article was written in response to &ldquo;
@@ -126,9 +128,9 @@ const ArticleBody = ({ classes, articles, sections, content, media }) => {
             target="_blank"
             to={`${sections[article.sectionId].permalink}/${article.slug}`}
           >
-            {article.title}
+            {title}
           </Link>
-          &rdquo;, published in Volume {article.volume} Issue{" "}
+          ,&rdquo; published in Volume {article.volume} Issue{" "}
           {article.issue}.
         </span>
       );
