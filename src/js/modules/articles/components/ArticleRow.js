@@ -56,6 +56,15 @@ const styles = {
     lineHeight: "1.12",
     marginBottom: "5px",
     paddingTop: "2px",
+    "&:hover": {
+      color: "#000",
+    },
+    "&:active": {
+      color: "#000",
+    },
+    "&:focus": {
+      color: "#000",
+    },
   },
   summary: {
     color: "#000",
