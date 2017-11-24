@@ -74,12 +74,13 @@ const styles = {
   "@media (max-width: 767px)": {
     featuredMedia: {
       height: "auto",
+      marginBottom: "18px",
       overflow: "visible",
       paddingLeft: "0 !important",
       paddingTop: "14px",
       "& figure img": {
         marginLeft: "-14px",
-        width: "100vw",
+        width: "100vw !important",
       },
     },
   },

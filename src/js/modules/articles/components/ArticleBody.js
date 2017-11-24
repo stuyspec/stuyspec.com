@@ -23,7 +23,7 @@ const styles = {
       marginBottom: "20px",
     },
     "& p:first-child": {
-      marginTop: "28px",
+      marginTop: "8px",
     },
     "& > div > p::first-letter": {
       // dropcap
@@ -61,6 +61,9 @@ const styles = {
       // the original reefer
       display: "none",
     },
+    "& figure:first-child": {
+      marginBottom: "28px",
+    }
   },
   content: {
     marginTop: "13px",

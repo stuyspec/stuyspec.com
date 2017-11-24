@@ -48,6 +48,8 @@ const styles = {
   figure: {
     float: "right",
     marginLeft: "6px",
+    maxHeight: "45px",
+    overflow: "hidden",
     width: "62px",
     "& img": {
       width: "100%",

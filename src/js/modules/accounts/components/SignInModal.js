@@ -24,6 +24,11 @@ const styles = {
   signOutForm: {
     display: "inline-block",
   },
+  "@media (max-width: 767px)": {
+    SignInModal: {
+      width: "95.5%",
+    },
+  },
 };
 
 const SignInModal = ({
