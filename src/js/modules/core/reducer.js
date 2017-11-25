@@ -2,6 +2,8 @@ import {
   REFRESH_WINDOW_DIMENSIONS,
   OPEN_SIDEBAR,
   CLOSE_SIDEBAR,
+  OPEN_LIGHTBOX,
+  CLOSE_LIGHTBOX,
 } from "./actionTypes";
 
 // getWindowWidth & getWindowHeight was
@@ -24,7 +26,7 @@ const initialState = {
   viewportWidth: getViewportWidth(),
   viewportHeight: getViewportHeight(),
   isSidebarOpen: false,
-  rowHeight: 0,
+  lightboxIsOpen: false,
 };
 
 const reducer = (state = { ...initialState }, action) => {
@@ -53,6 +55,18 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         isSidebarOpen: false,
+      };
+    }
+    case OPEN_LIGHTBOX: {
+      return {
+        ...state,
+        lightboxIsOpen: true,
+      };
+    }
+    case CLOSE_LIGHTBOX: {
+      return {
+        ...state,
+        lightboxIsOpen: false,
       };
     }
     default:
