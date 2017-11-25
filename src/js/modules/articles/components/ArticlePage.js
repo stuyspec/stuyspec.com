@@ -13,6 +13,7 @@ import CommentThread from "../../comments/components/CommentThread";
 import NotFoundPage from "../../core/components/NotFoundPage";
 import { getArticleFromRequestedSlug, getArticleMedia } from "../selectors";
 import { openSubscriptionModal } from "../../accounts/actions";
+import { openLightbox } from "../../core/actions";
 
 import SimpleSlider from "./SimpleSlider";
 
@@ -71,9 +72,13 @@ const ArticlePage = ({
   sections,
   media,
   openSubscriptionModal,
-  allMediaTemporarily
+  allMediaTemporarily,
+  openLightbox,
 }) => {
-  return <SimpleSlider media={Object.values(allMediaTemporarily).slice(1,5)}/>
+  return <button style={{ margin: "100px" }} onClick={openLightbox} />;
+  return (
+    <SimpleSlider media={Object.values(allMediaTemporarily).slice(1, 5)} />
+  );
   if (!article) {
     return <NotFoundPage />;
   }
@@ -111,7 +116,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ openSubscriptionModal }, dispatch);
+  return bindActionCreators({ openSubscriptionModal, openLightbox }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(

@@ -57,7 +57,9 @@ const reducer = (state = { ...initialState }, action) => {
       return { ...state, isSearching: true };
     }
     case SEARCH_ARTICLES_FULFILLED: {
-      const searchableIds = action.payload.map(searchResult => searchResult.searchableId);
+      const searchableIds = action.payload.map(
+        searchResult => searchResult.searchableId,
+      );
       return {
         ...state,
         searchableIds: searchableIds,

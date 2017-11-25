@@ -21,7 +21,7 @@ const styles = {
   },
 };
 
-const SearchPage = ({ classes, articles }) => {  
+const SearchPage = ({ classes, articles }) => {
   return (
     <Grid fluid className={classes.SearchPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -29,7 +29,7 @@ const SearchPage = ({ classes, articles }) => {
         <meta />
       </Helmet>
       <Row>
-    {/* A SEARCH FORM */}
+        {/* A SEARCH FORM */}
         <Col xs={12} sm={12} md={9} lg={9} className={classes.articleList}>
           <ArticleList articles={articles} title="Search" label="Articles" />
         </Col>
@@ -56,4 +56,6 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ searchArticles }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(SearchPage));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  injectSheet(styles)(SearchPage),
+);
