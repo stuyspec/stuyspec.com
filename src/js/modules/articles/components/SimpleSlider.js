@@ -3,16 +3,31 @@ import Slider from "react-slick";
 import injectSheet from "react-jss";
 
 const styles = {
-  Page: {
-    padding: "20px",
-    margin: "auto",
+  SimpleSlider: {
+    height: "100%",
     width: "90%",
+    "-webkit-box-pack": "end",
+    "-ms-flex-pack": "end",
+    position: "relative",
+    display: "flex",
+    "-webkit-box-orient": "vertical",
+    "-webkit-box-direction": "normal",
+    "-ms-flex-direction": "column",
+    flexDirection: "column",
+    justifyContent: "space-around",
     "& *": {
       minHeight: 0,
       minWidth: 0,
     },
   },
   Slider: {
+    // height: "100%",
+    // "& .slick-list": {
+    //   height: "100%",
+    //   "& .slick-track": {
+    //     height: "100%",
+    //   },
+    // },
     "& .slick-next:before, .slick-prev:before": {
       fontSize: "20px",
       color: "#00558B",
@@ -145,46 +160,44 @@ class SimpleSlider extends Component {
       slidesToScroll: 1,
     };
     return (
-      <div className={classes.Page}>
-        <div className={classes.Page}>
-          <Slider
-            {...settings}
-            ref={c => (this.slider = c)}
-            className={classes.Slider}
-          >
-            {media.map(image => {
-              return (
-                <div className={classes.slideContainer} key={image.id}>
-                  <figure className={classes.slide}>
-                    <img src={image.attachmentUrl} />
-                    <figcaption className={classes.slideCaption}>
-                      <p>{image.title}</p>
-                    </figcaption>
-                  </figure>
-                </div>
-              );
-            })}
-          </Slider>
-          <div className={classes.sliderFooter}>
-            <div className={classes.index}>
-              <p>
-                {this.state.index + 1} of {this.props.media.length}
-              </p>
-            </div>
-            <div className={classes.carouselControls}>
-              <button
-                className={classes.controlButton}
-                onClick={this.prevSlide}
-              >
-                &lt;
-              </button>
-              <button
-                className={classes.controlButton}
-                onClick={this.nextSlide}
-              >
-                &gt;
-              </button>
-            </div>
+      <div className={classes.SimpleSlider}>
+        <Slider
+          {...settings}
+          ref={c => (this.slider = c)}
+          className={classes.Slider}
+        >
+          {media.map(image => {
+            return (
+              <div className={classes.slideContainer} key={image.id}>
+                <figure className={classes.slide}>
+                  <img src={image.attachmentUrl} />
+                  <figcaption className={classes.slideCaption}>
+                    <p>{image.title}</p>
+                  </figcaption>
+                </figure>
+              </div>
+            );
+          })}
+        </Slider>
+        <div className={classes.sliderFooter}>
+          <div className={classes.index}>
+            <p>
+              {this.state.index + 1} of {this.props.media.length}
+            </p>
+          </div>
+          <div className={classes.carouselControls}>
+            <button
+              className={classes.controlButton}
+              onClick={this.prevSlide}
+            >
+              &lt;
+            </button>
+            <button
+              className={classes.controlButton}
+              onClick={this.nextSlide}
+            >
+              &gt;
+            </button>
           </div>
         </div>
       </div>

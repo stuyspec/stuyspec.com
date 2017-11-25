@@ -10,7 +10,7 @@ const styles = {
     background: "#000",
     height: "100%",
     left: 0,
-    padding: "44px",
+    padding: "100px 30px 30px 60px",
     position: "fixed",
     top: 0,
     width: "100%!important",
@@ -27,6 +27,7 @@ const styles = {
     "-webkit-box-pack": "center",
     "-ms-flex-pack": "center",
     justifyContent: "center",
+    height: "100%",
   },
   closeButton: {
     background: "transparent",
@@ -54,7 +55,10 @@ const styles = {
       transform: "rotate(-45deg)",
     },
   },
-  lightboxHeader: {
+  lightboxHeader: {    
+    left: 0,
+    position: "absolute",
+    top: "32px",
     "-webkit-box-align": "center",
     "-ms-flex-align": "center",
     alignItems: "center",
@@ -69,6 +73,7 @@ const styles = {
     fontFamily: "Old English Text MT",
     fontSize: "31px",
     lineHeight: 0,
+    marginLeft: "30px",
     minWidth: "179px", // we don't want "The Spectator" to line-wrap.
   },
   headerSpacer: {
