@@ -5,7 +5,10 @@ import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
-import { SPEC_REEFER_PATTERN, SPEC_IMG_CAROUSEL_PATTERN } from "../../../constants";
+import {
+  SPEC_REEFER_PATTERN,
+  SPEC_IMG_CAROUSEL_PATTERN,
+} from "../../../constants";
 
 import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 import RightRail from "./RightRail";
@@ -13,7 +16,6 @@ import RightRail from "./RightRail";
 import SimpleSlider from "./SimpleSlider";
 import { Lightbox } from "../../core/components";
 import { openLightbox } from "../../core/actions";
-
 
 const styles = {
   ArticleBody: {
@@ -84,7 +86,7 @@ const styles = {
     transitionDuration: ".3s",
     "&:hover": {
       backgroundColor: "#ccc",
-    }
+    },
   },
   lightboxButtonContent: {
     padding: "6px 8px",
@@ -119,7 +121,14 @@ const styles = {
   },
 };
 
-const ArticleBody = ({ classes, articles, article: {content, title}, sections, media, openLightbox }) => {
+const ArticleBody = ({
+  classes,
+  articles,
+  article: { content, title },
+  sections,
+  media,
+  openLightbox,
+}) => {
   /*
   const generateFigure = (match, string, offset) => {
     const image = media[parseInt(string)];
@@ -152,11 +161,13 @@ const ArticleBody = ({ classes, articles, article: {content, title}, sections, m
           <Link
             id="reefer-link"
             target="_blank"
-            to={`${sections[reeferArticle.sectionId].permalink}/${reeferArticle.slug}`}
+            to={`${sections[reeferArticle.sectionId]
+              .permalink}/${reeferArticle.slug}`}
           >
             {title}
           </Link>
-          ,&rdquo; published in Volume {reeferArticle.volume} Issue {reeferArticle.issue}.
+          ,&rdquo; published in Volume {reeferArticle.volume} Issue{" "}
+          {reeferArticle.issue}.
         </span>
       );
     }
@@ -171,20 +182,25 @@ const ArticleBody = ({ classes, articles, article: {content, title}, sections, m
           Object.values(media).length > 0 && (
             <div>
               <Lightbox title={title}>
-                <SimpleSlider media={Object.values(media)}/>
+                <SimpleSlider media={Object.values(media)} />
               </Lightbox>
               <div className={classes.featuredMediaContainer}>
                 <ArticleFeaturedMedia featuredMedia={firstImage}>
-                  <button 
-                    key="carouselButton" 
-                    className={classes.lightboxButton} 
+                  <button
+                    key="carouselButton"
+                    className={classes.lightboxButton}
                     onClick={openLightbox}
                   >
                     <div className={classes.lightboxButtonContent}>
-                      <img className={classes.lightboxIcon} src="/img/slides.svg"/>
+                      <img
+                        className={classes.lightboxIcon}
+                        src="/img/slides.svg"
+                      />
                     </div>
                   </button>
-                  <i>{/* with multiple children of ArticleFeaturedMedia, it can conduct a chidlren.find*/}</i>
+                  <i>
+                    {/* with multiple children of ArticleFeaturedMedia, it can conduct a chidlren.find*/}
+                  </i>
                 </ArticleFeaturedMedia>
               </div>
             </div>
@@ -192,9 +208,7 @@ const ArticleBody = ({ classes, articles, article: {content, title}, sections, m
         ) : (
           featuredMedia && (
             <div className={classes.featuredMediaContainer}>
-              <ArticleFeaturedMedia
-                featuredMedia={featuredMedia}
-              />
+              <ArticleFeaturedMedia featuredMedia={featuredMedia} />
             </div>
           )
         )}
@@ -220,4 +234,6 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ openLightbox }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(ArticleBody));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  injectSheet(styles)(ArticleBody),
+);

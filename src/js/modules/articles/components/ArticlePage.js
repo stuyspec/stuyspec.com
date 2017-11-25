@@ -82,7 +82,8 @@ const ArticlePage = ({
     // temporary; in the future, the uploader would add these tags to
     // article content (sometimes, even an article with 20 images may be
     // viewed as a scrolled essay, not a slideshow.
-    articleClone.content = '<spec-img-carousel></spec-img-carousel>' + article.content;
+    articleClone.content =
+      "<spec-img-carousel></spec-img-carousel>" + article.content;
   }
   return (
     <Grid fluid className={classes.ArticlePage}>

@@ -7,7 +7,7 @@ import { openLightbox, closeLightbox } from "../actions";
 
 const styles = {
   Lightbox: {
-    background: "#000",
+    background: "rgba(0, 0, 0, .9)",
     height: "100%",
     left: 0,
     padding: "100px 30px 30px 60px",
@@ -49,13 +49,13 @@ const styles = {
       backgroundColor: "#fff",
     },
     "&:before": {
-      transform: "rotate(45deg)",      
+      transform: "rotate(45deg)",
     },
     "&:after": {
       transform: "rotate(-45deg)",
     },
   },
-  lightboxHeader: {    
+  lightboxHeader: {
     left: 0,
     position: "absolute",
     top: "32px",
@@ -82,7 +82,7 @@ const styles = {
     marginLeft: "15px",
   },
   headerTitle: {
-    fontFamily: "Minion Pro",//Minion Pro",
+    fontFamily: "Minion Pro", //Minion Pro",
     fontSize: "21px",
     marginLeft: "15px",
     position: "relative",
@@ -91,8 +91,8 @@ const styles = {
   "@media (max-width: 767px)": {
     lightboxHeader: {
       display: "none",
-    }
-  }
+    },
+  },
 };
 
 const Lightbox = ({
@@ -108,11 +108,11 @@ const Lightbox = ({
       <div className={classes.Lightbox}>
         <div className={classes.lightboxHeader}>
           <div className={classes.headerLogo}>The Spectator</div>
-          <div className={classes.headerSpacer}></div>
+          <div className={classes.headerSpacer} />
           <div className={classes.headerTitle}>{title}</div>
         </div>
         <div className={classes.contentContainer}>
-          <button onClick={closeLightbox} className={classes.closeButton}></button>
+          <button onClick={closeLightbox} className={classes.closeButton} />
           {children}
         </div>
       </div>

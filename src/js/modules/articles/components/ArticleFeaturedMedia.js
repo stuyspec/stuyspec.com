@@ -65,17 +65,17 @@ class ArticleFeaturedMedia extends Component {
         imgWidth: img.width,
       });
     };
-  }  
+  };
   getComponent = key => {
     if (!this.props.children) {
       return null;
     }
     return this.props.children.find(child => child.key === key);
-  }
+  };
   render = () => {
     const { classes, featuredMedia, users } = this.props;
     const creator = users[featuredMedia.userId];
-    const carouselButton = this.getComponent('carouselButton');
+    const carouselButton = this.getComponent("carouselButton");
     return (
       <figure
         className={
@@ -86,7 +86,7 @@ class ArticleFeaturedMedia extends Component {
           )
         }
         style={{
-          'marginBottom': carouselButton ? '-28px' : 0,
+          marginBottom: carouselButton ? "-28px" : 0,
         }}
       >
         <div className={classes.imgContainer}>
@@ -102,7 +102,7 @@ class ArticleFeaturedMedia extends Component {
             <Link
               className={classes.creditLine}
               style={{
-                "top": carouselButton ? "-42px" : 0,
+                top: carouselButton ? "-42px" : 0,
               }}
               to={`/${MEDIA_CREATOR_SLUGS[
                 featuredMedia.mediaType
@@ -118,7 +118,7 @@ class ArticleFeaturedMedia extends Component {
         )}
       </figure>
     );
-  }
+  };
 }
 
 const mapStateToProps = state => ({

@@ -50,7 +50,7 @@ const styles = {
     flexDirection: "column",
     justifyContent: "flex-end",
     margin: 0,
-    "& img": {      
+    "& img": {
       margin: "0 auto",
       maxHeight: "50vh",
       maxWidth: "100%",
@@ -186,16 +186,10 @@ class SimpleSlider extends Component {
             </p>
           </div>
           <div className={classes.carouselControls}>
-            <button
-              className={classes.controlButton}
-              onClick={this.prevSlide}
-            >
+            <button className={classes.controlButton} onClick={this.prevSlide}>
               &lt;
             </button>
-            <button
-              className={classes.controlButton}
-              onClick={this.nextSlide}
-            >
+            <button className={classes.controlButton} onClick={this.nextSlide}>
               &gt;
             </button>
           </div>
