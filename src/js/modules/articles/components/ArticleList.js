@@ -54,7 +54,7 @@ const ArticleList = ({ classes, articles, title, label }) => {
       {title && (
         title === "VOICES" ? (
           <figure className={classes.voicesBanner}>
-            <img src="/img/voices_banner.png" alt="VOICES"/>
+            <img src="/img/voices_banner.png" alt="VOICES" title="Art by Vivian Lin (Class of '18)"/>
           </figure>
         ) : (
           <p className={classes.title}>{title}</p>
