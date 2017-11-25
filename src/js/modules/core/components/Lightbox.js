@@ -36,6 +36,21 @@ const styles = {
     right: "35px",
     top: "35px",
     width: "24px",
+    "&:before, &:after": {
+      position: "absolute",
+      content: '" "',
+      top: 0,
+      left: "12px",
+      height: "24px",
+      width: "2px",
+      backgroundColor: "#fff",
+    },
+    "&:before": {
+      transform: "rotate(45deg)",      
+    },
+    "&:after": {
+      transform: "rotate(-45deg)",
+    },
   },
 };
 
@@ -49,7 +64,8 @@ const Lightbox = ({
   if (lightboxIsOpen) {
     return (
       <div className={classes.Lightbox}>
-        <button onClick={closeLightbox} className={classes.closeButton} />
+        <button onClick={closeLightbox} className={classes.closeButton}></button>
+        {children}
       </div>
     );
   } else {
