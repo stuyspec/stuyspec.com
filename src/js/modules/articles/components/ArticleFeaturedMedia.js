@@ -1,15 +1,14 @@
 import React, { Component } from "react";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
-import { Link } from "react-router-dom";
 
-import { MEDIA_CREATOR_SLUGS } from "../../../constants";
-import { capitalizeWord } from "../../../utils";
+import { openLightbox } from "../../core/actions";
+import ArticleMediaCaption from "./ArticleMediaCaption";
 
 const styles = {
   figure: {
-    margin: 0,
-    marginBottom: "28px",
+    margin: "0 0 28px 0",
     width: "100%",
   },
   tallFigure: {
@@ -20,24 +19,32 @@ const styles = {
     width: "45%",
   },
   imgContainer: {
+    position: "relative",
     "& img": {
       width: "100%",
     },
     "& button": {
-      position: "relative",
-      top: "-70px",
-      left: "28px",
+      bottom: "20px",
+      left: "20px",
+      position: "absolute",
     },
   },
-  caption: {
-    fontFamily: "Minion Pro",
-    fontSize: "14px",
-    lineHeight: "1.07",
-    marginTop: "7px",
+  lightboxButton: {
+    backgroundColor: "#fff",
+    border: "none",
+    borderRadius: 0,
+    opacity: .8,
+    outline: "none",
+    transitionDuration: ".3s",
+    "&:hover": {
+      opacity: .9,
+    },
   },
-  creditLine: {
-    color: "#888",
-    position: "relative",
+  lightboxButtonContent: {
+    padding: "6px 8px",
+  },
+  lightboxIcon: {
+    width: "30px !important",
   },
   "@media (max-width: 767px)": {
     tallFigure: {
@@ -59,7 +66,7 @@ class ArticleFeaturedMedia extends Component {
   }
   componentDidMount = () => {
     const img = new Image();
-    img.src = this.props.featuredMedia.attachmentUrl;
+    img.src = this.props.image.attachmentUrl;
     img.onload = () => {
       this.setState({
         imgHeight: img.height,
@@ -67,47 +74,40 @@ class ArticleFeaturedMedia extends Component {
       });
     };
   };
+  openLightbox = () => this.props.openLightbox();
   render = () => {
-    const { classes, featuredMedia, users, children } = this.props;
-    const creator = users[featuredMedia.userId];
+    const { classes, image, isCarouselButtonVisible } = this.props;
     const isFigureTall = this.state.imgHeight > this.state.imgWidth * 1.2;
     return (
       <figure
         className={isFigureTall ? classes.tallFigure : classes.figure}
       >
         <div className={classes.imgContainer}>
-          <img className={classes.img} src={featuredMedia.attachmentUrl} />
-          {children}
-        </div>
-        {creator && (
-          <figcaption className={classes.caption}>
-            <span>
-              {featuredMedia.caption}
-              {featuredMedia.caption !== "" && "&nbsp;"}
-            </span>
-            <Link
-              className={classes.creditLine}
-              to={`/${MEDIA_CREATOR_SLUGS[
-                featuredMedia.mediaType
-              ]}/${creator.slug}`}
+          <img className={classes.img} src={image.attachmentUrl} />
+          {isCarouselButtonVisible && (
+            <button
+              className={classes.lightboxButton}
+              onClick={this.openLightbox}
             >
-              {capitalizeWord(featuredMedia.mediaType)}
-              &nbsp;by&nbsp;
-              {creator.firstName}
-              {creator.lastName !== "" && " " + creator.lastName}
-            </Link>
-            .
-          </figcaption>
-        )}
+              <div className={classes.lightboxButtonContent}>
+                <img
+                  className={classes.lightboxIcon}
+                  src="/img/slides.svg"
+                />
+              </div>
+            </button>
+          )}
+        </div>
+        <ArticleMediaCaption image={image}/>
       </figure>
     );
   };
 }
 
-const mapStateToProps = state => ({
-  users: state.users.users,
-});
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ openLightbox }, dispatch);
+};
 
-export default connect(mapStateToProps)(
-  injectSheet(styles)(ArticleFeaturedMedia),
+export default connect(null, mapDispatchToProps)(
+  injectSheet(styles)(ArticleFeaturedMedia)
 );

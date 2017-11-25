@@ -1,5 +1,4 @@
 import React from "react";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
@@ -15,7 +14,6 @@ import RightRail from "./RightRail";
 
 import { Gallery } from "../../media/components";
 import { Lightbox } from "../../core/components";
-import { openLightbox } from "../../core/actions";
 
 const styles = {
   ArticleBody: {
@@ -24,9 +22,6 @@ const styles = {
     fontSize: "18px",
     lineHeight: 1.44,
     padding: "0 0 18px",
-    "& figure:first-child figcaption": {
-      lineHeight: 1.3,
-    },
     "& p": {
       marginBottom: "20px",
     },
@@ -66,39 +61,15 @@ const styles = {
       },
     },
     "& spec-reefer": {
-      // the original reefer
       display: "none",
-    },
-  },
-  featuredMediaContainer: {
-    "& figure": {
-      // marginBottom: "28px",
     },
   },
   content: {
     marginTop: "13px",
   },
-  lightboxButton: {
-    backgroundColor: "#fff",
-    border: "none",
-    borderRadius: 0,
-    opacity: .8,
-    outline: "none",
-    transitionDuration: ".3s",
-    "&:hover": {
-      opacity: .9,
-    },
-  },
-  lightboxButtonContent: {
-    padding: "6px 8px",
-  },
-  lightboxIcon: {
-    width: "30px !important",
-  },
   "@media (max-width: 991px)": {
-    featuredMediaContainer: {
-      "& figure:first-child": {
-        // featured media
+    ArticleBody: {
+      "& > figure": {
         padding: "0 10%",
       },
     },
@@ -107,8 +78,8 @@ const styles = {
     },
   },
   "@media (max-width: 767px)": {
-    featuredMediaContainer: {
-      "& figure:first-child": {
+    ArticleBody: {
+      "& > figure": {
         padding: "0 2%",
         "& > div > img": {
           marginLeft: "-14px", // ArticleBody.paddingLeft = 14px
@@ -128,7 +99,6 @@ const ArticleBody = ({
   article: { content, title },
   sections,
   media,
-  openLightbox,
 }) => {
   /*
   const generateFigure = (match, string, offset) => {
@@ -173,43 +143,14 @@ const ArticleBody = ({
       );
     }
   };
-  const featuredMedia = media.find(medium => medium.isFeatured);
-  const shouldShowImgCarousel = SPEC_IMG_CAROUSEL_PATTERN.test(content) && Object.values(media).length > 0;
+  const isCarouselButtonVisible = SPEC_IMG_CAROUSEL_PATTERN.test(content) && Object.values(media).length > 0;
   return (
     <Row>
       <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
-        {shouldShowImgCarousel ? (
-          <div>
-            <Lightbox title={title}>
-              <Gallery media={Object.values(media)} />
-            </Lightbox>
-            <div className={classes.featuredMediaContainer}>
-              <ArticleFeaturedMedia featuredMedia={Object.values(media)[0]}>
-                <button
-                  key="carouselButton"
-                  className={classes.lightboxButton}
-                  onClick={openLightbox}
-                >
-                  <div className={classes.lightboxButtonContent}>
-                    <img
-                      className={classes.lightboxIcon}
-                      src="/img/slides.svg"
-                    />
-                  </div>
-                </button>
-                <i>
-                  {/* with multiple children of ArticleFeaturedMedia, it can conduct a chidlren.find*/}
-                </i>
-              </ArticleFeaturedMedia>
-            </div>
-          </div>          
-        ) : (
-          featuredMedia && (
-            <div className={classes.featuredMediaContainer}>
-              <ArticleFeaturedMedia featuredMedia={featuredMedia} />
-            </div>
-          )
-        )}
+        <Lightbox title={title}>
+          <Gallery media={Object.values(media)} />
+        </Lightbox>
+        <ArticleFeaturedMedia image={Object.values(media)[0]} isCarouselButtonVisible={isCarouselButtonVisible} />       
         {SPEC_REEFER_PATTERN.test(content) && generateArticleReefer(content)}
         <div
           className={classes.innerHTML}
@@ -228,10 +169,6 @@ const mapStateToProps = state => ({
   sections: state.sections.sections,
 });
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ openLightbox }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(
+export default connect(mapStateToProps)(
   injectSheet(styles)(ArticleBody),
 );
