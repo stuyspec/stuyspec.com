@@ -60,26 +60,20 @@ class ArticleFeaturedMedia extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      imgHeight: 0,
-      imgWidth: 0,
+      isImageTall: false
     };
   }
-  componentDidMount = () => {
+  componentDidMount() {
     const img = new Image();
     img.src = this.props.image.attachmentUrl;
-    img.onload = () => {
-      this.setState({
-        imgHeight: img.height,
-        imgWidth: img.width,
-      });
-    };
-  };
+    img.onload = () =>
+      this.setState({isImageTall: img.height > this.state.imgWidth * 1.4});
+  }
   openLightbox = () => this.props.openLightbox();
-  render = () => {
+  render() {
     const { classes, image, isCarouselButtonVisible } = this.props;
-    const isFigureTall = this.state.imgHeight > this.state.imgWidth * 1.2;
     return (
-      <figure className={isFigureTall ? classes.tallFigure : classes.figure}>
+      <figure className={this.state.isImageTall ? classes.tallFigure : classes.figure}>
         <div className={classes.imgContainer}>
           <img className={classes.img} src={image.attachmentUrl} />
           {isCarouselButtonVisible && (
@@ -96,7 +90,7 @@ class ArticleFeaturedMedia extends Component {
         <ArticleMediaCaption image={image} />
       </figure>
     );
-  };
+  }
 }
 
 const mapDispatchToProps = dispatch => {
