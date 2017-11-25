@@ -18,14 +18,7 @@ const styles = {
   },
   contentContainer: {
     display: "flex",
-    "-webkit-box-align": "center",
-    "-ms-flex-align": "center",
     alignItems: "center",
-    display: "-webkit-box",
-    display: "-ms-flexbox",
-    display: "flex",
-    "-webkit-box-pack": "center",
-    "-ms-flex-pack": "center",
     justifyContent: "center",
     height: "100%",
   },
@@ -59,11 +52,7 @@ const styles = {
     left: 0,
     position: "absolute",
     top: "32px",
-    "-webkit-box-align": "center",
-    "-ms-flex-align": "center",
     alignItems: "center",
-    display: "-webkit-box",
-    display: "-ms-flexbox",
     display: "flex",
     lineHeight: "31px",
     color: "#fff",
@@ -99,11 +88,10 @@ const Lightbox = ({
   classes,
   children,
   title,
-  lightboxIsOpen,
-  openLightbox,
+  isLightboxVisible,
   closeLightbox,
 }) => {
-  if (lightboxIsOpen) {
+  if (isLightboxVisible) {
     return (
       <div className={classes.Lightbox}>
         <div className={classes.lightboxHeader}>
@@ -123,7 +111,7 @@ const Lightbox = ({
 };
 
 const mapStateToProps = state => ({
-  lightboxIsOpen: state.core.lightboxIsOpen,
+  isLightboxVisible: state.core.isLightboxVisible,
 });
 
 const mapDispatchToProps = dispatch => {

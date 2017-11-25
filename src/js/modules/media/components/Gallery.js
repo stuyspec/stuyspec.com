@@ -6,13 +6,14 @@ import injectSheet from "react-jss";
 
 const styles = {
   Gallery: {
-    height: "100%",
-    width: "90%",
-    position: "relative",
     display: "flex",
     flexDirection: "column",
+    height: "100%",
     justifyContent: "space-around",
+    position: "relative",
+    width: "90%",
     "& *": {
+      // necessary for react-slick + flex
       minHeight: 0,
       minWidth: 0,
     },
@@ -103,7 +104,7 @@ class Gallery extends Component {
   prevSlide = () => {
     this.slider.slickPrev();
   };
-  render = () => {
+  render() {
     const { classes, media } = this.props;
     const settings = {
       customPaging: i => {

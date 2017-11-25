@@ -26,7 +26,7 @@ const initialState = {
   viewportWidth: getViewportWidth(),
   viewportHeight: getViewportHeight(),
   isSidebarOpen: false,
-  lightboxIsOpen: false,
+  isLightboxVisible: false,
 };
 
 const reducer = (state = { ...initialState }, action) => {
@@ -60,13 +60,13 @@ const reducer = (state = { ...initialState }, action) => {
     case OPEN_LIGHTBOX: {
       return {
         ...state,
-        lightboxIsOpen: true,
+        isLightboxVisible: true,
       };
     }
     case CLOSE_LIGHTBOX: {
       return {
         ...state,
-        lightboxIsOpen: false,
+        isLightboxVisible: false,
       };
     }
     default:
