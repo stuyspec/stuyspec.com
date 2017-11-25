@@ -252,8 +252,7 @@ const Masthead = ({
       */}
         <li key={-3} className={classes.sectionListItem}>
           <Link
-            onClick={openSubscriptionModal}
-            to={"/"}
+            to="/search"
             className={classes.sectionLink}
           >
             <Search className={classes.navSearchButton} />

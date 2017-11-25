@@ -2,9 +2,12 @@ import axios from "axios";
 import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from "../../constants";
 import { validateKey } from "../../utils";
 import * as t from "./actionTypes";
+import { reset } from "redux-form";
 
 export const searchArticles = query => {
+  query = query.search;
   return dispatch => {
+    console.log("dispatching");
     dispatch({ type: t.SEARCH_ARTICLES_PENDING });
     axios
       .get(`${STUY_SPEC_API_URL}/articles?query=${encodeURI(query)}`, STUY_SPEC_API_HEADERS)
@@ -13,6 +16,7 @@ export const searchArticles = query => {
           type: t.SEARCH_ARTICLES_FULFILLED,
           payload: response.data,
         });
+        dispatch(reset("search"));
       })
       .catch(err => {
         dispatch({
@@ -21,8 +25,7 @@ export const searchArticles = query => {
         });
       });
   };
-
-}
+};
 
 export const fetchArticles = () => {
   return dispatch => {
