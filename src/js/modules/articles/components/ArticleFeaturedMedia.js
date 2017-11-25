@@ -86,7 +86,7 @@ class ArticleFeaturedMedia extends Component {
           )
         }
         style={{
-          marginBottom: carouselButton ? "-28px" : 0,
+          marginBottom: carouselButton ? "0px" : "28px",
         }}
       >
         <div className={classes.imgContainer}>
