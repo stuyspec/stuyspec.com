@@ -16,6 +16,7 @@ import { openSubscriptionModal } from "../../accounts/actions";
 import { openLightbox } from "../../core/actions";
 
 import SimpleSlider from "./SimpleSlider";
+import { Lightbox } from "../../core/components";
 
 const styles = {
   ArticlePage: {
@@ -75,10 +76,14 @@ const ArticlePage = ({
   allMediaTemporarily,
   openLightbox,
 }) => {
-  return <button style={{ margin: "100px" }} onClick={openLightbox} />;
   return (
-    <SimpleSlider media={Object.values(allMediaTemporarily).slice(1, 5)} />
-  );
+    <div>
+      <Lightbox>
+        <SimpleSlider media={Object.values(allMediaTemporarily).slice(1, 5)}/>
+      </Lightbox>
+      <button style={{ margin: "100px" }} onClick={openLightbox}>lightbox</button>;
+    </div>
+  )
   if (!article) {
     return <NotFoundPage />;
   }
