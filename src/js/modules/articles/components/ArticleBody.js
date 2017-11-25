@@ -82,10 +82,11 @@ const styles = {
     backgroundColor: "#fff",
     border: "none",
     borderRadius: 0,
+    opacity: .8,
     outline: "none",
     transitionDuration: ".3s",
     "&:hover": {
-      backgroundColor: "#ccc",
+      opacity: .9,
     },
   },
   lightboxButtonContent: {
