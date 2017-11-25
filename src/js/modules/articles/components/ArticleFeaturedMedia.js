@@ -13,8 +13,8 @@ const styles = {
   },
   tallFigure: {
     float: "left",
-    marginTop: "28px !important",
-    marginBottom: "8px",
+    marginTop: "9px !important",
+    marginBottom: "5px",
     paddingRight: "3.5% !important",
     width: "45%",
   },
@@ -76,17 +76,13 @@ class ArticleFeaturedMedia extends Component {
     const { classes, featuredMedia, users } = this.props;
     const creator = users[featuredMedia.userId];
     const carouselButton = this.getComponent("carouselButton");
+
+    const isFigureTall = this.state.imgHeight > this.state.imgWidth * 1.2;
     return (
       <figure
-        className={
-          this.state.imgHeight > this.state.imgWidth * 1.2 ? (
-            classes.tallFigure
-          ) : (
-            classes.figure
-          )
-        }
+        className={isFigureTall ? classes.tallFigure : classes.figure}
         style={{
-          marginBottom: carouselButton ? "0px" : "28px",
+          marginBottom: carouselButton ? "0px" : (!isFigureTall && "28px"),
         }}
       >
         <div className={classes.imgContainer}>

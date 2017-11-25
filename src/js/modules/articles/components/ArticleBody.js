@@ -13,7 +13,7 @@ import {
 import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 import RightRail from "./RightRail";
 
-import Gallery from "../../media/components/Gallery";
+import { Gallery } from "../../media/components";
 import { Lightbox } from "../../core/components";
 import { openLightbox } from "../../core/actions";
 
@@ -72,7 +72,7 @@ const styles = {
   },
   featuredMediaContainer: {
     "& figure": {
-      marginBottom: "28px",
+      // marginBottom: "28px",
     },
   },
   content: {
@@ -155,7 +155,7 @@ const ArticleBody = ({
     const match = SPEC_REEFER_PATTERN.exec(content);
     const reeferArticle = articles[parseInt(match[1])];
     if (reeferArticle) {
-      const title = reeferArticle.title.replace("“", "‘").replace("”", "’");
+      const reeferTitle = reeferArticle.title.replace("“", "‘").replace("”", "’");
       return (
         <span id="article-reefer">
           This article was written in response to &ldquo;
@@ -165,7 +165,7 @@ const ArticleBody = ({
             to={`${sections[reeferArticle.sectionId]
               .permalink}/${reeferArticle.slug}`}
           >
-            {title}
+            {reeferTitle}
           </Link>
           ,&rdquo; published in Volume {reeferArticle.volume} Issue{" "}
           {reeferArticle.issue}.
@@ -174,38 +174,35 @@ const ArticleBody = ({
     }
   };
   const featuredMedia = media.find(medium => medium.isFeatured);
-  const displayImgCarousel = SPEC_IMG_CAROUSEL_PATTERN.test(content);
-  const firstImage = Object.values(media)[0];
+  const shouldShowImgCarousel = SPEC_IMG_CAROUSEL_PATTERN.test(content) && Object.values(media).length > 0;
   return (
     <Row>
       <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
-        {displayImgCarousel ? (
-          Object.values(media).length > 0 && (
-            <div>
-              <Lightbox title={title}>
-                <Gallery media={Object.values(media)} />
-              </Lightbox>
-              <div className={classes.featuredMediaContainer}>
-                <ArticleFeaturedMedia featuredMedia={firstImage}>
-                  <button
-                    key="carouselButton"
-                    className={classes.lightboxButton}
-                    onClick={openLightbox}
-                  >
-                    <div className={classes.lightboxButtonContent}>
-                      <img
-                        className={classes.lightboxIcon}
-                        src="/img/slides.svg"
-                      />
-                    </div>
-                  </button>
-                  <i>
-                    {/* with multiple children of ArticleFeaturedMedia, it can conduct a chidlren.find*/}
-                  </i>
-                </ArticleFeaturedMedia>
-              </div>
+        {shouldShowImgCarousel ? (
+          <div>
+            <Lightbox title={title}>
+              <Gallery media={Object.values(media)} />
+            </Lightbox>
+            <div className={classes.featuredMediaContainer}>
+              <ArticleFeaturedMedia featuredMedia={Object.values(media)[0]}>
+                <button
+                  key="carouselButton"
+                  className={classes.lightboxButton}
+                  onClick={openLightbox}
+                >
+                  <div className={classes.lightboxButtonContent}>
+                    <img
+                      className={classes.lightboxIcon}
+                      src="/img/slides.svg"
+                    />
+                  </div>
+                </button>
+                <i>
+                  {/* with multiple children of ArticleFeaturedMedia, it can conduct a chidlren.find*/}
+                </i>
+              </ArticleFeaturedMedia>
             </div>
-          )
+          </div>          
         ) : (
           featuredMedia && (
             <div className={classes.featuredMediaContainer}>
