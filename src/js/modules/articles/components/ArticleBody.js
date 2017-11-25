@@ -63,7 +63,7 @@ const styles = {
     },
     "& figure:first-child": {
       marginBottom: "28px",
-    }
+    },
   },
   content: {
     marginTop: "13px",
@@ -120,9 +120,8 @@ const ArticleBody = ({ classes, articles, sections, content, media }) => {
   const generateArticleReefer = content => {
     const match = SPEC_REEFER_PATTERN.exec(content);
     const article = articles[parseInt(match[1])];
-    console.log(article.title)
     if (article) {
-      const title = article.title.replace('“', '‘').replace('”', '’');
+      const title = article.title.replace("“", "‘").replace("”", "’");
       return (
         <span id="article-reefer">
           This article was written in response to &ldquo;
@@ -133,8 +132,7 @@ const ArticleBody = ({ classes, articles, sections, content, media }) => {
           >
             {title}
           </Link>
-          ,&rdquo; published in Volume {article.volume} Issue{" "}
-          {article.issue}.
+          ,&rdquo; published in Volume {article.volume} Issue {article.issue}.
         </span>
       );
     }

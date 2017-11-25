@@ -7,7 +7,10 @@ export const searchArticles = query => {
   return dispatch => {
     dispatch({ type: t.SEARCH_ARTICLES_PENDING });
     axios
-      .get(`${STUY_SPEC_API_URL}/articles?query=${encodeURI(query)}`, STUY_SPEC_API_HEADERS)
+      .get(
+        `${STUY_SPEC_API_URL}/articles?query=${encodeURI(query)}`,
+        STUY_SPEC_API_HEADERS,
+      )
       .then(response => {
         dispatch({
           type: t.SEARCH_ARTICLES_FULFILLED,
@@ -21,8 +24,7 @@ export const searchArticles = query => {
         });
       });
   };
-
-}
+};
 
 export const fetchArticles = () => {
   return dispatch => {
