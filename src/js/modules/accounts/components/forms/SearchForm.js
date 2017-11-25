@@ -1,20 +1,46 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
+import { Search } from "../../../core/icons";
 
 const styles = {
     SearchForm: {
-        marginTop: "26px",
+        margin: "26px 0 40px",
+        textAlign: "center",
     },
     input: {
         backgroundColor: "#eee",
         borderRadius: "4px",
+        border: "none",
+        color: "#888",
+        fontFamily: "Circular Std",
+        fontSize: "18px",
+        fontWeight: "500",
         height: "51px",
-        marginTop: "26px",
-        textAlign: "center",
+        padding: "14px 44px",
+        textAlign: "left",
         width: "410px",
+    },
+    submitButton: {
+        backgroundColor: "#3572b7",
+        borderRadius: "0 4px 4px 0",
+        border: "none",
+        color: "#fff",
+        fontFamily: "Minion Pro",
+        fontStyle: "italic",
+        fontSize: "18px",
+        height: "51px",
+        margin: "0 auto",
+        textAlign: "center",
+        width: "74px",
+    },
+    search: {
+        width: "17px",
+        height: "17px",
+        position: "relative",
+        left: "33px",
+        bottom: "2px",
     }
-
 };
 
 const validate = formValues => {
@@ -30,35 +56,28 @@ const renderField = ({
                          meta: { touched, error, warning },
                      }) => {
     return (
-        <div>
-            <div>
                 <input
-                    style={{ width: "100%" }}
                     {...input}
                     placeholder={label}
                     type={type}
                     className={classes.input}
                 />
-                {touched &&
-                ((error && <span>{error}</span>) ||
-                    (warning && <span>{warning}</span>))}
-            </div>
-        </div>
     );
 };
 
 const SearchForm = ({ classes, handleSubmit, submitting, status }) => {
     return (
         <div className={classes.SearchForm}>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} >
+                <div className={classes.form}>
+                <Search className={classes.search}/>
                 <Field
                     name="search"
                     type="text"
                     component={renderField}
-                    label="Enter search terms"
+                    label={"Enter search terms"}
                     classes={classes}
                 />
-                <div>
                     <button
                         type="submit"
                         disabled={submitting}

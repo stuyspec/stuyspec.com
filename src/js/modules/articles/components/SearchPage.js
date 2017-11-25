@@ -20,7 +20,7 @@ const styles = {
     fontFamily: "Canela",
     fontSize: "36px",
     fontWeight: "500",
-    marginBottom: "26px",
+    margin: 0,
     textAlign: "center",
   },
   "@media (min-width: 992px)": {
@@ -28,9 +28,13 @@ const styles = {
       marginTop: "80px",
     },
   },
+    form: {
+      margin: "0 auto",
+        display: "block",
+    },
 };
 
-const SearchPage = ({ classes, articles, searchableIds }) => {
+const SearchPage = ({ classes, articles, searchableIds, searchArticles }) => {
   return (
     <Grid fluid className={classes.SearchPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -38,22 +42,26 @@ const SearchPage = ({ classes, articles, searchableIds }) => {
         <meta />
       </Helmet>
       <Row>
-        <p className={classes.title}>
-          Search Page
-        </p>
-        <SearchForm onSubmit={values => searchArticles(values)}/>
-          {searchableIds.length !== 0 && <Col xs={12} sm={12} md={9} lg={9} className={classes.articleList}>
+      <p className={classes.title}>
+        Search Page
+      </p>
+      <SearchForm onSubmit={values => searchArticles(values)} className={classes.form}/>
+      <hr className={classes.hr}/>
+      </Row>
+      <Row>
+          {searchableIds.length !== 0 &&
+          <Col xs={12} sm={12} md={9} lg={9} className={classes.articleList}>
             <ArticleList articles={articles} title="Search" label="Articles" />
           </Col>}
-        <Col
-          xsHidden
-          smHidden
-          md={3}
-          lg={3}
-          className={classes.tallAdContainer}
-        >
-          <TallAd />
-        </Col>
+          {searchableIds.length !== 0 &&
+          <Col
+              smHidden
+              md={3}
+              lg={3}
+              className={classes.tallAdContainer}
+          >
+            <TallAd />
+          </Col>}
       </Row>
     </Grid>
   );

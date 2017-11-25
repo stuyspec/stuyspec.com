@@ -18,6 +18,7 @@ const TallAd = ({ classes, advertisements, ad }) => {
   if (!ad) {
     ad = advertisements[0];
   }
+  console.log(ad);
   return (
     <div className={classes.TallAd}>
       <Link to={ad.url} target="_blank">
