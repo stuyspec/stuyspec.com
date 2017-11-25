@@ -59,6 +59,9 @@ const SidebarContent = ({
     </Link>,
   );
   Object.values(topLevelSections).map(section => {
+    if (section.name === "10/31 Terror Attack") {
+      return;
+    }
     sidebarElements.push(
       <Link
         className={classes.sidebarSectionLink}

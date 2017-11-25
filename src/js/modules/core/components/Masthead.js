@@ -192,7 +192,7 @@ const Masthead = ({
   session,
   openSubscriptionModal,
 }) => {
-  const unwantedSectionNames = ["Art", "Photo", "Video"];
+  const unwantedSectionNames = ["Art", "Photo", "Video", "10/31 Terror Attack"];
   return (
     <div className={classes.Masthead}>
       <StyledNavButton onClick={openSidebar} type="Sections">
