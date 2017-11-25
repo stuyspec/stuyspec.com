@@ -78,7 +78,7 @@ const ArticlePage = ({
 }) => {
   return (
     <div>
-      <Lightbox>
+      <Lightbox title={article.title}>
         <SimpleSlider media={Object.values(allMediaTemporarily).slice(1, 5)}/>
       </Lightbox>
       <button style={{ margin: "100px" }} onClick={openLightbox}>lightbox</button>;

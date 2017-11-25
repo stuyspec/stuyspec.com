@@ -8,6 +8,15 @@ import { openLightbox, closeLightbox } from "../actions";
 const styles = {
   Lightbox: {
     background: "#000",
+    height: "100%",
+    left: 0,
+    padding: "44px",
+    position: "fixed",
+    top: 0,
+    width: "100%!important",
+    zIndex: 10000,
+  },
+  contentContainer: {
     display: "flex",
     "-webkit-box-align": "center",
     "-ms-flex-align": "center",
@@ -15,16 +24,9 @@ const styles = {
     display: "-webkit-box",
     display: "-ms-flexbox",
     display: "flex",
-    height: "100%",
     "-webkit-box-pack": "center",
     "-ms-flex-pack": "center",
     justifyContent: "center",
-    left: 0,
-    padding: "44px 0 0",
-    position: "fixed",
-    top: 0,
-    width: "100%!important",
-    zIndex: 10000,
   },
   closeButton: {
     background: "transparent",
@@ -52,11 +54,40 @@ const styles = {
       transform: "rotate(-45deg)",
     },
   },
+  lightboxHeader: {
+    "-webkit-box-align": "center",
+    "-ms-flex-align": "center",
+    alignItems: "center",
+    display: "-webkit-box",
+    display: "-ms-flexbox",
+    display: "flex",
+    lineHeight: "31px",
+    color: "#fff",
+    height: "36px",
+  },
+  headerLogo: {
+    fontFamily: "Old English Text MT",
+    fontSize: "31px",
+    lineHeight: 0,
+  },
+  headerSpacer: {
+    borderLeft: "1px solid #fff",
+    height: "100%",
+    marginLeft: "15px",
+  },
+  headerTitle: {
+    fontFamily: "Minion Pro",//Minion Pro",
+    fontSize: "21px",
+    marginLeft: "15px",
+    position: "relative",
+    top: "2px",
+  },
 };
 
 const Lightbox = ({
   classes,
   children,
+  title,
   lightboxIsOpen,
   openLightbox,
   closeLightbox,
@@ -64,8 +95,15 @@ const Lightbox = ({
   if (lightboxIsOpen) {
     return (
       <div className={classes.Lightbox}>
-        <button onClick={closeLightbox} className={classes.closeButton}></button>
-        {children}
+        <div className={classes.lightboxHeader}>
+          <div className={classes.headerLogo}>The Spectator</div>
+          <div className={classes.headerSpacer}></div>
+          <div className={classes.headerTitle}>{title}</div>
+        </div>
+        <div className={classes.contentContainer}>
+          <button onClick={closeLightbox} className={classes.closeButton}></button>
+          {children}
+        </div>
       </div>
     );
   } else {

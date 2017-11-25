@@ -11,7 +11,6 @@ import { Helmet } from "react-helmet";
 import PageHeader from "./PageHeader";
 import PageFooter from "./PageFooter";
 import SidebarContent from "./SidebarContent";
-import Lightbox from "./Lightbox";
 import SubscriptionModal from "../../accounts/components/SubscriptionModal";
 import { HorizontalAd } from "../../advertisements/components";
 import { openSidebar, closeSidebar } from "../actions";
@@ -86,7 +85,6 @@ class PageLayout extends Component {
         styles={sidebarStyles}
       >
         <div id="scroll-reset-assistant">
-          <Lightbox />
           <PageHeader location={location} />
           <Helmet>
             <title>The Stuyvesant Spectator</title>
