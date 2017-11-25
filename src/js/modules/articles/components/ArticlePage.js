@@ -74,10 +74,9 @@ const ArticlePage = ({
   if (!article) {
     return <NotFoundPage />;
   }
-  // the clone allows modifying the content for the purpose documented right below.
   let articleClone = JSON.parse(JSON.stringify(article));
   if (Object.values(media).length > 1) {
-    // obviously this behavior is redundant to what we have in ArticleBody.
+    // Obviously this behavior is redundant to what we have in ArticleBody.
     // A prop to ArticleBody would make more sense. However, this is only
     // temporary; in the future, the uploader would add these tags to
     // article content (sometimes, even an article with 20 images may be
