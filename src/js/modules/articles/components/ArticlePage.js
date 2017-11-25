@@ -13,10 +13,6 @@ import CommentThread from "../../comments/components/CommentThread";
 import NotFoundPage from "../../core/components/NotFoundPage";
 import { getArticleFromRequestedSlug, getArticleMedia } from "../selectors";
 import { openSubscriptionModal } from "../../accounts/actions";
-import { openLightbox } from "../../core/actions";
-
-import SimpleSlider from "./SimpleSlider";
-import { Lightbox } from "../../core/components";
 
 const styles = {
   ArticlePage: {
@@ -73,19 +69,20 @@ const ArticlePage = ({
   sections,
   media,
   openSubscriptionModal,
-  allMediaTemporarily,
   openLightbox,
 }) => {
-  return (
-    <div>
-      <Lightbox title={article.title}>
-        <SimpleSlider media={Object.values(allMediaTemporarily).slice(1, 5)}/>
-      </Lightbox>
-      <button style={{ margin: "100px" }} onClick={openLightbox}>lightbox</button>
-    </div>
-  )
   if (!article) {
     return <NotFoundPage />;
+  }
+  // the clone allows modifying the content for the purpose documented right below.
+  let articleClone = JSON.parse(JSON.stringify(article));
+  if (Object.values(media).length > 1) {
+    // obviously this behavior is redundant to what we have in ArticleBody.
+    // A prop to ArticleBody would make more sense. However, this is only
+    // temporary; in the future, the uploader would add these tags to
+    // article content (sometimes, even an article with 20 images may be
+    // viewed as a scrolled essay, not a slideshow.
+    articleClone.content = '<spec-img-carousel></spec-img-carousel>' + article.content;
   }
   return (
     <Grid fluid className={classes.ArticlePage}>
@@ -94,7 +91,7 @@ const ArticlePage = ({
         <meta />
       </Helmet>
       <ArticleHeader article={article} section={section} />
-      <ArticleBody content={article.content} media={media} />
+      <ArticleBody article={articleClone} media={media} />
       <Row className={classes.descriptionRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.description}>
           The Pulse of the Student Body:&nbsp;
@@ -117,11 +114,10 @@ const mapStateToProps = (state, ownProps) => ({
   article: getArticleFromRequestedSlug(state, ownProps),
   sections: state.sections.sections,
   media: getArticleMedia(state, ownProps),
-  allMediaTemporarily: state.media.media,
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ openSubscriptionModal, openLightbox }, dispatch);
+  return bindActionCreators({ openSubscriptionModal }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(

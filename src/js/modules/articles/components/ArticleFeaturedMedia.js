@@ -18,8 +18,15 @@ const styles = {
     paddingRight: "3.5% !important",
     width: "45%",
   },
-  img: {
-    width: "100%",
+  imgContainer: {
+    "& img": {
+      width: "100%",
+    },
+    "& button": {
+      position: "relative",
+      top: "-70px",
+      left: "28px",
+    },
   },
   caption: {
     fontFamily: "Minion Pro",
@@ -29,6 +36,7 @@ const styles = {
   },
   creditLine: {
     color: "#888",
+    position: "relative",
   },
   "@media (max-width: 767px)": {
     tallFigure: {
@@ -48,7 +56,7 @@ class ArticleFeaturedMedia extends Component {
       imgWidth: 0,
     };
   }
-  componentDidMount() {
+  componentDidMount = () => {
     const img = new Image();
     img.src = this.props.featuredMedia.attachmentUrl;
     img.onload = () => {
@@ -57,11 +65,17 @@ class ArticleFeaturedMedia extends Component {
         imgWidth: img.width,
       });
     };
+  }  
+  getComponent = key => {
+    if (!this.props.children) {
+      return null;
+    }
+    return this.props.children.find(child => child.key === key);
   }
-  render() {
-    const { classes, featuredMedia, isCaption, users } = this.props;
+  render = () => {
+    const { classes, featuredMedia, users } = this.props;
     const creator = users[featuredMedia.userId];
-
+    const carouselButton = this.getComponent('carouselButton');
     return (
       <figure
         className={
@@ -71,10 +85,15 @@ class ArticleFeaturedMedia extends Component {
             classes.figure
           )
         }
+        style={{
+          'marginBottom': carouselButton ? '-28px' : 0,
+        }}
       >
-        <img className={classes.img} src={featuredMedia.attachmentUrl} />
-        {isCaption &&
-        creator && (
+        <div className={classes.imgContainer}>
+          <img className={classes.img} src={featuredMedia.attachmentUrl} />
+          {carouselButton}
+        </div>
+        {creator && (
           <figcaption className={classes.caption}>
             <span>
               {featuredMedia.caption}
@@ -82,6 +101,9 @@ class ArticleFeaturedMedia extends Component {
             </span>
             <Link
               className={classes.creditLine}
+              style={{
+                "top": carouselButton ? "-42px" : 0,
+              }}
               to={`/${MEDIA_CREATOR_SLUGS[
                 featuredMedia.mediaType
               ]}/${creator.slug}`}
@@ -98,43 +120,6 @@ class ArticleFeaturedMedia extends Component {
     );
   }
 }
-/*
-const ArticleFeaturedMedia = ({ classes, featuredMedia, isCaption }) => {
-  const { creator } = featuredMedia;
-
-  var figureIsTall = false;
-  const img = new Image();
-  let dimensions = []
-  img.src = featuredMedia.attachmentUrl;
-  return img.onload = () => {
-    return <p>hj</p>
-  }
-  console.log(dimensions);
-
-  return (
-    <figure className={figureIsTall ? classes.tallFigure : classes.figure}>
-      <img className={classes.img} src={featuredMedia.attachmentUrl} />
-      {isCaption && (
-        <figcaption className={classes.caption}>
-          <span>{featuredMedia.caption}&nbsp;</span>
-          <Link
-            className={classes.creditLine}
-            to={`/${MEDIA_CREATOR_SLUGS[
-              featuredMedia.mediaType
-            ]}/${creator.slug}`}
-          >
-            {capitalizeWord(featuredMedia.mediaType)}
-            &nbsp;by&nbsp;
-            {creator.firstName}
-            {creator.lastName !== "" && " " + creator.lastName}
-          </Link>
-          .
-        </figcaption>
-      )}
-    </figure>
-  );
-};
-*/
 
 const mapStateToProps = state => ({
   users: state.users.users,

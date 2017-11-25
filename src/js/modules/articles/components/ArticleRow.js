@@ -8,7 +8,6 @@ import { getMedia } from "../../media/selectors";
 import { getSections } from "../../sections/selectors";
 import { getUsers } from "../../users/selectors";
 import Byline from "./Byline";
-import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 import Dateline from "./Dateline";
 
 const styles = {

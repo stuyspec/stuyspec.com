@@ -14,3 +14,4 @@ export const MEDIA_CREATOR_SLUGS = {
 
 export const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 export const SPEC_REEFER_PATTERN = /<spec-reefer id=(\d*)><\/spec-reefer>/;
+export const SPEC_IMG_CAROUSEL_PATTERN = /<spec-img-carousel><\/spec-img-carousel>/;

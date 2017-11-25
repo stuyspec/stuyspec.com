@@ -1,13 +1,19 @@
 import React from "react";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
-import { SPEC_REEFER_PATTERN } from "../../../constants";
+import { SPEC_REEFER_PATTERN, SPEC_IMG_CAROUSEL_PATTERN } from "../../../constants";
 
 import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 import RightRail from "./RightRail";
+
+import SimpleSlider from "./SimpleSlider";
+import { Lightbox } from "../../core/components";
+import { openLightbox } from "../../core/actions";
+
 
 const styles = {
   ArticleBody: {
@@ -61,15 +67,33 @@ const styles = {
       // the original reefer
       display: "none",
     },
-    "& figure:first-child": {
+  },
+  featuredMediaContainer: {
+    "& figure": {
       marginBottom: "28px",
     },
   },
   content: {
     marginTop: "13px",
   },
+  lightboxButton: {
+    backgroundColor: "#fff",
+    border: "none",
+    borderRadius: 0,
+    outline: "none",
+    transitionDuration: ".3s",
+    "&:hover": {
+      backgroundColor: "#ccc",
+    }
+  },
+  lightboxButtonContent: {
+    padding: "6px 8px",
+  },
+  lightboxIcon: {
+    width: "30px !important",
+  },
   "@media (max-width: 991px)": {
-    ArticleBody: {
+    featuredMediaContainer: {
       "& figure:first-child": {
         // featured media
         padding: "0 10%",
@@ -80,10 +104,10 @@ const styles = {
     },
   },
   "@media (max-width: 767px)": {
-    ArticleBody: {
+    featuredMediaContainer: {
       "& figure:first-child": {
         padding: "0 2%",
-        "& img": {
+        "& > div > img": {
           marginLeft: "-14px", // ArticleBody.paddingLeft = 14px
           width: "100vw",
         },
@@ -95,7 +119,7 @@ const styles = {
   },
 };
 
-const ArticleBody = ({ classes, articles, sections, content, media }) => {
+const ArticleBody = ({ classes, articles, article: {content, title}, sections, media, openLightbox }) => {
   /*
   const generateFigure = (match, string, offset) => {
     const image = media[parseInt(string)];
@@ -119,33 +143,60 @@ const ArticleBody = ({ classes, articles, sections, content, media }) => {
   //  featuredMedia = Object.values(articleMedia).find(image => image.isFeatured);
   const generateArticleReefer = content => {
     const match = SPEC_REEFER_PATTERN.exec(content);
-    const article = articles[parseInt(match[1])];
-    if (article) {
-      const title = article.title.replace("“", "‘").replace("”", "’");
+    const reeferArticle = articles[parseInt(match[1])];
+    if (reeferArticle) {
+      const title = reeferArticle.title.replace("“", "‘").replace("”", "’");
       return (
         <span id="article-reefer">
           This article was written in response to &ldquo;
           <Link
             id="reefer-link"
             target="_blank"
-            to={`${sections[article.sectionId].permalink}/${article.slug}`}
+            to={`${sections[reeferArticle.sectionId].permalink}/${reeferArticle.slug}`}
           >
             {title}
           </Link>
-          ,&rdquo; published in Volume {article.volume} Issue {article.issue}.
+          ,&rdquo; published in Volume {reeferArticle.volume} Issue {reeferArticle.issue}.
         </span>
       );
     }
   };
   const featuredMedia = media.find(medium => medium.isFeatured);
+  const displayImgCarousel = SPEC_IMG_CAROUSEL_PATTERN.test(content);
+  const firstImage = Object.values(media)[0];
   return (
     <Row>
       <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
-        {featuredMedia && (
-          <ArticleFeaturedMedia
-            featuredMedia={featuredMedia}
-            isCaption={true}
-          />
+        {displayImgCarousel ? (
+          Object.values(media).length > 0 && (
+            <div>
+              <Lightbox title={title}>
+                <SimpleSlider media={Object.values(media)}/>
+              </Lightbox>
+              <div className={classes.featuredMediaContainer}>
+                <ArticleFeaturedMedia featuredMedia={firstImage}>
+                  <button 
+                    key="carouselButton" 
+                    className={classes.lightboxButton} 
+                    onClick={openLightbox}
+                  >
+                    <div className={classes.lightboxButtonContent}>
+                      <img className={classes.lightboxIcon} src="/img/slides.svg"/>
+                    </div>
+                  </button>
+                  <i>{/* with multiple children of ArticleFeaturedMedia, it can conduct a chidlren.find*/}</i>
+                </ArticleFeaturedMedia>
+              </div>
+            </div>
+          )
+        ) : (
+          featuredMedia && (
+            <div className={classes.featuredMediaContainer}>
+              <ArticleFeaturedMedia
+                featuredMedia={featuredMedia}
+              />
+            </div>
+          )
         )}
         {SPEC_REEFER_PATTERN.test(content) && generateArticleReefer(content)}
         <div
@@ -165,4 +216,8 @@ const mapStateToProps = state => ({
   sections: state.sections.sections,
 });
 
-export default connect(mapStateToProps)(injectSheet(styles)(ArticleBody));
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ openLightbox }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(ArticleBody));
