@@ -21,7 +21,7 @@ const styles = {
 
 const ArticleMediaCaption = ({ classes, users, image }) => {
   if (!image) {
-    return <figcaption></figcaption>;
+    return <figcaption />;
   }
   const artist = users[image.userId];
   return (
@@ -32,9 +32,7 @@ const ArticleMediaCaption = ({ classes, users, image }) => {
       </span>
       <Link
         className={classes.creditLine}
-        to={`/${MEDIA_CREATOR_SLUGS[
-          image.mediaType
-        ]}/${artist.slug}`}
+        to={`/${MEDIA_CREATOR_SLUGS[image.mediaType]}/${artist.slug}`}
       >
         {capitalizeWord(image.mediaType)}
         &nbsp;by&nbsp;
@@ -50,4 +48,6 @@ const mapStateToProps = state => ({
   users: state.users.users,
 });
 
-export default connect(mapStateToProps)(injectSheet(styles)(ArticleMediaCaption));
+export default connect(mapStateToProps)(
+  injectSheet(styles)(ArticleMediaCaption),
+);

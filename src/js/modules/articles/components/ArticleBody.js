@@ -125,7 +125,9 @@ const ArticleBody = ({
     const match = SPEC_REEFER_PATTERN.exec(content);
     const reeferArticle = articles[parseInt(match[1])];
     if (reeferArticle) {
-      const reeferTitle = reeferArticle.title.replace("“", "‘").replace("”", "’");
+      const reeferTitle = reeferArticle.title
+        .replace("“", "‘")
+        .replace("”", "’");
       return (
         <span id="article-reefer">
           This article was written in response to &ldquo;
@@ -143,14 +145,18 @@ const ArticleBody = ({
       );
     }
   };
-  const isCarouselButtonVisible = SPEC_IMG_CAROUSEL_PATTERN.test(content) && Object.values(media).length > 0;
+  const isCarouselButtonVisible =
+    SPEC_IMG_CAROUSEL_PATTERN.test(content) && Object.values(media).length > 0;
   return (
     <Row>
       <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
         <Lightbox title={title}>
           <Gallery media={Object.values(media)} />
         </Lightbox>
-        <ArticleFeaturedMedia image={Object.values(media)[0]} isCarouselButtonVisible={isCarouselButtonVisible} />       
+        <ArticleFeaturedMedia
+          image={Object.values(media)[0]}
+          isCarouselButtonVisible={isCarouselButtonVisible}
+        />
         {SPEC_REEFER_PATTERN.test(content) && generateArticleReefer(content)}
         <div
           className={classes.innerHTML}
@@ -169,6 +175,4 @@ const mapStateToProps = state => ({
   sections: state.sections.sections,
 });
 
-export default connect(mapStateToProps)(
-  injectSheet(styles)(ArticleBody),
-);
+export default connect(mapStateToProps)(injectSheet(styles)(ArticleBody));

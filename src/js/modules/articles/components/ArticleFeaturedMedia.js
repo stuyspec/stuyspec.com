@@ -33,11 +33,11 @@ const styles = {
     backgroundColor: "#fff",
     border: "none",
     borderRadius: 0,
-    opacity: .8,
+    opacity: 0.8,
     outline: "none",
     transitionDuration: ".3s",
     "&:hover": {
-      opacity: .9,
+      opacity: 0.9,
     },
   },
   lightboxButtonContent: {
@@ -79,9 +79,7 @@ class ArticleFeaturedMedia extends Component {
     const { classes, image, isCarouselButtonVisible } = this.props;
     const isFigureTall = this.state.imgHeight > this.state.imgWidth * 1.2;
     return (
-      <figure
-        className={isFigureTall ? classes.tallFigure : classes.figure}
-      >
+      <figure className={isFigureTall ? classes.tallFigure : classes.figure}>
         <div className={classes.imgContainer}>
           <img className={classes.img} src={image.attachmentUrl} />
           {isCarouselButtonVisible && (
@@ -90,15 +88,12 @@ class ArticleFeaturedMedia extends Component {
               onClick={this.openLightbox}
             >
               <div className={classes.lightboxButtonContent}>
-                <img
-                  className={classes.lightboxIcon}
-                  src="/img/slides.svg"
-                />
+                <img className={classes.lightboxIcon} src="/img/slides.svg" />
               </div>
             </button>
           )}
         </div>
-        <ArticleMediaCaption image={image}/>
+        <ArticleMediaCaption image={image} />
       </figure>
     );
   };
@@ -109,5 +104,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(null, mapDispatchToProps)(
-  injectSheet(styles)(ArticleFeaturedMedia)
+  injectSheet(styles)(ArticleFeaturedMedia),
 );
