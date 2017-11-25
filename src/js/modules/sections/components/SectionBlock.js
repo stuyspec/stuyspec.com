@@ -48,6 +48,8 @@ const styles = {
   figure: {
     float: "right",
     marginLeft: "6px",
+    maxHeight: "45px",
+    overflow: "hidden",
     width: "62px",
     "& img": {
       width: "100%",
@@ -141,7 +143,10 @@ const SectionBlock = ({ classes, articles, section, sections, media }) => {
           return (
             <div className={classes.article} key={article.id}>
               {featuredMedia && (
-                <Link to={`${sections[article.sectionId].permalink}/${article.slug}`}>
+                <Link
+                  to={`${sections[article.sectionId]
+                    .permalink}/${article.slug}`}
+                >
                   <figure className={classes.figure}>
                     <img src={featuredMedia.thumbAttachmentUrl} />
                   </figure>

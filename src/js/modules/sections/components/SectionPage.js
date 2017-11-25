@@ -217,7 +217,10 @@ const SectionPage = ({
   section,
   media,
 }) => {
-  if (section.parentId || section.name === "HumorNOT" || section.name === "News") {
+  if (
+    section.parentId ||
+    section.name === "News"
+  ) {
     return (
       <Grid fluid className={classes.SubsectionPage}>
         <Helmet>
@@ -248,13 +251,14 @@ const SectionPage = ({
   }
   const featuredArticle = Object.values(sectionTreeArticles).find(article => {
     if (section.name === "Humor") {
-      if (directSubsections[article.sectionId] && directSubsections[article.sectionId].name === "Spooktator") {
+      if (
+        directSubsections[article.sectionId] &&
+        directSubsections[article.sectionId].name === "Spooktator"
+      ) {
         return false;
       }
     }
-    return Object.values(media).find(
-      medium => medium.articleId === article.id,
-    );
+    return Object.values(media).find(medium => medium.articleId === article.id);
   });
   const featuredMedia = Object.values(media).find(
     image => image.articleId === featuredArticle.id,
@@ -269,9 +273,7 @@ const SectionPage = ({
   let secondaryArticle = Object.values(sectionTreeArticles).find(
     article =>
       article !== featuredArticle &&
-      Object.values(media).find(
-        medium => medium.articleId === article.id,
-      ),
+      Object.values(media).find(medium => medium.articleId === article.id),
   );
   if (!secondaryArticle) {
     secondaryArticle = Object.values(sectionTreeArticles)[1];
@@ -283,7 +285,9 @@ const SectionPage = ({
   } else if (section.name === "Humor") {
     hardcodedSubsection = "Spooktator";
   }
-  const featuredSubsection = Object.values(directSubsections).find(subsection => {
+  const featuredSubsection = Object.values(
+    directSubsections,
+  ).find(subsection => {
     if (hardcodedSubsection) {
       return subsection.name === hardcodedSubsection;
     } else {
@@ -319,7 +323,9 @@ const SectionPage = ({
       <Row className={classes.featuredRow}>
         {featuredMedia && (
           <Col xs={12} sm={7} md={7} lg={7} className={classes.featuredMedia}>
-            <Link to={`${featuredArticleSection.permalink}/${featuredArticle.slug}`}>
+            <Link
+              to={`${featuredArticleSection.permalink}/${featuredArticle.slug}`}
+            >
               <figure>
                 <img src={featuredMedia.attachmentUrl} />
               </figure>

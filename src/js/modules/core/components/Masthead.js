@@ -122,7 +122,7 @@ const styles = {
 };
 
 const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
-const isFirefox = navigator.userAgent.indexOf('Firefox') > -1;
+const isFirefox = navigator.userAgent.indexOf("Firefox") > -1;
 
 const navButtonStyles = {
   Sections: {
@@ -153,7 +153,7 @@ const navButtonStyles = {
     backgroundColor: "#DB2B39",
     border: "solid 1.5px #DB2B39",
     display: "inline",
-    top: isSafari ? "-20px" : (isFirefox ? "-4px" : "0"),
+    top: isSafari ? "-20px" : isFirefox ? "-4px" : "0",
   },
   SignIn: {
     borderRadius: 0,
@@ -192,7 +192,7 @@ const Masthead = ({
   session,
   openSubscriptionModal,
 }) => {
-  const unwantedSectionNames = ["Art", "Photo", "Video"];
+  const unwantedSectionNames = ["Art", "Photo", "Video", "10/31 Terror Attack"];
   return (
     <div className={classes.Masthead}>
       <StyledNavButton onClick={openSidebar} type="Sections">

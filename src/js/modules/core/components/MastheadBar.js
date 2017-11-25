@@ -175,7 +175,9 @@ const MastheadBar = ({
   const sectionSlug = sectionSlugArray[sectionSlugArray.length - 1];
   let section = null;
   if (sectionSlugs.includes(sectionSlug)) {
-    section = Object.values(sections).find(section => section.slug === sectionSlug);
+    section = Object.values(sections).find(
+      section => section.slug === sectionSlug,
+    );
   }
 
   let mastheadSectionName = null;
@@ -194,7 +196,16 @@ const MastheadBar = ({
             <Search />
           </StyledNavButton>
         </div>
-        <Link className={classes.brandingLink} to={(section && section.parentId) ? sections[section.parentId].permalink : "/"}>
+        <Link
+          className={classes.brandingLink}
+          to={
+            section && section.parentId ? (
+              sections[section.parentId].permalink
+            ) : (
+              "/"
+            )
+          }
+        >
           The Spectator
           {mastheadSectionName === "Arts & Entertainment" ? (
             <span className={classes.responsiveSectionNameContainer}>
@@ -204,7 +215,9 @@ const MastheadBar = ({
               <span className={classes.sectionNameMobile}>A&E</span>
             </span>
           ) : (
-            mastheadSectionName && <span className={classes.sectionName}>{mastheadSectionName}</span>
+            mastheadSectionName && (
+              <span className={classes.sectionName}>{mastheadSectionName}</span>
+            )
           )}
         </Link>
         {session.userId ? (

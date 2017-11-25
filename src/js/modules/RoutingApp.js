@@ -15,6 +15,7 @@ import {
   ArticlePage,
   RecommendedPage,
   LatestPage,
+  SearchPage,
 } from "./articles/components";
 import { HomePage, PageLayout, NotFoundPage } from "./core/components";
 import { DescriptionPage } from "./descriptions/components";
@@ -179,6 +180,12 @@ class RoutingApp extends Component {
                 path={"/latest"}
                 key={"latest"}
                 component={LatestPage}
+              />
+              <Route
+                exact
+                path={"/search"}
+                key={"search"}
+                component={SearchPage}
               />
               <Route
                 path="/404-page-not-found"

@@ -1,3 +1,5 @@
+import { SPEC_REEFER_PATTERN } from "./constants";
+
 export const capitalizeWord = string => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
@@ -11,7 +13,11 @@ export const shortenSummary = article => {
   if (articleSummary.length > 25) {
     articleSummary = articleSummary.slice(0, 24).join(" ") + "...";
   } else if (article.summary === '') {
-    articleSummary = article.content.replace('<p>', ' ').replace('</p>', ' ').split(" ").slice(0, 24).join(" ") + "...";
+    articleSummary = article.content
+      .replace(SPEC_REEFER_PATTERN, '')
+      .replace('<p>', ' ')
+      .replace('</p>', ' ')
+      .split(" ").slice(0, 24).join(" ") + "...";
   } else {
     articleSummary = articleSummary.join(" ");
   }

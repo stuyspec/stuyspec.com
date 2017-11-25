@@ -5,3 +5,8 @@ node_modules
 builds/**
 .idea
 .DS_STORE
+
+# script for building & uploading/creating invalidation
+aws_transport.sh
+# invalidation batch
+invbatch.json

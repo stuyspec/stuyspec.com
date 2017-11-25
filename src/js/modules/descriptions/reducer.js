@@ -129,7 +129,7 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
 <center>——————</center>
 <p>If you have any comments, questions, concerns, or suggestions regarding this webpage or concerning The Spectator in general, please e-mail us directly at <a href="mailto:web@stuyspec.com">web@stuyspec.com</a>.
 <p>Please be aware that this webpage is currently a work in progress. We are still working to implement new features and update content. If you have access to past content that you believe should be on this site or know someone who does, please do not hesitate to contact us through the resources mentioned above. We sincerely apologize for any past work that is missing or lacks proper credit, and implore you to email us with any information you believe would assist in resolving this.</p>
-`
+`,
   },
   advertise: {
     id: 1,
@@ -173,7 +173,7 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
   <br>
   <b>Email</b>: smajmudar@stuy.edu
 </ul>
-`
+`,
   },
   sponsors: {
     id: 2,
@@ -208,7 +208,7 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
   <a href="http://thinkshirt.com/"><img alt="ThinkShirt" src=
   "/img/sponsors/ThinkShirt.png" style="margin-bottom:50px"></a><br>
 </center>
-`
+`,
   },
   apparel: {
     id: 3,
@@ -217,7 +217,7 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
     content: `<p style="text-align: center">
   Check out our apparel on <a href="http://specapparel.strikingly.com/">Stirkingly!</a>
 </p>
-`
+`,
   },
   staff: {
     id: 4,
@@ -295,7 +295,7 @@ Kerry Garfinkel
 <p style="text-align: right; width: 100%">
   <i>*Managing Board members</i>
 </p>
-`
+`,
   },
   contact: {
     id: 5,
@@ -304,7 +304,7 @@ Kerry Garfinkel
     content: `<p style="text-align: center">
   Contact us at <a href="mailto:web@stuyspec.com">wen@stuyspec.com</a>.
 </p>
-`
+`,
   },
   "join-us": {
     id: 6,

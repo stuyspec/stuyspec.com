@@ -11,10 +11,7 @@ import ArticleBody from "./ArticleBody";
 import RecommendedRow from "./RecommendedRow";
 import CommentThread from "../../comments/components/CommentThread";
 import NotFoundPage from "../../core/components/NotFoundPage";
-import {
-  getArticleFromRequestedSlug,
-  getArticleMedia,
-} from "../selectors";
+import { getArticleFromRequestedSlug, getArticleMedia } from "../selectors";
 import { openSubscriptionModal } from "../../accounts/actions";
 
 const styles = {
