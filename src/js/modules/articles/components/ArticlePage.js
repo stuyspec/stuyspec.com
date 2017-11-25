@@ -81,7 +81,7 @@ const ArticlePage = ({
       <Lightbox title={article.title}>
         <SimpleSlider media={Object.values(allMediaTemporarily).slice(1, 5)}/>
       </Lightbox>
-      <button style={{ margin: "100px" }} onClick={openLightbox}>lightbox</button>;
+      <button style={{ margin: "100px" }} onClick={openLightbox}>lightbox</button>
     </div>
   )
   if (!article) {

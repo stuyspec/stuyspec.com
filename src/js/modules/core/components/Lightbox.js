@@ -69,6 +69,7 @@ const styles = {
     fontFamily: "Old English Text MT",
     fontSize: "31px",
     lineHeight: 0,
+    minWidth: "179px", // we don't want "The Spectator" to line-wrap.
   },
   headerSpacer: {
     borderLeft: "1px solid #fff",
@@ -82,6 +83,11 @@ const styles = {
     position: "relative",
     top: "2px",
   },
+  "@media (max-width: 767px)": {
+    lightboxHeader: {
+      display: "none",
+    }
+  }
 };
 
 const Lightbox = ({
