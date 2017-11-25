@@ -19,15 +19,38 @@ const styles = {
       opacity: 0.75,
     },
   },
-  slideContainer: {
-    "& img": {
+  slideContainer: {},
+  slide: {
+    "-webkit-box-align": "center",
+    "-ms-flex-align": "center",
+    alignItems: "center",
+    height: "100%",
+    "-webkit-box-pack": "end",
+    "-ms-flex-pack": "end",
+    position: "relative",
+    display: "flex",
+    "-webkit-box-orient": "vertical",
+    "-webkit-box-direction": "normal",
+    "-ms-flex-direction": "column",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    margin: 0,
+    "& img": {      
       margin: "0 auto",
       maxHeight: "50vh",
       maxWidth: "100%",
-      border: "5px solid #fff",
     },
+  },
+  slideCaption: {
+    alignSelf: "flex-start",
+    width: "100%",
     "& p": {
+      color: "#fff",
+      marginTop: "10px",
       width: "100%",
+      fontFamily: "Minion Pro",
+      fontStyle: "italic",
+      fontSize: "17px",
       textAlign: "center",
     },
   },
@@ -51,6 +74,10 @@ const styles = {
     justifyContent: "flex-end",
     marginTop: "20px",
   },
+  index: {
+    color: "#ddd",
+    fontFamily: "Circular Std",
+  },
   carouselControls: {
     "-webkit-box-align": "end",
     "-ms-flex-align": "end",
@@ -62,6 +89,7 @@ const styles = {
   controlButton: {
     background: "#333",
     height: "48px",
+    outline: "none",
     marginLeft: "10px",
     position: "relative",
     width: "48px",
@@ -111,7 +139,7 @@ class SimpleSlider extends Component {
       arrows: false,
       dots: true,
       dotsClass: "slick-dots slick-thumb",
-      infinite: true,
+      infinite: false,
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
@@ -119,7 +147,6 @@ class SimpleSlider extends Component {
     return (
       <div className={classes.Page}>
         <div className={classes.Page}>
-          <h2>Custom Paging</h2>
           <Slider
             {...settings}
             ref={c => (this.slider = c)}
@@ -128,8 +155,12 @@ class SimpleSlider extends Component {
             {media.map(image => {
               return (
                 <div className={classes.slideContainer} key={image.id}>
-                  <img src={image.attachmentUrl} />
-                  <p>{image.title}</p>
+                  <figure className={classes.slide}>
+                    <img src={image.attachmentUrl} />
+                    <figcaption className={classes.slideCaption}>
+                      <p>{image.title}</p>
+                    </figcaption>
+                  </figure>
                 </div>
               );
             })}
