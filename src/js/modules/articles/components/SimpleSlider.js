@@ -22,6 +22,7 @@ const styles = {
   slideContainer: {
     "& img": {
       margin: "0 auto",
+      maxHeight: "50vh",
       maxWidth: "100%",
       border: "5px solid #fff",
     },
@@ -35,12 +36,12 @@ const styles = {
     width: "100%",
   },
   sliderFooter: {
+    display: "-webkit-box",
+    display: "-ms-flexbox",
     "-webkit-box-align": "center",
     "-ms-flex-align": "center",
     alignItems: "center",
     display: "flex",
-    display: "-webkit-box",
-    display: "-ms-flexbox",
     "-webkit-box-orient": "horizontal",
     "-webkit-box-direction": "normal",
     "-ms-flex-direction": "row",
@@ -50,35 +51,53 @@ const styles = {
     justifyContent: "flex-end",
     marginTop: "20px",
   },
-  index: {
-    alignSelf: "flex-end",
-    marginTop: 0,
-    minWidth: "65px",
-    position: "static",
-    textAlign: "right",
-    "-webkit-transform": "none",
-    "-ms-transform": "none",
-    transform: "none",
-  }
+  carouselControls: {
+    "-webkit-box-align": "end",
+    "-ms-flex-align": "end",
+    "align-items": "flex-end",
+    display: "-webkit-box",
+    display: "-ms-flexbox",
+    display: "flex",
+  },
+  controlButton: {
+    background: "#333",
+    height: "48px",
+    marginLeft: "10px",
+    position: "relative",
+    width: "48px",
+    color: "#bbb",
+    fontFamily: "Circular Std",
+    fontSize: "14px",
+    fontWeight: 500,
+    lineHeight: 1,
+    border: 0,
+    borderRadius: "2px",
+    padding: "15px",
+    verticalAlign: "middle",
+  },
 };
 
 const img = 'https://media.newyorker.com/photos/59096a581c7a8e33fb38ddf5/master/w_1926,c_limit/Fairfield_Bathtub.RGB.LoRes-thumb-300x236-15963.jpg';
 class SimpleSlider extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      index: 0,
+    };
   }
   nextSlide = () => {
     this.slider.slickNext();
-  }
+  };
   prevSlide = () => {
     this.slider.slickPrev();
-  }
+  };
   render = () => {
     const { classes, media } = this.props;
     const settings = {
       customPaging: i => {
         return <a><img key={i} className={classes.thumbnailImage} src={media[i].thumbAttachmentUrl}/></a>;
       },
+      afterChange: currentSlideIndex => this.setState({index: currentSlideIndex}),
       arrows: false,
       dots: true,
       dotsClass: 'slick-dots slick-thumb',
@@ -102,12 +121,17 @@ class SimpleSlider extends Component {
         })}
         </Slider>
         <div className={classes.sliderFooter}>
-          <button className='button' onClick={this.prevSlide}>Previous</button>
-          <button className='button' onClick={this.nextSlide}>Next</button>
+          <div className={classes.index}>
+            <p>{this.state.index + 1} of {this.props.media.length}</p>
+          </div>
+          <div className={classes.carouselControls}>
+            <button className={classes.controlButton} onClick={this.prevSlide}>&lt;</button>
+            <button className={classes.controlButton} onClick={this.nextSlide}>&gt;</button>
+          </div>
         </div>
 
       </div></div>
-    )
-  }
+    );
+  };
 }
 export default injectSheet(styles)(SimpleSlider);
