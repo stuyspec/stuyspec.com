@@ -27,6 +27,19 @@ const styles = {
     padding: "4px 0",
     marginBottom: "22px",
   },
+  voicesBanner: {
+    marginBottom: "18px",
+    width: "100%",
+    "& img": {
+      width: "100%",
+      // styles for alt-text
+      color: "#000",
+      fontFamily: "Canela",
+      fontSize: "48px",
+      fontWeight: 500,
+      lineHeight: 1,
+    },
+  },
 };
 
 const ArticleList = ({ classes, articles, title, label }) => {
@@ -38,7 +51,15 @@ const ArticleList = ({ classes, articles, title, label }) => {
   }
   return (
     <Grid className={classes.ArticleList}>
-      {title && <p className={classes.title}>{title}</p>}
+      {title && (
+        title === "VOICES" ? (
+          <figure className={classes.voicesBanner}>
+            <img src="/img/voices_banner.png" alt="VOICES"/>
+          </figure>
+        ) : (
+          <p className={classes.title}>{title}</p>
+        )
+      )}
       {label && <p className={classes.label}>{label}</p>}
       {rowArticles.map(article => {
         return <ArticleRow article={article} key={article.id} />;
