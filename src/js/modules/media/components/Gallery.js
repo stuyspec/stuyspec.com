@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import injectSheet from "react-jss";
 
 const styles = {
-  SimpleSlider: {
+  Gallery: {
     height: "100%",
     width: "90%",
     "-webkit-box-pack": "end",
@@ -21,13 +21,6 @@ const styles = {
     },
   },
   Slider: {
-    // height: "100%",
-    // "& .slick-list": {
-    //   height: "100%",
-    //   "& .slick-track": {
-    //     height: "100%",
-    //   },
-    // },
     "& .slick-next:before, .slick-prev:before": {
       fontSize: "20px",
       color: "#00558B",
@@ -120,9 +113,7 @@ const styles = {
   },
 };
 
-const img =
-  "https://media.newyorker.com/photos/59096a581c7a8e33fb38ddf5/master/w_1926,c_limit/Fairfield_Bathtub.RGB.LoRes-thumb-300x236-15963.jpg";
-class SimpleSlider extends Component {
+class Gallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -160,7 +151,7 @@ class SimpleSlider extends Component {
       slidesToScroll: 1,
     };
     return (
-      <div className={classes.SimpleSlider}>
+      <div className={classes.Gallery}>
         <Slider
           {...settings}
           ref={c => (this.slider = c)}
@@ -198,4 +189,4 @@ class SimpleSlider extends Component {
     );
   };
 }
-export default injectSheet(styles)(SimpleSlider);
+export default injectSheet(styles)(Gallery);

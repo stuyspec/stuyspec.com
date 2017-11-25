@@ -13,7 +13,7 @@ import {
 import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 import RightRail from "./RightRail";
 
-import SimpleSlider from "./SimpleSlider";
+import Gallery from "../../media/components/Gallery";
 import { Lightbox } from "../../core/components";
 import { openLightbox } from "../../core/actions";
 
@@ -182,7 +182,7 @@ const ArticleBody = ({
           Object.values(media).length > 0 && (
             <div>
               <Lightbox title={title}>
-                <SimpleSlider media={Object.values(media)} />
+                <Gallery media={Object.values(media)} />
               </Lightbox>
               <div className={classes.featuredMediaContainer}>
                 <ArticleFeaturedMedia featuredMedia={firstImage}>
