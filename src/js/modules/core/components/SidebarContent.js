@@ -109,7 +109,6 @@ const SidebarContent = ({
 };
 
 const mapStateToProps = state => ({
-  isSidebarOpen: state.core.isSidebarOpen,
   session: state.accounts.session,
   topLevelSections: getTopLevelSections(state),
 });
