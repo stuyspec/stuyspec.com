@@ -219,7 +219,6 @@ const SectionPage = ({
 }) => {
   if (
     section.parentId ||
-    section.name === "HumorNOT" ||
     section.name === "News"
   ) {
     return (

@@ -15,6 +15,7 @@ import {
   ArticlePage,
   RecommendedPage,
   LatestPage,
+  SearchPage,
 } from "./articles/components";
 import { HomePage, PageLayout, NotFoundPage } from "./core/components";
 import { DescriptionPage } from "./descriptions/components";
