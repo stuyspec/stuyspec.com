@@ -9,6 +9,7 @@ import { capitalizeWord } from "../../../utils";
 const styles = {
   figure: {
     margin: 0,
+    marginBottom: "28px",
     width: "100%",
   },
   tallFigure: {
@@ -66,28 +67,17 @@ class ArticleFeaturedMedia extends Component {
       });
     };
   };
-  getComponent = key => {
-    if (!this.props.children) {
-      return null;
-    }
-    return this.props.children.find(child => child.key === key);
-  };
   render = () => {
-    const { classes, featuredMedia, users } = this.props;
+    const { classes, featuredMedia, users, children } = this.props;
     const creator = users[featuredMedia.userId];
-    const carouselButton = this.getComponent("carouselButton");
-
     const isFigureTall = this.state.imgHeight > this.state.imgWidth * 1.2;
     return (
       <figure
         className={isFigureTall ? classes.tallFigure : classes.figure}
-        style={{
-          marginBottom: carouselButton ? "0px" : (!isFigureTall && "28px"),
-        }}
       >
         <div className={classes.imgContainer}>
           <img className={classes.img} src={featuredMedia.attachmentUrl} />
-          {carouselButton}
+          {children}
         </div>
         {creator && (
           <figcaption className={classes.caption}>
@@ -97,9 +87,6 @@ class ArticleFeaturedMedia extends Component {
             </span>
             <Link
               className={classes.creditLine}
-              style={{
-                top: carouselButton ? "-42px" : 0,
-              }}
               to={`/${MEDIA_CREATOR_SLUGS[
                 featuredMedia.mediaType
               ]}/${creator.slug}`}

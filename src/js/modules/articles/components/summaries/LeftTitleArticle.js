@@ -28,7 +28,7 @@ const styles = {
     },
   },
   header: {
-    paddingLeft: "0 !important",
+    padding: "0 !important",
   },
   title: {
     color: "#000",
@@ -54,7 +54,8 @@ const styles = {
     lineHeight: 1.29,
   },
   featuredMedia: {
-    paddingRight: "14px !important",
+    paddingLeft: "14px !important",
+    paddingRight: 0,
     height: "360px",
     overflow: "hidden",
     "& > a >figure > img": {
