@@ -18,6 +18,13 @@ export const closeSidebar = () => ({
   type: t.CLOSE_SIDEBAR,
 });
 
+export const openLightbox = () => ({
+  type: t.OPEN_LIGHTBOX,
+});
+export const closeLightbox = () => ({
+  type: t.CLOSE_LIGHTBOX,
+});
+
 export const fetchAllData = () => {
   return dispatch => {
     fetchDataPromise = new Promise((resolve, reject) => {
