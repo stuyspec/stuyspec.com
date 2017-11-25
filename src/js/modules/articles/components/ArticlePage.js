@@ -14,6 +14,8 @@ import NotFoundPage from "../../core/components/NotFoundPage";
 import { getArticleFromRequestedSlug, getArticleMedia } from "../selectors";
 import { openSubscriptionModal } from "../../accounts/actions";
 
+import SimpleSlider from "./SimpleSlider";
+
 const styles = {
   ArticlePage: {
     marginTop: "80px",
@@ -69,7 +71,9 @@ const ArticlePage = ({
   sections,
   media,
   openSubscriptionModal,
+  allMediaTemporarily
 }) => {
+  return <SimpleSlider media={Object.values(allMediaTemporarily).slice(1,5)}/>
   if (!article) {
     return <NotFoundPage />;
   }
@@ -103,6 +107,7 @@ const mapStateToProps = (state, ownProps) => ({
   article: getArticleFromRequestedSlug(state, ownProps),
   sections: state.sections.sections,
   media: getArticleMedia(state, ownProps),
+  allMediaTemporarily: state.media.media,
 });
 
 const mapDispatchToProps = dispatch => {
