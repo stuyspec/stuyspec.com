@@ -1,7 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
 import injectSheet from "react-jss";
-import { Link } from "react-router-dom";
 import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
 import {
@@ -10,6 +8,7 @@ import {
 } from "../../../constants";
 
 import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
+import ArticleReference from "./ArticleReference";
 import RightRail from "./RightRail";
 
 import { Gallery } from "../../media/components";
@@ -76,9 +75,7 @@ const styles = {
 
 const ArticleBody = ({
   classes,
-  articles,
   article: { content, title },
-  sections,
   media,
 }) => {
   /*
@@ -108,7 +105,6 @@ const ArticleBody = ({
   const referencedArticleId = SPEC_IMG_CAROUSEL_PATTERN.test(content)
     ? parseInt(SPEC_REFERENCE_PATTERN.exec(content)[1])
     : 0;
-  console.log(media);
   return (
     <Row>
       <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
@@ -137,9 +133,4 @@ const ArticleBody = ({
   );
 };
 
-const mapStateToProps = state => ({
-  articles: state.articles.articles,
-  sections: state.sections.sections,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(ArticleBody));
+export default injectSheet(styles)(ArticleBody);
