@@ -155,7 +155,7 @@ const ArticleBody = ({
         </Lightbox>
         <ArticleFeaturedMedia
           image={Object.values(media)[0]}
-          isCarouselButtonVisible={isCarouselButtonVisible}
+          carouselImageCount={isCarouselButtonVisible ? Object.values(media).length : 0}
         />
         {SPEC_REEFER_PATTERN.test(content) && generateArticleReefer(content)}
         <div

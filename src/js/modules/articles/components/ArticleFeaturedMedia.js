@@ -33,18 +33,22 @@ const styles = {
     backgroundColor: "#fff",
     border: "none",
     borderRadius: 0,
+    display: "flex",
+    alignItems: "center",
     opacity: 0.8,
     outline: "none",
+    padding: "12px 15px",
     transitionDuration: ".3s",
     "&:hover": {
       opacity: 0.9,
     },
   },
-  lightboxButtonContent: {
-    padding: "6px 8px",
-  },
   lightboxIcon: {
-    width: "30px !important",
+    width: "26px !important",
+  },
+  carouselImageCount: {
+    fontFamily: "Circular Std",
+    marginLeft: "12px",
   },
   "@media (max-width: 767px)": {
     tallFigure: {
@@ -67,23 +71,22 @@ class ArticleFeaturedMedia extends Component {
     const img = new Image();
     img.src = this.props.image.attachmentUrl;
     img.onload = () =>
-      this.setState({isImageTall: img.height > this.state.imgWidth * 1.4});
+      this.setState({isImageTall: img.height > img.width * 1.2});
   }
   openLightbox = () => this.props.openLightbox();
   render() {
-    const { classes, image, isCarouselButtonVisible } = this.props;
+    const { classes, image, carouselImageCount } = this.props;
     return (
       <figure className={this.state.isImageTall ? classes.tallFigure : classes.figure}>
         <div className={classes.imgContainer}>
           <img className={classes.img} src={image.attachmentUrl} />
-          {isCarouselButtonVisible && (
+          {carouselImageCount && (
             <button
               className={classes.lightboxButton}
               onClick={this.openLightbox}
             >
-              <div className={classes.lightboxButtonContent}>
-                <img className={classes.lightboxIcon} src="/img/slides.svg" />
-              </div>
+              <img className={classes.lightboxIcon} src="/img/slides.svg" />
+              <span className={classes.carouselImageCount}>{carouselImageCount}</span>
             </button>
           )}
         </div>
