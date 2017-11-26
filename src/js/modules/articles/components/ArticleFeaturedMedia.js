@@ -64,28 +64,35 @@ class ArticleFeaturedMedia extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isImageTall: false
+      isImageTall: false,
     };
   }
   componentDidMount() {
     const img = new Image();
     img.src = this.props.image.attachmentUrl;
     img.onload = () =>
-      this.setState({isImageTall: img.height > img.width * 1.2});
+      this.setState({ isImageTall: img.height > img.width * 1.2 });
   }
   render() {
-    const { classes, image, isCarouselButtonVisible, carouselImageCount, openLightbox } = this.props;
+    const {
+      classes,
+      image,
+      isCarouselButtonVisible,
+      carouselImageCount,
+      openLightbox,
+    } = this.props;
     return (
-      <figure className={this.state.isImageTall ? classes.tallFigure : classes.figure}>
+      <figure
+        className={this.state.isImageTall ? classes.tallFigure : classes.figure}
+      >
         <div className={classes.imgContainer}>
           <img className={classes.img} src={image.attachmentUrl} />
           {isCarouselButtonVisible && (
-            <button
-              className={classes.lightboxButton}
-              onClick={openLightbox}
-            >
+            <button className={classes.lightboxButton} onClick={openLightbox}>
               <img className={classes.lightboxIcon} src="/img/slides.svg" />
-              <span className={classes.carouselImageCount}>{carouselImageCount}</span>
+              <span className={classes.carouselImageCount}>
+                {carouselImageCount}
+              </span>
             </button>
           )}
         </div>
