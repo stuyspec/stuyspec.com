@@ -41,25 +41,6 @@ const styles = {
       lineHeight: 1.44,
       padding: 0,
     },
-    "& span#article-reference": {
-      display: "block",
-      fontStyle: "italic",
-      marginTop: "12px",
-      marginBottom: "24px",
-      "& a#reference-link": {
-        color: "#000",
-        textDecoration: "underline",
-        "&:hover": {
-          color: "#000",
-        },
-        "&:active": {
-          color: "#000",
-        },
-        "&:focus": {
-          color: "#000",
-        },
-      },
-    },
     "& spec-reference": {
       display: "none",
     },
@@ -70,9 +51,6 @@ const styles = {
   "@media (max-width: 991px)": {
     ArticleBody: {
       "& > figure": {
-        padding: "0 10%",
-      },
-      "& span#article-reference": {
         padding: "0 10%",
       },
     },
@@ -88,9 +66,6 @@ const styles = {
           marginLeft: "-14px", // ArticleBody.paddingLeft = 14px
           width: "100vw",
         },
-      },
-      "& span#article-reference": {
-        padding: "0 2%",
       },
     },
     innerHTML: {
@@ -127,32 +102,12 @@ const ArticleBody = ({
   }
   */
   //  featuredMedia = Object.values(articleMedia).find(image => image.isFeatured);
-  const generateReferencedArticle = content => {
-    const match = SPEC_REFERENCE_PATTERN.exec(content);
-    const referencedArticle = articles[parseInt(match[1])]
-    if (referencedArticle) {
-      const referencedTitle = referencedArticle.title
-        .replace("“", "‘")
-        .replace("”", "’");
-      return (
-        <span id="article-reference">
-          This article was written in response to &ldquo;
-          <Link
-            id="reference-link"
-            target="_blank"
-            to={`${sections[referencedArticle.sectionId]
-              .permalink}/${referencedArticle.slug}`}
-          >
-            {referencedTitle}
-          </Link>
-          ,&rdquo; published in Volume {referencedArticle.volume} Issue{" "}
-          {referencedArticle.issue}.
-        </span>
-      );
-    }
-  };
+
   const isCarouselButtonVisible =
     SPEC_IMG_CAROUSEL_PATTERN.test(content) && Object.values(media).length > 0;
+  const referencedArticleId = SPEC_IMG_CAROUSEL_PATTERN.test(content)
+    ? parseInt(SPEC_REFERENCE_PATTERN.exec(content)[1])
+    : 0;
   console.log(media);
   return (
     <Row>
@@ -160,14 +115,16 @@ const ArticleBody = ({
         <Lightbox title={title}>
           <Gallery media={Object.values(media)} />
         </Lightbox>
-        {Object.values(media).length > 0 && 
+        {Object.values(media).length > 0 && (
           <ArticleFeaturedMedia
             image={Object.values(media).find(media => media.isFeatured)}
             isCarouselButtonVisible={isCarouselButtonVisible}
             carouselImageCount={Object.values(media).length}
           />
-        }
-        {SPEC_REFERENCE_PATTERN.test(content) && generateReferencedArticle(content)}
+        )}
+        {referencedArticleId && (
+          <ArticleReference articleId={referencedArticleId} />
+        )}
         <div
           className={classes.innerHTML}
           dangerouslySetInnerHTML={{ __html: content }}
