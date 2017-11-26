@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import injectSheet from "react-jss";
 
-// TODO: split up
-
 const styles = {
   Gallery: {
     display: "flex",
@@ -136,17 +134,20 @@ class Gallery extends Component {
           className={classes.Slider}
         >
           {media.map(image => {
+            // Slide unable to be taken out of .map(); there seems to be
+            // HTML classes passed down that are interrupted when the
+            // following figure is substituted with a custom component.
             return (
-              <div className={classes.slideContainer} key={image.id}>
-                <figure className={classes.slide}>
-                  <img src={image.attachmentUrl} />
-                  <figcaption className={classes.slideCaption}>
-                    <p>{image.title}</p>
-                  </figcaption>
-                </figure>
-              </div>
-            );
-          })}
+              <div className={classes.slideContainer}> 
+                <figure className={classes.slide}> 
+                  <img src={image.attachmentUrl} /> 
+                  <figcaption className={classes.slideCaption}> 
+                    <p>{image.title}</p> 
+                  </figcaption> 
+                </figure> 
+              </div> 
+            )
+            })}
         </Slider>
         <div className={classes.sliderFooter}>
           <div className={classes.index}>
