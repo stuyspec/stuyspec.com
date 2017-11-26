@@ -1,4 +1,4 @@
-export const STUY_SPEC_API_URL = "http://localhost:3000";
+export const STUY_SPEC_API_URL = "__API_URL_HERE__";
 
 export const STUY_SPEC_API_HEADERS = {
   headers: {
