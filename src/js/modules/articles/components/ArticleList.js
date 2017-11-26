@@ -52,7 +52,7 @@ const ArticleList = ({ classes, articles, title, label }) => {
   return (
     <Grid className={classes.ArticleList}>
       {title &&
-        (title === "VOICES" ? (
+        (title === "VOICES" ? ( // voices is the only section with art
           <figure className={classes.voicesBanner}>
             <img
               src="/img/voices_banner.png"

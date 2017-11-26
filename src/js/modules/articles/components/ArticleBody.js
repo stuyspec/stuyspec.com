@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
 import {
-  SPEC_REEFER_PATTERN,
+  SPEC_REFERENCE_PATTERN,
   SPEC_IMG_CAROUSEL_PATTERN,
 } from "../../../constants";
 
@@ -41,12 +41,12 @@ const styles = {
       lineHeight: 1.44,
       padding: 0,
     },
-    "& span#article-reefer": {
+    "& span#article-reference": {
       display: "block",
       fontStyle: "italic",
       marginTop: "12px",
       marginBottom: "24px",
-      "& a#reefer-link": {
+      "& a#reference-link": {
         color: "#000",
         textDecoration: "underline",
         "&:hover": {
@@ -60,7 +60,7 @@ const styles = {
         },
       },
     },
-    "& spec-reefer": {
+    "& spec-reference": {
       display: "none",
     },
   },
@@ -70,6 +70,9 @@ const styles = {
   "@media (max-width: 991px)": {
     ArticleBody: {
       "& > figure": {
+        padding: "0 10%",
+      },
+      "& span#article-reference": {
         padding: "0 10%",
       },
     },
@@ -85,6 +88,9 @@ const styles = {
           marginLeft: "-14px", // ArticleBody.paddingLeft = 14px
           width: "100vw",
         },
+      },
+      "& span#article-reference": {
+        padding: "0 2%",
       },
     },
     innerHTML: {
@@ -121,43 +127,47 @@ const ArticleBody = ({
   }
   */
   //  featuredMedia = Object.values(articleMedia).find(image => image.isFeatured);
-  const generateArticleReefer = content => {
-    const match = SPEC_REEFER_PATTERN.exec(content);
-    const reeferArticle = articles[parseInt(match[1])];
-    if (reeferArticle) {
-      const reeferTitle = reeferArticle.title
+  const generateReferencedArticle = content => {
+    const match = SPEC_REFERENCE_PATTERN.exec(content);
+    const referencedArticle = articles[parseInt(match[1])]
+    if (referencedArticle) {
+      const referencedTitle = referencedArticle.title
         .replace("“", "‘")
         .replace("”", "’");
       return (
-        <span id="article-reefer">
+        <span id="article-reference">
           This article was written in response to &ldquo;
           <Link
-            id="reefer-link"
+            id="reference-link"
             target="_blank"
-            to={`${sections[reeferArticle.sectionId]
-              .permalink}/${reeferArticle.slug}`}
+            to={`${sections[referencedArticle.sectionId]
+              .permalink}/${referencedArticle.slug}`}
           >
-            {reeferTitle}
+            {referencedTitle}
           </Link>
-          ,&rdquo; published in Volume {reeferArticle.volume} Issue{" "}
-          {reeferArticle.issue}.
+          ,&rdquo; published in Volume {referencedArticle.volume} Issue{" "}
+          {referencedArticle.issue}.
         </span>
       );
     }
   };
   const isCarouselButtonVisible =
     SPEC_IMG_CAROUSEL_PATTERN.test(content) && Object.values(media).length > 0;
+  console.log(media);
   return (
     <Row>
       <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
         <Lightbox title={title}>
           <Gallery media={Object.values(media)} />
         </Lightbox>
-        <ArticleFeaturedMedia
-          image={Object.values(media)[0]}
-          carouselImageCount={isCarouselButtonVisible ? Object.values(media).length : 0}
-        />
-        {SPEC_REEFER_PATTERN.test(content) && generateArticleReefer(content)}
+        {Object.values(media).length > 0 && 
+          <ArticleFeaturedMedia
+            image={Object.values(media).find(media => media.isFeatured)}
+            isCarouselButtonVisible={isCarouselButtonVisible}
+            carouselImageCount={Object.values(media).length}
+          />
+        }
+        {SPEC_REFERENCE_PATTERN.test(content) && generateReferencedArticle(content)}
         <div
           className={classes.innerHTML}
           dangerouslySetInnerHTML={{ __html: content }}

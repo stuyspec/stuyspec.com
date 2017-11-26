@@ -123,8 +123,8 @@ export const getPhotographerArticles = createSelector(
  *   article.
  */
 export const getArticleMedia = createSelector(
-  [getArticleFromRequestedSlug, getMedia, getUsers],
-  (article, media, users) => {
+  [getArticleFromRequestedSlug, getMedia],
+  (article, media) => {
     if (!article) {
       return null;
     }
