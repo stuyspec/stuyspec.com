@@ -1,5 +1,6 @@
 //export const STUY_SPEC_API_URL = "https://api.stuyspec.xyz";
 export const STUY_SPEC_API_URL = "https://api.stuyspec.com";//"http://localhost:3000";
+export const STUY_SPEC_URL = "https://staging.stuyspec.com";
 
 export const STUY_SPEC_API_HEADERS = {
   headers: {
