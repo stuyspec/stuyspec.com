@@ -32,6 +32,14 @@ const styles = {
       margin: "0 auto",
         display: "block",
     },
+    articleList: {
+      paddingRight: "14px !important",
+    },
+    tallAdContainer: {
+      paddingLeft: "14px !important",
+        borderLeft: "solid 1px #ddd",
+    }
+
 };
 
 const SearchPage = ({ classes, articles, searchableIds, searchArticles }) => {
