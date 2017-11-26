@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import injectSheet from "react-jss";
 
+import SliderFooter from "./SliderFooter":
+
 const styles = {
   Gallery: {
     display: "flex",
@@ -54,38 +56,6 @@ const styles = {
   thumbnailImage: {
     height: "100%",
     width: "100%",
-  },
-  sliderFooter: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    marginTop: "20px",
-  },
-  index: {
-    color: "#ddd",
-    fontFamily: "Circular Std",
-  },
-  carouselControls: {
-    alignItems: "flex-end",
-    display: "flex",
-  },
-  controlButton: {
-    background: "#333",
-    border: 0,
-    borderRadius: "2px",
-    color: "#bbb",
-    fontFamily: "Circular Std",
-    fontSize: "14px",
-    fontWeight: 500,
-    height: "48px",
-    lineHeight: 1,
-    outline: "none",
-    marginLeft: "10px",
-    padding: "15px",
-    position: "relative",
-    verticalAlign: "middle",
-    width: "48px",
   },
 };
 
@@ -149,23 +119,14 @@ class Gallery extends Component {
             )
             })}
         </Slider>
-        <div className={classes.sliderFooter}>
-          <div className={classes.index}>
-            <p>
-              {this.state.index + 1} of {this.props.media.length}
-            </p>
-          </div>
-          <div className={classes.carouselControls}>
-            <button className={classes.controlButton} onClick={this.prevSlide}>
-              &lt;
-            </button>
-            <button className={classes.controlButton} onClick={this.nextSlide}>
-              &gt;
-            </button>
-          </div>
-        </div>
+        <SliderFooter 
+          helperText={`${this.state.index + 1} of ${this.props.media.length}`}
+          nextSlide={this.nextSlide}
+          prevSlide={this.prevSlide}
+        />
       </div>
     );
   };
 }
+
 export default injectSheet(styles)(Gallery);
