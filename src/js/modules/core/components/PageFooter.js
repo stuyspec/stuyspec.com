@@ -217,6 +217,13 @@ const PageFooter = ({
           About Us
         </Link>
         {descriptionLinks}
+        <a
+          className={classes.subsectionLink}
+          key={-1}
+          href="https://issuu.com/stuyspectator"
+        >
+          Visual Archives
+        </a>
       </div>
     );
   };
