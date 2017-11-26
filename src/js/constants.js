@@ -1,3 +1,4 @@
+export const STUY_SPEC_URL = "https://staging.stuyspec.com";
 export const STUY_SPEC_API_URL = "http://localhost:3000";
 
 export const STUY_SPEC_API_HEADERS = {
@@ -5,6 +6,7 @@ export const STUY_SPEC_API_HEADERS = {
     "X-Key-Inflection": "camel"
   }
 };
+
 
 export const MEDIA_CREATOR_SLUGS = {
   illustration: "illustrators",
