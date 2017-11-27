@@ -123,8 +123,8 @@ export const getPhotographerArticles = createSelector(
  *   article.
  */
 export const getArticleMedia = createSelector(
-  [getArticleFromRequestedSlug, getMedia, getUsers],
-  (article, media, users) => {
+  [getArticleFromRequestedSlug, getMedia],
+  (article, media) => {
     if (!article) {
       return null;
     }
@@ -138,14 +138,5 @@ export const getLatestArticles = createSelector(
     return Object.values(articles).sort((a, b) => {
       return new Date(b) - new Date(a);
     });
-  },
-);
-
-export const getArticlesFromSection = createSelector(
-  [getArticlesWithContributors, getSectionFromRequestedSlug],
-  (articles, section) => {
-    return Object.values(articles).filter(
-      article => article.sectionId === section.id,
-    );
   },
 );

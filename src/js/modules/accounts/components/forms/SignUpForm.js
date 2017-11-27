@@ -79,7 +79,7 @@ const renderField = ({
           type={type}
         />
         {touched &&
-          ((error && <span>{error}</span>) ||
+          ((error && <span style={{'color': 'red'}}>{error}</span>) ||
             (warning && <span>{warning}</span>))}
       </div>
     </div>

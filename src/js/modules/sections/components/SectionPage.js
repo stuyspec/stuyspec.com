@@ -1,3 +1,5 @@
+// TODO: SECTINOPAGE IS LITERALLY A MESS
+
 import React from "react";
 import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-bootstrap/lib";
@@ -11,7 +13,6 @@ import { getSectionTreeArticles } from "../../articles/selectors";
 import { getDirectSubsections } from "../../sections/selectors";
 import SectionColumn from "./SectionColumn";
 import {
-  LatestArticlesRibbon,
   LeftTitleArticle,
 } from "../../articles/components/summaries";
 import { Dateline, Byline } from "../../articles/components/index";
@@ -217,10 +218,7 @@ const SectionPage = ({
   section,
   media,
 }) => {
-  if (
-    section.parentId ||
-    section.name === "News"
-  ) {
+  if (section.parentId || section.name === "News") {
     return (
       <Grid fluid className={classes.SubsectionPage}>
         <Helmet>

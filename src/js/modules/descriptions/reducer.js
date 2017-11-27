@@ -1,14 +1,3 @@
-/*
-TODO: The following pages redirect you to something else:
-    Advertise has links to forms for advertisment
-    Apparel redirects to http://specapparel.strikingly.com/
-    Contact is a form
-    Subscribe is also a form
-    Sponsers has images
-    Join Us redirects to http://www.stuyspec.com/recruiting/ which has a different page structure
-    Visual Archives link have things related to issuu
- */
-
 const initialState = {
   "our-charter": {
     id: 0,
@@ -144,8 +133,7 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
   <br>
   <pre><b>Fax</b>: 212-587-3874, attn. The Spectator</pre>
   <br>
-  <pre>
-  <b>Phone</b>: 212-312-4800 ext. 2601</pre/><br>
+  <pre><b>Phone</b>: 212-312-4800 ext. 2601</pre/><br>
 </ul>
 <h2>Student Groups</h2>
 <ul>
@@ -210,17 +198,8 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
 </center>
 `,
   },
-  apparel: {
-    id: 3,
-    title: "Apparel",
-    slug: "apparel",
-    content: `<p style="text-align: center">
-  Check out our apparel on <a href="http://specapparel.strikingly.com/">Stirkingly!</a>
-</p>
-`,
-  },
   staff: {
-    id: 4,
+    id: 3,
     title: "Staff",
     slug: "staff",
     content: `<center>
@@ -298,27 +277,13 @@ Kerry Garfinkel
 `,
   },
   contact: {
-    id: 5,
+    id: 4,
     title: "Contact",
     slug: "contact",
     content: `<p style="text-align: center">
   Contact us at <a href="mailto:web@stuyspec.com">wen@stuyspec.com</a>.
 </p>
 `,
-  },
-  "join-us": {
-    id: 6,
-    title: "Join Us",
-    slug: "join-us",
-    content:
-      '<p><center><a href="http://www.stuyspec.com/recruiting/">Join Us</a><br></center></p>',
-  },
-  "visual-archives": {
-    id: 7,
-    title: "Visual Archives",
-    slug: "visual-archives",
-    content:
-      '<p><center>To see all of our available issues in PDF form, head <a href="https://issuu.com/stuyspectator">here!</a></center><br></p>',
   },
 };
 

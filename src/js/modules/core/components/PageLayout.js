@@ -125,16 +125,3 @@ const mapDispatchToProps = dispatch => {
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(PageLayout)),
 );
-
-/**
-import {Helmet} from "react-helmet";
-
-<Helmet titleTemplate="%s | The Stuyvesant Spectator">
-        <title>
-
-        </title>
-        <meta>
-
-        </meta>
-      </Helmet>
-*/

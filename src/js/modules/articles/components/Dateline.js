@@ -14,22 +14,25 @@ const styles = {
 
 const Dateline = ({ classes, article }) => {
   let dateText = "";
-  if (article.volume == 108) {
-    if (article.issue == 1) {
+  if (article.volume === 108) {
+    if (article.issue === 1) {
       dateText = "September 11, 2017";
-    } else if (article.issue == 2) {
+    } else if (article.issue === 2) {
       dateText = "September 29, 2017";
-    } else if (article.issue == 3) {
+    } else if (article.issue === 3) {
       dateText = "October 10, 2017";
-    } else if (article.issue == 4) {
+    } else if (article.issue === 4) {
       dateText = "October 31, 2017";
-    } else if (article.issue == 5) {
+    } else if (article.issue === 5) {
       dateText = "November 10, 2017";
     }
   }
-  if (article.volume == 107) {
-    if (article.issue == 16) {
+  if (article.volume === 107) {
+    if (article.issue === 16) {
       dateText = "June 9, 2017";
+    }
+    if (article.issue === 15) {
+      dateText = "May 26, 2017";
     }
   }
   // return <p className={classes.Dateline}>{formatDate(article.createdAt)}</p>;

@@ -1,13 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
-import { Link } from "react-router-dom";
 import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
-import { SPEC_REEFER_PATTERN } from "../../../constants";
+import {
+  SPEC_REFERENCE_PATTERN,
+  SPEC_IMG_CAROUSEL_PATTERN,
+} from "../../../constants";
 
 import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
+import ArticleReference from "./ArticleReference";
 import RightRail from "./RightRail";
+
+import { Gallery } from "../../media/components";
+import { Lightbox } from "../../core/components";
 
 const styles = {
   ArticleBody: {
@@ -16,9 +22,6 @@ const styles = {
     fontSize: "18px",
     lineHeight: 1.44,
     padding: "0 0 18px",
-    "& figure:first-child figcaption": {
-      lineHeight: 1.3,
-    },
     "& p": {
       marginBottom: "20px",
     },
@@ -38,40 +41,16 @@ const styles = {
       lineHeight: 1.44,
       padding: 0,
     },
-    "& span#article-reefer": {
-      display: "block",
-      fontStyle: "italic",
-      marginTop: "12px",
-      marginBottom: "24px",
-      "& a#reefer-link": {
-        color: "#000",
-        textDecoration: "underline",
-        "&:hover": {
-          color: "#000",
-        },
-        "&:active": {
-          color: "#000",
-        },
-        "&:focus": {
-          color: "#000",
-        },
-      },
-    },
-    "& spec-reefer": {
-      // the original reefer
+    "& spec-reference": {
       display: "none",
     },
-    "& figure:first-child": {
-      marginBottom: "28px",
-    }
   },
   content: {
     marginTop: "13px",
   },
   "@media (max-width: 991px)": {
     ArticleBody: {
-      "& figure:first-child": {
-        // featured media
+      "& > figure": {
         padding: "0 10%",
       },
     },
@@ -81,9 +60,9 @@ const styles = {
   },
   "@media (max-width: 767px)": {
     ArticleBody: {
-      "& figure:first-child": {
+      "& > figure": {
         padding: "0 2%",
-        "& img": {
+        "& > div > img": {
           marginLeft: "-14px", // ArticleBody.paddingLeft = 14px
           width: "100vw",
         },
@@ -95,7 +74,12 @@ const styles = {
   },
 };
 
-const ArticleBody = ({ classes, articles, sections, content, media }) => {
+const ArticleBody = ({
+  classes,
+  article: { content, title },
+  articles,
+  media,
+}) => {
   /*
   const generateFigure = (match, string, offset) => {
     const image = media[parseInt(string)];
@@ -117,39 +101,30 @@ const ArticleBody = ({ classes, articles, sections, content, media }) => {
   }
   */
   //  featuredMedia = Object.values(articleMedia).find(image => image.isFeatured);
-  const generateArticleReefer = content => {
-    const match = SPEC_REEFER_PATTERN.exec(content);
-    const article = articles[parseInt(match[1])];
-    console.log(article.title)
-    if (article) {
-      const title = article.title.replace('“', '‘').replace('”', '’');
-      return (
-        <span id="article-reefer">
-          This article was written in response to &ldquo;
-          <Link
-            id="reefer-link"
-            target="_blank"
-            to={`${sections[article.sectionId].permalink}/${article.slug}`}
-          >
-            {title}
-          </Link>
-          ,&rdquo; published in Volume {article.volume} Issue{" "}
-          {article.issue}.
-        </span>
-      );
-    }
-  };
-  const featuredMedia = media.find(medium => medium.isFeatured);
+
+  const isCarouselButtonVisible =
+    SPEC_IMG_CAROUSEL_PATTERN.test(content) && Object.values(media).length > 0;
+  const referencedArticleId = SPEC_REFERENCE_PATTERN.test(content)
+    ? parseInt(SPEC_REFERENCE_PATTERN.exec(content)[1])
+    : -1;
   return (
     <Row>
       <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
-        {featuredMedia && (
+        {SPEC_IMG_CAROUSEL_PATTERN.test(content) && (
+          <Lightbox title={title}>
+            <Gallery media={Object.values(media)} />
+          </Lightbox>
+        )}
+        {Object.values(media).length > 0 && (
           <ArticleFeaturedMedia
-            featuredMedia={featuredMedia}
-            isCaption={true}
+            image={Object.values(media)[0]}
+            isCarouselButtonVisible={isCarouselButtonVisible}
+            carouselImageCount={Object.values(media).length}
           />
         )}
-        {SPEC_REEFER_PATTERN.test(content) && generateArticleReefer(content)}
+        {referencedArticleId !== -1 && referencedArticleId in articles && (
+          <ArticleReference articleId={referencedArticleId} />
+        )}
         <div
           className={classes.innerHTML}
           dangerouslySetInnerHTML={{ __html: content }}
@@ -164,7 +139,6 @@ const ArticleBody = ({ classes, articles, sections, content, media }) => {
 
 const mapStateToProps = state => ({
   articles: state.articles.articles,
-  sections: state.sections.sections,
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(ArticleBody));

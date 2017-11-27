@@ -28,7 +28,7 @@ const styles = {
     },
   },
   header: {
-    paddingLeft: "0 !important",
+    padding: "0 !important",
   },
   title: {
     color: "#000",
@@ -54,7 +54,8 @@ const styles = {
     lineHeight: 1.29,
   },
   featuredMedia: {
-    paddingRight: "14px !important",
+    paddingLeft: "14px !important",
+    paddingRight: 0,
     height: "360px",
     overflow: "hidden",
     "& > a >figure > img": {
@@ -90,16 +91,12 @@ const LeftTitleArticle = ({ classes, article, media, sections }) => {
   const featuredMedia = Object.values(media).find(
     mediaObject => mediaObject.articleId === article.id,
   );
-  const section = Object.values(sections).find(
-    section => article.sectionId === section.id,
-  );
+  const section = sections[article.sectionId];
   return (
     <Row className={classes.article}>
-      {/*
       <Link className={classes.section} to={section.permalink}>
         {section.name}
       </Link>
-    */}
       <Col
         xs={12}
         smPush={4}

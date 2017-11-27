@@ -114,12 +114,10 @@ const SectionFeature = ({
   classes,
   articles,
   section,
-  sections,
   media,
   without,
 }) => {
-  let sectionArticles = [];
-  sectionArticles = Object.values(
+  const sectionArticles = Object.values(
     Object.filter(
       articles,
       article => article.sectionId === section.id && article !== without,
@@ -250,7 +248,6 @@ const SectionFeature = ({
 const mapStateToProps = (state, ownProps) => ({
   articles: getArticlesWithContributors(state),
   media: state.media.media,
-  sections: state.sections.sections,
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(SectionFeature));

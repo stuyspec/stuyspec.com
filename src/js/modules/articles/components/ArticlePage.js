@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
-import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 import ArticleHeader from "./ArticleHeader";
@@ -69,6 +68,7 @@ const ArticlePage = ({
   sections,
   media,
   openSubscriptionModal,
+  openLightbox,
 }) => {
   if (!article) {
     return <NotFoundPage />;
@@ -80,7 +80,7 @@ const ArticlePage = ({
         <meta />
       </Helmet>
       <ArticleHeader article={article} section={section} />
-      <ArticleBody content={article.content} media={media} />
+      <ArticleBody article={article} media={media} />
       <Row className={classes.descriptionRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.description}>
           The Pulse of the Student Body:&nbsp;
