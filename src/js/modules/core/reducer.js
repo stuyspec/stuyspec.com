@@ -36,18 +36,6 @@ const initialState = {
 
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
-    case FETCH_INIT_DATA_FULFILLED: {
-      return {
-        ...state,
-        isDataFetched: true,
-      }
-    }
-    case FETCH_INIT_DATA_REJECTED: {
-      return {
-        ...state,
-        isDataFetched: false,
-      }
-    }
     case REFRESH_WINDOW_DIMENSIONS: {
       let viewportWidth = getViewportWidth(),
         viewportHeight = getViewportHeight();
