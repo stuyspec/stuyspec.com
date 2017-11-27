@@ -108,7 +108,7 @@ const ArticleBody = ({
   return (
     <Row>
       <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
-        {isCarouselButtonVisible && (
+        {SPEC_IMG_CAROUSEL_PATTERN.test(content) && (
           <Lightbox title={title}>
             <Gallery media={Object.values(media)} />
           </Lightbox>
