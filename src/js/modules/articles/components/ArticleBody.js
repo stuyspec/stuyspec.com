@@ -102,15 +102,17 @@ const ArticleBody = ({
 
   const isCarouselButtonVisible =
     SPEC_IMG_CAROUSEL_PATTERN.test(content) && Object.values(media).length > 0;
-  const referencedArticleId = SPEC_IMG_CAROUSEL_PATTERN.test(content)
+  const referencedArticleId = SPEC_REFERENCE_PATTERN.test(content)
     ? parseInt(SPEC_REFERENCE_PATTERN.exec(content)[1])
-    : 0;
+    : -1;
   return (
     <Row>
       <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
-        <Lightbox title={title}>
-          <Gallery media={Object.values(media)} />
-        </Lightbox>
+        {isCarouselButtonVisible && (
+          <Lightbox title={title}>
+            <Gallery media={Object.values(media)} />
+          </Lightbox>
+        )}
         {Object.values(media).length > 0 && (
           <ArticleFeaturedMedia
             image={Object.values(media).find(media => media.isFeatured)}
@@ -118,7 +120,7 @@ const ArticleBody = ({
             carouselImageCount={Object.values(media).length}
           />
         )}
-        {referencedArticleId && (
+        {referencedArticleId !== -1 && (
           <ArticleReference articleId={referencedArticleId} />
         )}
         <div

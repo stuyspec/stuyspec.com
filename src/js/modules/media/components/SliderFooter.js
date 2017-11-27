@@ -39,11 +39,7 @@ const styles = {
 const SliderFooter = ({ classes, helperText, nextSlide, prevSlide }) => {
   return (
     <div className={classes.SliderFooter}>
-      <div className={classes.index}>
-        <p>
-          {this.state.index + 1} of {this.props.media.length}
-        </p>
-      </div>
+      <div className={classes.index}>{helperText}</div>
       <div className={classes.carouselControls}>
         <button className={classes.controlButton} onClick={prevSlide}>
           &lt;
@@ -53,7 +49,7 @@ const SliderFooter = ({ classes, helperText, nextSlide, prevSlide }) => {
         </button>
       </div>
     </div>
-  ;)
+  );
 };
 
 export default injectSheet(styles)(SliderFooter);

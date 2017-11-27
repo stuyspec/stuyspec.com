@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import injectSheet from "react-jss";
 
-import SliderFooter from "./SliderFooter":
+import SliderFooter from "./SliderFooter";
 
 const styles = {
   Gallery: {
@@ -77,9 +77,8 @@ class Gallery extends Component {
     const settings = {
       customPaging: i => {
         return (
-          <a>
+          <a key={i}>
             <img
-              key={i}
               className={classes.thumbnailImage}
               src={media[i].thumbAttachmentUrl}
             />
@@ -108,7 +107,7 @@ class Gallery extends Component {
             // HTML classes passed down that are interrupted when the
             // following figure is substituted with a custom component.
             return (
-              <div className={classes.slideContainer}> 
+              <div className={classes.slideContainer} key={image.id}> 
                 <figure className={classes.slide}> 
                   <img src={image.attachmentUrl} /> 
                   <figcaption className={classes.slideCaption}> 
