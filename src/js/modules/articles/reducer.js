@@ -13,7 +13,6 @@ const initialState = {
   error: null,
   articles: {},
   authorships: [],
-  searchableIds: [],
 };
 
 const reducer = (state = { ...initialState }, action) => {

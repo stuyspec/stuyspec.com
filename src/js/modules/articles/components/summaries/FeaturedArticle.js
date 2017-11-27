@@ -1,7 +1,6 @@
 /* The FeaturedArticle component displays the highest-rated article. It is
  * currently nested in a <Col md={9} lg={9}>.
  */
-
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";

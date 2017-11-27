@@ -77,7 +77,11 @@ const renderField = ({
           className={classes.email}
         />
         {touched &&
-          ((error && <p className={classes.error}>{error}</p>) ||
+          ((error && (
+            <p style={{ color: "red" }} className={classes.error}>
+              {error}
+            </p>
+          )) ||
             (warning && <p>{warning}</p>))}
       </div>
     </div>

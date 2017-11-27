@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         comments: action.payload.comments.reduce((acc, comment) => {
-          acc[comment.id] = comment
+          acc[comment.id] = comment;
           return acc;
         }, {}),
       }

@@ -15,7 +15,6 @@ import {
   ArticlePage,
   RecommendedPage,
   LatestPage,
-  SearchPage,
 } from "./articles/components";
 import {
   HomePage,
@@ -180,12 +179,6 @@ class RoutingApp extends Component {
                 component={LatestPage}
               />
               <Route
-                exact
-                path={"/search"}
-                key={"search"}
-                component={SearchPage}
-              />
-              <Route
                 path="/404-page-not-found"
                 key={"notFound"}
                 component={NotFoundPage}
@@ -209,7 +202,6 @@ class RoutingApp extends Component {
 
 const mapStateToProps = state => ({
   descriptions: state.descriptions,
-  roles: state.users.roles,
   sections: state.sections.sections,
   session: state.accounts.session,
   isAllDataFetched: state.core.isAllDataFetched,

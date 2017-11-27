@@ -9,6 +9,8 @@ import Byline from "../Byline";
 import Dateline from "../Dateline";
 import Outquote from "../Outquote";
 
+// TODO: ADD THE OUTQUOTE
+
 const styles = {
   LeftColumn: {
     paddingRight: "7px !important", // adds to the 7px in Col = 14px
@@ -169,7 +171,7 @@ const LeftColumn = ({ classes, articles, media, sections, outquotes }) => {
           <div>
             <Link
               to={`${sections[secondaryArticle.sectionId]
-              .permalink}/${secondaryArticle.slug}`}
+                .permalink}/${secondaryArticle.slug}`}
             >
               <figure className={classes.figure}>
                 <img src={secondaryMedia.mediumAttachmentUrl} />

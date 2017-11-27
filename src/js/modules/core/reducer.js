@@ -5,6 +5,8 @@ import {
   FETCH_INIT_DATA_PENDING,
   FETCH_INIT_DATA_FULFILLED,
   FETCH_INIT_DATA_REJECTED,
+  OPEN_LIGHTBOX,
+  CLOSE_LIGHTBOX,
 } from "./actionTypes";
 
 // getWindowWidth & getWindowHeight was
@@ -27,9 +29,9 @@ const initialState = {
   viewportWidth: getViewportWidth(),
   viewportHeight: getViewportHeight(),
   isSidebarOpen: false,
-  rowHeight: 0,
   isAllDataFetched: false,
   error: null,
+  isLightboxVisible: false,
 };
 
 const reducer = (state = { ...initialState }, action) => {
@@ -83,6 +85,18 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         isSidebarOpen: false,
+      };
+    }
+    case OPEN_LIGHTBOX: {
+      return {
+        ...state,
+        isLightboxVisible: true,
+      };
+    }
+    case CLOSE_LIGHTBOX: {
+      return {
+        ...state,
+        isLightboxVisible: false,
       };
     }
     default:

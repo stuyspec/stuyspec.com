@@ -27,7 +27,7 @@ const styles = {
 };
 
 const SHARE_BUTTON_SIZE = 28;
-const SHARE_BUTTON_COLOR = '#000'
+const SHARE_BUTTON_COLOR = "#000";
 
 const ShareTools = ({ classes, article, section, outquotes }) => {
   const shareUrl = STUY_SPEC_URL + `${section.permalink}/${article.slug}`;

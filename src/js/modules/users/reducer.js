@@ -6,8 +6,6 @@ import {
 } from "../core/actionTypes";
 import { UPDATE_USER_FULFILLED } from "../accounts/actionTypes";
 
-import { isObjectEmpty } from "../../utils";
-
 const initialState = {
   error: null,
   users: {},

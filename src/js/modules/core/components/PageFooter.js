@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 
-import { getDescriptions } from "../../descriptions/selectors";
 import { getTopLevelSectionsWithChildren } from "../../sections/selectors";
 
 const styles = {
@@ -32,12 +31,17 @@ const styles = {
     fontFamily: "Circular Std",
     fontStyle: "normal",
     fontWeight: "bold",
+    marginBottom: 0,
     textDecoration: "none",
     "&:hover": {
       color: "#000",
       textDecoration: "none",
     },
     "&:focus": {
+      color: "#000",
+      textDecoration: "none",
+    },
+    "&:active": {
       color: "#000",
       textDecoration: "none",
     },
@@ -55,6 +59,10 @@ const styles = {
       textDecoration: "none",
     },
     "&:focus": {
+      color: "#000",
+      textDecoration: "none",
+    },
+    "&:active": {
       color: "#000",
       textDecoration: "none",
     },
@@ -145,10 +153,6 @@ const styles = {
         color: "#000",
         textDecoration: "none",
       },
-      "&:active": {
-        color: "#000",
-        textDecoration: "none",
-      },
       "&:focus": {
         color: "#000",
         textDecoration: "none",
@@ -209,14 +213,27 @@ const PageFooter = ({
     });
     return (
       <div className={classes.sectionBlock} key="about">
-        <Link
+        <p
           className={classes.topLevelSectionLink}
           key={-1}
-          to="/about/our-charter"
         >
           About Us
-        </Link>
+        </p>
         {descriptionLinks}
+        <a
+          className={classes.subsectionLink}
+          key={-2}
+          href="https://issuu.com/stuyspectator"
+        >
+          Visual Archives
+        </a>
+        <a
+          className={classes.subsectionLink}
+          key={-3}
+          href="https://specapparel.strikingly.com/"
+        >
+          Apparel
+        </a>
       </div>
     );
   };
@@ -272,7 +289,7 @@ const PageFooter = ({
 
 const mapStateToProps = state => ({
   topLevelSectionsWithChildren: getTopLevelSectionsWithChildren(state),
-  descriptions: getDescriptions(state),
+  descriptions: state.descriptions,
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(PageFooter));

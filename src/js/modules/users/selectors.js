@@ -1,5 +1,4 @@
 import { createSelector } from "reselect";
-import appHistory from "../../tools/appHistory";
 
 export const getUsers = state => state.users.users;
 export const getRoles = state => state.users.roles;

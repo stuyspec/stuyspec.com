@@ -6,7 +6,6 @@ const RibbonComponent = ({
   classes,
   article,
   section,
-  sections,
   featuredMedia,
 }) => {
   return (
