@@ -20,7 +20,7 @@ export const fetchAllData = () => {
     axios
       .get(`${STUY_SPEC_API_URL}/init`, STUY_SPEC_API_HEADERS)
       .then(response => {
-        throwForEmptySlices(response.data);
+        validateSlices(response.data);
         dispatch({type: t.FETCH_INIT_DATA_FULFILLED, payload: response.data})
       })
       .catch(err => {
@@ -44,7 +44,7 @@ const sliceNames = [
   'outquotes',
 ];
 
-const throwForEmptySlices = data => {
+const validateSlices = data => {
   for (sliceName of sliceNames) {
     if (!(sliceName in data)) {
       throw sliceName + " not in initial data.";

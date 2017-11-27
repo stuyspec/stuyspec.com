@@ -40,14 +40,13 @@ const styles = {
 };
 
 const DataErrorPage = ({ classes, error, action}) => {
-  console.error(error);
   return (
     <Grid className={classes.DataErrorPage}>
       <Helmet>
         <title>The Stuyvesant Spectator</title>
       </Helmet>
       <h1>Data Error.</h1>
-      <p>Our apologies, we have encountered a problem with our data-fetching.</p>
+      <p>Our apologies, we encountered a problem when fetching our data.</p>
       <p>&mdash;<i>The Stuyvesant Spectator Web Department</i></p>
       <button className={classes.retryButton} onClick={action}>Reload Page</button>
       <img src="/img/wow-face.png" title="Art by Jade Lo (Class Of '20)" className={classes.wowFace} />
