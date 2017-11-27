@@ -15,9 +15,14 @@ export const shortenSummary = article => {
   } else if (article.summary === '') {
     articleSummary = article.content
       .replace(SPEC_REFERENCE_PATTERN, '')
-      .replace('<p>', ' ')
-      .replace('</p>', ' ')
-      .split(" ").slice(0, 24).join(" ") + "...";
+      .replace('<p>', '')  // all content starts with one '<p>'
+    while (articleSummary.includes('</p><p>')) {
+      articleSummary = articleSummary.replace('</p><p>', ' ');
+    }
+    return articleSummary
+      .split(" ")
+      .slice(0, 24)
+      .join(" ") + "...";     
   } else {
     articleSummary = articleSummary.join(" ");
   }
