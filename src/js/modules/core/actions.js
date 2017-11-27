@@ -35,7 +35,7 @@ export const fetchAllData = () => {
 const sliceNames = [
   'articles',
   'sections',
-  'comments',
+  // 'comments', We don't care if zero comments exist.
   'media',
   'users',
   'roles',

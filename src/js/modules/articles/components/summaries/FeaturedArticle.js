@@ -82,19 +82,12 @@ const styles = {
 };
 
 const FeaturedArticle = ({ classes, media, sections, article }) => {
-  if (!article) {
-    return <div/>;
-  }
   const section = Object.values(sections).find(section => {
     return section.id === article.sectionId;
   });
   const featuredMedia = Object.values(media).find(mediaObject => {
     return mediaObject.isFeatured && mediaObject.articleId === article.id;
   });
-  let linkToArticle = section.permalink + "/" + article.slug;
-  if (section.parentId) {
-    linkToArticle = sections[section.parentId].slug + linkToArticle;
-  }
   return (
     <Row className={classes.FeaturedArticle}>
       <Col

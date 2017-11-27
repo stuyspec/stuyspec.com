@@ -24,12 +24,18 @@ const styles = {
     border: "1px solid #3472b7",
     borderRadius: "3px",
     color: "#fff",
-    fontSize: "15px",
+    fontSize: "21px",
     fontStyle: "italic",
-    height: "32px",
+    height: "46px",
     marginTop: "15px",
     textAlign: "center",
-    width: "70px",
+    width: "146px",
+  },
+  wowFace: {
+    bottom: 0,
+    position: "absolute",
+    right: 0,
+    width: "50vw",
   },
 };
 
@@ -42,7 +48,9 @@ const DataErrorPage = ({ classes, error, action}) => {
       </Helmet>
       <h1>Data Error.</h1>
       <p>Our apologies, we have encountered a problem with our data-fetching.</p>
-      <button className={classes.retryButton} onClick={action}>Retry</button>
+      <p>&mdash;<i>The Stuyvesant Spectator Web Department</i></p>
+      <button className={classes.retryButton} onClick={action}>Reload Page</button>
+      <img src="/img/wow-face.png" className={classes.wowFace} />
       {/*
       <p className={classes.requestText}>
         Help the Spectator Web Department out, and
