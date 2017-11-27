@@ -2,6 +2,7 @@ import {
   REFRESH_WINDOW_DIMENSIONS,
   OPEN_SIDEBAR,
   CLOSE_SIDEBAR,
+  FETCH_INIT_DATA_REJECTED,
 } from "./actionTypes";
 
 // getWindowWidth & getWindowHeight was
@@ -25,6 +26,7 @@ const initialState = {
   viewportHeight: getViewportHeight(),
   isSidebarOpen: false,
   rowHeight: 0,
+  error: null,
 };
 
 const reducer = (state = { ...initialState }, action) => {
@@ -42,6 +44,12 @@ const reducer = (state = { ...initialState }, action) => {
         // otherwise do not mutate
         return state;
       }
+    }
+    case FETCH_INIT_DATA_REJECTED: {
+      return {
+        ...state,
+        error: action.payload,
+      };
     }
     case OPEN_SIDEBAR: {
       return {
