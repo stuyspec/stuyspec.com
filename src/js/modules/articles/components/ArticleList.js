@@ -51,15 +51,18 @@ const ArticleList = ({ classes, articles, title, label }) => {
   }
   return (
     <Grid className={classes.ArticleList}>
-      {title && (
-        title === "VOICES" ? (
+      {title &&
+        (title === "VOICES" ? ( // voices is the only section with art
           <figure className={classes.voicesBanner}>
-            <img src="/img/voices_banner.png" alt="VOICES" title="Art by Vivian Lin (Class of '18)"/>
+            <img
+              src="/img/voices_banner.png"
+              alt="VOICES"
+              title="Art by Vivian Lin (Class of '18)"
+            />
           </figure>
         ) : (
           <p className={classes.title}>{title}</p>
-        )
-      )}
+        ))}
       {label && <p className={classes.label}>{label}</p>}
       {rowArticles.map(article => {
         return <ArticleRow article={article} key={article.id} />;

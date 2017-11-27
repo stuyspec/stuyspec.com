@@ -31,12 +31,17 @@ const styles = {
     fontFamily: "Circular Std",
     fontStyle: "normal",
     fontWeight: "bold",
+    marginBottom: 0,
     textDecoration: "none",
     "&:hover": {
       color: "#000",
       textDecoration: "none",
     },
     "&:focus": {
+      color: "#000",
+      textDecoration: "none",
+    },
+    "&:active": {
       color: "#000",
       textDecoration: "none",
     },
@@ -54,6 +59,10 @@ const styles = {
       textDecoration: "none",
     },
     "&:focus": {
+      color: "#000",
+      textDecoration: "none",
+    },
+    "&:active": {
       color: "#000",
       textDecoration: "none",
     },
@@ -204,14 +213,27 @@ const PageFooter = ({
     });
     return (
       <div className={classes.sectionBlock} key="about">
-        <Link
+        <p
           className={classes.topLevelSectionLink}
           key={-1}
-          to="/about/our-charter"
         >
           About Us
-        </Link>
+        </p>
         {descriptionLinks}
+        <a
+          className={classes.subsectionLink}
+          key={-2}
+          href="https://issuu.com/stuyspectator"
+        >
+          Visual Archives
+        </a>
+        <a
+          className={classes.subsectionLink}
+          key={-3}
+          href="https://specapparel.strikingly.com/"
+        >
+          Apparel
+        </a>
       </div>
     );
   };

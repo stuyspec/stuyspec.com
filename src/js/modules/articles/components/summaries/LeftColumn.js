@@ -171,7 +171,7 @@ const LeftColumn = ({ classes, articles, media, sections, outquotes }) => {
           <div>
             <Link
               to={`${sections[secondaryArticle.sectionId]
-              .permalink}/${secondaryArticle.slug}`}
+                .permalink}/${secondaryArticle.slug}`}
             >
               <figure className={classes.figure}>
                 <img src={secondaryMedia.mediumAttachmentUrl} />
