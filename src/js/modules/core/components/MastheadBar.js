@@ -193,9 +193,9 @@ const MastheadBar = ({
             <Hamburger />
           </StyledNavButton>
           <Link to="/search">
-          <StyledNavButton label="search">
-            <Search />
-          </StyledNavButton>
+            <StyledNavButton label="search">
+              <Search color="#000" />
+            </StyledNavButton>
           </Link>
         </div>
         <Link
