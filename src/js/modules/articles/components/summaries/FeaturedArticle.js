@@ -82,6 +82,9 @@ const styles = {
 };
 
 const FeaturedArticle = ({ classes, media, sections, article }) => {
+  if (!article) {
+    return <div/>;
+  }
   const section = Object.values(sections).find(section => {
     return section.id === article.sectionId;
   });

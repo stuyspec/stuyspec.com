@@ -21,7 +21,6 @@ export const fetchAllData = () => {
       .get(`${STUY_SPEC_API_URL}/init`, STUY_SPEC_API_HEADERS)
       .then(response => {
         throwForEmptySlices(response.data);
-        // validate the data
         dispatch({type: t.FETCH_INIT_DATA_FULFILLED, payload: response.data})
       })
       .catch(err => {
