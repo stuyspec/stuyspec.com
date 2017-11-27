@@ -3,9 +3,6 @@ import {
 } from "../core/actionTypes";
 import { getSectionsWithPermalinks } from "./selectors";
 
-/*
-  TODO: Remove the hardcoded subsections once done
- */
 const initialState = {
   sections: {},
 };

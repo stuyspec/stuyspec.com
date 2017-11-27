@@ -28,10 +28,6 @@ export const fetchAllData = () => {
       .then(response => {
         // validate the data
         dispatch({type: t.FETCH_INIT_DATA_FULFILLED, payload: response.data})
-        // dispatch(fillArticles(response.data.articles));
-        // dispatch(fillUsers(response.data.users));
-        // dispatch(fillUserRoles(response.data.userRoles));
-        // dispatch(fillRoles(response.data.roles));
         // dispatch(fillComments(response.data.comments));
         // dispatch(fillAuthorships(response.data.authorships));
         // dispatch(fillOutquotes(response.data.outquotes));
