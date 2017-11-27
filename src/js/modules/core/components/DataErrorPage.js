@@ -33,9 +33,11 @@ const styles = {
   },
   wowFace: {
     bottom: 0,
+    maxHeight: "50vh",
+    maxWidth: "50vw",
     position: "absolute",
     right: 0,
-    width: "50vw",
+    zIndex: -1,
   },
 };
 
