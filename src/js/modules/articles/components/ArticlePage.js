@@ -74,16 +74,6 @@ const ArticlePage = ({
   if (!article) {
     return <NotFoundPage />;
   }
-  let articleClone = JSON.parse(JSON.stringify(article));
-  if (Object.values(media).length > 1) {
-    // Obviously this behavior is redundant to what we have in ArticleBody.
-    // A prop to ArticleBody would make more sense. However, this is only
-    // temporary; in the future, the uploader would add these tags to
-    // article content (sometimes, even an article with 20 images may be
-    // viewed as a scrolled essay, not a slideshow.
-    articleClone.content =
-      "<spec-img-carousel></spec-img-carousel>" + article.content;
-  }
   return (
     <Grid fluid className={classes.ArticlePage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -91,7 +81,7 @@ const ArticlePage = ({
         <meta />
       </Helmet>
       <ArticleHeader article={article} section={section} />
-      <ArticleBody article={articleClone} media={media} />
+      <ArticleBody article={article} media={media} />
       <Row className={classes.descriptionRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.description}>
           The Pulse of the Student Body:&nbsp;

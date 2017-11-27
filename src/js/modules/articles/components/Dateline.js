@@ -31,6 +31,9 @@ const Dateline = ({ classes, article }) => {
     if (article.issue == 16) {
       dateText = "June 9, 2017";
     }
+    if (article.issue == 15) {
+      dateText = "May 26, 2017";
+    }
   }
   // return <p className={classes.Dateline}>{formatDate(article.createdAt)}</p>;
   return <p className={classes.Dateline}>{dateText}</p>;

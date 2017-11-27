@@ -27,7 +27,7 @@ export const closeLightbox = () => ({
 
 export const fetchAllData = () => {
   return dispatch => {
-    fetchDataPromise = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       resolve(dispatch(fetchSections()));
     })
       .then(response => {
