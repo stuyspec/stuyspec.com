@@ -21,14 +21,12 @@ import { HomePage, PageLayout, NotFoundPage } from "./core/components";
 import { DescriptionPage } from "./descriptions/components";
 import { SectionPage } from "./sections/components";
 import {
-  RolePage,
   ContributorPage,
   PhotographerPage,
   IllustratorPage,
 } from "./users/components";
 
 import { fetchAllData } from "./core/actions";
-import { sessionfy } from "./accounts/actions";
 
 class RoutingApp extends Component {
   constructor(props) {
@@ -46,18 +44,16 @@ class RoutingApp extends Component {
   render() {
     const {
       sections,
-      roles,
       descriptions,
       session,
-      isAllDataFetched,
-      sessionfy,
+      isDataFetched,
     } = this.props;
     return (
       <ConnectedRouter
         onUpdate={() => window.scrollTo(0, 0)}
         history={appHistory}
       >
-        {isAllDataFetched && (
+        {isDataFetched && (
           <PageLayout>
             <Switch>
               <Route exact path="/" component={HomePage} />
@@ -85,16 +81,6 @@ class RoutingApp extends Component {
                   />
                 );
               })}
-              {/*Object.values(roles).map(role => {
-                return (
-                  <Route
-                    exact
-                    path={`/${role.slug}`}
-                    key={`role${role.id}`}
-                    render={props => <RolePage role={role} />}
-                  />
-                );
-              })*/}
               {Object.values(descriptions).map(description => {
                 return (
                   <Route
@@ -207,20 +193,13 @@ class RoutingApp extends Component {
 
 const mapStateToProps = state => ({
   descriptions: state.descriptions,
-  roles: state.users.roles,
   sections: state.sections.sections,
   session: state.accounts.session,
-  isAllDataFetched:
-    state.articles.isFetched &&
-    state.comments.isFetched &&
-    state.media.isFetched &&
-    state.sections.isFetched &&
-    state.users.isFetched &&
-    state.outquotes.isFetched,
+  isDataFetched: state.core.isDataFetched,
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchAllData, sessionfy }, dispatch);
+  return bindActionCreators({ fetchAllData }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoutingApp);

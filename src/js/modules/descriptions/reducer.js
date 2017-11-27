@@ -1,14 +1,3 @@
-/*
-TODO: The following pages redirect you to something else:
-    Advertise has links to forms for advertisment
-    Apparel redirects to http://specapparel.strikingly.com/
-    Contact is a form
-    Subscribe is also a form
-    Sponsers has images
-    Join Us redirects to http://www.stuyspec.com/recruiting/ which has a different page structure
-    Visual Archives link have things related to issuu
- */
-
 const initialState = {
   "our-charter": {
     id: 0,
@@ -145,7 +134,7 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
   <pre><b>Fax</b>: 212-587-3874, attn. The Spectator</pre>
   <br>
   <pre>
-  <b>Phone</b>: 212-312-4800 ext. 2601</pre/><br>
+  <b>Phone</b>: 212-312-4800 ext. 2601</pre><br>
 </ul>
 <h2>Student Groups</h2>
 <ul>

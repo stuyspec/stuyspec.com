@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 
-import { getDescriptions } from "../../descriptions/selectors";
 import { getTopLevelSectionsWithChildren } from "../../sections/selectors";
 
 const styles = {
@@ -145,10 +144,6 @@ const styles = {
         color: "#000",
         textDecoration: "none",
       },
-      "&:active": {
-        color: "#000",
-        textDecoration: "none",
-      },
       "&:focus": {
         color: "#000",
         textDecoration: "none",
@@ -272,7 +267,7 @@ const PageFooter = ({
 
 const mapStateToProps = state => ({
   topLevelSectionsWithChildren: getTopLevelSectionsWithChildren(state),
-  descriptions: getDescriptions(state),
+  descriptions: state.descriptions,
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(PageFooter));

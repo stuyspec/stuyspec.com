@@ -9,6 +9,8 @@ import Byline from "../Byline";
 import Dateline from "../Dateline";
 import Outquote from "../Outquote";
 
+// TODO: ADD THE OUTQUOTE
+
 const styles = {
   LeftColumn: {
     paddingRight: "7px !important", // adds to the 7px in Col = 14px

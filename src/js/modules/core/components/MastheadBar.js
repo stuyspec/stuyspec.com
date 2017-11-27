@@ -5,7 +5,7 @@ import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
-import { getSections, getSectionSlugs } from "../../sections/selectors";
+import { getSectionSlugs } from "../../sections/selectors";
 
 import { openSubscriptionModal } from "../../accounts/actions";
 
@@ -245,7 +245,7 @@ const MastheadBar = ({
 const mapStateToProps = state => ({
   session: state.accounts.session,
   sectionSlugs: getSectionSlugs(state),
-  sections: getSections(state),
+  sections: state.sections.sections,
 });
 
 const mapDispatchToProps = dispatch => {

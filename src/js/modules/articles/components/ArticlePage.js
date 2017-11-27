@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
-import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 import ArticleHeader from "./ArticleHeader";

@@ -4,11 +4,7 @@ import { Row, Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import { getMedia } from "../../media/selectors";
-import { getSections } from "../../sections/selectors";
-import { getUsers } from "../../users/selectors";
 import Byline from "./Byline";
-import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 import Dateline from "./Dateline";
 
 const styles = {
@@ -141,9 +137,9 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
 };
 
 const mapStateToProps = state => ({
-  media: getMedia(state),
-  sections: getSections(state),
-  users: getUsers(state),
+  media: state.media.media,
+  sections: state.sections.sections,
+  users: state.users.users,
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(ArticleRow));

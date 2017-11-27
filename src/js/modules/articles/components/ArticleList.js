@@ -64,7 +64,7 @@ const ArticleList = ({ classes, articles, title, label }) => {
       {rowArticles.map(article => {
         return <ArticleRow article={article} key={article.id} />;
       })}
-      {rowArticles.length == 0 && (
+      {rowArticles.length === 0 && (
         <p>
           We are still in the process of uploading old articles. Please check
           back at a later time.

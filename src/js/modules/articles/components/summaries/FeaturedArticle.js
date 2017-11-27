@@ -1,7 +1,6 @@
 /* The FeaturedArticle component displays the highest-rated article. It is
  * currently nested in a <Col md={9} lg={9}>.
  */
-
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -88,10 +87,6 @@ const FeaturedArticle = ({ classes, media, sections, article }) => {
   const featuredMedia = Object.values(media).find(mediaObject => {
     return mediaObject.isFeatured && mediaObject.articleId === article.id;
   });
-  let linkToArticle = section.permalink + "/" + article.slug;
-  if (section.parentId) {
-    linkToArticle = sections[section.parentId].slug + linkToArticle;
-  }
   return (
     <Row className={classes.FeaturedArticle}>
       <Col
