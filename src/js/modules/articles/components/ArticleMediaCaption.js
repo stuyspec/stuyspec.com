@@ -20,9 +20,6 @@ const styles = {
 };
 
 const ArticleMediaCaption = ({ classes, users, image }) => {
-  if (!image) {
-    return <figcaption />;
-  }
   const artist = users[image.userId];
   return (
     <figcaption className={classes.caption}>

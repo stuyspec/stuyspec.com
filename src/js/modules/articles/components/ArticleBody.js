@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
@@ -76,6 +77,7 @@ const styles = {
 const ArticleBody = ({
   classes,
   article: { content, title },
+  articles,
   media,
 }) => {
   /*
@@ -115,12 +117,12 @@ const ArticleBody = ({
         )}
         {Object.values(media).length > 0 && (
           <ArticleFeaturedMedia
-            image={Object.values(media).find(media => media.isFeatured)}
+            image={Object.values(media)[0]}
             isCarouselButtonVisible={isCarouselButtonVisible}
             carouselImageCount={Object.values(media).length}
           />
         )}
-        {referencedArticleId !== -1 && (
+        {referencedArticleId !== -1 && referencedArticleId in articles && (
           <ArticleReference articleId={referencedArticleId} />
         )}
         <div
@@ -135,4 +137,8 @@ const ArticleBody = ({
   );
 };
 
-export default injectSheet(styles)(ArticleBody);
+const mapStateToProps = state => ({
+  articles: state.articles.articles,
+});
+
+export default connect(mapStateToProps)(injectSheet(styles)(ArticleBody));

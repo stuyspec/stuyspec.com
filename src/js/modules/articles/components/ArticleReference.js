@@ -36,12 +36,6 @@ const styles = {
 };
 
 const ArticleReference = ({ classes, articles, sections, articleId }) => {
-  if (!(articleId in articles)) {
-    console.error(
-      `No articles with id ${articleId} found for ArticleReference.`,
-    );
-    return <span />;
-  }
   const referencedArticle = articles[articleId];
   // Since the title will be surrounded with double quotes, we replace the
   // title's double quotes (for movies, books, etc.) with single quotes.
