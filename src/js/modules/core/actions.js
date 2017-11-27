@@ -1,11 +1,5 @@
 import axios from "axios";
 import * as t from "./actionTypes";
-// import { fillArticles, fillAuthorships } from "../articles/actions";
-// import { fillComments } from "../comments/actions";
-// import { fillMedia } from "../media/actions";
-// import { fillSections } from "../sections/actions";
-// import { fillUsers, fillUserRoles, fillRoles } from "../users/actions";
-// import { fillOutquotes } from "../outquotes/actions";
 import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from "../../constants";
 
 export const refreshWindowDimensions = () => ({
@@ -28,9 +22,6 @@ export const fetchAllData = () => {
       .then(response => {
         // validate the data
         dispatch({type: t.FETCH_INIT_DATA_FULFILLED, payload: response.data})
-        // dispatch(fillComments(response.data.comments));
-        // dispatch(fillAuthorships(response.data.authorships));
-        // dispatch(fillOutquotes(response.data.outquotes));
       })
       .catch(err => {
         dispatch({
