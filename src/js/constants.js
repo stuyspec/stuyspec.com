@@ -1,5 +1,5 @@
-export const STUY_SPEC_URL = "https://staging.stuyspec.com";
-export const STUY_SPEC_API_URL = "http://localhost:3000";
+// Will get replaced by gulpfile with relevant environment url
+export const STUY_SPEC_API_URL = "__API_URL_HERE__";
 
 export const STUY_SPEC_API_HEADERS = {
   headers: {

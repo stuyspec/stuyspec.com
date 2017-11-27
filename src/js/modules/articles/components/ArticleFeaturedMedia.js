@@ -98,43 +98,6 @@ class ArticleFeaturedMedia extends Component {
     );
   }
 }
-/*
-const ArticleFeaturedMedia = ({ classes, featuredMedia, isCaption }) => {
-  const { creator } = featuredMedia;
-
-  var figureIsTall = false;
-  const img = new Image();
-  let dimensions = []
-  img.src = featuredMedia.attachmentUrl;
-  return img.onload = () => {
-    return <p>hj</p>
-  }
-  console.log(dimensions);
-
-  return (
-    <figure className={figureIsTall ? classes.tallFigure : classes.figure}>
-      <img className={classes.img} src={featuredMedia.attachmentUrl} />
-      {isCaption && (
-        <figcaption className={classes.caption}>
-          <span>{featuredMedia.caption}&nbsp;</span>
-          <Link
-            className={classes.creditLine}
-            to={`/${MEDIA_CREATOR_SLUGS[
-              featuredMedia.mediaType
-            ]}/${creator.slug}`}
-          >
-            {capitalizeWord(featuredMedia.mediaType)}
-            &nbsp;by&nbsp;
-            {creator.firstName}
-            {creator.lastName !== "" && " " + creator.lastName}
-          </Link>
-          .
-        </figcaption>
-      )}
-    </figure>
-  );
-};
-*/
 
 const mapStateToProps = state => ({
   users: state.users.users,
