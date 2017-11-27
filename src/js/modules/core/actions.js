@@ -1,10 +1,6 @@
+import axios from "axios";
 import * as t from "./actionTypes";
-import { fetchArticles, fetchAuthorships } from "../articles/actions";
-import { fetchComments } from "../comments/actions";
-import { fetchMedia } from "../media/actions";
-import { fetchSections } from "../sections/actions";
-import { fetchUsers, fetchUserRoles, fetchRoles } from "../users/actions";
-import { fetchOutquotes } from "../outquotes/actions";
+import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from "../../constants";
 
 export const refreshWindowDimensions = () => ({
   type: t.REFRESH_WINDOW_DIMENSIONS,
@@ -20,35 +16,41 @@ export const closeSidebar = () => ({
 
 export const fetchAllData = () => {
   return dispatch => {
-    return new Promise((resolve, reject) => {
-      resolve(dispatch(fetchSections()));
-    })
+    dispatch({type: t.FETCH_INIT_DATA_PENDING})
+    axios
+      .get(`${STUY_SPEC_API_URL}/init`, STUY_SPEC_API_HEADERS)
       .then(response => {
-        dispatch(fetchComments());
+        validateSlices(response.data);
+        dispatch({type: t.FETCH_INIT_DATA_FULFILLED, payload: response.data})
       })
-      .then(response => {
-        dispatch(fetchMedia());
-      })
-      .then(response => {
-        dispatch(fetchRoles());
-      })
-      .then(response => {
-        dispatch(fetchUsers());
-      })
-      .then(response => {
-        dispatch(fetchUserRoles());
-      })
-      .then(response => {
-        dispatch(fetchRoles());
-      })
-      .then(response => {
-        dispatch(fetchAuthorships());
-      })
-      .then(response => {
-        dispatch(fetchArticles());
-      })
-      .then(response => {
-        dispatch(fetchOutquotes());
+      .catch(err => {
+        dispatch({
+          type: t.FETCH_INIT_DATA_REJECTED,
+          payload: err,
+        });
       });
   };
+};
+
+const sliceNames = [
+  'articles',
+  'sections',
+  // 'comments', We don't care if zero comments exist.
+  'media',
+  'users',
+  'roles',
+  'userRoles',
+  'authorships',
+  'outquotes',
+];
+
+const validateSlices = data => {
+  for (sliceName of sliceNames) {
+    if (!(sliceName in data)) {
+      throw sliceName + " not in initial data.";
+    }
+    if (data[sliceName].length === 0) {
+      throw `Zero ${sliceName} received in initial data.`;
+    }
+  }
 };

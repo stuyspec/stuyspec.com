@@ -90,16 +90,12 @@ const LeftTitleArticle = ({ classes, article, media, sections }) => {
   const featuredMedia = Object.values(media).find(
     mediaObject => mediaObject.articleId === article.id,
   );
-  const section = Object.values(sections).find(
-    section => article.sectionId === section.id,
-  );
+  const section = sections[article.sectionId];
   return (
     <Row className={classes.article}>
-      {/*
       <Link className={classes.section} to={section.permalink}>
         {section.name}
       </Link>
-    */}
       <Col
         xs={12}
         smPush={4}
