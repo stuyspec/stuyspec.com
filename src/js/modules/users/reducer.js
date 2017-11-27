@@ -1,19 +1,14 @@
 import {
-  FETCH_USERS_PENDING,
-  FETCH_USERS_REJECTED,
-  FETCH_USERS_FULFILLED,
-  FETCH_USER_ROLES_FULFILLED,
-  FETCH_ROLES_FULFILLED,
   CREATE_USER_FULFILLED,
 } from "./actionTypes";
-
+import {
+  FETCH_INIT_DATA_FULFILLED
+} from "../core/actionTypes";
 import { UPDATE_USER_FULFILLED } from "../accounts/actionTypes";
 
 import { isObjectEmpty } from "../../utils";
 
 const initialState = {
-  isFetching: false,
-  isFetched: false,
   error: null,
   users: {},
   roles: {},
@@ -22,39 +17,19 @@ const initialState = {
 
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
-    case FETCH_USERS_PENDING: {
-      return { ...state, isFetching: true };
-    }
-    case FETCH_USERS_FULFILLED: {
+    case FETCH_INIT_DATA_FULFILLED: {
       return {
         ...state,
-        isFetching: false,
-        isFetched: !isObjectEmpty(state.roles) && state.userRoles !== 0,
-        users: action.payload.reduce((acc, user) => {
+        users: action.payload.users.reduce((acc, user) => {
           acc[user.id] = user;
           return acc;
         }, {}),
-      };
-    }
-    case FETCH_USERS_REJECTED: {
-      return { ...state, isFetching: false, error: action.payload };
-    }
-    case FETCH_USER_ROLES_FULFILLED: {
-      return {
-        ...state,
-        userRoles: action.payload,
-        isFetched: !isObjectEmpty(state.users) && state.userRoles !== 0,
-      };
-    }
-    case FETCH_ROLES_FULFILLED: {
-      return {
-        ...state,
-        isFetched: !isObjectEmpty(state.users) && !isObjectEmpty(state.roles),
-        roles: action.payload.reduce((acc, role) => {
+        userRoles: action.payload.userRoles,
+        roles: action.payload.roles.reduce((acc, role) => {
           acc[role.id] = role;
-          return acc;
+          return acc
         }, {}),
-      };
+      }
     }
     case CREATE_USER_FULFILLED: {
       return {
@@ -65,7 +40,6 @@ const reducer = (state = { ...initialState }, action) => {
         },
       };
     }
-
     case UPDATE_USER_FULFILLED: {
       const updatedUser = action.payload.data;
       return {

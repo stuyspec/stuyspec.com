@@ -16,18 +16,21 @@ import {
   RecommendedPage,
   LatestPage,
 } from "./articles/components";
-import { HomePage, PageLayout, NotFoundPage } from "./core/components";
+import {
+  HomePage,
+  PageLayout,
+  NotFoundPage,
+  DataErrorPage,
+} from "./core/components";
 import { DescriptionPage } from "./descriptions/components";
 import { SectionPage } from "./sections/components";
 import {
-  RolePage,
   ContributorPage,
   PhotographerPage,
   IllustratorPage,
 } from "./users/components";
 
 import { fetchAllData } from "./core/actions";
-import { sessionfy } from "./accounts/actions";
 
 class RoutingApp extends Component {
   constructor(props) {
@@ -35,27 +38,32 @@ class RoutingApp extends Component {
   }
 
   componentDidMount() {
+    this.prepareData();
+  }
+
+  // Separate function because it is reused for the DataErrorPage
+  prepareData = () => {
     this.props.fetchAllData();
     const session = localStorage.getItem("session");
     if (session) {
       this.props.sessionfy(JSON.parse(session));
     }
-  }
+  };
 
   render() {
     const {
       sections,
-      roles,
       descriptions,
       session,
       isAllDataFetched,
-      sessionfy,
+      initDataError,
     } = this.props;
     return (
       <ConnectedRouter
         onUpdate={() => window.scrollTo(0, 0)}
         history={appHistory}
       >
+        <div>
         {isAllDataFetched && (
           <PageLayout>
             <Switch>
@@ -84,16 +92,6 @@ class RoutingApp extends Component {
                   />
                 );
               })}
-              {/*Object.values(roles).map(role => {
-                return (
-                  <Route
-                    exact
-                    path={`/${role.slug}`}
-                    key={`role${role.id}`}
-                    render={props => <RolePage role={role} />}
-                  />
-                );
-              })*/}
               {Object.values(descriptions).map(description => {
                 return (
                   <Route
@@ -193,6 +191,10 @@ class RoutingApp extends Component {
             </Switch>
           </PageLayout>
         )}
+        {initDataError && (
+          <DataErrorPage error={initDataError} action={this.prepareData}/>
+        )}
+        </div>
       </ConnectedRouter>
     );
   }
@@ -203,17 +205,12 @@ const mapStateToProps = state => ({
   roles: state.users.roles,
   sections: state.sections.sections,
   session: state.accounts.session,
-  isAllDataFetched:
-    state.articles.isFetched &&
-    state.comments.isFetched &&
-    state.media.isFetched &&
-    state.sections.isFetched &&
-    state.users.isFetched &&
-    state.outquotes.isFetched,
+  isAllDataFetched: state.core.isAllDataFetched,
+  initDataError: state.core.error,
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchAllData, sessionfy }, dispatch);
+  return bindActionCreators({ fetchAllData }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoutingApp);
