@@ -7,6 +7,7 @@ export const STUY_SPEC_API_HEADERS = {
   }
 };
 
+
 export const MEDIA_CREATOR_SLUGS = {
   illustration: "illustrators",
   photo: "photographers"

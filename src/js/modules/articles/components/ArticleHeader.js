@@ -5,6 +5,7 @@ import { Row, Col } from "react-bootstrap/lib";
 
 import Byline from "./Byline";
 import Dateline from "./Dateline";
+import ShareTools from "./ShareTools";
 
 const styles = {
   headerRow: {},
@@ -41,6 +42,14 @@ const styles = {
     marginTop: 0,
     marginBottom: "20px",
   },
+  meta: {
+    alignItems: "center",
+    display: "flex",
+    flexWrap: "wrap",
+    "& > *": {
+      marginBottom: "5px",
+    },
+  },
   Byline: {
     color: "#000",
     display: "inline",
@@ -60,8 +69,9 @@ const styles = {
   },
   Dateline: {
     color: "#000",
-    display: "inline",
     fontSize: "14px",
+    marginRight: "28px",
+    marginTop: 0,
   },
   "@media (max-width: 991px)": {
     headerRow: {
@@ -75,8 +85,6 @@ const styles = {
   },
 };
 
-// TODO: make selector for dateline
-
 const ArticleHeader = ({ classes, article, section }) => {
   return (
     <Row className={classes.headerRow}>
@@ -85,8 +93,11 @@ const ArticleHeader = ({ classes, article, section }) => {
           {section.name}
         </Link>
         <h1 className={classes.headline}>{article.title}</h1>
-        <Byline classes={classes} contributors={article.contributors} />
-        <Dateline classes={classes} article={article} />
+        <div className={classes.meta}>
+          <Byline classes={classes} contributors={article.contributors} />
+          <Dateline classes={classes} article={article} />
+          <ShareTools article={article} section={section} />
+        </div>
       </Col>
     </Row>
   );
