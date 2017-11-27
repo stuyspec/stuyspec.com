@@ -50,7 +50,7 @@ const DataErrorPage = ({ classes, error, action}) => {
       <p>Our apologies, we have encountered a problem with our data-fetching.</p>
       <p>&mdash;<i>The Stuyvesant Spectator Web Department</i></p>
       <button className={classes.retryButton} onClick={action}>Reload Page</button>
-      <img src="/img/wow-face.png" className={classes.wowFace} />
+      <img src="/img/wow-face.png" title="Art by Jade Lo (Class Of '20)" className={classes.wowFace} />
       {/*
       <p className={classes.requestText}>
         Help the Spectator Web Department out, and
