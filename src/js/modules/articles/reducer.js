@@ -23,6 +23,10 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         articles: action.payload.articles.reduce((acc, article) => {
           article["originalSummary"] = article["summary"];
+          /* shortenSummary shortens the article summary to 25 words + "..."
+           * Also creates a summary from article content if the article has
+           * no summary.
+           */
           article["summary"] = shortenSummary(article);
           acc[article.id] = article;
           return acc;

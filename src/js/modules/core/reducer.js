@@ -2,6 +2,7 @@ import {
   REFRESH_WINDOW_DIMENSIONS,
   OPEN_SIDEBAR,
   CLOSE_SIDEBAR,
+  FETCH_INIT_DATA_PENDING,
   FETCH_INIT_DATA_FULFILLED,
   FETCH_INIT_DATA_REJECTED,
 } from "./actionTypes";
@@ -27,7 +28,8 @@ const initialState = {
   viewportHeight: getViewportHeight(),
   isSidebarOpen: false,
   rowHeight: 0,
-  isDataFetched: false,
+  isAllDataFetched: false,
+  error: null,
 };
 
 const reducer = (state = { ...initialState }, action) => {
@@ -57,6 +59,31 @@ const reducer = (state = { ...initialState }, action) => {
         // otherwise do not mutate
         return state;
       }
+    }
+    case FETCH_INIT_DATA_PENDING: {
+      return {
+        ...state,
+        isAllDataFetched: false,
+        error: null,
+      }
+    }
+    case FETCH_INIT_DATA_FULFILLED: {
+      return {
+        ...state,
+        isAllDataFetched: true,
+      }
+    }
+    case FETCH_INIT_DATA_REJECTED: {
+      return {
+        ...state,
+        error: action.payload,
+        /* If somehow another slice's reducer reading in data fails,
+         * isAllDataFetched would be true, and FETCH)INIT_DATA_FULFILLED would
+         * have been dispatched, so we need to make sure isAllDataFetched is
+         * false.
+         */
+        isAllDataFetched: false,
+      };
     }
     case OPEN_SIDEBAR: {
       return {

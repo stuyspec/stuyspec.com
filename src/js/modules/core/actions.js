@@ -20,7 +20,7 @@ export const fetchAllData = () => {
     axios
       .get(`${STUY_SPEC_API_URL}/init`, STUY_SPEC_API_HEADERS)
       .then(response => {
-        // validate the data
+        throwForEmptySlices(response.data);
         dispatch({type: t.FETCH_INIT_DATA_FULFILLED, payload: response.data})
       })
       .catch(err => {
@@ -30,4 +30,27 @@ export const fetchAllData = () => {
         });
       });
   };
+};
+
+const sliceNames = [
+  'articles',
+  'sections',
+  // 'comments', We don't care if zero comments exist.
+  'media',
+  'users',
+  'roles',
+  'userRoles',
+  'authorships',
+  'outquotes',
+];
+
+const throwForEmptySlices = data => {
+  for (sliceName of sliceNames) {
+    if (!(sliceName in data)) {
+      throw sliceName + " not in initial data.";
+    }
+    if (data[sliceName].length === 0) {
+      throw `Zero ${sliceName} received in initial data.`;
+    }
+  }
 };

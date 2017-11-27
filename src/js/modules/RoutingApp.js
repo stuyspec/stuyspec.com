@@ -17,7 +17,12 @@ import {
   LatestPage,
   SearchPage,
 } from "./articles/components";
-import { HomePage, PageLayout, NotFoundPage } from "./core/components";
+import {
+  HomePage,
+  PageLayout,
+  NotFoundPage,
+  DataErrorPage,
+} from "./core/components";
 import { DescriptionPage } from "./descriptions/components";
 import { SectionPage } from "./sections/components";
 import {
@@ -34,26 +39,33 @@ class RoutingApp extends Component {
   }
 
   componentDidMount() {
+    this.prepareData();
+  }
+
+  // Separate function because it is reused for the DataErrorPage
+  prepareData = () => {
     this.props.fetchAllData();
     const session = localStorage.getItem("session");
     if (session) {
       this.props.sessionfy(JSON.parse(session));
     }
-  }
+  };
 
   render() {
     const {
       sections,
       descriptions,
       session,
-      isDataFetched,
+      isAllDataFetched,
+      initDataError,
     } = this.props;
     return (
       <ConnectedRouter
         onUpdate={() => window.scrollTo(0, 0)}
         history={appHistory}
       >
-        {isDataFetched && (
+        <div>
+        {isAllDataFetched && (
           <PageLayout>
             <Switch>
               <Route exact path="/" component={HomePage} />
@@ -186,6 +198,10 @@ class RoutingApp extends Component {
             </Switch>
           </PageLayout>
         )}
+        {initDataError && (
+          <DataErrorPage error={initDataError} action={this.prepareData}/>
+        )}
+        </div>
       </ConnectedRouter>
     );
   }
@@ -195,7 +211,8 @@ const mapStateToProps = state => ({
   descriptions: state.descriptions,
   sections: state.sections.sections,
   session: state.accounts.session,
-  isDataFetched: state.core.isDataFetched,
+  isAllDataFetched: state.core.isAllDataFetched,
+  initDataError: state.core.error,
 });
 
 const mapDispatchToProps = dispatch => {
