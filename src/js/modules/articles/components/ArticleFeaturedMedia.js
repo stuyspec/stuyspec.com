@@ -29,7 +29,7 @@ const styles = {
       position: "absolute",
     },
   },
-  lightboxButton: {
+  carouselButton: {
     backgroundColor: "#fff",
     border: "none",
     borderRadius: 0,
@@ -43,7 +43,7 @@ const styles = {
       opacity: 0.9,
     },
   },
-  lightboxIcon: {
+  slidesIcon: {
     width: "26px !important",
   },
   carouselImageCount: {
@@ -88,8 +88,8 @@ class ArticleFeaturedMedia extends Component {
         <div className={classes.imgContainer}>
           <img className={classes.img} src={image.attachmentUrl} />
           {isCarouselButtonVisible && (
-            <button className={classes.lightboxButton} onClick={openLightbox}>
-              <img className={classes.lightboxIcon} src="/img/slides.svg" />
+            <button className={classes.carouselButton} onClick={openLightbox}>
+              <img className={classes.slidesIcon} src="/img/slides.svg" />
               <span className={classes.carouselImageCount}>
                 {carouselImageCount}
               </span>
