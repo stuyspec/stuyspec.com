@@ -6,7 +6,6 @@ import { reset } from "redux-form";
 export const searchArticles = query => {
   query = query.search;
   return dispatch => {
-    console.log("dispatching");
     dispatch({ type: t.SEARCH_ARTICLES_PENDING });
     axios
       .get(`${STUY_SPEC_API_URL}/articles?query=${encodeURI(query)}`, STUY_SPEC_API_HEADERS)

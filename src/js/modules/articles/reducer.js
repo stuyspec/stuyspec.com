@@ -13,6 +13,7 @@ const initialState = {
   error: null,
   articles: {},
   authorships: [],
+  searchableIds: [],
 };
 
 const reducer = (state = { ...initialState }, action) => {
@@ -41,12 +42,14 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         searchableIds: searchableIds,
+        isSearching: false,
       };
     }
     case SEARCH_ARTICLES_REJECTED: {
       return {
         ...state,
         error: action.payload,
+        isSearching: false,
       };
     }
   }

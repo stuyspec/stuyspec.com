@@ -47,9 +47,9 @@ const styles = {
 };
 
 const ArticleList = ({ classes, articles, title, label }) => {
-  let rowArticles = Object.values(articles);
-  if (title !== "Recommended") {
-    rowArticles = Object.values(articles).sort((a, b) => {
+  let rowArticles = articles.isArray ? articles : Object.values(articles);
+  if (title !== "Recommended" && title !== "Search") {
+    rowArticles = rowArticles.sort((a, b) => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
   }
