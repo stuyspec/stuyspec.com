@@ -1,10 +1,12 @@
+import axios from "axios";
 import * as t from "./actionTypes";
-import { fetchArticles, fetchAuthorships } from "../articles/actions";
-import { fetchComments } from "../comments/actions";
-import { fetchMedia } from "../media/actions";
-import { fetchSections } from "../sections/actions";
-import { fetchUsers, fetchUserRoles, fetchRoles } from "../users/actions";
-import { fetchOutquotes } from "../outquotes/actions";
+// import { fillArticles, fillAuthorships } from "../articles/actions";
+// import { fillComments } from "../comments/actions";
+// import { fillMedia } from "../media/actions";
+// import { fillSections } from "../sections/actions";
+// import { fillUsers, fillUserRoles, fillRoles } from "../users/actions";
+// import { fillOutquotes } from "../outquotes/actions";
+import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from "../../constants";
 
 export const refreshWindowDimensions = () => ({
   type: t.REFRESH_WINDOW_DIMENSIONS,
@@ -20,35 +22,25 @@ export const closeSidebar = () => ({
 
 export const fetchAllData = () => {
   return dispatch => {
-    return new Promise((resolve, reject) => {
-      resolve(dispatch(fetchSections()));
-    })
+    dispatch({type: t.FETCH_INIT_DATA_PENDING})
+    axios
+      .get(`${STUY_SPEC_API_URL}/init`, STUY_SPEC_API_HEADERS)
       .then(response => {
-        dispatch(fetchComments());
+        // validate the data
+        dispatch({type: t.FETCH_INIT_DATA_FULFILLED, payload: response.data})
+        // dispatch(fillArticles(response.data.articles));
+        // dispatch(fillUsers(response.data.users));
+        // dispatch(fillUserRoles(response.data.userRoles));
+        // dispatch(fillRoles(response.data.roles));
+        // dispatch(fillComments(response.data.comments));
+        // dispatch(fillAuthorships(response.data.authorships));
+        // dispatch(fillOutquotes(response.data.outquotes));
       })
-      .then(response => {
-        dispatch(fetchMedia());
-      })
-      .then(response => {
-        dispatch(fetchRoles());
-      })
-      .then(response => {
-        dispatch(fetchUsers());
-      })
-      .then(response => {
-        dispatch(fetchUserRoles());
-      })
-      .then(response => {
-        dispatch(fetchRoles());
-      })
-      .then(response => {
-        dispatch(fetchAuthorships());
-      })
-      .then(response => {
-        dispatch(fetchArticles());
-      })
-      .then(response => {
-        dispatch(fetchOutquotes());
+      .catch(err => {
+        dispatch({
+          type: t.FETCH_INIT_DATA_REJECTED,
+          payload: err,
+        });
       });
   };
 };
