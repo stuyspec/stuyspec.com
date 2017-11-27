@@ -209,17 +209,8 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
 </center>
 `,
   },
-  apparel: {
-    id: 3,
-    title: "Apparel",
-    slug: "apparel",
-    content: `<p style="text-align: center">
-  Check out our apparel on <a href="http://specapparel.strikingly.com/">Stirkingly!</a>
-</p>
-`,
-  },
   staff: {
-    id: 4,
+    id: 3,
     title: "Staff",
     slug: "staff",
     content: `<center>
@@ -297,7 +288,7 @@ Kerry Garfinkel
 `,
   },
   contact: {
-    id: 5,
+    id: 4,
     title: "Contact",
     slug: "contact",
     content: `<p style="text-align: center">
