@@ -46,7 +46,7 @@ const HomePage = ({ classes, sections, articles, media }) => {
   const newsSection = Object.values(sections).find(
     section => section.name === "News",
   );
-  const featuredArticle = Object.values(articles).find(
+  const featuredArticle = articles.find(
     article =>
       sections[article.sectionId]["name"] !== "News" &&
       Object.values(media).find(
@@ -54,7 +54,7 @@ const HomePage = ({ classes, sections, articles, media }) => {
       ),
   );
   let recommendedArticles = [];
-  for (article of Object.values(articles)) {
+  for (article of articles) {
     if (recommendedArticles.length >= 5) {
       break;
     }

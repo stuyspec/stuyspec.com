@@ -106,7 +106,11 @@ const ArticleBody = ({
     SPEC_IMG_CAROUSEL_PATTERN.test(content) && Object.values(media).length > 0;
   const referencedArticleId = SPEC_REFERENCE_PATTERN.test(content)
     ? parseInt(SPEC_REFERENCE_PATTERN.exec(content)[1])
-    : -1;
+    : null;
+  let referencedArticle = null;
+  if (referencedArticleId) {
+    referencedArticle = articles.find(article.id === referencedArticleId);
+  }
   return (
     <Row>
       <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
@@ -122,9 +126,9 @@ const ArticleBody = ({
             carouselImageCount={Object.values(media).length}
           />
         )}
-        {referencedArticleId !== -1 && referencedArticleId in articles && (
-          <ArticleReference articleId={referencedArticleId} />
-        )}
+        {referencedArticle &&
+          <ArticleReference article={referencedArticle} />
+        }
         <div
           className={classes.innerHTML}
           dangerouslySetInnerHTML={{ __html: content }}

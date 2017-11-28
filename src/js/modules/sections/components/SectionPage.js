@@ -247,7 +247,7 @@ const SectionPage = ({
       </Grid>
     );
   }
-  const featuredArticle = Object.values(sectionTreeArticles).find(article => {
+  const featuredArticle = sectionTreeArticles.find(article => {
     if (section.name === "Humor") {
       if (
         directSubsections[article.sectionId] &&
@@ -268,13 +268,13 @@ const SectionPage = ({
     featuredArticleSection = section;
   }
 
-  let secondaryArticle = Object.values(sectionTreeArticles).find(
+  let secondaryArticle = sectionTreeArticles.find(
     article =>
       article !== featuredArticle &&
       Object.values(media).find(medium => medium.articleId === article.id),
   );
   if (!secondaryArticle) {
-    secondaryArticle = Object.values(sectionTreeArticles)[1];
+    secondaryArticle = sectionTreeArticles[1];
   }
 
   let hardcodedSubsection = null;

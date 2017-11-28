@@ -21,8 +21,10 @@ export const getDirectSubsections = createSelector(
  * The selector returns a filtered sections object which contains only top level
  *   sections (sections with no parents).
  */
-export const getTopLevelSections = createSelector([getSections], sections =>
-  Object.filter(sections, section => section.parentId === null),
+export const getTopLevelSections = createSelector(
+  [getSections],
+  sections =>
+    Object.filter(sections, section => section.parentId === null),
 );
 
 /**
@@ -70,20 +72,4 @@ export const getSectionTreeIds = createSelector(
 
 export const getSectionSlugs = createSelector([getSections], sections => {
   return Object.values(sections).map(section => section.slug);
-});
-
-export const getColumnSections = createSelector([getSections], sections => {
-  const columnSectionNames = [
-    "Opinions",
-    "Features",
-    "Humor",
-    "Staff Editorials",
-    "Arts & Entertainment",
-    "Sports",
-  ];
-  return columnSectionNames.map(name =>
-    Object.values(sections).find(section => {
-      return section.name === name;
-    }),
-  );
 });

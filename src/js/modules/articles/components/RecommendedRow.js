@@ -126,9 +126,9 @@ const styles = {
   },
 };
 
-const RecommendedRow = ({ classes, media, section, articles, sections }) => {
+const RecommendedRow = ({ classes, media, articles, sections }) => {
   // section is always the parent section, articles are always in that tree.
-  const recommendedArticles = Object.values(articles).slice(0, 4);
+  const recommendedArticles = articles.slice(0, 4);
   return (
     <Row className={classes.RecommendedRow}>
       <p className={classes.recommendedText}>Recommended</p>
