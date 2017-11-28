@@ -17,6 +17,7 @@ import {
   CLOSE_SUBSCRIPTION_MODAL,
   SESSIONFY,
 } from "./actionTypes";
+import { CREATE_COMMENT_FULFILLED } from "../comments/actionTypes";
 
 const initialState = {
   status: {
@@ -34,6 +35,15 @@ const initialState = {
 
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
+    case CREATE_COMMENT_FULFILLED: {
+      return {
+        ...state,
+        session: {
+          ...state.session,
+          headers: action.payload.headers,
+        },
+      };
+    }
     case SIGN_IN_PENDING: {
       return {
         ...state,

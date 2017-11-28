@@ -22,6 +22,9 @@ const styles = {
     CommentThread: {
       padding: "0 10%",
     },
+    commentFormContainer: {
+      marginBottom: "36px",
+    },
   },
   "@media (max-width: 767px)": {
     CommentThread: {
@@ -42,12 +45,17 @@ const CommentThread = ({
       ...values,
       articleId: article.id,
       userId: session.userId,
+    }, {
+      'access-token': session.headers['access-token'],
+      client: session.headers.client,
+      expiry: session.headers.expiry,
+      uid: session.headers.uid
     });
   };
   return (
     <Grid fluid className={classes.CommentThread}>
-      <Row>
-        <CommentForm session={session} onSubmit={handleCreateComment} />
+      <Row className={classes.commentFormContainer}>
+        <CommentForm onSubmit={handleCreateComment} />
         <Col md={4} lg={4} />
       </Row>
       <SignInModal />

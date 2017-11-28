@@ -31,6 +31,7 @@ import {
 } from "./users/components";
 
 import { fetchAllData } from "./core/actions";
+import { sessionfy } from "./accounts/actions";
 
 class RoutingApp extends Component {
   constructor(props) {
@@ -209,7 +210,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchAllData }, dispatch);
+  return bindActionCreators({ fetchAllData, sessionfy }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoutingApp);
