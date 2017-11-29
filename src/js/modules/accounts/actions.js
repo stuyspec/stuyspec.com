@@ -69,18 +69,13 @@ export const signIn = (signInParams, isInModal) => {
       .post(
         `${STUY_SPEC_API_URL}/auth/sign_in`,
         signInParams,
-        STUY_SPEC_API_HEADERS,
+        STUY_SPEC_API_HEADERS
       )
       .then(response => {
         dispatch({
           type: t.SIGN_IN_FULFILLED,
           payload: response,
         });
-        const sessionObject = {
-          userId: response.data.data.id,
-          headers: response.headers,
-        };
-        localStorage.setItem("session", JSON.stringify(sessionObject));
         if (isInModal !== true) {
           appHistory.push("/myaccount/profile");
         }
@@ -95,21 +90,13 @@ export const signIn = (signInParams, isInModal) => {
 };
 
 export const signOut = session => {
-  const sessionHeaders = session.headers;
-  const headers = {
-    "access-token": sessionHeaders["access-token"],
-    client: sessionHeaders.client,
-    uid: sessionHeaders.uid,
-  };
   return dispatch => {
-    dispatch({ type: t.SIGN_OUT_PENDING, payload: headers });
+    dispatch({ type: t.SIGN_OUT_PENDING, payload: session });
     axios
-      .delete(`${STUY_SPEC_API_URL}/auth/sign_out`, { headers })
+      .delete(`${STUY_SPEC_API_URL}/auth/sign_out`, {headers: session})
       .then(response => {
-        localStorage.clear();
         dispatch({
           type: t.SIGN_OUT_FULFILLED,
-          payload: response,
         });
       })
       .catch(err => {
@@ -190,11 +177,40 @@ export const subscribe = values => {
   };
 };
 
-export const sessionfy = sessionObject => {
+export const validateToken = session => {
+  if (session) {
+    return dispatch => {
+      axios.get(
+        `${STUY_SPEC_API_URL}/auth/validate_token`,
+        {
+          headers: {
+            'access-token': session['access-token'],
+            client: session.client,
+            uid: session.uid,
+          }
+        }
+      )
+        .then(response => {
+          dispatch({
+            type: t.VALIDATE_TOKEN_FULFILLED,
+            payload: response,
+          });
+        })
+        .catch(err => {
+          dispatch({
+            type: t.VALIDATE_TOKEN_REJECTED,
+          });
+        });
+    }
+  }
+};
+
+export const sessionfy = session => {
   return dispatch => {
     dispatch({
       type: t.SESSIONFY,
-      payload: sessionObject,
+      payload: session,
     });
+    dispatch(validateToken(session));
   };
 };

@@ -68,7 +68,6 @@ const ArticlePage = ({
   sections,
   media,
   openSubscriptionModal,
-  openLightbox,
 }) => {
   if (!article) {
     return <NotFoundPage />;
