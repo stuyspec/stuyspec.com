@@ -7,6 +7,7 @@ import { EMAIL_REGEX } from "../../../../constants";
 const styles = {
   SignUpForm: {
     fontFamily: "Minion Pro",
+    maxWidth: "100%",
     "& form div": {
       // each Field
       marginBottom: "7px",

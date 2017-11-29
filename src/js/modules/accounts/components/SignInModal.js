@@ -1,5 +1,6 @@
 import React from "react";
 import { bindActionCreators } from "redux";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Modal } from "react-bootstrap/lib";
@@ -10,6 +11,7 @@ import { signIn, signUp, closeSignInModal } from "../actions";
 const styles = {
   SignInModal: {
     width: "50%",
+    maxWidth: "420px"
   },
   modalContent: {
     padding: "12px",
@@ -17,15 +19,32 @@ const styles = {
   formTitle: {
     fontFamily: "Minion Pro",
     fontSize: "26px",
+    textAlign: "center",
   },
   signInForm: {
     display: "inline-block",
+    width: "100%",
   },
   signOutForm: {
     display: "inline-block",
+    width: "100%",
+  },  
+  signUpRedirect: {
+    color: "#3084df",
+    display: "block",
+    fontFamily: "Minion Pro",
+    fontSize: "17px",
+    marginBottom: "7px",
   },
   "@media (max-width: 767px)": {
     SignInModal: {
+      margin: "40px auto",
+      width: "95.5%",
+    },
+  },
+  "@media (max-width: 575px)": {
+    SignInModal: {
+      maxWidth: "none",
       width: "95.5%",
     },
   },
@@ -53,13 +72,12 @@ const SignInModal = ({
         {/* If second param of signIn is true, the form will not redirect
         to the profile page because it knows it is in a modal */}
         <div className={classes.signInForm}>
-          <h3 className={classes.formTitle}>Sign in</h3>
+          <h3 className={classes.formTitle}>Sign in to comment</h3>
           <SignInForm onSubmit={values => signIn(values, true)} />
         </div>
-        <div className={classes.signUpForm}>
-          <h3 className={classes.formTitle}>Don't have an account? Sign up.</h3>
-          <SignUpForm onSubmit={signUp} />
-        </div>
+        <Link to={"/myaccount/sign-up"} className={classes.signUpRedirect}>
+          Don't have an account? Create one »
+        </Link>
       </div>
     </Modal>
   );

@@ -7,6 +7,7 @@ import { EMAIL_REGEX } from "../../../../constants";
 const styles = {
   SignInForm: {
     fontFamily: "Minion Pro",
+    width: "100%",
     "& form div": {
       // each Field
       marginBottom: "7px",
