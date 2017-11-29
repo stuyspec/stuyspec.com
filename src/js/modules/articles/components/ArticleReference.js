@@ -13,13 +13,7 @@ const styles = {
   referenceLink: {
     color: "#000",
     textDecoration: "underline",
-    "&:hover": {
-      color: "#000",
-    },
-    "&:active": {
-      color: "#000",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },

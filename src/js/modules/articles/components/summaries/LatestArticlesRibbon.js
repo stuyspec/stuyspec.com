@@ -55,13 +55,7 @@ const styles = {
     letterSpacing: "0.5px",
     lineHeight: 1.17,
     margin: 0,
-    "&:active": {
-      color: "#000",
-    },
-    "&:focus": {
-      color: "#000",
-    },
-    "&:hover": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },

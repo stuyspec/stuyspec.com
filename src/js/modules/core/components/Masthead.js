@@ -25,11 +25,7 @@ const styles = {
     fontFamily: "Old English Text MT",
     fontSize: "75px",
     marginBottom: "10px",
-    "&:hover": {
-      color: "#000",
-      textDecoration: "none",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none",
     },
@@ -64,13 +60,7 @@ const styles = {
     fontSize: "13px",
     fontWeight: 300,
     textDecoration: "none",
-    "&:hover": {
-      color: "#000",
-    },
-    "&:active": {
-      color: "#000",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },

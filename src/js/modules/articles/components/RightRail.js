@@ -27,10 +27,7 @@ const styles = {
     fontWeight: 300,
     margin: "0 0 12px 0",
     padding: "4px 0",
-    "&:hover": {
-      color: "#000",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },
@@ -60,8 +57,10 @@ const styles = {
     fontSize: "12px",
     marginBottom: "6px",
     textTransform: "uppercase",
-    "&:hover": { color: "#000", textDecoration: "none" },
-    "&:focus": { color: "#000", textDecoration: "none" },
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none",
+    },
   },
   figure: {
     float: "right",

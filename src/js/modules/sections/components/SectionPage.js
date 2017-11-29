@@ -47,13 +47,7 @@ const styles = {
     width: "325px",
     "& a": {
       color: "#000",
-      "&:hover": {
-        color: "#000",
-      },
-      "&:active": {
-        color: "#000",
-      },
-      "&:focus": {
+      "&:hover, &:active, &:focus": {
         color: "#000",
       },
     },
@@ -116,11 +110,7 @@ const styles = {
     fontFamily: "Circular Std",
     fontSize: "12px",
     fontWeight: 300,
-    "&:hover": {
-      color: "#000",
-      textDecoration: "none",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none",
     },

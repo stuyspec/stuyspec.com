@@ -29,7 +29,7 @@ const styles = {
     height: "32px",
     marginTop: "15px",
     textAlign: "center",
-    width: "70px",
+    width: "90px",
     "&:disabled": {
       background: "#ddd",
       borderColor: "#ddd",

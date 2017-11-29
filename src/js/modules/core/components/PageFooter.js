@@ -33,15 +33,7 @@ const styles = {
     fontWeight: "bold",
     marginBottom: 0,
     textDecoration: "none",
-    "&:hover": {
-      color: "#000",
-      textDecoration: "none",
-    },
-    "&:focus": {
-      color: "#000",
-      textDecoration: "none",
-    },
-    "&:active": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none",
     },
@@ -54,15 +46,7 @@ const styles = {
     fontStyle: "normal",
     fontWeight: "300",
     textDecoration: "none",
-    "&:hover": {
-      color: "#000",
-      textDecoration: "none",
-    },
-    "&:focus": {
-      color: "#000",
-      textDecoration: "none",
-    },
-    "&:active": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none",
     },
@@ -74,11 +58,7 @@ const styles = {
     fontStyle: "normal",
     fontWeight: 400,
     paddingTop: "10px",
-    "&:hover": {
-      color: "#000",
-      textDecoration: "none",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none",
     },
@@ -94,15 +74,7 @@ const styles = {
       color: "#aaa",
       fontSize: "12px",
       padding: "0 16px 6px 0",
-      "&:active": {
-        color: "#aaa",
-        textDecoration: "underline",
-      },
-      "&:focus": {
-        color: "#aaa",
-        textDecoration: "underline",
-      },
-      "&:hover": {
+      "&:hover, &:active, &:focus": {
         color: "#aaa",
         textDecoration: "underline",
       },
@@ -115,13 +87,7 @@ const styles = {
     "& a": {
       color: "#aaa",
       textDecoration: "underline",
-      "&:active": {
-        color: "#aaa",
-      },
-      "&:focus": {
-        color: "#aaa",
-      },
-      "&:hover": {
+      "&:hover, &:active, &:focus": {
         color: "#aaa",
       },
     },
@@ -149,15 +115,7 @@ const styles = {
     topLevelSectionLink: {
       fontSize: "15px",
       fontWeight: "500",
-      "&:active": {
-        color: "#000",
-        textDecoration: "none",
-      },
-      "&:focus": {
-        color: "#000",
-        textDecoration: "none",
-      },
-      "&:hover": {
+      "&:hover, &:active, &:focus": {
         color: "#000",
         textDecoration: "none",
       },

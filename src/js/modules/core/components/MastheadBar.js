@@ -44,11 +44,7 @@ const styles = {
     position: "absolute",
     textDecoration: "none",
     transform: "translate(-50%,0)",
-    "&:hover": {
-      color: "#000",
-      textDecoration: "none",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none",
     },

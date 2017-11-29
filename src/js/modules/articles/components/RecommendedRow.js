@@ -43,13 +43,7 @@ const styles = {
     fontFamily: "Minion Pro",
     fontSize: "14px",
     lineHeight: "1.21",
-    "&:active": {
-      color: "#000",
-    },
-    "&:focus": {
-      color: "#000",
-    },
-    "&:hover": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },
@@ -60,13 +54,7 @@ const styles = {
     fontSize: "19px",
     lineHeight: "1.38",
     marginBottom: "2px",
-    "&:active": {
-      color: "#000",
-    },
-    "&:focus": {
-      color: "#000",
-    },
-    "&:hover": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },

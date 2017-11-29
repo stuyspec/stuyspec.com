@@ -40,10 +40,7 @@ const styles = {
     fontSize: "12px",
     marginBottom: "4px",
     textTransform: "uppercase",
-    "&:hover": {
-      color: "#000",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },
@@ -66,10 +63,7 @@ const styles = {
     fontSize: "18px",
     lineHeight: 1.22,
     marginBottom: "1px",
-    "&:hover": {
-      color: "#000",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },

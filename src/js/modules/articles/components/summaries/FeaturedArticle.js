@@ -39,8 +39,10 @@ const styles = {
     fontWeight: 300,
     margin: "6px 0 9px 0",
     textTransform: "uppercase",
-    "&:hover": { color: "#000", textDecoration: "none" },
-    "&:focus": { color: "#000", textDecoration: "none" },
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none",
+    },
   },
   headline: {
     paddingRight: "0 !important",

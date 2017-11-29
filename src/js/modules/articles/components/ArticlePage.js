@@ -29,14 +29,10 @@ const styles = {
   },
   subscribe: {
     color: "#3572b7",
-    "&:active": {
-      color: "#3572b7",
-    },
-    "&:focus": {
+    "&:hover, &:focus, &:active": {
       color: "#3572b7",
     },
     "&:hover": {
-      color: "#3572b7",
       cursor: "pointer",
     },
   },

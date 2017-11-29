@@ -28,12 +28,18 @@ const styles = {
     fontWeight: "bold",
     lineHeight: "1.22",
     marginBottom: "7px",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+    },
   },
   smallTitle: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "16px",
     lineHeight: "1.25",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+    },
   },
   sectionLabel: {
     color: "#000",
@@ -42,8 +48,10 @@ const styles = {
     fontSize: "12px",
     marginBottom: "6px",
     textTransform: "uppercase",
-    "&:hover": { color: "#000", textDecoration: "none" },
-    "&:focus": { color: "#000", textDecoration: "none" },
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none",
+    },
   },
   figure: {
     float: "right",
@@ -73,7 +81,7 @@ const styles = {
       display: "inline",
       "& a": {
         color: "#888",
-        "&:hover": {
+        "&:hover, &:active, &:focus": {
           color: "#888",
         },
       },

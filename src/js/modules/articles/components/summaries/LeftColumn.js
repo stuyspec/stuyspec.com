@@ -38,10 +38,7 @@ const styles = {
     fontSize: "30px",
     lineHeight: 1.13,
     marginBottom: "6px",
-    "&:hover": {
-      color: "#000",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },
@@ -53,10 +50,7 @@ const styles = {
     fontSize: "12px",
     marginBottom: "7px",
     textTransform: "uppercase",
-    "&:hover": {
-      color: "#000",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },
@@ -75,10 +69,7 @@ const styles = {
     fontSize: "18px",
     lineHeight: 1.22,
     marginBottom: "4px",
-    "&:hover": {
-      color: "#000",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },

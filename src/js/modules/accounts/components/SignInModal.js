@@ -17,24 +17,46 @@ const styles = {
     padding: "12px",
   },
   formTitle: {
-    fontFamily: "Minion Pro",
+    fontFamily: "Canela",
     fontSize: "26px",
+    fontWeight: 300,
     textAlign: "center",
   },
   signInForm: {
     display: "inline-block",
     width: "100%",
+    "& hr": {
+      overflow: "visible" /* For IE */,
+      padding: 0,
+      border: "none",
+      borderTop: "medium double #333",
+      color: "#333",
+      textAlign: "center",
+      "&:after": {
+        content: '"§"',
+        fontFamily: "Minion Pro",
+        display: "inline-block",
+        position: "relative",
+        top: "-0.7em",
+        fontSize: "1.5em",
+        padding: "0 0.25em",
+        background: "white",
+      },
+    },
   },
   signOutForm: {
     display: "inline-block",
     width: "100%",
   },
   signUpRedirect: {
-    color: "#3084df",
+    color: "#999",
     display: "block",
     fontFamily: "Minion Pro",
-    fontSize: "17px",
+    fontSize: "15px",
     marginBottom: "7px",
+    "&:hover, &:active, &:focus": {
+      color: "#999",
+    },
   },
   "@media (max-width: 767px)": {
     SignInModal: {
@@ -73,6 +95,7 @@ const SignInModal = ({
         to the profile page because it knows it is in a modal */}
         <div className={classes.signInForm}>
           <h3 className={classes.formTitle}>Sign in to comment</h3>
+          <hr />
           <SignInForm onSubmit={values => signIn(values, true)} />
         </div>
         <Link to={"/myaccount/sign-up"} className={classes.signUpRedirect}>

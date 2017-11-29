@@ -22,8 +22,10 @@ const styles = {
     marginBottom: "3px",
     textTransform: "uppercase",
     width: "100%",
-    "&:hover": { color: "#000", textDecoration: "none" },
-    "&:focus": { color: "#000", textDecoration: "none" },
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none",
+    },
   },
   primaryArticle: {
     paddingLeft: "13px !important",
@@ -45,13 +47,7 @@ const styles = {
     fontWeight: "bold",
     lineHeight: 1.25,
     marginBottom: "7px",
-    "&:active": {
-      color: "#000",
-    },
-    "&:focus": {
-      color: "#000",
-    },
-    "&:hover": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },

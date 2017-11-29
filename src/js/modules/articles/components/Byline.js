@@ -13,7 +13,7 @@ const styles = {
       margin: "0 0 2px 0",
       "& a": {
         color: "#888",
-        "&:hover": {
+        "&:hover, &:active, &:focus": {
           color: "#888",
         },
       },

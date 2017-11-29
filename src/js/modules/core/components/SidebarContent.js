@@ -25,11 +25,7 @@ const styles = {
     padding: "8px 0 8px 11px",
     textAlign: "left",
     width: "100%",
-    "&:active": {
-      color: "#000",
-      textDecoration: "none",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none",
     },

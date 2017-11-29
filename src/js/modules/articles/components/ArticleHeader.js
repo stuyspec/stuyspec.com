@@ -27,10 +27,7 @@ const styles = {
     textDecoration: "none",
     textTransform: "uppercase",
     width: "150px",
-    "&:hover": {
-      color: "#000",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },
