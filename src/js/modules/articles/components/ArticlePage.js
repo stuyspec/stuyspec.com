@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Helmet } from "react-helmet";
+import { toRoman } from "roman-numerals";
 
 import ArticleHeader from "./ArticleHeader";
 import ArticleBody from "./ArticleBody";
@@ -17,23 +18,14 @@ const styles = {
   ArticlePage: {
     marginTop: "80px",
   },
-  issuuRow: {
-    marginBottom: "24px",
-  },
   description: {
     border: "1px solid #ddd",
     borderStyle: "solid none", // only top-bottom borders
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "16px",
+    marginBottom: "24px",
     padding: "12px 0 13px",
-  },
-  issuuDescription: {
-      borderBottom: "1px solid #ddd",
-      color: "#000",
-      fontFamily: "Minion Pro",
-      fontSize: "16px",
-      padding: "12px 0 13px",
   },
   subscribe: {
     color: "#3572b7",
@@ -90,19 +82,9 @@ const ArticlePage = ({
       <ArticleBody article={article} media={media} />
       <Row className={classes.descriptionRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.description}>
-          The Pulse of the Student Body:&nbsp;
-          <span className={classes.subscribe} onClick={openSubscriptionModal}>
-            Subscribe
-          </span>
-          &nbsp;to <em>The Stuyvesant Spectator</em>’s biweekly newsletter.
-        </Col>
-        <Col xsHidden smHidden md={3} lg={3} />
-      </Row>
-      <Row className={classes.issuuRow}>
-        <Col xs={12} sm={12} md={9} lg={9} className={classes.issuuDescription}>
-          Published in&nbsp;
-          <a className={classes.subscribe} href="https://issuu.com/stuyspectator/docs">
-              {`Volume ${article.volume} Issue ${article.issue}`}
+          This article was published in&nbsp;
+          <a className={classes.subscribe} href="https://issuu.com/stuyspectator/docs" target="_blank">
+              {`Volume ${toRoman(article.volume)}, Issue ${article.issue}`}
           </a>
           .
         </Col>
