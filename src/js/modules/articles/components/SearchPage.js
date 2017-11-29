@@ -52,7 +52,7 @@ const SearchPage = ({ classes, articles, searchableIds, searchArticles }) => {
         <meta />
       </Helmet>
       <Row>
-        <p className={classes.title}>Search Page</p>
+        <p className={classes.title}>Search Results</p>
         <SearchForm
           onSubmit={values => searchArticles(values)}
           className={classes.form}
@@ -64,11 +64,11 @@ const SearchPage = ({ classes, articles, searchableIds, searchArticles }) => {
           <Col xs={12} sm={12} md={9} lg={9} className={classes.articleList}>
             <ArticleList
               articles={searchedArticles}
-              title="Search"
+              title={`${searchedArticles.length} results`}
               label="Articles"
             />
           </Col>
-          <Col smHidden md={3} lg={3} className={classes.tallAdContainer}>
+          <Col xsHidden smHidden md={3} lg={3} className={classes.tallAdContainer}>
             <TallAd />
           </Col>
         </Row>
