@@ -101,10 +101,12 @@ const SectionBlock = ({ classes, articles, section, sections, media }) => {
       .filter(subsection => subsection.parentId === section.id)
       .map(subsection => subsection.id);
     sectionArticles = articles.filter(article =>
-      subsectionIds.includes(article.sectionId)
+      subsectionIds.includes(article.sectionId),
     );
   } else {
-    sectionArticles = articles.filter(article => article.sectionId === section.id);
+    sectionArticles = articles.filter(
+      article => article.sectionId === section.id,
+    );
   }
   const bigArticle = sectionArticles[0];
   const rowArticles = sectionArticles.slice(1, 4);
@@ -127,7 +129,7 @@ const SectionBlock = ({ classes, articles, section, sections, media }) => {
         </div>
       )}
       {sectionArticles.length > 1 &&
-       sectionArticles.slice(1, 4).map(article => {
+        sectionArticles.slice(1, 4).map(article => {
           const featuredMedia = Object.values(media).find(mediaObject => {
             return (
               mediaObject.isFeatured && mediaObject.articleId === article.id

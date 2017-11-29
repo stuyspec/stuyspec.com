@@ -9,7 +9,7 @@ const {
   FacebookShareButton,
   TwitterShareButton,
   LinkedinShareButton,
-  EmailShareButton
+  EmailShareButton,
 } = ShareButtons;
 
 const FacebookIcon = generateShareIcon("facebook");
@@ -21,9 +21,9 @@ const styles = {
   ShareTools: {
     display: "flex",
     "& > div:not(:last-child)": {
-      marginRight: "14px"
-    }
-  }
+      marginRight: "14px",
+    },
+  },
 };
 
 const SHARE_BUTTON_SIZE = 28;
@@ -33,7 +33,7 @@ const ShareTools = ({ classes, article, section, outquotes }) => {
   const shareUrl = STUY_SPEC_URL + `${section.permalink}/${article.slug}`;
   const { title, summary } = article;
   const outquote = Object.values(outquotes).find(
-    outquote => outquote.articleId === article.id
+    outquote => outquote.articleId === article.id,
   );
 
   const emailBody = `${title}—${summary}\n\n${shareUrl}`;
@@ -96,7 +96,7 @@ const ShareTools = ({ classes, article, section, outquotes }) => {
 };
 
 const mapStateToProps = state => ({
-  outquotes: state.outquotes.outquotes
+  outquotes: state.outquotes.outquotes,
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(ShareTools));

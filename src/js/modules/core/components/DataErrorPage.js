@@ -42,7 +42,7 @@ const styles = {
   },
 };
 
-const DataErrorPage = ({ classes, error, action}) => {
+const DataErrorPage = ({ classes, error, action }) => {
   return (
     <Grid className={classes.DataErrorPage}>
       <Helmet>
@@ -50,9 +50,17 @@ const DataErrorPage = ({ classes, error, action}) => {
       </Helmet>
       <h1>Data Error.</h1>
       <p>Our apologies, we encountered a problem when fetching our data.</p>
-      <p>&mdash;<i>The Stuyvesant Spectator Web Department</i></p>
-      <button className={classes.retryButton} onClick={action}>Reload Page</button>
-      <img src="/img/wow-face.png" title="Art by Jade Lo (Class Of '20)" className={classes.wowFace} />
+      <p>
+        &mdash;<i>The Stuyvesant Spectator Web Department</i>
+      </p>
+      <button className={classes.retryButton} onClick={action}>
+        Reload Page
+      </button>
+      <img
+        src="/img/wow-face.png"
+        title="Art by Jade Lo (Class Of '20)"
+        className={classes.wowFace}
+      />
       <p className={classes.requestText}>
         If the error persists, please e-mail The Spectator Web Department at
         &nbsp;<a href="mailto:web@stuyspec.com">web@stuyspec.com</a>&nbsp; with

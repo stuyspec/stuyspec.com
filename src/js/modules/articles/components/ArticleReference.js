@@ -47,13 +47,11 @@ const ArticleReference = ({ classes, article, sections }) => {
       This article was written in response to &ldquo;
       <Link
         className={classes.referenceLink}
-        to={`${sections[article.sectionId]
-          .permalink}/${article.slug}`}
+        to={`${sections[article.sectionId].permalink}/${article.slug}`}
       >
         {title}
       </Link>
-      ,&rdquo; published in Volume {article.volume} Issue{" "}
-      {article.issue}.
+      ,&rdquo; published in Volume {article.volume} Issue {article.issue}.
     </span>
   );
 };

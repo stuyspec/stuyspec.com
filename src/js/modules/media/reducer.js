@@ -1,6 +1,4 @@
-import {
-  FETCH_INIT_DATA_FULFILLED
-} from "../core/actionTypes";
+import { FETCH_INIT_DATA_FULFILLED } from "../core/actionTypes";
 
 const initialState = {
   media: {},
@@ -15,7 +13,7 @@ const reducer = (state = { ...initialState }, action) => {
           acc[medium.id] = medium;
           return acc;
         }, {}),
-      }
+      };
     }
   }
   return state;

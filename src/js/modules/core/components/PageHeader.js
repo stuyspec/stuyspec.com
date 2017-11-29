@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 
 import Masthead from "./Masthead";

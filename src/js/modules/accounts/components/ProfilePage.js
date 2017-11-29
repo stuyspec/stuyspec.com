@@ -65,7 +65,9 @@ const ProfilePage = ({ classes, signOut, session, sessionUser }) => {
             lg={6}
             lgOffset={3}
           >
-            <p className={classes.pageTitle}>Welcome, {sessionUser.firstName}.</p>
+            <p className={classes.pageTitle}>
+              Welcome, {sessionUser.firstName}.
+            </p>
             <Link
               to={"/myaccount/profile/edit"}
               className={classes.editRedirect}

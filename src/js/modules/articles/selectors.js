@@ -44,7 +44,9 @@ export const getArticlesWithContributors = createSelector(
 export const getSectionTreeArticles = createSelector(
   [getArticlesWithContributors, getSectionTreeIds],
   (articles, sectionTreeIds) => {
-    return articles.filter(article => sectionTreeIds.includes(article.sectionId));
+    return articles.filter(article =>
+      sectionTreeIds.includes(article.sectionId),
+    );
   },
 );
 
@@ -58,9 +60,10 @@ export const getArticleFromRequestedSlug = createSelector(
     getSectionFromRequestedSlug,
   ],
   (articles, requestedArticleSlug, section) => {
-    return articles.find(article =>
-      article.slug === requestedArticleSlug &&
-      article.sectionId === section.id
+    return articles.find(
+      article =>
+        article.slug === requestedArticleSlug &&
+        article.sectionId === section.id,
     );
   },
 );
@@ -89,7 +92,9 @@ export const getContributorArticles = createSelector(
 export const getIllustratorArticles = createSelector(
   [getIllustratorIllustrations, getArticlesWithContributors],
   (illustrations, articles) => {
-    const articleIds = Object.values(illustrations).map(illustration => illustration.articleId);
+    const articleIds = Object.values(illustrations).map(
+      illustration => illustration.articleId,
+    );
     return articles.filter(article => articleIds.includes(article.id));
   },
 );
@@ -101,7 +106,9 @@ export const getIllustratorArticles = createSelector(
 export const getPhotographerArticles = createSelector(
   [getPhotographerPhotographs, getArticlesWithContributors],
   (photographs, articles) => {
-    const articleIds = Object.values(photographs).map(photograph => photograph.articleId);
+    const articleIds = Object.values(photographs).map(
+      photograph => photograph.articleId,
+    );
     return articles.filter(article => articleIds.includes(article.id));
   },
 );

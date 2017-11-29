@@ -9,7 +9,7 @@ import ArticleList from "./ArticleList";
 import { TallAd } from "../../advertisements/components";
 import { getArticlesWithContributors } from "../selectors";
 import { searchArticles } from "../actions";
-import { SearchForm } from "../../accounts/components/forms";
+import SearchForm from "./SearchForm";
 
 const styles = {
   SearchPage: {
@@ -23,28 +23,28 @@ const styles = {
     margin: 0,
     textAlign: "center",
   },
-  "@media (min-width: 992px)": {
+  form: {
+    margin: "0 auto",
+    display: "block",
+  },
+  articleList: {
+    paddingRight: "14px !important",
+  },
+  tallAdContainer: {
+    paddingLeft: "14px !important",
+    borderLeft: "solid 1px #ddd",
+  },
+  "@media (min-width: 991px)": {
     SearchPage: {
       marginTop: "80px",
     },
   },
-    form: {
-      margin: "0 auto",
-        display: "block",
-    },
-    articleList: {
-      paddingRight: "14px !important",
-    },
-    tallAdContainer: {
-      paddingLeft: "14px !important",
-        borderLeft: "solid 1px #ddd",
-    }
-
 };
 
-// TODO: SEARCH PAGE BUT ARTICLE SLICE IS ARRAY
-
 const SearchPage = ({ classes, articles, searchableIds, searchArticles }) => {
+  const searchedArticles = articles.filter(article =>
+    searchableIds.includes(article.id),
+  );
   return (
     <Grid fluid className={classes.SearchPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -52,27 +52,33 @@ const SearchPage = ({ classes, articles, searchableIds, searchArticles }) => {
         <meta />
       </Helmet>
       <Row>
-      <p className={classes.title}>
-        Search Page
-      </p>
-      <SearchForm onSubmit={values => searchArticles(values)} className={classes.form}/>
-      <hr className={classes.hr}/>
+        <p className={classes.title}>Search Results</p>
+        <SearchForm
+          onSubmit={values => searchArticles(values)}
+          className={classes.form}
+        />
+        <hr className={classes.hr} />
       </Row>
-      <Row>
-          {searchableIds.length !== 0 &&
+      {searchedArticles.length > 0 && (
+        <Row>
           <Col xs={12} sm={12} md={9} lg={9} className={classes.articleList}>
-            <ArticleList articles={articles} title="Search" label="Articles" />
-          </Col>}
-          {searchableIds.length !== 0 &&
+            <ArticleList
+              articles={searchedArticles}
+              title={`${searchedArticles.length} results`}
+              label="Articles"
+            />
+          </Col>
           <Col
-              smHidden
-              md={3}
-              lg={3}
-              className={classes.tallAdContainer}
+            xsHidden
+            smHidden
+            md={3}
+            lg={3}
+            className={classes.tallAdContainer}
           >
             <TallAd />
-          </Col>}
-      </Row>
+          </Col>
+        </Row>
+      )}
     </Grid>
   );
 };
@@ -86,4 +92,6 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ searchArticles }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(SearchPage));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  injectSheet(styles)(SearchPage),
+);

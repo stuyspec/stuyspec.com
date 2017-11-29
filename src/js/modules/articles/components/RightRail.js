@@ -121,34 +121,32 @@ const RightRail = ({ classes, articles, sections, media, ads }) => {
         <Link to="/recommended" className={classes.label}>
           Recommended
         </Link>
-        {articles
-          .slice(0, 5)
-          .map(article => {
-            const featuredMedia = Object.values(media).find(
-              mediaObject => mediaObject.articleId === article.id,
-            );
-            const section = Object.values(sections).find(
-              section => article.sectionId === section.id,
-            );
-            return (
-              <div className={classes.article} key={article.id}>
-                {featuredMedia && (
-                  <Link to={`${section.permalink}/${article.slug}`}>
-                    <figure className={classes.figure}>
-                      <img src={featuredMedia.thumbAttachmentUrl} />
-                    </figure>
-                  </Link>
-                )}
-                <Link
-                  to={`${section.permalink}/${article.slug}`}
-                  className={classes.smallTitle}
-                >
-                  {article.title}
+        {articles.slice(0, 5).map(article => {
+          const featuredMedia = Object.values(media).find(
+            mediaObject => mediaObject.articleId === article.id,
+          );
+          const section = Object.values(sections).find(
+            section => article.sectionId === section.id,
+          );
+          return (
+            <div className={classes.article} key={article.id}>
+              {featuredMedia && (
+                <Link to={`${section.permalink}/${article.slug}`}>
+                  <figure className={classes.figure}>
+                    <img src={featuredMedia.thumbAttachmentUrl} />
+                  </figure>
                 </Link>
-                <Byline classes={classes} contributors={article.contributors} />
-              </div>
-            );
-          })}
+              )}
+              <Link
+                to={`${section.permalink}/${article.slug}`}
+                className={classes.smallTitle}
+              >
+                {article.title}
+              </Link>
+              <Byline classes={classes} contributors={article.contributors} />
+            </div>
+          );
+        })}
       </div>
       <div className={classes.tallAdContainer}>
         <TallAd ad={ad} />

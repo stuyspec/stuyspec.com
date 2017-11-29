@@ -117,8 +117,9 @@ const SectionFeature = ({
   media,
   without, // parents can exclude a specific article (for example, the featuredArticle of a page
 }) => {
-  const sectionArticles = articles.filter(article =>
-    article.sectionId === section.id && article !== without);
+  const sectionArticles = articles.filter(
+    article => article.sectionId === section.id && article !== without,
+  );
   const primaryArticle =
     sectionArticles[0] === articles[0]
       ? sectionArticles[1]

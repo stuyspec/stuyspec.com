@@ -12,9 +12,7 @@ import { ArticleList } from "../../articles/components";
 import { getSectionTreeArticles } from "../../articles/selectors";
 import { getDirectSubsections } from "../../sections/selectors";
 import SectionColumn from "./SectionColumn";
-import {
-  LeftTitleArticle,
-} from "../../articles/components/summaries";
+import { LeftTitleArticle } from "../../articles/components/summaries";
 import { Dateline, Byline } from "../../articles/components/index";
 import SectionFeature from "./SectionFeature";
 import { TallAd } from "../../advertisements/components/index";

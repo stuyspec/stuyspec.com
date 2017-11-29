@@ -8,5 +8,5 @@ export const getCurrentUser = createSelector(
     if (session) {
       return Object.values(users).find(user => user.email === session.uid);
     }
-  }
+  },
 );

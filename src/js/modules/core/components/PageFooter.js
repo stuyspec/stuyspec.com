@@ -213,10 +213,7 @@ const PageFooter = ({
     });
     return (
       <div className={classes.sectionBlock} key="about">
-        <p
-          className={classes.topLevelSectionLink}
-          key={-1}
-        >
+        <p className={classes.topLevelSectionLink} key={-1}>
           About Us
         </p>
         {descriptionLinks}

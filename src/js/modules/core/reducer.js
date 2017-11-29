@@ -55,13 +55,13 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         isAllDataFetched: false,
         error: null,
-      }
+      };
     }
     case FETCH_INIT_DATA_FULFILLED: {
       return {
         ...state,
         isAllDataFetched: true,
-      }
+      };
     }
     case FETCH_INIT_DATA_REJECTED: {
       return {

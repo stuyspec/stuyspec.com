@@ -2,12 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-const RibbonComponent = ({
-  classes,
-  article,
-  section,
-  featuredMedia,
-}) => {
+const RibbonComponent = ({ classes, article, section, featuredMedia }) => {
   return (
     <div className={classes.RibbonComponent}>
       {featuredMedia && (

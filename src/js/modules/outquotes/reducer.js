@@ -1,6 +1,4 @@
-import {
-  FETCH_INIT_DATA_FULFILLED
-} from "../core/actionTypes";
+import { FETCH_INIT_DATA_FULFILLED } from "../core/actionTypes";
 
 const initialState = {
   outquotes: {},
@@ -15,7 +13,7 @@ const reducer = (state = { ...initialState }, action) => {
           acc[outquote.id] = outquote;
           return acc;
         }, {}),
-      }
+      };
     }
   }
   return state;

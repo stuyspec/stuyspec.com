@@ -107,25 +107,25 @@ class Gallery extends Component {
             // HTML classes passed down that are interrupted when the
             // following figure is substituted with a custom component.
             return (
-              <div className={classes.slideContainer} key={image.id}> 
-                <figure className={classes.slide}> 
-                  <img src={image.attachmentUrl} /> 
-                  <figcaption className={classes.slideCaption}> 
-                    <p>{image.title}</p> 
-                  </figcaption> 
-                </figure> 
-              </div> 
-            )
-            })}
+              <div className={classes.slideContainer} key={image.id}>
+                <figure className={classes.slide}>
+                  <img src={image.attachmentUrl} />
+                  <figcaption className={classes.slideCaption}>
+                    <p>{image.title}</p>
+                  </figcaption>
+                </figure>
+              </div>
+            );
+          })}
         </Slider>
-        <SliderFooter 
+        <SliderFooter
           helperText={`${this.state.index + 1} of ${this.props.media.length}`}
           nextSlide={this.nextSlide}
           prevSlide={this.prevSlide}
         />
       </div>
     );
-  };
+  }
 }
 
 export default injectSheet(styles)(Gallery);

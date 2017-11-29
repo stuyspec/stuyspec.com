@@ -192,9 +192,11 @@ const MastheadBar = ({
           <StyledNavButton label="sections" onClick={openSidebar}>
             <Hamburger />
           </StyledNavButton>
-          <StyledNavButton label="search">
-            <Search />
-          </StyledNavButton>
+          <Link to="/search">
+            <StyledNavButton label="search">
+              <Search color="#000" />
+            </StyledNavButton>
+          </Link>
         </div>
         <Link
           className={classes.brandingLink}
