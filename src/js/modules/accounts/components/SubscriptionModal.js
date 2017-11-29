@@ -69,6 +69,7 @@ const SubscriptionModal = ({
     <Modal
       dialogClassName={classes.SubscriptionModal}
       show={isSubscriptionModalOpen}
+      onHide={closeSubscriptionModal}
     >
       <img
         className={classes.borough}
