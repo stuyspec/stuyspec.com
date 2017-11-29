@@ -9,7 +9,7 @@ import ArticleList from "./ArticleList";
 import { TallAd } from "../../advertisements/components";
 import { getArticlesWithContributors } from "../selectors";
 import { searchArticles } from "../actions";
-import { SearchForm } from "../../accounts/components/forms";
+import SearchForm from "./SearchForm";
 
 const styles = {
   SearchPage: {

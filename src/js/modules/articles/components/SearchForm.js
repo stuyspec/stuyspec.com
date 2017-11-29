@@ -1,7 +1,7 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
-import { Search } from "../../../core/icons";
+import { Search } from "../../core/icons/index";
 
 const styles = {
   SearchForm: {
