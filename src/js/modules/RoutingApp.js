@@ -128,7 +128,7 @@ class RoutingApp extends Component {
                 path={"/myaccount"}
                 key={"signIn"}
                 render={() =>
-                  session.userId ? (
+                  session ? (
                     <Redirect to="/myaccount/profile" />
                   ) : (
                     <SignInPage />
@@ -139,7 +139,7 @@ class RoutingApp extends Component {
                 path="/myaccount/sign-up"
                 key={"signUp"}
                 render={() =>
-                  session.userId ? (
+                  session ? (
                     <Redirect to="/myaccount/profile" />
                   ) : (
                     <SignUpPage />
@@ -150,7 +150,7 @@ class RoutingApp extends Component {
                 path="/myaccount/profile"
                 key={"profile"}
                 render={() =>
-                  session.userId ? (
+                  session ? (
                     <ProfilePage />
                   ) : (
                     <Redirect to="/myaccount" />
@@ -161,7 +161,7 @@ class RoutingApp extends Component {
                 path="/myaccount/profile/edit"
                 key={"editProfile"}
                 render={() =>
-                  session.userId ? (
+                  session ? (
                     <EditProfilePage />
                   ) : (
                     <Redirect to="/myaccount" />

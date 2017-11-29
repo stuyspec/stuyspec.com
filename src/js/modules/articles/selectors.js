@@ -76,7 +76,7 @@ export const getContributorArticles = createSelector(
       return [];
     }
     const articleIds = authorships
-      .filter(authorship => authorship.userId === contributorId)
+      .filter(authorship => authorship.userId === contributor.id)
       .map(authorship => authorship.articleId);
     return articles.filter(article => articleIds.includes(article.id));
   },
@@ -89,7 +89,7 @@ export const getContributorArticles = createSelector(
 export const getIllustratorArticles = createSelector(
   [getIllustratorIllustrations, getArticlesWithContributors],
   (illustrations, articles) => {
-    const articleIds = illustrations.map(illustration => illustration.articleId);
+    const articleIds = Object.values(illustrations).map(illustration => illustration.articleId);
     return articles.filter(article => articleIds.includes(article.id));
   },
 );
@@ -101,7 +101,7 @@ export const getIllustratorArticles = createSelector(
 export const getPhotographerArticles = createSelector(
   [getPhotographerPhotographs, getArticlesWithContributors],
   (photographs, articles) => {
-    const articleIds = photographs.map(photograph => photograph.articleId);
+    const articleIds = Object.values(photographs).map(photograph => photograph.articleId);
     return articles.filter(article => articleIds.includes(article.id));
   },
 );

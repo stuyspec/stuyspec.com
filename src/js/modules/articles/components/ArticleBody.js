@@ -101,7 +101,6 @@ const ArticleBody = ({
   }
   */
   //  featuredMedia = Object.values(articleMedia).find(image => image.isFeatured);
-
   const isCarouselButtonVisible =
     SPEC_IMG_CAROUSEL_PATTERN.test(content) && Object.values(media).length > 0;
   const referencedArticleId = SPEC_REFERENCE_PATTERN.test(content)

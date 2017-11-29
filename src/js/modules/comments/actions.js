@@ -5,7 +5,6 @@ import { reset } from "redux-form";
 
 export const createComment = (values, devise_headers) => {
   console.log({"X-Key-Inflection": "camel", ...devise_headers});
-  return;
   return dispatch => {
     dispatch({
       type: t.CREATE_COMMENT_PENDING,
@@ -15,7 +14,7 @@ export const createComment = (values, devise_headers) => {
       .post(
         `${STUY_SPEC_API_URL}/comments`,
         values,
-        {"X-Key-Inflection": "camel", ...devise_headers}
+        {headers: {"X-Key-Inflection": "camel", ...devise_headers}}
       )
       .then(response => {
         dispatch({

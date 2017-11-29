@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 const styles = {
   DataErrorPage: {
     fontFamily: "Minion Pro",
+    maxWidth: "767px",
     paddingTop: "80px",
     textAlign: "center",
     "& h1": {
@@ -27,7 +28,7 @@ const styles = {
     fontSize: "21px",
     fontStyle: "italic",
     height: "46px",
-    marginTop: "15px",
+    margin: "15px 0",
     textAlign: "center",
     width: "146px",
   },
