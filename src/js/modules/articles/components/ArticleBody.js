@@ -125,9 +125,7 @@ const ArticleBody = ({
             carouselImageCount={Object.values(media).length}
           />
         )}
-        {referencedArticle &&
-          <ArticleReference article={referencedArticle} />
-        }
+        {referencedArticle && <ArticleReference article={referencedArticle} />}
         <div
           className={classes.innerHTML}
           dangerouslySetInnerHTML={{ __html: content }}

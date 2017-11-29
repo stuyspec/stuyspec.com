@@ -23,14 +23,9 @@ const styles = {
     margin: 0,
     textAlign: "center",
   },
-  "@media (min-width: 992px)": {
-    SearchPage: {
-      marginTop: "80px",
-    },
-  },
   form: {
     margin: "0 auto",
-      display: "block",
+    display: "block",
   },
   articleList: {
     paddingRight: "14px !important",
@@ -39,12 +34,17 @@ const styles = {
     paddingLeft: "14px !important",
     borderLeft: "solid 1px #ddd",
   },
+  "@media (min-width: 991px)": {
+    SearchPage: {
+      marginTop: "80px",
+    },
+  },
 };
 
-// TODO: SEARCH PAGE BUT ARTICLE SLICE IS ARRAY
-
 const SearchPage = ({ classes, articles, searchableIds, searchArticles }) => {
-  const searchedArticles = searchableIds.map(searchableId => articles[searchableId]);
+  const searchedArticles = articles.filter(article =>
+    searchableIds.includes(article.id),
+  );
   return (
     <Grid fluid className={classes.SearchPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -52,23 +52,23 @@ const SearchPage = ({ classes, articles, searchableIds, searchArticles }) => {
         <meta />
       </Helmet>
       <Row>
-        <p className={classes.title}>
-          Search Page
-        </p>
-        <SearchForm onSubmit={values => searchArticles(values)} className={classes.form}/>
-        <hr className={classes.hr}/>
+        <p className={classes.title}>Search Page</p>
+        <SearchForm
+          onSubmit={values => searchArticles(values)}
+          className={classes.form}
+        />
+        <hr className={classes.hr} />
       </Row>
       {searchedArticles.length > 0 && (
         <Row>
           <Col xs={12} sm={12} md={9} lg={9} className={classes.articleList}>
-            <ArticleList articles={searchedArticles} title="Search" label="Articles" />
+            <ArticleList
+              articles={searchedArticles}
+              title="Search"
+              label="Articles"
+            />
           </Col>
-          <Col
-              smHidden
-              md={3}
-              lg={3}
-              className={classes.tallAdContainer}
-          >
+          <Col smHidden md={3} lg={3} className={classes.tallAdContainer}>
             <TallAd />
           </Col>
         </Row>
@@ -86,4 +86,6 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ searchArticles }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(SearchPage));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  injectSheet(styles)(SearchPage),
+);

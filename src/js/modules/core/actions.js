@@ -23,12 +23,12 @@ export const closeLightbox = () => ({
 
 export const fetchAllData = () => {
   return dispatch => {
-    dispatch({type: t.FETCH_INIT_DATA_PENDING})
+    dispatch({ type: t.FETCH_INIT_DATA_PENDING });
     axios
       .get(`${STUY_SPEC_API_URL}/init`, STUY_SPEC_API_HEADERS)
       .then(response => {
         validateSlices(response.data);
-        dispatch({type: t.FETCH_INIT_DATA_FULFILLED, payload: response.data})
+        dispatch({ type: t.FETCH_INIT_DATA_FULFILLED, payload: response.data });
       })
       .catch(err => {
         dispatch({
@@ -40,15 +40,15 @@ export const fetchAllData = () => {
 };
 
 const sliceNames = [
-  'articles',
-  'sections',
+  "articles",
+  "sections",
   // 'comments', We don't care if zero comments exist.
-  'media',
-  'users',
-  'roles',
-  'userRoles',
-  'authorships',
-  'outquotes',
+  "media",
+  "users",
+  "roles",
+  "userRoles",
+  "authorships",
+  "outquotes",
 ];
 
 const validateSlices = data => {

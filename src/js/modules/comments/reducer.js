@@ -2,9 +2,7 @@ import {
   CREATE_COMMENT_FULFILLED,
   CREATE_COMMENT_REJECTED,
 } from "./actionTypes";
-import {
-  FETCH_INIT_DATA_FULFILLED
-} from "../core/actionTypes";
+import { FETCH_INIT_DATA_FULFILLED } from "../core/actionTypes";
 
 const initialState = {
   comments: {},
@@ -23,7 +21,7 @@ const reducer = (state = initialState, action) => {
           acc[comment.id] = comment;
           return acc;
         }, {}),
-      }
+      };
     }
     case CREATE_COMMENT_FULFILLED: {
       return {

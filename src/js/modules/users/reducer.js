@@ -1,9 +1,5 @@
-import {
-  CREATE_USER_FULFILLED,
-} from "./actionTypes";
-import {
-  FETCH_INIT_DATA_FULFILLED
-} from "../core/actionTypes";
+import { CREATE_USER_FULFILLED } from "./actionTypes";
+import { FETCH_INIT_DATA_FULFILLED } from "../core/actionTypes";
 import { UPDATE_USER_FULFILLED } from "../accounts/actionTypes";
 
 const initialState = {
@@ -25,9 +21,9 @@ const reducer = (state = { ...initialState }, action) => {
         userRoles: action.payload.userRoles,
         roles: action.payload.roles.reduce((acc, role) => {
           acc[role.id] = role;
-          return acc
+          return acc;
         }, {}),
-      }
+      };
     }
     case CREATE_USER_FULFILLED: {
       return {

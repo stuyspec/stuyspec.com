@@ -21,10 +21,8 @@ export const getDirectSubsections = createSelector(
  * The selector returns a filtered sections object which contains only top level
  *   sections (sections with no parents).
  */
-export const getTopLevelSections = createSelector(
-  [getSections],
-  sections =>
-    Object.filter(sections, section => section.parentId === null),
+export const getTopLevelSections = createSelector([getSections], sections =>
+  Object.filter(sections, section => section.parentId === null),
 );
 
 /**

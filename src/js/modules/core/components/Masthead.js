@@ -207,7 +207,10 @@ const Masthead = ({
           <tbody>
             <tr>
               <th id="problematic-subscribe-button-container-in-moz">
-                <StyledNavButton onClick={openSubscriptionModal} type="Subscribe">
+                <StyledNavButton
+                  onClick={openSubscriptionModal}
+                  type="Subscribe"
+                >
                   <span className={classes.subscribeText}>Subscribe</span>
                   <br />
                   <span className={classes.subscribeTo}>to our newsletter</span>
@@ -255,10 +258,7 @@ const Masthead = ({
         </li>
       */}
         <li key={-3} className={classes.sectionListItem}>
-          <Link
-            to="/search"
-            className={classes.sectionLink}
-          >
+          <Link to="/search" className={classes.sectionLink}>
             <Search className={classes.navSearchButton} />
           </Link>
         </li>

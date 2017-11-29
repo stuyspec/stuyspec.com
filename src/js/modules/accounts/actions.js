@@ -69,7 +69,7 @@ export const signIn = (signInParams, isInModal) => {
       .post(
         `${STUY_SPEC_API_URL}/auth/sign_in`,
         signInParams,
-        STUY_SPEC_API_HEADERS
+        STUY_SPEC_API_HEADERS,
       )
       .then(response => {
         dispatch({
@@ -93,7 +93,7 @@ export const signOut = session => {
   return dispatch => {
     dispatch({ type: t.SIGN_OUT_PENDING, payload: session });
     axios
-      .delete(`${STUY_SPEC_API_URL}/auth/sign_out`, {headers: session})
+      .delete(`${STUY_SPEC_API_URL}/auth/sign_out`, { headers: session })
       .then(response => {
         dispatch({
           type: t.SIGN_OUT_FULFILLED,
@@ -180,16 +180,14 @@ export const subscribe = values => {
 export const validateToken = session => {
   if (session) {
     return dispatch => {
-      axios.get(
-        `${STUY_SPEC_API_URL}/auth/validate_token`,
-        {
+      axios
+        .get(`${STUY_SPEC_API_URL}/auth/validate_token`, {
           headers: {
-            'access-token': session['access-token'],
+            "access-token": session["access-token"],
             client: session.client,
             uid: session.uid,
-          }
-        }
-      )
+          },
+        })
         .then(response => {
           dispatch({
             type: t.VALIDATE_TOKEN_FULFILLED,
@@ -201,7 +199,7 @@ export const validateToken = session => {
             type: t.VALIDATE_TOKEN_REJECTED,
           });
         });
-    }
+    };
   }
 };
 

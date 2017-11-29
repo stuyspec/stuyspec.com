@@ -43,11 +43,14 @@ const CommentThread = ({
   session,
 }) => {
   const handleCreateComment = values => {
-    createComment({
-      ...values,
-      articleId: article.id,
-      userId: sessionUser.id,
-    }, session);
+    createComment(
+      {
+        ...values,
+        articleId: article.id,
+        userId: sessionUser.id,
+      },
+      session,
+    );
   };
   return (
     <Grid fluid className={classes.CommentThread}>

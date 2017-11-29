@@ -3,9 +3,7 @@ import {
   SEARCH_ARTICLES_FULFILLED,
   SEARCH_ARTICLES_REJECTED,
 } from "./actionTypes";
-import {
-  FETCH_INIT_DATA_FULFILLED
-} from "../core/actionTypes";
+import { FETCH_INIT_DATA_FULFILLED } from "../core/actionTypes";
 import { shortenSummary } from "../../utils";
 
 const initialState = {
@@ -31,13 +29,15 @@ const reducer = (state = { ...initialState }, action) => {
           return article;
         }),
         authorships: action.payload.authorships,
-      }
+      };
     }
     case SEARCH_ARTICLES_PENDING: {
       return { ...state, isSearching: true };
     }
     case SEARCH_ARTICLES_FULFILLED: {
-      const searchableIds = action.payload.map(searchResult => searchResult.searchableId);
+      const searchableIds = action.payload.map(
+        searchResult => searchResult.searchableId,
+      );
       return {
         ...state,
         searchableIds: searchableIds,
