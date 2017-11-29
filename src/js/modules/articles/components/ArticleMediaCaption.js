@@ -24,8 +24,8 @@ const ArticleMediaCaption = ({ classes, users, image }) => {
   return (
     <figcaption className={classes.caption}>
       <span>
-        {image.caption}
-        {image.caption !== "" && "&nbsp;"}
+        {/* Render caption if caption is not null and is not empty string. */}
+        {image.caption && image.caption}
       </span>
       <Link
         className={classes.creditLine}
