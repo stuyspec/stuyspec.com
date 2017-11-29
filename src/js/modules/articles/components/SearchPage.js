@@ -68,7 +68,13 @@ const SearchPage = ({ classes, articles, searchableIds, searchArticles }) => {
               label="Articles"
             />
           </Col>
-          <Col xsHidden smHidden md={3} lg={3} className={classes.tallAdContainer}>
+          <Col
+            xsHidden
+            smHidden
+            md={3}
+            lg={3}
+            className={classes.tallAdContainer}
+          >
             <TallAd />
           </Col>
         </Row>

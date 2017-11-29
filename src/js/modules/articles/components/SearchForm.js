@@ -58,8 +58,8 @@ const styles = {
   "@media (max-width: 576px)": {
     inputContainer: {
       padding: 0,
-    }
-  }
+    },
+  },
 };
 
 const SearchForm = ({ classes, handleSubmit, submitting }) => {
