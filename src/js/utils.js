@@ -52,11 +52,9 @@ export const isObjectEmpty = obj => {
  * @returns {string}
  */
 export const formatDate = string => {
-  //Removes the Z at the end of the string which eliminates the need to offset the date
-  const newString = string.slice(0, string.length - 1);
   // articleDateline and currentDate will be in the format:
   // Tue Aug 01 2017 20:08:54 GMT-0400 (EDT)
-  const articleDateline = new Date(newString);
+  const articleDateline = new Date(string);
   const currentDate = new Date();
   //formattedDate is in the following format:
   //August 1, 2017, 8:08 PM
