@@ -11,7 +11,7 @@ import { signIn, signUp, closeSignInModal } from "../actions";
 const styles = {
   SignInModal: {
     width: "50%",
-    maxWidth: "420px"
+    maxWidth: "420px",
   },
   modalContent: {
     padding: "12px",
@@ -28,7 +28,7 @@ const styles = {
   signOutForm: {
     display: "inline-block",
     width: "100%",
-  },  
+  },
   signUpRedirect: {
     color: "#3084df",
     display: "block",

@@ -2,7 +2,7 @@ import React from "react";
 import injectSheet from "react-jss";
 import dateFormat from "dateformat";
 
-const MILLISECONDS_IN_DAY = 8.64e7
+const MILLISECONDS_IN_DAY = 8.64e7;
 
 const styles = {
   Dateline: {

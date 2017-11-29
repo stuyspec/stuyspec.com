@@ -82,8 +82,12 @@ const ArticlePage = ({
       <Row className={classes.descriptionRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.description}>
           This article was published in&nbsp;
-          <a className={classes.subscribe} href="https://issuu.com/stuyspectator/docs" target="_blank">
-              {`Volume ${toRoman(article.volume)}, Issue ${article.issue}`}
+          <a
+            className={classes.subscribe}
+            href="https://issuu.com/stuyspectator/docs"
+            target="_blank"
+          >
+            {`Volume ${toRoman(article.volume)}, Issue ${article.issue}`}
           </a>
           .
         </Col>
