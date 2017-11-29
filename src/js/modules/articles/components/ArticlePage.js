@@ -17,7 +17,7 @@ const styles = {
   ArticlePage: {
     marginTop: "80px",
   },
-  descriptionRow: {
+  issuuRow: {
     marginBottom: "24px",
   },
   description: {
@@ -27,6 +27,13 @@ const styles = {
     fontFamily: "Minion Pro",
     fontSize: "16px",
     padding: "12px 0 13px",
+  },
+  issuuDescription: {
+      borderBottom: "1px solid #ddd",
+      color: "#000",
+      fontFamily: "Minion Pro",
+      fontSize: "16px",
+      padding: "12px 0 13px",
   },
   subscribe: {
     color: "#3572b7",
@@ -88,6 +95,16 @@ const ArticlePage = ({
             Subscribe
           </span>
           &nbsp;to <em>The Stuyvesant Spectator</em>’s biweekly newsletter.
+        </Col>
+        <Col xsHidden smHidden md={3} lg={3} />
+      </Row>
+      <Row className={classes.issuuRow}>
+        <Col xs={12} sm={12} md={9} lg={9} className={classes.issuuDescription}>
+          Published in&nbsp;
+          <a className={classes.subscribe} href="https://issuu.com/stuyspectator/docs">
+              {`Volume ${article.volume} Issue ${article.issue}`}
+          </a>
+          .
         </Col>
         <Col xsHidden smHidden md={3} lg={3} />
       </Row>

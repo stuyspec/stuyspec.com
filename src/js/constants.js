@@ -1,5 +1,5 @@
 // Will get replaced by gulpfile with relevant environment url
-export const STUY_SPEC_API_URL = "__API_URL_HERE__";
+export const STUY_SPEC_API_URL = "https://api.stuyspec.com/";
 
 export const STUY_SPEC_API_HEADERS = {
   headers: {
