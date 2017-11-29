@@ -100,15 +100,11 @@ const SectionBlock = ({ classes, articles, section, sections, media }) => {
     const subsectionIds = Object.values(sections)
       .filter(subsection => subsection.parentId === section.id)
       .map(subsection => subsection.id);
-    sectionArticles = Object.values(
-      Object.filter(articles, article =>
-        subsectionIds.includes(article.sectionId),
-      ),
+    sectionArticles = articles.filter(article =>
+      subsectionIds.includes(article.sectionId)
     );
   } else {
-    sectionArticles = Object.values(
-      Object.filter(articles, article => article.sectionId === section.id),
-    );
+    sectionArticles = articles.filter(article => article.sectionId === section.id);
   }
   const bigArticle = sectionArticles[0];
   const rowArticles = sectionArticles.slice(1, 4);
@@ -130,8 +126,8 @@ const SectionBlock = ({ classes, articles, section, sections, media }) => {
           <Dateline classes={classes} article={bigArticle} />
         </div>
       )}
-      {rowArticles.length > 0 &&
-        rowArticles.map(article => {
+      {sectionArticles.length > 1 &&
+       sectionArticles.slice(1, 4).map(article => {
           const featuredMedia = Object.values(media).find(mediaObject => {
             return (
               mediaObject.isFeatured && mediaObject.articleId === article.id

@@ -42,6 +42,8 @@ const styles = {
 
 };
 
+// TODO: SEARCH PAGE BUT ARTICLE SLICE IS ARRAY
+
 const SearchPage = ({ classes, articles, searchableIds, searchArticles }) => {
   return (
     <Grid fluid className={classes.SearchPage}>

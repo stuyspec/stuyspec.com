@@ -202,24 +202,28 @@ const Masthead = ({
       <Link className={classes.theSpectatorLogo} to="/">
         The Spectator
       </Link>
-      {!session.userId && (
+      {!session && (
         <table className={classes.positioning}>
-          <th id="problematic-subscribe-button-container-in-moz">
-            <StyledNavButton onClick={openSubscriptionModal} type="Subscribe">
-              <span className={classes.subscribeText}>Subscribe</span>
-              <br />
-              <span className={classes.subscribeTo}>to our newsletter</span>
-            </StyledNavButton>
-          </th>
-          <th>
-            <div className={classes.userTools}>
-              <Link to="/myaccount/profile">
-                <StyledNavButton type="SignIn">
-                  <span className={classes.signInText}>Sign In</span>
+          <tbody>
+            <tr>
+              <th id="problematic-subscribe-button-container-in-moz">
+                <StyledNavButton onClick={openSubscriptionModal} type="Subscribe">
+                  <span className={classes.subscribeText}>Subscribe</span>
+                  <br />
+                  <span className={classes.subscribeTo}>to our newsletter</span>
                 </StyledNavButton>
-              </Link>
-            </div>
-          </th>
+              </th>
+              <th>
+                <div className={classes.userTools}>
+                  <Link to="/myaccount/profile">
+                    <StyledNavButton type="SignIn">
+                      <span className={classes.signInText}>Sign In</span>
+                    </StyledNavButton>
+                  </Link>
+                </div>
+              </th>
+            </tr>
+          </tbody>
         </table>
       )}
       <ul className={classes.sectionLinksNav}>

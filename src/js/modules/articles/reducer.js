@@ -11,7 +11,7 @@ import { shortenSummary } from "../../utils";
 const initialState = {
   isSearching: false,
   error: null,
-  articles: {},
+  articles: [],
   authorships: [],
 };
 
@@ -20,16 +20,15 @@ const reducer = (state = { ...initialState }, action) => {
     case FETCH_INIT_DATA_FULFILLED: {
       return {
         ...state,
-        articles: action.payload.articles.reduce((acc, article) => {
-          article["originalSummary"] = article["summary"];
+        articles: action.payload.articles.map(article => {
+          article.originalSummary = article.summary;
           /* shortenSummary shortens the article summary to 25 words + "..."
            * Also creates a summary from article content if the article has
            * no summary.
            */
-          article["summary"] = shortenSummary(article);
-          acc[article.id] = article;
-          return acc;
-        }, {}),
+          article.summary = shortenSummary(article);
+          return article;
+        }),
         authorships: action.payload.authorships,
       }
     }

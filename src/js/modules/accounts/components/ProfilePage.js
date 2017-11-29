@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet";
 
 import { SignOutForm } from "./forms";
 import { signOut } from "../actions";
+import { getCurrentUser } from "../selectors";
 
 const styles = {
   pageTitle: {
@@ -46,9 +47,8 @@ const styles = {
   },
 };
 
-const ProfilePage = ({ classes, session, signOut, status, users }) => {
-  const user = users[session.userId];
-  if (user) {
+const ProfilePage = ({ classes, signOut, session, sessionUser }) => {
+  if (sessionUser) {
     return (
       <Grid fluid className={classes.ProfilePage}>
         <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -65,7 +65,7 @@ const ProfilePage = ({ classes, session, signOut, status, users }) => {
             lg={6}
             lgOffset={3}
           >
-            <p className={classes.pageTitle}>Welcome, {user.firstName}.</p>
+            <p className={classes.pageTitle}>Welcome, {sessionUser.firstName}.</p>
             <Link
               to={"/myaccount/profile/edit"}
               className={classes.editRedirect}
@@ -77,15 +77,15 @@ const ProfilePage = ({ classes, session, signOut, status, users }) => {
                 <tbody>
                   <tr>
                     <td>First Name</td>
-                    <td>{user.firstName}</td>
+                    <td>{sessionUser.firstName}</td>
                   </tr>
                   <tr>
                     <td>Last Name</td>
-                    <td>{user.lastName}</td>
+                    <td>{sessionUser.lastName}</td>
                   </tr>
                   <tr>
                     <td>E-mail Address</td>
-                    <td>{user.email}</td>
+                    <td>{sessionUser.email}</td>
                   </tr>
                 </tbody>
               </Table>
@@ -101,8 +101,7 @@ const ProfilePage = ({ classes, session, signOut, status, users }) => {
 
 const mapStateToProps = state => ({
   session: state.accounts.session,
-  status: state.accounts.status,
-  users: state.users.users,
+  sessionUser: getCurrentUser(state),
 });
 
 const mapDispatchToProps = dispatch => {
