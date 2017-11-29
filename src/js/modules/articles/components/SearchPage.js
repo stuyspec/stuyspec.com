@@ -41,6 +41,8 @@ const styles = {
   },
 };
 
+// TODO: SEARCH PAGE BUT ARTICLE SLICE IS ARRAY
+
 const SearchPage = ({ classes, articles, searchableIds, searchArticles }) => {
   const searchedArticles = searchableIds.map(searchableId => articles[searchableId]);
   return (

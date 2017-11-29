@@ -32,6 +32,7 @@ import {
 } from "./users/components";
 
 import { fetchAllData } from "./core/actions";
+import { sessionfy } from "./accounts/actions";
 
 class RoutingApp extends Component {
   constructor(props) {
@@ -128,7 +129,7 @@ class RoutingApp extends Component {
                 path={"/myaccount"}
                 key={"signIn"}
                 render={() =>
-                  session.userId ? (
+                  session ? (
                     <Redirect to="/myaccount/profile" />
                   ) : (
                     <SignInPage />
@@ -139,7 +140,7 @@ class RoutingApp extends Component {
                 path="/myaccount/sign-up"
                 key={"signUp"}
                 render={() =>
-                  session.userId ? (
+                  session ? (
                     <Redirect to="/myaccount/profile" />
                   ) : (
                     <SignUpPage />
@@ -150,7 +151,7 @@ class RoutingApp extends Component {
                 path="/myaccount/profile"
                 key={"profile"}
                 render={() =>
-                  session.userId ? (
+                  session ? (
                     <ProfilePage />
                   ) : (
                     <Redirect to="/myaccount" />
@@ -161,7 +162,7 @@ class RoutingApp extends Component {
                 path="/myaccount/profile/edit"
                 key={"editProfile"}
                 render={() =>
-                  session.userId ? (
+                  session ? (
                     <EditProfilePage />
                   ) : (
                     <Redirect to="/myaccount" />
@@ -216,7 +217,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchAllData }, dispatch);
+  return bindActionCreators({ fetchAllData, sessionfy }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoutingApp);

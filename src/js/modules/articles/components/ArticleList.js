@@ -47,9 +47,8 @@ const styles = {
 };
 
 const ArticleList = ({ classes, articles, title, label }) => {
-  let rowArticles = articles.isArray ? articles : Object.values(articles);
-  if (title !== "Recommended" && title !== "Search") {
-    rowArticles = rowArticles.sort((a, b) => {
+  if (title !== "Recommended") {
+    articles = articles.sort((a, b) => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
   }
@@ -68,10 +67,10 @@ const ArticleList = ({ classes, articles, title, label }) => {
           <p className={classes.title}>{title}</p>
         ))}
       {label && <p className={classes.label}>{label}</p>}
-      {rowArticles.map(article => {
+      {articles.map(article => {
         return <ArticleRow article={article} key={article.id} />;
       })}
-      {rowArticles.length === 0 && (
+      {articles.length === 0 && (
         <p className={classes.noArticlesMessage}>
           We are still in the process of uploading old articles. Please check
           back at a later time.

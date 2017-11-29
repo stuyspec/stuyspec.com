@@ -8,8 +8,6 @@ import { getArticlesWithContributors } from "../selectors";
 
 import { TallAd } from "../../advertisements/components";
 
-const NUMBER_OF_RAIL_ARTICLES = 5;
-
 const styles = {
   RightRail: {
     marginTop: "28px",
@@ -123,8 +121,8 @@ const RightRail = ({ classes, articles, sections, media, ads }) => {
         <Link to="/recommended" className={classes.label}>
           Recommended
         </Link>
-        {Object.values(articles)
-          .slice(0, NUMBER_OF_RAIL_ARTICLES)
+        {articles
+          .slice(0, 5)
           .map(article => {
             const featuredMedia = Object.values(media).find(
               mediaObject => mediaObject.articleId === article.id,

@@ -82,7 +82,7 @@ const SidebarContent = ({
       );
     }
   });
-  if (session.userId) {
+  if (session) {
     sidebarElements.push(
       <Link
         className={classes.sidebarSectionLink}

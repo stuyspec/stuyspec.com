@@ -37,17 +37,18 @@ const styles = {
     alignItems: "center",
     opacity: 0.8,
     outline: "none",
-    padding: "12px 15px",
+    padding: "8px 11px",
     transitionDuration: ".3s",
     "&:hover": {
       opacity: 0.9,
     },
   },
   slidesIcon: {
-    width: "26px !important",
+    width: "23px !important",
   },
   carouselImageCount: {
     fontFamily: "Circular Std",
+    fontSize: "17px",
     marginLeft: "12px",
   },
   "@media (max-width: 767px)": {

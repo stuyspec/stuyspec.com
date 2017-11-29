@@ -35,11 +35,10 @@ const styles = {
   },
 };
 
-const ArticleReference = ({ classes, articles, sections, articleId }) => {
-  const referencedArticle = articles[articleId];
+const ArticleReference = ({ classes, article, sections }) => {
   // Since the title will be surrounded with double quotes, we replace the
   // title's double quotes (for movies, books, etc.) with single quotes.
-  const referencedTitle = referencedArticle.title
+  const title = article.title
     .replace('"', "'") // straight double quote
     .replace("“", "‘") // curly left double quote
     .replace("”", "’"); // curly right double quote
@@ -48,19 +47,18 @@ const ArticleReference = ({ classes, articles, sections, articleId }) => {
       This article was written in response to &ldquo;
       <Link
         className={classes.referenceLink}
-        to={`${sections[referencedArticle.sectionId]
-          .permalink}/${referencedArticle.slug}`}
+        to={`${sections[article.sectionId]
+          .permalink}/${article.slug}`}
       >
-        {referencedTitle}
+        {title}
       </Link>
-      ,&rdquo; published in Volume {referencedArticle.volume} Issue{" "}
-      {referencedArticle.issue}.
+      ,&rdquo; published in Volume {article.volume} Issue{" "}
+      {article.issue}.
     </span>
   );
 };
 
 const mapStateToProps = state => ({
-  articles: state.articles.articles,
   sections: state.sections.sections,
 });
 
