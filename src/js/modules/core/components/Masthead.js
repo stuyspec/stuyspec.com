@@ -289,11 +289,14 @@ const Masthead = ({
             The Paper
           </Link>
         </li>
-        <li key={-3} className={classes.sectionListItem}>
-          <Link to="/search" className={classes.sectionLink}>
-            <Search className={classes.navSearchButton} />
-          </Link>
-        </li>
+      */}
+        {!session && (
+          <li key={-3} className={classes.sectionListItem}>
+            <Link to="/search" className={classes.sectionLink}>
+              <Search className={classes.navSearchButton} />
+            </Link>
+          </li>
+        )}
       */}
       </ul>
     </div>
