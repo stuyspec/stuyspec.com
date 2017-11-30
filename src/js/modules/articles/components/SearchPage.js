@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 import { Helmet } from "react-helmet";
+import ReactLoading from 'react-loading';
 
 import ArticleList from "./ArticleList";
 import { TallAd } from "../../advertisements/components";
@@ -41,7 +42,7 @@ const styles = {
   },
 };
 
-const SearchPage = ({ classes, articles, searchableIds, searchArticles }) => {
+const SearchPage = ({ classes, articles, searchableIds, searchArticles, isSearching }) => {
   const searchedArticles = articles.filter(article =>
     searchableIds.includes(article.id),
   );
@@ -59,6 +60,13 @@ const SearchPage = ({ classes, articles, searchableIds, searchArticles }) => {
         />
         <hr className={classes.hr} />
       </Row>
+      {isSearching && (
+        <Row>
+          <Col xs={12} sm={12} md={9} lg={9} className={classes.loadingSearch}>
+            <ReactLoading type="bubbles" color="#000" />
+          </Col>
+        </Row>
+      )}
       {searchedArticles.length > 0 && (
         <Row>
           <Col xs={12} sm={12} md={9} lg={9} className={classes.articleList}>
@@ -86,6 +94,7 @@ const SearchPage = ({ classes, articles, searchableIds, searchArticles }) => {
 const mapStateToProps = state => ({
   articles: getArticlesWithContributors(state),
   searchableIds: state.articles.searchableIds,
+  isSearching: state.articles.isSearching,
 });
 
 const mapDispatchToProps = dispatch => {
