@@ -281,7 +281,7 @@ Kerry Garfinkel
     title: "Contact",
     slug: "contact",
     content: `<p style="text-align: center">
-  Contact us at <a href="mailto:web@stuyspec.com">wen@stuyspec.com</a>.
+  Contact us at <a href="mailto:web@stuyspec.com">web@stuyspec.com</a>.
 </p>
 `,
   },
