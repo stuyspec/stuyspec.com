@@ -7,6 +7,7 @@ import { EMAIL_REGEX } from "../../../../constants";
 const styles = {
   SignUpForm: {
     fontFamily: "Minion Pro",
+    maxWidth: "100%",
     "& form div": {
       // each Field
       marginBottom: "7px",
@@ -79,7 +80,7 @@ const renderField = ({
           type={type}
         />
         {touched &&
-          ((error && <span>{error}</span>) ||
+          ((error && <span style={{ color: "red" }}>{error}</span>) ||
             (warning && <span>{warning}</span>))}
       </div>
     </div>

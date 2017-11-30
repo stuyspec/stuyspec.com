@@ -8,9 +8,13 @@ import { EMAIL_REGEX } from "../../../../constants";
 const styles = {
   successMessage: {
     color: "green",
+    fontFamily: "Minion Pro",
+    marginTop: "8px",
   },
   errorMessage: {
     color: "red",
+    fontFamily: "Minion Pro",
+    marginTop: "8px",
   },
   dataTable: {
     "& .table-responsive table > tbody > tr > td": {

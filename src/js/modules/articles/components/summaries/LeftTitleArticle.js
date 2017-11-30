@@ -28,7 +28,7 @@ const styles = {
     },
   },
   header: {
-    paddingLeft: "0 !important",
+    padding: "0 !important",
   },
   title: {
     color: "#000",
@@ -54,10 +54,11 @@ const styles = {
     lineHeight: 1.29,
   },
   featuredMedia: {
-    paddingRight: "14px !important",
+    paddingLeft: "14px !important",
+    paddingRight: 0,
     height: "360px",
     overflow: "hidden",
-    "& > figure > img": {
+    "& > a >figure > img": {
       width: "100%",
     },
   },
@@ -74,12 +75,13 @@ const styles = {
   "@media (max-width: 767px)": {
     featuredMedia: {
       height: "auto",
+      marginBottom: "18px",
       overflow: "visible",
       paddingLeft: "0 !important",
       paddingTop: "14px",
       "& figure img": {
         marginLeft: "-14px",
-        width: "100vw",
+        width: "100vw !important",
       },
     },
   },
@@ -89,16 +91,12 @@ const LeftTitleArticle = ({ classes, article, media, sections }) => {
   const featuredMedia = Object.values(media).find(
     mediaObject => mediaObject.articleId === article.id,
   );
-  const section = Object.values(sections).find(
-    section => article.sectionId === section.id,
-  );
+  const section = sections[article.sectionId];
   return (
     <Row className={classes.article}>
-      {/*
       <Link className={classes.section} to={section.permalink}>
         {section.name}
       </Link>
-    */}
       <Col
         xs={12}
         smPush={4}
@@ -110,9 +108,11 @@ const LeftTitleArticle = ({ classes, article, media, sections }) => {
         className={classes.featuredMedia}
       >
         {featuredMedia && (
-          <figure>
-            <img src={featuredMedia.attachmentUrl} />
-          </figure>
+          <Link to={`${section.permalink}/${article.slug}`}>
+            <figure>
+              <img src={featuredMedia.attachmentUrl} />
+            </figure>
+          </Link>
         )}
       </Col>
       <Col

@@ -1,3 +1,5 @@
+// TODO: SECTINOPAGE IS LITERALLY A MESS
+
 import React from "react";
 import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-bootstrap/lib";
@@ -10,10 +12,7 @@ import { ArticleList } from "../../articles/components";
 import { getSectionTreeArticles } from "../../articles/selectors";
 import { getDirectSubsections } from "../../sections/selectors";
 import SectionColumn from "./SectionColumn";
-import {
-  LatestArticlesRibbon,
-  LeftTitleArticle,
-} from "../../articles/components/summaries";
+import { LeftTitleArticle } from "../../articles/components/summaries";
 import { Dateline, Byline } from "../../articles/components/index";
 import SectionFeature from "./SectionFeature";
 import { TallAd } from "../../advertisements/components/index";
@@ -48,13 +47,7 @@ const styles = {
     width: "325px",
     "& a": {
       color: "#000",
-      "&:hover": {
-        color: "#000",
-      },
-      "&:active": {
-        color: "#000",
-      },
-      "&:focus": {
+      "&:hover, &:active, &:focus": {
         color: "#000",
       },
     },
@@ -117,11 +110,7 @@ const styles = {
     fontFamily: "Circular Std",
     fontSize: "12px",
     fontWeight: 300,
-    "&:hover": {
-      color: "#000",
-      textDecoration: "none",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none",
     },
@@ -217,7 +206,7 @@ const SectionPage = ({
   section,
   media,
 }) => {
-  if (section.parentId || section.name === "Humor" || section.name === "News") {
+  if (section.parentId || section.name === "News") {
     return (
       <Grid fluid className={classes.SubsectionPage}>
         <Helmet>
@@ -246,11 +235,17 @@ const SectionPage = ({
       </Grid>
     );
   }
-  const featuredArticle = Object.values(sectionTreeArticles).find(article =>
-    Object.values(media).find(
-      mediaObject => mediaObject.articleId === article.id,
-    ),
-  );
+  const featuredArticle = sectionTreeArticles.find(article => {
+    if (section.name === "Humor") {
+      if (
+        directSubsections[article.sectionId] &&
+        directSubsections[article.sectionId].name === "Spooktator"
+      ) {
+        return false;
+      }
+    }
+    return Object.values(media).find(medium => medium.articleId === article.id);
+  });
   const featuredMedia = Object.values(media).find(
     image => image.articleId === featuredArticle.id,
   );
@@ -261,24 +256,30 @@ const SectionPage = ({
     featuredArticleSection = section;
   }
 
-  let secondaryArticle = Object.values(sectionTreeArticles).find(
+  let secondaryArticle = sectionTreeArticles.find(
     article =>
       article !== featuredArticle &&
-      Object.values(media).find(
-        mediaObject => mediaObject.articleId === article.id,
-      ),
+      Object.values(media).find(medium => medium.articleId === article.id),
   );
   if (!secondaryArticle) {
-    secondaryArticle = Object.values(sectionTreeArticles)[1];
+    secondaryArticle = sectionTreeArticles[1];
   }
-  let featuredSubsection = Object.values(directSubsections).find(
-    subsection => subsection.id !== featuredArticle.sectionId,
-  );
-  if (section.slug == "ae") {
-    featuredSubsection = Object.values(directSubsections).find(
-      ds => ds.name === "Music",
-    );
+
+  let hardcodedSubsection = null;
+  if (section.name === "Arts & Entertainment") {
+    hardcodedSubsection = "Music";
+  } else if (section.name === "Humor") {
+    hardcodedSubsection = "Spooktator";
   }
+  const featuredSubsection = Object.values(
+    directSubsections,
+  ).find(subsection => {
+    if (hardcodedSubsection) {
+      return subsection.name === hardcodedSubsection;
+    } else {
+      return subsection.id !== featuredArticle.sectionId;
+    }
+  });
 
   return (
     <Grid fluid className={classes.SectionPage}>
@@ -308,9 +309,13 @@ const SectionPage = ({
       <Row className={classes.featuredRow}>
         {featuredMedia && (
           <Col xs={12} sm={7} md={7} lg={7} className={classes.featuredMedia}>
-            <figure>
-              <img src={featuredMedia.attachmentUrl} />
-            </figure>
+            <Link
+              to={`${featuredArticleSection.permalink}/${featuredArticle.slug}`}
+            >
+              <figure>
+                <img src={featuredMedia.attachmentUrl} />
+              </figure>
+            </Link>
           </Col>
         )}
         <Col xs={12} sm={5} md={5} lg={5} className={classes.featuredArticle}>

@@ -5,7 +5,7 @@ import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
-import { getSections, getSectionSlugs } from "../../sections/selectors";
+import { getSectionSlugs } from "../../sections/selectors";
 
 import { openSubscriptionModal } from "../../accounts/actions";
 
@@ -44,11 +44,7 @@ const styles = {
     position: "absolute",
     textDecoration: "none",
     transform: "translate(-50%,0)",
-    "&:hover": {
-      color: "#000",
-      textDecoration: "none",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none",
     },
@@ -173,12 +169,18 @@ const MastheadBar = ({
 }) => {
   const sectionSlugArray = location.pathname.split("/");
   const sectionSlug = sectionSlugArray[sectionSlugArray.length - 1];
-  let brandingSection = null;
+  let section = null;
   if (sectionSlugs.includes(sectionSlug)) {
-    brandingSection = Object.values(sections).find(
+    section = Object.values(sections).find(
       section => section.slug === sectionSlug,
-    ).name;
+    );
   }
+
+  let mastheadSectionName = null;
+  if (section && section.parentId) {
+    mastheadSectionName = sections[section.parentId].name;
+  }
+
   return (
     <div className={classes.MastheadBar}>
       <div className={classes.barContainer}>
@@ -186,32 +188,37 @@ const MastheadBar = ({
           <StyledNavButton label="sections" onClick={openSidebar}>
             <Hamburger />
           </StyledNavButton>
-          <StyledNavButton label="search">
-            <Search />
-          </StyledNavButton>
+          <Link to="/search">
+            <StyledNavButton label="search">
+              <Search color="#000" />
+            </StyledNavButton>
+          </Link>
         </div>
-        <Link className={classes.brandingLink} to="/">
+        <Link
+          className={classes.brandingLink}
+          to={
+            section && section.parentId ? (
+              sections[section.parentId].permalink
+            ) : (
+              "/"
+            )
+          }
+        >
           The Spectator
-          {brandingSection === "Arts & Entertainment" && (
+          {mastheadSectionName === "Arts & Entertainment" ? (
             <span className={classes.responsiveSectionNameContainer}>
               <span className={classes.sectionNameDesktop}>
-                {brandingSection}
+                {mastheadSectionName}
               </span>
               <span className={classes.sectionNameMobile}>A&E</span>
             </span>
-          )}
-          {brandingSection &&
-          brandingSection !== "Arts & Entertainment" && (
-            <span className={classes.sectionName}>
-              {brandingSection === "At Stuyvesant" ? (
-                "Sports at Stuyvesant"
-              ) : (
-                brandingSection
-              )}
-            </span>
+          ) : (
+            mastheadSectionName && (
+              <span className={classes.sectionName}>{mastheadSectionName}</span>
+            )
           )}
         </Link>
-        {session.userId ? (
+        {session ? (
           <div className={classes.userTools}>
             <Link to="/myaccount/profile">
               <StyledNavButton label="profile" />
@@ -236,7 +243,7 @@ const MastheadBar = ({
 const mapStateToProps = state => ({
   session: state.accounts.session,
   sectionSlugs: getSectionSlugs(state),
-  sections: getSections(state),
+  sections: state.sections.sections,
 });
 
 const mapDispatchToProps = dispatch => {

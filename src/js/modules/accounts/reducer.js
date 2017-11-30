@@ -16,7 +16,10 @@ import {
   OPEN_SUBSCRIPTION_MODAL,
   CLOSE_SUBSCRIPTION_MODAL,
   SESSIONFY,
+  VALIDATE_TOKEN_FULFILLED,
+  VALIDATE_TOKEN_REJECTED,
 } from "./actionTypes";
+import { CREATE_COMMENT_FULFILLED } from "../comments/actionTypes";
 
 const initialState = {
   status: {
@@ -25,15 +28,19 @@ const initialState = {
     formName: null,
   },
   isSignInModalOpen: false,
-  session: {
-    userId: null,
-    headers: null,
-  },
+  session: null,
   isSubscriptionModalOpen: false,
 };
 
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
+    case CREATE_COMMENT_FULFILLED: {
+      localStorage.setItem("session", JSON.stringify(action.payload.headers));
+      return {
+        ...state,
+        session: action.payload.headers,
+      };
+    }
     case SIGN_IN_PENDING: {
       return {
         ...state,
@@ -45,12 +52,10 @@ const reducer = (state = { ...initialState }, action) => {
       };
     }
     case SIGN_IN_FULFILLED: {
+      localStorage.setItem("session", JSON.stringify(action.payload.headers));
       return {
         ...state,
-        session: {
-          userId: action.payload.data.data.id,
-          headers: action.payload.headers,
-        },
+        session: action.payload.headers,
         status: {
           errors: [],
           formName: "signIn",
@@ -112,6 +117,7 @@ const reducer = (state = { ...initialState }, action) => {
       };
     }
     case SIGN_OUT_FULFILLED: {
+      localStorage.removeItem("session");
       return {
         ...state,
         status: {
@@ -119,10 +125,7 @@ const reducer = (state = { ...initialState }, action) => {
           message: "You have been successfully signed out.",
           formName: "signOut",
         },
-        session: {
-          userId: null,
-          headers: null,
-        },
+        session: null,
       };
     }
     case SIGN_OUT_REJECTED: {
@@ -149,10 +152,6 @@ const reducer = (state = { ...initialState }, action) => {
     case UPDATE_USER_FULFILLED: {
       return {
         ...state,
-        session: {
-          userId: action.payload.data.id,
-          headers: state.session.headers, // headers remain the same
-        },
         status: {
           errors: [],
           message: "Your changes have been saved.",
@@ -187,6 +186,16 @@ const reducer = (state = { ...initialState }, action) => {
 
     case SESSIONFY: {
       return { ...state, session: action.payload };
+    }
+    case VALIDATE_TOKEN_FULFILLED: {
+      return { ...state, session: action.payload.headers };
+    }
+    case VALIDATE_TOKEN_REJECTED: {
+      localStorage.removeItem("session");
+      return {
+        ...state,
+        session: null,
+      };
     }
 
     case "@@redux-form/DESTROY": {

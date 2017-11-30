@@ -1,37 +1,18 @@
-import {
-  FETCH_MEDIA_PENDING,
-  FETCH_MEDIA_FULFILLED,
-  FETCH_MEDIA_REJECTED,
-} from "./actionTypes";
+import { FETCH_INIT_DATA_FULFILLED } from "../core/actionTypes";
 
 const initialState = {
-  isFetching: false,
-  isFetched: false,
-  error: null,
   media: {},
 };
 
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
-    case FETCH_MEDIA_PENDING: {
-      return { ...state, isFetching: true };
-    }
-    case FETCH_MEDIA_FULFILLED: {
+    case FETCH_INIT_DATA_FULFILLED: {
       return {
         ...state,
-        isFetching: false,
-        isFetched: true,
-        media: action.payload.reduce((acc, mediaObject) => {
-          acc[mediaObject.id] = mediaObject;
+        media: action.payload.media.reduce((acc, medium) => {
+          acc[medium.id] = medium;
           return acc;
         }, {}),
-      };
-    }
-    case FETCH_MEDIA_REJECTED: {
-      return {
-        ...state,
-        isFetching: false,
-        error: action.payload,
       };
     }
   }

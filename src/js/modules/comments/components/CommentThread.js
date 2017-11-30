@@ -10,6 +10,7 @@ import { SignInModal } from "../../accounts/components";
 
 import { createComment } from "../actions";
 import { getRequestedArticleComments } from "../selectors";
+import { getCurrentUser } from "../../accounts/selectors";
 
 const styles = {
   CommentThread: {
@@ -21,6 +22,9 @@ const styles = {
   "@media (max-width: 991px)": {
     CommentThread: {
       padding: "0 10%",
+    },
+    commentFormContainer: {
+      marginBottom: "36px",
     },
   },
   "@media (max-width: 767px)": {
@@ -35,19 +39,23 @@ const CommentThread = ({
   comments,
   article,
   createComment,
+  sessionUser,
   session,
 }) => {
   const handleCreateComment = values => {
-    createComment({
-      ...values,
-      articleId: article.id,
-      userId: session.userId,
-    });
+    createComment(
+      {
+        ...values,
+        articleId: article.id,
+        userId: sessionUser.id,
+      },
+      session,
+    );
   };
   return (
     <Grid fluid className={classes.CommentThread}>
-      <Row>
-        <CommentForm session={session} onSubmit={handleCreateComment} />
+      <Row className={classes.commentFormContainer}>
+        <CommentForm onSubmit={handleCreateComment} />
         <Col md={4} lg={4} />
       </Row>
       <SignInModal />
@@ -60,6 +68,7 @@ const CommentThread = ({
 
 const mapStateToProps = (state, ownProps) => ({
   comments: getRequestedArticleComments(state, ownProps),
+  sessionUser: getCurrentUser(state),
   session: state.accounts.session,
 });
 

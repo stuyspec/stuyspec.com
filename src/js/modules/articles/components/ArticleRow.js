@@ -4,11 +4,7 @@ import { Row, Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import { getMedia } from "../../media/selectors";
-import { getSections } from "../../sections/selectors";
-import { getUsers } from "../../users/selectors";
 import Byline from "./Byline";
-import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 import Dateline from "./Dateline";
 
 const styles = {
@@ -56,6 +52,9 @@ const styles = {
     lineHeight: "1.12",
     marginBottom: "5px",
     paddingTop: "2px",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+    },
   },
   summary: {
     color: "#000",
@@ -105,12 +104,14 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
         </div>
         <div className={classes.preview}>
           {featuredMedia && (
-            <figure className={classes.figure}>
-              <img
-                src={featuredMedia.attachmentUrl}
-                alt={featuredMedia.title}
-              />
-            </figure>
+            <Link to={`${section.permalink}/${article.slug}`}>
+              <figure className={classes.figure}>
+                <img
+                  src={featuredMedia.attachmentUrl}
+                  alt={featuredMedia.title}
+                />
+              </figure>
+            </Link>
           )}
           <Link
             to={`${section.permalink}/${article.slug}`}
@@ -130,9 +131,9 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
 };
 
 const mapStateToProps = state => ({
-  media: getMedia(state),
-  sections: getSections(state),
-  users: getUsers(state),
+  media: state.media.media,
+  sections: state.sections.sections,
+  users: state.users.users,
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(ArticleRow));

@@ -25,11 +25,7 @@ const styles = {
     padding: "8px 0 8px 11px",
     textAlign: "left",
     width: "100%",
-    "&:active": {
-      color: "#000",
-      textDecoration: "none",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none",
     },
@@ -59,6 +55,9 @@ const SidebarContent = ({
     </Link>,
   );
   Object.values(topLevelSections).map(section => {
+    if (section.name === "10/31 Terror Attack") {
+      return;
+    }
     sidebarElements.push(
       <Link
         className={classes.sidebarSectionLink}
@@ -79,7 +78,7 @@ const SidebarContent = ({
       );
     }
   });
-  if (session.userId) {
+  if (session) {
     sidebarElements.push(
       <Link
         className={classes.sidebarSectionLink}
@@ -106,7 +105,6 @@ const SidebarContent = ({
 };
 
 const mapStateToProps = state => ({
-  isSidebarOpen: state.core.isSidebarOpen,
   session: state.accounts.session,
   topLevelSections: getTopLevelSections(state),
 });

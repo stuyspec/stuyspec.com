@@ -4,9 +4,7 @@ import { connect } from "react-redux";
 import { Row, Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 
-import { getMedia } from "../../media/selectors";
 import { getSectionTreeArticles } from "../selectors";
-import { getSections } from "../../sections/selectors";
 
 const styles = {
   RecommendedRow: {
@@ -45,13 +43,7 @@ const styles = {
     fontFamily: "Minion Pro",
     fontSize: "14px",
     lineHeight: "1.21",
-    "&:active": {
-      color: "#000",
-    },
-    "&:focus": {
-      color: "#000",
-    },
-    "&:hover": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },
@@ -62,13 +54,7 @@ const styles = {
     fontSize: "19px",
     lineHeight: "1.38",
     marginBottom: "2px",
-    "&:active": {
-      color: "#000",
-    },
-    "&:focus": {
-      color: "#000",
-    },
-    "&:hover": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },
@@ -128,8 +114,9 @@ const styles = {
   },
 };
 
-const RecommendedRow = ({ classes, media, section, articles, sections }) => {
-  const recommendedArticles = Object.values(articles).slice(0, 4);
+const RecommendedRow = ({ classes, media, articles, sections }) => {
+  // section is always the parent section, articles are always in that tree.
+  const recommendedArticles = articles.slice(0, 4);
   return (
     <Row className={classes.RecommendedRow}>
       <p className={classes.recommendedText}>Recommended</p>
@@ -140,22 +127,21 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
               mediaObject.isFeatured && mediaObject.articleId === article.id
             );
           });
-          let linkToArticle = section.permalink + "/" + article.slug;
-          if (section.parentId) {
-            linkToArticle = sections[section.parentId] + linkToArticle;
-          }
-
+          // some articles may be under a subsection of the main section.
+          const articleSection = sections[article.sectionId];
           if (featuredMedia) {
             return (
               <div key={article.id} className={classes.recommendedBlock}>
-                <figure className={classes.figure}>
-                  <img src={featuredMedia.mediumAttachmentUrl} />
-                </figure>
-                <Link to={`${section.permalink}`} className={classes.label}>
-                  {section.name}
+                <Link to={`${articleSection.permalink}/${article.slug}`}>
+                  <figure className={classes.figure}>
+                    <img src={featuredMedia.mediumAttachmentUrl} />
+                  </figure>
+                </Link>
+                <Link to={articleSection.permalink} className={classes.label}>
+                  {articleSection.name}
                 </Link>
                 <Link
-                  to={`${section.permalink}/${article.slug}`}
+                  to={`${articleSection.permalink}/${article.slug}`}
                   className={classes.titleWithImage}
                 >
                   {article.title}
@@ -165,10 +151,16 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
           } else {
             return (
               <div key={article.id} className={classes.recommendedBlock}>
-                <Link to={`${section.permalink}`} className={classes.label}>
-                  {section.name}
+                <Link
+                  to={`${articleSection.permalink}`}
+                  className={classes.label}
+                >
+                  {articleSection.name}
                 </Link>
-                <Link to={linkToArticle} className={classes.titleWithoutImage}>
+                <Link
+                  to={`${articleSection.permalink}/${article.slug}`}
+                  className={classes.titleWithoutImage}
+                >
                   {article.title}
                 </Link>
                 <p className={classes.summary}>{article.summary}</p>
@@ -183,9 +175,9 @@ const RecommendedRow = ({ classes, media, section, articles, sections }) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  media: getMedia(state),
+  media: state.media.media,
   articles: getSectionTreeArticles(state, ownProps),
-  sections: getSections(state),
+  sections: state.sections.sections,
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(RecommendedRow));

@@ -27,23 +27,55 @@ const styles = {
     padding: "4px 0",
     marginBottom: "22px",
   },
+  voicesBanner: {
+    marginBottom: "18px",
+    width: "100%",
+    "& img": {
+      width: "100%",
+      // styles for alt-text
+      color: "#000",
+      fontFamily: "Canela",
+      fontSize: "48px",
+      fontWeight: 500,
+      lineHeight: 1,
+    },
+  },
+  noArticlesMessage: {
+    fontFamily: "Minion Pro",
+    fontSize: "17px",
+  },
 };
 
 const ArticleList = ({ classes, articles, title, label }) => {
-  let rowArticles = Object.values(articles);
   if (title !== "Recommended") {
-    rowArticles = Object.values(articles).sort((a, b) => {
+    articles = articles.sort((a, b) => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
-    console.log(rowArticles);
   }
   return (
     <Grid className={classes.ArticleList}>
-      {title && <p className={classes.title}>{title}</p>}
+      {title &&
+        (title === "VOICES" ? ( // voices is the only section with art
+          <figure className={classes.voicesBanner}>
+            <img
+              src="/img/voices_banner.png"
+              alt="VOICES"
+              title="Art by Vivian Lin (Class of '18)"
+            />
+          </figure>
+        ) : (
+          <p className={classes.title}>{title}</p>
+        ))}
       {label && <p className={classes.label}>{label}</p>}
-      {rowArticles.map(article => {
+      {articles.map(article => {
         return <ArticleRow article={article} key={article.id} />;
       })}
+      {articles.length === 0 && (
+        <p className={classes.noArticlesMessage}>
+          We are still in the process of uploading old articles. Please check
+          back at a later time.
+        </p>
+      )}
     </Grid>
   );
 };

@@ -1,19 +1,10 @@
-import React, { Component } from "react";
-import injectSheet from "react-jss";
+import React from "react";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 
 import Masthead from "./Masthead";
 import MastheadBar from "./MastheadBar";
 
-const styles = {
-  PageHeader: {
-    margin: "0 auto",
-    textAlign: "center",
-    width: "100%",
-  },
-};
-
-const PageHeader = ({ classes, location }) => {
+const PageHeader = ({ location }) => {
   return (
     <Grid>
       <Row>
@@ -35,4 +26,4 @@ const PageHeader = ({ classes, location }) => {
   );
 };
 
-export default injectSheet(styles)(PageHeader);
+export default PageHeader;

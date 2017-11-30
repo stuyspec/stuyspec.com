@@ -9,6 +9,8 @@ import Byline from "../Byline";
 import Dateline from "../Dateline";
 import Outquote from "../Outquote";
 
+// TODO: ADD OUTQUOTES
+
 const styles = {
   RightColumn: {
     borderLeft: "solid 1px #ddd",
@@ -38,10 +40,7 @@ const styles = {
     fontSize: "12px",
     marginBottom: "4px",
     textTransform: "uppercase",
-    "&:hover": {
-      color: "#000",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },
@@ -64,10 +63,7 @@ const styles = {
     fontSize: "18px",
     lineHeight: 1.22,
     marginBottom: "1px",
-    "&:hover": {
-      color: "#000",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },
@@ -101,7 +97,7 @@ const styles = {
   },
 };
 
-const RightColumn = ({ classes, articles, media, sections, outquotes }) => {
+const RightColumn = ({ classes, articles, sections, outquotes }) => {
   let availableArticles = [];
   Object.values(articles)
     .slice(9)
@@ -187,7 +183,6 @@ const RightColumn = ({ classes, articles, media, sections, outquotes }) => {
 
 const mapStateToProps = state => ({
   articles: getArticlesWithContributors(state),
-  media: state.media.media,
   sections: state.sections.sections,
   outquotes: state.outquotes.outquotes,
 });

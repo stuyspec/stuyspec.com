@@ -1,7 +1,6 @@
 /* The FeaturedArticle component displays the highest-rated article. It is
  * currently nested in a <Col md={9} lg={9}>.
  */
-
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -40,8 +39,10 @@ const styles = {
     fontWeight: 300,
     margin: "6px 0 9px 0",
     textTransform: "uppercase",
-    "&:hover": { color: "#000", textDecoration: "none" },
-    "&:focus": { color: "#000", textDecoration: "none" },
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none",
+    },
   },
   headline: {
     paddingRight: "0 !important",
@@ -101,9 +102,11 @@ const FeaturedArticle = ({ classes, media, sections, article }) => {
         className={classes.featuredMediaContainer}
       >
         {featuredMedia && (
-          <figure className={classes.figure}>
-            <img src={featuredMedia.attachmentUrl} />
-          </figure>
+          <Link to={`${section.permalink}/${article.slug}`}>
+            <figure className={classes.figure}>
+              <img src={featuredMedia.attachmentUrl} />
+            </figure>
+          </Link>
         )}
       </Col>
       <Col

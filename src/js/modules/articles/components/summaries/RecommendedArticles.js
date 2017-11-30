@@ -18,10 +18,7 @@ const styles = {
     fontWeight: 300,
     margin: 0,
     padding: "4px 0",
-    "&:hover": {
-      color: "#000",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },
@@ -50,13 +47,7 @@ const styles = {
     fontWeight: "bold",
     lineHeight: 1,
     marginBottom: "8px",
-    "&:active": {
-      color: "#000",
-    },
-    "&:focus": {
-      color: "#000",
-    },
-    "&:hover": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },

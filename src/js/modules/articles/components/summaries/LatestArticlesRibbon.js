@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
 import RibbonComponent from "./RibbonComponent";
@@ -56,13 +55,7 @@ const styles = {
     letterSpacing: "0.5px",
     lineHeight: 1.17,
     margin: 0,
-    "&:active": {
-      color: "#000",
-    },
-    "&:focus": {
-      color: "#000",
-    },
-    "&:hover": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },

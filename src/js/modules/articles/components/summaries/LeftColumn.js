@@ -9,6 +9,8 @@ import Byline from "../Byline";
 import Dateline from "../Dateline";
 import Outquote from "../Outquote";
 
+// TODO: ADD THE OUTQUOTE
+
 const styles = {
   LeftColumn: {
     paddingRight: "7px !important", // adds to the 7px in Col = 14px
@@ -36,10 +38,7 @@ const styles = {
     fontSize: "30px",
     lineHeight: 1.13,
     marginBottom: "6px",
-    "&:hover": {
-      color: "#000",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },
@@ -51,10 +50,7 @@ const styles = {
     fontSize: "12px",
     marginBottom: "7px",
     textTransform: "uppercase",
-    "&:hover": {
-      color: "#000",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },
@@ -73,10 +69,7 @@ const styles = {
     fontSize: "18px",
     lineHeight: 1.22,
     marginBottom: "4px",
-    "&:hover": {
-      color: "#000",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },
@@ -136,9 +129,14 @@ const LeftColumn = ({ classes, articles, media, sections, outquotes }) => {
       <div className={classes.primaryArticle}>
         {primaryMedia && (
           <div>
-            <figure className={classes.figure}>
-              <img src={primaryMedia.mediumAttachmentUrl} />
-            </figure>
+            <Link
+              to={`${sections[primaryArticle.sectionId]
+                .permalink}/${primaryArticle.slug}`}
+            >
+              <figure className={classes.figure}>
+                <img src={primaryMedia.mediumAttachmentUrl} />
+              </figure>
+            </Link>
           </div>
         )}
         <Link
@@ -162,9 +160,14 @@ const LeftColumn = ({ classes, articles, media, sections, outquotes }) => {
       <div className={classes.secondaryArticle}>
         {secondaryMedia && (
           <div>
-            <figure className={classes.figure}>
-              <img src={secondaryMedia.mediumAttachmentUrl} />
-            </figure>
+            <Link
+              to={`${sections[secondaryArticle.sectionId]
+                .permalink}/${secondaryArticle.slug}`}
+            >
+              <figure className={classes.figure}>
+                <img src={secondaryMedia.mediumAttachmentUrl} />
+              </figure>
+            </Link>
           </div>
         )}
         <Link
@@ -190,9 +193,14 @@ const LeftColumn = ({ classes, articles, media, sections, outquotes }) => {
       <div className={classes.outquoteArticle}>
         {outquoteMedia && (
           <div>
-            <figure className={classes.figure}>
-              <img src={outquoteMedia.mediumAttachmentUrl} />
-            </figure>
+            <Link
+              to={`${sections[outquoteArticle.sectionId]
+                .permalink}/${outquoteArticle.slug}`}
+            >
+              <figure className={classes.figure}>
+                <img src={outquoteMedia.mediumAttachmentUrl} />
+              </figure>
+            </Link>
           </div>
         )}
         <Link

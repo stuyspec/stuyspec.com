@@ -8,8 +8,6 @@ import { getArticlesWithContributors } from "../selectors";
 
 import { TallAd } from "../../advertisements/components";
 
-const NUMBER_OF_RAIL_ARTICLES = 5;
-
 const styles = {
   RightRail: {
     marginTop: "28px",
@@ -29,10 +27,7 @@ const styles = {
     fontWeight: 300,
     margin: "0 0 12px 0",
     padding: "4px 0",
-    "&:hover": {
-      color: "#000",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },
@@ -62,8 +57,10 @@ const styles = {
     fontSize: "12px",
     marginBottom: "6px",
     textTransform: "uppercase",
-    "&:hover": { color: "#000", textDecoration: "none" },
-    "&:focus": { color: "#000", textDecoration: "none" },
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none",
+    },
   },
   figure: {
     float: "right",
@@ -123,32 +120,32 @@ const RightRail = ({ classes, articles, sections, media, ads }) => {
         <Link to="/recommended" className={classes.label}>
           Recommended
         </Link>
-        {Object.values(articles)
-          .slice(0, NUMBER_OF_RAIL_ARTICLES)
-          .map(article => {
-            const featuredMedia = Object.values(media).find(
-              mediaObject => mediaObject.articleId === article.id,
-            );
-            const section = Object.values(sections).find(
-              section => article.sectionId === section.id,
-            );
-            return (
-              <div className={classes.article} key={article.id}>
-                {featuredMedia && (
+        {articles.slice(0, 5).map(article => {
+          const featuredMedia = Object.values(media).find(
+            mediaObject => mediaObject.articleId === article.id,
+          );
+          const section = Object.values(sections).find(
+            section => article.sectionId === section.id,
+          );
+          return (
+            <div className={classes.article} key={article.id}>
+              {featuredMedia && (
+                <Link to={`${section.permalink}/${article.slug}`}>
                   <figure className={classes.figure}>
                     <img src={featuredMedia.thumbAttachmentUrl} />
                   </figure>
-                )}
-                <Link
-                  to={`${section.permalink}/${article.slug}`}
-                  className={classes.smallTitle}
-                >
-                  {article.title}
                 </Link>
-                <Byline classes={classes} contributors={article.contributors} />
-              </div>
-            );
-          })}
+              )}
+              <Link
+                to={`${section.permalink}/${article.slug}`}
+                className={classes.smallTitle}
+              >
+                {article.title}
+              </Link>
+              <Byline classes={classes} contributors={article.contributors} />
+            </div>
+          );
+        })}
       </div>
       <div className={classes.tallAdContainer}>
         <TallAd ad={ad} />

@@ -28,12 +28,18 @@ const styles = {
     fontWeight: "bold",
     lineHeight: "1.22",
     marginBottom: "7px",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+    },
   },
   smallTitle: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "16px",
     lineHeight: "1.25",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+    },
   },
   sectionLabel: {
     color: "#000",
@@ -42,12 +48,16 @@ const styles = {
     fontSize: "12px",
     marginBottom: "6px",
     textTransform: "uppercase",
-    "&:hover": { color: "#000", textDecoration: "none" },
-    "&:focus": { color: "#000", textDecoration: "none" },
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none",
+    },
   },
   figure: {
     float: "right",
     marginLeft: "6px",
+    maxHeight: "45px",
+    overflow: "hidden",
     width: "62px",
     "& img": {
       width: "100%",
@@ -71,7 +81,7 @@ const styles = {
       display: "inline",
       "& a": {
         color: "#888",
-        "&:hover": {
+        "&:hover, &:active, &:focus": {
           color: "#888",
         },
       },
@@ -98,14 +108,12 @@ const SectionBlock = ({ classes, articles, section, sections, media }) => {
     const subsectionIds = Object.values(sections)
       .filter(subsection => subsection.parentId === section.id)
       .map(subsection => subsection.id);
-    sectionArticles = Object.values(
-      Object.filter(articles, article =>
-        subsectionIds.includes(article.sectionId),
-      ),
+    sectionArticles = articles.filter(article =>
+      subsectionIds.includes(article.sectionId),
     );
   } else {
-    sectionArticles = Object.values(
-      Object.filter(articles, article => article.sectionId === section.id),
+    sectionArticles = articles.filter(
+      article => article.sectionId === section.id,
     );
   }
   const bigArticle = sectionArticles[0];
@@ -128,22 +136,30 @@ const SectionBlock = ({ classes, articles, section, sections, media }) => {
           <Dateline classes={classes} article={bigArticle} />
         </div>
       )}
-      {rowArticles.length > 0 &&
-        rowArticles.map(article => {
+      {sectionArticles.length > 1 &&
+        sectionArticles.slice(1, 4).map(article => {
           const featuredMedia = Object.values(media).find(mediaObject => {
             return (
               mediaObject.isFeatured && mediaObject.articleId === article.id
             );
           });
+          // In the links, we index sections again because the Sports
+          // SectionBlock finds articles in not only the given section prop,
+          // but also its subsections.
           return (
             <div className={classes.article} key={article.id}>
               {featuredMedia && (
-                <figure className={classes.figure}>
-                  <img src={featuredMedia.thumbAttachmentUrl} />
-                </figure>
+                <Link
+                  to={`${sections[article.sectionId]
+                    .permalink}/${article.slug}`}
+                >
+                  <figure className={classes.figure}>
+                    <img src={featuredMedia.thumbAttachmentUrl} />
+                  </figure>
+                </Link>
               )}
               <Link
-                to={`${section.permalink}/${article.slug}`}
+                to={`${sections[article.sectionId].permalink}/${article.slug}`}
                 className={classes.smallTitle}
               >
                 {article.title}

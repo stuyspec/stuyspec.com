@@ -3,26 +3,20 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
-import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { toRoman } from "roman-numerals";
 
 import ArticleHeader from "./ArticleHeader";
 import ArticleBody from "./ArticleBody";
 import RecommendedRow from "./RecommendedRow";
 import CommentThread from "../../comments/components/CommentThread";
 import NotFoundPage from "../../core/components/NotFoundPage";
-import {
-  getArticleFromRequestedSlug,
-  getArticleFeaturedMedia,
-} from "../selectors";
+import { getArticleFromRequestedSlug, getArticleMedia } from "../selectors";
 import { openSubscriptionModal } from "../../accounts/actions";
 
 const styles = {
   ArticlePage: {
     marginTop: "80px",
-  },
-  descriptionRow: {
-    marginBottom: "24px",
   },
   description: {
     border: "1px solid #ddd",
@@ -30,18 +24,15 @@ const styles = {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "16px",
+    marginBottom: "24px",
     padding: "12px 0 13px",
   },
   subscribe: {
     color: "#3572b7",
-    "&:active": {
-      color: "#3572b7",
-    },
-    "&:focus": {
+    "&:hover, &:focus, &:active": {
       color: "#3572b7",
     },
     "&:hover": {
-      color: "#3572b7",
       cursor: "pointer",
     },
   },
@@ -70,7 +61,6 @@ const ArticlePage = ({
   article,
   section,
   sections,
-  featuredMedia,
   media,
   openSubscriptionModal,
 }) => {
@@ -84,14 +74,18 @@ const ArticlePage = ({
         <meta />
       </Helmet>
       <ArticleHeader article={article} section={section} />
-      <ArticleBody content={article.content} featuredMedia={featuredMedia} />
+      <ArticleBody article={article} media={media} />
       <Row className={classes.descriptionRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.description}>
-          The Pulse of the Student Body:&nbsp;
-          <span className={classes.subscribe} onClick={openSubscriptionModal}>
-            Subscribe
-          </span>
-          &nbsp;to <em>The Stuyvesant Spectator</em>’s biweekly newsletter.
+          This article was published in&nbsp;
+          <a
+            className={classes.subscribe}
+            href="https://issuu.com/stuyspectator/docs"
+            target="_blank"
+          >
+            {`Volume ${toRoman(article.volume)}, Issue ${article.issue}`}
+          </a>
+          .
         </Col>
         <Col xsHidden smHidden md={3} lg={3} />
       </Row>
@@ -106,8 +100,7 @@ const ArticlePage = ({
 const mapStateToProps = (state, ownProps) => ({
   article: getArticleFromRequestedSlug(state, ownProps),
   sections: state.sections.sections,
-  featuredMedia: getArticleFeaturedMedia(state, ownProps),
-  media: state.media.media,
+  media: getArticleMedia(state, ownProps),
 });
 
 const mapDispatchToProps = dispatch => {

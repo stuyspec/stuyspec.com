@@ -18,19 +18,17 @@ const getRequestedArticleSlug = (state, props) =>
   props.match.params.article_slug;
 
 /**
- * The selector returns an articles object with an additional property for each
+ * The selector returns the Article array with an additional property for each
  *   article: an array of its contributors.
  */
 export const getArticlesWithContributors = createSelector(
   [getArticles, getUsers, getAuthorships],
   (originalArticles, users, authorships) => {
-    // efficient and readable method of deep cloning an object.
-    // https://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-deep-clone-an-object-in-javascript
+    // clones the articles array
     const articles = JSON.parse(JSON.stringify(originalArticles));
-    Object.keys(articles).map(articleId => {
-      const targetArticle = articles[articleId];
-      targetArticle.contributors = authorships
-        .filter(authorship => authorship.articleId === parseInt(articleId))
+    articles.forEach(article => {
+      article.contributors = authorships
+        .filter(authorship => authorship.articleId === article.id)
         .map(authorship => users[authorship.userId]);
     });
     return articles;
@@ -46,9 +44,9 @@ export const getArticlesWithContributors = createSelector(
 export const getSectionTreeArticles = createSelector(
   [getArticlesWithContributors, getSectionTreeIds],
   (articles, sectionTreeIds) => {
-    return Object.filter(articles, article => {
-      return sectionTreeIds.includes(article.sectionId);
-    });
+    return articles.filter(article =>
+      sectionTreeIds.includes(article.sectionId),
+    );
   },
 );
 
@@ -62,12 +60,11 @@ export const getArticleFromRequestedSlug = createSelector(
     getSectionFromRequestedSlug,
   ],
   (articles, requestedArticleSlug, section) => {
-    return Object.values(articles).find(article => {
-      return (
+    return articles.find(
+      article =>
         article.slug === requestedArticleSlug &&
-        article.sectionId === section.id
-      );
-    });
+        article.sectionId === section.id,
+    );
   },
 );
 
@@ -78,13 +75,13 @@ export const getArticleFromRequestedSlug = createSelector(
 export const getContributorArticles = createSelector(
   [getContributorFromSlug, getArticlesWithContributors, getAuthorships],
   (contributor, articles, authorships) => {
-    return authorships.reduce((acc, authorship) => {
-      if (contributor && authorship.userId === contributor.id) {
-        const article = articles[authorship.articleId];
-        acc[article.id] = article;
-      }
-      return acc;
-    }, {});
+    if (!contributor) {
+      return [];
+    }
+    const articleIds = authorships
+      .filter(authorship => authorship.userId === contributor.id)
+      .map(authorship => authorship.articleId);
+    return articles.filter(article => articleIds.includes(article.id));
   },
 );
 
@@ -95,11 +92,10 @@ export const getContributorArticles = createSelector(
 export const getIllustratorArticles = createSelector(
   [getIllustratorIllustrations, getArticlesWithContributors],
   (illustrations, articles) => {
-    return Object.values(illustrations).reduce((acc, illustration) => {
-      const article = articles[illustration.articleId];
-      acc[article.id] = article;
-      return acc;
-    }, {});
+    const articleIds = Object.values(illustrations).map(
+      illustration => illustration.articleId,
+    );
+    return articles.filter(article => articleIds.includes(article.id));
   },
 );
 
@@ -110,11 +106,10 @@ export const getIllustratorArticles = createSelector(
 export const getPhotographerArticles = createSelector(
   [getPhotographerPhotographs, getArticlesWithContributors],
   (photographs, articles) => {
-    return Object.values(photographs).reduce((acc, photograph) => {
-      const article = articles[photograph.articleId];
-      acc[article.id] = article;
-      return acc;
-    }, {});
+    const articleIds = Object.values(photographs).map(
+      photograph => photograph.articleId,
+    );
+    return articles.filter(article => articleIds.includes(article.id));
   },
 );
 
@@ -122,38 +117,21 @@ export const getPhotographerArticles = createSelector(
  * The selector returns a media object for the featured media of a requested
  *   article.
  */
-export const getArticleFeaturedMedia = createSelector(
-  [getArticleFromRequestedSlug, getMedia, getUsers],
-  (article, media, users) => {
+export const getArticleMedia = createSelector(
+  [getArticleFromRequestedSlug, getMedia],
+  (article, media) => {
     if (!article) {
       return null;
     }
-    const featuredMedia = Object.values(media).find(mediaObject => {
-      return mediaObject.isFeatured && mediaObject.articleId === article.id;
-    });
-    if (featuredMedia) {
-      return {
-        ...featuredMedia,
-        creator: users[featuredMedia.userId],
-      };
-    }
+    return Object.values(media).filter(image => image.articleId === article.id);
   },
 );
 
 export const getLatestArticles = createSelector(
   [getArticlesWithContributors],
   articles => {
-    return Object.values(articles).sort((a, b) => {
+    return articles.sort((a, b) => {
       return new Date(b) - new Date(a);
     });
-  },
-);
-
-export const getArticlesFromSection = createSelector(
-  [getArticlesWithContributors, getSectionFromRequestedSlug],
-  (articles, section) => {
-    return Object.values(articles).filter(
-      article => article.sectionId === section.id,
-    );
   },
 );

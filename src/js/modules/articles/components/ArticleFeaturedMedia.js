@@ -1,33 +1,55 @@
 import React, { Component } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import injectSheet from "react-jss";
-import { Link } from "react-router-dom";
 
-import { MEDIA_CREATOR_SLUGS } from "../../../constants";
-import { capitalizeWord } from "../../../utils";
+import { openLightbox } from "../../core/actions";
+import ArticleMediaCaption from "./ArticleMediaCaption";
 
 const styles = {
   figure: {
-    margin: 0,
+    margin: "0 0 28px 0",
     width: "100%",
   },
   tallFigure: {
     float: "left",
-    marginTop: "28px !important",
-    marginBottom: "8px",
+    marginTop: "9px !important",
+    marginBottom: "5px",
     paddingRight: "3.5% !important",
     width: "45%",
   },
-  img: {
-    width: "100%",
+  imgContainer: {
+    position: "relative",
+    "& img": {
+      width: "100%",
+    },
+    "& button": {
+      bottom: "20px",
+      left: "20px",
+      position: "absolute",
+    },
   },
-  caption: {
-    fontFamily: "Minion Pro",
-    fontSize: "14px",
-    lineHeight: "1.07",
-    marginTop: "7px",
+  carouselButton: {
+    backgroundColor: "#fff",
+    border: "none",
+    borderRadius: 0,
+    display: "flex",
+    alignItems: "center",
+    opacity: 0.8,
+    outline: "none",
+    padding: "8px 11px",
+    transitionDuration: ".3s",
+    "&:hover": {
+      opacity: 0.9,
+    },
   },
-  creditLine: {
-    color: "#888",
+  slidesIcon: {
+    width: "23px !important",
+  },
+  carouselImageCount: {
+    fontFamily: "Circular Std",
+    fontSize: "17px",
+    marginLeft: "12px",
   },
   "@media (max-width: 767px)": {
     tallFigure: {
@@ -43,93 +65,48 @@ class ArticleFeaturedMedia extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      imgHeight: 0,
-      imgWidth: 0,
+      isImageTall: false,
     };
   }
   componentDidMount() {
     const img = new Image();
-    img.src = this.props.featuredMedia.attachmentUrl;
-    img.onload = () => {
-      this.setState({
-        imgHeight: img.height,
-        imgWidth: img.width,
-      });
-    };
+    img.src = this.props.image.thumbAttachmentUrl;
+    img.onload = () =>
+      this.setState({ isImageTall: img.height > img.width * 1.2 });
   }
   render() {
-    const { classes, featuredMedia, isCaption } = this.props;
-    const { creator } = featuredMedia;
+    const {
+      classes,
+      image,
+      isCarouselButtonVisible,
+      carouselImageCount,
+      openLightbox,
+    } = this.props;
     return (
       <figure
-        className={
-          this.state.imgHeight > this.state.imgWidth * 1.2 ? (
-            classes.tallFigure
-          ) : (
-            classes.figure
-          )
-        }
+        className={this.state.isImageTall ? classes.tallFigure : classes.figure}
       >
-        <img className={classes.img} src={featuredMedia.attachmentUrl} />
-        {isCaption && (
-          <figcaption className={classes.caption}>
-            <span>
-              {featuredMedia.caption}
-              {featuredMedia.caption !== "" && "&nbsp;"}
-            </span>
-            <Link
-              className={classes.creditLine}
-              to={`/${MEDIA_CREATOR_SLUGS[
-                featuredMedia.mediaType
-              ]}/${creator.slug}`}
-            >
-              {capitalizeWord(featuredMedia.mediaType)}
-              &nbsp;by&nbsp;
-              {creator.firstName}
-              {creator.lastName !== "" && " " + creator.lastName}
-            </Link>
-            .
-          </figcaption>
-        )}
+        <div className={classes.imgContainer}>
+          <img className={classes.img} src={image.attachmentUrl} />
+          {isCarouselButtonVisible && (
+            <button className={classes.carouselButton} onClick={openLightbox}>
+              <img className={classes.slidesIcon} src="/img/slides.svg" />
+              <span className={classes.carouselImageCount}>
+                {carouselImageCount}
+              </span>
+            </button>
+          )}
+        </div>
+        <ArticleMediaCaption image={image} />
       </figure>
     );
   }
 }
-/*
-const ArticleFeaturedMedia = ({ classes, featuredMedia, isCaption }) => {
-  const { creator } = featuredMedia;
 
-  var figureIsTall = false;
-  const img = new Image();
-  let dimensions = []
-  img.src = featuredMedia.attachmentUrl;
-  return img.onload = () => {
-    return <p>hj</p>
-  }
-  console.log(dimensions);
-
-  return (
-    <figure className={figureIsTall ? classes.tallFigure : classes.figure}>
-      <img className={classes.img} src={featuredMedia.attachmentUrl} />
-      {isCaption && (
-        <figcaption className={classes.caption}>
-          <span>{featuredMedia.caption}&nbsp;</span>
-          <Link
-            className={classes.creditLine}
-            to={`/${MEDIA_CREATOR_SLUGS[
-              featuredMedia.mediaType
-            ]}/${creator.slug}`}
-          >
-            {capitalizeWord(featuredMedia.mediaType)}
-            &nbsp;by&nbsp;
-            {creator.firstName}
-            {creator.lastName !== "" && " " + creator.lastName}
-          </Link>
-          .
-        </figcaption>
-      )}
-    </figure>
-  );
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ openLightbox }, dispatch);
 };
-*/
-export default injectSheet(styles)(ArticleFeaturedMedia);
+
+export default connect(null, mapDispatchToProps)(
+  injectSheet(styles)(ArticleFeaturedMedia),
+);

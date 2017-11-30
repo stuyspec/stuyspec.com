@@ -71,7 +71,7 @@ const IllustratorPage = ({ classes, illustrator, articles }) => {
             {illustrator.email}
           </a>
           <p className={classes.description}>{illustrator.description}</p>
-          <div className={classes.latest}>Latest</div>
+          <div className={classes.latest}>Illustrations</div>
           <ArticleList articles={articles} />
         </Col>
       </Row>

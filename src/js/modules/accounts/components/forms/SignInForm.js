@@ -7,6 +7,7 @@ import { EMAIL_REGEX } from "../../../../constants";
 const styles = {
   SignInForm: {
     fontFamily: "Minion Pro",
+    width: "100%",
     "& form div": {
       // each Field
       marginBottom: "7px",
@@ -28,7 +29,7 @@ const styles = {
     height: "32px",
     marginTop: "15px",
     textAlign: "center",
-    width: "70px",
+    width: "90px",
     "&:disabled": {
       background: "#ddd",
       borderColor: "#ddd",
@@ -64,7 +65,7 @@ const renderField = ({
           type={type}
         />
         {touched &&
-          ((error && <span>{error}</span>) ||
+          ((error && <span style={{ color: "red" }}>{error}</span>) ||
             (warning && <span>{warning}</span>))}
       </div>
     </div>

@@ -22,8 +22,10 @@ const styles = {
     marginBottom: "3px",
     textTransform: "uppercase",
     width: "100%",
-    "&:hover": { color: "#000", textDecoration: "none" },
-    "&:focus": { color: "#000", textDecoration: "none" },
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none",
+    },
   },
   primaryArticle: {
     paddingLeft: "13px !important",
@@ -45,13 +47,7 @@ const styles = {
     fontWeight: "bold",
     lineHeight: 1.25,
     marginBottom: "7px",
-    "&:active": {
-      color: "#000",
-    },
-    "&:focus": {
-      color: "#000",
-    },
-    "&:hover": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },
@@ -114,21 +110,16 @@ const SectionFeature = ({
   classes,
   articles,
   section,
-  sections,
   media,
-  without,
+  without, // parents can exclude a specific article (for example, the featuredArticle of a page
 }) => {
-  let sectionArticles = [];
-  sectionArticles = Object.values(
-    Object.filter(
-      articles,
-      article => article.sectionId === section.id && article !== without,
-    ),
+  const sectionArticles = articles.filter(
+    article => article.sectionId === section.id && article !== without,
   );
   const primaryArticle =
-    sectionArticles[0] === Object.values(articles)[0]
+    sectionArticles[0] === articles[0]
       ? sectionArticles[1]
-      : sectionArticles[0];
+      : sectionArticles[0]; // we don't want to copy the homepage FeaturedArticle
   let featuredMedia = null;
   const secondaryArticle =
     sectionArticles.slice(1, 10).find(article => {
@@ -177,9 +168,11 @@ const SectionFeature = ({
           lg={4}
           className={classes.featuredMediaContainer}
         >
-          <figure className={classes.figure}>
-            <img src={featuredMedia.mediumAttachmentUrl} />
-          </figure>
+          <Link to={`${section.permalink}/${secondaryArticle.slug}`}>
+            <figure className={classes.figure}>
+              <img src={featuredMedia.mediumAttachmentUrl} />
+            </figure>
+          </Link>
         </Col>
       ) : (
         possibleTernaryArticle && (
@@ -248,7 +241,6 @@ const SectionFeature = ({
 const mapStateToProps = (state, ownProps) => ({
   articles: getArticlesWithContributors(state),
   media: state.media.media,
-  sections: state.sections.sections,
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(SectionFeature));

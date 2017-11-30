@@ -1,5 +1,4 @@
 import { createSelector } from "reselect";
-import appHistory from "../../tools/appHistory";
 
 export const getUsers = state => state.users.users;
 export const getRoles = state => state.users.roles;
@@ -20,7 +19,8 @@ export const getContributorFromSlug = createSelector(
     const user = Object.values(users).find(user => {
       return user.slug === requestedContributorSlug;
     });
-    if (user &&
+    if (
+      user &&
       userRoles.find(userRole => {
         return (
           userRole.userId === user.id &&
@@ -39,7 +39,8 @@ export const getIllustratorFromSlug = createSelector(
     const user = Object.values(users).find(user => {
       return user.slug === requestedIllustratorSlug;
     });
-    if (user &&
+    if (
+      user &&
       userRoles.find(userRole => {
         return (
           userRole.userId === user.id &&
@@ -58,7 +59,8 @@ export const getPhotographerFromSlug = createSelector(
     const user = Object.values(users).find(user => {
       return user.slug === requestedPhotographerSlug;
     });
-    if (user &&
+    if (
+      user &&
       userRoles.find(userRole => {
         return (
           userRole.userId === user.id &&

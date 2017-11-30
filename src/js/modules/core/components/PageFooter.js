@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 
-import { getDescriptions } from "../../descriptions/selectors";
 import { getTopLevelSectionsWithChildren } from "../../sections/selectors";
 
 const styles = {
@@ -32,12 +31,9 @@ const styles = {
     fontFamily: "Circular Std",
     fontStyle: "normal",
     fontWeight: "bold",
+    marginBottom: 0,
     textDecoration: "none",
-    "&:hover": {
-      color: "#000",
-      textDecoration: "none",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none",
     },
@@ -50,11 +46,7 @@ const styles = {
     fontStyle: "normal",
     fontWeight: "300",
     textDecoration: "none",
-    "&:hover": {
-      color: "#000",
-      textDecoration: "none",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none",
     },
@@ -66,19 +58,15 @@ const styles = {
     fontStyle: "normal",
     fontWeight: 400,
     paddingTop: "10px",
-    "&:hover": {
-      color: "#000",
-      textDecoration: "none",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none",
     },
   },
   aboutNavLinksMobile: {
     "& > div": {
-      // the surrounding section block
       border: 0,
+      paddingBottom: "1px",
     },
     "& > div > a": {
       // each about-us link
@@ -86,17 +74,21 @@ const styles = {
       color: "#aaa",
       fontSize: "12px",
       padding: "0 16px 6px 0",
-      "&:active": {
+      "&:hover, &:active, &:focus": {
         color: "#aaa",
         textDecoration: "underline",
       },
-      "&:focus": {
+    },
+  },
+  creditLine: {
+    color: "#aaa",
+    fontSize: "12px",
+    padding: "0 15px !important",
+    "& a": {
+      color: "#aaa",
+      textDecoration: "underline",
+      "&:hover, &:active, &:focus": {
         color: "#aaa",
-        textDecoration: "underline",
-      },
-      "&:hover": {
-        color: "#aaa",
-        textDecoration: "underline",
       },
     },
   },
@@ -123,15 +115,7 @@ const styles = {
     topLevelSectionLink: {
       fontSize: "15px",
       fontWeight: "500",
-      "&:active": {
-        color: "#000",
-        textDecoration: "none",
-      },
-      "&:focus": {
-        color: "#000",
-        textDecoration: "none",
-      },
-      "&:hover": {
+      "&:hover, &:active, &:focus": {
         color: "#000",
         textDecoration: "none",
       },
@@ -187,14 +171,24 @@ const PageFooter = ({
     });
     return (
       <div className={classes.sectionBlock} key="about">
-        <Link
-          className={classes.topLevelSectionLink}
-          key={-1}
-          to="/about/our-charter"
-        >
+        <p className={classes.topLevelSectionLink} key={-1}>
           About Us
-        </Link>
+        </p>
         {descriptionLinks}
+        <a
+          className={classes.subsectionLink}
+          key={-2}
+          href="https://issuu.com/stuyspectator"
+        >
+          Visual Archives
+        </a>
+        <a
+          className={classes.subsectionLink}
+          key={-3}
+          href="https://specapparel.strikingly.com/"
+        >
+          Apparel
+        </a>
       </div>
     );
   };
@@ -236,6 +230,13 @@ const PageFooter = ({
         >
           {createDescriptionLinks()}
         </Col>
+        {/*<Col xs={12} sm={10} smOffset={1} md={8} mdOffset={2} lg={8} lgOffset={2} className={classes.creditLine}>*/}
+        <Col xs={12} smHidden mdHidden lgHidden className={classes.creditLine}>
+          Created by{" "}
+          <Link to="https://github.com/stuyspec" target="_blank">
+            The Spectator Web Department
+          </Link>, 2017.
+        </Col>
       </Row>
     </Grid>
   );
@@ -243,7 +244,7 @@ const PageFooter = ({
 
 const mapStateToProps = state => ({
   topLevelSectionsWithChildren: getTopLevelSectionsWithChildren(state),
-  descriptions: getDescriptions(state),
+  descriptions: state.descriptions,
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(PageFooter));

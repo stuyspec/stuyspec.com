@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 
-import { getUsers } from "../../users/selectors";
-
 const styles = {
   Comment: {
     fontFamily: "Minion Pro",
@@ -57,7 +55,7 @@ const Comment = ({ classes, comment, users }) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  users: getUsers(state),
+  users: state.users.users,
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(Comment));

@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet";
 
 import { EditUserForm } from "./forms";
 import { updateUser } from "../actions";
+import { getCurrentUser } from "../selectors";
 
 const styles = {
   EditProfilePage: {
@@ -35,9 +36,9 @@ const styles = {
   },
 };
 
-const EditProfilePage = ({ classes, session, users, updateUser }) => {
+const EditProfilePage = ({ classes, sessionUser, updateUser }) => {
   const handleUpdateUser = values => {
-    updateUser(values, session.userId);
+    updateUser(values, sessionUser.id);
   };
   return (
     <Grid fluid className={classes.EditProfilePage}>
@@ -67,8 +68,7 @@ const EditProfilePage = ({ classes, session, users, updateUser }) => {
 };
 
 const mapStateToProps = state => ({
-  session: state.accounts.session,
-  users: state.users.users,
+  sessionUser: getCurrentUser(state),
 });
 
 const mapDispatchToProps = dispatch => {

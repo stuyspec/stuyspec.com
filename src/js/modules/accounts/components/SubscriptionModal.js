@@ -69,16 +69,17 @@ const SubscriptionModal = ({
     <Modal
       dialogClassName={classes.SubscriptionModal}
       show={isSubscriptionModalOpen}
+      onHide={closeSubscriptionModal}
     >
       <img
         className={classes.borough}
         src="https://i.imgur.com/4dYhg6S.png"
-        alt="borough"
+        title="Art by Vivian Lin (Class of '18)"
       />
       <img
         className={classes.playlist}
         src="https://i.imgur.com/zEV6AQ5.png"
-        alt="playlist"
+        title="Art by Vivian Lin (Class of '18)"
       />
       <p className={classes.newsletter}>Get The Spectator Newsletter.</p>
       <p className={classes.inbox}>Delivered directly to your inbox.</p>
@@ -93,7 +94,7 @@ const SubscriptionModal = ({
       <img
         className={classes.film}
         src="https://i.imgur.com/CY9Xf3s.png"
-        alt="film"
+        title="Art by Karen Lai (Class of '19)"
       />
     </Modal>
   );

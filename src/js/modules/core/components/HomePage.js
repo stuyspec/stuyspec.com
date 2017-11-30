@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
-import { Link } from "react-router-dom";
 
 import { getArticlesWithContributors } from "../../articles/selectors";
 
@@ -47,7 +46,7 @@ const HomePage = ({ classes, sections, articles, media }) => {
   const newsSection = Object.values(sections).find(
     section => section.name === "News",
   );
-  const featuredArticle = Object.values(articles).find(
+  const featuredArticle = articles.find(
     article =>
       sections[article.sectionId]["name"] !== "News" &&
       Object.values(media).find(
@@ -55,7 +54,7 @@ const HomePage = ({ classes, sections, articles, media }) => {
       ),
   );
   let recommendedArticles = [];
-  for (article of Object.values(articles)) {
+  for (article of articles) {
     if (recommendedArticles.length >= 5) {
       break;
     }
@@ -77,7 +76,6 @@ const HomePage = ({ classes, sections, articles, media }) => {
   ].map(sectionName =>
     Object.values(sections).find(section => section.name === sectionName),
   );
-  // TODO: big components should be moved out of Col's and have their own
   return (
     <div>
       <Grid fluid>

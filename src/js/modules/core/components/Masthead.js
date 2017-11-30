@@ -25,11 +25,7 @@ const styles = {
     fontFamily: "Old English Text MT",
     fontSize: "75px",
     marginBottom: "10px",
-    "&:hover": {
-      color: "#000",
-      textDecoration: "none",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none",
     },
@@ -55,18 +51,16 @@ const styles = {
     display: "inline",
     margin: "0px 13px",
   },
+  navSearchButton: {
+    top: "-1px",
+    position: "relative",
+  },
   sectionLink: {
     color: "#000",
     fontSize: "13px",
     fontWeight: 300,
     textDecoration: "none",
-    "&:hover": {
-      color: "#000",
-    },
-    "&:active": {
-      color: "#000",
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#000",
     },
   },
@@ -83,14 +77,46 @@ const styles = {
     fontSize: "14px",
     fontWeight: "bold",
     textAlign: "center",
-    color: "#000000",
+    color: "#000",
   },
   subscribeText: {
     fontFamily: "Circular Std",
     fontSize: "15px",
     fontWeight: "bold",
     textAlign: "center",
-    color: "#ffffff",
+    color: "#fff",
+  },
+  signedInNav: {
+    top: "5px",
+    display: "flex",
+    position: "relative",
+  },
+  myAccount: {
+    display: "inline",
+    fontFamily: "Circular Std",
+    fontSize: "14px",
+    fontWeight: "bold",
+    color: "#000",
+    transitionDuration: ".3s",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+    },
+  },
+  searchLink: {
+    color: "#000",
+    position: "relative",
+    height: "17px",
+    width: "17px",
+    marginLeft: "15px",
+    top: "1px",
+    "& svg": {
+      height: "100%",
+      width: "100%",
+    },
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none",
+    },
   },
   subscribeTo: {
     position: "relative",
@@ -117,10 +143,12 @@ const styles = {
   },
 };
 
-const SectionStyles = {
-  Sec: {
+const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+const isFirefox = navigator.userAgent.indexOf("Firefox") > -1;
+
+const navButtonStyles = {
+  Sections: {
     position: "relative",
-    // left: "35vh",
     top: "3vh",
     width: "103px",
     height: "39px",
@@ -137,23 +165,19 @@ const SectionStyles = {
       color: "#888",
     },
   },
-};
-
-const SubscribeStyles = {
-  Sub: {
+  Subscribe: {
     width: "116px",
     height: "39px",
+    position: "relative",
     borderRadius: 0,
     borderTopLeftRadius: "4px",
     borderBottomLeftRadius: "4px",
-    backgroundColor: "#4e6a9e",
-    border: "solid 1.5px #4e6a9e",
+    backgroundColor: "#DB2B39",
+    border: "solid 1.5px #DB2B39",
     display: "inline",
+    top: isSafari ? "-20px" : isFirefox ? "-4px" : "0",
   },
-};
-
-const SignInStyles = {
-  Sign: {
+  SignIn: {
     borderRadius: 0,
     borderTopRightRadius: "4px",
     borderBottomRightRadius: "4px",
@@ -170,7 +194,6 @@ const SignInStyles = {
     "&:hover span": {
       color: "#888",
     },
-    // top: "19px",
   },
 };
 
@@ -182,9 +205,7 @@ const NavButton = ({ children, onClick, classes, type }) => {
   );
 };
 
-const StyledSectionButton = injectSheet(SectionStyles)(NavButton);
-const StyledSubscribeButton = injectSheet(SubscribeStyles)(NavButton);
-const StyledSignInButton = injectSheet(SignInStyles)(NavButton);
+const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 
 const Masthead = ({
   classes,
@@ -193,36 +214,54 @@ const Masthead = ({
   session,
   openSubscriptionModal,
 }) => {
-  const unwantedSectionNames = ["Art", "Photo", "Video"];
+  const unwantedSectionNames = ["Art", "Photo", "Video", "10/31 Terror Attack"];
   return (
     <div className={classes.Masthead}>
-      <StyledSectionButton onClick={openSidebar} type="Sec">
+      <StyledNavButton onClick={openSidebar} type="Sections">
         <Hamburger className={classes.hamburger} />
         <span className={classes.buttonName}>Sections</span>
-      </StyledSectionButton>
+      </StyledNavButton>
       <Link className={classes.theSpectatorLogo} to="/">
         The Spectator
       </Link>
-      {!session.userId && (
-        <table className={classes.positioning}>
-          <th>
-            <StyledSubscribeButton onClick={openSubscriptionModal} type="Sub">
-              <span className={classes.subscribeText}>Subscribe</span>
-              <br />
-              <span className={classes.subscribeTo}>to our newsletter</span>
-            </StyledSubscribeButton>
-          </th>
-          <th>
-            <div className={classes.userTools}>
-              <Link to="/myaccount/profile">
-                <StyledSignInButton type="Sign">
-                  <span className={classes.signInText}>Sign In</span>
-                </StyledSignInButton>
-              </Link>
-            </div>
-          </th>
-        </table>
-      )}
+      <table className={classes.positioning}>
+        <tbody>
+          <tr>
+            <th id="problematic-subscribe-button-container-in-moz">
+            {session ? (
+              <div className={classes.signedInNav}>
+                <Link to="/myaccount/profile" className={classes.myAccount}>
+                  My Account
+                </Link>
+                <Link to="/search" className={classes.searchLink}>
+                  <Search className={classes.searchButton} />
+                </Link>
+              </div>
+            ) : (
+              <StyledNavButton
+                onClick={openSubscriptionModal}
+                type="Subscribe"
+              >
+                <span className={classes.subscribeText}>Subscribe</span>
+                <br />
+                <span className={classes.subscribeTo}>to our newsletter</span>
+              </StyledNavButton>
+            )}
+            </th>
+            {!session && (
+              <th>
+                <div className={classes.userTools}>
+                  <Link to="/myaccount/profile">
+                    <StyledNavButton type="SignIn">
+                      <span className={classes.signInText}>Sign In</span>
+                    </StyledNavButton>
+                  </Link>
+                </div>
+              </th>
+            )}
+          </tr>
+        </tbody>
+      </table>
       <ul className={classes.sectionLinksNav}>
         {Object.values(sections).map(section => {
           if (!unwantedSectionNames.includes(section.name)) {
@@ -248,6 +287,11 @@ const Masthead = ({
         <li key={-2} className={classes.sectionListItem}>
           <Link to={"/paper"} className={classes.sectionLink}>
             The Paper
+          </Link>
+        </li>
+        <li key={-3} className={classes.sectionListItem}>
+          <Link to="/search" className={classes.sectionLink}>
+            <Search className={classes.navSearchButton} />
           </Link>
         </li>
       */}
