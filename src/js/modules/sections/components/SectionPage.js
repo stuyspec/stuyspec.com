@@ -244,6 +244,10 @@ const SectionPage = ({
         return false;
       }
     }
+    if (section.name === "Arts & Entertainment") {
+      return article.id === 234;
+      // A HARDCODED ARTICLE
+    }
     return Object.values(media).find(medium => medium.articleId === article.id);
   });
   const featuredMedia = Object.values(media).find(

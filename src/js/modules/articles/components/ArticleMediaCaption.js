@@ -11,7 +11,7 @@ const styles = {
     fontFamily: "Minion Pro",
     fontSize: "14px",
     lineHeight: "1.1",
-    marginTop: "7px",
+    marginTop: "10px",
   },
   creditLine: {
     color: "#888",

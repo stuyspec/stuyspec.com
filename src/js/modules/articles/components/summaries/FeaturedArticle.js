@@ -60,8 +60,10 @@ const styles = {
   figure: {
     maxHeight: "480px",
     overflow: "hidden",
+    height: "350px", // HARDCODED
     "& img": {
-      width: "100%",
+      // width: "100%",
+      height: "100%", // HARDCODED
     },
   },
   "@media (max-width: 767px)": {
