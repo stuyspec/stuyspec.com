@@ -75,7 +75,9 @@ const styles = {
       padding: "0 !important",
     },
     figure: {
-      maxHeight: "50vw",
+      overflow: "visible",
+      height: "auto",
+      maxHeight: "none",
       "& img": {
         marginLeft: "-14px",
         width: "100vw",
