@@ -29,6 +29,9 @@ const styles = {
     borderBottom: "1px solid #ddd",
     paddingBottom: "18px",
   },
+  featuredMediaContainer: {
+    overflow: "visible",
+  },
   featuredMedia: {
     "& figure": {
       margin: 0,
@@ -316,7 +319,7 @@ const SectionPage = ({
             <Link
               to={`${featuredArticleSection.permalink}/${featuredArticle.slug}`}
             >
-              <figure>
+              <figure className={classes.featuredMediaContainer}>
                 <img src={featuredMedia.attachmentUrl} />
               </figure>
             </Link>

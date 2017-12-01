@@ -53,7 +53,7 @@ const styles = {
   },
   "@media (max-width: 767px)": {
     tallFigure: {
-      "& img": {
+      "& > div > img": {
         marginLeft: "0 !important",
         width: "100% !important",
       },

@@ -25,6 +25,11 @@ const styles = {
     "& p": {
       marginBottom: "20px",
     },
+    "& h4": {
+      textAlign: "center",
+      fontWeight: "bold",
+      textTransform: "uppercase",
+    },
     "& p:first-child": {
       marginTop: "8px",
     },
