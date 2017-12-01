@@ -143,9 +143,6 @@ const styles = {
   },
 };
 
-const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
-const isFirefox = navigator.userAgent.indexOf("Firefox") > -1;
-
 const navButtonStyles = {
   Sections: {
     position: "relative",
@@ -175,7 +172,6 @@ const navButtonStyles = {
     backgroundColor: "#DB2B39",
     border: "solid 1.5px #DB2B39",
     display: "inline",
-    top: isSafari ? "-20px" : isFirefox ? "-4px" : "0",
   },
   SignIn: {
     borderRadius: 0,

@@ -90,8 +90,8 @@ const reducer = (state = { ...initialState }, action) => {
         status: {
           errors: [],
           formName: "signUp",
-          message:
-            "Welcome! You can confirm your account through the link sent to the email you signed up with.",
+          message: "You are now able to sign in."
+            // "Welcome! You can confirm your account through the link sent to the email you signed up with.",
         },
       };
     }
