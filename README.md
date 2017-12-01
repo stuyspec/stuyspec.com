@@ -1,6 +1,8 @@
 # client-app
 The client-facing application of The Stuyvesant Spectator is built with [ReactJS](https://github.com/facebook/react). For the home page design, see [Behance](https://www.behance.net/gallery/58000077/The-SpectatorA-New-Look).
 
+
+![The Spectator home page](https://screenshots.firefoxusercontent.com/images/8c9ee5f7-ff54-4c83-908f-86d8ced4fe5c.png)
 ## Getting started
 _Requirement: [Git](https://help.github.com/articles/set-up-git/)_
 1. Clone the repo (default branch is `develop`): 
