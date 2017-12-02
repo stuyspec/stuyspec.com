@@ -15,10 +15,8 @@ export const shortenSummary = article => {
   } else if (article.summary === '') {
     articleSummary = article.content
       .replace(SPEC_REFERENCE_PATTERN, '')
-      .replace('<p>', '')  // all content starts with one '<p>'
-    while (articleSummary.includes('</p><p>')) {
-      articleSummary = articleSummary.replace('</p><p>', ' ');
-    }
+    articleSummary = articleSummary.replace(/<p>|<\/p>/g, '');
+    articleSummary = articleSummary.replace(/<h4>|<\/h4>/g, '');
     return articleSummary
       .split(" ")
       .slice(0, 24)
