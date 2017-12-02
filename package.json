@@ -1,8 +1,13 @@
 {
   "name": "client-app",
   "displayName": "client-app",
-  "version": "0.0.1",
-  "description": "Time to get to making stuff!",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stuyspec/client-app.git"
+  },
+  "license": "MIT",
+  "description": "The client-facing application of The Stuyvesant Spectator",
   "main": "app.js",
   "scripts": {
     "start": "gulp build && node app",
@@ -81,6 +86,7 @@
     "qs": "^6.5.1",
     "react-bootstrap": "^0.31.3",
     "react-favicon": "0.0.9",
+    "react-ga": "^2.3.5",
     "react-helmet": "^5.2.0",
     "react-icons": "^2.2.7",
     "react-loading": "^1.0.2",
