@@ -29,9 +29,6 @@ const styles = {
     borderBottom: "1px solid #ddd",
     paddingBottom: "18px",
   },
-  featuredMediaContainer: {
-    overflow: "visible",
-  },
   featuredMedia: {
     "& figure": {
       margin: 0,
@@ -102,6 +99,7 @@ const styles = {
   subsectionListItem: {
     borderBottom: "solid 1px #ddd",
     display: "inline",
+    marginBottom: "5px",
     textDecoration: "none",
     padding: "0 26px 10px 0",
     "&:last-child": {
@@ -249,6 +247,10 @@ const SectionPage = ({
     }
     if (section.name === "Arts & Entertainment") {
       return article.id === 234;
+      // A HARDCODED ARTICLE
+    }
+    if (section.name === "Features") {
+      return article.id === 196;
       // A HARDCODED ARTICLE
     }
     return Object.values(media).find(medium => medium.articleId === article.id);

@@ -58,7 +58,7 @@ const styles = {
     margin: "0 0 12px 0",
   },
   figure: {
-    height: "240px",
+    maxHeight: "240px",
     overflow: "hidden",
     "& img": {
       width: "100%",
@@ -72,7 +72,7 @@ const styles = {
   mobileArticleTitle1: {
     borderTop: "1px solid #ddd !important",
     marginTop: "14px",
-    padding: "12px 7px 8px 7px",
+    padding: "12px 7px 8px 0",
     "& a": {
       fontSize: "22px",
       marginBottom: 0,
@@ -80,7 +80,7 @@ const styles = {
   },
   mobileArticleTitle2: {
     borderTop: "1px solid #ddd !important",
-    padding: "12px 7px 2px 7px",
+    padding: "12px 7px 2px 0",
     "& a": {
       fontSize: "22px",
       marginBottom: 0,

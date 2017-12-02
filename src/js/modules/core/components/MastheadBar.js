@@ -40,7 +40,7 @@ const styles = {
     fontFamily: "Old English Text MT",
     fontSize: "26px",
     left: "50%",
-    marginTop: "2px",
+    marginTop: "1px",
     position: "absolute",
     textDecoration: "none",
     transform: "translate(-50%,0)",

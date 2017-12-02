@@ -54,11 +54,11 @@ const styles = {
     lineHeight: 1.29,
   },
   featuredMedia: {
+    maxHeight: "360px",
+    overflow: "hidden",
     paddingLeft: "14px !important",
     paddingRight: 0,
-    height: "360px",
-    overflow: "hidden",
-    "& > a >figure > img": {
+    "& > a > figure > img": {
       width: "100%",
     },
   },
@@ -76,7 +76,6 @@ const styles = {
     featuredMedia: {
       height: "auto",
       marginBottom: "18px",
-      overflow: "visible",
       paddingLeft: "0 !important",
       paddingTop: "14px",
       "& figure img": {
