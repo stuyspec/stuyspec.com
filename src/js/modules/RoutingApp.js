@@ -25,6 +25,7 @@ import {
 } from "./core/components";
 import { DescriptionPage } from "./descriptions/components";
 import { SectionPage } from "./sections/components";
+import NewspaperPage from "./newspapers/components/NewspaperPage";
 import {
   ContributorPage,
   PhotographerPage,
@@ -182,6 +183,10 @@ class RoutingApp extends Component {
                   key={"search"}
                   component={SearchPage}
                 />
+                <Route
+                  path={"/volume/:volume_num/issue/:issue_num"}
+                  key={"newspapers"}
+                  render={props => <NewspaperPage match={props.match} />}/>
                 <Route
                   path="/404-page-not-found"
                   key={"notFound"}
