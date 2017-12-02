@@ -69,7 +69,7 @@ const SidebarContent = ({
      * sections and one separating the non-writing sections from the user
      * account options.
      */
-    if (section.name === "Sports" /* || section.name === "Photo"*/) {
+    if (section.name === "Sports" || section.name === "10/31 Terror Attack") {
       sidebarElements.push(
         <hr className={classes.divider} key={section.id + 100} />,
       );

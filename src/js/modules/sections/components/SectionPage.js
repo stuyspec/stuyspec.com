@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import { Helmet } from "react-helmet";
 
-import { isObjectEmpty } from "../../../utils";
 import { ArticleList } from "../../articles/components";
 import { getSectionTreeArticles } from "../../articles/selectors";
 import { getDirectSubsections } from "../../sections/selectors";
@@ -126,11 +125,6 @@ const styles = {
       margin: 0,
     },
   },
-  emptySpace: {
-    height: "20px",
-    margin: 0,
-    padding: 0,
-  },
   sectionColumnContainer: {
     "& > div": {
       borderLeft: "none",
@@ -205,6 +199,7 @@ const SectionPage = ({
   sectionTreeArticles,
   directSubsections,
   section,
+  sections,
   media,
 }) => {
   if (section.parentId || section.name === "News") {
@@ -280,15 +275,23 @@ const SectionPage = ({
   } else if (section.name === "Humor") {
     hardcodedSubsection = "Spooktator";
   }
-  const featuredSubsection = Object.values(
-    directSubsections,
-  ).find(subsection => {
-    if (hardcodedSubsection) {
-      return subsection.name === hardcodedSubsection;
-    } else {
-      return subsection.id !== featuredArticle.sectionId;
-    }
-  });
+
+  let featuredSubsection = null;
+  if (section.name === "10/31 Terror Attack") {
+    // 10/31 has no subsections, but many students published Creative 
+    // Responses (their creative pieces in response to the attack).
+    featuredSubsection = Object.values(sections).find(section => section.name === "Creative Responses");
+  } else {
+    featuredSubsection = Object.values(
+      directSubsections,
+    ).find(subsection => {
+      if (hardcodedSubsection) {
+        return subsection.name === hardcodedSubsection;
+      } else {
+        return subsection.id !== featuredArticle.sectionId;
+      }
+    });
+  }
 
   return (
     <Grid fluid className={classes.SectionPage}>
@@ -296,25 +299,31 @@ const SectionPage = ({
         <title>{section.name}</title>
         <meta />
       </Helmet>
-      {isObjectEmpty(directSubsections) ? (
-        <div className={classes.emptySpace} />
+      <ul className={classes.subsectionBar}>
+      {section.name === "10/31 Terror Attack" ? (
+        <li className={classes.subsectionListItem}>
+          <Link
+            className={classes.subsectionLink}
+            to={featuredSubsection.permalink}
+          >
+            {featuredSubsection.name}
+          </Link>
+        </li>
       ) : (
-        <ul className={classes.subsectionBar}>
-          {Object.values(directSubsections).map(subsection => {
-            return (
-              <li className={classes.subsectionListItem} key={subsection.id}>
-                <Link
-                  className={classes.subsectionLink}
-                  to={subsection.permalink}
-                >
-                  {subsection.name}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        Object.values(directSubsections).map(subsection => {
+          return (
+            <li className={classes.subsectionListItem} key={subsection.id}>
+              <Link
+                className={classes.subsectionLink}
+                to={subsection.permalink}
+              >
+                {subsection.name}
+              </Link>
+            </li>
+          );
+        })
       )}
-
+      </ul>
       <Row className={classes.featuredRow}>
         {featuredMedia && (
           <Col xs={12} sm={7} md={7} lg={7} className={classes.featuredMedia}>
