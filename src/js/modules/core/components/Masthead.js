@@ -210,7 +210,6 @@ const Masthead = ({
   session,
   openSubscriptionModal,
 }) => {
-  const unwantedSectionNames = ["Art", "Photo", "Video", "10/31 Terror Attack"];
   return (
     <div className={classes.Masthead}>
       <StyledNavButton onClick={openSidebar} type="Sections">
@@ -223,7 +222,7 @@ const Masthead = ({
       <table className={classes.positioning}>
         <tbody>
           <tr>
-            <th id="problematic-subscribe-button-container-in-moz">
+            <th>
             {session ? (
               <div className={classes.signedInNav}>
                 <Link to="/myaccount/profile" className={classes.myAccount}>
@@ -260,15 +259,13 @@ const Masthead = ({
       </table>
       <ul className={classes.sectionLinksNav}>
         {Object.values(sections).map(section => {
-          if (!unwantedSectionNames.includes(section.name)) {
-            return (
-              <li key={section.id} className={classes.sectionListItem}>
-                <Link to={section.permalink} className={classes.sectionLink}>
-                  {section.name}
-                </Link>
-              </li>
-            );
-          }
+          return (
+            <li key={section.id} className={classes.sectionListItem}>
+              <Link to={section.permalink} className={classes.sectionLink}>
+                {section.name}
+              </Link>
+            </li>
+          );
         })}
         <li key={-1} className={classes.sectionListItem}>
           <Link
