@@ -59,7 +59,7 @@ const ArticleList = ({ classes, articles, title, label }) => {
           <figure className={classes.voicesBanner}>
             <img
               src="/img/voices_banner.png"
-              alt="VOICES"
+              alt="VOICES Banner by Vivian Lin (Class of '18)"
               title="Art by Vivian Lin (Class of '18)"
             />
           </figure>

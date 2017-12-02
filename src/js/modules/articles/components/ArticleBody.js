@@ -85,27 +85,6 @@ const ArticleBody = ({
   articles,
   media,
 }) => {
-  /*
-  const generateFigure = (match, string, offset) => {
-    const image = media[parseInt(string)];
-    if (image) {
-      return `<figure>
-          <img src={image.attachmentUrl} alt={image.title}/>
-          <figcaption>{image.caption}</figcaption>
-        </figure>`;
-    } else {
-      return `<figure>
-          <img src={`mediaId:${string}`} alt={Media not found.}/>
-        </figure>`;
-    }
-  };
-  // overlap of first spec-img afind = 0; and regular figure and artifletaeuerdmedia
-  specImgPattern = /<spec-img id=(\d)><\/spec-img>/;
-  while (specImgPattern.test(content)) {
-    content = content.replace(specImgPattern, generateFigure);
-  }
-  */
-  //  featuredMedia = Object.values(articleMedia).find(image => image.isFeatured);
   const isCarouselButtonVisible =
     SPEC_IMG_CAROUSEL_PATTERN.test(content) && Object.values(media).length > 0;
   const referencedArticleId = SPEC_REFERENCE_PATTERN.test(content)

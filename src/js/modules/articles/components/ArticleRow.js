@@ -108,7 +108,7 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
               <figure className={classes.figure}>
                 <img
                   src={featuredMedia.attachmentUrl}
-                  alt={featuredMedia.title}
+                  alt={`${featuredMedia.mediaType}: ${featuredMedia.title}`}
                 />
               </figure>
             </Link>

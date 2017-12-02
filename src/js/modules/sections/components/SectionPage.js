@@ -21,7 +21,7 @@ import { TallAd } from "../../advertisements/components/index";
 
 const styles = {
   subsectionBar: {
-    margin: "0 0 28px 0",
+    margin: "0 0 20px 0",
     padding: 0,
     textAlign: "center",
   },
@@ -98,7 +98,7 @@ const styles = {
   },
   subsectionListItem: {
     borderBottom: "solid 1px #ddd",
-    display: "inline",
+    display: "inline-block",
     marginBottom: "5px",
     textDecoration: "none",
     padding: "0 26px 10px 0",
@@ -164,10 +164,6 @@ const styles = {
       paddingTop: "3vw",
       width: "41.666666%", // col-sm-5
     },
-    featuredArticleTitle: {
-      fontSize: "4vw",
-      lineHeight: "4.4vw",
-    },
     featuredArticleSummary: {
       margin: "0 auto 18px auto",
       width: "80%",
@@ -191,6 +187,10 @@ const styles = {
     featuredArticle: {
       padding: "14px 0 0 0 !important",
       width: "100%",
+    },
+    featuredArticleTitle: {
+      fontSize: "30px",
+      lineHeight: "36px",
     },
     SectionFeatureContainer: {
       borderBottom: 0,
