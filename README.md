@@ -29,7 +29,7 @@ gulp
 To set up the server, follow the instructions on our the README of our [API](https://github.com/stuyspec/stuy-spec-api).
 In your `.env` file, add:
 ```
-PG_HOST=localhost
+PG_HOST:localhost
 ```
 
 ## Coding environment
