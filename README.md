@@ -26,8 +26,11 @@ npm install
 gulp
 ```
 
-### Setting up the server (yes, we are working on getting Docker set up)
 To set up the server, follow the instructions on our the README of our [API](https://github.com/stuyspec/stuy-spec-api).
+In your `.env` file, add:
+```
+PG_HOST=localhost
+```
 
 ## Coding environment
 **WebStorm**: the smartest JavaScript IDE (powerful, but will lag on weak computers). Get a free student license at [JetBrains](https://www.jetbrains.com/student/), then download and install WebStorm.
