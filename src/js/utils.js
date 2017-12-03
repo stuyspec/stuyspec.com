@@ -1,4 +1,4 @@
-import { SPEC_REFERENCE_PATTERN } from "./constants";
+import { SPEC_REFERENCE_PATTERN, SPEC_IMG_CAROUSEL_PATTERN } from "./constants";
 
 export const capitalizeWord = string => {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -15,8 +15,9 @@ export const shortenSummary = article => {
   } else if (article.summary === '') {
     articleSummary = article.content
       .replace(SPEC_REFERENCE_PATTERN, '')
-    articleSummary = articleSummary.replace(/<p>|<\/p>/g, '');
-    articleSummary = articleSummary.replace(/<h4>|<\/h4>/g, '');
+      .replace(SPEC_IMG_CAROUSEL_PATTERN, '')
+      .replace(/<p>|<\/p>/g, '')
+      .replace(/<h4>|<\/h4>/g, '');
     return articleSummary
       .split(" ")
       .slice(0, 24)
