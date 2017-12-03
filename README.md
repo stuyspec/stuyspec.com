@@ -2,11 +2,10 @@
 The client-facing application of The Stuyvesant Spectator is built with [React](https://github.com/facebook/react). For the home page design, see [Behance](https://www.behance.net/gallery/58000077/The-SpectatorA-New-Look).
 
 
-The Home Page:
+_The home page._
 ![The Spectator home page](https://screenshots.firefoxusercontent.com/images/8c9ee5f7-ff54-4c83-908f-86d8ced4fe5c.png)  
 
-
-Section page for the 10/31 Terror Attack:
+_Section page for the 10/31 Terror Attack._
 ![10/31 Terror Attack](https://screenshots.firefoxusercontent.com/images/bdfbe05c-d562-4781-891f-62b30fc68748.png)
 ## Getting started
 _Requirement: [Git](https://help.github.com/articles/set-up-git/)_
