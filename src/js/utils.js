@@ -16,12 +16,13 @@ export const shortenSummary = article => {
     articleSummary = article.content
       .replace(SPEC_REFERENCE_PATTERN, '')
       .replace(SPEC_IMG_CAROUSEL_PATTERN, '')
-      .replace(/<p>|<\/p>/g, '')
-      .replace(/<h4>|<\/h4>/g, '');
+      .replace(/<p>|<\/p>|<br>|<br\/>|<b>/g, '')
+      .replace(/<h4>|<\/h4>/g, '')
+      .replace(/<\/b>/g, ' ');
     return articleSummary
       .split(" ")
       .slice(0, 24)
-      .join(" ") + "...";     
+      .join(" ") + "...";
   } else {
     articleSummary = articleSummary.join(" ");
   }
