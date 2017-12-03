@@ -56,8 +56,7 @@ const styles = {
   featuredMedia: {
     maxHeight: "360px",
     overflow: "hidden",
-    paddingLeft: "14px !important",
-    paddingRight: 0,
+    padding: "0 14px !important",
     "& > a > figure > img": {
       width: "100%",
     },
