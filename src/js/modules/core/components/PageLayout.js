@@ -97,7 +97,7 @@ class PageLayout extends Component {
               content="newspaper,news,Stuyvesant,stuyvesant,highschool,humor,opinions,sports,arts,entertainment,articles,Spectator,spectator,knowledge,intelligence,pulse,manhattan,specialized,writers,photos"
             />
           </Helmet>
-          <Favicon url="img/logo.png" />
+          <Favicon url="/img/logo.png" />
           <div className={classes.PageContainer}>
             {children}
             <Grid fluid className={classes.footerAd}>
