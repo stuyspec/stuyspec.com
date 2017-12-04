@@ -66,6 +66,30 @@ const styles = {
       height: "100%", // HARDCODED
     },
   },
+
+
+  /* HARDCODED STYLES FOR SPECIFIC FEATURED ARTICLE */
+  FeaturedArticle: {
+    paddingBottom: "24px",
+    "& #muslim-student-crying-figure": {
+      height: "420px",
+      "& img": {
+        width: "80%",
+        margin: "0 auto",
+        display: "block",
+        height: "auto",
+      }
+    }
+  },
+  "@media (min-width: 768px)": {
+    title: {
+      width: "125%",
+      display: "block",
+    },
+  },
+  /* HARDCODED STYLES FOR FEATURED ARTICLE ENDS */
+
+
   "@media (max-width: 767px)": {
     featuredMediaContainer: {
       marginBottom: "14px",
@@ -75,8 +99,8 @@ const styles = {
       padding: "0 !important",
     },
     figure: {
-      overflow: "visible",
-      height: "auto",
+      overflow: "hidden",
+      height: "auto !important",
       maxHeight: "none",
       "& img": {
         marginLeft: "-14px",
@@ -107,7 +131,7 @@ const FeaturedArticle = ({ classes, media, sections, article }) => {
       >
         {featuredMedia && (
           <Link to={`${section.permalink}/${article.slug}`}>
-            <figure className={classes.figure}>
+            <figure className={classes.figure} id="muslim-student-crying-figure">
               <img src={featuredMedia.attachmentUrl} />
             </figure>
           </Link>
