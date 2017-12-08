@@ -198,3 +198,66 @@ https://stackoverflow.com/a/8539107/6174302
 .row > div[class^="col-md"]:last-child {
     padding-right: 0;
 }
+
+.only-print {
+    display: none;
+}
+
+
+/* ========================= *
+ * PRINT STYLES 
+ * ========================= */
+ @media print {
+    * {
+        overflow: visible !important;
+        font-size: 18px;
+    }
+
+    .only-print {
+        display: block;
+    }
+
+    #branding {
+        font-family: "OldEnglishTextMT";
+        font-size: 30px;
+    }
+
+    img {
+        margin-left: 0 !important;
+    }
+
+    /* We assume MastheadBar has the className MastheadBar (part of CFA's code style) */
+    div[class^="MastheadBar-"],
+    div[class^="RecommendedRow-"],
+    div[class^="CommentThread-"],
+    div[class^="RightRail-"], 
+    div[class^="HorizontalAd-"], 
+    div[class^="PageFooter-"] {
+        display: none;
+    }
+
+    div[class^="ArticlePage-"] {
+        padding: 0 !important;
+    }
+
+    a[href]:after {
+        content: "";
+    }
+
+    abbr[title]:after {
+        content: "";
+    }
+
+    a[href^="javascript:"]:after,a[href^="#"]:after {
+        content: ""
+    }
+}
+
+
+
+
+
+
+
+
+

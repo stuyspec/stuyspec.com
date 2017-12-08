@@ -85,6 +85,7 @@ const styles = {
 const ArticleHeader = ({ classes, article, section }) => {
   return (
     <Row className={classes.headerRow}>
+      <p class="only-print" id="branding">The Stuyvesant Spectator</p>
       <Col xs={12} sm={12} md={12} lg={12} className={classes.ArticleHeader}>
         <Link to={section.permalink} className={classes.rubric}>
           {section.name}

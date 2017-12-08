@@ -72,7 +72,7 @@ class ArticleFeaturedMedia extends Component {
     const img = new Image();
     img.src = this.props.image.thumbAttachmentUrl;
     img.onload = () =>
-      this.setState({ isImageTall: img.height > img.width * 1.2 });
+      this.setState({ isImageTall: img.height > img.width * 1.3 });
   }
   render() {
     const {

@@ -64,6 +64,7 @@ const styles = {
     },
   },
   aboutNavLinksMobile: {
+    paddingLeft: "7px",
     "& > div": {
       border: 0,
       paddingBottom: "1px",
@@ -83,7 +84,8 @@ const styles = {
   creditLine: {
     color: "#aaa",
     fontSize: "12px",
-    padding: "0 15px !important",
+    padding: "0 15px",
+    paddingLeft: "7px",
     "& a": {
       color: "#aaa",
       textDecoration: "underline",
