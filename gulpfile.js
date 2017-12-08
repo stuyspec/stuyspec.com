@@ -306,7 +306,7 @@ let Events = {
 function scripts(p) {
   let watch = typeof p.watch !== "undefined" ? p.watch : true;
 
-  //set up our watcher
+  // Set up our watcher
   let b = browserify({
     extensions: [".js", ".json", ".es6", ".jsx"],
     entries: [Paths.ENTRY_POINT],
@@ -360,6 +360,12 @@ function scripts(p) {
         _global.DEV_MODE ? "http://localhost:3000" : "https://api.stuyspec.com"
       )
     );
+    stream = stream.pipe(
+      replace(
+        "__DEV_ENV_HERE__",
+        `"${process.env.NODE_ENV}"`
+      )
+    )
     if (watch && rebuild) {
       return stream.pipe(gulp.dest(Paths.DEST_DEV));
     } else {
@@ -468,8 +474,6 @@ gulp.task("welcome-build-notice", function() {
 gulp.task("welcome-dev-notice", function() {
   Log.startNotice("dev");
 });
-
-const STUY_SPEC_API_PROD_ENDPOINT = "https://api.stuyspec.com";
 
 gulp.task("create-js-build", function() {
   _global.DEV_MODE = false;
