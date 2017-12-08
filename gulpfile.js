@@ -363,7 +363,7 @@ function scripts(p) {
     stream = stream.pipe(
       replace(
         "__DEV_ENV_HERE__",
-        `"${process.env.NODE_ENV}"`
+        _global.DEV_MODE ? `'development'` : `'production'`
       )
     )
     if (watch && rebuild) {
