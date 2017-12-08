@@ -198,3 +198,116 @@ https://stackoverflow.com/a/8539107/6174302
 .row > div[class^="col-md"]:last-child {
     padding-right: 0;
 }
+
+.only-print {
+    display: none;
+}
+
+
+/* ========================= *
+ * PRINT STYLES 
+ * ========================= */
+ @media print {
+    * {
+        overflow: visible !important;
+        font-size: 18px;
+    }
+
+    .only-print {
+        display: block;
+    }
+
+    #branding {
+        font-family: "OldEnglishTextMT";
+        font-size: 30px;
+    }
+
+    img {
+        margin-left: 0 !important;
+    }
+
+    /* We assume MastheadBar has the className MastheadBar (part of CFA's code style) */
+    div[class^="MastheadBar-"],
+    div[class^="RecommendedRow-"],
+    div[class^="CommentThread-"],
+    div[class^="RightRail-"], 
+    div[class^="HorizontalAd-"], 
+    div[class^="PageFooter-"] {
+        display: none;
+    }
+
+    div[class^="ArticlePage-"] {
+        padding: 0 !important;
+    }
+
+    a[href]:after {
+        content: "";
+    }
+
+    abbr[title]:after {
+        content: "";
+    }
+
+    a[href^="javascript:"]:after,a[href^="#"]:after {
+        content: ""
+    }
+
+    blockquote,pre {
+        border: 1px solid #999;
+        page-break-inside: avoid
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    img,tr {
+        page-break-inside: avoid
+    }
+
+    img {
+        max-width: 100%!important
+    }
+
+    h2,h3,p {
+        orphans: 3;
+        widows: 3
+    }
+
+    h2,h3 {
+        page-break-after: avoid
+    }
+
+    .navbar {
+        display: none
+    }
+
+    .btn>.caret,.dropup>.btn>.caret {
+        border-top-color: #000!important
+    }
+
+    .label {
+        border: 1px solid #000
+    }
+
+    .table {
+        border-collapse: collapse!important
+    }
+
+    .table td,.table th {
+        background-color: #fff!important
+    }
+
+    .table-bordered td,.table-bordered th {
+        border: 1px solid #ddd!important
+    }
+}
+
+
+
+
+
+
+
+
+
