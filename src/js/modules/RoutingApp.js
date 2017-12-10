@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import { Route, Redirect, Switch } from "react-router-dom";
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import ConnectedRouter from "react-router-redux/ConnectedRouter";
 import appHistory from "tools/appHistory";
 
@@ -39,18 +39,18 @@ class RoutingApp extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    this.prepareData();
-  }
+  // componentDidMount() {
+  //   this.prepareData();
+  // }
 
-  // Separate function because it is reused for the DataErrorPage
-  prepareData = () => {
-    this.props.fetchAllData();
-    const session = localStorage.getItem("session");
-    if (session) {
-      this.props.sessionfy(JSON.parse(session));
-    }
-  };
+  // // Separate function because it is reused for the DataErrorPage
+  // prepareData = () => {
+  //   this.props.fetchAllData();
+  //   const session = localStorage.getItem("session");
+  //   if (session) {
+  //     this.props.sessionfy(JSON.parse(session));
+  //   }
+  // };
 
   render() {
     const {
@@ -64,156 +64,137 @@ class RoutingApp extends Component {
       <ConnectedRouter
         onUpdate={() => window.scrollTo(0, 0)}
         history={appHistory}
-      >
-        <div>
-          {isAllDataFetched && (
-            <PageLayout>
-              <Switch>
-                <Route exact path="/" component={HomePage} />
-                {Object.values(sections).map(section => {
-                  return (
-                    <Route
-                      exact
-                      path={section.permalink}
-                      key={`section${section.id}`}
-                      render={props => (
-                        <SectionPage match={props.match} section={section} />
-                      )}
-                    />
-                  );
-                })}
-                {Object.values(sections).map(section => {
-                  return (
-                    <Route
-                      exact
-                      path={`${section.permalink}/:article_slug`}
-                      key={`article${section.id}`}
-                      render={props => (
-                        <ArticlePage match={props.match} section={section} />
-                      )}
-                    />
-                  );
-                })}
-                {Object.values(descriptions).map(description => {
-                  return (
-                    <Route
-                      exact
-                      path={`/about/${description.slug}`}
-                      key={`description${description.id}`}
-                      render={props => (
-                        <DescriptionPage description={description} />
-                      )}
-                    />
-                  );
-                })}
+      >          
+        <PageLayout>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            {Object.values(sections).map(section => {
+              return (
                 <Route
                   exact
-                  path={"/contributors/:contributor_slug"}
-                  key={"contributors"}
-                  render={props => <ContributorPage match={props.match} />}
+                  path={section.permalink}
+                  key={`section${section.id}`}
+                  render={props => (
+                    <SectionPage match={props.match} section={section} />
+                  )}
                 />
+              );
+            })}
+            {Object.values(sections).map(section => {
+              return (
                 <Route
                   exact
-                  path={"/illustrators/:illustrator_slug"}
-                  key={"illustrators"}
-                  render={props => <IllustratorPage match={props.match} />}
+                  path={`${section.permalink}/:article_slug`}
+                  key={`article${section.id}`}
+                  render={props => (
+                    <ArticlePage match={props.match} section={section} />
+                  )}
                 />
+              );
+            })}
+            {Object.values(descriptions).map(description => {
+              return (
                 <Route
                   exact
-                  path={"/photographers/:photographer_slug"}
-                  key={"photographers"}
-                  render={props => <PhotographerPage match={props.match} />}
+                  path={`/about/${description.slug}`}
+                  key={`description${description.id}`}
+                  render={props => (
+                    <DescriptionPage description={description} />
+                  )}
                 />
-                <Route
-                  exact
-                  path={"/myaccount"}
-                  key={"signIn"}
-                  render={() =>
-                    session ? (
-                      <Redirect to="/myaccount/profile" />
-                    ) : (
-                      <SignInPage />
-                    )}
-                />
-                <Route
-                  exact
-                  path="/myaccount/sign-up"
-                  key={"signUp"}
-                  render={() =>
-                    session ? (
-                      <Redirect to="/myaccount/profile" />
-                    ) : (
-                      <SignUpPage />
-                    )}
-                />
-                <Route
-                  exact
-                  path="/myaccount/profile"
-                  key={"profile"}
-                  render={() =>
-                    session ? <ProfilePage /> : <Redirect to="/myaccount" />}
-                />
-                <Route
-                  exact
-                  path="/myaccount/profile/edit"
-                  key={"editProfile"}
-                  render={() =>
-                    session ? (
-                      <EditProfilePage />
-                    ) : (
-                      <Redirect to="/myaccount" />
-                    )}
-                />
-                <Route
-                  exact
-                  path={"/recommended"}
-                  key={"recommended"}
-                  component={RecommendedPage}
-                />
-                <Route
-                  exact
-                  path={"/latest"}
-                  key={"latest"}
-                  component={LatestPage}
-                />
-                <Route
-                  exact
-                  path={"/search"}
-                  key={"search"}
-                  component={SearchPage}
-                />
-                <Route
-                  path="/404-page-not-found"
-                  key={"notFound"}
-                  component={NotFoundPage}
-                />
-                <Route
-                  path="*"
-                  key={"404"}
-                  render={() => <Redirect to="/404-page-not-found" />}
-                />
-              </Switch>
-            </PageLayout>
-          )}
-          {initDataError && (
-            <DataErrorPage error={initDataError} action={this.prepareData} />
-          )}
-        </div>
+              );
+            })}
+            <Route
+              exact
+              path={"/contributors/:contributor_slug"}
+              key={"contributors"}
+              render={props => <ContributorPage match={props.match} />}
+            />
+            <Route
+              exact
+              path={"/illustrators/:illustrator_slug"}
+              key={"illustrators"}
+              render={props => <IllustratorPage match={props.match} />}
+            />
+            <Route
+              exact
+              path={"/photographers/:photographer_slug"}
+              key={"photographers"}
+              render={props => <PhotographerPage match={props.match} />}
+            />
+            <Route
+              exact
+              path={"/myaccount"}
+              key={"signIn"}
+              render={() =>
+                session ? (
+                  <Redirect to="/myaccount/profile" />
+                ) : (
+                  <SignInPage />
+                )}
+            />
+            <Route
+              exact
+              path="/myaccount/sign-up"
+              key={"signUp"}
+              render={() =>
+                session ? (
+                  <Redirect to="/myaccount/profile" />
+                ) : (
+                  <SignUpPage />
+                )}
+            />
+            <Route
+              exact
+              path="/myaccount/profile"
+              key={"profile"}
+              render={() =>
+                session ? <ProfilePage /> : <Redirect to="/myaccount" />}
+            />
+            <Route
+              exact
+              path="/myaccount/profile/edit"
+              key={"editProfile"}
+              render={() =>
+                session ? (
+                  <EditProfilePage />
+                ) : (
+                  <Redirect to="/myaccount" />
+                )}
+            />
+            <Route
+              exact
+              path={"/recommended"}
+              key={"recommended"}
+              component={RecommendedPage}
+            />
+            <Route
+              exact
+              path={"/latest"}
+              key={"latest"}
+              component={LatestPage}
+            />
+            <Route
+              exact
+              path={"/search"}
+              key={"search"}
+              component={SearchPage}
+            />
+            <Route
+              path="/404-page-not-found"
+              key={"notFound"}
+              component={NotFoundPage}
+            />
+            <Route
+              path="*"
+              key={"404"}
+              render={() => <Redirect to="/404-page-not-found" />}
+            />
+          </Switch>
+        </PageLayout>
       </ConnectedRouter>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  descriptions: state.descriptions,
-  sections: state.sections.sections,
-  session: state.accounts.session,
-  isAllDataFetched: state.core.isAllDataFetched,
-  initDataError: state.core.error,
-});
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchAllData, sessionfy }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(RoutingApp);
+export default RoutingApp;

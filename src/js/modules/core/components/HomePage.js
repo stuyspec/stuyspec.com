@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
-
-import { getArticlesWithContributors } from "../../articles/selectors";
 
 import {
   FeaturedArticle,
@@ -12,7 +11,6 @@ import {
   LeftColumn,
   RightColumn,
 } from "../../articles/components/summaries";
-
 import { SectionFeature, SectionColumn } from "../../sections/components";
 
 const styles = {
@@ -47,19 +45,20 @@ class HomePage extends Component {
     return nextProps.articles != nextState.articles;
   }
   render() {
-    const { classes, sections, articles, media } = this.props;
+    const { classes } = this.props;
+    const { allArticles } = this.props.data;
     const newsSection = Object.values(sections).find(
       section => section.name === "News",
     );
-    // const featuredArticle = articles.find(
-    //   article =>
-    //     sections[article.sectionId]["name"] !== "News" &&
-    //     Object.values(media).find(
-    //       media => media.articleId === article.id && media.isFeatured,
-    //     ),
-    // );
+    const featuredArticle = articles.find(
+      article =>
+        sections[article.sectionId]["name"] !== "News" &&
+        Object.values(media).find(
+          media => media.articleId === article.id && media.isFeatured,
+        ),
+    );
     /* A HARDCODED ARTICLE */
-    const featuredArticle = articles.find(article => article.id === 253)
+    // const featuredArticle = articles.find(article => article.id === 253)
     let recommendedArticles = [];
     for (article of articles) {
       if (recommendedArticles.length >= 5) {
@@ -128,10 +127,19 @@ class HomePage extends Component {
   }
 };
 
-const mapStateToProps = state => ({
-  articles: getArticlesWithContributors(state),
-  media: state.media.media,
-  sections: state.sections.sections,
-});
 
-export default connect(mapStateToProps)(injectSheet(styles)(HomePage));
+
+export default graphql(gql`
+  query ArticleQuery {
+    allArticles {
+      id
+      title
+      section_id
+      contributors {
+        id
+        first_name
+        last_name
+      }
+    }
+  }
+`)(injectSheet(styles)(HomePage));
