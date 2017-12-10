@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Helmet } from "react-helmet";
@@ -97,16 +99,12 @@ const ArticlePage = ({
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  article: getArticleFromRequestedSlug(state, ownProps),
-  sections: state.sections.sections,
-  media: getArticleMedia(state, ownProps),
-});
-
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ openSubscriptionModal }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
+export default graphql(gql`
+  
+`)(connect(null, mapDispatchToProps)(
   injectSheet(styles)(ArticlePage),
-);
+));
