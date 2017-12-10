@@ -5,6 +5,7 @@ import {
   SIGN_UP_FULFILLED,
   SIGN_UP_REJECTED,
   SIGN_UP_PENDING,
+  SIGN_UP_REDIRECT,
   SIGN_OUT_PENDING,
   SIGN_OUT_FULFILLED,
   SIGN_OUT_REJECTED,
@@ -62,7 +63,7 @@ const reducer = (state = { ...initialState }, action) => {
           message: "Successfully signed in.",
         },
       };
-    }
+    }signUp
     case SIGN_IN_REJECTED: {
       return {
         ...state,
@@ -73,7 +74,16 @@ const reducer = (state = { ...initialState }, action) => {
         },
       };
     }
-
+      case SIGN_UP_REDIRECT : {
+        return {
+            ...state,
+            status: {
+              errors: [],
+              formName: "signIn",
+              message:"Welcome! You can confirm your account through the link sent to the email you signed up with.",
+            },
+        };
+      }
     case SIGN_UP_PENDING: {
       return {
         ...state,
@@ -89,9 +99,8 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         status: {
           errors: [],
-          formName: "signUp",
-          message:
-            "Welcome! You can confirm your account through the link sent to the email you signed up with.",
+          formName: "signIn",
+          message: null,
         },
       };
     }
