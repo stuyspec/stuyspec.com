@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 
@@ -125,9 +125,7 @@ class HomePage extends Component {
       </div>
     );
   }
-};
-
-
+}
 
 export default graphql(gql`
   query ArticleQuery {

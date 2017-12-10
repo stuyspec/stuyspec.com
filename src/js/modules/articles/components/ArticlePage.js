@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Helmet } from "react-helmet";
@@ -105,6 +105,4 @@ const mapDispatchToProps = dispatch => {
 
 export default graphql(gql`
   
-`)(connect(null, mapDispatchToProps)(
-  injectSheet(styles)(ArticlePage),
-));
+`)(connect(null, mapDispatchToProps)(injectSheet(styles)(ArticlePage)));

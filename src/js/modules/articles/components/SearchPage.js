@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 import { Helmet } from "react-helmet";
-import ReactLoading from 'react-loading';
+import ReactLoading from "react-loading";
 
 import ArticleList from "./ArticleList";
 import { TallAd } from "../../advertisements/components";
@@ -42,7 +42,13 @@ const styles = {
   },
 };
 
-const SearchPage = ({ classes, articles, searchableIds, searchArticles, isSearching }) => {
+const SearchPage = ({
+  classes,
+  articles,
+  searchableIds,
+  searchArticles,
+  isSearching,
+}) => {
   const searchedArticles = articles.filter(article =>
     searchableIds.includes(article.id),
   );

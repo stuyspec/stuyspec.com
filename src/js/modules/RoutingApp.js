@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
 import ConnectedRouter from "react-router-redux/ConnectedRouter";
 import appHistory from "tools/appHistory";
 
@@ -64,7 +64,7 @@ class RoutingApp extends Component {
       <ConnectedRouter
         onUpdate={() => window.scrollTo(0, 0)}
         history={appHistory}
-      >          
+      >
         <PageLayout>
           <Switch>
             <Route exact path="/" component={HomePage} />
@@ -127,22 +127,14 @@ class RoutingApp extends Component {
               path={"/myaccount"}
               key={"signIn"}
               render={() =>
-                session ? (
-                  <Redirect to="/myaccount/profile" />
-                ) : (
-                  <SignInPage />
-                )}
+                session ? <Redirect to="/myaccount/profile" /> : <SignInPage />}
             />
             <Route
               exact
               path="/myaccount/sign-up"
               key={"signUp"}
               render={() =>
-                session ? (
-                  <Redirect to="/myaccount/profile" />
-                ) : (
-                  <SignUpPage />
-                )}
+                session ? <Redirect to="/myaccount/profile" /> : <SignUpPage />}
             />
             <Route
               exact
@@ -156,11 +148,7 @@ class RoutingApp extends Component {
               path="/myaccount/profile/edit"
               key={"editProfile"}
               render={() =>
-                session ? (
-                  <EditProfilePage />
-                ) : (
-                  <Redirect to="/myaccount" />
-                )}
+                session ? <EditProfilePage /> : <Redirect to="/myaccount" />}
             />
             <Route
               exact
