@@ -49,6 +49,10 @@ export const signUp = registrationParams => {
           type: CREATE_USER_FULFILLED,
           payload: response,
         });
+        appHistory.push("/myaccount");
+        dispatch({
+          type: t.SIGN_UP_REDIRECT,
+        });
       })
       .catch(err => {
         dispatch({

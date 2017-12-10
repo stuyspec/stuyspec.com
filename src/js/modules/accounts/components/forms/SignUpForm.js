@@ -131,11 +131,6 @@ const SignUpForm = ({ classes, handleSubmit, submitting, status }) => {
           </button>
         </div>
       </form>
-      {status.formName === "signUp" && (
-        <div>
-          <p key="success" className={classes.successMessage}>
-            {status.message}
-          </p>
           {status.errors.map((error, index) => {
             return (
               <p key={index} className={classes.errorMessage}>
@@ -143,8 +138,6 @@ const SignUpForm = ({ classes, handleSubmit, submitting, status }) => {
               </p>
             );
           })}
-        </div>
-      )}
     </div>
   );
 };
