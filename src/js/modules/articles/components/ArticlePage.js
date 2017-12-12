@@ -63,9 +63,8 @@ const styles = {
 const ArticlePage = ({ classes, data, openSubscriptionModal }) => {
   data = humps.camelizeKeys(data);
   const { loading, articleBySlug } = data;
-  if (loading) {
-    return <p>loading</p>;
-  }
+  if (loading) return null;
+  
   const { section } = articleBySlug;
   return (
     <Grid fluid className={classes.ArticlePage}>
@@ -125,6 +124,7 @@ const ArticleBySlug = gql`
       contributors {
         first_name
         last_name
+        slug
       }
       section {
         name

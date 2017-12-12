@@ -81,7 +81,7 @@ class PageLayout extends Component {
     const { classes, children, location, isSidebarOpen, data } = this.props;
     const { loading, featuredSections } = data;
     if (loading) {
-      return <p>loading</p>;
+      return <p> </p>;
     }
     return (
       <Sidebar

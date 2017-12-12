@@ -35,16 +35,25 @@ import {
 import { fetchAllData } from "./core/actions";
 import { sessionfy } from "./accounts/actions";
 
-const RoutingApp = ({ data: { loading, allSections }, descriptions }) => {
-  if (loading) {
-    return <p>loading</p>;
+const RoutingAppQuery = gql`
+  query RoutingAppQuery {
+    allSections {
+      id
+      name
+      permalink
+    }
   }
+`;
+
+const RoutingApp = ({ data: { loading, allSections }, descriptions }) => {
+  console.log(loading);
   return (
     <ConnectedRouter
       onUpdate={() => window.scrollTo(0, 0)}
       history={appHistory}
     >
       <PageLayout>
+      {!loading ? (
         <Switch>
           <Route exact path="/" component={HomePage} />
           {allSections.map(section => {
@@ -81,7 +90,6 @@ const RoutingApp = ({ data: { loading, allSections }, descriptions }) => {
               />
             );
           })}
-          {/*
           <Route
             exact
             path={"/contributors/:contributor_slug"}
@@ -100,6 +108,7 @@ const RoutingApp = ({ data: { loading, allSections }, descriptions }) => {
             key={"photographers"}
             render={props => <PhotographerPage match={props.match} />}
           />
+          {/*
           <Route
             exact
             path={"/myaccount"}
@@ -158,6 +167,9 @@ const RoutingApp = ({ data: { loading, allSections }, descriptions }) => {
           />
         */}
         </Switch>
+      ) : (
+        <span> </span>
+      )}
       </PageLayout>
     </ConnectedRouter>
   );
@@ -167,12 +179,4 @@ const mapStateToProps = state => ({
   descriptions: state.descriptions,
 });
 
-export default graphql(gql`
-  query RoutingAppQuery {
-    allSections {
-      id
-      name
-      permalink
-    }
-  }
-`)(connect(mapStateToProps)(RoutingApp));
+export default graphql(RoutingAppQuery)(connect(mapStateToProps)(RoutingApp));
