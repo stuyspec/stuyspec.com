@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 
-import { getTopLevelSectionsWithChildren } from "../../sections/selectors";
-
 const styles = {
   PageFooter: {
     background: "#fff",
@@ -130,36 +128,11 @@ const styles = {
 
 const PageFooter = ({
   classes,
-  topLevelSectionsWithChildren,
+  sections,
   descriptions,
 }) => {
-  const createSectionLinks = () => {
-    return Object.values(topLevelSectionsWithChildren).map(section => {
-      return (
-        <div className={classes.sectionBlock} key={section.id}>
-          <Link
-            className={classes.topLevelSectionLink}
-            key={section.id}
-            to={section.permalink}
-          >
-            {section.name}
-          </Link>
-          {Object.values(section.subsections).map(subsection => {
-            return (
-              <Link
-                className={classes.subsectionLink}
-                key={subsection.id}
-                to={subsection.permalink}
-              >
-                {subsection.name}
-              </Link>
-            );
-          })}
-        </div>
-      );
-    });
-  };
   const createDescriptionLinks = () => {
+    // is a function because it is reused
     const descriptionLinks = Object.values(descriptions).map(description => {
       return (
         <Link
@@ -220,7 +193,30 @@ const PageFooter = ({
           lgOffset={2}
           className={classes.sectionFlex}
         >
-          {createSectionLinks()}
+          {sections.map(section => {
+            return (
+              <div className={classes.sectionBlock} key={section.id}>
+                <Link
+                  className={classes.topLevelSectionLink}
+                  key={section.id}
+                  to={section.permalink}
+                >
+                  {section.name}
+                </Link>
+                {Object.values(section.subsections).map(subsection => {
+                  return (
+                    <Link
+                      className={classes.subsectionLink}
+                      key={subsection.id}
+                      to={subsection.permalink}
+                    >
+                      {subsection.name}
+                    </Link>
+                  );
+                })}
+              </div>
+            );
+          })}
           {createDescriptionLinks()}
         </Col>
         <Col
@@ -245,7 +241,6 @@ const PageFooter = ({
 };
 
 const mapStateToProps = state => ({
-  topLevelSectionsWithChildren: getTopLevelSectionsWithChildren(state),
   descriptions: state.descriptions,
 });
 

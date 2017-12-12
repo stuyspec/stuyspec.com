@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import injectSheet from "react-jss";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
 import Sidebar from "react-sidebar";
 import Favicon from "react-favicon";
 import { Grid } from "react-bootstrap/lib";
@@ -76,16 +78,20 @@ class PageLayout extends Component {
   };
 
   render() {
-    const { classes, children, location, isSidebarOpen } = this.props;
+    const { classes, children, location, isSidebarOpen, data } = this.props;
+    const { loading, featuredSections } = data;
+    if (loading) {
+      return <p>loading</p>;
+    }
     return (
       <Sidebar
-        sidebar={<SidebarContent />}
+        sidebar={<SidebarContent sections={featuredSections} />}
         open={isSidebarOpen}
         onSetOpen={isSidebarOpen => this.handleSetOpen(isSidebarOpen)}
         styles={sidebarStyles}
       >
         <div id="scroll-reset-assistant">
-          <PageHeader location={location} />
+          <PageHeader location={location} sections={featuredSections} />
           <Helmet>
             <title>The Stuyvesant Spectator</title>
             <meta
@@ -107,7 +113,7 @@ class PageLayout extends Component {
             </Grid>
           </div>
           <SubscriptionModal />
-          <PageFooter />
+          <PageFooter sections={featuredSections} />
         </div>
       </Sidebar>
     );
@@ -122,6 +128,17 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ openSidebar, closeSidebar }, dispatch);
 };
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(PageLayout)),
-);
+export default graphql(gql`
+  query PageLayoutQyer {
+    featuredSections {
+      id
+      name
+      permalink
+      subsections {
+        id
+        name
+        permalink
+      }
+    }
+  }
+`)(withRouter(connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(PageLayout))));

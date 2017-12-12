@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { getCurrentUser } from "../../accounts/selectors";
 import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
-import { getTopLevelSections } from "../../sections/selectors";
 import { openSubscriptionModal } from "../../accounts/actions";
 
 const styles = {
@@ -298,8 +297,7 @@ const Masthead = ({
 
 const mapStateToProps = state => ({
   session: state.accounts.session,
-  currentUser: getCurrentUser(state),
-  sections: getTopLevelSections(state),
+  currentUser: getCurrentUser(state)
 });
 
 const mapDispatchToProps = dispatch => {

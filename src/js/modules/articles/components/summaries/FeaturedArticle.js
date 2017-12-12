@@ -2,7 +2,6 @@
  * currently nested in a <Col md={9} lg={9}>.
  */
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import Row from "react-bootstrap/lib/Row";
@@ -60,34 +59,10 @@ const styles = {
   figure: {
     maxHeight: "480px",
     overflow: "hidden",
-    height: "350px", // HARDCODED
     "& img": {
-      // width: "100%",
-      height: "100%", // HARDCODED
+      width: "100%",
     },
   },
-
-  /* HARDCODED STYLES FOR SPECIFIC FEATURED ARTICLE */
-  FeaturedArticle: {
-    paddingBottom: "24px",
-    "& #muslim-student-crying-figure": {
-      height: "420px",
-      "& img": {
-        width: "80%",
-        margin: "0 auto",
-        display: "block",
-        height: "auto",
-      },
-    },
-  },
-  "@media (min-width: 768px)": {
-    title: {
-      width: "125%",
-      display: "block",
-    },
-  },
-  /* HARDCODED STYLES FOR FEATURED ARTICLE ENDS */
-
   "@media (max-width: 767px)": {
     featuredMediaContainer: {
       marginBottom: "14px",
@@ -108,13 +83,9 @@ const styles = {
   },
 };
 
-const FeaturedArticle = ({ classes, media, sections, article }) => {
-  const section = Object.values(sections).find(section => {
-    return section.id === article.sectionId;
-  });
-  const featuredMedia = Object.values(media).find(mediaObject => {
-    return mediaObject.isFeatured && mediaObject.articleId === article.id;
-  });
+const FeaturedArticle = ({ classes, article }) => {
+  const { section } = article;
+  const featuredMedia = article.media[0];
   return (
     <Row className={classes.FeaturedArticle}>
       <Col
@@ -129,10 +100,7 @@ const FeaturedArticle = ({ classes, media, sections, article }) => {
       >
         {featuredMedia && (
           <Link to={`${section.permalink}/${article.slug}`}>
-            <figure
-              className={classes.figure}
-              id="muslim-student-crying-figure"
-            >
+            <figure className={classes.figure}>
               <img src={featuredMedia.attachmentUrl} />
             </figure>
           </Link>
@@ -165,10 +133,4 @@ const FeaturedArticle = ({ classes, media, sections, article }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  media: state.media.media,
-  sections: state.sections.sections,
-  users: state.users.users,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(FeaturedArticle));
+export default injectSheet(styles)(FeaturedArticle);

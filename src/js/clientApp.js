@@ -6,6 +6,7 @@ import { AppContainer } from "react-hot-loader";
 import injectTapEventPlugin from "react-tap-event-plugin";
 import store from "./store";
 import Provider from "react-redux/lib/components/Provider";
+import { STUY_SPEC_API_URL } from "./constants";
 
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
@@ -29,11 +30,7 @@ ReactGA.initialize("UA-110467163-1")
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 const apolloClient = new ApolloClient({
-  // By default, this client will send queries to the
-  //  `/graphql` endpoint on the same host
-  // Pass the configuration option { uri: YOUR_GRAPHQL_API_URL } to the `HttpLink` to connect
-  // to a different host
-  link: new HttpLink(),
+  link: new HttpLink({ uri: `${STUY_SPEC_API_URL}/graphql`}),
   cache: new InMemoryCache()
 });
 

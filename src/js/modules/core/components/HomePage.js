@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
+import humps from "humps";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 
@@ -40,6 +41,7 @@ const styles = {
 
 //The filler column should have a borderRight. Wait until there is something there first
 
+/*
 class HomePage extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     return nextProps.articles != nextState.articles;
@@ -57,7 +59,7 @@ class HomePage extends Component {
           media => media.articleId === article.id && media.isFeatured,
         ),
     );
-    /* A HARDCODED ARTICLE */
+    // A HARDCODED ARTICLE
     // const featuredArticle = articles.find(article => article.id === 253)
     let recommendedArticles = [];
     for (article of articles) {
@@ -125,18 +127,76 @@ class HomePage extends Component {
       </div>
     );
   }
-}
+}*/
+
+const HomePage = ({ classes, data }) => {
+  data = humps.camelizeKeys(data);
+  const { loading, featuredArticle, newsArticles } = data;
+  if (loading) {
+    return <p>loading</p>;
+  }
+  return (
+    <div>
+      <Grid fluid>
+        <Row>
+          <Col
+            xs={12}
+            sm={12}
+            md={9}
+            lg={9}
+            className={classes.primaryComponents}
+          >
+            <FeaturedArticle article={featuredArticle} />
+            <SectionFeature articles={newsArticles} />
+          </Col>
+        </Row>
+      </Grid>
+    </div>
+  );
+};
 
 export default graphql(gql`
-  query ArticleQuery {
-    allArticles {
-      id
+  query HomePageQuery {
+    featuredArticle {
       title
-      section_id
+      slug
+      summary
+      created_at
       contributors {
-        id
         first_name
         last_name
+        slug
+      }
+      media {
+        title
+        attachment_url
+        medium_attachment_url
+        thumb_attachment_url
+      }
+      section {
+        name
+        permalink
+      }
+    }
+    newsArticles {
+      title
+      slug
+      summary
+      created_at
+      contributors {
+        first_name
+        last_name
+        slug
+      }
+      media {
+        title
+        attachment_url
+        medium_attachment_url
+        thumb_attachment_url
+      }
+      section {
+        name
+        permalink
       }
     }
   }

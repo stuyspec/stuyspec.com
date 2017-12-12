@@ -1,8 +1,8 @@
-// TODO: SECTINOPAGE IS LITERALLY A MESS
-
 import React from "react";
-import { connect } from "react-redux";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
 import { Grid, Row, Col } from "react-bootstrap/lib";
+import humps from "humps";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import { Helmet } from "react-helmet";
@@ -196,12 +196,16 @@ const styles = {
 
 const SectionPage = ({
   classes,
-  sectionTreeArticles,
-  directSubsections,
+  data,
   section,
-  sections,
   media,
 }) => {
+  data = humps.camelizeKeys(data);
+  if (data.loading) {
+    return <p>loading</p>;
+  }
+  console.log(data);
+  const { articlesBySectionID, subsectionsByParentSectionID } = data;
   if (section.parentId || section.name === "News") {
     return (
       <Grid fluid className={classes.SubsectionPage}>
@@ -212,7 +216,7 @@ const SectionPage = ({
         <Row>
           <Col xs={12} sm={9} md={9} lg={9} className={classes.latestArticles}>
             <ArticleList
-              articles={sectionTreeArticles}
+              articles={articlesBySectionID}
               title={section.name}
               label="Latest"
             />
@@ -401,12 +405,43 @@ const SectionPage = ({
     </Grid>
   );
 };
-
+/*
 const mapStateToProps = (state, ownProps) => ({
   sectionTreeArticles: getSectionTreeArticles(state, ownProps),
   directSubsections: getDirectSubsections(state, ownProps),
   sections: state.sections.sections,
   media: state.media.media,
-});
+});*/
 
-export default connect(mapStateToProps, null)(injectSheet(styles)(SectionPage));
+export default graphql(gql`
+  query SectionPageQuery($section_id: ID!) {
+    articlesBySectionID(section_id: $section_id) {
+      id
+      title
+      slug
+      summary
+      created_at
+      section {
+        permalink
+      }
+      contributors {
+        first_name
+        last_name
+        slug
+      }
+      media {
+        title
+        media_type
+        attachment_url
+        medium_attachment_url
+        thumb_attachment_url
+      }
+    }
+    sectionsByParentSectionID(section_id: $section_id) {
+      name
+      permalink
+    }
+  }
+`, {
+  options: ({ section }) => ({ variables: { section_id: section.id }}),
+})(injectSheet(styles)(SectionPage));

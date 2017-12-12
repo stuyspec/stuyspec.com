@@ -1,12 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import { Row, Col } from "react-bootstrap/lib";
 
 import Byline from "../../articles/components/Byline";
 import Dateline from "../../articles/components/Dateline";
-import { getArticlesWithContributors } from "../../articles/selectors";
 
 const styles = {
   SectionFeature: {
@@ -106,6 +104,100 @@ const styles = {
   },
 };
 
+const SectionFeature = ({ classes, articles }) => {
+  const [primaryArticle, secondaryArticle, ternaryArticle] = articles;
+  const featuredMedia = primaryArticle.media[0];
+  const { section } = primaryArticle;
+  return (
+    <Row className={classes.SectionFeature}>
+      <Link to={section.permalink} className={classes.sectionLabel}>
+        {section.name}
+      </Link>
+
+      <Col xsHidden sm={4} md={4} lg={4} className={classes.secondaryArticle}>
+        <Link
+          className={classes.title}
+          to={`${section.permalink}/${secondaryArticle.slug}`}
+        >
+          {secondaryArticle.title}
+        </Link>
+        <p className={classes.summary}>{secondaryArticle.summary}</p>
+        <Byline contributors={secondaryArticle.contributors} />
+        <Dateline article={secondaryArticle} />
+      </Col>
+      {featuredMedia ? (
+        <Col
+          xs={6}
+          sm={4}
+          md={4}
+          lg={4}
+          className={classes.featuredMediaContainer}
+        >
+          <Link to={`${section.permalink}/${primaryArticle.slug}`}>
+            <figure className={classes.figure}>
+              <img src={featuredMedia.mediumAttachmentUrl} />
+            </figure>
+          </Link>
+        </Col>
+      ) : (
+        <Col xsHidden sm={4} md={4} lg={4} className={classes.ternaryArticle}>
+          <Link
+            className={classes.title}
+            to={`${section.permalink}/${ternaryArticle.slug}`}
+          >
+            {ternaryArticle.title}
+          </Link>
+          <p className={classes.summary}>{ternaryArticle.summary}</p>
+          <Byline contributors={ternaryArticle.contributors} />
+          <Dateline article={ternaryArticle} />
+        </Col>
+      )}
+      <Col xs={6} sm={4} md={4} lg={4} className={classes.primaryArticle}>
+        <Link
+          className={classes.title}
+          to={`${section.permalink}/${primaryArticle.slug}`}
+        >
+          {primaryArticle.title}
+        </Link>
+        <p className={classes.summary}>{primaryArticle.summary}</p>
+        <Byline contributors={primaryArticle.contributors} />
+        <Dateline article={primaryArticle} />
+      </Col>
+      
+
+      <Col
+        xs={12}
+        smHidden
+        mdHidden
+        lgHidden
+        className={classes.mobileArticleTitle1}
+      >
+        <Link
+          className={classes.title}
+          to={`${section.permalink}/${primaryArticle.slug}`}
+        >
+          {primaryArticle.title}
+        </Link>
+      </Col>
+      <Col
+        xs={12}
+        smHidden
+        mdHidden
+        lgHidden
+        className={classes.mobileArticleTitle2}
+      >
+        <Link
+          className={classes.title}
+          to={`${section.permalink}/${ternaryArticle.slug}`}
+        >
+          {ternaryArticle.title}
+        </Link>
+      </Col>
+    </Row>
+  );
+};
+
+/*
 const SectionFeature = ({
   classes,
   articles,
@@ -237,10 +329,6 @@ const SectionFeature = ({
     </Row>
   );
 };
+*/
 
-const mapStateToProps = (state, ownProps) => ({
-  articles: getArticlesWithContributors(state),
-  media: state.media.media,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(SectionFeature));
+export default injectSheet(styles)(SectionFeature);

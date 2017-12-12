@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Row, Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
@@ -88,14 +87,9 @@ const styles = {
   },
 };
 
-const ArticleRow = ({ classes, article, sections, users, media }) => {
-  const section = sections[article.sectionId];
-  const featuredMedia = Object.values(media).find(media => {
-    return media.isFeatured && media.articleId === article.id;
-  });
-  if (featuredMedia) {
-    featuredMedia.creator = users[featuredMedia.userId];
-  }
+const ArticleRow = ({ classes, article }) => {
+  const { section } = article;
+  const featuredMedia = article.media[0];
   return (
     <Row key={article.id} className={classes.ArticleRow}>
       <div className={classes.articleBlock} key={article.id}>
@@ -130,10 +124,4 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  media: state.media.media,
-  sections: state.sections.sections,
-  users: state.users.users,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(ArticleRow));
+export default injectSheet(styles)(ArticleRow);

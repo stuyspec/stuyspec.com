@@ -7,6 +7,7 @@ import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Helmet } from "react-helmet";
 import { toRoman } from "roman-numerals";
+import { withRouter } from "react-router";
 
 import ArticleHeader from "./ArticleHeader";
 import ArticleBody from "./ArticleBody";
@@ -60,23 +61,21 @@ const styles = {
 
 const ArticlePage = ({
   classes,
-  article,
-  section,
-  sections,
-  media,
+  data,
   openSubscriptionModal,
 }) => {
-  if (!article) {
-    return <NotFoundPage />;
+  const { loading, section, articleBySlug } = data;
+  if (loading) {
+    return <p>loading</p>;
   }
   return (
     <Grid fluid className={classes.ArticlePage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-        <title>{article.title}</title>
+        <title>{articleBySlug.title}</title>
         <meta />
       </Helmet>
-      <ArticleHeader article={article} section={section} />
-      <ArticleBody article={article} media={media} />
+      <ArticleHeader article={articleBySlug} section={section} />
+      <ArticleBody article={articleBySlug} media={articleBySlug.media} />
       <Row className={classes.descriptionRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.description}>
           This article was published in&nbsp;
@@ -85,16 +84,16 @@ const ArticlePage = ({
             href="https://issuu.com/stuyspectator/docs"
             target="_blank"
           >
-            {`Volume ${toRoman(article.volume)}, Issue ${article.issue}`}
+            {`Volume ${toRoman(articleBySlug.volume)}, Issue ${articleBySlug.issue}`}
           </a>
           .
         </Col>
         <Col xsHidden smHidden md={3} lg={3} />
       </Row>
       <RecommendedRow
-        section={section.parentId ? sections[section.parentId] : section}
+        section={section.parent_section ? section.parent_section : section}
       />
-      <CommentThread article={article} />
+      <CommentThread article={articleBySlug} />
     </Grid>
   );
 };
@@ -103,6 +102,31 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ openSubscriptionModal }, dispatch);
 };
 
-export default graphql(gql`
-  
-`)(connect(null, mapDispatchToProps)(injectSheet(styles)(ArticlePage)));
+const ArticleBySlug = gql`
+  query ArticleQuery($slug: String!) {
+    articleBySlug(slug: $slug) {
+      title
+      content
+      media
+      created_at
+      volume
+      issue
+      contributors {
+        first_name
+        last_name
+      }
+      section {
+        name
+        permalink
+        parent_section {
+          name
+          permalink
+        }
+      }
+    }
+  }
+`;
+
+export default graphql(ArticleBySlug, {
+  options: ({ match }) => ({ variables: { slug: match.params.article_slug }}),
+})(withRouter(connect(null, mapDispatchToProps)(injectSheet(styles)(ArticlePage))));
