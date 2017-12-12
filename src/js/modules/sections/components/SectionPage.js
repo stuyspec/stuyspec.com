@@ -199,7 +199,6 @@ const SectionPage = ({ classes, data, section, media }) => {
   if (data.loading) {
     return <p>loading</p>;
   }
-  console.log(data);
   const { articlesBySectionID, subsectionsByParentSectionID } = data;
   if (section.parentId || section.name === "News") {
     return (

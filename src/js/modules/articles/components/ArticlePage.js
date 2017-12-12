@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
+import humps from "humps";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Helmet } from "react-helmet";
@@ -60,10 +61,12 @@ const styles = {
 };
 
 const ArticlePage = ({ classes, data, openSubscriptionModal }) => {
-  const { loading, section, articleBySlug } = data;
+  data = humps.camelizeKeys(data);
+  const { loading, articleBySlug } = data;
   if (loading) {
     return <p>loading</p>;
   }
+  const { section } = articleBySlug;
   return (
     <Grid fluid className={classes.ArticlePage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -105,7 +108,17 @@ const ArticleBySlug = gql`
     articleBySlug(slug: $slug) {
       title
       content
-      media
+      media {
+        attachment_url
+        media_type
+        caption
+        title
+        user {
+          first_name
+          last_name
+          slug
+        }
+      }
       created_at
       volume
       issue

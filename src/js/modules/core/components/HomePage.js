@@ -130,11 +130,11 @@ class HomePage extends Component {
 }*/
 
 const HomePage = ({ classes, data }) => {
-  data = humps.camelizeKeys(data);
   const { loading, featuredArticle, newsArticles } = data;
   if (loading) {
     return <p>loading</p>;
   }
+  data = humps.camelizeKeys(data);
   return (
     <div>
       <Grid fluid>

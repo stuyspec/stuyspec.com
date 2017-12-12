@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Route, Redirect, Switch } from "react-router-dom";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
@@ -34,7 +35,7 @@ import {
 import { fetchAllData } from "./core/actions";
 import { sessionfy } from "./accounts/actions";
 
-const RoutingApp = ({ data, match }) => {
+const RoutingApp = ({ data }) => {
   const { loading, allSections } = data;
   if (loading) {
     return <p>loading</p>;
@@ -47,18 +48,18 @@ const RoutingApp = ({ data, match }) => {
       <PageLayout>
         <Switch>
           <Route exact path="/" component={HomePage} />
-          {/*Object.values(sections).map(section => {
+          {allSections.map(section => {
             return (
               <Route
                 exact
                 path={section.permalink}
                 key={`section${section.id}`}
                 render={props => (
-                  <SectionPage match={props.match} section={section} />
+                  <SectionPage section={section} />
                 )}
               />
             );
-          })*/}
+          })}
           {allSections.map(section => {
             return (
               <Route
@@ -69,7 +70,6 @@ const RoutingApp = ({ data, match }) => {
               />
             );
           })}
-          {/*
           {Object.values(descriptions).map(description => {
             return (
               <Route
@@ -82,6 +82,7 @@ const RoutingApp = ({ data, match }) => {
               />
             );
           })}
+          {/*
           <Route
             exact
             path={"/contributors/:contributor_slug"}
@@ -163,6 +164,10 @@ const RoutingApp = ({ data, match }) => {
   );
 };
 
+const mapStateToProps = state => ({
+  descriptions: state.descriptions,
+});
+
 export default graphql(gql`
   query RoutingAppQuery {
     allSections {
@@ -171,4 +176,4 @@ export default graphql(gql`
       permalink
     }
   }
-`)(RoutingApp);
+`)(connect(mapStateToProps)(RoutingApp));

@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
@@ -19,8 +18,8 @@ const styles = {
   },
 };
 
-const ArticleMediaCaption = ({ classes, users, image }) => {
-  const artist = users[image.userId];
+const ArticleMediaCaption = ({ classes, image }) => {
+  const { user } = image;
   return (
     <figcaption className={classes.caption}>
       <span>
@@ -29,22 +28,16 @@ const ArticleMediaCaption = ({ classes, users, image }) => {
       </span>
       <Link
         className={classes.creditLine}
-        to={`/${MEDIA_CREATOR_SLUGS[image.mediaType]}/${artist.slug}`}
+        to={`/${MEDIA_CREATOR_SLUGS[image.mediaType]}/${user.slug}`}
       >
         {capitalizeWord(image.mediaType)}
         &nbsp;by&nbsp;
-        {artist.firstName}
-        {artist.lastName !== "" && " " + artist.lastName}
+        {user.firstName}
+        {user.lastName !== "" && " " + user.lastName}
       </Link>
       .
     </figcaption>
   );
 };
 
-const mapStateToProps = state => ({
-  users: state.users.users,
-});
-
-export default connect(mapStateToProps)(
-  injectSheet(styles)(ArticleMediaCaption),
-);
+export default injectSheet(styles)(ArticleMediaCaption);
