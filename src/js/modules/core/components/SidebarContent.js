@@ -36,12 +36,7 @@ const styles = {
   },
 };
 
-const SidebarContent = ({
-  classes,
-  session,
-  sections,
-  closeSidebar,
-}) => {
+const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
   let sidebarElements = [];
   sidebarElements.push(
     <Link

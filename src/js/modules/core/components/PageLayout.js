@@ -141,4 +141,10 @@ export default graphql(gql`
       }
     }
   }
-`)(withRouter(connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(PageLayout))));
+`)(
+  withRouter(
+    connect(mapStateToProps, mapDispatchToProps)(
+      injectSheet(styles)(PageLayout),
+    ),
+  ),
+);

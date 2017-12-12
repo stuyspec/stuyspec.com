@@ -59,11 +59,7 @@ const styles = {
   },
 };
 
-const ArticlePage = ({
-  classes,
-  data,
-  openSubscriptionModal,
-}) => {
+const ArticlePage = ({ classes, data, openSubscriptionModal }) => {
   const { loading, section, articleBySlug } = data;
   if (loading) {
     return <p>loading</p>;
@@ -84,7 +80,9 @@ const ArticlePage = ({
             href="https://issuu.com/stuyspectator/docs"
             target="_blank"
           >
-            {`Volume ${toRoman(articleBySlug.volume)}, Issue ${articleBySlug.issue}`}
+            {`Volume ${toRoman(
+              articleBySlug.volume,
+            )}, Issue ${articleBySlug.issue}`}
           </a>
           .
         </Col>
@@ -128,5 +126,9 @@ const ArticleBySlug = gql`
 `;
 
 export default graphql(ArticleBySlug, {
-  options: ({ match }) => ({ variables: { slug: match.params.article_slug }}),
-})(withRouter(connect(null, mapDispatchToProps)(injectSheet(styles)(ArticlePage))));
+  options: ({ match }) => ({ variables: { slug: match.params.article_slug } }),
+})(
+  withRouter(
+    connect(null, mapDispatchToProps)(injectSheet(styles)(ArticlePage)),
+  ),
+);

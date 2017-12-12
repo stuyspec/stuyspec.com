@@ -126,11 +126,7 @@ const styles = {
   },
 };
 
-const PageFooter = ({
-  classes,
-  sections,
-  descriptions,
-}) => {
+const PageFooter = ({ classes, sections, descriptions }) => {
   const createDescriptionLinks = () => {
     // is a function because it is reused
     const descriptionLinks = Object.values(descriptions).map(description => {

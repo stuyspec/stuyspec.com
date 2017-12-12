@@ -163,7 +163,6 @@ const SectionFeature = ({ classes, articles }) => {
         <Byline contributors={primaryArticle.contributors} />
         <Dateline article={primaryArticle} />
       </Col>
-      
 
       <Col
         xs={12}

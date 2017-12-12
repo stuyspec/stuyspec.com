@@ -159,7 +159,7 @@ const RoutingApp = ({ data, match }) => {
         */}
         </Switch>
       </PageLayout>
-    </ConnectedRouter>    
+    </ConnectedRouter>
   );
 };
 

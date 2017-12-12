@@ -194,12 +194,7 @@ const styles = {
   },
 };
 
-const SectionPage = ({
-  classes,
-  data,
-  section,
-  media,
-}) => {
+const SectionPage = ({ classes, data, section, media }) => {
   data = humps.camelizeKeys(data);
   if (data.loading) {
     return <p>loading</p>;
@@ -413,35 +408,38 @@ const mapStateToProps = (state, ownProps) => ({
   media: state.media.media,
 });*/
 
-export default graphql(gql`
-  query SectionPageQuery($section_id: ID!) {
-    articlesBySectionID(section_id: $section_id) {
-      id
-      title
-      slug
-      summary
-      created_at
-      section {
+export default graphql(
+  gql`
+    query SectionPageQuery($section_id: ID!) {
+      articlesBySectionID(section_id: $section_id) {
+        id
+        title
+        slug
+        summary
+        created_at
+        section {
+          permalink
+        }
+        contributors {
+          first_name
+          last_name
+          slug
+        }
+        media {
+          title
+          media_type
+          attachment_url
+          medium_attachment_url
+          thumb_attachment_url
+        }
+      }
+      sectionsByParentSectionID(section_id: $section_id) {
+        name
         permalink
       }
-      contributors {
-        first_name
-        last_name
-        slug
-      }
-      media {
-        title
-        media_type
-        attachment_url
-        medium_attachment_url
-        thumb_attachment_url
-      }
     }
-    sectionsByParentSectionID(section_id: $section_id) {
-      name
-      permalink
-    }
-  }
-`, {
-  options: ({ section }) => ({ variables: { section_id: section.id }}),
-})(injectSheet(styles)(SectionPage));
+  `,
+  {
+    options: ({ section }) => ({ variables: { section_id: section.id } }),
+  },
+)(injectSheet(styles)(SectionPage));

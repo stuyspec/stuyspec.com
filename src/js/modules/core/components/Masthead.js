@@ -297,7 +297,7 @@ const Masthead = ({
 
 const mapStateToProps = state => ({
   session: state.accounts.session,
-  currentUser: getCurrentUser(state)
+  currentUser: getCurrentUser(state),
 });
 
 const mapDispatchToProps = dispatch => {
