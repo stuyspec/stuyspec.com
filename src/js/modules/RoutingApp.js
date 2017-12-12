@@ -35,8 +35,7 @@ import {
 import { fetchAllData } from "./core/actions";
 import { sessionfy } from "./accounts/actions";
 
-const RoutingApp = ({ data }) => {
-  const { loading, allSections } = data;
+const RoutingApp = ({ data: { loading, allSections }, descriptions }) => {
   if (loading) {
     return <p>loading</p>;
   }
