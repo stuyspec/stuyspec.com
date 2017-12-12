@@ -87,7 +87,6 @@ const styles = {
 const ContributorPage = ({ classes, data }) => {
   data = humps.camelizeKeys(data);
   if (data.loading) return null;
-  console.log(data);
 
   const contributor = data.userBySlug;
   if (contributor === null) {
