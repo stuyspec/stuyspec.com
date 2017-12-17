@@ -46,7 +46,6 @@ const RoutingAppQuery = gql`
 `;
 
 const RoutingApp = ({ data: { loading, allSections }, descriptions }) => {
-  console.log(loading);
   return (
     <ConnectedRouter
       onUpdate={() => window.scrollTo(0, 0)}

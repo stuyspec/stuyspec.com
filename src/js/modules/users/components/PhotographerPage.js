@@ -12,7 +12,7 @@ import { ArticleList } from "../../articles/components";
 import { NotFoundPage } from "../../core/components";
 
 const PhotographerBySlug = gql`
-  query PhoographerPageQuery($slug: String!) {
+  query PhotographerPageQuery($slug: String!) {
     userBySlug(slug: $slug) {
       first_name
       last_name
@@ -94,8 +94,7 @@ const PhotographerPage = ({ classes, data }) => {
   if (photographer === null) {
     return <NotFoundPage />;
   }
-  console.log(data);
-  const articles = photographer.media.articles.map(medium => medium.article);
+  const articles = photographer.media.map(medium => medium.article);
   return (
     <Grid className={classes.PhotographerPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -112,7 +111,7 @@ const PhotographerPage = ({ classes, data }) => {
           </a>
           <p className={classes.description}>{photographer.description}</p>
           <div className={classes.latest}>Photos</div>
-          <ArticleList articles={photographer.articles} />
+          <ArticleList articles={articles} />
         </Col>
       </Row>
     </Grid>

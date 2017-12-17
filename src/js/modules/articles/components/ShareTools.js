@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { ShareButtons, generateShareIcon } from "react-share";
 
-import { STUY_SPEC_URL } from "../../../constants";
+import { STUY_SPEC_API_URL } from "../../../constants";
 
 const {
   FacebookShareButton,
@@ -30,7 +30,7 @@ const SHARE_BUTTON_SIZE = 28;
 const SHARE_BUTTON_COLOR = "#000";
 
 const ShareTools = ({ classes, article, section, outquotes }) => {
-  const shareUrl = STUY_SPEC_URL + `${section.permalink}/${article.slug}`;
+  const shareUrl = STUY_SPEC_API_URL + `${section.permalink}/${article.slug}`;
   const { title, summary } = article;
   const outquote = Object.values(outquotes).find(
     outquote => outquote.articleId === article.id,
