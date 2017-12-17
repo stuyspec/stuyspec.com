@@ -278,13 +278,13 @@ const SectionPage = ({
 
   let featuredSubsection = null;
   if (section.name === "10/31 Terror Attack") {
-    // 10/31 has no subsections, but many students published Creative 
+    // 10/31 has no subsections, but many students published Creative
     // Responses (their creative pieces in response to the attack).
-    featuredSubsection = Object.values(sections).find(section => section.name === "Creative Responses");
+    featuredSubsection = Object.values(sections).find(
+      section => section.name === "Creative Responses",
+    );
   } else {
-    featuredSubsection = Object.values(
-      directSubsections,
-    ).find(subsection => {
+    featuredSubsection = Object.values(directSubsections).find(subsection => {
       if (hardcodedSubsection) {
         return subsection.name === hardcodedSubsection;
       } else {
@@ -300,29 +300,29 @@ const SectionPage = ({
         <meta />
       </Helmet>
       <ul className={classes.subsectionBar}>
-      {section.name === "10/31 Terror Attack" ? (
-        <li className={classes.subsectionListItem}>
-          <Link
-            className={classes.subsectionLink}
-            to={featuredSubsection.permalink}
-          >
-            {featuredSubsection.name}
-          </Link>
-        </li>
-      ) : (
-        Object.values(directSubsections).map(subsection => {
-          return (
-            <li className={classes.subsectionListItem} key={subsection.id}>
-              <Link
-                className={classes.subsectionLink}
-                to={subsection.permalink}
-              >
-                {subsection.name}
-              </Link>
-            </li>
-          );
-        })
-      )}
+        {section.name === "10/31 Terror Attack" ? (
+          <li className={classes.subsectionListItem}>
+            <Link
+              className={classes.subsectionLink}
+              to={featuredSubsection.permalink}
+            >
+              {featuredSubsection.name}
+            </Link>
+          </li>
+        ) : (
+          Object.values(directSubsections).map(subsection => {
+            return (
+              <li className={classes.subsectionListItem} key={subsection.id}>
+                <Link
+                  className={classes.subsectionLink}
+                  to={subsection.permalink}
+                >
+                  {subsection.name}
+                </Link>
+              </li>
+            );
+          })
+        )}
       </ul>
       <Row className={classes.featuredRow}>
         {featuredMedia && (

@@ -98,7 +98,7 @@ export const signOut = session => {
         dispatch({
           type: t.SIGN_OUT_FULFILLED,
         });
-        appHistory.push("/")
+        appHistory.push("/");
       })
       .catch(err => {
         dispatch({
