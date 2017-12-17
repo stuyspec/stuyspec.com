@@ -14,6 +14,53 @@ import {
 } from "../../articles/components/summaries";
 import { SectionFeature, SectionColumn } from "../../sections/components";
 
+const HomePageQuery = gql`
+  query HomePageQuery {
+    featuredArticle {
+      title
+      slug
+      summary
+      created_at
+      contributors {
+        first_name
+        last_name
+        slug
+      }
+      media {
+        title
+        attachment_url
+        medium_attachment_url
+        thumb_attachment_url
+      }
+      section {
+        name
+        permalink
+      }
+    }
+    newsArticles {
+      title
+      slug
+      summary
+      created_at
+      contributors {
+        first_name
+        last_name
+        slug
+      }
+      media {
+        title
+        attachment_url
+        medium_attachment_url
+        thumb_attachment_url
+      }
+      section {
+        name
+        permalink
+      }
+    }
+  }
+`;
+
 const styles = {
   HomePage: {
     marginTop: "23px 0px 13px",
@@ -155,49 +202,4 @@ const HomePage = ({ classes, data }) => {
   );
 };
 
-export default graphql(gql`
-  query HomePageQuery {
-    featuredArticle {
-      title
-      slug
-      summary
-      created_at
-      contributors {
-        first_name
-        last_name
-        slug
-      }
-      media {
-        title
-        attachment_url
-        medium_attachment_url
-        thumb_attachment_url
-      }
-      section {
-        name
-        permalink
-      }
-    }
-    newsArticles {
-      title
-      slug
-      summary
-      created_at
-      contributors {
-        first_name
-        last_name
-        slug
-      }
-      media {
-        title
-        attachment_url
-        medium_attachment_url
-        thumb_attachment_url
-      }
-      section {
-        name
-        permalink
-      }
-    }
-  }
-`)(injectSheet(styles)(HomePage));
+export default graphql(HomePageQuery)(injectSheet(styles)(HomePage));
