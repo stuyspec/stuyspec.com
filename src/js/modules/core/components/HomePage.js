@@ -59,7 +59,7 @@ class HomePage extends Component {
     //     ),
     // );
     /* A HARDCODED ARTICLE */
-    const featuredArticle = articles.find(article => article.id === 253)
+    const featuredArticle = articles.find(article => article.id === 253);
     let recommendedArticles = [];
     for (article of articles) {
       if (recommendedArticles.length >= 5) {
@@ -126,7 +126,7 @@ class HomePage extends Component {
       </div>
     );
   }
-};
+}
 
 const mapStateToProps = state => ({
   articles: getArticlesWithContributors(state),

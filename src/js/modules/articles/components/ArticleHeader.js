@@ -8,7 +8,6 @@ import Dateline from "./Dateline";
 import ShareTools from "./ShareTools";
 
 const styles = {
-  headerRow: {},
   ArticleHeader: {
     borderTop: "solid 1px #000",
     borderBottom: "1px solid #dedede",
@@ -84,8 +83,10 @@ const styles = {
 
 const ArticleHeader = ({ classes, article, section }) => {
   return (
-    <Row className={classes.headerRow}>
-      <p className="only-print" id="branding">The Stuyvesant Spectator</p>
+    <Row>
+      <p className="only-print" id="branding">
+        The Stuyvesant Spectator
+      </p>
       <Col xs={12} sm={12} md={12} lg={12} className={classes.ArticleHeader}>
         <Link to={section.permalink} className={classes.rubric}>
           {section.name}
