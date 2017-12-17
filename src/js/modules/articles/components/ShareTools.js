@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { ShareButtons, generateShareIcon } from "react-share";
+import { Print } from "../../core/icons/index";
 
 import { STUY_SPEC_URL } from "../../../constants";
 
@@ -25,6 +26,32 @@ const styles = {
     },
   },
 };
+
+const navButtonStyles = {
+    NavButton: {
+        background: "none",
+        borderWidth: 0,
+        margin: 0,
+        padding: 0,
+        "&:hover": {
+            cursor: "pointer",
+        },
+    },
+    icon: {
+        display: "inline",
+        marginRight: "4px",
+    },
+};
+
+const NavButton = ({ classes, children, onClick }) => {
+    return (
+        <button className={classes.NavButton} onClick={onClick}>
+          <div className={classes.icon}>{children}</div>
+        </button>
+    );
+};
+const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
+
 
 const SHARE_BUTTON_SIZE = 28;
 const SHARE_BUTTON_COLOR = "#000";
@@ -90,6 +117,11 @@ const ShareTools = ({ classes, article, section, outquotes }) => {
             round
           />
         </EmailShareButton>
+      </div>
+      <div className={classes.shareButton} key={4}>
+        <StyledNavButton onClick={window.print}>
+          <Print size={28}/>
+        </StyledNavButton>
       </div>
     </div>
   );
