@@ -223,25 +223,25 @@ const Masthead = ({
         <tbody>
           <tr>
             <th>
-            {session ? (
-              <div className={classes.signedInNav}>
-                <Link to="/myaccount/profile" className={classes.myAccount}>
-                  My Account
-                </Link>
-                <Link to="/search" className={classes.searchLink}>
-                  <Search className={classes.searchButton} />
-                </Link>
-              </div>
-            ) : (
-              <StyledNavButton
-                onClick={openSubscriptionModal}
-                type="Subscribe"
-              >
-                <span className={classes.subscribeText}>Subscribe</span>
-                <br />
-                <span className={classes.subscribeTo}>to our newsletter</span>
-              </StyledNavButton>
-            )}
+              {session ? (
+                <div className={classes.signedInNav}>
+                  <Link to="/myaccount/profile" className={classes.myAccount}>
+                    My Account
+                  </Link>
+                  <Link to="/search" className={classes.searchLink}>
+                    <Search className={classes.searchButton} />
+                  </Link>
+                </div>
+              ) : (
+                <StyledNavButton
+                  onClick={openSubscriptionModal}
+                  type="Subscribe"
+                >
+                  <span className={classes.subscribeText}>Subscribe</span>
+                  <br />
+                  <span className={classes.subscribeTo}>to our newsletter</span>
+                </StyledNavButton>
+              )}
             </th>
             {!session && (
               <th>
@@ -290,7 +290,7 @@ const Masthead = ({
             </Link>
           </li>
         )}
-      */}
+        */}
       </ul>
     </div>
   );

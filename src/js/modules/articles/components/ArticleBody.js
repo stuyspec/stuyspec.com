@@ -92,7 +92,9 @@ const ArticleBody = ({
     : null;
   let referencedArticle = null;
   if (referencedArticleId) {
-    referencedArticle = articles.find(article => article.id === referencedArticleId);
+    referencedArticle = articles.find(
+      article => article.id === referencedArticleId,
+    );
   }
   return (
     <Row>

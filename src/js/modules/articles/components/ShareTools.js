@@ -28,30 +28,29 @@ const styles = {
 };
 
 const navButtonStyles = {
-    NavButton: {
-        background: "none",
-        borderWidth: 0,
-        margin: 0,
-        padding: 0,
-        "&:hover": {
-            cursor: "pointer",
-        },
+  NavButton: {
+    background: "none",
+    borderWidth: 0,
+    margin: 0,
+    padding: 0,
+    "&:hover": {
+      cursor: "pointer",
     },
-    icon: {
-        display: "inline",
-        marginRight: "4px",
-    },
+  },
+  icon: {
+    display: "inline",
+    marginRight: "4px",
+  },
 };
 
 const NavButton = ({ classes, children, onClick }) => {
-    return (
-        <button className={classes.NavButton} onClick={onClick}>
-          <div className={classes.icon}>{children}</div>
-        </button>
-    );
+  return (
+    <button className={classes.NavButton} onClick={onClick}>
+      <div className={classes.icon}>{children}</div>
+    </button>
+  );
 };
 const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
-
 
 const SHARE_BUTTON_SIZE = 28;
 const SHARE_BUTTON_COLOR = "#000";
@@ -120,7 +119,7 @@ const ShareTools = ({ classes, article, section, outquotes }) => {
       </div>
       <div className={classes.shareButton} key={4}>
         <StyledNavButton onClick={window.print}>
-          <Print size={28}/>
+          <Print size={28} />
         </StyledNavButton>
       </div>
     </div>
