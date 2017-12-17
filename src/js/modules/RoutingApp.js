@@ -53,62 +53,60 @@ const RoutingApp = ({ data: { loading, allSections }, descriptions }) => {
       history={appHistory}
     >
       <PageLayout>
-      {!loading ? (
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          {allSections.map(section => {
-            return (
-              <Route
-                exact
-                path={section.permalink}
-                key={`section${section.id}`}
-                render={props => (
-                  <SectionPage section={section} />
-                )}
-              />
-            );
-          })}
-          {allSections.map(section => {
-            return (
-              <Route
-                exact
-                path={`${section.permalink}/:article_slug`}
-                key={`article${section.id}`}
-                component={ArticlePage}
-              />
-            );
-          })}
-          {Object.values(descriptions).map(description => {
-            return (
-              <Route
-                exact
-                path={`/about/${description.slug}`}
-                key={`description${description.id}`}
-                render={props => (
-                  <DescriptionPage description={description} />
-                )}
-              />
-            );
-          })}
-          <Route
-            exact
-            path={"/contributors/:contributor_slug"}
-            key={"contributors"}
-            render={props => <ContributorPage match={props.match} />}
-          />
-          <Route
-            exact
-            path={"/illustrators/:illustrator_slug"}
-            key={"illustrators"}
-            render={props => <IllustratorPage match={props.match} />}
-          />
-          <Route
-            exact
-            path={"/photographers/:photographer_slug"}
-            key={"photographers"}
-            render={props => <PhotographerPage match={props.match} />}
-          />
-          {/*
+        {!loading ? (
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            {allSections.map(section => {
+              return (
+                <Route
+                  exact
+                  path={section.permalink}
+                  key={`section${section.id}`}
+                  render={props => <SectionPage section={section} />}
+                />
+              );
+            })}
+            {allSections.map(section => {
+              return (
+                <Route
+                  exact
+                  path={`${section.permalink}/:article_slug`}
+                  key={`article${section.id}`}
+                  component={ArticlePage}
+                />
+              );
+            })}
+            {Object.values(descriptions).map(description => {
+              return (
+                <Route
+                  exact
+                  path={`/about/${description.slug}`}
+                  key={`description${description.id}`}
+                  render={props => (
+                    <DescriptionPage description={description} />
+                  )}
+                />
+              );
+            })}
+            <Route
+              exact
+              path={"/contributors/:contributor_slug"}
+              key={"contributors"}
+              render={props => <ContributorPage match={props.match} />}
+            />
+            <Route
+              exact
+              path={"/illustrators/:illustrator_slug"}
+              key={"illustrators"}
+              render={props => <IllustratorPage match={props.match} />}
+            />
+            <Route
+              exact
+              path={"/photographers/:photographer_slug"}
+              key={"photographers"}
+              render={props => <PhotographerPage match={props.match} />}
+            />
+            {/*
           <Route
             exact
             path={"/myaccount"}
@@ -166,10 +164,10 @@ const RoutingApp = ({ data: { loading, allSections }, descriptions }) => {
             render={() => <Redirect to="/404-page-not-found" />}
           />
         */}
-        </Switch>
-      ) : (
-        <span> </span>
-      )}
+          </Switch>
+        ) : (
+          <span> </span>
+        )}
       </PageLayout>
     </ConnectedRouter>
   );

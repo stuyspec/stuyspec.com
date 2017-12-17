@@ -116,5 +116,7 @@ const ContributorPage = ({ classes, data }) => {
 };
 
 export default graphql(ContributorBySlug, {
-  options: ({ match }) => ({ variables: { slug: match.params.contributor_slug } }),
+  options: ({ match }) => ({
+    variables: { slug: match.params.contributor_slug },
+  }),
 })(withRouter(injectSheet(styles)(ContributorPage)));

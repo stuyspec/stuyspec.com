@@ -3,11 +3,45 @@ import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Helmet } from "react-helmet";
+import { withRouter } from "react-router";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
 
-import { getPhotographerFromSlug } from "../selectors";
-import { getPhotographerArticles } from "../../articles/selectors";
 import { ArticleList } from "../../articles/components";
 import { NotFoundPage } from "../../core/components";
+
+const PhotographerBySlug = gql`
+  query PhoographerPageQuery($slug: String!) {
+    userBySlug(slug: $slug) {
+      first_name
+      last_name
+      email
+      description
+      media {
+        article {
+          id
+          slug
+          title
+          summary
+          contributors {
+            slug
+            first_name
+            last_name
+          }
+          section {
+            permalink
+          }
+          media {
+            media_type
+            title
+            attachment_url
+          }
+        }
+      }
+    }
+  }
+`;
 
 const styles = {
   PhotographerPage: {
@@ -52,10 +86,16 @@ const styles = {
   },
 };
 
-const PhotographerPage = ({ classes, photographer, articles }) => {
-  if (!photographer) {
+const PhotographerPage = ({ classes, data }) => {
+  data = humps.camelizeKeys(data);
+  if (data.loading) return null;
+
+  const photographer = data.userBySlug;
+  if (photographer === null) {
     return <NotFoundPage />;
   }
+  console.log(data);
+  const articles = photographer.media.articles.map(medium => medium.article);
   return (
     <Grid className={classes.PhotographerPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -72,18 +112,15 @@ const PhotographerPage = ({ classes, photographer, articles }) => {
           </a>
           <p className={classes.description}>{photographer.description}</p>
           <div className={classes.latest}>Photos</div>
-          <ArticleList articles={articles} />
+          <ArticleList articles={photographer.articles} />
         </Col>
       </Row>
     </Grid>
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  photographer: getPhotographerFromSlug(state, ownProps),
-  articles: getPhotographerArticles(state, ownProps),
-});
-
-export default connect(mapStateToProps, null)(
-  injectSheet(styles)(PhotographerPage),
-);
+export default graphql(PhotographerBySlug, {
+  options: ({ match }) => ({
+    variables: { slug: match.params.photographer_slug },
+  }),
+})(withRouter(injectSheet(styles)(PhotographerPage)));
