@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { ShareButtons, generateShareIcon } from "react-share";
-import { Print } from "../../core/icons/index";
+import { Print } from "../../core/icons";
 
 import { STUY_SPEC_URL } from "../../../constants";
 
@@ -39,7 +39,7 @@ const navButtonStyles = {
   },
   icon: {
     display: "inline",
-    marginRight: "4px",
+    margin: 0,
   },
 };
 

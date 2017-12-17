@@ -7,9 +7,6 @@ const styles = {
     stroke: "rgb(221, 221, 221)",
     strokeWidth: "1.5px",
   },
-  print: {
-    paddingTop: "10px",
-  },
 };
 // originally FaBars
 export default (Print = props => (
@@ -22,9 +19,3 @@ export default (Print = props => (
     </g>
   </Icon>
 ));
-
-/*
-<g >
-        <circle cx="32" cy="32" r="30" fill="#7f7f7f" style={styles.circle}/>
-      </g>
- */
