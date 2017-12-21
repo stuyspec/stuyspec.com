@@ -43,9 +43,6 @@ const styles = {
 //The filler column should have a borderRight. Wait until there is something there first
 
 class HomePage extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.articles != nextState.articles;
-  }
   render() {
     const { classes, sections, articles, media } = this.props;
     const newsSection = Object.values(sections).find(
