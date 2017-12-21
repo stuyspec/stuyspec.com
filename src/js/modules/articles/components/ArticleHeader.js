@@ -83,7 +83,7 @@ const styles = {
 
 const ArticleHeader = ({ classes, article, section }) => {
   return (
-    <Row>
+    <Row className={classes.headerRow}>
       <p className="only-print" id="branding">
         The Stuyvesant Spectator
       </p>
