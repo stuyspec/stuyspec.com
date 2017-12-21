@@ -60,34 +60,10 @@ const styles = {
   figure: {
     maxHeight: "480px",
     overflow: "hidden",
-    height: "350px", // HARDCODED
     "& img": {
-      // width: "100%",
-      height: "100%", // HARDCODED
+      width: "100%",
     },
   },
-
-  /* HARDCODED STYLES FOR SPECIFIC FEATURED ARTICLE */
-  FeaturedArticle: {
-    paddingBottom: "24px",
-    "& #muslim-student-crying-figure": {
-      height: "420px",
-      "& img": {
-        width: "80%",
-        margin: "0 auto",
-        display: "block",
-        height: "auto",
-      },
-    },
-  },
-  "@media (min-width: 768px)": {
-    title: {
-      width: "125%",
-      display: "block",
-    },
-  },
-  /* HARDCODED STYLES FOR FEATURED ARTICLE ENDS */
-
   "@media (max-width: 767px)": {
     featuredMediaContainer: {
       marginBottom: "14px",
@@ -131,7 +107,6 @@ const FeaturedArticle = ({ classes, media, sections, article }) => {
           <Link to={`${section.permalink}/${article.slug}`}>
             <figure
               className={classes.figure}
-              id="muslim-student-crying-figure"
             >
               <img src={featuredMedia.attachmentUrl} />
             </figure>

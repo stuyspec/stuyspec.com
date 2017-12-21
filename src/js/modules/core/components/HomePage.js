@@ -51,15 +51,15 @@ class HomePage extends Component {
     const newsSection = Object.values(sections).find(
       section => section.name === "News",
     );
-    // const featuredArticle = articles.find(
-    //   article =>
-    //     sections[article.sectionId]["name"] !== "News" &&
-    //     Object.values(media).find(
-    //       media => media.articleId === article.id && media.isFeatured,
-    //     ),
-    // );
+    const featuredArticle = articles.find(
+      article =>
+        sections[article.sectionId]["name"] !== "News" &&
+        Object.values(media).find(
+          media => media.articleId === article.id && media.isFeatured,
+        ),
+    );
     /* A HARDCODED ARTICLE */
-    const featuredArticle = articles.find(article => article.id === 253);
+    // const featuredArticle = articles.find(article => article.id === 253);
     let recommendedArticles = [];
     for (article of articles) {
       if (recommendedArticles.length >= 5) {

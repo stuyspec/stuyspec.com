@@ -117,7 +117,6 @@ const SectionBlock = ({ classes, articles, section, sections, media }) => {
     );
   }
   const bigArticle = sectionArticles[0];
-  const rowArticles = sectionArticles.slice(1, 4);
   return (
     <div className={classes.SectionBlock}>
       <Link to={section.permalink} className={classes.sectionLabel}>
@@ -137,7 +136,7 @@ const SectionBlock = ({ classes, articles, section, sections, media }) => {
         </div>
       )}
       {sectionArticles.length > 1 &&
-        sectionArticles.slice(1, 4).map(article => {
+        sectionArticles.slice(1, 3).map(article => {
           const featuredMedia = Object.values(media).find(mediaObject => {
             return (
               mediaObject.isFeatured && mediaObject.articleId === article.id
