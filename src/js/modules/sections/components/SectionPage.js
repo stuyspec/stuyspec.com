@@ -285,6 +285,10 @@ const SectionPage = ({
     });
   }
 
+  directSubsections = Object.values(directSubsections).sort((a, b) => { // alphabetizes subsections
+    return a['name'].localeCompare(b['name']);
+  })
+
   return (
     <Grid fluid className={classes.SectionPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -302,7 +306,7 @@ const SectionPage = ({
             </Link>
           </li>
         ) : (
-          Object.values(directSubsections).map(subsection => {
+          directSubsections.map(subsection => {
             return (
               <li className={classes.subsectionListItem} key={subsection.id}>
                 <Link
