@@ -285,9 +285,10 @@ const SectionPage = ({
     });
   }
 
-  directSubsections = Object.values(directSubsections).sort((a, b) => { // alphabetizes subsections
-    return a['name'].localeCompare(b['name']);
-  })
+  directSubsections = Object.values(directSubsections).sort((a, b) => {
+    // alphabetizes subsections
+    return a["name"].localeCompare(b["name"]);
+  });
 
   return (
     <Grid fluid className={classes.SectionPage}>
