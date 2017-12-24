@@ -35,6 +35,7 @@ const styles = {
       textTransform: "uppercase",
     },
     "& h5": {
+      fontSize: "18px",
       fontWeight: "bold",
       textTransform: "uppercase",
     },
