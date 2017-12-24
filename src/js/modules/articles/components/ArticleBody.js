@@ -25,10 +25,23 @@ const styles = {
     "& p": {
       marginBottom: "20px",
     },
+    "& t": {
+      display: "inline-block",
+      marginRight: "40px",
+    },
     "& h4": {
       textAlign: "center",
       fontWeight: "bold",
       textTransform: "uppercase",
+    },
+    "& h5": {
+      fontWeight: "bold",
+      textTransform: "uppercase",
+    },
+    "& h2": {
+      fontWeight: "bold",
+      textTransform: "uppercase",
+      textAlign: "center",
     },
     "& p:first-child": {
       marginTop: "8px",
