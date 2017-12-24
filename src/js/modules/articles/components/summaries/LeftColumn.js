@@ -134,7 +134,7 @@ const LeftColumn = ({ classes, articles, media, sections, outquotes }) => {
                 .permalink}/${primaryArticle.slug}`}
             >
               <figure className={classes.figure}>
-                <img src={primaryMedia.mediumAttachmentUrl} />
+                <img src={primaryMedia.attachmentUrl} />
               </figure>
             </Link>
           </div>
@@ -165,7 +165,7 @@ const LeftColumn = ({ classes, articles, media, sections, outquotes }) => {
                 .permalink}/${secondaryArticle.slug}`}
             >
               <figure className={classes.figure}>
-                <img src={secondaryMedia.mediumAttachmentUrl} />
+                <img src={secondaryMedia.attachmentUrl} />
               </figure>
             </Link>
           </div>
@@ -198,7 +198,7 @@ const LeftColumn = ({ classes, articles, media, sections, outquotes }) => {
                 .permalink}/${outquoteArticle.slug}`}
             >
               <figure className={classes.figure}>
-                <img src={outquoteMedia.mediumAttachmentUrl} />
+                <img src={outquoteMedia.attachmentUrl} />
               </figure>
             </Link>
           </div>
