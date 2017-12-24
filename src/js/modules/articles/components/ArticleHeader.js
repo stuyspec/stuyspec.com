@@ -36,7 +36,7 @@ const styles = {
     fontSize: "36px",
     fontWeight: "normal",
     marginTop: 0,
-    marginBottom: "20px",
+    marginBottom: "18px",
   },
   meta: {
     alignItems: "center",
@@ -49,7 +49,7 @@ const styles = {
   Byline: {
     color: "#000",
     display: "inline",
-    fontSize: "14px",
+    fontSize: "15px",
     fontWeight: "bold",
     marginRight: "9px",
     "& p": {
@@ -65,7 +65,7 @@ const styles = {
   },
   Dateline: {
     color: "#000",
-    fontSize: "14px",
+    fontSize: "15px",
     marginRight: "28px",
     marginTop: 0,
   },
