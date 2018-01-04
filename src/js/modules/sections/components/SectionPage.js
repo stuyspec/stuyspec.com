@@ -23,6 +23,7 @@ const styles = {
     color: "#000",
     fontFamily: "Canela",
     fontSize: "60px",
+    height: "78px",
     marginBottom: "7px",
     textAlign: "center",
   },
