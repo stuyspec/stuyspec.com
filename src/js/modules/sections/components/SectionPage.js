@@ -28,14 +28,13 @@ const styles = {
     textAlign: "center",
   },
   subsectionBar: {
-    borderBottom: "1px solid #ddd",
-    margin: "0 0 26px 0",
-    padding: "0 0 35px 0",
+    margin: "0 0 35px 0",
     textAlign: "center",
   },
   featuredRow: {
+    borderTop: "1px solid #ddd",
     borderBottom: "1px solid #ddd",
-    paddingBottom: "22px",
+    padding: "26px 0 26px 0",
   },
   featuredMedia: {
     "& figure": {
