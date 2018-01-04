@@ -4,15 +4,38 @@ import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 
-import { getCurrentUser } from "../../accounts/selectors";
-import { Search } from "../icons";
-import { openSidebar } from "../actions";
-import { getTopLevelSections } from "../../sections/selectors";
+import { Search } from "../../core/icons";
+import { getTopLevelSections } from "../selectors";
 import { openSubscriptionModal } from "../../accounts/actions";
 
-const FeaturedSectionsBar = ({ classes, openSidebar, openSubscriptionModal }) => {
+const styles = {
+  FeaturedSectionsBar: {
+    fontFamily: "Circular Std",
+    listStyleType: "none",
+    padding: "6px",
+  },
+  sectionListItem: {
+    display: "inline",
+    margin: "0px 13px",
+  },
+  navSearchButton: {
+    top: "-1px",
+    position: "relative",
+  },
+  sectionLink: {
+    color: "#000",
+    fontSize: "14px",
+    fontWeight: 300,
+    textDecoration: "none",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+    },
+  },
+};
+
+const FeaturedSectionsBar = ({ classes, openSubscriptionModal, sections }) => {
   return (
-    <ul className={classes.sectionLinksNav}>
+    <ul className={classes.FeaturedSectionsBar}>
       {Object.values(sections).map(section => {
         return (
           <li key={section.id} className={classes.sectionListItem}>
@@ -38,26 +61,23 @@ const FeaturedSectionsBar = ({ classes, openSidebar, openSubscriptionModal }) =>
           </Link>
         </li>
       */}
-      {!session && (
-        <li key={-3} className={classes.sectionListItem}>
-          <Link to="/search" className={classes.sectionLink}>
-            <Search className={classes.navSearchButton} />
-          </Link>
-        </li>
-      )}
-      */}
+      <li key={-3} className={classes.sectionListItem}>
+        <Link to="/search" className={classes.sectionLink}>
+          <Search className={classes.navSearchButton} />
+        </Link>
+      </li>
     </ul>
   )
-}
+};
 
 const mapStateToProps = state => ({
   sections: getTopLevelSections(state),
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ openSubscriptionModal, openSidebar }, dispatch);
+  return bindActionCreators({ openSubscriptionModal }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(Masthead),
+  injectSheet(styles)(FeaturedSectionsBar),
 );
