@@ -18,7 +18,7 @@ const styles = {
     boxShadow: "0 2px 4px 0 rgba(0,0,0,.2)",
     height: "71px",
     left: 0,
-    position: "absolute",
+    position: "fixed",
     width: "100%",
     top: 0,
     zIndex: 1000,
