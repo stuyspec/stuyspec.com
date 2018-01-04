@@ -257,41 +257,7 @@ const Masthead = ({
           </tr>
         </tbody>
       </table>
-      <ul className={classes.sectionLinksNav}>
-        {Object.values(sections).map(section => {
-          return (
-            <li key={section.id} className={classes.sectionListItem}>
-              <Link to={section.permalink} className={classes.sectionLink}>
-                {section.name}
-              </Link>
-            </li>
-          );
-        })}
-        <li key={-1} className={classes.sectionListItem}>
-          <Link
-            onClick={openSubscriptionModal}
-            to={"/"}
-            className={classes.sectionLink}
-          >
-            Newsletter
-          </Link>
-        </li>
-        {/*
-        <li key={-2} className={classes.sectionListItem}>
-          <Link to={"/paper"} className={classes.sectionLink}>
-            The Paper
-          </Link>
-        </li>
-      */}
-        {!session && (
-          <li key={-3} className={classes.sectionListItem}>
-            <Link to="/search" className={classes.sectionLink}>
-              <Search className={classes.navSearchButton} />
-            </Link>
-          </li>
-        )}
-        */}
-      </ul>
+      <FeaturedSectionsBar />
     </div>
   );
 };

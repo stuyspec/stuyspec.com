@@ -25,7 +25,7 @@ const navButtonStyles = {
   },
   "@media (max-width: 768px)": {
     MobileNavButton: {
-      display: "block",
+      display: "inline",
     },
   },
 };
