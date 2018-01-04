@@ -16,7 +16,6 @@ const navButtonStyles = {
     fontFamily: "Circular Std",
     fontSize: "12px",
     fontWeight: "bold",
-    textTransform: "uppercase",
   },
   icon: {
     display: "inline",

@@ -3,10 +3,12 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
+
 import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
 import NavButton from "./NavButton";
 import MobileNavButton from "./MobileNavButton";
+import { FeaturedSectionsBar } from "../../sections/components";
 
 import { openSubscriptionModal } from "../../accounts/actions";
 
@@ -22,43 +24,78 @@ const styles = {
     zIndex: 1000,
   },
   barContainer: {
-    height: "100%",
+    display: "flex",
+    height: "37px",
+    justifyContent: "space-between",
     margin: "0 auto",
-    padding: "0px 30px",
+    padding: "12px 30px 0px 30px",
     position: "relative",
-    width: "100%",
     textAlign: "center",
+    width: "100%",
   },
-  quickNav: {
-    float: "left",
-    marginTop: "9px",
+  sidebarToggle: {
     "& button": {
       marginRight: "24px",
     },
   },
   brandingLink: {
+    bottom: "9px",
     color: "#000",
     fontFamily: "Old English Text MT",
-    fontSize: "26px",
+    fontSize: "30px",
     left: "50%",
     marginTop: "1px",
     position: "absolute",
     textDecoration: "none",
-    transform: "translate(-50%,0)",
+    top: "1px",
+    transform: "translate(-50%, 0)",
     "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none",
     },
   },
-  userTools: {
-    float: "right",
-    marginTop: "9px",
+  navButtons: {
+    fontFamily: "Circular Std",
+    fontSize: "13px",
+    fontWeight: 300,
+    display: "flex",
+    flexDirection: "column",
     "& button": {
       marginLeft: "24px",
     },
   },
+  userTools: {
+    marginBottom: "12px",
+    "& > a": {
+      color: "#888",
+      "&:hover, &:active, &:focus": {
+        color: "#888",
+      },
+    },
+  },
+  subscribeLink: {
+    borderLeft: "1px solid #888",
+    marginLeft: "9px",
+    paddingLeft: "8px",
+  },
+  searchLink: {
+    alignSelf: "flex-end",
+    color: "#000",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+    },
+    "& svg": {
+      display: "inline",
+      marginRight: "4px",
+      transform: "translateY(-2px)",
+    },
+  },
   responsiveSectionNamesContainer: {
     display: "inline",
+  },
+  sectionsBarContainer: {
+    display: "flex",
+    justifyContent: "center",
   },
   "@media (max-width: 768px)": {
     brandingLink: {
@@ -86,39 +123,34 @@ const MastheadBar = ({
   return (
     <div className={classes.MastheadBar}>
       <div className={classes.barContainer}>
-        <div className={classes.quickNav}>
+        <div className={classes.sidebarToggle}>
           <MobileNavButton onClick={openSidebar}>
             <Hamburger />
           </MobileNavButton>
-          <Link to="/search">
-            <NavButton label="search">
-              <Search color="#000" />
-            </NavButton>
-          </Link>
         </div>
         <Link
           className={classes.brandingLink}
           to={"/"}
         >
           The Spectator
-        </Link>
-        {session ? (
+        </Link>        
+        <div className={classes.navButtons}>
           <div className={classes.userTools}>
-            <Link to="/myaccount/profile">
-              <NavButton label="profile" />
-            </Link>
+            {session ? (
+              <Link to="/myaccount/profile">Profile</Link>
+            ) : (
+              <Link to="/myaccount">Log In</Link>
+            )}
+            <Link to="/myaccount" className={classes.subscribeLink} onClick={openSubscriptionModal}>Subscribe</Link>
           </div>
-        ) : (
-          <div className={classes.userTools}>
-            <Link to="/myaccount">
-              <NavButton label="log in" />
-            </Link>
-            <NavButton
-              label="subscribe"
-              onClick={openSubscriptionModal}
-            />
-          </div>
-        )}
+          <Link to="/search" className={classes.searchLink}>
+            <Search color="#000" />
+            Search
+          </Link>
+        </div>
+      </div>
+      <div className={classes.sectionsBarContainer}>
+        <FeaturedSectionsBar />
       </div>
     </div>
   );
