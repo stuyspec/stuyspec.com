@@ -34,7 +34,7 @@ const styles = {
   },
   featuredRow: {
     borderBottom: "1px solid #ddd",
-    paddingBottom: "18px",
+    paddingBottom: "22px",
   },
   featuredMedia: {
     "& figure": {
