@@ -5,7 +5,8 @@ import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
-import { getSectionSlugs } from "../../sections/selectors";
+import NavButton from "./NavButton";
+import MobileNavButton from "./MobileNavButton";
 
 import { openSubscriptionModal } from "../../accounts/actions";
 
@@ -13,9 +14,9 @@ const styles = {
   MastheadBar: {
     backgroundColor: "#fff",
     boxShadow: "0 2px 4px 0 rgba(0,0,0,.2)",
-    height: "40px",
+    height: "71px",
     left: 0,
-    position: "fixed",
+    position: "absolute",
     width: "100%",
     top: 0,
     zIndex: 1000,
@@ -56,46 +57,8 @@ const styles = {
       marginLeft: "24px",
     },
   },
-  sectionName: {
-    borderLeft: "solid 1px #000",
-    bottom: "4px",
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "15px",
-    fontWeight: "bold",
-    lineHeight: "0.93",
-    marginLeft: "7.5px",
-    padding: "2.5px 0 0 7.5px",
-    position: "relative",
-  },
   responsiveSectionNamesContainer: {
     display: "inline",
-  },
-  sectionNameDesktop: {
-    borderLeft: "solid 1px #000",
-    bottom: "4px",
-    color: "#000",
-    display: "inline",
-    fontFamily: "Minion Pro",
-    fontSize: "15px",
-    fontWeight: "bold",
-    lineHeight: "0.93",
-    marginLeft: "7.5px",
-    padding: "2.5px 0 0 7.5px",
-    position: "relative",
-  },
-  sectionNameMobile: {
-    borderLeft: "solid 1px #000",
-    bottom: "4px",
-    color: "#000",
-    display: "none",
-    fontFamily: "Minion Pro",
-    fontSize: "15px",
-    fontWeight: "bold",
-    lineHeight: "0.93",
-    marginLeft: "7.5px",
-    padding: "2.5px 0 0 7.5px",
-    position: "relative",
   },
   "@media (max-width: 768px)": {
     brandingLink: {
@@ -103,12 +66,6 @@ const styles = {
     },
     barContainer: {
       padding: "0 20px",
-    },
-    sectionNameDesktop: {
-      display: "none",
-    },
-    sectionNameMobile: {
-      display: "inline",
     },
     quickNav: {
       float: "left",
@@ -120,116 +77,43 @@ const styles = {
   },
 };
 
-const navButtonStyles = {
-  NavButton: {
-    background: "none",
-    borderWidth: 0,
-    margin: 0,
-    padding: 0,
-    "&:hover": {
-      cursor: "pointer",
-    },
-  },
-  buttonText: {
-    color: "#000",
-    fontFamily: "Circular Std",
-    fontSize: "12px",
-    fontWeight: "bold",
-    textTransform: "uppercase",
-  },
-  icon: {
-    display: "inline",
-    marginRight: "4px",
-  },
-  "@media (max-width: 768px)": {
-    buttonText: {
-      display: "none",
-    },
-  },
-};
-
-const NavButton = ({ classes, children, label, onClick }) => {
-  return (
-    <button className={classes.NavButton} onClick={onClick}>
-      <div className={classes.icon}>{children}</div>
-      <span className={classes.buttonText}>{label}</span>
-    </button>
-  );
-};
-const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
-
 const MastheadBar = ({
   classes,
   openSidebar,
   openSubscriptionModal,
   session,
-  location,
-  sectionSlugs,
-  sections,
 }) => {
-  const sectionSlugArray = location.pathname.split("/");
-  const sectionSlug = sectionSlugArray[sectionSlugArray.length - 1];
-  let section = null;
-  if (sectionSlugs.includes(sectionSlug)) {
-    section = Object.values(sections).find(
-      section => section.slug === sectionSlug,
-    );
-  }
-
-  let mastheadSectionName = null;
-  if (section && section.parentId) {
-    mastheadSectionName = sections[section.parentId].name;
-  }
-
   return (
     <div className={classes.MastheadBar}>
       <div className={classes.barContainer}>
         <div className={classes.quickNav}>
-          <StyledNavButton label="sections" onClick={openSidebar}>
+          <MobileNavButton onClick={openSidebar}>
             <Hamburger />
-          </StyledNavButton>
+          </MobileNavButton>
           <Link to="/search">
-            <StyledNavButton label="search">
+            <NavButton label="search">
               <Search color="#000" />
-            </StyledNavButton>
+            </NavButton>
           </Link>
         </div>
         <Link
           className={classes.brandingLink}
-          to={
-            section && section.parentId ? (
-              sections[section.parentId].permalink
-            ) : (
-              "/"
-            )
-          }
+          to={"/"}
         >
           The Spectator
-          {mastheadSectionName === "Arts & Entertainment" ? (
-            <span className={classes.responsiveSectionNameContainer}>
-              <span className={classes.sectionNameDesktop}>
-                {mastheadSectionName}
-              </span>
-              <span className={classes.sectionNameMobile}>A&E</span>
-            </span>
-          ) : (
-            mastheadSectionName && (
-              <span className={classes.sectionName}>{mastheadSectionName}</span>
-            )
-          )}
         </Link>
         {session ? (
           <div className={classes.userTools}>
             <Link to="/myaccount/profile">
-              <StyledNavButton label="profile" />
+              <NavButton label="profile" />
             </Link>
           </div>
         ) : (
           <div className={classes.userTools}>
             <Link to="/myaccount">
-              <StyledNavButton label="log in" />
+              <NavButton label="log in" />
             </Link>
-            <StyledNavButton
+            <NavButton
               label="subscribe"
               onClick={openSubscriptionModal}
             />
@@ -242,8 +126,6 @@ const MastheadBar = ({
 
 const mapStateToProps = state => ({
   session: state.accounts.session,
-  sectionSlugs: getSectionSlugs(state),
-  sections: state.sections.sections,
 });
 
 const mapDispatchToProps = dispatch => {
