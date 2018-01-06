@@ -89,7 +89,10 @@ const styles = {
 
 const ArticleRow = ({ classes, article }) => {
   const { section } = article;
-  const featuredMedia = article.media[0];
+  let featuredMedia = null;
+  if (article.media.length > 0) {
+    featuredMedia = article.media[0]
+  }
   return (
     <Row key={article.id} className={classes.ArticleRow}>
       <div className={classes.articleBlock} key={article.id}>
@@ -115,9 +118,9 @@ const ArticleRow = ({ classes, article }) => {
           </Link>
           <p className={classes.summary}>{article.summary}</p>
           <Byline contributors={article.contributors} />
-          <p className={classes.DatelineMobile}>
+          <div className={classes.DatelineMobile}>
             <Dateline timestamp={article.createdAt} />
-          </p>
+          </div>
         </div>
       </div>
     </Row>

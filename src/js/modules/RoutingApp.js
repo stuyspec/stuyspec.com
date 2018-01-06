@@ -107,6 +107,18 @@ const RoutingApp = ({
               key={"photographers"}
               render={props => <PhotographerPage match={props.match} />}
             />
+            <Route
+              exact
+              path={"/recommended"}
+              key={"recommended"}
+              component={RecommendedPage}
+            />
+            <Route
+              exact
+              path={"/latest"}
+              key={"latest"}
+              component={LatestPage}
+            />
             {/*
           <Route
             exact
@@ -136,18 +148,7 @@ const RoutingApp = ({
             render={() =>
               session ? <EditProfilePage /> : <Redirect to="/myaccount" />}
           />
-          <Route
-            exact
-            path={"/recommended"}
-            key={"recommended"}
-            component={RecommendedPage}
-          />
-          <Route
-            exact
-            path={"/latest"}
-            key={"latest"}
-            component={LatestPage}
-          />
+          
           <Route
             exact
             path={"/search"}
