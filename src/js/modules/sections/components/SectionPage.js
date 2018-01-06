@@ -212,7 +212,8 @@ const SectionPage = ({ classes, data, section, media }) => {
     return null;
   }
   data = humps.camelizeKeys(data);
-  const { articlesBySectionID, topRankedArticles, subsectionsByParentSectionID } = data;
+  const { articlesBySectionID, topRankedArticles } = data;
+  const subsections = data.sectionsByParentSectionID;
   if (section.parentId) {
     return (
       <Grid fluid className={classes.SubsectionPage}>
@@ -268,7 +269,7 @@ const SectionPage = ({ classes, data, section, media }) => {
     });
   }
 
-  directSubsections = Object.values(directSubsections).sort((a, b) => {
+  sectionsByParentSectionID = Object.values(directSubsections).sort((a, b) => {
     // alphabetizes subsections
     return a["name"].localeCompare(b["name"]);
   });
@@ -293,31 +294,33 @@ const SectionPage = ({ classes, data, section, media }) => {
             </Link>
           </li>
         ) : (
-          Object.values(directSubsections).map(subsection => {
-            return (
-              <li className={classes.subsectionListItem} key={subsection.id}>
-                <Link
-                  className={classes.subsectionLink}
-                  to={subsection.permalink}
-                >
-                  {subsection.name}
-                </Link>
-              </li>
-            );
-          })
+          subsections
+            .sort((a, b) => a["name"].localeCompare(b["name"]))
+            .map(subsection => {
+              return (
+                <li className={classes.subsectionListItem} key={subsection.id}>
+                  <Link
+                    className={classes.subsectionLink}
+                    to={subsection.permalink}
+                  >
+                    {subsection.name}
+                  </Link>
+                </li>
+              );
+            })
         )}
       </ul>
       <RightTitleArticle article={featuredArticle} />
       <Row className={classes.secondaryRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.secondaryCol}>
-          {featuredSubsection && (
+          {/*featuredSubsection && (
             <div className={classes.SectionFeatureContainer}>
               <SectionFeature
                 section={featuredSubsection}
                 without={featuredArticle}
               />
             </div>
-          )}
+          )*/}
           <LeftTitleArticle article={secondaryArticle} />
         </Col>
         <Col
@@ -341,7 +344,7 @@ const SectionPage = ({ classes, data, section, media }) => {
         </Col>
         <Col xsHidden sm={3} md={3} lg={3}>
           <div className={classes.sectionColumnContainer}>
-            <SectionColumn sections={Object.values(directSubsections)} />
+            <SectionColumn slugs={subsections.map(s => s.slug)} />
           </div>
         </Col>
       </Row>

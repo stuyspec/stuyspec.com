@@ -1,4 +1,7 @@
 import React from "react";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import { Row, Col } from "react-bootstrap/lib";
@@ -196,138 +199,6 @@ const SectionFeature = ({ classes, articles }) => {
   );
 };
 
-/*
-const SectionFeature = ({
-  classes,
-  articles,
-  section,
-  media,
-  without, // parents can exclude a specific article (for example, the featuredArticle of a page
-}) => {
-  const sectionArticles = articles.filter(
-    article => article.sectionId === section.id && article !== without,
-  );
-  const primaryArticle =
-    sectionArticles[0] === articles[0]
-      ? sectionArticles[1]
-      : sectionArticles[0]; // we don't want to copy the homepage FeaturedArticle
-  let featuredMedia = null;
-  const secondaryArticle =
-    sectionArticles.slice(1, 10).find(article => {
-      if (article === primaryArticle) {
-        return false;
-      }
-      // find a TOP 10 Article within the section with media
-      const mediaObject = Object.values(media).find(
-        mediaObject => mediaObject.articleId === article.id,
-      );
-      if (mediaObject) {
-        featuredMedia = mediaObject;
-      }
-      return mediaObject;
-    }) || sectionArticles[2]; // if none such article found, default is the second
-  const possibleTernaryArticle = sectionArticles
-    .slice(1, 10)
-    .find(
-      article => article !== secondaryArticle && article !== primaryArticle,
-    );
-
-  // NESTED IN <Col lg={9}>
-  return (
-    <Row className={classes.SectionFeature}>
-      <Link to={section.permalink} className={classes.sectionLabel}>
-        {section.name}
-      </Link>
-      {secondaryArticle && (
-        <Col xs={6} sm={4} md={4} lg={4} className={classes.secondaryArticle}>
-          <Link
-            className={classes.title}
-            to={`${section.permalink}/${secondaryArticle.slug}`}
-          >
-            {secondaryArticle.title}
-          </Link>
-          <p className={classes.summary}>{secondaryArticle.summary}</p>
-          <Byline contributors={secondaryArticle.contributors} />
-          <Dateline timestamp={secondaryArticle.createdAt} />
-        </Col>
-      )}
-      {featuredMedia ? (
-        <Col
-          xs={6}
-          sm={4}
-          md={4}
-          lg={4}
-          className={classes.featuredMediaContainer}
-        >
-          <Link to={`${section.permalink}/${secondaryArticle.slug}`}>
-            <figure className={classes.figure}>
-              <img src={featuredMedia.mediumAttachmentUrl} />
-            </figure>
-          </Link>
-        </Col>
-      ) : (
-        possibleTernaryArticle && (
-          <Col xsHidden sm={4} md={4} lg={4} className={classes.ternaryArticle}>
-            <Link
-              className={classes.title}
-              to={`${section.permalink}/${possibleTernaryArticle.slug}`}
-            >
-              {possibleTernaryArticle.title}
-            </Link>
-            <p className={classes.summary}>{possibleTernaryArticle.summary}</p>
-            <Byline contributors={possibleTernaryArticle.contributors} />
-            <Dateline timestamp={possibleTernaryArticle.createdAt} />
-          </Col>
-        )
-      )}
-      {primaryArticle && (
-        <Col xsHidden sm={4} md={4} lg={4} className={classes.primaryArticle}>
-          <Link
-            className={classes.title}
-            to={`${section.permalink}/${primaryArticle.slug}`}
-          >
-            {primaryArticle.title}
-          </Link>
-          <p className={classes.summary}>{primaryArticle.summary}</p>
-          <Byline contributors={primaryArticle.contributors} />
-          <Dateline timestamp={primaryArticle.createdAt} />
-        </Col>
-      )}
-      {primaryArticle && (
-        <Col
-          xs={12}
-          smHidden
-          mdHidden
-          lgHidden
-          className={classes.mobileArticleTitle1}
-        >
-          <Link
-            className={classes.title}
-            to={`${section.permalink}/${primaryArticle.slug}`}
-          >
-            {primaryArticle.title}
-          </Link>
-        </Col>
-      )}
-      {possibleTernaryArticle && (
-        <Col
-          xs={12}
-          smHidden
-          mdHidden
-          lgHidden
-          className={classes.mobileArticleTitle2}
-        >
-          <Link
-            className={classes.title}
-            to={`${section.permalink}/${possibleTernaryArticle.slug}`}
-          >
-            {possibleTernaryArticle.title}
-          </Link>
-        </Col>
-      )}
-    </Row>
-  );
-};
-*/
-
-export default injectSheet(styles)(SectionFeature);
+export default graphql(SectionFeatureQuery, {
+  options: ({ section_id }) => ({ variables: { section_id: section_id } }),
+})(injectSheet(styles)(SectionFeature));
