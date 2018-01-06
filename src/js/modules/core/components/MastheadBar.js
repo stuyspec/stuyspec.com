@@ -136,12 +136,9 @@ const MastheadBar = ({
             <Hamburger />
           </MobileNavButton>
         </div>
-        <Link
-          className={classes.brandingLink}
-          to={"/"}
-        >
+        <Link className={classes.brandingLink} to={"/"}>
           The Spectator
-        </Link>        
+        </Link>
         <div className={classes.navButtons}>
           <div className={classes.userTools}>
             {session ? (
@@ -149,7 +146,13 @@ const MastheadBar = ({
             ) : (
               <Link to="/myaccount">Log In</Link>
             )}
-            <Link to="/myaccount" className={classes.subscribeLink} onClick={openSubscriptionModal}>Subscribe</Link>
+            <Link
+              to="/myaccount"
+              className={classes.subscribeLink}
+              onClick={openSubscriptionModal}
+            >
+              Subscribe
+            </Link>
           </div>
           <Link to="/search" className={classes.searchLink}>
             <Search color="#000" />

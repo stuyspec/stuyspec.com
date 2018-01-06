@@ -20,7 +20,9 @@ const PageHeader = ({ classes, location, sections }) => {
     <Grid className={classes.HeaderContainer}>
       <Row>
         <Col xsHidden smHidden md={12} lg={12}>
-          {location.pathname === "/" ? <Masthead /> : (
+          {location.pathname === "/" ? (
+            <Masthead />
+          ) : (
             <div className={classes.mastheadBar}>
               <MastheadBar />
             </div>

@@ -92,19 +92,20 @@ const ArtistPage = ({ classes, data, match }) => {
   if (!artist) {
     return <NotFoundPage />;
   }
-  const media_type = MEDIA_CREATOR_SLUGS[match.path.split('/')[1]];
-  console.log(artist.media)
-  console.log(artist.media
-    .filter(medium => medium.mediaType === media_type));
+  const media_type = MEDIA_CREATOR_SLUGS[match.path.split("/")[1]];
+  console.log(artist.media);
+  console.log(artist.media.filter(medium => medium.mediaType === media_type));
   const articles = artist.media
     .filter(medium => medium.mediaType === media_type)
     .map(medium => ({
       ...medium.article,
-      media: [{
-        mediaType: medium.mediaType,
-        title: medium.title,
-        attachmentUrl: medium.attachmentUrl,
-      }],
+      media: [
+        {
+          mediaType: medium.mediaType,
+          title: medium.title,
+          attachmentUrl: medium.attachmentUrl,
+        },
+      ],
     }));
   return (
     <Grid className={classes.ArtistPage}>

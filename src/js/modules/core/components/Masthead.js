@@ -184,12 +184,7 @@ const NavButton = ({ children, onClick, classes, type }) => {
 
 const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 
-const Masthead = ({
-  classes,
-  openSidebar,
-  session,
-  openSubscriptionModal,
-}) => {
+const Masthead = ({ classes, openSidebar, session, openSubscriptionModal }) => {
   return (
     <Grid className={classes.Masthead}>
       <StyledNavButton onClick={openSidebar} type="Sections">

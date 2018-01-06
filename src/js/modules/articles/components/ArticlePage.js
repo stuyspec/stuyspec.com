@@ -18,6 +18,42 @@ import NotFoundPage from "../../core/components/NotFoundPage";
 import { getArticleFromRequestedSlug, getArticleMedia } from "../selectors";
 import { openSubscriptionModal } from "../../accounts/actions";
 
+const ArticleBySlug = gql`
+  query ArticleQuery($slug: String!) {
+    articleBySlug(slug: $slug) {
+      title
+      content
+      media {
+        attachment_url
+        media_type
+        caption
+        title
+        user {
+          first_name
+          last_name
+          slug
+        }
+      }
+      created_at
+      volume
+      issue
+      contributors {
+        first_name
+        last_name
+        slug
+      }
+      section {
+        name
+        permalink
+        parent_section {
+          name
+          permalink
+        }
+      }
+    }
+  }
+`;
+
 const styles = {
   description: {
     border: "1px solid #ddd",
@@ -100,42 +136,6 @@ const ArticlePage = ({ classes, data, openSubscriptionModal }) => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ openSubscriptionModal }, dispatch);
 };
-
-const ArticleBySlug = gql`
-  query ArticleQuery($slug: String!) {
-    articleBySlug(slug: $slug) {
-      title
-      content
-      media {
-        attachment_url
-        media_type
-        caption
-        title
-        user {
-          first_name
-          last_name
-          slug
-        }
-      }
-      created_at
-      volume
-      issue
-      contributors {
-        first_name
-        last_name
-        slug
-      }
-      section {
-        name
-        permalink
-        parent_section {
-          name
-          permalink
-        }
-      }
-    }
-  }
-`;
 
 export default graphql(ArticleBySlug, {
   options: ({ match }) => ({ variables: { slug: match.params.article_slug } }),

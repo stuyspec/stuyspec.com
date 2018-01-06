@@ -26,10 +26,7 @@ import {
 } from "./core/components";
 import { DescriptionPage } from "./descriptions/components";
 import { SectionPage } from "./sections/components";
-import {
-  ContributorPage,
-  ArtistPage,
-} from "./users/components";
+import { ContributorPage, ArtistPage } from "./users/components";
 
 import { sessionfy } from "./accounts/actions";
 
@@ -146,18 +143,14 @@ const RoutingApp = ({
               key={"editProfile"}
               render={() =>
                 session ? <EditProfilePage /> : <Redirect to="/myaccount" />}
-            />          
+            />
             <Route
               exact
               path={"/search"}
               key={"search"}
               component={SearchPage}
             />
-            <Route
-              path="*"
-              key={"404"}
-              component={NotFoundPage}
-            />
+            <Route path="*" key={"404"} component={NotFoundPage} />
           </Switch>
         ) : (
           <span> </span>

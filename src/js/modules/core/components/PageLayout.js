@@ -30,7 +30,7 @@ const PageLayoutQuery = gql`
       }
     }
   }
-`
+`;
 
 const styles = {
   horizontalAdContainer: {

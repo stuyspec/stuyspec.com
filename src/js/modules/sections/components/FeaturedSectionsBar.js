@@ -48,7 +48,12 @@ const styles = {
   },
 };
 
-const FeaturedSectionsBar = ({ classes, openSubscriptionModal, data, omitSearch }) => {
+const FeaturedSectionsBar = ({
+  classes,
+  openSubscriptionModal,
+  data,
+  omitSearch,
+}) => {
   if (data.loading) {
     return null;
   }
@@ -89,7 +94,7 @@ const FeaturedSectionsBar = ({ classes, openSubscriptionModal, data, omitSearch 
         </li>
       )}
     </ul>
-  )
+  );
 };
 
 const mapDispatchToProps = dispatch => {

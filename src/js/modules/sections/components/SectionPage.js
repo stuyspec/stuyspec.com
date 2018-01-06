@@ -11,7 +11,10 @@ import { ArticleList } from "../../articles/components";
 import { getSectionTreeArticles } from "../../articles/selectors";
 import { getDirectSubsections } from "../../sections/selectors";
 import SectionColumn from "./SectionColumn";
-import { LeftTitleArticle, RightTitleArticle } from "../../articles/components/summaries";
+import {
+  LeftTitleArticle,
+  RightTitleArticle,
+} from "../../articles/components/summaries";
 import { Dateline, Byline } from "../../articles/components/index";
 import SectionFeature from "./SectionFeature";
 import { TallAd } from "../../advertisements/components/index";
@@ -79,7 +82,7 @@ const SectionPageQuery = gql`
 `;
 
 const styles = {
-  sectionTitle:{
+  sectionTitle: {
     color: "#000",
     fontFamily: "Canela",
     fontSize: "60px",
@@ -273,9 +276,7 @@ const SectionPage = ({ classes, data, section }) => {
         <title>{section.name}</title>
         <meta />
       </Helmet>
-      <div className={classes.sectionTitle}>
-        {section.name}
-      </div>
+      <div className={classes.sectionTitle}>{section.name}</div>
       <ul className={classes.subsectionBar}>
         {section.name === "10/31 Terror Attack" ? (
           <li className={classes.subsectionListItem}>
@@ -345,9 +346,6 @@ const SectionPage = ({ classes, data, section }) => {
   );
 };
 
-export default graphql(
-  SectionPageQuery,
-  {
-    options: ({ section }) => ({ variables: { section_id: section.id } }),
-  },
-)(injectSheet(styles)(SectionPage));
+export default graphql(SectionPageQuery, {
+  options: ({ section }) => ({ variables: { section_id: section.id } }),
+})(injectSheet(styles)(SectionPage));
