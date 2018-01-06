@@ -10,6 +10,7 @@ import RibbonComponent from "./RibbonComponent";
 const LatestArticlesQuery = gql`
   query LatestArticlesQuery($limit: Int!) {
     latestArticles(limit: $limit) {
+      id
       title
       slug
       summary
