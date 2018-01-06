@@ -6,10 +6,10 @@ const MILLISECONDS_IN_DAY = 8.64e7;
 
 const styles = {
   Dateline: {
-    color: "#888888",
+    color: "#888",
     fontFamily: "Circular Std",
     fontSize: "12px",
-    fontWeight: "300",
+    fontWeight: 300,
     marginBottom: 0,
   },
 };

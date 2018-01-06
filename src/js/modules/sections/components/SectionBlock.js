@@ -112,18 +112,6 @@ const styles = {
       },
     },
   },
-  Dateline: {
-    color: "#888",
-    fontFamily: "Circular Std",
-    fontSize: "12px",
-    fontWeight: "300",
-    margin: 0,
-    "& p": {
-      color: "#000",
-      margin: 0,
-      display: "inline",
-    },
-  },
 };
 
 const SectionBlock = ({ classes, data, slug }) => {
@@ -149,33 +137,24 @@ const SectionBlock = ({ classes, data, slug }) => {
           </Link>
           <p className={classes.summary}>{bigArticle.summary}</p>
           <Byline classes={classes} contributors={bigArticle.contributors} />
-          <Dateline classes={classes} article={bigArticle} />
+          <Dateline timestamp={bigArticle.createdAt} />
         </div>
       )}
-      {sectionArticles.length > 1 &&
-        sectionArticles.slice(1, 4).map(article => {
-          const featuredMedia = Object.values(media).find(mediaObject => {
-            return (
-              mediaObject.isFeatured && mediaObject.articleId === article.id
-            );
-          });
-          // In the links, we index sections again because the Sports
-          // SectionBlock finds articles in not only the given section prop,
-          // but also its subsections.
+      {topRankedArticles.length > 1 &&
+        topRankedArticles.slice(1, 3).map(article => {
           return (
             <div className={classes.article} key={article.id}>
-              {featuredMedia && (
+              {article.media.length > 0 && (
                 <Link
-                  to={`${sections[article.sectionId]
-                    .permalink}/${article.slug}`}
+                  to={`${section.permalink}/${article.slug}`}
                 >
                   <figure className={classes.figure}>
-                    <img src={featuredMedia.thumbAttachmentUrl} />
+                    <img src={article.media[0].thumbAttachmentUrl} />
                   </figure>
                 </Link>
               )}
               <Link
-                to={`${sections[article.sectionId].permalink}/${article.slug}`}
+                to={`${section.permalink}/${article.slug}`}
                 className={classes.smallTitle}
               >
                 {article.title}
