@@ -82,7 +82,6 @@ const RecommendedArticles = ({ classes, limit, data }) => {
     return null;
   }
   data = humps.camelizeKeys(data);
-  console.log(data);
   const { topRankedArticles } = data;
   return (
     <div className={classes.RecommendedArticles}>

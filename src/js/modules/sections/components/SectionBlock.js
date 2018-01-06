@@ -117,6 +117,8 @@ const styles = {
 const SectionBlock = ({ classes, data, slug }) => {
   if (data.loading) {
     return null;
+  } else if (data.error) {
+    console.error(data.error.message);
   }
   data = humps.camelizeKeys(data);
   const { topRankedArticles } = data;

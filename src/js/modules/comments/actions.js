@@ -4,7 +4,6 @@ import axios from "axios";
 import { reset } from "redux-form";
 
 export const createComment = (values, devise_headers) => {
-  console.log({ "X-Key-Inflection": "camel", ...devise_headers });
   return dispatch => {
     dispatch({
       type: t.CREATE_COMMENT_PENDING,
