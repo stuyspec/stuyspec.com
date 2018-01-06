@@ -80,7 +80,11 @@ const LatestPage = ({ classes, data }) => {
       </Helmet>
       <Row>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.articleList}>
-          <ArticleList articles={latestArticles} title="Latest" label="Articles" />
+          <ArticleList
+            articles={latestArticles}
+            title="Latest"
+            label="Articles"
+          />
         </Col>
         <Col
           xsHidden

@@ -91,7 +91,7 @@ const ArticleRow = ({ classes, article }) => {
   const { section } = article;
   let featuredMedia = null;
   if (article.media.length > 0) {
-    featuredMedia = article.media[0]
+    featuredMedia = article.media[0];
   }
   return (
     <Row key={article.id} className={classes.ArticleRow}>

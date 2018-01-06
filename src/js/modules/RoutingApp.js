@@ -120,52 +120,51 @@ const RoutingApp = ({
               component={LatestPage}
             />
             {/*
-          <Route
-            exact
-            path={"/myaccount"}
-            key={"signIn"}
-            render={() =>
-              session ? <Redirect to="/myaccount/profile" /> : <SignInPage />}
-          />
-          <Route
-            exact
-            path="/myaccount/sign-up"
-            key={"signUp"}
-            render={() =>
-              session ? <Redirect to="/myaccount/profile" /> : <SignUpPage />}
-          />
-          <Route
-            exact
-            path="/myaccount/profile"
-            key={"profile"}
-            render={() =>
-              session ? <ProfilePage /> : <Redirect to="/myaccount" />}
-          />
-          <Route
-            exact
-            path="/myaccount/profile/edit"
-            key={"editProfile"}
-            render={() =>
-              session ? <EditProfilePage /> : <Redirect to="/myaccount" />}
-          />
-          
-          <Route
-            exact
-            path={"/search"}
-            key={"search"}
-            component={SearchPage}
-          />
-          <Route
-            path="/404-page-not-found"
-            key={"notFound"}
-            component={NotFoundPage}
-          />
-          <Route
-            path="*"
-            key={"404"}
-            render={() => <Redirect to="/404-page-not-found" />}
-          />
-        */}
+            <Route
+              exact
+              path={"/myaccount"}
+              key={"signIn"}
+              render={() =>
+                session ? <Redirect to="/myaccount/profile" /> : <SignInPage />}
+            />
+            <Route
+              exact
+              path="/myaccount/sign-up"
+              key={"signUp"}
+              render={() =>
+                session ? <Redirect to="/myaccount/profile" /> : <SignUpPage />}
+            />
+            <Route
+              exact
+              path="/myaccount/profile"
+              key={"profile"}
+              render={() =>
+                session ? <ProfilePage /> : <Redirect to="/myaccount" />}
+            />
+            <Route
+              exact
+              path="/myaccount/profile/edit"
+              key={"editProfile"}
+              render={() =>
+                session ? <EditProfilePage /> : <Redirect to="/myaccount" />}
+            />          
+            <Route
+              exact
+              path={"/search"}
+              key={"search"}
+              component={SearchPage}
+            />
+            <Route
+              path="/404-page-not-found"
+              key={"notFound"}
+              component={NotFoundPage}
+            />
+            <Route
+              path="*"
+              key={"404"}
+              render={() => <Redirect to="/404-page-not-found" />}
+            />
+          */}
           </Switch>
         ) : (
           <span> </span>
