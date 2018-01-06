@@ -100,7 +100,7 @@ const styles = {
 };
 
 const LeftColumn = ({ classes }) => {
-  return <Col xs={12} sm={3} md={3} lg={3} className={classes.LeftColumn}></Col>;
+  return <Col xs={12} sm={3} md={3} lg={3} className={classes.LeftColumn} />;
   const [primaryArticle, secondaryArticle] = Object.values(articles).slice(
     6,
     8,
@@ -153,7 +153,7 @@ const LeftColumn = ({ classes }) => {
         </Link>
         <p className={classes.summary}>{primaryArticle.summary}</p>
         <Byline contributors={primaryArticle.contributors} />
-        <Dateline article={primaryArticle} />
+        <Dateline timestamp={primaryArticle.createdAt} />
       </div>
 
       <div className={classes.secondaryArticle}>
@@ -186,7 +186,7 @@ const LeftColumn = ({ classes }) => {
         <div className={classes.bylineContainer}>
           <Byline contributors={secondaryArticle.contributors} />
         </div>
-        <Dateline article={secondaryArticle} />
+        <Dateline timestamp={secondaryArticle.createdAt} />
       </div>
 
       <div className={classes.outquoteArticle}>
@@ -220,7 +220,7 @@ const LeftColumn = ({ classes }) => {
         <div className={classes.bylineContainer}>
           <Byline contributors={outquoteArticle.contributors} />
         </div>
-        <Dateline article={outquoteArticle} />
+        <Dateline timestamp={outquoteArticle.createdAt} />
       </div>
     </Col>
   );

@@ -97,7 +97,7 @@ const styles = {
 };
 
 const RightColumn = ({ classes }) => {
-  return <Col xs={12} sm={3} md={3} lg={3} className={classes.RightColumn}></Col>;
+  return <Col xs={12} sm={3} md={3} lg={3} className={classes.RightColumn} />;
   let availableArticles = [];
   Object.values(articles)
     .slice(9)
@@ -143,7 +143,7 @@ const RightColumn = ({ classes }) => {
           )*/}
           <p className={classes.summary}>{primaryArticle.summary}</p>
           <Byline contributors={primaryArticle.contributors} />
-          <Dateline article={primaryArticle} />
+          <Dateline timestamp={primaryArticle.createdAt} />
         </div>
       )}
 
@@ -164,7 +164,7 @@ const RightColumn = ({ classes }) => {
           </Link>
           <p className={classes.summary}>{secondaryArticle.summary}</p>
           <Byline contributors={secondaryArticle.contributors} />
-          <Dateline article={secondaryArticle} />
+          <Dateline timestamp={secondaryArticle.createdAt} />
         </div>
       )}
 

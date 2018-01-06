@@ -127,7 +127,7 @@ const FeaturedArticle = ({ classes, article }) => {
         </Link>
         <p className={classes.summary}>{article.summary}</p>
         <Byline contributors={article.contributors} />
-        <Dateline article={article} />
+        <Dateline timestamp={article.createdAt} />
       </Col>
     </Row>
   );

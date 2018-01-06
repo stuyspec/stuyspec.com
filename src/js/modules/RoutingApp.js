@@ -44,7 +44,10 @@ const RoutingAppQuery = gql`
   }
 `;
 
-const RoutingApp = ({ data: { loading, error, allSections }, descriptions }) => {
+const RoutingApp = ({
+  data: { loading, error, allSections },
+  descriptions,
+}) => {
   return (
     <ConnectedRouter
       onUpdate={() => window.scrollTo(0, 0)}

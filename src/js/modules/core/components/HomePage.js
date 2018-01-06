@@ -182,16 +182,12 @@ const HomePage = ({ classes, data }) => {
   if (loading) {
     return null;
   }
-  const firstColumnSectionSlugs = [
-    "opinions",
-    "features",
-    "humor",
-  ]
+  const firstColumnSectionSlugs = ["opinions", "features", "humor"];
   const secondColumnSectionSlugs = [
     "staff-editorials",
     "ae",
     "sports-at-stuyvesant",
-  ]
+  ];
   return (
     <div>
       <Grid fluid>

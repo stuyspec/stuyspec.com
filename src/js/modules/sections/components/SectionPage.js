@@ -355,7 +355,7 @@ const SectionPage = ({ classes, data, section, media }) => {
             {featuredArticle.summary}
           </p>
           <Byline contributors={featuredArticle.contributors} />
-          <Dateline article={featuredArticle} />
+          <Dateline timestamp={featuredArticle.createdAt} />
         </Col>
       </Row>
 

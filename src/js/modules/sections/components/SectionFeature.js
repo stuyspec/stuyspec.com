@@ -123,7 +123,7 @@ const SectionFeature = ({ classes, articles }) => {
         </Link>
         <p className={classes.summary}>{secondaryArticle.summary}</p>
         <Byline contributors={secondaryArticle.contributors} />
-        <Dateline article={secondaryArticle} />
+        <Dateline timestamp={secondaryArticle.createdAt} />
       </Col>
       {featuredMedia ? (
         <Col
@@ -149,7 +149,7 @@ const SectionFeature = ({ classes, articles }) => {
           </Link>
           <p className={classes.summary}>{ternaryArticle.summary}</p>
           <Byline contributors={ternaryArticle.contributors} />
-          <Dateline article={ternaryArticle} />
+          <Dateline timestamp={ternaryArticle.createdAt} />
         </Col>
       )}
       <Col xs={6} sm={4} md={4} lg={4} className={classes.primaryArticle}>
@@ -161,7 +161,7 @@ const SectionFeature = ({ classes, articles }) => {
         </Link>
         <p className={classes.summary}>{primaryArticle.summary}</p>
         <Byline contributors={primaryArticle.contributors} />
-        <Dateline article={primaryArticle} />
+        <Dateline timestamp={primaryArticle.createdAt} />
       </Col>
 
       <Col
@@ -248,7 +248,7 @@ const SectionFeature = ({
           </Link>
           <p className={classes.summary}>{secondaryArticle.summary}</p>
           <Byline contributors={secondaryArticle.contributors} />
-          <Dateline article={secondaryArticle} />
+          <Dateline timestamp={secondaryArticle.createdAt} />
         </Col>
       )}
       {featuredMedia ? (
@@ -276,7 +276,7 @@ const SectionFeature = ({
             </Link>
             <p className={classes.summary}>{possibleTernaryArticle.summary}</p>
             <Byline contributors={possibleTernaryArticle.contributors} />
-            <Dateline article={possibleTernaryArticle} />
+            <Dateline timestamp={possibleTernaryArticle.createdAt} />
           </Col>
         )
       )}
@@ -290,7 +290,7 @@ const SectionFeature = ({
           </Link>
           <p className={classes.summary}>{primaryArticle.summary}</p>
           <Byline contributors={primaryArticle.contributors} />
-          <Dateline article={primaryArticle} />
+          <Dateline timestamp={primaryArticle.createdAt} />
         </Col>
       )}
       {primaryArticle && (

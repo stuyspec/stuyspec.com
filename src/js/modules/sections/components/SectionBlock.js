@@ -126,7 +126,7 @@ const styles = {
   },
 };
 
-const SectionBlock = ({ classes, data, slug }) => {  
+const SectionBlock = ({ classes, data, slug }) => {
   if (data.loading) {
     return null;
   }
