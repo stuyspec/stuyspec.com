@@ -1,12 +1,20 @@
 import React from "react";
+import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 
 import Masthead from "./Masthead";
 import MastheadBar from "./MastheadBar";
 
-const PageHeader = ({ location, sections }) => {
+const styles = {
+  HeaderContainer: {
+    width: "100% !important",
+    padding: "0 !important",
+  },
+};
+
+const PageHeader = ({ classes, location }) => {
   return (
-    <Grid>
+    <Grid className={classes.HeaderContainer}>
       <Row>
         <Col xsHidden smHidden md={12} lg={12}>
           {location.pathname === "/" ||
@@ -26,4 +34,4 @@ const PageHeader = ({ location, sections }) => {
   );
 };
 
-export default PageHeader;
+export default injectSheet(styles)(PageHeader);

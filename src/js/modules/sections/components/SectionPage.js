@@ -19,14 +19,23 @@ import { TallAd } from "../../advertisements/components/index";
 // TODO: STYLE SECONDARY ARTICLE. consider setting a max height
 
 const styles = {
+  sectionTitle:{
+    color: "#000",
+    fontFamily: "Canela",
+    fontSize: "60px",
+    fontWeight: 300,
+    height: "73px",
+    marginBottom: "7px",
+    textAlign: "center",
+  },
   subsectionBar: {
-    margin: "0 0 20px 0",
-    padding: 0,
+    margin: "0 0 35px 0",
     textAlign: "center",
   },
   featuredRow: {
+    borderTop: "1px solid #ddd",
     borderBottom: "1px solid #ddd",
-    paddingBottom: "18px",
+    padding: "26px 0 26px 0",
   },
   featuredMedia: {
     "& figure": {
@@ -96,11 +105,10 @@ const styles = {
     paddingRight: "0 !important",
   },
   subsectionListItem: {
-    borderBottom: "solid 1px #ddd",
     display: "inline-block",
     marginBottom: "5px",
     textDecoration: "none",
-    padding: "0 26px 10px 0",
+    padding: "0 26px 0px 0",
     "&:last-child": {
       paddingRight: 0,
     },
@@ -108,7 +116,7 @@ const styles = {
   subsectionLink: {
     color: "#000",
     fontFamily: "Circular Std",
-    fontSize: "12px",
+    fontSize: "14px",
     fontWeight: 300,
     "&:hover, &:active, &:focus": {
       color: "#000",
@@ -138,7 +146,7 @@ const styles = {
   },
   "@media (min-width: 992px)": {
     SectionPage: {
-      marginTop: "46px",
+      marginTop: "99px",
     },
     SectionFeatureContainer: {
       marginRight: "14px !important",
@@ -238,14 +246,6 @@ const SectionPage = ({ classes, data, section, media }) => {
         return false;
       }
     }
-    if (section.name === "Arts & Entertainment") {
-      return article.id === 234;
-      // A HARDCODED ARTICLE
-    }
-    if (section.name === "Features") {
-      return article.id === 196;
-      // A HARDCODED ARTICLE
-    }
     return Object.values(media).find(medium => medium.articleId === article.id);
   });
   const featuredMedia = Object.values(media).find(
@@ -291,12 +291,20 @@ const SectionPage = ({ classes, data, section, media }) => {
     });
   }
 
+  directSubsections = Object.values(directSubsections).sort((a, b) => {
+    // alphabetizes subsections
+    return a["name"].localeCompare(b["name"]);
+  });
+
   return (
     <Grid fluid className={classes.SectionPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>{section.name}</title>
         <meta />
       </Helmet>
+      <div className={classes.sectionTitle}>
+        {section.name}
+      </div>
       <ul className={classes.subsectionBar}>
         {section.name === "10/31 Terror Attack" ? (
           <li className={classes.subsectionListItem}>

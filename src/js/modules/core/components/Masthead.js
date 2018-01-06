@@ -3,11 +3,13 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
+import { Grid } from "react-bootstrap/lib";
 
 import { getCurrentUser } from "../../accounts/selectors";
 import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
 import { openSubscriptionModal } from "../../accounts/actions";
+import { FeaturedSectionsBar } from "../../sections/components";
 
 const styles = {
   Masthead: {
@@ -40,29 +42,6 @@ const styles = {
       textDecoration: "none",
     },
   },
-  sectionLinksNav: {
-    borderTop: "1px solid black",
-    fontFamily: "Circular Std",
-    listStyleType: "none",
-    padding: "6px",
-  },
-  sectionListItem: {
-    display: "inline",
-    margin: "0px 13px",
-  },
-  navSearchButton: {
-    top: "-1px",
-    position: "relative",
-  },
-  sectionLink: {
-    color: "#000",
-    fontSize: "13px",
-    fontWeight: 300,
-    textDecoration: "none",
-    "&:hover, &:active, &:focus": {
-      color: "#000",
-    },
-  },
   hamburger: {
     display: "inline",
     width: "24px",
@@ -89,6 +68,9 @@ const styles = {
     top: "5px",
     display: "flex",
     position: "relative",
+  },
+  FeaturedSectionsBarContainer: {
+    borderTop: "1px solid black",
   },
   myAccount: {
     display: "inline",
@@ -210,7 +192,7 @@ const Masthead = ({
   openSubscriptionModal,
 }) => {
   return (
-    <div className={classes.Masthead}>
+    <Grid className={classes.Masthead}>
       <StyledNavButton onClick={openSidebar} type="Sections">
         <Hamburger className={classes.hamburger} />
         <span className={classes.buttonName}>Sections</span>
@@ -256,42 +238,10 @@ const Masthead = ({
           </tr>
         </tbody>
       </table>
-      <ul className={classes.sectionLinksNav}>
-        {Object.values(sections).map(section => {
-          return (
-            <li key={section.id} className={classes.sectionListItem}>
-              <Link to={section.permalink} className={classes.sectionLink}>
-                {section.name}
-              </Link>
-            </li>
-          );
-        })}
-        <li key={-1} className={classes.sectionListItem}>
-          <Link
-            onClick={openSubscriptionModal}
-            to={"/"}
-            className={classes.sectionLink}
-          >
-            Newsletter
-          </Link>
-        </li>
-        {/*
-        <li key={-2} className={classes.sectionListItem}>
-          <Link to={"/paper"} className={classes.sectionLink}>
-            The Paper
-          </Link>
-        </li>
-      */}
-        {!session && (
-          <li key={-3} className={classes.sectionListItem}>
-            <Link to="/search" className={classes.sectionLink}>
-              <Search className={classes.navSearchButton} />
-            </Link>
-          </li>
-        )}
-        */}
-      </ul>
-    </div>
+      <div className={classes.FeaturedSectionsBarContainer}>
+        <FeaturedSectionsBar />
+      </div>
+    </Grid>
   );
 };
 

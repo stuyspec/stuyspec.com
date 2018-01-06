@@ -90,9 +90,6 @@ const styles = {
 
 /*
 class HomePage extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.articles != nextState.articles;
-  }
   render() {
     const { classes } = this.props;
     const { allArticles } = this.props.data;
