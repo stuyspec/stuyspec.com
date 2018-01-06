@@ -12,22 +12,17 @@ const styles = {
   },
 };
 
-const PageHeader = ({ classes, location }) => {
+const PageHeader = ({ classes, location, sections }) => {
   return (
     <Grid className={classes.HeaderContainer}>
       <Row>
         <Col xsHidden smHidden md={12} lg={12}>
-          {location.pathname === "/" ||
-          location.pathname === "/404-page-not-found" ? (
-            <Masthead sections={sections} />
-          ) : (
-            <MastheadBar location={location} />
-          )}
+          {location.pathname === "/" ? <Masthead /> : <MastheadBar />}
         </Col>
       </Row>
       <Row>
         <Col xs={12} sm={12} mdHidden lgHidden>
-          <MastheadBar location={location} />
+          <MastheadBar />
         </Col>
       </Row>
     </Grid>

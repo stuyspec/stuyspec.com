@@ -132,8 +132,7 @@ const SectionBlock = ({ classes, data, slug }) => {
       {bigArticle && (
         <div className={classes.article}>
           <Link
-            to={`${sections[bigArticle.sectionId]
-              .permalink}/${bigArticle.slug}`}
+            to={`${section.permalink}/${bigArticle.slug}`}
             className={classes.bigTitle}
           >
             {bigArticle.title}

@@ -17,6 +17,21 @@ import SubscriptionModal from "../../accounts/components/SubscriptionModal";
 import { HorizontalAd } from "../../advertisements/components";
 import { openSidebar, closeSidebar } from "../actions";
 
+const PageLayoutQuery = gql`
+  query PageLayoutQuery {
+    featuredSections {
+      id
+      name
+      permalink
+      subsections {
+        id
+        name
+        permalink
+      }
+    }
+  }
+`
+
 const styles = {
   horizontalAdContainer: {
     margin: "20px 0",
@@ -128,20 +143,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ openSidebar, closeSidebar }, dispatch);
 };
 
-export default graphql(gql`
-  query PageLayoutQyer {
-    featuredSections {
-      id
-      name
-      permalink
-      subsections {
-        id
-        name
-        permalink
-      }
-    }
-  }
-`)(
+export default graphql(PageLayoutQuery)(
   withRouter(
     connect(mapStateToProps, mapDispatchToProps)(
       injectSheet(styles)(PageLayout),

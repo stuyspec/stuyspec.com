@@ -187,7 +187,6 @@ const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 const Masthead = ({
   classes,
   openSidebar,
-  sections,
   session,
   openSubscriptionModal,
 }) => {

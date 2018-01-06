@@ -119,7 +119,6 @@ const RoutingApp = ({
               key={"latest"}
               component={LatestPage}
             />
-            {/*
             <Route
               exact
               path={"/myaccount"}
@@ -155,16 +154,10 @@ const RoutingApp = ({
               component={SearchPage}
             />
             <Route
-              path="/404-page-not-found"
-              key={"notFound"}
-              component={NotFoundPage}
-            />
-            <Route
               path="*"
               key={"404"}
-              render={() => <Redirect to="/404-page-not-found" />}
+              component={NotFoundPage}
             />
-          */}
           </Switch>
         ) : (
           <span> </span>

@@ -1,12 +1,24 @@
 import React from "react";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, compose } from "redux";
 import { connect } from "react-redux";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 
 import { Search } from "../../core/icons";
-import { getTopLevelSections } from "../selectors";
 import { openSubscriptionModal } from "../../accounts/actions";
+
+const FeaturedSectionsQuery = gql`
+  query FeaturedSectionsQuery {
+    featuredSections {
+      id
+      permalink
+      name
+    }
+  }
+`;
 
 const styles = {
   FeaturedSectionsBar: {
@@ -33,10 +45,15 @@ const styles = {
   },
 };
 
-const FeaturedSectionsBar = ({ classes, openSubscriptionModal, sections }) => {
+const FeaturedSectionsBar = ({ classes, openSubscriptionModal, data }) => {
+  if (data.loading) {
+    return null;
+  }
+  data = humps.camelizeKeys(data);
+  const { featuredSections } = data;
   return (
     <ul className={classes.FeaturedSectionsBar}>
-      {Object.values(sections).map(section => {
+      {featuredSections.map(section => {
         return (
           <li key={section.id} className={classes.sectionListItem}>
             <Link to={section.permalink} className={classes.sectionLink}>
@@ -70,14 +87,12 @@ const FeaturedSectionsBar = ({ classes, openSubscriptionModal, sections }) => {
   )
 };
 
-const mapStateToProps = state => ({
-  sections: getTopLevelSections(state),
-});
-
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ openSubscriptionModal }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(FeaturedSectionsBar),
-);
+export default compose(
+  graphql(FeaturedSectionsQuery),
+  connect(null, mapDispatchToProps),
+  injectSheet(styles),
+)(FeaturedSectionsBar);
