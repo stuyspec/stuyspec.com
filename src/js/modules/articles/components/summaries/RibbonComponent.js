@@ -1,8 +1,12 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-const RibbonComponent = ({ classes, article, section, featuredMedia }) => {
+const RibbonComponent = ({ classes, article }) => {
+  let featuredMedia = null;
+  if (article.media.length > 0) {
+    featuredMedia = article.media.find(medium => medium.isFeatured);
+  }
+  const { section } = article;
   return (
     <div className={classes.RibbonComponent}>
       {featuredMedia && (
@@ -30,8 +34,4 @@ const RibbonComponent = ({ classes, article, section, featuredMedia }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  sections: state.sections.sections,
-});
-
-export default connect(mapStateToProps)(RibbonComponent);
+export default RibbonComponent;

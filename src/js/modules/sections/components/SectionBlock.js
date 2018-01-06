@@ -1,11 +1,36 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
 import injectSheet from "react-jss";
 
 import Dateline from "../../articles/components/Dateline";
 import Byline from "../../articles/components/Byline";
-import { getArticlesWithContributors } from "../../articles/selectors";
+
+const SectionBlockQuery = gql`
+  query SectionBlockQuery($limit: Int!, $section_slug: String!) {
+    topRankedArticles(limit: $limit, section_slug: $section_slug) {
+      title
+      slug
+      summary
+      created_at
+      contributors {
+        first_name
+        last_name
+        slug
+      }
+      media {
+        thumb_attachment_url
+      }
+      section {
+        name
+        permalink
+      }
+    }
+  }
+`;
 
 const styles = {
   SectionBlock: {
@@ -101,23 +126,14 @@ const styles = {
   },
 };
 
-const SectionBlock = ({ classes, articles, section, sections, media }) => {
-  let sectionArticles = [];
-  if (section.name === "Sports") {
-    // most sports articles are in subsections
-    const subsectionIds = Object.values(sections)
-      .filter(subsection => subsection.parentId === section.id)
-      .map(subsection => subsection.id);
-    sectionArticles = articles.filter(article =>
-      subsectionIds.includes(article.sectionId),
-    );
-  } else {
-    sectionArticles = articles.filter(
-      article => article.sectionId === section.id,
-    );
+const SectionBlock = ({ classes, data, slug }) => {  
+  if (data.loading) {
+    return null;
   }
-  const bigArticle = sectionArticles[0];
-  const rowArticles = sectionArticles.slice(1, 4);
+  data = humps.camelizeKeys(data);
+  const { topRankedArticles } = data;
+  const bigArticle = topRankedArticles[0];
+  const { section } = bigArticle;
   return (
     <div className={classes.SectionBlock}>
       <Link to={section.permalink} className={classes.sectionLabel}>
@@ -172,10 +188,6 @@ const SectionBlock = ({ classes, articles, section, sections, media }) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  media: state.media.media,
-  articles: getArticlesWithContributors(state),
-  sections: state.sections.sections,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(SectionBlock));
+export default graphql(SectionBlockQuery, {
+  options: ({ slug }) => ({ variables: { section_slug: slug, limit: 3 } }),
+})(injectSheet(styles)(SectionBlock));

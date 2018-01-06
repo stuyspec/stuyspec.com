@@ -63,7 +63,9 @@ const styles = {
 const ArticlePage = ({ classes, data, openSubscriptionModal }) => {
   data = humps.camelizeKeys(data);
   const { loading, articleBySlug } = data;
-  if (loading) return null;
+  if (loading) {
+    return null;
+  }
 
   const { section } = articleBySlug;
   return (

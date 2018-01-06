@@ -1,10 +1,8 @@
 import React from "react";
-import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 
-import { getArticlesWithContributors } from "../../selectors";
 import Byline from "../Byline";
 import Dateline from "../Dateline";
 import Outquote from "../Outquote";
@@ -101,7 +99,8 @@ const styles = {
   },
 };
 
-const LeftColumn = ({ classes, articles, media, sections, outquotes }) => {
+const LeftColumn = ({ classes }) => {
+  return <Col xs={12} sm={3} md={3} lg={3} className={classes.LeftColumn}></Col>;
   const [primaryArticle, secondaryArticle] = Object.values(articles).slice(
     6,
     8,
@@ -227,11 +226,4 @@ const LeftColumn = ({ classes, articles, media, sections, outquotes }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  articles: getArticlesWithContributors(state),
-  media: state.media.media,
-  sections: state.sections.sections,
-  outquotes: state.outquotes.outquotes,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(LeftColumn));
+export default injectSheet(styles)(LeftColumn);

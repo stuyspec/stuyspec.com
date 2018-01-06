@@ -32,7 +32,6 @@ import {
   IllustratorPage,
 } from "./users/components";
 
-import { fetchAllData } from "./core/actions";
 import { sessionfy } from "./accounts/actions";
 
 const RoutingAppQuery = gql`
@@ -45,7 +44,7 @@ const RoutingAppQuery = gql`
   }
 `;
 
-const RoutingApp = ({ data: { loading, allSections }, descriptions }) => {
+const RoutingApp = ({ data: { loading, error, allSections }, descriptions }) => {
   return (
     <ConnectedRouter
       onUpdate={() => window.scrollTo(0, 0)}
@@ -75,7 +74,7 @@ const RoutingApp = ({ data: { loading, allSections }, descriptions }) => {
                 />
               );
             })}
-            {Object.values(descriptions).map(description => {
+            {descriptions.map(description => {
               return (
                 <Route
                   exact

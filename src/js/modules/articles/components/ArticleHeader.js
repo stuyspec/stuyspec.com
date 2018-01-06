@@ -95,7 +95,7 @@ const ArticleHeader = ({ classes, article, section }) => {
         <h1 className={classes.headline}>{article.title}</h1>
         <div className={classes.meta}>
           <Byline classes={classes} contributors={article.contributors} />
-          <Dateline classes={classes} article={article} />
+          <Dateline classes={classes} timestamp={article.createdAt} />
           <ShareTools article={article} section={section} />
         </div>
       </Col>

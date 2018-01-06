@@ -1,8 +1,24 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
 import injectSheet from "react-jss";
 import { Row, Col } from "react-bootstrap/lib";
+
+const RecommendedArticlesQuery = gql`
+  query RecommendedArticlesQuery($limit: Int!) {
+    topRankedArticles(limit: $limit) {
+      title
+      slug
+      summary
+      section {
+        permalink
+      }
+    }
+  }
+`;
 
 const styles = {
   RecommendedArticles: {
@@ -60,22 +76,27 @@ const styles = {
   },
 };
 
-const RecommendedArticles = ({ classes, recommendedArticles, sections }) => {
-  // NESTED IN <Col lg={3} md={3}>
+// NESTED IN <Col lg={3} md={3}>
+const RecommendedArticles = ({ classes, limit, data }) => {
+  if (data.loading) {
+    return null;
+  }
+  data = humps.camelizeKeys(data);
+  console.log(data);
+  const { topRankedArticles } = data;
   return (
     <div className={classes.RecommendedArticles}>
       <Link to="/recommended" className={classes.label}>
         Recommended
       </Link>
-      {recommendedArticles.map((article, index) => {
-        const section = sections[article.sectionId];
+      {topRankedArticles.map((article, index) => {
         return (
-          <div className={classes.articleItem} key={article.id}>
+          <div className={classes.articleItem} key={index}>
             <p className={classes.numberLabel}>{index + 1}.</p>
             <div className={classes.articleSummary}>
               <Link
                 className={classes.title}
-                to={`${section.permalink}/${article.slug}`}
+                to={`${article.section.permalink}/${article.slug}`}
               >
                 {article.title}
               </Link>
@@ -88,10 +109,7 @@ const RecommendedArticles = ({ classes, recommendedArticles, sections }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  sections: state.sections.sections,
-});
-
-export default connect(mapStateToProps)(
-  injectSheet(styles)(RecommendedArticles),
-);
+export default graphql(RecommendedArticlesQuery, {
+  options: ({ limit }) => ({ variables: { limit: limit || 5 } }),
+  // if limit not given as prop, we use 5 as the default.
+})(injectSheet(styles)(RecommendedArticles));

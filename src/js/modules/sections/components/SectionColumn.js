@@ -27,11 +27,11 @@ const styles = {
   },
 };
 
-const SectionColumn = ({ classes, sections }) => {
+const SectionColumn = ({ classes, slugs }) => {
   return (
     <div className={classes.SectionColumn}>
-      {sections.map(section => {
-        return <SectionBlock section={section} key={section.id} />;
+      {slugs.map((slug, index) => {
+        return <SectionBlock slug={slug} key={index} />;
       })}
     </div>
   );

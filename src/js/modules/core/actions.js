@@ -21,24 +21,6 @@ export const closeLightbox = () => ({
   type: t.CLOSE_LIGHTBOX,
 });
 
-export const fetchAllData = () => {
-  return dispatch => {
-    dispatch({ type: t.FETCH_INIT_DATA_PENDING });
-    axios
-      .get(`${STUY_SPEC_API_URL}/init`, STUY_SPEC_API_HEADERS)
-      .then(response => {
-        validateSlices(response.data);
-        dispatch({ type: t.FETCH_INIT_DATA_FULFILLED, payload: response.data });
-      })
-      .catch(err => {
-        dispatch({
-          type: t.FETCH_INIT_DATA_REJECTED,
-          payload: err,
-        });
-      });
-  };
-};
-
 const sliceNames = [
   "articles",
   "sections",

@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
@@ -97,7 +96,8 @@ const styles = {
   },
 };
 
-const RightColumn = ({ classes, articles, sections, outquotes }) => {
+const RightColumn = ({ classes }) => {
+  return <Col xs={12} sm={3} md={3} lg={3} className={classes.RightColumn}></Col>;
   let availableArticles = [];
   Object.values(articles)
     .slice(9)
@@ -181,10 +181,4 @@ const RightColumn = ({ classes, articles, sections, outquotes }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  articles: getArticlesWithContributors(state),
-  sections: state.sections.sections,
-  outquotes: state.outquotes.outquotes,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(RightColumn));
+export default injectSheet(styles)(RightColumn);

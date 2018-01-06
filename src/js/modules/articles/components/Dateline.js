@@ -19,10 +19,10 @@ const styles = {
  * shortTime: 5:46 PM
  */
 
-const Dateline = ({ classes, article }) => {
-  let dateline = dateFormat(article.createdAt, "longDate");
-  if (new Date() - new Date(article.createdAt) < MILLISECONDS_IN_DAY) {
-    dateline = dateFormat(article.createdAt, "shortTime");
+const Dateline = ({ classes, timestamp }) => {
+  let dateline = dateFormat(timestamp, "longDate");
+  if (new Date() - new Date(timestamp) < MILLISECONDS_IN_DAY) {
+    dateline = dateFormat(timestamp, "shortTime");
   }
   return <p className={classes.Dateline}>{dateline}</p>;
 };

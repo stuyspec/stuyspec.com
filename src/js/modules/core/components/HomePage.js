@@ -180,8 +180,18 @@ const HomePage = ({ classes, data }) => {
   data = humps.camelizeKeys(data);
   const { loading, featuredArticle, newsArticles } = data;
   if (loading) {
-    return <p>loading</p>;
+    return null;
   }
+  const firstColumnSectionSlugs = [
+    "opinions",
+    "features",
+    "humor",
+  ]
+  const secondColumnSectionSlugs = [
+    "staff-editorials",
+    "ae",
+    "sports-at-stuyvesant",
+  ]
   return (
     <div>
       <Grid fluid>
@@ -196,6 +206,30 @@ const HomePage = ({ classes, data }) => {
             <FeaturedArticle article={featuredArticle} />
             <SectionFeature articles={newsArticles} />
           </Col>
+          <Col
+            xsHidden
+            smHidden
+            md={3}
+            lg={3}
+            className={classes.recommendedArticles}
+          >
+            <RecommendedArticles />
+          </Col>
+        </Row>
+        <Row>
+          <Col xsHidden sm={12} md={12} lg={12}>
+            <LatestArticlesRibbon className={classes.latestArticlesRibbon} />
+          </Col>
+        </Row>
+        <Row>
+          <LeftColumn />
+          <Col xs={12} sm={3} md={3} lg={3} className={classes.skinnyCol}>
+            <SectionColumn slugs={firstColumnSectionSlugs} />
+          </Col>
+          <Col xs={12} sm={3} md={3} lg={3} className={classes.skinnyCol}>
+            <SectionColumn slugs={secondColumnSectionSlugs} />
+          </Col>
+          <RightColumn />
         </Row>
       </Grid>
     </div>
