@@ -92,6 +92,16 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
       </Link>,
     );
   }
+  sidebarElements.push(
+    <Link
+      className={classes.sidebarSectionLink}
+      key={-3}
+      onClick={closeSidebar}
+      to="/search"
+    >
+      Search
+    </Link>,
+  );
   return <div>{sidebarElements}</div>;
 };
 

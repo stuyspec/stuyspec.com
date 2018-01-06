@@ -13,9 +13,6 @@ import { searchArticles } from "../actions";
 import SearchForm from "./SearchForm";
 
 const styles = {
-  SearchPage: {
-    marginTop: "76px",
-  },
   title: {
     color: "#000",
     fontFamily: "Canela",
@@ -34,11 +31,6 @@ const styles = {
   tallAdContainer: {
     paddingLeft: "14px !important",
     borderLeft: "solid 1px #ddd",
-  },
-  "@media (min-width: 991px)": {
-    SearchPage: {
-      marginTop: "80px",
-    },
   },
 };
 

@@ -16,16 +16,11 @@ const styles = {
     fontSize: "18px",
     color: "#000000",
   },
-  "@media (min-width: 992px)": {
-    DescriptionPage: {
-      marginTop: "60px",
-    },
-  },
 };
 
 const DescriptionPage = ({ classes, description }) => {
   return (
-    <Grid fluid className={classes.DescriptionPage}>
+    <Grid fluid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>{description.title}</title>
         <meta />

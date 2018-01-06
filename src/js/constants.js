@@ -11,6 +11,8 @@ export const STUY_SPEC_API_HEADERS = {
 export const MEDIA_CREATOR_SLUGS = {
   illustration: "illustrators",
   photo: "photographers",
+  illustrators: "illustration",
+  photographers: "photo",
 };
 
 export const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;

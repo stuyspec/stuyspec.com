@@ -19,9 +19,6 @@ import { getArticleFromRequestedSlug, getArticleMedia } from "../selectors";
 import { openSubscriptionModal } from "../../accounts/actions";
 
 const styles = {
-  ArticlePage: {
-    marginTop: "80px",
-  },
   description: {
     border: "1px solid #ddd",
     borderStyle: "solid none", // only top-bottom borders

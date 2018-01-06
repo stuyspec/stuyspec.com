@@ -7,7 +7,6 @@ import { Helmet } from "react-helmet";
 const styles = {
   NotFoundPage: {
     fontFamily: "Minion Pro",
-    paddingTop: "80px",
     textAlign: "center",
     "& h1": {
       fontFamily: "Canela",
@@ -30,9 +29,6 @@ const styles = {
     marginTop: "25px",
   },
   "@media (max-width: 767px)": {
-    NotFoundPage: {
-      paddingTop: "40px",
-    },
     img: {
       width: "100%",
     },

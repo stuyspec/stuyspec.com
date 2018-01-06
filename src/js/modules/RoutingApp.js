@@ -28,8 +28,7 @@ import { DescriptionPage } from "./descriptions/components";
 import { SectionPage } from "./sections/components";
 import {
   ContributorPage,
-  PhotographerPage,
-  IllustratorPage,
+  ArtistPage,
 } from "./users/components";
 
 import { sessionfy } from "./accounts/actions";
@@ -46,6 +45,7 @@ const RoutingAppQuery = gql`
 
 const RoutingApp = ({
   data: { loading, error, allSections },
+  session,
   descriptions,
 }) => {
   return (
@@ -97,15 +97,15 @@ const RoutingApp = ({
             />
             <Route
               exact
-              path={"/illustrators/:illustrator_slug"}
+              path={"/illustrators/:artist_slug"}
               key={"illustrators"}
-              render={props => <IllustratorPage match={props.match} />}
+              render={props => <ArtistPage match={props.match} />}
             />
             <Route
               exact
-              path={"/photographers/:photographer_slug"}
+              path={"/photographers/:artist_slug"}
               key={"photographers"}
-              render={props => <PhotographerPage match={props.match} />}
+              render={props => <ArtistPage match={props.match} />}
             />
             <Route
               exact
@@ -169,6 +169,7 @@ const RoutingApp = ({
 
 const mapStateToProps = state => ({
   descriptions: state.descriptions,
+  session: state.accounts.session,
 });
 
 export default graphql(RoutingAppQuery)(connect(mapStateToProps)(RoutingApp));

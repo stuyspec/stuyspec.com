@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import Row from "react-bootstrap/lib/Row";
@@ -85,11 +84,8 @@ const styles = {
   },
 };
 
-const LeftTitleArticle = ({ classes, article, media, sections }) => {
-  const featuredMedia = Object.values(media).find(
-    mediaObject => mediaObject.articleId === article.id,
-  );
-  const section = sections[article.sectionId];
+const LeftTitleArticle = ({ classes, article }) => {
+  const { section } = article;
   return (
     <Row className={classes.article}>
       <Link className={classes.section} to={section.permalink}>
@@ -105,10 +101,10 @@ const LeftTitleArticle = ({ classes, article, media, sections }) => {
         lg={8}
         className={classes.featuredMedia}
       >
-        {featuredMedia && (
+        {article.media.length > 0 && (
           <Link to={`${section.permalink}/${article.slug}`}>
             <figure>
-              <img src={featuredMedia.attachmentUrl} />
+              <img src={article.media[0].attachmentUrl} />
             </figure>
           </Link>
         )}
@@ -137,9 +133,4 @@ const LeftTitleArticle = ({ classes, article, media, sections }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  media: state.media.media,
-  sections: state.sections.sections,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(LeftTitleArticle));
+export default injectSheet(styles)(LeftTitleArticle);

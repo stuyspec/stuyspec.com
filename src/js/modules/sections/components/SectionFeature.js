@@ -199,6 +199,4 @@ const SectionFeature = ({ classes, articles }) => {
   );
 };
 
-export default graphql(SectionFeatureQuery, {
-  options: ({ section_id }) => ({ variables: { section_id: section_id } }),
-})(injectSheet(styles)(SectionFeature));
+export default injectSheet(styles)(SectionFeature);

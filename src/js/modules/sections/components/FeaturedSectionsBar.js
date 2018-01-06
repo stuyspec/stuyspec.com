@@ -42,6 +42,9 @@ const styles = {
     "&:hover, &:active, &:focus": {
       color: "#000",
     },
+    "&:active, &:focus": {
+      textDecoration: "none",
+    },
   },
 };
 

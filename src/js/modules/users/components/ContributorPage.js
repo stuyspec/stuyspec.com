@@ -42,9 +42,6 @@ const ContributorBySlug = gql`
 `;
 
 const styles = {
-  ContributorPage: {
-    marginTop: "100px",
-  },
   name: {
     color: "#000",
     fontFamily: "Canela",
@@ -86,8 +83,9 @@ const styles = {
 
 const ContributorPage = ({ classes, data }) => {
   data = humps.camelizeKeys(data);
-  if (data.loading) return null;
-
+  if (data.loading) {
+    return null;
+  }
   const contributor = data.userBySlug;
   if (contributor === null) {
     return <NotFoundPage />;

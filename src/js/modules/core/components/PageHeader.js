@@ -10,6 +10,9 @@ const styles = {
     width: "100% !important",
     padding: "0 !important",
   },
+  mastheadBar: {
+    marginTop: "100px",
+  },
 };
 
 const PageHeader = ({ classes, location, sections }) => {
@@ -17,12 +20,18 @@ const PageHeader = ({ classes, location, sections }) => {
     <Grid className={classes.HeaderContainer}>
       <Row>
         <Col xsHidden smHidden md={12} lg={12}>
-          {location.pathname === "/" ? <Masthead /> : <MastheadBar />}
+          {location.pathname === "/" ? <Masthead /> : (
+            <div className={classes.mastheadBar}>
+              <MastheadBar />
+            </div>
+          )}
         </Col>
       </Row>
       <Row>
         <Col xs={12} sm={12} mdHidden lgHidden>
-          <MastheadBar />
+          <div className={classes.mastheadBar}>
+            <MastheadBar />
+          </div>
         </Col>
       </Row>
     </Grid>

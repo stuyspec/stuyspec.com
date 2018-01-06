@@ -37,9 +37,6 @@ const RecommendedPageQuery = gql`
 `;
 
 const styles = {
-  RecommendedPage: {
-    marginTop: "80px",
-  },
   pageTitle: {
     color: "#000",
     fontFamily: "Canela",
@@ -70,7 +67,7 @@ const RecommendedPage = ({ classes, data }) => {
   data = humps.camelizeKeys(data);
   const { topRankedArticles } = data;
   return (
-    <Grid fluid className={classes.RecommendedPage}>
+    <Grid fluid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>Most Recommended</title>
         <meta />

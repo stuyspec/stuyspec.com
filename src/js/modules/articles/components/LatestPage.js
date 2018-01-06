@@ -37,9 +37,6 @@ const LatestPageQuery = gql`
 `;
 
 const styles = {
-  LatestPage: {
-    marginTop: "20px",
-  },
   pageTitle: {
     color: "#000",
     fontFamily: "Canela",
@@ -52,9 +49,6 @@ const styles = {
     padding: 0,
   },
   "@media (min-width: 992px)": {
-    LatestPage: {
-      marginTop: "80px",
-    },
     articleList: {
       paddingRight: "14px !important",
     },
@@ -73,7 +67,7 @@ const LatestPage = ({ classes, data }) => {
   data = humps.camelizeKeys(data);
   const { latestArticles } = data;
   return (
-    <Grid fluid className={classes.LatestPage}>
+    <Grid fluid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>The Latest</title>
         <meta />

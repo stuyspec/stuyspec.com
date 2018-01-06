@@ -16,7 +16,7 @@ const styles = {
   MastheadBar: {
     backgroundColor: "#fff",
     boxShadow: "0 2px 4px 0 rgba(0,0,0,.2)",
-    height: "71px",
+    height: "73px",
     left: 0,
     position: "fixed",
     width: "100%",
@@ -42,7 +42,7 @@ const styles = {
     bottom: "9px",
     color: "#000",
     fontFamily: "Old English Text MT",
-    fontSize: "30px",
+    fontSize: "32px",
     left: "50%",
     marginTop: "1px",
     position: "absolute",
@@ -96,6 +96,14 @@ const styles = {
   sectionsBarContainer: {
     display: "flex",
     justifyContent: "center",
+  },
+  "@media (max-width: 991px)": {
+    sectionsBarContainer: {
+      display: "none",
+    },
+    navButtons: {
+      display: "none",
+    },
   },
   "@media (max-width: 768px)": {
     brandingLink: {

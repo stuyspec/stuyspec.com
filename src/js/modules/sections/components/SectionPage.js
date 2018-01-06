@@ -28,6 +28,9 @@ const SectionPageQuery = gql`
       created_at
       section {
         permalink
+        parent_section {
+          id
+        }
       }
       contributors {
         first_name
@@ -44,7 +47,7 @@ const SectionPageQuery = gql`
         attachment_url
       }
     }
-    latestArticles(section_id: $section_id) {
+    latestArticles(section_id: $section_id, limit: 10) {
       id
       title
       slug
@@ -67,7 +70,9 @@ const SectionPageQuery = gql`
       }
     }
     sectionsByParentSectionID(section_id: $section_id) {
+      id
       name
+      slug
       permalink
     }
   }
@@ -79,12 +84,13 @@ const styles = {
     fontFamily: "Canela",
     fontSize: "60px",
     fontWeight: 300,
-    height: "73px",
+    lineHeight: 1,
     marginBottom: "7px",
     textAlign: "center",
   },
   subsectionBar: {
     margin: "0 0 35px 0",
+    paddingLeft: 0,
     textAlign: "center",
   },
   secondaryRow: {
@@ -144,15 +150,11 @@ const styles = {
     },
   },
   SubsectionPage: {
-    marginTop: "80px",
     "& div > div": {
       borderRight: 0,
     },
   },
   "@media (min-width: 992px)": {
-    SectionPage: {
-      marginTop: "99px",
-    },
     SectionFeatureContainer: {
       marginRight: "14px !important",
     },
@@ -163,9 +165,6 @@ const styles = {
     },
   },
   "@media (max-width: 991px)": {
-    SectionPage: {
-      marginTop: "-16px", // counters PageContainer.marginTop = 60px
-    },
     featuredArticle: {
       marginLeft: 0,
       paddingTop: "3vw",
@@ -207,14 +206,15 @@ const styles = {
   },
 };
 
-const SectionPage = ({ classes, data, section, media }) => {
+const SectionPage = ({ classes, data, section }) => {
   if (data.loading) {
     return null;
   }
   data = humps.camelizeKeys(data);
-  const { articlesBySectionID, topRankedArticles } = data;
+  const { latestArticles, topRankedArticles } = data;
+  const [featuredArticle, secondaryArticle] = topRankedArticles;
   const subsections = data.sectionsByParentSectionID;
-  if (section.parentId) {
+  if (featuredArticle.section.parentSection) {
     return (
       <Grid fluid className={classes.SubsectionPage}>
         <Helmet>
@@ -224,7 +224,7 @@ const SectionPage = ({ classes, data, section, media }) => {
         <Row>
           <Col xs={12} sm={9} md={9} lg={9} className={classes.latestArticles}>
             <ArticleList
-              articles={articlesBySectionID}
+              articles={latestArticles}
               title={section.name}
               label="Latest"
             />
@@ -243,15 +243,13 @@ const SectionPage = ({ classes, data, section, media }) => {
       </Grid>
     );
   }
-  const [featuredArticle, secondaryArticle] = topRankedArticles;
-
+  /*
   let hardcodedSubsection = null;
   if (section.name === "Arts & Entertainment") {
     hardcodedSubsection = "Music";
   } else if (section.name === "Humor") {
     hardcodedSubsection = "Spooktator";
   }
-
   let featuredSubsection = null;
   if (section.name === "10/31 Terror Attack") {
     // 10/31 has no subsections, but many students published Creative
@@ -268,12 +266,7 @@ const SectionPage = ({ classes, data, section, media }) => {
       }
     });
   }
-
-  sectionsByParentSectionID = Object.values(directSubsections).sort((a, b) => {
-    // alphabetizes subsections
-    return a["name"].localeCompare(b["name"]);
-  });
-
+  */
   return (
     <Grid fluid className={classes.SectionPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -337,7 +330,7 @@ const SectionPage = ({ classes, data, section, media }) => {
       <Row>
         <Col xs={12} sm={9} md={9} lg={9} className={classes.latestArticles}>
           <ArticleList
-            articles={sectionTreeArticles}
+            articles={latestArticles}
             title="Latest"
             label="Latest"
           />
@@ -351,13 +344,6 @@ const SectionPage = ({ classes, data, section, media }) => {
     </Grid>
   );
 };
-/*
-const mapStateToProps = (state, ownProps) => ({
-  sectionTreeArticles: getSectionTreeArticles(state, ownProps),
-  directSubsections: getDirectSubsections(state, ownProps),
-  sections: state.sections.sections,
-  media: state.media.media,
-});*/
 
 export default graphql(
   SectionPageQuery,
