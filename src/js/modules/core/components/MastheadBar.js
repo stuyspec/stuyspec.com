@@ -150,7 +150,7 @@ const MastheadBar = ({
         </div>
       </div>
       <div className={classes.sectionsBarContainer}>
-        <FeaturedSectionsBar />
+        <FeaturedSectionsBar omitSearch={true} />
       </div>
     </div>
   );

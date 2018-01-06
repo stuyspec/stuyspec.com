@@ -45,7 +45,7 @@ const styles = {
   },
 };
 
-const FeaturedSectionsBar = ({ classes, openSubscriptionModal, data }) => {
+const FeaturedSectionsBar = ({ classes, openSubscriptionModal, data, omitSearch }) => {
   if (data.loading) {
     return null;
   }
@@ -78,11 +78,13 @@ const FeaturedSectionsBar = ({ classes, openSubscriptionModal, data }) => {
           </Link>
         </li>
       */}
-      <li key={-3} className={classes.sectionListItem}>
-        <Link to="/search" className={classes.sectionLink}>
-          <Search className={classes.navSearchButton} />
-        </Link>
-      </li>
+      {!omitSearch && (
+        <li key={-3} className={classes.sectionListItem}>
+          <Link to="/search" className={classes.sectionLink}>
+            <Search className={classes.navSearchButton} />
+          </Link>
+        </li>
+      )}
     </ul>
   )
 };

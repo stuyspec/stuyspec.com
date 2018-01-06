@@ -11,12 +11,67 @@ import { ArticleList } from "../../articles/components";
 import { getSectionTreeArticles } from "../../articles/selectors";
 import { getDirectSubsections } from "../../sections/selectors";
 import SectionColumn from "./SectionColumn";
-import { LeftTitleArticle } from "../../articles/components/summaries";
+import { LeftTitleArticle, RightTitleArticle } from "../../articles/components/summaries";
 import { Dateline, Byline } from "../../articles/components/index";
 import SectionFeature from "./SectionFeature";
 import { TallAd } from "../../advertisements/components/index";
 
 // TODO: STYLE SECONDARY ARTICLE. consider setting a max height
+
+const SectionPageQuery = gql`
+  query SectionPageQuery($section_id: ID!) {
+    topRankedArticles(section_id: $section_id, limit: 2) {
+      id
+      title
+      slug
+      summary
+      created_at
+      section {
+        permalink
+      }
+      contributors {
+        first_name
+        last_name
+        slug
+      }
+      section {
+        name
+        permalink
+      }
+      media {
+        title
+        media_type
+        attachment_url
+      }
+    }
+    latestArticles(section_id: $section_id) {
+      id
+      title
+      slug
+      summary
+      created_at
+      section {
+        permalink
+      }
+      contributors {
+        first_name
+        last_name
+        slug
+      }
+      media {
+        title
+        media_type
+        attachment_url
+        medium_attachment_url
+        thumb_attachment_url
+      }
+    }
+    sectionsByParentSectionID(section_id: $section_id) {
+      name
+      permalink
+    }
+  }
+`;
 
 const styles = {
   sectionTitle:{
@@ -31,56 +86,6 @@ const styles = {
   subsectionBar: {
     margin: "0 0 35px 0",
     textAlign: "center",
-  },
-  featuredRow: {
-    borderTop: "1px solid #ddd",
-    borderBottom: "1px solid #ddd",
-    padding: "26px 0 26px 0",
-  },
-  featuredMedia: {
-    "& figure": {
-      margin: 0,
-      maxHeight: "500px",
-      overflow: "hidden",
-      width: "100%",
-      "& img": {
-        width: "100%",
-      },
-    },
-  },
-  featuredArticle: {
-    marginLeft: "55px",
-    paddingTop: "35px",
-    textAlign: "center",
-    width: "325px",
-    "& a": {
-      color: "#000",
-      "&:hover, &:active, &:focus": {
-        color: "#000",
-      },
-    },
-  },
-  featuredArticleSection: {
-    display: "block",
-    fontFamily: "Circular Std",
-    fontSize: "13px",
-    fontWeight: 300,
-    marginBottom: "8px",
-    textTransform: "uppercase",
-  },
-  featuredArticleTitle: {
-    display: "block",
-    fontFamily: "Canela",
-    fontSize: "40px",
-    fontWeight: 300,
-    lineHeight: "48px",
-    marginBottom: "13px",
-  },
-  featuredArticleSummary: {
-    fontFamily: "Minion Pro",
-    fontSize: "16px",
-    lineHeight: 1.25,
-    marginBottom: "18px",
   },
   secondaryRow: {
     marginBottom: "18px",
@@ -203,12 +208,12 @@ const styles = {
 };
 
 const SectionPage = ({ classes, data, section, media }) => {
-  data = humps.camelizeKeys(data);
   if (data.loading) {
-    return <p>loading</p>;
+    return null;
   }
-  const { articlesBySectionID, subsectionsByParentSectionID } = data;
-  if (section.parentId || section.name === "News") {
+  data = humps.camelizeKeys(data);
+  const { articlesBySectionID, topRankedArticles, subsectionsByParentSectionID } = data;
+  if (section.parentId) {
     return (
       <Grid fluid className={classes.SubsectionPage}>
         <Helmet>
@@ -237,35 +242,7 @@ const SectionPage = ({ classes, data, section, media }) => {
       </Grid>
     );
   }
-  const featuredArticle = sectionTreeArticles.find(article => {
-    if (section.name === "Humor") {
-      if (
-        directSubsections[article.sectionId] &&
-        directSubsections[article.sectionId].name === "Spooktator"
-      ) {
-        return false;
-      }
-    }
-    return Object.values(media).find(medium => medium.articleId === article.id);
-  });
-  const featuredMedia = Object.values(media).find(
-    image => image.articleId === featuredArticle.id,
-  );
-  let featuredArticleSection = Object.values(directSubsections).find(
-    subsection => subsection.id === featuredArticle.sectionId,
-  );
-  if (!featuredArticleSection) {
-    featuredArticleSection = section;
-  }
-
-  let secondaryArticle = sectionTreeArticles.find(
-    article =>
-      article !== featuredArticle &&
-      Object.values(media).find(medium => medium.articleId === article.id),
-  );
-  if (!secondaryArticle) {
-    secondaryArticle = sectionTreeArticles[1];
-  }
+  const [featuredArticle, secondaryArticle] = topRankedArticles;
 
   let hardcodedSubsection = null;
   if (section.name === "Arts & Entertainment") {
@@ -330,43 +307,7 @@ const SectionPage = ({ classes, data, section, media }) => {
           })
         )}
       </ul>
-      <Row className={classes.featuredRow}>
-        {featuredMedia && (
-          <Col xs={12} sm={7} md={7} lg={7} className={classes.featuredMedia}>
-            <Link
-              to={`${featuredArticleSection.permalink}/${featuredArticle.slug}`}
-            >
-              <figure className={classes.featuredMediaContainer}>
-                <img src={featuredMedia.attachmentUrl} />
-              </figure>
-            </Link>
-          </Col>
-        )}
-        <Col xs={12} sm={5} md={5} lg={5} className={classes.featuredArticle}>
-          <Link
-            className={classes.featuredArticleSection}
-            to={featuredArticleSection.permalink}
-          >
-            {featuredArticleSection.name === "Arts & Entertainment" ? (
-              "A&E"
-            ) : (
-              featuredArticleSection.name
-            )}
-          </Link>
-          <Link
-            className={classes.featuredArticleTitle}
-            to={`${featuredArticleSection.permalink}/${featuredArticle.slug}`}
-          >
-            {featuredArticle.title}
-          </Link>
-          <p className={classes.featuredArticleSummary}>
-            {featuredArticle.summary}
-          </p>
-          <Byline contributors={featuredArticle.contributors} />
-          <Dateline timestamp={featuredArticle.createdAt} />
-        </Col>
-      </Row>
-
+      <RightTitleArticle article={featuredArticle} />
       <Row className={classes.secondaryRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.secondaryCol}>
           {featuredSubsection && (
@@ -416,36 +357,7 @@ const mapStateToProps = (state, ownProps) => ({
 });*/
 
 export default graphql(
-  gql`
-    query SectionPageQuery($section_id: ID!) {
-      articlesBySectionID(section_id: $section_id) {
-        id
-        title
-        slug
-        summary
-        created_at
-        section {
-          permalink
-        }
-        contributors {
-          first_name
-          last_name
-          slug
-        }
-        media {
-          title
-          media_type
-          attachment_url
-          medium_attachment_url
-          thumb_attachment_url
-        }
-      }
-      sectionsByParentSectionID(section_id: $section_id) {
-        name
-        permalink
-      }
-    }
-  `,
+  SectionPageQuery,
   {
     options: ({ section }) => ({ variables: { section_id: section.id } }),
   },

@@ -12,6 +12,7 @@ import Byline from "../../articles/components/Byline";
 const SectionBlockQuery = gql`
   query SectionBlockQuery($limit: Int!, $section_slug: String!) {
     topRankedArticles(limit: $limit, section_slug: $section_slug) {
+      id
       title
       slug
       summary
@@ -142,27 +143,26 @@ const SectionBlock = ({ classes, data, slug }) => {
           <Dateline timestamp={bigArticle.createdAt} />
         </div>
       )}
-      {topRankedArticles.length > 1 &&
-        topRankedArticles.slice(1, 3).map(article => {
-          return (
-            <div className={classes.article} key={article.id}>
-              {article.media.length > 0 && (
-                <Link to={`${section.permalink}/${article.slug}`}>
-                  <figure className={classes.figure}>
-                    <img src={article.media[0].thumbAttachmentUrl} />
-                  </figure>
-                </Link>
-              )}
-              <Link
-                to={`${section.permalink}/${article.slug}`}
-                className={classes.smallTitle}
-              >
-                {article.title}
+      {topRankedArticles.map(article => {
+        return (
+          <div className={classes.article} key={article.id}>
+            {article.media.length > 0 && (
+              <Link to={`${section.permalink}/${article.slug}`}>
+                <figure className={classes.figure}>
+                  <img src={article.media[0].thumbAttachmentUrl} />
+                </figure>
               </Link>
-              <Byline classes={classes} contributors={article.contributors} />
-            </div>
-          );
-        })}
+            )}
+            <Link
+              to={`${section.permalink}/${article.slug}`}
+              className={classes.smallTitle}
+            >
+              {article.title}
+            </Link>
+            <Byline classes={classes} contributors={article.contributors} />
+          </div>
+        );
+      })}
     </div>
   );
 };
