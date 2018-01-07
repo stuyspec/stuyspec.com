@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Helmet } from "react-helmet";
@@ -92,8 +91,6 @@ const ArtistPage = ({ classes, data, match }) => {
     return <NotFoundPage />;
   }
   const media_type = MEDIA_CREATOR_SLUGS[match.path.split("/")[1]];
-  console.log(artist.media);
-  console.log(artist.media.filter(medium => medium.mediaType === media_type));
   const articles = artist.media
     .filter(medium => medium.mediaType === media_type)
     .map(medium => ({

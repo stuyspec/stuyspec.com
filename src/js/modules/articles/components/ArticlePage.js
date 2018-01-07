@@ -23,6 +23,7 @@ const ArticleQuery = gql`
       title
       content
       media {
+        id
         attachment_url
         media_type
         caption
@@ -100,12 +101,11 @@ const ArticlePage = ({ classes, data }) => {
   }
   data = humps.camelizeKeys(data);
   const { articleBySlug } = data;
+  const { section } = articleBySlug;
 
   const referencedArticleId = SPEC_REFERENCE_PATTERN.test(articleBySlug.content)
     ? parseInt(SPEC_REFERENCE_PATTERN.exec(articleBySlug.content)[1])
     : -1;
-
-  const { section } = articleBySlug;
   return (
     <Grid fluid className={classes.ArticlePage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -113,13 +113,12 @@ const ArticlePage = ({ classes, data }) => {
         <meta />
       </Helmet>
       <ArticleHeader article={articleBySlug} section={section} />
-      {/*<ArticleBody
+      <ArticleBody
         article={articleBySlug}
-        media={articleBySlug.media}
         referencedArticleId={referencedArticleId}
         // the referencedId is passed as a prop so ArticleBody can send a
         // GraphQL query for the referenced article.
-      />*/}
+      />
       <Row className={classes.descriptionRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.description}>
           This article was published in&nbsp;

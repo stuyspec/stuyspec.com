@@ -97,7 +97,7 @@ const styles = {
       "& > figure": {
         padding: "0 2%",
         "& > div > img": {
-          marginLeft: "-14px", // ArticleBody.paddingLeft = 14px
+          marginLeft: "-10px",
           width: "100vw",
         },
       },
@@ -108,29 +108,29 @@ const styles = {
   },
 };
 
-const ArticleBody = ({ classes, data, article: { content, title } }) => {
+const ArticleBody = ({ classes, data, article }) => {
   const isCarouselButtonVisible =
-    SPEC_IMG_CAROUSEL_PATTERN.test(content) && Object.values(media).length > 0;
+    SPEC_IMG_CAROUSEL_PATTERN.test(article.content) && Object.values(media).length > 0;
 
   return (
     <Row>
       <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
-        {SPEC_IMG_CAROUSEL_PATTERN.test(content) && (
-          <Lightbox title={title}>
-            <Gallery media={Object.values(media)} />
+        {SPEC_IMG_CAROUSEL_PATTERN.test(article.content) && (
+          <Lightbox title={article.title}>
+            <Gallery media={article.media} />
           </Lightbox>
         )}
-        {Object.values(media).length > 0 && (
+        {article.media.length > 0 && (
           <ArticleFeaturedMedia
-            image={Object.values(media)[0]}
+            image={article.media[0]}
             isCarouselButtonVisible={isCarouselButtonVisible}
-            carouselImageCount={Object.values(media).length}
+            carouselImageCount={article.media.length}
           />
         )}
-        {!data.loading && !data.error && <ArticleReference article={data.articleByID} />}
+        {data && !data.loading && !data.error && <ArticleReference article={data.articleByID} />}
         <div
           className={classes.innerHTML}
-          dangerouslySetInnerHTML={{ __html: content }}
+          dangerouslySetInnerHTML={{ __html: article.content }}
         />
       </Col>
       <Col xsHidden smHidden mdOffset={1} md={3} lgOffset={1} lg={3}>
@@ -143,7 +143,7 @@ const ArticleBody = ({ classes, data, article: { content, title } }) => {
 
 export default graphql(ReferencedArticleQuery, {
   // skip this query if no referencedArticleId was found in article content
-  skip: ({ referencedArticleId }) => !referencedArticleId,
+  skip: ({ referencedArticleId }) => referencedArticleId < 0,
   options: ({ referencedArticleId }) => ({
     variables: { article_id: referencedArticleId },
   }),

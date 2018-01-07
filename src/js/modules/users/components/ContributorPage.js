@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Helmet } from "react-helmet";
@@ -81,10 +80,10 @@ const styles = {
 };
 
 const ContributorPage = ({ classes, data }) => {
-  data = humps.camelizeKeys(data);
   if (data.loading) {
     return null;
   }
+  data = humps.camelizeKeys(data);
   const contributor = data.userBySlug;
   if (contributor === null) {
     return <NotFoundPage />;
