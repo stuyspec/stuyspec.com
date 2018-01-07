@@ -37,7 +37,7 @@ const styles = {
 const CommentThread = ({
   classes,
   comments,
-  article,
+  articleId,
   createComment,
   sessionUser,
   session,
@@ -46,7 +46,7 @@ const CommentThread = ({
     createComment(
       {
         ...values,
-        articleId: article.id,
+        articleId: articleId,
         userId: sessionUser.id,
       },
       session,

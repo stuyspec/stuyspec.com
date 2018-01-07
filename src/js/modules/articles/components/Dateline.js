@@ -21,6 +21,8 @@ const styles = {
 
 const Dateline = ({ classes, timestamp }) => {
   let dateline = dateFormat(timestamp, "longDate");
+  // If the timestamp is the same day (< 24 hours difference), use the
+  // shortTime format. If not, use the longDate format.
   if (new Date() - new Date(timestamp) < MILLISECONDS_IN_DAY) {
     dateline = dateFormat(timestamp, "shortTime");
   }

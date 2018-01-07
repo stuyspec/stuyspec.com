@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, compose } from "redux";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import humps from "humps";
@@ -20,6 +20,7 @@ import { openSubscriptionModal } from "../../accounts/actions";
 const ArticleBySlug = gql`
   query ArticleQuery($slug: String!) {
     articleBySlug(slug: $slug) {
+      id
       title
       content
       media {
@@ -127,7 +128,7 @@ const ArticlePage = ({ classes, data, openSubscriptionModal }) => {
         <Col xsHidden smHidden md={3} lg={3} />
       </Row>
       <RecommendedRow section={section.parentSection ? section.parentSection : section} />
-      <CommentThread article={articleBySlug} />
+      <CommentThread articleId={articleBySlug.id} />
     </Grid>
   );
 };
@@ -136,8 +137,10 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ openSubscriptionModal }, dispatch);
 };
 
-export default graphql(ArticleBySlug, {
-  options: ({ match }) => ({ variables: { slug: match.params.article_slug } }),
-})(
-    connect(null, mapDispatchToProps)(injectSheet(styles)(ArticlePage)),
-  );
+export default compose(
+  graphql(ArticleBySlug, {
+    options: ({ match }) => ({ variables: { slug: match.params.article_slug } }),
+  }),
+  connect(null, mapDispatchToProps),
+  injectSheet(styles),
+)(ArticlePage);
