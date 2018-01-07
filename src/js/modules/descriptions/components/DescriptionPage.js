@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 import { Helmet } from "react-helmet";
-import { withRouter } from "react-router";
 
 import { NotFoundPage } from "../../core/components";
 
@@ -45,4 +44,4 @@ const mapStateToProps = (state, ownProps) => ({
   description: state.descriptions.find(desc => desc.slug === ownProps.match.params.description_slug),
 });
 
-export default withRouter(connect(mapStateToProps)(injectSheet(styles)(DescriptionPage)));
+export default connect(mapStateToProps)(injectSheet(styles)(DescriptionPage));

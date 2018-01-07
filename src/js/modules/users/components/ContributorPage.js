@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
-import { withRouter } from "react-router";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Helmet } from "react-helmet";
 import { graphql } from "react-apollo";
@@ -117,4 +116,4 @@ export default graphql(ContributorBySlug, {
   options: ({ match }) => ({
     variables: { slug: match.params.contributor_slug },
   }),
-})(withRouter(injectSheet(styles)(ContributorPage)));
+})(injectSheet(styles)(ContributorPage));

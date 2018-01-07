@@ -8,7 +8,6 @@ import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Helmet } from "react-helmet";
 import { toRoman } from "roman-numerals";
-import { withRouter } from "react-router";
 
 import ArticleHeader from "./ArticleHeader";
 import ArticleBody from "./ArticleBody";
@@ -140,7 +139,5 @@ const mapDispatchToProps = dispatch => {
 export default graphql(ArticleBySlug, {
   options: ({ match }) => ({ variables: { slug: match.params.article_slug } }),
 })(
-  withRouter(
     connect(null, mapDispatchToProps)(injectSheet(styles)(ArticlePage)),
-  ),
-);
+  );

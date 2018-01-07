@@ -79,19 +79,19 @@ const RoutingApp = ({
               exact
               path={"/contributors/:contributor_slug"}
               key={"contributors"}
-              render={props => <ContributorPage />}
+              component={ContributorPage}
             />
             <Route
               exact
               path={"/illustrators/:artist_slug"}
               key={"illustrators"}
-              render={props => <ArtistPage />}
+              component={ArtistPage}
             />
             <Route
               exact
               path={"/photographers/:artist_slug"}
               key={"photographers"}
-              render={props => <ArtistPage />}
+              component={ArtistPage}
             />
             <Route
               exact

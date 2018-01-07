@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Helmet } from "react-helmet";
-import { withRouter } from "react-router";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import humps from "humps";
@@ -134,4 +133,4 @@ export default graphql(ArtistBySlug, {
   options: ({ match }) => ({
     variables: { slug: match.params.artist_slug },
   }),
-})(withRouter(injectSheet(styles)(ArtistPage)));
+})(injectSheet(styles)(ArtistPage));
