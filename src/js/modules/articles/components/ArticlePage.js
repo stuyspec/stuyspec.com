@@ -42,9 +42,11 @@ const ArticleBySlug = gql`
         slug
       }
       section {
+        id
         name
         permalink
         parent_section {
+          id
           name
           permalink
         }
@@ -124,9 +126,7 @@ const ArticlePage = ({ classes, data, openSubscriptionModal }) => {
         </Col>
         <Col xsHidden smHidden md={3} lg={3} />
       </Row>
-      <RecommendedRow
-        section={section.parent_section ? section.parent_section : section}
-      />
+      <RecommendedRow section={section.parentSection ? section.parentSection : section} />
       <CommentThread article={articleBySlug} />
     </Grid>
   );
