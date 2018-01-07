@@ -73,7 +73,7 @@ const styles = {
   bylineContainer: {
     marginBottom: "4px",
   },
-  "@media (max-width: 768px)": {
+  "@media (max-width: 767px)": {
     LeftColumn: {
       paddingRight: "0 !important",
     },

@@ -1,8 +1,12 @@
 import React from "react";
+import Col from "react-bootstrap/lib/Col";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 
 const styles = {
+  ArticleRecommendation: {
+    marginBottom: "12px",
+  },
   label: {
     color: "#000",
     display: "block",
@@ -40,34 +44,11 @@ const styles = {
     },
   },
   figure: {
-    marginBottom: "4.1px",
-    maxHeight: "170px",
+    marginBottom: "4px",
     overflow: "hidden",
     width: "100%",
     "& img": {
       width: "100%",
-    },
-  },
-  ArticleRecommendation: {
-    float: "left",
-    padding: "0 7px 0",
-    width: "25%",
-    "&:first-child": {
-      paddingLeft: 0,
-    },
-    "&:last-child": {
-      paddingRight: 0,
-    },
-  },
-  "@media (max-width: 767px)": {
-    figure: {
-      maxHeight: "270px",
-    },
-  },
-  "@media (max-width: 575px)": {
-    ArticleRecommendation: {
-      width: "50%",
-      marginBottom: "7px",
     },
   },
 };
@@ -76,7 +57,7 @@ const ArticleRecommendation = ({ classes, article }) => {
   const { section } = article;
   const image = article.media[0];
   return (
-    <div className={classes.ArticleRecommendation}>
+    <Col xs={12} sm={6} md={6} lg={6} className={classes.ArticleRecommendation}>
       {image && (
         <Link to={`${section.permalink}/${article.slug}`}>
           <figure className={classes.figure}>
@@ -89,12 +70,12 @@ const ArticleRecommendation = ({ classes, article }) => {
       </Link>
       <Link
         to={`${section.permalink}/${article.slug}`}
-        className={image ? classes.titleWithImage : classes.titleWithoutImage}
+        className={classes.titleWithoutImage}
       >
         {article.title}
       </Link>
-      {!image && <p className={classes.summary}>{article.summary}</p>}
-    </div>
+      <p className={classes.summary}>{article.summary}</p>
+    </Col>
   );
 };
 

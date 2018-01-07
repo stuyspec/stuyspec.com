@@ -1,4 +1,5 @@
 import React from "react";
+import { compose } from "redux";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import humps from "humps";
@@ -94,14 +95,14 @@ const styles = {
 };
 
 const ArticlePage = ({ classes, data }) => {
-  data = humps.camelizeKeys(data);
-  const { loading, articleBySlug } = data;
-  if (loading) {
+  if (data.loading) {
     return null;
   }
+  data = humps.camelizeKeys(data);
+  const { articleBySlug } = data;
 
-  const referencedArticleId = SPEC_REFERENCE_PATTERN.test(article.content)
-    ? parseInt(SPEC_REFERENCE_PATTERN.exec(article.content)[1])
+  const referencedArticleId = SPEC_REFERENCE_PATTERN.test(articleBySlug.content)
+    ? parseInt(SPEC_REFERENCE_PATTERN.exec(articleBySlug.content)[1])
     : -1;
 
   const { section } = articleBySlug;
@@ -143,16 +144,11 @@ const ArticlePage = ({ classes, data }) => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ openSubscriptionModal }, dispatch);
-};
-
 export default compose(
-  graphql(ArticleBySlug, {
+  graphql(ArticleQuery, {
     options: ({ match }) => ({
       variables: { slug: match.params.article_slug },
     }),
   }),
-  connect(null, mapDispatchToProps),
   injectSheet(styles),
 )(ArticlePage);

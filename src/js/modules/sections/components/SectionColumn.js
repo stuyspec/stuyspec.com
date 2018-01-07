@@ -14,7 +14,7 @@ const styles = {
       marginBottom: "24px",
     },
   },
-  "@media (max-width: 768px)": {
+  "@media (max-width: 767px)": {
     SectionColumn: {
       borderLeft: "none",
       padding: "0 !important",

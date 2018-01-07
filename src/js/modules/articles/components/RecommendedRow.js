@@ -1,7 +1,6 @@
 import React from "react";
 import injectSheet from "react-jss";
 import { Row, Col } from "react-bootstrap/lib";
-import { Link } from "react-router-dom";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import humps from "humps";
@@ -19,6 +18,7 @@ const RecommendedRowQuery = gql`
         medium_attachment_url
       }
       section {
+        id
         name
         permalink
       }
@@ -34,6 +34,20 @@ const styles = {
   recommendedList: {
     borderBottom: "solid 1px #ddd",
     padding: "0 0 24px",
+    "& > .row > div": {
+      padding: "12px",
+    },
+    /* recommendedBlocks are structured in the block form
+         1  2
+         3  4,
+       rendering the following padding removals necessary.
+     */
+    "& > .row > div:nth-child(1), & > .row > div:nth-child(3)": {
+      paddingLeft: "0 !important",
+    },
+    "& > .row > div:nth-child(2), & > .row > div:nth-child(4)": {
+      paddingRight: "0 !important",
+    },
   },
   recommendedText: {
     color: "#000",
@@ -47,29 +61,19 @@ const styles = {
       padding: "0 10%",
     },
   },
-  "@media (max-width: 767px)": {
+  "@media (max-width: 768px)": {
     RecommendedRow: {
       padding: "0 2%",
     },
-  },
-  "@media (max-width: 575px)": {
     recommendedList: {
-      /* recommendedBlocks are structured in a block form,
-           1  2
-           3  4,
-         rendering these next padding removals necessary.
-       */
-      "& > div:nth-child(2)": {
-        paddingRight: "0 !important",
-      },
-      "& > div:nth-child(3)": {
-        paddingLeft: "0 !important",
+      "& > .row > div": {
+        padding: "12px 0 !important",
       },
     },
   },
 };
 
-const RecommendedRow = ({ classes, data, section }) => {
+const RecommendedRow = ({ classes, data }) => {
   if (data.loading) {
     return null;
   }
@@ -81,9 +85,11 @@ const RecommendedRow = ({ classes, data, section }) => {
     <Row className={classes.RecommendedRow}>
       <p className={classes.recommendedText}>Recommended</p>
       <Col xs={12} sm={12} md={9} lg={9} className={classes.recommendedList}>
-        {topRankedArticles.map(article => (
-          <ArticleRecommendation key={article.id} article={article} />
-        ))}
+        <Row>
+          {topRankedArticles.map(article => (
+            <ArticleRecommendation key={article.id} article={article} />
+          ))}
+        </Row>
       </Col>
       <Col xsHidden smHidden md={3} lg={3} />
     </Row>

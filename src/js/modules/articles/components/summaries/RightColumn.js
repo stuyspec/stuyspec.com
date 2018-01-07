@@ -88,7 +88,7 @@ const styles = {
     height: 340,
     width: "100%",
   },
-  "@media (max-width: 768px)": {
+  "@media (max-width: 767px)": {
     RightColumn: {
       borderLeft: "none",
       paddingLeft: "0 !important",

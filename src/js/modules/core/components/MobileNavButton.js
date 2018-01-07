@@ -23,7 +23,7 @@ const navButtonStyles = {
     display: "inline",
     marginRight: "4px",
   },
-  "@media (max-width: 992px)": {
+  "@media (max-width: 991px)": {
     MobileNavButton: {
       display: "inline",
     },
