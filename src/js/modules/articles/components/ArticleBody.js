@@ -1,10 +1,11 @@
 import React from "react";
-import { connect } from "react-redux";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
 import injectSheet from "react-jss";
 import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
 import {
-  SPEC_REFERENCE_PATTERN,
   SPEC_IMG_CAROUSEL_PATTERN,
 } from "../../../constants";
 
@@ -14,6 +15,20 @@ import RightRail from "./RightRail";
 
 import { Gallery } from "../../media/components";
 import { Lightbox } from "../../core/components";
+
+const ReferencedArticleQuery = gql`
+  query ReferencedArticleQuery($article_id: ID!) {
+    articleByID(id: $article_id) {
+      title
+      volume
+      issue
+      slug
+      section {
+        permalink
+      }
+    }
+  }
+`;
 
 const styles = {
   ArticleBody: {
@@ -93,23 +108,10 @@ const styles = {
   },
 };
 
-const ArticleBody = ({
-  classes,
-  article: { content, title },
-  articles,
-  media,
-}) => {
+const ArticleBody = ({ classes, data, article: { content, title } }) => {
   const isCarouselButtonVisible =
     SPEC_IMG_CAROUSEL_PATTERN.test(content) && Object.values(media).length > 0;
-  const referencedArticleId = SPEC_REFERENCE_PATTERN.test(content)
-    ? parseInt(SPEC_REFERENCE_PATTERN.exec(content)[1])
-    : null;
-  let referencedArticle = null;
-  if (referencedArticleId) {
-    referencedArticle = articles.find(
-      article => article.id === referencedArticleId,
-    );
-  }
+
   return (
     <Row>
       <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
@@ -125,7 +127,7 @@ const ArticleBody = ({
             carouselImageCount={Object.values(media).length}
           />
         )}
-        {referencedArticle && <ArticleReference article={referencedArticle} />}
+        {!data.loading && !data.error && <ArticleReference article={data.articleByID} />}
         <div
           className={classes.innerHTML}
           dangerouslySetInnerHTML={{ __html: content }}
@@ -138,8 +140,11 @@ const ArticleBody = ({
   );
 };
 
-const mapStateToProps = state => ({
-  articles: state.articles.articles,
-});
 
-export default connect(mapStateToProps)(injectSheet(styles)(ArticleBody));
+export default graphql(ReferencedArticleQuery, {
+  // skip this query if no referencedArticleId was found in article content
+  skip: ({ referencedArticleId }) => !referencedArticleId,
+  options: ({ referencedArticleId }) => ({
+    variables: { article_id: referencedArticleId },
+  }),
+})(injectSheet(styles)(ArticleBody));

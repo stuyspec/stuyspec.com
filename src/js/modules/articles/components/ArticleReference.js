@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 
@@ -29,7 +28,7 @@ const styles = {
   },
 };
 
-const ArticleReference = ({ classes, article, sections }) => {
+const ArticleReference = ({ classes, article }) => {
   // Since the title will be surrounded with double quotes, we replace the
   // title's double quotes (for movies, books, etc.) with single quotes.
   const title = article.title
@@ -41,7 +40,7 @@ const ArticleReference = ({ classes, article, sections }) => {
       This article was written in response to &ldquo;
       <Link
         className={classes.referenceLink}
-        to={`${sections[article.sectionId].permalink}/${article.slug}`}
+        to={`${article.section.permalink}/${article.slug}`}
       >
         {title}
       </Link>
@@ -50,8 +49,4 @@ const ArticleReference = ({ classes, article, sections }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  sections: state.sections.sections,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(ArticleReference));
+export default injectSheet(styles)(ArticleReference);

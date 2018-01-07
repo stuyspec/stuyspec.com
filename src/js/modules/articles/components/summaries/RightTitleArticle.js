@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import Row from "react-bootstrap/lib/Row";

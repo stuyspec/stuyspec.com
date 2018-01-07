@@ -2,21 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const RibbonComponent = ({ classes, article }) => {
-  let featuredMedia = null;
-  if (article.media.length > 0) {
-    featuredMedia = article.media.find(medium => medium.isFeatured);
-  }
   const { section } = article;
   return (
     <div className={classes.RibbonComponent}>
-      {featuredMedia && (
+      {article.media.length > 0 && (
         <div>
           <Link
             to={`${section.permalink}/${article.slug}`}
             className={classes.title}
           >
             <figure className={classes.figure}>
-              <img src={featuredMedia.thumbAttachmentUrl} />
+              <img src={article.media[0].thumbAttachmentUrl} />
             </figure>
           </Link>
         </div>

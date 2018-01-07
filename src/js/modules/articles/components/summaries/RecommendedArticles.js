@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
@@ -76,8 +75,7 @@ const styles = {
   },
 };
 
-// NESTED IN <Col lg={3} md={3}>
-const RecommendedArticles = ({ classes, limit, data }) => {
+const RecommendedArticles = ({ classes, data }) => {
   if (data.loading) {
     return null;
   }

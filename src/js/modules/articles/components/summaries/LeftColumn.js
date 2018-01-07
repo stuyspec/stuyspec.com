@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 import Byline from "../Byline";
 import Dateline from "../Dateline";
-import Outquote from "../Outquote";
 
 // TODO: ADD THE OUTQUOTE
 

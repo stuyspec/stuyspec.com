@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
@@ -92,7 +91,7 @@ const styles = {
   },
 };
 
-const LatestArticlesRibbon = ({ classes, data, limit }) => {
+const LatestArticlesRibbon = ({ classes, data }) => {
   if (data.loading) {
     return null;
   }
