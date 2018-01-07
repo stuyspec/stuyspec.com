@@ -1,23 +1,21 @@
 import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators, compose } from "redux";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import humps from "humps";
 import injectSheet from "react-jss";
-import { Grid, Row, Col } from "react-bootstrap/lib";
+import Grid from "react-bootstrap/lib/Grid";
+import Row from "react-bootstrap/lib/Row";
+import Col from "react-bootstrap/lib/Col";
 import { Helmet } from "react-helmet";
 import { toRoman } from "roman-numerals";
-
+import { SPEC_REFERENCE_PATTERN } from "../../../constants";
 import ArticleHeader from "./ArticleHeader";
 import ArticleBody from "./ArticleBody";
 import RecommendedRow from "./RecommendedRow";
 import CommentThread from "../../comments/components/CommentThread";
 import NotFoundPage from "../../core/components/NotFoundPage";
-import { getArticleFromRequestedSlug, getArticleMedia } from "../selectors";
-import { openSubscriptionModal } from "../../accounts/actions";
 
-const ArticleBySlug = gql`
+const ArticleQuery = gql`
   query ArticleQuery($slug: String!) {
     articleBySlug(slug: $slug) {
       id
@@ -95,12 +93,16 @@ const styles = {
   },
 };
 
-const ArticlePage = ({ classes, data, openSubscriptionModal }) => {
+const ArticlePage = ({ classes, data }) => {
   data = humps.camelizeKeys(data);
   const { loading, articleBySlug } = data;
   if (loading) {
     return null;
   }
+
+  const referencedArticleId = SPEC_REFERENCE_PATTERN.test(article.content)
+    ? parseInt(SPEC_REFERENCE_PATTERN.exec(article.content)[1])
+    : -1;
 
   const { section } = articleBySlug;
   return (
@@ -110,7 +112,13 @@ const ArticlePage = ({ classes, data, openSubscriptionModal }) => {
         <meta />
       </Helmet>
       <ArticleHeader article={articleBySlug} section={section} />
-      <ArticleBody article={articleBySlug} media={articleBySlug.media} />
+      {/*<ArticleBody
+        article={articleBySlug}
+        media={articleBySlug.media}
+        referencedArticleId={referencedArticleId}
+        // the referencedId is passed as a prop so ArticleBody can send a
+        // GraphQL query for the referenced article.
+      />*/}
       <Row className={classes.descriptionRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.description}>
           This article was published in&nbsp;
