@@ -59,4 +59,4 @@ find ./src/js/modules -type f -name '*.js' | xargs prettier --write --trailing-c
 ## Contribution
 
 ### StuySpec StuyleGuide (in progress)
-- We use ID, not id
+- We use ID, not Id
