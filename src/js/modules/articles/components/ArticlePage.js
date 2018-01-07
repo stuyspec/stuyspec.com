@@ -127,7 +127,9 @@ const ArticlePage = ({ classes, data, openSubscriptionModal }) => {
         </Col>
         <Col xsHidden smHidden md={3} lg={3} />
       </Row>
-      <RecommendedRow section={section.parentSection ? section.parentSection : section} />
+      <RecommendedRow
+        section={section.parentSection ? section.parentSection : section}
+      />
       <CommentThread articleId={articleBySlug.id} />
     </Grid>
   );
@@ -139,7 +141,9 @@ const mapDispatchToProps = dispatch => {
 
 export default compose(
   graphql(ArticleBySlug, {
-    options: ({ match }) => ({ variables: { slug: match.params.article_slug } }),
+    options: ({ match }) => ({
+      variables: { slug: match.params.article_slug },
+    }),
   }),
   connect(null, mapDispatchToProps),
   injectSheet(styles),

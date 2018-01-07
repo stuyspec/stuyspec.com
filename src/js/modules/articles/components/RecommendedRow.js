@@ -81,7 +81,9 @@ const RecommendedRow = ({ classes, data, section }) => {
     <Row className={classes.RecommendedRow}>
       <p className={classes.recommendedText}>Recommended</p>
       <Col xs={12} sm={12} md={9} lg={9} className={classes.recommendedList}>
-        {topRankedArticles.map(article => <ArticleRecommendation key={article.id} article={article} />)}
+        {topRankedArticles.map(article => (
+          <ArticleRecommendation key={article.id} article={article} />
+        ))}
       </Col>
       <Col xsHidden smHidden md={3} lg={3} />
     </Row>

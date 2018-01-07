@@ -41,7 +41,9 @@ const DescriptionPage = ({ classes, description }) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  description: state.descriptions.find(desc => desc.slug === ownProps.match.params.description_slug),
+  description: state.descriptions.find(
+    desc => desc.slug === ownProps.match.params.description_slug,
+  ),
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(DescriptionPage));

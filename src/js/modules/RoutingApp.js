@@ -74,7 +74,11 @@ const RoutingApp = ({
                 />
               );
             })}
-            <Route exact path={"/about/:description_slug"} component={DescriptionPage} />
+            <Route
+              exact
+              path={"/about/:description_slug"}
+              component={DescriptionPage}
+            />
             <Route
               exact
               path={"/contributors/:contributor_slug"}
