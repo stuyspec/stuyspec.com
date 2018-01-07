@@ -1,7 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 import { Helmet } from "react-helmet";
+
+import { NotFoundPage } from "../../core/components";
 
 const styles = {
   descriptionTitle: {
@@ -19,6 +22,9 @@ const styles = {
 };
 
 const DescriptionPage = ({ classes, description }) => {
+  if (description === null) {
+    return <NotFoundPage />;
+  }
   return (
     <Grid fluid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -34,4 +40,8 @@ const DescriptionPage = ({ classes, description }) => {
   );
 };
 
-export default injectSheet(styles)(DescriptionPage);
+const mapStateToProps = (state, ownProps) => ({
+  description: state.descriptions.find(desc => desc.slug === ownProps.match.description_slug),
+});
+
+export default withRouter(connect(mapStateToProps)(injectSheet(styles)(DescriptionPage)));

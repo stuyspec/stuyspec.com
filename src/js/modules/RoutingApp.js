@@ -74,18 +74,7 @@ const RoutingApp = ({
                 />
               );
             })}
-            {descriptions.map(description => {
-              return (
-                <Route
-                  exact
-                  path={`/about/${description.slug}`}
-                  key={`description${description.id}`}
-                  render={props => (
-                    <DescriptionPage description={description} />
-                  )}
-                />
-              );
-            })}
+            <Route exact path={"/about/:description_slug"} component={DescriptionPage} />
             <Route
               exact
               path={"/contributors/:contributor_slug"}
