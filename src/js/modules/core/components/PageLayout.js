@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, compose } from "redux";
 import { withRouter } from "react-router-dom";
 import injectSheet from "react-jss";
 import { graphql } from "react-apollo";
@@ -140,10 +140,9 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ openSidebar, closeSidebar }, dispatch);
 };
 
-export default graphql(PageLayoutQuery)(
-  withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(
-      injectSheet(styles)(PageLayout),
-    ),
-  ),
-);
+export default compose(
+  graphql(PageLayoutQuery),
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps),
+  injectSheet(styles),
+)(PageLayout);

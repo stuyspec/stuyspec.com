@@ -74,7 +74,7 @@ const ArticleReference = ({ classes, data }) => {
 
 export default graphql(ArticleReferenceQuery, {
   // skip this query if no referencedArticleId was found in article content
-  skip: ({ article }) => !SPEC_REFERENCE_PATTERN.test(article.content)
+  skip: ({ article }) => !SPEC_REFERENCE_PATTERN.test(article.content),
   options: ({ article }) => ({
     variables: { article_id: parseInt(SPEC_REFERENCE_PATTERN.exec(articleBySlug.content)[1]) },
   }),

@@ -102,7 +102,7 @@ const ArticlePage = ({ classes, data }) => {
   data = humps.camelizeKeys(data);
   const { articleBySlug } = data;
   const { section } = articleBySlug;
-  
+
   return (
     <Grid fluid className={classes.ArticlePage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -132,7 +132,7 @@ const ArticlePage = ({ classes, data }) => {
         <Col xsHidden smHidden md={3} lg={3} />
       </Row>
       <RecommendedRow
-        section={section.parentSection ? section.parentSection : section}
+        section={section.parentSection || section}
       />
       <CommentThread articleId={articleBySlug.id} />
     </Grid>

@@ -48,7 +48,7 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
       Home
     </Link>,
   );
-  Object.values(sections).map(section => {
+  sections.map(section => {
     sidebarElements.push(
       <Link
         className={classes.sidebarSectionLink}

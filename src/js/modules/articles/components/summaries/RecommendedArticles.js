@@ -9,6 +9,7 @@ import { Row, Col } from "react-bootstrap/lib";
 const RecommendedArticlesQuery = gql`
   query RecommendedArticlesQuery($limit: Int!) {
     topRankedArticles(limit: $limit) {
+      id
       title
       slug
       summary

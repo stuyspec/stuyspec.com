@@ -129,23 +129,22 @@ const styles = {
 const PageFooter = ({ classes, sections, descriptions }) => {
   const createDescriptionLinks = () => {
     // is a function because it is reused
-    const descriptionLinks = Object.values(descriptions).map(description => {
-      return (
-        <Link
-          className={classes.subsectionLink}
-          key={description.id}
-          to={`/about/${description.slug}`}
-        >
-          {description.title}
-        </Link>
-      );
-    });
     return (
       <div className={classes.sectionBlock} key="about">
         <p className={classes.topLevelSectionLink} key={-1}>
           About Us
         </p>
-        {descriptionLinks}
+        {descriptions.map(description => {
+          return (
+            <Link
+              className={classes.subsectionLink}
+              key={description.id}
+              to={`/about/${description.slug}`}
+            >
+              {description.title}
+            </Link>
+          );
+        })}
         <a
           className={classes.subsectionLink}
           key={-2}

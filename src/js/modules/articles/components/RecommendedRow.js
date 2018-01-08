@@ -73,12 +73,12 @@ const styles = {
   },
 };
 
+/* Row of recommended articles on the bottom of the Article Page */
 const RecommendedRow = ({ classes, data }) => {
   if (data.loading) {
     return null;
   }
   data = humps.camelizeKeys(data);
-  console.log(data);
 
   const { topRankedArticles } = data;
   return (

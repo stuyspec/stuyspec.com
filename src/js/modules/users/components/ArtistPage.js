@@ -11,7 +11,7 @@ import { NotFoundPage } from "../../core/components";
 import { MEDIA_CREATOR_SLUGS } from "../../../constants";
 
 const ArtistBySlug = gql`
-  query PhotographerPageQuery($slug: String!) {
+  query ArtistPageQuery($slug: String!) {
     userBySlug(slug: $slug) {
       first_name
       last_name
@@ -90,9 +90,9 @@ const ArtistPage = ({ classes, data, match }) => {
   if (!artist) {
     return <NotFoundPage />;
   }
-  const media_type = MEDIA_CREATOR_SLUGS[match.path.split("/")[1]];
+  const mediaType = MEDIA_CREATOR_SLUGS[match.path.split("/")[1]];
   const articles = artist.media
-    .filter(medium => medium.mediaType === media_type)
+    .filter(medium => medium.mediaType === mediaType)
     .map(medium => ({
       ...medium.article,
       media: [
