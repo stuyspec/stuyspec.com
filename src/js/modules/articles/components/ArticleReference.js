@@ -4,11 +4,11 @@ import gql from "graphql-tag";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 import {
-  SPEC_IMG_CAROUSEL_PATTERN,
+  SPEC_REFERENCE_PATTERN,
 } from "../../../constants";
 
-const ReferencedArticleQuery = gql`
-  query ReferencedArticleQuery($article_id: ID!) {
+const ArticleReferenceQuery = gql`
+  query ArticleReferenceQuery($article_id: ID!) {
     articleByID(id: $article_id) {
       title
       volume

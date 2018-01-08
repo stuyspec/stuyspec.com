@@ -8,7 +8,6 @@ import { Helmet } from "react-helmet";
 
 import ArticleList from "./ArticleList";
 import { TallAd } from "../../advertisements/components";
-import { getLatestArticles } from "../selectors";
 
 const LatestPageQuery = gql`
   query LatestPageQuery($limit: Int!) {

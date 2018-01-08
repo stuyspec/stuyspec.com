@@ -3,7 +3,6 @@ import injectSheet from "react-jss";
 import { Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 
-import { getArticlesWithContributors } from "../../selectors";
 import Byline from "../Byline";
 import Dateline from "../Dateline";
 import Outquote from "../Outquote";

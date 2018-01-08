@@ -8,15 +8,11 @@ import injectSheet from "react-jss";
 import { Helmet } from "react-helmet";
 
 import { ArticleList } from "../../articles/components";
-import { getSectionTreeArticles } from "../../articles/selectors";
-import { getDirectSubsections } from "../../sections/selectors";
 import SectionColumn from "./SectionColumn";
 import {
   LeftTitleArticle,
   RightTitleArticle,
 } from "../../articles/components/summaries";
-import { Dateline, Byline } from "../../articles/components/index";
-import SectionFeature from "./SectionFeature";
 import { TallAd } from "../../advertisements/components/index";
 
 // TODO: STYLE SECONDARY ARTICLE. consider setting a max height

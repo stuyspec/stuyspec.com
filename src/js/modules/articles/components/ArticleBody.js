@@ -5,7 +5,9 @@ import Col from "react-bootstrap/lib/Col";
 import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 import ArticleReference from "./ArticleReference";
 import RightRail from "./RightRail";
-
+import {
+  SPEC_IMG_CAROUSEL_PATTERN,
+} from "../../../constants";
 import { Gallery } from "../../media/components";
 import { Lightbox } from "../../core/components";
 
