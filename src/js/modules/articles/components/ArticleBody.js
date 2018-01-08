@@ -1,34 +1,13 @@
 import React from "react";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
-import humps from "humps";
 import injectSheet from "react-jss";
 import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
-import {
-  SPEC_IMG_CAROUSEL_PATTERN,
-} from "../../../constants";
-
 import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 import ArticleReference from "./ArticleReference";
 import RightRail from "./RightRail";
 
 import { Gallery } from "../../media/components";
 import { Lightbox } from "../../core/components";
-
-const ReferencedArticleQuery = gql`
-  query ReferencedArticleQuery($article_id: ID!) {
-    articleByID(id: $article_id) {
-      title
-      volume
-      issue
-      slug
-      section {
-        permalink
-      }
-    }
-  }
-`;
 
 const styles = {
   ArticleBody: {
@@ -127,7 +106,7 @@ const ArticleBody = ({ classes, data, article }) => {
             carouselImageCount={article.media.length}
           />
         )}
-        {data && !data.loading && !data.error && <ArticleReference article={data.articleByID} />}
+        <ArticleReference article={data.articleByID} />
         <div
           className={classes.innerHTML}
           dangerouslySetInnerHTML={{ __html: article.content }}
@@ -141,10 +120,4 @@ const ArticleBody = ({ classes, data, article }) => {
 };
 
 
-export default graphql(ReferencedArticleQuery, {
-  // skip this query if no referencedArticleId was found in article content
-  skip: ({ referencedArticleId }) => referencedArticleId < 0,
-  options: ({ referencedArticleId }) => ({
-    variables: { article_id: referencedArticleId },
-  }),
-})(injectSheet(styles)(ArticleBody));
+export default injectSheet(styles)(ArticleBody);

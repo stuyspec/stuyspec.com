@@ -102,10 +102,7 @@ const ArticlePage = ({ classes, data }) => {
   data = humps.camelizeKeys(data);
   const { articleBySlug } = data;
   const { section } = articleBySlug;
-
-  const referencedArticleId = SPEC_REFERENCE_PATTERN.test(articleBySlug.content)
-    ? parseInt(SPEC_REFERENCE_PATTERN.exec(articleBySlug.content)[1])
-    : -1;
+  
   return (
     <Grid fluid className={classes.ArticlePage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -115,7 +112,6 @@ const ArticlePage = ({ classes, data }) => {
       <ArticleHeader article={articleBySlug} section={section} />
       <ArticleBody
         article={articleBySlug}
-        referencedArticleId={referencedArticleId}
         // the referencedId is passed as a prop so ArticleBody can send a
         // GraphQL query for the referenced article.
       />

@@ -1,6 +1,25 @@
 import React from "react";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
+import {
+  SPEC_IMG_CAROUSEL_PATTERN,
+} from "../../../constants";
+
+const ReferencedArticleQuery = gql`
+  query ReferencedArticleQuery($article_id: ID!) {
+    articleByID(id: $article_id) {
+      title
+      volume
+      issue
+      slug
+      section {
+        permalink
+      }
+    }
+  }
+`;
 
 const styles = {
   ArticleReference: {
@@ -28,7 +47,11 @@ const styles = {
   },
 };
 
-const ArticleReference = ({ classes, article }) => {
+const ArticleReference = ({ classes, data }) => {
+  if (!data || data.loading || data.error) {
+    return null;
+  }
+  const article = data.articleByID;
   // Since the title will be surrounded with double quotes, we replace the
   // title's double quotes (for movies, books, etc.) with single quotes.
   const title = article.title
@@ -49,4 +72,10 @@ const ArticleReference = ({ classes, article }) => {
   );
 };
 
-export default injectSheet(styles)(ArticleReference);
+export default graphql(ArticleReferenceQuery, {
+  // skip this query if no referencedArticleId was found in article content
+  skip: ({ article }) => !SPEC_REFERENCE_PATTERN.test(article.content)
+  options: ({ article }) => ({
+    variables: { article_id: parseInt(SPEC_REFERENCE_PATTERN.exec(articleBySlug.content)[1]) },
+  }),
+})(injectSheet(styles)(ArticleReference));
