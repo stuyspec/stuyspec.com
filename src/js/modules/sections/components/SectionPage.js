@@ -19,6 +19,10 @@ import { TallAd } from "../../advertisements/components/index";
 
 const SectionPageQuery = gql`
   query SectionPageQuery($section_id: ID!) {
+    featuredSubsection {
+      name
+      permalink
+    }
     topRankedArticles(section_id: $section_id, limit: 2) {
       id
       title
@@ -37,6 +41,7 @@ const SectionPageQuery = gql`
         slug
       }
       section {
+        id
         name
         permalink
       }
@@ -53,6 +58,7 @@ const SectionPageQuery = gql`
       summary
       created_at
       section {
+        id
         permalink
       }
       contributors {
@@ -210,7 +216,7 @@ const SectionPage = ({ classes, data, section }) => {
     return null;
   }
   data = humps.camelizeKeys(data);
-  const { latestArticles, topRankedArticles } = data;
+  const { latestArticles, topRankedArticles, featuredSubsection } = data;
   const [featuredArticle, secondaryArticle] = topRankedArticles;
   const subsections = data.sectionsByParentSectionID;
   if (featuredArticle.section.parentSection) {
@@ -242,30 +248,7 @@ const SectionPage = ({ classes, data, section }) => {
       </Grid>
     );
   }
-  /*
-  let hardcodedSubsection = null;
-  if (section.name === "Arts & Entertainment") {
-    hardcodedSubsection = "Music";
-  } else if (section.name === "Humor") {
-    hardcodedSubsection = "Spooktator";
-  }
-  let featuredSubsection = null;
-  if (section.name === "10/31 Terror Attack") {
-    // 10/31 has no subsections, but many students published Creative
-    // Responses (their creative pieces in response to the attack).
-    featuredSubsection = Object.values(sections).find(
-      section => section.name === "Creative Responses",
-    );
-  } else {
-    featuredSubsection = Object.values(directSubsections).find(subsection => {
-      if (hardcodedSubsection) {
-        return subsection.name === hardcodedSubsection;
-      } else {
-        return subsection.id !== featuredArticle.sectionId;
-      }
-    });
-  }
-  */
+ 
   return (
     <Grid fluid className={classes.SectionPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">

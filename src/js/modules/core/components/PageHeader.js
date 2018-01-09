@@ -11,7 +11,7 @@ const styles = {
     padding: "0 !important",
   },
   mastheadBar: {
-    marginTop: "100px",
+    marginTop: "130px",
   },
 };
 

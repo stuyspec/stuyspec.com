@@ -89,7 +89,7 @@ const styles = {
   },
 };
 
-const ArticleBody = ({ classes, data, article }) => {
+const ArticleBody = ({ classes, article }) => {
   const isCarouselButtonVisible =
     SPEC_IMG_CAROUSEL_PATTERN.test(article.content) && Object.values(media).length > 0;
 
@@ -108,7 +108,7 @@ const ArticleBody = ({ classes, data, article }) => {
             carouselImageCount={article.media.length}
           />
         )}
-        <ArticleReference article={data.articleByID} />
+        <ArticleReference article={article} />
         <div
           className={classes.innerHTML}
           dangerouslySetInnerHTML={{ __html: article.content }}
@@ -120,6 +120,5 @@ const ArticleBody = ({ classes, data, article }) => {
     </Row>
   );
 };
-
 
 export default injectSheet(styles)(ArticleBody);

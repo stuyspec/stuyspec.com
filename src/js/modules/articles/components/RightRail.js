@@ -19,9 +19,10 @@ const RightRailQuery = gql`
         last_name
       }
       media {
-        thumbAttachmentUrl
+        thumb_attachment_url
       }
       section {
+        id
         permalink
       }
     }
