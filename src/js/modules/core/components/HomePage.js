@@ -28,27 +28,7 @@ const HomePageQuery = gql`
       }
       media {
         title
-        attachment_url
-        medium_attachment_url
-        thumb_attachment_url
-      }
-      section {
-        name
-        permalink
-      }
-    }
-    newsArticles {
-      title
-      slug
-      summary
-      created_at
-      contributors {
-        first_name
-        last_name
-        slug
-      }
-      media {
-        title
+        media_type
         attachment_url
         medium_attachment_url
         thumb_attachment_url
@@ -87,11 +67,13 @@ const styles = {
 };
 
 const HomePage = ({ classes, data }) => {
-  data = humps.camelizeKeys(data);
-  const { loading, featuredArticle, newsArticles } = data;
-  if (loading) {
+  if (data.loading) {
     return null;
   }
+  data = humps.camelizeKeys(data);
+  const { featuredArticle } = data;
+  console.log(data);
+
   const firstColumnSectionSlugs = ["opinions", "features", "humor"];
   const secondColumnSectionSlugs = [
     "staff-editorials",
@@ -110,7 +92,7 @@ const HomePage = ({ classes, data }) => {
             className={classes.primaryComponents}
           >
             <FeaturedArticle article={featuredArticle} />
-            <SectionFeature articles={newsArticles} />
+            <SectionFeature section_slug={"news"} />
           </Col>
           <Col
             xsHidden

@@ -9,6 +9,32 @@ import { Row, Col } from "react-bootstrap/lib";
 import Byline from "../../articles/components/Byline";
 import Dateline from "../../articles/components/Dateline";
 
+const SectionFeatureQuery = gql`
+  query SectionFeatureQuery($section_slug: String!) {
+    featuredArticlesBySectionSlug(section_slug: $section_slug) {
+      title
+      slug
+      summary
+      created_at
+      contributors {
+        first_name
+        last_name
+        slug
+      }
+      media {
+        title
+        attachment_url
+        medium_attachment_url
+        thumb_attachment_url
+      }
+      section {
+        name
+        permalink
+      }
+    }
+  }
+`;
+
 const styles = {
   SectionFeature: {
     borderTop: "1px solid #ddd",
@@ -107,8 +133,14 @@ const styles = {
   },
 };
 
-const SectionFeature = ({ classes, articles }) => {
-  const [primaryArticle, secondaryArticle, ternaryArticle] = articles;
+const SectionFeature = ({ classes, data }) => {
+  if (data.loading) {
+    return null;
+  }
+  data = humps.camelizeKeys(data);
+
+
+  const [primaryArticle, secondaryArticle, ternaryArticle] = data.featuredArticlesBySectionSlug;
   const featuredMedia = primaryArticle.media[0];
   const { section } = primaryArticle;
   return (
@@ -199,4 +231,6 @@ const SectionFeature = ({ classes, articles }) => {
   );
 };
 
-export default injectSheet(styles)(SectionFeature);
+export default graphql(SectionFeatureQuery, {
+  options: ({ section_slug }) => ({ variables: { section_slug: section_slug } }),
+})(injectSheet(styles)(SectionFeature));
