@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet";
 
 import { ArticleList } from "../../articles/components";
 import SectionColumn from "./SectionColumn";
+import SectionFeature from "./SectionFeature";
 import {
   LeftTitleArticle,
   RightTitleArticle,
@@ -19,9 +20,8 @@ import { TallAd } from "../../advertisements/components/index";
 
 const SectionPageQuery = gql`
   query SectionPageQuery($section_id: ID!) {
-    featuredSubsection {
-      name
-      permalink
+    featuredSubsection(section_id: $section_id) {
+      slug
     }
     topRankedArticles(section_id: $section_id, limit: 2) {
       id
@@ -211,7 +211,10 @@ const styles = {
   },
 };
 
-const SectionPage = ({ classes, data, section }) => {
+// const SectionPage = ({ classes, data, section }) => {
+const SectionPage = props => {
+  console.log(props);
+  let { data, classes, section } = props;
   if (data.loading) {
     return null;
   }
@@ -286,14 +289,11 @@ const SectionPage = ({ classes, data, section }) => {
       <RightTitleArticle article={featuredArticle} />
       <Row className={classes.secondaryRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.secondaryCol}>
-          {/*featuredSubsection && (
+          {featuredSubsection && (
             <div className={classes.SectionFeatureContainer}>
-              <SectionFeature
-                section={featuredSubsection}
-                without={featuredArticle}
-              />
+              <SectionFeature section_slug={featuredSubsection.slug} />
             </div>
-          )*/}
+          )}
           <LeftTitleArticle article={secondaryArticle} />
         </Col>
         <Col
