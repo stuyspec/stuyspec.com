@@ -14,6 +14,7 @@ const RecommendedArticlesQuery = gql`
       slug
       summary
       section {
+        id
         permalink
       }
     }

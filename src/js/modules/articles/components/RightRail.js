@@ -137,6 +137,7 @@ const RightRail = ({ classes, data }) => {
   if (data.loading) {
     return null;
   }
+  data = humps.camelizeKeys(data);
   const articles = data.topRankedArticles;
   return (
     <div className={classes.RightRail}>

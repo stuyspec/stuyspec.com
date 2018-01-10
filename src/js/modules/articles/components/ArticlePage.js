@@ -20,6 +20,7 @@ const ArticleQuery = gql`
   query ArticleQuery($slug: String!) {
     articleBySlug(slug: $slug) {
       id
+      slug
       title
       content
       media {
