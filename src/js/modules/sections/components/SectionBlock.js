@@ -150,7 +150,10 @@ const SectionBlock = ({ classes, data, slug }) => {
             {article.media.length > 0 && (
               <Link to={`${section.permalink}/${article.slug}`}>
                 <figure className={classes.figure}>
-                  <img src={article.media[0].thumbAttachmentUrl} alt={article.media[0].title}/>
+                  <img
+                    src={article.media[0].thumbAttachmentUrl}
+                    alt={article.media[0].title}
+                  />
                 </figure>
               </Link>
             )}

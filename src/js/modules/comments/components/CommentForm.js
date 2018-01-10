@@ -114,11 +114,7 @@ const validate = values => {
   return errors;
 };
 
-const renderField = ({
-  input,
-  meta: { touched, error },
-  checkLogin,
-}) => {
+const renderField = ({ input, meta: { touched, error }, checkLogin }) => {
   return (
     <div>
       <textarea
@@ -203,5 +199,5 @@ export default compose(
     validate,
   }),
   connect(mapStateToProps, mapDispatchToProps),
-  injectSheet(styles)
+  injectSheet(styles),
 )(CommentForm);

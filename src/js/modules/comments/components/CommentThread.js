@@ -42,13 +42,7 @@ const styles = {
   },
 };
 
-const CommentThread = ({
-  classes,
-  article,
-  createComment,
-  data,
-  session,
-}) => {
+const CommentThread = ({ classes, article, createComment, data, session }) => {
   if (data.loading) {
     return null;
   }
@@ -92,5 +86,5 @@ export default compose(
     options: ({ session }) => ({ variables: { uid: session.uid } }),
   }),
   connect(mapStateToProps, mapDispatchToProps),
-  injectSheet(styles)
+  injectSheet(styles),
 )(CommentThread);

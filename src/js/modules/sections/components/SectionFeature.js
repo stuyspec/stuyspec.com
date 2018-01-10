@@ -171,7 +171,10 @@ const SectionFeature = ({ classes, data }) => {
         >
           <Link to={`${section.permalink}/${primaryArticle.slug}`}>
             <figure className={classes.figure}>
-              <img src={featuredMedia.mediumAttachmentUrl} alt={featuredMedia.title} />
+              <img
+                src={featuredMedia.mediumAttachmentUrl}
+                alt={featuredMedia.title}
+              />
             </figure>
           </Link>
         </Col>
@@ -199,7 +202,7 @@ const SectionFeature = ({ classes, data }) => {
         <Byline contributors={primaryArticle.contributors} />
         <Dateline timestamp={primaryArticle.createdAt} />
       </Col>
-      
+
       <Col
         xs={12}
         smHidden

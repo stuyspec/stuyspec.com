@@ -59,7 +59,7 @@ const ArticleQuery = gql`
         published_at
         user {
           first_name
-          last_name          
+          last_name
         }
       }
     }
@@ -136,7 +136,7 @@ const ArticlePage = ({ classes, data }) => {
             {`Volume ${toRoman(
               articleBySlug.volume,
             )}, Issue ${articleBySlug.issue}`}
-          {/* TODO: Lookup table */}
+            {/* TODO: Lookup table */}
           </a>
           .
         </Col>

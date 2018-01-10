@@ -159,7 +159,7 @@ const DescriptionLinks = ({ classes, descriptions }) => {
       </a>
     </div>
   );
-}
+};
 
 const PageFooter = ({ classes, sections, descriptions }) => {
   return (

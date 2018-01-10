@@ -89,8 +89,7 @@ const styles = {
 
 const ArticleBody = ({ classes, article }) => {
   const isCarouselButtonVisible =
-    SPEC_IMG_CAROUSEL_PATTERN.test(article.content) &&
-    article.media.length > 0;
+    SPEC_IMG_CAROUSEL_PATTERN.test(article.content) && article.media.length > 0;
 
   return (
     <Row>
