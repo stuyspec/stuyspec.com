@@ -5,7 +5,6 @@ import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 import { Grid } from "react-bootstrap/lib";
 
-import { getCurrentUser } from "../../accounts/selectors";
 import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
 import { openSubscriptionModal } from "../../accounts/actions";
@@ -119,7 +118,6 @@ const styles = {
     overflow: "visible",
     display: "inline",
     position: "relative",
-    // left: "-20vh",
     top: "3vh",
   },
 };
