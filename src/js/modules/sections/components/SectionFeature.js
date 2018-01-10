@@ -58,12 +58,10 @@ const styles = {
     paddingLeft: "13px !important",
     paddingRight: "0 !important",
   },
-  secondaryArticle: {
-    paddingRight: "7px",
-  },
   ternaryArticle: {
     padding: "0 14px 0 13px !important",
-    borderRight: "solid 1px #ddd",
+    border: "solid 1px #ddd",
+    borderStyle: "none solid",
     paddingRight: "13px !important",
   },
   title: {
@@ -94,7 +92,7 @@ const styles = {
   featuredMediaContainer: {
     borderRight: "solid 1px #ddd",
     paddingLeft: "13px !important",
-    paddingRight: "14px !important",
+    paddingRight: "14px",
   },
   mobileArticleTitle1: {
     borderTop: "1px solid #ddd !important",
@@ -118,17 +116,18 @@ const styles = {
       borderBottom: "1px solid #ddd",
       paddingBottom: "6px",
     },
-    secondaryArticle: {
-      padding: "0px !important",
-      marginBottom: 0,
-    },
     ternaryArticle: {
-      padding: "0px !important",
+      borderLeft: 0,
       marginBottom: 0,
+      padding: "0px 13px 0px 0px !important",
+    },
+    primaryArticle: {
+      paddingLeft: "13px !important",
     },
     featuredMediaContainer: {
       borderRight: 0,
-      paddingRight: "0 !important",
+      paddingLeft: "0 !important",
+      paddingRight: 0,
     },
   },
 };
@@ -177,7 +176,7 @@ const SectionFeature = ({ classes, data }) => {
           </Link>
         </Col>
       ) : (
-        <Col xsHidden sm={4} md={4} lg={4} className={classes.ternaryArticle}>
+        <Col xs={6} sm={4} md={4} lg={4} className={classes.ternaryArticle}>
           <Link
             className={classes.title}
             to={`${section.permalink}/${ternaryArticle.slug}`}
@@ -200,7 +199,7 @@ const SectionFeature = ({ classes, data }) => {
         <Byline contributors={primaryArticle.contributors} />
         <Dateline timestamp={primaryArticle.createdAt} />
       </Col>
-
+      
       <Col
         xs={12}
         smHidden
@@ -210,25 +209,28 @@ const SectionFeature = ({ classes, data }) => {
       >
         <Link
           className={classes.title}
-          to={`${section.permalink}/${primaryArticle.slug}`}
+          to={`${section.permalink}/${secondaryArticle.slug}`}
         >
-          {primaryArticle.title}
+          {secondaryArticle.title}
         </Link>
       </Col>
-      <Col
-        xs={12}
-        smHidden
-        mdHidden
-        lgHidden
-        className={classes.mobileArticleTitle2}
-      >
-        <Link
-          className={classes.title}
-          to={`${section.permalink}/${ternaryArticle.slug}`}
+
+      {featuredMedia && (
+        <Col
+          xs={12}
+          smHidden
+          mdHidden
+          lgHidden
+          className={classes.mobileArticleTitle2}
         >
-          {ternaryArticle.title}
-        </Link>
-      </Col>
+          <Link
+            className={classes.title}
+            to={`${section.permalink}/${ternaryArticle.slug}`}
+          >
+            {ternaryArticle.title}
+          </Link>
+        </Col>
+      )}
     </Row>
   );
 };

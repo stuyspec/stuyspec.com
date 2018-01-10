@@ -72,7 +72,6 @@ const HomePage = ({ classes, data }) => {
   }
   data = humps.camelizeKeys(data);
   const { featuredArticle } = data;
-  console.log(data);
 
   const firstColumnSectionSlugs = ["opinions", "features", "humor"];
   const secondColumnSectionSlugs = [

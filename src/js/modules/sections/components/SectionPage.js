@@ -213,7 +213,6 @@ const styles = {
 
 // const SectionPage = ({ classes, data, section }) => {
 const SectionPage = props => {
-  console.log(props);
   let { data, classes, section } = props;
   if (data.loading) {
     return null;
