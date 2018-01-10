@@ -136,6 +136,7 @@ const ArticlePage = ({ classes, data }) => {
             {`Volume ${toRoman(
               articleBySlug.volume,
             )}, Issue ${articleBySlug.issue}`}
+          {/* TODO: Lookup table */}
           </a>
           .
         </Col>

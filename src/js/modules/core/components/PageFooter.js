@@ -126,42 +126,42 @@ const styles = {
   },
 };
 
+const DescriptionLinks = ({ classes, descriptions }) => {
+  return (
+    <div className={classes.sectionBlock} key="about">
+      <p className={classes.topLevelSectionLink} key={-1}>
+        About Us
+      </p>
+      {descriptions.map(description => {
+        return (
+          <Link
+            className={classes.subsectionLink}
+            key={description.id}
+            to={`/about/${description.slug}`}
+          >
+            {description.title}
+          </Link>
+        );
+      })}
+      <a
+        className={classes.subsectionLink}
+        key={-2}
+        href="https://issuu.com/stuyspectator"
+      >
+        Visual Archives
+      </a>
+      <a
+        className={classes.subsectionLink}
+        key={-3}
+        href="https://specapparel.strikingly.com/"
+      >
+        Apparel
+      </a>
+    </div>
+  );
+}
+
 const PageFooter = ({ classes, sections, descriptions }) => {
-  const createDescriptionLinks = () => {
-    // is a function because it is reused
-    return (
-      <div className={classes.sectionBlock} key="about">
-        <p className={classes.topLevelSectionLink} key={-1}>
-          About Us
-        </p>
-        {descriptions.map(description => {
-          return (
-            <Link
-              className={classes.subsectionLink}
-              key={description.id}
-              to={`/about/${description.slug}`}
-            >
-              {description.title}
-            </Link>
-          );
-        })}
-        <a
-          className={classes.subsectionLink}
-          key={-2}
-          href="https://issuu.com/stuyspectator"
-        >
-          Visual Archives
-        </a>
-        <a
-          className={classes.subsectionLink}
-          key={-3}
-          href="https://specapparel.strikingly.com/"
-        >
-          Apparel
-        </a>
-      </div>
-    );
-  };
   return (
     <Grid fluid className={classes.PageFooter}>
       <Row className={classes.pageFooterMain}>
@@ -212,7 +212,7 @@ const PageFooter = ({ classes, sections, descriptions }) => {
               </div>
             );
           })}
-          {createDescriptionLinks()}
+          <DescriptionLinks classes={classes} descriptions={descriptions} />
         </Col>
         <Col
           xs={12}
@@ -221,7 +221,7 @@ const PageFooter = ({ classes, sections, descriptions }) => {
           lgHidden
           className={classes.aboutNavLinksMobile}
         >
-          {createDescriptionLinks()}
+          <DescriptionLinks classes={classes} descriptions={descriptions} />
         </Col>
         {/*<Col xs={12} sm={10} smOffset={1} md={8} mdOffset={2} lg={8} lgOffset={2} className={classes.creditLine}>*/}
         <Col xs={12} smHidden mdHidden lgHidden className={classes.creditLine}>

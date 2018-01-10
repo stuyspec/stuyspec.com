@@ -90,7 +90,7 @@ const RecommendedArticles = ({ classes, data }) => {
       </Link>
       {topRankedArticles.map((article, index) => {
         return (
-          <div className={classes.articleItem} key={index}>
+          <div className={classes.articleItem} key={article.id}>
             <p className={classes.numberLabel}>{index + 1}.</p>
             <div className={classes.articleSummary}>
               <Link
