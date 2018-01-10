@@ -3,8 +3,6 @@ import {
   SEARCH_ARTICLES_FULFILLED,
   SEARCH_ARTICLES_REJECTED,
 } from "./actionTypes";
-import { FETCH_INIT_DATA_FULFILLED } from "../core/actionTypes";
-import { shortenSummary } from "../../utils";
 
 const initialState = {};
 

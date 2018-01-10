@@ -241,7 +241,6 @@ const Masthead = ({ classes, openSidebar, session, openSubscriptionModal }) => {
 
 const mapStateToProps = state => ({
   session: state.accounts.session,
-  currentUser: getCurrentUser(state),
 });
 
 const mapDispatchToProps = dispatch => {
