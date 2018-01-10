@@ -26,6 +26,7 @@ const SectionBlockQuery = gql`
         thumb_attachment_url
       }
       section {
+        id
         name
         permalink
       }

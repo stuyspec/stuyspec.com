@@ -95,15 +95,15 @@ const RightTitleArticle = ({ classes, article }) => {
   const { section } = article;
   return (
     <Row className={classes.RightTitleArticle}>
-      {article.media.length > 0 && (
-        <Col xs={12} sm={7} md={7} lg={7} className={classes.featuredMedia}>
+      <Col xs={12} sm={7} md={7} lg={7} className={classes.featuredMedia}>
+        {article.media.length > 0 && (
           <Link to={`${section.permalink}/${article.slug}`}>
             <figure className={classes.featuredMediaContainer}>
               <img src={article.media[0].attachmentUrl} />
             </figure>
           </Link>
-        </Col>
-      )}
+        )}
+      </Col>
       <Col xs={12} sm={5} md={5} lg={5} className={classes.article}>
         <Link className={classes.sectionLink} to={section.permalink}>
           {section.name === "Arts & Entertainment" ? "A&E" : section.name}
