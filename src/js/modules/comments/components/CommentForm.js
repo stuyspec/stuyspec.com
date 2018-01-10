@@ -1,10 +1,9 @@
 import React from "react";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, compose } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 import { Grid, Row, Col } from "react-bootstrap/lib";
-import { getCurrentUser } from "../../accounts/selectors";
 import injectSheet from "react-jss";
 
 import { openSignInModal, signOut } from "../../accounts/actions";
@@ -117,7 +116,6 @@ const validate = values => {
 
 const renderField = ({
   input,
-  disabled,
   meta: { touched, error },
   checkLogin,
 }) => {
@@ -139,7 +137,6 @@ const CommentForm = ({
   handleSubmit,
   submitting,
   currentUser,
-  session,
   openSignInModal,
   status,
   signOut,
@@ -194,19 +191,17 @@ const CommentForm = ({
 
 const mapStateToProps = state => ({
   status: state.comments.status,
-  currentUser: getCurrentUser(state),
-  session: state.accounts.session,
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ openSignInModal, signOut }, dispatch);
 };
 
-const ConnectedCommentForm = connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(CommentForm),
-);
-
-export default reduxForm({
-  form: "createComment",
-  validate,
-})(ConnectedCommentForm);
+export default compose(
+  reduxForm({
+    form: "createComment",
+    validate,
+  }),
+  connect(mapStateToProps, mapDispatchToProps),
+  injectSheet(styles)
+)(CommentForm);

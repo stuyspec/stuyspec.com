@@ -39,10 +39,13 @@ const styles = {
     fontSize: "14px",
     fontWeight: 300,
     textDecoration: "none",
-    "&:hover, &:active, &:focus": {
+    "&:hover": {
       color: "#000",
+      textDecoration: "underline",
+      cursor: "pointer",
     },
     "&:active, &:focus": {
+      color: "#000",
       textDecoration: "none",
     },
   },
@@ -71,13 +74,9 @@ const FeaturedSectionsBar = ({
         );
       })}
       <li key={-1} className={classes.sectionListItem}>
-        <Link
-          onClick={openSubscriptionModal}
-          to={"/"}
-          className={classes.sectionLink}
-        >
+        <span onClick={openSubscriptionModal} className={classes.sectionLink}>
           Newsletter
-        </Link>
+        </span>
       </li>
       {/*
         <li key={-2} className={classes.sectionListItem}>

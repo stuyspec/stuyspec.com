@@ -103,7 +103,7 @@ const FeaturedArticle = ({ classes, article }) => {
             <figure className={classes.figure}>
               <img
                 src={featuredMedia.attachmentUrl}
-                alt={`${featuredMedia.mediaType}: ${featuredMedia.title}`}
+                alt={featuredMedia.title}
               />
             </figure>
           </Link>

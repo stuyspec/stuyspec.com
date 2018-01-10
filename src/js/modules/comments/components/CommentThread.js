@@ -9,8 +9,16 @@ import CommentForm from "./CommentForm";
 import { SignInModal } from "../../accounts/components";
 
 import { createComment } from "../actions";
-import { getRequestedArticleComments } from "../selectors";
-import { getCurrentUser } from "../../accounts/selectors";
+
+const CommentThreadQuery = gql`
+  query CommentThreadQuery($uid: String!) {
+    userByUID(uid: $uid) {
+      id
+      first_name
+      last_name
+    }
+  }
+`;
 
 const styles = {
   CommentThread: {
@@ -36,18 +44,23 @@ const styles = {
 
 const CommentThread = ({
   classes,
-  comments,
-  articleId,
+  article,
   createComment,
-  sessionUser,
+  data,
   session,
 }) => {
+  if (data.loading) {
+    return null;
+  }
+  data = humps.camelizeKeys(data);
+  const { userByUID } = data;
+
   const handleCreateComment = values => {
     createComment(
       {
         ...values,
-        articleId: articleId,
-        userId: sessionUser.id,
+        articleId: article.id,
+        userId: userByUID.id,
       },
       session,
     );
@@ -55,11 +68,11 @@ const CommentThread = ({
   return (
     <Grid fluid className={classes.CommentThread}>
       <Row className={classes.commentFormContainer}>
-        <CommentForm onSubmit={handleCreateComment} />
+        <CommentForm currentUser={userByUID} onSubmit={handleCreateComment} />
         <Col md={4} lg={4} />
       </Row>
       <SignInModal />
-      {Object.values(comments).map(comment => {
+      {article.comments.map(comment => {
         return <Comment comment={comment} key={comment.id} />;
       })}
     </Grid>
@@ -67,8 +80,6 @@ const CommentThread = ({
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  comments: getRequestedArticleComments(state, ownProps),
-  sessionUser: getCurrentUser(state),
   session: state.accounts.session,
 });
 
@@ -76,6 +87,10 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ createComment }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(CommentThread),
-);
+export default compose(
+  graphql(CommentThreadQuery, {
+    options: ({ session }) => ({ variables: { uid: session.uid } }),
+  }),
+  connect(mapStateToProps, mapDispatchToProps),
+  injectSheet(styles)
+)(CommentThread);

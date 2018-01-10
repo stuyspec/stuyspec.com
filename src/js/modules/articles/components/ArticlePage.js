@@ -53,6 +53,15 @@ const ArticleQuery = gql`
           permalink
         }
       }
+      comments {
+        id
+        content
+        published_at
+        user {
+          first_name
+          last_name          
+        }
+      }
     }
   }
 `;
@@ -133,7 +142,7 @@ const ArticlePage = ({ classes, data }) => {
         <Col xsHidden smHidden md={3} lg={3} />
       </Row>
       <RecommendedRow section={section.parentSection || section} />
-      <CommentThread articleId={articleBySlug.id} />
+      <CommentThread article={articleBySlug} />
     </Grid>
   );
 };

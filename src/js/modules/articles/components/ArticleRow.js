@@ -5,7 +5,6 @@ import injectSheet from "react-jss";
 
 import Byline from "./Byline";
 import Dateline from "./Dateline";
-import { capitalizeWord } from "../../../utils";
 
 const styles = {
   articleBlock: {
@@ -106,7 +105,7 @@ const ArticleRow = ({ classes, article }) => {
               <figure className={classes.figure}>
                 <img
                   src={featuredMedia.attachmentUrl}
-                  alt={`${capitalizeWord(featuredMedia.mediaType)}: ${featuredMedia.title}`}
+                  alt={featuredMedia.title}
                 />
               </figure>
             </Link>

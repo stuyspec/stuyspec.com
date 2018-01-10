@@ -171,7 +171,7 @@ const SectionFeature = ({ classes, data }) => {
         >
           <Link to={`${section.permalink}/${primaryArticle.slug}`}>
             <figure className={classes.figure}>
-              <img src={featuredMedia.mediumAttachmentUrl} />
+              <img src={featuredMedia.mediumAttachmentUrl} alt={featuredMedia.title} />
             </figure>
           </Link>
         </Col>

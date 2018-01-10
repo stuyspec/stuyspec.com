@@ -104,7 +104,7 @@ const LeftTitleArticle = ({ classes, article }) => {
         {article.media.length > 0 && (
           <Link to={`${section.permalink}/${article.slug}`}>
             <figure>
-              <img src={article.media[0].attachmentUrl} />
+              <img src={article.media[0].attachmentUrl} alt={article.media[0].title}/>
             </figure>
           </Link>
         )}

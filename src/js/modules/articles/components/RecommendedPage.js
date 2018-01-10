@@ -8,7 +8,6 @@ import { Helmet } from "react-helmet";
 
 import ArticleList from "./ArticleList";
 import { TallAd } from "../../advertisements/components/index";
-import { getArticlesWithContributors } from "../selectors";
 
 const RecommendedPageQuery = gql`
   query RecommendedPageQuery($limit: Int!) {

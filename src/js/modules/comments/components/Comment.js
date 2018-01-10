@@ -35,8 +35,8 @@ const styles = {
   },
 };
 
-const Comment = ({ classes, comment, users }) => {
-  const user = users[comment.userId];
+const Comment = ({ classes, comment }) => {
+  const { user } = comment;
   return (
     <Row className={classes.Comment}>
       <Col md={7} lg={7}>
@@ -53,9 +53,5 @@ const Comment = ({ classes, comment, users }) => {
     </Row>
   );
 };
-
-const mapStateToProps = (state, ownProps) => ({
-  users: state.users.users,
-});
 
 export default connect(mapStateToProps)(injectSheet(styles)(Comment));
