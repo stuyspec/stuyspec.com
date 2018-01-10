@@ -21,7 +21,9 @@ import { TallAd } from "../../advertisements/components/index";
 const SectionPageQuery = gql`
   query SectionPageQuery($section_id: ID!) {
     featuredSubsection(section_id: $section_id) {
+      name
       slug
+      permalink
     }
     topRankedArticles(section_id: $section_id, limit: 2) {
       id
