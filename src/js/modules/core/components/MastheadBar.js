@@ -98,6 +98,9 @@ const styles = {
     justifyContent: "center",
   },
   "@media (max-width: 991px)": {
+    MastheadBar: {
+      height: "52px",
+    },
     sectionsBarContainer: {
       display: "none",
     },
@@ -155,7 +158,7 @@ const MastheadBar = ({
             </Link>
           </div>
           <Link to="/search" className={classes.searchLink}>
-            <Search color="#000" />
+            <Search color="#000" size={30} />
             Search
           </Link>
         </div>

@@ -138,7 +138,6 @@ const SectionFeature = ({ classes, data }) => {
     return null;
   }
   data = humps.camelizeKeys(data);
-
   const [primaryArticle, secondaryArticle, ternaryArticle] = data.featuredArticlesBySectionSlug;
   const featuredMedia = primaryArticle.media[0];
   const { section } = primaryArticle;
