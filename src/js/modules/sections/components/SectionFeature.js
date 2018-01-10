@@ -138,7 +138,11 @@ const SectionFeature = ({ classes, data }) => {
     return null;
   }
   data = humps.camelizeKeys(data);
-  const [primaryArticle, secondaryArticle, ternaryArticle] = data.featuredArticlesBySectionSlug;
+  const [
+    primaryArticle,
+    secondaryArticle,
+    ternaryArticle,
+  ] = data.featuredArticlesBySectionSlug;
   const featuredMedia = primaryArticle.media[0];
   const { section } = primaryArticle;
   return (
@@ -230,5 +234,7 @@ const SectionFeature = ({ classes, data }) => {
 };
 
 export default graphql(SectionFeatureQuery, {
-  options: ({ section_slug }) => ({ variables: { section_slug: section_slug } }),
+  options: ({ section_slug }) => ({
+    variables: { section_slug: section_slug },
+  }),
 })(injectSheet(styles)(SectionFeature));

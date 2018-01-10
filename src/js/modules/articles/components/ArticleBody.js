@@ -5,9 +5,7 @@ import Col from "react-bootstrap/lib/Col";
 import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 import ArticleReference from "./ArticleReference";
 import RightRail from "./RightRail";
-import {
-  SPEC_IMG_CAROUSEL_PATTERN,
-} from "../../../constants";
+import { SPEC_IMG_CAROUSEL_PATTERN } from "../../../constants";
 import { Gallery } from "../../media/components";
 import { Lightbox } from "../../core/components";
 
@@ -78,7 +76,7 @@ const styles = {
       "& > figure": {
         padding: "0 2%",
         "& > div > img": {
-          marginLeft: "-10px",
+          marginLeft: "-2%",
           width: "100vw",
         },
       },
@@ -91,7 +89,8 @@ const styles = {
 
 const ArticleBody = ({ classes, article }) => {
   const isCarouselButtonVisible =
-    SPEC_IMG_CAROUSEL_PATTERN.test(article.content) && Object.values(media).length > 0;
+    SPEC_IMG_CAROUSEL_PATTERN.test(article.content) &&
+    Object.values(media).length > 0;
 
   return (
     <Row>

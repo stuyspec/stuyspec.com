@@ -251,7 +251,7 @@ const SectionPage = props => {
       </Grid>
     );
   }
- 
+
   return (
     <Grid fluid className={classes.SectionPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">

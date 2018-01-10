@@ -131,9 +131,7 @@ const ArticlePage = ({ classes, data }) => {
         </Col>
         <Col xsHidden smHidden md={3} lg={3} />
       </Row>
-      <RecommendedRow
-        section={section.parentSection || section}
-      />
+      <RecommendedRow section={section.parentSection || section} />
       <CommentThread articleId={articleBySlug.id} />
     </Grid>
   );

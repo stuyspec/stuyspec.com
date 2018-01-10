@@ -101,7 +101,10 @@ const FeaturedArticle = ({ classes, article }) => {
         {featuredMedia && (
           <Link to={`${section.permalink}/${article.slug}`}>
             <figure className={classes.figure}>
-              <img src={featuredMedia.attachmentUrl} alt={`${featuredMedia.mediaType}: ${featuredMedia.title}`}/>
+              <img
+                src={featuredMedia.attachmentUrl}
+                alt={`${featuredMedia.mediaType}: ${featuredMedia.title}`}
+              />
             </figure>
           </Link>
         )}

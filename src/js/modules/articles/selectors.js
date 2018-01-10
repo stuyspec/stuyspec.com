@@ -2,9 +2,7 @@ import React from "react";
 import { createSelector } from "reselect";
 
 import { getUsers } from "../users/selectors";
-import {
-  getSectionTreeIds,
-} from "../sections/selectors";
+import { getSectionTreeIds } from "../sections/selectors";
 
 export const getArticles = state => state.articles.articles;
 const getAuthorships = state => state.articles.authorships;

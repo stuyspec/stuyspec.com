@@ -35,7 +35,9 @@ const styles = {
   },
   sidebarToggle: {
     "& button": {
-      marginRight: "24px",
+      position: "relative",
+      left: "-10px",
+      top: "2px",
     },
   },
   brandingLink: {
@@ -108,21 +110,6 @@ const styles = {
       display: "none",
     },
   },
-  "@media (max-width: 767px)": {
-    brandingLink: {
-      width: "70%",
-    },
-    barContainer: {
-      padding: "0 20px",
-    },
-    quickNav: {
-      float: "left",
-      marginTop: "9px",
-      "& button": {
-        marginRight: "12px",
-      },
-    },
-  },
 };
 
 const MastheadBar = ({
@@ -136,7 +123,7 @@ const MastheadBar = ({
       <div className={classes.barContainer}>
         <div className={classes.sidebarToggle}>
           <MobileNavButton onClick={openSidebar}>
-            <Hamburger />
+            <Hamburger color={"#000"} size={20} />
           </MobileNavButton>
         </div>
         <Link className={classes.brandingLink} to={"/"}>
@@ -158,7 +145,7 @@ const MastheadBar = ({
             </Link>
           </div>
           <Link to="/search" className={classes.searchLink}>
-            <Search color="#000" size={30} />
+            <Search color={"#000"} />
             Search
           </Link>
         </div>

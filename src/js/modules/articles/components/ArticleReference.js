@@ -3,9 +3,7 @@ import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
-import {
-  SPEC_REFERENCE_PATTERN,
-} from "../../../constants";
+import { SPEC_REFERENCE_PATTERN } from "../../../constants";
 
 const ArticleReferenceQuery = gql`
   query ArticleReferenceQuery($article_id: ID!) {
@@ -76,6 +74,10 @@ export default graphql(ArticleReferenceQuery, {
   // skip this query if no referencedArticleId was found in article content
   skip: ({ article }) => !SPEC_REFERENCE_PATTERN.test(article.content),
   options: ({ article }) => ({
-    variables: { article_id: parseInt(SPEC_REFERENCE_PATTERN.exec(articleBySlug.content)[1]) },
+    variables: {
+      article_id: parseInt(
+        SPEC_REFERENCE_PATTERN.exec(articleBySlug.content)[1],
+      ),
+    },
   }),
 })(injectSheet(styles)(ArticleReference));
