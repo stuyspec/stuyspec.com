@@ -8,7 +8,6 @@ import ReactLoading from "react-loading";
 
 import ArticleList from "./ArticleList";
 import { TallAd } from "../../advertisements/components";
-import { getArticlesWithContributors } from "../selectors";
 import { searchArticles } from "../actions";
 import SearchForm from "./SearchForm";
 
@@ -36,7 +35,6 @@ const styles = {
 
 const SearchPage = ({
   classes,
-  articles,
   searchableIds,
   searchArticles,
   isSearching,
@@ -90,7 +88,6 @@ const SearchPage = ({
 };
 
 const mapStateToProps = state => ({
-  articles: getArticlesWithContributors(state),
   searchableIds: state.articles.searchableIds,
   isSearching: state.articles.isSearching,
 });
