@@ -1,6 +1,7 @@
 import React from "react";
-import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { graphql } from "react-apollo";
+import humps from "humps";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
@@ -8,6 +9,7 @@ import { Helmet } from "react-helmet";
 
 import { EditUserForm } from "./forms";
 import { updateUser } from "../actions";
+import { UserByUIDQuery } from "../../../queries";
 
 const styles = {
   pageTitle: {
@@ -27,9 +29,14 @@ const styles = {
   },
 };
 
-const EditProfilePage = ({ classes, sessionUser, updateUser }) => {
+const EditProfilePage = ({ classes, updateUser, data }) => {
+  if (data.loading) {
+    return null;
+  }
+  data = humps.camelizeKeys(data);
+  const currentUser = data.userByUID;
   const handleUpdateUser = values => {
-    updateUser(values, sessionUser.id);
+    updateUser(values, currentUser.id);
   };
   return (
     <Grid fluid>
@@ -59,13 +66,18 @@ const EditProfilePage = ({ classes, sessionUser, updateUser }) => {
 };
 
 const mapStateToProps = state => ({
-  sessionUser: getCurrentUser(state),
+  session: state.accounts.session,
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ updateUser }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(EditProfilePage),
-);
+export default compose(
+  graphql(UserByUIDQuery, {
+    // no skip is necessary because !session redirects to /myaccount from RoutingApp
+    options: ({ session }) => ({ variables: { uid: session.uid } }),
+  }),
+  connect(mapStateToProps, mapDispatchToProps),
+  injectSheet(styles),
+)(EditProfilePage);
