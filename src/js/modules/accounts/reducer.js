@@ -99,7 +99,7 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         status: {
-          errors: action.payload.response.data.errors.fullMessages,
+          errors: action.payload.response.data.errors ? action.payload.response.data.errors.fullMessages : action.payload.message,
           formName: "signUp",
           message: null,
         },

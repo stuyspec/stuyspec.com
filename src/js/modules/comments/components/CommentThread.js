@@ -1,28 +1,18 @@
 import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { graphql } from "react-apollo";
-import gql from "graphql-tag";
 import humps from "humps";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
-import { bindActionCreators } from "redux";
 
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import { SignInModal } from "../../accounts/components";
 
 import { createComment } from "../actions";
-
-const CommentThreadQuery = gql`
-  query CommentThreadQuery($uid: String!) {
-    userByUID(uid: $uid) {
-      id
-      first_name
-      last_name
-    }
-  }
-`;
+import { UserByUIDQuery } from "../../../queries";
 
 const styles = {
   CommentThread: {
@@ -89,7 +79,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default compose(
-  graphql(CommentThreadQuery, {
+  graphql(UserByUIDQuery, {
     skip: ({ session }) => !session,
     options: ({ session }) => ({ variables: { uid: session.uid } }),
   }),
