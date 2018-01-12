@@ -56,11 +56,14 @@ const ArticleQuery = gql`
       comments {
         id
         content
-        published_at
+        created_at
         user {
           first_name
           last_name
         }
+      }
+      outquotes {
+        text
       }
     }
   }
@@ -106,20 +109,19 @@ const styles = {
 };
 
 const ArticlePage = ({ classes, data }) => {
-  if (data.loading) {
+  if (data.loading || !data.articleBySlug) {
     return null;
   }
   data = humps.camelizeKeys(data);
   const { articleBySlug } = data;
   const { section } = articleBySlug;
-
   return (
     <Grid fluid className={classes.ArticlePage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>{articleBySlug.title}</title>
         <meta />
       </Helmet>
-      <ArticleHeader article={articleBySlug} section={section} />
+      <ArticleHeader article={articleBySlug} />
       <ArticleBody
         article={articleBySlug}
         // the referencedId is passed as a prop so ArticleBody can send a

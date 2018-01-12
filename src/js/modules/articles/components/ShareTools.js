@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { ShareButtons, generateShareIcon } from "react-share";
 import { Print } from "../../core/icons";
@@ -55,12 +54,11 @@ const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 const SHARE_BUTTON_SIZE = 28;
 const SHARE_BUTTON_COLOR = "#000";
 
-const ShareTools = ({ classes, article, section, outquotes }) => {
+const ShareTools = ({ classes, article }) => {  
+  const { section, title, summary, outquotes } = article;
   const shareUrl = STUY_SPEC_API_URL + `${section.permalink}/${article.slug}`;
-  const { title, summary } = article;
-  const outquote = Object.values(outquotes).find(
-    outquote => outquote.articleId === article.id,
-  );
+
+  const outquote = outquotes[0] || null;
 
   const emailBody = `${title}—${summary}\n\n${shareUrl}`;
   return (
@@ -126,8 +124,4 @@ const ShareTools = ({ classes, article, section, outquotes }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  outquotes: state.outquotes.outquotes,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(ShareTools));
+export default injectSheet(styles)(ShareTools);

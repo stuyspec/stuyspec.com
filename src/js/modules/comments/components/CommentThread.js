@@ -47,11 +47,14 @@ const styles = {
 };
 
 const CommentThread = ({ classes, article, createComment, data, session }) => {
-  if (data.loading) {
+  if (data && data.loading) {
     return null;
   }
-  data = humps.camelizeKeys(data);
-  const { userByUID } = data;
+  let currentUser = null;
+  if (data && data.userByUID) {
+    data = humps.camelizeKeys(data);
+    currentUser = data.userByUID;
+  }
 
   const handleCreateComment = values => {
     createComment(
@@ -66,7 +69,7 @@ const CommentThread = ({ classes, article, createComment, data, session }) => {
   return (
     <Grid fluid className={classes.CommentThread}>
       <Row className={classes.commentFormContainer}>
-        <CommentForm currentUser={userByUID} onSubmit={handleCreateComment} />
+        <CommentForm currentUser={currentUser} onSubmit={handleCreateComment} />
         <Col md={4} lg={4} />
       </Row>
       <SignInModal />
@@ -87,6 +90,7 @@ const mapDispatchToProps = dispatch => {
 
 export default compose(
   graphql(CommentThreadQuery, {
+    skip: ({ session }) => !session,
     options: ({ session }) => ({ variables: { uid: session.uid } }),
   }),
   connect(mapStateToProps, mapDispatchToProps),

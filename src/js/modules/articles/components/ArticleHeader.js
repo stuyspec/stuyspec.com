@@ -81,7 +81,8 @@ const styles = {
   },
 };
 
-const ArticleHeader = ({ classes, article, section }) => {
+const ArticleHeader = ({ classes, article }) => {
+  const { section } = article;
   return (
     <Row className={classes.headerRow}>
       <p className="only-print" id="branding">
@@ -95,7 +96,7 @@ const ArticleHeader = ({ classes, article, section }) => {
         <div className={classes.meta}>
           <Byline classes={classes} contributors={article.contributors} />
           <Dateline classes={classes} timestamp={article.createdAt} />
-          <ShareTools article={article} section={section} />
+          <ShareTools article={article} />
         </div>
       </Col>
     </Row>

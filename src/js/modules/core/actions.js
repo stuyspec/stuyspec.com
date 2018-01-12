@@ -20,26 +20,3 @@ export const openLightbox = () => ({
 export const closeLightbox = () => ({
   type: t.CLOSE_LIGHTBOX,
 });
-
-const sliceNames = [
-  "articles",
-  "sections",
-  // 'comments', We don't care if zero comments exist.
-  "media",
-  "users",
-  "roles",
-  "userRoles",
-  "authorships",
-  "outquotes",
-];
-
-const validateSlices = data => {
-  for (sliceName of sliceNames) {
-    if (!(sliceName in data)) {
-      throw sliceName + " not in initial data.";
-    }
-    if (data[sliceName].length === 0) {
-      throw `Zero ${sliceName} received in initial data.`;
-    }
-  }
-};
