@@ -8,7 +8,6 @@ import { Helmet } from "react-helmet";
 
 import { EditUserForm } from "./forms";
 import { updateUser } from "../actions";
-import { getCurrentUser } from "../selectors";
 
 const styles = {
   pageTitle: {

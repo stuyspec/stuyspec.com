@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 
@@ -54,4 +53,4 @@ const Comment = ({ classes, comment }) => {
   );
 };
 
-export default connect(mapStateToProps)(injectSheet(styles)(Comment));
+export default injectSheet(styles)(Comment);

@@ -8,7 +8,6 @@ import { Helmet } from "react-helmet";
 
 import { SignOutForm } from "./forms";
 import { signOut } from "../actions";
-import { getCurrentUser } from "../selectors";
 
 const styles = {
   pageTitle: {

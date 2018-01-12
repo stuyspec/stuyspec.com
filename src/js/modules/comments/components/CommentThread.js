@@ -1,5 +1,9 @@
 import React from "react";
+import { compose } from "redux";
 import { connect } from "react-redux";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { bindActionCreators } from "redux";
