@@ -35,6 +35,7 @@ const EditProfilePage = ({ classes, updateUser, data }) => {
   }
   data = humps.camelizeKeys(data);
   const currentUser = data.userByUID;
+
   const handleUpdateUser = values => {
     updateUser(values, currentUser.id);
   };

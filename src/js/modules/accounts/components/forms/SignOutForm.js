@@ -1,5 +1,5 @@
 import React from "react";
-import { bindActionCreators } from "redux";
+import { compose } from "redux";
 import { connect } from "react-redux";
 import { reduxForm } from "redux-form";
 import injectSheet from "react-jss";
@@ -64,10 +64,10 @@ const mapStateToProps = state => ({
   status: state.accounts.status,
 });
 
-const ConnectedSignOutForm = connect(mapStateToProps)(
-  injectSheet(styles)(SignOutForm),
-);
-
-export default reduxForm({
-  form: "signOut",
-})(ConnectedSignOutForm);
+export default compose(
+  reduxForm({
+    form: "signOut",
+  }),
+  connect(mapStateToProps),
+  injectSheet(styles)
+)(SignOutForm);

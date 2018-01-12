@@ -1,4 +1,5 @@
 import React from "react";
+import { compose } from "redux";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
@@ -120,11 +121,11 @@ const mapStateToProps = state => ({
   status: state.accounts.status,
 });
 
-const ConnectedSignInForm = connect(mapStateToProps)(
-  injectSheet(styles)(SignInForm),
-);
-
-export default reduxForm({
-  form: "signIn",
-  validate,
-})(ConnectedSignInForm);
+export default compose(
+  reduxForm({
+    form: "signIn",
+    validate,
+  }),
+  connect(mapStateToProps),
+  injectSheet(styles)
+)(SignInForm);
