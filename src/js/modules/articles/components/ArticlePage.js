@@ -144,7 +144,7 @@ const ArticlePage = ({ classes, data }) => {
       <CommentThread article={articleBySlug} />
     </Grid>
   );
-}
+};
 
 export default compose(
   graphql(ArticleQuery, {

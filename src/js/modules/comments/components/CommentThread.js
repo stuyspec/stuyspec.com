@@ -99,7 +99,9 @@ const mapDispatchToProps = dispatch => {
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   graphql(UserByUIDQuery, {
-    options: ({ session }) => ({ variables: { uid: (session && session.uid) || "" } }),
+    options: ({ session }) => ({
+      variables: { uid: (session && session.uid) || "" },
+    }),
   }),
   injectSheet(styles),
 )(CommentThread);
