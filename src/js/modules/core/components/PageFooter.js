@@ -9,6 +9,7 @@ const styles = {
     background: "#fff",
     height: "370px",
     marginTop: "14px",
+    marginBottom: "60px",
   },
   pageFooterMain: {
     borderTop: "3px solid #ddd",
@@ -79,6 +80,9 @@ const styles = {
       },
     },
   },
+  hr: {
+    margin: "12px 0",    
+  },
   creditLine: {
     color: "#aaa",
     fontSize: "12px",
@@ -121,6 +125,9 @@ const styles = {
       },
     },
     subsectionLink: {
+      display: "none",
+    },
+    hr: {
       display: "none",
     },
   },
@@ -215,6 +222,22 @@ const PageFooter = ({ classes, sections, descriptions }) => {
           <DescriptionLinks classes={classes} descriptions={descriptions} />
         </Col>
         <Col
+          xsHidden
+          sm={10}
+          smOffset={1}
+          md={8}
+          mdOffset={2}
+          lg={8}
+          lgOffset={2}
+          className={classes.creditLine}
+        >
+          <hr className={classes.hr} />
+          Created by{" "}
+          <a href="https://github.com/stuyspec">
+            The Spectator Web Department
+          </a>, 2017.
+        </Col>
+        <Col
           xs={12}
           smHidden
           mdHidden
@@ -223,12 +246,18 @@ const PageFooter = ({ classes, sections, descriptions }) => {
         >
           <DescriptionLinks classes={classes} descriptions={descriptions} />
         </Col>
-        {/*<Col xs={12} sm={10} smOffset={1} md={8} mdOffset={2} lg={8} lgOffset={2} className={classes.creditLine}>*/}
-        <Col xs={12} smHidden mdHidden lgHidden className={classes.creditLine}>
+        <Col
+          xs={12}
+          smHidden
+          mdHidden
+          lgHidden
+          className={classes.creditLine}
+        >
+          <hr className={classes.hr} />
           Created by{" "}
-          <Link to="https://github.com/stuyspec" target="_blank">
+          <a href="https://github.com/stuyspec">
             The Spectator Web Department
-          </Link>, 2017.
+          </a>, 2017.
         </Col>
       </Row>
     </Grid>

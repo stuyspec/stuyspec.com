@@ -72,11 +72,6 @@ const styles = {
     lineHeight: "1.5",
     marginBottom: "26px",
   },
-  "@media (max-width: 1199px) and (min-width: 992px)": {
-    ContributorPage: {
-      paddingLeft: "10%",
-    },
-  },
 };
 
 const ContributorPage = ({ classes, data }) => {
@@ -89,7 +84,7 @@ const ContributorPage = ({ classes, data }) => {
     return <NotFoundPage />;
   }
   return (
-    <Grid className={classes.ContributorPage}>
+    <Grid >
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>{`${contributor.firstName} ${contributor.lastName}`}</title>
         <meta />

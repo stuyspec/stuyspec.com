@@ -118,7 +118,7 @@ const styles = {
   },
   TallAdContainer: {
     borderLeft: "1px solid #ddd",
-    marginTop: "24px",
+    marginTop: "57px",
     paddingLeft: "14px !important",
     paddingRight: "0 !important",
   },
@@ -244,7 +244,6 @@ const SectionPage = props => {
             md={3}
             lg={3}
             className={classes.TallAdContainer}
-            style={{ marginTop: "57px" }}
           >
             <TallAd />
           </Col>

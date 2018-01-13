@@ -43,7 +43,7 @@ const SearchPage = ({
     searchableIds.includes(article.id),
   );
   return (
-    <Grid fluid className={classes.SearchPage}>
+    <Grid fluid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>Search</title>
         <meta />
