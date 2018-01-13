@@ -60,15 +60,17 @@ class CommentThread extends React.Component {
       return null;
     }
     let currentUser = null;
-    console.log(session);
-    if (data && data.userByUID) { 
+    if (data && data.userByUID) {
       data = humps.camelizeKeys(data);
       currentUser = data.userByUID;
-    }    
+    }
     return (
       <Grid fluid className={classes.CommentThread}>
         <Row className={classes.commentFormContainer}>
-          <CommentForm currentUser={currentUser} onSubmit={this.handleCreateComment} />
+          <CommentForm
+            currentUser={currentUser}
+            onSubmit={this.handleCreateComment}
+          />
           <Col md={4} lg={4} />
         </Row>
         <SignInModal />

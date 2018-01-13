@@ -54,7 +54,7 @@ const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 const SHARE_BUTTON_SIZE = 28;
 const SHARE_BUTTON_COLOR = "#000";
 
-const ShareTools = ({ classes, article }) => {  
+const ShareTools = ({ classes, article }) => {
   const { section, title, summary, outquotes } = article;
   const shareUrl = STUY_SPEC_API_URL + `${section.permalink}/${article.slug}`;
 

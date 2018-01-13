@@ -116,13 +116,19 @@ class ArticlePage extends Component {
      * data.articleBySlug is not replaced with props without the article.
      */
     const { data } = this.props;
-    console.log('previous', this.props);
-    console.log('next', nextProps)
-    console.log(`will update: ${Boolean(!(data && data.articleBySlug) && nextProps.data.articleBySlug)}`)
+    console.log("previous", this.props);
+    console.log("next", nextProps);
+    console.log(
+      `will update: ${Boolean(
+        !(data && data.articleBySlug) && nextProps.data.articleBySlug,
+      )}`,
+    );
     /* If somehow the below logic returns undefined, Boolean() will make sure
      * this function returns a boolean (either real or truthy/falsy).
      */
-    return Boolean(!(data && data.articleBySlug) && nextProps.data.articleBySlug);
+    return Boolean(
+      !(data && data.articleBySlug) && nextProps.data.articleBySlug,
+    );
   }
   render() {
     let { classes, data } = this.props;
@@ -176,7 +182,6 @@ class ArticlePage extends Component {
     );
   }
 }
-
 
 export default compose(
   graphql(ArticleQuery, {

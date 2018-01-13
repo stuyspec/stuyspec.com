@@ -66,13 +66,8 @@ const ProfilePage = ({ classes, signOut, session, data }) => {
           lg={6}
           lgOffset={3}
         >
-          <p className={classes.pageTitle}>
-            Welcome, {currentUser.firstName}.
-          </p>
-          <Link
-            to={"/myaccount/profile/edit"}
-            className={classes.editRedirect}
-          >
+          <p className={classes.pageTitle}>Welcome, {currentUser.firstName}.</p>
+          <Link to={"/myaccount/profile/edit"} className={classes.editRedirect}>
             Edit Profile
           </Link>
           <div className={classes.dataTable}>

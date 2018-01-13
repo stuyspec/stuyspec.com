@@ -69,5 +69,5 @@ export default compose(
     form: "signOut",
   }),
   connect(mapStateToProps),
-  injectSheet(styles)
+  injectSheet(styles),
 )(SignOutForm);

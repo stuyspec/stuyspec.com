@@ -157,5 +157,5 @@ export default compose(
     validate,
   }),
   connect(mapStateToProps),
-  injectSheet(styles)
+  injectSheet(styles),
 )(EditUserForm);
