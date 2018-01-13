@@ -16,7 +16,7 @@ const styles = {
     marginTop: "9px !important",
     marginBottom: "5px",
     paddingRight: "3.5% !important",
-    width: "45%",
+    width: "55%",
   },
   imgContainer: {
     position: "relative",
