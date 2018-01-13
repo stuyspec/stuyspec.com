@@ -1,5 +1,6 @@
 import React from "react";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, compose } from "redux";
+import { connect } from "react-redux";
 import { graphql } from "react-apollo";
 import humps from "humps";
 import { Link } from "react-router-dom";

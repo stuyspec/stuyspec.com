@@ -137,6 +137,7 @@ const CommentForm = ({
   status,
   signOut,
 }) => {
+  console.log(currentUser);
   return (
     <Col md={7} lg={7} className={classes.CommentForm}>
       {currentUser && (

@@ -36,39 +36,49 @@ const styles = {
   },
 };
 
-const CommentThread = ({ classes, article, createComment, data, session }) => {
-  if (data && data.loading) {
-    return null;
-  }
-  let currentUser = null;
-  if (data && data.userByUID) {
-    data = humps.camelizeKeys(data);
-    currentUser = data.userByUID;
+class CommentThread extends React.Component {
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.session) {
+      this.props.data.refetch();
+    }
   }
 
-  const handleCreateComment = values => {
-    createComment(
+  handleCreateComment = values => {
+    this.props.createComment(
       {
         ...values,
-        articleId: article.id,
-        userId: userByUID.id,
+        articleId: this.props.article.id,
+        userId: this.props.data.userByUID.id,
       },
       session,
     );
   };
-  return (
-    <Grid fluid className={classes.CommentThread}>
-      <Row className={classes.commentFormContainer}>
-        <CommentForm currentUser={currentUser} onSubmit={handleCreateComment} />
-        <Col md={4} lg={4} />
-      </Row>
-      <SignInModal />
-      {article.comments.map(comment => {
-        return <Comment comment={comment} key={comment.id} />;
-      })}
-    </Grid>
-  );
-};
+
+  render() {
+    let { classes, article, data, session } = this.props;
+    if (data && data.loading) {
+      return null;
+    }
+    let currentUser = null;
+    console.log(session);
+    if (data && data.userByUID) { 
+      data = humps.camelizeKeys(data);
+      currentUser = data.userByUID;
+    }    
+    return (
+      <Grid fluid className={classes.CommentThread}>
+        <Row className={classes.commentFormContainer}>
+          <CommentForm currentUser={currentUser} onSubmit={this.handleCreateComment} />
+          <Col md={4} lg={4} />
+        </Row>
+        <SignInModal />
+        {article.comments.map(comment => {
+          return <Comment comment={comment} key={comment.id} />;
+        })}
+      </Grid>
+    );
+  }
+}
 
 const mapStateToProps = (state, ownProps) => ({
   session: state.accounts.session,
