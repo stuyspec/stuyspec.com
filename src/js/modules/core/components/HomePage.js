@@ -17,7 +17,7 @@ import { SectionFeature, SectionColumn } from "../../sections/components";
 
 const styles = {
   HomePage: {
-    marginTop: "23px 0px 13px",
+    margin: "23px 0px 13px",
   },
   recommendedArticles: {
     padding: 0,

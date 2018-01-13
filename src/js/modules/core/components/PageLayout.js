@@ -25,9 +25,6 @@ const styles = {
     },
   },
   "@media (max-width: 991px)": {
-    PageContainer: {
-      marginTop: "60px",
-    },
     footerAd: {
       padding: 0,
     },

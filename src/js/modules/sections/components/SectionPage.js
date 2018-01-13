@@ -1,5 +1,3 @@
-// TODO: SECTINOPAGE IS LITERALLY A MESS
-
 import React from "react";
 import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-bootstrap/lib";
@@ -15,8 +13,6 @@ import { LeftTitleArticle } from "../../articles/components/summaries";
 import { Dateline, Byline } from "../../articles/components/index";
 import SectionFeature from "./SectionFeature";
 import { TallAd } from "../../advertisements/components/index";
-
-// TODO: STYLE SECONDARY ARTICLE. consider setting a max height
 
 const styles = {
   sectionTitle:{
@@ -100,7 +96,7 @@ const styles = {
   },
   TallAdContainer: {
     borderLeft: "1px solid #ddd",
-    marginTop: "24px",
+    marginTop: "57px",
     paddingLeft: "14px !important",
     paddingRight: "0 !important",
   },
@@ -139,15 +135,11 @@ const styles = {
     },
   },
   SubsectionPage: {
-    marginTop: "80px",
     "& div > div": {
       borderRight: 0,
     },
   },
   "@media (min-width: 992px)": {
-    SectionPage: {
-      marginTop: "99px",
-    },
     SectionFeatureContainer: {
       marginRight: "14px !important",
     },
@@ -158,9 +150,6 @@ const styles = {
     },
   },
   "@media (max-width: 991px)": {
-    SectionPage: {
-      marginTop: "-16px", // counters PageContainer.marginTop = 60px
-    },
     featuredArticle: {
       marginLeft: 0,
       paddingTop: "3vw",
@@ -231,7 +220,6 @@ const SectionPage = ({
             md={3}
             lg={3}
             className={classes.TallAdContainer}
-            style={{ marginTop: "57px" }}
           >
             <TallAd />
           </Col>
@@ -417,4 +405,4 @@ const mapStateToProps = (state, ownProps) => ({
   media: state.media.media,
 });
 
-export default connect(mapStateToProps, null)(injectSheet(styles)(SectionPage));
+export default connect(mapStateToProps)(injectSheet(styles)(SectionPage));

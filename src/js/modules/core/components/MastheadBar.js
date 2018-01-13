@@ -16,7 +16,7 @@ const styles = {
   MastheadBar: {
     backgroundColor: "#fff",
     boxShadow: "0 2px 4px 0 rgba(0,0,0,.2)",
-    height: "71px",
+    height: "73px",
     left: 0,
     position: "fixed",
     width: "100%",
@@ -35,14 +35,16 @@ const styles = {
   },
   sidebarToggle: {
     "& button": {
-      marginRight: "24px",
+      position: "relative",
+      left: "-10px",
+      top: "2px",
     },
   },
   brandingLink: {
     bottom: "9px",
     color: "#000",
     fontFamily: "Old English Text MT",
-    fontSize: "30px",
+    fontSize: "32px",
     left: "50%",
     marginTop: "1px",
     position: "absolute",
@@ -97,19 +99,15 @@ const styles = {
     display: "flex",
     justifyContent: "center",
   },
-  "@media (max-width: 768px)": {
-    brandingLink: {
-      width: "70%",
+  "@media (max-width: 991px)": {
+    MastheadBar: {
+      height: "52px",
     },
-    barContainer: {
-      padding: "0 20px",
+    sectionsBarContainer: {
+      display: "none",
     },
-    quickNav: {
-      float: "left",
-      marginTop: "9px",
-      "& button": {
-        marginRight: "12px",
-      },
+    navButtons: {
+      display: "none",
     },
   },
 };
@@ -125,7 +123,7 @@ const MastheadBar = ({
       <div className={classes.barContainer}>
         <div className={classes.sidebarToggle}>
           <MobileNavButton onClick={openSidebar}>
-            <Hamburger />
+            <Hamburger color={"#000"} size={20} />
           </MobileNavButton>
         </div>
         <Link
@@ -150,7 +148,7 @@ const MastheadBar = ({
         </div>
       </div>
       <div className={classes.sectionsBarContainer}>
-        <FeaturedSectionsBar />
+        <FeaturedSectionsBar omitSearch={true}/>
       </div>
     </div>
   );

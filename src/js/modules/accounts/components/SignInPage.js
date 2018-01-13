@@ -28,16 +28,11 @@ const styles = {
     fontSize: "17px",
     marginBottom: "7px",
   },
-  "@media (min-width: 992px)": {
-    SignInPage: {
-      marginTop: "60px",
-    },
-  },
 };
 
 const SignInPage = ({ classes, signIn }) => {
   return (
-    <Grid fluid className={classes.SignInPage}>
+    <Grid fluid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>Sign In</title>
         <meta />

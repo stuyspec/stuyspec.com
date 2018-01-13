@@ -40,17 +40,12 @@ const styles = {
       width: "120px",
     },
   },
-  "@media (min-width: 992px)": {
-    ProfilePage: {
-      marginTop: "60px",
-    },
-  },
 };
 
 const ProfilePage = ({ classes, signOut, session, sessionUser }) => {
   if (sessionUser) {
     return (
-      <Grid fluid className={classes.ProfilePage}>
+      <Grid fluid>
         <Helmet titleTemplate="%s | The Stuyvesant Spectator">
           <title>Profile</title>
           <meta />

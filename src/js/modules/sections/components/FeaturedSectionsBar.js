@@ -33,7 +33,7 @@ const styles = {
   },
 };
 
-const FeaturedSectionsBar = ({ classes, openSubscriptionModal, sections }) => {
+const FeaturedSectionsBar = ({ classes, openSubscriptionModal, sections, omitSearch }) => {
   return (
     <ul className={classes.FeaturedSectionsBar}>
       {Object.values(sections).map(section => {
@@ -61,11 +61,13 @@ const FeaturedSectionsBar = ({ classes, openSubscriptionModal, sections }) => {
           </Link>
         </li>
       */}
-      <li key={-3} className={classes.sectionListItem}>
-        <Link to="/search" className={classes.sectionLink}>
-          <Search className={classes.navSearchButton} />
-        </Link>
-      </li>
+      {!omitSearch && (
+        <li key={-3} className={classes.sectionListItem}>
+          <Link to="/search" className={classes.sectionLink}>
+            <Search className={classes.navSearchButton} />
+          </Link>
+        </li>
+      )}
     </ul>
   )
 };

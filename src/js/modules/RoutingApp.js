@@ -183,14 +183,9 @@ class RoutingApp extends Component {
                   component={SearchPage}
                 />
                 <Route
-                  path="/404-page-not-found"
+                  path="*"
                   key={"notFound"}
                   component={NotFoundPage}
-                />
-                <Route
-                  path="*"
-                  key={"404"}
-                  render={() => <Redirect to="/404-page-not-found" />}
                 />
               </Switch>
             </PageLayout>

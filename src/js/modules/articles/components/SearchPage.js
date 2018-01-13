@@ -13,9 +13,6 @@ import { searchArticles } from "../actions";
 import SearchForm from "./SearchForm";
 
 const styles = {
-  SearchPage: {
-    marginTop: "76px",
-  },
   title: {
     color: "#000",
     fontFamily: "Canela",
@@ -35,11 +32,6 @@ const styles = {
     paddingLeft: "14px !important",
     borderLeft: "solid 1px #ddd",
   },
-  "@media (min-width: 991px)": {
-    SearchPage: {
-      marginTop: "80px",
-    },
-  },
 };
 
 const SearchPage = ({
@@ -53,7 +45,7 @@ const SearchPage = ({
     searchableIds.includes(article.id),
   );
   return (
-    <Grid fluid className={classes.SearchPage}>
+    <Grid fluid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>Search</title>
         <meta />

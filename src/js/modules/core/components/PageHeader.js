@@ -10,6 +10,9 @@ const styles = {
     width: "100% !important",
     padding: "0 !important",
   },
+  mastheadBar: {
+    marginTop: "130px",
+  },
 };
 
 const PageHeader = ({ classes, location }) => {
@@ -17,17 +20,20 @@ const PageHeader = ({ classes, location }) => {
     <Grid className={classes.HeaderContainer}>
       <Row>
         <Col xsHidden smHidden md={12} lg={12}>
-          {location.pathname === "/" ||
-          location.pathname === "/404-page-not-found" ? (
+          {location.pathname === "/" ? (
             <Masthead />
           ) : (
-            <MastheadBar location={location} />
+            <div className={classes.mastheadBar}>
+              <MastheadBar location={location} />
+            </div>
           )}
         </Col>
       </Row>
       <Row>
         <Col xs={12} sm={12} mdHidden lgHidden>
-          <MastheadBar location={location} />
+          <div className={classes.mastheadBar}>
+            <MastheadBar location={location} />
+          </div>
         </Col>
       </Row>
     </Grid>
