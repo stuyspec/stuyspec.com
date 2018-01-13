@@ -60,7 +60,7 @@ const RoutingApp = ({
                   exact
                   path={section.permalink}
                   key={`section${section.id}`}
-                  render={props => <SectionPage section={section} />}
+                  render={() => <SectionPage section={section} />}
                 />
               );
             })}
