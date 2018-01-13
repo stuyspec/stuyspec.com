@@ -37,8 +37,14 @@ const styles = {
 };
 
 class CommentThread extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.props.session) {
+      /* If there is a session now, a user has just logged in. We want their
+       * information, so refetch. */
       this.props.data.refetch();
     }
   }
@@ -50,7 +56,7 @@ class CommentThread extends React.Component {
         articleId: this.props.article.id,
         userId: this.props.data.userByUID.id,
       },
-      session,
+      this.props.session,
     );
   };
 
@@ -91,10 +97,9 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default compose(
-  graphql(UserByUIDQuery, {
-    skip: ({ session }) => !session,
-    options: ({ session }) => ({ variables: { uid: session.uid } }),
-  }),
   connect(mapStateToProps, mapDispatchToProps),
+  graphql(UserByUIDQuery, {
+    options: ({ session }) => ({ variables: { uid: (session && session.uid) || "" } }),
+  }),
   injectSheet(styles),
 )(CommentThread);

@@ -108,79 +108,42 @@ const styles = {
   },
 };
 
-class ArticlePage extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    /* A mysterious component update after graphql gives the correct data to
-     * ArticlePage is removing articleBySlug from data. This
-     * lifecycle method is to ensure that props that already contains
-     * data.articleBySlug is not replaced with props without the article.
-     */
-    const { data } = this.props;
-    console.log("previous", this.props);
-    console.log("next", nextProps);
-    console.log(
-      `will update: ${Boolean(
-        !(data && data.articleBySlug) && nextProps.data.articleBySlug,
-      )}`,
-    );
-    /* If somehow the below logic returns undefined, Boolean() will make sure
-     * this function returns a boolean (either real or truthy/falsy).
-     */
-    return Boolean(
-      !(data && data.articleBySlug) && nextProps.data.articleBySlug,
-    );
+const ArticlePage = ({ classes, data }) => {
+  if (data.loading) {
+    return null;
   }
-  render() {
-    let { classes, data } = this.props;
-    if (data.loading) {
-      return null;
-    }
-    data = humps.camelizeKeys(data);
-    // if (!data.articleBySlug) {
-    //   console.log('=====no article=====');
-    //   console.log(data);
-    //   console.log('==========end=======');
-    // } else {
-    //   console.log('====has article=====');
-    //   console.log(data);
-    //   console.log('==========end=======');
-    // }
-    const { articleBySlug } = data;
-    const { section } = articleBySlug;
-    return (
-      <Grid fluid className={classes.ArticlePage}>
-        <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-          <title>{articleBySlug.title}</title>
-          <meta />
-        </Helmet>
-        <ArticleHeader article={articleBySlug} />
-        <ArticleBody
-          article={articleBySlug}
-          // the referencedId is passed as a prop so ArticleBody can send a
-          // GraphQL query for the referenced article.
-        />
-        <Row className={classes.descriptionRow}>
-          <Col xs={12} sm={12} md={9} lg={9} className={classes.description}>
-            This article was published in&nbsp;
-            <a
-              className={classes.subscribe}
-              href="https://issuu.com/stuyspectator/docs"
-              target="_blank"
-            >
-              {`Volume ${toRoman(
-                articleBySlug.volume,
-              )}, Issue ${articleBySlug.issue}`}
-              {/* TODO: Lookup table for individual volume/issue links */}
-            </a>
-            .
-          </Col>
-          <Col xsHidden smHidden md={3} lg={3} />
-        </Row>
-        <RecommendedRow section={section.parentSection || section} />
-        <CommentThread article={articleBySlug} />
-      </Grid>
-    );
-  }
+  data = humps.camelizeKeys(data);
+  const { articleBySlug } = data;
+  const { section } = articleBySlug;
+  return (
+    <Grid fluid className={classes.ArticlePage}>
+      <Helmet titleTemplate="%s | The Stuyvesant Spectator">
+        <title>{articleBySlug.title}</title>
+        <meta />
+      </Helmet>
+      <ArticleHeader article={articleBySlug} />
+      <ArticleBody article={articleBySlug} />
+      <Row className={classes.descriptionRow}>
+        <Col xs={12} sm={12} md={9} lg={9} className={classes.description}>
+          This article was published in&nbsp;
+          <a
+            className={classes.subscribe}
+            href="https://issuu.com/stuyspectator/docs"
+            target="_blank"
+          >
+            {`Volume ${toRoman(
+              articleBySlug.volume,
+            )}, Issue ${articleBySlug.issue}`}
+            {/* TODO: Lookup table for individual volume/issue links */}
+          </a>
+          .
+        </Col>
+        <Col xsHidden smHidden md={3} lg={3} />
+      </Row>
+      <RecommendedRow section={section.parentSection || section} />
+      <CommentThread article={articleBySlug} />
+    </Grid>
+  );
 }
 
 export default compose(
