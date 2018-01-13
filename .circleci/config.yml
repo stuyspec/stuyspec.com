@@ -38,7 +38,7 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "staging" ]; then
               aws s3 sync ~/client-app/dist/prod s3://staging.stuyspec.com
             elif [ "${CIRCLE_BRANCH}" == "master" ]; then
-              aws s3 sync ~/client-app/dist/prod s3://stuyspec.com
+              aws s3 sync ~/client-app/dist/prod s3://stuyspec
             else
               echo "We do not deploy on the ${CIRCLE_BRANCH}."
             fi
