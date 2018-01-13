@@ -104,10 +104,13 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default compose(
-  graphql(UserByUIDQuery, {
-    // no skip is necessary because !session redirects to /myaccount from RoutingApp
-    options: ({ session }) => ({ variables: { uid: session.uid } }),
-  }),
+  // connect is placed above graphql so options can use props.session as a variable
   connect(mapStateToProps, mapDispatchToProps),
+  graphql(UserByUIDQuery, {
+    options: ({ session }) => ({ 
+      fetchPolicy: "network-only",
+      variables: { uid: (session && session.uid) || "" }
+    }),
+  }),
   injectSheet(styles),
 )(ProfilePage);

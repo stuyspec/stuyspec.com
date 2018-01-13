@@ -6,6 +6,7 @@ export const UserByUIDQuery = gql`
       id
       first_name
       last_name
+      email
     }
   }
 `;

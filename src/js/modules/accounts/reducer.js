@@ -100,9 +100,8 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         status: {
-          errors: action.payload.response.data.errors
-            ? action.payload.response.data.errors.fullMessages
-            : action.payload.message,
+          errors: (action.payload.response &&
+            action.payload.response.data.errors) || [action.payload.message],
           formName: "signUp",
           message: null,
         },
@@ -135,7 +134,8 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         status: {
-          errors: action.payload.response.data.errors,
+          errors: (action.payload.response &&
+            action.payload.response.data.errors) || [action.payload.message],
           message: null,
           formName: "signOut",
         },
@@ -166,7 +166,8 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         status: {
-          errors: action.payload.response.data.errors,
+          errors: (action.payload.response &&
+            action.payload.response.data.errors) || [action.payload.message],
           message: null,
           formName: "editUser",
         },

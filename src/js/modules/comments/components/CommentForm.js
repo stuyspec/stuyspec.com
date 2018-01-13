@@ -134,6 +134,7 @@ const CommentForm = ({
   submitting,
   currentUser,
   openSignInModal,
+  session,
   status,
   signOut,
 }) => {
@@ -187,6 +188,7 @@ const CommentForm = ({
 
 const mapStateToProps = state => ({
   status: state.comments.status,
+  session: state.accounts.session,
 });
 
 const mapDispatchToProps = dispatch => {
