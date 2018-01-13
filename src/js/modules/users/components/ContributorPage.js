@@ -10,9 +10,6 @@ import { ArticleList } from "../../articles/components";
 import { NotFoundPage } from "../../core/components";
 
 const styles = {
-  ContributorPage: {
-    marginTop: "100px",
-  },
   name: {
     color: "#000",
     fontFamily: "Canela",
@@ -45,11 +42,6 @@ const styles = {
     lineHeight: "1.5",
     marginBottom: "26px",
   },
-  "@media (max-width: 1199px) and (min-width: 992px)": {
-    ContributorPage: {
-      paddingLeft: "10%",
-    },
-  },
 };
 
 const ContributorPage = ({ classes, contributor, articles }) => {
@@ -57,7 +49,7 @@ const ContributorPage = ({ classes, contributor, articles }) => {
     return <NotFoundPage />;
   }
   return (
-    <Grid className={classes.ContributorPage}>
+    <Grid >
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>{`${contributor.firstName} ${contributor.lastName}`}</title>
         <meta />

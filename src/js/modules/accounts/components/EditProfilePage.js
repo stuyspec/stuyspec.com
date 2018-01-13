@@ -11,9 +11,6 @@ import { updateUser } from "../actions";
 import { getCurrentUser } from "../selectors";
 
 const styles = {
-  EditProfilePage: {
-    marginTop: "60px",
-  },
   pageTitle: {
     color: "#000",
     fontFamily: "Canela",
@@ -29,11 +26,6 @@ const styles = {
     fontSize: "17px",
     marginBottom: "14px",
   },
-  "@media (max-width: 991px)": {
-    EditProfilePage: {
-      marginTop: 0,
-    },
-  },
 };
 
 const EditProfilePage = ({ classes, sessionUser, updateUser }) => {
@@ -41,7 +33,7 @@ const EditProfilePage = ({ classes, sessionUser, updateUser }) => {
     updateUser(values, sessionUser.id);
   };
   return (
-    <Grid fluid className={classes.EditProfilePage}>
+    <Grid fluid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>Edit Profile</title>
         <meta />

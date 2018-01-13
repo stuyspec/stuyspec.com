@@ -9,9 +9,6 @@ import { TallAd } from "../../advertisements/components/index";
 import { getArticlesWithContributors } from "../selectors";
 
 const styles = {
-  RecommendedPage: {
-    marginTop: "80px",
-  },
   pageTitle: {
     color: "#000",
     fontFamily: "Canela",
@@ -37,7 +34,7 @@ const styles = {
 
 const RecommendedPage = ({ classes, articles }) => {
   return (
-    <Grid fluid className={classes.RecommendedPage}>
+    <Grid fluid >
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>Most Recommended</title>
         <meta />

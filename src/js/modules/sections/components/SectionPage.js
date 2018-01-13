@@ -1,5 +1,3 @@
-// TODO: SECTINOPAGE IS LITERALLY A MESS
-
 import React from "react";
 import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-bootstrap/lib";
@@ -16,17 +14,24 @@ import { Dateline, Byline } from "../../articles/components/index";
 import SectionFeature from "./SectionFeature";
 import { TallAd } from "../../advertisements/components/index";
 
-// TODO: STYLE SECONDARY ARTICLE. consider setting a max height
-
 const styles = {
+  sectionTitle:{
+    color: "#000",
+    fontFamily: "Canela",
+    fontSize: "60px",
+    fontWeight: 300,
+    height: "73px",
+    marginBottom: "7px",
+    textAlign: "center",
+  },
   subsectionBar: {
-    margin: "0 0 20px 0",
-    padding: 0,
+    margin: "0 0 35px 0",
     textAlign: "center",
   },
   featuredRow: {
+    borderTop: "1px solid #ddd",
     borderBottom: "1px solid #ddd",
-    paddingBottom: "18px",
+    padding: "26px 0 26px 0",
   },
   featuredMedia: {
     "& figure": {
@@ -91,16 +96,15 @@ const styles = {
   },
   TallAdContainer: {
     borderLeft: "1px solid #ddd",
-    marginTop: "24px",
+    marginTop: "57px",
     paddingLeft: "14px !important",
     paddingRight: "0 !important",
   },
   subsectionListItem: {
-    borderBottom: "solid 1px #ddd",
     display: "inline-block",
     marginBottom: "5px",
     textDecoration: "none",
-    padding: "0 26px 10px 0",
+    padding: "0 26px 0px 0",
     "&:last-child": {
       paddingRight: 0,
     },
@@ -108,7 +112,7 @@ const styles = {
   subsectionLink: {
     color: "#000",
     fontFamily: "Circular Std",
-    fontSize: "12px",
+    fontSize: "14px",
     fontWeight: 300,
     "&:hover, &:active, &:focus": {
       color: "#000",
@@ -131,15 +135,11 @@ const styles = {
     },
   },
   SubsectionPage: {
-    marginTop: "80px",
     "& div > div": {
       borderRight: 0,
     },
   },
   "@media (min-width: 992px)": {
-    SectionPage: {
-      marginTop: "46px",
-    },
     SectionFeatureContainer: {
       marginRight: "14px !important",
     },
@@ -150,9 +150,6 @@ const styles = {
     },
   },
   "@media (max-width: 991px)": {
-    SectionPage: {
-      marginTop: "-16px", // counters PageContainer.marginTop = 60px
-    },
     featuredArticle: {
       marginLeft: 0,
       paddingTop: "3vw",
@@ -223,7 +220,6 @@ const SectionPage = ({
             md={3}
             lg={3}
             className={classes.TallAdContainer}
-            style={{ marginTop: "57px" }}
           >
             <TallAd />
           </Col>
@@ -296,6 +292,9 @@ const SectionPage = ({
         <title>{section.name}</title>
         <meta />
       </Helmet>
+      <div className={classes.sectionTitle}>
+        {section.name}
+      </div>
       <ul className={classes.subsectionBar}>
         {section.name === "10/31 Terror Attack" ? (
           <li className={classes.subsectionListItem}>
@@ -406,4 +405,4 @@ const mapStateToProps = (state, ownProps) => ({
   media: state.media.media,
 });
 
-export default connect(mapStateToProps, null)(injectSheet(styles)(SectionPage));
+export default connect(mapStateToProps)(injectSheet(styles)(SectionPage));
