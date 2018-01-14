@@ -1,5 +1,10 @@
+/* SectionBlocks are cards that display the top three articles of a section.
+ * They are used in the middle 2 columns of the second level of the HomePage and
+ * at the right of the ArticleList on a SectionPage of a section with child
+ * sections.
+ */
+
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
