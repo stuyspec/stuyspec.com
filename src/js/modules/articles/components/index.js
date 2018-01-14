@@ -5,3 +5,4 @@ export { default as RecommendedPage } from "./RecommendedPage";
 export { default as LatestPage } from "./LatestPage";
 export { default as Byline } from "./Byline";
 export { default as Dateline } from "./Dateline";
+export { default as Outquote } from "./Outquote";

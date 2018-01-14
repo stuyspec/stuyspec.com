@@ -3,11 +3,7 @@ import injectSheet from "react-jss";
 import { Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 
-import Byline from "../Byline";
-import Dateline from "../Dateline";
-import Outquote from "../Outquote";
-
-// TODO: ADD OUTQUOTES
+import { Byline, Dateline } from "../";
 
 const styles = {
   RightColumn: {
@@ -95,24 +91,11 @@ const styles = {
   },
 };
 
-const RightColumn = ({ classes }) => {
+const RightColumn = ({ classes, data }) => {
   return <Col xs={12} sm={3} md={3} lg={3} className={classes.RightColumn} />;
-  let availableArticles = [];
-  Object.values(articles)
-    .slice(9)
-    .find(article => {
-      if (availableArticles.length >= 2) {
-        return true;
-      }
-      if (
-        !Object.values(outquotes).find(
-          outquote => outquote.articleId === article.id,
-        )
-      ) {
-        availableArticles.push(article);
-      }
-    });
-  const [primaryArticle, secondaryArticle] = availableArticles;
+  const [primaryArticle, secondaryArticle] = data.articles;
+  const primarySection = primaryArticle.section;
+  const secondarySection = secondaryArticle.section;
   return (
     <Col xs={12} sm={3} md={3} lg={3} className={classes.RightColumn}>
       <div
@@ -124,22 +107,29 @@ const RightColumn = ({ classes }) => {
       />
       {primaryArticle && (
         <div className={classes.primaryArticle}>
+          {primaryArticle.media.length > 0 && (
+            <div>
+              <Link
+                to={`${primarySection.permalink}/${primaryArticle.slug}`}
+              >
+                <figure className={classes.figure}>
+                  <img src={primaryArticle.media[0].attachmentUrl} />
+                </figure>
+              </Link>
+            </div>
+          )}
           <Link
-            to={sections[primaryArticle.sectionId].permalink}
+            to={primarySection.permalink}
             className={classes.sectionLabel}
           >
-            {sections[primaryArticle.sectionId].name}
+            {primarySection.name}
           </Link>
           <Link
-            to={`${sections[primaryArticle.sectionId]
-              .permalink}/${primaryArticle.slug}`}
+            to={`${primarySection.permalink}/${primaryArticle.slug}`}
             className={classes.articleTitle}
           >
             {primaryArticle.title}
           </Link>
-          {/*primaryArticle.outquotes.length > 0 && (
-            <Outquote quote={primaryArticle.outquotes[0]} />
-          )*/}
           <p className={classes.summary}>{primaryArticle.summary}</p>
           <Byline contributors={primaryArticle.contributors} />
           <Dateline timestamp={primaryArticle.createdAt} />
@@ -148,14 +138,25 @@ const RightColumn = ({ classes }) => {
 
       {secondaryArticle && (
         <div className={classes.secondaryArticle}>
+          {secondaryArticle.media.length > 0 && (
+            <div>
+              <Link
+                to={`${secondarySection.permalink}/${secondaryArticle.slug}`}
+              >
+                <figure className={classes.figure}>
+                  <img src={secondaryArticle.media[0].attachmentUrl} />
+                </figure>
+              </Link>
+            </div>
+          )}
           <Link
-            to={sections[secondaryArticle.sectionId].permalink}
+            to={secondarySection.permalink}
             className={classes.sectionLabel}
           >
-            {sections[secondaryArticle.sectionId].name}
+            {secondarySection.name}
           </Link>
           <Link
-            to={`${sections[secondaryArticle.sectionId]
+            to={`${secondarySection
               .permalink}/${secondaryArticle.slug}`}
             className={classes.articleTitle}
           >
@@ -167,12 +168,12 @@ const RightColumn = ({ classes }) => {
         </div>
       )}
 
-      <Link to="/" className={classes.label}>
-        SING! 2017 Senior Playlist
+      <Link to="https://open.spotify.com/user/1225511959/playlist/5kkx7i6sMHdeMB5pJY29Zw" className={classes.label}>
+        Spooky Playlist 2017
       </Link>
       <iframe
         className={classes.spotifyEmbed}
-        src="https://open.spotify.com/embed/user/spec.ae/playlist/4FrJhYPbWrWF3fYkzGZPy1"
+        src="https://open.spotify.com/embed/user/1225511959/playlist/5kkx7i6sMHdeMB5pJY29Zw"
         frameBorder="0"
         allowTransparency="true"
       />

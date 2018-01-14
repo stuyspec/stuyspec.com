@@ -3,10 +3,7 @@ import injectSheet from "react-jss";
 import { Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 
-import Byline from "../Byline";
-import Dateline from "../Dateline";
-
-// TODO: ADD THE OUTQUOTE
+import { Byline, Dateline, Outquote } from "../";
 
 const styles = {
   LeftColumn: {
@@ -98,57 +95,37 @@ const styles = {
   },
 };
 
-const LeftColumn = ({ classes }) => {
+const LeftColumn = ({ classes, data }) => {
   return <Col xs={12} sm={3} md={3} lg={3} className={classes.LeftColumn} />;
-  const [primaryArticle, secondaryArticle] = Object.values(articles).slice(
-    6,
-    8,
-  );
-  const outquoteArticle = Object.values(articles)
-    .slice(9)
-    .find(article => {
-      return Object.values(outquotes).find(
-        outquote => outquote.articleId === article.id,
-      );
-    });
-
-  [primaryMedia, secondaryMedia, outquoteMedia] = [
-    primaryArticle,
-    secondaryArticle,
-    outquoteArticle,
-  ].map(article => {
-    return Object.values(media).find(
-      mediaObject =>
-        mediaObject.articleId === article.id && mediaObject.isFeatured,
-    );
-  });
+  const [primaryArticle, secondaryArticle, outquoteArticle] = data.articles;
+  const primarySection = primaryArticle.section;
+  const secondarySection = secondaryArticle.section;
+  const outquoteSection = outquoteArticle.section;
   return (
     <Col xs={12} sm={3} md={3} lg={3} className={classes.LeftColumn}>
       <div className={classes.primaryArticle}>
-        {primaryMedia && (
+        {primaryArticle.media.length > 0 && (
           <div>
             <Link
-              to={`${sections[primaryArticle.sectionId]
-                .permalink}/${primaryArticle.slug}`}
+              to={`${primarySection.permalink}/${primaryArticle.slug}`}
             >
               <figure className={classes.figure}>
-                <img src={primaryMedia.attachmentUrl} />
+                <img src={primaryArticle.media[0].attachmentUrl} />
               </figure>
             </Link>
           </div>
         )}
         <Link
-          to={`${sections[primaryArticle.sectionId]
-            .permalink}/${primaryArticle.slug}`}
+          to={`${primarySection.permalink}/${primaryArticle.slug}`}
           className={classes.primaryTitle}
         >
           {primaryArticle.title}
         </Link>
         <Link
-          to={sections[primaryArticle.sectionId].permalink}
+          to={primarySection.permalink}
           className={classes.sectionLabel}
         >
-          {sections[primaryArticle.sectionId].name}
+          {primarySection.name}
         </Link>
         <p className={classes.summary}>{primaryArticle.summary}</p>
         <Byline contributors={primaryArticle.contributors} />
@@ -156,27 +133,25 @@ const LeftColumn = ({ classes }) => {
       </div>
 
       <div className={classes.secondaryArticle}>
-        {secondaryMedia && (
+        {secondaryArticle.media.length > 0 && (
           <div>
             <Link
-              to={`${sections[secondaryArticle.sectionId]
-                .permalink}/${secondaryArticle.slug}`}
+              to={`${secondarySection.permalink}/${secondaryArticle.slug}`}
             >
               <figure className={classes.figure}>
-                <img src={secondaryMedia.attachmentUrl} />
+                <img src={secondaryArticle.media[0].attachmentUrl} />
               </figure>
             </Link>
           </div>
         )}
         <Link
-          to={sections[secondaryArticle.sectionId].permalink}
+          to={secondarySection.permalink}
           className={classes.sectionLabel}
         >
-          {sections[secondaryArticle.sectionId].name}
+          {secondarySection.name}
         </Link>
         <Link
-          to={`${sections[secondaryArticle.sectionId]
-            .permalink}/${secondaryArticle.slug}`}
+          to={`${secondarySection.permalink}/${secondaryArticle.slug}`}
           className={classes.articleTitle}
         >
           {secondaryArticle.title}
@@ -189,32 +164,30 @@ const LeftColumn = ({ classes }) => {
       </div>
 
       <div className={classes.outquoteArticle}>
-        {outquoteMedia && (
+        {outquoteArticle.media.length > 0 && (
           <div>
             <Link
-              to={`${sections[outquoteArticle.sectionId]
-                .permalink}/${outquoteArticle.slug}`}
+              to={`${outquoteSection.permalink}/${outquoteArticle.slug}`}
             >
               <figure className={classes.figure}>
-                <img src={outquoteMedia.attachmentUrl} />
+                <img src={outquoteArticle.media[0].attachmentUrl} />
               </figure>
             </Link>
           </div>
         )}
         <Link
-          to={sections[outquoteArticle.sectionId].permalink}
+          to={outquoteSection.permalink}
           className={classes.sectionLabel}
         >
-          {sections[outquoteArticle.sectionId].name}
+          {outquoteSection.name}
         </Link>
         <Link
-          to={`${sections[outquoteArticle.sectionId]
-            .permalink}/${outquoteArticle.slug}`}
+          to={`${outquoteSection.permalink}/${outquoteArticle.slug}`}
           className={classes.articleTitle}
         >
           {outquoteArticle.title}
         </Link>
-        {/*<Outquote quote={outquoteArticle.outquotes[0]} />*/}
+        <Outquote quote={outquoteArticle.outquotes[0]} />
         <p className={classes.summary}>{outquoteArticle.summary}</p>
         <div className={classes.bylineContainer}>
           <Byline contributors={outquoteArticle.contributors} />

@@ -186,7 +186,7 @@ https://stackoverflow.com/a/8539107/6174302
 
 .row > div[class*="col-lg"],
 .row > div[class*="col-md"] {
-    padding-left: 0;
+    padding-left: 0 !important;
 }
 .row > div[class*="col-lg"] ~ div[class*="col-lg"],
 .row > div[class*="col-md"] ~ div[class*="col-md"] {
@@ -196,7 +196,7 @@ https://stackoverflow.com/a/8539107/6174302
 /* Will not work in certain cases: see client-app Issue #28 */
 .row > div[class^="col-lg"]:last-child,
 .row > div[class^="col-md"]:last-child {
-    padding-right: 0;
+    padding-right: 0 !important;
 }
 
 .only-print {
