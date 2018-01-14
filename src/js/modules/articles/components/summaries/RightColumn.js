@@ -109,19 +109,14 @@ const RightColumn = ({ classes, data }) => {
         <div className={classes.primaryArticle}>
           {primaryArticle.media.length > 0 && (
             <div>
-              <Link
-                to={`${primarySection.permalink}/${primaryArticle.slug}`}
-              >
+              <Link to={`${primarySection.permalink}/${primaryArticle.slug}`}>
                 <figure className={classes.figure}>
                   <img src={primaryArticle.media[0].attachmentUrl} />
                 </figure>
               </Link>
             </div>
           )}
-          <Link
-            to={primarySection.permalink}
-            className={classes.sectionLabel}
-          >
+          <Link to={primarySection.permalink} className={classes.sectionLabel}>
             {primarySection.name}
           </Link>
           <Link
@@ -156,8 +151,7 @@ const RightColumn = ({ classes, data }) => {
             {secondarySection.name}
           </Link>
           <Link
-            to={`${secondarySection
-              .permalink}/${secondaryArticle.slug}`}
+            to={`${secondarySection.permalink}/${secondaryArticle.slug}`}
             className={classes.articleTitle}
           >
             {secondaryArticle.title}
@@ -168,7 +162,10 @@ const RightColumn = ({ classes, data }) => {
         </div>
       )}
 
-      <Link to="https://open.spotify.com/user/1225511959/playlist/5kkx7i6sMHdeMB5pJY29Zw" className={classes.label}>
+      <Link
+        to="https://open.spotify.com/user/1225511959/playlist/5kkx7i6sMHdeMB5pJY29Zw"
+        className={classes.label}
+      >
         Spooky Playlist 2017
       </Link>
       <iframe

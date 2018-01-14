@@ -81,14 +81,18 @@ const RecommendedRow = ({ classes, data }) => {
       <p className={classes.recommendedText}>Recommended</p>
       <Col xs={12} sm={12} md={12} lg={12} className={classes.recommendedList}>
         <Row>
-          {topRankedArticles.slice(0, 2).map(article => (
-            <ArticleRecommendation key={article.id} article={article} />
-          ))}
+          {topRankedArticles
+            .slice(0, 2)
+            .map(article => (
+              <ArticleRecommendation key={article.id} article={article} />
+            ))}
         </Row>
         <Row>
-          {topRankedArticles.slice(2, 4).map(article => (
-            <ArticleRecommendation key={article.id} article={article} />
-          ))}
+          {topRankedArticles
+            .slice(2, 4)
+            .map(article => (
+              <ArticleRecommendation key={article.id} article={article} />
+            ))}
         </Row>
       </Col>
     </Row>

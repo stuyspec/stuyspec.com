@@ -106,9 +106,7 @@ const LeftColumn = ({ classes, data }) => {
       <div className={classes.primaryArticle}>
         {primaryArticle.media.length > 0 && (
           <div>
-            <Link
-              to={`${primarySection.permalink}/${primaryArticle.slug}`}
-            >
+            <Link to={`${primarySection.permalink}/${primaryArticle.slug}`}>
               <figure className={classes.figure}>
                 <img src={primaryArticle.media[0].attachmentUrl} />
               </figure>
@@ -121,10 +119,7 @@ const LeftColumn = ({ classes, data }) => {
         >
           {primaryArticle.title}
         </Link>
-        <Link
-          to={primarySection.permalink}
-          className={classes.sectionLabel}
-        >
+        <Link to={primarySection.permalink} className={classes.sectionLabel}>
           {primarySection.name}
         </Link>
         <p className={classes.summary}>{primaryArticle.summary}</p>
@@ -135,19 +130,14 @@ const LeftColumn = ({ classes, data }) => {
       <div className={classes.secondaryArticle}>
         {secondaryArticle.media.length > 0 && (
           <div>
-            <Link
-              to={`${secondarySection.permalink}/${secondaryArticle.slug}`}
-            >
+            <Link to={`${secondarySection.permalink}/${secondaryArticle.slug}`}>
               <figure className={classes.figure}>
                 <img src={secondaryArticle.media[0].attachmentUrl} />
               </figure>
             </Link>
           </div>
         )}
-        <Link
-          to={secondarySection.permalink}
-          className={classes.sectionLabel}
-        >
+        <Link to={secondarySection.permalink} className={classes.sectionLabel}>
           {secondarySection.name}
         </Link>
         <Link
@@ -166,19 +156,14 @@ const LeftColumn = ({ classes, data }) => {
       <div className={classes.outquoteArticle}>
         {outquoteArticle.media.length > 0 && (
           <div>
-            <Link
-              to={`${outquoteSection.permalink}/${outquoteArticle.slug}`}
-            >
+            <Link to={`${outquoteSection.permalink}/${outquoteArticle.slug}`}>
               <figure className={classes.figure}>
                 <img src={outquoteArticle.media[0].attachmentUrl} />
               </figure>
             </Link>
           </div>
         )}
-        <Link
-          to={outquoteSection.permalink}
-          className={classes.sectionLabel}
-        >
+        <Link to={outquoteSection.permalink} className={classes.sectionLabel}>
           {outquoteSection.name}
         </Link>
         <Link

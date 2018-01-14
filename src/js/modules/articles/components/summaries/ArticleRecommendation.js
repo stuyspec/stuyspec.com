@@ -55,19 +55,17 @@ const ArticleRecommendation = ({ classes, article }) => {
     <Col xs={12} sm={6} md={6} lg={6} className={classes.ArticleRecommendation}>
       {article.media.length > 0 && (
         <div>
-          <Link
-            to={`${section.permalink}/${article.slug}`}
-          >
+          <Link to={`${section.permalink}/${article.slug}`}>
             <figure className={classes.figure}>
-              <img src={article.media[0].attachmentUrl} alt={article.media[0].title} />
+              <img
+                src={article.media[0].attachmentUrl}
+                alt={article.media[0].title}
+              />
             </figure>
           </Link>
         </div>
       )}
-      <Link
-        to={section.permalink}
-        className={classes.sectionLabel}
-      >
+      <Link to={section.permalink} className={classes.sectionLabel}>
         {section.name}
       </Link>
       <Link
