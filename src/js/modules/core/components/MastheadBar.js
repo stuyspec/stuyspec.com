@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
-import NavButton from "./NavButton";
 import MobileNavButton from "./MobileNavButton";
 import { FeaturedSectionsBar } from "../../sections/components";
 
@@ -21,7 +20,7 @@ const styles = {
     position: "fixed",
     width: "100%",
     top: 0,
-    zIndex: 1000,
+    zIndex: 1000
   },
   barContainer: {
     display: "flex",
@@ -31,14 +30,14 @@ const styles = {
     padding: "12px 30px 0px 30px",
     position: "relative",
     textAlign: "center",
-    width: "100%",
+    width: "100%"
   },
   sidebarToggle: {
     "& button": {
       position: "relative",
       left: "-10px",
-      top: "2px",
-    },
+      top: "2px"
+    }
   },
   brandingLink: {
     bottom: "9px",
@@ -53,8 +52,8 @@ const styles = {
     transform: "translate(-50%, 0)",
     "&:hover, &:active, &:focus": {
       color: "#000",
-      textDecoration: "none",
-    },
+      textDecoration: "none"
+    }
   },
   navButtons: {
     fontFamily: "Circular Std",
@@ -63,60 +62,60 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     "& button": {
-      marginLeft: "24px",
-    },
+      marginLeft: "24px"
+    }
   },
   userTools: {
     marginBottom: "12px",
     "& > a": {
       color: "#888",
       "&:hover, &:active, &:focus": {
-        color: "#888",
-      },
-    },
+        color: "#888"
+      }
+    }
   },
   subscribeLink: {
     borderLeft: "1px solid #888",
     marginLeft: "9px",
-    paddingLeft: "8px",
+    paddingLeft: "8px"
   },
   searchLink: {
     alignSelf: "flex-end",
     color: "#000",
     "&:hover, &:active, &:focus": {
-      color: "#000",
+      color: "#000"
     },
     "& svg": {
       display: "inline",
       marginRight: "4px",
-      transform: "translateY(-2px)",
-    },
+      transform: "translateY(-2px)"
+    }
   },
   responsiveSectionNamesContainer: {
-    display: "inline",
+    display: "inline"
   },
   sectionsBarContainer: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   "@media (max-width: 991px)": {
     MastheadBar: {
-      height: "52px",
+      height: "52px"
     },
     sectionsBarContainer: {
-      display: "none",
+      display: "none"
     },
     navButtons: {
-      display: "none",
-    },
-  },
+      display: "none"
+    }
+  }
 };
 
 const MastheadBar = ({
   classes,
   openSidebar,
   openSubscriptionModal,
-  session,
+  session
 }) => {
   return (
     <div className={classes.MastheadBar}>
@@ -126,12 +125,9 @@ const MastheadBar = ({
             <Hamburger color={"#000"} size={20} />
           </MobileNavButton>
         </div>
-        <Link
-          className={classes.brandingLink}
-          to={"/"}
-        >
+        <Link className={classes.brandingLink} to={"/"}>
           The Spectator
-        </Link>        
+        </Link>
         <div className={classes.navButtons}>
           <div className={classes.userTools}>
             {session ? (
@@ -139,7 +135,13 @@ const MastheadBar = ({
             ) : (
               <Link to="/myaccount">Log In</Link>
             )}
-            <Link to="/myaccount" className={classes.subscribeLink} onClick={openSubscriptionModal}>Subscribe</Link>
+            <Link
+              to="/myaccount"
+              className={classes.subscribeLink}
+              onClick={openSubscriptionModal}
+            >
+              Subscribe
+            </Link>
           </div>
           <Link to="/search" className={classes.searchLink}>
             <Search color="#000" />
@@ -148,14 +150,14 @@ const MastheadBar = ({
         </div>
       </div>
       <div className={classes.sectionsBarContainer}>
-        <FeaturedSectionsBar omitSearch={true}/>
+        <FeaturedSectionsBar omitSearch={true} />
       </div>
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  session: state.accounts.session,
+  session: state.accounts.session
 });
 
 const mapDispatchToProps = dispatch => {
@@ -163,5 +165,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(MastheadBar),
+  injectSheet(styles)(MastheadBar)
 );

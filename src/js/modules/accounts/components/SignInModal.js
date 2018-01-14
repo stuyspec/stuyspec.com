@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Modal } from "react-bootstrap/lib";
 
-import { SignInForm, SignUpForm } from "./forms";
+import { SignInForm } from "./forms";
 import { signIn, signUp, closeSignInModal } from "../actions";
 
 const styles = {
