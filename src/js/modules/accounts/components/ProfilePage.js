@@ -107,9 +107,9 @@ export default compose(
   // connect is placed above graphql so options can use props.session as a variable
   connect(mapStateToProps, mapDispatchToProps),
   graphql(UserByUIDQuery, {
-    options: ({ session }) => ({ 
+    options: ({ session }) => ({
       fetchPolicy: "network-only",
-      variables: { uid: (session && session.uid) || "" }
+      variables: { uid: (session && session.uid) || "" },
     }),
   }),
   injectSheet(styles),

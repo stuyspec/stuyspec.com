@@ -205,7 +205,7 @@ const PageFooter = ({ classes, sections, descriptions }) => {
                 >
                   {section.name}
                 </Link>
-                {Object.values(section.subsections).map(subsection => {
+                {section.subsections.map(subsection => {
                   return (
                     <Link
                       className={classes.subsectionLink}

@@ -1,5 +1,5 @@
 import * as t from "./actionTypes";
-import { STUY_SPEC_API_HEADERS, STUY_SPEC_API_URL } from "../../constants";
+import { STUY_SPEC_API_URL } from "../../constants";
 import axios from "axios";
 import { reset } from "redux-form";
 

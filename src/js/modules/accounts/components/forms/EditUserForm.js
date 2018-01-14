@@ -3,7 +3,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
-import { Table } from "react-bootstrap/lib";
+import Table from "react-bootstrap/lib/Table";
 import { EMAIL_REGEX } from "../../../../constants";
 
 const styles = {

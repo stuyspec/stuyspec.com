@@ -15,8 +15,8 @@ import Dateline from "../../articles/components/Dateline";
 import Byline from "../../articles/components/Byline";
 
 const SectionBlockQuery = gql`
-  query SectionBlockQuery($limit: Int!, $section_slug: String!) {
-    topRankedArticles(limit: $limit, section_slug: $section_slug) {
+  query SectionBlockQuery($section_slug: String!) {
+    topRankedArticles(limit: 3, section_slug: $section_slug) {
       id
       title
       slug
@@ -177,5 +177,5 @@ const SectionBlock = ({ classes, data, slug }) => {
 };
 
 export default graphql(SectionBlockQuery, {
-  options: ({ slug }) => ({ variables: { section_slug: slug, limit: 3 } }),
+  options: ({ slug }) => ({ variables: { section_slug: slug } }),
 })(injectSheet(styles)(SectionBlock));

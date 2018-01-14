@@ -1,6 +1,9 @@
 import React from "react";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
+import dateFormat from "dateformat";
+
+const MILLISECONDS_IN_DAY = 8.64e7;
 
 const styles = {
   Comment: {
@@ -34,8 +37,20 @@ const styles = {
   },
 };
 
+/* dateFormat:
+ * longDate: June 9, 2007
+ * shortTime: 5:46 PM
+ */
+
 const Comment = ({ classes, comment }) => {
-  const { user } = comment;
+  const { user, publishedAt } = comment;
+  // If the timestamp is the same day (< 24 hours difference), use the
+  // shortTime format. If not, use the longDate format.
+  const dateSetting =
+    new Date() - new Date(publishedAt) < MILLISECONDS_IN_DAY
+      ? "shortTime"
+      : "longDate";
+  const dateline = dateFormat(publishedAt, dateSetting);
   return (
     <Row className={classes.Comment}>
       <Col md={7} lg={7}>
@@ -44,7 +59,9 @@ const Comment = ({ classes, comment }) => {
             {user.firstName} {user.lastName}
           </span>
           <span className={classes.bulletPoint}>&#8226;</span>
-          <span className={classes.publishedAt}>{comment.publishedAt}</span>
+          <span className={classes.publishedAt}>
+            Published {dateSetting === "shortTime" ? "at" : "on"} {dateline}
+          </span>
         </p>
         <p className={classes.content}>{comment.content}</p>
       </Col>
