@@ -13,8 +13,8 @@ const styles = {
   ArticleBody: {
     color: "#000",
     fontFamily: "Minion Pro",
-    fontSize: "18px",
-    lineHeight: 1.44,
+    fontSize: "19px",
+    lineHeight: 1.4,
     padding: "0 0 18px",
     "& p": {
       marginBottom: "20px",
@@ -44,9 +44,9 @@ const styles = {
     "& > div > p::first-letter": {
       // dropcap
       float: "left",
-      fontSize: "58px",
+      fontSize: "64px",
       lineHeight: "43px",
-      padding: "7px 6px 0px 3px",
+      padding: "11px 6px 0px 3px",
     },
     "& > div > p ~ p::first-letter": {
       float: "none",

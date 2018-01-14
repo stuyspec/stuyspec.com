@@ -42,6 +42,12 @@ const styles = {
     "& > .row > div": {
       padding: "18px !important",
     },
+    "& > .row > div:first-child": {
+      paddingLeft: "0 !important",
+    },
+    "& > .row > div:last-child": {
+      paddingRight: "0 !important",
+    },
   },
   recommendedText: {
     color: "#000",
