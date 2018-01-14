@@ -20,7 +20,7 @@ const styles = {
 
 const DescriptionPage = ({ classes, description }) => {
   return (
-    <Grid fluid >
+    <Grid fluid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>{description.title}</title>
         <meta />

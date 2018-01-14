@@ -15,7 +15,7 @@ import SectionFeature from "./SectionFeature";
 import { TallAd } from "../../advertisements/components/index";
 
 const styles = {
-  sectionTitle:{
+  sectionTitle: {
     color: "#000",
     fontFamily: "Canela",
     fontSize: "60px",
@@ -292,9 +292,7 @@ const SectionPage = ({
         <title>{section.name}</title>
         <meta />
       </Helmet>
-      <div className={classes.sectionTitle}>
-        {section.name}
-      </div>
+      <div className={classes.sectionTitle}>{section.name}</div>
       <ul className={classes.subsectionBar}>
         {section.name === "10/31 Terror Attack" ? (
           <li className={classes.subsectionListItem}>

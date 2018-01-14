@@ -49,7 +49,7 @@ const IllustratorPage = ({ classes, illustrator, articles }) => {
     return <NotFoundPage />;
   }
   return (
-    <Grid >
+    <Grid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>{`${illustrator.firstName} ${illustrator.lastName}`}</title>
         <meta />

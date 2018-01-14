@@ -33,7 +33,12 @@ const styles = {
   },
 };
 
-const FeaturedSectionsBar = ({ classes, openSubscriptionModal, sections, omitSearch }) => {
+const FeaturedSectionsBar = ({
+  classes,
+  openSubscriptionModal,
+  sections,
+  omitSearch,
+}) => {
   return (
     <ul className={classes.FeaturedSectionsBar}>
       {Object.values(sections).map(section => {
@@ -69,7 +74,7 @@ const FeaturedSectionsBar = ({ classes, openSubscriptionModal, sections, omitSea
         </li>
       )}
     </ul>
-  )
+  );
 };
 
 const mapStateToProps = state => ({

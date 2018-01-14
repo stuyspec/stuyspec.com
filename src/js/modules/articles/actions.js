@@ -8,16 +8,16 @@ export const searchArticles = query => {
   return dispatch => {
     dispatch({ type: t.SEARCH_ARTICLES_PENDING });
     axios
-    .get(
-      `${STUY_SPEC_API_URL}/articles?query=${encodeURI(query)}`,
-      STUY_SPEC_API_HEADERS,
-    )
-    .then(response => {
-      dispatch({
-        type: t.SEARCH_ARTICLES_FULFILLED,
-        payload: response.data,
-      });
-      dispatch(reset("search"));
+      .get(
+        `${STUY_SPEC_API_URL}/articles?query=${encodeURI(query)}`,
+        STUY_SPEC_API_HEADERS,
+      )
+      .then(response => {
+        dispatch({
+          type: t.SEARCH_ARTICLES_FULFILLED,
+          payload: response.data,
+        });
+        dispatch(reset("search"));
       })
       .catch(err => {
         dispatch({

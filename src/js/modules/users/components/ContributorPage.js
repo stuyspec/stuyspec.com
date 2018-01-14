@@ -49,7 +49,7 @@ const ContributorPage = ({ classes, contributor, articles }) => {
     return <NotFoundPage />;
   }
   return (
-    <Grid >
+    <Grid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>{`${contributor.firstName} ${contributor.lastName}`}</title>
         <meta />

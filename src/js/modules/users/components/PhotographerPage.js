@@ -49,7 +49,7 @@ const PhotographerPage = ({ classes, photographer, articles }) => {
     return <NotFoundPage />;
   }
   return (
-    <Grid >
+    <Grid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>{`${photographer.firstName} ${photographer.lastName}`}</title>
         <meta />

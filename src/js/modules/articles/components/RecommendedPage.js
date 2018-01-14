@@ -34,7 +34,7 @@ const styles = {
 
 const RecommendedPage = ({ classes, articles }) => {
   return (
-    <Grid fluid >
+    <Grid fluid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>Most Recommended</title>
         <meta />

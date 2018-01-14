@@ -182,11 +182,7 @@ class RoutingApp extends Component {
                   key={"search"}
                   component={SearchPage}
                 />
-                <Route
-                  path="*"
-                  key={"notFound"}
-                  component={NotFoundPage}
-                />
+                <Route path="*" key={"notFound"} component={NotFoundPage} />
               </Switch>
             </PageLayout>
           )}

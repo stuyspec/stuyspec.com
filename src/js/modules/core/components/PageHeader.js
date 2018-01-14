@@ -31,7 +31,10 @@ const PageHeader = ({ classes, location }) => {
       </Row>
       <Row>
         <Col xs={12} sm={12} mdHidden lgHidden>
-          <div className={classes.mastheadBar} style={{ marginTop: location.pathname === "/" ? "90px" : "130px" }}>
+          <div
+            className={classes.mastheadBar}
+            style={{ marginTop: location.pathname === "/" ? "90px" : "130px" }}
+          >
             <MastheadBar location={location} />
           </div>
         </Col>

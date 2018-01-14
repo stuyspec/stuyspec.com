@@ -83,7 +83,7 @@ const styles = {
     },
   },
   hr: {
-    margin: "12px 0",    
+    margin: "12px 0",
   },
   creditLine: {
     color: "#aaa",
@@ -255,13 +255,7 @@ const PageFooter = ({
         >
           {createDescriptionLinks()}
         </Col>
-        <Col
-          xs={12}
-          smHidden
-          mdHidden
-          lgHidden
-          className={classes.creditLine}
-        >
+        <Col xs={12} smHidden mdHidden lgHidden className={classes.creditLine}>
           <hr className={classes.hr} />
           Created by{" "}
           <a href="https://github.com/stuyspec">

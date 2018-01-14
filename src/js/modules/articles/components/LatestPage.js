@@ -34,7 +34,7 @@ const styles = {
 
 const LatestPage = ({ classes, articles }) => {
   return (
-    <Grid fluid >
+    <Grid fluid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>The Latest</title>
         <meta />
