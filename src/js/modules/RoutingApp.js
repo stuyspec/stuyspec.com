@@ -40,6 +40,8 @@ class RoutingApp extends Component {
   }
 
   componentDidMount() {
+    const loadingIcon = document.querySelector(".loading");
+    loadingIcon.parentNode.removeChild(loadingIcon);
     this.prepareData();
   }
 
