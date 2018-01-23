@@ -115,14 +115,15 @@ const SectionFeature = ({
 }) => {
   const sectionArticles = articles.filter(
     article => article.sectionId === section.id && article !== without,
-  );
+  );  
+  console.log(sectionArticles);
   const primaryArticle =
     sectionArticles[0] === articles[0]
       ? sectionArticles[1]
       : sectionArticles[0]; // we don't want to copy the homepage FeaturedArticle
   let featuredMedia = null;
   const secondaryArticle =
-    sectionArticles.slice(1, 10).find(article => {
+    sectionArticles.find(article => {
       if (article === primaryArticle) {
         return false;
       }
