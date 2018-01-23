@@ -1,8 +1,10 @@
 # client-app
-The client-facing application of The Stuyvesant Spectator is built with [React](https://github.com/facebook/react).
+[![CircleCI](https://img.shields.io/circleci/project/github/RedSparr0w/node-csgo-parser.svg)]()
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?)](https://github.com/prettier/prettier)
+
+The client-facing application of The Stuyvesant Spectator, built in [React](https://github.com/facebook/react).
 
 ## Getting started
-_Requirement: [Git](https://help.github.com/articles/set-up-git/)_
 1. Clone the repo (default branch is `develop`): 
 ```
 git clone https://github.com/stuyspec/client-app
@@ -20,17 +22,27 @@ npm install
 gulp
 ```
 
-To set up the server, follow the instructions on our the README of our [API](https://github.com/stuyspec/stuy-spec-api).
-In your `.env` file, add:
+To set up the development data server, follow the instructions on our the README of our [API](https://github.com/stuyspec/stuy-spec-api). If, however, you need to use data from the real, production API, go to `client-app/src/js/constants.js` and modify the file like so:
 ```
-PG_HOST:localhost
+...
+COMMENT THIS LINE OUT --> export const STUY_SPEC_API_URL = "__API_URL_HERE__";
+UNCOMMENT THIS LINE   --> //export const STUY_SPEC_API_URL = "https://api.stuyspec.com";
+...
+```
+Be sure to undo these changes whenever committing to a develop, staging, or production branch (`develop`, `staging`, `master`, respectively).
+
+## Contribution
+
+### Prettier
+We use  [Prettier](https://github.com/prettier/prettier) to Webstorm to make sure all developers have a uniform coding style. Add `prettier` with `yarn global add prettier`. To run Prettier, `cd` to the root of client-app and run
+```
+find ./src/js/modules -type f -name '*.js' | xargs prettier --write --trailing-comma all
 ```
 
-## Coding environment
-**WebStorm**: the smartest JavaScript IDE (powerful, but will lag on weak computers). Get a free student license at [JetBrains](https://www.jetbrains.com/student/), then download and install WebStorm.
-**Prettier**: we need to add [Prettier](https://github.com/prettier/prettier) to Webstorm to make sure all developers have a uniform coding style.
-In the Terminal, add Prettier with yarn: `yarn global add prettier`.  
+### Webstorm
+Webstorm is a popular choice for JS developers, but it will lag on weak computers (including standard Macbook Pro). Get a free student license at [JetBrains](https://www.jetbrains.com/student/), then download and install WebStorm.
 
+#### Prettier with Webstorm ####
 In Webstorm, navigate to `WebStorm > Preferences > Tools > External Tools`.  
 
 Click on the `+` icon to add a new external tool. Then fill out the `Name` and under the Tool Settings, fill out `Program`, `Parameters` , and `Working directory`.  
@@ -51,9 +63,3 @@ Double click on Prettier and add keyboard shortcut. I am on a Mac and I personal
 
 You are now good to go, now any file that you want to prettify, just go to that specific file in WebStorm and then press your set keybinding and it should automatically prettify the file that you are currently viewing.  
 
-To run Prettier on the entire projects, `cd` to the root of client-app and run
-```
-find ./src/js/modules -type f -name '*.js' | xargs prettier --write --trailing-comma all
-```
-
-## Contribution
