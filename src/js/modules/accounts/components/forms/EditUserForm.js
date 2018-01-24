@@ -1,5 +1,5 @@
 import React from "react";
-import { compose } from "redux";=
+import { compose } from "redux";
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
 import Table from "react-bootstrap/lib/Table";

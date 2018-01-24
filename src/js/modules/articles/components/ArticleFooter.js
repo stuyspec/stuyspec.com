@@ -32,9 +32,10 @@ const styles = {
   subscriptionCTA: {
     color: "#000",
     fontSize: "19px",
-    marginBottom: "4px",
+    marginBottom: "10px",
   },
   subscriptionFormContainer: {
+    marginBottom: "21px",
     "& > div > form > div": {
       display: "inline-block",
     },
@@ -44,14 +45,12 @@ const styles = {
         borderRadius: "3px 0 0 3px",
         width: "100%",
       },
-      "& > div > p": { // success/error messages mess up this delicate JSS
-        position: "absolute",
-      },
     },
     "& > div > form > div:last-child": {
       width: "20%",
       "& > button": { // "Subscribe" button
         borderRadius: "0 3px 3px 0",
+        margin: 0,
         width: "100%",
       },
     },
