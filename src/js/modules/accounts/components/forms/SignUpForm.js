@@ -1,9 +1,10 @@
 import React from "react";
 import { compose } from "redux";
-import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
 import { EMAIL_REGEX } from "../../../../constants";
+
+import FormStatus from "./FormStatus";
 
 const styles = {
   SignUpForm: {
@@ -13,12 +14,6 @@ const styles = {
       // each Field
       marginBottom: "7px",
     },
-  },
-  successMessage: {
-    color: "green",
-  },
-  errorMessage: {
-    color: "red",
   },
   submitButton: {
     backgroundColor: "#3472b7",
@@ -132,33 +127,15 @@ const SignUpForm = ({ classes, handleSubmit, submitting, status }) => {
           </button>
         </div>
       </form>
-      {status.formName === "signUp" && (
-        <div>
-          <p key="success" className={classes.successMessage}>
-            {status.message}
-          </p>
-          {status.errors.map((error, index) => {
-            return (
-              <p key={index} className={classes.errorMessage}>
-                {error}
-              </p>
-            );
-          })}
-        </div>
-      )}
+      <FormStatus formName="signUp" />
     </div>
   );
 };
-
-const mapStateToProps = state => ({
-  status: state.accounts.status,
-});
 
 export default compose(
   reduxForm({
     form: "signUp",
     validate,
   }),
-  connect(mapStateToProps),
   injectSheet(styles),
 )(SignUpForm);

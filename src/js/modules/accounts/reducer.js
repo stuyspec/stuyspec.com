@@ -18,6 +18,9 @@ import {
   SESSIONIFY,
   VALIDATE_TOKEN_FULFILLED,
   VALIDATE_TOKEN_REJECTED,
+  CREATE_SUBSCRIBER_PENDING,
+  CREATE_SUBSCRIBER_FULFILLED,
+  CREATE_SUBSCRIBER_REJECTED,
 } from "./actionTypes";
 import { CREATE_COMMENT_FULFILLED } from "../comments/actionTypes";
 
@@ -41,7 +44,8 @@ const reducer = (state = { ...initialState }, action) => {
         session: action.payload.headers,
       };
     }
-    case SIGN_IN_PENDING: {
+
+    case SIGN_IN_PENDING: case SIGN_UP_PENDING: case SIGN_OUT_PENDING: case CREATE_SUBSCRIBER_PENDING: case UPDATE_USER_PENDING: {
       return {
         ...state,
         status: {
@@ -75,16 +79,6 @@ const reducer = (state = { ...initialState }, action) => {
       };
     }
 
-    case SIGN_UP_PENDING: {
-      return {
-        ...state,
-        status: {
-          errors: [],
-          formName: null,
-          message: null,
-        },
-      };
-    }
     case SIGN_UP_FULFILLED: {
       return {
         ...state,
@@ -108,16 +102,6 @@ const reducer = (state = { ...initialState }, action) => {
       };
     }
 
-    case SIGN_OUT_PENDING: {
-      return {
-        ...state,
-        status: {
-          errors: [],
-          formName: null,
-          message: null,
-        },
-      };
-    }
     case SIGN_OUT_FULFILLED: {
       localStorage.removeItem("session");
       return {
@@ -141,17 +125,29 @@ const reducer = (state = { ...initialState }, action) => {
         },
       };
     }
-
-    case UPDATE_USER_PENDING: {
+    
+    case CREATE_SUBSCRIBER_FULFILLED: {
       return {
         ...state,
         status: {
           errors: [],
-          message: null,
-          formName: null,
+          message: "You have been added to the subscription list.",
+          formName: "subscription",
         },
       };
     }
+    case CREATE_SUBSCRIBER_REJECTED: {
+      return {
+        ...state,
+        status: {
+          errors: (action.payload.response &&
+            action.payload.response.data.errors) || [action.payload.message],
+          message: null,
+          formName: "subscription",
+        },
+      };
+    }
+
     case UPDATE_USER_FULFILLED: {
       return {
         ...state,

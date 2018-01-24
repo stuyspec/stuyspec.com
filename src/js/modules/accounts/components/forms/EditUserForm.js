@@ -1,22 +1,13 @@
 import React from "react";
-import { compose } from "redux";
-import { connect } from "react-redux";
+import { compose } from "redux";=
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
 import Table from "react-bootstrap/lib/Table";
 import { EMAIL_REGEX } from "../../../../constants";
 
+import FormStatus from "./FormStatus";
+
 const styles = {
-  successMessage: {
-    color: "green",
-    fontFamily: "Minion Pro",
-    marginTop: "8px",
-  },
-  errorMessage: {
-    color: "red",
-    fontFamily: "Minion Pro",
-    marginTop: "8px",
-  },
   dataTable: {
     "& .table-responsive table > tbody > tr > td": {
       fontFamily: "Minion Pro",
@@ -129,33 +120,15 @@ const EditUserForm = ({ classes, handleSubmit, submitting, status }) => {
           </button>
         </div>
       </form>
-      {status.formName === "editUser" && (
-        <div>
-          <p key="success" className={classes.successMessage}>
-            {status.message}
-          </p>
-          {status.errors.map((error, index) => {
-            return (
-              <p key={index} className={classes.errorMessage}>
-                {error}
-              </p>
-            );
-          })}
-        </div>
-      )}
+      <FormStatus formName="editUser" />
     </div>
   );
 };
-
-const mapStateToProps = state => ({
-  status: state.accounts.status,
-});
 
 export default compose(
   reduxForm({
     form: "editUser",
     validate,
   }),
-  connect(mapStateToProps),
   injectSheet(styles),
 )(EditUserForm);

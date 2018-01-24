@@ -1,7 +1,10 @@
 import React from "react";
+import { compose } from "redux";
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
 import { EMAIL_REGEX } from "../../../../constants";
+
+import FormStatus from "./FormStatus";
 
 const styles = {
   SignInForm: {
@@ -88,7 +91,7 @@ const renderField = ({
   );
 };
 
-const SubscriptionForm = ({ classes, handleSubmit, submitting }) => {
+const SubscriptionForm = ({ classes, handleSubmit, submitting, callToAction }) => {
   return (
     <div className={classes.SubscriptionForm}>
       <form onSubmit={handleSubmit}>
@@ -105,15 +108,18 @@ const SubscriptionForm = ({ classes, handleSubmit, submitting }) => {
             disabled={submitting}
             className={classes.submitButton}
           >
-            Subscribe
+            {callToAction ? callToAction : "Subscribe"}
           </button>
         </div>
       </form>
+      <FormStatus formName="subscription"/>
     </div>
   );
 };
 
-export default reduxForm({
-  form: "Subscription",
-  validate,
-})(injectSheet(styles)(SubscriptionForm));
+export default compose(
+  reduxForm({
+    form: "subscription",
+  }),
+  injectSheet(styles),
+)(SubscriptionForm);

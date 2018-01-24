@@ -5,14 +5,9 @@ import { reduxForm } from "redux-form";
 import injectSheet from "react-jss";
 
 import { signOut } from "../../actions";
+import FormStatus from "./FormStatus";
 
 const styles = {
-  successMessage: {
-    color: "green",
-  },
-  errorMessage: {
-    color: "red",
-  },
   signOutButton: {
     backgroundColor: "#3472b7",
     border: "1px solid #3472b7",
@@ -28,7 +23,7 @@ const styles = {
   },
 };
 
-const SignOutForm = ({ classes, handleSubmit, submitting, status }) => {
+const SignOutForm = ({ classes, handleSubmit, submitting }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -42,32 +37,14 @@ const SignOutForm = ({ classes, handleSubmit, submitting, status }) => {
           </button>
         </div>
       </form>
-      {status.formName === "signOut" && (
-        <div>
-          <p key="success" className={classes.successMessage}>
-            {status.message}
-          </p>
-          {status.errors.map((error, index) => {
-            return (
-              <p key={index} className={classes.errorMessage}>
-                {error}
-              </p>
-            );
-          })}
-        </div>
-      )}
+      <FormStatus formName="signOut" />
     </div>
   );
 };
-
-const mapStateToProps = state => ({
-  status: state.accounts.status,
-});
 
 export default compose(
   reduxForm({
     form: "signOut",
   }),
-  connect(mapStateToProps),
   injectSheet(styles),
 )(SignOutForm);
