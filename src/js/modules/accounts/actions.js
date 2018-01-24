@@ -204,10 +204,10 @@ export const validateToken = session => {
   }
 };
 
-export const sessionfy = session => {
+export const sessionify = session => {
   return dispatch => {
     dispatch({
-      type: t.SESSIONFY,
+      type: t.SESSIONIFY,
       payload: session,
     });
     dispatch(validateToken(session));

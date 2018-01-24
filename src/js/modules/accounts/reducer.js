@@ -15,7 +15,7 @@ import {
   CLOSE_SIGN_IN_MODAL,
   OPEN_SUBSCRIPTION_MODAL,
   CLOSE_SUBSCRIPTION_MODAL,
-  SESSIONFY,
+  SESSIONIFY,
   VALIDATE_TOKEN_FULFILLED,
   VALIDATE_TOKEN_REJECTED,
 } from "./actionTypes";
@@ -188,7 +188,7 @@ const reducer = (state = { ...initialState }, action) => {
       return { ...state, isSubscriptionModalOpen: false };
     }
 
-    case SESSIONFY: {
+    case SESSIONIFY: {
       return { ...state, session: action.payload };
     }
     case VALIDATE_TOKEN_FULFILLED: {
