@@ -38,6 +38,27 @@ const HomePageQuery = gql`
         permalink
       }
     }
+    columnArticles {
+      title
+      slug
+      summary
+      created_at
+      contributors {
+        first_name
+        last_name
+        slug
+      }
+      media {
+        attachment_url
+      }
+      section {
+        name
+        permalink
+      }
+      outquotes {
+        text
+      }
+    }
   }
 `;
 
@@ -71,7 +92,7 @@ const HomePage = ({ classes, data }) => {
     return null;
   }
   data = humps.camelizeKeys(data);
-  const { featuredArticle } = data;
+  const { featuredArticle, columnArticles } = data;
 
   const firstColumnSectionSlugs = ["opinions", "features", "humor"];
   const secondColumnSectionSlugs = [
@@ -109,14 +130,14 @@ const HomePage = ({ classes, data }) => {
           </Col>
         </Row>
         <Row>
-          <LeftColumn />
+          <LeftColumn articles={columnArticles.slice(0, 3)} />
           <Col xs={12} sm={3} md={3} lg={3} className={classes.skinnyCol}>
             <SectionColumn slugs={firstColumnSectionSlugs} />
           </Col>
           <Col xs={12} sm={3} md={3} lg={3} className={classes.skinnyCol}>
             <SectionColumn slugs={secondColumnSectionSlugs} />
           </Col>
-          <RightColumn />
+          <RightColumn articles={columnArticles.slice(3)} />
         </Row>
       </Grid>
     </div>

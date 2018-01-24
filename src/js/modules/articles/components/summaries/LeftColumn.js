@@ -95,14 +95,18 @@ const styles = {
   },
 };
 
-const LeftColumn = ({ classes, data }) => {
-  return <Col xs={12} sm={3} md={3} lg={3} className={classes.LeftColumn} />;
-  const [primaryArticle, secondaryArticle, outquoteArticle] = data.articles;
+const LeftColumn = ({ classes, articles }) => {
+  if (articles.length !== 3) {
+    // TODO: Better way to handle this
+    return <Col xsHidden sm={3} md={3} lg={3} className={classes.LeftColumn} />;
+  }  
+  const [primaryArticle, secondaryArticle, outquoteArticle] = articles;
   const primarySection = primaryArticle.section;
   const secondarySection = secondaryArticle.section;
   const outquoteSection = outquoteArticle.section;
   return (
-    <Col xs={12} sm={3} md={3} lg={3} className={classes.LeftColumn}>
+    <Col xsHidden sm={3} md={3} lg={3} className={classes.LeftColumn}>
+      {/* Column xsHidden because the mobile UI would repeat too many articles */}
       <div className={classes.primaryArticle}>
         {primaryArticle.media.length > 0 && (
           <div>
@@ -172,7 +176,7 @@ const LeftColumn = ({ classes, data }) => {
         >
           {outquoteArticle.title}
         </Link>
-        <Outquote quote={outquoteArticle.outquotes[0]} />
+        <Outquote quote={outquoteArticle.outquotes[0].text} />
         <p className={classes.summary}>{outquoteArticle.summary}</p>
         <div className={classes.bylineContainer}>
           <Byline contributors={outquoteArticle.contributors} />

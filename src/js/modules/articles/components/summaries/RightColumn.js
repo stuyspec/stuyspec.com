@@ -91,18 +91,23 @@ const styles = {
   },
 };
 
-const RightColumn = ({ classes, data }) => {
-  return <Col xs={12} sm={3} md={3} lg={3} className={classes.RightColumn} />;
-  const [primaryArticle, secondaryArticle] = data.articles;
+const RightColumn = ({ classes, articles }) => {
+  if (articles.length !== 2) {
+    // TODO: Better way to handle this
+    return <Col xsHidden sm={3} md={3} lg={3} className={classes.RightColumn} />;
+  }  
+  const [primaryArticle, secondaryArticle] = articles;
   const primarySection = primaryArticle.section;
   const secondarySection = secondaryArticle.section;
   return (
-    <Col xs={12} sm={3} md={3} lg={3} className={classes.RightColumn}>
+    <Col xsHidden sm={3} md={3} lg={3} className={classes.RightColumn}>
+      {/* Column xsHidden because the mobile UI would repeat too many articles */}
       <div
         dangerouslySetInnerHTML={{
           __html:
             '<iframe style="width:100%; height:309px;" src="//e.issuu.com/embed.html#9521608/55321841" frameborder="0" allowfullscreen></iframe>',
         }}
+        // TODO: Issu & Newspaper/Volume/Issue's have to become Rails models
         className={classes.issuuEmbed}
       />
       {primaryArticle && (
