@@ -1,3 +1,5 @@
+/* Row of recommended articles on the bottom of the Article Page */
+
 import React from "react";
 import injectSheet from "react-jss";
 import { Row, Col } from "react-bootstrap/lib";
@@ -65,10 +67,15 @@ const styles = {
     RecommendedRow: {
       padding: "0 2%",
     },
+    recommendedList: {
+      "& > .row > div": {
+        padding: "0px !important",
+        marginBottom: "38px",
+      },
+    },
   },
 };
 
-/* Row of recommended articles on the bottom of the Article Page */
 const RecommendedRow = ({ classes, data }) => {
   if (data.loading) {
     return null;

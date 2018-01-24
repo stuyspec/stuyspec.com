@@ -9,7 +9,7 @@ const styles = {
     marginBottom: "12px",
   },
   figure: {
-    marginBottom: "4px",
+    marginBottom: "16px",
     overflow: "hidden",
     width: "100%",
     "& img": {
@@ -22,7 +22,7 @@ const styles = {
     fontFamily: "Circular Std",
     fontSize: "12px",
     fontWeight: 300,
-    margin: "12px 0",
+    marginBottom: "12px",
     textTransform: "uppercase",
     "&:hover, &:active, &:focus": {
       color: "#000",
