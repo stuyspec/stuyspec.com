@@ -119,7 +119,7 @@ const RightColumn = ({ classes, articles, sections, outquotes }) => {
       <div
         dangerouslySetInnerHTML={{
           __html:
-            '<iframe style="width:100%; height:309px;" src="//e.issuu.com/embed.html#9521608/57360506" frameborder="0" allowfullscreen></iframe>',
+            '<iframe style="width:100%; height:309px;" src="//e.issuu.com/embed.html#9521608/57642557" frameborder="0" allowfullscreen></iframe>',
         }}
         className={classes.issuuEmbed}
       />
@@ -168,12 +168,12 @@ const RightColumn = ({ classes, articles, sections, outquotes }) => {
         </div>
       )}
 
-      <Link to="/" className={classes.label}>
-        SING! 2017 Senior Playlist
+      <Link to="https://open.spotify.com/user/1225511959/playlist/5kkx7i6sMHdeMB5pJY29Zw" className={classes.label}>
+        Spooktator Playlist
       </Link>
       <iframe
         className={classes.spotifyEmbed}
-        src="https://open.spotify.com/embed/user/spec.ae/playlist/4FrJhYPbWrWF3fYkzGZPy1"
+        src="https://open.spotify.com/embed/user/1225511959/playlist/5kkx7i6sMHdeMB5pJY29Zw"
         frameBorder="0"
         allowTransparency="true"
       />
