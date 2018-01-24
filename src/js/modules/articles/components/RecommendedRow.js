@@ -38,6 +38,16 @@ const styles = {
     padding: 0,
     marginBottom: "24px",
   },
+  title: {
+    border: "1px solid #ddd",
+    borderStyle: "solid none", // only top-bottom borders
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "26px",
+    marginBottom: "24px",
+    padding: "12px 0 13px",
+    textAlign: "center",
+  },
   recommendedList: {
     borderBottom: "solid 1px #ddd",
     padding: "0 0 24px",
@@ -50,13 +60,6 @@ const styles = {
     "& > .row > div:last-child": {
       paddingRight: "0 !important",
     },
-  },
-  recommendedText: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "12px",
-    marginBottom: "12px",
-    textTransform: "uppercase",
   },
   "@media (max-width: 991px)": {
     RecommendedRow: {
@@ -85,7 +88,9 @@ const RecommendedRow = ({ classes, data }) => {
   const { topRankedArticles } = data;
   return (
     <Row className={classes.RecommendedRow}>
-      <p className={classes.recommendedText}>Recommended</p>
+      <Col xs={12} sm={12} md={12} lg={12} className={classes.title}>
+        Recommended
+      </Col>
       <Col xs={12} sm={12} md={12} lg={12} className={classes.recommendedList}>
         <Row>
           {topRankedArticles

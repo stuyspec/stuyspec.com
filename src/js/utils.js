@@ -17,7 +17,8 @@ export const shortenSummary = article => {
       .replace(SPEC_REFERENCE_PATTERN, '')
       .replace(SPEC_IMG_CAROUSEL_PATTERN, '')
       .replace(/<p>|<\/p>|<br>|<br\/>|<b>/g, '')
-      .replace(/<h4>|<\/h4>/g, '')
+      .replace(/<h4>|<\/h4>/g, ' ')
+      .replace(/<i>|<\/i>/g, ' ')
       .replace(/<\/b>/g, ' ');
     return articleSummary
       .split(" ")

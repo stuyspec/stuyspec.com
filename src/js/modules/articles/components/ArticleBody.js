@@ -2,6 +2,7 @@ import React from "react";
 import injectSheet from "react-jss";
 import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
+
 import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 import ArticleReference from "./ArticleReference";
 import RightRail from "./RightRail";
@@ -56,6 +57,16 @@ const styles = {
     },
     "& spec-reference": {
       display: "none",
+    },
+  },
+  print: {
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontStyle: "italic",
+    "& a": {
+      "&:hover, &:active, &:focus": {
+        color: "#999",
+      },
     },
   },
   content: {

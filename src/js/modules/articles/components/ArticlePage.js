@@ -8,11 +8,8 @@ import Grid from "react-bootstrap/lib/Grid";
 import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
 import { Helmet } from "react-helmet";
-import { toRoman } from "roman-numerals";
 import { SPEC_REFERENCE_PATTERN } from "../../../constants";
-import ArticleHeader from "./ArticleHeader";
-import ArticleBody from "./ArticleBody";
-import RecommendedRow from "./RecommendedRow";
+import { ArticleHeader, ArticleBody, ArticleFooter, RecommendedRow } from "./";
 import CommentThread from "../../comments/components/CommentThread";
 import NotFoundPage from "../../core/components/NotFoundPage";
 
@@ -70,15 +67,6 @@ const ArticleQuery = gql`
 `;
 
 const styles = {
-  description: {
-    border: "1px solid #ddd",
-    borderStyle: "solid none", // only top-bottom borders
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "16px",
-    marginBottom: "24px",
-    padding: "12px 0 13px",
-  },
   subscribe: {
     color: "#3572b7",
     "&:hover, &:focus, &:active": {
@@ -96,14 +84,6 @@ const styles = {
   "@media (max-width: 991px)": {
     ArticlePage: {
       padding: 0,
-    },
-    descriptionRow: {
-      padding: "0 10%",
-    },
-  },
-  "@media (max-width: 767px)": {
-    descriptionRow: {
-      padding: "0 2%",
     },
   },
 };
@@ -123,23 +103,7 @@ const ArticlePage = ({ classes, data }) => {
       </Helmet>
       <ArticleHeader article={articleBySlug} />
       <ArticleBody article={articleBySlug} />
-      <Row className={classes.descriptionRow}>
-        <Col xs={12} sm={12} md={9} lg={9} className={classes.description}>
-          This article was published in&nbsp;
-          <a
-            className={classes.subscribe}
-            href="https://issuu.com/stuyspectator/docs"
-            target="_blank"
-          >
-            {`Volume ${toRoman(
-              articleBySlug.volume,
-            )}, Issue ${articleBySlug.issue}`}
-            {/* TODO: Lookup table for individual volume/issue links */}
-          </a>
-          .
-        </Col>
-        <Col xsHidden smHidden md={3} lg={3} />
-      </Row>
+      <ArticleFooter article={articleBySlug} />
       <RecommendedRow section={section.parentSection || section} />
       <CommentThread article={articleBySlug} />
     </Grid>
