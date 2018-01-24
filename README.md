@@ -14,14 +14,13 @@ git clone https://github.com/stuyspec/client-app
 ```
 cd client-app/
 ```
-3. Install the node packages used in this project with <u>N</u>ode Package Manager: 
+3. Install the node modules used in this project with Node Package Manager: 
 ```
-npm install
+npm install && npm install -g gulp-cli
 ```
-4. Build and begin a live reload server on `http://localhost:8080`: 
-```
-gulp
-```
+
+## Running the app
+Build and begin a live reload server on `http://localhost:8080` by simply running `gulp`.
 
 To set up the development data server, follow the instructions on our the README of our [API](https://github.com/stuyspec/stuy-spec-api). If, however, you need to use data from the real, production API, go to `client-app/src/js/constants.js` and modify the file like so:
 ```
@@ -35,7 +34,7 @@ Be sure to undo these changes whenever committing to a develop, staging, or prod
 ## Contribution
 
 ### Prettier
-We use  [Prettier](https://github.com/prettier/prettier) to Webstorm to make sure all developers have a uniform coding style. Add `prettier` with `yarn global add prettier`. To run Prettier, `cd` to the root of client-app and run
+We use [Prettier](https://github.com/prettier/prettier) to make sure all developers have a uniform coding style. Add `prettier` with `yarn global add prettier`. To run Prettier, `cd` to the root of client-app and run
 ```
 find ./src/js/modules -type f -name '*.js' | xargs prettier --write --trailing-comma all
 ```
