@@ -22,15 +22,18 @@ export const closeLightbox = () => ({
 });
 
 export const fetchAllData = () => {
+  const loadingIcon = document.querySelector(".loading");
   return dispatch => {
     dispatch({ type: t.FETCH_INIT_DATA_PENDING });
     axios
       .get(`${STUY_SPEC_API_URL}/init`, STUY_SPEC_API_HEADERS)
       .then(response => {
         validateSlices(response.data);
+        loadingIcon.parentNode.removeChild(loadingIcon);
         dispatch({ type: t.FETCH_INIT_DATA_FULFILLED, payload: response.data });
       })
       .catch(err => {
+        loadingIcon.parentNode.removeChild(loadingIcon);
         dispatch({
           type: t.FETCH_INIT_DATA_REJECTED,
           payload: err,

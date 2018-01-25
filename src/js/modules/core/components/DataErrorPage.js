@@ -42,7 +42,7 @@ const styles = {
   },
 };
 
-const DataErrorPage = ({ classes, error, action }) => {
+const DataErrorPage = ({ classes, action }) => {
   return (
     <Grid className={classes.DataErrorPage}>
       <Helmet>
