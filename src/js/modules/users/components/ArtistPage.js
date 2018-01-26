@@ -32,6 +32,7 @@ const ArtistBySlug = gql`
             last_name
           }
           section {
+            id
             permalink
           }
         }
@@ -85,6 +86,8 @@ const ArtistPage = ({ classes, data, match }) => {
   if (data.loading) {
     return null;
   }
+
+  console.log(data);
 
   const artist = data.userBySlug;
   if (!artist) {

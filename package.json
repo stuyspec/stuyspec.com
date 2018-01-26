@@ -11,7 +11,7 @@
   "main": "app.js",
   "scripts": {
     "start": "gulp build && node app",
-    "dev": "gulp && node app --dev"
+    "dev": "node app --dev | gulp dev"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

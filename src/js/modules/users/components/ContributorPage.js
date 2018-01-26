@@ -27,6 +27,7 @@ const ContributorBySlug = gql`
           last_name
         }
         section {
+          id
           permalink
         }
         media {
