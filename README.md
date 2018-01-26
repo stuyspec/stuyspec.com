@@ -20,7 +20,6 @@ npm install && npm install -g gulp-cli
 ```
 
 ## Running the app
-Build and begin a live reload server on `http://localhost:8080` by simply running `gulp`.
 
 To set up the development data server, follow the instructions on our the README of our [API](https://github.com/stuyspec/stuy-spec-api). If, however, you need to use data from the real, production API, go to `client-app/src/js/constants.js` and modify the file like so:
 ```
@@ -30,6 +29,17 @@ UNCOMMENT THIS LINE   --> //export const STUY_SPEC_API_URL = "https://api.stuysp
 ...
 ```
 Be sure to undo these changes whenever committing to a develop, staging, or production branch (`develop`, `staging`, `master`, respectively).
+
+### With Live-Reload Server
+Build and begin a live reload server on `http://localhost:8080` by simply running `gulp`.
+
+### Typical Node/Express Development Server
+If you would like to run without a hot reload server in dev mode, static changes can be detected when refreshing without re-running the dev server. Simply run `gulp dev` and then in another console `node app --dev` (port can be specified as param but default is `3002`).
+
+You can also run the npm script `dev` to do the same thing:
+```
+$ npm run-script dev
+```
 
 ## Contribution
 
