@@ -115,7 +115,7 @@ const SectionFeature = ({
 }) => {
   const sectionArticles = articles.filter(
     article => article.sectionId === section.id && article !== without,
-  );  
+  );
   console.log(sectionArticles);
   const primaryArticle =
     sectionArticles[0] === articles[0]

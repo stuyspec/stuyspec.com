@@ -257,10 +257,8 @@ const PageFooter = ({
         </Col>
         <Col xs={12} smHidden mdHidden lgHidden className={classes.creditLine}>
           <hr className={classes.hr} />
-          Created by{" "}
-          <a href="https://github.com/stuyspec">
-            The Spectator Web Department
-          </a>, 2017.
+          Created by The Spectator Web Department, 2017. This site is{" "}
+          <a href="https://github.com/stuyspec">open source</a>!
         </Col>
       </Row>
     </Grid>

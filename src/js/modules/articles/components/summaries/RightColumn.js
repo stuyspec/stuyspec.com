@@ -168,7 +168,10 @@ const RightColumn = ({ classes, articles, sections, outquotes }) => {
         </div>
       )}
 
-      <Link to="https://open.spotify.com/user/1225511959/playlist/5kkx7i6sMHdeMB5pJY29Zw" className={classes.label}>
+      <Link
+        to="https://open.spotify.com/user/1225511959/playlist/5kkx7i6sMHdeMB5pJY29Zw"
+        className={classes.label}
+      >
         Spooktator Playlist
       </Link>
       <iframe
