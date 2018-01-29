@@ -3,6 +3,7 @@
 // TODO -> come up with cleaner way of keeping track
 // TODO... of update count, preventing bump-version, etc
 var _global = { DEV_MODE: false };
+require('dotenv').config();
 
 var gulp = require("gulp"),
   uglify = require("gulp-uglify"),
@@ -357,7 +358,7 @@ function scripts(p) {
     stream = stream.pipe(
       replace(
         "__API_URL_HERE__",
-        _global.DEV_MODE ? "http://localhost:3000" : "https://api.stuyspec.com"
+        _global.DEV_MODE ? process.env.DEV_API : process.env.PROD_API
       )
     );
     stream = stream.pipe(
