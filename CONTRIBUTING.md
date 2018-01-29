@@ -1,0 +1,229 @@
+# Contribution Guidelines
+
+### Setup
+
+- [Prerequisites](#prerequisites)
+- [Forking the Project](#forking-the-project)
+- [Setup client-app](#setup-client-app)
+- [Create a Branch](#create-a-branch)
+
+### Create
+
+- [Make Changes](#make-changes)
+
+### Submit
+
+- [Creating a Pull Request](#creating-a-pull-request)
+- [Next Steps](#next-steps)
+
+### Prerequisites
+
+| Prerequisite                                | Version |
+| ------------------------------------------- | ------- |
+| [Node.js](http://nodejs.org)                | `~ ^8.9.3`  |
+| npm (comes with Node)                       | `~ ^5`  |
+
+> _[What's the difference between a tilde (~) and a caret (^) in a npm package.json file?](https://michaelsoolee.com/npm-package-tilde-caret/)_.
+
+If Node.js is already installed on your machine, run the following commands to validate the versions:
+
+```shell
+node -v
+```
+
+### Forking the Project
+
+#### Setting Up Your System
+
+1. Install [Git](https://git-scm.com/) or your favorite Git client.
+2. (Optional) [Setup an SSH Key](https://help.github.com/articles/generating-an-ssh-key/) for GitHub.
+
+#### Forking client-app
+
+1. Go to the top level client-app repository: <https://github.com/stuyspec/client-app>
+2. Click the "Fork" Button in the upper right hand corner of the interface ([More Details Here](https://help.github.com/articles/fork-a-repo/))
+3. After the repository (repo) has been forked, you will be taken to your copy of the freeCodeCamp repo at <https://github.com/YOUR_USERNAME/client-app>
+
+#### Cloning Your Fork
+
+1. Open a Terminal / Command Line / Bash Shell in your projects directory (_i.e.: `/yourprojectdirectory/`_)
+2. Clone your fork of client-app
+
+```shell
+$ git clone https://github.com/YOUR_USERNAME/freeCodeCamp.git
+```
+
+This will download the entire client-app repo to your projects directory.
+
+#### Setup Your Upstream
+
+1. Change directory to the new client-app directory (`cd client-app`)
+2. Add a remote to the official client-app repo:
+
+```shell
+$ git remote add upstream https://github.com/stuyspec/client-app.git
+```
+
+Congratulations, you now have a local copy of the client-app repo!
+
+#### Maintaining Your Fork
+
+Now that you have a copy of your fork, there is work you will need to do to keep it current.
+
+##### Rebasing from Upstream
+
+Do this prior to every time you create a branch for a pull request (PR):
+
+1. Make sure you are on the `develop` branch
+
+```shell
+$ git status
+On branch develop
+Your branch is up-to-date with 'origin/develop'.
+```
+If your aren't on `develop`, resolve outstanding files / commits and checkout the `develop` branch
+
+```shell
+$ git checkout develop
+```
+
+2. Do a pull with rebase against `upstream`
+
+```shell
+$ git pull --rebase upstream develop
+```
+
+This will pull down all of the changes to the official develop branch, without making an additional commit in your local repo.
+
+### Setup client-app
+
+Once you have client-app cloned, before you start the application, you first need to install all of the dependencies:
+
+```bash
+# Install NPM dependencies
+npm install && npm install -g gulp-cli
+```
+
+Now you will need to [setup our API on localhost](https://github.com/stuyspec/stuy-spec-api/blob/develop/README.md). After you have done that, you can start the application:
+
+```bash
+# Start the Express server in another terminal
+$ node app --dev
+
+# Start the application
+$ gulp dev
+```
+
+Now navigate to your browser and open <http://localhost:3002>. If the app loads, congratulations – you're all set.
+
+#### Using Production Database
+If you want to use data from the real, production API, go to `client-app/src/js/constants.js` and modify the file like so:
+```
+...
+COMMENT THIS LINE OUT --> export const STUY_SPEC_API_URL = "__API_URL_HERE__";
+UNCOMMENT THIS LINE   --> //export const STUY_SPEC_API_URL = "https://api.stuyspec.com";
+...
+```
+Be sure to undo these changes whenever pushing to origin.
+
+### Create a Branch
+
+Before you start working, you will need to create a separate branch specific to the issue / feature you're working on. You will push your work to this branch.
+
+#### Naming Your Branch
+
+Name the branch something like `fix/xxx` or `feature/xxx` where `xxx` is a short description of the changes or feature 
+you are attempting to add. For example `fix/email-login` would be a branch where you fix something specific to email login.
+
+#### Adding Your Branch
+
+To create a branch on your local machine (and switch to this branch):
+
+```shell
+$ git checkout -b [name_of_your_new_branch]
+```
+
+and to push to GitHub:
+
+```shell
+$ git push origin [name_of_your_new_branch]
+```
+
+**If you need more help with branching, take a look at [this](https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches).**
+
+### Make Changes
+
+This bit is up to you!
+
+When you're ready to share your code, create a pull request.
+
+### Creating a Pull Request
+
+A pull request (PR) is a method of submitting proposed changes to the client-app
+repo (or any repo, for that matter). You will make changes to copies of the
+files which make up client-app in a personal fork, then apply to have them
+accepted by client-app proper.
+
+1.  Perform the maintenance step of rebasing `develop`.
+2.  Ensure you are on the `develop` branch using `git status`:
+
+```bash
+$ git status
+On branch develop
+Your branch is up-to-date with 'origin/develop'.
+
+nothing to commit, working directory clean
+```
+
+1.  If you are not on develop or your working directory is not clean, resolve
+    any outstanding files/commits and checkout develop `git checkout develop`
+
+2.  Create a branch off of `develop` with git: `git checkout -B
+    branch/name-here` **Note:** Branch naming is important. Use a name like
+    `fix/short-fix-description` or `feature/short-feature-description`.
+
+3.  Edit your file(s) locally with the editor of your choice.
+
+4.  Check your `git status` to see unstaged files.
+
+5.  Add your edited files: `git add path/to/filename.ext` You can also do: `git
+    add .` to add all unstaged files. Take care, though, because you can
+    accidentally add files you don't want added. Review your `git status` first.
+
+6.  Commit your edits. Refer to [Writing good commit messages](https://github.com/erlang/otp/wiki/writing-good-commit-messages).
+
+7.  Push your commits to your GitHub Fork: `git push origin branch/name-here`
+
+In your web browser go to your repository fork's GitHub Page.
+
+1.  Once the edits have been committed, you will be prompted to create a pull
+    request on that page.
+
+2.  By default, all pull requests should be against the client-app main repo, `develop`
+    branch.
+
+3.  Submit a pull request to client-app's `develop` branch.
+
+4.  The title (also called the subject) of your PR should be descriptive of your
+    changes and succinctly indicates what is being fixed.
+
+    -   Examples: `Add Test Cases to Bonfire Drop It` `Correct typo in Waypoint
+        Size Your Images`
+
+5.  In the body of your PR include a more detailed summary of the changes you
+    made and why.
+
+    -   If the PR is meant to fix an existing bug/issue then, at the end of
+        your PR's description, append the keyword `closes` and #xxxx (where xxxx
+        is the issue number). Example: `closes #1337`. This tells GitHub to
+        close the existing issue, if the PR is merged.
+
+### Next Steps
+
+#### If your PR is accepted
+
+Once your PR is accepted, you may delete the branch you created to submit it.
+This keeps your working fork clean.
+
+You can do this with a press of a button on the GitHub PR interface. You can
+delete the local copy of the branch with: `git branch -D branch/to-delete-name`
