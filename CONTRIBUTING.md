@@ -16,6 +16,9 @@
 - [Creating a Pull Request](#creating-a-pull-request)
 - [Next Steps](#next-steps)
 
+### Extras
+- [Code style and Prettier](#code-style-and-prettier)
+
 ### Prerequisites
 
 | Prerequisite                                | Version |
@@ -227,3 +230,31 @@ This keeps your working fork clean.
 
 You can do this with a press of a button on the GitHub PR interface. You can
 delete the local copy of the branch with: `git branch -D branch/to-delete-name`
+
+### Code Style and Prettier
+
+We use [Prettier](https://github.com/prettier/prettier) to make sure all developers have a uniform coding style. Add `prettier` with `yarn global add prettier`. To run Prettier, `cd` to the root of client-app and run
+```
+find ./src/js/modules -type f -name '*.js' | xargs prettier --write --trailing-comma all
+```
+
+#### Prettier with Webstorm 
+Webstorm is a popular IDE choice among JS developers, and Prettier integrates well into it. Get a free student license at [JetBrains](https://www.jetbrains.com/student/), then download and install WebStorm. In Webstorm, navigate to `WebStorm > Preferences > Tools > External Tools`.  
+
+Click on the `+` icon to add a new external tool. Then fill out the `Name` and under the Tool Settings, fill out `Program`, `Parameters` , and `Working directory`.  
+
+```
+Program: /usr/local/lib/node_modules/prettier/bin/prettier.js
+Parameters: --write --trailing-comma all $FilePathRelativeToProjectRoot$
+Working directory: $ProjectFileDir$
+```
+
+<img src="https://cdn-images-1.medium.com/max/1600/1*anZPX6XaHHBJQUC4Zz6aSA.png"/>
+
+To set the keybindings for Prettier, navigate to `WebStorm > Preferences > Keymap`. Under `Keymap`, use the search input box to search for `prettier`.
+
+<img src="https://cdn-images-1.medium.com/max/1600/1*rwhqT811uuR2X4ftQpWOPA.png"/>
+
+Double click on Prettier and add keyboard shortcut. I am on a Mac and I personally use `command + shift + p`.  
+
+You are now good to go, now any file that you want to prettify, just go to that specific file in WebStorm and then press your set keybinding and it should automatically prettify the file that you are currently viewing.  
