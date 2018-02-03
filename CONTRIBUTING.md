@@ -1,6 +1,6 @@
 # Contribution Guidelines
 
-_These guidelines are taken from [freeCodeCamp](https://github.com/freeCodeCamp/freeCodeCamp) and are protected under the BSD 3-Clause License._
+_These guidelines are based off those of [freeCodeCamp](https://github.com/freeCodeCamp/freeCodeCamp), protected under the BSD 3-Clause License._
 
 ### Setup
 
