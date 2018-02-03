@@ -1,8 +1,10 @@
 /* Row of recommended articles on the bottom of the Article Page */
 
 import React from "react";
+import { compose } from "redux";
 import injectSheet from "react-jss";
 import { Row, Col } from "react-bootstrap/lib";
+import { withRouter } from "react-router-dom";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import humps from "humps";
@@ -79,13 +81,14 @@ const styles = {
   },
 };
 
-const RecommendedRow = ({ classes, data }) => {
+const RecommendedRow = ({ classes, data, match: { params: { article_slug } } }) => {
   if (data.loading) {
     return null;
   }
   data = humps.camelizeKeys(data);
 
-  const { topRankedArticles } = data;
+  const articles = data.topRankedArticles.filter(article => article.slug !== article_slug);
+
   return (
     <Row className={classes.RecommendedRow}>
       <Col xs={12} sm={12} md={12} lg={12} className={classes.title}>
@@ -93,14 +96,14 @@ const RecommendedRow = ({ classes, data }) => {
       </Col>
       <Col xs={12} sm={12} md={12} lg={12} className={classes.recommendedList}>
         <Row>
-          {topRankedArticles
+          {articles
             .slice(0, 2)
             .map(article => (
               <ArticleRecommendation key={article.id} article={article} />
             ))}
         </Row>
         <Row>
-          {topRankedArticles
+          {articles
             .slice(2, 4)
             .map(article => (
               <ArticleRecommendation key={article.id} article={article} />
@@ -111,6 +114,10 @@ const RecommendedRow = ({ classes, data }) => {
   );
 };
 
-export default graphql(RecommendedRowQuery, {
-  options: ({ section }) => ({ variables: { section_id: section.id } }),
-})(injectSheet(styles)(RecommendedRow));
+export default compose(
+  graphql(RecommendedRowQuery, {
+    options: ({ section }) => ({ variables: { section_id: section.id } }),
+  }),
+  withRouter,
+  injectSheet(styles),
+)(RecommendedRow);
