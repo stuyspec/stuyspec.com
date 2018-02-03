@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
 import { Search } from "../../core/icons/index";
@@ -62,28 +62,42 @@ const styles = {
   },
 };
 
-const SearchForm = ({ classes, handleSubmit, submitting }) => {
-  return (
-    <form onSubmit={handleSubmit} className={classes.SearchForm}>
-      <div className={classes.inputContainer}>
-        <Search className={classes.search} />
-        <Field
-          name="search"
-          type="text"
-          component="input"
-          placeholder="Enter search terms"
-        />
-        <button
-          type="submit"
-          disabled={submitting}
-          className={classes.submitButton}
-        >
-          Go
-        </button>
-      </div>
-    </form>
-  );
-};
+class SearchForm extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillMount() {
+    const { query, initialize } = this.props;
+    if (query) {
+      initialize({ query });
+    }
+  }
+
+  render() {
+    const { classes, handleSubmit, submitting } = this.props;
+    return (
+      <form onSubmit={handleSubmit} className={classes.SearchForm}>
+        <div className={classes.inputContainer}>
+          <Search className={classes.search} />
+          <Field
+            name="query"
+            type="text"
+            component="input"
+            placeholder="Enter search terms"
+          />
+          <button
+            type="submit"
+            disabled={submitting}
+            className={classes.submitButton}
+          >
+            Go
+          </button>
+        </div>
+      </form>
+    );
+  }
+}
 
 export default reduxForm({
   form: "search",

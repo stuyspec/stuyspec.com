@@ -5,6 +5,8 @@ export { default as ArticleFooter } from "./ArticleFooter";
 export { default as RecommendedRow } from "./RecommendedRow";
 export { default as ArticleList } from "./ArticleList";
 export { default as SearchPage } from "./SearchPage";
+export { default as SearchForm } from "./SearchForm";
+export { default as SearchResults } from "./SearchResults";
 export { default as RecommendedPage } from "./RecommendedPage";
 export { default as LatestPage } from "./LatestPage";
 export { default as Byline } from "./Byline";
