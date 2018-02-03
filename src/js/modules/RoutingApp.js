@@ -54,7 +54,11 @@ class RoutingApp extends PureComponent {
   }
 
   render() {
-    const { data: { loading, error, allSections }, session, descriptions } = this.props;
+    const {
+      data: { loading, error, allSections },
+      session,
+      descriptions,
+    } = this.props;
     return (
       <ConnectedRouter history={appHistory}>
         <PageLayout>
@@ -121,14 +125,22 @@ class RoutingApp extends PureComponent {
                 path={"/myaccount"}
                 key={"signIn"}
                 render={() =>
-                  session ? <Redirect to="/myaccount/profile" /> : <SignInPage />}
+                  session ? (
+                    <Redirect to="/myaccount/profile" />
+                  ) : (
+                    <SignInPage />
+                  )}
               />
               <Route
                 exact
                 path="/myaccount/sign-up"
                 key={"signUp"}
                 render={() =>
-                  session ? <Redirect to="/myaccount/profile" /> : <SignUpPage />}
+                  session ? (
+                    <Redirect to="/myaccount/profile" />
+                  ) : (
+                    <SignUpPage />
+                  )}
               />
               <Route
                 exact
@@ -144,12 +156,7 @@ class RoutingApp extends PureComponent {
                 render={() =>
                   session ? <EditProfilePage /> : <Redirect to="/myaccount" />}
               />
-              <Route
-                exact
-                path={"/search"}
-                key={"search"}
-                component={SearchPage}
-              />
+              <Route path={"/search"} key={"search"} component={SearchPage} />
               <Route path="*" key={"404"} component={NotFoundPage} />
             </Switch>
           ) : (

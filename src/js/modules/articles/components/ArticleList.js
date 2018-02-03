@@ -40,10 +40,6 @@ const styles = {
       lineHeight: 1,
     },
   },
-  noArticlesMessage: {
-    fontFamily: "Minion Pro",
-    fontSize: "17px",
-  },
 };
 
 const ArticleList = ({ classes, articles, title, label }) => {
@@ -70,12 +66,6 @@ const ArticleList = ({ classes, articles, title, label }) => {
       {articles.map(article => {
         return <ArticleRow article={article} key={article.id} />;
       })}
-      {articles.length === 0 && (
-        <p className={classes.noArticlesMessage}>
-          We are still in the process of uploading old articles. Please check
-          back at a later time.
-        </p>
-      )}
     </Grid>
   );
 };

@@ -10,7 +10,7 @@ import SubscriptionForm from "../../accounts/components/forms/SubscriptionForm";
 import { subscribe } from "../../accounts/actions";
 
 const styles = {
-  ArticleFooter: {    
+  ArticleFooter: {
     fontFamily: "Minion Pro",
   },
   inPrint: {
@@ -41,14 +41,16 @@ const styles = {
     },
     "& > div > form > div:first-child": {
       width: "80%",
-      "& > div > input": { // email input
+      "& > div > input": {
+        // email input
         borderRadius: "3px 0 0 3px",
         width: "100%",
       },
     },
     "& > div > form > div:last-child": {
       width: "20%",
-      "& > button": { // "Subscribe" button
+      "& > button": {
+        // "Subscribe" button
         borderRadius: "0 3px 3px 0",
         margin: 0,
         width: "100%",
@@ -78,18 +80,20 @@ const ArticleFooter = ({ classes, article, subscribe }) => {
             href="https://issuu.com/stuyspectator/docs"
             target="_blank"
           >
-            {`Volume ${toRoman(
-              article.volume,
-            )}, Issue ${article.issue}`}
+            {`Volume ${toRoman(article.volume)}, Issue ${article.issue}`}
             {/* TODO: Lookup table for individual volume/issue links */}
           </a>
           .
         </p>
         <p className={classes.subscriptionCTA}>
-          Never miss a <i>Spectator</i> issue again. Sign up for for our newsletter to receive a weekly e-mail with staff-picked stories.
+          Never miss a <i>Spectator</i> issue again. Sign up for for our
+          newsletter to receive a weekly e-mail with staff-picked stories.
         </p>
         <div className={classes.subscriptionFormContainer}>
-          <SubscriptionForm onSubmit={values => subscribe(values)} callToAction="Go"/>
+          <SubscriptionForm
+            onSubmit={values => subscribe(values)}
+            callToAction="Go"
+          />
         </div>
       </Col>
       <Col xsHidden smHidden md={4} lg={4} />
@@ -101,4 +105,6 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ subscribe }, dispatch);
 };
 
-export default connect(null, mapDispatchToProps)(injectSheet(styles)(ArticleFooter));
+export default connect(null, mapDispatchToProps)(
+  injectSheet(styles)(ArticleFooter),
+);

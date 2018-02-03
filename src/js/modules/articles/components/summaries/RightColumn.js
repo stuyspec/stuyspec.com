@@ -94,8 +94,10 @@ const styles = {
 const RightColumn = ({ classes, articles }) => {
   if (articles.length !== 2) {
     // TODO: Better way to handle this
-    return <Col xsHidden sm={3} md={3} lg={3} className={classes.RightColumn} />;
-  }  
+    return (
+      <Col xsHidden sm={3} md={3} lg={3} className={classes.RightColumn} />
+    );
+  }
   const [primaryArticle, secondaryArticle] = articles;
   const primarySection = primaryArticle.section;
   const secondarySection = secondaryArticle.section;

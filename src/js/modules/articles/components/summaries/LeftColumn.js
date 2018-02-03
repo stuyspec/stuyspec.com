@@ -99,7 +99,7 @@ const LeftColumn = ({ classes, articles }) => {
   if (articles.length !== 3) {
     // TODO: Better way to handle this
     return <Col xsHidden sm={3} md={3} lg={3} className={classes.LeftColumn} />;
-  }  
+  }
   const [primaryArticle, secondaryArticle, outquoteArticle] = articles;
   const primarySection = primaryArticle.section;
   const secondarySection = secondaryArticle.section;

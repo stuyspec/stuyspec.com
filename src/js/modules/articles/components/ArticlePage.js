@@ -93,8 +93,10 @@ const ArticlePage = ({ classes, data }) => {
     return null;
   }
   data = humps.camelizeKeys(data);
+
   const { articleBySlug } = data;
   const { section } = articleBySlug;
+
   return (
     <Grid fluid className={classes.ArticlePage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
