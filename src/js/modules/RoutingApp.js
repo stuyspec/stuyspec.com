@@ -60,7 +60,7 @@ class RoutingApp extends PureComponent {
       descriptions,
     } = this.props;
 
-    if (!loading) {
+    if (document.getElementById("loading") && !loading) {
       const loadingIcon = document.getElementById("loading");
       loadingIcon.parentNode.removeChild(loadingIcon);
     }
