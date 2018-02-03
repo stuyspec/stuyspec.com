@@ -6,8 +6,8 @@ _These guidelines are based off those of [freeCodeCamp](https://github.com/freeC
 
 - [Prerequisites](#prerequisites)
 - [Forking the Project](#forking-the-project)
-- [Set Up client-app](#set-up-client-app)
 - [Set Up MailHog](#set-up-mailhog)
+- [Set Up client-app](#set-up-client-app)
 - [Create a Branch](#create-a-branch)
 
 ### Create
