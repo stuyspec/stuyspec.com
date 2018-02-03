@@ -6,7 +6,8 @@ _These guidelines are based off those of [freeCodeCamp](https://github.com/freeC
 
 - [Prerequisites](#prerequisites)
 - [Forking the Project](#forking-the-project)
-- [Setup client-app](#setup-client-app)
+- [Set Up MailHog](#set-up-mailhog)
+- [Set Up client-app](#set-up-client-app)
 - [Create a Branch](#create-a-branch)
 
 ### Create
@@ -41,7 +42,7 @@ node -v
 #### Setting Up Your System
 
 1. Install [Git](https://git-scm.com/) or your favorite Git client.
-2. (Optional) [Setup an SSH Key](https://help.github.com/articles/generating-an-ssh-key/) for GitHub.
+2. (Optional) [Set Up an SSH Key](https://help.github.com/articles/generating-an-ssh-key/) for GitHub.
 
 #### Forking client-app
 
@@ -60,7 +61,7 @@ $ git clone https://github.com/YOUR_USERNAME/freeCodeCamp.git
 
 This will download the entire client-app repo to your projects directory.
 
-#### Setup Your Upstream
+#### Set Up Your Upstream
 
 1. Change directory to the new client-app directory (`cd client-app`)
 2. Add a remote to the official client-app repo:
@@ -100,7 +101,30 @@ $ git pull --rebase upstream develop
 
 This will pull down all of the changes to the official develop branch, without making an additional commit in your local repo.
 
-### Setup client-app
+### Set Up MailHog
+
+To be able to test account creation, you need to set up MailHog. MailHog is a local SMTP mail server that will catch the emails your client-app instance is sending. How you install MailHog is dependent upon your OS. 
+
+#### macOS
+
+Here is how to set up MailHog on macOS with [Homebrew](https://brew.sh/):
+
+```bash
+brew install mailhog
+brew services start mailhog
+```
+
+Open <http://localhost:8025/> to see caught mail.
+
+#### Windows
+
+Download the latest MailHog version from [MailHog's official repository](https://github.com/mailhog/MailHog/blob/master/docs/RELEASES.md). Click on the link for your Windows version (32 or 64 bit) and .exe file will be downloaded to your computer.
+
+Once it finishes downloading, click on the file. You will probably get a Windows firewall notification where you will have to allow access to MailHog. Once you do, a standard Windows command line prompt will open with MailHog already running.
+
+To close MailHog, close the command prompt. To run it again, click on the same .exe file. You don't need to download a new one.
+
+### Set Up client-app
 
 Once you have client-app cloned, before you start the application, you first need to install all of the dependencies:
 
@@ -109,23 +133,15 @@ Once you have client-app cloned, before you start the application, you first nee
 npm install && npm install -g gulp-cli
 ```
 
-Now you will need to [setup our API on localhost](https://github.com/stuyspec/stuy-spec-api/blob/develop/README.md). After you have done that, you can start the application:
+Now you will need to [set up our API on localhost](https://github.com/stuyspec/stuy-spec-api/blob/develop/README.md). After you have done that, you can start the application:
 
 ```bash
 npm run dev
 ```
 
-Now navigate to your browser and open <http://localhost:3002>. If the app loads, congratulations – you're all set.
+Now navigate to your browser and open <http://localhost:3002>. If the app loads, congratulations---you're all set.
 
-#### Using Production Database
-If you want to use data from the real, production API, go to `client-app/src/js/constants.js` and modify the file like so:
-```
-...
-COMMENT THIS LINE OUT --> export const STUY_SPEC_API_URL = "__API_URL_HERE__";
-UNCOMMENT THIS LINE   --> //export const STUY_SPEC_API_URL = "https://api.stuyspec.com";
-...
-```
-Be sure to undo these changes whenever pushing to origin.
+If you ever want to use data from the real, production API, give the DEV_API variable in your `.env` (dotenv) file the same value as your PROD_API.
 
 ### Create a Branch
 
