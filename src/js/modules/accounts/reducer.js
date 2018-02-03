@@ -45,7 +45,11 @@ const reducer = (state = { ...initialState }, action) => {
       };
     }
 
-    case SIGN_IN_PENDING: case SIGN_UP_PENDING: case SIGN_OUT_PENDING: case CREATE_SUBSCRIBER_PENDING: case UPDATE_USER_PENDING: {
+    case SIGN_IN_PENDING:
+    case SIGN_UP_PENDING:
+    case SIGN_OUT_PENDING:
+    case CREATE_SUBSCRIBER_PENDING:
+    case UPDATE_USER_PENDING: {
       return {
         ...state,
         status: {
@@ -125,7 +129,7 @@ const reducer = (state = { ...initialState }, action) => {
         },
       };
     }
-    
+
     case CREATE_SUBSCRIBER_FULFILLED: {
       return {
         ...state,

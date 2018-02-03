@@ -91,7 +91,12 @@ const renderField = ({
   );
 };
 
-const SubscriptionForm = ({ classes, handleSubmit, submitting, callToAction }) => {
+const SubscriptionForm = ({
+  classes,
+  handleSubmit,
+  submitting,
+  callToAction,
+}) => {
   return (
     <div className={classes.SubscriptionForm}>
       <form onSubmit={handleSubmit}>
@@ -112,7 +117,7 @@ const SubscriptionForm = ({ classes, handleSubmit, submitting, callToAction }) =
           </button>
         </div>
       </form>
-      <FormStatus formName="subscription"/>
+      <FormStatus formName="subscription" />
     </div>
   );
 };
