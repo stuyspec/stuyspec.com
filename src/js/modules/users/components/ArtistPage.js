@@ -10,13 +10,15 @@ import { ArticleList } from "../../articles/components";
 import { NotFoundPage } from "../../core/components";
 import { MEDIA_CREATOR_SLUGS } from "../../../constants";
 
-const ArtistBySlug = gql`
-  query ArtistPageQuery($slug: String!) {
-    userBySlug(slug: $slug) {
-      first_name
-      last_name
-      email
-      description
+const ArtistProfileBySlug = gql`
+  query ArtistProfileBySlug($user_slug: String!, $role_slug: String!) {
+    profileByUserSlug(user_slug: $user_slug, role_slug: $role_slug) {
+      user {
+        first_name
+        last_name
+        email
+        description
+      }
       media {
         media_type
         title
@@ -87,14 +89,14 @@ const ArtistPage = ({ classes, data, match }) => {
     return null;
   }
 
-  console.log(data);
-
-  const artist = data.userBySlug;
-  if (!artist) {
+  if (!data.profileByUserSlug) {
     return <NotFoundPage />;
   }
+
+  const artist = data.profileByUserSlug.user;
+
   const mediaType = MEDIA_CREATOR_SLUGS[match.path.split("/")[1]];
-  const articles = artist.media
+  const articles = data.profileByUserSlug.media
     .filter(medium => medium.mediaType === mediaType)
     .map(medium => ({
       ...medium.article,
@@ -129,8 +131,11 @@ const ArtistPage = ({ classes, data, match }) => {
   );
 };
 
-export default graphql(ArtistBySlug, {
+export default graphql(ArtistProfileBySlug, {
   options: ({ match }) => ({
-    variables: { slug: match.params.artist_slug },
+    variables: {
+      user_slug: match.params.artist_slug,
+      role_slug: match.path.split("/")[1], // this route will always work thanks to limits set in RoutingApp
+    },
   }),
 })(injectSheet(styles)(ArtistPage));
