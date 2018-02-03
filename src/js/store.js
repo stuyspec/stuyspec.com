@@ -11,7 +11,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 
 const middleware =
-  __DEV_ENV_HERE__ === "production"
+  "__DEV_ENV_HERE__" === "production"
     ? applyMiddleware(
         promise(),
         thunk,
