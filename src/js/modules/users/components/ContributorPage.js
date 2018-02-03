@@ -99,8 +99,10 @@ const ContributorPage = ({ classes, data }) => {
             {contributor.email}
           </a>
           <p className={classes.description}>{contributor.description}</p>
-          <div className={classes.latest}>Latest</div>
-          <ArticleList articles={contributor.articles} />
+          <ArticleList
+            articles={contributor.articles}
+            label="Latest Articles"
+          />
         </Col>
       </Row>
     </Grid>
