@@ -5,7 +5,6 @@ node_modules
 builds/**
 .idea
 .DS_STORE
-.env
 
 # script for building & uploading/creating invalidation
 aws_transport.sh
