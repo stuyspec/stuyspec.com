@@ -2,7 +2,6 @@
  * FONTS 
  * ========================= */
 
-
 @font-face {
     font-family: "Old English Text MT";
     src: url('/fonts/OldEnglishTextMT.ttf') format("truetype");
@@ -81,7 +80,6 @@ body {
     margin: 0;
 }
 
-/* For styling img alts */
 img {
     color: #000;
     font-family: "Minion Pro";
@@ -254,16 +252,15 @@ https://stackoverflow.com/a/8539107/6174302
 }
 
 /* ========================= *
- * PRINT STYLES
+ * LOADING ICON STYLES
  * ========================= */
-
-.loading {
+#loading {
     margin: 100px auto 0;
     width: 70px;
     text-align: center;
 }
 
-.loading > div {
+#loading > div {
     width: 18px;
     height: 18px;
     background-color: #333;
@@ -274,27 +271,31 @@ https://stackoverflow.com/a/8539107/6174302
     animation: sk-bouncedelay 1.4s infinite ease-in-out both;
 }
 
-.loading .bounce1 {
+#loading #bounce1 {
     -webkit-animation-delay: -0.32s;
     animation-delay: -0.32s;
 }
 
-.loading .bounce2 {
+#loading #bounce2 {
     -webkit-animation-delay: -0.16s;
     animation-delay: -0.16s;
 }
 
-@-webkit-keyframes sk-bouncedelay {
-    0%, 80%, 100% { -webkit-transform: scale(0) }
-    40% { -webkit-transform: scale(1.0) }
+ @-webkit-keyframes sk-bouncedelay {
+    0%, 80%, 100% {
+        -webkit-transform: scale(0) 
+    }
+    40% {
+        -webkit-transform: scale(1.0) 
+    }
 }
-
-@keyframes sk-bouncedelay {
+ @keyframes sk-bouncedelay {
     0%, 80%, 100% {
         -webkit-transform: scale(0);
         transform: scale(0);
-    } 40% {
-          -webkit-transform: scale(1.0);
-          transform: scale(1.0);
-      }
+    }
+    40% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+    }
 }

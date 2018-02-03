@@ -59,6 +59,12 @@ class RoutingApp extends PureComponent {
       session,
       descriptions,
     } = this.props;
+
+    if (!loading) {
+      const loadingIcon = document.getElementById("loading");
+      loadingIcon.parentNode.removeChild(loadingIcon);
+    }
+    
     return (
       <ConnectedRouter history={appHistory}>
         <PageLayout>
