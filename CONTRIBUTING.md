@@ -139,17 +139,9 @@ Now you will need to [set up our API on localhost](https://github.com/stuyspec/s
 npm run dev
 ```
 
-Now navigate to your browser and open <http://localhost:3002>. If the app loads, congratulations – you're all set.
+Now navigate to your browser and open <http://localhost:3002>. If the app loads, congratulations---you're all set.
 
-#### Using Production Database
-If you want to use data from the real, production API, go to `client-app/src/js/constants.js` and modify the file like so:
-```
-...
-COMMENT THIS LINE OUT --> export const STUY_SPEC_API_URL = "__API_URL_HERE__";
-UNCOMMENT THIS LINE   --> //export const STUY_SPEC_API_URL = "https://api.stuyspec.com";
-...
-```
-Be sure to undo these changes whenever pushing to origin.
+If you ever want to use data from the real, production API, give the DEV_API variable in your `.env` (dotenv) file the same value as your PROD_API.
 
 ### Create a Branch
 
