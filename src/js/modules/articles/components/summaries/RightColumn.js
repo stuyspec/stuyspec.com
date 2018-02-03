@@ -107,7 +107,7 @@ const RightColumn = ({ classes, articles }) => {
       <div
         dangerouslySetInnerHTML={{
           __html:
-            '<iframe style="width:100%; height:309px;" src="//e.issuu.com/embed.html#9521608/55321841" frameborder="0" allowfullscreen></iframe>',
+            '<iframe style="width:100%; height:309px;" src="//e.issuu.com/embed.html#9521608/57642557" frameborder="0" allowfullscreen></iframe>',
         }}
         // TODO: Issu & Newspaper/Volume/Issue's have to become Rails models
         className={classes.issuuEmbed}

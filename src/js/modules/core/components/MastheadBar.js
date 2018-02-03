@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
-import NavButton from "./NavButton";
 import MobileNavButton from "./MobileNavButton";
 import { FeaturedSectionsBar } from "../../sections/components";
 
