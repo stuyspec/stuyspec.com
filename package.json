@@ -74,6 +74,7 @@
     "ejs": "^2.5.7",
     "envify": "^4.1.0",
     "express": "^4.16.2",
+    "gulp-version-number": "^0.1.7",
     "http-errors": "^1.6.2",
     "jsesc": "^2.5.1",
     "jss": "^8.1.0",
