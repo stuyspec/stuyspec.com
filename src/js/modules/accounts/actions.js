@@ -1,5 +1,6 @@
 import axios from "axios";
 import appHistory from "../../tools/appHistory";
+import { reset } from "redux-form";
 
 import * as t from "./actionTypes";
 import { CREATE_USER_FULFILLED } from "../users/actionTypes";

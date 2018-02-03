@@ -5,6 +5,7 @@ import injectSheet from "react-jss";
 const styles = {
   successMessage: {
     color: "green",
+    marginTop: "10px",
   },
   errorMessage: {
     color: "red",

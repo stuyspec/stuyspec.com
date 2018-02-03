@@ -141,11 +141,15 @@ const reducer = (state = { ...initialState }, action) => {
       };
     }
     case CREATE_SUBSCRIBER_REJECTED: {
+      let errors = (action.payload.response &&
+            action.payload.response.data.errors) || [action.payload.message];
+      if (action.payload.response.status === 422) {
+        errors= ["This email is already subscribed to the newsletter."];
+      }
       return {
         ...state,
         status: {
-          errors: (action.payload.response &&
-            action.payload.response.data.errors) || [action.payload.message],
+          errors,
           message: null,
           formName: "subscription",
         },

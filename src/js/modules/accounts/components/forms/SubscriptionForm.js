@@ -7,18 +7,8 @@ import { EMAIL_REGEX } from "../../../../constants";
 import FormStatus from "./FormStatus";
 
 const styles = {
-  SignInForm: {
-    fontFamily: "Minion Pro",
-    "& form div": {
-      // each Field
-      marginBottom: "7px",
-    },
-  },
-  errorMessage: {
-    color: "red",
-  },
-  successMessage: {
-    color: "green",
+  form: {
+    display: "flex",
   },
   submitButton: {
     backgroundColor: "#e2130b",
@@ -47,9 +37,10 @@ const styles = {
     padding: "11px",
     width: "275px",
   },
-  error: {
+  syncValidation: {
     color: "red",
     margin: 0,
+    marginTop: "10px",
   },
 };
 
@@ -80,12 +71,11 @@ const renderField = ({
           className={classes.email}
         />
         {touched &&
-          ((error && (
-            <p style={{ color: "red" }} className={classes.error}>
+          (error && (
+            <p className={classes.syncValidation}>
               {error}
             </p>
-          )) ||
-            (warning && <p>{warning}</p>))}
+          ))}
       </div>
     </div>
   );
@@ -98,8 +88,8 @@ const SubscriptionForm = ({
   callToAction,
 }) => {
   return (
-    <div className={classes.SubscriptionForm}>
-      <form onSubmit={handleSubmit}>
+    <div>
+      <form onSubmit={handleSubmit} className={classes.form}>
         <Field
           name="email"
           type="email"
@@ -125,6 +115,7 @@ const SubscriptionForm = ({
 export default compose(
   reduxForm({
     form: "subscription",
+    validate
   }),
   injectSheet(styles),
 )(SubscriptionForm);
