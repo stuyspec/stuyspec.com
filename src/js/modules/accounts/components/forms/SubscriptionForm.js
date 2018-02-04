@@ -16,7 +16,7 @@ const styles = {
     fontSize: "15px",
     fontWeight: "300",
     padding: "11px",
-    margin: "9px 0 21px 0",
+    margin: "9px 0 0 0",
     width: "275px",
     "&:disabled": {
       background: "#ddd",
@@ -24,7 +24,7 @@ const styles = {
       color: "#888",
     },
   },
-  email: {
+  input: {
     backgroundColor: "#eee",
     border: "none",
     borderRadius: "3px",
@@ -33,6 +33,11 @@ const styles = {
     fontWeight: "300",
     padding: "11px",
     width: "275px",
+  },
+  syncValidation: {
+    color: "red",
+    fontFamily: "Minion Pro",
+    margin: "10px 0 0 0",
   },
 };
 
@@ -59,7 +64,8 @@ const SubscriptionForm = ({
           name="email"
           type="email"
           autoComplete="email"
-          component={renderField}
+          component={RenderField}
+          isLabelVisible={false}
           label="Enter your e-mail address."
           classes={classes}
         />

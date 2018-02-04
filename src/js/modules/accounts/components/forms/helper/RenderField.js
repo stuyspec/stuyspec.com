@@ -12,15 +12,17 @@ const styles = {
 };
 
 const RenderField = ({
+  classes,
   input,
   label,
+  isLabelVisible=true,
   autoComplete,
   type,
   meta: { touched, error },
 }) => {
   return (
     <div>
-      <label>{label}</label>
+      {isLabelVisible && <label>{label}</label>}
       <div>
         <input
           className={classes.input}
