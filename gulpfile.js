@@ -39,32 +39,32 @@ const Flags = {
   version_bump: {
     defaultValue: true,
     description:
-      'Whether or not to bump versions on successive updates when building',
+      'Whether or not to bump versions on successive updates when building'
   },
   success_notice: {
     defaultValue: true,
-    description: 'Displays a success notice in the OS when build is successful',
+    description: 'Displays a success notice in the OS when build is successful'
   },
   error_notice: {
     defaultValue: true,
-    description: 'Displays an error notice in the OS when a build fails',
+    description: 'Displays an error notice in the OS when a build fails'
   },
   error_sound: {
     defaultValue: false,
-    description: 'Play a sound when there is an error',
+    description: 'Play a sound when there is an error'
   },
   build_js_debug: {
     defaultValue: false,
     description:
-      'Whether or not to include source ' + 'maps in Javascript release builds',
+      'Whether or not to include source ' + 'maps in Javascript release builds'
   },
   export_standalone: {
     defaultValue: false,
     description:
       'Automatically generate a build folder ' +
       'corresponding to the time you created' +
-      'your package via a builds/[current_date] folder/',
-  },
+      'your package via a builds/[current_date] folder/'
+  }
 };
 
 // set up build paths config
@@ -94,13 +94,13 @@ const BABELIFY_CONFIG = {
     'transform-decorators-legacy',
     'add-module-exports',
     'react-hot-loader/babel',
-    ['module-alias', Aliases],
-  ],
+    ['module-alias', Aliases]
+  ]
 };
 
 const WATCHIFY_CONFIG = {
   poll: true,
-  ignoreWatch: ['**/node_modes/**'],
+  ignoreWatch: ['**/node_modes/**']
 };
 
 let versionFileContent = fs.readFileSync(Paths.VERSION_CONFIG_FILE, 'utf8'),
@@ -109,7 +109,7 @@ let versionFileContent = fs.readFileSync(Paths.VERSION_CONFIG_FILE, 'utf8'),
   timeProcessedCount = 0,
   latestVersion = '---',
   latestVersionBuilt = versionFileContent.match(
-    /VERSION[\s]*:[\s]*'([\d]+)[\.]([\d]+)[\.]([\d]+)'/gi,
+    /VERSION[\s]*:[\s]*'([\d]+)[\.]([\d]+)[\.]([\d]+)'/gi
   )[0];
 
 let getLatestVersionStrInFile = () => {
@@ -119,13 +119,13 @@ let getLatestVersionStrInFile = () => {
     fileContent.match(/VERSION[\s]*:[\s]*'([\d]+)[\.]([\d]+)[\.]([\d]+)'/gi)
   ) {
     return fileContent.match(
-      /VERSION[\s]*:[\s]*'([\d]+)[\.]([\d]+)[\.]([\d]+)'/gi,
+      /VERSION[\s]*:[\s]*'([\d]+)[\.]([\d]+)[\.]([\d]+)'/gi
     )[0];
   }
 };
 
 const SEMVER_STR = getLatestVersionStrInFile().match(
-  /([\d]+)[\.]([\d]+)[\.]([\d]+)/gi,
+  /([\d]+)[\.]([\d]+)[\.]([\d]+)/gi
 )[0];
 
 const VERSION_NUMBER_CONFIG = {
@@ -133,8 +133,8 @@ const VERSION_NUMBER_CONFIG = {
   replaces: [['/build.js', `/build.js?v=${SEMVER_STR}`]],
   append: {
     key: 'v',
-    to: ['css'],
-  },
+    to: ['css']
+  }
   // appends ?v=VERSION to /build.js and CSS files
 };
 
@@ -143,7 +143,7 @@ let Notices = {
     notifier.notify({
       title: 'Build Successful',
       message: p.message,
-      sound: false,
+      sound: false
     });
   },
   /**
@@ -155,7 +155,7 @@ let Notices = {
       notifier.notify({
         title: 'Error Building',
         message: p.message,
-        sound: FlagValues.error_sound,
+        sound: FlagValues.error_sound
       });
     }
   },
@@ -164,9 +164,9 @@ let Notices = {
       title: 'Watching ' + Paths.DEST_DEV,
       message:
         'Ready to watch for file changes to ' + 'build into ' + Paths.DEST_PROD,
-      sound: false,
+      sound: false
     });
-  },
+  }
 };
 
 /** various logging functions */
@@ -183,7 +183,7 @@ let Log = {
         '] ' +
         (dirNameIndex != -1
           ? file.substr(
-              dirNameIndex + __dirname.length + 1 + Paths.ENTRY_FOLDER.length,
+              dirNameIndex + __dirname.length + 1 + Paths.ENTRY_FOLDER.length
             )
           : file).bold.magenta
       );
@@ -201,7 +201,7 @@ let Log = {
           (++updateCount + '').bold.magenta +
           ' time' +
           (updateCount == 1 ? '' : 's') +
-          '. \n',
+          '. \n'
       );
     }
   },
@@ -215,21 +215,21 @@ let Log = {
       figlet.textSync(pkg.name, {
         font: 'Slant',
         horizontalLayout: 'default',
-        verticalLayout: 'default',
+        verticalLayout: 'default'
       });
 
     console.log(appPrintOut);
     console.log(`\t\tSource Code Builder\n`);
     console.log(`> Running in ${mode == 'build' ? 'Build' : 'Dev'} Mode\n`);
     console.log(
-      '[ gulp tasks: build \u2022 dev-server (default) \u2022 dev ]\n',
+      '[ gulp tasks: build \u2022 dev-server (default) \u2022 dev ]\n'
     );
 
     Log.listFlags();
 
     if (mode != 'build') {
       console.log(
-        'Note : Initial build may take a bit of time on the first run before cache-ing...\n',
+        'Note : Initial build may take a bit of time on the first run before cache-ing...\n'
       );
     }
   },
@@ -243,16 +243,16 @@ let Log = {
       errorAtDisplay = `${errorAt.getHours()}:${errorAt.getMinutes()}.${errorAt.getMilliseconds()}`;
     console.log(
       `${errorAtDisplay} ${`error occurred during build:\n\t${err.message.red
-        .bold}\n`}`,
+        .bold}\n`}`
     );
     console.log(
-      `Even though building may have finished successfully, ${''}there was an error compiling the app sourcecode. ${''}This may lead to errors\n`,
+      `Even though building may have finished successfully, ${''}there was an error compiling the app sourcecode. ${''}This may lead to errors\n`
     );
   },
   listFlags() {
     let flagTable = new Table({
       head: ['flag'.gray, 'status'.gray, 'description'.gray],
-      colWidths: [20, 10, 60],
+      colWidths: [20, 10, 60]
     });
 
     for (var flagName in FlagValues) {
@@ -269,7 +269,7 @@ let Log = {
     }
     console.log(flagTable.toString().gray);
     console.log('\n');
-  },
+  }
 };
 
 let Events = {
@@ -285,7 +285,7 @@ let Events = {
     ) {
       successNoticeCount += 1;
       let version = getLatestVersionStrInFile().match(
-        /([\d]+)[\.]([\d]+)[\.]([\d]+)/gi,
+        /([\d]+)[\.]([\d]+)[\.]([\d]+)/gi
       )[0];
       let getMessage = osNotice => {
         let seconds = parseInt(ms) / 1000 + '',
@@ -306,11 +306,11 @@ let Events = {
         notifier.notify({
           title: 'Successful build',
           message: getMessage(true),
-          sound: false,
+          sound: false
         });
       }
     }
-  },
+  }
 };
 
 /**
@@ -330,11 +330,11 @@ function scripts(p) {
     debug: _global.DEV_MODE,
     cache: {},
     packageCache: {},
-    plugin: watch ? [liveReactLoad] : [],
+    plugin: watch ? [liveReactLoad] : []
   })
     .transform(babelify.configure(BABELIFY_CONFIG))
     .transform(
-      envify({ NODE_ENV: _global.DEV_MODE ? 'development' : 'production' }),
+      envify({ NODE_ENV: _global.DEV_MODE ? 'development' : 'production' })
     );
 
   // wrap in watchify
@@ -373,14 +373,14 @@ function scripts(p) {
     stream = stream.pipe(
       replace(
         '__API_URL_HERE__',
-        _global.DEV_MODE ? process.env.DEV_API : process.env.PROD_API,
-      ),
+        _global.DEV_MODE ? process.env.DEV_API : process.env.PROD_API
+      )
     );
     stream = stream.pipe(
       replace(
         '__DEV_ENV_HERE__',
-        _global.DEV_MODE ? `'development'` : `'production'`,
-      ),
+        _global.DEV_MODE ? `'development'` : `'production'`
+      )
     );
 
     if (watch && rebuild) {
@@ -404,7 +404,7 @@ function scripts(p) {
         return getBuildStream(true);
       } else {
         runSequence('check-for-version-bump', () =>
-          getBuildStream(updateCount === 0),
+          getBuildStream(updateCount === 0)
         );
       }
     });
@@ -431,11 +431,11 @@ gulp.task('dev-server', ['dev'], function() {
   return gulp.src(Paths.DEST_DEV).pipe(
     liveReload({
       host: '0.0.0.0',
-      port: 8080,
+      port: 8080
       // TODO | configure live reload
       // TODO | to react to CSS/static asset
       // TODO | changes. currently just JS
-    }),
+    })
   );
 });
 
@@ -474,8 +474,8 @@ gulp.task('check-for-version-bump', function() {
             let nextVersion = `VERSION : '${major}.${minor}.${parseInt(patch) +
               1}'`;
             return (latestVersion = nextVersion), nextVersion;
-          },
-        ),
+          }
+        )
       )
       .pipe(gulp.dest(Paths.VERSION_CONFIG_DIR));
   } else return;
@@ -523,10 +523,10 @@ gulp.task('build', function() {
       'copy-extra-to-build',
       'html-ref-and-concat-css',
       'minify-images',
-      'create-js-build',
+      'create-js-build'
     ],
     'append-version-numbers',
-    'export-standalone-build',
+    'export-standalone-build'
   );
 });
 
