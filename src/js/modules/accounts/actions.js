@@ -159,7 +159,6 @@ export const subscribe = values => {
       type: t.CREATE_SUBSCRIBER_PENDING,
       payload: values,
     });
-    dispatch({ type: t.CLOSE_SUBSCRIPTION_MODAL });
     axios
       .post(`${STUY_SPEC_API_URL}/subscribers`, values, STUY_SPEC_API_HEADERS)
       .then(response => {
@@ -167,8 +166,14 @@ export const subscribe = values => {
           type: t.CREATE_SUBSCRIBER_FULFILLED,
           payload: response,
         });
-        // Destroys the inputs in the form Subscription
-        dispatch(reset("Subscription"));
+
+        // Lets the user glance at the confirmation message
+        setTimeout(() => {
+          dispatch({ type: t.CLOSE_SUBSCRIPTION_MODAL });
+
+          // Destroys the inputs in the form Subscription
+          dispatch(reset("Subscription"));
+        }, 500)
       })
       .catch(err => {
         dispatch({
