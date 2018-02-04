@@ -1,8 +1,18 @@
 <!DOCTYPE html>
-  <html>
-  <head>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="utf-8">
+
+    <meta name="author" content="The Spectator Web Department" />
+    <meta name="description" content="The Pulse of the Student Body" />
+    <meta name="keywords" content="The Spectator, journalism, Stuyvesant High School, student body" />
+
+    <meta property="og:image" content="https://s3.amazonaws.com/stuyspec-images/the_logo.png"/>
+    <meta property="og:title" content="The Stuyvesant Spectator" />
+    <meta property="og:url" content="https://stuyspec.com" />
+    <meta property="og:site_name" content="The Spectator" />
+    <meta property="og:type" content="website" />
 
     <title>The Stuyvesant Spectator - The Pulse of the Stuyvesant Student Body</title>
 
@@ -12,21 +22,26 @@
     <link href="/css/slick.min.css" rel="stylesheet" type="text/css"/>
     <link href="/css/slick-theme.min.css" rel="stylesheet" type="text/css"/>
 
-    <meta property="og:image" content="https://s3.amazonaws.com/stuyspec-images/the_logo.png"/>
-    <meta property="og:title" content="The Stuyvesant Spectator" />
-    <meta property="og:url" content="https://stuyspec.com" />
-    <meta property="og:site_name" content="The Spectator" />
-    <meta property="og:type" content="website" />
-  </head>
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-49387606-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  <body>
+      gtag('config', 'UA-49387606-1');
+    </script>
+</head>
+
+<body>
     <div id="loading">
-      <div id="bounce1"></div>
-      <div id="bounce2"></div>
-      <div id="bounce3"></div>
+        <div id="bounce1"></div>
+        <div id="bounce2"></div>
+        <div id="bounce3"></div>
     </div>
     <div id="app"></div>
-  </body>
+</body>
 
-  <script src="/build.js"></script>
+<script src="/build.js"></script>
+
 </html>
