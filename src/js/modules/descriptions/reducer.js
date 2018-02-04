@@ -133,7 +133,7 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
   <br>
   <pre><b>Fax</b>: 212-587-3874, attn. The Spectator</pre>
   <br>
-  <pre><b>Phone</b>: 212-312-4800 ext. 2601</pre/><br>
+  <pre><b>Phone</b>: 212-312-4800 ext. 2601</pre><br/>
 </ul>
 <h2>Student Groups</h2>
 <ul>
@@ -287,7 +287,7 @@ Kerry Garfinkel
   },
 ];
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState) => {
   return state;
 };
 

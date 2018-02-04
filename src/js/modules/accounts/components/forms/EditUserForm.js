@@ -34,8 +34,6 @@ const styles = {
   },
 };
 
-// TODO: add warnings to specific forms
-
 const validate = formValues => {
   const errors = {};
   if (formValues.email && !EMAIL_REGEX.test(formValues.email)) {
@@ -67,7 +65,7 @@ const renderField = ({
   );
 };
 
-const EditUserForm = ({ classes, handleSubmit, submitting, status }) => {
+const EditUserForm = ({ classes, handleSubmit, submitting }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>

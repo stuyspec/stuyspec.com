@@ -1,6 +1,5 @@
 import React from "react";
 import { compose } from "redux";
-import { connect } from "react-redux";
 import { reduxForm } from "redux-form";
 import injectSheet from "react-jss";
 

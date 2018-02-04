@@ -95,7 +95,7 @@ export const signOut = session => {
     dispatch({ type: t.SIGN_OUT_PENDING, payload: session });
     axios
       .delete(`${STUY_SPEC_API_URL}/auth/sign_out`, { headers: session })
-      .then(response => {
+      .then(() => {
         dispatch({
           type: t.SIGN_OUT_FULFILLED,
         });
@@ -196,7 +196,7 @@ export const validateToken = session => {
             payload: response,
           });
         })
-        .catch(err => {
+        .catch(() => {
           dispatch({
             type: t.VALIDATE_TOKEN_REJECTED,
           });

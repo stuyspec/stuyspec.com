@@ -67,15 +67,15 @@ class RoutingApp extends PureComponent {
   }
 
   render() {
-    const {
-      data: { loading, error, allSections },
-      session,
-      descriptions,
-    } = this.props;
+    const { data: { loading, error, allSections }, session } = this.props;
 
     if (document.getElementById("loading") && !loading) {
       const loadingIcon = document.getElementById("loading");
       loadingIcon.parentNode.removeChild(loadingIcon);
+    }
+
+    if (error) {
+      return <DataErrorPage />;
     }
 
     return (
@@ -188,7 +188,6 @@ class RoutingApp extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  descriptions: state.descriptions,
   session: state.accounts.session,
 });
 

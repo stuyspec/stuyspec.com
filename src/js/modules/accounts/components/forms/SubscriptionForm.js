@@ -7,9 +7,6 @@ import { EMAIL_REGEX } from "../../../../constants";
 import FormStatus from "./FormStatus";
 
 const styles = {
-  form: {
-    display: "flex",
-  },
   submitButton: {
     backgroundColor: "#e2130b",
     border: "none",
@@ -59,7 +56,7 @@ const renderField = ({
   label,
   type,
   classes,
-  meta: { touched, error, warning },
+  meta: { touched, error },
 }) => {
   return (
     <div>
@@ -85,7 +82,7 @@ const SubscriptionForm = ({
 }) => {
   return (
     <div>
-      <form onSubmit={handleSubmit} className={classes.form}>
+      <form onSubmit={handleSubmit}>
         <Field
           name="email"
           type="email"

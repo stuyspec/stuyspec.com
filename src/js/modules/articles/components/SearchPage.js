@@ -4,10 +4,8 @@ import { withRouter } from "react-router-dom";
 import { Grid, Row } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 import { Helmet } from "react-helmet";
-import gql from "graphql-tag";
-import humps from "humps";
 
-import { ArticleList, SearchForm, SearchResults } from "./";
+import { SearchForm, SearchResults } from "./";
 import { getUrlParameterByName } from "../../../utils";
 
 const styles = {

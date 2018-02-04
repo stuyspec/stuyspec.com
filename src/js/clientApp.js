@@ -26,7 +26,7 @@ console.log("appVersion ->", VERSION);
 
 
 import ReactGA from "react-ga";
-ReactGA.initialize("UA-110467163-1")
+ReactGA.initialize("UA-110467163-1");
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 const apolloClient = new ApolloClient({

@@ -63,7 +63,7 @@ const ShareTools = ({ classes, article }) => {
   const emailBody = `${title}—${summary}\n\n${shareUrl}`;
   return (
     <div className={classes.ShareTools}>
-      <div className={classes.shareButton} key={0}>
+      <div key={0}>
         <FacebookShareButton
           url={shareUrl}
           hashtag={"#stuyspec"}
@@ -77,7 +77,7 @@ const ShareTools = ({ classes, article }) => {
           />
         </FacebookShareButton>
       </div>
-      <div className={classes.shareButton} key={1}>
+      <div key={1}>
         <TwitterShareButton
           url={shareUrl}
           title={title}
@@ -91,7 +91,7 @@ const ShareTools = ({ classes, article }) => {
           />
         </TwitterShareButton>
       </div>
-      <div className={classes.shareButton} key={2}>
+      <div key={2}>
         <LinkedinShareButton url={shareUrl} title={title} description={summary}>
           <LinkedinIcon
             size={SHARE_BUTTON_SIZE}
@@ -101,7 +101,7 @@ const ShareTools = ({ classes, article }) => {
           />
         </LinkedinShareButton>
       </div>
-      <div className={classes.shareButton} key={3}>
+      <div key={3}>
         <EmailShareButton
           url={shareUrl}
           subject={`StuySpec.com: ${title}`}
@@ -115,7 +115,7 @@ const ShareTools = ({ classes, article }) => {
           />
         </EmailShareButton>
       </div>
-      <div className={classes.shareButton} key={4}>
+      <div key={4}>
         <StyledNavButton onClick={window.print}>
           <Print size={28} />
         </StyledNavButton>

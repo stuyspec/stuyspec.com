@@ -1,7 +1,6 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import { Row, Col } from "react-bootstrap/lib";
 import { toRoman } from "roman-numerals";
@@ -36,6 +35,9 @@ const styles = {
   },
   subscriptionFormContainer: {
     marginBottom: "21px",
+    "& > div > form": {
+      display: "flex",
+    },
     "& > div > form > div": {
       display: "inline-block",
     },

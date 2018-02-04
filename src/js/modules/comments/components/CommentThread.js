@@ -61,7 +61,7 @@ class CommentThread extends React.Component {
   };
 
   render() {
-    let { classes, article, data, session } = this.props;
+    let { classes, article, data } = this.props;
     if (data && data.loading) {
       return null;
     }

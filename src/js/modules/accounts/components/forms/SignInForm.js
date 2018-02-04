@@ -68,7 +68,7 @@ const renderField = ({
   );
 };
 
-const SignInForm = ({ classes, handleSubmit, submitting, status }) => {
+const SignInForm = ({ classes, handleSubmit, submitting }) => {
   return (
     <div className={classes.SignInForm}>
       <form onSubmit={handleSubmit}>

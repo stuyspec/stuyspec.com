@@ -15,7 +15,7 @@ const styles = {
   },
 };
 
-const PageHeader = ({ classes, location, sections }) => {
+const PageHeader = ({ classes, location }) => {
   return (
     <Grid className={classes.HeaderContainer}>
       <Row>
