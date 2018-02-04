@@ -5,8 +5,7 @@ node_modules
 builds/**
 .idea
 .DS_STORE
+.env
 
-# script for building & uploading/creating invalidation
-aws_transport.sh
-# invalidation batch
-invbatch.json
+# Text editor settings for eslint
+.eslintrc*

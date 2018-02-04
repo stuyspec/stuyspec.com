@@ -85,6 +85,7 @@ const SignInForm = ({ classes, handleSubmit, submitting, status }) => {
         <Field
           name="password"
           type="password"
+          autocomplete="current-password"
           component={renderField}
           label="Password"
         />
