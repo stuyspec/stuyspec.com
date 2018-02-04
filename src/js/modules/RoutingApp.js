@@ -5,6 +5,7 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import ConnectedRouter from "react-router-redux/ConnectedRouter";
+import queryString from "query-string";
 import appHistory from "tools/appHistory";
 
 import {
@@ -47,9 +48,21 @@ class RoutingApp extends PureComponent {
   }
 
   componentDidMount() {
+    const { sessionify } = this.props;
+
     const session = localStorage.getItem("session");
     if (session) {
-      this.props.sessionify(JSON.parse(session));
+      sessionify(JSON.parse(session));
+    } else {
+      const urlHeaders = queryString.parse(window.location.search);
+      sessionHeaders = ['client_id', 'token', 'uid'];
+      if (sessionHeaders.every(header => header in urlHeaders)) {
+        sessionify({
+          'access-token': urlHeaders.token,
+          client: urlHeaders.client_id,
+          uid: urlHeaders.uid,
+        });
+      }
     }
   }
 

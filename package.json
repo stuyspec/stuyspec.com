@@ -90,6 +90,7 @@
     "mime-db": "^1.30.0",
     "orchestrator": "^0.3.8",
     "qs": "^6.5.1",
+    "query-string": "^5.1.0",
     "react-apollo": "^2.0.4",
     "react-bootstrap": "^0.31.3",
     "react-favicon": "0.0.9",

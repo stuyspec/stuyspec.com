@@ -196,6 +196,7 @@ const reducer = (state = { ...initialState }, action) => {
       return { ...state, session: action.payload };
     }
     case VALIDATE_TOKEN_FULFILLED: {
+      localStorage.setItem("session", JSON.stringify(action.payload.headers));
       return { ...state, session: action.payload.headers };
     }
     case VALIDATE_TOKEN_REJECTED: {
