@@ -9,7 +9,7 @@ import routerMiddleware from "react-router-redux/middleware";
 import appHistory from "tools/appHistory";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-
+//__DEV_ENV_HERE__ = "development"
 const middleware =
   __DEV_ENV_HERE__ === "production"
     ? applyMiddleware(
