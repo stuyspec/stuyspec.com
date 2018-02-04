@@ -27,6 +27,7 @@
     "babelify": "^7.3.0",
     "browserify": "^14.4.0",
     "dotenv": "^4.0.0",
+    "eslint-config-google": "^0.9.1",
     "events": "^1.1.1",
     "figlet": "^1.2.0",
     "gulp": "^3.9.1",
