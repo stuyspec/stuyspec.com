@@ -106,7 +106,7 @@ const SignUpForm = ({ classes, handleSubmit, submitting }) => {
           </button>
         </div>
       </form>
-      <FormStatus formName="signUp" redirect="/myaccount"/>
+      <FormStatus formName="signUp" redirect="/myaccount" />
     </div>
   );
 };

@@ -41,7 +41,7 @@ const styles = {
     fontFamily: "Circular Std",
     fontSize: "15px",
     fontWeight: "300",
-    marginBottom: "19px",
+    margin: "20px 0",
     padding: "11px",
     width: "275px",
   },

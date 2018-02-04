@@ -15,7 +15,7 @@ const RenderField = ({
   classes,
   input,
   label,
-  isLabelVisible=true,
+  isLabelVisible = true,
   autoComplete,
   type,
   meta: { touched, error },

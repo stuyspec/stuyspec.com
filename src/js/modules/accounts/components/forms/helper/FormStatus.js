@@ -5,6 +5,9 @@ import { withRouter } from "react-router-dom";
 import injectSheet from "react-jss";
 
 const styles = {
+  FormStatus: {
+    fontFamily: "Minion Pro",
+  },
   successMessage: {
     color: "green",
     marginTop: "10px",
@@ -27,7 +30,7 @@ const FormStatus = ({ classes, status, formName, redirect, history }) => {
   }
 
   return (
-    <div>
+    <div className={classes.FormStatus}>
       <p key="success" className={classes.successMessage}>
         {status.message}
       </p>

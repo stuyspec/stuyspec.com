@@ -173,7 +173,7 @@ export const subscribe = values => {
 
           // Destroys the inputs in the form Subscription
           dispatch(reset("Subscription"));
-        }, 500)
+        }, 500);
       })
       .catch(err => {
         dispatch({
