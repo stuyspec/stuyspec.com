@@ -81,13 +81,19 @@ const styles = {
   },
 };
 
-const RecommendedRow = ({ classes, data, match: { params: { article_slug } } }) => {
+const RecommendedRow = ({
+  classes,
+  data,
+  match: { params: { article_slug } },
+}) => {
   if (data.loading) {
     return null;
   }
   data = humps.camelizeKeys(data);
 
-  const articles = data.topRankedArticles.filter(article => article.slug !== article_slug);
+  const articles = data.topRankedArticles.filter(
+    article => article.slug !== article_slug,
+  );
 
   return (
     <Row className={classes.RecommendedRow}>

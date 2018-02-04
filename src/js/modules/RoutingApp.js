@@ -55,10 +55,10 @@ class RoutingApp extends PureComponent {
       sessionify(JSON.parse(session));
     } else {
       const urlHeaders = queryString.parse(window.location.search);
-      sessionHeaders = ['client_id', 'token', 'uid'];
+      sessionHeaders = ["client_id", "token", "uid"];
       if (sessionHeaders.every(header => header in urlHeaders)) {
         sessionify({
-          'access-token': urlHeaders.token,
+          "access-token": urlHeaders.token,
           client: urlHeaders.client_id,
           uid: urlHeaders.uid,
         });
@@ -77,7 +77,7 @@ class RoutingApp extends PureComponent {
       const loadingIcon = document.getElementById("loading");
       loadingIcon.parentNode.removeChild(loadingIcon);
     }
-    
+
     return (
       <ConnectedRouter history={appHistory}>
         <PageLayout>

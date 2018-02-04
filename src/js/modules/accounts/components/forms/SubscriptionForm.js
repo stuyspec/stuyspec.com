@@ -71,11 +71,7 @@ const renderField = ({
           className={classes.email}
         />
         {touched &&
-          (error && (
-            <p className={classes.syncValidation}>
-              {error}
-            </p>
-          ))}
+          (error && <p className={classes.syncValidation}>{error}</p>)}
       </div>
     </div>
   );
@@ -115,7 +111,7 @@ const SubscriptionForm = ({
 export default compose(
   reduxForm({
     form: "subscription",
-    validate
+    validate,
   }),
   injectSheet(styles),
 )(SubscriptionForm);
