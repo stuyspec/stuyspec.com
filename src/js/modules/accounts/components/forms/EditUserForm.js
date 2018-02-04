@@ -5,7 +5,7 @@ import injectSheet from "react-jss";
 import Table from "react-bootstrap/lib/Table";
 import { EMAIL_REGEX } from "../../../../constants";
 
-import FormStatus from "./FormStatus";
+import { FormStatus, RenderField } from "./helper";
 
 const styles = {
   dataTable: {
@@ -42,29 +42,6 @@ const validate = formValues => {
   return errors;
 };
 
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error, warning },
-}) => {
-  return (
-    <div>
-      <div>
-        <input
-          {...input}
-          placeholder={label}
-          type={type}
-          style={{ width: "100%" }}
-        />
-        {touched &&
-          ((error && <span>{error}</span>) ||
-            (warning && <span>{warning}</span>))}
-      </div>
-    </div>
-  );
-};
-
 const EditUserForm = ({ classes, handleSubmit, submitting }) => {
   return (
     <div>
@@ -78,7 +55,8 @@ const EditUserForm = ({ classes, handleSubmit, submitting }) => {
                   <Field
                     name="firstName"
                     type="text"
-                    component={renderField}
+                    autoComplete="off"
+                    component={RenderField}
                     label="First Name"
                   />
                 </td>
@@ -89,7 +67,8 @@ const EditUserForm = ({ classes, handleSubmit, submitting }) => {
                   <Field
                     name="lastName"
                     type="text"
-                    component={renderField}
+                    autoComplete="off"
+                    component={RenderField}
                     label="Last Name"
                   />
                 </td>
@@ -100,7 +79,8 @@ const EditUserForm = ({ classes, handleSubmit, submitting }) => {
                   <Field
                     name="email"
                     type="email"
-                    component={renderField}
+                    autoComplete="off"
+                    component={RenderField}
                     label="Email"
                   />
                 </td>

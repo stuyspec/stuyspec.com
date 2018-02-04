@@ -5,8 +5,9 @@ const styles = {
   input: {
     width: "100%",
   },
-  errorMessage: {
+  syncValidation: {
     color: "red",
+    margin: "10px 0 0 0",
   },
 };
 
@@ -29,7 +30,7 @@ const RenderField = ({
           type={type}
         />
         {touched &&
-          (error && <p className={classes.errorMessage}>{error}</p>)}
+          (error && <p className={classes.syncValidation}>{error}</p>)}
       </div>
     </div>
   );

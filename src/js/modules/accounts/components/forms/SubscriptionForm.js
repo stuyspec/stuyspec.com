@@ -4,7 +4,7 @@ import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
 import { EMAIL_REGEX } from "../../../../constants";
 
-import FormStatus from "./FormStatus";
+import { FormStatus, RenderField } from "./helper";
 
 const styles = {
   submitButton: {
@@ -34,11 +34,6 @@ const styles = {
     padding: "11px",
     width: "275px",
   },
-  syncValidation: {
-    color: "red",
-    margin: 0,
-    marginTop: "10px",
-  },
 };
 
 const validate = formValues => {
@@ -49,31 +44,6 @@ const validate = formValues => {
     errors.email = "Invalid email address";
   }
   return errors;
-};
-
-const renderField = ({
-  input,
-  label,
-  autoComplete,
-  type,
-  classes,
-  meta: { touched, error },
-}) => {
-  return (
-    <div>
-      <div>
-        <input
-          {...input}
-          placeholder={label}
-          autoComplete={autoComplete}
-          type={type}
-          className={classes.email}
-        />
-        {touched &&
-          (error && <p className={classes.syncValidation}>{error}</p>)}
-      </div>
-    </div>
-  );
 };
 
 const SubscriptionForm = ({
@@ -88,6 +58,7 @@ const SubscriptionForm = ({
         <Field
           name="email"
           type="email"
+          autoComplete="email"
           component={renderField}
           label="Enter your e-mail address."
           classes={classes}

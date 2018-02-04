@@ -4,7 +4,7 @@ import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
 import { EMAIL_REGEX } from "../../../../constants";
 
-import FormStatus from "./FormStatus";
+import { FormStatus, RenderField } from "./helper";
 
 const styles = {
   SignInForm: {
@@ -44,31 +44,6 @@ const validate = formValues => {
   return errors;
 };
 
-const renderField = ({
-  input,
-  label,
-  autoComplete,
-  type,
-  meta: { touched, error },
-}) => {
-  return (
-    <div>
-      <label>{label}</label>
-      <div>
-        <input
-          style={{ width: "100%" }}
-          {...input}
-          autoComplete={autoComplete}
-          placeholder={label}
-          type={type}
-        />
-        {touched &&
-          (error && <span style={{ color: "red" }}>{error}</span>)}
-      </div>
-    </div>
-  );
-};
-
 const SignInForm = ({ classes, handleSubmit, submitting }) => {
   return (
     <div className={classes.SignInForm}>
@@ -76,15 +51,15 @@ const SignInForm = ({ classes, handleSubmit, submitting }) => {
         <Field
           name="email"
           type="email"
-          autoComplete="current-password"
-          component={renderField}
+          autoComplete="email"
+          component={RenderField}
           label="Email"
         />
         <Field
           name="password"
           type="password"
           autoComplete="current-password"
-          component={renderField}
+          component={RenderField}
           label="Password"
         />
         <div>

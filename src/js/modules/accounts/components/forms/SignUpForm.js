@@ -4,7 +4,7 @@ import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
 import { EMAIL_REGEX } from "../../../../constants";
 
-import FormStatus from "./FormStatus";
+import { FormStatus, RenderField } from "./helper";
 
 const styles = {
   SignUpForm: {
@@ -59,31 +59,6 @@ const validate = formValues => {
   return errors;
 };
 
-const renderField = ({
-  input,
-  label,
-  autoComplete,
-  type,
-  meta: { touched, error },
-}) => {
-  return (
-    <div>
-      <label>{label}</label>
-      <div>
-        <input
-          className={classes.input}
-          {...input}
-          autoComplete={autoComplete}
-          placeholder={label}
-          type={type}
-        />
-        {touched &&
-          (error && <span style={{ color: "red" }}>{error}</span>)}
-      </div>
-    </div>
-  );
-};
-
 const SignUpForm = ({ classes, handleSubmit, submitting }) => {
   return (
     <div className={classes.SignUpForm}>
@@ -91,31 +66,34 @@ const SignUpForm = ({ classes, handleSubmit, submitting }) => {
         <Field
           name="firstName"
           type="text"
-          component={renderField}
+          component={RenderField}
           label="First Name"
         />
         <Field
           name="lastName"
           type="text"
-          component={renderField}
+          component={RenderField}
           label="Last Name"
         />
         <Field
           name="email"
           type="email"
-          component={renderField}
+          autoComplete="email"
+          component={RenderField}
           label="Email"
         />
         <Field
           name="password"
           type="password"
-          component={renderField}
+          autoComplete="new-password"
+          component={RenderField}
           label="Password"
         />
         <Field
           name="passwordConfirmation"
           type="password"
-          component={renderField}
+          autoComplete="new-password"
+          component={RenderField}
           label="Password Confirmation"
         />
         <div>
