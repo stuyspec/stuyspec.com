@@ -62,22 +62,23 @@ const validate = formValues => {
 const renderField = ({
   input,
   label,
+  autoComplete,
   type,
-  meta: { touched, error, warning },
+  meta: { touched, error },
 }) => {
   return (
     <div>
       <label>{label}</label>
       <div>
         <input
-          style={{ width: "100%" }}
+          className={classes.input}
           {...input}
+          autoComplete={autoComplete}
           placeholder={label}
           type={type}
         />
         {touched &&
-          ((error && <span style={{ color: "red" }}>{error}</span>) ||
-            (warning && <span>{warning}</span>))}
+          (error && <span style={{ color: "red" }}>{error}</span>)}
       </div>
     </div>
   );

@@ -47,8 +47,9 @@ const validate = formValues => {
 const renderField = ({
   input,
   label,
+  autoComplete,
   type,
-  meta: { touched, error, warning },
+  meta: { touched, error },
 }) => {
   return (
     <div>
@@ -57,12 +58,12 @@ const renderField = ({
         <input
           style={{ width: "100%" }}
           {...input}
+          autoComplete={autoComplete}
           placeholder={label}
           type={type}
         />
         {touched &&
-          ((error && <span style={{ color: "red" }}>{error}</span>) ||
-            (warning && <span>{warning}</span>))}
+          (error && <span style={{ color: "red" }}>{error}</span>)}
       </div>
     </div>
   );
@@ -75,12 +76,14 @@ const SignInForm = ({ classes, handleSubmit, submitting }) => {
         <Field
           name="email"
           type="email"
+          autoComplete="current-password"
           component={renderField}
           label="Email"
         />
         <Field
           name="password"
           type="password"
+          autoComplete="current-password"
           component={renderField}
           label="Password"
         />

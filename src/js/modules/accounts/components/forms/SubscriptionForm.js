@@ -54,6 +54,7 @@ const validate = formValues => {
 const renderField = ({
   input,
   label,
+  autoComplete,
   type,
   classes,
   meta: { touched, error },
@@ -64,6 +65,7 @@ const renderField = ({
         <input
           {...input}
           placeholder={label}
+          autoComplete={autoComplete}
           type={type}
           className={classes.email}
         />
