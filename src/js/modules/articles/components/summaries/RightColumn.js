@@ -4,6 +4,9 @@ import { Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 
 import { Byline, Dateline } from "../";
+import { ISSUU_CONFIG } from "../../../../constants";
+
+// TODO: ADD OUTQUOTES
 
 const styles = {
   RightColumn: {
@@ -101,13 +104,14 @@ const RightColumn = ({ classes, articles }) => {
   const [primaryArticle, secondaryArticle] = articles;
   const primarySection = primaryArticle.section;
   const secondarySection = secondaryArticle.section;
+  
   return (
     <Col xsHidden sm={3} md={3} lg={3} className={classes.RightColumn}>
       {/* Column xsHidden because the mobile UI would repeat too many articles */}
       <div
         dangerouslySetInnerHTML={{
           __html:
-            '<iframe style="width:100%; height:309px;" src="//e.issuu.com/embed.html#9521608/57642557" frameborder="0" allowfullscreen></iframe>',
+            `<iframe style="width:100%; height:309px;" src="//e.issuu.com/embed.html#9521608/${ISSUU_CONFIG}" frameborder="0" allowfullscreen></iframe>`,
         }}
         // TODO: Issu & Newspaper/Volume/Issue's have to become Rails models
         className={classes.issuuEmbed}
