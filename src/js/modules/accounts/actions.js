@@ -185,6 +185,7 @@ export const subscribe = values => {
 };
 
 export const validateToken = session => {
+  // If a session exists, we need to check if it is still valid.
   if (session) {
     return dispatch => {
       axios
@@ -210,10 +211,10 @@ export const validateToken = session => {
   }
 };
 
-export const sessionify = session => {
+export const createSession = session => {
   return dispatch => {
     dispatch({
-      type: t.SESSIONIFY,
+      type: t.CREATE_SESSION,
       payload: session,
     });
     dispatch(validateToken(session));

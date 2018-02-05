@@ -30,7 +30,7 @@ import { DescriptionPage } from "./descriptions/components";
 import { SectionPage } from "./sections/components";
 import { ContributorPage, ArtistPage } from "./users/components";
 
-import { sessionify } from "./accounts/actions";
+import { createSession } from "./accounts/actions";
 
 const RoutingAppQuery = gql`
   query RoutingAppQuery {
@@ -48,16 +48,20 @@ class RoutingApp extends PureComponent {
   }
 
   componentDidMount() {
-    const { sessionify } = this.props;
+    const { createSession } = this.props;
 
     const session = localStorage.getItem("session");
     if (session) {
-      sessionify(JSON.parse(session));
-    } else {
+      // Create session from local storage
+      createSession(JSON.parse(session));
+    } else { 
+      // Create session from URL queries
       const urlHeaders = queryString.parse(window.location.search);
+
+      // If everything we need in a session exists, create the session
       sessionHeaders = ["client_id", "token", "uid"];
       if (sessionHeaders.every(header => header in urlHeaders)) {
-        sessionify({
+        createSession({
           "access-token": urlHeaders.token,
           client: urlHeaders.client_id,
           uid: urlHeaders.uid,
@@ -69,8 +73,9 @@ class RoutingApp extends PureComponent {
   render() {
     const { data: { loading, error, allSections }, session } = this.props;
 
-    if (document.getElementById("loading") && !loading) {
-      const loadingIcon = document.getElementById("loading");
+    const loadingIcon = document.getElementById("loading");
+    if (loadingIcon && !loading) {
+      // If data stopped loading and we haven't unmounted the loading icon
       loadingIcon.parentNode.removeChild(loadingIcon);
     }
 
@@ -192,7 +197,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ sessionify }, dispatch);
+  return bindActionCreators({ createSession }, dispatch);
 };
 
 export default compose(
