@@ -4,7 +4,7 @@ import { reduxForm } from "redux-form";
 import injectSheet from "react-jss";
 
 import { signOut } from "../../actions";
-import FormStatus from "./FormStatus";
+import { FormStatus } from "./helper";
 
 const styles = {
   signOutButton: {
