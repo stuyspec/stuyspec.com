@@ -8,7 +8,7 @@ import humps from "humps";
 
 import { ArticleList } from "../../articles/components";
 import { NotFoundPage } from "../../core/components";
-import { MEDIA_CREATOR_SLUGS } from "../../../constants";
+import { PROFILE_SLUGS } from "../../../constants";
 
 const ArtistProfileBySlug = gql`
   query ArtistProfileBySlug($user_slug: String!, $role_slug: String!) {
@@ -95,7 +95,7 @@ const ArtistPage = ({ classes, data, match }) => {
 
   const artist = data.profileByUserSlug.user;
 
-  const mediaType = MEDIA_CREATOR_SLUGS[match.path.split("/")[1]];
+  const mediaType = PROFILE_SLUGS[match.path.split("/")[1]];
   const articles = data.profileByUserSlug.media
     .filter(medium => medium.mediaType === mediaType)
     .map(medium => ({

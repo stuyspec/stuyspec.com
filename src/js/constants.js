@@ -10,7 +10,7 @@ export const STUY_SPEC_API_HEADERS = {
   },
 };
 
-export const MEDIA_CREATOR_SLUGS = {
+export const PROFILE_SLUGS = {
   illustration: "illustrators",
   photo: "photographers",
   illustrators: "illustration",

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import { MEDIA_CREATOR_SLUGS } from "../../../constants";
+import { PROFILE_SLUGS } from "../../../constants";
 import { capitalizeWord } from "../../../utils";
 
 const styles = {
@@ -32,7 +32,7 @@ const ArticleMediaCaption = ({ classes, image }) => {
       </span>
       <Link
         className={classes.creditLine}
-        to={`/${MEDIA_CREATOR_SLUGS[image.mediaType]}/${user.slug}`}
+        to={`/${PROFILE_SLUGS[image.mediaType]}/${user.slug}`}
       >
         {capitalizeWord(image.mediaType)}
         &nbsp;by&nbsp;
