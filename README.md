@@ -8,3 +8,7 @@ The client-facing application of The Stuyvesant Spectator, built in [React](http
 ## Contributing
 
 We welcome pull requests from Spec Web developerse and seasoned JavaScript developers alike! Please follow [these steps](CONTRIBUTING.md) to contribute.
+
+## Roadmap
+
+For information on the things which are currently being focused on, please visit the [ROADMAP.md](ROADMAP.md) file.
