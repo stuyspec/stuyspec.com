@@ -5,7 +5,7 @@ import injectSheet from "react-jss";
 import Table from "react-bootstrap/lib/Table";
 import { EMAIL_REGEX } from "../../../../constants";
 
-import { FormStatus, RenderField } from "./helper";
+import { FormStatus, RenderField } from "./helpers";
 
 const styles = {
   dataTable: {

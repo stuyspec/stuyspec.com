@@ -31,7 +31,7 @@ const styles = {
     fontSize: "17px",
     marginBottom: "14px",
   },
-  dataTable: {
+  userInfoTableContainer: {
     "& .table-responsive table > tbody > tr > td": {
       fontFamily: "Minion Pro",
       fontSize: "17px",
@@ -70,7 +70,7 @@ const ProfilePage = ({ classes, signOut, session, data }) => {
           <Link to={"/myaccount/profile/edit"} className={classes.editRedirect}>
             Edit Profile
           </Link>
-          <div className={classes.dataTable}>
+          <div className={classes.userInfoTableContainer}>
             <Table responsive>
               <tbody>
                 <tr>
@@ -108,8 +108,12 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   graphql(UserByUIDQuery, {
     options: ({ session }) => ({
-      fetchPolicy: "network-only",
       variables: { uid: (session && session.uid) || "" },
+
+      // The "network-only" fetch policy prevents any caching of user token
+      // headers, which constantly change.
+      // https://www.apollographql.com/docs/react/basics/queries.html#graphql-config-options-fetchPolicy
+      fetchPolicy: "network-only",
     }),
   }),
   injectSheet(styles),

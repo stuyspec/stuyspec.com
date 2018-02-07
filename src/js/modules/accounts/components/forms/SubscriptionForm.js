@@ -4,7 +4,7 @@ import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
 import { EMAIL_REGEX } from "../../../../constants";
 
-import { FormStatus, RenderField } from "./helper";
+import { FormStatus, RenderField } from "./helpers";
 
 const styles = {
   submitButton: {
