@@ -37,7 +37,7 @@ const styles = {
   },
 };
 
-/* dateFormat:
+/* date settings:
  * longDate: June 9, 2007
  * shortTime: 5:46 PM
  */
@@ -46,11 +46,11 @@ const Comment = ({ classes, comment }) => {
   const { user, publishedAt } = comment;
   // If the timestamp is the same day (< 24 hours difference), use the
   // shortTime format. If not, use the longDate format.
-  const dateFormat =
+  const dateSetting =
     new Date() - new Date(publishedAt) < MILLISECONDS_IN_DAY
       ? "shortTime"
       : "longDate";
-  const dateline = dateFormat(publishedAt, dateFormat);
+  const dateline = dateFormat(publishedAt, dateSetting);
   return (
     <Row className={classes.Comment}>
       <Col md={7} lg={7}>
@@ -60,7 +60,7 @@ const Comment = ({ classes, comment }) => {
           </span>
           <span className={classes.bulletPoint}>&#8226;</span>
           <span className={classes.publishedAt}>
-            Published {dateFormat === "shortTime" ? "at" : "on"} {dateline}
+            Published {dateSetting === "shortTime" ? "at" : "on"} {dateline}
           </span>
         </p>
         <p className={classes.content}>{comment.content}</p>

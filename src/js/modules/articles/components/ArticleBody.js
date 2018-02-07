@@ -46,7 +46,7 @@ const styles = {
       // dropcap
       float: "left",
       fontSize: "64px",
-      lineHeight: "43px",
+      lineHeight: "40px",
       padding: "11px 6px 0px 3px",
     },
     "& > div > p ~ p::first-letter": {
