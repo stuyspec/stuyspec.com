@@ -68,12 +68,14 @@ class ArticleFeaturedMedia extends Component {
       isImageTall: false,
     };
   }
+
   componentDidMount() {
     const img = new Image();
     img.src = this.props.image.thumbAttachmentUrl;
     img.onload = () =>
       this.setState({ isImageTall: img.height > img.width * 1.3 });
   }
+
   render() {
     const {
       classes,
@@ -82,9 +84,11 @@ class ArticleFeaturedMedia extends Component {
       carouselImageCount,
       openLightbox,
     } = this.props;
+    const { isImageTall } = this.state;
+
     return (
       <figure
-        className={this.state.isImageTall ? classes.tallFigure : classes.figure}
+        className={isImageTall ? classes.tallFigure : classes.figure}
       >
         <div className={classes.imgContainer}>
           <img className={classes.img} src={image.attachmentUrl} />

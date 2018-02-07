@@ -23,14 +23,15 @@ const ArticleMediaCaption = ({ classes, image }) => {
   let { caption } = image;
 
   // If the caption does not end in a period, add one.
-  if (caption && caption.substr(caption.length - 1) !== ".") {
+  if (caption && caption.substr(caption.length - 2) !== ". ") {
     caption += ".";
   }
+
   return (
     <figcaption className={classes.caption}>
       <span>
         {/* Render caption if caption is not null and is not empty string. */}
-        {caption && caption + " "}
+        {caption && caption}
       </span>
       <Link
         className={classes.creditLine}
