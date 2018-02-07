@@ -1,3 +1,6 @@
+// RibbonComponents are mapped inline to a ribbon (e.g. LatestArticlesRibbon).
+// Ribbons are components for content that stretch across the window.
+
 import React from "react";
 import { Link } from "react-router-dom";
 

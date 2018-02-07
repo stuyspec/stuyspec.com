@@ -88,7 +88,7 @@ const ArticleFooter = ({ classes, article, subscribe }) => {
           .
         </p>
         <p className={classes.subscriptionCTA}>
-          Never miss a <i>Spectator</i> issue again. Sign up for for our
+          Never miss a <i>Spectator</i> issue again. Sign up for our
           newsletter to receive a weekly e-mail with staff-picked stories.
         </p>
         <div className={classes.subscriptionFormContainer}>

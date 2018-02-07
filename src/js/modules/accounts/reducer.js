@@ -135,7 +135,7 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         status: {
           errors: [],
-          message: "You have been added to the subscription list.",
+          message: "You have been added as a subscriber.",
           formName: "subscription",
         },
       };
@@ -144,7 +144,7 @@ const reducer = (state = { ...initialState }, action) => {
       let errors = (action.payload.response &&
         action.payload.response.data.errors) || [action.payload.message];
       if (action.payload.response.status === 422) {
-        errors = ["This email is already subscribed to the newsletter."];
+        errors = ["You are already a subscriber."];
       }
       return {
         ...state,

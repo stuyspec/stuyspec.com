@@ -99,6 +99,8 @@ const styles = {
 };
 
 const ArticleBody = ({ classes, article }) => {
+
+  // TODO: refactor media to make the carousel part of media/back-end
   const isCarouselButtonVisible =
     SPEC_IMG_CAROUSEL_PATTERN.test(article.content) && article.media.length > 0;
 

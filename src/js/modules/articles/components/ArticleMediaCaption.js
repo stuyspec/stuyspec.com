@@ -21,6 +21,8 @@ const styles = {
 const ArticleMediaCaption = ({ classes, image }) => {
   const { user } = image;
   let { caption } = image;
+
+  // If the caption does not end in a period, add one.
   if (caption && caption.substr(caption.length - 1) !== ".") {
     caption += ".";
   }
