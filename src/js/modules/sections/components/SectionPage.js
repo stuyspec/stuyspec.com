@@ -8,8 +8,7 @@ import injectSheet from "react-jss";
 import { Helmet } from "react-helmet";
 
 import { ArticleList } from "../../articles/components";
-import SectionColumn from "./SectionColumn";
-import SectionFeature from "./SectionFeature";
+import { SubsectionPage, SectionColumn, SectionFeature } from "./";
 import {
   LeftTitleArticle,
   RightTitleArticle,
@@ -214,43 +213,21 @@ const styles = {
 };
 
 // const SectionPage = ({ classes, data, section }) => {
-const SectionPage = props => {
-  let { data, classes, section } = props;
+const SectionPage = ({ data, classes, section }) => {
+  // let { data, classes, section } = props;
   if (data.loading) {
     return null;
   }
+
   data = humps.camelizeKeys(data);
   const { latestArticles, topRankedArticles, featuredSubsection } = data;
   const [featuredArticle, secondaryArticle] = topRankedArticles;
-  const subsections = data.sectionsByParentSectionID;
+
   if (featuredArticle.section.parentSection) {
-    return (
-      <Grid fluid className={classes.SubsectionPage}>
-        <Helmet>
-          <title>{section.name} | The Stuyvesant Spectator</title>
-          <meta />
-        </Helmet>
-        <Row>
-          <Col xs={12} sm={9} md={9} lg={9} className={classes.latestArticles}>
-            <ArticleList
-              articles={latestArticles}
-              title={section.name}
-              label="Latest"
-            />
-          </Col>
-          <Col
-            xsHidden
-            sm={3}
-            md={3}
-            lg={3}
-            className={classes.TallAdContainer}
-          >
-            <TallAd />
-          </Col>
-        </Row>
-      </Grid>
-    );
+    return <SubsectionPage section={section} latestArticles={latestArticles} />;
   }
+
+  const subsections = data.sectionsByParentSectionID;
 
   return (
     <Grid fluid className={classes.SectionPage}>
