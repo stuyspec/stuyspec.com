@@ -17,6 +17,7 @@ const LatestArticlesQuery = gql`
         thumb_attachment_url
       }
       section {
+        id
         name
         permalink
       }
