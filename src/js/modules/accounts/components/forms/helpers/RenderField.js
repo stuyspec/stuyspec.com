@@ -16,12 +16,12 @@ const RenderField = ({
   input,
   label,
   isLabelVisible = true,
+  type,
+  meta: { touched, error },
 
   // The autoComplete input attribute helps password managers infer the purpose
   // of a field in a form. Proper usage of autoCompletes means better UX.
   autoComplete,
-  type,
-  meta: { touched, error },
 }) => {
   return (
     <div>

@@ -18,6 +18,9 @@ const styles = {
 };
 
 const FormStatus = ({ classes, status, formName, redirect, history }) => {
+  // The FormStatus component is shared on most forms. We have a status with
+  // the current formName in external state so the FormStatus doesn't display
+  // messages on one form that was actually meant for another form.
   if (status.formName !== formName) {
     return null;
   }
