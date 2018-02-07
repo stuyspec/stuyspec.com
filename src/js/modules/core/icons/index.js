@@ -1,4 +1,4 @@
 export { default as Hamburger } from "./Hamburger";
 export { default as Search } from "./Search";
 export { default as Print } from "./Print";
-export { default as PropagateLoader } from "./PropagateLoader";
+export { default as LoadingIcon } from "./LoadingIcon";

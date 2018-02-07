@@ -7,16 +7,10 @@ import { Row, Col } from "react-bootstrap";
 import injectSheet from "react-jss";
 
 import { TallAd } from "../../advertisements/components";
+import { LoadingIcon } from "../../core/icons";
 import ArticleList from "./ArticleList";
-import { PropagateLoader } from "../../core/icons";
 
 const styles = {
-  loaderContainer: {
-    height: "6px",
-    margin: "20px auto",
-    textAlign: "center",
-    width: "1px",
-  },
   articleList: {
     paddingRight: "14px !important",
   },
@@ -54,9 +48,7 @@ const SearchResultsQuery = gql`
 const SearchResults = ({ classes, data }) => {
   if (data.loading) {
     return (
-      <div className={classes.loaderContainer}>
-        <PropagateLoader />
-      </div>
+      <LoadingIcon />
     );
   }
   data = humps.camelizeKeys(data);
