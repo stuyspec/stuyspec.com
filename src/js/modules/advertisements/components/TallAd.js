@@ -1,16 +1,16 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import injectSheet from 'react-jss';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
 
-import { pathToAds } from '../constants';
+import { pathToAds } from "../constants";
 
 const styles = {
   TallAd: {
-    width: '100%',
+    width: "100%",
   },
   img: {
-    width: '100%',
+    width: "100%",
   },
 };
 

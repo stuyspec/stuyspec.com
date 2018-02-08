@@ -1,192 +1,192 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Grid, Row, Col } from 'react-bootstrap/lib';
-import { Link } from 'react-router-dom';
-import injectSheet from 'react-jss';
-import { Helmet } from 'react-helmet';
+import React from "react";
+import { connect } from "react-redux";
+import { Grid, Row, Col } from "react-bootstrap/lib";
+import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
+import { Helmet } from "react-helmet";
 
-import { ArticleList } from '../../articles/components';
-import { getSectionTreeArticles } from '../../articles/selectors';
-import { getDirectSubsections } from '../../sections/selectors';
-import SectionColumn from './SectionColumn';
-import { LeftTitleArticle } from '../../articles/components/summaries';
-import { Dateline, Byline } from '../../articles/components/index';
-import SectionFeature from './SectionFeature';
-import { TallAd } from '../../advertisements/components/index';
+import { ArticleList } from "../../articles/components";
+import { getSectionTreeArticles } from "../../articles/selectors";
+import { getDirectSubsections } from "../../sections/selectors";
+import SectionColumn from "./SectionColumn";
+import { LeftTitleArticle } from "../../articles/components/summaries";
+import { Dateline, Byline } from "../../articles/components/index";
+import SectionFeature from "./SectionFeature";
+import { TallAd } from "../../advertisements/components/index";
 
 const styles = {
   sectionTitle: {
-    color: '#000',
-    fontFamily: 'Canela',
-    fontSize: '60px',
+    color: "#000",
+    fontFamily: "Canela",
+    fontSize: "60px",
     fontWeight: 300,
-    height: '73px',
-    marginBottom: '7px',
-    textAlign: 'center',
+    height: "73px",
+    marginBottom: "7px",
+    textAlign: "center",
   },
   subsectionBar: {
-    margin: '0 0 35px 0',
-    textAlign: 'center',
+    margin: "0 0 35px 0",
+    textAlign: "center",
   },
   featuredRow: {
-    borderTop: '1px solid #ddd',
-    borderBottom: '1px solid #ddd',
-    padding: '26px 0 26px 0',
+    borderTop: "1px solid #ddd",
+    borderBottom: "1px solid #ddd",
+    padding: "26px 0 26px 0",
   },
   featuredMedia: {
-    '& figure': {
+    "& figure": {
       margin: 0,
-      maxHeight: '500px',
-      overflow: 'hidden',
-      width: '100%',
-      '& img': {
-        width: '100%',
+      maxHeight: "500px",
+      overflow: "hidden",
+      width: "100%",
+      "& img": {
+        width: "100%",
       },
     },
   },
   featuredArticle: {
-    marginLeft: '55px',
-    paddingTop: '35px',
-    textAlign: 'center',
-    width: '325px',
-    '& a': {
-      color: '#000',
-      '&:hover, &:active, &:focus': {
-        color: '#000',
+    marginLeft: "55px",
+    paddingTop: "35px",
+    textAlign: "center",
+    width: "325px",
+    "& a": {
+      color: "#000",
+      "&:hover, &:active, &:focus": {
+        color: "#000",
       },
     },
   },
   featuredArticleSection: {
-    display: 'block',
-    fontFamily: 'Circular Std',
-    fontSize: '13px',
+    display: "block",
+    fontFamily: "Circular Std",
+    fontSize: "13px",
     fontWeight: 300,
-    marginBottom: '8px',
-    textTransform: 'uppercase',
+    marginBottom: "8px",
+    textTransform: "uppercase",
   },
   featuredArticleTitle: {
-    display: 'block',
-    fontFamily: 'Canela',
-    fontSize: '40px',
+    display: "block",
+    fontFamily: "Canela",
+    fontSize: "40px",
     fontWeight: 300,
-    lineHeight: '48px',
-    marginBottom: '13px',
+    lineHeight: "48px",
+    marginBottom: "13px",
   },
   featuredArticleSummary: {
-    fontFamily: 'Minion Pro',
-    fontSize: '16px',
+    fontFamily: "Minion Pro",
+    fontSize: "16px",
     lineHeight: 1.25,
-    marginBottom: '18px',
+    marginBottom: "18px",
   },
   secondaryRow: {
-    marginBottom: '18px',
-    borderBottom: '1px solid #ddd',
-    paddingBottom: '18px',
+    marginBottom: "18px",
+    borderBottom: "1px solid #ddd",
+    paddingBottom: "18px",
   },
   secondaryCol: {
-    paddingRight: '0 !important',
+    paddingRight: "0 !important",
   },
   SectionFeatureContainer: {
-    borderBottom: '1px solid #ddd',
-    marginBottom: '18px',
-    marginRight: '14px',
-    '& div': {
-      borderTop: 'none',
+    borderBottom: "1px solid #ddd",
+    marginBottom: "18px",
+    marginRight: "14px",
+    "& div": {
+      borderTop: "none",
     },
   },
   TallAdContainer: {
-    borderLeft: '1px solid #ddd',
-    marginTop: '57px',
-    paddingLeft: '14px !important',
-    paddingRight: '0 !important',
+    borderLeft: "1px solid #ddd",
+    marginTop: "57px",
+    paddingLeft: "14px !important",
+    paddingRight: "0 !important",
   },
   subsectionListItem: {
-    display: 'inline-block',
-    marginBottom: '5px',
-    textDecoration: 'none',
-    padding: '0 26px 0px 0',
-    '&:last-child': {
+    display: "inline-block",
+    marginBottom: "5px",
+    textDecoration: "none",
+    padding: "0 26px 0px 0",
+    "&:last-child": {
       paddingRight: 0,
     },
   },
   subsectionLink: {
-    color: '#000',
-    fontFamily: 'Circular Std',
-    fontSize: '14px',
+    color: "#000",
+    fontFamily: "Circular Std",
+    fontSize: "14px",
     fontWeight: 300,
-    '&:hover, &:active, &:focus': {
-      color: '#000',
-      textDecoration: 'none',
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none",
     },
   },
   latestArticles: {
-    borderRight: 'solid 1px #ddd',
-    marginTop: '8px',
-    padding: '0 13px 0 0',
-    '& > div:last-child': {
+    borderRight: "solid 1px #ddd",
+    marginTop: "8px",
+    padding: "0 13px 0 0",
+    "& > div:last-child": {
       // articleBlocks
-      border: 'none',
+      border: "none",
       margin: 0,
     },
   },
   sectionColumnContainer: {
-    '& > div': {
-      borderLeft: 'none',
+    "& > div": {
+      borderLeft: "none",
     },
   },
   SubsectionPage: {
-    '& div > div': {
+    "& div > div": {
       borderRight: 0,
     },
   },
-  '@media (min-width: 992px)': {
+  "@media (min-width: 992px)": {
     SectionFeatureContainer: {
-      marginRight: '14px !important',
+      marginRight: "14px !important",
     },
   },
-  '@media (min-width: 768px)': {
+  "@media (min-width: 768px)": {
     SectionFeatureContainer: {
       marginRight: 0,
     },
   },
-  '@media (max-width: 991px)': {
+  "@media (max-width: 991px)": {
     featuredArticle: {
       marginLeft: 0,
-      paddingTop: '3vw',
-      width: '41.666666%', // col-sm-5
+      paddingTop: "3vw",
+      width: "41.666666%", // col-sm-5
     },
     featuredArticleSummary: {
-      margin: '0 auto 18px auto',
-      width: '80%',
+      margin: "0 auto 18px auto",
+      width: "80%",
     },
   },
-  '@media (max-width: 767px)': {
+  "@media (max-width: 767px)": {
     latestArticles: {
-      borderRight: 'none',
+      borderRight: "none",
       paddingRight: 0,
     },
     featuredMedia: {
-      paddingRight: '0 !important',
-      '& figure': {
-        maxHeight: '50vh',
+      paddingRight: "0 !important",
+      "& figure": {
+        maxHeight: "50vh",
       },
-      '& figure img': {
-        marginLeft: '-14px',
-        width: '100vw',
+      "& figure img": {
+        marginLeft: "-14px",
+        width: "100vw",
       },
     },
     featuredArticle: {
-      padding: '14px 0 0 0 !important',
-      width: '100%',
+      padding: "14px 0 0 0 !important",
+      width: "100%",
     },
     featuredArticleTitle: {
-      fontSize: '30px',
-      lineHeight: '36px',
+      fontSize: "30px",
+      lineHeight: "36px",
     },
     SectionFeatureContainer: {
       borderBottom: 0,
       borderRight: 0,
-      marginRight: '0 !important',
+      marginRight: "0 !important",
     },
   },
 };
@@ -199,7 +199,7 @@ const SectionPage = ({
   sections,
   media,
 }) => {
-  if (section.parentId || section.name === 'News') {
+  if (section.parentId || section.name === "News") {
     return (
       <Grid fluid className={classes.SubsectionPage}>
         <Helmet>
@@ -228,10 +228,10 @@ const SectionPage = ({
     );
   }
   const featuredArticle = sectionTreeArticles.find(article => {
-    if (section.name === 'Humor') {
+    if (section.name === "Humor") {
       if (
         directSubsections[article.sectionId] &&
-        directSubsections[article.sectionId].name === 'Spooktator'
+        directSubsections[article.sectionId].name === "Spooktator"
       ) {
         return false;
       }
@@ -258,18 +258,18 @@ const SectionPage = ({
   }
 
   let hardcodedSubsection = null;
-  if (section.name === 'Arts & Entertainment') {
-    hardcodedSubsection = 'Music';
-  } else if (section.name === 'Humor') {
-    hardcodedSubsection = 'Spooktator';
+  if (section.name === "Arts & Entertainment") {
+    hardcodedSubsection = "Music";
+  } else if (section.name === "Humor") {
+    hardcodedSubsection = "Spooktator";
   }
 
   let featuredSubsection = null;
-  if (section.name === '10/31 Terror Attack') {
+  if (section.name === "10/31 Terror Attack") {
     // 10/31 has no subsections, but many students published Creative
     // Responses (their creative pieces in response to the attack).
     featuredSubsection = Object.values(sections).find(
-      section => section.name === 'Creative Responses',
+      section => section.name === "Creative Responses",
     );
   } else {
     featuredSubsection = Object.values(directSubsections).find(subsection => {
@@ -283,7 +283,7 @@ const SectionPage = ({
 
   directSubsections = Object.values(directSubsections).sort((a, b) => {
     // alphabetizes subsections
-    return a['name'].localeCompare(b['name']);
+    return a["name"].localeCompare(b["name"]);
   });
 
   return (
@@ -294,7 +294,7 @@ const SectionPage = ({
       </Helmet>
       <div className={classes.sectionTitle}>{section.name}</div>
       <ul className={classes.subsectionBar}>
-        {section.name === '10/31 Terror Attack' ? (
+        {section.name === "10/31 Terror Attack" ? (
           <li className={classes.subsectionListItem}>
             <Link
               className={classes.subsectionLink}
@@ -335,8 +335,8 @@ const SectionPage = ({
             className={classes.featuredArticleSection}
             to={featuredArticleSection.permalink}
           >
-            {featuredArticleSection.name === 'Arts & Entertainment' ? (
-              'A&E'
+            {featuredArticleSection.name === "Arts & Entertainment" ? (
+              "A&E"
             ) : (
               featuredArticleSection.name
             )}

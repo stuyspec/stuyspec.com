@@ -1,4 +1,4 @@
-import { FETCH_INIT_DATA_FULFILLED } from '../core/actionTypes';
+import { FETCH_INIT_DATA_FULFILLED } from "../core/actionTypes";
 
 const initialState = {
   media: {},

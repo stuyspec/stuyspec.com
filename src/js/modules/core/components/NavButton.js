@@ -1,29 +1,29 @@
-import React from 'react';
-import injectSheet from 'react-jss';
+import React from "react";
+import injectSheet from "react-jss";
 
 const navButtonStyles = {
   NavButton: {
-    background: 'none',
+    background: "none",
     borderWidth: 0,
     margin: 0,
     padding: 0,
-    '&:hover': {
-      cursor: 'pointer',
+    "&:hover": {
+      cursor: "pointer",
     },
   },
   buttonText: {
-    color: '#000',
-    fontFamily: 'Circular Std',
-    fontSize: '12px',
-    fontWeight: 'bold',
+    color: "#000",
+    fontFamily: "Circular Std",
+    fontSize: "12px",
+    fontWeight: "bold",
   },
   icon: {
-    display: 'inline',
-    marginRight: '4px',
+    display: "inline",
+    marginRight: "4px",
   },
-  '@media (max-width: 768px)': {
+  "@media (max-width: 768px)": {
     buttonText: {
-      display: 'none',
+      display: "none",
     },
   },
 };

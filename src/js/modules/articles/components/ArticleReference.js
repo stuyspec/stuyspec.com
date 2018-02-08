@@ -1,30 +1,30 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import injectSheet from 'react-jss';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { connect } from "react-redux";
+import injectSheet from "react-jss";
+import { Link } from "react-router-dom";
 
 const styles = {
   ArticleReference: {
-    display: 'block',
-    fontStyle: 'italic',
-    marginTop: '12px',
-    marginBottom: '24px',
+    display: "block",
+    fontStyle: "italic",
+    marginTop: "12px",
+    marginBottom: "24px",
   },
   referenceLink: {
-    color: '#000',
-    textDecoration: 'underline',
-    '&:hover, &:active, &:focus': {
-      color: '#000',
+    color: "#000",
+    textDecoration: "underline",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
     },
   },
-  '@media (max-width: 991px)': {
+  "@media (max-width: 991px)": {
     ArticleReference: {
-      padding: '0 10%',
+      padding: "0 10%",
     },
   },
-  '@media (max-width: 767px)': {
+  "@media (max-width: 767px)": {
     ArticleReference: {
-      padding: '0 2%',
+      padding: "0 2%",
     },
   },
 };
@@ -34,8 +34,8 @@ const ArticleReference = ({ classes, article, sections }) => {
   // title's double quotes (for movies, books, etc.) with single quotes.
   const title = article.title
     .replace('"', "'") // straight double quote
-    .replace('“', '‘') // curly left double quote
-    .replace('”', '’'); // curly right double quote
+    .replace("“", "‘") // curly left double quote
+    .replace("”", "’"); // curly right double quote
   return (
     <span className={classes.ArticleReference}>
       This article was written in response to &ldquo;

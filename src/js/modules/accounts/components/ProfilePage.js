@@ -1,43 +1,43 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
-import injectSheet from 'react-jss';
-import { Grid, Row, Col, Table } from 'react-bootstrap/lib';
-import { Helmet } from 'react-helmet';
+import React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
+import { Grid, Row, Col, Table } from "react-bootstrap/lib";
+import { Helmet } from "react-helmet";
 
-import { SignOutForm } from './forms';
-import { signOut } from '../actions';
-import { getCurrentUser } from '../selectors';
+import { SignOutForm } from "./forms";
+import { signOut } from "../actions";
+import { getCurrentUser } from "../selectors";
 
 const styles = {
   pageTitle: {
-    color: '#000',
-    fontFamily: 'Canela',
-    fontSize: '48px',
+    color: "#000",
+    fontFamily: "Canela",
+    fontSize: "48px",
     fontWeight: 500,
     lineHeight: 1,
-    marginBottom: '11px',
+    marginBottom: "11px",
   },
   hr: {
-    margin: '10px 0',
+    margin: "10px 0",
   },
   editRedirect: {
-    color: '#3084df',
-    display: 'block',
-    fontFamily: 'Minion Pro',
-    fontSize: '17px',
-    marginBottom: '14px',
+    color: "#3084df",
+    display: "block",
+    fontFamily: "Minion Pro",
+    fontSize: "17px",
+    marginBottom: "14px",
   },
   dataTable: {
-    '& .table-responsive table > tbody > tr > td': {
-      fontFamily: 'Minion Pro',
-      fontSize: '17px',
-      padding: '8px 0',
+    "& .table-responsive table > tbody > tr > td": {
+      fontFamily: "Minion Pro",
+      fontSize: "17px",
+      padding: "8px 0",
     },
-    '& .table-responsive table > tbody > tr > td:first-child': {
-      paddingRight: '12px',
-      width: '120px',
+    "& .table-responsive table > tbody > tr > td:first-child": {
+      paddingRight: "12px",
+      width: "120px",
     },
   },
 };
@@ -64,7 +64,7 @@ const ProfilePage = ({ classes, signOut, session, sessionUser }) => {
               Welcome, {sessionUser.firstName}.
             </p>
             <Link
-              to={'/myaccount/profile/edit'}
+              to={"/myaccount/profile/edit"}
               className={classes.editRedirect}
             >
               Edit Profile

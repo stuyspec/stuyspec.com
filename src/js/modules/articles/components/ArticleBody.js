@@ -1,94 +1,94 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import injectSheet from 'react-jss';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
+import React from "react";
+import { connect } from "react-redux";
+import injectSheet from "react-jss";
+import Row from "react-bootstrap/lib/Row";
+import Col from "react-bootstrap/lib/Col";
 import {
   SPEC_REFERENCE_PATTERN,
   SPEC_IMG_CAROUSEL_PATTERN,
-} from '../../../constants';
+} from "../../../constants";
 
-import ArticleFeaturedMedia from './ArticleFeaturedMedia';
-import ArticleReference from './ArticleReference';
-import RightRail from './RightRail';
+import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
+import ArticleReference from "./ArticleReference";
+import RightRail from "./RightRail";
 
-import { Gallery } from '../../media/components';
-import { Lightbox } from '../../core/components';
+import { Gallery } from "../../media/components";
+import { Lightbox } from "../../core/components";
 
 const styles = {
   ArticleBody: {
-    color: '#000',
-    fontFamily: 'Minion Pro',
-    fontSize: '18px',
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "18px",
     lineHeight: 1.44,
-    padding: '0 0 18px',
-    '& p': {
-      marginBottom: '20px',
+    padding: "0 0 18px",
+    "& p": {
+      marginBottom: "20px",
     },
-    '& t': {
-      display: 'inline-block',
-      marginRight: '40px',
+    "& t": {
+      display: "inline-block",
+      marginRight: "40px",
     },
-    '& h4': {
-      textAlign: 'center',
-      fontWeight: 'bold',
-      textTransform: 'uppercase',
+    "& h4": {
+      textAlign: "center",
+      fontWeight: "bold",
+      textTransform: "uppercase",
     },
-    '& h5': {
-      fontSize: '18px',
-      fontWeight: 'bold',
-      textTransform: 'uppercase',
+    "& h5": {
+      fontSize: "18px",
+      fontWeight: "bold",
+      textTransform: "uppercase",
     },
-    '& h2': {
-      fontWeight: 'bold',
-      textTransform: 'uppercase',
-      textAlign: 'center',
+    "& h2": {
+      fontWeight: "bold",
+      textTransform: "uppercase",
+      textAlign: "center",
     },
-    '& p:first-child': {
-      marginTop: '8px',
+    "& p:first-child": {
+      marginTop: "8px",
     },
-    '& > div > p::first-letter': {
+    "& > div > p::first-letter": {
       // dropcap
-      float: 'left',
-      fontSize: '58px',
-      lineHeight: '43px',
-      padding: '7px 6px 0px 3px',
+      float: "left",
+      fontSize: "58px",
+      lineHeight: "43px",
+      padding: "7px 6px 0px 3px",
     },
-    '& > div > p ~ p::first-letter': {
-      float: 'none',
-      fontSize: '18px',
+    "& > div > p ~ p::first-letter": {
+      float: "none",
+      fontSize: "18px",
       lineHeight: 1.44,
       padding: 0,
     },
-    '& spec-reference': {
-      display: 'none',
+    "& spec-reference": {
+      display: "none",
     },
   },
   content: {
-    marginTop: '13px',
+    marginTop: "13px",
   },
-  '@media (max-width: 991px)': {
+  "@media (max-width: 991px)": {
     ArticleBody: {
-      '& > figure': {
-        padding: '0 10%',
+      "& > figure": {
+        padding: "0 10%",
       },
     },
     innerHTML: {
-      padding: '0 10%',
+      padding: "0 10%",
     },
   },
-  '@media (max-width: 767px)': {
+  "@media (max-width: 767px)": {
     ArticleBody: {
-      '& > figure': {
-        padding: '0 2%',
-        '& > div > img': {
-          marginLeft: '-14px', // ArticleBody.paddingLeft = 14px
-          width: '100vw',
+      "& > figure": {
+        padding: "0 2%",
+        "& > div > img": {
+          marginLeft: "-14px", // ArticleBody.paddingLeft = 14px
+          width: "100vw",
         },
       },
     },
     innerHTML: {
-      padding: '0 2%',
+      padding: "0 2%",
     },
   },
 };

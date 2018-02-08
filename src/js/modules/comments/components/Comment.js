@@ -1,36 +1,36 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import injectSheet from 'react-jss';
-import { Grid, Row, Col } from 'react-bootstrap/lib';
+import React from "react";
+import { connect } from "react-redux";
+import injectSheet from "react-jss";
+import { Grid, Row, Col } from "react-bootstrap/lib";
 
 const styles = {
   Comment: {
-    fontFamily: 'Minion Pro',
-    marginBottom: '18px',
+    fontFamily: "Minion Pro",
+    marginBottom: "18px",
   },
   commentInfo: {
-    marginBottom: '2px',
+    marginBottom: "2px",
   },
   userName: {
-    fontSize: '18px',
-    fontWeight: 'bold',
-    color: '#000',
+    fontSize: "18px",
+    fontWeight: "bold",
+    color: "#000",
   },
   content: {
-    color: '#000',
-    fontSize: '16px',
-    lineHeight: '1.5',
+    color: "#000",
+    fontSize: "16px",
+    lineHeight: "1.5",
     margin: 0,
   },
   bulletPoint: {
-    color: '#ccc',
-    fontSize: '12px',
-    margin: '0 4px',
-    position: 'relative',
+    color: "#ccc",
+    fontSize: "12px",
+    margin: "0 4px",
+    position: "relative",
   },
   publishedAt: {
-    color: '#a8a8a8',
-    fontSize: '16px',
+    color: "#a8a8a8",
+    fontSize: "16px",
     fontWeight: 300,
   },
 };

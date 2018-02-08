@@ -1,4 +1,4 @@
-import { SPEC_REFERENCE_PATTERN, SPEC_IMG_CAROUSEL_PATTERN } from './constants';
+import { SPEC_REFERENCE_PATTERN, SPEC_IMG_CAROUSEL_PATTERN } from "./constants";
 
 export const capitalizeWord = string => {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -11,24 +11,24 @@ export const shortenSummary = article => {
     );
     return null;
   }
-  let articleSummary = article.summary.split(' ');
+  let articleSummary = article.summary.split(" ");
   if (articleSummary.length > 25) {
-    articleSummary = articleSummary.slice(0, 24).join(' ') + '...';
-  } else if (article.summary === '') {
+    articleSummary = articleSummary.slice(0, 24).join(" ") + "...";
+  } else if (article.summary === "") {
     articleSummary = article.content
-      .replace(SPEC_REFERENCE_PATTERN, '')
-      .replace(SPEC_IMG_CAROUSEL_PATTERN, '')
-      .replace(/<p>|<\/p>|<br>|<br\/>|<b>/g, '')
-      .replace(/<h4>|<\/h4>/g, '')
-      .replace(/<\/b>/g, ' ');
+      .replace(SPEC_REFERENCE_PATTERN, "")
+      .replace(SPEC_IMG_CAROUSEL_PATTERN, "")
+      .replace(/<p>|<\/p>|<br>|<br\/>|<b>/g, "")
+      .replace(/<h4>|<\/h4>/g, "")
+      .replace(/<\/b>/g, " ");
     return (
       articleSummary
-        .split(' ')
+        .split(" ")
         .slice(0, 24)
-        .join(' ') + '...'
+        .join(" ") + "..."
     );
   } else {
-    articleSummary = articleSummary.join(' ');
+    articleSummary = articleSummary.join(" ");
   }
   return articleSummary;
 };
@@ -61,15 +61,15 @@ export const formatDate = string => {
   //formattedDate is in the following format:
   //August 1, 2017, 8:08 PM
   const options = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
   };
-  const formattedDate = articleDateline.toLocaleDateString('en-us', options);
+  const formattedDate = articleDateline.toLocaleDateString("en-us", options);
   //splitIndex returns the index of the space between the date and time
-  const splitIndex = formattedDate.lastIndexOf(' ', formattedDate.length - 4);
+  const splitIndex = formattedDate.lastIndexOf(" ", formattedDate.length - 4);
   //These slices return this part: Aug 01 2017
   if (
     currentDate.toString().slice(4, 15) ===
@@ -121,12 +121,12 @@ def Conv_Num_to_Roman(n):
  */
 //Credit to Mr.Brooks
 export const convertToRoman = number => {
-  const ones = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
-  const tens = ['X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'];
-  const huns = ['C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM'];
-  const thos = ['M', 'MM'];
+  const ones = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
+  const tens = ["X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"];
+  const huns = ["C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"];
+  const thos = ["M", "MM"];
   let arabicNum = number;
-  let romanString = '';
+  let romanString = "";
   if (arabicNum >= 1000) {
     romanString += thos[Math.floor(arabicNum / 1000) - 1];
     arabicNum %= 1000;

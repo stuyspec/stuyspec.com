@@ -1,5 +1,5 @@
-import { FETCH_INIT_DATA_FULFILLED } from '../core/actionTypes';
-import { getSectionsWithPermalinks } from './selectors';
+import { FETCH_INIT_DATA_FULFILLED } from "../core/actionTypes";
+import { getSectionsWithPermalinks } from "./selectors";
 
 const initialState = {
   sections: {},
@@ -11,11 +11,11 @@ const addPermalinksToSections = sectionsArray => {
     return acc;
   }, {});
   return sectionsArray.reduce((acc, section) => {
-    let permalink = '/' + section.slug;
+    let permalink = "/" + section.slug;
     if (section.parentId) {
-      permalink = '/' + sections[section.parentId].slug + permalink;
+      permalink = "/" + sections[section.parentId].slug + permalink;
     }
-    if (!'Art Photo'.includes(section.name)) {
+    if (!"Art Photo".includes(section.name)) {
       acc[section.id] = {
         ...section,
         permalink,

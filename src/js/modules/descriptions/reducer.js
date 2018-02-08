@@ -1,8 +1,8 @@
 const initialState = {
-  'our-charter': {
+  "our-charter": {
     id: 0,
-    title: 'Our Charter',
-    slug: 'our-charter',
+    title: "Our Charter",
+    slug: "our-charter",
     content: `<h1>The Charter of The Spectator</h1>
 Approved September 24, 2016 by The Spectator Editorial Board.<br>
 <h2>I. Statement of Purpose<br></h2>
@@ -122,8 +122,8 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
   },
   advertise: {
     id: 1,
-    title: 'Advertise',
-    slug: 'advertise',
+    title: "Advertise",
+    slug: "advertise",
     content: `<h2>Local Advertising</h2>
 <ul>Local advertisers are classified as all those companies either headquartered within New York City or whose New York City local branch is placing an advertisement.The best way to contact an advertising representative is to <a href="mailto:specbusiness@gmail.com">e-mail the business manager</a>. For information on rates and our publication schedule, please see the advertising forms below.</ul>
 <h2>National Advertising</h2>
@@ -165,8 +165,8 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
   },
   sponsors: {
     id: 2,
-    title: 'Sponsors',
-    slug: 'sponsors',
+    title: "Sponsors",
+    slug: "sponsors",
     content: `<h2>Become A Sponsor</h2>
 <p>
   If you are interested in sponsoring <i>The Spectator</i> to help
@@ -200,8 +200,8 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
   },
   staff: {
     id: 3,
-    title: 'Staff',
-    slug: 'staff',
+    title: "Staff",
+    slug: "staff",
     content: `<center>
 <h2>
   Members of the 2017-2018 Spectator Editorial Board
@@ -278,8 +278,8 @@ Kerry Garfinkel
   },
   contact: {
     id: 4,
-    title: 'Contact',
-    slug: 'contact',
+    title: "Contact",
+    slug: "contact",
     content: `<p style="text-align: center">
   Contact us at <a href="mailto:web@stuyspec.com">web@stuyspec.com</a>.
 </p>

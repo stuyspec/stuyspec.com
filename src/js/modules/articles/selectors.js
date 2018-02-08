@@ -1,16 +1,16 @@
-import React from 'react';
-import { createSelector } from 'reselect';
+import React from "react";
+import { createSelector } from "reselect";
 
-import { getUsers, getContributorFromSlug } from '../users/selectors';
+import { getUsers, getContributorFromSlug } from "../users/selectors";
 import {
   getSectionFromRequestedSlug,
   getSectionTreeIds,
-} from '../sections/selectors';
+} from "../sections/selectors";
 import {
   getMedia,
   getIllustratorIllustrations,
   getPhotographerPhotographs,
-} from '../media/selectors';
+} from "../media/selectors";
 
 export const getArticles = state => state.articles.articles;
 const getAuthorships = state => state.articles.authorships;

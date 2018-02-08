@@ -7,7 +7,7 @@ import {
   FETCH_INIT_DATA_REJECTED,
   OPEN_LIGHTBOX,
   CLOSE_LIGHTBOX,
-} from './actionTypes';
+} from "./actionTypes";
 
 // getWindowWidth & getWindowHeight was
 // adapted from http://stackoverflow.com/a/8876069/1291659

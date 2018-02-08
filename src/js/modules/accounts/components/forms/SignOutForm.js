@@ -1,30 +1,30 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
-import injectSheet from 'react-jss';
+import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { reduxForm } from "redux-form";
+import injectSheet from "react-jss";
 
-import { signOut } from '../../actions';
+import { signOut } from "../../actions";
 
 const styles = {
   successMessage: {
-    color: 'green',
+    color: "green",
   },
   errorMessage: {
-    color: 'red',
+    color: "red",
   },
   signOutButton: {
-    backgroundColor: '#3472b7',
-    border: '1px solid #3472b7',
-    borderRadius: '3px',
-    color: '#fff',
-    fontFamily: 'Minion Pro',
-    fontSize: '15px',
-    fontStyle: 'italic',
-    height: '32px',
-    marginTop: '15px',
-    textAlign: 'center',
-    width: '85px',
+    backgroundColor: "#3472b7",
+    border: "1px solid #3472b7",
+    borderRadius: "3px",
+    color: "#fff",
+    fontFamily: "Minion Pro",
+    fontSize: "15px",
+    fontStyle: "italic",
+    height: "32px",
+    marginTop: "15px",
+    textAlign: "center",
+    width: "85px",
   },
 };
 
@@ -42,7 +42,7 @@ const SignOutForm = ({ classes, handleSubmit, submitting, status }) => {
           </button>
         </div>
       </form>
-      {status.formName === 'signOut' && (
+      {status.formName === "signOut" && (
         <div>
           <p key="success" className={classes.successMessage}>
             {status.message}
@@ -69,5 +69,5 @@ const ConnectedSignOutForm = connect(mapStateToProps)(
 );
 
 export default reduxForm({
-  form: 'signOut',
+  form: "signOut",
 })(ConnectedSignOutForm);

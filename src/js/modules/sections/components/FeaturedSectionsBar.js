@@ -1,34 +1,34 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import injectSheet from 'react-jss';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import injectSheet from "react-jss";
+import { Link } from "react-router-dom";
 
-import { Search } from '../../core/icons';
-import { getTopLevelSections } from '../selectors';
-import { openSubscriptionModal } from '../../accounts/actions';
+import { Search } from "../../core/icons";
+import { getTopLevelSections } from "../selectors";
+import { openSubscriptionModal } from "../../accounts/actions";
 
 const styles = {
   FeaturedSectionsBar: {
-    fontFamily: 'Circular Std',
-    listStyleType: 'none',
-    padding: '6px',
+    fontFamily: "Circular Std",
+    listStyleType: "none",
+    padding: "6px",
   },
   sectionListItem: {
-    display: 'inline',
-    margin: '0px 13px',
+    display: "inline",
+    margin: "0px 13px",
   },
   navSearchButton: {
-    top: '-1px',
-    position: 'relative',
+    top: "-1px",
+    position: "relative",
   },
   sectionLink: {
-    color: '#000',
-    fontSize: '14px',
+    color: "#000",
+    fontSize: "14px",
     fontWeight: 300,
-    textDecoration: 'none',
-    '&:hover, &:active, &:focus': {
-      color: '#000',
+    textDecoration: "none",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
     },
   },
 };
@@ -53,7 +53,7 @@ const FeaturedSectionsBar = ({
       <li key={-1} className={classes.sectionListItem}>
         <Link
           onClick={openSubscriptionModal}
-          to={'/'}
+          to={"/"}
           className={classes.sectionLink}
         >
           Newsletter

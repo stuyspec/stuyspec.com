@@ -1,20 +1,20 @@
-import React from 'react';
-import { Grid, Row, Col } from 'react-bootstrap/lib';
-import injectSheet from 'react-jss';
-import { Helmet } from 'react-helmet';
+import React from "react";
+import { Grid, Row, Col } from "react-bootstrap/lib";
+import injectSheet from "react-jss";
+import { Helmet } from "react-helmet";
 
 const styles = {
   descriptionTitle: {
-    fontFamily: 'Canela',
-    fontSize: '36px',
-    fontWeight: '500',
-    textAlign: 'center',
-    color: '#000000',
+    fontFamily: "Canela",
+    fontSize: "36px",
+    fontWeight: "500",
+    textAlign: "center",
+    color: "#000000",
   },
   descriptionContent: {
-    fontFamily: 'Minion Pro',
-    fontSize: '18px',
-    color: '#000000',
+    fontFamily: "Minion Pro",
+    fontSize: "18px",
+    color: "#000000",
   },
 };
 

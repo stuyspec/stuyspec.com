@@ -1,36 +1,36 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Grid, Row, Col } from 'react-bootstrap/lib';
-import injectSheet from 'react-jss';
-import { Helmet } from 'react-helmet';
-import ReactLoading from 'react-loading';
+import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { Grid, Row, Col } from "react-bootstrap/lib";
+import injectSheet from "react-jss";
+import { Helmet } from "react-helmet";
+import ReactLoading from "react-loading";
 
-import ArticleList from './ArticleList';
-import { TallAd } from '../../advertisements/components';
-import { getArticlesWithContributors } from '../selectors';
-import { searchArticles } from '../actions';
-import SearchForm from './SearchForm';
+import ArticleList from "./ArticleList";
+import { TallAd } from "../../advertisements/components";
+import { getArticlesWithContributors } from "../selectors";
+import { searchArticles } from "../actions";
+import SearchForm from "./SearchForm";
 
 const styles = {
   title: {
-    color: '#000',
-    fontFamily: 'Canela',
-    fontSize: '36px',
-    fontWeight: '500',
+    color: "#000",
+    fontFamily: "Canela",
+    fontSize: "36px",
+    fontWeight: "500",
     margin: 0,
-    textAlign: 'center',
+    textAlign: "center",
   },
   form: {
-    margin: '0 auto',
-    display: 'block',
+    margin: "0 auto",
+    display: "block",
   },
   articleList: {
-    paddingRight: '14px !important',
+    paddingRight: "14px !important",
   },
   tallAdContainer: {
-    paddingLeft: '14px !important',
-    borderLeft: 'solid 1px #ddd',
+    paddingLeft: "14px !important",
+    borderLeft: "solid 1px #ddd",
   },
 };
 

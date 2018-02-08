@@ -1,100 +1,100 @@
-import React from 'react';
-import injectSheet from 'react-jss';
-import { connect } from 'react-redux';
-import { Row, Col } from 'react-bootstrap/lib';
-import { Link } from 'react-router-dom';
+import React from "react";
+import injectSheet from "react-jss";
+import { connect } from "react-redux";
+import { Row, Col } from "react-bootstrap/lib";
+import { Link } from "react-router-dom";
 
-import { getSectionTreeArticles } from '../selectors';
+import { getSectionTreeArticles } from "../selectors";
 
 const styles = {
   RecommendedRow: {
     padding: 0,
-    marginBottom: '24px',
+    marginBottom: "24px",
   },
   recommendedList: {
-    borderBottom: 'solid 1px #ddd',
-    padding: '0 0 24px',
+    borderBottom: "solid 1px #ddd",
+    padding: "0 0 24px",
   },
   label: {
-    color: '#000',
-    display: 'block',
-    fontFamily: 'Circular Std',
-    fontSize: '12px',
-    fontWeight: '300',
-    marginBottom: '3px',
-    textTransform: 'uppercase',
+    color: "#000",
+    display: "block",
+    fontFamily: "Circular Std",
+    fontSize: "12px",
+    fontWeight: "300",
+    marginBottom: "3px",
+    textTransform: "uppercase",
   },
   recommendedText: {
-    color: '#000',
-    fontFamily: 'Minion Pro',
-    fontSize: '12px',
-    marginBottom: '12px',
-    textTransform: 'uppercase',
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "12px",
+    marginBottom: "12px",
+    textTransform: "uppercase",
   },
   summary: {
-    color: '#000',
-    fontFamily: 'Minion Pro',
-    fontSize: '14px',
-    fontWeight: '300',
-    lineHeight: '1.29',
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "14px",
+    fontWeight: "300",
+    lineHeight: "1.29",
   },
   titleWithImage: {
-    color: '#000',
-    fontFamily: 'Minion Pro',
-    fontSize: '14px',
-    lineHeight: '1.21',
-    '&:hover, &:active, &:focus': {
-      color: '#000',
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "14px",
+    lineHeight: "1.21",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
     },
   },
   titleWithoutImage: {
-    color: '#000',
-    display: 'block',
-    fontFamily: 'Canela',
-    fontSize: '19px',
-    lineHeight: '1.38',
-    marginBottom: '2px',
-    '&:hover, &:active, &:focus': {
-      color: '#000',
+    color: "#000",
+    display: "block",
+    fontFamily: "Canela",
+    fontSize: "19px",
+    lineHeight: "1.38",
+    marginBottom: "2px",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
     },
   },
   figure: {
-    marginBottom: '4.1px',
-    maxHeight: '170px',
-    overflow: 'hidden',
-    width: '100%',
-    '& img': {
-      width: '100%',
+    marginBottom: "4.1px",
+    maxHeight: "170px",
+    overflow: "hidden",
+    width: "100%",
+    "& img": {
+      width: "100%",
     },
   },
   recommendedBlock: {
-    float: 'left',
-    padding: '0 7px 0',
-    width: '25%',
-    '&:first-child': {
+    float: "left",
+    padding: "0 7px 0",
+    width: "25%",
+    "&:first-child": {
       paddingLeft: 0,
     },
-    '&:last-child': {
+    "&:last-child": {
       paddingRight: 0,
     },
   },
-  '@media (max-width: 991px)': {
+  "@media (max-width: 991px)": {
     RecommendedRow: {
-      padding: '0 10%',
+      padding: "0 10%",
     },
   },
-  '@media (max-width: 767px)': {
+  "@media (max-width: 767px)": {
     RecommendedRow: {
-      padding: '0 2%',
+      padding: "0 2%",
     },
     figure: {
-      maxHeight: '270px',
+      maxHeight: "270px",
     },
   },
-  '@media (max-width: 575px)': {
+  "@media (max-width: 575px)": {
     recommendedBlock: {
-      width: '50%',
-      marginBottom: '7px',
+      width: "50%",
+      marginBottom: "7px",
     },
     recommendedList: {
       /* recommendedBlocks are structured in a block form,
@@ -102,13 +102,13 @@ const styles = {
            3  4,
          rendering these next padding removals necessary.
        */
-      '& > div:nth-child(2)': {
+      "& > div:nth-child(2)": {
         // 2nd recommendedBlock
-        paddingRight: '0 !important',
+        paddingRight: "0 !important",
       },
-      '& > div:nth-child(3)': {
+      "& > div:nth-child(3)": {
         // 3rd recommendedBlock
-        paddingLeft: '0 !important',
+        paddingLeft: "0 !important",
       },
     },
   },

@@ -1,61 +1,61 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import injectSheet from 'react-jss';
-import { Modal } from 'react-bootstrap/lib';
+import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import injectSheet from "react-jss";
+import { Modal } from "react-bootstrap/lib";
 
-import SubscriptionForm from './forms/SubscriptionForm';
-import { closeSubscriptionModal, subscribe } from '../actions';
+import SubscriptionForm from "./forms/SubscriptionForm";
+import { closeSubscriptionModal, subscribe } from "../actions";
 
 const styles = {
   SubscriptionModal: {
-    left: '30.5%',
-    position: 'absolute',
-    textAlign: 'center',
-    top: '3%',
-    width: '483px',
+    left: "30.5%",
+    position: "absolute",
+    textAlign: "center",
+    top: "3%",
+    width: "483px",
   },
   film: {
-    display: 'block',
-    height: '89px',
-    marginLeft: '40%',
-    width: '164px',
+    display: "block",
+    height: "89px",
+    marginLeft: "40%",
+    width: "164px",
   },
   playlist: {
-    height: '108px',
-    left: '3%',
-    position: 'absolute',
-    top: '48%',
+    height: "108px",
+    left: "3%",
+    position: "absolute",
+    top: "48%",
   },
   borough: {
-    display: 'block',
-    height: '145px',
-    margin: '0 0 30px 25%',
-    width: '234px',
+    display: "block",
+    height: "145px",
+    margin: "0 0 30px 25%",
+    width: "234px",
   },
   notInterested: {
-    backgroundColor: '#ccc',
-    border: 'none',
-    borderRadius: '3px',
-    color: '#888',
-    fontFamily: 'Circular Std',
-    fontSize: '15px',
-    fontWeight: '300',
-    marginBottom: '19px',
-    padding: '11px',
-    width: '275px',
+    backgroundColor: "#ccc",
+    border: "none",
+    borderRadius: "3px",
+    color: "#888",
+    fontFamily: "Circular Std",
+    fontSize: "15px",
+    fontWeight: "300",
+    marginBottom: "19px",
+    padding: "11px",
+    width: "275px",
   },
   newsletter: {
-    color: '#000',
-    fontFamily: 'Minion Pro',
-    fontSize: '28px',
-    margin: '0 0 13px',
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "28px",
+    margin: "0 0 13px",
   },
   inbox: {
-    color: '#000',
-    fontFamily: 'Minion Pro',
-    fontSize: '21px',
-    margin: '0 0 24px 0',
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "21px",
+    margin: "0 0 24px 0",
   },
 };
 

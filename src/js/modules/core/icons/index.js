@@ -3,6 +3,6 @@
  * https://github.com/rob2d/generator-react-redux-gulp/issues/7
  */
 
-export { default as Hamburger } from './Hamburger';
-export { default as Search } from './Search';
-export { default as Print } from './Print';
+export { default as Hamburger } from "./Hamburger";
+export { default as Search } from "./Search";
+export { default as Print } from "./Print";

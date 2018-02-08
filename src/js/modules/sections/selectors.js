@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from "reselect";
 
 export const getSections = state => state.sections.sections;
 export const getSectionFromRequestedSlug = (state, props) => props.section;

@@ -1,44 +1,44 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
-import injectSheet from 'react-jss';
-import { Table } from 'react-bootstrap/lib';
-import { EMAIL_REGEX } from '../../../../constants';
+import React from "react";
+import { connect } from "react-redux";
+import { Field, reduxForm } from "redux-form";
+import injectSheet from "react-jss";
+import { Table } from "react-bootstrap/lib";
+import { EMAIL_REGEX } from "../../../../constants";
 
 const styles = {
   successMessage: {
-    color: 'green',
-    fontFamily: 'Minion Pro',
-    marginTop: '8px',
+    color: "green",
+    fontFamily: "Minion Pro",
+    marginTop: "8px",
   },
   errorMessage: {
-    color: 'red',
-    fontFamily: 'Minion Pro',
-    marginTop: '8px',
+    color: "red",
+    fontFamily: "Minion Pro",
+    marginTop: "8px",
   },
   dataTable: {
-    '& .table-responsive table > tbody > tr > td': {
-      fontFamily: 'Minion Pro',
-      fontSize: '17px',
-      padding: '8px 0',
+    "& .table-responsive table > tbody > tr > td": {
+      fontFamily: "Minion Pro",
+      fontSize: "17px",
+      padding: "8px 0",
     },
-    '& .table-responsive table > tbody > tr > td:first-child': {
-      paddingRight: '12px',
-      width: '120px',
+    "& .table-responsive table > tbody > tr > td:first-child": {
+      paddingRight: "12px",
+      width: "120px",
     },
   },
   saveButton: {
-    backgroundColor: '#3472b7',
-    border: '1px solid #3472b7',
-    borderRadius: '3px',
-    color: '#fff',
-    fontFamily: 'Minion Pro',
-    fontSize: '15px',
-    fontStyle: 'italic',
-    height: '32px',
-    marginTop: '15px',
-    textAlign: 'center',
-    width: '85px',
+    backgroundColor: "#3472b7",
+    border: "1px solid #3472b7",
+    borderRadius: "3px",
+    color: "#fff",
+    fontFamily: "Minion Pro",
+    fontSize: "15px",
+    fontStyle: "italic",
+    height: "32px",
+    marginTop: "15px",
+    textAlign: "center",
+    width: "85px",
   },
 };
 
@@ -47,7 +47,7 @@ const styles = {
 const validate = formValues => {
   const errors = {};
   if (formValues.email && !EMAIL_REGEX.test(formValues.email)) {
-    errors.email = 'Invalid email address';
+    errors.email = "Invalid email address";
   }
   return errors;
 };
@@ -65,7 +65,7 @@ const renderField = ({
           {...input}
           placeholder={label}
           type={type}
-          style={{ width: '100%' }}
+          style={{ width: "100%" }}
         />
         {touched &&
           ((error && <span>{error}</span>) ||
@@ -128,7 +128,7 @@ const EditUserForm = ({ classes, handleSubmit, submitting, status }) => {
           </button>
         </div>
       </form>
-      {status.formName === 'editUser' && (
+      {status.formName === "editUser" && (
         <div>
           <p key="success" className={classes.successMessage}>
             {status.message}
@@ -155,6 +155,6 @@ const ConnectedEditUserForm = connect(mapStateToProps)(
 );
 
 export default reduxForm({
-  form: 'editUser',
+  form: "editUser",
   validate,
 })(ConnectedEditUserForm);

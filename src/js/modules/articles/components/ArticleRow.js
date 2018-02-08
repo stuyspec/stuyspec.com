@@ -1,88 +1,88 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Row, Col } from 'react-bootstrap/lib';
-import { Link } from 'react-router-dom';
-import injectSheet from 'react-jss';
+import React from "react";
+import { connect } from "react-redux";
+import { Row, Col } from "react-bootstrap/lib";
+import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
 
-import Byline from './Byline';
-import Dateline from './Dateline';
+import Byline from "./Byline";
+import Dateline from "./Dateline";
 
 const styles = {
   articleBlock: {
-    borderBottom: 'solid 1px #ddd',
-    marginBottom: '22px',
-    paddingBottom: '20px',
+    borderBottom: "solid 1px #ddd",
+    marginBottom: "22px",
+    paddingBottom: "20px",
   },
   DatelineDesktop: {
-    color: '#888',
-    display: 'block',
-    fontFamily: 'Circular Std',
-    fontSize: '13px',
-    fontWeight: '300',
-    float: 'left',
-    marginRight: '19px',
-    width: '110px',
+    color: "#888",
+    display: "block",
+    fontFamily: "Circular Std",
+    fontSize: "13px",
+    fontWeight: "300",
+    float: "left",
+    marginRight: "19px",
+    width: "110px",
   },
   DatelineMobile: {
-    color: '#888',
-    display: 'none',
-    fontFamily: 'Circular Std',
-    fontSize: '12px',
-    fontWeight: '300',
-    marginRight: '19px',
+    color: "#888",
+    display: "none",
+    fontFamily: "Circular Std",
+    fontSize: "12px",
+    fontWeight: "300",
+    marginRight: "19px",
   },
   preview: {
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   figure: {
-    float: 'right',
-    height: '130px',
-    marginLeft: '29px',
-    width: '166px',
-    '& img': {
-      width: '100%',
+    float: "right",
+    height: "130px",
+    marginLeft: "29px",
+    width: "166px",
+    "& img": {
+      width: "100%",
     },
   },
   title: {
-    color: '#000',
-    display: 'block',
-    fontFamily: 'Minion Pro',
-    fontSize: '24px',
+    color: "#000",
+    display: "block",
+    fontFamily: "Minion Pro",
+    fontSize: "24px",
     fontWeight: 700,
-    lineHeight: '1.12',
-    marginBottom: '5px',
-    paddingTop: '2px',
-    '&:hover, &:active, &:focus': {
-      color: '#000',
+    lineHeight: "1.12",
+    marginBottom: "5px",
+    paddingTop: "2px",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
     },
   },
   summary: {
-    color: '#000',
-    fontFamily: 'Minion Pro',
-    fontSize: '16px',
-    lineHeight: '1.25',
-    marginBottom: '3px',
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "16px",
+    lineHeight: "1.25",
+    marginBottom: "3px",
   },
-  '@media (max-width: 767px)': {
+  "@media (max-width: 767px)": {
     DatelineDesktop: {
-      display: 'none',
+      display: "none",
     },
     DatelineMobile: {
-      display: 'block',
+      display: "block",
     },
     preview: {
-      overflow: 'visible',
+      overflow: "visible",
     },
     figure: {
-      float: 'none',
-      margin: '0 0 14px 0',
-      height: 'auto',
-      maxHeight: '80vw',
-      overflow: 'hidden',
-      width: '100%',
-      '& img': {
-        marginLeft: '-14px',
-        width: '100vw',
+      float: "none",
+      margin: "0 0 14px 0",
+      height: "auto",
+      maxHeight: "80vw",
+      overflow: "hidden",
+      width: "100%",
+      "& img": {
+        marginLeft: "-14px",
+        width: "100vw",
       },
     },
   },
