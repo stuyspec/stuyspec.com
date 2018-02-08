@@ -9,6 +9,10 @@ const styles = {
     marginBottom: "12px",
   },
   figure: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    height: "400px",
     marginBottom: "16px",
     overflow: "hidden",
     width: "100%",
