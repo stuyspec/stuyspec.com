@@ -1,18 +1,18 @@
-import React from 'react';
-import injectSheet from 'react-jss';
+import React from "react";
+import injectSheet from "react-jss";
 
 const styles = {
   Outquote: {
-    border: '1px solid #000',
-    borderStyle: 'solid none',
-    color: '#000',
-    fontFamily: 'Minion Pro',
-    fontSize: '16px',
-    fontStyle: 'italic',
+    border: "1px solid #000",
+    borderStyle: "solid none",
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "16px",
+    fontStyle: "italic",
     lineHeight: 1.25,
-    margin: '15px 0 16px',
-    padding: '13px 35px',
-    textAlign: 'center',
+    margin: "15px 0 16px",
+    padding: "13px 35px",
+    textAlign: "center",
   },
 };
 

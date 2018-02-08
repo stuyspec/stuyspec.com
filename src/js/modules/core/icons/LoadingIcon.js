@@ -1,9 +1,9 @@
-import React from 'react';
-import injectSheet from 'react-jss';
+import React from "react";
+import injectSheet from "react-jss";
 
 const styles = {
   LoadingIcon: {
-    margin: '16px auto !important',
+    margin: "16px auto !important",
   },
 };
 

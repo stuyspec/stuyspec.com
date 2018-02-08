@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { compose } from 'redux';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
-import humps from 'humps';
-import injectSheet from 'react-jss';
-import Grid from 'react-bootstrap/lib/Grid';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import { Helmet } from 'react-helmet';
-import { SPEC_REFERENCE_PATTERN } from '../../../constants';
-import { ArticleHeader, ArticleBody, ArticleFooter, RecommendedRow } from './';
-import CommentThread from '../../comments/components/CommentThread';
-import NotFoundPage from '../../core/components/NotFoundPage';
+import React, { Component } from "react";
+import { compose } from "redux";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
+import injectSheet from "react-jss";
+import Grid from "react-bootstrap/lib/Grid";
+import Row from "react-bootstrap/lib/Row";
+import Col from "react-bootstrap/lib/Col";
+import { Helmet } from "react-helmet";
+import { SPEC_REFERENCE_PATTERN } from "../../../constants";
+import { ArticleHeader, ArticleBody, ArticleFooter, RecommendedRow } from "./";
+import CommentThread from "../../comments/components/CommentThread";
+import NotFoundPage from "../../core/components/NotFoundPage";
 
 const ArticleQuery = gql`
   query ArticleQuery($slug: String!) {
@@ -68,20 +68,20 @@ const ArticleQuery = gql`
 
 const styles = {
   subscribe: {
-    color: '#3572b7',
-    '&:hover, &:focus, &:active': {
-      color: '#3572b7',
+    color: "#3572b7",
+    "&:hover, &:focus, &:active": {
+      color: "#3572b7",
     },
-    '&:hover': {
-      cursor: 'pointer',
+    "&:hover": {
+      cursor: "pointer",
     },
   },
-  '@media (max-width: 1199px)': {
+  "@media (max-width: 1199px)": {
     ArticlePage: {
-      padding: '0 8%',
+      padding: "0 8%",
     },
   },
-  '@media (max-width: 991px)': {
+  "@media (max-width: 991px)": {
     ArticlePage: {
       padding: 0,
     },

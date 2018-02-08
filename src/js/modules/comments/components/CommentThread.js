@@ -1,37 +1,37 @@
-import React from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { graphql } from 'react-apollo';
-import humps from 'humps';
-import injectSheet from 'react-jss';
-import { Grid, Row, Col } from 'react-bootstrap/lib';
+import React from "react";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { graphql } from "react-apollo";
+import humps from "humps";
+import injectSheet from "react-jss";
+import { Grid, Row, Col } from "react-bootstrap/lib";
 
-import Comment from './Comment';
-import CommentForm from './CommentForm';
-import { SignInModal } from '../../accounts/components';
+import Comment from "./Comment";
+import CommentForm from "./CommentForm";
+import { SignInModal } from "../../accounts/components";
 
-import { createComment } from '../actions';
-import { UserByUIDQuery } from '../../../queries';
+import { createComment } from "../actions";
+import { UserByUIDQuery } from "../../../queries";
 
 const styles = {
   CommentThread: {
     padding: 0,
-    '& textarea': {
-      resize: 'vertical', // only allows vertical resizing
+    "& textarea": {
+      resize: "vertical", // only allows vertical resizing
     },
   },
-  '@media (max-width: 991px)': {
+  "@media (max-width: 991px)": {
     CommentThread: {
-      padding: '0 10%',
+      padding: "0 10%",
     },
     commentFormContainer: {
-      marginBottom: '36px',
+      marginBottom: "36px",
     },
   },
-  '@media (max-width: 767px)': {
+  "@media (max-width: 767px)": {
     CommentThread: {
-      padding: '0 2%',
+      padding: "0 2%",
     },
   },
 };
@@ -101,8 +101,8 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   graphql(UserByUIDQuery, {
     options: ({ session }) => ({
-      fetchPolicy: 'network-only',
-      variables: { uid: (session && session.uid) || '' },
+      fetchPolicy: "network-only",
+      variables: { uid: (session && session.uid) || "" },
     }),
   }),
   injectSheet(styles),

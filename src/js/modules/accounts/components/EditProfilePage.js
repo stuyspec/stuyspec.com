@@ -1,32 +1,32 @@
-import React from 'react';
-import { bindActionCreators, compose } from 'redux';
-import { connect } from 'react-redux';
-import { graphql } from 'react-apollo';
-import humps from 'humps';
-import { Link } from 'react-router-dom';
-import injectSheet from 'react-jss';
-import { Grid, Row, Col } from 'react-bootstrap/lib';
-import { Helmet } from 'react-helmet';
+import React from "react";
+import { bindActionCreators, compose } from "redux";
+import { connect } from "react-redux";
+import { graphql } from "react-apollo";
+import humps from "humps";
+import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
+import { Grid, Row, Col } from "react-bootstrap/lib";
+import { Helmet } from "react-helmet";
 
-import { EditUserForm } from './forms';
-import { updateUser } from '../actions';
-import { UserByUIDQuery } from '../../../queries';
+import { EditUserForm } from "./forms";
+import { updateUser } from "../actions";
+import { UserByUIDQuery } from "../../../queries";
 
 const styles = {
   pageTitle: {
-    color: '#000',
-    fontFamily: 'Canela',
-    fontSize: '48px',
+    color: "#000",
+    fontFamily: "Canela",
+    fontSize: "48px",
     fontWeight: 500,
     lineHeight: 1,
-    marginBottom: '11px',
+    marginBottom: "11px",
   },
   backRedirect: {
-    color: '#3084df',
-    display: 'block',
-    fontFamily: 'Minion Pro',
-    fontSize: '17px',
-    marginBottom: '14px',
+    color: "#3084df",
+    display: "block",
+    fontFamily: "Minion Pro",
+    fontSize: "17px",
+    marginBottom: "14px",
   },
 };
 
@@ -57,7 +57,7 @@ const EditProfilePage = ({ classes, updateUser, data }) => {
           lgOffset={3}
         >
           <p className={classes.pageTitle}>Edit Profile</p>
-          <Link to={'/myaccount/profile'} className={classes.backRedirect}>
+          <Link to={"/myaccount/profile"} className={classes.backRedirect}>
             Back to Profile
           </Link>
           <EditUserForm onSubmit={handleUpdateUser} />
@@ -80,8 +80,8 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   graphql(UserByUIDQuery, {
     options: ({ session }) => ({
-      fetchPolicy: 'network-only',
-      variables: { uid: (session && session.uid) || '' },
+      fetchPolicy: "network-only",
+      variables: { uid: (session && session.uid) || "" },
     }),
   }),
   injectSheet(styles),

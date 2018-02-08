@@ -1,61 +1,61 @@
-import React, { Component } from 'react';
-import Slider from 'react-slick';
-import injectSheet from 'react-jss';
+import React, { Component } from "react";
+import Slider from "react-slick";
+import injectSheet from "react-jss";
 
-import SliderFooter from './SliderFooter';
+import SliderFooter from "./SliderFooter";
 
 const styles = {
   Gallery: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-    justifyContent: 'space-around',
-    position: 'relative',
-    width: '90%',
-    '& *': {
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
+    justifyContent: "space-around",
+    position: "relative",
+    width: "90%",
+    "& *": {
       // necessary for react-slick + flex
       minHeight: 0,
       minWidth: 0,
     },
   },
   Slider: {
-    '& .slick-next:before, .slick-prev:before': {
-      fontSize: '20px',
-      color: '#00558B',
+    "& .slick-next:before, .slick-prev:before": {
+      fontSize: "20px",
+      color: "#00558B",
       opacity: 0.75,
     },
   },
   slideContainer: {},
   slide: {
-    alignItems: 'center',
-    height: '100%',
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
+    alignItems: "center",
+    height: "100%",
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
     margin: 0,
-    '& img': {
-      margin: '0 auto',
-      maxHeight: '50vh',
-      maxWidth: '100%',
+    "& img": {
+      margin: "0 auto",
+      maxHeight: "50vh",
+      maxWidth: "100%",
     },
   },
   slideCaption: {
-    alignSelf: 'flex-start',
-    width: '100%',
-    '& p': {
-      color: '#fff',
-      marginTop: '10px',
-      width: '100%',
-      fontFamily: 'Minion Pro',
-      fontStyle: 'italic',
-      fontSize: '17px',
-      textAlign: 'center',
+    alignSelf: "flex-start",
+    width: "100%",
+    "& p": {
+      color: "#fff",
+      marginTop: "10px",
+      width: "100%",
+      fontFamily: "Minion Pro",
+      fontStyle: "italic",
+      fontSize: "17px",
+      textAlign: "center",
     },
   },
   thumbnailImage: {
-    height: '100%',
-    width: '100%',
+    height: "100%",
+    width: "100%",
   },
 };
 
@@ -89,7 +89,7 @@ class Gallery extends Component {
         this.setState({ index: currentSlideIndex }),
       arrows: false,
       dots: true,
-      dotsClass: 'slick-dots slick-thumb',
+      dotsClass: "slick-dots slick-thumb",
       infinite: false,
       speed: 500,
       slidesToShow: 1,

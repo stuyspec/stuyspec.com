@@ -1,7 +1,7 @@
 import {
   CREATE_COMMENT_FULFILLED,
   CREATE_COMMENT_REJECTED,
-} from './actionTypes';
+} from "./actionTypes";
 
 const initialState = {
   status: {
@@ -16,7 +16,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         status: {
-          type: 'fulfilled',
+          type: "fulfilled",
           message: `Comment submitted for review at ${action.payload.data
             .createdAt}`,
         },
@@ -26,13 +26,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         status: {
-          type: 'rejected',
+          type: "rejected",
           message: `Comment failed to post (${action.payload})`,
         },
       };
     }
 
-    case '@@redux-form/DESTROY': {
+    case "@@redux-form/DESTROY": {
       // Clears status data so the success message will not appear on other
       // articles' comment threads.
       return {

@@ -1,14 +1,14 @@
-import React from 'react';
-import injectSheet from 'react-jss';
-import dateFormat from 'dateformat';
+import React from "react";
+import injectSheet from "react-jss";
+import dateFormat from "dateformat";
 
 const MILLISECONDS_IN_DAY = 8.64e7;
 
 const styles = {
   Dateline: {
-    color: '#888',
-    fontFamily: 'Circular Std',
-    fontSize: '12px',
+    color: "#888",
+    fontFamily: "Circular Std",
+    fontSize: "12px",
     fontWeight: 300,
     marginBottom: 0,
   },
@@ -25,8 +25,8 @@ const Dateline = ({ classes, timestamp }) => {
   const dateline = dateFormat(
     timestamp,
     new Date() - new Date(timestamp) < MILLISECONDS_IN_DAY
-      ? 'shortTime'
-      : 'longDate',
+      ? "shortTime"
+      : "longDate",
   );
   return <p className={classes.Dateline}>{dateline}</p>;
 };

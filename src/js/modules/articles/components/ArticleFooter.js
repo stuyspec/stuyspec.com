@@ -1,72 +1,72 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import injectSheet from 'react-jss';
-import { Row, Col } from 'react-bootstrap/lib';
-import { toRoman } from 'roman-numerals';
+import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import injectSheet from "react-jss";
+import { Row, Col } from "react-bootstrap/lib";
+import { toRoman } from "roman-numerals";
 
-import SubscriptionForm from '../../accounts/components/forms/SubscriptionForm';
-import { subscribe } from '../../accounts/actions';
+import SubscriptionForm from "../../accounts/components/forms/SubscriptionForm";
+import { subscribe } from "../../accounts/actions";
 
 const styles = {
   ArticleFooter: {
-    fontFamily: 'Minion Pro',
+    fontFamily: "Minion Pro",
   },
   inPrint: {
-    borderBottom: '1px solid #ddd',
-    color: '#000',
-    fontSize: '19px',
-    fontStyle: 'italic',
+    borderBottom: "1px solid #ddd",
+    color: "#000",
+    fontSize: "19px",
+    fontStyle: "italic",
     lineHeight: 1.4,
-    marginBottom: '14px',
-    paddingBottom: '13px',
-    '& a': {
-      color: '#000',
-      textDecoration: 'underline',
-      '&:hover, &:active, &:focus': {
-        color: '#000',
+    marginBottom: "14px",
+    paddingBottom: "13px",
+    "& a": {
+      color: "#000",
+      textDecoration: "underline",
+      "&:hover, &:active, &:focus": {
+        color: "#000",
       },
     },
   },
   subscriptionCTA: {
-    color: '#000',
-    fontSize: '19px',
-    marginBottom: '10px',
+    color: "#000",
+    fontSize: "19px",
+    marginBottom: "10px",
   },
   subscriptionFormContainer: {
-    marginBottom: '21px',
-    '& > div > form': {
-      display: 'flex',
+    marginBottom: "21px",
+    "& > div > form": {
+      display: "flex",
     },
-    '& > div > form > div': {
-      display: 'inline-block',
+    "& > div > form > div": {
+      display: "inline-block",
     },
-    '& > div > form > div:first-child': {
-      width: '80%',
-      '& > div > input': {
+    "& > div > form > div:first-child": {
+      width: "80%",
+      "& > div > input": {
         // email input
-        borderRadius: '3px 0 0 3px',
-        width: '100%',
+        borderRadius: "3px 0 0 3px",
+        width: "100%",
       },
     },
-    '& > div > form > div:last-child': {
-      width: '20%',
-      '& > button': {
+    "& > div > form > div:last-child": {
+      width: "20%",
+      "& > button": {
         // "Subscribe" button
-        borderRadius: '0 3px 3px 0',
+        borderRadius: "0 3px 3px 0",
         margin: 0,
-        width: '100%',
+        width: "100%",
       },
     },
   },
-  '@media (max-width: 991px)': {
+  "@media (max-width: 991px)": {
     ArticleFooter: {
-      padding: '0 10%',
+      padding: "0 10%",
     },
   },
-  '@media (max-width: 767px)': {
+  "@media (max-width: 767px)": {
     ArticleFooter: {
-      padding: '0 2%',
+      padding: "0 2%",
     },
   },
 };

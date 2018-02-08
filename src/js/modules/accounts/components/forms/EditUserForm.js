@@ -1,43 +1,43 @@
-import React from 'react';
-import { compose } from 'redux';
-import { Field, reduxForm } from 'redux-form';
-import injectSheet from 'react-jss';
-import Table from 'react-bootstrap/lib/Table';
-import { EMAIL_REGEX } from '../../../../constants';
+import React from "react";
+import { compose } from "redux";
+import { Field, reduxForm } from "redux-form";
+import injectSheet from "react-jss";
+import Table from "react-bootstrap/lib/Table";
+import { EMAIL_REGEX } from "../../../../constants";
 
-import { FormStatus, RenderField } from './helpers';
+import { FormStatus, RenderField } from "./helpers";
 
 const styles = {
   dataTable: {
-    '& .table-responsive table > tbody > tr > td': {
-      fontFamily: 'Minion Pro',
-      fontSize: '17px',
-      padding: '8px 0',
+    "& .table-responsive table > tbody > tr > td": {
+      fontFamily: "Minion Pro",
+      fontSize: "17px",
+      padding: "8px 0",
     },
-    '& .table-responsive table > tbody > tr > td:first-child': {
-      paddingRight: '12px',
-      width: '120px',
+    "& .table-responsive table > tbody > tr > td:first-child": {
+      paddingRight: "12px",
+      width: "120px",
     },
   },
   saveButton: {
-    backgroundColor: '#3472b7',
-    border: '1px solid #3472b7',
-    borderRadius: '3px',
-    color: '#fff',
-    fontFamily: 'Minion Pro',
-    fontSize: '15px',
-    fontStyle: 'italic',
-    height: '32px',
-    marginTop: '15px',
-    textAlign: 'center',
-    width: '85px',
+    backgroundColor: "#3472b7",
+    border: "1px solid #3472b7",
+    borderRadius: "3px",
+    color: "#fff",
+    fontFamily: "Minion Pro",
+    fontSize: "15px",
+    fontStyle: "italic",
+    height: "32px",
+    marginTop: "15px",
+    textAlign: "center",
+    width: "85px",
   },
 };
 
 const validate = formValues => {
   const errors = {};
   if (formValues.email && !EMAIL_REGEX.test(formValues.email)) {
-    errors.email = 'Invalid email address';
+    errors.email = "Invalid email address";
   }
   return errors;
 };
@@ -105,7 +105,7 @@ const EditUserForm = ({ classes, handleSubmit, submitting }) => {
 
 export default compose(
   reduxForm({
-    form: 'editUser',
+    form: "editUser",
     validate,
   }),
   injectSheet(styles),

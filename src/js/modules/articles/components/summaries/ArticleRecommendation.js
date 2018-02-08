@@ -1,51 +1,51 @@
-import React from 'react';
-import Col from 'react-bootstrap/lib/Col';
-import injectSheet from 'react-jss';
-import { Link } from 'react-router-dom';
-import { Byline, Dateline } from '../';
+import React from "react";
+import Col from "react-bootstrap/lib/Col";
+import injectSheet from "react-jss";
+import { Link } from "react-router-dom";
+import { Byline, Dateline } from "../";
 
 const styles = {
   ArticleRecommendation: {
-    marginBottom: '12px',
+    marginBottom: "12px",
   },
   figure: {
-    marginBottom: '16px',
-    overflow: 'hidden',
-    width: '100%',
-    '& img': {
-      width: '100%',
+    marginBottom: "16px",
+    overflow: "hidden",
+    width: "100%",
+    "& img": {
+      width: "100%",
     },
   },
   sectionLabel: {
-    color: '#000',
-    display: 'block',
-    fontFamily: 'Circular Std',
-    fontSize: '12px',
+    color: "#000",
+    display: "block",
+    fontFamily: "Circular Std",
+    fontSize: "12px",
     fontWeight: 300,
-    marginBottom: '12px',
-    textTransform: 'uppercase',
-    '&:hover, &:active, &:focus': {
-      color: '#000',
+    marginBottom: "12px",
+    textTransform: "uppercase",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
     },
   },
   title: {
-    color: '#000',
-    display: 'block',
-    fontFamily: 'Canela',
-    fontSize: '28px',
+    color: "#000",
+    display: "block",
+    fontFamily: "Canela",
+    fontSize: "28px",
     fontWeight: 300,
-    lineHeight: '1.2',
-    marginBottom: '8px',
-    '&:hover, &:active, &:focus': {
-      color: '#000',
+    lineHeight: "1.2",
+    marginBottom: "8px",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
     },
   },
   summary: {
-    color: '#000',
-    fontFamily: 'Minion Pro',
-    fontSize: '16px',
-    fontWeight: '300',
-    lineHeight: '1.29',
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "16px",
+    fontWeight: "300",
+    lineHeight: "1.29",
   },
 };
 
