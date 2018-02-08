@@ -12,8 +12,8 @@ import humps from "humps";
 import { ArticleRecommendation } from "./summaries";
 
 const RecommendedRowQuery = gql`
-  query RecommendedRowQuery($section_id: ID!) {
-    topRankedArticles(section_id: $section_id, limit: 4) {
+  query RecommendedRowQuery($section_id: ID!, $limit: ID!) {
+    topRankedArticles(section_id: $section_id, limit: $limit) {
       id
       title
       slug
@@ -122,7 +122,16 @@ const RecommendedRow = ({
 
 export default compose(
   graphql(RecommendedRowQuery, {
-    options: ({ section }) => ({ variables: { section_id: section.id } }),
+    options: ({ section }) => ({ 
+      variables: { 
+        section_id: section.id,
+
+        // Though the RecommendedRow only displays four articles, to account 
+        // for the case that one of the recommended articles includes the
+        // current article, we want a backup.
+        limit: 5,
+      } 
+    }),
   }),
   withRouter,
   injectSheet(styles),
