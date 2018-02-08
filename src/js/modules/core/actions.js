@@ -1,6 +1,6 @@
-import axios from "axios";
-import * as t from "./actionTypes";
-import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from "../../constants";
+import axios from 'axios';
+import * as t from './actionTypes';
+import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from '../../constants';
 
 export const refreshWindowDimensions = () => ({
   type: t.REFRESH_WINDOW_DIMENSIONS,
@@ -22,7 +22,7 @@ export const closeLightbox = () => ({
 });
 
 export const fetchAllData = () => {
-  const loadingIcon = document.querySelector(".loading");
+  const loadingIcon = document.querySelector('.loading');
   return dispatch => {
     dispatch({ type: t.FETCH_INIT_DATA_PENDING });
     axios
@@ -43,21 +43,21 @@ export const fetchAllData = () => {
 };
 
 const sliceNames = [
-  "articles",
-  "sections",
+  'articles',
+  'sections',
   // 'comments', We don't care if zero comments exist.
-  "media",
-  "users",
-  "roles",
-  "userRoles",
-  "authorships",
-  "outquotes",
+  'media',
+  'users',
+  'roles',
+  'userRoles',
+  'authorships',
+  'outquotes',
 ];
 
 const validateSlices = data => {
   for (sliceName of sliceNames) {
     if (!(sliceName in data)) {
-      throw sliceName + " not in initial data.";
+      throw sliceName + ' not in initial data.';
     }
     if (data[sliceName].length === 0) {
       throw `Zero ${sliceName} received in initial data.`;

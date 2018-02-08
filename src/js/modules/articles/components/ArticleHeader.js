@@ -1,82 +1,82 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import injectSheet from "react-jss";
-import { Row, Col } from "react-bootstrap/lib";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import injectSheet from 'react-jss';
+import { Row, Col } from 'react-bootstrap/lib';
 
-import Byline from "./Byline";
-import Dateline from "./Dateline";
-import ShareTools from "./ShareTools";
+import Byline from './Byline';
+import Dateline from './Dateline';
+import ShareTools from './ShareTools';
 
 const styles = {
   ArticleHeader: {
-    borderTop: "solid 1px #000",
-    borderBottom: "1px solid #dedede",
-    color: "#000",
-    fontFamily: "Minion Pro",
-    marginBottom: "20px",
-    padding: "10px 0 11px",
+    borderTop: 'solid 1px #000',
+    borderBottom: '1px solid #dedede',
+    color: '#000',
+    fontFamily: 'Minion Pro',
+    marginBottom: '20px',
+    padding: '10px 0 11px',
   },
   rubric: {
-    color: "#000",
-    display: "block",
-    fontFamily: "Circular Std",
-    fontSize: "12px",
+    color: '#000',
+    display: 'block',
+    fontFamily: 'Circular Std',
+    fontSize: '12px',
     fontWeight: 500,
-    marginBottom: "20px",
-    textDecoration: "none",
-    textTransform: "uppercase",
-    width: "150px",
-    "&:hover, &:active, &:focus": {
-      color: "#000",
+    marginBottom: '20px',
+    textDecoration: 'none',
+    textTransform: 'uppercase',
+    width: '150px',
+    '&:hover, &:active, &:focus': {
+      color: '#000',
     },
   },
   headline: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "36px",
-    fontWeight: "normal",
+    color: '#000',
+    fontFamily: 'Minion Pro',
+    fontSize: '36px',
+    fontWeight: 'normal',
     marginTop: 0,
-    marginBottom: "18px",
+    marginBottom: '18px',
   },
   meta: {
-    alignItems: "center",
-    display: "flex",
-    flexWrap: "wrap",
-    "& > *": {
-      marginBottom: "5px",
+    alignItems: 'center',
+    display: 'flex',
+    flexWrap: 'wrap',
+    '& > *': {
+      marginBottom: '5px',
     },
   },
   Byline: {
-    color: "#000",
-    display: "inline",
-    fontSize: "15px",
-    fontWeight: "bold",
-    marginRight: "9px",
-    "& p": {
-      display: "inline",
+    color: '#000',
+    display: 'inline',
+    fontSize: '15px',
+    fontWeight: 'bold',
+    marginRight: '9px',
+    '& p': {
+      display: 'inline',
       margin: 0,
-      "& a": {
-        color: "#000",
-        "&:hover": {
-          color: "#000",
+      '& a': {
+        color: '#000',
+        '&:hover': {
+          color: '#000',
         },
       },
     },
   },
   Dateline: {
-    color: "#000",
-    fontSize: "15px",
-    marginRight: "28px",
+    color: '#000',
+    fontSize: '15px',
+    marginRight: '28px',
     marginTop: 0,
   },
-  "@media (max-width: 991px)": {
+  '@media (max-width: 991px)': {
     headerRow: {
-      padding: "0 10%",
+      padding: '0 10%',
     },
   },
-  "@media (max-width: 768px)": {
+  '@media (max-width: 768px)': {
     headerRow: {
-      padding: "0 2%",
+      padding: '0 2%',
     },
   },
 };

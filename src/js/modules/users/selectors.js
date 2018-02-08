@@ -1,4 +1,4 @@
-import { createSelector } from "reselect";
+import { createSelector } from 'reselect';
 
 export const getUsers = state => state.users.users;
 export const getRoles = state => state.users.roles;
@@ -24,7 +24,7 @@ export const getContributorFromSlug = createSelector(
       userRoles.find(userRole => {
         return (
           userRole.userId === user.id &&
-          roles[userRole.roleId].title === "Contributor"
+          roles[userRole.roleId].title === 'Contributor'
         );
       })
     ) {
@@ -44,7 +44,7 @@ export const getIllustratorFromSlug = createSelector(
       userRoles.find(userRole => {
         return (
           userRole.userId === user.id &&
-          roles[userRole.roleId].title === "Illustrator"
+          roles[userRole.roleId].title === 'Illustrator'
         );
       })
     ) {
@@ -64,7 +64,7 @@ export const getPhotographerFromSlug = createSelector(
       userRoles.find(userRole => {
         return (
           userRole.userId === user.id &&
-          roles[userRole.roleId].title === "Photographer"
+          roles[userRole.roleId].title === 'Photographer'
         );
       })
     ) {

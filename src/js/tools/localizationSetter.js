@@ -1,4 +1,4 @@
-import EventEmitter from "events";
+import EventEmitter from 'events';
 
 // simple interface to
 // aggregate various sets of 'localized-strings'
@@ -7,12 +7,12 @@ import EventEmitter from "events";
 
 class LocalizationSetter extends EventEmitter {
   addLocalizedStrings = localizedStrings => {
-    this.on("setLanguage", function(language) {
+    this.on('setLanguage', function(language) {
       localizedStrings.setLanguage(language);
     });
   };
   setLanguage = language => {
-    this.emit("setLanguage", language);
+    this.emit('setLanguage', language);
   };
 }
 

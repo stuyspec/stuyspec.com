@@ -1,38 +1,38 @@
-import React from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import injectSheet from "react-jss";
+import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import injectSheet from 'react-jss';
 
-import { closeSidebar } from "../actions";
-import { getTopLevelSections } from "../../sections/selectors";
+import { closeSidebar } from '../actions';
+import { getTopLevelSections } from '../../sections/selectors';
 
 const styles = {
   divider: {
-    background: "#ddd",
+    background: '#ddd',
     border: 0,
-    height: "1px",
+    height: '1px',
     margin: 0,
   },
   sidebarSectionLink: {
-    borderRadius: "3px",
-    color: "#000",
-    display: "block",
-    fontFamily: "Circular Std",
-    fontSize: "15px",
-    fontWeight: "500",
-    margin: "8px 0",
-    padding: "8px 0 8px 11px",
-    textAlign: "left",
-    width: "100%",
-    "&:hover, &:active, &:focus": {
-      color: "#000",
-      textDecoration: "none",
+    borderRadius: '3px',
+    color: '#000',
+    display: 'block',
+    fontFamily: 'Circular Std',
+    fontSize: '15px',
+    fontWeight: '500',
+    margin: '8px 0',
+    padding: '8px 0 8px 11px',
+    textAlign: 'left',
+    width: '100%',
+    '&:hover, &:active, &:focus': {
+      color: '#000',
+      textDecoration: 'none',
     },
-    "&:hover": {
-      background: "rgba(84, 153, 232, 0.26)",
-      color: "#000",
-      textDecoration: "none",
+    '&:hover': {
+      background: 'rgba(84, 153, 232, 0.26)',
+      color: '#000',
+      textDecoration: 'none',
     },
   },
 };
@@ -49,7 +49,7 @@ const SidebarContent = ({
       className={classes.sidebarSectionLink}
       key={-1}
       onClick={closeSidebar}
-      to={"/"}
+      to={'/'}
     >
       Home
     </Link>,
@@ -69,7 +69,7 @@ const SidebarContent = ({
      * sections and one separating the non-writing sections from the user
      * account options.
      */
-    if (section.name === "Sports" || section.name === "10/31 Terror Attack") {
+    if (section.name === 'Sports' || section.name === '10/31 Terror Attack') {
       sidebarElements.push(
         <hr className={classes.divider} key={section.id + 100} />,
       );

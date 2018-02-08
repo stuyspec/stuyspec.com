@@ -1,7 +1,7 @@
-import axios from "axios";
-import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from "../../constants";
-import * as t from "./actionTypes";
-import { reset } from "redux-form";
+import axios from 'axios';
+import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from '../../constants';
+import * as t from './actionTypes';
+import { reset } from 'redux-form';
 
 export const searchArticles = query => {
   query = query.search;
@@ -17,7 +17,7 @@ export const searchArticles = query => {
           type: t.SEARCH_ARTICLES_FULFILLED,
           payload: response.data,
         });
-        dispatch(reset("search"));
+        dispatch(reset('search'));
       })
       .catch(err => {
         dispatch({

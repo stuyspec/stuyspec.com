@@ -1,6 +1,6 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const RibbonComponent = ({ classes, article, section, featuredMedia }) => {
   return (
@@ -18,7 +18,7 @@ const RibbonComponent = ({ classes, article, section, featuredMedia }) => {
         </div>
       )}
       <Link to={section.permalink} className={classes.sectionLabel}>
-        {section.name === "Arts & Entertainment" ? "A&E" : section.name}
+        {section.name === 'Arts & Entertainment' ? 'A&E' : section.name}
       </Link>
       <Link
         to={`${section.permalink}/${article.slug}`}

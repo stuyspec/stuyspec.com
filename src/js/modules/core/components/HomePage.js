@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import injectSheet from "react-jss";
-import { Grid, Row, Col } from "react-bootstrap/lib";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import injectSheet from 'react-jss';
+import { Grid, Row, Col } from 'react-bootstrap/lib';
 
-import { getArticlesWithContributors } from "../../articles/selectors";
+import { getArticlesWithContributors } from '../../articles/selectors';
 
 import {
   FeaturedArticle,
@@ -11,31 +11,31 @@ import {
   LatestArticlesRibbon,
   LeftColumn,
   RightColumn,
-} from "../../articles/components/summaries";
+} from '../../articles/components/summaries';
 
-import { SectionFeature, SectionColumn } from "../../sections/components";
+import { SectionFeature, SectionColumn } from '../../sections/components';
 
 const styles = {
   HomePage: {
-    margin: "23px 0px 13px",
+    margin: '23px 0px 13px',
   },
   recommendedArticles: {
     padding: 0,
   },
   primaryComponents: {
-    borderRight: "solid 1px #ddd",
-    marginBottom: "19px",
-    paddingRight: "14px",
+    borderRight: 'solid 1px #ddd',
+    marginBottom: '19px',
+    paddingRight: '14px',
   },
-  "@media (max-width: 991px)": {
+  '@media (max-width: 991px)': {
     primaryComponents: {
-      borderRight: "none",
+      borderRight: 'none',
       paddingRight: 0,
     },
   },
-  "@media (max-width: 768px)": {
+  '@media (max-width: 768px)': {
     skinnyCol: {
-      padding: "0 !important",
+      padding: '0 !important',
     },
   },
 };
@@ -46,11 +46,11 @@ class HomePage extends Component {
   render() {
     const { classes, sections, articles, media } = this.props;
     const newsSection = Object.values(sections).find(
-      section => section.name === "News",
+      section => section.name === 'News',
     );
     const featuredArticle = articles.find(
       article =>
-        sections[article.sectionId]["name"] !== "News" &&
+        sections[article.sectionId]['name'] !== 'News' &&
         Object.values(media).find(
           media => media.articleId === article.id && media.isFeatured,
         ),
@@ -67,16 +67,16 @@ class HomePage extends Component {
       }
     }
     const firstColumnSections = [
-      "Opinions",
-      "Features",
-      "Humor",
+      'Opinions',
+      'Features',
+      'Humor',
     ].map(sectionName =>
       Object.values(sections).find(section => section.name === sectionName),
     );
     const secondColumnSections = [
-      "Staff Editorials",
-      "Arts & Entertainment",
-      "Sports",
+      'Staff Editorials',
+      'Arts & Entertainment',
+      'Sports',
     ].map(sectionName =>
       Object.values(sections).find(section => section.name === sectionName),
     );

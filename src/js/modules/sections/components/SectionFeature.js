@@ -1,107 +1,107 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import injectSheet from "react-jss";
-import { Row, Col } from "react-bootstrap/lib";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import injectSheet from 'react-jss';
+import { Row, Col } from 'react-bootstrap/lib';
 
-import Byline from "../../articles/components/Byline";
-import Dateline from "../../articles/components/Dateline";
-import { getArticlesWithContributors } from "../../articles/selectors";
+import Byline from '../../articles/components/Byline';
+import Dateline from '../../articles/components/Dateline';
+import { getArticlesWithContributors } from '../../articles/selectors';
 
 const styles = {
   SectionFeature: {
-    borderTop: "1px solid #ddd",
-    paddingTop: "6px",
-    paddingBottom: "18px",
+    borderTop: '1px solid #ddd',
+    paddingTop: '6px',
+    paddingBottom: '18px',
   },
   sectionLabel: {
-    color: "#000",
-    display: "block",
-    fontFamily: "Minion Pro",
-    fontSize: "12px",
-    marginBottom: "3px",
-    textTransform: "uppercase",
-    width: "100%",
-    "&:hover, &:active, &:focus": {
-      color: "#000",
-      textDecoration: "none",
+    color: '#000',
+    display: 'block',
+    fontFamily: 'Minion Pro',
+    fontSize: '12px',
+    marginBottom: '3px',
+    textTransform: 'uppercase',
+    width: '100%',
+    '&:hover, &:active, &:focus': {
+      color: '#000',
+      textDecoration: 'none',
     },
   },
   primaryArticle: {
-    paddingLeft: "13px !important",
-    paddingRight: "0 !important",
+    paddingLeft: '13px !important',
+    paddingRight: '0 !important',
   },
   secondaryArticle: {
-    paddingRight: "7px",
+    paddingRight: '7px',
   },
   ternaryArticle: {
-    padding: "0 14px 0 13px !important",
-    borderRight: "solid 1px #ddd",
-    paddingRight: "13px !important",
+    padding: '0 14px 0 13px !important',
+    borderRight: 'solid 1px #ddd',
+    paddingRight: '13px !important',
   },
   title: {
-    color: "#000",
-    display: "block",
-    fontFamily: "Minion Pro",
-    fontSize: "16px",
-    fontWeight: "bold",
+    color: '#000',
+    display: 'block',
+    fontFamily: 'Minion Pro',
+    fontSize: '16px',
+    fontWeight: 'bold',
     lineHeight: 1.25,
-    marginBottom: "7px",
-    "&:hover, &:active, &:focus": {
-      color: "#000",
+    marginBottom: '7px',
+    '&:hover, &:active, &:focus': {
+      color: '#000',
     },
   },
   summary: {
-    fontFamily: "Minion Pro",
-    fontSize: "14px",
+    fontFamily: 'Minion Pro',
+    fontSize: '14px',
     lineHeight: 1.29,
-    margin: "0 0 12px 0",
+    margin: '0 0 12px 0',
   },
   figure: {
-    maxHeight: "240px",
-    overflow: "hidden",
-    "& img": {
-      width: "100%",
+    maxHeight: '240px',
+    overflow: 'hidden',
+    '& img': {
+      width: '100%',
     },
   },
   featuredMediaContainer: {
-    borderRight: "solid 1px #ddd",
-    paddingLeft: "13px !important",
-    paddingRight: "14px !important",
+    borderRight: 'solid 1px #ddd',
+    paddingLeft: '13px !important',
+    paddingRight: '14px !important',
   },
   mobileArticleTitle1: {
-    borderTop: "1px solid #ddd !important",
-    marginTop: "14px",
-    padding: "12px 7px 8px 0",
-    "& a": {
-      fontSize: "22px",
+    borderTop: '1px solid #ddd !important',
+    marginTop: '14px',
+    padding: '12px 7px 8px 0',
+    '& a': {
+      fontSize: '22px',
       marginBottom: 0,
     },
   },
   mobileArticleTitle2: {
-    borderTop: "1px solid #ddd !important",
-    padding: "12px 7px 2px 0",
-    "& a": {
-      fontSize: "22px",
+    borderTop: '1px solid #ddd !important',
+    padding: '12px 7px 2px 0',
+    '& a': {
+      fontSize: '22px',
       marginBottom: 0,
     },
   },
-  "@media (max-width: 767px)": {
+  '@media (max-width: 767px)': {
     SectionFeature: {
-      borderBottom: "1px solid #ddd",
-      paddingBottom: "6px",
+      borderBottom: '1px solid #ddd',
+      paddingBottom: '6px',
     },
     secondaryArticle: {
-      padding: "0px !important",
+      padding: '0px !important',
       marginBottom: 0,
     },
     ternaryArticle: {
-      padding: "0px !important",
+      padding: '0px !important',
       marginBottom: 0,
     },
     featuredMediaContainer: {
       borderRight: 0,
-      paddingRight: "0 !important",
+      paddingRight: '0 !important',
     },
   },
 };
@@ -115,7 +115,7 @@ const SectionFeature = ({
 }) => {
   const sectionArticles = articles.filter(
     article => article.sectionId === section.id && article !== without,
-  );  
+  );
   console.log(sectionArticles);
   const primaryArticle =
     sectionArticles[0] === articles[0]

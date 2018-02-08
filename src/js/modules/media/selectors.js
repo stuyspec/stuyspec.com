@@ -1,9 +1,9 @@
-import { createSelector } from "reselect";
+import { createSelector } from 'reselect';
 
 import {
   getIllustratorFromSlug,
   getPhotographerFromSlug,
-} from "../users/selectors";
+} from '../users/selectors';
 
 export const getMedia = state => state.media.media;
 
@@ -16,7 +16,7 @@ export const getIllustratorIllustrations = createSelector(
     return Object.filter(media, mediaObject => {
       return (
         mediaObject.userId === illustrator.id &&
-        mediaObject.mediaType === "illustration"
+        mediaObject.mediaType === 'illustration'
       );
     });
   },
@@ -31,7 +31,7 @@ export const getPhotographerPhotographs = createSelector(
     return Object.filter(media, mediaObject => {
       return (
         mediaObject.userId === photographer.id &&
-        mediaObject.mediaType === "photo"
+        mediaObject.mediaType === 'photo'
       );
     });
   },

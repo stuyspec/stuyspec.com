@@ -1,11 +1,11 @@
-import React from "react";
-import Icon from "react-icon-base";
+import React from 'react';
+import Icon from 'react-icon-base';
 
 const styles = {
   circle: {
-    fill: "white",
-    stroke: "rgb(221, 221, 221)",
-    strokeWidth: "1.5px",
+    fill: 'white',
+    stroke: 'rgb(221, 221, 221)',
+    strokeWidth: '1.5px',
   },
 };
 const Print = props => (

@@ -1,38 +1,38 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { Route, Redirect, Switch } from "react-router-dom";
-import ConnectedRouter from "react-router-redux/ConnectedRouter";
-import appHistory from "tools/appHistory";
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import ConnectedRouter from 'react-router-redux/ConnectedRouter';
+import appHistory from 'tools/appHistory';
 
 import {
   SignInPage,
   SignUpPage,
   ProfilePage,
   EditProfilePage,
-} from "./accounts/components";
+} from './accounts/components';
 import {
   ArticlePage,
   LatestPage,
   RecommendedPage,
   SearchPage,
-} from "./articles/components";
+} from './articles/components';
 import {
   DataErrorPage,
   HomePage,
   NotFoundPage,
   PageLayout,
-} from "./core/components";
-import { DescriptionPage } from "./descriptions/components";
-import { SectionPage } from "./sections/components";
+} from './core/components';
+import { DescriptionPage } from './descriptions/components';
+import { SectionPage } from './sections/components';
 import {
   ContributorPage,
   PhotographerPage,
   IllustratorPage,
-} from "./users/components";
+} from './users/components';
 
-import { fetchAllData } from "./core/actions";
-import { sessionfy } from "./accounts/actions";
+import { fetchAllData } from './core/actions';
+import { sessionfy } from './accounts/actions';
 
 class RoutingApp extends Component {
   constructor(props) {
@@ -46,7 +46,7 @@ class RoutingApp extends Component {
   // Separate function because it is reused for the DataErrorPage
   prepareData = () => {
     this.props.fetchAllData();
-    const session = localStorage.getItem("session");
+    const session = localStorage.getItem('session');
     if (session) {
       this.props.sessionfy(JSON.parse(session));
     }
@@ -108,26 +108,26 @@ class RoutingApp extends Component {
                 })}
                 <Route
                   exact
-                  path={"/contributors/:contributor_slug"}
-                  key={"contributors"}
+                  path={'/contributors/:contributor_slug'}
+                  key={'contributors'}
                   render={props => <ContributorPage match={props.match} />}
                 />
                 <Route
                   exact
-                  path={"/illustrators/:illustrator_slug"}
-                  key={"illustrators"}
+                  path={'/illustrators/:illustrator_slug'}
+                  key={'illustrators'}
                   render={props => <IllustratorPage match={props.match} />}
                 />
                 <Route
                   exact
-                  path={"/photographers/:photographer_slug"}
-                  key={"photographers"}
+                  path={'/photographers/:photographer_slug'}
+                  key={'photographers'}
                   render={props => <PhotographerPage match={props.match} />}
                 />
                 <Route
                   exact
-                  path={"/myaccount"}
-                  key={"signIn"}
+                  path={'/myaccount'}
+                  key={'signIn'}
                   render={() =>
                     session ? (
                       <Redirect to="/myaccount/profile" />
@@ -138,7 +138,7 @@ class RoutingApp extends Component {
                 <Route
                   exact
                   path="/myaccount/sign-up"
-                  key={"signUp"}
+                  key={'signUp'}
                   render={() =>
                     session ? (
                       <Redirect to="/myaccount/profile" />
@@ -149,14 +149,14 @@ class RoutingApp extends Component {
                 <Route
                   exact
                   path="/myaccount/profile"
-                  key={"profile"}
+                  key={'profile'}
                   render={() =>
                     session ? <ProfilePage /> : <Redirect to="/myaccount" />}
                 />
                 <Route
                   exact
                   path="/myaccount/profile/edit"
-                  key={"editProfile"}
+                  key={'editProfile'}
                   render={() =>
                     session ? (
                       <EditProfilePage />
@@ -166,23 +166,23 @@ class RoutingApp extends Component {
                 />
                 <Route
                   exact
-                  path={"/recommended"}
-                  key={"recommended"}
+                  path={'/recommended'}
+                  key={'recommended'}
                   component={RecommendedPage}
                 />
                 <Route
                   exact
-                  path={"/latest"}
-                  key={"latest"}
+                  path={'/latest'}
+                  key={'latest'}
                   component={LatestPage}
                 />
                 <Route
                   exact
-                  path={"/search"}
-                  key={"search"}
+                  path={'/search'}
+                  key={'search'}
                   component={SearchPage}
                 />
-                <Route path="*" key={"notFound"} component={NotFoundPage} />
+                <Route path="*" key={'notFound'} component={NotFoundPage} />
               </Switch>
             </PageLayout>
           )}

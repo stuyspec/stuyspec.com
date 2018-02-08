@@ -1,11 +1,11 @@
-import "babel-polyfill";
-import React from "react";
-import ReactDOM from "react-dom";
-import { RoutingApp } from "./modules";
-import { AppContainer } from "react-hot-loader";
-import injectTapEventPlugin from "react-tap-event-plugin";
-import store from "./store";
-import Provider from "react-redux/lib/components/Provider";
+import 'babel-polyfill';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { RoutingApp } from './modules';
+import { AppContainer } from 'react-hot-loader';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import store from './store';
+import Provider from 'react-redux/lib/components/Provider';
 
 // for onClick events with MUI/React
 try {
@@ -14,14 +14,14 @@ try {
   // hot reloading, no issue
 }
 
-import { VERSION } from "./versionInfo";
-console.log("appVersion ->", VERSION);
+import { VERSION } from './versionInfo';
+console.log('appVersion ->', VERSION);
 
-import ReactGA from "react-ga";
-ReactGA.initialize("UA-110467163-1")
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-110467163-1');
 ReactGA.pageview(window.location.pathname + window.location.search);
 
-import { objectFilter } from "./utils";
+import { objectFilter } from './utils';
 Object.filter = objectFilter;
 
 ReactDOM.render(
@@ -30,5 +30,5 @@ ReactDOM.render(
       <RoutingApp />
     </Provider>
   </AppContainer>,
-  document.getElementById("app"),
+  document.getElementById('app'),
 );

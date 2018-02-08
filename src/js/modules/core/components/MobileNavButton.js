@@ -1,31 +1,31 @@
-import React from "react";
-import injectSheet from "react-jss";
+import React from 'react';
+import injectSheet from 'react-jss';
 
 const navButtonStyles = {
   MobileNavButton: {
-    background: "none",
+    background: 'none',
     borderWidth: 0,
-    display: "none",
+    display: 'none',
     margin: 0,
     padding: 0,
-    "&:hover": {
-      cursor: "pointer",
+    '&:hover': {
+      cursor: 'pointer',
     },
   },
   buttonText: {
-    color: "#000",
-    fontFamily: "Circular Std",
-    fontSize: "12px",
-    fontWeight: "bold",
-    textTransform: "uppercase",
+    color: '#000',
+    fontFamily: 'Circular Std',
+    fontSize: '12px',
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
   },
   icon: {
-    display: "inline",
-    marginRight: "4px",
+    display: 'inline',
+    marginRight: '4px',
   },
-  "@media (max-width: 991px)": {
+  '@media (max-width: 991px)': {
     MobileNavButton: {
-      display: "inline",
+      display: 'inline',
     },
   },
 };

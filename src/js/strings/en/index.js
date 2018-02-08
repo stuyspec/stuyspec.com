@@ -1,4 +1,4 @@
-import menus from "./en-menus";
+import menus from './en-menus';
 
 export { menus };
 

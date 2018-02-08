@@ -1,10 +1,10 @@
-import React from "react";
-import { connect } from "react-redux";
-import injectSheet from "react-jss";
-import { ShareButtons, generateShareIcon } from "react-share";
-import { Print } from "../../core/icons";
+import React from 'react';
+import { connect } from 'react-redux';
+import injectSheet from 'react-jss';
+import { ShareButtons, generateShareIcon } from 'react-share';
+import { Print } from '../../core/icons';
 
-import { STUY_SPEC_API_URL } from "../../../constants";
+import { STUY_SPEC_API_URL } from '../../../constants';
 
 const {
   FacebookShareButton,
@@ -13,32 +13,32 @@ const {
   EmailShareButton,
 } = ShareButtons;
 
-const FacebookIcon = generateShareIcon("facebook");
-const TwitterIcon = generateShareIcon("twitter");
-const LinkedinIcon = generateShareIcon("linkedin");
-const EmailIcon = generateShareIcon("email");
+const FacebookIcon = generateShareIcon('facebook');
+const TwitterIcon = generateShareIcon('twitter');
+const LinkedinIcon = generateShareIcon('linkedin');
+const EmailIcon = generateShareIcon('email');
 
 const styles = {
   ShareTools: {
-    display: "flex",
-    "& > div:not(:last-child)": {
-      marginRight: "14px",
+    display: 'flex',
+    '& > div:not(:last-child)': {
+      marginRight: '14px',
     },
   },
 };
 
 const navButtonStyles = {
   NavButton: {
-    background: "none",
+    background: 'none',
     borderWidth: 0,
     margin: 0,
     padding: 0,
-    "&:hover": {
-      cursor: "pointer",
+    '&:hover': {
+      cursor: 'pointer',
     },
   },
   icon: {
-    display: "inline",
+    display: 'inline',
     margin: 0,
   },
 };
@@ -53,7 +53,7 @@ const NavButton = ({ classes, children, onClick }) => {
 const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 
 const SHARE_BUTTON_SIZE = 28;
-const SHARE_BUTTON_COLOR = "#000";
+const SHARE_BUTTON_COLOR = '#000';
 
 const ShareTools = ({ classes, article, section, outquotes }) => {
   const shareUrl = STUY_SPEC_API_URL + `${section.permalink}/${article.slug}`;
@@ -68,13 +68,13 @@ const ShareTools = ({ classes, article, section, outquotes }) => {
       <div className={classes.shareButton} key={0}>
         <FacebookShareButton
           url={shareUrl}
-          hashtag={"#stuyspec"}
+          hashtag={'#stuyspec'}
           quote={outquote && outquote.text}
         >
           <FacebookIcon
             size={SHARE_BUTTON_SIZE}
             logoFillColor={SHARE_BUTTON_COLOR}
-            iconBgStyle={{ fill: "white", stroke: "#ddd", "stroke-width": 1.5 }}
+            iconBgStyle={{ fill: 'white', stroke: '#ddd', 'stroke-width': 1.5 }}
             round
           />
         </FacebookShareButton>
@@ -83,12 +83,12 @@ const ShareTools = ({ classes, article, section, outquotes }) => {
         <TwitterShareButton
           url={shareUrl}
           title={title}
-          hashtags={["stuyspec"]}
+          hashtags={['stuyspec']}
         >
           <TwitterIcon
             size={SHARE_BUTTON_SIZE}
             logoFillColor={SHARE_BUTTON_COLOR}
-            iconBgStyle={{ fill: "white", stroke: "#ddd", "stroke-width": 1.5 }}
+            iconBgStyle={{ fill: 'white', stroke: '#ddd', 'stroke-width': 1.5 }}
             round
           />
         </TwitterShareButton>
@@ -98,7 +98,7 @@ const ShareTools = ({ classes, article, section, outquotes }) => {
           <LinkedinIcon
             size={SHARE_BUTTON_SIZE}
             logoFillColor={SHARE_BUTTON_COLOR}
-            iconBgStyle={{ fill: "white", stroke: "#ddd", "stroke-width": 1.5 }}
+            iconBgStyle={{ fill: 'white', stroke: '#ddd', 'stroke-width': 1.5 }}
             round
           />
         </LinkedinShareButton>
@@ -112,7 +112,7 @@ const ShareTools = ({ classes, article, section, outquotes }) => {
           <EmailIcon
             size={SHARE_BUTTON_SIZE}
             logoFillColor={SHARE_BUTTON_COLOR}
-            iconBgStyle={{ fill: "white", stroke: "#ddd", "stroke-width": 1.5 }}
+            iconBgStyle={{ fill: 'white', stroke: '#ddd', 'stroke-width': 1.5 }}
             round
           />
         </EmailShareButton>

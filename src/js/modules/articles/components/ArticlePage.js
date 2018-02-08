@@ -1,54 +1,54 @@
-import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import injectSheet from "react-jss";
-import { Grid, Row, Col } from "react-bootstrap/lib";
-import { Helmet } from "react-helmet";
-import { toRoman } from "roman-numerals";
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import injectSheet from 'react-jss';
+import { Grid, Row, Col } from 'react-bootstrap/lib';
+import { Helmet } from 'react-helmet';
+import { toRoman } from 'roman-numerals';
 
-import ArticleHeader from "./ArticleHeader";
-import ArticleBody from "./ArticleBody";
-import RecommendedRow from "./RecommendedRow";
-import CommentThread from "../../comments/components/CommentThread";
-import NotFoundPage from "../../core/components/NotFoundPage";
-import { getArticleFromRequestedSlug, getArticleMedia } from "../selectors";
-import { openSubscriptionModal } from "../../accounts/actions";
+import ArticleHeader from './ArticleHeader';
+import ArticleBody from './ArticleBody';
+import RecommendedRow from './RecommendedRow';
+import CommentThread from '../../comments/components/CommentThread';
+import NotFoundPage from '../../core/components/NotFoundPage';
+import { getArticleFromRequestedSlug, getArticleMedia } from '../selectors';
+import { openSubscriptionModal } from '../../accounts/actions';
 
 const styles = {
   description: {
-    border: "1px solid #ddd",
-    borderStyle: "solid none", // only top-bottom borders
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "16px",
-    marginBottom: "24px",
-    padding: "12px 0 13px",
+    border: '1px solid #ddd',
+    borderStyle: 'solid none', // only top-bottom borders
+    color: '#000',
+    fontFamily: 'Minion Pro',
+    fontSize: '16px',
+    marginBottom: '24px',
+    padding: '12px 0 13px',
   },
   subscribe: {
-    color: "#3572b7",
-    "&:hover, &:focus, &:active": {
-      color: "#3572b7",
+    color: '#3572b7',
+    '&:hover, &:focus, &:active': {
+      color: '#3572b7',
     },
-    "&:hover": {
-      cursor: "pointer",
+    '&:hover': {
+      cursor: 'pointer',
     },
   },
-  "@media (max-width: 1199px)": {
+  '@media (max-width: 1199px)': {
     ArticlePage: {
-      padding: "0 8%",
+      padding: '0 8%',
     },
   },
-  "@media (max-width: 991px)": {
+  '@media (max-width: 991px)': {
     ArticlePage: {
       padding: 0,
     },
     descriptionRow: {
-      padding: "0 10%",
+      padding: '0 10%',
     },
   },
-  "@media (max-width: 767px)": {
+  '@media (max-width: 767px)': {
     descriptionRow: {
-      padding: "0 2%",
+      padding: '0 2%',
     },
   },
 };

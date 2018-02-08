@@ -1,5 +1,5 @@
 export default {
   main: {
-    languageAbbr: "ES",
+    languageAbbr: 'ES',
   },
 };
