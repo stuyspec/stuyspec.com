@@ -249,7 +249,7 @@ delete the local copy of the branch with: `git branch -D branch/to-delete-name`
 
 We use [Prettier](https://github.com/prettier/prettier) to make sure all developers have a uniform coding style. Add `prettier` with `yarn global add prettier`. To run Prettier, `cd` to the root of client-app and run
 ```
-find ./src/js/modules -type f -name '*.js' | xargs prettier --write --trailing-comma all
+find ./src/js/modules -type f -name '*.js' | xargs prettier --write --trailing-comma all --single-quote
 ```
 
 #### Prettier with Webstorm 
@@ -259,7 +259,7 @@ Click on the `+` icon to add a new external tool. Then fill out the `Name` and u
 
 ```
 Program: /usr/local/lib/node_modules/prettier/bin/prettier.js
-Parameters: --write --trailing-comma all $FilePathRelativeToProjectRoot$
+Parameters: --write --trailing-comma all --single-quote $FilePathRelativeToProjectRoot$
 Working directory: $ProjectFileDir$
 ```
 
