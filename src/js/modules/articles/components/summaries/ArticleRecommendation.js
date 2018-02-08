@@ -44,7 +44,7 @@ const styles = {
       color: "#000",
     },
   },
-  summary: {
+  preview: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "16px",
@@ -78,7 +78,7 @@ const ArticleRecommendation = ({ classes, article }) => {
       >
         {article.title}
       </Link>
-      <p className={classes.summary}>{article.summary}</p>
+      <p className={classes.preview}>{article.preview}</p>
       <Byline contributors={article.contributors} />
       <Dateline timestamp={article.createdAt} />
     </Col>

@@ -47,7 +47,7 @@ const styles = {
       color: "#000",
     },
   },
-  summary: {
+  preview: {
     fontFamily: "Minion Pro",
     fontSize: "16px",
     lineHeight: 1.29,
@@ -128,7 +128,7 @@ const LeftTitleArticle = ({ classes, article }) => {
         >
           {article.title}
         </Link>
-        <p className={classes.summary}>{article.summary}</p>
+        <p className={classes.preview}>{article.preview}</p>
         <Byline contributors={article.contributors} />
         <Dateline timestamp={article.createdAt} />
       </Col>

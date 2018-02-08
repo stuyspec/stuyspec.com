@@ -26,7 +26,7 @@ const SearchResultsQuery = gql`
       searchable {
         id
         title
-        summary
+        preview
         slug
         created_at
         media {

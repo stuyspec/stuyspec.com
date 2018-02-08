@@ -45,7 +45,7 @@ const styles = {
     borderBottom: "1px solid #ddd",
     marginBottom: "14px",
   },
-  summary: {
+  preview: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "14px",
@@ -135,7 +135,7 @@ const RightColumn = ({ classes, articles }) => {
           >
             {primaryArticle.title}
           </Link>
-          <p className={classes.summary}>{primaryArticle.summary}</p>
+          <p className={classes.preview}>{primaryArticle.preview}</p>
           <Byline contributors={primaryArticle.contributors} />
           <Dateline timestamp={primaryArticle.createdAt} />
         </div>
@@ -166,7 +166,7 @@ const RightColumn = ({ classes, articles }) => {
           >
             {secondaryArticle.title}
           </Link>
-          <p className={classes.summary}>{secondaryArticle.summary}</p>
+          <p className={classes.preview}>{secondaryArticle.preview}</p>
           <Byline contributors={secondaryArticle.contributors} />
           <Dateline timestamp={secondaryArticle.createdAt} />
         </div>

@@ -28,7 +28,7 @@ const SectionPageQuery = gql`
       id
       title
       slug
-      summary
+      preview
       created_at
       section {
         permalink
@@ -56,7 +56,7 @@ const SectionPageQuery = gql`
       id
       title
       slug
-      summary
+      preview
       created_at
       section {
         id

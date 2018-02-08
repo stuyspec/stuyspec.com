@@ -12,7 +12,7 @@ const RecommendedArticlesQuery = gql`
       id
       title
       slug
-      summary
+      preview
       section {
         id
         permalink
@@ -68,7 +68,7 @@ const styles = {
       color: "#000",
     },
   },
-  summary: {
+  preview: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "14px",
@@ -99,7 +99,7 @@ const RecommendedArticles = ({ classes, data }) => {
               >
                 {article.title}
               </Link>
-              <p className={classes.summary}>{article.summary}</p>
+              <p className={classes.preview}>{article.preview}</p>
             </div>
           </div>
         );

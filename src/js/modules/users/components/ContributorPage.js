@@ -20,7 +20,7 @@ const ContributorBySlug = gql`
         id
         slug
         title
-        summary
+        preview
         contributors {
           slug
           first_name

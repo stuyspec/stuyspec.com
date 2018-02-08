@@ -20,7 +20,7 @@ const SectionBlockQuery = gql`
       id
       title
       slug
-      summary
+      preview
       created_at
       contributors {
         first_name
@@ -95,7 +95,7 @@ const styles = {
       width: "100%",
     },
   },
-  summary: {
+  preview: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "14px",
@@ -144,7 +144,7 @@ const SectionBlock = ({ classes, data }) => {
           >
             {bigArticle.title}
           </Link>
-          <p className={classes.summary}>{bigArticle.summary}</p>
+          <p className={classes.preview}>{bigArticle.preview}</p>
           <Byline classes={classes} contributors={bigArticle.contributors} />
           <Dateline timestamp={bigArticle.createdAt} />
         </div>

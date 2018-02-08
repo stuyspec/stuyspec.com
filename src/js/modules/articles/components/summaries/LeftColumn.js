@@ -48,7 +48,7 @@ const styles = {
       color: "#000",
     },
   },
-  summary: {
+  preview: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "14px",
@@ -126,7 +126,7 @@ const LeftColumn = ({ classes, articles }) => {
         <Link to={primarySection.permalink} className={classes.sectionLabel}>
           {primarySection.name}
         </Link>
-        <p className={classes.summary}>{primaryArticle.summary}</p>
+        <p className={classes.preview}>{primaryArticle.preview}</p>
         <Byline contributors={primaryArticle.contributors} />
         <Dateline timestamp={primaryArticle.createdAt} />
       </div>
@@ -150,7 +150,7 @@ const LeftColumn = ({ classes, articles }) => {
         >
           {secondaryArticle.title}
         </Link>
-        <p className={classes.summary}>{secondaryArticle.summary}</p>
+        <p className={classes.preview}>{secondaryArticle.preview}</p>
         <div className={classes.bylineContainer}>
           <Byline contributors={secondaryArticle.contributors} />
         </div>
@@ -177,7 +177,7 @@ const LeftColumn = ({ classes, articles }) => {
           {outquoteArticle.title}
         </Link>
         <Outquote quote={outquoteArticle.outquotes[0].text} />
-        <p className={classes.summary}>{outquoteArticle.summary}</p>
+        <p className={classes.preview}>{outquoteArticle.preview}</p>
         <div className={classes.bylineContainer}>
           <Byline contributors={outquoteArticle.contributors} />
         </div>

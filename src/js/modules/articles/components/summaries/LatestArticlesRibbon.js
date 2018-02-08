@@ -12,7 +12,7 @@ const LatestArticlesQuery = gql`
       id
       title
       slug
-      summary
+      preview
       media {
         thumb_attachment_url
       }

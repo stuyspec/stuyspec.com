@@ -17,7 +17,7 @@ const RecommendedRowQuery = gql`
       id
       title
       slug
-      summary
+      preview
       created_at
       contributors {
         first_name

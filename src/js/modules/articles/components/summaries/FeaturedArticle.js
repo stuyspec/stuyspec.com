@@ -47,7 +47,7 @@ const styles = {
     paddingRight: "0 !important",
     paddingLeft: "0 !important",
   },
-  summary: {
+  preview: {
     fontFamily: "Minion Pro",
     fontSize: "14px",
     lineHeight: 1.29,
@@ -128,7 +128,7 @@ const FeaturedArticle = ({ classes, article }) => {
         <Link to={section.permalink} className={classes.sectionLabel}>
           {section.name}
         </Link>
-        <p className={classes.summary}>{article.summary}</p>
+        <p className={classes.preview}>{article.preview}</p>
         <Byline contributors={article.contributors} />
         <Dateline timestamp={article.createdAt} />
       </Col>

@@ -52,7 +52,7 @@ const styles = {
     lineHeight: "48px",
     marginBottom: "13px",
   },
-  summary: {
+  preview: {
     fontFamily: "Minion Pro",
     fontSize: "16px",
     lineHeight: 1.25,
@@ -64,7 +64,7 @@ const styles = {
       paddingTop: "3vw",
       width: "41.666666%", // col-sm-5
     },
-    summary: {
+    preview: {
       margin: "0 auto 18px auto",
       width: "80%",
     },
@@ -117,7 +117,7 @@ const RightTitleArticle = ({ classes, article }) => {
         >
           {article.title}
         </Link>
-        <p className={classes.summary}>{article.summary}</p>
+        <p className={classes.preview}>{article.preview}</p>
         <Byline contributors={article.contributors} />
         <Dateline timestamp={article.createdAt} />
       </Col>

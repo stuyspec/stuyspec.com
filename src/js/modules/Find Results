@@ -1,0 +1,287 @@
+Searching 126 files for "summary" (case sensitive)
+
+/Users/jasonkao/spectator/client-app/src/js/modules/articles/components/ArticleRow.js:
+   56      },
+   57    },
+   58:   summary: {
+   59      color: "#000",
+   60      fontFamily: "Minion Pro",
+   ..
+  117              {article.title}
+  118            </Link>
+  119:           <p className={classes.summary}>{article.summary}</p>
+  120            <Byline contributors={article.contributors} />
+  121            <div className={classes.DatelineMobile}>
+
+/Users/jasonkao/spectator/client-app/src/js/modules/articles/components/LatestPage.js:
+   16        title
+   17        slug
+   18:       summary
+   19        created_at
+   20        contributors {
+
+/Users/jasonkao/spectator/client-app/src/js/modules/articles/components/RecommendedPage.js:
+   16        title
+   17        slug
+   18:       summary
+   19        created_at
+   20        contributors {
+
+/Users/jasonkao/spectator/client-app/src/js/modules/articles/components/RecommendedRow.js:
+   18        title
+   19        slug
+   20:       summary
+   21        created_at
+   22        contributors {
+
+/Users/jasonkao/spectator/client-app/src/js/modules/articles/components/SearchResults.js:
+   27          id
+   28          title
+   29:         summary
+   30          slug
+   31          created_at
+
+/Users/jasonkao/spectator/client-app/src/js/modules/articles/components/ShareTools.js:
+   56  
+   57  const ShareTools = ({ classes, article }) => {
+   58:   const { section, title, summary, outquotes } = article;
+   59    const shareUrl = STUY_SPEC_API_URL + `${section.permalink}/${article.slug}`;
+   60  
+   61    const outquote = outquotes[0] || null;
+   62  
+   63:   const emailBody = `${title}—${summary}\n\n${shareUrl}`;
+   64    return (
+   65      <div className={classes.ShareTools}>
+   ..
+   93        </div>
+   94        <div key={2}>
+   95:         <LinkedinShareButton url={shareUrl} title={title} description={summary}>
+   96            <LinkedinIcon
+   97              size={SHARE_BUTTON_SIZE}
+
+/Users/jasonkao/spectator/client-app/src/js/modules/articles/components/summaries/ArticleRecommendation.js:
+   45      },
+   46    },
+   47:   summary: {
+   48      color: "#000",
+   49      fontFamily: "Minion Pro",
+   ..
+   79          {article.title}
+   80        </Link>
+   81:       <p className={classes.summary}>{article.summary}</p>
+   82        <Byline contributors={article.contributors} />
+   83        <Dateline timestamp={article.createdAt} />
+
+/Users/jasonkao/spectator/client-app/src/js/modules/articles/components/summaries/FeaturedArticle.js:
+   48      paddingLeft: "0 !important",
+   49    },
+   50:   summary: {
+   51      fontFamily: "Minion Pro",
+   52      fontSize: "14px",
+   ..
+  129            {section.name}
+  130          </Link>
+  131:         <p className={classes.summary}>{article.summary}</p>
+  132          <Byline contributors={article.contributors} />
+  133          <Dateline timestamp={article.createdAt} />
+
+/Users/jasonkao/spectator/client-app/src/js/modules/articles/components/summaries/LatestArticlesRibbon.js:
+   13        title
+   14        slug
+   15:       summary
+   16        media {
+   17          thumb_attachment_url
+
+/Users/jasonkao/spectator/client-app/src/js/modules/articles/components/summaries/LeftColumn.js:
+   49      },
+   50    },
+   51:   summary: {
+   52      color: "#000",
+   53      fontFamily: "Minion Pro",
+   ..
+  127            {primarySection.name}
+  128          </Link>
+  129:         <p className={classes.summary}>{primaryArticle.summary}</p>
+  130          <Byline contributors={primaryArticle.contributors} />
+  131          <Dateline timestamp={primaryArticle.createdAt} />
+  ...
+  151            {secondaryArticle.title}
+  152          </Link>
+  153:         <p className={classes.summary}>{secondaryArticle.summary}</p>
+  154          <div className={classes.bylineContainer}>
+  155            <Byline contributors={secondaryArticle.contributors} />
+  ...
+  178          </Link>
+  179          <Outquote quote={outquoteArticle.outquotes[0].text} />
+  180:         <p className={classes.summary}>{outquoteArticle.summary}</p>
+  181          <div className={classes.bylineContainer}>
+  182            <Byline contributors={outquoteArticle.contributors} />
+
+/Users/jasonkao/spectator/client-app/src/js/modules/articles/components/summaries/LeftTitleArticle.js:
+   48      },
+   49    },
+   50:   summary: {
+   51      fontFamily: "Minion Pro",
+   52      fontSize: "16px",
+   ..
+  129            {article.title}
+  130          </Link>
+  131:         <p className={classes.summary}>{article.summary}</p>
+  132          <Byline contributors={article.contributors} />
+  133          <Dateline timestamp={article.createdAt} />
+
+/Users/jasonkao/spectator/client-app/src/js/modules/articles/components/summaries/RecommendedArticles.js:
+   13        title
+   14        slug
+   15:       summary
+   16        section {
+   17          id
+   ..
+   69      },
+   70    },
+   71:   summary: {
+   72      color: "#000",
+   73      fontFamily: "Minion Pro",
+   ..
+  100                  {article.title}
+  101                </Link>
+  102:               <p className={classes.summary}>{article.summary}</p>
+  103              </div>
+  104            </div>
+
+/Users/jasonkao/spectator/client-app/src/js/modules/articles/components/summaries/RightColumn.js:
+   46      marginBottom: "14px",
+   47    },
+   48:   summary: {
+   49      color: "#000",
+   50      fontFamily: "Minion Pro",
+   ..
+  136              {primaryArticle.title}
+  137            </Link>
+  138:           <p className={classes.summary}>{primaryArticle.summary}</p>
+  139            <Byline contributors={primaryArticle.contributors} />
+  140            <Dateline timestamp={primaryArticle.createdAt} />
+  ...
+  167              {secondaryArticle.title}
+  168            </Link>
+  169:           <p className={classes.summary}>{secondaryArticle.summary}</p>
+  170            <Byline contributors={secondaryArticle.contributors} />
+  171            <Dateline timestamp={secondaryArticle.createdAt} />
+
+/Users/jasonkao/spectator/client-app/src/js/modules/articles/components/summaries/RightTitleArticle.js:
+   53      marginBottom: "13px",
+   54    },
+   55:   summary: {
+   56      fontFamily: "Minion Pro",
+   57      fontSize: "16px",
+   ..
+   65        width: "41.666666%", // col-sm-5
+   66      },
+   67:     summary: {
+   68        margin: "0 auto 18px auto",
+   69        width: "80%",
+   ..
+  118            {article.title}
+  119          </Link>
+  120:         <p className={classes.summary}>{article.summary}</p>
+  121          <Byline contributors={article.contributors} />
+  122          <Dateline timestamp={article.createdAt} />
+
+/Users/jasonkao/spectator/client-app/src/js/modules/core/components/DataErrorPage.js:
+   65          If the error persists, please e-mail The Spectator Web Department at
+   66          &nbsp;<a href="mailto:web@stuyspec.com">web@stuyspec.com</a>&nbsp; with
+   67:         a brief summary of what went wrong.
+   68        </p>
+   69      </Grid>
+
+/Users/jasonkao/spectator/client-app/src/js/modules/core/components/HomePage.js:
+   20        title
+   21        slug
+   22:       summary
+   23        created_at
+   24        contributors {
+   ..
+   42        title
+   43        slug
+   44:       summary
+   45        created_at
+   46        contributors {
+
+/Users/jasonkao/spectator/client-app/src/js/modules/sections/components/SectionBlock.js:
+   21        title
+   22        slug
+   23:       summary
+   24        created_at
+   25        contributors {
+   ..
+   96      },
+   97    },
+   98:   summary: {
+   99      color: "#000",
+  100      fontFamily: "Minion Pro",
+  ...
+  145              {bigArticle.title}
+  146            </Link>
+  147:           <p className={classes.summary}>{bigArticle.summary}</p>
+  148            <Byline classes={classes} contributors={bigArticle.contributors} />
+  149            <Dateline timestamp={bigArticle.createdAt} />
+
+/Users/jasonkao/spectator/client-app/src/js/modules/sections/components/SectionFeature.js:
+   15        title
+   16        slug
+   17:       summary
+   18        created_at
+   19        contributors {
+   ..
+   77      },
+   78    },
+   79:   summary: {
+   80      fontFamily: "Minion Pro",
+   81      fontSize: "14px",
+   ..
+  158            {secondaryArticle.title}
+  159          </Link>
+  160:         <p className={classes.summary}>{secondaryArticle.summary}</p>
+  161          <Byline contributors={secondaryArticle.contributors} />
+  162          <Dateline timestamp={secondaryArticle.createdAt} />
+  ...
+  187              {ternaryArticle.title}
+  188            </Link>
+  189:           <p className={classes.summary}>{ternaryArticle.summary}</p>
+  190            <Byline contributors={ternaryArticle.contributors} />
+  191            <Dateline timestamp={ternaryArticle.createdAt} />
+  ...
+  199            {primaryArticle.title}
+  200          </Link>
+  201:         <p className={classes.summary}>{primaryArticle.summary}</p>
+  202          <Byline contributors={primaryArticle.contributors} />
+  203          <Dateline timestamp={primaryArticle.createdAt} />
+
+/Users/jasonkao/spectator/client-app/src/js/modules/sections/components/SectionPage.js:
+   29        title
+   30        slug
+   31:       summary
+   32        created_at
+   33        section {
+   ..
+   57        title
+   58        slug
+   59:       summary
+   60        created_at
+   61        section {
+
+/Users/jasonkao/spectator/client-app/src/js/modules/users/components/ArtistPage.js:
+   27            slug
+   28            title
+   29:           summary
+   30            contributors {
+   31              slug
+
+/Users/jasonkao/spectator/client-app/src/js/modules/users/components/ContributorPage.js:
+   21          slug
+   22          title
+   23:         summary
+   24          contributors {
+   25            slug
+
+59 matches across 21 files

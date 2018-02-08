@@ -64,7 +64,7 @@ const DataErrorPage = ({ classes, action }) => {
       <p className={classes.requestText}>
         If the error persists, please e-mail The Spectator Web Department at
         &nbsp;<a href="mailto:web@stuyspec.com">web@stuyspec.com</a>&nbsp; with
-        a brief summary of what went wrong.
+        a brief explanation of what went wrong.
       </p>
     </Grid>
   );

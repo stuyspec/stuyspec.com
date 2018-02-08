@@ -19,7 +19,7 @@ const HomePageQuery = gql`
     featuredArticle {
       title
       slug
-      summary
+      preview
       created_at
       contributors {
         first_name
@@ -41,7 +41,7 @@ const HomePageQuery = gql`
     columnArticles {
       title
       slug
-      summary
+      preview
       created_at
       contributors {
         first_name

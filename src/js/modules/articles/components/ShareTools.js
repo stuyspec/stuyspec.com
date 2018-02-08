@@ -55,12 +55,12 @@ const SHARE_BUTTON_SIZE = 28;
 const SHARE_BUTTON_COLOR = "#000";
 
 const ShareTools = ({ classes, article }) => {
-  const { section, title, summary, outquotes } = article;
+  const { section, title, preview, outquotes } = article;
   const shareUrl = STUY_SPEC_API_URL + `${section.permalink}/${article.slug}`;
 
   const outquote = outquotes[0] || null;
 
-  const emailBody = `${title}—${summary}\n\n${shareUrl}`;
+  const emailBody = `${title}—${preview}\n\n${shareUrl}`;
   return (
     <div className={classes.ShareTools}>
       <div key={0}>
@@ -92,7 +92,7 @@ const ShareTools = ({ classes, article }) => {
         </TwitterShareButton>
       </div>
       <div key={2}>
-        <LinkedinShareButton url={shareUrl} title={title} description={summary}>
+        <LinkedinShareButton url={shareUrl} title={title} description={preview}>
           <LinkedinIcon
             size={SHARE_BUTTON_SIZE}
             logoFillColor={SHARE_BUTTON_COLOR}

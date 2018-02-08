@@ -14,7 +14,7 @@ const SectionFeatureQuery = gql`
     featuredArticlesBySectionSlug(section_slug: $section_slug) {
       title
       slug
-      summary
+      preview
       created_at
       contributors {
         first_name
@@ -76,7 +76,7 @@ const styles = {
       color: "#000",
     },
   },
-  summary: {
+  preview: {
     fontFamily: "Minion Pro",
     fontSize: "14px",
     lineHeight: 1.29,
@@ -157,7 +157,7 @@ const SectionFeature = ({ classes, data }) => {
         >
           {secondaryArticle.title}
         </Link>
-        <p className={classes.summary}>{secondaryArticle.summary}</p>
+        <p className={classes.preview}>{secondaryArticle.preview}</p>
         <Byline contributors={secondaryArticle.contributors} />
         <Dateline timestamp={secondaryArticle.createdAt} />
       </Col>
@@ -186,7 +186,7 @@ const SectionFeature = ({ classes, data }) => {
           >
             {ternaryArticle.title}
           </Link>
-          <p className={classes.summary}>{ternaryArticle.summary}</p>
+          <p className={classes.preview}>{ternaryArticle.preview}</p>
           <Byline contributors={ternaryArticle.contributors} />
           <Dateline timestamp={ternaryArticle.createdAt} />
         </Col>
@@ -198,7 +198,7 @@ const SectionFeature = ({ classes, data }) => {
         >
           {primaryArticle.title}
         </Link>
-        <p className={classes.summary}>{primaryArticle.summary}</p>
+        <p className={classes.preview}>{primaryArticle.preview}</p>
         <Byline contributors={primaryArticle.contributors} />
         <Dateline timestamp={primaryArticle.createdAt} />
       </Col>
