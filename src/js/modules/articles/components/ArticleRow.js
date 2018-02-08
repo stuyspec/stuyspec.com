@@ -30,7 +30,7 @@ const styles = {
     fontWeight: "300",
     marginRight: "19px",
   },
-  preview: {
+  featuredMedia: {
     overflow: "hidden",
   },
   figure: {
@@ -69,7 +69,7 @@ const styles = {
     DatelineMobile: {
       display: "block",
     },
-    preview: {
+    featuredMedia: {
       overflow: "visible",
     },
     figure: {
@@ -99,7 +99,7 @@ const ArticleRow = ({ classes, article }) => {
         <div className={classes.DatelineDesktop}>
           <Dateline timestamp={article.createdAt} />
         </div>
-        <div className={classes.preview}>
+        <div className={classes.featuredMedia}>
           {featuredMedia && (
             <Link to={`${section.permalink}/${article.slug}`}>
               <figure className={classes.figure}>
