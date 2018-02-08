@@ -1,25 +1,25 @@
-import React, { PureComponent } from "react";
-import { compose } from "redux";
-import { withRouter } from "react-router-dom";
-import { Grid, Row } from "react-bootstrap/lib";
-import injectSheet from "react-jss";
-import { Helmet } from "react-helmet";
+import React, { PureComponent } from 'react';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
+import { Grid, Row } from 'react-bootstrap/lib';
+import injectSheet from 'react-jss';
+import { Helmet } from 'react-helmet';
 
-import { SearchForm, SearchResults } from "./";
-import { getUrlParameterByName } from "../../../utils";
+import { SearchForm, SearchResults } from './';
+import { getUrlParameterByName } from '../../../utils';
 
 const styles = {
   title: {
-    color: "#000",
-    fontFamily: "Canela",
-    fontSize: "36px",
-    fontWeight: "500",
+    color: '#000',
+    fontFamily: 'Canela',
+    fontSize: '36px',
+    fontWeight: '500',
     margin: 0,
-    textAlign: "center",
+    textAlign: 'center',
   },
   form: {
-    margin: "0 auto",
-    display: "block",
+    margin: '0 auto',
+    display: 'block',
   },
 };
 
@@ -27,7 +27,7 @@ class SearchPage extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      query: getUrlParameterByName("query"),
+      query: getUrlParameterByName('query'),
     };
   }
 

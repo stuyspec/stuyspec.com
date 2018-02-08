@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators, compose } from "redux";
-import { withRouter } from "react-router-dom";
-import injectSheet from "react-jss";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
-import Sidebar from "react-sidebar";
-import Favicon from "react-favicon";
-import { Grid } from "react-bootstrap/lib";
-import { Helmet } from "react-helmet";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators, compose } from 'redux';
+import { withRouter } from 'react-router-dom';
+import injectSheet from 'react-jss';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import Sidebar from 'react-sidebar';
+import Favicon from 'react-favicon';
+import { Grid } from 'react-bootstrap/lib';
+import { Helmet } from 'react-helmet';
 
-import PageHeader from "./PageHeader";
-import PageFooter from "./PageFooter";
-import SidebarContent from "./SidebarContent";
-import SubscriptionModal from "../../accounts/components/SubscriptionModal";
-import { HorizontalAd } from "../../advertisements/components";
-import { openSidebar, closeSidebar } from "../actions";
+import PageHeader from './PageHeader';
+import PageFooter from './PageFooter';
+import SidebarContent from './SidebarContent';
+import SubscriptionModal from '../../accounts/components/SubscriptionModal';
+import { HorizontalAd } from '../../advertisements/components';
+import { openSidebar, closeSidebar } from '../actions';
 
 const PageLayoutQuery = gql`
   query PageLayoutQuery {
@@ -34,41 +34,41 @@ const PageLayoutQuery = gql`
 
 const styles = {
   horizontalAdContainer: {
-    margin: "20px 0",
-    "& > div > a": {
-      display: "block",
-      margin: "0 auto",
-      width: "75%",
+    margin: '20px 0',
+    '& > div > a': {
+      display: 'block',
+      margin: '0 auto',
+      width: '75%',
     },
   },
-  "@media (max-width: 991px)": {
+  '@media (max-width: 991px)': {
     footerAd: {
       padding: 0,
     },
     horizontalAdContainer: {
-      padding: "0 10%",
-      "& > div > a": {
-        width: "100%",
+      padding: '0 10%',
+      '& > div > a': {
+        width: '100%',
       },
     },
   },
-  "@media (max-width: 767px)": {
+  '@media (max-width: 767px)': {
     horizontalAdContainer: {
-      padding: "0 2%",
+      padding: '0 2%',
     },
   },
 };
 
 const sidebarStyles = {
   sidebar: {
-    background: "#fff",
-    boxShadow: "1px 2px 12px 0 rgba(0, 0, 0, 0.5)",
-    padding: "14px",
-    width: "220px",
+    background: '#fff',
+    boxShadow: '1px 2px 12px 0 rgba(0, 0, 0, 0.5)',
+    padding: '14px',
+    width: '220px',
     zIndex: 5001,
   },
   overlay: {
-    background: "rgba(255, 255, 255, 0.8)",
+    background: 'rgba(255, 255, 255, 0.8)',
     zIndex: 5000,
   },
 };
@@ -76,10 +76,10 @@ const sidebarStyles = {
 class PageLayout extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
-      if (document.getElementById("scroll-reset-assistant")) {
+      if (document.getElementById('scroll-reset-assistant')) {
         // onChange called once before my-page renders
         document.getElementById(
-          "scroll-reset-assistant",
+          'scroll-reset-assistant',
         ).parentNode.scrollTop = 0;
       }
     }

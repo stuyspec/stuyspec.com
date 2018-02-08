@@ -1,5 +1,5 @@
-import { CREATE_USER_FULFILLED } from "./actionTypes";
-import { UPDATE_USER_FULFILLED } from "../accounts/actionTypes";
+import { CREATE_USER_FULFILLED } from './actionTypes';
+import { UPDATE_USER_FULFILLED } from '../accounts/actionTypes';
 
 const initialState = {
   error: null,

@@ -1,20 +1,20 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import injectSheet from "react-jss";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import injectSheet from 'react-jss';
 
-import { PROFILE_SLUGS } from "../../../constants";
-import { capitalizeWord } from "../../../utils";
+import { PROFILE_SLUGS } from '../../../constants';
+import { capitalizeWord } from '../../../utils';
 
 const styles = {
   caption: {
-    fontFamily: "Minion Pro",
-    fontSize: "14px",
-    lineHeight: "1.1",
-    marginTop: "10px",
+    fontFamily: 'Minion Pro',
+    fontSize: '14px',
+    lineHeight: '1.1',
+    marginTop: '10px',
   },
   creditLine: {
-    color: "#888",
-    position: "relative",
+    color: '#888',
+    position: 'relative',
   },
 };
 
@@ -23,8 +23,8 @@ const ArticleMediaCaption = ({ classes, image }) => {
   let { caption } = image;
 
   // If the caption does not end in a period, add one.
-  if (caption && caption.substr(caption.length - 2) !== ". ") {
-    caption += ".";
+  if (caption && caption.substr(caption.length - 2) !== '. ') {
+    caption += '.';
   }
 
   return (
@@ -41,7 +41,7 @@ const ArticleMediaCaption = ({ classes, image }) => {
         &nbsp;by&nbsp;
         {user.firstName}
         {/* Department names are stored in firstName, not lastName, requiring the following logic */}
-        {user.lastName !== "" && " " + user.lastName}
+        {user.lastName !== '' && ' ' + user.lastName}
       </Link>
       .
     </figcaption>

@@ -1,1 +1,1 @@
-export { default as DescriptionPage } from "./DescriptionPage";
+export { default as DescriptionPage } from './DescriptionPage';

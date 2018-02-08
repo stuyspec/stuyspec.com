@@ -1,7 +1,7 @@
-import * as t from "./actionTypes";
-import { STUY_SPEC_API_URL } from "../../constants";
-import axios from "axios";
-import { reset } from "redux-form";
+import * as t from './actionTypes';
+import { STUY_SPEC_API_URL } from '../../constants';
+import axios from 'axios';
+import { reset } from 'redux-form';
 
 export const createComment = (values, devise_headers) => {
   return dispatch => {
@@ -11,7 +11,7 @@ export const createComment = (values, devise_headers) => {
     });
     axios
       .post(`${STUY_SPEC_API_URL}/comments`, values, {
-        headers: { "X-Key-Inflection": "camel", ...devise_headers },
+        headers: { 'X-Key-Inflection': 'camel', ...devise_headers },
       })
       .then(response => {
         dispatch({
@@ -19,7 +19,7 @@ export const createComment = (values, devise_headers) => {
           payload: response,
         });
         // Destroys the inputs in the form createComment
-        dispatch(reset("createComment"));
+        dispatch(reset('createComment'));
       })
       .catch(err => {
         dispatch({

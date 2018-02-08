@@ -1,15 +1,15 @@
 /* Row of recommended articles on the bottom of the Article Page */
 
-import React from "react";
-import { compose } from "redux";
-import injectSheet from "react-jss";
-import { Row, Col } from "react-bootstrap/lib";
-import { withRouter } from "react-router-dom";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
-import humps from "humps";
+import React from 'react';
+import { compose } from 'redux';
+import injectSheet from 'react-jss';
+import { Row, Col } from 'react-bootstrap/lib';
+import { withRouter } from 'react-router-dom';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import humps from 'humps';
 
-import { ArticleRecommendation } from "./summaries";
+import { ArticleRecommendation } from './summaries';
 
 const RecommendedRowQuery = gql`
   query RecommendedRowQuery($section_id: ID!, $limit: ID!) {
@@ -38,44 +38,44 @@ const RecommendedRowQuery = gql`
 const styles = {
   RecommendedRow: {
     padding: 0,
-    marginBottom: "24px",
+    marginBottom: '24px',
   },
   title: {
-    border: "1px solid #ddd",
-    borderStyle: "solid none", // only top-bottom borders
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "26px",
-    marginBottom: "24px",
-    padding: "12px 0 13px",
-    textAlign: "center",
+    border: '1px solid #ddd',
+    borderStyle: 'solid none', // only top-bottom borders
+    color: '#000',
+    fontFamily: 'Minion Pro',
+    fontSize: '26px',
+    marginBottom: '24px',
+    padding: '12px 0 13px',
+    textAlign: 'center',
   },
   recommendedList: {
-    borderBottom: "solid 1px #ddd",
-    padding: "0 0 24px",
-    "& > .row > div": {
-      padding: "18px !important",
+    borderBottom: 'solid 1px #ddd',
+    padding: '0 0 24px',
+    '& > .row > div': {
+      padding: '18px !important',
     },
-    "& > .row > div:first-child": {
-      paddingLeft: "0 !important",
+    '& > .row > div:first-child': {
+      paddingLeft: '0 !important',
     },
-    "& > .row > div:last-child": {
-      paddingRight: "0 !important",
-    },
-  },
-  "@media (max-width: 991px)": {
-    RecommendedRow: {
-      padding: "0 10%",
+    '& > .row > div:last-child': {
+      paddingRight: '0 !important',
     },
   },
-  "@media (max-width: 767px)": {
+  '@media (max-width: 991px)': {
     RecommendedRow: {
-      padding: "0 2%",
+      padding: '0 10%',
+    },
+  },
+  '@media (max-width: 767px)': {
+    RecommendedRow: {
+      padding: '0 2%',
     },
     recommendedList: {
-      "& > .row > div": {
-        padding: "0px !important",
-        marginBottom: "38px",
+      '& > .row > div': {
+        padding: '0px !important',
+        marginBottom: '38px',
       },
     },
   },
@@ -122,15 +122,15 @@ const RecommendedRow = ({
 
 export default compose(
   graphql(RecommendedRowQuery, {
-    options: ({ section }) => ({ 
-      variables: { 
+    options: ({ section }) => ({
+      variables: {
         section_id: section.id,
 
-        // Though the RecommendedRow only displays four articles, to account 
+        // Though the RecommendedRow only displays four articles, to account
         // for the case that one of the recommended articles includes the
         // current article, we want a backup.
         limit: 5,
-      } 
+      },
     }),
   }),
   withRouter,

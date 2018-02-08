@@ -1,13 +1,13 @@
-import React from "react";
-import injectSheet from "react-jss";
-import { Grid, Row, Col } from "react-bootstrap/lib";
-import { Helmet } from "react-helmet";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
-import humps from "humps";
+import React from 'react';
+import injectSheet from 'react-jss';
+import { Grid, Row, Col } from 'react-bootstrap/lib';
+import { Helmet } from 'react-helmet';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import humps from 'humps';
 
-import { ArticleList } from "../../articles/components";
-import { NotFoundPage } from "../../core/components";
+import { ArticleList } from '../../articles/components';
+import { NotFoundPage } from '../../core/components';
 
 const ContributorBySlug = gql`
   query ContributorPageQuery($slug: String!) {
@@ -42,36 +42,36 @@ const ContributorBySlug = gql`
 
 const styles = {
   name: {
-    color: "#000",
-    fontFamily: "Canela",
-    fontSize: "48px",
+    color: '#000',
+    fontFamily: 'Canela',
+    fontSize: '48px',
     fontWeight: 500,
     lineHeight: 1,
-    marginBottom: "11px",
+    marginBottom: '11px',
   },
   email: {
-    color: "#3084df",
-    display: "block",
-    fontFamily: "Minion Pro",
-    fontSize: "17px",
-    marginBottom: "7px",
+    color: '#3084df',
+    display: 'block',
+    fontFamily: 'Minion Pro',
+    fontSize: '17px',
+    marginBottom: '7px',
   },
   latest: {
-    borderTop: "1px solid #000",
-    borderBottom: "1px solid #ddd",
-    borderStyle: "solid none",
-    color: "#000",
-    fontFamily: "Circular Std",
-    fontSize: "13px",
-    fontWeight: "300",
-    marginBottom: "22px",
-    padding: "4px 0px",
+    borderTop: '1px solid #000',
+    borderBottom: '1px solid #ddd',
+    borderStyle: 'solid none',
+    color: '#000',
+    fontFamily: 'Circular Std',
+    fontSize: '13px',
+    fontWeight: '300',
+    marginBottom: '22px',
+    padding: '4px 0px',
   },
   description: {
-    fontFamily: "Minion Pro",
-    fontSize: "16px",
-    lineHeight: "1.5",
-    marginBottom: "26px",
+    fontFamily: 'Minion Pro',
+    fontSize: '16px',
+    lineHeight: '1.5',
+    marginBottom: '26px',
   },
 };
 

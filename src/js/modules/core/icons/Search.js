@@ -1,5 +1,5 @@
-import React from "react";
-import Icon from "react-icon-base";
+import React from 'react';
+import Icon from 'react-icon-base';
 
 const Search = props => (
   <Icon viewBox="0 0 40 40" {...props}>

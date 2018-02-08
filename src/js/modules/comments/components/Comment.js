@@ -1,38 +1,38 @@
-import React from "react";
-import injectSheet from "react-jss";
-import { Grid, Row, Col } from "react-bootstrap/lib";
-import dateFormat from "dateformat";
+import React from 'react';
+import injectSheet from 'react-jss';
+import { Grid, Row, Col } from 'react-bootstrap/lib';
+import dateFormat from 'dateformat';
 
 const MILLISECONDS_IN_DAY = 8.64e7;
 
 const styles = {
   Comment: {
-    fontFamily: "Minion Pro",
-    marginBottom: "18px",
+    fontFamily: 'Minion Pro',
+    marginBottom: '18px',
   },
   commentInfo: {
-    marginBottom: "2px",
+    marginBottom: '2px',
   },
   userName: {
-    fontSize: "18px",
-    fontWeight: "bold",
-    color: "#000",
+    fontSize: '18px',
+    fontWeight: 'bold',
+    color: '#000',
   },
   content: {
-    color: "#000",
-    fontSize: "16px",
-    lineHeight: "1.5",
+    color: '#000',
+    fontSize: '16px',
+    lineHeight: '1.5',
     margin: 0,
   },
   bulletPoint: {
-    color: "#ccc",
-    fontSize: "12px",
-    margin: "0 4px",
-    position: "relative",
+    color: '#ccc',
+    fontSize: '12px',
+    margin: '0 4px',
+    position: 'relative',
   },
   publishedAt: {
-    color: "#a8a8a8",
-    fontSize: "16px",
+    color: '#a8a8a8',
+    fontSize: '16px',
     fontWeight: 300,
   },
 };
@@ -48,8 +48,8 @@ const Comment = ({ classes, comment }) => {
   // shortTime format. If not, use the longDate format.
   const dateSetting =
     new Date() - new Date(publishedAt) < MILLISECONDS_IN_DAY
-      ? "shortTime"
-      : "longDate";
+      ? 'shortTime'
+      : 'longDate';
   const dateline = dateFormat(publishedAt, dateSetting);
   return (
     <Row className={classes.Comment}>
@@ -60,7 +60,7 @@ const Comment = ({ classes, comment }) => {
           </span>
           <span className={classes.bulletPoint}>&#8226;</span>
           <span className={classes.publishedAt}>
-            Published {dateSetting === "shortTime" ? "at" : "on"} {dateline}
+            Published {dateSetting === 'shortTime' ? 'at' : 'on'} {dateline}
           </span>
         </p>
         <p className={classes.content}>{comment.content}</p>

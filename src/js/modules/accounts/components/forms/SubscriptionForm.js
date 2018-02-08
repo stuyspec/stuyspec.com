@@ -1,52 +1,52 @@
-import React from "react";
-import { compose } from "redux";
-import { Field, reduxForm } from "redux-form";
-import injectSheet from "react-jss";
-import { EMAIL_REGEX } from "../../../../constants";
+import React from 'react';
+import { compose } from 'redux';
+import { Field, reduxForm } from 'redux-form';
+import injectSheet from 'react-jss';
+import { EMAIL_REGEX } from '../../../../constants';
 
-import { FormStatus, RenderField } from "./helpers";
+import { FormStatus, RenderField } from './helpers';
 
 const styles = {
   submitButton: {
-    backgroundColor: "#e2130b",
-    border: "none",
-    borderRadius: "3px",
-    color: "#fff",
-    fontFamily: "Circular Std",
-    fontSize: "15px",
-    fontWeight: "300",
-    padding: "11px",
-    margin: "9px 0 0 0",
-    width: "275px",
-    "&:disabled": {
-      background: "#ddd",
-      borderColor: "#ddd",
-      color: "#888",
+    backgroundColor: '#e2130b',
+    border: 'none',
+    borderRadius: '3px',
+    color: '#fff',
+    fontFamily: 'Circular Std',
+    fontSize: '15px',
+    fontWeight: '300',
+    padding: '11px',
+    margin: '9px 0 0 0',
+    width: '275px',
+    '&:disabled': {
+      background: '#ddd',
+      borderColor: '#ddd',
+      color: '#888',
     },
   },
   input: {
-    backgroundColor: "#eee",
-    border: "none",
-    borderRadius: "3px",
-    fontFamily: "Circular Std",
-    fontSize: "15px",
-    fontWeight: "300",
-    padding: "11px",
-    width: "275px",
+    backgroundColor: '#eee',
+    border: 'none',
+    borderRadius: '3px',
+    fontFamily: 'Circular Std',
+    fontSize: '15px',
+    fontWeight: '300',
+    padding: '11px',
+    width: '275px',
   },
   syncValidation: {
-    color: "red",
-    fontFamily: "Minion Pro",
-    margin: "10px 0 0 0",
+    color: 'red',
+    fontFamily: 'Minion Pro',
+    margin: '10px 0 0 0',
   },
 };
 
 const validate = formValues => {
   const errors = {};
   if (!formValues.email) {
-    errors.email = "No email detected";
+    errors.email = 'No email detected';
   } else if (!EMAIL_REGEX.test(formValues.email)) {
-    errors.email = "Invalid email address";
+    errors.email = 'Invalid email address';
   }
   return errors;
 };
@@ -75,7 +75,7 @@ const SubscriptionForm = ({
             disabled={submitting}
             className={classes.submitButton}
           >
-            {callToAction ? callToAction : "Subscribe"}
+            {callToAction ? callToAction : 'Subscribe'}
           </button>
         </div>
       </form>
@@ -86,7 +86,7 @@ const SubscriptionForm = ({
 
 export default compose(
   reduxForm({
-    form: "subscription",
+    form: 'subscription',
     validate,
   }),
   injectSheet(styles),

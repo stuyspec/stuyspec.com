@@ -1,38 +1,38 @@
-import React from "react";
-import injectSheet from "react-jss";
+import React from 'react';
+import injectSheet from 'react-jss';
 
 const styles = {
   SliderFooter: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    marginTop: "20px",
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginTop: '20px',
   },
   index: {
-    color: "#ddd",
-    fontFamily: "Circular Std",
+    color: '#ddd',
+    fontFamily: 'Circular Std',
   },
   carouselControls: {
-    alignItems: "flex-end",
-    display: "flex",
+    alignItems: 'flex-end',
+    display: 'flex',
   },
   controlButton: {
-    background: "#333",
+    background: '#333',
     border: 0,
-    borderRadius: "2px",
-    color: "#bbb",
-    fontFamily: "Circular Std",
-    fontSize: "14px",
+    borderRadius: '2px',
+    color: '#bbb',
+    fontFamily: 'Circular Std',
+    fontSize: '14px',
     fontWeight: 500,
-    height: "48px",
+    height: '48px',
     lineHeight: 1,
-    outline: "none",
-    marginLeft: "10px",
-    padding: "15px",
-    position: "relative",
-    verticalAlign: "middle",
-    width: "48px",
+    outline: 'none',
+    marginLeft: '10px',
+    padding: '15px',
+    position: 'relative',
+    verticalAlign: 'middle',
+    width: '48px',
   },
 };
 

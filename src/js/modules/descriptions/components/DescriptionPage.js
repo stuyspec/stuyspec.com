@@ -1,23 +1,23 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Grid, Row, Col } from "react-bootstrap/lib";
-import injectSheet from "react-jss";
-import { Helmet } from "react-helmet";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Grid, Row, Col } from 'react-bootstrap/lib';
+import injectSheet from 'react-jss';
+import { Helmet } from 'react-helmet';
 
-import { NotFoundPage } from "../../core/components";
+import { NotFoundPage } from '../../core/components';
 
 const styles = {
   descriptionTitle: {
-    fontFamily: "Canela",
-    fontSize: "36px",
-    fontWeight: "500",
-    textAlign: "center",
-    color: "#000000",
+    fontFamily: 'Canela',
+    fontSize: '36px',
+    fontWeight: '500',
+    textAlign: 'center',
+    color: '#000000',
   },
   descriptionContent: {
-    fontFamily: "Minion Pro",
-    fontSize: "18px",
-    color: "#000000",
+    fontFamily: 'Minion Pro',
+    fontSize: '18px',
+    color: '#000000',
   },
 };
 

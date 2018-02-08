@@ -1,4 +1,4 @@
-import { SPEC_REFERENCE_PATTERN, SPEC_IMG_CAROUSEL_PATTERN } from "./constants";
+import { SPEC_REFERENCE_PATTERN, SPEC_IMG_CAROUSEL_PATTERN } from './constants';
 
 export const capitalizeWord = string => {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -6,12 +6,14 @@ export const capitalizeWord = string => {
 
 export const shortenSummary = article => {
   if (article.content === undefined || article.summary === undefined) {
-    console.error(`Article: ${article}. Missing content or summary field in shortenSummary.`);
+    console.error(
+      `Article: ${article}. Missing content or summary field in shortenSummary.`,
+    );
     return null;
   }
-  let articleSummary = article.summary.split(" ");
+  let articleSummary = article.summary.split(' ');
   if (articleSummary.length > 25) {
-    articleSummary = articleSummary.slice(0, 24).join(" ") + "...";
+    articleSummary = articleSummary.slice(0, 24).join(' ') + '...';
   } else if (article.summary === '') {
     articleSummary = article.content
       .replace(SPEC_REFERENCE_PATTERN, '')
@@ -20,15 +22,17 @@ export const shortenSummary = article => {
       .replace(/<h4>|<\/h4>/g, ' ')
       .replace(/<i>|<\/i>/g, ' ')
       .replace(/<\/b>/g, ' ');
-    return articleSummary
-      .split(" ")
-      .slice(0, 24)
-      .join(" ") + "...";
+    return (
+      articleSummary
+        .split(' ')
+        .slice(0, 24)
+        .join(' ') + '...'
+    );
   } else {
-    articleSummary = articleSummary.join(" ");
+    articleSummary = articleSummary.join(' ');
   }
   return articleSummary;
-}
+};
 
 /**
  * Writes the filter function for objects.
@@ -40,11 +44,11 @@ export const objectFilter = (obj, predicate) =>
     .filter(key => predicate(obj[key]))
     .reduce((res, key) => ((res[key] = obj[key]), res), {});
 
-export const getUrlParameterByName = (name, url=window.location.href) => {
-  name = name.replace(/[\[\]]/g, "\\$&");
-  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-      results = regex.exec(url);
+export const getUrlParameterByName = (name, url = window.location.href) => {
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+    results = regex.exec(url);
   if (!results) return null;
   if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\+/g, " "));
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
 };

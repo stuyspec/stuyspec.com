@@ -1,19 +1,19 @@
-import React from "react";
-import { compose } from "redux";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import injectSheet from "react-jss";
+import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import injectSheet from 'react-jss';
 
 const styles = {
   FormStatus: {
-    fontFamily: "Minion Pro",
+    fontFamily: 'Minion Pro',
   },
   successMessage: {
-    color: "green",
-    marginTop: "10px",
+    color: 'green',
+    marginTop: '10px',
   },
   errorMessage: {
-    color: "red",
+    color: 'red',
   },
 };
 
