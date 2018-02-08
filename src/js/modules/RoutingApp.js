@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
@@ -9,10 +9,10 @@ import queryString from 'query-string';
 import appHistory from 'tools/appHistory';
 
 import {
+  EditProfilePage,
+  ProfilePage,
   SignInPage,
   SignUpPage,
-  ProfilePage,
-  EditProfilePage,
 } from './accounts/components';
 import {
   ArticlePage,
@@ -28,7 +28,7 @@ import {
 } from './core/components';
 import { DescriptionPage } from './descriptions/components';
 import { SectionPage } from './sections/components';
-import { ContributorPage, ArtistPage } from './users/components';
+import { ArtistPage, ContributorPage } from './users/components';
 
 import { createSession } from './accounts/actions';
 
@@ -43,10 +43,6 @@ const RoutingAppQuery = gql`
 `;
 
 class RoutingApp extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const { createSession } = this.props;
 
@@ -59,7 +55,7 @@ class RoutingApp extends PureComponent {
       const urlHeaders = queryString.parse(window.location.search);
 
       // If everything we need in a session exists, create the session
-      sessionHeaders = ['client_id', 'token', 'uid'];
+      const sessionHeaders = ['client_id', 'token', 'uid'];
       if (sessionHeaders.every(header => header in urlHeaders)) {
         createSession({
           'access-token': urlHeaders.token,
