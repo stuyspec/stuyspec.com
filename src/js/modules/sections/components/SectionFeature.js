@@ -68,7 +68,7 @@ const styles = {
     color: "#000",
     display: "block",
     fontFamily: "Minion Pro",
-    fontSize: "16px",
+    fontSize: "18px",
     fontWeight: "bold",
     lineHeight: 1.25,
     marginBottom: "7px",
@@ -78,7 +78,7 @@ const styles = {
   },
   preview: {
     fontFamily: "Minion Pro",
-    fontSize: "14px",
+    fontSize: "16px",
     lineHeight: 1.29,
     margin: "0 0 12px 0",
   },

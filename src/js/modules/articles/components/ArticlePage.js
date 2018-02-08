@@ -23,6 +23,7 @@ const ArticleQuery = gql`
       media {
         id
         attachment_url
+        thumb_attachment_url
         media_type
         caption
         title

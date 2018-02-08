@@ -11,7 +11,7 @@ import { NotFoundPage } from "../../core/components";
 
 const ArtistProfileBySlug = gql`
   query ArtistProfileBySlug($user_slug: String!, $role_slug: String!) {
-    profileByUserSlug(user_slug: $user_slug, role_slug: $role_slug) {
+    profileByUserAndRole(user_slug: $user_slug, role_slug: $role_slug) {
       user {
         first_name
         last_name
@@ -88,13 +88,13 @@ const ArtistPage = ({ classes, data, match }) => {
     return null;
   }
 
-  if (!data.profileByUserSlug) {
+  if (!data.profileByUserAndRole) {
     return <NotFoundPage />;
   }
 
-  const artist = data.profileByUserSlug.user;
+  const artist = data.profileByUserAndRole.user;
 
-  const articles = data.profileByUserSlug.media.map(medium => ({
+  const articles = data.profileByUserAndRole.media.map(medium => ({
     ...medium.article,
     media: [
       {
