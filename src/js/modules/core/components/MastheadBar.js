@@ -123,7 +123,6 @@ const MastheadBar = ({
         <div className={classes.sidebarToggle}>
           <MobileNavButton onClick={openSidebar}>
             <Hamburger color={'#000'} size={20} />
-            {/* TODO: consider pure CSS */}
           </MobileNavButton>
         </div>
         <Link className={classes.brandingLink} to={'/'}>
