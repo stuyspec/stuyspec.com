@@ -78,7 +78,7 @@ const styles = {
   },
   preview: {
     fontFamily: "Minion Pro",
-    fontSize: "16px",
+    fontSize: "14px",
     lineHeight: 1.29,
     margin: "0 0 12px 0",
   },

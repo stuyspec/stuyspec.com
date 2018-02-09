@@ -223,7 +223,7 @@ const SectionPage = ({ data, classes, section }) => {
   const { latestArticles, topRankedArticles, featuredSubsection } = data;
   const [featuredArticle, secondaryArticle] = topRankedArticles;
 
-  if (featuredArticle.section.parentSection) {
+  if (!featuredSubsection) {
     return <SubsectionPage section={section} latestArticles={latestArticles} />;
   }
 
@@ -303,5 +303,9 @@ const SectionPage = ({ data, classes, section }) => {
 };
 
 export default graphql(SectionPageQuery, {
-  options: ({ section }) => ({ variables: { section_id: section.id } }),
+  options: ({ section }) => ({ 
+    variables: {
+     section_id: section.id,
+   }
+  }),
 })(injectSheet(styles)(SectionPage));
