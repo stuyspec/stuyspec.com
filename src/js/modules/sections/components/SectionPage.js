@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import { Helmet } from "react-helmet";
 
-import { ArticleList } from "../../articles/components";
+import { ArticleFeed } from "../../articles/components";
 import { SubsectionPage, SectionColumn, SectionFeature } from "./";
 import {
   LeftTitleArticle,
@@ -50,29 +50,6 @@ const SectionPageQuery = gql`
         title
         media_type
         attachment_url
-      }
-    }
-    latestArticles(section_id: $section_id, limit: 10) {
-      id
-      title
-      slug
-      preview
-      created_at
-      section {
-        id
-        permalink
-      }
-      contributors {
-        first_name
-        last_name
-        slug
-      }
-      media {
-        title
-        media_type
-        attachment_url
-        medium_attachment_url
-        thumb_attachment_url
       }
     }
     sectionsByParentSectionID(section_id: $section_id) {
@@ -224,7 +201,7 @@ const SectionPage = ({ data, classes, section }) => {
   const [featuredArticle, secondaryArticle] = topRankedArticles;
 
   if (!featuredSubsection) {
-    return <SubsectionPage section={section} latestArticles={latestArticles} />;
+    return <SubsectionPage section={section} />;
   }
 
   const subsections = data.sectionsByParentSectionID;
@@ -286,10 +263,9 @@ const SectionPage = ({ data, classes, section }) => {
 
       <Row>
         <Col xs={12} sm={9} md={9} lg={9} className={classes.latestArticles}>
-          <ArticleList
-            articles={latestArticles}
+          <ArticleFeed
+            section={section}
             title="Latest"
-            label="Latest"
           />
         </Col>
         <Col xsHidden sm={3} md={3} lg={3}>
