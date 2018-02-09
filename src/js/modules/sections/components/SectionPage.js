@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import { Helmet } from "react-helmet";
 
-import { ArticleList } from "../../articles/components";
+import { ArticleFeed } from "../../articles/components";
 import { SubsectionPage, SectionColumn, SectionFeature } from "./";
 import {
   LeftTitleArticle,
@@ -286,8 +286,8 @@ const SectionPage = ({ data, classes, section }) => {
 
       <Row>
         <Col xs={12} sm={9} md={9} lg={9} className={classes.latestArticles}>
-          <ArticleList
-            articles={latestArticles}
+          <ArticleFeed
+            section={section}
             title="Latest"
             label="Latest"
           />

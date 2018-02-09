@@ -4,6 +4,7 @@ export { default as ArticleBody } from "./ArticleBody";
 export { default as ArticleFooter } from "./ArticleFooter";
 export { default as RecommendedRow } from "./RecommendedRow";
 export { default as ArticleList } from "./ArticleList";
+export { default as ArticleFeed } from "./ArticleFeed";
 export { default as SearchPage } from "./SearchPage";
 export { default as SearchForm } from "./SearchForm";
 export { default as SearchResults } from "./SearchResults";
