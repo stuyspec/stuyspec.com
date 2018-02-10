@@ -178,7 +178,7 @@ const SectionFeature = ({ classes, data }) => {
             </figure>
           </Link>
         </Col>
-      ) : (
+      ) : (ternaryArticle && (
         <Col xs={6} sm={4} md={4} lg={4} className={classes.ternaryArticle}>
           <Link
             className={classes.title}
@@ -190,7 +190,7 @@ const SectionFeature = ({ classes, data }) => {
           <Byline contributors={ternaryArticle.contributors} />
           <Dateline timestamp={ternaryArticle.createdAt} />
         </Col>
-      )}
+      ))}
       <Col xs={6} sm={4} md={4} lg={4} className={classes.primaryArticle}>
         <Link
           className={classes.title}
@@ -218,7 +218,7 @@ const SectionFeature = ({ classes, data }) => {
         </Link>
       </Col>
 
-      {featuredMedia && (
+      {featuredMedia && ternaryArticle && (
         <Col
           xs={12}
           smHidden
