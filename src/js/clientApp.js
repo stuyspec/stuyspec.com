@@ -31,6 +31,11 @@ const apolloClient = new ApolloClient({
 import { objectFilter } from "./utils";
 Object.filter = objectFilter;
 
+// Adds trim() method for String's
+if(typeof(String.prototype.trim) === "undefined") {
+  String.prototype.trim = () => String(this).replace(/^\s+|\s+$/g, '');
+}
+
 ReactDOM.render(
   <AppContainer>
     <ApolloProvider client={apolloClient}>
