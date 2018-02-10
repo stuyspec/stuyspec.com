@@ -20,12 +20,6 @@ const styles = {
  */
 
 const Dateline = ({ classes, timestamp }) => {
-  // Remove timezone setting (e.g. "-0500") from timestamp. It causes
-  // "invalid date" type error on certain browsers.
-  timestamp = timestamp.replace(/-\d{4}/, '').trim();
-  // TODO: how to restore timezone offset?
-
-
   // If the timestamp is the same day (< 24 hours difference), use the
   // shortTime format. If not, use the longDate format.
   const dateline = dateFormat(
