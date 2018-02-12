@@ -7,8 +7,8 @@ import humps from "humps";
 import ArticleList from "./ArticleList";
 
 const ArticleFeedQuery = gql`
-  query ArticleFeedQuery($section_id: ID) {
-    latestArticles(section_id: $section_id, limit: 10) {
+  query ArticleFeedQuery($section_id: ID, $page: Int) {
+    latestArticles(section_id: $section_id, page: $page) {
       id
       title
       slug
@@ -49,6 +49,29 @@ export default graphql(ArticleFeedQuery, {
   options: ({ section }) => ({
     variables: {
       section_id: section ? section.id : undefined,
+      page: 0,
     },
+  }),
+  props: ({ data: loading, feed, fetchMore }) => ({
+    loading,
+    feed,
+    loadMoreEntries: () => {
+      return fetchMore({
+        // query: ... (you can specify a different query. FEED_QUERY is used by default)
+        variables: {
+          // We are able to figure out which offset to use because it matches
+          // the feed length, but we could also use state, or the previous
+          // variables to calculate this (see the cursor example below)
+          offset: feed.length,
+        },
+        updateQuery: (previousResult, { fetchMoreResult }) => {
+          if (!fetchMoreResult) { return previousResult; }
+          return {
+            ...previousResult,
+            feed: [ ...previousResult.feed, ...fetchMoreResult.feed ],
+          };
+        },
+      });
+    }
   })
 })(ArticleFeed);
