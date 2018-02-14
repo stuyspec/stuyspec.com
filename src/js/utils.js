@@ -1,7 +1,9 @@
-import { SPEC_REFERENCE_PATTERN } from "./constants";
-
 export const capitalizeWord = string => {
   return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+export const sleeper = ms => {
+  return x => new Promise(resolve => setTimeout(() => resolve(x), ms));
 };
 
 // The filter function, but for objects. The predicate is the filtering
@@ -15,7 +17,11 @@ export const getUrlParameterByName = (name, url = window.location.href) => {
   name = name.replace(/[\[\]]/g, "\\$&");
   var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
     results = regex.exec(url);
-  if (!results) return null;
-  if (!results[2]) return "";
+  if (!results) {
+    return null;
+  }
+  if (!results[2]) {
+    return "";
+  }
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 };
