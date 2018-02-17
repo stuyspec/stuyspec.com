@@ -34,41 +34,42 @@ const ArticleFeedQuery = gql`
   }
 `;
 
-const ArticleFeed = ({ data, title }) => {
-  if (data.loading) {
+const ArticleFeed = ({ loading, page, latestArticles, loadMoreEntries, title = "Latest" }) => {
+  if (loading) {
     return null;
   }
 
-  data = humps.camelizeKeys(data);
-  const { latestArticles } = data;
-
-  return <ArticleList articles={latestArticles} title={title} label="Latest" />
-}
+  latestArticles = humps.camelizeKeys(latestArticles);
+  console.log(page, latestArticles);
+  return (
+    <div>
+      <button onClick={loadMoreEntries}>load more</button>
+      <ArticleList articles={latestArticles} title={title} label="Articles" />
+    </div>
+  );
+};
 
 export default graphql(ArticleFeedQuery, {
   options: ({ section }) => ({
     variables: {
-      section_id: section ? section.id : undefined,
-      page: 0,
+      section_id: section ? section.id : null,
+      page: 1,
     },
   }),
-  props: ({ data: loading, feed, fetchMore }) => ({
+  props: ({ data: { loading, latestArticles, fetchMore, variables }}) => ({
     loading,
-    feed,
+    latestArticles,
+    page: variables.page + 1,
     loadMoreEntries: () => {
       return fetchMore({
-        // query: ... (you can specify a different query. FEED_QUERY is used by default)
         variables: {
-          // We are able to figure out which offset to use because it matches
-          // the feed length, but we could also use state, or the previous
-          // variables to calculate this (see the cursor example below)
-          offset: feed.length,
+          page: variables.page + 1,
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
           if (!fetchMoreResult) { return previousResult; }
           return {
             ...previousResult,
-            feed: [ ...previousResult.feed, ...fetchMoreResult.feed ],
+            latestArticles: [ ...previousResult.latestArticles, ...fetchMoreResult.latestArticles ],
           };
         },
       });
