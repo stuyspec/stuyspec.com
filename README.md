@@ -27,12 +27,12 @@ We use Issuu to host our newspaper PDFs. Every time we send, we have to upload t
 
 5. Go to the "First, the basics." section and change the background color to #333333.
 
-5. Scroll down and click "Save & Get Code". Choose the `iFrame` option. It looks something like this:
+6. Scroll down and click "Save & Get Code". Choose the `iFrame` option. It looks something like this:
 ```
 <iframe style="..." src="//e.issuu.com/embed.html#FIRST_NUMBER/SECOND_NUMBER" frameborder="0" allowfullscreen></iframe>
 ```
 
-6. Copy the SECOND\_NUMBER and, in the constants file, set the `ISSUU_CONFIG` to that number.
+7. Copy the SECOND\_NUMBER and, in the constants file, set the `ISSUU_CONFIG` to that number.
 ```
 export const ISSUU_CONFIG = SECOND_NUMBER;
 ```
