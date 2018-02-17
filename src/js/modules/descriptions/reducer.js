@@ -203,76 +203,108 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
     title: "Staff",
     slug: "staff",
     content: `<center>
-<h2>
-  Members of the 2017-2018 Spectator Editorial Board
+<h2 style="margin-bottom: 30px;">
+  Members of the 2018-2019 Spectator Editorial Board
 </h2>
 <b>Editors In Chief</b><br>
-Anne George*<br>
-Matteo Wong*<br>
+Jane Rhee<br>
+Sophie Watwood<br>
 <br>
-<b>News Editors</b><br>
-Nishmi Abeyweera<br>
-Shamook Rakshit<br>
-Blythe Zadrozny<br>
-<br>
-<b>Features Editors</b><br>
-Archi Das<br>
-Asim Kapparova<br>
-Sophie Watwood*<br>
-<br>
-<b>Opinions Editors</b><br>
-Jame Rhee<br>
-Eliza Spinna<br>
-<br>
-<b>Arts & Entertainment Editors</b><br>
-Karen Chen*<br>
-Sophie Feng<br>
-Eliana Kavouriadis<br>
-<br>
-<b>Humor Editors</b><br>
-Kerwin Chen<br>
-Shaina Peters<br>
-Michael Xu*<br>
-<br>
-<b>Sports Editors</b><br>
-Ray Jones<br>
-Sem Murck<br>
-Max Onderdonk*<br>
-<br>
-<b>Web Editors</b><br>
-Jason Kao<br>
-George Zheng<br>
-<br>
-<b>Photography Editors</b><br>
-Julia Lee<br>
-Mika Simoncelli<br>
-Ting Ting Chen<br>
-<br>
-<b>Art Directions</b><br>
-Klaire Geller<br>
-Christine Jegarl<br>
-Vivian Lin<br>
-<br>
-<b>Layout Editors</b><br>
-Arpita Nag<br>
-Jessica Wu<br>
-Katie Wu<br>
-<br>
-<b>Copy Editors</b><br>
-Vincent Jiang<br>
-Michelle Lai<br>
-Venus Nnadi<br>
-<br>
-<b>Business Managers</b><br>
-Saloni Majmudar<br>
-Donia Tung<br>
-<br>
+<table style="width:87%;text-align:center" >
+    <tr>
+        <td style="width:30%;vertical-align: top">
+            <b>News Editors</b><br>
+            Nishmi Abeyweera<br>
+            George Shey<br>
+            <br>
+        </td>
+        <td style="width:40%;vertical-align: top">
+            <b>Features Editors</b><br>
+            Archi Das<br>
+            Amy Huang<br>
+            Amanda Peng<br>
+            <br>
+        </td>
+        <td style="width:30%;vertical-align: top">
+             <b>Opinions Editors</b><br>
+            Artem Ilyanok<br>
+            Eliza Spinna<br>
+            <br>
+        </td>
+    </tr>
+    <tr>
+        <td style="width:30%;vertical-align: top">
+            <b>Arts & Entertainment Editors</b><br>
+            Thomas Chen**<br>
+            William Lohier<br>
+            Emily Xu<br>
+            <br>
+        </td>
+        <td style="width:40%;vertical-align: top">
+            <b>Humor Editors</b><br>
+            Kerwin Chen<br>
+            Gabrielle Umanova<br>
+            <br>
+        </td>
+        <td style="width:30%;vertical-align: top" >
+            <b>Sports Editors</b><br>
+            Celina Liu<br>
+            Ariel Melendez<br>
+            Jeremy Rubin<br>
+            <br>
+        </td>
+    </tr>
+    <tr>
+        <td style="width:30%;vertical-align: top">
+            <b>Web Editors</b><br>
+            Darius Jankausakas**<br>
+            Jason Lin<br>
+            Jerry Ye<br>
+            <br>
+        </td>
+        <td style="width:40%;vertical-align: top">
+            <b>Photography Editors</b><br>
+            Ting Ting Chen<br>
+            Elena Sapelyuk<br>
+            <br>
+        </td>
+        <td style="width:30%;vertical-align: top">
+            <b>Art Directions</b><br>
+            Klaire Geller<br>
+            Anika Hashem<br>
+            Darren Liang<br>
+            <br>
+        </td>
+    </tr>
+    <tr>
+        <td style="width:30%;vertical-align: top">
+            <b>Layout Editors</b><br>
+            Dahae Choi<br>
+            Christina Tan<br>
+            Katie Wu<br>
+            <br>
+        </td>
+        <td style="width:40%;vertical-align: top">
+            <b>Copy Editors</b><br>
+            Jeanette Cheung<br>
+            Michelle Lai<br>
+            Jonela Malollari<br>
+            <br>
+        </td>
+        <td style="width:30%;vertical-align: top">
+            <b>Business Managers</b><br>
+            Stacey Xue<br>
+            <br>
+        </td>
+    </tr>
+</table>
 <b>Faculty Advisor</b><br>
 Kerry Garfinkel
-</center>
 <br>
-<p style="text-align: right; width: 100%">
-  <i>*Managing Board members</i>
+</center>
+<p style="text-align: right; width: 100%; margin-top:20px">
+  <i>*Managing Board members</i><br>
+  <i>**Editors In Training</i>
 </p>
 `,
   },
