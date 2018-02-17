@@ -203,7 +203,7 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
     title: "Staff",
     slug: "staff",
     content: `<center>
-<h2>
+<h2 style="margin-bottom: 30px;">
   Members of the 2018-2019 Spectator Editorial Board
 </h2>
 <b>Editors In Chief</b><br>
@@ -302,7 +302,7 @@ Sophie Watwood<br>
 Kerry Garfinkel
 <br>
 </center>
-<p style="text-align: right; width: 100%">
+<p style="text-align: right; width: 100%; margin-top:20px">
   <i>*Managing Board members</i><br>
   <i>**Editors In Training</i>
 </p>
