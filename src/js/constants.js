@@ -2,7 +2,7 @@
 export const STUY_SPEC_API_URL = "__API_URL_HERE__";
 
 // TODO: a Newspaper model in API that contains an issuu_config
-export const ISSUU_CONFIG = 58064428;
+export const ISSUU_CONFIG = 58466823;
 
 export const STUY_SPEC_API_HEADERS = {
   headers: {
