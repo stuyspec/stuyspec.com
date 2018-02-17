@@ -173,7 +173,7 @@ export const subscribe = values => {
         dispatch({ type: t.CLOSE_SUBSCRIPTION_MODAL });
 
         // Destroys the inputs in the form Subscription
-        dispatch(reset('Subscription'));
+        dispatch(reset("Subscription"));
       })
       .catch(err => {
         dispatch({

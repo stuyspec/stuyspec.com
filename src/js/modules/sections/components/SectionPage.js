@@ -263,10 +263,7 @@ const SectionPage = ({ data, classes, section }) => {
 
       <Row>
         <Col xs={12} sm={9} md={9} lg={9} className={classes.latestArticles}>
-          <ArticleFeed
-            section={section}
-            title="Latest"
-          />
+          <ArticleFeed section={section} title="Latest" />
         </Col>
         <Col xsHidden sm={3} md={3} lg={3}>
           <div className={classes.sectionColumnContainer}>
@@ -279,9 +276,9 @@ const SectionPage = ({ data, classes, section }) => {
 };
 
 export default graphql(SectionPageQuery, {
-  options: ({ section }) => ({ 
+  options: ({ section }) => ({
     variables: {
-     section_id: section.id,
-   }
+      section_id: section.id,
+    },
   }),
 })(injectSheet(styles)(SectionPage));

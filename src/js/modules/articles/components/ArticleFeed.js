@@ -1,10 +1,10 @@
 import React from "react";
-import { Grid } from "react-bootstrap/lib";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import humps from "humps";
 
 import ArticleList from "./ArticleList";
+import { ARTICLE_PAGINATES_PER } from "../constants";
 
 const ArticleFeedQuery = gql`
   query ArticleFeedQuery($section_id: ID, $page: Int) {
@@ -34,17 +34,21 @@ const ArticleFeedQuery = gql`
   }
 `;
 
-const ArticleFeed = ({ loading, page, latestArticles, loadMoreEntries, title = "Latest" }) => {
+const ArticleFeed = ({
+  loading,
+  latestArticles,
+  loadMoreEntries,
+  title = "Latest",
+}) => {
   if (loading) {
     return null;
   }
 
   latestArticles = humps.camelizeKeys(latestArticles);
-  console.log(page, latestArticles);
   return (
     <div>
-      <button onClick={loadMoreEntries}>load more</button>
       <ArticleList articles={latestArticles} title={title} label="Articles" />
+      <button onClick={loadMoreEntries}>load more</button>
     </div>
   );
 };
@@ -56,23 +60,27 @@ export default graphql(ArticleFeedQuery, {
       page: 1,
     },
   }),
-  props: ({ data: { loading, latestArticles, fetchMore, variables }}) => ({
+  props: ({ data: { loading, latestArticles, fetchMore } }) => ({
     loading,
     latestArticles,
-    page: variables.page + 1,
     loadMoreEntries: () => {
       return fetchMore({
         variables: {
-          page: variables.page + 1,
+          page: Math.floor(latestArticles.length / ARTICLE_PAGINATES_PER) + 1,
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
-          if (!fetchMoreResult) { return previousResult; }
+          if (!fetchMoreResult) {
+            return previousResult;
+          }
           return {
             ...previousResult,
-            latestArticles: [ ...previousResult.latestArticles, ...fetchMoreResult.latestArticles ],
+            latestArticles: [
+              ...previousResult.latestArticles,
+              ...fetchMoreResult.latestArticles,
+            ],
           };
         },
       });
-    }
-  })
+    },
+  }),
 })(ArticleFeed);
