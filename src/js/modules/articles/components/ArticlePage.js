@@ -1,17 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import { compose } from "redux";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import humps from "humps";
 import injectSheet from "react-jss";
 import Grid from "react-bootstrap/lib/Grid";
-import Row from "react-bootstrap/lib/Row";
-import Col from "react-bootstrap/lib/Col";
 import { Helmet } from "react-helmet";
-import { SPEC_REFERENCE_PATTERN } from "../../../constants";
 import { ArticleHeader, ArticleBody, ArticleFooter, RecommendedRow } from "./";
 import CommentThread from "../../comments/components/CommentThread";
-import NotFoundPage from "../../core/components/NotFoundPage";
 
 const ArticleQuery = gql`
   query ArticleQuery($slug: String!) {
