@@ -151,7 +151,7 @@ const styles = {
     featuredArticle: {
       marginLeft: 0,
       paddingTop: "3vw",
-      width: "41.666666%", // col-sm-5
+      width: "41.666666%",
     },
     featuredArticleSummary: {
       margin: "0 auto 18px auto",
@@ -197,7 +197,7 @@ const SectionPage = ({ data, classes, section }) => {
   }
 
   data = humps.camelizeKeys(data);
-  const { latestArticles, topRankedArticles, featuredSubsection } = data;
+  const { topRankedArticles, featuredSubsection } = data;
   const [featuredArticle, secondaryArticle] = topRankedArticles;
 
   if (!featuredSubsection) {
@@ -263,7 +263,7 @@ const SectionPage = ({ data, classes, section }) => {
 
       <Row>
         <Col xs={12} sm={9} md={9} lg={9} className={classes.latestArticles}>
-          <ArticleFeed section={section} title="Latest" />
+          <ArticleFeed section={section} />
         </Col>
         <Col xsHidden sm={3} md={3} lg={3}>
           <div className={classes.sectionColumnContainer}>

@@ -18,7 +18,7 @@ const styles = {
     color: "#000",
     fontFamily: "Canela",
     fontSize: "30px",
-    fontWeight: "300",
+    fontWeight: 300,
     lineHeight: "1.25",
     "&:active": {
       color: "#000",

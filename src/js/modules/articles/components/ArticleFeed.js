@@ -2,6 +2,7 @@ import React from "react";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import humps from "humps";
+import injectSheet from "react-jss";
 
 import ArticleList from "./ArticleList";
 import { ARTICLE_PAGINATES_PER } from "../constants";
@@ -34,10 +35,33 @@ const ArticleFeedQuery = gql`
   }
 `;
 
+const styles = {
+  ArticleFeed: {
+    marginBottom: "36px",
+  },
+  buttonContainer: {
+    display: "flex",
+    width: "100%",
+    justifyContent: "center",
+  },
+  loadMoreButton: {
+    background: "#9dba73",
+    borderRadius: "3px",
+    color: "#fff",
+    fontFamily: "Canela",
+    border: "none",
+    padding: "12px 16px",
+    fontSize: "16px",
+    cursor: "pointer",
+  },
+};
+
 const ArticleFeed = ({
+  classes,
   loading,
   latestArticles,
   loadMoreEntries,
+  areMoreArticles,
   title = "Latest",
 }) => {
   if (loading) {
@@ -46,31 +70,45 @@ const ArticleFeed = ({
 
   latestArticles = humps.camelizeKeys(latestArticles);
   return (
-    <div>
+    <div className={classes.ArticleFeed}>
       <ArticleList articles={latestArticles} title={title} label="Articles" />
-      <button onClick={loadMoreEntries}>load more</button>
+      {areMoreArticles && (
+        <div className={classes.buttonContainer}>
+          <button className={classes.loadMoreButton} onClick={loadMoreEntries}>
+            Load More
+          </button>
+        </div>
+      )}
     </div>
   );
 };
 
 export default graphql(ArticleFeedQuery, {
+  // options uses props to compute how a query is fetched.
   options: ({ section }) => ({
     variables: {
+      // ArticleFeed is both used on SectionPage's and the LatestPage.
       section_id: section ? section.id : null,
+
+      // We start on page 1 of articles
       page: 1,
     },
   }),
   props: ({ data: { loading, latestArticles, fetchMore } }) => ({
     loading,
     latestArticles,
+    areMoreArticles: true,
     loadMoreEntries: () => {
       return fetchMore({
         variables: {
           page: Math.floor(latestArticles.length / ARTICLE_PAGINATES_PER) + 1,
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
-          if (!fetchMoreResult) {
-            return previousResult;
+          if (!fetchMoreResult || fetchMoreResult.latestArticles.length === 0) {
+            return {
+              ...previousResult,
+              areMoreArticles: false,
+            };
           }
           return {
             ...previousResult,
@@ -83,4 +121,4 @@ export default graphql(ArticleFeedQuery, {
       });
     },
   }),
-})(ArticleFeed);
+})(injectSheet(styles)(ArticleFeed));
