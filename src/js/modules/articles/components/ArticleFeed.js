@@ -56,32 +56,62 @@ const styles = {
   },
 };
 
-const ArticleFeed = ({
-  classes,
-  loading,
-  latestArticles,
-  loadMoreEntries,
-  areMoreArticles,
-  title = "Latest",
-}) => {
-  if (loading) {
-    return null;
+class ArticleFeed extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = { isLoadMoreButtonVisible: true };
   }
 
-  latestArticles = humps.camelizeKeys(latestArticles);
-  return (
-    <div className={classes.ArticleFeed}>
-      <ArticleList articles={latestArticles} title={title} label="Articles" />
-      {areMoreArticles && (
-        <div className={classes.buttonContainer}>
-          <button className={classes.loadMoreButton} onClick={loadMoreEntries}>
-            Load More
-          </button>
-        </div>
-      )}
-    </div>
-  );
-};
+  componentWillUpdate(nextProps) {
+    // If no articles have loaded yet or we have already removed the load-more
+    // button, we don't do anything.
+    if (
+      !(nextProps.latestArticles && this.props.latestArticles) ||
+      !this.state.isLoadMoreButtonVisible
+    ) {
+      return;
+    }
+
+    // If after getting the next page of articles we still have the same
+    // number of articles or the number of articles we have is not a multiple
+    // of ARTICLES_PER_PAGE, we know there aren't any articles left.
+    if (
+      nextProps.latestArticles.length === this.props.latestArticles.length ||
+      nextProps.latestArticles.length % ARTICLES_PER_PAGE !== 0
+    ) {
+      this.setState({ isLoadMoreButtonVisible: false });
+    }
+  }
+
+  render() {
+    const { classes, loading, loadMoreEntries, title = "Latest" } = this.props;
+
+    if (loading) {
+      return null;
+    }
+
+    const { isLoadMoreButtonVisible } = this.state;
+    let { latestArticles } = this.props;
+    latestArticles = humps.camelizeKeys(latestArticles);
+
+    return (
+      <div className={classes.ArticleFeed}>
+        <ArticleList articles={latestArticles} title={title} label="Articles" />
+        {isLoadMoreButtonVisible && (
+          <div className={classes.buttonContainer}>
+            <button
+              className={classes.loadMoreButton}
+              onClick={loadMoreEntries}
+            >
+              Load More
+            </button>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
 
 export default graphql(ArticleFeedQuery, {
   // options uses props to compute how a query is fetched.
