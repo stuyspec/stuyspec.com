@@ -114,7 +114,7 @@ const validate = values => {
   return errors;
 };
 
-const renderField = ({ input, meta: { touched, error }, checkLogin }) => {
+const CommentTextArea = ({ input, meta: { touched, error }, checkLogin }) => {
   return (
     <div>
       <textarea
@@ -159,7 +159,7 @@ const CommentForm = ({
       <form onSubmit={handleSubmit}>
         <Field
           name="content"
-          component={renderField}
+          component={CommentTextArea}
           checkLogin={() => !currentUser && openSignInModal()}
         />
         <div className={classes.submitDiv}>

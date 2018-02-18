@@ -5,7 +5,7 @@ import { reset } from "redux-form";
 import * as t from "./actionTypes";
 import { CREATE_USER_FULFILLED } from "../users/actionTypes";
 import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from "../../constants";
-import { sleeper } from "../../utils";
+import { delay } from "../../utils";
 
 export const signUp = registrationParams => {
   return dispatch => {
@@ -168,7 +168,7 @@ export const subscribe = values => {
           payload: response,
         });
       })
-      .then(sleeper(500)) // Lets the user glance at the confirmation message
+      .then(delay(500)) // Lets the user glance at the confirmation message
       .then(() => {
         dispatch({ type: t.CLOSE_SUBSCRIPTION_MODAL });
 

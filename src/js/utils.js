@@ -2,7 +2,7 @@ export const capitalizeWord = string => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-export const sleeper = ms => {
+export const delay = ms => {
   return x => new Promise(resolve => setTimeout(() => resolve(x), ms));
 };
 
