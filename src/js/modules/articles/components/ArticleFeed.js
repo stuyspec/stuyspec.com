@@ -1,15 +1,15 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import humps from "humps";
 import injectSheet from "react-jss";
 
 import ArticleList from "./ArticleList";
-import { ARTICLE_PAGINATES_PER } from "../constants";
+import { ARTICLES_PER_PAGE } from "../constants";
 
 const ArticleFeedQuery = gql`
-  query ArticleFeedQuery($section_id: ID, $page: Int) {
-    latestArticles(section_id: $section_id, page: $page) {
+  query ArticleFeedQuery($section_id: ID, $offset: Int, $limit: Int) {
+    latestArticles(section_id: $section_id, offset: $offset, limit: $limit) {
       id
       title
       slug
@@ -90,25 +90,29 @@ export default graphql(ArticleFeedQuery, {
       // ArticleFeed is both used on SectionPage's and the LatestPage.
       section_id: section ? section.id : null,
 
-      // We start on page 1 of articles
-      page: 1,
+      // We start with the first {ARTICLES_PER_PAGE} articles.
+      offset: 0,
+      limit: ARTICLES_PER_PAGE,
     },
   }),
+
+  // the props function intercepts the props passed to ArticleFeed and lets us
+  // restructure them.
   props: ({ data: { loading, latestArticles, fetchMore } }) => ({
     loading,
     latestArticles,
-    areMoreArticles: true,
+
+    // the loadMoreEntries function uses Apollo's fetchMore function fetch more
+    // articles.
     loadMoreEntries: () => {
       return fetchMore({
         variables: {
-          page: Math.floor(latestArticles.length / ARTICLE_PAGINATES_PER) + 1,
+          // We update our offset to get the next page of articles.
+          offset: latestArticles.length,
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
-          if (!fetchMoreResult || fetchMoreResult.latestArticles.length === 0) {
-            return {
-              ...previousResult,
-              areMoreArticles: false,
-            };
+          if (!fetchMoreResult) {
+            return previousResult;
           }
           return {
             ...previousResult,
