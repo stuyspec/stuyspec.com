@@ -63,7 +63,7 @@ class ArticleFeed extends PureComponent {
     this.state = { isLoadMoreButtonVisible: true };
   }
 
-  componentWillUpdate(nextProps) {
+  componentWillReceiveProps(nextProps) {
     // If no articles have loaded yet or we have already removed the load-more
     // button, we don't do anything.
     if (
@@ -85,7 +85,7 @@ class ArticleFeed extends PureComponent {
   }
 
   render() {
-    const { classes, loading, loadMoreEntries, title = "Latest" } = this.props;
+    const { classes, loading, loadMoreArticles, title = "Latest" } = this.props;
 
     if (loading) {
       return null;
@@ -102,7 +102,7 @@ class ArticleFeed extends PureComponent {
           <div className={classes.buttonContainer}>
             <button
               className={classes.loadMoreButton}
-              onClick={loadMoreEntries}
+              onClick={loadMoreArticles}
             >
               Load More
             </button>
@@ -114,7 +114,6 @@ class ArticleFeed extends PureComponent {
 }
 
 export default graphql(ArticleFeedQuery, {
-  // options uses props to compute how a query is fetched.
   options: ({ section }) => ({
     variables: {
       // ArticleFeed is both used on SectionPage's and the LatestPage.
@@ -126,15 +125,15 @@ export default graphql(ArticleFeedQuery, {
     },
   }),
 
-  // the props function intercepts the props passed to ArticleFeed and lets us
+  // The props function intercepts the props passed to ArticleFeed and lets us
   // restructure them.
   props: ({ data: { loading, latestArticles, fetchMore } }) => ({
     loading,
     latestArticles,
 
-    // the loadMoreEntries function uses Apollo's fetchMore function fetch more
-    // articles.
-    loadMoreEntries: () => {
+    // loadMoreArticles is just a configured version of Apollo's fetchMore
+    // function. It uses offsets and previous data to get more articles.
+    loadMoreArticles: () => {
       return fetchMore({
         variables: {
           // We update our offset to get the next page of articles.
