@@ -66,10 +66,7 @@ class ArticleFeed extends PureComponent {
   componentWillReceiveProps(nextProps) {
     // If no articles have loaded yet or we have already removed the load-more
     // button, we don't do anything.
-    if (
-      !(nextProps.latestArticles && this.props.latestArticles) ||
-      !this.state.isLoadMoreButtonVisible
-    ) {
+    if (!nextProps.latestArticles || !this.state.isLoadMoreButtonVisible) {
       return;
     }
 
@@ -77,7 +74,8 @@ class ArticleFeed extends PureComponent {
     // number of articles or the number of articles we have is not a multiple
     // of ARTICLES_PER_PAGE, we know there aren't any articles left.
     if (
-      nextProps.latestArticles.length === this.props.latestArticles.length ||
+      (this.props.latestArticles &&
+        nextProps.latestArticles.length === this.props.latestArticles.length) ||
       nextProps.latestArticles.length % ARTICLES_PER_PAGE !== 0
     ) {
       this.setState({ isLoadMoreButtonVisible: false });
