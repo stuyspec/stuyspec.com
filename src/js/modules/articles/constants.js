@@ -2,4 +2,4 @@ export default {
   NAME: "articles",
 };
 
-export const ARTICLE_PAGINATES_PER = 10;
+export const ARTICLES_PER_PAGE = 20;
