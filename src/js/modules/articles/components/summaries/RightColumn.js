@@ -120,8 +120,7 @@ const RightColumn = ({ classes, articles, sections, outquotes }) => {
     <Col xs={12} sm={3} md={3} lg={3} className={classes.RightColumn}>
       <div
         dangerouslySetInnerHTML={{
-          __html:
-            `<iframe style="width:100%; height:309px;" src="//e.issuu.com/embed.html#9521608/${ISSUU_CONFIG}" frameborder="0" allowfullscreen></iframe>`,
+          __html: `<iframe style="width:100%; height:309px;" src="//e.issuu.com/embed.html#9521608/${ISSUU_CONFIG}" frameborder="0" allowfullscreen></iframe>`,
         }}
         className={classes.issuuEmbed}
       />

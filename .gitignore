@@ -6,6 +6,3 @@ builds/**
 .idea
 .DS_STORE
 .env
-
-# Text editor settings for eslint
-.eslintrc*

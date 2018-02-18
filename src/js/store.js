@@ -9,7 +9,6 @@ import routerMiddleware from "react-router-redux/middleware";
 import appHistory from "tools/appHistory";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-
 const middleware =
   __DEV_ENV_HERE__ === "production"
     ? applyMiddleware(
@@ -29,4 +28,3 @@ const middleware =
       );
 
 export default createStore(reducer, middleware);
-
