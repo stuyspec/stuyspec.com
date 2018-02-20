@@ -73,9 +73,11 @@ class ArticleFeed extends PureComponent {
     // If after getting the next page of articles we still have the same
     // number of articles or the number of articles we have is not a multiple
     // of ARTICLES_PER_PAGE, we know there aren't any articles left.
+    const noNewArticles =
+      this.props.latestArticles &&
+      this.props.latestArticles.length === nextProps.latestArticles.length;
     if (
-      (this.props.latestArticles &&
-        nextProps.latestArticles.length === this.props.latestArticles.length) ||
+      noNewArticles ||
       nextProps.latestArticles.length % ARTICLES_PER_PAGE !== 0
     ) {
       this.setState({ isLoadMoreButtonVisible: false });
