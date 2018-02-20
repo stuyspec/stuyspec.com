@@ -135,7 +135,7 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         status: {
           errors: [],
-          message: "You have been successfully subscribed.",
+          message: "You have successfully subscribed to our newsletter.",
           formName: "subscription",
         },
       };

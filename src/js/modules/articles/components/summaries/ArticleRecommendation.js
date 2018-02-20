@@ -17,6 +17,8 @@ const styles = {
     overflow: "hidden",
     width: "100%",
     "& img": {
+      height: "400px",
+      objectFit: "cover",
       width: "100%",
     },
   },
