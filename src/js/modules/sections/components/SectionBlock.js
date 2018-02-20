@@ -124,13 +124,13 @@ const styles = {
 const SectionBlock = ({ classes, data }) => {
   if (data.loading) {
     return null;
-  } else if (data.error) {
-    console.error(data.error.message);
   }
+
   data = humps.camelizeKeys(data);
   const { topRankedArticles } = data;
   const bigArticle = topRankedArticles[0];
   const { section } = bigArticle;
+
   return (
     <div className={classes.SectionBlock}>
       <Link to={section.permalink} className={classes.sectionLabel}>

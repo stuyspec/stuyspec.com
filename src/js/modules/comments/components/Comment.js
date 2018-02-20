@@ -31,7 +31,7 @@ const styles = {
     position: "relative",
   },
   publishedAt: {
-    color: "#a8a8a8",
+    color: "#888",
     fontSize: "16px",
     fontWeight: 300,
   },

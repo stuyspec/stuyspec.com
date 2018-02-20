@@ -112,7 +112,7 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         status: {
           errors: [],
-          message: "You have been successfully signed out.",
+          message: "You have successfully signed out.",
           formName: "signOut",
         },
         session: null,
@@ -135,7 +135,7 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         status: {
           errors: [],
-          message: "You have been added as a subscriber.",
+          message: "You have successfully subscribed to our newsletter.",
           formName: "subscription",
         },
       };
@@ -144,7 +144,7 @@ const reducer = (state = { ...initialState }, action) => {
       let errors = (action.payload.response &&
         action.payload.response.data.errors) || [action.payload.message];
       if (action.payload.response.status === 422) {
-        errors = ["You are already a subscriber."];
+        errors = ["You have already subscribed."];
       }
       return {
         ...state,
@@ -161,7 +161,7 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         status: {
           errors: [],
-          message: "Your changes have been saved.",
+          message: "Your information has been updated.",
           formName: "editUser",
         },
       };

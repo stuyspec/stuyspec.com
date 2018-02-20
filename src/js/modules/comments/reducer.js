@@ -1,3 +1,5 @@
+import dateFormat from "dateformat";
+
 import {
   CREATE_COMMENT_FULFILLED,
   CREATE_COMMENT_REJECTED,
@@ -13,12 +15,14 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_COMMENT_FULFILLED: {
+      const time = dateFormat(action.payload.date.createdAt, "shortTime");
+      // e.g. 5:46 PM
+
       return {
         ...state,
         status: {
           type: "fulfilled",
-          message: `Comment submitted for review at ${action.payload.data
-            .createdAt}`,
+          message: `Comment submitted for review at ${time}.`,
         },
       };
     }
@@ -27,7 +31,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         status: {
           type: "rejected",
-          message: `Comment failed to post (${action.payload})`,
+          message: `Comment failed to post (${action.payload}).`,
         },
       };
     }

@@ -68,7 +68,7 @@ const RecommendedPage = ({ classes, data }) => {
   return (
     <Grid fluid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-        <title>Most Recommended</title>
+        <title>Recommended</title>
         <meta />
       </Helmet>
       <Row>
@@ -94,5 +94,5 @@ const RecommendedPage = ({ classes, data }) => {
 };
 
 export default graphql(RecommendedPageQuery, {
-  options: props => ({ variables: { limit: 20 } }),
+  options: () => ({ variables: { limit: 20 } }),
 })(injectSheet(styles)(RecommendedPage));

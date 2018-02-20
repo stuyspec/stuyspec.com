@@ -114,6 +114,10 @@ const LatestArticlesRibbon = ({ classes, data }) => {
 };
 
 export default graphql(LatestArticlesQuery, {
-  options: ({ limit }) => ({ variables: { limit: limit || 5 } }),
-  // if limit not given as prop, we use 5 as the default.
+  options: ({ limit }) => ({
+    variables: {
+      // if limit not given as prop, we use 5 as the default.
+      limit: limit || 5,
+    },
+  }),
 })(injectSheet(styles)(LatestArticlesRibbon));

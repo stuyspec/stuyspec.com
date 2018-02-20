@@ -31,7 +31,7 @@ const styles = {
     fontSize: "17px",
     marginBottom: "14px",
   },
-  userInfoTableContainer: {
+  userInfo: {
     "& .table-responsive table > tbody > tr > td": {
       fontFamily: "Minion Pro",
       fontSize: "17px",
@@ -70,7 +70,7 @@ const ProfilePage = ({ classes, signOut, session, data }) => {
           <Link to={"/myaccount/profile/edit"} className={classes.editRedirect}>
             Edit Profile
           </Link>
-          <div className={classes.userInfoTableContainer}>
+          <div className={classes.userInfo}>
             <Table responsive>
               <tbody>
                 <tr>

@@ -3,7 +3,7 @@ import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 
-import { ArticleList } from "../../articles/components";
+import { ArticleFeed } from "../../articles/components";
 import { TallAd } from "../../advertisements/components/index";
 
 const styles = {
@@ -30,7 +30,7 @@ const styles = {
   },
 };
 
-const SubsectionPage = ({ classes, section, latestArticles }) => {
+const SubsectionPage = ({ classes, section }) => {
   return (
     <Grid fluid className={classes.SubsectionPage}>
       <Helmet>
@@ -39,11 +39,7 @@ const SubsectionPage = ({ classes, section, latestArticles }) => {
       </Helmet>
       <Row>
         <Col xs={12} sm={9} md={9} lg={9} className={classes.latestArticles}>
-          <ArticleList
-            articles={latestArticles}
-            title={section.name}
-            label="Latest"
-          />
+          <ArticleFeed section={section} title={section.name} />
         </Col>
         <Col xsHidden sm={3} md={3} lg={3} className={classes.TallAdContainer}>
           <TallAd />
