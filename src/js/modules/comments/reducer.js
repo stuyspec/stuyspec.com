@@ -15,7 +15,10 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_COMMENT_FULFILLED: {
-      const time = dateFormat(action.payload.data.createdAt, "shortTime").toLowerCase();
+      const time = dateFormat(
+        action.payload.data.createdAt,
+        "shortTime",
+      ).toLowerCase();
       // e.g. 5:46 pm
 
       return {
