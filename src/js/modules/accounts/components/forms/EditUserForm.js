@@ -42,7 +42,7 @@ const validate = formValues => {
   return errors;
 };
 
-const EditUserForm = ({ classes, handleSubmit, submitting }) => {
+const EditUserForm = ({ classes, handleSubmit, submitting, user }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -57,7 +57,8 @@ const EditUserForm = ({ classes, handleSubmit, submitting }) => {
                     type="text"
                     autoComplete="off"
                     component={RenderField}
-                    label="First Name"
+                    label={user.firstName}
+                    isLabelVisible={false}
                   />
                 </td>
               </tr>
@@ -69,7 +70,8 @@ const EditUserForm = ({ classes, handleSubmit, submitting }) => {
                     type="text"
                     autoComplete="off"
                     component={RenderField}
-                    label="Last Name"
+                    label={user.lastName}
+                    isLabelVisible={false}
                   />
                 </td>
               </tr>
@@ -81,7 +83,8 @@ const EditUserForm = ({ classes, handleSubmit, submitting }) => {
                     type="email"
                     autoComplete="off"
                     component={RenderField}
-                    label="Email"
+                    label={user.email}
+                    isLabelVisible={false}
                   />
                 </td>
               </tr>

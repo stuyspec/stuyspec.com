@@ -60,7 +60,7 @@ const EditProfilePage = ({ classes, updateUser, data }) => {
           <Link to={"/myaccount/profile"} className={classes.backRedirect}>
             Back to Profile
           </Link>
-          <EditUserForm onSubmit={handleUpdateUser} />
+          <EditUserForm onSubmit={handleUpdateUser} user={currentUser} />
         </Col>
       </Row>
     </Grid>
@@ -76,12 +76,16 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default compose(
-  // connect is placed above graphql so options can use props.session as a variable
+  // connect is placed above the Apollo HOC so options can use props.session
+  // as a variable
   connect(mapStateToProps, mapDispatchToProps),
   graphql(UserByUIDQuery, {
     options: ({ session }) => ({
-      fetchPolicy: "network-only",
       variables: { uid: (session && session.uid) || "" },
+
+      // The "network-only" fetch policy prevents any caching of user token
+      // headers, which constantly change.
+      fetchPolicy: "network-only",
     }),
   }),
   injectSheet(styles),

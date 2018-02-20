@@ -105,9 +105,7 @@ const styles = {
 
 const validate = values => {
   const errors = {};
-  if (!values.content) {
-    errors.content = "Required";
-  } else if (values.content.length > 1000) {
+  if (values.content && values.content.length > 1000) {
     errors.content = `Must be 1000 characters or less. Currently 
     ${values.content.length} characters`;
   }

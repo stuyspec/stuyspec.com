@@ -104,7 +104,8 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default compose(
-  // connect is placed above graphql so options can use props.session as a variable
+  // connect is placed above the Apollo HOC so options can use props.session
+  // as a variable
   connect(mapStateToProps, mapDispatchToProps),
   graphql(UserByUIDQuery, {
     options: ({ session }) => ({
@@ -112,7 +113,6 @@ export default compose(
 
       // The "network-only" fetch policy prevents any caching of user token
       // headers, which constantly change.
-      // https://www.apollographql.com/docs/react/basics/queries.html#graphql-config-options-fetchPolicy
       fetchPolicy: "network-only",
     }),
   }),
