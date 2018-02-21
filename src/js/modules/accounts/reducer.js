@@ -35,14 +35,22 @@ const initialState = {
   isSubscriptionModalOpen: false,
 };
 
+const isSessionValid = session => {
+  const requiredHeaders = ["access-token", "expiry", "client", "uid"];
+  return requiredHeaders.every(header => header in session);
+};
+
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     case CREATE_COMMENT_FULFILLED: {
-      localStorage.setItem("session", JSON.stringify(action.payload.headers));
-      return {
-        ...state,
-        session: action.payload.headers,
-      };
+      const { headers } = action.payload;
+      if (isSessionValid(headers)) {
+        localStorage.setItem("session", JSON.stringify(headers));
+        return {
+          ...state,
+          session: headers,
+        };
+      }
     }
 
     case SIGN_IN_PENDING:
@@ -195,10 +203,7 @@ const reducer = (state = { ...initialState }, action) => {
     case CREATE_SESSION: {
       return { ...state, session: action.payload };
     }
-    case VALIDATE_TOKEN_FULFILLED: {
-      localStorage.setItem("session", JSON.stringify(action.payload.headers));
-      return { ...state, session: action.payload.headers };
-    }
+
     case VALIDATE_TOKEN_REJECTED: {
       localStorage.removeItem("session");
       return {

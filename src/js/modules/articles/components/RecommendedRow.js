@@ -42,7 +42,7 @@ const styles = {
   },
   title: {
     border: "1px solid #ddd",
-    borderStyle: "solid none", // only top-bottom borders
+    borderStyle: "solid none",
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "26px",
