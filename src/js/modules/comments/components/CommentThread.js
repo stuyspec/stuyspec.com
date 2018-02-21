@@ -1,7 +1,6 @@
 import React from "react";
-import { compose } from "redux";
+import { bindActionCreators, compose } from "redux";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { graphql } from "react-apollo";
 import humps from "humps";
 import injectSheet from "react-jss";
@@ -18,7 +17,7 @@ const styles = {
   CommentThread: {
     padding: 0,
     "& textarea": {
-      resize: "vertical", // only allows vertical resizing
+      resize: "vertical",
     },
   },
   "@media (max-width: 991px)": {
@@ -80,7 +79,7 @@ class CommentThread extends React.Component {
           <Col md={4} lg={4} />
         </Row>
         <SignInModal />
-        {article.comments.map(comment => {
+        {article.publishedComments.map(comment => {
           return <Comment comment={comment} key={comment.id} />;
         })}
       </Grid>
@@ -88,7 +87,7 @@ class CommentThread extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   session: state.accounts.session,
 });
 
@@ -97,7 +96,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default compose(
-  // connect is placed above graphql so options can use props.session as a variable
   connect(mapStateToProps, mapDispatchToProps),
   graphql(UserByUIDQuery, {
     options: ({ session }) => ({
