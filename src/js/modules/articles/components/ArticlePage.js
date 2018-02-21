@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import { compose } from "redux";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
@@ -47,7 +47,7 @@ const ArticleQuery = gql`
           permalink
         }
       }
-      comments {
+      published_comments {
         id
         content
         created_at
@@ -85,29 +85,53 @@ const styles = {
   },
 };
 
-const ArticlePage = ({ classes, data }) => {
-  if (data.loading) {
-    return null;
+class ArticlePage extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      article: null,
+    };
   }
-  data = humps.camelizeKeys(data);
 
-  const { articleBySlug } = data;
-  const { section } = articleBySlug;
+  componentWillReceiveProps(nextProps) {
+    let { data } = nextProps;
 
-  return (
-    <Grid fluid className={classes.ArticlePage}>
-      <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-        <title>{articleBySlug.title}</title>
-        <meta />
-      </Helmet>
-      <ArticleHeader article={articleBySlug} />
-      <ArticleBody article={articleBySlug} />
-      <ArticleFooter article={articleBySlug} />
-      <RecommendedRow section={section.parentSection || section} />
-      <CommentThread article={articleBySlug} />
-    </Grid>
-  );
-};
+    if (data.loading) {
+      return;
+    }
+    data = humps.camelizeKeys(data);
+
+    if (data.articleBySlug) {
+      this.setState({ article: data.articleBySlug });
+    }
+  }
+
+  render() {
+    const { article } = this.state;
+    const { classes } = this.props;
+
+    if (!article) {
+      return null;
+    }
+
+    const { section } = article;
+
+    return (
+      <Grid fluid className={classes.ArticlePage}>
+        <Helmet titleTemplate="%s | The Stuyvesant Spectator">
+          <title>{article.title}</title>
+          <meta />
+        </Helmet>
+        <ArticleHeader article={article} />
+        <ArticleBody article={article} />
+        <ArticleFooter article={article} />
+        <RecommendedRow section={section.parentSection || section} />
+        <CommentThread article={article} />
+      </Grid>
+    );
+  }
+}
 
 export default compose(
   graphql(ArticleQuery, {
