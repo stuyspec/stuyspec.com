@@ -185,30 +185,32 @@ export const subscribe = values => {
 };
 
 export const validateToken = session => {
-  // If a session exists, we need to check if it is still valid.
-  if (session) {
-    return dispatch => {
-      axios
-        .get(`${STUY_SPEC_API_URL}/auth/validate_token`, {
-          headers: {
-            "access-token": session["access-token"],
-            client: session.client,
-            uid: session.uid,
-          },
-        })
-        .then(response => {
-          dispatch({
-            type: t.VALIDATE_TOKEN_FULFILLED,
-            payload: response,
-          });
-        })
-        .catch(() => {
-          dispatch({
-            type: t.VALIDATE_TOKEN_REJECTED,
-          });
-        });
-    };
+  if (!session) {
+    return;
   }
+
+  // If a session exists, we need to check if it is still valid.
+  return dispatch => {
+    axios
+      .get(`${STUY_SPEC_API_URL}/auth/validate_token`, {
+        headers: {
+          "access-token": session["access-token"],
+          client: session.client,
+          uid: session.uid,
+        },
+      })
+      .then(response => {
+        dispatch({
+          type: t.VALIDATE_TOKEN_FULFILLED,
+          payload: response,
+        });
+      })
+      .catch(() => {
+        dispatch({
+          type: t.VALIDATE_TOKEN_REJECTED,
+        });
+      });
+  };
 };
 
 export const createSession = session => {
