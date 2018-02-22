@@ -1,7 +1,23 @@
 import React from "react";
-import { connect } from "react-redux";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
+import { SPEC_REFERENCE_PATTERN } from "../../../constants";
+
+const ArticleReferenceQuery = gql`
+  query ArticleReferenceQuery($article_id: ID!) {
+    articleByID(id: $article_id) {
+      title
+      volume
+      issue
+      slug
+      section {
+        permalink
+      }
+    }
+  }
+`;
 
 const styles = {
   ArticleReference: {
@@ -29,19 +45,23 @@ const styles = {
   },
 };
 
-const ArticleReference = ({ classes, article, sections }) => {
+const ArticleReference = ({ classes, data }) => {
+  if (!data || data.loading || data.error) {
+    return null;
+  }
+  const article = data.articleByID;
   // Since the title will be surrounded with double quotes, we replace the
   // title's double quotes (for movies, books, etc.) with single quotes.
   const title = article.title
-    .replace('"', "'") // straight double quote
-    .replace("“", "‘") // curly left double quote
-    .replace("”", "’"); // curly right double quote
+    .replace('"', "'")
+    .replace("“", "‘")
+    .replace("”", "’");
   return (
     <span className={classes.ArticleReference}>
       This article was written in response to &ldquo;
       <Link
         className={classes.referenceLink}
-        to={`${sections[article.sectionId].permalink}/${article.slug}`}
+        to={`${article.section.permalink}/${article.slug}`}
       >
         {title}
       </Link>
@@ -50,8 +70,15 @@ const ArticleReference = ({ classes, article, sections }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  sections: state.sections.sections,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(ArticleReference));
+export default graphql(ArticleReferenceQuery, {
+  // skip this query if no referencedArticleId was found in article content
+  skip: ({ article }) => !SPEC_REFERENCE_PATTERN.test(article.content),
+  options: ({ article }) => ({
+    variables: {
+      article_id: parseInt(
+        SPEC_REFERENCE_PATTERN.exec(article.content)[1],
+        10,
+      ),
+    },
+  }),
+})(injectSheet(styles)(ArticleReference));

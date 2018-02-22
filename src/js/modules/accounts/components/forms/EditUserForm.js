@@ -1,21 +1,13 @@
 import React from "react";
-import { connect } from "react-redux";
+import { compose } from "redux";
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
-import { Table } from "react-bootstrap/lib";
+import Table from "react-bootstrap/lib/Table";
 import { EMAIL_REGEX } from "../../../../constants";
 
+import { FormStatus, RenderField } from "./helpers";
+
 const styles = {
-  successMessage: {
-    color: "green",
-    fontFamily: "Minion Pro",
-    marginTop: "8px",
-  },
-  errorMessage: {
-    color: "red",
-    fontFamily: "Minion Pro",
-    marginTop: "8px",
-  },
   dataTable: {
     "& .table-responsive table > tbody > tr > td": {
       fontFamily: "Minion Pro",
@@ -42,8 +34,6 @@ const styles = {
   },
 };
 
-// TODO: add warnings to specific forms
-
 const validate = formValues => {
   const errors = {};
   if (formValues.email && !EMAIL_REGEX.test(formValues.email)) {
@@ -52,30 +42,7 @@ const validate = formValues => {
   return errors;
 };
 
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error, warning },
-}) => {
-  return (
-    <div>
-      <div>
-        <input
-          {...input}
-          placeholder={label}
-          type={type}
-          style={{ width: "100%" }}
-        />
-        {touched &&
-          ((error && <span>{error}</span>) ||
-            (warning && <span>{warning}</span>))}
-      </div>
-    </div>
-  );
-};
-
-const EditUserForm = ({ classes, handleSubmit, submitting, status }) => {
+const EditUserForm = ({ classes, handleSubmit, submitting, user }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -88,8 +55,10 @@ const EditUserForm = ({ classes, handleSubmit, submitting, status }) => {
                   <Field
                     name="firstName"
                     type="text"
-                    component={renderField}
-                    label="First Name"
+                    autoComplete="off"
+                    component={RenderField}
+                    label={user.firstName}
+                    isLabelVisible={false}
                   />
                 </td>
               </tr>
@@ -99,8 +68,10 @@ const EditUserForm = ({ classes, handleSubmit, submitting, status }) => {
                   <Field
                     name="lastName"
                     type="text"
-                    component={renderField}
-                    label="Last Name"
+                    autoComplete="off"
+                    component={RenderField}
+                    label={user.lastName}
+                    isLabelVisible={false}
                   />
                 </td>
               </tr>
@@ -110,8 +81,10 @@ const EditUserForm = ({ classes, handleSubmit, submitting, status }) => {
                   <Field
                     name="email"
                     type="email"
-                    component={renderField}
-                    label="Email"
+                    autoComplete="off"
+                    component={RenderField}
+                    label={user.email}
+                    isLabelVisible={false}
                   />
                 </td>
               </tr>
@@ -128,33 +101,15 @@ const EditUserForm = ({ classes, handleSubmit, submitting, status }) => {
           </button>
         </div>
       </form>
-      {status.formName === "editUser" && (
-        <div>
-          <p key="success" className={classes.successMessage}>
-            {status.message}
-          </p>
-          {status.errors.map((error, index) => {
-            return (
-              <p key={index} className={classes.errorMessage}>
-                {error}
-              </p>
-            );
-          })}
-        </div>
-      )}
+      <FormStatus formName="editUser" />
     </div>
   );
 };
 
-const mapStateToProps = state => ({
-  status: state.accounts.status,
-});
-
-const ConnectedEditUserForm = connect(mapStateToProps)(
-  injectSheet(styles)(EditUserForm),
-);
-
-export default reduxForm({
-  form: "editUser",
-  validate,
-})(ConnectedEditUserForm);
+export default compose(
+  reduxForm({
+    form: "editUser",
+    validate,
+  }),
+  injectSheet(styles),
+)(EditUserForm);

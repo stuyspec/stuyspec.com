@@ -24,7 +24,7 @@ const PageHeader = ({ classes, location }) => {
             <Masthead />
           ) : (
             <div className={classes.mastheadBar}>
-              <MastheadBar location={location} />
+              <MastheadBar />
             </div>
           )}
         </Col>

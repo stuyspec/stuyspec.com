@@ -1,7 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
 import injectSheet from "react-jss";
-import { Grid, Row, Col } from "react-bootstrap/lib";
+import { Row, Col } from "react-bootstrap/lib";
+import dateFormat from "dateformat";
+
+const MILLISECONDS_IN_DAY = 8.64e7;
 
 const styles = {
   Comment: {
@@ -29,14 +31,26 @@ const styles = {
     position: "relative",
   },
   publishedAt: {
-    color: "#a8a8a8",
+    color: "#888",
     fontSize: "16px",
     fontWeight: 300,
   },
 };
 
-const Comment = ({ classes, comment, users }) => {
-  const user = users[comment.userId];
+/* date settings:
+ * longDate: June 9, 2007
+ * shortTime: 5:46 PM
+ */
+
+const Comment = ({ classes, comment }) => {
+  const { user, publishedAt } = comment;
+  // If the timestamp is the same day (< 24 hours difference), use the
+  // shortTime format. If not, use the longDate format.
+  const dateSetting =
+    new Date() - new Date(publishedAt) < MILLISECONDS_IN_DAY
+      ? "shortTime"
+      : "longDate";
+  const dateline = dateFormat(publishedAt, dateSetting);
   return (
     <Row className={classes.Comment}>
       <Col md={7} lg={7}>
@@ -45,7 +59,9 @@ const Comment = ({ classes, comment, users }) => {
             {user.firstName} {user.lastName}
           </span>
           <span className={classes.bulletPoint}>&#8226;</span>
-          <span className={classes.publishedAt}>{comment.publishedAt}</span>
+          <span className={classes.publishedAt}>
+            Published {dateSetting === "shortTime" ? "at" : "on"} {dateline}
+          </span>
         </p>
         <p className={classes.content}>{comment.content}</p>
       </Col>
@@ -54,8 +70,4 @@ const Comment = ({ classes, comment, users }) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  users: state.users.users,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(Comment));
+export default injectSheet(styles)(Comment);

@@ -1,29 +1,69 @@
-import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import React, { PureComponent } from "react";
+import { compose } from "redux";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
 import injectSheet from "react-jss";
-import { Grid, Row, Col } from "react-bootstrap/lib";
+import Grid from "react-bootstrap/lib/Grid";
 import { Helmet } from "react-helmet";
-import { toRoman } from "roman-numerals";
-
-import ArticleHeader from "./ArticleHeader";
-import ArticleBody from "./ArticleBody";
-import RecommendedRow from "./RecommendedRow";
+import { ArticleHeader, ArticleBody, ArticleFooter, RecommendedRow } from "./";
 import CommentThread from "../../comments/components/CommentThread";
-import NotFoundPage from "../../core/components/NotFoundPage";
-import { getArticleFromRequestedSlug, getArticleMedia } from "../selectors";
-import { openSubscriptionModal } from "../../accounts/actions";
+
+const ArticleQuery = gql`
+  query ArticleQuery($slug: String!) {
+    articleBySlug(slug: $slug) {
+      id
+      slug
+      title
+      content
+      media {
+        id
+        attachment_url
+        thumb_attachment_url
+        media_type
+        caption
+        title
+        user {
+          first_name
+          last_name
+          slug
+        }
+      }
+      created_at
+      volume
+      issue
+      contributors {
+        first_name
+        last_name
+        slug
+      }
+      section {
+        id
+        name
+        permalink
+        parent_section {
+          id
+          name
+          permalink
+        }
+      }
+      published_comments {
+        id
+        content
+        created_at
+        user {
+          first_name
+          last_name
+        }
+      }
+      outquotes {
+        text
+      }
+    }
+  }
+`;
 
 const styles = {
-  description: {
-    border: "1px solid #ddd",
-    borderStyle: "solid none", // only top-bottom borders
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "16px",
-    marginBottom: "24px",
-    padding: "12px 0 13px",
-  },
   subscribe: {
     color: "#3572b7",
     "&:hover, &:focus, &:active": {
@@ -42,68 +82,62 @@ const styles = {
     ArticlePage: {
       padding: 0,
     },
-    descriptionRow: {
-      padding: "0 10%",
-    },
-  },
-  "@media (max-width: 767px)": {
-    descriptionRow: {
-      padding: "0 2%",
-    },
   },
 };
 
-const ArticlePage = ({
-  classes,
-  article,
-  section,
-  sections,
-  media,
-  openSubscriptionModal,
-}) => {
-  if (!article) {
-    return <NotFoundPage />;
+class ArticlePage extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      article: null,
+    };
   }
-  return (
-    <Grid fluid className={classes.ArticlePage}>
-      <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-        <title>{article.title}</title>
-        <meta />
-      </Helmet>
-      <ArticleHeader article={article} section={section} />
-      <ArticleBody article={article} media={media} />
-      <Row className={classes.descriptionRow}>
-        <Col xs={12} sm={12} md={9} lg={9} className={classes.description}>
-          This article was published in&nbsp;
-          <a
-            className={classes.subscribe}
-            href="https://issuu.com/stuyspectator/docs"
-            target="_blank"
-          >
-            {`Volume ${toRoman(article.volume)}, Issue ${article.issue}`}
-          </a>
-          .
-        </Col>
-        <Col xsHidden smHidden md={3} lg={3} />
-      </Row>
-      <RecommendedRow
-        section={section.parentId ? sections[section.parentId] : section}
-      />
-      <CommentThread article={article} />
-    </Grid>
-  );
-};
 
-const mapStateToProps = (state, ownProps) => ({
-  article: getArticleFromRequestedSlug(state, ownProps),
-  sections: state.sections.sections,
-  media: getArticleMedia(state, ownProps),
-});
+  componentWillReceiveProps(nextProps) {
+    let { data } = nextProps;
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ openSubscriptionModal }, dispatch);
-};
+    if (data.loading) {
+      return;
+    }
+    data = humps.camelizeKeys(data);
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(ArticlePage),
-);
+    if (data.articleBySlug) {
+      this.setState({ article: data.articleBySlug });
+    }
+  }
+
+  render() {
+    const { article } = this.state;
+    const { classes } = this.props;
+
+    if (!article) {
+      return null;
+    }
+
+    const { section } = article;
+
+    return (
+      <Grid fluid className={classes.ArticlePage}>
+        <Helmet titleTemplate="%s | The Stuyvesant Spectator">
+          <title>{article.title}</title>
+          <meta />
+        </Helmet>
+        <ArticleHeader article={article} />
+        <ArticleBody article={article} />
+        <ArticleFooter article={article} />
+        <RecommendedRow section={section.parentSection || section} />
+        <CommentThread article={article} />
+      </Grid>
+    );
+  }
+}
+
+export default compose(
+  graphql(ArticleQuery, {
+    options: ({ match }) => ({
+      variables: { slug: match.params.article_slug },
+    }),
+  }),
+  injectSheet(styles),
+)(ArticlePage);

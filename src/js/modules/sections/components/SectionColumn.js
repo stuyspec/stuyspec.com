@@ -1,6 +1,5 @@
 import React from "react";
 import injectSheet from "react-jss";
-import { Col } from "react-bootstrap/lib";
 
 import SectionBlock from "./SectionBlock";
 
@@ -14,7 +13,7 @@ const styles = {
       marginBottom: "24px",
     },
   },
-  "@media (max-width: 768px)": {
+  "@media (max-width: 767px)": {
     SectionColumn: {
       borderLeft: "none",
       padding: "0 !important",
@@ -27,11 +26,11 @@ const styles = {
   },
 };
 
-const SectionColumn = ({ classes, sections }) => {
+const SectionColumn = ({ classes, slugs }) => {
   return (
     <div className={classes.SectionColumn}>
-      {sections.map(section => {
-        return <SectionBlock section={section} key={section.id} />;
+      {slugs.map((slug, index) => {
+        return <SectionBlock slug={slug} key={index} />;
       })}
     </div>
   );

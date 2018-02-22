@@ -6,7 +6,7 @@ import injectSheet from "react-jss";
 import { Modal } from "react-bootstrap/lib";
 
 import { SignInForm } from "./forms";
-import { signIn, signUp, closeSignInModal } from "../actions";
+import { signIn, closeSignInModal } from "../actions";
 
 const styles = {
   SignInModal: {
@@ -26,7 +26,7 @@ const styles = {
     display: "inline-block",
     width: "100%",
     "& hr": {
-      overflow: "visible" /* For IE */,
+      overflow: "visible",
       padding: 0,
       border: "none",
       borderTop: "medium double #333",
@@ -77,7 +77,6 @@ const SignInModal = ({
   isSignInModalOpen,
   closeSignInModal,
   signIn,
-  signUp,
   status,
 }) => {
   if (status.formName === "signIn" && status.errors.length === 0) {
@@ -112,7 +111,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ signIn, signUp, closeSignInModal }, dispatch);
+  return bindActionCreators({ signIn, closeSignInModal }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(

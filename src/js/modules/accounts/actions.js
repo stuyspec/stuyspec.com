@@ -1,9 +1,11 @@
 import axios from "axios";
 import appHistory from "../../tools/appHistory";
+import { reset } from "redux-form";
 
 import * as t from "./actionTypes";
 import { CREATE_USER_FULFILLED } from "../users/actionTypes";
 import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from "../../constants";
+import { delay } from "../../utils";
 
 export const signUp = registrationParams => {
   return dispatch => {
@@ -94,7 +96,7 @@ export const signOut = session => {
     dispatch({ type: t.SIGN_OUT_PENDING, payload: session });
     axios
       .delete(`${STUY_SPEC_API_URL}/auth/sign_out`, { headers: session })
-      .then(response => {
+      .then(() => {
         dispatch({
           type: t.SIGN_OUT_FULFILLED,
         });
@@ -158,7 +160,6 @@ export const subscribe = values => {
       type: t.CREATE_SUBSCRIBER_PENDING,
       payload: values,
     });
-    dispatch({ type: t.CLOSE_SUBSCRIPTION_MODAL });
     axios
       .post(`${STUY_SPEC_API_URL}/subscribers`, values, STUY_SPEC_API_HEADERS)
       .then(response => {
@@ -166,6 +167,12 @@ export const subscribe = values => {
           type: t.CREATE_SUBSCRIBER_FULFILLED,
           payload: response,
         });
+      })
+      // Lets the user glance at the confirmation message
+      .then(delay(500))
+      .then(() => {
+        dispatch({ type: t.CLOSE_SUBSCRIPTION_MODAL });
+
         // Destroys the inputs in the form Subscription
         dispatch(reset("Subscription"));
       })
@@ -179,35 +186,38 @@ export const subscribe = values => {
 };
 
 export const validateToken = session => {
-  if (session) {
-    return dispatch => {
-      axios
-        .get(`${STUY_SPEC_API_URL}/auth/validate_token`, {
-          headers: {
-            "access-token": session["access-token"],
-            client: session.client,
-            uid: session.uid,
-          },
-        })
-        .then(response => {
-          dispatch({
-            type: t.VALIDATE_TOKEN_FULFILLED,
-            payload: response,
-          });
-        })
-        .catch(err => {
-          dispatch({
-            type: t.VALIDATE_TOKEN_REJECTED,
-          });
-        });
-    };
+  if (!session) {
+    return false;
   }
+
+  // If a session exists, we need to check if it is still valid.
+  return dispatch => {
+    axios
+      .get(`${STUY_SPEC_API_URL}/auth/validate_token`, {
+        headers: {
+          "access-token": session["access-token"],
+          client: session.client,
+          uid: session.uid,
+        },
+      })
+      .then(response => {
+        dispatch({
+          type: t.VALIDATE_TOKEN_FULFILLED,
+          payload: response,
+        });
+      })
+      .catch(() => {
+        dispatch({
+          type: t.VALIDATE_TOKEN_REJECTED,
+        });
+      });
+  };
 };
 
-export const sessionfy = session => {
+export const createSession = session => {
   return dispatch => {
     dispatch({
-      type: t.SESSIONFY,
+      type: t.CREATE_SESSION,
       payload: session,
     });
     dispatch(validateToken(session));

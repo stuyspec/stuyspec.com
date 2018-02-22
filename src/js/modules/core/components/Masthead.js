@@ -5,16 +5,15 @@ import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 import { Grid } from "react-bootstrap/lib";
 
-import { getCurrentUser } from "../../accounts/selectors";
 import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
-import { getTopLevelSections } from "../../sections/selectors";
 import { openSubscriptionModal } from "../../accounts/actions";
 import { FeaturedSectionsBar } from "../../sections/components";
 
 const styles = {
   Masthead: {
-    fontSize: 0, // resets font size to remove unwanted whitespace
+    // resets font size to remove unwanted whitespace
+    fontSize: 0,
     margin: "24px auto 19px auto",
     textAlign: "center",
     "& button:focus": {
@@ -120,7 +119,6 @@ const styles = {
     overflow: "visible",
     display: "inline",
     position: "relative",
-    // left: "-20vh",
     top: "3vh",
   },
 };
@@ -185,13 +183,7 @@ const NavButton = ({ children, onClick, classes, type }) => {
 
 const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 
-const Masthead = ({
-  classes,
-  openSidebar,
-  sections,
-  session,
-  openSubscriptionModal,
-}) => {
+const Masthead = ({ classes, openSidebar, session, openSubscriptionModal }) => {
   return (
     <Grid className={classes.Masthead}>
       <StyledNavButton onClick={openSidebar} type="Sections">
@@ -248,8 +240,6 @@ const Masthead = ({
 
 const mapStateToProps = state => ({
   session: state.accounts.session,
-  currentUser: getCurrentUser(state),
-  sections: getTopLevelSections(state),
 });
 
 const mapDispatchToProps = dispatch => {

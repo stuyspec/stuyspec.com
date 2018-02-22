@@ -1,12 +1,39 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-bootstrap/lib";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
 import injectSheet from "react-jss";
 import { Helmet } from "react-helmet";
 
 import ArticleList from "./ArticleList";
 import { TallAd } from "../../advertisements/components/index";
-import { getArticlesWithContributors } from "../selectors";
+
+const RecommendedPageQuery = gql`
+  query RecommendedPageQuery($limit: Int!) {
+    topRankedArticles(limit: $limit) {
+      id
+      title
+      slug
+      preview
+      created_at
+      contributors {
+        first_name
+        last_name
+        slug
+      }
+      media {
+        title
+        attachment_url
+        media_type
+      }
+      section {
+        name
+        permalink
+      }
+    }
+  }
+`;
 
 const styles = {
   pageTitle: {
@@ -32,17 +59,22 @@ const styles = {
   },
 };
 
-const RecommendedPage = ({ classes, articles }) => {
+const RecommendedPage = ({ classes, data }) => {
+  if (data.loading) {
+    return null;
+  }
+  data = humps.camelizeKeys(data);
+  const { topRankedArticles } = data;
   return (
     <Grid fluid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-        <title>Most Recommended</title>
+        <title>Recommended</title>
         <meta />
       </Helmet>
       <Row>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.articleList}>
           <ArticleList
-            articles={articles}
+            articles={topRankedArticles}
             title="Recommended"
             label="Articles"
           />
@@ -61,8 +93,6 @@ const RecommendedPage = ({ classes, articles }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  articles: getArticlesWithContributors(state),
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(RecommendedPage));
+export default graphql(RecommendedPageQuery, {
+  options: () => ({ variables: { limit: 20 } }),
+})(injectSheet(styles)(RecommendedPage));

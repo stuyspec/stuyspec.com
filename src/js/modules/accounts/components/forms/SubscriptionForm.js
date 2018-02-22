@@ -1,22 +1,12 @@
 import React from "react";
+import { compose } from "redux";
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
 import { EMAIL_REGEX } from "../../../../constants";
 
+import { FormStatus, RenderField } from "./helpers";
+
 const styles = {
-  SignInForm: {
-    fontFamily: "Minion Pro",
-    "& form div": {
-      // each Field
-      marginBottom: "7px",
-    },
-  },
-  errorMessage: {
-    color: "red",
-  },
-  successMessage: {
-    color: "green",
-  },
   submitButton: {
     backgroundColor: "#e2130b",
     border: "none",
@@ -24,9 +14,9 @@ const styles = {
     color: "#fff",
     fontFamily: "Circular Std",
     fontSize: "15px",
-    fontWeight: "300",
+    fontWeight: 300,
     padding: "11px",
-    margin: "9px 0 21px 0",
+    margin: "9px 0 0 0",
     width: "275px",
     "&:disabled": {
       background: "#ddd",
@@ -34,19 +24,20 @@ const styles = {
       color: "#888",
     },
   },
-  email: {
+  input: {
     backgroundColor: "#eee",
     border: "none",
     borderRadius: "3px",
     fontFamily: "Circular Std",
     fontSize: "15px",
-    fontWeight: "300",
+    fontWeight: 300,
     padding: "11px",
     width: "275px",
   },
-  error: {
+  syncValidation: {
     color: "red",
-    margin: 0,
+    fontFamily: "Minion Pro",
+    margin: "10px 0 0 0",
   },
 };
 
@@ -60,42 +51,21 @@ const validate = formValues => {
   return errors;
 };
 
-const renderField = ({
-  input,
-  label,
-  type,
+const SubscriptionForm = ({
   classes,
-  meta: { touched, error, warning },
+  handleSubmit,
+  submitting,
+  callToAction,
 }) => {
   return (
     <div>
-      <div>
-        <input
-          {...input}
-          placeholder={label}
-          type={type}
-          className={classes.email}
-        />
-        {touched &&
-          ((error && (
-            <p style={{ color: "red" }} className={classes.error}>
-              {error}
-            </p>
-          )) ||
-            (warning && <p>{warning}</p>))}
-      </div>
-    </div>
-  );
-};
-
-const SubscriptionForm = ({ classes, handleSubmit, submitting }) => {
-  return (
-    <div className={classes.SubscriptionForm}>
       <form onSubmit={handleSubmit}>
         <Field
           name="email"
           type="email"
-          component={renderField}
+          autoComplete="email"
+          component={RenderField}
+          isLabelVisible={false}
           label="Enter your e-mail address."
           classes={classes}
         />
@@ -105,15 +75,19 @@ const SubscriptionForm = ({ classes, handleSubmit, submitting }) => {
             disabled={submitting}
             className={classes.submitButton}
           >
-            Subscribe
+            {callToAction ? callToAction : "Subscribe"}
           </button>
         </div>
       </form>
+      <FormStatus formName="subscription" />
     </div>
   );
 };
 
-export default reduxForm({
-  form: "Subscription",
-  validate,
-})(injectSheet(styles)(SubscriptionForm));
+export default compose(
+  reduxForm({
+    form: "subscription",
+    validate,
+  }),
+  injectSheet(styles),
+)(SubscriptionForm);

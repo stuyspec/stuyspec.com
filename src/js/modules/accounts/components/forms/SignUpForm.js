@@ -1,8 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
+import { compose } from "redux";
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
 import { EMAIL_REGEX } from "../../../../constants";
+
+import { FormStatus, RenderField } from "./helpers";
 
 const styles = {
   SignUpForm: {
@@ -12,12 +14,6 @@ const styles = {
       // each Field
       marginBottom: "7px",
     },
-  },
-  successMessage: {
-    color: "green",
-  },
-  errorMessage: {
-    color: "red",
   },
   submitButton: {
     backgroundColor: "#3472b7",
@@ -63,62 +59,41 @@ const validate = formValues => {
   return errors;
 };
 
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error, warning },
-}) => {
-  return (
-    <div>
-      <label>{label}</label>
-      <div>
-        <input
-          style={{ width: "100%" }}
-          {...input}
-          placeholder={label}
-          type={type}
-        />
-        {touched &&
-          ((error && <span style={{ color: "red" }}>{error}</span>) ||
-            (warning && <span>{warning}</span>))}
-      </div>
-    </div>
-  );
-};
-
-const SignUpForm = ({ classes, handleSubmit, submitting, status }) => {
+const SignUpForm = ({ classes, handleSubmit, submitting }) => {
   return (
     <div className={classes.SignUpForm}>
       <form onSubmit={handleSubmit}>
         <Field
           name="firstName"
           type="text"
-          component={renderField}
+          component={RenderField}
           label="First Name"
         />
         <Field
           name="lastName"
           type="text"
-          component={renderField}
+          component={RenderField}
           label="Last Name"
         />
         <Field
           name="email"
           type="email"
-          component={renderField}
+          autoComplete="email"
+          component={RenderField}
           label="Email"
         />
         <Field
           name="password"
           type="password"
-          component={renderField}
+          autoComplete="new-password"
+          component={RenderField}
           label="Password"
         />
         <Field
           name="passwordConfirmation"
           type="password"
-          component={renderField}
+          autoComplete="new-password"
+          component={RenderField}
           label="Password Confirmation"
         />
         <div>
@@ -131,33 +106,15 @@ const SignUpForm = ({ classes, handleSubmit, submitting, status }) => {
           </button>
         </div>
       </form>
-      {status.formName === "signUp" && (
-        <div>
-          <p key="success" className={classes.successMessage}>
-            {status.message}
-          </p>
-          {status.errors.map((error, index) => {
-            return (
-              <p key={index} className={classes.errorMessage}>
-                {error}
-              </p>
-            );
-          })}
-        </div>
-      )}
+      <FormStatus formName="signUp" redirect="/myaccount" />
     </div>
   );
 };
 
-const mapStateToProps = state => ({
-  status: state.accounts.status,
-});
-
-const ConnectedSignUpForm = connect(mapStateToProps, null)(
-  injectSheet(styles)(SignUpForm),
-);
-
-export default reduxForm({
-  form: "signUp",
-  validate,
-})(ConnectedSignUpForm);
+export default compose(
+  reduxForm({
+    form: "signUp",
+    validate,
+  }),
+  injectSheet(styles),
+)(SignUpForm);

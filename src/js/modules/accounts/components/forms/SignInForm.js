@@ -1,8 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
+import { compose } from "redux";
 import { Field, reduxForm } from "redux-form";
 import injectSheet from "react-jss";
 import { EMAIL_REGEX } from "../../../../constants";
+
+import { FormStatus, RenderField } from "./helpers";
 
 const styles = {
   SignInForm: {
@@ -12,12 +14,6 @@ const styles = {
       // each Field
       marginBottom: "7px",
     },
-  },
-  errorMessage: {
-    color: "red",
-  },
-  successMessage: {
-    color: "green",
   },
   submitButton: {
     backgroundColor: "#3472b7",
@@ -48,44 +44,22 @@ const validate = formValues => {
   return errors;
 };
 
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error, warning },
-}) => {
-  return (
-    <div>
-      <label>{label}</label>
-      <div>
-        <input
-          style={{ width: "100%" }}
-          {...input}
-          placeholder={label}
-          type={type}
-        />
-        {touched &&
-          ((error && <span style={{ color: "red" }}>{error}</span>) ||
-            (warning && <span>{warning}</span>))}
-      </div>
-    </div>
-  );
-};
-
-const SignInForm = ({ classes, handleSubmit, submitting, status }) => {
+const SignInForm = ({ classes, handleSubmit, submitting }) => {
   return (
     <div className={classes.SignInForm}>
       <form onSubmit={handleSubmit}>
         <Field
           name="email"
           type="email"
-          component={renderField}
+          autoComplete="email"
+          component={RenderField}
           label="Email"
         />
         <Field
           name="password"
           type="password"
-          component={renderField}
+          autoComplete="current-password"
+          component={RenderField}
           label="Password"
         />
         <div>
@@ -98,33 +72,15 @@ const SignInForm = ({ classes, handleSubmit, submitting, status }) => {
           </button>
         </div>
       </form>
-      {status.formName === "signIn" && (
-        <div>
-          <p key="success" className={classes.successMessage}>
-            {status.message}
-          </p>
-          {status.errors.map((error, index) => {
-            return (
-              <p key={index} className={classes.errorMessage}>
-                {error}
-              </p>
-            );
-          })}
-        </div>
-      )}
+      <FormStatus formName="signIn" />
     </div>
   );
 };
 
-const mapStateToProps = state => ({
-  status: state.accounts.status,
-});
-
-const ConnectedSignInForm = connect(mapStateToProps)(
-  injectSheet(styles)(SignInForm),
-);
-
-export default reduxForm({
-  form: "signIn",
-  validate,
-})(ConnectedSignInForm);
+export default compose(
+  reduxForm({
+    form: "signIn",
+    validate,
+  }),
+  injectSheet(styles),
+)(SignInForm);
