@@ -17,7 +17,7 @@ const styles = {
     display: "block",
     fontFamily: "Circular Std",
     fontSize: "13px",
-    fontWeight: "300",
+    fontWeight: 300,
     float: "left",
     marginRight: "19px",
     width: "110px",
@@ -27,7 +27,7 @@ const styles = {
     display: "none",
     fontFamily: "Circular Std",
     fontSize: "12px",
-    fontWeight: "300",
+    fontWeight: 300,
     marginRight: "19px",
   },
   featuredMedia: {

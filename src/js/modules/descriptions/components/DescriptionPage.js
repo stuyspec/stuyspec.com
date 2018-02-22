@@ -10,7 +10,7 @@ const styles = {
   descriptionTitle: {
     fontFamily: "Canela",
     fontSize: "36px",
-    fontWeight: "500",
+    fontWeight: 500,
     textAlign: "center",
     color: "#000000",
   },

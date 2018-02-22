@@ -50,7 +50,7 @@ const styles = {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "16px",
-    fontWeight: "300",
+    fontWeight: 300,
     lineHeight: "1.29",
   },
 };

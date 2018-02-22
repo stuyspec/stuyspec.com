@@ -43,7 +43,7 @@ const styles = {
     fontSize: "13px",
     fontFamily: "Circular Std",
     fontStyle: "normal",
-    fontWeight: "300",
+    fontWeight: 300,
     textDecoration: "none",
     "&:hover, &:active, &:focus": {
       color: "#000",
@@ -118,7 +118,7 @@ const styles = {
     },
     topLevelSectionLink: {
       fontSize: "15px",
-      fontWeight: "500",
+      fontWeight: 500,
       "&:hover, &:active, &:focus": {
         color: "#000",
         textDecoration: "none",

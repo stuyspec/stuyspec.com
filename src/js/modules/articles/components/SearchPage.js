@@ -13,7 +13,7 @@ const styles = {
     color: "#000",
     fontFamily: "Canela",
     fontSize: "36px",
-    fontWeight: "500",
+    fontWeight: 500,
     margin: 0,
     textAlign: "center",
   },

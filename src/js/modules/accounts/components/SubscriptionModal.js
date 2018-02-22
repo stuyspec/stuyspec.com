@@ -40,7 +40,7 @@ const styles = {
     color: "#888",
     fontFamily: "Circular Std",
     fontSize: "15px",
-    fontWeight: "300",
+    fontWeight: 300,
     margin: "20px 0",
     padding: "11px",
     width: "275px",

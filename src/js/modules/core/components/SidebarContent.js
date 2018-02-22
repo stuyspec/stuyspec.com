@@ -19,7 +19,7 @@ const styles = {
     display: "block",
     fontFamily: "Circular Std",
     fontSize: "15px",
-    fontWeight: "500",
+    fontWeight: 500,
     margin: "8px 0",
     padding: "8px 0 8px 11px",
     textAlign: "left",

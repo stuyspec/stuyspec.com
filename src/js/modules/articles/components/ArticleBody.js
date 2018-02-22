@@ -10,6 +10,9 @@ import { SPEC_IMG_CAROUSEL_PATTERN } from "../../../constants";
 import { Gallery } from "../../media/components";
 import { Lightbox } from "../../core/components";
 
+const isBrowserFirefox =
+  navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
+
 const styles = {
   ArticleBody: {
     color: "#000",
@@ -47,7 +50,8 @@ const styles = {
       float: "left",
       fontSize: "64px",
       lineHeight: "40px",
-      padding: "11px 6px 0px 3px",
+      padding: "0px 6px 0px 3px",
+      paddingTop: isBrowserFirefox ? "5px" : "11px",
     },
     "& > div > p ~ p::first-letter": {
       float: "none",

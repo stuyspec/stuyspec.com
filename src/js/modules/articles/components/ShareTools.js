@@ -72,7 +72,7 @@ const ShareTools = ({ classes, article }) => {
           <FacebookIcon
             size={SHARE_BUTTON_SIZE}
             logoFillColor={SHARE_BUTTON_COLOR}
-            iconBgStyle={{ fill: "white", stroke: "#ddd", "stroke-width": 1.5 }}
+            iconBgStyle={{ fill: "white", stroke: "#ddd", strokeWidth: 1.5 }}
             round
           />
         </FacebookShareButton>

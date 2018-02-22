@@ -63,7 +63,7 @@ const styles = {
     color: "#000",
     fontFamily: "Circular Std",
     fontSize: "13px",
-    fontWeight: "300",
+    fontWeight: 300,
     marginBottom: "22px",
     padding: "4px 0px",
   },

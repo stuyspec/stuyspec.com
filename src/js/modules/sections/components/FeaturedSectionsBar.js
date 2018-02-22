@@ -47,6 +47,7 @@ const styles = {
     "&:active, &:focus": {
       color: "#000",
       textDecoration: "none",
+      outline: "none",
     },
   },
 };

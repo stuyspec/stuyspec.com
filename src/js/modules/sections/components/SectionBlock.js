@@ -106,7 +106,7 @@ const styles = {
     color: "#888",
     fontFamily: "Circular Std",
     fontSize: "12px",
-    fontWeight: "300",
+    fontWeight: 300,
     marginBottom: "3px",
     "& p": {
       margin: "0",

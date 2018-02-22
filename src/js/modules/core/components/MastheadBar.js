@@ -67,14 +67,16 @@ const styles = {
   },
   userTools: {
     marginBottom: "12px",
-    "& > a": {
+    "& > a, span": {
       color: "#888",
       "&:hover, &:active, &:focus": {
         color: "#888",
+        cursor: "pointer",
+        textDecoration: "underline",
       },
     },
   },
-  subscribeLink: {
+  subscriber: {
     borderLeft: "1px solid #888",
     marginLeft: "9px",
     paddingLeft: "8px",
@@ -135,13 +137,12 @@ const MastheadBar = ({
             ) : (
               <Link to="/myaccount">Log In</Link>
             )}
-            <Link
-              to="/myaccount"
-              className={classes.subscribeLink}
+            <span
+              className={classes.subscriber}
               onClick={openSubscriptionModal}
             >
               Subscribe
-            </Link>
+            </span>
           </div>
           <Link to="/search" className={classes.searchLink}>
             <Search color={"#000"} />

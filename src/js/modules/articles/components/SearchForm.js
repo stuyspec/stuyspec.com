@@ -19,7 +19,7 @@ const styles = {
       color: "#888",
       fontFamily: "Circular Std",
       fontSize: "18px",
-      fontWeight: "500",
+      fontWeight: 500,
       height: "51px",
       padding: "14px 44px",
       textAlign: "left",
