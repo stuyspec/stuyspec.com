@@ -34,6 +34,7 @@ const SearchResultsQuery = gql`
           title
         }
         section {
+          id
           permalink
         }
         contributors {
