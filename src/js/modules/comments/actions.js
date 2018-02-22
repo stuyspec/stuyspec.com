@@ -1,10 +1,9 @@
 import * as t from "./actionTypes";
-import { STUY_SPEC_API_HEADERS, STUY_SPEC_API_URL } from "../../constants";
+import { STUY_SPEC_API_URL } from "../../constants";
 import axios from "axios";
 import { reset } from "redux-form";
 
-export const createComment = (values, devise_headers) => {
-  console.log({ "X-Key-Inflection": "camel", ...devise_headers });
+export const createComment = (values, deviseHeaders) => {
   return dispatch => {
     dispatch({
       type: t.CREATE_COMMENT_PENDING,
@@ -12,7 +11,7 @@ export const createComment = (values, devise_headers) => {
     });
     axios
       .post(`${STUY_SPEC_API_URL}/comments`, values, {
-        headers: { "X-Key-Inflection": "camel", ...devise_headers },
+        headers: { "X-Key-Inflection": "camel", ...deviseHeaders },
       })
       .then(response => {
         dispatch({

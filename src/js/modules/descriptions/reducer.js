@@ -1,5 +1,5 @@
-const initialState = {
-  "our-charter": {
+const initialState = [
+  {
     id: 0,
     title: "Our Charter",
     slug: "our-charter",
@@ -120,7 +120,7 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
 <p>Please be aware that this webpage is currently a work in progress. We are still working to implement new features and update content. If you have access to past content that you believe should be on this site or know someone who does, please do not hesitate to contact us through the resources mentioned above. We sincerely apologize for any past work that is missing or lacks proper credit, and implore you to email us with any information you believe would assist in resolving this.</p>
 `,
   },
-  advertise: {
+  {
     id: 1,
     title: "Advertise",
     slug: "advertise",
@@ -133,7 +133,7 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
   <br>
   <pre><b>Fax</b>: 212-587-3874, attn. The Spectator</pre>
   <br>
-  <pre><b>Phone</b>: 212-312-4800 ext. 2601</pre/><br>
+  <pre><b>Phone</b>: 212-312-4800 ext. 2601</pre><br/>
 </ul>
 <h2>Student Groups</h2>
 <ul>
@@ -163,7 +163,7 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
 </ul>
 `,
   },
-  sponsors: {
+  {
     id: 2,
     title: "Sponsors",
     slug: "sponsors",
@@ -198,7 +198,7 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
 </center>
 `,
   },
-  staff: {
+  {
     id: 3,
     title: "Staff",
     slug: "staff",
@@ -308,7 +308,7 @@ Kerry Garfinkel
 </p>
 `,
   },
-  contact: {
+  {
     id: 4,
     title: "Contact",
     slug: "contact",
@@ -317,9 +317,9 @@ Kerry Garfinkel
 </p>
 `,
   },
-};
+];
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState) => {
   return state;
 };
 

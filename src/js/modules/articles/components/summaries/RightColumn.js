@@ -1,16 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 
-import { getArticlesWithContributors } from "../../selectors";
-import Byline from "../Byline";
-import Dateline from "../Dateline";
-import Outquote from "../Outquote";
+import { Byline, Dateline } from "../";
 import { ISSUU_CONFIG } from "../../../../constants";
-
-// TODO: ADD OUTQUOTES
 
 const styles = {
   RightColumn: {
@@ -49,7 +43,7 @@ const styles = {
     borderBottom: "1px solid #ddd",
     marginBottom: "14px",
   },
-  summary: {
+  preview: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "14px",
@@ -90,7 +84,7 @@ const styles = {
     height: 340,
     width: "100%",
   },
-  "@media (max-width: 768px)": {
+  "@media (max-width: 767px)": {
     RightColumn: {
       borderLeft: "none",
       paddingLeft: "0 !important",
@@ -98,74 +92,81 @@ const styles = {
   },
 };
 
-const RightColumn = ({ classes, articles, sections, outquotes }) => {
-  let availableArticles = [];
-  Object.values(articles)
-    .slice(9)
-    .find(article => {
-      if (availableArticles.length >= 2) {
-        return true;
-      }
-      if (
-        !Object.values(outquotes).find(
-          outquote => outquote.articleId === article.id,
-        )
-      ) {
-        availableArticles.push(article);
-      }
-    });
-  const [primaryArticle, secondaryArticle] = availableArticles;
+const RightColumn = ({ classes, articles }) => {
+  if (articles.length !== 2) {
+    // TODO: Better way to handle this
+    return (
+      <Col xsHidden sm={3} md={3} lg={3} className={classes.RightColumn} />
+    );
+  }
+  const [primaryArticle, secondaryArticle] = articles;
+  const primarySection = primaryArticle.section;
+  const secondarySection = secondaryArticle.section;
 
   return (
-    <Col xs={12} sm={3} md={3} lg={3} className={classes.RightColumn}>
+    <Col xsHidden sm={3} md={3} lg={3} className={classes.RightColumn}>
+      {/* Column xsHidden because the mobile UI would repeat too many articles */}
       <div
         dangerouslySetInnerHTML={{
           __html: `<iframe style="width:100%; height:309px;" src="//e.issuu.com/embed.html#9521608/${ISSUU_CONFIG}" frameborder="0" allowfullscreen></iframe>`,
         }}
+        // TODO: Issu & Newspaper/Volume/Issue's have to become Rails models
         className={classes.issuuEmbed}
       />
       {primaryArticle && (
         <div className={classes.primaryArticle}>
-          <Link
-            to={sections[primaryArticle.sectionId].permalink}
-            className={classes.sectionLabel}
-          >
-            {sections[primaryArticle.sectionId].name}
+          {primaryArticle.media.length > 0 && (
+            <div>
+              <Link to={`${primarySection.permalink}/${primaryArticle.slug}`}>
+                <figure className={classes.figure}>
+                  <img src={primaryArticle.media[0].attachmentUrl} />
+                </figure>
+              </Link>
+            </div>
+          )}
+          <Link to={primarySection.permalink} className={classes.sectionLabel}>
+            {primarySection.name}
           </Link>
           <Link
-            to={`${sections[primaryArticle.sectionId]
-              .permalink}/${primaryArticle.slug}`}
+            to={`${primarySection.permalink}/${primaryArticle.slug}`}
             className={classes.articleTitle}
           >
             {primaryArticle.title}
           </Link>
-          {/*primaryArticle.outquotes.length > 0 && (
-            <Outquote quote={primaryArticle.outquotes[0]} />
-          )*/}
-          <p className={classes.summary}>{primaryArticle.summary}</p>
+          <p className={classes.preview}>{primaryArticle.preview}</p>
           <Byline contributors={primaryArticle.contributors} />
-          <Dateline article={primaryArticle} />
+          <Dateline timestamp={primaryArticle.createdAt} />
         </div>
       )}
 
       {secondaryArticle && (
         <div className={classes.secondaryArticle}>
+          {secondaryArticle.media.length > 0 && (
+            <div>
+              <Link
+                to={`${secondarySection.permalink}/${secondaryArticle.slug}`}
+              >
+                <figure className={classes.figure}>
+                  <img src={secondaryArticle.media[0].attachmentUrl} />
+                </figure>
+              </Link>
+            </div>
+          )}
           <Link
-            to={sections[secondaryArticle.sectionId].permalink}
+            to={secondarySection.permalink}
             className={classes.sectionLabel}
           >
-            {sections[secondaryArticle.sectionId].name}
+            {secondarySection.name}
           </Link>
           <Link
-            to={`${sections[secondaryArticle.sectionId]
-              .permalink}/${secondaryArticle.slug}`}
+            to={`${secondarySection.permalink}/${secondaryArticle.slug}`}
             className={classes.articleTitle}
           >
             {secondaryArticle.title}
           </Link>
-          <p className={classes.summary}>{secondaryArticle.summary}</p>
+          <p className={classes.preview}>{secondaryArticle.preview}</p>
           <Byline contributors={secondaryArticle.contributors} />
-          <Dateline article={secondaryArticle} />
+          <Dateline timestamp={secondaryArticle.createdAt} />
         </div>
       )}
 
@@ -173,7 +174,7 @@ const RightColumn = ({ classes, articles, sections, outquotes }) => {
         to="https://open.spotify.com/user/1225511959/playlist/5kkx7i6sMHdeMB5pJY29Zw"
         className={classes.label}
       >
-        Spooktator Playlist
+        Spooky Playlist 2017
       </Link>
       <iframe
         className={classes.spotifyEmbed}
@@ -185,10 +186,4 @@ const RightColumn = ({ classes, articles, sections, outquotes }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  articles: getArticlesWithContributors(state),
-  sections: state.sections.sections,
-  outquotes: state.outquotes.outquotes,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(RightColumn));
+export default injectSheet(styles)(RightColumn);

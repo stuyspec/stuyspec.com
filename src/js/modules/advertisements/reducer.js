@@ -11,11 +11,7 @@ const initialState = [
   },
 ];
 
-const reducer = (state = { ...initialState }, action) => {
-  switch (action.type) {
-    default:
-      break;
-  }
+const reducer = (state = { ...initialState }) => {
   return state;
 };
 

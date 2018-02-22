@@ -1,11 +1,29 @@
 import React from "react";
-import { connect } from "react-redux";
 import injectSheet from "react-jss";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
 
 import RibbonComponent from "./RibbonComponent";
-import { getLatestArticles } from "../../selectors";
 
-const LATEST_ARTICLES_SHOWN = 5;
+const LatestArticlesQuery = gql`
+  query LatestArticlesQuery($limit: Int!) {
+    latestArticles(limit: $limit) {
+      id
+      title
+      slug
+      preview
+      media {
+        thumb_attachment_url
+      }
+      section {
+        id
+        name
+        permalink
+      }
+    }
+  }
+`;
 
 const styles = {
   LatestArticlesRibbon: {
@@ -74,20 +92,19 @@ const styles = {
   },
 };
 
-const LatestArticlesRibbon = ({ classes, articles, media, sections }) => {
-  const latestArticles = articles.slice(0, LATEST_ARTICLES_SHOWN);
+const LatestArticlesRibbon = ({ classes, data }) => {
+  if (data.loading) {
+    return null;
+  }
+  data = humps.camelizeKeys(data);
+  const { latestArticles } = data;
   return (
     <div className={classes.LatestArticlesRibbon}>
       {latestArticles.map(article => {
-        const featuredMedia = Object.values(media).find(mediaObject => {
-          return mediaObject.isFeatured && mediaObject.articleId === article.id;
-        });
         return (
           <RibbonComponent
             article={article}
             classes={classes}
-            section={sections[article.sectionId]}
-            featuredMedia={featuredMedia}
             key={article.id}
           />
         );
@@ -96,12 +113,11 @@ const LatestArticlesRibbon = ({ classes, articles, media, sections }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  articles: getLatestArticles(state),
-  media: state.media.media,
-  sections: state.sections.sections,
-});
-
-export default connect(mapStateToProps)(
-  injectSheet(styles)(LatestArticlesRibbon),
-);
+export default graphql(LatestArticlesQuery, {
+  options: ({ limit }) => ({
+    variables: {
+      // if limit not given as prop, we use 5 as the default.
+      limit: limit || 5,
+    },
+  }),
+})(injectSheet(styles)(LatestArticlesRibbon));

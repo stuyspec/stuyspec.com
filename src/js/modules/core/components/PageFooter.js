@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 
-import { getTopLevelSectionsWithChildren } from "../../sections/selectors";
-
 const styles = {
   PageFooter: {
     background: "#fff",
@@ -45,7 +43,7 @@ const styles = {
     fontSize: "13px",
     fontFamily: "Circular Std",
     fontStyle: "normal",
-    fontWeight: "300",
+    fontWeight: 300,
     textDecoration: "none",
     "&:hover, &:active, &:focus": {
       color: "#000",
@@ -120,7 +118,7 @@ const styles = {
     },
     topLevelSectionLink: {
       fontSize: "15px",
-      fontWeight: "500",
+      fontWeight: 500,
       "&:hover, &:active, &:focus": {
         color: "#000",
         textDecoration: "none",
@@ -135,72 +133,42 @@ const styles = {
   },
 };
 
-const PageFooter = ({
-  classes,
-  topLevelSectionsWithChildren,
-  descriptions,
-}) => {
-  const createSectionLinks = () => {
-    return Object.values(topLevelSectionsWithChildren).map(section => {
-      return (
-        <div className={classes.sectionBlock} key={section.id}>
+const DescriptionLinks = ({ classes, descriptions }) => {
+  return (
+    <div className={classes.sectionBlock} key="about">
+      <p className={classes.topLevelSectionLink} key={-1}>
+        About Us
+      </p>
+      {descriptions.map(description => {
+        return (
           <Link
-            className={classes.topLevelSectionLink}
-            key={section.id}
-            to={section.permalink}
+            className={classes.subsectionLink}
+            key={description.id}
+            to={`/about/${description.slug}`}
           >
-            {section.name}
+            {description.title}
           </Link>
-          {Object.values(section.subsections).map(subsection => {
-            return (
-              <Link
-                className={classes.subsectionLink}
-                key={subsection.id}
-                to={subsection.permalink}
-              >
-                {subsection.name}
-              </Link>
-            );
-          })}
-        </div>
-      );
-    });
-  };
-  const createDescriptionLinks = () => {
-    const descriptionLinks = Object.values(descriptions).map(description => {
-      return (
-        <Link
-          className={classes.subsectionLink}
-          key={description.id}
-          to={`/about/${description.slug}`}
-        >
-          {description.title}
-        </Link>
-      );
-    });
-    return (
-      <div className={classes.sectionBlock} key="about">
-        <p className={classes.topLevelSectionLink} key={-1}>
-          About Us
-        </p>
-        {descriptionLinks}
-        <a
-          className={classes.subsectionLink}
-          key={-2}
-          href="https://issuu.com/stuyspectator"
-        >
-          Visual Archives
-        </a>
-        <a
-          className={classes.subsectionLink}
-          key={-3}
-          href="https://specapparel.strikingly.com/"
-        >
-          Apparel
-        </a>
-      </div>
-    );
-  };
+        );
+      })}
+      <a
+        className={classes.subsectionLink}
+        key={-2}
+        href="https://issuu.com/stuyspectator"
+      >
+        Visual Archives
+      </a>
+      <a
+        className={classes.subsectionLink}
+        key={-3}
+        href="https://specapparel.strikingly.com/"
+      >
+        Apparel
+      </a>
+    </div>
+  );
+};
+
+const PageFooter = ({ classes, sections, descriptions }) => {
   return (
     <Grid fluid className={classes.PageFooter}>
       <Row className={classes.pageFooterMain}>
@@ -227,8 +195,31 @@ const PageFooter = ({
           lgOffset={2}
           className={classes.sectionFlex}
         >
-          {createSectionLinks()}
-          {createDescriptionLinks()}
+          {sections.map(section => {
+            return (
+              <div className={classes.sectionBlock} key={section.id}>
+                <Link
+                  className={classes.topLevelSectionLink}
+                  key={section.id}
+                  to={section.permalink}
+                >
+                  {section.name}
+                </Link>
+                {section.subsections.map(subsection => {
+                  return (
+                    <Link
+                      className={classes.subsectionLink}
+                      key={subsection.id}
+                      to={subsection.permalink}
+                    >
+                      {subsection.name}
+                    </Link>
+                  );
+                })}
+              </div>
+            );
+          })}
+          <DescriptionLinks classes={classes} descriptions={descriptions} />
         </Col>
         <Col
           xsHidden
@@ -253,7 +244,7 @@ const PageFooter = ({
           lgHidden
           className={classes.aboutNavLinksMobile}
         >
-          {createDescriptionLinks()}
+          <DescriptionLinks classes={classes} descriptions={descriptions} />
         </Col>
         <Col xs={12} smHidden mdHidden lgHidden className={classes.creditLine}>
           <hr className={classes.hr} />
@@ -266,7 +257,6 @@ const PageFooter = ({
 };
 
 const mapStateToProps = state => ({
-  topLevelSectionsWithChildren: getTopLevelSectionsWithChildren(state),
   descriptions: state.descriptions,
 });
 

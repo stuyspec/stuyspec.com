@@ -1,19 +1,14 @@
 import React from "react";
-import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 
-import { getArticlesWithContributors } from "../../selectors";
-import Byline from "../Byline";
-import Dateline from "../Dateline";
-import Outquote from "../Outquote";
-
-// TODO: ADD THE OUTQUOTE
+import { Byline, Dateline, Outquote } from "../";
 
 const styles = {
   LeftColumn: {
-    paddingRight: "7px !important", // adds to the 7px in Col = 14px
+    // adds to the 7px in Col = 14px
+    paddingRight: "7px !important",
     "& > div": {
       borderBottom: "1px solid #ddd",
       marginBottom: "14px",
@@ -54,7 +49,7 @@ const styles = {
       color: "#000",
     },
   },
-  summary: {
+  preview: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "14px",
@@ -76,7 +71,7 @@ const styles = {
   bylineContainer: {
     marginBottom: "4px",
   },
-  "@media (max-width: 768px)": {
+  "@media (max-width: 767px)": {
     LeftColumn: {
       paddingRight: "0 !important",
     },
@@ -101,137 +96,96 @@ const styles = {
   },
 };
 
-const LeftColumn = ({ classes, articles, media, sections, outquotes }) => {
-  const [primaryArticle, secondaryArticle] = Object.values(articles).slice(
-    6,
-    8,
-  );
-  const outquoteArticle = Object.values(articles)
-    .slice(9)
-    .find(article => {
-      return Object.values(outquotes).find(
-        outquote => outquote.articleId === article.id,
-      );
-    });
-
-  [primaryMedia, secondaryMedia, outquoteMedia] = [
-    primaryArticle,
-    secondaryArticle,
-    outquoteArticle,
-  ].map(article => {
-    return Object.values(media).find(
-      mediaObject =>
-        mediaObject.articleId === article.id && mediaObject.isFeatured,
-    );
-  });
+const LeftColumn = ({ classes, articles }) => {
+  if (articles.length !== 3) {
+    // TODO: Better way to handle this
+    return <Col xsHidden sm={3} md={3} lg={3} className={classes.LeftColumn} />;
+  }
+  const [primaryArticle, secondaryArticle, outquoteArticle] = articles;
+  const primarySection = primaryArticle.section;
+  const secondarySection = secondaryArticle.section;
+  const outquoteSection = outquoteArticle.section;
   return (
-    <Col xs={12} sm={3} md={3} lg={3} className={classes.LeftColumn}>
+    <Col xsHidden sm={3} md={3} lg={3} className={classes.LeftColumn}>
+      {/* Column xsHidden because the mobile UI would repeat too many articles */}
       <div className={classes.primaryArticle}>
-        {primaryMedia && (
+        {primaryArticle.media.length > 0 && (
           <div>
-            <Link
-              to={`${sections[primaryArticle.sectionId]
-                .permalink}/${primaryArticle.slug}`}
-            >
+            <Link to={`${primarySection.permalink}/${primaryArticle.slug}`}>
               <figure className={classes.figure}>
-                <img src={primaryMedia.attachmentUrl} />
+                <img src={primaryArticle.media[0].attachmentUrl} />
               </figure>
             </Link>
           </div>
         )}
         <Link
-          to={`${sections[primaryArticle.sectionId]
-            .permalink}/${primaryArticle.slug}`}
+          to={`${primarySection.permalink}/${primaryArticle.slug}`}
           className={classes.primaryTitle}
         >
           {primaryArticle.title}
         </Link>
-        <Link
-          to={sections[primaryArticle.sectionId].permalink}
-          className={classes.sectionLabel}
-        >
-          {sections[primaryArticle.sectionId].name}
+        <Link to={primarySection.permalink} className={classes.sectionLabel}>
+          {primarySection.name}
         </Link>
-        <p className={classes.summary}>{primaryArticle.summary}</p>
+        <p className={classes.preview}>{primaryArticle.preview}</p>
         <Byline contributors={primaryArticle.contributors} />
-        <Dateline article={primaryArticle} />
+        <Dateline timestamp={primaryArticle.createdAt} />
       </div>
 
       <div className={classes.secondaryArticle}>
-        {secondaryMedia && (
+        {secondaryArticle.media.length > 0 && (
           <div>
-            <Link
-              to={`${sections[secondaryArticle.sectionId]
-                .permalink}/${secondaryArticle.slug}`}
-            >
+            <Link to={`${secondarySection.permalink}/${secondaryArticle.slug}`}>
               <figure className={classes.figure}>
-                <img src={secondaryMedia.attachmentUrl} />
+                <img src={secondaryArticle.media[0].attachmentUrl} />
               </figure>
             </Link>
           </div>
         )}
-        <Link
-          to={sections[secondaryArticle.sectionId].permalink}
-          className={classes.sectionLabel}
-        >
-          {sections[secondaryArticle.sectionId].name}
+        <Link to={secondarySection.permalink} className={classes.sectionLabel}>
+          {secondarySection.name}
         </Link>
         <Link
-          to={`${sections[secondaryArticle.sectionId]
-            .permalink}/${secondaryArticle.slug}`}
+          to={`${secondarySection.permalink}/${secondaryArticle.slug}`}
           className={classes.articleTitle}
         >
           {secondaryArticle.title}
         </Link>
-        <p className={classes.summary}>{secondaryArticle.summary}</p>
+        <p className={classes.preview}>{secondaryArticle.preview}</p>
         <div className={classes.bylineContainer}>
           <Byline contributors={secondaryArticle.contributors} />
         </div>
-        <Dateline article={secondaryArticle} />
+        <Dateline timestamp={secondaryArticle.createdAt} />
       </div>
 
       <div className={classes.outquoteArticle}>
-        {outquoteMedia && (
+        {outquoteArticle.media.length > 0 && (
           <div>
-            <Link
-              to={`${sections[outquoteArticle.sectionId]
-                .permalink}/${outquoteArticle.slug}`}
-            >
+            <Link to={`${outquoteSection.permalink}/${outquoteArticle.slug}`}>
               <figure className={classes.figure}>
-                <img src={outquoteMedia.attachmentUrl} />
+                <img src={outquoteArticle.media[0].attachmentUrl} />
               </figure>
             </Link>
           </div>
         )}
-        <Link
-          to={sections[outquoteArticle.sectionId].permalink}
-          className={classes.sectionLabel}
-        >
-          {sections[outquoteArticle.sectionId].name}
+        <Link to={outquoteSection.permalink} className={classes.sectionLabel}>
+          {outquoteSection.name}
         </Link>
         <Link
-          to={`${sections[outquoteArticle.sectionId]
-            .permalink}/${outquoteArticle.slug}`}
+          to={`${outquoteSection.permalink}/${outquoteArticle.slug}`}
           className={classes.articleTitle}
         >
           {outquoteArticle.title}
         </Link>
-        {/*<Outquote quote={outquoteArticle.outquotes[0]} />*/}
-        <p className={classes.summary}>{outquoteArticle.summary}</p>
+        <Outquote quote={outquoteArticle.outquotes[0].text} />
+        <p className={classes.preview}>{outquoteArticle.preview}</p>
         <div className={classes.bylineContainer}>
           <Byline contributors={outquoteArticle.contributors} />
         </div>
-        <Dateline article={outquoteArticle} />
+        <Dateline timestamp={outquoteArticle.createdAt} />
       </div>
     </Col>
   );
 };
 
-const mapStateToProps = state => ({
-  articles: getArticlesWithContributors(state),
-  media: state.media.media,
-  sections: state.sections.sections,
-  outquotes: state.outquotes.outquotes,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(LeftColumn));
+export default injectSheet(styles)(LeftColumn);

@@ -25,7 +25,7 @@ We use Issuu to host our newspaper PDFs. Every time we send, we have to upload t
 
 4. Go to the [publication list](https://issuu.com/home/publications) and click the `Embed` option for the issue you just published.
 
-5. Go to the "First, the basics." section and change the background color to #333333.
+5. Go to the "First, the basics." section and change the background color to `#333333`.
 
 6. Scroll down and click "Save & Get Code". Choose the `iFrame` option. It looks something like this:
 ```

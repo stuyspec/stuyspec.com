@@ -1,22 +1,23 @@
 import React from "react";
+import { bindActionCreators, compose } from "redux";
 import { connect } from "react-redux";
+import { graphql } from "react-apollo";
+import humps from "humps";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
-import { bindActionCreators } from "redux";
 
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import { SignInModal } from "../../accounts/components";
 
 import { createComment } from "../actions";
-import { getRequestedArticleComments } from "../selectors";
-import { getCurrentUser } from "../../accounts/selectors";
+import { UserByUIDQuery } from "../../../queries";
 
 const styles = {
   CommentThread: {
     padding: 0,
     "& textarea": {
-      resize: "vertical", // only allows vertical resizing
+      resize: "vertical",
     },
   },
   "@media (max-width: 991px)": {
@@ -34,41 +35,59 @@ const styles = {
   },
 };
 
-const CommentThread = ({
-  classes,
-  comments,
-  article,
-  createComment,
-  sessionUser,
-  session,
-}) => {
-  const handleCreateComment = values => {
-    createComment(
+class CommentThread extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.session && this.props.session !== prevProps.session) {
+      /* If there is a session now, a user has just logged in. We want their
+       * information, so refetch. */
+      this.props.data.refetch();
+    }
+  }
+
+  handleCreateComment = values => {
+    this.props.createComment(
       {
         ...values,
-        articleId: article.id,
-        userId: sessionUser.id,
+        articleId: this.props.article.id,
+        userId: this.props.data.userByUID.id,
       },
-      session,
+      this.props.session,
     );
   };
-  return (
-    <Grid fluid className={classes.CommentThread}>
-      <Row className={classes.commentFormContainer}>
-        <CommentForm onSubmit={handleCreateComment} />
-        <Col md={4} lg={4} />
-      </Row>
-      <SignInModal />
-      {Object.values(comments).map(comment => {
-        return <Comment comment={comment} key={comment.id} />;
-      })}
-    </Grid>
-  );
-};
 
-const mapStateToProps = (state, ownProps) => ({
-  comments: getRequestedArticleComments(state, ownProps),
-  sessionUser: getCurrentUser(state),
+  render() {
+    let { classes, article, data } = this.props;
+    if (data && data.loading) {
+      return null;
+    }
+    let currentUser = null;
+    if (data && data.userByUID) {
+      data = humps.camelizeKeys(data);
+      currentUser = data.userByUID;
+    }
+    return (
+      <Grid fluid className={classes.CommentThread}>
+        <Row className={classes.commentFormContainer}>
+          <CommentForm
+            currentUser={currentUser}
+            onSubmit={this.handleCreateComment}
+          />
+          <Col md={4} lg={4} />
+        </Row>
+        <SignInModal />
+        {article.publishedComments.map(comment => {
+          return <Comment comment={comment} key={comment.id} />;
+        })}
+      </Grid>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
   session: state.accounts.session,
 });
 
@@ -76,6 +95,13 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ createComment }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(CommentThread),
-);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  graphql(UserByUIDQuery, {
+    options: ({ session }) => ({
+      fetchPolicy: "network-only",
+      variables: { uid: (session && session.uid) || "" },
+    }),
+  }),
+  injectSheet(styles),
+)(CommentThread);

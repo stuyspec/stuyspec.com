@@ -1,81 +1,66 @@
-import React from "react";
-import injectSheet from "react-jss";
-import { connect } from "react-redux";
-import { Row, Col } from "react-bootstrap/lib";
-import { Link } from "react-router-dom";
+/* Row of recommended articles on the bottom of the Article Page */
 
-import { getSectionTreeArticles } from "../selectors";
+import React from "react";
+import { compose } from "redux";
+import injectSheet from "react-jss";
+import { Row, Col } from "react-bootstrap/lib";
+import { withRouter } from "react-router-dom";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
+
+import { ArticleRecommendation } from "./summaries";
+
+const RecommendedRowQuery = gql`
+  query RecommendedRowQuery($section_id: ID!, $limit: Int!) {
+    topRankedArticles(section_id: $section_id, limit: $limit, has_media: true) {
+      id
+      title
+      slug
+      preview
+      created_at
+      contributors {
+        first_name
+        last_name
+      }
+      media {
+        attachment_url
+      }
+      section {
+        id
+        name
+        permalink
+      }
+    }
+  }
+`;
 
 const styles = {
   RecommendedRow: {
     padding: 0,
     marginBottom: "24px",
   },
+  title: {
+    border: "1px solid #ddd",
+    borderStyle: "solid none",
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "26px",
+    marginBottom: "24px",
+    padding: "12px 0 13px",
+    textAlign: "center",
+  },
   recommendedList: {
     borderBottom: "solid 1px #ddd",
     padding: "0 0 24px",
-  },
-  label: {
-    color: "#000",
-    display: "block",
-    fontFamily: "Circular Std",
-    fontSize: "12px",
-    fontWeight: "300",
-    marginBottom: "3px",
-    textTransform: "uppercase",
-  },
-  recommendedText: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "12px",
-    marginBottom: "12px",
-    textTransform: "uppercase",
-  },
-  summary: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "14px",
-    fontWeight: "300",
-    lineHeight: "1.29",
-  },
-  titleWithImage: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "14px",
-    lineHeight: "1.21",
-    "&:hover, &:active, &:focus": {
-      color: "#000",
+    "& > .row > div": {
+      padding: "18px !important",
     },
-  },
-  titleWithoutImage: {
-    color: "#000",
-    display: "block",
-    fontFamily: "Canela",
-    fontSize: "19px",
-    lineHeight: "1.38",
-    marginBottom: "2px",
-    "&:hover, &:active, &:focus": {
-      color: "#000",
+    "& > .row > div:first-child": {
+      paddingLeft: "0 !important",
     },
-  },
-  figure: {
-    marginBottom: "4.1px",
-    maxHeight: "170px",
-    overflow: "hidden",
-    width: "100%",
-    "& img": {
-      width: "100%",
-    },
-  },
-  recommendedBlock: {
-    float: "left",
-    padding: "0 7px 0",
-    width: "25%",
-    "&:first-child": {
-      paddingLeft: 0,
-    },
-    "&:last-child": {
-      paddingRight: 0,
+    "& > .row > div:last-child": {
+      paddingRight: "0 !important",
     },
   },
   "@media (max-width: 991px)": {
@@ -87,97 +72,67 @@ const styles = {
     RecommendedRow: {
       padding: "0 2%",
     },
-    figure: {
-      maxHeight: "270px",
-    },
-  },
-  "@media (max-width: 575px)": {
-    recommendedBlock: {
-      width: "50%",
-      marginBottom: "7px",
-    },
     recommendedList: {
-      /* recommendedBlocks are structured in a block form,
-           1  2
-           3  4,
-         rendering these next padding removals necessary.
-       */
-      "& > div:nth-child(2)": {
-        // 2nd recommendedBlock
-        paddingRight: "0 !important",
-      },
-      "& > div:nth-child(3)": {
-        // 3rd recommendedBlock
-        paddingLeft: "0 !important",
+      "& > .row > div": {
+        padding: "0px !important",
+        marginBottom: "38px",
       },
     },
   },
 };
 
-const RecommendedRow = ({ classes, media, articles, sections }) => {
-  // section is always the parent section, articles are always in that tree.
-  const recommendedArticles = articles.slice(0, 4);
+const RecommendedRow = ({
+  classes,
+  data,
+  match: { params: { article_slug } },
+}) => {
+  if (data.loading) {
+    return null;
+  }
+  data = humps.camelizeKeys(data);
+
+  const articles = data.topRankedArticles.filter(
+    article => article.slug !== article_slug,
+  );
+
   return (
     <Row className={classes.RecommendedRow}>
-      <p className={classes.recommendedText}>Recommended</p>
-      <Col xs={12} sm={12} md={9} lg={9} className={classes.recommendedList}>
-        {recommendedArticles.map(article => {
-          const featuredMedia = Object.values(media).find(mediaObject => {
-            return (
-              mediaObject.isFeatured && mediaObject.articleId === article.id
-            );
-          });
-          // some articles may be under a subsection of the main section.
-          const articleSection = sections[article.sectionId];
-          if (featuredMedia) {
-            return (
-              <div key={article.id} className={classes.recommendedBlock}>
-                <Link to={`${articleSection.permalink}/${article.slug}`}>
-                  <figure className={classes.figure}>
-                    <img src={featuredMedia.mediumAttachmentUrl} />
-                  </figure>
-                </Link>
-                <Link to={articleSection.permalink} className={classes.label}>
-                  {articleSection.name}
-                </Link>
-                <Link
-                  to={`${articleSection.permalink}/${article.slug}`}
-                  className={classes.titleWithImage}
-                >
-                  {article.title}
-                </Link>
-              </div>
-            );
-          } else {
-            return (
-              <div key={article.id} className={classes.recommendedBlock}>
-                <Link
-                  to={`${articleSection.permalink}`}
-                  className={classes.label}
-                >
-                  {articleSection.name}
-                </Link>
-                <Link
-                  to={`${articleSection.permalink}/${article.slug}`}
-                  className={classes.titleWithoutImage}
-                >
-                  {article.title}
-                </Link>
-                <p className={classes.summary}>{article.summary}</p>
-              </div>
-            );
-          }
-        })}
+      <Col xs={12} sm={12} md={12} lg={12} className={classes.title}>
+        Recommended
       </Col>
-      <Col xsHidden smHidden md={3} lg={3} />
+      <Col xs={12} sm={12} md={12} lg={12} className={classes.recommendedList}>
+        <Row>
+          {articles
+            .slice(0, 2)
+            .map(article => (
+              <ArticleRecommendation key={article.id} article={article} />
+            ))}
+        </Row>
+        <Row>
+          {articles
+            .slice(2, 4)
+            .map(article => (
+              <ArticleRecommendation key={article.id} article={article} />
+            ))}
+        </Row>
+      </Col>
     </Row>
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  media: state.media.media,
-  articles: getSectionTreeArticles(state, ownProps),
-  sections: state.sections.sections,
-});
+export default compose(
+  graphql(RecommendedRowQuery, {
+    options: ({ section }) => ({
+      variables: {
+        section_id: section.id,
 
-export default connect(mapStateToProps)(injectSheet(styles)(RecommendedRow));
+        // Though the RecommendedRow only displays four articles, to account
+        // for the case that one of the recommended articles includes the
+        // current article, we want a backup.
+        limit: 5,
+      },
+    }),
+  }),
+  withRouter,
+  injectSheet(styles),
+)(RecommendedRow);

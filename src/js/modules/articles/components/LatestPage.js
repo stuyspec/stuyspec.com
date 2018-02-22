@@ -1,12 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 import { Helmet } from "react-helmet";
 
-import ArticleList from "./ArticleList";
+import ArticleFeed from "./ArticleFeed";
 import { TallAd } from "../../advertisements/components";
-import { getLatestArticles } from "../selectors";
 
 const styles = {
   pageTitle: {
@@ -32,7 +30,7 @@ const styles = {
   },
 };
 
-const LatestPage = ({ classes, articles }) => {
+const LatestPage = ({ classes }) => {
   return (
     <Grid fluid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -41,7 +39,7 @@ const LatestPage = ({ classes, articles }) => {
       </Helmet>
       <Row>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.articleList}>
-          <ArticleList articles={articles} title="Latest" label="Articles" />
+          <ArticleFeed />
         </Col>
         <Col
           xsHidden
@@ -57,8 +55,4 @@ const LatestPage = ({ classes, articles }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  articles: getLatestArticles(state),
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(LatestPage));
+export default injectSheet(styles)(LatestPage);

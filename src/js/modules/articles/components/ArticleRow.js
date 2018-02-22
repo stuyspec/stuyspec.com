@@ -1,6 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Row, Col } from "react-bootstrap/lib";
+import { Row } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
@@ -18,7 +17,7 @@ const styles = {
     display: "block",
     fontFamily: "Circular Std",
     fontSize: "13px",
-    fontWeight: "300",
+    fontWeight: 300,
     float: "left",
     marginRight: "19px",
     width: "110px",
@@ -28,10 +27,10 @@ const styles = {
     display: "none",
     fontFamily: "Circular Std",
     fontSize: "12px",
-    fontWeight: "300",
+    fontWeight: 300,
     marginRight: "19px",
   },
-  preview: {
+  featuredMedia: {
     overflow: "hidden",
   },
   figure: {
@@ -56,7 +55,7 @@ const styles = {
       color: "#000",
     },
   },
-  summary: {
+  preview: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "16px",
@@ -70,7 +69,7 @@ const styles = {
     DatelineMobile: {
       display: "block",
     },
-    preview: {
+    featuredMedia: {
       overflow: "visible",
     },
     figure: {
@@ -88,27 +87,25 @@ const styles = {
   },
 };
 
-const ArticleRow = ({ classes, article, sections, users, media }) => {
-  const section = sections[article.sectionId];
-  const featuredMedia = Object.values(media).find(media => {
-    return media.isFeatured && media.articleId === article.id;
-  });
-  if (featuredMedia) {
-    featuredMedia.creator = users[featuredMedia.userId];
+const ArticleRow = ({ classes, article }) => {
+  const { section } = article;
+  let featuredMedia = null;
+  if (article.media.length > 0) {
+    featuredMedia = article.media[0];
   }
   return (
     <Row key={article.id} className={classes.ArticleRow}>
       <div className={classes.articleBlock} key={article.id}>
         <div className={classes.DatelineDesktop}>
-          <Dateline article={article} />
+          <Dateline timestamp={article.createdAt} />
         </div>
-        <div className={classes.preview}>
+        <div className={classes.featuredMedia}>
           {featuredMedia && (
             <Link to={`${section.permalink}/${article.slug}`}>
               <figure className={classes.figure}>
                 <img
                   src={featuredMedia.attachmentUrl}
-                  alt={`${featuredMedia.mediaType}: ${featuredMedia.title}`}
+                  alt={featuredMedia.title}
                 />
               </figure>
             </Link>
@@ -119,21 +116,15 @@ const ArticleRow = ({ classes, article, sections, users, media }) => {
           >
             {article.title}
           </Link>
-          <p className={classes.summary}>{article.summary}</p>
+          <p className={classes.preview}>{article.preview}</p>
           <Byline contributors={article.contributors} />
-          <p className={classes.DatelineMobile}>
-            <Dateline article={article} />
-          </p>
+          <div className={classes.DatelineMobile}>
+            <Dateline timestamp={article.createdAt} />
+          </div>
         </div>
       </div>
     </Row>
   );
 };
 
-const mapStateToProps = state => ({
-  media: state.media.media,
-  sections: state.sections.sections,
-  users: state.users.users,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(ArticleRow));
+export default injectSheet(styles)(ArticleRow);

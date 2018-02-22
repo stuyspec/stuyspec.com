@@ -1,12 +1,39 @@
 import React from "react";
-import { connect } from "react-redux";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import { Row, Col } from "react-bootstrap/lib";
 
 import Byline from "../../articles/components/Byline";
 import Dateline from "../../articles/components/Dateline";
-import { getArticlesWithContributors } from "../../articles/selectors";
+
+const SectionFeatureQuery = gql`
+  query SectionFeatureQuery($section_slug: String!) {
+    featuredArticlesBySectionSlug(section_slug: $section_slug) {
+      title
+      slug
+      preview
+      created_at
+      contributors {
+        first_name
+        last_name
+        slug
+      }
+      media {
+        title
+        attachment_url
+        medium_attachment_url
+        thumb_attachment_url
+      }
+      section {
+        name
+        permalink
+      }
+    }
+  }
+`;
 
 const styles = {
   SectionFeature: {
@@ -27,23 +54,21 @@ const styles = {
       textDecoration: "none",
     },
   },
-  primaryArticle: {
+  secondaryArticle: {
     paddingLeft: "13px !important",
     paddingRight: "0 !important",
   },
-  secondaryArticle: {
-    paddingRight: "7px",
-  },
   ternaryArticle: {
     padding: "0 14px 0 13px !important",
-    borderRight: "solid 1px #ddd",
+    border: "solid 1px #ddd",
+    borderStyle: "none solid",
     paddingRight: "13px !important",
   },
   title: {
     color: "#000",
     display: "block",
     fontFamily: "Minion Pro",
-    fontSize: "16px",
+    fontSize: "18px",
     fontWeight: "bold",
     lineHeight: 1.25,
     marginBottom: "7px",
@@ -51,7 +76,7 @@ const styles = {
       color: "#000",
     },
   },
-  summary: {
+  preview: {
     fontFamily: "Minion Pro",
     fontSize: "14px",
     lineHeight: 1.29,
@@ -67,7 +92,7 @@ const styles = {
   featuredMediaContainer: {
     borderRight: "solid 1px #ddd",
     paddingLeft: "13px !important",
-    paddingRight: "14px !important",
+    paddingRight: "14px",
   },
   mobileArticleTitle1: {
     borderTop: "1px solid #ddd !important",
@@ -91,76 +116,52 @@ const styles = {
       borderBottom: "1px solid #ddd",
       paddingBottom: "6px",
     },
-    secondaryArticle: {
-      padding: "0px !important",
-      marginBottom: 0,
-    },
     ternaryArticle: {
-      padding: "0px !important",
+      borderLeft: 0,
       marginBottom: 0,
+      padding: "0px 13px 0px 0px !important",
+    },
+    secondaryArticle: {
+      paddingLeft: "13px !important",
     },
     featuredMediaContainer: {
       borderRight: 0,
-      paddingRight: "0 !important",
+      paddingLeft: "0 !important",
+      paddingRight: 0,
     },
   },
 };
 
-const SectionFeature = ({
-  classes,
-  articles,
-  section,
-  media,
-  without, // parents can exclude a specific article (for example, the featuredArticle of a page
-}) => {
-  const sectionArticles = articles.filter(
-    article => article.sectionId === section.id && article !== without,
-  );
-  console.log(sectionArticles);
-  const primaryArticle =
-    sectionArticles[0] === articles[0]
-      ? sectionArticles[1]
-      : sectionArticles[0]; // we don't want to copy the homepage FeaturedArticle
-  let featuredMedia = null;
-  const secondaryArticle =
-    sectionArticles.find(article => {
-      if (article === primaryArticle) {
-        return false;
-      }
-      // find a TOP 10 Article within the section with media
-      const mediaObject = Object.values(media).find(
-        mediaObject => mediaObject.articleId === article.id,
-      );
-      if (mediaObject) {
-        featuredMedia = mediaObject;
-      }
-      return mediaObject;
-    }) || sectionArticles[2]; // if none such article found, default is the second
-  const possibleTernaryArticle = sectionArticles
-    .slice(1, 10)
-    .find(
-      article => article !== secondaryArticle && article !== primaryArticle,
-    );
-
-  // NESTED IN <Col lg={9}>
+const SectionFeature = ({ classes, data }) => {
+  if (data.loading) {
+    return null;
+  }
+  data = humps.camelizeKeys(data);
+  const [
+    primaryArticle,
+    secondaryArticle,
+    ternaryArticle,
+  ] = data.featuredArticlesBySectionSlug;
+  const featuredMedia = primaryArticle.media[0];
+  const { section } = primaryArticle;
   return (
     <Row className={classes.SectionFeature}>
       <Link to={section.permalink} className={classes.sectionLabel}>
         {section.name}
       </Link>
-      {secondaryArticle && (
-        <Col xs={6} sm={4} md={4} lg={4} className={classes.secondaryArticle}>
-          <Link
-            className={classes.title}
-            to={`${section.permalink}/${secondaryArticle.slug}`}
-          >
-            {secondaryArticle.title}
-          </Link>
-          <p className={classes.summary}>{secondaryArticle.summary}</p>
-          <Byline contributors={secondaryArticle.contributors} />
-          <Dateline article={secondaryArticle} />
-        </Col>
-      )}
+
+      <Col xs={6} sm={4} md={4} lg={4} className={classes.primaryArticle}>
+        <Link
+          className={classes.title}
+          to={`${section.permalink}/${primaryArticle.slug}`}
+        >
+          {primaryArticle.title}
+        </Link>
+        <p className={classes.preview}>{primaryArticle.preview}</p>
+        <Byline contributors={primaryArticle.contributors} />
+        <Dateline timestamp={primaryArticle.createdAt} />
+      </Col>
+
       {featuredMedia ? (
         <Col
           xs={6}
@@ -169,57 +170,60 @@ const SectionFeature = ({
           lg={4}
           className={classes.featuredMediaContainer}
         >
-          <Link to={`${section.permalink}/${secondaryArticle.slug}`}>
+          <Link to={`${section.permalink}/${primaryArticle.slug}`}>
             <figure className={classes.figure}>
-              <img src={featuredMedia.mediumAttachmentUrl} />
+              <img
+                src={featuredMedia.mediumAttachmentUrl}
+                alt={featuredMedia.title}
+              />
             </figure>
           </Link>
         </Col>
       ) : (
-        possibleTernaryArticle && (
-          <Col xsHidden sm={4} md={4} lg={4} className={classes.ternaryArticle}>
+        ternaryArticle && (
+          <Col xs={6} sm={4} md={4} lg={4} className={classes.ternaryArticle}>
             <Link
               className={classes.title}
-              to={`${section.permalink}/${possibleTernaryArticle.slug}`}
+              to={`${section.permalink}/${ternaryArticle.slug}`}
             >
-              {possibleTernaryArticle.title}
+              {ternaryArticle.title}
             </Link>
-            <p className={classes.summary}>{possibleTernaryArticle.summary}</p>
-            <Byline contributors={possibleTernaryArticle.contributors} />
-            <Dateline article={possibleTernaryArticle} />
+            <p className={classes.preview}>{ternaryArticle.preview}</p>
+            <Byline contributors={ternaryArticle.contributors} />
+            <Dateline timestamp={ternaryArticle.createdAt} />
           </Col>
         )
       )}
-      {primaryArticle && (
-        <Col xsHidden sm={4} md={4} lg={4} className={classes.primaryArticle}>
-          <Link
-            className={classes.title}
-            to={`${section.permalink}/${primaryArticle.slug}`}
-          >
-            {primaryArticle.title}
-          </Link>
-          <p className={classes.summary}>{primaryArticle.summary}</p>
-          <Byline contributors={primaryArticle.contributors} />
-          <Dateline article={primaryArticle} />
-        </Col>
-      )}
-      {primaryArticle && (
-        <Col
-          xs={12}
-          smHidden
-          mdHidden
-          lgHidden
-          className={classes.mobileArticleTitle1}
+
+      <Col xsHidden sm={4} md={4} lg={4} className={classes.secondaryArticle}>
+        <Link
+          className={classes.title}
+          to={`${section.permalink}/${secondaryArticle.slug}`}
         >
-          <Link
-            className={classes.title}
-            to={`${section.permalink}/${primaryArticle.slug}`}
-          >
-            {primaryArticle.title}
-          </Link>
-        </Col>
-      )}
-      {possibleTernaryArticle && (
+          {secondaryArticle.title}
+        </Link>
+        <p className={classes.preview}>{secondaryArticle.preview}</p>
+        <Byline contributors={secondaryArticle.contributors} />
+        <Dateline timestamp={secondaryArticle.createdAt} />
+      </Col>
+
+      <Col
+        xs={12}
+        smHidden
+        mdHidden
+        lgHidden
+        className={classes.mobileArticleTitle1}
+      >
+        <Link
+          className={classes.title}
+          to={`${section.permalink}/${secondaryArticle.slug}`}
+        >
+          {secondaryArticle.title}
+        </Link>
+      </Col>
+
+      {featuredMedia &&
+      ternaryArticle && (
         <Col
           xs={12}
           smHidden
@@ -229,9 +233,9 @@ const SectionFeature = ({
         >
           <Link
             className={classes.title}
-            to={`${section.permalink}/${possibleTernaryArticle.slug}`}
+            to={`${section.permalink}/${ternaryArticle.slug}`}
           >
-            {possibleTernaryArticle.title}
+            {ternaryArticle.title}
           </Link>
         </Col>
       )}
@@ -239,9 +243,8 @@ const SectionFeature = ({
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  articles: getArticlesWithContributors(state),
-  media: state.media.media,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(SectionFeature));
+export default graphql(SectionFeatureQuery, {
+  options: ({ section_slug }) => ({
+    variables: { section_slug },
+  }),
+})(injectSheet(styles)(SectionFeature));

@@ -1,10 +1,9 @@
 import React from "react";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, compose } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
-import { Grid, Row, Col } from "react-bootstrap/lib";
-import { getCurrentUser } from "../../accounts/selectors";
+import { Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 
 import { openSignInModal, signOut } from "../../accounts/actions";
@@ -106,21 +105,14 @@ const styles = {
 
 const validate = values => {
   const errors = {};
-  if (!values.content) {
-    errors.content = "Required";
-  } else if (values.content.length > 1000) {
+  if (values.content && values.content.length > 1000) {
     errors.content = `Must be 1000 characters or less. Currently 
     ${values.content.length} characters`;
   }
   return errors;
 };
 
-const renderField = ({
-  input,
-  disabled,
-  meta: { touched, error },
-  checkLogin,
-}) => {
+const CommentTextArea = ({ input, meta: { touched, error }, checkLogin }) => {
   return (
     <div>
       <textarea
@@ -139,8 +131,8 @@ const CommentForm = ({
   handleSubmit,
   submitting,
   currentUser,
-  session,
   openSignInModal,
+  session,
   status,
   signOut,
 }) => {
@@ -165,7 +157,7 @@ const CommentForm = ({
       <form onSubmit={handleSubmit}>
         <Field
           name="content"
-          component={renderField}
+          component={CommentTextArea}
           checkLogin={() => !currentUser && openSignInModal()}
         />
         <div className={classes.submitDiv}>
@@ -194,7 +186,6 @@ const CommentForm = ({
 
 const mapStateToProps = state => ({
   status: state.comments.status,
-  currentUser: getCurrentUser(state),
   session: state.accounts.session,
 });
 
@@ -202,11 +193,11 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ openSignInModal, signOut }, dispatch);
 };
 
-const ConnectedCommentForm = connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(CommentForm),
-);
-
-export default reduxForm({
-  form: "createComment",
-  validate,
-})(ConnectedCommentForm);
+export default compose(
+  reduxForm({
+    form: "createComment",
+    validate,
+  }),
+  connect(mapStateToProps, mapDispatchToProps),
+  injectSheet(styles),
+)(CommentForm);

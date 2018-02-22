@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
 import { closeSidebar } from "../actions";
-import { getTopLevelSections } from "../../sections/selectors";
 
 const styles = {
   divider: {
@@ -20,7 +19,7 @@ const styles = {
     display: "block",
     fontFamily: "Circular Std",
     fontSize: "15px",
-    fontWeight: "500",
+    fontWeight: 500,
     margin: "8px 0",
     padding: "8px 0 8px 11px",
     textAlign: "left",
@@ -37,12 +36,7 @@ const styles = {
   },
 };
 
-const SidebarContent = ({
-  classes,
-  session,
-  topLevelSections,
-  closeSidebar,
-}) => {
+const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
   let sidebarElements = [];
   sidebarElements.push(
     <Link
@@ -54,7 +48,7 @@ const SidebarContent = ({
       Home
     </Link>,
   );
-  Object.values(topLevelSections).map(section => {
+  sections.map(section => {
     sidebarElements.push(
       <Link
         className={classes.sidebarSectionLink}
@@ -98,12 +92,21 @@ const SidebarContent = ({
       </Link>,
     );
   }
+  sidebarElements.push(
+    <Link
+      className={classes.sidebarSectionLink}
+      key={-3}
+      onClick={closeSidebar}
+      to="/search"
+    >
+      Search
+    </Link>,
+  );
   return <div>{sidebarElements}</div>;
 };
 
 const mapStateToProps = state => ({
   session: state.accounts.session,
-  topLevelSections: getTopLevelSections(state),
 });
 
 const mapDispatchToProps = dispatch => {

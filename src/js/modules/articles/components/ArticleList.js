@@ -23,7 +23,7 @@ const styles = {
     color: "#000",
     fontFamily: "Circular Std",
     fontSize: "13px",
-    fontWeight: "300",
+    fontWeight: 300,
     padding: "4px 0",
     marginBottom: "22px",
   },
@@ -40,10 +40,6 @@ const styles = {
       lineHeight: 1,
     },
   },
-  noArticlesMessage: {
-    fontFamily: "Minion Pro",
-    fontSize: "17px",
-  },
 };
 
 const ArticleList = ({ classes, articles, title, label }) => {
@@ -55,7 +51,8 @@ const ArticleList = ({ classes, articles, title, label }) => {
   return (
     <Grid className={classes.ArticleList}>
       {title &&
-        (title === "VOICES" ? ( // voices is the only section with art
+        (title === "VOICES" ? (
+          // voices is the only section with art
           <figure className={classes.voicesBanner}>
             <img
               src="/img/voices_banner.png"
@@ -70,12 +67,6 @@ const ArticleList = ({ classes, articles, title, label }) => {
       {articles.map(article => {
         return <ArticleRow article={article} key={article.id} />;
       })}
-      {articles.length === 0 && (
-        <p className={classes.noArticlesMessage}>
-          We are still in the process of uploading old articles. Please check
-          back at a later time.
-        </p>
-      )}
     </Grid>
   );
 };

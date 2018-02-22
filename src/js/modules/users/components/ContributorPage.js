@@ -1,13 +1,44 @@
 import React from "react";
-import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Helmet } from "react-helmet";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
 
-import { getContributorFromSlug } from "../selectors";
-import { getContributorArticles } from "../../articles/selectors";
 import { ArticleList } from "../../articles/components";
 import { NotFoundPage } from "../../core/components";
+
+const ContributorBySlug = gql`
+  query ContributorPageQuery($slug: String!) {
+    userBySlug(slug: $slug) {
+      first_name
+      last_name
+      email
+      description
+      articles {
+        id
+        slug
+        title
+        preview
+        contributors {
+          slug
+          first_name
+          last_name
+        }
+        section {
+          id
+          permalink
+        }
+        media {
+          media_type
+          title
+          attachment_url
+        }
+      }
+    }
+  }
+`;
 
 const styles = {
   name: {
@@ -32,7 +63,7 @@ const styles = {
     color: "#000",
     fontFamily: "Circular Std",
     fontSize: "13px",
-    fontWeight: "300",
+    fontWeight: 300,
     marginBottom: "22px",
     padding: "4px 0px",
   },
@@ -44,8 +75,13 @@ const styles = {
   },
 };
 
-const ContributorPage = ({ classes, contributor, articles }) => {
-  if (!contributor) {
+const ContributorPage = ({ classes, data }) => {
+  if (data.loading) {
+    return null;
+  }
+  data = humps.camelizeKeys(data);
+  const contributor = data.userBySlug;
+  if (contributor === null) {
     return <NotFoundPage />;
   }
   return (
@@ -63,19 +99,18 @@ const ContributorPage = ({ classes, contributor, articles }) => {
             {contributor.email}
           </a>
           <p className={classes.description}>{contributor.description}</p>
-          <div className={classes.latest}>Latest</div>
-          <ArticleList articles={articles} />
+          <ArticleList
+            articles={contributor.articles}
+            label="Latest Articles"
+          />
         </Col>
       </Row>
     </Grid>
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  contributor: getContributorFromSlug(state, ownProps),
-  articles: getContributorArticles(state, ownProps),
-});
-
-export default connect(mapStateToProps, null)(
-  injectSheet(styles)(ContributorPage),
-);
+export default graphql(ContributorBySlug, {
+  options: ({ match }) => ({
+    variables: { slug: match.params.contributor_slug },
+  }),
+})(injectSheet(styles)(ContributorPage));

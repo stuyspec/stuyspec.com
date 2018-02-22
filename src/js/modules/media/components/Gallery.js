@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Slider from "react-slick";
 import injectSheet from "react-jss";
 
@@ -59,7 +59,7 @@ const styles = {
   },
 };
 
-class Gallery extends Component {
+class Gallery extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
