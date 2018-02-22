@@ -4,7 +4,6 @@ import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import humps from "humps";
 import injectSheet from "react-jss";
-import { Row, Col } from "react-bootstrap/lib";
 
 const RecommendedArticlesQuery = gql`
   query RecommendedArticlesQuery($limit: Int!) {

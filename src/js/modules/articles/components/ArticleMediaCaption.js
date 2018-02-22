@@ -40,7 +40,8 @@ const ArticleMediaCaption = ({ classes, image }) => {
         {capitalizeWord(image.mediaType)}
         &nbsp;by&nbsp;
         {user.firstName}
-        {/* Department names are stored in firstName, not lastName, requiring the following logic */}
+        {/* Department names are stored in firstName, not lastName, requiring 
+            the following logic */}
         {user.lastName !== "" && " " + user.lastName}
       </Link>
       .

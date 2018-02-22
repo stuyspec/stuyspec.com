@@ -79,13 +79,6 @@ const FeaturedSectionsBar = ({
           Newsletter
         </span>
       </li>
-      {/*
-        <li key={-2} className={classes.sectionListItem}>
-          <Link to={"/paper"} className={classes.sectionLink}>
-            The Paper
-          </Link>
-        </li>
-      */}
       {!omitSearch && (
         <li key={-3} className={classes.sectionListItem}>
           <Link to="/search" className={classes.sectionLink}>

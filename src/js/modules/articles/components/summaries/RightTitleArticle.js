@@ -62,7 +62,7 @@ const styles = {
     article: {
       marginLeft: 0,
       paddingTop: "3vw",
-      width: "41.666666%", // col-sm-5
+      width: "41.666666%",
     },
     preview: {
       margin: "0 auto 18px auto",

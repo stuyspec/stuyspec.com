@@ -3,7 +3,6 @@ import { compose } from "redux";
 import { reduxForm } from "redux-form";
 import injectSheet from "react-jss";
 
-import { signOut } from "../../actions";
 import { FormStatus } from "./helpers";
 
 const styles = {

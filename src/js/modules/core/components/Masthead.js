@@ -12,7 +12,8 @@ import { FeaturedSectionsBar } from "../../sections/components";
 
 const styles = {
   Masthead: {
-    fontSize: 0, // resets font size to remove unwanted whitespace
+    // resets font size to remove unwanted whitespace
+    fontSize: 0,
     margin: "24px auto 19px auto",
     textAlign: "center",
     "& button:focus": {

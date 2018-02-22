@@ -3,7 +3,7 @@ import { bindActionCreators, compose } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
-import { Grid, Row, Col } from "react-bootstrap/lib";
+import { Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 
 import { openSignInModal, signOut } from "../../accounts/actions";

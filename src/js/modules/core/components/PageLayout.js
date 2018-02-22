@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 import { withRouter } from "react-router-dom";
@@ -72,7 +72,7 @@ const sidebarStyles = {
   },
 };
 
-class PageLayout extends Component {
+class PageLayout extends PureComponent {
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
       if (document.getElementById("scroll-reset-assistant")) {
@@ -85,7 +85,11 @@ class PageLayout extends Component {
   }
 
   handleSetOpen = isSidebarOpen => {
-    isSidebarOpen ? this.props.openSidebar() : this.props.closeSidebar();
+    if (isSidebarOpen) {
+      this.props.openSidebar();
+    } else {
+      this.props.closeSidebar();
+    }
   };
 
   render() {

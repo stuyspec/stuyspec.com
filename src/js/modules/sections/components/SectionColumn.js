@@ -1,6 +1,5 @@
 import React from "react";
 import injectSheet from "react-jss";
-import { Col } from "react-bootstrap/lib";
 
 import SectionBlock from "./SectionBlock";
 

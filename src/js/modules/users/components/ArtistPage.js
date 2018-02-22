@@ -82,7 +82,7 @@ const styles = {
   },
 };
 
-const ArtistPage = ({ classes, data, match }) => {
+const ArtistPage = ({ classes, data }) => {
   data = humps.camelizeKeys(data);
   if (data.loading) {
     return null;
@@ -131,7 +131,9 @@ export default graphql(ArtistProfileBySlug, {
   options: ({ match }) => ({
     variables: {
       user_slug: match.params.artist_slug,
-      role_slug: match.path.split("/")[1], // this route will always work thanks to limits set in RoutingApp
+
+      // this route will always work thanks to limits set in RoutingApp
+      role_slug: match.path.split("/")[1],
     },
   }),
 })(injectSheet(styles)(ArtistPage));

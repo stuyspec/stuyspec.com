@@ -40,7 +40,11 @@ const reducer = (state = { ...initialState }, action) => {
         state.viewportHeight !== viewportHeight
       ) {
         // override width/height which will refresh app view
-        return Object.assign({ ...state }, { viewportWidth, viewportHeight });
+        return {
+          ...state,
+          viewportWidth,
+          viewportHeight,
+        };
       } else {
         // otherwise do not mutate
         return state;

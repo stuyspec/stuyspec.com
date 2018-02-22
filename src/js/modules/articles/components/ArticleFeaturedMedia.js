@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
@@ -61,7 +61,7 @@ const styles = {
   },
 };
 
-class ArticleFeaturedMedia extends Component {
+class ArticleFeaturedMedia extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {

@@ -53,9 +53,9 @@ const ArticleReference = ({ classes, data }) => {
   // Since the title will be surrounded with double quotes, we replace the
   // title's double quotes (for movies, books, etc.) with single quotes.
   const title = article.title
-    .replace('"', "'") // straight double quote
-    .replace("“", "‘") // curly left double quote
-    .replace("”", "’"); // curly right double quote
+    .replace('"', "'")
+    .replace("“", "‘")
+    .replace("”", "’");
   return (
     <span className={classes.ArticleReference}>
       This article was written in response to &ldquo;
@@ -76,7 +76,8 @@ export default graphql(ArticleReferenceQuery, {
   options: ({ article }) => ({
     variables: {
       article_id: parseInt(
-        SPEC_REFERENCE_PATTERN.exec(articleBySlug.content)[1],
+        SPEC_REFERENCE_PATTERN.exec(article.content)[1],
+        10,
       ),
     },
   }),

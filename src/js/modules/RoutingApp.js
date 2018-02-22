@@ -6,7 +6,7 @@ import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import ConnectedRouter from "react-router-redux/ConnectedRouter";
 import queryString from "query-string";
-import appHistory from "tools/appHistory";
+import appHistory from "../tools/appHistory";
 
 import {
   EditProfilePage,
@@ -82,7 +82,7 @@ class RoutingApp extends PureComponent {
     return (
       <ConnectedRouter history={appHistory}>
         <PageLayout>
-          {!loading ? (
+          {!loading && (
             <Switch>
               <Route exact path="/" component={HomePage} />
               {allSections.map(section => {
@@ -179,8 +179,6 @@ class RoutingApp extends PureComponent {
               <Route path={"/search"} key={"search"} component={SearchPage} />
               <Route path="*" key={"404"} component={NotFoundPage} />
             </Switch>
-          ) : (
-            <span> </span>
           )}
         </PageLayout>
       </ConnectedRouter>

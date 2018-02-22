@@ -26,7 +26,7 @@ const styles = {
     display: "inline-block",
     width: "100%",
     "& hr": {
-      overflow: "visible" /* For IE */,
+      overflow: "visible",
       padding: 0,
       border: "none",
       borderTop: "medium double #333",

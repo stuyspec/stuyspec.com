@@ -168,7 +168,8 @@ export const subscribe = values => {
           payload: response,
         });
       })
-      .then(delay(500)) // Lets the user glance at the confirmation message
+      // Lets the user glance at the confirmation message
+      .then(delay(500))
       .then(() => {
         dispatch({ type: t.CLOSE_SUBSCRIPTION_MODAL });
 
@@ -186,7 +187,7 @@ export const subscribe = values => {
 
 export const validateToken = session => {
   if (!session) {
-    return;
+    return false;
   }
 
   // If a session exists, we need to check if it is still valid.

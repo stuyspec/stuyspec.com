@@ -40,7 +40,7 @@ class CommentThread extends React.Component {
     super(props);
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (this.props.session && this.props.session !== prevProps.session) {
       /* If there is a session now, a user has just logged in. We want their
        * information, so refetch. */

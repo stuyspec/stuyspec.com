@@ -7,7 +7,8 @@ import { Byline, Dateline, Outquote } from "../";
 
 const styles = {
   LeftColumn: {
-    paddingRight: "7px !important", // adds to the 7px in Col = 14px
+    // adds to the 7px in Col = 14px
+    paddingRight: "7px !important",
     "& > div": {
       borderBottom: "1px solid #ddd",
       marginBottom: "14px",

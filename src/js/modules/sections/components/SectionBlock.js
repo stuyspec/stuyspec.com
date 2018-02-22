@@ -122,7 +122,7 @@ const styles = {
 };
 
 const SectionBlock = ({ classes, data }) => {
-  if (data.loading) {
+  if (data.loading || data.topRankedArticles.length === 0) {
     return null;
   }
 

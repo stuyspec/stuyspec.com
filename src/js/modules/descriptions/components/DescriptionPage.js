@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Grid, Row, Col } from "react-bootstrap/lib";
+import { Grid } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 import { Helmet } from "react-helmet";
 

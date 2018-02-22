@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 import { Byline, Dateline } from "../";
 import { ISSUU_CONFIG } from "../../../../constants";
 
-// TODO: ADD OUTQUOTES
-
 const styles = {
   RightColumn: {
     borderLeft: "solid 1px #ddd",
