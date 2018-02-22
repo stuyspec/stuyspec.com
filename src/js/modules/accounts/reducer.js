@@ -152,7 +152,7 @@ const reducer = (state = { ...initialState }, action) => {
       let errors = (action.payload.response &&
         action.payload.response.data.errors) || [action.payload.message];
       if (action.payload.response.status === 422) {
-        errors = ["You have already subscribed."];
+        errors = ["You are already subscribed."];
       }
       return {
         ...state,

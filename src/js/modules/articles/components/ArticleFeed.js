@@ -131,8 +131,8 @@ export default graphql(ArticleFeedQuery, {
     loading,
     latestArticles,
 
-    // loadMoreArticles is just a configured version of Apollo's fetchMore
-    // function. It uses offsets and previous data to get more articles.
+    // loadMoreArticles is just a wrapper for Apollo's fetchMore function.
+    // It uses offsets and previous data to determine which articles to get.
     loadMoreArticles: () => {
       return fetchMore({
         variables: {
