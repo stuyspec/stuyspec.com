@@ -54,7 +54,7 @@ const styles = {
       textDecoration: "none",
     },
   },
-  primaryArticle: {
+  secondaryArticle: {
     paddingLeft: "13px !important",
     paddingRight: "0 !important",
   },
@@ -121,7 +121,7 @@ const styles = {
       marginBottom: 0,
       padding: "0px 13px 0px 0px !important",
     },
-    primaryArticle: {
+    secondaryArticle: {
       paddingLeft: "13px !important",
     },
     featuredMediaContainer: {
@@ -150,17 +150,18 @@ const SectionFeature = ({ classes, data }) => {
         {section.name}
       </Link>
 
-      <Col xsHidden sm={4} md={4} lg={4} className={classes.secondaryArticle}>
+      <Col xs={6} sm={4} md={4} lg={4} className={classes.primaryArticle}>
         <Link
           className={classes.title}
-          to={`${section.permalink}/${secondaryArticle.slug}`}
+          to={`${section.permalink}/${primaryArticle.slug}`}
         >
-          {secondaryArticle.title}
+          {primaryArticle.title}
         </Link>
-        <p className={classes.preview}>{secondaryArticle.preview}</p>
-        <Byline contributors={secondaryArticle.contributors} />
-        <Dateline timestamp={secondaryArticle.createdAt} />
+        <p className={classes.preview}>{primaryArticle.preview}</p>
+        <Byline contributors={primaryArticle.contributors} />
+        <Dateline timestamp={primaryArticle.createdAt} />
       </Col>
+
       {featuredMedia ? (
         <Col
           xs={6}
@@ -193,16 +194,17 @@ const SectionFeature = ({ classes, data }) => {
           </Col>
         )
       )}
-      <Col xs={6} sm={4} md={4} lg={4} className={classes.primaryArticle}>
+
+      <Col xsHidden sm={4} md={4} lg={4} className={classes.secondaryArticle}>
         <Link
           className={classes.title}
-          to={`${section.permalink}/${primaryArticle.slug}`}
+          to={`${section.permalink}/${secondaryArticle.slug}`}
         >
-          {primaryArticle.title}
+          {secondaryArticle.title}
         </Link>
-        <p className={classes.preview}>{primaryArticle.preview}</p>
-        <Byline contributors={primaryArticle.contributors} />
-        <Dateline timestamp={primaryArticle.createdAt} />
+        <p className={classes.preview}>{secondaryArticle.preview}</p>
+        <Byline contributors={secondaryArticle.contributors} />
+        <Dateline timestamp={secondaryArticle.createdAt} />
       </Col>
 
       <Col
@@ -243,6 +245,6 @@ const SectionFeature = ({ classes, data }) => {
 
 export default graphql(SectionFeatureQuery, {
   options: ({ section_slug }) => ({
-    variables: { section_slug: section_slug },
+    variables: { section_slug },
   }),
 })(injectSheet(styles)(SectionFeature));
