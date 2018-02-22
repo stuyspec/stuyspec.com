@@ -74,14 +74,15 @@ const styles = {
       padding: "0 10%",
     },
   },
-  "@media (max-width: 768px)": {
+  "@media (max-width: 767px)": {
     headerRow: {
       padding: "0 2%",
     },
   },
 };
 
-const ArticleHeader = ({ classes, article, section }) => {
+const ArticleHeader = ({ classes, article }) => {
+  const { section } = article;
   return (
     <Row className={classes.headerRow}>
       <p className="only-print" id="branding">
@@ -94,8 +95,8 @@ const ArticleHeader = ({ classes, article, section }) => {
         <h1 className={classes.headline}>{article.title}</h1>
         <div className={classes.meta}>
           <Byline classes={classes} contributors={article.contributors} />
-          <Dateline classes={classes} article={article} />
-          <ShareTools article={article} section={section} />
+          <Dateline classes={classes} timestamp={article.createdAt} />
+          <ShareTools article={article} />
         </div>
       </Col>
     </Row>

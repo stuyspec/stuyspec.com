@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { ShareButtons, generateShareIcon } from "react-share";
 import { Print } from "../../core/icons";
@@ -55,17 +54,16 @@ const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 const SHARE_BUTTON_SIZE = 28;
 const SHARE_BUTTON_COLOR = "#000";
 
-const ShareTools = ({ classes, article, section, outquotes }) => {
+const ShareTools = ({ classes, article }) => {
+  const { section, title, preview, outquotes } = article;
   const shareUrl = STUY_SPEC_API_URL + `${section.permalink}/${article.slug}`;
-  const { title, summary } = article;
-  const outquote = Object.values(outquotes).find(
-    outquote => outquote.articleId === article.id,
-  );
 
-  const emailBody = `${title}—${summary}\n\n${shareUrl}`;
+  const outquote = outquotes[0] || null;
+
+  const emailBody = `${title}—${preview}\n\n${shareUrl}`;
   return (
     <div className={classes.ShareTools}>
-      <div className={classes.shareButton} key={0}>
+      <div key={0}>
         <FacebookShareButton
           url={shareUrl}
           hashtag={"#stuyspec"}
@@ -74,12 +72,12 @@ const ShareTools = ({ classes, article, section, outquotes }) => {
           <FacebookIcon
             size={SHARE_BUTTON_SIZE}
             logoFillColor={SHARE_BUTTON_COLOR}
-            iconBgStyle={{ fill: "white", stroke: "#ddd", "stroke-width": 1.5 }}
+            iconBgStyle={{ fill: "white", stroke: "#ddd", strokeWidth: 1.5 }}
             round
           />
         </FacebookShareButton>
       </div>
-      <div className={classes.shareButton} key={1}>
+      <div key={1}>
         <TwitterShareButton
           url={shareUrl}
           title={title}
@@ -93,8 +91,8 @@ const ShareTools = ({ classes, article, section, outquotes }) => {
           />
         </TwitterShareButton>
       </div>
-      <div className={classes.shareButton} key={2}>
-        <LinkedinShareButton url={shareUrl} title={title} description={summary}>
+      <div key={2}>
+        <LinkedinShareButton url={shareUrl} title={title} description={preview}>
           <LinkedinIcon
             size={SHARE_BUTTON_SIZE}
             logoFillColor={SHARE_BUTTON_COLOR}
@@ -103,7 +101,7 @@ const ShareTools = ({ classes, article, section, outquotes }) => {
           />
         </LinkedinShareButton>
       </div>
-      <div className={classes.shareButton} key={3}>
+      <div key={3}>
         <EmailShareButton
           url={shareUrl}
           subject={`StuySpec.com: ${title}`}
@@ -117,7 +115,7 @@ const ShareTools = ({ classes, article, section, outquotes }) => {
           />
         </EmailShareButton>
       </div>
-      <div className={classes.shareButton} key={4}>
+      <div key={4}>
         <StyledNavButton onClick={window.print}>
           <Print size={28} />
         </StyledNavButton>
@@ -126,8 +124,4 @@ const ShareTools = ({ classes, article, section, outquotes }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  outquotes: state.outquotes.outquotes,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(ShareTools));
+export default injectSheet(styles)(ShareTools);

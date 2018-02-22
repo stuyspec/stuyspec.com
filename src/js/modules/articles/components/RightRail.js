@@ -1,12 +1,33 @@
 import React from "react";
-import { connect } from "react-redux";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 
 import Byline from "./Byline";
-import { getArticlesWithContributors } from "../selectors";
-
 import { TallAd } from "../../advertisements/components";
+
+const RightRailQuery = gql`
+  query RightRailQuery {
+    topRankedArticles(limit: 5) {
+      id
+      slug
+      title
+      contributors {
+        first_name
+        last_name
+      }
+      media {
+        thumb_attachment_url
+      }
+      section {
+        id
+        permalink
+      }
+    }
+  }
+`;
 
 const styles = {
   RightRail: {
@@ -76,7 +97,7 @@ const styles = {
     color: "#888",
     fontFamily: "Circular Std",
     fontSize: "12px",
-    fontWeight: "300",
+    fontWeight: 300,
     marginBottom: "3px",
     "& p": {
       margin: "0",
@@ -93,7 +114,7 @@ const styles = {
     color: "#888",
     fontFamily: "Circular Std",
     fontSize: "12px",
-    fontWeight: "300",
+    fontWeight: 300,
     margin: 0,
     "& p": {
       color: "#000",
@@ -112,27 +133,26 @@ const styles = {
 };
 
 // inside a Col
-const RightRail = ({ classes, articles, sections, media, ads }) => {
-  const ad = ads[0];
+const RightRail = ({ classes, data }) => {
+  if (data.loading) {
+    return null;
+  }
+  data = humps.camelizeKeys(data);
+  const articles = data.topRankedArticles;
   return (
     <div className={classes.RightRail}>
       <div className={classes.Recommended}>
         <Link to="/recommended" className={classes.label}>
           Recommended
         </Link>
-        {articles.slice(0, 5).map(article => {
-          const featuredMedia = Object.values(media).find(
-            mediaObject => mediaObject.articleId === article.id,
-          );
-          const section = Object.values(sections).find(
-            section => article.sectionId === section.id,
-          );
+        {articles.map(article => {
+          const { section } = article;
           return (
             <div className={classes.article} key={article.id}>
-              {featuredMedia && (
+              {article.media.length > 0 && (
                 <Link to={`${section.permalink}/${article.slug}`}>
                   <figure className={classes.figure}>
-                    <img src={featuredMedia.thumbAttachmentUrl} />
+                    <img src={article.media[0].thumbAttachmentUrl} />
                   </figure>
                 </Link>
               )}
@@ -148,17 +168,10 @@ const RightRail = ({ classes, articles, sections, media, ads }) => {
         })}
       </div>
       <div className={classes.tallAdContainer}>
-        <TallAd ad={ad} />
+        <TallAd />
       </div>
     </div>
   );
 };
 
-const mapStateToProps = state => ({
-  articles: getArticlesWithContributors(state),
-  ads: state.advertisements,
-  media: state.media.media,
-  sections: state.sections.sections,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(RightRail));
+export default graphql(RightRailQuery)(injectSheet(styles)(RightRail));

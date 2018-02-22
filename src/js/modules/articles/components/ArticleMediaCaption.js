@@ -1,9 +1,8 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
-import { MEDIA_CREATOR_SLUGS } from "../../../constants";
+import { PROFILE_SLUGS } from "../../../constants";
 import { capitalizeWord } from "../../../utils";
 
 const styles = {
@@ -19,32 +18,35 @@ const styles = {
   },
 };
 
-const ArticleMediaCaption = ({ classes, users, image }) => {
-  const artist = users[image.userId];
+const ArticleMediaCaption = ({ classes, image }) => {
+  const { user } = image;
+  let { caption } = image;
+
+  // If the caption does not end in a period, add one.
+  if (caption && caption.substr(caption.length - 1) !== ".") {
+    caption += ".";
+  }
+
   return (
     <figcaption className={classes.caption}>
       <span>
         {/* Render caption if caption is not null and is not empty string. */}
-        {image.caption && image.caption + " "}
+        {caption && caption + " "}
       </span>
       <Link
         className={classes.creditLine}
-        to={`/${MEDIA_CREATOR_SLUGS[image.mediaType]}/${artist.slug}`}
+        to={`/${PROFILE_SLUGS[image.mediaType]}/${user.slug}`}
       >
         {capitalizeWord(image.mediaType)}
         &nbsp;by&nbsp;
-        {artist.firstName}
-        {artist.lastName !== "" && " " + artist.lastName}
+        {user.firstName}
+        {/* Department names are stored in firstName, not lastName, requiring 
+            the following logic */}
+        {user.lastName !== "" && " " + user.lastName}
       </Link>
       .
     </figcaption>
   );
 };
 
-const mapStateToProps = state => ({
-  users: state.users.users,
-});
-
-export default connect(mapStateToProps)(
-  injectSheet(styles)(ArticleMediaCaption),
-);
+export default injectSheet(styles)(ArticleMediaCaption);

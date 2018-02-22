@@ -64,7 +64,9 @@ const styles = {
     fontSize: "31px",
     lineHeight: 0,
     marginLeft: "30px",
-    minWidth: "179px", // we don't want "The Spectator" to line-wrap.
+
+    // we don't want "The Spectator" to line-wrap.
+    minWidth: "179px",
   },
   headerSpacer: {
     borderLeft: "1px solid #fff",
@@ -72,7 +74,7 @@ const styles = {
     marginLeft: "15px",
   },
   headerTitle: {
-    fontFamily: "Minion Pro", //Minion Pro",
+    fontFamily: "Minion Pro",
     fontSize: "21px",
     marginLeft: "15px",
     position: "relative",

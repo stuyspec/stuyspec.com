@@ -15,9 +15,11 @@ import {
   CLOSE_SIGN_IN_MODAL,
   OPEN_SUBSCRIPTION_MODAL,
   CLOSE_SUBSCRIPTION_MODAL,
-  SESSIONFY,
-  VALIDATE_TOKEN_FULFILLED,
+  CREATE_SESSION,
   VALIDATE_TOKEN_REJECTED,
+  CREATE_SUBSCRIBER_PENDING,
+  CREATE_SUBSCRIBER_FULFILLED,
+  CREATE_SUBSCRIBER_REJECTED,
 } from "./actionTypes";
 import { CREATE_COMMENT_FULFILLED } from "../comments/actionTypes";
 
@@ -32,16 +34,29 @@ const initialState = {
   isSubscriptionModalOpen: false,
 };
 
+const isSessionValid = session => {
+  const requiredHeaders = ["access-token", "expiry", "client", "uid"];
+  return requiredHeaders.every(header => header in session);
+};
+
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     case CREATE_COMMENT_FULFILLED: {
-      localStorage.setItem("session", JSON.stringify(action.payload.headers));
-      return {
-        ...state,
-        session: action.payload.headers,
-      };
+      const { headers } = action.payload;
+      if (isSessionValid(headers)) {
+        localStorage.setItem("session", JSON.stringify(headers));
+        return {
+          ...state,
+          session: headers,
+        };
+      }
     }
-    case SIGN_IN_PENDING: {
+
+    case SIGN_IN_PENDING:
+    case SIGN_UP_PENDING:
+    case SIGN_OUT_PENDING:
+    case CREATE_SUBSCRIBER_PENDING:
+    case UPDATE_USER_PENDING: {
       return {
         ...state,
         status: {
@@ -67,23 +82,14 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         status: {
-          errors: action.payload.response.data.errors,
+          errors: (action.payload.response &&
+            action.payload.response.data.errors) || [action.payload.message],
           formName: "signIn",
           message: null,
         },
       };
     }
 
-    case SIGN_UP_PENDING: {
-      return {
-        ...state,
-        status: {
-          errors: [],
-          formName: null,
-          message: null,
-        },
-      };
-    }
     case SIGN_UP_FULFILLED: {
       return {
         ...state,
@@ -99,30 +105,21 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         status: {
-          errors: action.payload.response.data.errors.fullMessages,
+          errors: (action.payload.response &&
+            action.payload.response.data.errors) || [action.payload.message],
           formName: "signUp",
           message: null,
         },
       };
     }
 
-    case SIGN_OUT_PENDING: {
-      return {
-        ...state,
-        status: {
-          errors: [],
-          formName: null,
-          message: null,
-        },
-      };
-    }
     case SIGN_OUT_FULFILLED: {
       localStorage.removeItem("session");
       return {
         ...state,
         status: {
           errors: [],
-          message: "You have been successfully signed out.",
+          message: "You have successfully signed out.",
           formName: "signOut",
         },
         session: null,
@@ -132,29 +129,46 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         status: {
-          errors: action.payload.response.data.errors,
+          errors: (action.payload.response &&
+            action.payload.response.data.errors) || [action.payload.message],
           message: null,
           formName: "signOut",
         },
       };
     }
 
-    case UPDATE_USER_PENDING: {
+    case CREATE_SUBSCRIBER_FULFILLED: {
       return {
         ...state,
         status: {
           errors: [],
-          message: null,
-          formName: null,
+          message: "You have successfully subscribed to our newsletter.",
+          formName: "subscription",
         },
       };
     }
+    case CREATE_SUBSCRIBER_REJECTED: {
+      let errors = (action.payload.response &&
+        action.payload.response.data.errors) || [action.payload.message];
+      if (action.payload.response.status === 422) {
+        errors = ["You are already subscribed."];
+      }
+      return {
+        ...state,
+        status: {
+          errors,
+          message: null,
+          formName: "subscription",
+        },
+      };
+    }
+
     case UPDATE_USER_FULFILLED: {
       return {
         ...state,
         status: {
           errors: [],
-          message: "Your changes have been saved.",
+          message: "Your information has been updated.",
           formName: "editUser",
         },
       };
@@ -163,7 +177,8 @@ const reducer = (state = { ...initialState }, action) => {
       return {
         ...state,
         status: {
-          errors: action.payload.response.data.errors,
+          errors: (action.payload.response &&
+            action.payload.response.data.errors) || [action.payload.message],
           message: null,
           formName: "editUser",
         },
@@ -184,12 +199,10 @@ const reducer = (state = { ...initialState }, action) => {
       return { ...state, isSubscriptionModalOpen: false };
     }
 
-    case SESSIONFY: {
+    case CREATE_SESSION: {
       return { ...state, session: action.payload };
     }
-    case VALIDATE_TOKEN_FULFILLED: {
-      return { ...state, session: action.payload.headers };
-    }
+
     case VALIDATE_TOKEN_REJECTED: {
       localStorage.removeItem("session");
       return {

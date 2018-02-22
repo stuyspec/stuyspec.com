@@ -1,18 +1,11 @@
 import React from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import { compose } from "redux";
 import { reduxForm } from "redux-form";
 import injectSheet from "react-jss";
 
-import { signOut } from "../../actions";
+import { FormStatus } from "./helpers";
 
 const styles = {
-  successMessage: {
-    color: "green",
-  },
-  errorMessage: {
-    color: "red",
-  },
   signOutButton: {
     backgroundColor: "#3472b7",
     border: "1px solid #3472b7",
@@ -28,7 +21,7 @@ const styles = {
   },
 };
 
-const SignOutForm = ({ classes, handleSubmit, submitting, status }) => {
+const SignOutForm = ({ classes, handleSubmit, submitting }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -42,32 +35,14 @@ const SignOutForm = ({ classes, handleSubmit, submitting, status }) => {
           </button>
         </div>
       </form>
-      {status.formName === "signOut" && (
-        <div>
-          <p key="success" className={classes.successMessage}>
-            {status.message}
-          </p>
-          {status.errors.map((error, index) => {
-            return (
-              <p key={index} className={classes.errorMessage}>
-                {error}
-              </p>
-            );
-          })}
-        </div>
-      )}
+      <FormStatus formName="signOut" />
     </div>
   );
 };
 
-const mapStateToProps = state => ({
-  status: state.accounts.status,
-});
-
-const ConnectedSignOutForm = connect(mapStateToProps)(
-  injectSheet(styles)(SignOutForm),
-);
-
-export default reduxForm({
-  form: "signOut",
-})(ConnectedSignOutForm);
+export default compose(
+  reduxForm({
+    form: "signOut",
+  }),
+  injectSheet(styles),
+)(SignOutForm);

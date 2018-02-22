@@ -1,18 +1,24 @@
+// RibbonComponents are mapped inline to a ribbon (e.g. LatestArticlesRibbon).
+// Ribbons are components for content that stretch across the window.
+
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-const RibbonComponent = ({ classes, article, section, featuredMedia }) => {
+const RibbonComponent = ({ classes, article }) => {
+  const { section } = article;
   return (
     <div className={classes.RibbonComponent}>
-      {featuredMedia && (
+      {article.media.length > 0 && (
         <div>
           <Link
             to={`${section.permalink}/${article.slug}`}
             className={classes.title}
           >
             <figure className={classes.figure}>
-              <img src={featuredMedia.thumbAttachmentUrl} />
+              <img
+                src={article.media[0].thumbAttachmentUrl}
+                alt={article.media[0].title}
+              />
             </figure>
           </Link>
         </div>
@@ -30,8 +36,4 @@ const RibbonComponent = ({ classes, article, section, featuredMedia }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  sections: state.sections.sections,
-});
-
-export default connect(mapStateToProps)(RibbonComponent);
+export default RibbonComponent;

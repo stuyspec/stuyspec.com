@@ -1,23 +1,19 @@
-import React from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { Grid, Row, Col } from "react-bootstrap/lib";
+import React, { PureComponent } from "react";
+import { compose } from "redux";
+import { withRouter } from "react-router-dom";
+import { Grid, Row } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 import { Helmet } from "react-helmet";
-import ReactLoading from "react-loading";
 
-import ArticleList from "./ArticleList";
-import { TallAd } from "../../advertisements/components";
-import { getArticlesWithContributors } from "../selectors";
-import { searchArticles } from "../actions";
-import SearchForm from "./SearchForm";
+import { SearchForm, SearchResults } from "./";
+import { getUrlParameterByName } from "../../../utils";
 
 const styles = {
   title: {
     color: "#000",
     fontFamily: "Canela",
     fontSize: "36px",
-    fontWeight: "500",
+    fontWeight: 500,
     margin: 0,
     textAlign: "center",
   },
@@ -25,80 +21,47 @@ const styles = {
     margin: "0 auto",
     display: "block",
   },
-  articleList: {
-    paddingRight: "14px !important",
-  },
-  tallAdContainer: {
-    paddingLeft: "14px !important",
-    borderLeft: "solid 1px #ddd",
-  },
 };
 
-const SearchPage = ({
-  classes,
-  articles,
-  searchableIds,
-  searchArticles,
-  isSearching,
-}) => {
-  const searchedArticles = articles.filter(article =>
-    searchableIds.includes(article.id),
-  );
-  return (
-    <Grid fluid>
-      <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-        <title>Search</title>
-        <meta />
-      </Helmet>
-      <Row>
-        <p className={classes.title}>Search Results</p>
-        <SearchForm
-          onSubmit={values => searchArticles(values)}
-          className={classes.form}
-        />
-        <hr className={classes.hr} />
-      </Row>
-      {isSearching && (
+class SearchPage extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      query: getUrlParameterByName("query"),
+    };
+  }
+
+  handleSearchFormSubmit = ({ query }) => {
+    // We want a reusable search path
+    this.props.history.push(
+      `${this.props.location.pathname}?query=${encodeURIComponent(query)}`,
+    );
+
+    this.setState({ query });
+  };
+
+  render() {
+    const { query } = this.state;
+    const { classes } = this.props;
+
+    return (
+      <Grid fluid>
+        <Helmet titleTemplate="%s | The Stuyvesant Spectator">
+          <title>Search</title>
+        </Helmet>
         <Row>
-          <Col xs={12} sm={12} md={9} lg={9} className={classes.loadingSearch}>
-            <ReactLoading type="bubbles" color="#000" />
-          </Col>
+          <p className={classes.title}>Search Results</p>
+          <SearchForm
+            onSubmit={this.handleSearchFormSubmit}
+            query={query}
+            className={classes.form}
+          />
+          <hr className={classes.hr} />
         </Row>
-      )}
-      {searchedArticles.length > 0 && (
-        <Row>
-          <Col xs={12} sm={12} md={9} lg={9} className={classes.articleList}>
-            <ArticleList
-              articles={searchedArticles}
-              title={`${searchedArticles.length} results`}
-              label="Articles"
-            />
-          </Col>
-          <Col
-            xsHidden
-            smHidden
-            md={3}
-            lg={3}
-            className={classes.tallAdContainer}
-          >
-            <TallAd />
-          </Col>
-        </Row>
-      )}
-    </Grid>
-  );
-};
+        {query && <SearchResults query={query} />}
+      </Grid>
+    );
+  }
+}
 
-const mapStateToProps = state => ({
-  articles: getArticlesWithContributors(state),
-  searchableIds: state.articles.searchableIds,
-  isSearching: state.articles.isSearching,
-});
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ searchArticles }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(SearchPage),
-);
+export default compose(withRouter, injectSheet(styles))(SearchPage);

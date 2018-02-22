@@ -1,12 +1,13 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, compose } from "redux";
 import { withRouter } from "react-router-dom";
 import injectSheet from "react-jss";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
 import Sidebar from "react-sidebar";
 import Favicon from "react-favicon";
 import { Grid } from "react-bootstrap/lib";
-import { Helmet } from "react-helmet";
 
 import PageHeader from "./PageHeader";
 import PageFooter from "./PageFooter";
@@ -14,6 +15,21 @@ import SidebarContent from "./SidebarContent";
 import SubscriptionModal from "../../accounts/components/SubscriptionModal";
 import { HorizontalAd } from "../../advertisements/components";
 import { openSidebar, closeSidebar } from "../actions";
+
+const PageLayoutQuery = gql`
+  query PageLayoutQuery {
+    featuredSections {
+      id
+      name
+      permalink
+      subsections {
+        id
+        name
+        permalink
+      }
+    }
+  }
+`;
 
 const styles = {
   horizontalAdContainer: {
@@ -56,7 +72,7 @@ const sidebarStyles = {
   },
 };
 
-class PageLayout extends Component {
+class PageLayout extends PureComponent {
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
       if (document.getElementById("scroll-reset-assistant")) {
@@ -69,31 +85,28 @@ class PageLayout extends Component {
   }
 
   handleSetOpen = isSidebarOpen => {
-    isSidebarOpen ? this.props.openSidebar() : this.props.closeSidebar();
+    if (isSidebarOpen) {
+      this.props.openSidebar();
+    } else {
+      this.props.closeSidebar();
+    }
   };
 
   render() {
-    const { classes, children, location, isSidebarOpen } = this.props;
+    const { classes, children, location, isSidebarOpen, data } = this.props;
+    const { loading, featuredSections } = data;
+    if (loading) {
+      return null;
+    }
     return (
       <Sidebar
-        sidebar={<SidebarContent />}
+        sidebar={<SidebarContent sections={featuredSections} />}
         open={isSidebarOpen}
         onSetOpen={isSidebarOpen => this.handleSetOpen(isSidebarOpen)}
         styles={sidebarStyles}
       >
         <div id="scroll-reset-assistant">
-          <PageHeader location={location} />
-          <Helmet>
-            <title>The Stuyvesant Spectator</title>
-            <meta
-              name="description"
-              content="The Stuyvesant Spectator is a newspaper published by Stuyvesant High School students every two weeks. It contains sections such as news, features, opinions, arts & entertainment, humor, sports, photography, art, layout, copy, business, and web. This website is basically the best high school newspaper website in New York because it uses React and Redux with a Rails API and utilizes modern technology to spread knowledge of current events and opinions on pressing issues. The Stuyvesant Spectator informs the Stuyvesant student body about what has been going on lately in the school, especially those students who do nothing but study 24/7, so this newspaper basically keeps everyone up to date. During certain parts of the year, The Stuyvesant Spectator publishes special editions written exclusively by the wonderful and intelligent students at Stuyvesant High School. With such a wide range of topics, readers would never run out of reading material, which makes this newspaper awesome!"
-            />
-            <meta
-              name="keywords"
-              content="newspaper,news,Stuyvesant,stuyvesant,highschool,humor,opinions,sports,arts,entertainment,articles,Spectator,spectator,knowledge,intelligence,pulse,manhattan,specialized,writers,photos"
-            />
-          </Helmet>
+          <PageHeader location={location} sections={featuredSections} />
           <Favicon url="/img/logo.png" />
           <div className={classes.PageContainer}>
             {children}
@@ -104,7 +117,7 @@ class PageLayout extends Component {
             </Grid>
           </div>
           <SubscriptionModal />
-          <PageFooter />
+          <PageFooter sections={featuredSections} />
         </div>
       </Sidebar>
     );
@@ -119,6 +132,9 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ openSidebar, closeSidebar }, dispatch);
 };
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(PageLayout)),
-);
+export default compose(
+  graphql(PageLayoutQuery),
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps),
+  injectSheet(styles),
+)(PageLayout);

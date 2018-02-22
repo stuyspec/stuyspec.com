@@ -1,26 +1,24 @@
 import React from "react";
-import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
-import {
-  SPEC_REFERENCE_PATTERN,
-  SPEC_IMG_CAROUSEL_PATTERN,
-} from "../../../constants";
 
 import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
 import ArticleReference from "./ArticleReference";
 import RightRail from "./RightRail";
-
+import { SPEC_IMG_CAROUSEL_PATTERN } from "../../../constants";
 import { Gallery } from "../../media/components";
 import { Lightbox } from "../../core/components";
+
+const isBrowserFirefox =
+  navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
 
 const styles = {
   ArticleBody: {
     color: "#000",
     fontFamily: "Minion Pro",
-    fontSize: "18px",
-    lineHeight: 1.44,
+    fontSize: "19px",
+    lineHeight: 1.4,
     padding: "0 0 18px",
     "& p": {
       marginBottom: "20px",
@@ -50,9 +48,10 @@ const styles = {
     "& > div > p::first-letter": {
       // dropcap
       float: "left",
-      fontSize: "58px",
-      lineHeight: "43px",
-      padding: "7px 6px 0px 3px",
+      fontSize: "64px",
+      lineHeight: "40px",
+      padding: "0px 6px 0px 3px",
+      paddingTop: isBrowserFirefox ? "5px" : "11px",
     },
     "& > div > p ~ p::first-letter": {
       float: "none",
@@ -62,6 +61,16 @@ const styles = {
     },
     "& spec-reference": {
       display: "none",
+    },
+  },
+  print: {
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontStyle: "italic",
+    "& a": {
+      "&:hover, &:active, &:focus": {
+        color: "#999",
+      },
     },
   },
   content: {
@@ -82,7 +91,7 @@ const styles = {
       "& > figure": {
         padding: "0 2%",
         "& > div > img": {
-          marginLeft: "-14px", // ArticleBody.paddingLeft = 14px
+          marginLeft: "-2%",
           width: "100vw",
         },
       },
@@ -93,42 +102,30 @@ const styles = {
   },
 };
 
-const ArticleBody = ({
-  classes,
-  article: { content, title },
-  articles,
-  media,
-}) => {
+const ArticleBody = ({ classes, article }) => {
+  // TODO: refactor media to make the carousel part of media/back-end
   const isCarouselButtonVisible =
-    SPEC_IMG_CAROUSEL_PATTERN.test(content) && Object.values(media).length > 0;
-  const referencedArticleId = SPEC_REFERENCE_PATTERN.test(content)
-    ? parseInt(SPEC_REFERENCE_PATTERN.exec(content)[1])
-    : null;
-  let referencedArticle = null;
-  if (referencedArticleId) {
-    referencedArticle = articles.find(
-      article => article.id === referencedArticleId,
-    );
-  }
+    SPEC_IMG_CAROUSEL_PATTERN.test(article.content) && article.media.length > 0;
+
   return (
     <Row>
       <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
-        {SPEC_IMG_CAROUSEL_PATTERN.test(content) && (
-          <Lightbox title={title}>
-            <Gallery media={Object.values(media)} />
+        {SPEC_IMG_CAROUSEL_PATTERN.test(article.content) && (
+          <Lightbox title={article.title}>
+            <Gallery media={article.media} />
           </Lightbox>
         )}
-        {Object.values(media).length > 0 && (
+        {article.media.length > 0 && (
           <ArticleFeaturedMedia
-            image={Object.values(media)[0]}
+            image={article.media[0]}
             isCarouselButtonVisible={isCarouselButtonVisible}
-            carouselImageCount={Object.values(media).length}
+            carouselImageCount={article.media.length}
           />
         )}
-        {referencedArticle && <ArticleReference article={referencedArticle} />}
+        <ArticleReference article={article} />
         <div
           className={classes.innerHTML}
-          dangerouslySetInnerHTML={{ __html: content }}
+          dangerouslySetInnerHTML={{ __html: article.content }}
         />
       </Col>
       <Col xsHidden smHidden mdOffset={1} md={3} lgOffset={1} lg={3}>
@@ -138,8 +135,4 @@ const ArticleBody = ({
   );
 };
 
-const mapStateToProps = state => ({
-  articles: state.articles.articles,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(ArticleBody));
+export default injectSheet(styles)(ArticleBody);

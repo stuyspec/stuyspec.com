@@ -1,6 +1,8 @@
 import React from "react";
+import { bindActionCreators, compose } from "redux";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { graphql } from "react-apollo";
+import humps from "humps";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
@@ -8,7 +10,7 @@ import { Helmet } from "react-helmet";
 
 import { EditUserForm } from "./forms";
 import { updateUser } from "../actions";
-import { getCurrentUser } from "../selectors";
+import { UserByUIDQuery } from "../../../queries";
 
 const styles = {
   pageTitle: {
@@ -28,9 +30,15 @@ const styles = {
   },
 };
 
-const EditProfilePage = ({ classes, sessionUser, updateUser }) => {
+const EditProfilePage = ({ classes, updateUser, data }) => {
+  if (data.loading) {
+    return null;
+  }
+  data = humps.camelizeKeys(data);
+  const currentUser = data.userByUID;
+
   const handleUpdateUser = values => {
-    updateUser(values, sessionUser.id);
+    updateUser(values, currentUser.id);
   };
   return (
     <Grid fluid>
@@ -52,7 +60,7 @@ const EditProfilePage = ({ classes, sessionUser, updateUser }) => {
           <Link to={"/myaccount/profile"} className={classes.backRedirect}>
             Back to Profile
           </Link>
-          <EditUserForm onSubmit={handleUpdateUser} />
+          <EditUserForm onSubmit={handleUpdateUser} user={currentUser} />
         </Col>
       </Row>
     </Grid>
@@ -60,13 +68,25 @@ const EditProfilePage = ({ classes, sessionUser, updateUser }) => {
 };
 
 const mapStateToProps = state => ({
-  sessionUser: getCurrentUser(state),
+  session: state.accounts.session,
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ updateUser }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(EditProfilePage),
-);
+export default compose(
+  // connect is placed above the Apollo HOC so options can use props.session
+  // as a variable
+  connect(mapStateToProps, mapDispatchToProps),
+  graphql(UserByUIDQuery, {
+    options: ({ session }) => ({
+      variables: { uid: (session && session.uid) || "" },
+
+      // The "network-only" fetch policy prevents any caching of user token
+      // headers, which constantly change.
+      fetchPolicy: "network-only",
+    }),
+  }),
+  injectSheet(styles),
+)(EditProfilePage);

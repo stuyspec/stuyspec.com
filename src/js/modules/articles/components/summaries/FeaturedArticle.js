@@ -2,7 +2,6 @@
  * currently nested in a <Col md={9} lg={9}>.
  */
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import Row from "react-bootstrap/lib/Row";
@@ -19,7 +18,7 @@ const styles = {
     color: "#000",
     fontFamily: "Canela",
     fontSize: "30px",
-    fontWeight: "300",
+    fontWeight: 300,
     lineHeight: "1.25",
     "&:active": {
       color: "#000",
@@ -48,7 +47,7 @@ const styles = {
     paddingRight: "0 !important",
     paddingLeft: "0 !important",
   },
-  summary: {
+  preview: {
     fontFamily: "Minion Pro",
     fontSize: "14px",
     lineHeight: 1.29,
@@ -84,13 +83,9 @@ const styles = {
   },
 };
 
-const FeaturedArticle = ({ classes, media, sections, article }) => {
-  const section = Object.values(sections).find(section => {
-    return section.id === article.sectionId;
-  });
-  const featuredMedia = Object.values(media).find(mediaObject => {
-    return mediaObject.isFeatured && mediaObject.articleId === article.id;
-  });
+const FeaturedArticle = ({ classes, article }) => {
+  const { section } = article;
+  const featuredMedia = article.media[0];
   return (
     <Row className={classes.FeaturedArticle}>
       <Col
@@ -106,7 +101,10 @@ const FeaturedArticle = ({ classes, media, sections, article }) => {
         {featuredMedia && (
           <Link to={`${section.permalink}/${article.slug}`}>
             <figure className={classes.figure}>
-              <img src={featuredMedia.attachmentUrl} />
+              <img
+                src={featuredMedia.attachmentUrl}
+                alt={featuredMedia.title}
+              />
             </figure>
           </Link>
         )}
@@ -130,18 +128,12 @@ const FeaturedArticle = ({ classes, media, sections, article }) => {
         <Link to={section.permalink} className={classes.sectionLabel}>
           {section.name}
         </Link>
-        <p className={classes.summary}>{article.summary}</p>
+        <p className={classes.preview}>{article.preview}</p>
         <Byline contributors={article.contributors} />
-        <Dateline article={article} />
+        <Dateline timestamp={article.createdAt} />
       </Col>
     </Row>
   );
 };
 
-const mapStateToProps = state => ({
-  media: state.media.media,
-  sections: state.sections.sections,
-  users: state.users.users,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(FeaturedArticle));
+export default injectSheet(styles)(FeaturedArticle);

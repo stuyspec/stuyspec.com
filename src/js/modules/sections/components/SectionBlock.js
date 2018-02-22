@@ -1,11 +1,43 @@
+/* SectionBlocks are cards that display the top three articles of a section.
+ * They are used in the middle 2 columns of the second level of the HomePage and
+ * at the right of the ArticleList on a SectionPage of a section with child
+ * sections.
+ */
+
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
 import injectSheet from "react-jss";
 
 import Dateline from "../../articles/components/Dateline";
 import Byline from "../../articles/components/Byline";
-import { getArticlesWithContributors } from "../../articles/selectors";
+
+const SectionBlockQuery = gql`
+  query SectionBlockQuery($section_slug: String!) {
+    topRankedArticles(limit: 3, section_slug: $section_slug) {
+      id
+      title
+      slug
+      preview
+      created_at
+      contributors {
+        first_name
+        last_name
+        slug
+      }
+      media {
+        thumb_attachment_url
+      }
+      section {
+        id
+        name
+        permalink
+      }
+    }
+  }
+`;
 
 const styles = {
   SectionBlock: {
@@ -63,7 +95,7 @@ const styles = {
       width: "100%",
     },
   },
-  summary: {
+  preview: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "14px",
@@ -74,7 +106,7 @@ const styles = {
     color: "#888",
     fontFamily: "Circular Std",
     fontSize: "12px",
-    fontWeight: "300",
+    fontWeight: 300,
     marginBottom: "3px",
     "& p": {
       margin: "0",
@@ -87,36 +119,18 @@ const styles = {
       },
     },
   },
-  Dateline: {
-    color: "#888",
-    fontFamily: "Circular Std",
-    fontSize: "12px",
-    fontWeight: "300",
-    margin: 0,
-    "& p": {
-      color: "#000",
-      margin: 0,
-      display: "inline",
-    },
-  },
 };
 
-const SectionBlock = ({ classes, articles, section, sections, media }) => {
-  let sectionArticles = [];
-  if (section.name === "Sports") {
-    // most sports articles are in subsections
-    const subsectionIds = Object.values(sections)
-      .filter(subsection => subsection.parentId === section.id)
-      .map(subsection => subsection.id);
-    sectionArticles = articles.filter(article =>
-      subsectionIds.includes(article.sectionId),
-    );
-  } else {
-    sectionArticles = articles.filter(
-      article => article.sectionId === section.id,
-    );
+const SectionBlock = ({ classes, data }) => {
+  if (data.loading || data.topRankedArticles.length === 0) {
+    return null;
   }
-  const bigArticle = sectionArticles[0];
+
+  data = humps.camelizeKeys(data);
+  const { topRankedArticles } = data;
+  const bigArticle = topRankedArticles[0];
+  const { section } = bigArticle;
+
   return (
     <div className={classes.SectionBlock}>
       <Link to={section.permalink} className={classes.sectionLabel}>
@@ -125,57 +139,43 @@ const SectionBlock = ({ classes, articles, section, sections, media }) => {
       {bigArticle && (
         <div className={classes.article}>
           <Link
-            to={`${sections[bigArticle.sectionId]
-              .permalink}/${bigArticle.slug}`}
+            to={`${section.permalink}/${bigArticle.slug}`}
             className={classes.bigTitle}
           >
             {bigArticle.title}
           </Link>
-          <p className={classes.summary}>{bigArticle.summary}</p>
+          <p className={classes.preview}>{bigArticle.preview}</p>
           <Byline classes={classes} contributors={bigArticle.contributors} />
-          <Dateline classes={classes} article={bigArticle} />
+          <Dateline timestamp={bigArticle.createdAt} />
         </div>
       )}
-      {sectionArticles.length > 1 &&
-        sectionArticles.slice(1, 3).map(article => {
-          const featuredMedia = Object.values(media).find(mediaObject => {
-            return (
-              mediaObject.isFeatured && mediaObject.articleId === article.id
-            );
-          });
-          // In the links, we index sections again because the Sports
-          // SectionBlock finds articles in not only the given section prop,
-          // but also its subsections.
-          return (
-            <div className={classes.article} key={article.id}>
-              {featuredMedia && (
-                <Link
-                  to={`${sections[article.sectionId]
-                    .permalink}/${article.slug}`}
-                >
-                  <figure className={classes.figure}>
-                    <img src={featuredMedia.thumbAttachmentUrl} />
-                  </figure>
-                </Link>
-              )}
-              <Link
-                to={`${sections[article.sectionId].permalink}/${article.slug}`}
-                className={classes.smallTitle}
-              >
-                {article.title}
+      {topRankedArticles.map(article => {
+        return (
+          <div className={classes.article} key={article.id}>
+            {article.media.length > 0 && (
+              <Link to={`${section.permalink}/${article.slug}`}>
+                <figure className={classes.figure}>
+                  <img
+                    src={article.media[0].thumbAttachmentUrl}
+                    alt={article.media[0].title}
+                  />
+                </figure>
               </Link>
-              <Byline classes={classes} contributors={article.contributors} />
-            </div>
-          );
-        })}
+            )}
+            <Link
+              to={`${section.permalink}/${article.slug}`}
+              className={classes.smallTitle}
+            >
+              {article.title}
+            </Link>
+            <Byline classes={classes} contributors={article.contributors} />
+          </div>
+        );
+      })}
     </div>
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  media: state.media.media,
-  articles: getArticlesWithContributors(state),
-  sections: state.sections.sections,
-});
-
-export default connect(mapStateToProps)(injectSheet(styles)(SectionBlock));
+export default graphql(SectionBlockQuery, {
+  options: ({ slug }) => ({ variables: { section_slug: slug } }),
+})(injectSheet(styles)(SectionBlock));

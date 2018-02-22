@@ -14,10 +14,8 @@ const styles = {
   },
 };
 
-const HorizontalAd = ({ classes, advertisements, ad }) => {
-  if (!ad) {
-    ad = advertisements[1];
-  }
+const HorizontalAd = ({ classes, advertisements }) => {
+  const ad = advertisements[1];
   return (
     <div className={classes.HorizontalAd}>
       <Link to={ad.url} target="_blank">
