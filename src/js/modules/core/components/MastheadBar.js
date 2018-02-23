@@ -111,22 +111,10 @@ const styles = {
       display: "none",
     },
   },
-  "@media (max-width: 320px)": {
+  "@media (max-width: 375px)": {
     brandingLink: {
-      bottom: "9px",
-      color: "#000",
-      fontFamily: "Old English Text MT",
-      fontSize: "27px",
-      left: "50%",
-      marginTop: "5px",
-      position: "absolute",
-      textDecoration: "none",
-      top: "1px",
-      transform: "translate(-50%, 0)",
-      "&:hover, &:active, &:focus": {
-        color: "#000",
-        textDecoration: "none",
-      },
+      fontSize: "25px",
+      marginTop: "7.5px",
     },
     MastheadBar: {
       height: "52px",
