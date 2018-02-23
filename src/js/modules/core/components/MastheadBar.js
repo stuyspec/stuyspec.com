@@ -111,6 +111,33 @@ const styles = {
       display: "none",
     },
   },
+  "@media (max-width: 320px)": {
+    brandingLink: {
+      bottom: "9px",
+      color: "#000",
+      fontFamily: "Old English Text MT",
+      fontSize: "27px",
+      left: "50%",
+      marginTop: "5px",
+      position: "absolute",
+      textDecoration: "none",
+      top: "1px",
+      transform: "translate(-50%, 0)",
+      "&:hover, &:active, &:focus": {
+        color: "#000",
+        textDecoration: "none",
+      },
+    },
+    MastheadBar: {
+      height: "52px",
+    },
+    sectionsBarContainer: {
+      display: "none",
+    },
+    navButtons: {
+      display: "none",
+    },
+  },
 };
 
 const MastheadBar = ({
