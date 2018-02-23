@@ -116,15 +116,6 @@ const styles = {
       fontSize: "25px",
       marginTop: "7.5px",
     },
-    MastheadBar: {
-      height: "52px",
-    },
-    sectionsBarContainer: {
-      display: "none",
-    },
-    navButtons: {
-      display: "none",
-    },
   },
 };
 
