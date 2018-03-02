@@ -67,8 +67,8 @@ const styles = {
     fontFamily: "Canela",
     fontSize: "60px",
     fontWeight: 300,
-    lineHeight: 1,
-    marginBottom: "7px",
+    lineHeight: 1.2,
+    marginBottom: "12px",
     textAlign: "center",
   },
   subsectionBar: {
