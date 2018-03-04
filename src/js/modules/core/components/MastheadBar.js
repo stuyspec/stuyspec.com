@@ -111,6 +111,12 @@ const styles = {
       display: "none",
     },
   },
+  "@media (max-width: 375px)": {
+    brandingLink: {
+      fontSize: "25px",
+      marginTop: "7.5px",
+    },
+  },
 };
 
 const MastheadBar = ({
