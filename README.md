@@ -37,3 +37,7 @@ We use Issuu to host our newspaper PDFs. Every time we send, we have to upload t
 export const ISSUU_CONFIG = SECOND_NUMBER;
 ```
 
+## Deploying
+
+We use CircleCI for continuous integration. If you push to the `staging` branch, the code will be synced to our staging S3 bucket. If you push to `master`, it will be synced to the prod bucket (`stuyspec`).
+
