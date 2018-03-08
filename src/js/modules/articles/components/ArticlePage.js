@@ -122,7 +122,6 @@ class ArticlePage extends PureComponent {
       <Grid fluid className={classes.ArticlePage}>
         <Helmet titleTemplate="%s | The Stuyvesant Spectator">
           <title>{article.title}</title>
-          <meta />
         </Helmet>
         <ArticleHeader article={article} />
         <ArticleBody article={article} />
