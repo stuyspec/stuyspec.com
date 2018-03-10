@@ -32,6 +32,8 @@ import { ArtistPage, ContributorPage } from "./users/components";
 
 import { createSession } from "./accounts/actions";
 
+import { RecruitmentPage } from "./recruitment/components"
+
 const RoutingAppQuery = gql`
   query RoutingAppQuery {
     allSections {
@@ -177,6 +179,7 @@ class RoutingApp extends PureComponent {
                   session ? <EditProfilePage /> : <Redirect to="/myaccount" />}
               />
               <Route path={"/search"} key={"search"} component={SearchPage} />
+              <Route exact path={"/recruit"} key={"recruit"} component={RecruitmentPage} />
               <Route path="*" key={"404"} component={NotFoundPage} />
             </Switch>
           )}
