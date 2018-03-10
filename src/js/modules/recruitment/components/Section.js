@@ -1,5 +1,6 @@
 import React from "react";
-import Quote from "./Quote";
+import injectSheet from "react-jss";
+import { Quote } from "./Quote";
 
 const styles = {
     background: {
@@ -9,7 +10,7 @@ const styles = {
     }
 }
 
-const Section = (name, description, quotes) => {
+const Section = ({ name, description, quotes }) => {
     return (
         <div>
             <h1>{name}</h1>
@@ -18,5 +19,5 @@ const Section = (name, description, quotes) => {
                 return (<Quote text={text} source={source} />)})
             }
         </div>
-    )
+    );
 }

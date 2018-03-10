@@ -1,5 +1,8 @@
 import React, { PureComponent } from "react";
-import * as constants from "./constants";
+import injectSheet from "react-jss";
+
+import { Section } from "./Section";
+import * as constants from "../constants";
 
 const styles = {
     
@@ -10,7 +13,7 @@ const RecruitmentPage = () => {
     return (
         <div>
             {sections.map(
-                section => {return (<Section name={section.name} description={section.description} quotes={section.quotes} />)}
+                section => {return (<Section name={section.name} description={section.description} quotes={section.quotes} />);}
             )}
         </div>
     )

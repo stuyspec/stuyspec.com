@@ -1,4 +1,5 @@
 import React from "react";
+import injectSheet from "react-jss";
 
 const styles = {
     background: {
@@ -12,7 +13,7 @@ const styles = {
     },
 }
 
-const Quote = (text, source) => {
+const Quote = ({ text, source }) => {
     return (
         <div id={styles.background}>
             <p id={styles.text}>
@@ -20,5 +21,7 @@ const Quote = (text, source) => {
             </p>
             <i id={styles.text}>{source}</i>
         </div>
-    )
+    );
 }
+
+export default injectSheet(styles)(Quote);

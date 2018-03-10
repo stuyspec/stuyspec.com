@@ -178,8 +178,13 @@ class RoutingApp extends PureComponent {
                 render={() =>
                   session ? <EditProfilePage /> : <Redirect to="/myaccount" />}
               />
+              <Route 
+                exact
+                path={"/recruit"}
+                key={"recruit"}
+                component={RecruitmentPage}
+              />
               <Route path={"/search"} key={"search"} component={SearchPage} />
-              <Route exact path={"/recruit"} key={"recruit"} component={RecruitmentPage} />
               <Route path="*" key={"404"} component={NotFoundPage} />
             </Switch>
           )}
