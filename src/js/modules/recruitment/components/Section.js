@@ -20,4 +20,6 @@ const Section = ({ name, description, quotes }) => {
             }
         </div>
     );
-}
+};
+
+export default injectSheet(styles)(Section);

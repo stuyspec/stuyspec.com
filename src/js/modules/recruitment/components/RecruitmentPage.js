@@ -9,14 +9,18 @@ const styles = {
 }
 
 const RecruitmentPage = () => {
-    const sections = constants.SECTIONS;
+    //const sections = constants.SECTIONS;
     return (
-        <div>
+        /*<div>
             {sections.map(
-                section => {return (<Section name={section.name} description={section.description} quotes={section.quotes} />);}
+                section => <Section name={section.name} description={section.description} quotes={section.quotes} />
             )}
         </div>
-    )
-}
+        */
+       <div>
+           <Section name="Web" description="Best department" quotes={{text: "Fight the power", source: "Nich"}} />
+        </div>
+    );
+};
 
 export default injectSheet(styles)(RecruitmentPage);

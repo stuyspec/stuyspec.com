@@ -22,6 +22,6 @@ const Quote = ({ text, source }) => {
             <i id={styles.text}>{source}</i>
         </div>
     );
-}
+};
 
 export default injectSheet(styles)(Quote);
