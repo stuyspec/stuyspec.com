@@ -39,5 +39,5 @@ export const ISSUU_CONFIG = SECOND_NUMBER;
 
 ## Deploying
 
-We use CircleCI for continuous integration. If you push to the `staging` branch, the code will be synced to our staging S3 bucket. If you push to `master`, it will be synced to the prod bucket (`stuyspec`).
+We use CircleCI for continuous integration. If you push to the `staging` branch, the code will be synced to our staging S3 bucket (hosted on `staging.stuyspec.com`). If you push to `master`, it will be synced to the prod bucket (`stuyspec.com`).
 
