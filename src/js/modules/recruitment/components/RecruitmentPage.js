@@ -1,29 +1,43 @@
 import React, { PureComponent } from "react";
 import injectSheet from "react-jss";
+import Grid from "react-bootstrap/lib/Grid";
+import Row from "react-bootstrap/lib/Row";
+import Col from "react-bootstrap/lib/Col"
 
 import * as constants from "../constants";
 
 const styles = {
-    quote: {
-        background: {
-            borderRadius: "15px",
-            borderColor: "gray",
-            backgroundColor: "gainsboro",
-        },
-        text: {
-            fontFamily: "Minion Pro",
-            fontSize: "15px"
-        },
+    Quote: {
+        borderRadius: "5px",
+        borderColor: "gray",
+        //backgroundColor: "gainsboro",
+        marginLeft: "5px",
+        marginRight: "5px",
+        marginBottom: "50px",
+        display: "inlineBlock",
     },
-    section: {
-
+    QuoteText: {
+        fontFamily: "Minion Pro",
+        textAlign: "center"
     },
-    page: {
+    SectionText: {
+        fontFamily: "Circular Std",
+        textAlign: "center"
+    },
+    Section: {
+        backgroundColor: "whitesmoke",
+        borderRadius: "10px",
+        borderColor: "steelblue",
+        maxWidth: "350px",
+        display: "inlineBlock",
+        boxShadow: "",
+    },
+    RecruitmentPage: {
 
     }
 };
 
-const RecruitmentPage = ({}) => {
+const RecruitmentPage = ({classes}) => {
     //const sections = constants.SECTIONS;
     return (
         /*<div>
@@ -32,34 +46,52 @@ const RecruitmentPage = ({}) => {
             )}
         </div>
         */
-       <div>
-           <Section name="Web" description="Best department" quotes={[{text: "Fight the power", source: "Nich"}]} />
+       /*<div className={classes.RecruitmentPage}>
+           <StyledSection name="Web" description="Best department" quotes={[{text: "Fight the power", source: "Nich"}]} />
+        </div>*/
+        <div className={classes.RecruitmentPage}>
+            <Grid fluid>
+                <Col>
+                {
+                    constants.SECTIONS.map(
+                    section => <StyledSection name={section.name} imageLink={section.imageLink} description={section.description} quotes={section.quotes} />
+                    )
+                }
+                </Col>
+            </Grid>
         </div>
     );
 };
 
 
-const Quote = ({ text, source }) => {
+const Quote = ({ classes, text, source }) => {
     return (
-        <div id={styles.quote.background}>
-            <p id={styles.quote.text}>
+        <div className={classes.Quote}>
+            <p className={classes.QuoteText}>
                 {"“" + text + "”"}
             </p>
-            <i id={styles.quote.text}>{"―" + source}</i>
+            <p  className={classes.QuoteText}>
+                <i>{"―" + source}</i>
+            </p>
         </div>
     );
 };
 
-const Section = ({ name, description, quotes }) => {
+const StyledQuote = injectSheet(styles)(Quote);
+
+const Section = ({ classes, imageLink, name, description, quotes }) => {
     return (
-        <div>
-            <h1>{name}</h1>
-            <p>{description}</p>
+        <div className={classes.Section}>
+            <h1 className={classes.SectionText}>{name}</h1>
+            <img src={imageLink} />
+            <p className={classes.SectionText}>{description}</p>
             {quotes.map(({text, source}) => {
-                return (<Quote text={text} source={source} />)})
+                return (<StyledQuote text={text} source={source} />)})
             }
         </div>
     );
 };
+
+const StyledSection = injectSheet(styles)(Section);
 
 export default injectSheet(styles)(RecruitmentPage);
