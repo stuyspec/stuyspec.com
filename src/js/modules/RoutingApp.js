@@ -180,8 +180,8 @@ class RoutingApp extends PureComponent {
               />
               <Route 
                 exact
-                path={"/recruit"}
-                key={"recruit"}
+                path={"/recruiting"}
+                key={"recruiting"}
                 component={RecruitmentPage}
               />
               <Route path={"/search"} key={"search"} component={SearchPage} />
