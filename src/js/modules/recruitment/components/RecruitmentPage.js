@@ -33,9 +33,11 @@ const styles = {
         backgroundColor: "whitesmoke",
         borderColor: "steelblue",
         borderRadius: "10px",
+        boxShadow: "0px 2.5px 5px 2.5px lightgray",
         flexGrow: "1",
         marginBottom: "25px",
         maxWidth: "350px",
+        position: "relative",
     },
     RecruitmentPage: {
 
@@ -58,12 +60,33 @@ const styles = {
       fontFamily: "Minion Pro",
       margin: "10px",
       textAlign: "center",
+      position: "absolute",
+      bottom: "-2.5px",
+      left: "0",
+      right: "0",
+    },
+    Title: {
+        fontFamily: "Old English Text MT",
+        fontSize: "50px",
+        textAlign: "center",
+        paddingBottom: "10px",
+    },
+    Description: {
+        fontFamily: "Minion Pro",
+        fontSize: "20px",
+        textAlign: "center",
+        paddingBottom: "20px"
     }
 };
 
 const RecruitmentPage = ({classes}) => {
     return (
         <div className={classes.RecruitmentPage}>
+            <h1 className={classes.Title}>Recruitments</h1>
+            <p className={classes.Description}>
+                Come to the Stuyvesant Spectator's recruitments to join a 100 year tradition of student journalism.
+                Interest meeting this Wednesday and Thursday after 10th at the library.
+            </p>
             <div className={classes.FlexContainer}>
                 {
                     constants.SECTIONS.map(
