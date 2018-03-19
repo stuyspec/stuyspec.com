@@ -19,6 +19,7 @@ const ArticleQuery = gql`
       media {
         id
         attachment_url
+        medium_attachment_url
         thumb_attachment_url
         media_type
         caption
@@ -121,7 +122,6 @@ class ArticlePage extends PureComponent {
       <Grid fluid className={classes.ArticlePage}>
         <Helmet titleTemplate="%s | The Stuyvesant Spectator">
           <title>{article.title}</title>
-          <meta />
         </Helmet>
         <ArticleHeader article={article} />
         <ArticleBody article={article} />

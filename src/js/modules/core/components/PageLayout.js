@@ -8,6 +8,7 @@ import gql from "graphql-tag";
 import Sidebar from "react-sidebar";
 import Favicon from "react-favicon";
 import { Grid } from "react-bootstrap/lib";
+import { Helmet } from "react-helmet";
 
 import PageHeader from "./PageHeader";
 import PageFooter from "./PageFooter";
@@ -106,6 +107,11 @@ class PageLayout extends PureComponent {
         styles={sidebarStyles}
       >
         <div id="scroll-reset-assistant">
+          <Helmet>
+            <title>
+              The Stuyvesant Spectator - The Pulse of the Stuyvesant Student Body
+            </title>
+          </Helmet>
           <PageHeader location={location} sections={featuredSections} />
           <Favicon url="/img/logo.png" />
           <div className={classes.PageContainer}>

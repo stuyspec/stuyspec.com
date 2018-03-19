@@ -103,13 +103,17 @@ class Gallery extends PureComponent {
           className={classes.Slider}
         >
           {media.map(image => {
+            // Temporary fix of an unintentionally rotated image.
+            // REQUIRES A MORE SOLID FIX
+            const imgSrc = image.id == 261 ? image.mediumAttachmentUrl : image.attachmentUrl;
+
             // Slide unable to be taken out of .map(); there seems to be
             // HTML classes passed down that are interrupted when the
             // following figure is substituted with a custom component.
             return (
               <div className={classes.slideContainer} key={image.id}>
                 <figure className={classes.slide}>
-                  <img src={image.attachmentUrl} />
+                  <img src={imgSrc} />
                   <figcaption className={classes.slideCaption}>
                     <p>{image.title}</p>
                   </figcaption>
