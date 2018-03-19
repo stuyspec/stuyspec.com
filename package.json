@@ -46,7 +46,7 @@
     "gulp-useref": "^3.1.2",
     "history": "^4.7.2",
     "livereactload": "^4.0.0-beta.2",
-    "moment": "^2.18.1",
+    "moment": "^2.19.3",
     "node-notifier": "^5.1.2",
     "prettier": "1.8.2",
     "prop-types": "^15.6.0",
