@@ -85,7 +85,7 @@ const RecruitmentPage = ({classes}) => {
             <h1 className={classes.Title}>Recruitments</h1>
             <p className={classes.Description}>
                 Come to the Stuyvesant Spectator's recruitments to join a 100 year tradition of student journalism.
-                Interest meeting this Wednesday and Thursday after 10th at the library.
+                Interest meeting this Tuesday after 10th at the library.
             </p>
             <div className={classes.FlexContainer}>
                 {
