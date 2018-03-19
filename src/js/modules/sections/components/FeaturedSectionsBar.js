@@ -79,6 +79,11 @@ const FeaturedSectionsBar = ({
           Newsletter
         </span>
       </li>
+      <li key={-2} className={classes.sectionListItem}>
+        <Link to="/recruiting" className={classes.sectionLink}>
+          Recruitments
+        </Link>
+      </li>
       {!omitSearch && (
         <li key={-3} className={classes.sectionListItem}>
           <Link to="/search" className={classes.sectionLink}>
