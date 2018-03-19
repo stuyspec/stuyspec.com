@@ -39,9 +39,6 @@ const styles = {
         maxWidth: "350px",
         position: "relative",
     },
-    RecruitmentPage: {
-
-    },
     FlexContainer: {
       display: "flex",
       flexDirection: "row",
@@ -81,7 +78,7 @@ const styles = {
 
 const RecruitmentPage = ({classes}) => {
     return (
-        <div className={classes.RecruitmentPage}>
+        <div>
             <h1 className={classes.Title}>Recruitments</h1>
             <p className={classes.Description}>
                 Come to the Stuyvesant Spectator's recruitments to join a 100 year tradition of student journalism.
