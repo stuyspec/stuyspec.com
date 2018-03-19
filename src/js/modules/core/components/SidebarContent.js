@@ -63,7 +63,7 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
      * sections and one separating the non-writing sections from the user
      * account options.
      */
-    if (section.name === "Sports" || section.name === "10/31 Terror Attack") {
+    if (section.name === "Arts & Entertainment" || section.name === "10/31 Terror Attack") {
       sidebarElements.push(
         <hr className={classes.divider} key={section.id + 100} />,
       );
