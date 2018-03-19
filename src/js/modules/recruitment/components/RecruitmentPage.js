@@ -122,12 +122,12 @@ const Section = ({ classes, imageLink, name, description, quotes, app}) => {
     return (
         <div className={classes.Section}>
             <h1 className={classes.SectionTitle}>{name}</h1>
-            <img src={imageLink} className={classes.Image}/>
+            {imageLink && <img src={imageLink} className={classes.Image}/>}
             <p className={classes.SectionText}>{description}</p>
             {quotes.map(({text, source}) => {
                 return (<StyledQuote text={text} source={source} />)})
             }
-            <a href={app} className={classes.App}> Click here to sign up for {name}! </a>
+            {app && <a href={app} className={classes.App}> Click here to sign up for {name}! </a>}
         </div>
     );
 };
