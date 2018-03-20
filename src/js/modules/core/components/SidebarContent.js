@@ -63,12 +63,27 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
      * sections and one separating the non-writing sections from the user
      * account options.
      */
-    if (section.name === "Sports" || section.name === "10/31 Terror Attack") {
+    if (section.name === "Arts & Entertainment" || section.name === "10/31 Terror Attack") {
       sidebarElements.push(
         <hr className={classes.divider} key={section.id + 100} />,
       );
     }
   });
+
+  sidebarElements.push(
+    <Link
+      className={classes.sidebarSectionLink}
+      key={-3}
+      onClick={closeSidebar}
+      to="/recruiting"
+    >
+      Recruitments
+    </Link>
+  );
+  sidebarElements.push(
+    <hr className={classes.divider} key={-4} />,
+  );
+
   if (session) {
     sidebarElements.push(
       <Link
@@ -95,7 +110,7 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
   sidebarElements.push(
     <Link
       className={classes.sidebarSectionLink}
-      key={-3}
+      key={-5}
       onClick={closeSidebar}
       to="/search"
     >
