@@ -15,6 +15,7 @@ const ArticleQuery = gql`
       id
       slug
       title
+      preview
       content
       media {
         id
