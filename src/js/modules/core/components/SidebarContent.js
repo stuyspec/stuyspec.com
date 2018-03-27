@@ -69,6 +69,21 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
       );
     }
   });
+
+  sidebarElements.push(
+    <Link
+      className={classes.sidebarSectionLink}
+      key={-3}
+      onClick={closeSidebar}
+      to="/recruiting"
+    >
+      Recruitments
+    </Link>
+  );
+  sidebarElements.push(
+    <hr className={classes.divider} key={-4} />,
+  );
+
   if (session) {
     sidebarElements.push(
       <Link
@@ -95,7 +110,7 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
   sidebarElements.push(
     <Link
       className={classes.sidebarSectionLink}
-      key={-3}
+      key={-5}
       onClick={closeSidebar}
       to="/search"
     >
