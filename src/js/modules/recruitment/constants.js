@@ -1,5 +1,12 @@
 export const SECTIONS = [
   {
+    name: "News",
+    imageLink: null,
+    description: `Do you want to be a part of the best department of The Spectator? Do you want to get tight with the administration? Do you want to see your name and your articles on the front page? Do you want to find out about the coolest news at Stuy before anyone else? Do you want to report on that cool news? If so, join the Spectator News Department!!! `,
+    quotes: [],
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSerzJDbe4FJPoi1fx2r2WCEUIiV7YyGZhvn7OWU5LPDl0yLMQ/viewform"
+  },
+  {
     name: "Features",
     imageLink: null,
     description: `The best way to describe Features in one word is STORYTELLING. 
@@ -26,7 +33,7 @@ export const SECTIONS = [
         source: "Amy Huang"
       }
     ],
-    link: null
+    link: "https://goo.gl/forms/4Lptlm1ixxayzkZo2"
   },
   {
     name: "Opinions",
@@ -47,7 +54,37 @@ export const SECTIONS = [
         source: "Angela Wong"
       }
     ],
+    link: "https://docs.google.com/document/d/1HJicqJ6RGqiZp6nMU3CM3ltB7wGjmgS5t9JN9o-Txms/edit?usp=sharing"
+  },
+  {
+    name: "Humor",
+    imageLink: null,
+    description: `Do you want to lowkey rant about your life and roast everything?
+        Would you like to have a personality glow up?
+        Do you want to join a low commitment and fun Spec department? 
+        Join Spec Humor!
+        We write funny and satirical pieces for The Spec and unlike other departments, everything we publish is libel and slander which means that you'll be in control of what everyone says!`,
+    quotes: [],
+    link: "https://goo.gl/forms/IbJKekpk7JyTugmA2 "
+  },
+  {
+    name: "Arts and Entertainment",
+    imageLink: null,
+    description: `We here at Arts and Entertainment aim to cover stories about arts and entertainment. We are on the frontline to covering major Stuyvesant events like
+    Stuy Squad, SING!, and SOS in addition to writing about movies and literature. You can basically write about anything you want: from 
+    food to culture to theater, you name it! If you are interested in signing up, we unfortunately do not have a Google Forms yet, so you can message 
+    Emily Xu, William Lohier, or Thomas Chen to show that you are interested.`,
+    quotes: [],
     link: null
+  },
+  {
+    name: "Sports",
+    imageLink: null,
+    description: `Were you following March Madness? Are you hype for the start of the MLB season? Do you know who LeBron James is?
+
+If you answered yes (or no!) to any of those questions, the Spectator Sports department is the place for you!! We cover Stuy sports as well as non-Stuy sports topics such as whether NCAA athletes should be paid and steroid use in the MLB. `,
+    quotes: [],
+    link: "https://docs.google.com/forms/d/1x-lhV8KaxgKsCz5HutN3BSE9Nt9ZYhkfRrAM6lU2ui8/viewform?edit_requested=true"
   },
   {
     name: "Copy",
@@ -65,7 +102,7 @@ export const SECTIONS = [
         source: "Tasfia Bashar"
       }
     ],
-    link: null
+    link: "https://goo.gl/forms/lGKk6by8M3So1LhH2"
   },
   {
     name: "Web",
@@ -79,10 +116,71 @@ export const SECTIONS = [
         text: `Having the privilege of being a part of the Web Department was the highlight of my year—
         not only did I learn more about different technologies in web development and the newest frontiers of programming, 
         but I also became friends with an amazing group of people!`,
-        source: "George Zheng"
+        source: "Jerry Ye"
       }
     ],
-    link: null,
+    link: "https://goo.gl/forms/q1BqWp8fZoepntdS2",
+  },
+  {
+    name: "Layout",
+    imageLink: null,
+    description: `A good publication should interest readers before they even pick it up and read it; 
+    the Layout department does just that! We are the last department that works with the newspaper and are responsible for formatting all of the articles, 
+    photos, art, etc. We make sure that the paper is aesthetically appealing and easy to read. 
+    After all, no one wants to read ugly and confusing blocks of text. With creativity and a certain magic called the InDesign, 
+    we present to you what you know as the Spectator. \n\nAs a staff member, you will be taught how to use InDesign and asked to critique 
+    the formatting of each issue as it is released.`,
+    quotes: [],
+    link: "https://goo.gl/forms/MqPkHvfeOOdzWSxY2"
+  },
+  {
+    name: "Photo",
+    imageLink: null,
+    description: `Photo is dedicated to providing interesting and dynamic photographs to support the articles in the Spectator. 
+    Typical assignments include portraits of students and teachers, photos at school events – including sports games – and shots of fun things around the city as well. 
+    Photography is not just support for articles though, it is journalism in its own right. 
+    Photo department members regularly contribute to or spearhead photo essay projects.\n\n
+    The Spectator Photo department only hosts a few meetings each term, so the most work is coordinated via email. 
+    Photo assignments are completed on the photographer’s own schedule, so long as they are in by department deadlines. 
+    This department is a good fit for anyone interested in photography, whether you’re just starting out, 
+    or you’re an expert looking for a place to practice and refine your skills.`,
+    quotes: [
+      {
+        text: `Being a part of Spec Photo is such a fun and rewarding experience! 
+        Photography is a great creative outlet and seeing your photos get published makes it so much more cool. 
+        Taking assignments and going to events, meetings, and clubs that you’ve never even heard of before to take photos lets you 
+        interact with the Stuyvesant community in a personal and unique way, you never know who you might meet. 
+        If there’s any way to contribute to the Spectator, I wholeheartedly say the best way is through Photo!`,
+        source: "Elena Sapelyuk"
+      }
+    ],
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSfndwMl7UgOmGbyBmCpQ7nDUv0Wdexsb93qTNBodd4UVMBOfg/viewform"
+  },
+  {
+    name: "Business",
+    imageLink: null,
+    description: `The Business Department is the beating heart of The Spectator -- 
+    as an independent student-run newspaper, The Spectator is able to publish thousands of copies every issue because 
+    of companies that place advertisements and agree to sponsorships. In order to continue this process, SpecBiz members have the responsibility 
+    in contacting various businesses and acquiring advertisements and sponsorships for the newspaper. 
+    Members are exposed to real life situations by learning proper etiquette, dealing with money, and communicating with adults in the real world.`,
+    quotes: [
+      {
+        text: `SpecBiz opened up my passion for business and taught me valuable life assets that no other department or club in high school could provide me. 
+        My confidence built as I began contacting more businesses and became much more comfortable in talking to adults on the phone in a professional manner, 
+        meeting with business managers throughout the city, and properly formatting emails. Joining this department was a life-changer, 
+        and even to those who don’t have much interest in money, 
+        I highly encourage you to join this heartwarming family who will teach you the things that you need beyond college.`,
+        source: "Stacey Xue",
+      },
+      {
+        text: `I used to be this shy kid, afraid of talking to strangers or in front of large audiences. 
+        But after joining SpecBiz and networking with representatives from various types of companies, 
+        securing deals here and there, I’ve become the most extrovert kind of guy you can ever meet!`,
+        source: "Alexander Radu"
+      }
+    ],
+    link: "https://stuyspec.recruiterbox.com/jobs/fk0fbxp/"
   },
   {
     name: "Art",
@@ -111,67 +209,6 @@ export const SECTIONS = [
         source: "Alex Lin"
       }
     ],
-    link: null
-  },
-  {
-    name: "Photo",
-    imageLink: null,
-    description: `Photo is dedicated to providing interesting and dynamic photographs to support the articles in the Spectator. 
-    Typical assignments include portraits of students and teachers, photos at school events – including sports games – and shots of fun things around the city as well. 
-    Photography is not just support for articles though, it is journalism in its own right. 
-    Photo department members regularly contribute to or spearhead photo essay projects.\n\n
-    The Spectator Photo department only hosts a few meetings each term, so the most work is coordinated via email. 
-    Photo assignments are completed on the photographer’s own schedule, so long as they are in by department deadlines. 
-    This department is a good fit for anyone interested in photography, whether you’re just starting out, 
-    or you’re an expert looking for a place to practice and refine your skills.`,
-    quotes: [
-      {
-        text: `Being a part of Spec Photo is such a fun and rewarding experience! 
-        Photography is a great creative outlet and seeing your photos get published makes it so much more cool. 
-        Taking assignments and going to events, meetings, and clubs that you’ve never even heard of before to take photos lets you 
-        interact with the Stuyvesant community in a personal and unique way, you never know who you might meet. 
-        If there’s any way to contribute to the Spectator, I wholeheartedly say the best way is through Photo!`,
-        source: "Elena Sapelyuk"
-      }
-    ],
-    link: null
-  },
-  {
-    name: "Business",
-    imageLink: null,
-    description: `The Business Department is the beating heart of The Spectator -- 
-    as an independent student-run newspaper, The Spectator is able to publish thousands of copies every issue because 
-    of companies that place advertisements and agree to sponsorships. In order to continue this process, SpecBiz members have the responsibility 
-    in contacting various businesses and acquiring advertisements and sponsorships for the newspaper. 
-    Members are exposed to real life situations by learning proper etiquette, dealing with money, and communicating with adults in the real world.`,
-    quotes: [
-      {
-        text: `SpecBiz opened up my passion for business and taught me valuable life assets that no other department or club in high school could provide me. 
-        My confidence built as I began contacting more businesses and became much more comfortable in talking to adults on the phone in a professional manner, 
-        meeting with business managers throughout the city, and properly formatting emails. Joining this department was a life-changer, 
-        and even to those who don’t have much interest in money, 
-        I highly encourage you to join this heartwarming family who will teach you the things that you need beyond college.`,
-        source: "Stacey Xue",
-      },
-      {
-        text: `I used to be this shy kid, afraid of talking to strangers or in front of large audiences. 
-        But after joining SpecBiz and networking with representatives from various types of companies, 
-        securing deals here and there, I’ve become the most extrovert kind of guy you can ever meet!`,
-        source: "Alexander Radu"
-      }
-    ],
-    link: null
-  },
-  {
-    name: "Layout",
-    imageLink: null,
-    description: `A good publication should interest readers before they even pick it up and read it; 
-    the Layout department does just that! We are the last department that works with the newspaper and are responsible for formatting all of the articles, 
-    photos, art, etc. We make sure that the paper is aesthetically appealing and easy to read. 
-    After all, no one wants to read ugly and confusing blocks of text. With creativity and a certain magic called the InDesign, 
-    we present to you what you know as the Spectator. \n\nAs a staff member, you will be taught how to use InDesign and asked to critique 
-    the formatting of each issue as it is released.`,
-    quotes: [],
-    link: null
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSesBmOEoqxFb4heJlv6JM9-5HdkRSDZuJ-1fiPMZbegnn2Slg/viewform"
   }
 ];
