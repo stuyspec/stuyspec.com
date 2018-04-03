@@ -116,7 +116,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         text: `Having the privilege of being a part of the Web Department was the highlight of my year—
         not only did I learn more about different technologies in web development and the newest frontiers of programming, 
         but I also became friends with an amazing group of people!`,
-        source: "George Zheng"
+        source: "Jerry Ye"
       }
     ],
     link: "https://goo.gl/forms/q1BqWp8fZoepntdS2",
