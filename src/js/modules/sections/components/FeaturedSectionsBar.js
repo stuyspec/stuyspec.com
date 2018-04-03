@@ -80,7 +80,7 @@ const FeaturedSectionsBar = ({
         </span>
       </li>
       <li key={-2} className={classes.sectionListItem}>
-        <Link to="/recruiting" className={classes.sectionLink}>
+        <Link to="/recruitments" className={classes.sectionLink}>
           Recruitments
         </Link>
       </li>
