@@ -70,12 +70,14 @@ export const SECTIONS = [
   {
     name: "Arts and Entertainment",
     imageLink: null,
-    description: `We here at Arts and Entertainment aim to cover stories about arts and entertainment. We are on the frontline to covering major Stuyvesant events like
-    Stuy Squad, SING!, and SOS in addition to writing about movies and literature. You can basically write about anything you want: from 
-    food to culture to theater, you name it! If you are interested in signing up, we unfortunately do not have a Google Forms yet, so you can message 
-    Emily Xu, William Lohier, or Thomas Chen to show that you are interested.`,
-    quotes: [],
-    link: null
+    description: `We here at Arts and Entertainment department of the Spectator and we are the zestiest department in the world.  We get to write about cool stuff like music, movies, books, plays, basically anything, that makes Stuy students less soulless!!
+We love everything artsy and cultural (especially like... Beyonce). We also cover major entertainment events like StuySquad, SOS, and SING! So what are you waiting for?
+Apply for the Spectator Arts and Entertainment department now!!!`,
+    quotes: [{
+	text:`Being part of Arts and Entertainment is the best choice I ever made in my life. It is just so fun to write about things that we as human beings already enjoy. Like, it couldn't be more enjoyable than that. (Except eating Häagen-Dazs while listening to Beyonce)`,
+	source: "Anonymous"
+	}],
+    link: "https://docs.google.com/document/d/1zxCIIBOsBTAuCGAslbX3EW8aQsp8b1aDDM2fTDxS_UE/edit"
   },
   {
     name: "Sports",
