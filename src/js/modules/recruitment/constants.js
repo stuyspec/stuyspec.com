@@ -85,7 +85,12 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
     description: `Were you following March Madness? Are you hype for the start of the MLB season? Do you know who LeBron James is?
 
 If you answered yes (or no!) to any of those questions, the Spectator Sports department is the place for you!! We cover Stuy sports as well as non-Stuy sports topics such as whether NCAA athletes should be paid and steroid use in the MLB. `,
-    quotes: [],
+    quotes: [
+    {
+        text: "Ray hates Spec.",
+        source: "Ray Jones"
+      },
+    ],
     link: "https://docs.google.com/forms/d/1x-lhV8KaxgKsCz5HutN3BSE9Nt9ZYhkfRrAM6lU2ui8/viewform?edit_requested=true"
   },
   {
