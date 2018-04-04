@@ -15,6 +15,10 @@ const styles = {
     },
     QuoteText: {
         fontFamily: "Minion Pro",
+        fontSize: "1.3em",
+        lineHeight: "1.4em",
+        margin: "10px",
+        padding: "3px",
         textAlign: "center"
     },
     SectionTitle: {
@@ -26,8 +30,11 @@ const styles = {
     SectionText:{
         color: "#000",
         fontFamily: "Minion Pro",
+        fontSize: "1.3em",
+        lineHeight: "1.4em",
+        margin: "13px",
+        padding: "3px",
         textAlign: "center",
-        margin: "10px",
     },
     Section: {
         backgroundColor: "whitesmoke",
@@ -37,6 +44,7 @@ const styles = {
         flexGrow: "1",
         marginBottom: "25px",
         maxWidth: "350px",
+        maxHeight: "1300px",
         position: "relative",
     },
     FlexContainer: {
@@ -52,19 +60,20 @@ const styles = {
       width: "300px",
     },
     App: {
-      //color: "#000",
       display: "block",
       fontFamily: "Minion Pro",
       margin: "10px",
       textAlign: "center",
-      position: "absolute",
+      float: "bottom",
       bottom: "-2.5px",
       left: "0",
       right: "0",
     },
     Title: {
+        color: "#000",
         fontFamily: "Old English Text MT",
         fontSize: "50px",
+        marginTop: "0",
         textAlign: "center",
         paddingBottom: "10px",
     },
@@ -82,7 +91,6 @@ const RecruitmentPage = ({classes}) => {
             <h1 className={classes.Title}>Recruitments</h1>
             <p className={classes.Description}>
                 Come to the Stuyvesant Spectator's recruitments to join a 100 year tradition of student journalism.
-                Interest meeting this Tuesday after 10th at the library.
             </p>
             <div className={classes.FlexContainer}>
                 {
@@ -91,7 +99,8 @@ const RecruitmentPage = ({classes}) => {
                                               imageLink={section.imageLink}
                                               description={section.description}
                                               quotes={section.quotes}
-                                              app={section.link} />
+                                              app={section.link}
+                                              key={section.name}/>
                     )
                 }
             </div>
@@ -104,7 +113,7 @@ const Quote = ({ classes, text, source }) => {
     return (
         <div className={classes.Quote}>
             <p className={classes.QuoteText}>
-                {"“" + text + "”"}
+              <i>{"“" + text + "”"}</i>
             </p>
             <p className={classes.QuoteText}>
                 <i>{"―" + source}</i>
