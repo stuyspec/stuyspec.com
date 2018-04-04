@@ -55,10 +55,9 @@ const SHARE_BUTTON_COLOR = "#000";
 const ShareTools = ({ classes, article }) => {
   const { section, title, preview, outquotes } = article;
   const shareUrl = window.location.hostname + `/${section.permalink}/${article.slug}`;
-
   const outquote = outquotes[0] || null;
 
-  const emailBody = `${title}—${preview}\n\n${shareUrl}`;
+  const emailBody = `${title}: ${preview}\n\n${shareUrl}`;
   return (
     <div className={classes.ShareTools}>
       <div key={0}>
