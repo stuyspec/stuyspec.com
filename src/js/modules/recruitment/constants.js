@@ -112,8 +112,9 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     This is the perfect department for both computer programming enthusiasts and novices who want to help The Spectator continue to storm the frontier of online journalism.`,
     quotes: [
       {
-        text: `Having the privilege of being a part of the Web Department was the highlight of my year—
-        not only did I learn more about different technologies in web development and the newest frontiers of programming, 
+        text: `Having the privilege of being a part of the Web Department was 
+        the highlight of my year—not only did I learn more about different
+         technologies in web development and the newest frontiers of programming, 
         but I also became friends with an amazing group of people!`,
         source: "Jerry Ye"
       }
