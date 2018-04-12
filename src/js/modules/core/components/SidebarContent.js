@@ -75,7 +75,7 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
       className={classes.sidebarSectionLink}
       key={-3}
       onClick={closeSidebar}
-      to="/recruiting"
+      to="/recruitments"
     >
       Recruitments
     </Link>
