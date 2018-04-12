@@ -1,41 +1,5 @@
 export const SECTIONS = [
   {
-    name: "News",
-    imageLink: null,
-    description: `Do you want to be a part of the best department of The Spectator? Do you want to get tight with the administration? Do you want to see your name and your articles on the front page? Do you want to find out about the coolest news at Stuy before anyone else? Do you want to report on that cool news? If so, join the Spectator News Department!!! `,
-    quotes: [],
-    link: "https://docs.google.com/forms/d/e/1FAIpQLSerzJDbe4FJPoi1fx2r2WCEUIiV7YyGZhvn7OWU5LPDl0yLMQ/viewform"
-  },
-  {
-    name: "Features",
-    imageLink: null,
-    description: `The best way to describe Features in one word is STORYTELLING. 
-    This is our main, essential craft. We write profiles telling the stories of interesting people 
-    or communities at Stuyvesant, provide more information and delve deeper into issues that News has covered, 
-    uncover information about specific issues at Stuy, and more. We're a very fun, creative department, 
-    but we also deal with hardcore investigative journalism that can actually affect change and shock people! 
-    If you love writing stories, digging around, and writing some hard-hitting articles, then the Features Department is the place for you.`,
-    quotes: [
-      {
-        text: `The best way to describe Features in one word is STORYTELLING. 
-        This is our main, essential craft. We write profiles telling the stories of interesting people or communities at Stuyvesant, 
-        provide more information and delve deeper into issues that News has covered, uncover information about specific issues at Stuy, and more. 
-        We're a very fun, creative department, but we also deal with hardcore investigative journalism that can actually affect change and shock people! 
-        If you love writing stories, digging around, and writing some hard-hitting articles, then the Features Department is the place for you.`,
-        source: "Asim Kapparova"
-      },
-      {
-        text: `Joining Features as a second term freshman was undeniably my best decision of that year. 
-        A few articles and meetings later, Features became engraved in my vocabulary. 
-        Where else can you interview the most wholesome people of Stuy and write a holistic article about them? 
-        Where I found amazing and unique editors, talented and quirky writers, Whole Foods cupcakes, and endless opportunities, 
-        I hope you do too. Join Features!`,
-        source: "Amy Huang"
-      }
-    ],
-    link: "https://goo.gl/forms/4Lptlm1ixxayzkZo2"
-  },
-  {
     name: "Opinions",
     imageLink: null,
     description: `The Opinions section of the Spectator focuses on analyzing and dissecting important, complex, 
@@ -57,6 +21,39 @@ export const SECTIONS = [
     link: "https://docs.google.com/document/d/1HJicqJ6RGqiZp6nMU3CM3ltB7wGjmgS5t9JN9o-Txms/edit?usp=sharing"
   },
   {
+    name: "Arts and Entertainment",
+    imageLink: null,
+    description: `We here at Arts and Entertainment department of the Spectator and we are the zestiest department in the world.  We get to write about cool stuff like music, movies, books, plays, basically anything, that makes Stuy students less soulless!!
+We love everything artsy and cultural (especially like... Beyonce). We also cover major entertainment events like StuySquad, SOS, and SING! So what are you waiting for?
+Apply for the Spectator Arts and Entertainment department now!!!`,
+    quotes: [{
+      text:`Being part of Arts and Entertainment is the best choice I ever made in my life. It is just so fun to write about things that we as human beings already enjoy. Like, it couldn't be more enjoyable than that. (Except eating Häagen-Dazs while listening to Beyonce)`,
+      source: "Anonymous"
+    }],
+    link: "https://docs.google.com/document/d/1zxCIIBOsBTAuCGAslbX3EW8aQsp8b1aDDM2fTDxS_UE/edit"
+  },
+  {
+    name: "Features",
+    imageLink: null,
+    description: `The best way to describe Features in one word is STORYTELLING. 
+    This is our main, essential craft. We write profiles telling the stories of interesting people 
+    or communities at Stuyvesant, provide more information and delve deeper into issues that News has covered, 
+    uncover information about specific issues at Stuy, and more. We're a very fun, creative department, 
+    but we also deal with hardcore investigative journalism that can actually affect change and shock people! 
+    If you love writing stories, digging around, and writing some hard-hitting articles, then the Features Department is the place for you.`,
+    quotes: [
+      {
+        text: `Joining Features as a second term freshman was undeniably my best decision of that year. 
+        A few articles and meetings later, Features became engraved in my vocabulary. 
+        Where else can you interview the most wholesome people of Stuy and write a holistic article about them? 
+        Where I found amazing and unique editors, talented and quirky writers, Whole Foods cupcakes, and endless opportunities, 
+        I hope you do too. Join Features!`,
+        source: "Amy Huang"
+      }
+    ],
+    link: "https://goo.gl/forms/4Lptlm1ixxayzkZo2"
+  },
+  {
     name: "Humor",
     imageLink: null,
     description: `Do you want to lowkey rant about your life and roast everything?
@@ -68,25 +65,25 @@ export const SECTIONS = [
     link: "https://goo.gl/forms/IbJKekpk7JyTugmA2 "
   },
   {
-    name: "Arts and Entertainment",
-    imageLink: null,
-    description: `We here at Arts and Entertainment department of the Spectator and we are the zestiest department in the world.  We get to write about cool stuff like music, movies, books, plays, basically anything, that makes Stuy students less soulless!!
-We love everything artsy and cultural (especially like... Beyonce). We also cover major entertainment events like StuySquad, SOS, and SING! So what are you waiting for?
-Apply for the Spectator Arts and Entertainment department now!!!`,
-    quotes: [{
-	text:`Being part of Arts and Entertainment is the best choice I ever made in my life. It is just so fun to write about things that we as human beings already enjoy. Like, it couldn't be more enjoyable than that. (Except eating Häagen-Dazs while listening to Beyonce)`,
-	source: "Anonymous"
-	}],
-    link: "https://docs.google.com/document/d/1zxCIIBOsBTAuCGAslbX3EW8aQsp8b1aDDM2fTDxS_UE/edit"
-  },
-  {
     name: "Sports",
     imageLink: null,
     description: `Were you following March Madness? Are you hype for the start of the MLB season? Do you know who LeBron James is?
 
 If you answered yes (or no!) to any of those questions, the Spectator Sports department is the place for you!! We cover Stuy sports as well as non-Stuy sports topics such as whether NCAA athletes should be paid and steroid use in the MLB. `,
-    quotes: [],
+    quotes: [
+    {
+        text: "Ray hates Spec.",
+        source: "Ray Jones"
+      },
+    ],
     link: "https://docs.google.com/forms/d/1x-lhV8KaxgKsCz5HutN3BSE9Nt9ZYhkfRrAM6lU2ui8/viewform?edit_requested=true"
+  },
+  {
+    name: "News",
+    imageLink: null,
+    description: `Do you want to be a part of the best department of The Spectator? Do you want to get tight with the administration? Do you want to see your name and your articles on the front page? Do you want to find out about the coolest news at Stuy before anyone else? Do you want to report on that cool news? If so, join the Spectator News Department!!! `,
+    quotes: [],
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSerzJDbe4FJPoi1fx2r2WCEUIiV7YyGZhvn7OWU5LPDl0yLMQ/viewform"
   },
   {
     name: "Copy",
@@ -115,8 +112,9 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     This is the perfect department for both computer programming enthusiasts and novices who want to help The Spectator continue to storm the frontier of online journalism.`,
     quotes: [
       {
-        text: `Having the privilege of being a part of the Web Department was the highlight of my year—
-        not only did I learn more about different technologies in web development and the newest frontiers of programming, 
+        text: `Having the privilege of being a part of the Web Department was 
+        the highlight of my year—not only did I learn more about different
+         technologies in web development and the newest frontiers of programming, 
         but I also became friends with an amazing group of people!`,
         source: "Jerry Ye"
       }
