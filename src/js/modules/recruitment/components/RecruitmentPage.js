@@ -90,7 +90,7 @@ const RecruitmentPage = ({classes}) => {
         <div>
             <h1 className={classes.Title}>Recruitments</h1>
             <p className={classes.Description}>
-                Come to the Stuyvesant Spectator's recruitments to join a 100 year tradition of student journalism.
+                Apply to the Stuyvesant Spectator to join a 100 year tradition of student journalism.
             </p>
             <div className={classes.FlexContainer}>
                 {
