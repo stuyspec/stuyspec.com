@@ -3,8 +3,6 @@ import injectSheet from "react-jss";
 import { ShareButtons, generateShareIcon } from "react-share";
 import { Print } from "../../core/icons";
 
-import { STUY_SPEC_API_URL } from "../../../constants";
-
 const {
   FacebookShareButton,
   TwitterShareButton,
@@ -56,11 +54,10 @@ const SHARE_BUTTON_COLOR = "#000";
 
 const ShareTools = ({ classes, article }) => {
   const { section, title, preview, outquotes } = article;
-  const shareUrl = STUY_SPEC_API_URL + `${section.permalink}/${article.slug}`;
-
+  const shareUrl = window.location.hostname + `/${section.permalink}/${article.slug}`;
   const outquote = outquotes[0] || null;
 
-  const emailBody = `${title}—${preview}\n\n${shareUrl}`;
+  const emailBody = `${title}: ${preview}\n\n${shareUrl}`;
   return (
     <div className={classes.ShareTools}>
       <div key={0}>

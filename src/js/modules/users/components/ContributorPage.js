@@ -21,6 +21,7 @@ const ContributorBySlug = gql`
         slug
         title
         preview
+        created_at
         contributors {
           slug
           first_name
