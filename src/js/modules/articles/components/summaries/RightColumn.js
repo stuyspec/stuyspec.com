@@ -169,19 +169,7 @@ const RightColumn = ({ classes, articles }) => {
           <Dateline timestamp={secondaryArticle.createdAt} />
         </div>
       )}
-
-      <Link
-        to="https://open.spotify.com/user/1225511959/playlist/5kkx7i6sMHdeMB5pJY29Zw"
-        className={classes.label}
-      >
-        Spooky Playlist 2017
-      </Link>
-      <iframe
-        className={classes.spotifyEmbed}
-        src="https://open.spotify.com/embed/user/1225511959/playlist/5kkx7i6sMHdeMB5pJY29Zw"
-        frameBorder="0"
-        allowTransparency="true"
-      />
+      
     </Col>
   );
 };
