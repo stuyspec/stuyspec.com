@@ -149,7 +149,7 @@ const SectionBlock = ({ classes, data }) => {
           <Dateline timestamp={bigArticle.createdAt} />
         </div>
       )}
-      {topRankedArticles.map(article => {
+      {topRankedArticles.slice(1).map(article => {
         return (
           <div className={classes.article} key={article.id}>
             {article.media.length > 0 && (
