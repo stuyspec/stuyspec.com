@@ -40,6 +40,7 @@ const SearchResultsQuery = gql`
         contributors {
           first_name
           last_name
+          slug
         }
       }
     }
