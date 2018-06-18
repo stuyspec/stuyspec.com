@@ -1,10 +1,10 @@
 {
-  "name": "client-app",
-  "displayName": "client-app",
+  "name": "stuyspec.com",
+  "displayName": "stuyspec.com",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/stuyspec/client-app.git"
+    "url": "git://github.com/stuyspec/stuyspec.com.git"
   },
   "license": "MIT",
   "description": "The client-facing application of The Stuyvesant Spectator",
