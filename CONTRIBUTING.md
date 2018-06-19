@@ -7,7 +7,7 @@ _These guidelines are based off those of [freeCodeCamp](https://github.com/freeC
 - [Prerequisites](#prerequisites)
 - [Forking the Project](#forking-the-project)
 - [Set Up MailHog](#set-up-mailhog)
-- [Set Up client-app](#set-up-client-app)
+- [Set Up Repo](#set-up-repo)
 - [Create a Branch](#create-a-branch)
 
 ### Create
@@ -44,33 +44,33 @@ node -v
 1. Install [Git](https://git-scm.com/) or your favorite Git client.
 2. (Optional) [Set Up an SSH Key](https://help.github.com/articles/generating-an-ssh-key/) for GitHub.
 
-#### Forking client-app
+#### Forking the Repo
 
-1. Go to the top level client-app repository: <https://github.com/stuyspec/client-app>
+1. Go to the top level stuyspec.com repository: <https://github.com/stuyspec/stuyspec.com>
 2. Click the "Fork" Button in the upper right hand corner of the interface ([More Details Here](https://help.github.com/articles/fork-a-repo/))
-3. After the repository (repo) has been forked, you will be taken to your copy of the freeCodeCamp repo at <https://github.com/YOUR_USERNAME/client-app>
+3. After the repository (repo) has been forked, you will be taken to your copy of the stuyspec.com repo at <https://github.com/YOUR_USERNAME/stuyspec.com>
 
 #### Cloning Your Fork
 
 1. Open a Terminal / Command Line / Bash Shell in your projects directory (_i.e.: `/yourprojectdirectory/`_)
-2. Clone your fork of client-app
+2. Clone your fork of stuyspec.com
 
 ```shell
 $ git clone https://github.com/YOUR_USERNAME/freeCodeCamp.git
 ```
 
-This will download the entire client-app repo to your projects directory.
+This will download the entire stuyspec.com repo to your projects directory.
 
 #### Set Up Your Upstream
 
-1. Change directory to the new client-app directory (`cd client-app`)
-2. Add a remote to the official client-app repo:
+1. Change directory to the new stuyspec.com directory (`cd stuyspec.com`)
+2. Add a remote to the official stuyspec.com repo:
 
 ```shell
-$ git remote add upstream https://github.com/stuyspec/client-app.git
+$ git remote add upstream https://github.com/stuyspec/stuyspec.com.git
 ```
 
-Congratulations, you now have a local copy of the client-app repo!
+Congratulations, you now have a local copy of the stuyspec.com repo!
 
 #### Maintaining Your Fork
 
@@ -103,7 +103,7 @@ This will pull down all of the changes to the official develop branch, without m
 
 ### Set Up MailHog
 
-To be able to test account creation, you need to set up MailHog. MailHog is a local SMTP mail server that will catch the emails your client-app instance is sending. How you install MailHog is dependent upon your OS. 
+To be able to test account creation, you need to set up MailHog. MailHog is a local SMTP mail server that will catch the emails your stuyspec.com instance is sending. How you install MailHog is dependent upon your OS. 
 
 #### macOS
 
@@ -124,9 +124,9 @@ Once it finishes downloading, click on the file. You will probably get a Windows
 
 To close MailHog, close the command prompt. To run it again, click on the same .exe file. You don't need to download a new one.
 
-### Set Up client-app
+### Set Up Repo
 
-Once you have client-app cloned, before you start the application, you first need to install all of the dependencies:
+Once you have stuyspec.com cloned, before you start the application, you first need to install all of the dependencies:
 
 ```bash
 # Install NPM dependencies
@@ -176,10 +176,10 @@ When you're ready to share your code, create a pull request.
 
 ### Creating a Pull Request
 
-A pull request (PR) is a method of submitting proposed changes to the client-app
+A pull request (PR) is a method of submitting proposed changes to the stuyspec.com
 repo (or any repo, for that matter). You will make changes to copies of the
-files which make up client-app in a personal fork, then apply to have them
-accepted by client-app proper.
+files which make up stuyspec.com in a personal fork, then apply to have them
+accepted by a stuyspec.com maintainer.
 
 1.  Perform the maintenance step of rebasing `develop`.
 2.  Ensure you are on the `develop` branch using `git status`:
@@ -216,10 +216,10 @@ In your web browser go to your repository fork's GitHub Page.
 1.  Once the edits have been committed, you will be prompted to create a pull
     request on that page.
 
-2.  By default, all pull requests should be against the client-app main repo, `develop`
+2.  By default, all pull requests should be against the stuyspec.com main repo, `develop`
     branch.
 
-3.  Submit a pull request to client-app's `develop` branch.
+3.  Submit a pull request to stuyspec.com's `develop` branch.
 
 4.  The title (also called the subject) of your PR should be descriptive of your
     changes and succinctly indicates what is being fixed.
@@ -247,7 +247,7 @@ delete the local copy of the branch with: `git branch -D branch/to-delete-name`
 
 ### Code Style and Prettier
 
-We use [Prettier](https://github.com/prettier/prettier) to make sure all developers have a uniform coding style. Add `prettier` with `yarn global add prettier`. To run Prettier, `cd` to the root of client-app and run
+We use [Prettier](https://github.com/prettier/prettier) to make sure all developers have a uniform coding style. Add `prettier` with `yarn global add prettier`. To run Prettier, `cd` to the root of stuyspec.com and run
 ```
 find ./src/js/modules -type f -name '*.js' | xargs prettier --write --trailing-comma all --single-quote
 ```

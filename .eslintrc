@@ -1,0 +1,25 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "import/no-named-as-default": 0,
+    "import/no-named-as-default-member", 0,
+
+    // allow files to have extension ".js"
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+
+    // allow ommitted parentheses in single-argument arrow functions
+    "arrow-parens": [2, "as-needed"],
+
+    // alow <Link to="..."> to act as anchors
+    "jsx-a11y/anchor-is-valid": [ "error", {
+        "components": [ "Link" ],
+        "specialLink": [ "to" ],
+        "aspects": [ "noHref", "invalidHref", "preferButton" ],
+      }]
+  },
+
+  // environments define allowed global variables
+  "env": {
+    "browser": true,
+  },
+}

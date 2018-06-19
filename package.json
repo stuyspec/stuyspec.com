@@ -1,10 +1,10 @@
 {
-  "name": "client-app",
-  "displayName": "client-app",
+  "name": "stuyspec.com",
+  "displayName": "stuyspec.com",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/stuyspec/client-app.git"
+    "url": "git://github.com/stuyspec/stuyspec.com.git"
   },
   "license": "MIT",
   "description": "The client-facing application of The Stuyvesant Spectator",
@@ -28,10 +28,13 @@
     "babelify": "^7.3.0",
     "browserify": "^14.4.0",
     "dotenv": "^4.0.0",
-    "eslint": "^4.17.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
     "eslint-config-freecodecamp": "^1.1.1",
     "eslint-config-google": "^0.9.1",
-    "eslint-plugin-react": "^7.6.1",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1",
     "events": "^1.1.1",
     "figlet": "^1.2.0",
     "gulp": "^3.9.1",
