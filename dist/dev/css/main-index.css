@@ -10,6 +10,20 @@
 }
 
 @font-face {
+    font-family: "Freight Text";
+    src: url('/fonts/FreightText Pro Book Regular.ttf') format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Freight Text Bold";
+    src: url('/fonts/FreightText Pro Bold Regular.ttf') format("truetype");
+    font-style: normal;
+    font-weight: 'bold';
+}
+
+@font-face {
     font-family: "Minion Pro";
     src: url('/fonts/MinionPro_Regular.ttf') format("truetype");
     font-style: normal;

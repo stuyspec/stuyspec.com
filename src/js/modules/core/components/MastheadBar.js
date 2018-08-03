@@ -42,8 +42,9 @@ const styles = {
   brandingLink: {
     bottom: "9px",
     color: "#000",
-    fontFamily: "Old English Text MT",
-    fontSize: "32px",
+    fontFamily: "Freight Text Bold",
+    fontWeight: "bold",
+    fontSize: "30px",
     left: "50%",
     marginTop: "1px",
     position: "absolute",
