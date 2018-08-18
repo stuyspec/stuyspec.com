@@ -1,4 +1,4 @@
 export default {
-  NAME: "advertisements",
-  pathToAds: "/img/ads/",
+  NAME: 'advertisements',
+  pathToAds: '/img/ads/',
 };

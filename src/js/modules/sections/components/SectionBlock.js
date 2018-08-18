@@ -4,15 +4,15 @@
  * sections.
  */
 
-import React from "react";
-import { Link } from "react-router-dom";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
-import humps from "humps";
-import injectSheet from "react-jss";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import humps from 'humps';
+import injectSheet from 'react-jss';
 
-import Dateline from "../../articles/components/Dateline";
-import Byline from "../../articles/components/Byline";
+import Dateline from '../../articles/components/Dateline';
+import Byline from '../../articles/components/Byline';
 
 const SectionBlockQuery = gql`
   query SectionBlockQuery($section_slug: String!) {
@@ -41,80 +41,80 @@ const SectionBlockQuery = gql`
 
 const styles = {
   SectionBlock: {
-    "& > div:last-child": {
+    '& > div:last-child': {
       // targets last article
-      border: "none",
+      border: 'none',
       paddingBottom: 0,
     },
   },
   article: {
-    borderBottom: "solid 1px #ddd",
-    paddingBottom: "12px",
-    marginBottom: "10px",
+    borderBottom: 'solid 1px #ddd',
+    paddingBottom: '12px',
+    marginBottom: '10px',
   },
   bigTitle: {
-    color: "#000",
-    display: "block",
-    fontFamily: "Minion Pro",
-    fontSize: "18px",
-    fontWeight: "bold",
-    lineHeight: "1.22",
-    marginBottom: "7px",
-    "&:hover, &:active, &:focus": {
-      color: "#000",
+    color: '#000',
+    display: 'block',
+    fontFamily: 'Minion Pro',
+    fontSize: '18px',
+    fontWeight: 'bold',
+    lineHeight: '1.22',
+    marginBottom: '7px',
+    '&:hover, &:active, &:focus': {
+      color: '#000',
     },
   },
   smallTitle: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "16px",
-    lineHeight: "1.25",
-    "&:hover, &:active, &:focus": {
-      color: "#000",
+    color: '#000',
+    fontFamily: 'Minion Pro',
+    fontSize: '16px',
+    lineHeight: '1.25',
+    '&:hover, &:active, &:focus': {
+      color: '#000',
     },
   },
   sectionLabel: {
-    color: "#000",
-    display: "block",
-    fontFamily: "Minion Pro",
-    fontSize: "12px",
-    marginBottom: "6px",
-    textTransform: "uppercase",
-    "&:hover, &:active, &:focus": {
-      color: "#000",
-      textDecoration: "none",
+    color: '#000',
+    display: 'block',
+    fontFamily: 'Minion Pro',
+    fontSize: '12px',
+    marginBottom: '6px',
+    textTransform: 'uppercase',
+    '&:hover, &:active, &:focus': {
+      color: '#000',
+      textDecoration: 'none',
     },
   },
   figure: {
-    float: "right",
-    marginLeft: "6px",
-    maxHeight: "45px",
-    overflow: "hidden",
-    width: "62px",
-    "& img": {
-      width: "100%",
+    float: 'right',
+    marginLeft: '6px',
+    maxHeight: '45px',
+    overflow: 'hidden',
+    width: '62px',
+    '& img': {
+      width: '100%',
     },
   },
   preview: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "14px",
-    lineHeight: "1.29",
-    marginBottom: "13px",
+    color: '#000',
+    fontFamily: 'Minion Pro',
+    fontSize: '14px',
+    lineHeight: '1.29',
+    marginBottom: '13px',
   },
   Byline: {
-    color: "#888",
-    fontFamily: "Circular Std",
-    fontSize: "12px",
+    color: '#888',
+    fontFamily: 'Circular Std',
+    fontSize: '12px',
     fontWeight: 300,
-    marginBottom: "3px",
-    "& p": {
-      margin: "0",
-      display: "inline",
-      "& a": {
-        color: "#888",
-        "&:hover, &:active, &:focus": {
-          color: "#888",
+    marginBottom: '3px',
+    '& p': {
+      margin: '0',
+      display: 'inline',
+      '& a': {
+        color: '#888',
+        '&:hover, &:active, &:focus': {
+          color: '#888',
         },
       },
     },

@@ -1,103 +1,103 @@
-import React from "react";
-import injectSheet from "react-jss";
-import Row from "react-bootstrap/lib/Row";
-import Col from "react-bootstrap/lib/Col";
+import React from 'react';
+import injectSheet from 'react-jss';
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
 
-import ArticleFeaturedMedia from "./ArticleFeaturedMedia";
-import ArticleReference from "./ArticleReference";
-import RightRail from "./RightRail";
-import { SPEC_IMG_CAROUSEL_PATTERN } from "../../../constants";
-import { Gallery } from "../../media/components";
-import { Lightbox } from "../../core/components";
+import ArticleFeaturedMedia from './ArticleFeaturedMedia';
+import ArticleReference from './ArticleReference';
+import RightRail from './RightRail';
+import { SPEC_IMG_CAROUSEL_PATTERN } from '../../../constants';
+import { Gallery } from '../../media/components';
+import { Lightbox } from '../../core/components';
 
 const isBrowserFirefox =
-  navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
+  navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
 const styles = {
   ArticleBody: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "19px",
+    color: '#000',
+    fontFamily: 'Minion Pro',
+    fontSize: '19px',
     lineHeight: 1.4,
-    padding: "0 0 18px",
-    "& p": {
-      marginBottom: "20px",
+    padding: '0 0 18px',
+    '& p': {
+      marginBottom: '20px',
     },
-    "& t": {
-      display: "inline-block",
-      marginRight: "40px",
+    '& t': {
+      display: 'inline-block',
+      marginRight: '40px',
     },
-    "& h4": {
-      textAlign: "center",
-      fontWeight: "bold",
-      textTransform: "uppercase",
+    '& h4': {
+      textAlign: 'center',
+      fontWeight: 'bold',
+      textTransform: 'uppercase',
     },
-    "& h5": {
-      fontSize: "18px",
-      fontWeight: "bold",
-      textTransform: "uppercase",
+    '& h5': {
+      fontSize: '18px',
+      fontWeight: 'bold',
+      textTransform: 'uppercase',
     },
-    "& h2": {
-      fontWeight: "bold",
-      textTransform: "uppercase",
-      textAlign: "center",
+    '& h2': {
+      fontWeight: 'bold',
+      textTransform: 'uppercase',
+      textAlign: 'center',
     },
-    "& p:first-child": {
-      marginTop: "8px",
+    '& p:first-child': {
+      marginTop: '8px',
     },
-    "& > div > p::first-letter": {
+    '& > div > p::first-letter': {
       // dropcap
-      float: "left",
-      fontSize: "64px",
-      lineHeight: "40px",
-      padding: "0px 6px 0px 3px",
-      paddingTop: isBrowserFirefox ? "5px" : "11px",
+      float: 'left',
+      fontSize: '64px',
+      lineHeight: '40px',
+      padding: '0px 6px 0px 3px',
+      paddingTop: isBrowserFirefox ? '5px' : '11px',
     },
-    "& > div > p ~ p::first-letter": {
-      float: "none",
-      fontSize: "18px",
+    '& > div > p ~ p::first-letter': {
+      float: 'none',
+      fontSize: '18px',
       lineHeight: 1.44,
       padding: 0,
     },
-    "& spec-reference": {
-      display: "none",
+    '& spec-reference': {
+      display: 'none',
     },
   },
   print: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontStyle: "italic",
-    "& a": {
-      "&:hover, &:active, &:focus": {
-        color: "#999",
+    color: '#000',
+    fontFamily: 'Minion Pro',
+    fontStyle: 'italic',
+    '& a': {
+      '&:hover, &:active, &:focus': {
+        color: '#999',
       },
     },
   },
   content: {
-    marginTop: "13px",
+    marginTop: '13px',
   },
-  "@media (max-width: 991px)": {
+  '@media (max-width: 991px)': {
     ArticleBody: {
-      "& > figure": {
-        padding: "0 10%",
+      '& > figure': {
+        padding: '0 10%',
       },
     },
     innerHTML: {
-      padding: "0 10%",
+      padding: '0 10%',
     },
   },
-  "@media (max-width: 767px)": {
+  '@media (max-width: 767px)': {
     ArticleBody: {
-      "& > figure": {
-        padding: "0 2%",
-        "& > div > img": {
-          marginLeft: "-2%",
-          width: "100vw",
+      '& > figure': {
+        padding: '0 2%',
+        '& > div > img': {
+          marginLeft: '-2%',
+          width: '100vw',
         },
       },
     },
     innerHTML: {
-      padding: "0 2%",
+      padding: '0 2%',
     },
   },
 };

@@ -1,61 +1,61 @@
-import React, { PureComponent } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import injectSheet from "react-jss";
+import React, { PureComponent } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import injectSheet from 'react-jss';
 
-import { openLightbox } from "../../core/actions";
-import ArticleMediaCaption from "./ArticleMediaCaption";
+import { openLightbox } from '../../core/actions';
+import ArticleMediaCaption from './ArticleMediaCaption';
 
 const styles = {
   figure: {
-    margin: "0 0 28px 0",
-    width: "100%",
+    margin: '0 0 28px 0',
+    width: '100%',
   },
   tallFigure: {
-    float: "left",
-    marginTop: "9px !important",
-    marginBottom: "5px",
-    paddingRight: "3.5% !important",
-    width: "55%",
+    float: 'left',
+    marginTop: '9px !important',
+    marginBottom: '5px',
+    paddingRight: '3.5% !important',
+    width: '55%',
   },
   imgContainer: {
-    position: "relative",
-    "& img": {
-      width: "100%",
+    position: 'relative',
+    '& img': {
+      width: '100%',
     },
-    "& button": {
-      bottom: "20px",
-      left: "20px",
-      position: "absolute",
+    '& button': {
+      bottom: '20px',
+      left: '20px',
+      position: 'absolute',
     },
   },
   carouselButton: {
-    backgroundColor: "#fff",
-    border: "none",
+    backgroundColor: '#fff',
+    border: 'none',
     borderRadius: 0,
-    display: "flex",
-    alignItems: "center",
+    display: 'flex',
+    alignItems: 'center',
     opacity: 0.8,
-    outline: "none",
-    padding: "8px 11px",
-    transitionDuration: ".3s",
-    "&:hover": {
+    outline: 'none',
+    padding: '8px 11px',
+    transitionDuration: '.3s',
+    '&:hover': {
       opacity: 0.9,
     },
   },
   slidesIcon: {
-    width: "23px !important",
+    width: '23px !important',
   },
   carouselImageCount: {
-    fontFamily: "Circular Std",
-    fontSize: "17px",
-    marginLeft: "12px",
+    fontFamily: 'Circular Std',
+    fontSize: '17px',
+    marginLeft: '12px',
   },
-  "@media (max-width: 767px)": {
+  '@media (max-width: 767px)': {
     tallFigure: {
-      "& > div > img": {
-        marginLeft: "0 !important",
-        width: "100% !important",
+      '& > div > img': {
+        marginLeft: '0 !important',
+        width: '100% !important',
       },
     },
   },
@@ -92,7 +92,7 @@ class ArticleFeaturedMedia extends PureComponent {
           <img className={classes.img} src={image.attachmentUrl} />
           {isCarouselButtonVisible && (
             <button className={classes.carouselButton} onClick={openLightbox}>
-              <img className={classes.slidesIcon} src="/img/slides.svg" />
+              <img className={classes.slidesIcon} src='/img/slides.svg' />
               <span className={classes.carouselImageCount}>
                 {carouselImageCount}
               </span>

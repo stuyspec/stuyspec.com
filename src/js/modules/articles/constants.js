@@ -1,5 +1,5 @@
 export default {
-  NAME: "articles",
+  NAME: 'articles',
 };
 
 export const ARTICLES_PER_PAGE = 20;

@@ -1,31 +1,31 @@
-import React from "react";
-import { Grid, Row, Col } from "react-bootstrap/lib";
-import injectSheet from "react-jss";
-import { Helmet } from "react-helmet";
+import React from 'react';
+import { Grid, Row, Col } from 'react-bootstrap/lib';
+import injectSheet from 'react-jss';
+import { Helmet } from 'react-helmet';
 
-import ArticleFeed from "./ArticleFeed";
-import { TallAd } from "../../advertisements/components";
+import ArticleFeed from './ArticleFeed';
+import { TallAd } from '../../advertisements/components';
 
 const styles = {
   pageTitle: {
-    color: "#000",
-    fontFamily: "Canela",
-    fontSize: "48px",
+    color: '#000',
+    fontFamily: 'Canela',
+    fontSize: '48px',
     fontWeight: 500,
     lineHeight: 1,
-    marginBottom: "11px",
+    marginBottom: '11px',
   },
   articleList: {
     padding: 0,
   },
-  "@media (min-width: 992px)": {
+  '@media (min-width: 992px)': {
     articleList: {
-      paddingRight: "14px !important",
+      paddingRight: '14px !important',
     },
     tallAdContainer: {
-      borderLeft: "1px solid #ddd",
-      marginTop: "57px",
-      paddingLeft: "14px !important",
+      borderLeft: '1px solid #ddd',
+      marginTop: '57px',
+      paddingLeft: '14px !important',
     },
   },
 };
@@ -33,7 +33,7 @@ const styles = {
 const LatestPage = ({ classes }) => {
   return (
     <Grid fluid>
-      <Helmet titleTemplate="%s | The Stuyvesant Spectator">
+      <Helmet titleTemplate='%s | The Stuyvesant Spectator'>
         <title>The Latest</title>
         <meta />
       </Helmet>

@@ -1,9 +1,9 @@
-import React from "react";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
-import humps from "humps";
-import injectSheet from "react-jss";
-import { Grid, Row, Col } from "react-bootstrap/lib";
+import React from 'react';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import humps from 'humps';
+import injectSheet from 'react-jss';
+import { Grid, Row, Col } from 'react-bootstrap/lib';
 
 import {
   FeaturedArticle,
@@ -11,8 +11,8 @@ import {
   LatestArticlesRibbon,
   LeftColumn,
   RightColumn,
-} from "../../articles/components/summaries";
-import { SectionFeature, SectionColumn } from "../../sections/components";
+} from '../../articles/components/summaries';
+import { SectionFeature, SectionColumn } from '../../sections/components';
 
 const HomePageQuery = gql`
   query HomePageQuery {
@@ -64,25 +64,25 @@ const HomePageQuery = gql`
 
 const styles = {
   HomePage: {
-    margin: "23px 0px 13px",
+    margin: '23px 0px 13px',
   },
   recommendedArticles: {
     padding: 0,
   },
   primaryComponents: {
-    borderRight: "solid 1px #ddd",
-    marginBottom: "19px",
-    paddingRight: "14px",
+    borderRight: 'solid 1px #ddd',
+    marginBottom: '19px',
+    paddingRight: '14px',
   },
-  "@media (max-width: 991px)": {
+  '@media (max-width: 991px)': {
     primaryComponents: {
-      borderRight: "none",
+      borderRight: 'none',
       paddingRight: 0,
     },
   },
-  "@media (max-width: 767px)": {
+  '@media (max-width: 767px)': {
     skinnyCol: {
-      padding: "0 !important",
+      padding: '0 !important',
     },
   },
 };
@@ -94,11 +94,11 @@ const HomePage = ({ classes, data }) => {
   data = humps.camelizeKeys(data);
   const { featuredArticle, columnArticles } = data;
 
-  const firstColumnSectionSlugs = ["opinions", "features", "humor"];
+  const firstColumnSectionSlugs = ['opinions', 'features', 'humor'];
   const secondColumnSectionSlugs = [
-    "staff-editorials",
-    "ae",
-    "sports-at-stuyvesant",
+    'staff-editorials',
+    'ae',
+    'sports-at-stuyvesant',
   ];
   return (
     <div>
@@ -112,7 +112,7 @@ const HomePage = ({ classes, data }) => {
             className={classes.primaryComponents}
           >
             <FeaturedArticle article={featuredArticle} />
-            <SectionFeature section_slug={"news"} />
+            <SectionFeature section_slug={'news'} />
           </Col>
           <Col
             xsHidden

@@ -1,14 +1,14 @@
-import React from "react";
-import { bindActionCreators, compose } from "redux";
-import { connect } from "react-redux";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
-import humps from "humps";
-import injectSheet from "react-jss";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { bindActionCreators, compose } from 'redux';
+import { connect } from 'react-redux';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import humps from 'humps';
+import injectSheet from 'react-jss';
+import { Link } from 'react-router-dom';
 
-import { Search } from "../../core/icons";
-import { openSubscriptionModal } from "../../accounts/actions";
+import { Search } from '../../core/icons';
+import { openSubscriptionModal } from '../../accounts/actions';
 
 const FeaturedSectionsQuery = gql`
   query FeaturedSectionsQuery {
@@ -22,32 +22,32 @@ const FeaturedSectionsQuery = gql`
 
 const styles = {
   FeaturedSectionsBar: {
-    fontFamily: "Circular Std",
-    listStyleType: "none",
-    padding: "6px",
+    fontFamily: 'Circular Std',
+    listStyleType: 'none',
+    padding: '6px',
   },
   sectionListItem: {
-    display: "inline",
-    margin: "0px 13px",
+    display: 'inline',
+    margin: '0px 13px',
   },
   navSearchButton: {
-    top: "-1px",
-    position: "relative",
+    top: '-1px',
+    position: 'relative',
   },
   sectionLink: {
-    color: "#000",
-    fontSize: "14px",
+    color: '#000',
+    fontSize: '14px',
     fontWeight: 300,
-    textDecoration: "none",
-    "&:hover": {
-      color: "#000",
-      textDecoration: "underline",
-      cursor: "pointer",
+    textDecoration: 'none',
+    '&:hover': {
+      color: '#000',
+      textDecoration: 'underline',
+      cursor: 'pointer',
     },
-    "&:active, &:focus": {
-      color: "#000",
-      textDecoration: "none",
-      outline: "none",
+    '&:active, &:focus': {
+      color: '#000',
+      textDecoration: 'none',
+      outline: 'none',
     },
   },
 };
@@ -80,13 +80,13 @@ const FeaturedSectionsBar = ({
         </span>
       </li>
       <li key={-2} className={classes.sectionListItem}>
-        <Link to="/recruitments" className={classes.sectionLink}>
+        <Link to='/recruitments' className={classes.sectionLink}>
           Recruitments
         </Link>
       </li>
       {!omitSearch && (
         <li key={-3} className={classes.sectionListItem}>
-          <Link to="/search" className={classes.sectionLink}>
+          <Link to='/search' className={classes.sectionLink}>
             <Search className={classes.navSearchButton} />
           </Link>
         </li>

@@ -1,9 +1,9 @@
-import dateFormat from "dateformat";
+import dateFormat from 'dateformat';
 
 import {
   CREATE_COMMENT_FULFILLED,
   CREATE_COMMENT_REJECTED,
-} from "./actionTypes";
+} from './actionTypes';
 
 const initialState = {
   status: {
@@ -17,14 +17,14 @@ const reducer = (state = initialState, action) => {
     case CREATE_COMMENT_FULFILLED: {
       const time = dateFormat(
         action.payload.data.createdAt,
-        "shortTime",
+        'shortTime',
       ).toLowerCase();
       // e.g. 5:46 pm
 
       return {
         ...state,
         status: {
-          type: "fulfilled",
+          type: 'fulfilled',
           message: `Comment submitted for review at ${time}.`,
         },
       };
@@ -33,13 +33,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         status: {
-          type: "rejected",
+          type: 'rejected',
           message: `Comment failed to post (${action.payload}).`,
         },
       };
     }
 
-    case "@@redux-form/DESTROY": {
+    case '@@redux-form/DESTROY': {
       // Clears status data so the success message will not appear on other
       // articles' comment threads.
       return {

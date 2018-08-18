@@ -1,8 +1,8 @@
 const initialState = [
   {
     id: 0,
-    title: "Our Charter",
-    slug: "our-charter",
+    title: 'Our Charter',
+    slug: 'our-charter',
     content: `<h1>The Charter of The Spectator</h1>
 Approved September 24, 2016 by The Spectator Editorial Board.<br>
 <h2>I. Statement of Purpose<br></h2>
@@ -116,20 +116,20 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
   <li>Advertisements are not placed on Opinions or Humor pages. Exceptions can be made if Humor is 1 &#189; pages, at the discretion of the Business Managers.</li>
 </ol>
 <center>——————</center>
-<p>If you have any comments, questions, concerns, or suggestions regarding this webpage or concerning The Spectator in general, please e-mail us directly at <a href="mailto:web@stuyspec.com">web@stuyspec.com</a>.
+<p>If you have any comments, questions, concerns, or suggestions regarding this webpage or concerning The Spectator in general, please e-mail us directly at <a href='mailto:web@stuyspec.com'>web@stuyspec.com</a>.
 <p>Please be aware that this webpage is currently a work in progress. We are still working to implement new features and update content. If you have access to past content that you believe should be on this site or know someone who does, please do not hesitate to contact us through the resources mentioned above. We sincerely apologize for any past work that is missing or lacks proper credit, and implore you to email us with any information you believe would assist in resolving this.</p>
 `,
   },
   {
     id: 1,
-    title: "Advertise",
-    slug: "advertise",
+    title: 'Advertise',
+    slug: 'advertise',
     content: `<h2>Local Advertising</h2>
-<ul>Local advertisers are classified as all those companies either headquartered within New York City or whose New York City local branch is placing an advertisement.The best way to contact an advertising representative is to <a href="mailto:specbusiness@gmail.com">e-mail the business manager</a>. For information on rates and our publication schedule, please see the advertising forms below.</ul>
+<ul>Local advertisers are classified as all those companies either headquartered within New York City or whose New York City local branch is placing an advertisement.The best way to contact an advertising representative is to <a href='mailto:specbusiness@gmail.com'>e-mail the business manager</a>. For information on rates and our publication schedule, please see the advertising forms below.</ul>
 <h2>National Advertising</h2>
 <ul>
   Please direct all national advertising orders and questions to our business desk:<br><br>
-  <pre><b>Email</b>: <a href="mailto:specbusiness@gmail.com">business@stuyspec.com</a></pre>
+  <pre><b>Email</b>: <a href='mailto:specbusiness@gmail.com'>business@stuyspec.com</a></pre>
   <br>
   <pre><b>Fax</b>: 212-587-3874, attn. The Spectator</pre>
   <br>
@@ -137,14 +137,14 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
 </ul>
 <h2>Student Groups</h2>
 <ul>
-  All Clubs and Pubs are offered discounted advertising rates in The Spectator! In order to place an ad, a representative (a president or cabinet member) must email <a href="mailto:specbusiness@gmail.com">business@stuyspec.com</a> with the following things:
+  All Clubs and Pubs are offered discounted advertising rates in The Spectator! In order to place an ad, a representative (a president or cabinet member) must email <a href='mailto:specbusiness@gmail.com'>business@stuyspec.com</a> with the following things:
   <ul>
     <li>Group Name</li>
     <li>Size of ad requested</li>
     <li>The date they would like the advertisement to appear</li>
     <li>A digital copy of the ad in JPG or PDF format</li>
   </ul>
-  Large ad sizes are available. Please contact <a href="mailto:specbusiness@gmail.com">business@stuyspec.com</a> for more details.
+  Large ad sizes are available. Please contact <a href='mailto:specbusiness@gmail.com'>business@stuyspec.com</a> for more details.
 </ul>
 <h2>Contact Business Directly</h2>
 <ul>
@@ -165,67 +165,67 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
   },
   {
     id: 2,
-    title: "Sponsors",
-    slug: "sponsors",
+    title: 'Sponsors',
+    slug: 'sponsors',
     content: `<h2>Become A Sponsor</h2>
 <p>
   If you are interested in sponsoring <i>The Spectator</i> to help
   preserve the tradition of excellence our publication has established
   heretofore, please contact the business managers at <a href=
-  "mailto:specbusiness@gmail.com">business@stuyspec.com</a>. For benefits of
+  'mailto:specbusiness@gmail.com'>business@stuyspec.com</a>. For benefits of
   sponsorship, please see the below document.
 </p>
 <center>
-  <iframe allowfullscreen frameborder="0" src=
-  "//e.issuu.com/embed.html#30896636/52588541" style=
-  "width:500px; height:647px;"></iframe>
+  <iframe allowfullscreen frameborder='0' src=
+  '//e.issuu.com/embed.html#30896636/52588541' style=
+  'width:500px; height:647px;'></iframe>
 </center>
 <hr>
 <center>
   <a href=
-  "https://www.asphaltgreen.org/bpc?utm_medium=referral&utm_source=stuyvesant%20spectator&utm_campaign=website%20referral">
-  <img alt="AsphaltGreen" src="/img/sponsors/AsphaltGreen.png" style=
-  "margin-bottom:50px"></a><br>
-  <a href="http://static.escapetheroomnyc.com/"><img alt="Escape" src=
-  "/img/sponsors/Escape.png" style="margin-bottom:50px"></a><br>
-  <a href="http://foxmanagementconsulting.com/"><img alt="FoxManagement"
-  src="/img/sponsors/FoxManagement.png" style="margin-bottom:50px"></a><br>
-  <a href="http://www.mysteryroomnyc.com/"><img alt="MysteryRoom" src=
-  "/img/sponsors/MysteryRoom.png" style=
-  "margin-bottom:50px; width:320px; height:181px"></a><br>
-  <a href="http://thinkshirt.com/"><img alt="ThinkShirt" src=
-  "/img/sponsors/ThinkShirt.png" style="margin-bottom:50px"></a><br>
+  'https://www.asphaltgreen.org/bpc?utm_medium=referral&utm_source=stuyvesant%20spectator&utm_campaign=website%20referral'>
+  <img alt='AsphaltGreen' src='/img/sponsors/AsphaltGreen.png' style=
+  'margin-bottom:50px'></a><br>
+  <a href='http://static.escapetheroomnyc.com/'><img alt='Escape' src=
+  '/img/sponsors/Escape.png' style='margin-bottom:50px'></a><br>
+  <a href='http://foxmanagementconsulting.com/'><img alt='FoxManagement'
+  src='/img/sponsors/FoxManagement.png' style='margin-bottom:50px'></a><br>
+  <a href='http://www.mysteryroomnyc.com/'><img alt='MysteryRoom' src=
+  '/img/sponsors/MysteryRoom.png' style=
+  'margin-bottom:50px; width:320px; height:181px'></a><br>
+  <a href='http://thinkshirt.com/'><img alt='ThinkShirt' src=
+  '/img/sponsors/ThinkShirt.png' style='margin-bottom:50px'></a><br>
 </center>
 `,
   },
   {
     id: 3,
-    title: "Staff",
-    slug: "staff",
+    title: 'Staff',
+    slug: 'staff',
     content: `<center>
-<h2 style="margin-bottom: 30px;">
+<h2 style='margin-bottom: 30px;'>
   Members of the 2018-2019 Spectator Editorial Board
 </h2>
 <b>Editors In Chief</b><br>
 Jane Rhee<br>
 Sophie Watwood<br>
 <br>
-<table style="width:87%;text-align:center" >
+<table style='width:87%;text-align:center' >
     <tr>
-        <td style="width:30%;vertical-align: top">
+        <td style='width:30%;vertical-align: top'>
             <b>News Editors</b><br>
             Nishmi Abeyweera<br>
             George Shey<br>
             <br>
         </td>
-        <td style="width:40%;vertical-align: top">
+        <td style='width:40%;vertical-align: top'>
             <b>Features Editors</b><br>
             Archi Das<br>
             Amy Huang<br>
             Amanda Peng<br>
             <br>
         </td>
-        <td style="width:30%;vertical-align: top">
+        <td style='width:30%;vertical-align: top'>
              <b>Opinions Editors</b><br>
             Artem Ilyanok<br>
             Eliza Spinna<br>
@@ -233,20 +233,20 @@ Sophie Watwood<br>
         </td>
     </tr>
     <tr>
-        <td style="width:30%;vertical-align: top">
+        <td style='width:30%;vertical-align: top'>
             <b>Arts & Entertainment Editors</b><br>
             Thomas Chen**<br>
             William Lohier<br>
             Emily Xu<br>
             <br>
         </td>
-        <td style="width:40%;vertical-align: top">
+        <td style='width:40%;vertical-align: top'>
             <b>Humor Editors</b><br>
             Kerwin Chen<br>
             Gabrielle Umanova<br>
             <br>
         </td>
-        <td style="width:30%;vertical-align: top" >
+        <td style='width:30%;vertical-align: top' >
             <b>Sports Editors</b><br>
             Celina Liu<br>
             Ariel Melendez<br>
@@ -255,20 +255,19 @@ Sophie Watwood<br>
         </td>
     </tr>
     <tr>
-        <td style="width:30%;vertical-align: top">
+        <td style='width:30%;vertical-align: top'>
             <b>Web Editors</b><br>
             Darius Jankausakas**<br>
-            Jason Lin<br>
             Jerry Ye<br>
             <br>
         </td>
-        <td style="width:40%;vertical-align: top">
+        <td style='width:40%;vertical-align: top'>
             <b>Photography Editors</b><br>
             Ting Ting Chen<br>
             Elena Sapelyuk<br>
             <br>
         </td>
-        <td style="width:30%;vertical-align: top">
+        <td style='width:30%;vertical-align: top'>
             <b>Art Directions</b><br>
             Klaire Geller<br>
             Anika Hashem<br>
@@ -277,21 +276,21 @@ Sophie Watwood<br>
         </td>
     </tr>
     <tr>
-        <td style="width:30%;vertical-align: top">
+        <td style='width:30%;vertical-align: top'>
             <b>Layout Editors</b><br>
             Dahae Choi<br>
             Christina Tan<br>
             Katie Wu<br>
             <br>
         </td>
-        <td style="width:40%;vertical-align: top">
+        <td style='width:40%;vertical-align: top'>
             <b>Copy Editors</b><br>
             Jeanette Cheung<br>
             Michelle Lai<br>
             Jonela Malollari<br>
             <br>
         </td>
-        <td style="width:30%;vertical-align: top">
+        <td style='width:30%;vertical-align: top'>
             <b>Business Managers</b><br>
             Stacey Xue<br>
             <br>
@@ -302,7 +301,7 @@ Sophie Watwood<br>
 Kerry Garfinkel
 <br>
 </center>
-<p style="text-align: right; width: 100%; margin-top:20px">
+<p style='text-align: right; width: 100%; margin-top:20px'>
   <i>*Managing Board members</i><br>
   <i>**Editors In Training</i>
 </p>
@@ -310,10 +309,10 @@ Kerry Garfinkel
   },
   {
     id: 4,
-    title: "Contact",
-    slug: "contact",
-    content: `<p style="text-align: center">
-  Contact us at <a href="mailto:web@stuyspec.com">web@stuyspec.com</a>.
+    title: 'Contact',
+    slug: 'contact',
+    content: `<p style='text-align: center'>
+  Contact us at <a href='mailto:web@stuyspec.com'>web@stuyspec.com</a>.
 </p>
 `,
   },

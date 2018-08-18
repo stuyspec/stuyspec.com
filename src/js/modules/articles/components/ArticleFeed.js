@@ -1,11 +1,11 @@
-import React, { PureComponent } from "react";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
-import humps from "humps";
-import injectSheet from "react-jss";
+import React, { PureComponent } from 'react';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import humps from 'humps';
+import injectSheet from 'react-jss';
 
-import ArticleList from "./ArticleList";
-import { ARTICLES_PER_PAGE } from "../constants";
+import ArticleList from './ArticleList';
+import { ARTICLES_PER_PAGE } from '../constants';
 
 const ArticleFeedQuery = gql`
   query ArticleFeedQuery($section_id: ID, $offset: Int, $limit: Int) {
@@ -37,22 +37,22 @@ const ArticleFeedQuery = gql`
 
 const styles = {
   ArticleFeed: {
-    marginBottom: "36px",
+    marginBottom: '36px',
   },
   buttonContainer: {
-    display: "flex",
-    width: "100%",
-    justifyContent: "center",
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'center',
   },
   loadMoreButton: {
-    background: "#9dba73",
-    borderRadius: "3px",
-    color: "#fff",
-    fontFamily: "Canela",
-    border: "none",
-    padding: "12px 16px",
-    fontSize: "16px",
-    cursor: "pointer",
+    background: '#9dba73',
+    borderRadius: '3px',
+    color: '#fff',
+    fontFamily: 'Canela',
+    border: 'none',
+    padding: '12px 16px',
+    fontSize: '16px',
+    cursor: 'pointer',
   },
 };
 
@@ -85,7 +85,7 @@ class ArticleFeed extends PureComponent {
   }
 
   render() {
-    const { classes, loading, loadMoreArticles, title = "Latest" } = this.props;
+    const { classes, loading, loadMoreArticles, title = 'Latest' } = this.props;
 
     if (loading) {
       return null;
@@ -97,7 +97,7 @@ class ArticleFeed extends PureComponent {
 
     return (
       <div className={classes.ArticleFeed}>
-        <ArticleList articles={latestArticles} title={title} label="Articles" />
+        <ArticleList articles={latestArticles} title={title} label='Articles' />
         {isLoadMoreButtonVisible && (
           <div className={classes.buttonContainer}>
             <button

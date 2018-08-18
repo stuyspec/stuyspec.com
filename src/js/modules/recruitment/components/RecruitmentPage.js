@@ -1,87 +1,87 @@
-import React, { PureComponent } from "react";
-import injectSheet from "react-jss";
+import React, { PureComponent } from 'react';
+import injectSheet from 'react-jss';
 
-import * as constants from "../constants";
+import * as constants from '../constants';
 
 const styles = {
     Quote: {
-        borderRadius: "5px",
-        borderColor: "gray",
-        color: "#000",
-        display: "inlineBlock",
-        marginLeft: "5px",
-        marginRight: "5px",
-        marginBottom: "25px",
+        borderRadius: '5px',
+        borderColor: 'gray',
+        color: '#000',
+        display: 'inlineBlock',
+        marginLeft: '5px',
+        marginRight: '5px',
+        marginBottom: '25px',
     },
     QuoteText: {
-        fontFamily: "Minion Pro",
-        fontSize: "1.3em",
-        lineHeight: "1.4em",
-        margin: "10px",
-        padding: "3px",
-        textAlign: "center"
+        fontFamily: 'Minion Pro',
+        fontSize: '1.3em',
+        lineHeight: '1.4em',
+        margin: '10px',
+        padding: '3px',
+        textAlign: 'center'
     },
     SectionTitle: {
-        color: "#000",
-        fontFamily: "Canela",
-        margin: "10px",
-        textAlign: "center",
+        color: '#000',
+        fontFamily: 'Canela',
+        margin: '10px',
+        textAlign: 'center',
     },
     SectionText:{
-        color: "#000",
-        fontFamily: "Minion Pro",
-        fontSize: "1.3em",
-        lineHeight: "1.4em",
-        margin: "13px",
-        padding: "3px",
-        textAlign: "center",
+        color: '#000',
+        fontFamily: 'Minion Pro',
+        fontSize: '1.3em',
+        lineHeight: '1.4em',
+        margin: '13px',
+        padding: '3px',
+        textAlign: 'center',
     },
     Section: {
-        backgroundColor: "whitesmoke",
-        borderColor: "steelblue",
-        borderRadius: "10px",
-        boxShadow: "0px 2.5px 5px 2.5px lightgray",
-        flexGrow: "1",
-        marginBottom: "25px",
-        maxWidth: "350px",
-        maxHeight: "1300px",
-        position: "relative",
+        backgroundColor: 'whitesmoke',
+        borderColor: 'steelblue',
+        borderRadius: '10px',
+        boxShadow: '0px 2.5px 5px 2.5px lightgray',
+        flexGrow: '1',
+        marginBottom: '25px',
+        maxWidth: '350px',
+        maxHeight: '1300px',
+        position: 'relative',
     },
     FlexContainer: {
-      display: "flex",
-      flexDirection: "row",
-      flexWrap: "wrap",
-      justifyContent: "space-evenly",
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-evenly',
     },
     Image: {
-      display: "block",
-      height: "300px",
-      margin: "0 auto 10px",
-      width: "300px",
+      display: 'block',
+      height: '300px',
+      margin: '0 auto 10px',
+      width: '300px',
     },
     App: {
-      display: "block",
-      fontFamily: "Minion Pro",
-      margin: "10px",
-      textAlign: "center",
-      float: "bottom",
-      bottom: "-2.5px",
-      left: "0",
-      right: "0",
+      display: 'block',
+      fontFamily: 'Minion Pro',
+      margin: '10px',
+      textAlign: 'center',
+      float: 'bottom',
+      bottom: '-2.5px',
+      left: '0',
+      right: '0',
     },
     Title: {
-        color: "#000",
-        fontFamily: "Old English Text MT",
-        fontSize: "50px",
-        marginTop: "0",
-        textAlign: "center",
-        paddingBottom: "10px",
+        color: '#000',
+        fontFamily: 'Old English Text MT',
+        fontSize: '50px',
+        marginTop: '0',
+        textAlign: 'center',
+        paddingBottom: '10px',
     },
     Description: {
-        fontFamily: "Minion Pro",
-        fontSize: "20px",
-        textAlign: "center",
-        paddingBottom: "20px"
+        fontFamily: 'Minion Pro',
+        fontSize: '20px',
+        textAlign: 'center',
+        paddingBottom: '20px'
     }
 };
 
@@ -113,10 +113,10 @@ const Quote = ({ classes, text, source }) => {
     return (
         <div className={classes.Quote}>
             <p className={classes.QuoteText}>
-              <i>{"“" + text + "”"}</i>
+              <i>{'“' + text + '”'}</i>
             </p>
             <p className={classes.QuoteText}>
-                <i>{"―" + source}</i>
+                <i>{'―' + source}</i>
             </p>
         </div>
     );

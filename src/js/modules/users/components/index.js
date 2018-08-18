@@ -1,2 +1,2 @@
-export { default as ContributorPage } from "./ContributorPage";
-export { default as ArtistPage } from "./ArtistPage";
+export { default as ContributorPage } from './ContributorPage';
+export { default as ArtistPage } from './ArtistPage';
