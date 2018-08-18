@@ -1,13 +1,13 @@
-import React from 'react';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
-import humps from 'humps';
-import { Link } from 'react-router-dom';
-import injectSheet from 'react-jss';
-import { Row, Col } from 'react-bootstrap/lib';
+import React from "react";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
+import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
+import { Row, Col } from "react-bootstrap/lib";
 
-import Byline from '../../articles/components/Byline';
-import Dateline from '../../articles/components/Dateline';
+import Byline from "../../articles/components/Byline";
+import Dateline from "../../articles/components/Dateline";
 
 const SectionFeatureQuery = gql`
   query SectionFeatureQuery($section_slug: String!) {
@@ -37,96 +37,96 @@ const SectionFeatureQuery = gql`
 
 const styles = {
   SectionFeature: {
-    borderTop: '1px solid #ddd',
-    paddingTop: '6px',
-    paddingBottom: '18px',
+    borderTop: "1px solid #ddd",
+    paddingTop: "6px",
+    paddingBottom: "18px",
   },
   sectionLabel: {
-    color: '#000',
-    display: 'block',
-    fontFamily: 'Minion Pro',
-    fontSize: '12px',
-    marginBottom: '3px',
-    textTransform: 'uppercase',
-    width: '100%',
-    '&:hover, &:active, &:focus': {
-      color: '#000',
-      textDecoration: 'none',
+    color: "#000",
+    display: "block",
+    fontFamily: "Minion Pro",
+    fontSize: "12px",
+    marginBottom: "3px",
+    textTransform: "uppercase",
+    width: "100%",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none",
     },
   },
   secondaryArticle: {
-    paddingLeft: '13px !important',
-    paddingRight: '0 !important',
+    paddingLeft: "13px !important",
+    paddingRight: "0 !important",
   },
   ternaryArticle: {
-    padding: '0 14px 0 13px !important',
-    border: 'solid 1px #ddd',
-    borderStyle: 'none solid',
-    paddingRight: '13px !important',
+    padding: "0 14px 0 13px !important",
+    border: "solid 1px #ddd",
+    borderStyle: "none solid",
+    paddingRight: "13px !important",
   },
   title: {
-    color: '#000',
-    display: 'block',
-    fontFamily: 'Minion Pro',
-    fontSize: '18px',
-    fontWeight: 'bold',
+    color: "#000",
+    display: "block",
+    fontFamily: "Minion Pro",
+    fontSize: "18px",
+    fontWeight: "bold",
     lineHeight: 1.25,
-    marginBottom: '7px',
-    '&:hover, &:active, &:focus': {
-      color: '#000',
+    marginBottom: "7px",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
     },
   },
   preview: {
-    fontFamily: 'Minion Pro',
-    fontSize: '14px',
+    fontFamily: "Minion Pro",
+    fontSize: "14px",
     lineHeight: 1.29,
-    margin: '0 0 12px 0',
+    margin: "0 0 12px 0",
   },
   figure: {
-    maxHeight: '240px',
-    overflow: 'hidden',
-    '& img': {
-      width: '100%',
+    maxHeight: "240px",
+    overflow: "hidden",
+    "& img": {
+      width: "100%",
     },
   },
   featuredMediaContainer: {
-    borderRight: 'solid 1px #ddd',
-    paddingLeft: '13px !important',
-    paddingRight: '14px',
+    borderRight: "solid 1px #ddd",
+    paddingLeft: "13px !important",
+    paddingRight: "14px",
   },
   mobileArticleTitle1: {
-    borderTop: '1px solid #ddd !important',
-    marginTop: '14px',
-    padding: '12px 7px 8px 0',
-    '& a': {
-      fontSize: '22px',
+    borderTop: "1px solid #ddd !important",
+    marginTop: "14px",
+    padding: "12px 7px 8px 0",
+    "& a": {
+      fontSize: "22px",
       marginBottom: 0,
     },
   },
   mobileArticleTitle2: {
-    borderTop: '1px solid #ddd !important',
-    padding: '12px 7px 2px 0',
-    '& a': {
-      fontSize: '22px',
+    borderTop: "1px solid #ddd !important",
+    padding: "12px 7px 2px 0",
+    "& a": {
+      fontSize: "22px",
       marginBottom: 0,
     },
   },
-  '@media (max-width: 767px)': {
+  "@media (max-width: 767px)": {
     SectionFeature: {
-      borderBottom: '1px solid #ddd',
-      paddingBottom: '6px',
+      borderBottom: "1px solid #ddd",
+      paddingBottom: "6px",
     },
     ternaryArticle: {
       borderLeft: 0,
       marginBottom: 0,
-      padding: '0px 13px 0px 0px !important',
+      padding: "0px 13px 0px 0px !important",
     },
     secondaryArticle: {
-      paddingLeft: '13px !important',
+      paddingLeft: "13px !important",
     },
     featuredMediaContainer: {
       borderRight: 0,
-      paddingLeft: '0 !important',
+      paddingLeft: "0 !important",
       paddingRight: 0,
     },
   },

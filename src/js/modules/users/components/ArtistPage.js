@@ -1,13 +1,13 @@
-import React from 'react';
-import injectSheet from 'react-jss';
-import { Grid, Row, Col } from 'react-bootstrap/lib';
-import { Helmet } from 'react-helmet';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
-import humps from 'humps';
+import React from "react";
+import injectSheet from "react-jss";
+import { Grid, Row, Col } from "react-bootstrap/lib";
+import { Helmet } from "react-helmet";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
 
-import { ArticleList } from '../../articles/components';
-import { NotFoundPage } from '../../core/components';
+import { ArticleList } from "../../articles/components";
+import { NotFoundPage } from "../../core/components";
 
 const ArtistProfileBySlug = gql`
   query ArtistProfileBySlug($user_slug: String!, $role_slug: String!) {
@@ -45,40 +45,40 @@ const ArtistProfileBySlug = gql`
 
 const styles = {
   name: {
-    color: '#000',
-    fontFamily: 'Canela',
-    fontSize: '48px',
+    color: "#000",
+    fontFamily: "Canela",
+    fontSize: "48px",
     fontWeight: 500,
     lineHeight: 1,
-    marginBottom: '11px',
+    marginBottom: "11px",
   },
   email: {
-    color: '#3084df',
-    display: 'block',
-    fontFamily: 'Minion Pro',
-    fontSize: '17px',
-    marginBottom: '7px',
+    color: "#3084df",
+    display: "block",
+    fontFamily: "Minion Pro",
+    fontSize: "17px",
+    marginBottom: "7px",
   },
   latest: {
-    borderTop: '1px solid #000',
-    borderBottom: '1px solid #ddd',
-    borderStyle: 'solid none',
-    color: '#000',
-    fontFamily: 'Circular Std',
-    fontSize: '13px',
+    borderTop: "1px solid #000",
+    borderBottom: "1px solid #ddd",
+    borderStyle: "solid none",
+    color: "#000",
+    fontFamily: "Circular Std",
+    fontSize: "13px",
     fontWeight: 300,
-    marginBottom: '22px',
-    padding: '4px 0px',
+    marginBottom: "22px",
+    padding: "4px 0px",
   },
   description: {
-    fontFamily: 'Minion Pro',
-    fontSize: '16px',
-    lineHeight: '1.5',
-    marginBottom: '26px',
+    fontFamily: "Minion Pro",
+    fontSize: "16px",
+    lineHeight: "1.5",
+    marginBottom: "26px",
   },
-  '@media (max-width: 1199px) and (min-width: 992px)': {
+  "@media (max-width: 1199px) and (min-width: 992px)": {
     ArtistPage: {
-      paddingLeft: '10%',
+      paddingLeft: "10%",
     },
   },
 };
@@ -107,7 +107,7 @@ const ArtistPage = ({ classes, data }) => {
   }));
   return (
     <Grid className={classes.ArtistPage}>
-      <Helmet titleTemplate='%s | The Stuyvesant Spectator'>
+      <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>{`${artist.firstName} ${artist.lastName}`}</title>
         <meta />
       </Helmet>
@@ -134,7 +134,7 @@ export default graphql(ArtistProfileBySlug, {
       user_slug: match.params.artist_slug,
 
       // this route will always work thanks to limits set in RoutingApp
-      role_slug: match.path.split('/')[1],
+      role_slug: match.path.split("/")[1],
     },
   }),
 })(injectSheet(styles)(ArtistPage));

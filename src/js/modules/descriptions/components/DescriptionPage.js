@@ -1,23 +1,23 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Grid } from 'react-bootstrap/lib';
-import injectSheet from 'react-jss';
-import { Helmet } from 'react-helmet';
+import React from "react";
+import { connect } from "react-redux";
+import { Grid } from "react-bootstrap/lib";
+import injectSheet from "react-jss";
+import { Helmet } from "react-helmet";
 
-import { NotFoundPage } from '../../core/components';
+import { NotFoundPage } from "../../core/components";
 
 const styles = {
   descriptionTitle: {
-    fontFamily: 'Canela',
-    fontSize: '36px',
+    fontFamily: "Canela",
+    fontSize: "36px",
     fontWeight: 500,
-    textAlign: 'center',
-    color: '#000000',
+    textAlign: "center",
+    color: "#000000",
   },
   descriptionContent: {
-    fontFamily: 'Minion Pro',
-    fontSize: '18px',
-    color: '#000000',
+    fontFamily: "Minion Pro",
+    fontSize: "18px",
+    color: "#000000",
   },
 };
 
@@ -27,7 +27,7 @@ const DescriptionPage = ({ classes, description }) => {
   }
   return (
     <Grid fluid>
-      <Helmet titleTemplate='%s | The Stuyvesant Spectator'>
+      <Helmet titleTemplate="%s | The Stuyvesant Spectator">
         <title>{description.title}</title>
         <meta />
       </Helmet>

@@ -1,6 +1,6 @@
 export const SECTIONS = [
   {
-    name: 'Opinions',
+    name: "Opinions",
     imageLink: null,
     description: `The Opinions section of the Spectator focuses on analyzing and dissecting important, complex, 
     and relevant issues happening in our Stuyvesant community and in the world beyond. 
@@ -15,25 +15,25 @@ export const SECTIONS = [
         or family to a wider audience. With writing drafts and coming up with arguments, I’ve also seen myself grow as a writer, allowing me to support my 
         arguments more effectively. As teenagers, it’s easy to feel like our voices do not matter as much as adults, 
         but this department has allowed for many students’ voices to be recognized, and I find that very special.`,
-        source: 'Angela Wong'
+        source: "Angela Wong"
       }
     ],
-    link: 'https://docs.google.com/document/d/1HJicqJ6RGqiZp6nMU3CM3ltB7wGjmgS5t9JN9o-Txms/edit?usp=sharing'
+    link: "https://docs.google.com/document/d/1HJicqJ6RGqiZp6nMU3CM3ltB7wGjmgS5t9JN9o-Txms/edit?usp=sharing"
   },
   {
-    name: 'Arts and Entertainment',
+    name: "Arts and Entertainment",
     imageLink: null,
     description: `We here at Arts and Entertainment department of the Spectator and we are the zestiest department in the world.  We get to write about cool stuff like music, movies, books, plays, basically anything, that makes Stuy students less soulless!!
 We love everything artsy and cultural (especially like... Beyonce). We also cover major entertainment events like StuySquad, SOS, and SING! So what are you waiting for?
 Apply for the Spectator Arts and Entertainment department now!!!`,
     quotes: [{
       text:`Being part of Arts and Entertainment is the best choice I ever made in my life. It is just so fun to write about things that we as human beings already enjoy. Like, it couldn't be more enjoyable than that. (Except eating Häagen-Dazs while listening to Beyonce)`,
-      source: 'Anonymous'
+      source: "Anonymous"
     }],
-    link: 'https://docs.google.com/document/d/1zxCIIBOsBTAuCGAslbX3EW8aQsp8b1aDDM2fTDxS_UE/edit'
+    link: "https://docs.google.com/document/d/1zxCIIBOsBTAuCGAslbX3EW8aQsp8b1aDDM2fTDxS_UE/edit"
   },
   {
-    name: 'Features',
+    name: "Features",
     imageLink: null,
     description: `The best way to describe Features in one word is STORYTELLING. 
     This is our main, essential craft. We write profiles telling the stories of interesting people 
@@ -48,13 +48,13 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
         Where else can you interview the most wholesome people of Stuy and write a holistic article about them? 
         Where I found amazing and unique editors, talented and quirky writers, Whole Foods cupcakes, and endless opportunities, 
         I hope you do too. Join Features!`,
-        source: 'Amy Huang'
+        source: "Amy Huang"
       }
     ],
-    link: 'https://goo.gl/forms/4Lptlm1ixxayzkZo2'
+    link: "https://goo.gl/forms/4Lptlm1ixxayzkZo2"
   },
   {
-    name: 'Humor',
+    name: "Humor",
     imageLink: null,
     description: `Do you want to lowkey rant about your life and roast everything?
         Would you like to have a personality glow up?
@@ -62,31 +62,31 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
         Join Spec Humor!
         We write funny and satirical pieces for The Spec and unlike other departments, everything we publish is libel and slander which means that you'll be in control of what everyone says!`,
     quotes: [],
-    link: 'https://goo.gl/forms/IbJKekpk7JyTugmA2 '
+    link: "https://goo.gl/forms/IbJKekpk7JyTugmA2 "
   },
   {
-    name: 'Sports',
+    name: "Sports",
     imageLink: null,
     description: `Were you following March Madness? Are you hype for the start of the MLB season? Do you know who LeBron James is?
 
 If you answered yes (or no!) to any of those questions, the Spectator Sports department is the place for you!! We cover Stuy sports as well as non-Stuy sports topics such as whether NCAA athletes should be paid and steroid use in the MLB. `,
     quotes: [
     {
-        text: 'Ray hates Spec.',
-        source: 'Ray Jones'
+        text: "Ray hates Spec.",
+        source: "Ray Jones"
       },
     ],
-    link: 'https://docs.google.com/forms/d/1x-lhV8KaxgKsCz5HutN3BSE9Nt9ZYhkfRrAM6lU2ui8/viewform?edit_requested=true'
+    link: "https://docs.google.com/forms/d/1x-lhV8KaxgKsCz5HutN3BSE9Nt9ZYhkfRrAM6lU2ui8/viewform?edit_requested=true"
   },
   {
-    name: 'News',
+    name: "News",
     imageLink: null,
     description: `Do you want to be a part of the best department of The Spectator? Do you want to get tight with the administration? Do you want to see your name and your articles on the front page? Do you want to find out about the coolest news at Stuy before anyone else? Do you want to report on that cool news? If so, join the Spectator News Department!!! `,
     quotes: [],
-    link: 'https://docs.google.com/forms/d/e/1FAIpQLSerzJDbe4FJPoi1fx2r2WCEUIiV7YyGZhvn7OWU5LPDl0yLMQ/viewform'
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSerzJDbe4FJPoi1fx2r2WCEUIiV7YyGZhvn7OWU5LPDl0yLMQ/viewform"
   },
   {
-    name: 'Copy',
+    name: "Copy",
     imageLink: null,
     description: `The Copy department makes sure The Spectator is free of all grammatical errors! 
     Being a part of this department means honing your grammar skills and meeting other grammar nerds. We send out articles to edit roughly every two weeks, 
@@ -98,13 +98,13 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         so being able to use that to my advantage to help out The Spectator is absolutely a win-win situation. 
         I love that it also means getting to see the various pieces before the final issue is released. 
         We have some really talented writers, and being able to polish their work and contribute to such a great publication is a privilege.`,
-        source: 'Tasfia Bashar'
+        source: "Tasfia Bashar"
       }
     ],
-    link: 'https://goo.gl/forms/lGKk6by8M3So1LhH2'
+    link: "https://goo.gl/forms/lGKk6by8M3So1LhH2"
   },
   {
-    name: 'Web',
+    name: "Web",
     imageLink: null,
     description: `The Web department is responsible for designing and updating The Spectator's website, www.stuyspec.com. 
     Web teaches how to develop and maintain a server using Ruby on Rails, a website using Javascript and React, and other tools using modern languages like Go. 
@@ -116,13 +116,13 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         the highlight of my year—not only did I learn more about different
          technologies in web development and the newest frontiers of programming, 
         but I also became friends with an amazing group of people!`,
-        source: 'Jerry Ye'
+        source: "Jerry Ye"
       }
     ],
-    link: 'https://goo.gl/forms/q1BqWp8fZoepntdS2',
+    link: "https://goo.gl/forms/q1BqWp8fZoepntdS2",
   },
   {
-    name: 'Layout',
+    name: "Layout",
     imageLink: null,
     description: `A good publication should interest readers before they even pick it up and read it; 
     the Layout department does just that! We are the last department that works with the newspaper and are responsible for formatting all of the articles, 
@@ -131,10 +131,10 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     we present to you what you know as the Spectator. \n\nAs a staff member, you will be taught how to use InDesign and asked to critique 
     the formatting of each issue as it is released.`,
     quotes: [],
-    link: 'https://goo.gl/forms/MqPkHvfeOOdzWSxY2'
+    link: "https://goo.gl/forms/MqPkHvfeOOdzWSxY2"
   },
   {
-    name: 'Photo',
+    name: "Photo",
     imageLink: null,
     description: `Photo is dedicated to providing interesting and dynamic photographs to support the articles in the Spectator. 
     Typical assignments include portraits of students and teachers, photos at school events – including sports games – and shots of fun things around the city as well. 
@@ -151,13 +151,13 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         Taking assignments and going to events, meetings, and clubs that you’ve never even heard of before to take photos lets you 
         interact with the Stuyvesant community in a personal and unique way, you never know who you might meet. 
         If there’s any way to contribute to the Spectator, I wholeheartedly say the best way is through Photo!`,
-        source: 'Elena Sapelyuk'
+        source: "Elena Sapelyuk"
       }
     ],
-    link: 'https://docs.google.com/forms/d/e/1FAIpQLSfndwMl7UgOmGbyBmCpQ7nDUv0Wdexsb93qTNBodd4UVMBOfg/viewform'
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSfndwMl7UgOmGbyBmCpQ7nDUv0Wdexsb93qTNBodd4UVMBOfg/viewform"
   },
   {
-    name: 'Business',
+    name: "Business",
     imageLink: null,
     description: `The Business Department is the beating heart of The Spectator -- 
     as an independent student-run newspaper, The Spectator is able to publish thousands of copies every issue because 
@@ -171,19 +171,19 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         meeting with business managers throughout the city, and properly formatting emails. Joining this department was a life-changer, 
         and even to those who don’t have much interest in money, 
         I highly encourage you to join this heartwarming family who will teach you the things that you need beyond college.`,
-        source: 'Stacey Xue',
+        source: "Stacey Xue",
       },
       {
         text: `I used to be this shy kid, afraid of talking to strangers or in front of large audiences. 
         But after joining SpecBiz and networking with representatives from various types of companies, 
         securing deals here and there, I’ve become the most extrovert kind of guy you can ever meet!`,
-        source: 'Alexander Radu'
+        source: "Alexander Radu"
       }
     ],
-    link: 'https://stuyspec.recruiterbox.com/jobs/fk0fbxp/'
+    link: "https://stuyspec.recruiterbox.com/jobs/fk0fbxp/"
   },
   {
-    name: 'Art',
+    name: "Art",
     imageLink: null,
     description: `It is often difficult to read through dense blocks of text without something to rest your eyes on. 
     In the Art Department, we strive to embellish the newspaper with our unique illustrations, each perfectly suited for its article. 
@@ -197,7 +197,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         Drawing for the art department has been such a fantastic experience. The club meetings are incredibly fun and relaxing as well. 
         You can socialize with friends and feel free to be yourself. 
         With different articles to draw for every 2 weeks, you'll find yourself challenged, but having fun at the same time.`,
-        source: 'Fahim Rahman'
+        source: "Fahim Rahman"
       },
       {
         text: `Spectator Art is the best club I have joined so far. When I see my art featured in The Spectator, I feel this sense of ecstasy! 
@@ -206,9 +206,9 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         Like every art club, there is always someone better than me, but their art serves as motivation for me to improve! 
         All the drawing I do boosts my sense of confidence. 
         This club is everything I can ask for.`,
-        source: 'Alex Lin'
+        source: "Alex Lin"
       }
     ],
-    link: 'https://docs.google.com/forms/d/e/1FAIpQLSesBmOEoqxFb4heJlv6JM9-5HdkRSDZuJ-1fiPMZbegnn2Slg/viewform'
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSesBmOEoqxFb4heJlv6JM9-5HdkRSDZuJ-1fiPMZbegnn2Slg/viewform"
   }
 ];

@@ -1,13 +1,13 @@
-import React from 'react';
-import injectSheet from 'react-jss';
+import React from "react";
+import injectSheet from "react-jss";
 
 const styles = {
   input: {
-    width: '100%',
+    width: "100%",
   },
   syncValidation: {
-    color: 'red',
-    margin: '10px 0 0 0',
+    color: "red",
+    margin: "10px 0 0 0",
   },
 };
 

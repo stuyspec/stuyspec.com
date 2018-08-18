@@ -1,9 +1,9 @@
-import React from 'react';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
-import injectSheet from 'react-jss';
-import { Link } from 'react-router-dom';
-import { SPEC_REFERENCE_PATTERN } from '../../../constants';
+import React from "react";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import injectSheet from "react-jss";
+import { Link } from "react-router-dom";
+import { SPEC_REFERENCE_PATTERN } from "../../../constants";
 
 const ArticleReferenceQuery = gql`
   query ArticleReferenceQuery($article_id: ID!) {
@@ -21,26 +21,26 @@ const ArticleReferenceQuery = gql`
 
 const styles = {
   ArticleReference: {
-    display: 'block',
-    fontStyle: 'italic',
-    marginTop: '12px',
-    marginBottom: '24px',
+    display: "block",
+    fontStyle: "italic",
+    marginTop: "12px",
+    marginBottom: "24px",
   },
   referenceLink: {
-    color: '#000',
-    textDecoration: 'underline',
-    '&:hover, &:active, &:focus': {
-      color: '#000',
+    color: "#000",
+    textDecoration: "underline",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
     },
   },
-  '@media (max-width: 991px)': {
+  "@media (max-width: 991px)": {
     ArticleReference: {
-      padding: '0 10%',
+      padding: "0 10%",
     },
   },
-  '@media (max-width: 767px)': {
+  "@media (max-width: 767px)": {
     ArticleReference: {
-      padding: '0 2%',
+      padding: "0 2%",
     },
   },
 };
@@ -53,9 +53,9 @@ const ArticleReference = ({ classes, data }) => {
   // Since the title will be surrounded with double quotes, we replace the
   // title's double quotes (for movies, books, etc.) with single quotes.
   const title = article.title
-    .replace(''', ''')
-    .replace('“', '‘')
-    .replace('”', '’');
+    .replace('"', "'")
+    .replace("“", "‘")
+    .replace("”", "’");
   return (
     <span className={classes.ArticleReference}>
       This article was written in response to &ldquo;

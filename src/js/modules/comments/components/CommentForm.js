@@ -1,104 +1,104 @@
-import React from 'react';
-import { bindActionCreators, compose } from 'redux';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Field, reduxForm } from 'redux-form';
-import { Col } from 'react-bootstrap/lib';
-import injectSheet from 'react-jss';
+import React from "react";
+import { bindActionCreators, compose } from "redux";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { Field, reduxForm } from "redux-form";
+import { Col } from "react-bootstrap/lib";
+import injectSheet from "react-jss";
 
-import { openSignInModal, signOut } from '../../accounts/actions';
+import { openSignInModal, signOut } from "../../accounts/actions";
 
 const styles = {
   CommentForm: {
-    color: '#000',
-    fontFamily: 'Minion Pro',
-    marginBottom: '28px',
-    padding: '0 20px 0 0',
+    color: "#000",
+    fontFamily: "Minion Pro",
+    marginBottom: "28px",
+    padding: "0 20px 0 0",
   },
   textarea: {
-    backgroundColor: '#fff',
-    border: 'solid 1px #e2e2e2',
-    fontSize: '16px',
-    height: '222px',
-    lineHeight: '1.5',
-    marginBottom: '10px',
-    padding: '12px',
-    width: '100%',
+    backgroundColor: "#fff",
+    border: "solid 1px #e2e2e2",
+    fontSize: "16px",
+    height: "222px",
+    lineHeight: "1.5",
+    marginBottom: "10px",
+    padding: "12px",
+    width: "100%",
   },
   submitDiv: {
-    textAlign: 'right',
-    clear: 'both',
+    textAlign: "right",
+    clear: "both",
   },
   submitButton: {
-    backgroundColor: '#3472b7',
-    border: '1px solid #3472b7',
-    borderRadius: '3px',
-    color: '#fff',
-    float: 'left',
-    fontSize: '15px',
-    fontStyle: 'italic',
-    height: '32px',
-    textAlign: 'center',
-    width: '70px',
-    '&:disabled': {
-      background: '#ddd',
-      borderColor: '#ddd',
-      color: '#888',
+    backgroundColor: "#3472b7",
+    border: "1px solid #3472b7",
+    borderRadius: "3px",
+    color: "#fff",
+    float: "left",
+    fontSize: "15px",
+    fontStyle: "italic",
+    height: "32px",
+    textAlign: "center",
+    width: "70px",
+    "&:disabled": {
+      background: "#ddd",
+      borderColor: "#ddd",
+      color: "#888",
     },
   },
   moderationWarning: {
-    bottom: '7px',
-    float: 'right',
-    fontSize: '15px',
-    fontStyle: 'italic',
-    position: 'relative',
+    bottom: "7px",
+    float: "right",
+    fontSize: "15px",
+    fontStyle: "italic",
+    position: "relative",
   },
   errorMessage: {
-    color: 'red',
+    color: "red",
   },
   editProfile: {
-    background: 'none',
-    border: 'none',
-    color: '#3572b7',
-    display: 'inline',
-    fontFamily: 'Circular Std',
-    fontSize: '16px',
+    background: "none",
+    border: "none",
+    color: "#3572b7",
+    display: "inline",
+    fontFamily: "Circular Std",
+    fontSize: "16px",
     margin: 0,
     padding: 0,
   },
   userName: {
-    display: 'inline',
-    fontSize: '18px',
-    fontWeight: 'bold',
-    marginRight: '4px',
+    display: "inline",
+    fontSize: "18px",
+    fontWeight: "bold",
+    marginRight: "4px",
   },
   userInfo: {
-    marginBottom: '13px',
+    marginBottom: "13px",
   },
   bulletPoint: {
-    color: '#ccc',
-    fontFamily: 'Circular Std',
-    fontSize: '12px',
-    margin: '0 4px',
-    position: 'relative',
+    color: "#ccc",
+    fontFamily: "Circular Std",
+    fontSize: "12px",
+    margin: "0 4px",
+    position: "relative",
   },
   optOut: {
-    background: 'none',
-    border: 'none',
-    color: '#3572b7',
-    display: 'inline',
-    fontSize: '16px',
+    background: "none",
+    border: "none",
+    color: "#3572b7",
+    display: "inline",
+    fontSize: "16px",
     padding: 0,
   },
   fulfilled: {
-    color: 'green',
+    color: "green",
   },
   rejected: {
-    color: 'red',
+    color: "red",
   },
-  '@media (max-width: 991px)': {
+  "@media (max-width: 991px)": {
     CommentForm: {
-      paddingRight: '0 !important',
+      paddingRight: "0 !important",
     },
   },
 };
@@ -117,7 +117,7 @@ const CommentTextArea = ({ input, meta: { touched, error }, checkLogin }) => {
     <div>
       <textarea
         {...input}
-        placeholder='Comment'
+        placeholder="Comment"
         style={styles.textarea}
         onClick={checkLogin}
       />
@@ -144,7 +144,7 @@ const CommentForm = ({
             {currentUser.firstName} {currentUser.lastName}
           </p>
           <span className={classes.bulletPoint}>&#8226;</span>
-          <Link className={classes.optOut} to='/myaccount/profile'>
+          <Link className={classes.optOut} to="/myaccount/profile">
             Edit Profile
           </Link>
           <span className={classes.bulletPoint}>&#8226;</span>
@@ -156,13 +156,13 @@ const CommentForm = ({
 
       <form onSubmit={handleSubmit}>
         <Field
-          name='content'
+          name="content"
           component={CommentTextArea}
           checkLogin={() => !currentUser && openSignInModal()}
         />
         <div className={classes.submitDiv}>
           <button
-            type='submit'
+            type="submit"
             disabled={!currentUser || submitting}
             className={classes.submitButton}
           >
@@ -171,10 +171,10 @@ const CommentForm = ({
           <p className={classes.moderationWarning}>
             Comments are moderated.
             <br />
-            {status.type === 'fulfilled' && (
+            {status.type === "fulfilled" && (
               <span className={classes.fulfilled}>{status.message}</span>
             )}
-            {status.type === 'rejected' && (
+            {status.type === "rejected" && (
               <span className={classes.rejected}>{status.message}</span>
             )}
           </p>
@@ -195,7 +195,7 @@ const mapDispatchToProps = dispatch => {
 
 export default compose(
   reduxForm({
-    form: 'createComment',
+    form: "createComment",
     validate,
   }),
   connect(mapStateToProps, mapDispatchToProps),

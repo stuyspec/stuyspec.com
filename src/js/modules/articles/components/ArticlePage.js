@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
-import { compose } from 'redux';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
-import humps from 'humps';
-import injectSheet from 'react-jss';
-import Grid from 'react-bootstrap/lib/Grid';
-import { Helmet } from 'react-helmet';
-import { ArticleHeader, ArticleBody, ArticleFooter, RecommendedRow } from './';
+import React, { PureComponent } from "react";
+import { compose } from "redux";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import humps from "humps";
+import injectSheet from "react-jss";
+import Grid from "react-bootstrap/lib/Grid";
+import { Helmet } from "react-helmet";
+import { ArticleHeader, ArticleBody, ArticleFooter, RecommendedRow } from "./";
 import CommentThread from '../../comments/components/CommentThread';
 
 const ArticleQuery = gql`
@@ -67,20 +67,20 @@ const ArticleQuery = gql`
 
 const styles = {
   subscribe: {
-    color: '#3572b7',
-    '&:hover, &:focus, &:active': {
-      color: '#3572b7',
+    color: "#3572b7",
+    "&:hover, &:focus, &:active": {
+      color: "#3572b7",
     },
-    '&:hover': {
-      cursor: 'pointer',
+    "&:hover": {
+      cursor: "pointer",
     },
   },
-  '@media (max-width: 1199px)': {
+  "@media (max-width: 1199px)": {
     ArticlePage: {
-      padding: '0 8%',
+      padding: "0 8%",
     },
   },
-  '@media (max-width: 991px)': {
+  "@media (max-width: 991px)": {
     ArticlePage: {
       padding: 0,
     },
@@ -121,7 +121,7 @@ class ArticlePage extends PureComponent {
 
     return (
       <Grid fluid className={classes.ArticlePage}>
-        <Helmet titleTemplate='%s | The Stuyvesant Spectator'>
+        <Helmet titleTemplate="%s | The Stuyvesant Spectator">
           <title>{article.title}</title>
         </Helmet>
         <ArticleHeader article={article} />

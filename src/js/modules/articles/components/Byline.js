@@ -1,20 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import injectSheet from 'react-jss';
+import React from "react";
+import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
 
 const styles = {
   Byline: {
-    color: '#888',
-    fontFamily: 'Circular Std',
-    fontSize: '12px',
+    color: "#888",
+    fontFamily: "Circular Std",
+    fontSize: "12px",
     fontWeight: 300,
-    '& p': {
-      display: 'inline',
-      margin: '0 0 2px 0',
-      '& a': {
-        color: '#888',
-        '&:hover, &:active, &:focus': {
-          color: '#888',
+    "& p": {
+      display: "inline",
+      margin: "0 0 2px 0",
+      "& a": {
+        color: "#888",
+        "&:hover, &:active, &:focus": {
+          color: "#888",
         },
       },
     },
@@ -22,18 +22,18 @@ const styles = {
 };
 
 const Byline = ({ classes, contributors }) => {
-  let separator = ', ';
+  let separator = ", ";
   return (
     <div className={classes.Byline}>
       {contributors.map((contributor, index) => {
         if (index === contributors.length - 2) {
-          separator = ' & ';
+          separator = " & ";
         } else if (index === contributors.length - 1) {
-          separator = '';
+          separator = "";
         }
         return (
           <p key={index} className={classes.Byline}>
-            {index === 0 ? 'By ' : ''}
+            {index === 0 ? "By " : ""}
             <Link to={`/contributors/${contributor.slug}`}>
               {contributor.firstName} {contributor.lastName}
             </Link>

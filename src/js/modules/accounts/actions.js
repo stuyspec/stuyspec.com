@@ -1,11 +1,11 @@
-import axios from 'axios';
-import appHistory from '../../tools/appHistory';
-import { reset } from 'redux-form';
+import axios from "axios";
+import appHistory from "../../tools/appHistory";
+import { reset } from "redux-form";
 
-import * as t from './actionTypes';
-import { CREATE_USER_FULFILLED } from '../users/actionTypes';
-import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from '../../constants';
-import { delay } from '../../utils';
+import * as t from "./actionTypes";
+import { CREATE_USER_FULFILLED } from "../users/actionTypes";
+import { STUY_SPEC_API_URL, STUY_SPEC_API_HEADERS } from "../../constants";
+import { delay } from "../../utils";
 
 export const signUp = registrationParams => {
   return dispatch => {
@@ -79,7 +79,7 @@ export const signIn = (signInParams, isInModal) => {
           payload: response,
         });
         if (isInModal !== true) {
-          appHistory.push('/myaccount/profile');
+          appHistory.push("/myaccount/profile");
         }
       })
       .catch(err => {
@@ -100,7 +100,7 @@ export const signOut = session => {
         dispatch({
           type: t.SIGN_OUT_FULFILLED,
         });
-        appHistory.push('/');
+        appHistory.push("/");
       })
       .catch(err => {
         dispatch({
@@ -174,7 +174,7 @@ export const subscribe = values => {
         dispatch({ type: t.CLOSE_SUBSCRIPTION_MODAL });
 
         // Destroys the inputs in the form Subscription
-        dispatch(reset('Subscription'));
+        dispatch(reset("Subscription"));
       })
       .catch(err => {
         dispatch({
@@ -195,7 +195,7 @@ export const validateToken = session => {
     axios
       .get(`${STUY_SPEC_API_URL}/auth/validate_token`, {
         headers: {
-          'access-token': session['access-token'],
+          "access-token": session["access-token"],
           client: session.client,
           uid: session.uid,
         },

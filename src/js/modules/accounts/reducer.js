@@ -20,8 +20,8 @@ import {
   CREATE_SUBSCRIBER_PENDING,
   CREATE_SUBSCRIBER_FULFILLED,
   CREATE_SUBSCRIBER_REJECTED,
-} from './actionTypes';
-import { CREATE_COMMENT_FULFILLED } from '../comments/actionTypes';
+} from "./actionTypes";
+import { CREATE_COMMENT_FULFILLED } from "../comments/actionTypes";
 
 const initialState = {
   status: {
@@ -35,7 +35,7 @@ const initialState = {
 };
 
 const isSessionValid = session => {
-  const requiredHeaders = ['access-token', 'expiry', 'client', 'uid'];
+  const requiredHeaders = ["access-token", "expiry", "client", "uid"];
   return requiredHeaders.every(header => header in session);
 };
 
@@ -44,7 +44,7 @@ const reducer = (state = { ...initialState }, action) => {
     case CREATE_COMMENT_FULFILLED: {
       const { headers } = action.payload;
       if (isSessionValid(headers)) {
-        localStorage.setItem('session', JSON.stringify(headers));
+        localStorage.setItem("session", JSON.stringify(headers));
         return {
           ...state,
           session: headers,
@@ -67,14 +67,14 @@ const reducer = (state = { ...initialState }, action) => {
       };
     }
     case SIGN_IN_FULFILLED: {
-      localStorage.setItem('session', JSON.stringify(action.payload.headers));
+      localStorage.setItem("session", JSON.stringify(action.payload.headers));
       return {
         ...state,
         session: action.payload.headers,
         status: {
           errors: [],
-          formName: 'signIn',
-          message: 'Successfully signed in.',
+          formName: "signIn",
+          message: "Successfully signed in.",
         },
       };
     }
@@ -84,7 +84,7 @@ const reducer = (state = { ...initialState }, action) => {
         status: {
           errors: (action.payload.response &&
             action.payload.response.data.errors) || [action.payload.message],
-          formName: 'signIn',
+          formName: "signIn",
           message: null,
         },
       };
@@ -95,9 +95,9 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         status: {
           errors: [],
-          formName: 'signUp',
+          formName: "signUp",
           message:
-            'Welcome! You can confirm your account through the link sent to the email you signed up with.',
+            "Welcome! You can confirm your account through the link sent to the email you signed up with.",
         },
       };
     }
@@ -107,20 +107,20 @@ const reducer = (state = { ...initialState }, action) => {
         status: {
           errors: (action.payload.response &&
             action.payload.response.data.errors.fullMessages) || [action.payload.message],
-          formName: 'signUp',
+          formName: "signUp",
           message: null,
         },
       };
     }
 
     case SIGN_OUT_FULFILLED: {
-      localStorage.removeItem('session');
+      localStorage.removeItem("session");
       return {
         ...state,
         status: {
           errors: [],
-          message: 'You have successfully signed out.',
-          formName: 'signOut',
+          message: "You have successfully signed out.",
+          formName: "signOut",
         },
         session: null,
       };
@@ -132,7 +132,7 @@ const reducer = (state = { ...initialState }, action) => {
           errors: (action.payload.response &&
             action.payload.response.data.errors) || [action.payload.message],
           message: null,
-          formName: 'signOut',
+          formName: "signOut",
         },
       };
     }
@@ -142,8 +142,8 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         status: {
           errors: [],
-          message: 'You have successfully subscribed to our newsletter.',
-          formName: 'subscription',
+          message: "You have successfully subscribed to our newsletter.",
+          formName: "subscription",
         },
       };
     }
@@ -151,14 +151,14 @@ const reducer = (state = { ...initialState }, action) => {
       let errors = (action.payload.response &&
         action.payload.response.data.errors) || [action.payload.message];
       if (action.payload.response.status === 422) {
-        errors = ['You are already subscribed.'];
+        errors = ["You are already subscribed."];
       }
       return {
         ...state,
         status: {
           errors,
           message: null,
-          formName: 'subscription',
+          formName: "subscription",
         },
       };
     }
@@ -168,8 +168,8 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         status: {
           errors: [],
-          message: 'Your information has been updated.',
-          formName: 'editUser',
+          message: "Your information has been updated.",
+          formName: "editUser",
         },
       };
     }
@@ -180,7 +180,7 @@ const reducer = (state = { ...initialState }, action) => {
           errors: (action.payload.response &&
             action.payload.response.data.errors) || [action.payload.message],
           message: null,
-          formName: 'editUser',
+          formName: "editUser",
         },
       };
     }
@@ -204,15 +204,15 @@ const reducer = (state = { ...initialState }, action) => {
     }
 
     case VALIDATE_TOKEN_REJECTED: {
-      localStorage.removeItem('session');
+      localStorage.removeItem("session");
       return {
         ...state,
         session: null,
       };
     }
 
-    case '@@redux-form/DESTROY': {
-      if (action.meta.form.includes('signOut')) {
+    case "@@redux-form/DESTROY": {
+      if (action.meta.form.includes("signOut")) {
         return state;
       }
       return {

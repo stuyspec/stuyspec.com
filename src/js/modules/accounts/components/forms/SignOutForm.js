@@ -1,23 +1,23 @@
-import React from 'react';
-import { compose } from 'redux';
-import { reduxForm } from 'redux-form';
-import injectSheet from 'react-jss';
+import React from "react";
+import { compose } from "redux";
+import { reduxForm } from "redux-form";
+import injectSheet from "react-jss";
 
-import { FormStatus } from './helpers';
+import { FormStatus } from "./helpers";
 
 const styles = {
   signOutButton: {
-    backgroundColor: '#3472b7',
-    border: '1px solid #3472b7',
-    borderRadius: '3px',
-    color: '#fff',
-    fontFamily: 'Minion Pro',
-    fontSize: '15px',
-    fontStyle: 'italic',
-    height: '32px',
-    marginTop: '15px',
-    textAlign: 'center',
-    width: '85px',
+    backgroundColor: "#3472b7",
+    border: "1px solid #3472b7",
+    borderRadius: "3px",
+    color: "#fff",
+    fontFamily: "Minion Pro",
+    fontSize: "15px",
+    fontStyle: "italic",
+    height: "32px",
+    marginTop: "15px",
+    textAlign: "center",
+    width: "85px",
   },
 };
 
@@ -27,7 +27,7 @@ const SignOutForm = ({ classes, handleSubmit, submitting }) => {
       <form onSubmit={handleSubmit}>
         <div>
           <button
-            type='submit'
+            type="submit"
             disabled={submitting}
             className={classes.signOutButton}
           >
@@ -35,14 +35,14 @@ const SignOutForm = ({ classes, handleSubmit, submitting }) => {
           </button>
         </div>
       </form>
-      <FormStatus formName='signOut' />
+      <FormStatus formName="signOut" />
     </div>
   );
 };
 
 export default compose(
   reduxForm({
-    form: 'signOut',
+    form: "signOut",
   }),
   injectSheet(styles),
 )(SignOutForm);
