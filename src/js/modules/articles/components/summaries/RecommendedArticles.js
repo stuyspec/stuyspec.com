@@ -30,8 +30,8 @@ const styles = {
     color: "#000",
     display: "block",
     fontFamily: "Circular Std",
-    fontSize: "13px",
-    fontWeight: 300,
+    fontSize: "1.2em",
+    fontWeight: 500,
     margin: 0,
     padding: "4px 0",
     "&:hover, &:active, &:focus": {
@@ -59,9 +59,9 @@ const styles = {
     color: "#000",
     display: "block",
     fontFamily: "Minion Pro",
-    fontSize: "14px",
+    fontSize: "1.2em",
     fontWeight: "bold",
-    lineHeight: 1,
+    lineHeight: "1.1em",
     marginBottom: "8px",
     "&:hover, &:active, &:focus": {
       color: "#000",
@@ -70,7 +70,7 @@ const styles = {
   preview: {
     color: "#000",
     fontFamily: "Minion Pro",
-    fontSize: "14px",
+    fontSize: "1.1em",
     lineHeight: 1.21,
     margin: 0,
   },
