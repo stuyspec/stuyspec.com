@@ -31,7 +31,7 @@ const styles = {
     minWidth: "24px",
     minHeight: "23px",
     opacity: "0.48",
-    marginRight: "2px",
+    marginRight: "0.4vw",
     float: "left"
   },
   text: {
