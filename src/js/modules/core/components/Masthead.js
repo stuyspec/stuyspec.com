@@ -14,6 +14,7 @@ import { FeaturedSectionsBar } from "../../sections/components";
 
 const styles = {
   Masthead: {
+    paddingTop: "20px",
     display: "flex",
     flexDirection: "column",
     paddingBottom: "3%"
