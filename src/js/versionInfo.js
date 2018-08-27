@@ -5,4 +5,5 @@
  */
 
 let VersionInfo = { VERSION : '2.0.912' };
+
 export default VersionInfo;

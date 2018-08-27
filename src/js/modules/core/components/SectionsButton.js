@@ -6,8 +6,11 @@ const styles = {
   SectionsButton: {
     display: "flex",
     alignItems: "center",
-    width: "103px",
-    height: "39px",
+    width: "8vw",
+    height: "6vh",
+    minWidth: "103px",
+    minHeight: "39px",
+    paddingRight: "10px",
     borderRadius: "3px",
     border: "solid 1.5px #dddddd",
     backgroundColor: "white",
@@ -23,15 +26,17 @@ const styles = {
   },
   hamburger: {
     display: "inline",
-    width: "24px",
-    height: "23px",
+    width: "3vw",
+    height: "3vh",
+    minWidth: "24px",
+    minHeight: "23px",
     opacity: "0.48",
-    marginRight: "4px",
+    marginRight: "2px",
     float: "left"
   },
   text: {
     fontFamily: "Circular Std",
-    fontSize: "14px",
+    fontSize: "1.8rem",
     fontWeight: "bold",
     textAlign: "center",
     color: "#000"
