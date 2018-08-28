@@ -6,10 +6,12 @@ const styles = {
   SectionsButton: {
     display: "flex",
     alignItems: "center",
-    width: "8vw",
+    width: "9vw",
     height: "6vh",
-    minWidth: "103px",
+    minWidth: "129px",
     minHeight: "39px",
+    maxHeight: "55px",
+    maxWidth: "150px",
     paddingRight: "10px",
     borderRadius: "3px",
     border: "solid 1.5px #dddddd",
@@ -30,6 +32,7 @@ const styles = {
     height: "3vh",
     minWidth: "24px",
     minHeight: "23px",
+    maxHeight: "30px",
     opacity: "0.48",
     marginRight: "0.4vw",
     float: "left"
@@ -38,7 +41,7 @@ const styles = {
     fontFamily: "Circular Std",
     fontSize: "1.8rem",
     fontWeight: "bold",
-    textAlign: "center",
+    textAlign: "left",
     color: "#000"
   },
 };

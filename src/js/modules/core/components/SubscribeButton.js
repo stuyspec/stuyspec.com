@@ -4,19 +4,25 @@ import injectSheet from "react-jss";
 const styles = {
   SubscribeButton: {
     width: "10vw",
-    height: "6vh",
+    height: "10vh",
     minWidth: "160px",
-    position: "relative",
+    minHeight: "55px",
+    maxWidth: "180px",
+    maxHeight: "60px",
     borderRadius: 0,
     borderTopLeftRadius: "4px",
     borderBottomLeftRadius: "4px",
     backgroundColor: "#DB2B39",
     border: "solid 1.5px #DB2B39",
-    display: "inline",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "flex-end",
     transition: "filter 0.8s",
     "&:hover": {
       filter: "opacity(75%)"
-    }
+    },
+    paddingBottom: "5px"
   },
   text: {
     fontFamily: "Circular Std",
@@ -39,7 +45,6 @@ const SubscribeButton = ({ onClick, classes }) => {
   return (
     <button onClick={onClick} className={classes.SubscribeButton}>
       <span className={classes.text}>Subscribe</span>
-      <br />
       <span className={classes.subscribeTo}>to our newsletter</span>
     </button>
   );

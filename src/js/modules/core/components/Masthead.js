@@ -84,6 +84,10 @@ const styles = {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center"
+  },
+  positioning: {
+    display: "flex",
+    flexDirection: "row"
   }
 };
 
