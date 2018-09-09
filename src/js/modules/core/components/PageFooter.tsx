@@ -1,28 +1,30 @@
-import React from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
+import DescriptionLinks from "./DescriptionLinks";
+import { Description } from "../types";
 
 const styles = {
   PageFooter: {
     background: "#fff",
     height: "370px",
     marginTop: "14px",
-    marginBottom: "60px",
+    marginBottom: "60px"
   },
   pageFooterMain: {
     borderTop: "3px solid #ddd",
-    margin: "0 auto",
+    margin: "0 auto"
   },
   sectionFlex: {
     height: "264px",
     display: "flex",
     flexFlow: "column wrap",
-    paddingTop: "6px",
+    paddingTop: "6px"
   },
   sectionBlock: {
-    marginTop: "19px",
+    marginTop: "19px"
   },
   topLevelSectionLink: {
     color: "#000",
@@ -34,8 +36,8 @@ const styles = {
     textDecoration: "none",
     "&:hover, &:active, &:focus": {
       color: "#000",
-      textDecoration: "none",
-    },
+      textDecoration: "none"
+    }
   },
   subsectionLink: {
     color: "#000",
@@ -47,8 +49,8 @@ const styles = {
     textDecoration: "none",
     "&:hover, &:active, &:focus": {
       color: "#000",
-      textDecoration: "none",
-    },
+      textDecoration: "none"
+    }
   },
   theSpectator: {
     color: "#000",
@@ -59,14 +61,14 @@ const styles = {
     paddingTop: "10px",
     "&:hover, &:active, &:focus": {
       color: "#000",
-      textDecoration: "none",
-    },
+      textDecoration: "none"
+    }
   },
   aboutNavLinksMobile: {
     paddingLeft: "7px",
     "& > div": {
       border: 0,
-      paddingBottom: "1px",
+      paddingBottom: "1px"
     },
     "& > div > a": {
       // each about-us link
@@ -76,12 +78,12 @@ const styles = {
       padding: "0 16px 6px 0",
       "&:hover, &:active, &:focus": {
         color: "#aaa",
-        textDecoration: "underline",
-      },
-    },
+        textDecoration: "underline"
+      }
+    }
   },
   hr: {
-    margin: "12px 0",
+    margin: "12px 0"
   },
   creditLine: {
     color: "#aaa",
@@ -92,83 +94,65 @@ const styles = {
       color: "#aaa",
       textDecoration: "underline",
       "&:hover, &:active, &:focus": {
-        color: "#aaa",
-      },
-    },
+        color: "#aaa"
+      }
+    }
   },
   "@media (max-width: 767px)": {
     PageFooter: {
-      marginBottom: "30px",
+      marginBottom: "30px"
     },
     sectionFlex: {
       flexWrap: "nowrap",
       height: "auto",
       "& > div:nth-child(6) ~ div": {
         // shows first six section blocks
-        display: "none",
+        display: "none"
       },
       "& > div:nth-child(6)": {
-        borderBottom: "1px solid #ddd",
-      },
+        borderBottom: "1px solid #ddd"
+      }
     },
     sectionBlock: {
       margin: 0,
       padding: "10px 0",
-      borderTop: "1px solid #ddd",
+      borderTop: "1px solid #ddd"
     },
     topLevelSectionLink: {
       fontSize: "15px",
       fontWeight: 500,
       "&:hover, &:active, &:focus": {
         color: "#000",
-        textDecoration: "none",
-      },
+        textDecoration: "none"
+      }
     },
     subsectionLink: {
-      display: "none",
+      display: "none"
     },
     hr: {
-      display: "none",
-    },
-  },
+      display: "none"
+    }
+  }
 };
 
-const DescriptionLinks = ({ classes, descriptions }) => {
-  return (
-    <div className={classes.sectionBlock} key="about">
-      <p className={classes.topLevelSectionLink} key={-1}>
-        About Us
-      </p>
-      {descriptions.map(description => {
-        return (
-          <Link
-            className={classes.subsectionLink}
-            key={description.id}
-            to={`/about/${description.slug}`}
-          >
-            {description.title}
-          </Link>
-        );
-      })}
-      <a
-        className={classes.subsectionLink}
-        key={-2}
-        href="https://issuu.com/stuyspectator"
-      >
-        Visual Archives
-      </a>
-      <a
-        className={classes.subsectionLink}
-        key={-3}
-        href="https://specapparel.strikingly.com/"
-      >
-        Apparel
-      </a>
-    </div>
-  );
-};
+interface PageFooterProps {
+  classes: { [s: string]: string };
+  sections: Section[];
+  descriptions: Description[];
+}
 
-const PageFooter = ({ classes, sections, descriptions }) => {
+interface Section {
+  id: number;
+  permalink: string;
+  name: string;
+  subsections: Section[];
+}
+
+const PageFooter: React.SFC<PageFooterProps> = ({
+  classes,
+  sections,
+  descriptions
+}) => {
   return (
     <Grid fluid className={classes.PageFooter}>
       <Row className={classes.pageFooterMain}>
@@ -256,8 +240,9 @@ const PageFooter = ({ classes, sections, descriptions }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  descriptions: state.descriptions,
+// TODO: Make a Redux state type
+const mapStateToProps = (state: any) => ({
+  descriptions: state.descriptions
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(PageFooter));

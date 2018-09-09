@@ -4,8 +4,10 @@
         "target": "es5",
 	"lib": [
 	    "esnext.asynciterable",
-	    "es2015"
-	]
+	    "es2015",
+	    "dom"
+	],
+	"jsx": "react"
     },
     "exclude": [
 	"node_modules"

@@ -14,7 +14,9 @@
     "dev": "node app --dev & gulp dev"
   },
   "devDependencies": {
+    "@types/jss": "^9.5.5",
     "@types/node": "^10.9.4",
+    "@types/react-redux": "^6.0.7",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -77,6 +79,8 @@
   },
   "dependencies": {
     "@types/react": "^16.4.0",
+    "@types/react-bootstrap": "^0.32.13",
+    "@types/react-router-dom": "^4.3.0",
     "apollo-client-preset": "^1.0.8",
     "axios": "^0.16.2",
     "cli-table": "^0.3.1",
