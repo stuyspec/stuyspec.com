@@ -37,7 +37,7 @@ class SearchPage extends PureComponent {
   render() {
     const { classes } = this.props;
     const searchParams = new URLSearchParams(this.props.location.search);
-    const query = searchParams.get('query');
+     const query = searchParams.get('query');
     return (
       <Grid fluid>
         <Helmet titleTemplate="%s | The Stuyvesant Spectator">
