@@ -14,6 +14,7 @@
     "dev": "node app --dev & gulp dev"
   },
   "devDependencies": {
+    "@types/node": "^10.9.4",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -68,6 +69,8 @@
     "redux-promise-middleware": "^4.4.2",
     "redux-thunk": "^2.3.0",
     "run-sequence": "^1.2.2",
+    "tsify": "^4.0.0",
+    "typescript": "^3.0.3",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^1.1.2",
     "watchify": "^3.11.0"

@@ -14,6 +14,7 @@ var gulp = require('gulp'),
   watchify = require('watchify'),
   babelify = require('babelify'),
   streamify = require('gulp-streamify'),
+  tsify = require("tsify"),
   envify = require('envify/custom'),
   fs = require('fs'),
   colors = require('colors'),
@@ -332,6 +333,7 @@ function scripts(p) {
     packageCache: {},
     plugin: watch ? [liveReactLoad] : []
   })
+    .plugin(tsify)
     .transform(babelify.configure(BABELIFY_CONFIG))
     .transform(
       envify({ NODE_ENV: _global.DEV_MODE ? 'development' : 'production' })

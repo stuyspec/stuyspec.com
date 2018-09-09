@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "target": "es5",
+	"lib": [
+	    "esnext.asynciterable",
+	    "es2015"
+	]
+    },
+    "exclude": [
+	"node_modules"
+    ]
+}
