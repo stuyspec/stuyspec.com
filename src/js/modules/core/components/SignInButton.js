@@ -3,8 +3,12 @@ import injectSheet from "react-jss"
 
 const styles = {
   SignIn: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 0,
     borderTopRightRadius: "4px",
+    minHeight: "39px",
     borderBottomRightRadius: "4px",
     backgroundColor: "#ffffff",
     border: "solid 1.5px #dddddd",
@@ -24,8 +28,8 @@ const styles = {
   text: {
     fontFamily: "Circular Std",
     fontSize: "1.5rem",
+    margin: 0,
     fontWeight: "bold",
-    textAlign: "center",
     color: "#000000",
   },
 }
@@ -33,7 +37,7 @@ const styles = {
 const SignInButton  = ({ classes}) => {
   return (
     <button className={classes.SignIn}>
-      <span className={classes.text}>Sign In</span>
+      <p className={classes.text}>Sign In</p>
     </button>
   );
 };

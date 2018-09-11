@@ -68,9 +68,6 @@ const styles = {
       color: "#000",
     },
   },
-  bylineContainer: {
-    marginBottom: "4px",
-  },
   "@media (max-width: 767px)": {
     LeftColumn: {
       paddingRight: "0 !important",

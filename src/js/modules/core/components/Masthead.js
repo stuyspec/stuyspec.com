@@ -81,10 +81,12 @@ const styles = {
   },
   logo: {
     display: "flex",
-    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
+  positioning: {
+    display: "flex",
+  },
 };
 
 const Masthead = ({ classes, openSidebar, session, openSubscriptionModal }) => {

@@ -8,38 +8,32 @@ const styles = {
     alignItems: "center",
     width: "8vw",
     height: "6vh",
-    minWidth: "103px",
+    minWidth: "111px",
     minHeight: "39px",
     paddingRight: "10px",
     borderRadius: "3px",
     border: "solid 1.5px #dddddd",
     backgroundColor: "white",
     float: "left",
-    "& span": {
-      position: "relative",
-      top: "2px",
-      transitionDuration: ".3s"
+    "&:hover p": {
+      color: "#888",
     },
-    "&:hover span": {
-      color: "#888"
-    }
   },
   hamburger: {
-    display: "inline",
     width: "3vw",
     height: "3vh",
     minWidth: "24px",
     minHeight: "23px",
-    opacity: "0.48",
+    opacity: 0.48,
     marginRight: "0.4vw",
-    float: "left"
   },
   text: {
     fontFamily: "Circular Std",
-    fontSize: "1.8rem",
+    fontSize: "1.6rem",
     fontWeight: "bold",
-    textAlign: "center",
-    color: "#000"
+    margin: 0,
+    color: "#000",
+    transitionDuration: ".3s",
   },
 };
 
@@ -47,7 +41,7 @@ const SectionsButton = ({ onClick, classes }) => {
   return (
     <button onClick={onClick} className={classes.SectionsButton}>
       <Hamburger className={classes.hamburger} />
-      <span className={classes.text}>Sections</span>
+      <p className={classes.text}>Sections</p>
     </button>
   );
 };
