@@ -3,7 +3,7 @@
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?)](https://github.com/prettier/prettier)
 
-The client-facing application of The Stuyvesant Spectator, built in [React](https://github.com/facebook/react).
+The client-facing application of The Stuyvesant Spectator, built in [React](https://github.com/facebook/react). Original timeline [here](https://docs.google.com/document/d/1DJtN_8y6D5Eg5oTwe46v9zsaS4wqIS6ca4sNKY2cQHM/edit?usp=sharing).
 
 ## Contributing
 
