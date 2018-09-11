@@ -6,7 +6,7 @@ const styles = {
   SectionsButton: {
     display: "flex",
     alignItems: "center",
-    width: "8vw",
+    width: "9vw",
     height: "6vh",
     minWidth: "111px",
     minHeight: "39px",

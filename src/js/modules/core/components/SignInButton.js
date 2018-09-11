@@ -1,5 +1,5 @@
-import React from "react"
-import injectSheet from "react-jss"
+import React from "react";
+import injectSheet from "react-jss";
 
 const styles = {
   SignIn: {
@@ -13,17 +13,22 @@ const styles = {
     backgroundColor: "#ffffff",
     border: "solid 1.5px #dddddd",
     borderLeft: 0,
-    height: "6vh",
-    width: "5vw",
     minWidth: "66px",
-    display: "inline",
+    minHeight: "45px",
+    maxWidth: "80px",
+    maxHeight: "50px",
+    height: "10vh",
+    width: "5vw",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     position: "relative",
     "& span": {
-      transitionDuration: ".3s",
+      transitionDuration: ".3s"
     },
     "&:hover span": {
-      color: "#888",
-    },
+      color: "#888"
+    }
   },
   text: {
     fontFamily: "Circular Std",
@@ -34,7 +39,7 @@ const styles = {
   },
 }
 
-const SignInButton  = ({ classes}) => {
+const SignInButton = ({ classes }) => {
   return (
     <button className={classes.SignIn}>
       <p className={classes.text}>Sign In</p>
