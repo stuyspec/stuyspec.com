@@ -85,6 +85,7 @@ class SearchForm extends PureComponent {
             type="text"
             component="input"
             placeholder="Enter search terms"
+            autoFocus
           />
           <button
             type="submit"
