@@ -10,6 +10,13 @@
 }
 
 @font-face {
+    font-family: "Mrs Eaves Small Caps";
+    src: url('/fonts/MrsEavesSmallCaps Regular.ttf') format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
     font-family: "Minion Pro";
     src: url('/fonts/MinionPro_Regular.ttf') format("truetype");
     font-style: normal;

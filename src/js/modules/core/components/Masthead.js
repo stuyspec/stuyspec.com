@@ -23,7 +23,7 @@ const styles = {
   theSpectatorLogo: {
     color: "#000",
     display: "inline-block",
-    fontFamily: "Old English Text MT",
+    fontFamily: "Mrs Eaves Small Caps",
     fontSize: "75px",
     marginBottom: "10px",
     "&:hover, &:active, &:focus": {

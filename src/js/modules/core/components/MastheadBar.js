@@ -42,13 +42,13 @@ const styles = {
   brandingLink: {
     bottom: "9px",
     color: "#000",
-    fontFamily: "Old English Text MT",
+    fontFamily: "Mrs Eaves Small Caps",
     fontSize: "32px",
     left: "50%",
     marginTop: "1px",
     position: "absolute",
     textDecoration: "none",
-    top: "1px",
+    top: "2px",
     transform: "translate(-50%, 0)",
     "&:hover, &:active, &:focus": {
       color: "#000",
