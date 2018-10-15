@@ -232,10 +232,11 @@ const PageFooter = ({ classes, sections, descriptions }) => {
           className={classes.creditLine}
         >
           <hr className={classes.hr} />
-          Created by{" "}
+          Created by Jason Kao, Nicholas Yang, Jason Lin, Darius Jankauskas, and
+          Cathy Cai{' '}
           <a href="https://github.com/stuyspec">
-            The Spectator Web Department
-          </a>, 2017.
+            @The Spectator Web Department
+          </a>.
         </Col>
         <Col
           xs={12}
@@ -248,8 +249,11 @@ const PageFooter = ({ classes, sections, descriptions }) => {
         </Col>
         <Col xs={12} smHidden mdHidden lgHidden className={classes.creditLine}>
           <hr className={classes.hr} />
-          Created by The Spectator Web Department, 2017. This site is{" "}
-          <a href="https://github.com/stuyspec">open sauce</a>!
+          Created by Jason Kao, Nicholas Yang, Jason Lin, Darius Jankauskas, and
+          Cathy Cai{' '}
+          <a href="https://github.com/stuyspec">
+            @The Spectator Web Department
+          </a>.
         </Col>
       </Row>
     </Grid>
