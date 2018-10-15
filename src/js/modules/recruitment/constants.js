@@ -83,7 +83,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     imageLink: null,
     description: `Do you want to be a part of the best department of The Spectator? Do you want to get tight with the administration? Do you want to see your name and your articles on the front page? Do you want to find out about the coolest news at Stuy before anyone else? Do you want to report on that cool news? If so, join the Spectator News Department!!! `,
     quotes: [],
-    link: "https://docs.google.com/forms/d/e/1FAIpQLSerzJDbe4FJPoi1fx2r2WCEUIiV7YyGZhvn7OWU5LPDl0yLMQ/viewform"
+    link: "https://docs.google.com/forms/d/e/1FAIpQLScPEU9ujGzS2XjNGTx7ZNTGRjyXjnHX0t3zyYjfTRwQPofyQw/viewform"
   },
   {
     name: "Copy",
@@ -101,7 +101,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         source: "Tasfia Bashar"
       }
     ],
-    link: "https://goo.gl/forms/lGKk6by8M3So1LhH2"
+    link: "https://goo.gl/forms/xvgVpZ8GLpAf1RGh1"
   },
   {
     name: "Web",
@@ -119,7 +119,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         source: "Jerry Ye"
       }
     ],
-    link: "https://goo.gl/forms/q1BqWp8fZoepntdS2",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLScAXSQmiIaiWxd9dlrxn__dDy8YquI0PD8GdTSSW8NXiJg5Gg/viewform",
   },
   {
     name: "Layout",
@@ -154,7 +154,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         source: "Elena Sapelyuk"
       }
     ],
-    link: "https://docs.google.com/forms/d/e/1FAIpQLSfndwMl7UgOmGbyBmCpQ7nDUv0Wdexsb93qTNBodd4UVMBOfg/viewform"
+    link: "https://l.messenger.com/l.php?u=https%3A%2F%2Fdocs.google.com%2F%E2%80%A6%2F1jTKUI0v_8eqBsmDPCBYrPZdmC-mQIhyQ&h=AT3fj_VqbhiGyb7ulzTpAaMKUfrrE2MY92nm9uBZ-_OwDdLUHnmvz4FXN99mQiFDkvzzu11ydXs5Rqc5wM5dmPJCkQv1cnRrtJEVKNFtqibcfYyo-qHYj2L9zC62YJB5BF3tFw"
   },
   {
     name: "Business",
@@ -180,7 +180,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         source: "Alexander Radu"
       }
     ],
-    link: "https://stuyspec.recruiterbox.com/jobs/fk0fbxp/"
+    link: "bit.ly/SpecBizFallApp"
   },
   {
     name: "Art",
@@ -209,6 +209,6 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         source: "Alex Lin"
       }
     ],
-    link: "https://docs.google.com/forms/d/e/1FAIpQLSesBmOEoqxFb4heJlv6JM9-5HdkRSDZuJ-1fiPMZbegnn2Slg/viewform"
+    link: "https://docs.google.com/forms/d/1XDpVjWulcjDIXp1fN92TBlXR9nj2wDDbBL9hLzT0YaM/viewform"
   }
 ];
