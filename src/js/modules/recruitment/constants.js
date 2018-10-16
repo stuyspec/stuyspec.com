@@ -18,7 +18,7 @@ export const SECTIONS = [
         source: "Angela Wong"
       }
     ],
-    link: "https://docs.google.com/document/d/1HJicqJ6RGqiZp6nMU3CM3ltB7wGjmgS5t9JN9o-Txms/edit?usp=sharing"
+    link: "https://docs.google.com/document/d/1HJicqJ6RGqiZp6nMU3CM3ltB7wGjmgS5t9JN9o-Txms/edit"
   },
   {
     name: "Arts and Entertainment",
@@ -30,7 +30,7 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
       text:`Being part of Arts and Entertainment is the best choice I ever made in my life. It is just so fun to write about things that we as human beings already enjoy. Like, it couldn't be more enjoyable than that. (Except eating Häagen-Dazs while listening to Beyonce)`,
       source: "Anonymous"
     }],
-    link: "https://docs.google.com/document/d/1zxCIIBOsBTAuCGAslbX3EW8aQsp8b1aDDM2fTDxS_UE/edit"
+    link: "https://docs.google.com/document/d/1eRjH6mz2herbaLhgKSo1ugSxhpBPHtsjyk1_8nXrPIQ/edit"
   },
   {
     name: "Features",
@@ -131,7 +131,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     we present to you what you know as the Spectator. \n\nAs a staff member, you will be taught how to use InDesign and asked to critique 
     the formatting of each issue as it is released.`,
     quotes: [],
-    link: "https://goo.gl/forms/MqPkHvfeOOdzWSxY2"
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSejlPbzAgIuTyQCV1BD5NprAS6t2TYyY-h-5GACAe2iRMVY9A/viewform"
   },
   {
     name: "Photo",
@@ -209,6 +209,6 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         source: "Alex Lin"
       }
     ],
-    link: "https://docs.google.com/forms/d/1XDpVjWulcjDIXp1fN92TBlXR9nj2wDDbBL9hLzT0YaM/viewform"
+    link: "https://docs.google.com/forms/d/e/1FAIpQLScYHVmOOyF-bNOdSnW5eJ5CAgKaLOB06SksuJAJwJ9oO0fgww/viewform"
   }
 ];
