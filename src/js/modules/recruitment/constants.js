@@ -68,7 +68,6 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
     name: "Sports",
     imageLink: null,
     description: `Were you following March Madness? Are you hype for the start of the MLB season? Do you know who LeBron James is?
-
 If you answered yes (or no!) to any of those questions, the Spectator Sports department is the place for you!! We cover Stuy sports as well as non-Stuy sports topics such as whether NCAA athletes should be paid and steroid use in the MLB. `,
     quotes: [
     {
