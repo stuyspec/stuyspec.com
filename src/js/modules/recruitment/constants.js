@@ -62,7 +62,7 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
         Join Spec Humor!
         We write funny and satirical pieces for The Spec and unlike other departments, everything we publish is libel and slander which means that you'll be in control of what everyone says!`,
     quotes: [],
-    link: "https://goo.gl/forms/IbJKekpk7JyTugmA2 "
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSd4YO5oBHIykZbmM2zx4EMPmjO0FBsP0xtvNVEygDOr1LxoJQ/viewform"
   },
   {
     name: "Sports",
@@ -75,7 +75,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         source: "Ray Jones"
       },
     ],
-    link: "https://docs.google.com/forms/d/1x-lhV8KaxgKsCz5HutN3BSE9Nt9ZYhkfRrAM6lU2ui8/viewform?edit_requested=true"
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSc138Eg8fykxT_bTGlMuknicshDJYhdGLM5bI0C2Px43mPQ3w/viewform"
   },
   {
     name: "News",
@@ -153,7 +153,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         source: "Elena Sapelyuk"
       }
     ],
-    link: "https://l.messenger.com/l.php?u=https%3A%2F%2Fdocs.google.com%2F%E2%80%A6%2F1jTKUI0v_8eqBsmDPCBYrPZdmC-mQIhyQ&h=AT3fj_VqbhiGyb7ulzTpAaMKUfrrE2MY92nm9uBZ-_OwDdLUHnmvz4FXN99mQiFDkvzzu11ydXs5Rqc5wM5dmPJCkQv1cnRrtJEVKNFtqibcfYyo-qHYj2L9zC62YJB5BF3tFw"
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSfjR58yPm8-7t68PLzFo-krqVSrTNHaNBHFZrPMzKfc7ooetQ/viewform"
   },
   {
     name: "Business",
