@@ -179,7 +179,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         source: "Alexander Radu"
       }
     ],
-    link: "bit.ly/SpecBizFallApp"
+    link: "https://bit.ly/SpecBizFallApp"
   },
   {
     name: "Art",
