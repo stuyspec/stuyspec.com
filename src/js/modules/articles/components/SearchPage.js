@@ -6,7 +6,6 @@ import injectSheet from "react-jss";
 import { Helmet } from "react-helmet";
 
 import { SearchForm, SearchResults } from "./";
-import { getUrlParameterByName } from "../../../utils";
 
 const styles = {
   title: {
@@ -15,35 +14,30 @@ const styles = {
     fontSize: "36px",
     fontWeight: 500,
     margin: 0,
-    textAlign: "center",
+    textAlign: "center"
   },
   form: {
     margin: "0 auto",
-    display: "block",
-  },
+    display: "block"
+  }
 };
 
 class SearchPage extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      query: getUrlParameterByName("query"),
-    };
   }
 
   handleSearchFormSubmit = ({ query }) => {
     // We want a reusable search path
     this.props.history.push(
-      `${this.props.location.pathname}?query=${encodeURIComponent(query)}`,
+      `${this.props.location.pathname}?query=${encodeURIComponent(query)}`
     );
-
-    this.setState({ query });
   };
 
   render() {
-    const { query } = this.state;
     const { classes } = this.props;
-
+    const searchParams = new URLSearchParams(this.props.location.search);
+    const query = searchParams.get('query');
     return (
       <Grid fluid>
         <Helmet titleTemplate="%s | The Stuyvesant Spectator">

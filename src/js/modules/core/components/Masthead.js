@@ -59,7 +59,7 @@ const styles = {
   },
   subscribeText: {
     fontFamily: "Circular Std",
-    fontSize: "15px",
+    fontSize: "2rem",
     fontWeight: "bold",
     textAlign: "center",
     color: "#fff",

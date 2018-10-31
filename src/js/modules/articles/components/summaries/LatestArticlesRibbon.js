@@ -34,7 +34,7 @@ const styles = {
   },
   RibbonComponent: {
     display: "inline-block",
-    height: "59px",
+    height: "66px",
     marginTop: "9px",
     marginBottom: "11px",
     overflow: "hidden",
@@ -50,10 +50,10 @@ const styles = {
   sectionLabel: {
     color: "#a8a8a8",
     fontFamily: "Circular Std",
-    fontSize: "11px",
-    fontWeight: 300,
+    fontSize: "1.3rem",
+    fontWeight: 500,
     letterSpacing: "0.5px",
-    marginBottom: "1px",
+    marginBottom: "3px",
     textTransform: "uppercase",
     "&:hover": {
       color: "#a8a8a8",
@@ -68,7 +68,7 @@ const styles = {
     color: "#000",
     display: "block",
     fontFamily: "Minion Pro",
-    fontSize: "12px",
+    fontSize: "1.5rem",
     fontWeight: "bold",
     letterSpacing: "0.5px",
     lineHeight: 1.17,

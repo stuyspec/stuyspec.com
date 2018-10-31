@@ -23,7 +23,8 @@ const FeaturedSectionsQuery = gql`
 const styles = {
   FeaturedSectionsBar: {
     fontFamily: "Circular Std",
-    listStyleType: "none",
+    display: "flex",
+    flexDirection: "row",
     padding: "6px",
   },
   sectionListItem: {
@@ -36,7 +37,7 @@ const styles = {
   },
   sectionLink: {
     color: "#000",
-    fontSize: "14px",
+    fontSize: "1.6rem",
     fontWeight: 300,
     textDecoration: "none",
     "&:hover": {
@@ -64,34 +65,34 @@ const FeaturedSectionsBar = ({
   data = humps.camelizeKeys(data);
   const { featuredSections } = data;
   return (
-    <ul className={classes.FeaturedSectionsBar}>
+    <div className={classes.FeaturedSectionsBar}>
       {featuredSections.map(section => {
         return (
-          <li key={section.id} className={classes.sectionListItem}>
+          <div key={section.id} className={classes.sectionListItem}>
             <Link to={section.permalink} className={classes.sectionLink}>
               {section.name}
             </Link>
-          </li>
+          </div>
         );
       })}
-      <li key={-1} className={classes.sectionListItem}>
+      <div key={-1} className={classes.sectionListItem}>
         <span onClick={openSubscriptionModal} className={classes.sectionLink}>
           Newsletter
         </span>
-      </li>
-      <li key={-2} className={classes.sectionListItem}>
+      </div>
+      <div key={-2} className={classes.sectionListItem}>
         <Link to="/recruitments" className={classes.sectionLink}>
           Recruitments
         </Link>
-      </li>
+      </div>
       {!omitSearch && (
-        <li key={-3} className={classes.sectionListItem}>
+        <div key={-3} className={classes.sectionListItem}>
           <Link to="/search" className={classes.sectionLink}>
             <Search className={classes.navSearchButton} />
           </Link>
-        </li>
+        </div>
       )}
-    </ul>
+    </div>
   );
 };
 

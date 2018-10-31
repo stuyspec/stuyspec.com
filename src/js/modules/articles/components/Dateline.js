@@ -8,7 +8,7 @@ const styles = {
   Dateline: {
     color: "#888",
     fontFamily: "Circular Std",
-    fontSize: "12px",
+    fontSize: "1.3rem",
     fontWeight: 300,
     marginBottom: 0,
   },
@@ -19,6 +19,7 @@ const styles = {
  * shortTime: 5:46 PM
  */
 
+/* Welcome to Dateline: Real-Life Crimes, Bad Situations */
 const Dateline = ({ classes, timestamp }) => {
   // If the timestamp is the same day (< 24 hours difference), use the
   // shortTime format. If not, use the longDate format.
