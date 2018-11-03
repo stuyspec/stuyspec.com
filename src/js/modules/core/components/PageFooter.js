@@ -249,7 +249,7 @@ const PageFooter = ({ classes, sections, descriptions }) => {
         </Col>
         <Col xs={12} smHidden mdHidden lgHidden className={classes.creditLine}>
           <hr className={classes.hr} />
-          Created by Jerry Ye, Jason Kao, Nicholas Yang, Jason Lin, Darius Jankauskas,
+          Created by Jason Kao, Nicholas Yang, Jerry Ye, Jason Lin, Darius Jankauskas,
           and Cathy Cai{' '}
           <a href="https://github.com/stuyspec">
             @The Spectator Web Department
