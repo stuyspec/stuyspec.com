@@ -4,13 +4,11 @@ import injectSheet from "react-jss";
 const styles = {
   SubscribeButton: {
     width: "10vw",
-    height: "10vh",
+    height: "45px",
     padding: "4px 0",
     lineHeight: "1.5rem",
     minWidth: "135px",
-    minHeight: "45px",
     maxWidth: "150px",
-    maxHeight: "50px",
     position: "relative",
     borderRadius: 0,
     borderTopLeftRadius: "4px",
@@ -28,14 +26,14 @@ const styles = {
   },
   text: {
     fontFamily: "Circular Std",
-    fontSize: "1.7rem",
+    fontSize: "1.6rem",
     fontWeight: "bold",
     textAlign: "center",
     color: "#fff",
   },
   subscribeTo: {
     fontFamily: "Circular Std",
-    fontSize: "1.5rem",
+    fontSize: "1.4rem",
     textAlign: "center",
     color: "#ffffff",
   },

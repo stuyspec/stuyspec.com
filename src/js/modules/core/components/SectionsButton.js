@@ -31,8 +31,6 @@ const styles = {
     fontWeight: "bold",
     textAlign: "left",
     color: "#000",
-    position: "relative",
-    top: "2px",
     transitionDuration: ".3s",
   },
 };
