@@ -5,6 +5,7 @@ const styles = {
   SubscribeButton: {
     width: "10vw",
     height: "10vh",
+    padding: "4px 0",
     lineHeight: "1.5rem",
     minWidth: "135px",
     minHeight: "45px",
@@ -19,16 +20,15 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-around",
     transition: "filter 0.8s",
     "&:hover": {
       filter: "opacity(75%)",
     },
-    paddingBottom: "5px",
   },
   text: {
     fontFamily: "Circular Std",
-    fontSize: "1.8rem",
+    fontSize: "1.7rem",
     fontWeight: "bold",
     textAlign: "center",
     color: "#fff",

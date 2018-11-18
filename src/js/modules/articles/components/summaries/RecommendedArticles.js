@@ -45,6 +45,7 @@ const styles = {
     fontSize: "13px",
     fontWeight: 300,
     margin: 0,
+    lineHeight: 1,
   },
   articleItem: {
     padding: "12px 0 12px 12px",

@@ -6,29 +6,21 @@ const styles = {
   SectionsButton: {
     display: "flex",
     alignItems: "center",
+    justifyContent: "space-evenly",
     width: "9vw",
-    height: "6vh",
     minWidth: "119px",
-    minHeight: "29px",
-    maxHeight: "45px",
+    height: "45px",
     maxWidth: "140px",
     paddingRight: "10px",
     borderRadius: "3px",
     border: "solid 1.5px #dddddd",
     backgroundColor: "white",
     float: "left",
-    "& span": {
-      position: "relative",
-      top: "2px",
-      transitionDuration: ".3s",
-    },
     "&:hover span": {
       color: "#888",
     },
   },
   hamburger: {
-    width: "3vw",
-    height: "3vh",
     minWidth: "24px",
     minHeight: "23px",
   },
@@ -39,6 +31,9 @@ const styles = {
     fontWeight: "bold",
     textAlign: "left",
     color: "#000",
+    position: "relative",
+    top: "2px",
+    transitionDuration: ".3s",
   },
 };
 
