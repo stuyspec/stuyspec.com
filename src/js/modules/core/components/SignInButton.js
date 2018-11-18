@@ -28,12 +28,12 @@ const styles = {
   },
   text: {
     fontFamily: "Circular Std",
-    fontSize: "1.7rem",
+    fontSize: "1.5rem",
+    margin: 0,
     fontWeight: "bold",
-    textAlign: "center",
-    color: "#000000"
-  }
-};
+    color: "#000000",
+  },
+}
 
 const SignInButton = ({ classes }) => {
   return (

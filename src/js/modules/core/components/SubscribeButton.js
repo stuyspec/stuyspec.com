@@ -9,6 +9,7 @@ const styles = {
     minHeight: "45px",
     maxWidth: "150px",
     maxHeight: "50px",
+    position: "relative",
     borderRadius: 0,
     borderTopLeftRadius: "4px",
     borderBottomLeftRadius: "4px",
@@ -38,7 +39,7 @@ const styles = {
     fontSize: "1.5rem",
     textAlign: "center",
     color: "#ffffff"
-  }
+  },
 };
 
 const SubscribeButton = ({ onClick, classes }) => {
