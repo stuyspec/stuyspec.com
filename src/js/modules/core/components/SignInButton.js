@@ -20,11 +20,11 @@ const styles = {
     justifyContent: "center",
     position: "relative",
     "& span": {
-      transitionDuration: ".3s"
+      transitionDuration: ".3s",
     },
     "&:hover span": {
-      color: "#888"
-    }
+      color: "#888",
+    },
   },
   text: {
     fontFamily: "Circular Std",
@@ -33,7 +33,7 @@ const styles = {
     fontWeight: "bold",
     color: "#000000",
   },
-}
+};
 
 const SignInButton = ({ classes }) => {
   return (

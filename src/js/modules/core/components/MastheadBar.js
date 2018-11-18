@@ -118,8 +118,8 @@ const styles = {
       marginTop: "7.5px",
     },
     MastheadBar: {
-      height: "70px"
-    }
+      height: "70px",
+    },
   },
 };
 

@@ -17,7 +17,7 @@ const styles = {
     paddingTop: "20px",
     display: "flex",
     flexDirection: "column",
-    paddingBottom: "3%"
+    paddingBottom: "3%",
   },
   theSpectatorLogo: {
     flexGrow: "2",
@@ -30,27 +30,27 @@ const styles = {
     marginBottom: "10px",
     "&:hover, &:active, &:focus": {
       color: "#000",
-      textDecoration: "none"
+      textDecoration: "none",
     },
     "@media (min-width: 768px)": {
-      fontSize: "75px"
-    }
+      fontSize: "75px",
+    },
   },
   userTools: {
     float: "right",
     margin: "0",
     padding: "0",
     "&:hover a": {
-      textDecoration: "none"
-    }
+      textDecoration: "none",
+    },
   },
   signedInNav: {
     top: "5px",
     display: "flex",
-    position: "relative"
+    position: "relative",
   },
   FeaturedSectionsBarContainer: {
-    borderTop: "1px solid black"
+    borderTop: "1px solid black",
   },
   myAccount: {
     display: "inline",
@@ -60,8 +60,8 @@ const styles = {
     color: "#000",
     transitionDuration: ".3s",
     "&:hover, &:active, &:focus": {
-      color: "#000"
-    }
+      color: "#000",
+    },
   },
   searchLink: {
     color: "#000",
@@ -72,23 +72,23 @@ const styles = {
     top: "1px",
     "& svg": {
       height: "100%",
-      width: "100%"
+      width: "100%",
     },
     "&:hover, &:active, &:focus": {
       color: "#000",
-      textDecoration: "none"
-    }
+      textDecoration: "none",
+    },
   },
   logo: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   positioning: {
     display: "flex",
-    flexDirection: "row"
-  }
+    flexDirection: "row",
+  },
 };
 
 const Masthead = ({ classes, openSidebar, session, openSubscriptionModal }) => {
@@ -129,7 +129,7 @@ const Masthead = ({ classes, openSidebar, session, openSubscriptionModal }) => {
 };
 
 const mapStateToProps = state => ({
-  session: state.accounts.session
+  session: state.accounts.session,
 });
 
 const mapDispatchToProps = dispatch => {
@@ -137,5 +137,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(Masthead)
+  injectSheet(styles)(Masthead),
 );

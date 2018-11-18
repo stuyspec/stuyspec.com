@@ -22,22 +22,22 @@ const styles = {
     justifyContent: "center",
     transition: "filter 0.8s",
     "&:hover": {
-      filter: "opacity(75%)"
+      filter: "opacity(75%)",
     },
-    paddingBottom: "5px"
+    paddingBottom: "5px",
   },
   text: {
     fontFamily: "Circular Std",
     fontSize: "1.8rem",
     fontWeight: "bold",
     textAlign: "center",
-    color: "#fff"
+    color: "#fff",
   },
   subscribeTo: {
     fontFamily: "Circular Std",
     fontSize: "1.5rem",
     textAlign: "center",
-    color: "#ffffff"
+    color: "#ffffff",
   },
 };
 

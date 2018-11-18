@@ -14,12 +14,12 @@ const styles = {
     fontSize: "36px",
     fontWeight: 500,
     margin: 0,
-    textAlign: "center"
+    textAlign: "center",
   },
   form: {
     margin: "0 auto",
-    display: "block"
-  }
+    display: "block",
+  },
 };
 
 class SearchPage extends PureComponent {
@@ -30,14 +30,14 @@ class SearchPage extends PureComponent {
   handleSearchFormSubmit = ({ query }) => {
     // We want a reusable search path
     this.props.history.push(
-      `${this.props.location.pathname}?query=${encodeURIComponent(query)}`
+      `${this.props.location.pathname}?query=${encodeURIComponent(query)}`,
     );
   };
 
   render() {
     const { classes } = this.props;
     const searchParams = new URLSearchParams(this.props.location.search);
-    const query = searchParams.get('query');
+    const query = searchParams.get("query");
     return (
       <Grid fluid>
         <Helmet titleTemplate="%s | The Stuyvesant Spectator">

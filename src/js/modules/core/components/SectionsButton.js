@@ -1,6 +1,6 @@
 import React from "react";
 import injectSheet from "react-jss";
-import { Hamburger } from '../icons'
+import { Hamburger } from "../icons";
 
 const styles = {
   SectionsButton: {
@@ -20,11 +20,11 @@ const styles = {
     "& span": {
       position: "relative",
       top: "2px",
-      transitionDuration: ".3s"
+      transitionDuration: ".3s",
     },
     "&:hover span": {
-      color: "#888"
-    }
+      color: "#888",
+    },
   },
   hamburger: {
     width: "3vw",
@@ -38,7 +38,7 @@ const styles = {
     fontSize: "1.6rem",
     fontWeight: "bold",
     textAlign: "left",
-    color: "#000"
+    color: "#000",
   },
 };
 

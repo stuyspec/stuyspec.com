@@ -32,7 +32,7 @@ import { ArtistPage, ContributorPage } from "./users/components";
 
 import { createSession } from "./accounts/actions";
 
-import { RecruitmentPage } from "./recruitment/components"
+import { RecruitmentPage } from "./recruitment/components";
 
 import { ClassifiedsRedirect } from "./core/components";
 
@@ -180,7 +180,7 @@ class RoutingApp extends PureComponent {
                 render={() =>
                   session ? <EditProfilePage /> : <Redirect to="/myaccount" />}
               />
-              <Route 
+              <Route
                 exact
                 path={"/recruitments"}
                 key={"recruitments"}

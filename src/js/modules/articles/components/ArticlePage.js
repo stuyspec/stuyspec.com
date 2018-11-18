@@ -7,7 +7,7 @@ import injectSheet from "react-jss";
 import Grid from "react-bootstrap/lib/Grid";
 import { Helmet } from "react-helmet";
 import { ArticleHeader, ArticleBody, ArticleFooter, RecommendedRow } from "./";
-import CommentThread from '../../comments/components/CommentThread';
+import CommentThread from "../../comments/components/CommentThread";
 
 const ArticleQuery = gql`
   query ArticleQuery($slug: String!) {

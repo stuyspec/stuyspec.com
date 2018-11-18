@@ -1,10 +1,11 @@
-import React from 'react';
+import React from "react";
 
 export default ClassifiedsRedirect = () => {
-    window.location = 'https://goo.gl/forms/bltSaUMOwVW5TpN02';
-    return (
-        <p>
-            If you're not automatically redirected, please <a href="https://goo.gl/forms/bltSaUMOwVW5TpN02">click here.</a>
-        </p>
-    );
-}
+  window.location = "https://goo.gl/forms/bltSaUMOwVW5TpN02";
+  return (
+    <p>
+      If you're not automatically redirected, please{" "}
+      <a href="https://goo.gl/forms/bltSaUMOwVW5TpN02">click here.</a>
+    </p>
+  );
+};
