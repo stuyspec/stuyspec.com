@@ -38,7 +38,7 @@ const styles = {
   },
   sectionLink: {
     color: "#000",
-    fontSize: "1.4rem",
+    fontSize: "1.5rem",
     fontWeight: 300,
     textDecoration: "none",
     "&:hover": {
