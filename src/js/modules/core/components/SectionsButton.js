@@ -34,7 +34,8 @@ const styles = {
   },
   text: {
     fontFamily: "Circular Std",
-    fontSize: "1.8rem",
+    paddingLeft: "5px",
+    fontSize: "1.6rem",
     fontWeight: "bold",
     textAlign: "left",
     color: "#000"

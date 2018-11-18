@@ -5,7 +5,8 @@ const styles = {
   SubscribeButton: {
     width: "10vw",
     height: "10vh",
-    minWidth: "130px",
+    lineHeight: "1.5rem",
+    minWidth: "135px",
     minHeight: "45px",
     maxWidth: "150px",
     maxHeight: "50px",
@@ -18,7 +19,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "center",
     transition: "filter 0.8s",
     "&:hover": {
       filter: "opacity(75%)"
@@ -27,14 +28,12 @@ const styles = {
   },
   text: {
     fontFamily: "Circular Std",
-    fontSize: "2rem",
+    fontSize: "1.8rem",
     fontWeight: "bold",
     textAlign: "center",
     color: "#fff"
   },
   subscribeTo: {
-    position: "relative",
-    top: "-7px",
     fontFamily: "Circular Std",
     fontSize: "1.5rem",
     textAlign: "center",
