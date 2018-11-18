@@ -114,8 +114,12 @@ const styles = {
   "@media (max-width: 375px)": {
     brandingLink: {
       fontSize: "25px",
+      lineHeight: "2rem",
       marginTop: "7.5px",
     },
+    MastheadBar: {
+      height: "70px"
+    }
   },
 };
 
