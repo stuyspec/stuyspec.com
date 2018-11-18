@@ -106,7 +106,9 @@ const reducer = (state = { ...initialState }, action) => {
         ...state,
         status: {
           errors: (action.payload.response &&
-            action.payload.response.data.errors.fullMessages) || [action.payload.message],
+            action.payload.response.data.errors.fullMessages) || [
+            action.payload.message,
+          ],
           formName: "signUp",
           message: null,
         },

@@ -233,7 +233,7 @@ const PageFooter = ({ classes, sections, descriptions }) => {
         >
           <hr className={classes.hr} />
           Created by Jason Kao, Nicholas Yang, Jason Lin, Darius Jankauskas, and
-          Cathy Cai{' '}
+          Cathy Cai{" "}
           <a href="https://github.com/stuyspec">
             @The Spectator Web Department
           </a>.
@@ -250,7 +250,7 @@ const PageFooter = ({ classes, sections, descriptions }) => {
         <Col xs={12} smHidden mdHidden lgHidden className={classes.creditLine}>
           <hr className={classes.hr} />
           Created by Jason Kao, Nicholas Yang, Jason Lin, Darius Jankauskas, and
-          Cathy Cai{' '}
+          Cathy Cai{" "}
           <a href="https://github.com/stuyspec">
             @The Spectator Web Department
           </a>.

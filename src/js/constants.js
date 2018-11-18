@@ -2,7 +2,7 @@
 export const STUY_SPEC_API_URL = "__API_URL_HERE__";
 
 // TODO: a Newspaper model in API that contains an issuu_config
-export const ISSUU_CONFIG = 65181189;
+export const ISSUU_CONFIG = 61744139;
 
 export const STUY_SPEC_API_HEADERS = {
   headers: {
@@ -18,7 +18,5 @@ export const PROFILE_SLUGS = {
 };
 
 export const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-export const SPEC_REFERENCE_PATTERN =
-  /<spec-reference id=(\d*)><\/spec-reference>/;
-export const SPEC_IMG_CAROUSEL_PATTERN =
-  /<spec-img-carousel><\/spec-img-carousel>/;
+export const SPEC_REFERENCE_PATTERN = /<spec-reference id=(\d*)><\/spec-reference>/;
+export const SPEC_IMG_CAROUSEL_PATTERN = /<spec-img-carousel><\/spec-img-carousel>/;

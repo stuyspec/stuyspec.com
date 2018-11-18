@@ -63,7 +63,10 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
      * sections and one separating the non-writing sections from the user
      * account options.
      */
-    if (section.name === "Arts & Entertainment" || section.name === "10/31 Terror Attack") {
+    if (
+      section.name === "Arts & Entertainment" ||
+      section.name === "10/31 Terror Attack"
+    ) {
       sidebarElements.push(
         <hr className={classes.divider} key={section.id + 100} />,
       );
@@ -78,11 +81,9 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
       to="/recruitments"
     >
       Recruitments
-    </Link>
+    </Link>,
   );
-  sidebarElements.push(
-    <hr className={classes.divider} key={-4} />,
-  );
+  sidebarElements.push(<hr className={classes.divider} key={-4} />);
 
   if (session) {
     sidebarElements.push(

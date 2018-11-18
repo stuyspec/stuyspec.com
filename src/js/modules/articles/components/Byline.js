@@ -6,7 +6,7 @@ const styles = {
   Byline: {
     color: "#888",
     fontFamily: "Circular Std",
-    fontSize: "1.4rem",
+    fontSize: "1.3rem",
     fontWeight: 300,
     "& p": {
       display: "inline",
