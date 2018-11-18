@@ -18,7 +18,7 @@ export const SECTIONS = [
         source: "Angela Wong"
       }
     ],
-    link: "https://docs.google.com/document/d/1HJicqJ6RGqiZp6nMU3CM3ltB7wGjmgS5t9JN9o-Txms/edit"
+    link: "https://docs.google.com/document/d/1HJicqJ6RGqiZp6nMU3CM3ltB7wGjmgS5t9JN9o-Txms/edit?usp=sharing"
   },
   {
     name: "Arts and Entertainment",
@@ -30,7 +30,7 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
       text:`Being part of Arts and Entertainment is the best choice I ever made in my life. It is just so fun to write about things that we as human beings already enjoy. Like, it couldn't be more enjoyable than that. (Except eating Häagen-Dazs while listening to Beyonce)`,
       source: "Anonymous"
     }],
-    link: "https://docs.google.com/document/d/1eRjH6mz2herbaLhgKSo1ugSxhpBPHtsjyk1_8nXrPIQ/edit"
+    link: "https://docs.google.com/document/d/1zxCIIBOsBTAuCGAslbX3EW8aQsp8b1aDDM2fTDxS_UE/edit"
   },
   {
     name: "Features",
@@ -62,7 +62,7 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
         Join Spec Humor!
         We write funny and satirical pieces for The Spec and unlike other departments, everything we publish is libel and slander which means that you'll be in control of what everyone says!`,
     quotes: [],
-    link: "https://docs.google.com/forms/d/e/1FAIpQLSd4YO5oBHIykZbmM2zx4EMPmjO0FBsP0xtvNVEygDOr1LxoJQ/viewform"
+    link: "https://goo.gl/forms/IbJKekpk7JyTugmA2 "
   },
   {
     name: "Sports",
