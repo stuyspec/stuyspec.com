@@ -3,7 +3,7 @@ import injectSheet from "react-jss";
 
 const styles = {
   SubscribeButton: {
-    width: "10vw",
+    width: "8vw",
     height: "45px",
     padding: "4px 0",
     lineHeight: "1.5rem",
