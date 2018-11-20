@@ -21,13 +21,16 @@ const styles = {
     width: "100%",
     top: 0,
     zIndex: 1000,
+    display: "flex",
+    alignItems: "center"
   },
   barContainer: {
     display: "flex",
     height: "37px",
     justifyContent: "space-between",
+    alignItems: "center",
     margin: "0 auto",
-    padding: "12px 30px 0px 30px",
+    padding: "5px 30px 0px 30px",
     position: "relative",
     textAlign: "center",
     width: "100%",
@@ -43,13 +46,8 @@ const styles = {
     bottom: "9px",
     color: "#000",
     fontFamily: "Mrs Eaves Small Caps",
-    fontSize: "32px",
-    left: "50%",
-    marginTop: "1px",
-    position: "absolute",
+    fontSize: "2.5rem",
     textDecoration: "none",
-    top: "2px",
-    transform: "translate(-50%, 0)",
     "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none",
@@ -113,12 +111,8 @@ const styles = {
   },
   "@media (max-width: 375px)": {
     brandingLink: {
-      fontSize: "25px",
       lineHeight: "2rem",
       marginTop: "7.5px",
-    },
-    MastheadBar: {
-      height: "70px",
     },
   },
 };
