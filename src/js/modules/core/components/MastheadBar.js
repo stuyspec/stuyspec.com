@@ -22,6 +22,7 @@ const styles = {
     top: 0,
     zIndex: 1000,
     display: "flex",
+    flexDirection: "column",
     alignItems: "center"
   },
   barContainer: {
@@ -43,7 +44,7 @@ const styles = {
     },
   },
   brandingLink: {
-    bottom: "9px",
+    bottom: "5px",
     color: "#000",
     fontFamily: "Mrs Eaves Small Caps",
     fontSize: "2.5rem",
@@ -54,6 +55,7 @@ const styles = {
     },
   },
   navButtons: {
+    marginTop: "20px",
     fontFamily: "Circular Std",
     fontSize: "13px",
     fontWeight: 300,
@@ -101,6 +103,7 @@ const styles = {
   "@media (max-width: 991px)": {
     MastheadBar: {
       height: "52px",
+      flexDirection: "row"
     },
     sectionsBarContainer: {
       display: "none",
