@@ -232,7 +232,7 @@ const PageFooter = ({ classes, sections, descriptions }) => {
           className={classes.creditLine}
         >
           <hr className={classes.hr} />
-          Created by Jason Kao, Nicholas Yang, Jason Lin, Darius Jankauskas, and
+          Created by Jason Kao, Nicholas Yang, Jerry Ye, Jason Lin, Darius Jankauskas, and
           Cathy Cai{" "}
           <a href="https://github.com/stuyspec">
             @The Spectator Web Department
