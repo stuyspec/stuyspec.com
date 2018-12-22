@@ -43,6 +43,7 @@ const ArticleQuery = gql`
         id
         name
         permalink
+        description
         parent_section {
           id
           name

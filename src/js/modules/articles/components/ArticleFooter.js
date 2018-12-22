@@ -1,6 +1,7 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import { Row, Col } from "react-bootstrap/lib";
 import { toRoman } from "roman-numerals";
@@ -72,20 +73,20 @@ const styles = {
 };
 
 const ArticleFooter = ({ classes, article, subscribe }) => {
+  const { volume, issue, section } = article;
   return (
     <Row className={classes.ArticleFooter}>
       <Col xs={12} sm={12} md={8} lg={8}>
         <p className={classes.inPrint}>
           This article appears in print in&nbsp;
-          <a
-            className={classes.subscribe}
-            href="https://issuu.com/stuyspectator/docs"
-            target="_blank"
-          >
-            {`Volume ${toRoman(article.volume)}, Issue ${article.issue}`}
-            {/* TODO: Lookup table for individual volume/issue links */}
-          </a>
-          .
+          {section.permalink.includes('special-issues') ? (
+            <span><Link to={section.permalink}>{section.name}</Link>, {section.description}</span>
+          ) : (
+            <a href="https://issuu.com/stuyspectator/docs" target="_blank">
+              {`Volume ${toRoman(article.volume)}, Issue ${article.issue}`}
+              {/* TODO: Lookup table for individual volume/issue links */}
+            </a>
+          )}.
         </p>
         <p className={classes.subscriptionCTA}>
           Never miss a <i>Spectator</i> issue again. Sign up for our newsletter

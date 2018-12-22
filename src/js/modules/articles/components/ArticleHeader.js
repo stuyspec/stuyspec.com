@@ -82,7 +82,7 @@ const styles = {
 };
 
 const ArticleHeader = ({ classes, article }) => {
-  const { section } = article;
+  const { contributors, section } = article;
   return (
     <Row className={classes.headerRow}>
       <p className="only-print" id="branding">
@@ -94,7 +94,9 @@ const ArticleHeader = ({ classes, article }) => {
         </Link>
         <h1 className={classes.headline}>{article.title}</h1>
         <div className={classes.meta}>
-          <Byline classes={classes} contributors={article.contributors} />
+          {contributors.length > 0 &&
+            <Byline classes={classes} contributors={article.contributors} />
+          }
           <Dateline classes={classes} timestamp={article.createdAt} />
           <ShareTools article={article} />
         </div>
