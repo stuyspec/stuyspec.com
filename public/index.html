@@ -1,86 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
+<link rel="shortcut icon " href="%PUBLIC_URL%/favicon.ico" />
+<link href="%PUBLIC_URL%/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="%PUBLIC_URL%/css/main-index.css" rel="stylesheet" type="text/css" />
 
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=" utf-8 " />
-    <link rel="shortcut icon " href="%PUBLIC_URL%/favicon.ico " />
-    <meta
-      name="viewport "
-      content="width=device-width, initial-scale=1, shrink-to-fit=no "
-    />
-    <meta name="theme-color " content="#000000 " />
-    <meta name="author " content="The Spectator Web Department " />
-    <meta
-      name="description "
-      content="The Stuyvesant Spectator is a newspaper published by Stuyvesant High School students every two weeks. It
-        contains sections such as news, features, opinions, arts & entertainment, humor, sports, photography, art, layout, copy,
-        business, and web. With such a wide range of topics, readers would never run out of reading material, which makes this
-        newspaper awesome! "
-    />
-    <meta
-      name="keywords "
-      content="The Spectator, journalism, Stuyvesant High School, student body, newspaper,news,Stuyvesant,stuyvesant,highschool,humor,opinions,sports,arts,entertainment,articles,Spectator,spectator,knowledge,intelligence,pulse,manhattan,specialized,writers,photos "
-    />
-    <meta property="og:image " content="https://s3.amazonaws.com/stuyspec-images/the_logo.png "/>
-    <meta property="og:title " content="The Stuyvesant Spectator " />
-    <meta property="og:url " content="https://stuyspec.com " />
-    <meta property="og:site_name " content="The Spectator " />
-    <meta property="og:type " content="website " />
-    <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest " href="%PUBLIC_URL%/manifest.json " />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico " or "favicon.ico ", "%PUBLIC_URL%/favicon.ico " will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>The Stuyvesant Spectator - The Pulse of the Stuyvesant Student Body</title>
-    <link href="%PUBLIC_URL%/css/bootstrap.min.css " rel="stylesheet " type="text/css "/>
-    <link href="%PUBLIC_URL%/css/main-index.css " rel="stylesheet " type="text/css "/>
-
-     <!-- Google Analytics -->
-    <script>
-        window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
-        ga('create', 'UA-110467163-1', 'auto');
-        ga('send', 'pageview');
-    </script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
-    <!-- End Google Analytics -->
-
-    <script>
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '286862141844783',
-                cookie: true,
-                xfbml: true,
-                version: 'v2.12'
-            });
-            FB.AppEvents.logPageView();
-
-        };
-
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) { return; }
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js ";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
-</head>
-  <body>
+<body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <style>
+        @font-face {
+            font-family: "Old English Text MT";
+            src: url('%PUBLIC_URL%/fonts/OldEnglishTextMT.ttf') format("truetype");
+            font-style: normal;
+            font-weight: normal;
+        }
+
+        @font-face {
+            font-family: "Mrs Eaves Small Caps";
+            src: url('%PUBLIC_URL%/fonts/MrsEavesSmallCaps Regular.ttf') format("truetype");
+            font-style: normal;
+            font-weight: normal;
+        }
+
+        @font-face {
+            font-family: "Minion Pro";
+            src: url('%PUBLIC_URL%/fonts/MinionPro_Regular.ttf') format("truetype");
+            font-style: normal;
+            font-weight: normal;
+        }
+
+        @font-face {
+            font-family: "Minion Pro";
+            src: url('%PUBLIC_URL%/fonts/MinionPro_Italic.ttf') format("truetype");
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        @font-face {
+            font-family: "Minion Pro";
+            src: url('%PUBLIC_URL%/fonts/MinionPro_Bold.ttf') format("truetype");
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        @font-face {
+            font-family: "Minion Pro";
+            src: url('%PUBLIC_URL%/fonts/Minion_Pro_Bold_ Italic.ttf') format("truetype");
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        @font-face {
+            font-family: "Circular Std";
+            src: url('%PUBLIC_URL%/fonts/CircularStd_Book.otf') format("opentype");
+            font-style: normal;
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: "Circular Std";
+            src: url('%PUBLIC_URL%/fonts/CircularStd_Medium.otf') format("opentype");
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: "Circular Std";
+            src: url('%PUBLIC_URL%/fonts/CircularStd_Bold.otf') format("opentype");
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        @font-face {
+            font-family: "Canela";
+            src: url('%PUBLIC_URL%/fonts/Canela-Regular.otf') format("opentype");
+            font-style: normal;
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: "Canela";
+            src: url('%PUBLIC_URL%/fonts/Canela-Medium.otf') format("opentype");
+            font-style: normal;
+            font-weight: 500;
+        }
+    </style>
+
     <div id="loading">
         <div id="bounce1"></div>
         <div id="bounce2"></div>
         <div id="bounce3"></div>
     </div>
     <div id="app"></div>
-  </body>
-</html>
+</body>
