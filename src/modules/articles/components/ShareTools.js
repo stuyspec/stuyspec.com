@@ -1,19 +1,17 @@
 import React from "react";
 import injectSheet from "react-jss";
-import { ShareButtons, generateShareIcon } from "react-share";
-import { Print } from "../../core/icons";
-
-const {
-  FacebookShareButton,
-  TwitterShareButton,
-  LinkedinShareButton,
+import { 
+  FacebookShareButton, 
+  TwitterShareButton, 
+  LinkedinShareButton, 
   EmailShareButton,
-} = ShareButtons;
+  FacebookIcon,
+  TwitterIcon,
+  LinkedinIcon,
+  EmailIcon,
+} from "react-share";
 
-const FacebookIcon = generateShareIcon("facebook");
-const TwitterIcon = generateShareIcon("twitter");
-const LinkedinIcon = generateShareIcon("linkedin");
-const EmailIcon = generateShareIcon("email");
+import { Print } from "../../core/icons";
 
 const styles = {
   ShareTools: {
