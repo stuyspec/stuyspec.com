@@ -29,16 +29,24 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: sudo apt-get install python-dev python-pip
-      - run: sudo pip install awscli
-      - run: sudo npm install -g gulp-cli
-      - run: gulp build
+      - run: sudo pip install awsebcli --upgrade --user
+      - run: npm run build
+      - run: mv build client-app
+      - run: cd
+      - run: git clone https://github.com/DJankauskas/stuy-spec-api.git
+      - run: cd stuy-spec-api
+      - run: git checkout master
+      - run: cp -af ~/client-app/client-app /public
+      - run: cd
+      - run: zip -r ~/stuy-spec-api/archive/api.zip ~/stuy-spec-api
+      - run: cd stuy-spec-api
       - deploy:
           name: Deploy to AWS S3
           command: |
-            if [ "${CIRCLE_BRANCH}" == "staging" ]; then
-              aws s3 sync ~/client-app/dist/prod s3://staging.stuyspec.com
-            elif [ "${CIRCLE_BRANCH}" == "master" ]; then
-              aws s3 sync ~/client-app/dist/prod s3://stuyspec
+            #if [ "${CIRCLE_BRANCH}" == "staging" ]; then
+              #aws s3 sync ~/client-app/dist/prod s3://staging.stuyspec.com
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              eb deploy --staged
             else
               echo "We do not deploy on the ${CIRCLE_BRANCH} branch."
             fi
