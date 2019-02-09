@@ -24,6 +24,7 @@ const styles = {
   FeaturedSectionsBar: {
     fontFamily: "Circular Std",
     display: "flex",
+    justifyContent: "center",
     flexDirection: "row",
     padding: "6px",
   },
@@ -37,7 +38,7 @@ const styles = {
   },
   sectionLink: {
     color: "#000",
-    fontSize: "1.6rem",
+    fontSize: "1.5rem",
     fontWeight: 300,
     textDecoration: "none",
     "&:hover": {

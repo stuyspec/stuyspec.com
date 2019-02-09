@@ -75,10 +75,7 @@ export default graphql(ArticleReferenceQuery, {
   skip: ({ article }) => !SPEC_REFERENCE_PATTERN.test(article.content),
   options: ({ article }) => ({
     variables: {
-      article_id: parseInt(
-        SPEC_REFERENCE_PATTERN.exec(article.content)[1],
-        10,
-      ),
+      article_id: parseInt(SPEC_REFERENCE_PATTERN.exec(article.content)[1], 10),
     },
   }),
 })(injectSheet(styles)(ArticleReference));

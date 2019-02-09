@@ -94,7 +94,7 @@ const styles = {
   },
   TallAdContainer: {
     borderLeft: "1px solid #ddd",
-    marginTop: "57px",
+    marginTop: "29px",
     paddingLeft: "14px !important",
     paddingRight: "0 !important",
   },

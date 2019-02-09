@@ -169,7 +169,6 @@ const RightColumn = ({ classes, articles }) => {
           <Dateline timestamp={secondaryArticle.createdAt} />
         </div>
       )}
-      
     </Col>
   );
 };

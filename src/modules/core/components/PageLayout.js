@@ -109,7 +109,8 @@ class PageLayout extends PureComponent {
         <div id="scroll-reset-assistant">
           <Helmet>
             <title>
-              The Stuyvesant Spectator - The Pulse of the Stuyvesant Student Body
+              The Stuyvesant Spectator - The Pulse of the Stuyvesant Student
+              Body
             </title>
           </Helmet>
           <PageHeader location={location} sections={featuredSections} />
