@@ -1,11 +1,11 @@
-import applyMiddleware from "redux/lib/applyMiddleware";
-import createStore from "redux/lib/createStore";
+import { applyMiddleware } from "redux";
+import { createStore } from "redux";
 import thunk from "redux-thunk";
 import promise from "redux-promise-middleware";
 import reducer from "./reducers";
 import logger from "redux-logger";
-import routerMiddleware from "react-router-redux/middleware";
-import appHistory from "tools/appHistory";
+import { routerMiddleware } from "react-router-redux";
+import appHistory from "./tools/appHistory";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 const middleware =

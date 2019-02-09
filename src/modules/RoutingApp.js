@@ -4,9 +4,10 @@ import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import ConnectedRouter from "react-router-redux/ConnectedRouter";
+import { ConnectedRouter } from "react-router-redux";
 import queryString from "query-string";
 import appHistory from "../tools/appHistory";
+import store from "../store"
 
 import {
   EditProfilePage,
@@ -26,6 +27,7 @@ import {
   NotFoundPage,
   PageLayout,
 } from "./core/components";
+
 import { DescriptionPage } from "./descriptions/components";
 import { SectionPage } from "./sections/components";
 import { ArtistPage, ContributorPage } from "./users/components";
@@ -46,7 +48,7 @@ const RoutingAppQuery = gql`
   }
 `;
 
-class RoutingApp extends PureComponent {
+class RoutingAppUnconnected extends PureComponent {
   componentDidMount() {
     const { createSession } = this.props;
 
@@ -84,7 +86,7 @@ class RoutingApp extends PureComponent {
     }
 
     return (
-      <ConnectedRouter history={appHistory}>
+      <ConnectedRouter history={appHistory} store={store} >
         <PageLayout>
           {!loading && (
             <Switch>
@@ -210,7 +212,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ createSession }, dispatch);
 };
 
-export default compose(
+export const RoutingApp = compose(
   graphql(RoutingAppQuery),
   connect(mapStateToProps, mapDispatchToProps),
-)(RoutingApp);
+)(RoutingAppUnconnected);
