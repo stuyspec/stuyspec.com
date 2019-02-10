@@ -1,45 +1,34 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
 version: 2
 jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:7.10
       - image: circleci/python:3.6.1
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
-    working_directory: ~/client-app
+    working_directory: ~/stuy-spec-api
     steps:
       - checkout
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-      - run: npm install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: sudo apt-get install python-dev python-pip
-      - run: sudo pip install awsebcli --upgrade --user
-      - run: npm run build
-      - run: mv build client-app
-      - run: cd
-      - run: git clone https://github.com/DJankauskas/stuy-spec-api.git
-      - run: cd stuy-spec-api
-      - run: git checkout master
-      - run: cp -af ~/client-app/client-app /public
-      - run: cd
-      - run: zip -r ~/stuy-spec-api/archive/api.zip ~/stuy-spec-api
-      - run: cd stuy-spec-api
+      - run: |
+          sudo apt-get install python-dev python-pip
+          sudo pip install awsebcli --upgrade --user
+          cd
+          git clone https://github.com/stuyspec/stuyspec.com.git
+          cd stuyspec.com
+          git checkout master
+          sudo apt-get install npm
+          npm install
+          npm run build
+          mv build client-app
+          cd
+          cd stuy-spec-api
+          git checkout master
+          cp -af ~/client-app/client-app public/
+          cd
+          zip -r ~/stuy-spec-api/archive/api.zip ~/stuy-spec-api
       - deploy:
           name: Deploy to AWS S3
           command: |
