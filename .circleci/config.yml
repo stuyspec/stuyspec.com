@@ -35,7 +35,7 @@ jobs:
           git clone https://github.com/stuyspec/stuyspec-api.git
           cd stuyspec-api
           git checkout master
-          cp -af ~/client-app/client-app public/
+          cp -af ~/client-app/client-app/. public
           cd
           zip -r ~/api.zip ~/stuyspec-api
           mkdir ~/stuyspec-api/archive
@@ -43,10 +43,10 @@ jobs:
       - deploy:
           name: Deploy to AWS S3
           command: |
-          cd ~/stuyspec-api
             #if [ "${CIRCLE_BRANCH}" == "staging" ]; then
               #aws s3 sync ~/client-app/dist/prod s3://staging.stuyspec.com
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              cd stuyspec-api
               printf "1\n1\n\n" | ~/.local/bin/eb init
               ~/.local/bin/eb deploy --staged
             else
