@@ -1,0 +1,242 @@
+/* ========================= *
+ * GENERAL STYLES 
+ * ========================= */
+
+* {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    margin: 0;
+}
+
+img {
+    color: #000;
+    font-family: "Minion Pro";
+    font-style: italic;
+}
+
+
+/* ========================= *
+ * BOOTSTRAP STYLES
+/* The negative margins on either side of Bootstrap rows are for balancing out
+ * gutters on those sides, but we have already accomplished this by removing
+ * gutters on the first- and last-child columns.
+ * ========================= */
+
+.row {
+    margin: 0;
+}
+
+.container {
+    padding: 0;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+@media (max-width: 767px) {
+    .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7,
+    .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+    }
+
+    .container {
+        padding: 0 14px;
+    }
+
+    .container-fluid {
+        padding: 0 14px;
+    }
+
+    .table-responsive {
+        border: none !important;
+    }
+
+    p[class^="summary-"], p[class*=" summary-"] {
+        font-size: 16px;
+    }
+
+}
+
+@media (min-width: 768px) {
+    .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7,
+    .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+    }
+
+    .container {
+        padding: 0 14px;
+    }
+
+    .container-fluid {
+        padding: 0 14px;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7,
+    .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+    }
+
+    .container {
+        width: 100%;
+        padding: 0 14px;
+    }
+
+    .container-fluid {
+        padding: 0 14px;
+    }
+
+}
+
+@media (min-width: 1200px) {
+    .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7,
+    .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+        position: relative;
+        min-height: 1px;
+        padding-right: 7px;
+        padding-left: 7px;
+    }
+
+    .container {
+        width: 1066px;
+    }
+
+    .container-fluid {
+        width: 1066px;
+    }
+
+}
+
+/* Picking out first and last columns in a row is documented in
+https://stackoverflow.com/a/8539107/6174302
+*/
+
+.row > div[class*="col-lg"],
+.row > div[class*="col-md"] {
+    padding-left: 0;
+}
+.row > div[class*="col-lg"] ~ div[class*="col-lg"],
+.row > div[class*="col-md"] ~ div[class*="col-md"] {
+    padding-left: 7px;
+}
+
+/* Will not work in certain cases: see client-app Issue #28 */
+.row > div[class^="col-lg"]:last-child,
+.row > div[class^="col-md"]:last-child {
+    padding-right: 0;
+}
+
+.only-print {
+    display: none;
+}
+
+
+/* ========================= *
+ * PRINT STYLES 
+ * ========================= */
+ @media print {
+    * {
+        overflow: visible !important;
+        font-size: 18px;
+    }
+
+    .only-print {
+        display: block;
+    }
+
+    #branding {
+        font-family: "OldEnglishTextMT";
+        font-size: 30px;
+    }
+
+    img {
+        margin-left: 0 !important;
+    }
+
+    /* We assume MastheadBar has the className MastheadBar (part of CFA's code style) */
+    div[class^="MastheadBar-"],
+    div[class^="RecommendedRow-"],
+    div[class^="CommentThread-"],
+    div[class^="RightRail-"], 
+    div[class^="HorizontalAd-"], 
+    div[class^="PageFooter-"] {
+        display: none;
+    }
+
+    div[class^="ArticlePage-"] {
+        padding: 0 !important;
+    }
+
+    a[href]:after {
+        content: "";
+    }
+
+    abbr[title]:after {
+        content: "";
+    }
+
+    a[href^="javascript:"]:after,a[href^="#"]:after {
+        content: ""
+    }
+}
+
+/* ========================= *
+ * LOADING ICON STYLES
+ * ========================= */
+#loading {
+    margin: 100px auto 0;
+    width: 80px;
+    text-align: center;
+}
+
+#loading > div {
+    width: 18px;
+    height: 18px;
+    background-color: #333;
+
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+#loading #bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+
+#loading #bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+
+ @-webkit-keyframes sk-bouncedelay {
+    0%, 80%, 100% {
+        -webkit-transform: scale(0) 
+    }
+    40% {
+        -webkit-transform: scale(1.0) 
+    }
+}
+ @keyframes sk-bouncedelay {
+    0%, 80%, 100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    40% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+    }
+}
+
+/* -------- WARNING: TURN WORD WRAP OFF -------- */ 
+ 
+/* ========================= * 
+ * COMBINED MINIFIED FILES 
+ * ========================= */ 
+ 
+ /* slick */
+.slick-list,.slick-slider,.slick-track{position:relative;display:block}.slick-loading .slick-slide,.slick-loading .slick-track{visibility:hidden}.slick-slider{box-sizing:border-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none;-khtml-user-select:none;-ms-touch-action:pan-y;touch-action:pan-y;-webkit-tap-highlight-color:transparent}.slick-list{overflow:hidden;margin:0;padding:0}.slick-list:focus{outline:0}.slick-list.dragging{cursor:pointer;cursor:hand}.slick-slider .slick-list,.slick-slider .slick-track{-webkit-transform:translate3d(0,0,0);-moz-transform:translate3d(0,0,0);-ms-transform:translate3d(0,0,0);-o-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}.slick-track{top:0;left:0}.slick-track:after,.slick-track:before{display:table;content:''}.slick-track:after{clear:both}.slick-slide{display:none;float:left;height:100%;min-height:1px}[dir=rtl] .slick-slide{float:right}.slick-slide img{display:block}.slick-slide.slick-loading img{display:none}.slick-slide.dragging img{pointer-events:none}.slick-initialized .slick-slide{display:block}.slick-vertical .slick-slide{display:block;height:auto;border:1px solid transparent}.slick-arrow.slick-hidden{display:none}/*# sourceMappingURL=slick.min.css.map */
+@charset 'UTF-8';.slick-dots,.slick-next,.slick-prev{position:absolute;display:block;padding:0}.slick-dots li button:before,.slick-next:before,.slick-prev:before{font-family:slick;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.slick-loading .slick-list{background:url(ajax-loader.gif) center center no-repeat #fff}@font-face{font-family:slick;font-weight:400;font-style:normal;src:url(fonts/slick.eot);src:url(fonts/slick.eot?#iefix) format('embedded-opentype'),url(fonts/slick.woff) format('woff'),url(fonts/slick.ttf) format('truetype'),url(fonts/slick.svg#slick) format('svg')}.slick-next,.slick-prev{font-size:0;line-height:0;top:50%;width:20px;height:20px;-webkit-transform:translate(0,-50%);-ms-transform:translate(0,-50%);transform:translate(0,-50%);cursor:pointer;color:transparent;border:none;outline:0;background:0 0}.slick-next:focus,.slick-next:hover,.slick-prev:focus,.slick-prev:hover{color:transparent;outline:0;background:0 0}.slick-next:focus:before,.slick-next:hover:before,.slick-prev:focus:before,.slick-prev:hover:before{opacity:1}.slick-next.slick-disabled:before,.slick-prev.slick-disabled:before{opacity:.25}.slick-next:before,.slick-prev:before{font-size:20px;line-height:1;opacity:.75;color:#fff}.slick-prev{left:-25px}[dir=rtl] .slick-prev{right:-25px;left:auto}.slick-prev:before{content:'←'}.slick-next:before,[dir=rtl] .slick-prev:before{content:'→'}.slick-next{right:-25px}[dir=rtl] .slick-next{right:auto;left:-25px}[dir=rtl] .slick-next:before{content:'←'}.slick-dotted.slick-slider{margin-bottom:30px}.slick-dots{bottom:-25px;width:100%;margin:0;list-style:none;text-align:center}.slick-dots li{position:relative;display:inline-block;width:20px;height:20px;margin:0 5px;padding:0;cursor:pointer}.slick-dots li button{font-size:0;line-height:0;display:block;width:20px;height:20px;padding:5px;cursor:pointer;color:transparent;border:0;outline:0;background:0 0}.slick-dots li button:focus,.slick-dots li button:hover{outline:0}.slick-dots li button:focus:before,.slick-dots li button:hover:before{opacity:1}.slick-dots li button:before{font-size:6px;line-height:20px;position:absolute;top:0;left:0;width:20px;height:20px;content:'•';text-align:center;opacity:.25;color:#000}.slick-dots li.slick-active button:before{opacity:.75;color:#000}/*# sourceMappingURL=slick-theme.min.css.map */

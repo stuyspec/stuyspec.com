@@ -1,0 +1,33 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import { RoutingApp } from "./modules/RoutingApp";
+import store from "./store";
+import { Provider } from "react-redux";
+import { STUY_SPEC_API_URL } from "./constants";
+
+import { ApolloProvider } from "react-apollo";
+import { ApolloClient } from "apollo-client";
+import { HttpLink } from "apollo-link-http";
+import { InMemoryCache } from "apollo-cache-inmemory";
+
+import { objectFilter } from "./utils";
+
+const apolloClient = new ApolloClient({
+  link: new HttpLink({ uri: `${STUY_SPEC_API_URL}/graphql` }),
+  cache: new InMemoryCache(),
+});
+
+Object.filter = objectFilter;
+
+const App = () => (
+  <Provider store={store}>
+    <ApolloProvider client={apolloClient}>
+      <RoutingApp />
+    </ApolloProvider>
+  </Provider>
+);
+
+ReactDOM.render(
+  <App />,
+  document.getElementById("app"),
+);
