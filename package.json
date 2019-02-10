@@ -12,7 +12,6 @@
     "@types/react-redux": "^7.0.0",
     "@types/react-router": "^4.4.3",
     "@types/react-router-dom": "^4.3.1",
-    "@types/redux": "^3.6.0",
     "apollo-cache-inmemory": "^1.4.2",
     "apollo-client": "^2.4.12",
     "apollo-link-http": "^1.5.9",
