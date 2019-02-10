@@ -43,6 +43,7 @@ jobs:
       - deploy:
           name: Deploy to AWS S3
           command: |
+          cd ~/stuyspec-api
             #if [ "${CIRCLE_BRANCH}" == "staging" ]; then
               #aws s3 sync ~/client-app/dist/prod s3://staging.stuyspec.com
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
