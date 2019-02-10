@@ -38,6 +38,7 @@ jobs:
           cp -af ~/client-app/build/* public/client-app
           cd
           zip -r ~/api.zip ~/stuyspec-api
+          mv ~/api.zip ~/stuyspec-api/
       - deploy:
           name: Deploy to AWS S3
           command: |
