@@ -30,12 +30,11 @@ jobs:
       - run: |
           npm install
           CI=false npm run build
-          mv build client-app
           cd
           git clone https://github.com/stuyspec/stuyspec-api.git
           cd stuyspec-api
           git checkout master
-          cp -af ~/client-app/client-app/. public
+          cp -af ~/client-app/build/. public/client-app
           cd
           zip -r ~/api.zip ~/stuyspec-api
           mkdir ~/stuyspec-api/archive
