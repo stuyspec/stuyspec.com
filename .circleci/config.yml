@@ -38,7 +38,8 @@ jobs:
           git checkout master
           cp -af ~/client-app/client-app public/
           cd
-          zip -r ~/stuyspec-api/archive/api.zip ~/stuyspec-api
+          zip -r ~/api.zip ~/stuyspec-api
+          mv -rf ~/api.zip ~/stuyspec-api/archive/
       - deploy:
           name: Deploy to AWS S3
           command: |
