@@ -1,14 +1,9 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
 version: 2
 jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:7.10
-      - image: circleci/python:3.6.1
+      - image: circleci/node:10.15
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -16,6 +11,12 @@ jobs:
     working_directory: ~/client-app
     steps:
       - checkout
+
+      - run: |
+          sudo apt-get install python-dev python-pip
+          sudo pip install awsebcli --upgrade --user
+          cd
+          sudo apt-get install python3
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -27,19 +28,19 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
-      - run: sudo apt-get install python-dev python-pip
-      - run: sudo pip install awsebcli --upgrade --user
-      - run: npm run build
-      - run: mv build client-app
-      - run: cd
-      - run: git clone https://github.com/DJankauskas/stuy-spec-api.git
-      - run: cd stuy-spec-api
-      - run: git checkout master
-      - run: cp -af ~/client-app/client-app /public
-      - run: cd
-      - run: zip -r ~/stuy-spec-api/archive/api.zip ~/stuy-spec-api
-      - run: cd stuy-spec-api
+      - run: |
+          npm install
+          CI=false npm run build
+          mv build client-app
+          cd
+          git clone https://github.com/stuyspec/stuyspec-api.git
+          cd stuyspec-api
+          git checkout master
+          cp -af ~/client-app/client-app public/
+          cd
+          zip -r ~/api.zip ~/stuyspec-api
+          mkdir ~/stuyspec-api/archive
+          mv -f ~/api.zip ~/stuyspec-api/archive/
       - deploy:
           name: Deploy to AWS S3
           command: |
