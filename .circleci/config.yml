@@ -17,16 +17,23 @@ jobs:
           sudo pip install awsebcli --upgrade --user
           cd
           sudo apt-get install python3
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
       - run: |
-          cd
-          git clone https://github.com/stuyspec/stuyspec.com.git
-          cd stuyspec.com
-          git checkout master
-          
           npm install
           npm run build
           mv build client-app
           cd
+          git clone https://github.com/stuyspec/stuyspec-api.git
           cd stuy-spec-api
           git checkout master
           cp -af ~/client-app/client-app public/
