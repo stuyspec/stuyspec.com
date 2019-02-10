@@ -30,7 +30,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: |
           npm install
-          npm run build
+          CI=false npm run build
           mv build client-app
           cd
           git clone https://github.com/stuyspec/stuyspec-api.git
