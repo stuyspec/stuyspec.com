@@ -47,7 +47,7 @@ jobs:
             #if [ "${CIRCLE_BRANCH}" == "staging" ]; then
               #aws s3 sync ~/client-app/dist/prod s3://staging.stuyspec.com
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              eb deploy --staged
+              ~/.local/bin/eb deploy --staged
             else
               echo "We do not deploy on the ${CIRCLE_BRANCH} branch."
             fi
