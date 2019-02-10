@@ -34,11 +34,11 @@ jobs:
           mv build client-app
           cd
           git clone https://github.com/stuyspec/stuyspec-api.git
-          cd stuy-spec-api
+          cd stuyspec-api
           git checkout master
           cp -af ~/client-app/client-app public/
           cd
-          zip -r ~/stuy-spec-api/archive/api.zip ~/stuy-spec-api
+          zip -r ~/stuyspec-api/archive/api.zip ~/stuyspec-api
       - deploy:
           name: Deploy to AWS S3
           command: |
