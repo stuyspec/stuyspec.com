@@ -8,7 +8,7 @@ jobs:
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
-    working_directory: ~/stuy-spec-api
+    working_directory: ~/client-app
     steps:
       - checkout
 
@@ -16,10 +16,13 @@ jobs:
           sudo apt-get install python-dev python-pip
           sudo pip install awsebcli --upgrade --user
           cd
+          sudo apt install nodejs npm
+      - run: |
+          cd
           git clone https://github.com/stuyspec/stuyspec.com.git
           cd stuyspec.com
           git checkout master
-          sudo apt-get install npm
+          
           npm install
           npm run build
           mv build client-app
