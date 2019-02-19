@@ -130,13 +130,13 @@ Once you have stuyspec.com cloned, before you start the application, you first n
 
 ```bash
 # Install NPM dependencies
-npm install && npm install -g gulp-cli
+npm instal
 ```
 
 Now you will need to [set up our API on localhost](https://github.com/stuyspec/stuy-spec-api/blob/develop/README.md). After you have done that, you can start the application:
 
 ```bash
-npm run dev
+npm start
 ```
 
 Now navigate to your browser and open <http://localhost:3002>. If the app loads, congratulations---you're all set.
