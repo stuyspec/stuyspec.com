@@ -130,7 +130,7 @@ Once you have stuyspec.com cloned, before you start the application, you first n
 
 ```bash
 # Install NPM dependencies
-npm instal
+npm install
 ```
 
 Now you will need to [set up our API on localhost](https://github.com/stuyspec/stuy-spec-api/blob/develop/README.md). After you have done that, you can start the application:
