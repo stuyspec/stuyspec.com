@@ -19,7 +19,7 @@ export const SECTIONS = [
       },
     ],
     link:
-      "https://docs.google.com/document/d/1HJicqJ6RGqiZp6nMU3CM3ltB7wGjmgS5t9JN9o-Txms/edit?usp=sharing",
+      "https://docs.google.com/document/d/1HJicqJ6RGqiZp6nMU3CM3ltB7wGjmgS5t9JN9o-Txms/edit",
   },
   {
     name: "Arts and Entertainment",
@@ -34,7 +34,7 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
       },
     ],
     link:
-      "https://docs.google.com/document/d/1zxCIIBOsBTAuCGAslbX3EW8aQsp8b1aDDM2fTDxS_UE/edit",
+      "https://docs.google.com/document/d/1uqjh03KQoQPntwDJUutb6U8WKSFgOfs20wokLDev6Hg/edit?usp=sharing",
   },
   {
     name: "Features",
@@ -55,7 +55,7 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
         source: "Amy Huang",
       },
     ],
-    link: "https://goo.gl/forms/4Lptlm1ixxayzkZo2",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSdl2av51aKS_cxu8v4caW6yqAYwgwsdTTKL6cbvsYya7lGrLA/viewform",
   },
   {
     name: "Humor",
@@ -66,7 +66,7 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
         Join Spec Humor!
         We write funny and satirical pieces for The Spec and unlike other departments, everything we publish is libel and slander which means that you'll be in control of what everyone says!`,
     quotes: [],
-    link: "https://goo.gl/forms/IbJKekpk7JyTugmA2 ",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLScy2P4rE-Cz0Fccmz2DmE12WGF_vUU0vm08vhHCl0Nn2_y0Sg/viewform?usp=pp_url",
   },
   {
     name: "Sports",
@@ -80,7 +80,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      "https://docs.google.com/forms/d/e/1FAIpQLSc138Eg8fykxT_bTGlMuknicshDJYhdGLM5bI0C2Px43mPQ3w/viewform",
+      "https://docs.google.com/forms/d/e/1FAIpQLSc6H8J8z7ErAfm3kV2cad-9unRpue5QkXa4SdmfzI78NL_55Q/viewform?usp=sf_link",
   },
   {
     name: "News",
@@ -88,7 +88,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     description: `Do you want to be a part of the best department of The Spectator? Do you want to get tight with the administration? Do you want to see your name and your articles on the front page? Do you want to find out about the coolest news at Stuy before anyone else? Do you want to report on that cool news? If so, join the Spectator News Department!!! `,
     quotes: [],
     link:
-      "https://docs.google.com/forms/d/e/1FAIpQLScPEU9ujGzS2XjNGTx7ZNTGRjyXjnHX0t3zyYjfTRwQPofyQw/viewform",
+      "https://docs.google.com/forms/d/e/1FAIpQLSewplFOqOYJF0BigZ2vK0jrpoLxGFAD5eqXZWUsn9pSN5KH3w/viewform?usp=sf_link",
   },
   {
     name: "Copy",
@@ -106,7 +106,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         source: "Tasfia Bashar",
       },
     ],
-    link: "https://goo.gl/forms/xvgVpZ8GLpAf1RGh1",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSc0grMamN4uMOyMokhDxiWSrmoFH0Nh9jzFzOsYxEIAHaEU2Q/viewform?usp=sf_link",
   },
   {
     name: "Web",
@@ -125,7 +125,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      "https://docs.google.com/forms/d/e/1FAIpQLScAXSQmiIaiWxd9dlrxn__dDy8YquI0PD8GdTSSW8NXiJg5Gg/viewform",
+      "https://docs.google.com/forms/d/e/1FAIpQLSd0zLvg6Dp2_1A3LFGI1r4Dq5djooJNuECRInjhVRZGE4Lfcg/viewform",
   },
   {
     name: "Layout",
@@ -138,7 +138,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     the formatting of each issue as it is released.`,
     quotes: [],
     link:
-      "https://docs.google.com/forms/d/e/1FAIpQLSejlPbzAgIuTyQCV1BD5NprAS6t2TYyY-h-5GACAe2iRMVY9A/viewform",
+      "https://goo.gl/forms/RHJKePs58HYD6TWG2",
   },
   {
     name: "Photo",
@@ -162,7 +162,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      "https://docs.google.com/forms/d/e/1FAIpQLSfjR58yPm8-7t68PLzFo-krqVSrTNHaNBHFZrPMzKfc7ooetQ/viewform",
+      "https://goo.gl/forms/6qZxzDQP2Kv0YWz52",
   },
   {
     name: "Business",
@@ -188,7 +188,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         source: "Alexander Radu",
       },
     ],
-    link: "https://bit.ly/SpecBizFallApp",
+    link: "https://goo.gl/forms/GM0rZB8CvhpxfRsB3",
   },
   {
     name: "Art",
@@ -218,6 +218,6 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      "https://docs.google.com/forms/d/e/1FAIpQLScYHVmOOyF-bNOdSnW5eJ5CAgKaLOB06SksuJAJwJ9oO0fgww/viewform",
+      "https://docs.google.com/forms/d/1QFMcm9Eqnjaknx82DgcZBDvlbHG6vdho4-pAr7yXAK0",
   },
 ];
