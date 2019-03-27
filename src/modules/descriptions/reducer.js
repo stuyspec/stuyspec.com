@@ -204,11 +204,11 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
     slug: "staff",
     content: `<center>
 <h2 style="margin-bottom: 30px;">
-  Members of the 2018-2019 Spectator Editorial Board
+  Members of the 2019-2020 Spectator Editorial Board
 </h2>
 <b>Editors In Chief</b><br>
-Jane Rhee<br>
-Sophie Watwood<br>
+Amy Huang<br>
+Artem Ilyanok<br>
 <br>
 <table style="width:87%;text-align:center" >
     <tr>
