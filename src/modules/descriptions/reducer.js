@@ -261,7 +261,6 @@ Artem Ilyanok<br>
         <td style="width:30%;vertical-align: top">
             <b>Web Editors</b><br>
             Darius Jankausakas<br>
-            Greg Zborovsky<br>
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
