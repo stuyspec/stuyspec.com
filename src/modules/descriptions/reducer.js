@@ -214,65 +214,67 @@ Sophie Watwood<br>
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>News Editors</b><br>
-            Nishmi Abeyweera<br>
-            George Shey<br>
+            Maddy Andersen<br>
+            Erin Lee<br>
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
             <b>Features Editors</b><br>
-            Archi Das<br>
-            Amy Huang<br>
+            Talia Kahan<br>
+            Zoe Oppenheimer<br>
             Amanda Peng<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
              <b>Opinions Editors</b><br>
-            Artem Ilyanok<br>
-            Eliza Spinna<br>
+            Michael Dekhtyar<br>
+            Jonathan Schneiderman<br>
             <br>
         </td>
     </tr>
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>Arts & Entertainment Editors</b><br>
-            Thomas Chen**<br>
-            William Lohier<br>
-            Emily Xu<br>
+            Thomas Chen<br>
+            Emma Linderman<br>
+            Jacqueline Thom<br>
+            Jiahe Wang<br>
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
             <b>Humor Editors</b><br>
-            Kerwin Chen<br>
-            Gabrielle Umanova<br>
+            Omar Ali<br>
+            Abdulla Elkhadrway<br>
+            Victor Kuang<br>
+            Olly Stewart<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top" >
             <b>Sports Editors</b><br>
-            Celina Liu<br>
-            Ariel Melendez<br>
-            Jeremy Rubin<br>
+            Ahmed Hussein<br>
+            Sunan Tajwar<br>
+            Bernard Wang<br>
             <br>
         </td>
     </tr>
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>Web Editors</b><br>
-            Darius Jankausakas**<br>
-            Jason Lin<br>
-            Jerry Ye<br>
+            Darius Jankausakas<br>
+            Greg Zborovsky<br>
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
             <b>Photography Editors</b><br>
-            Ting Ting Chen<br>
-            Elena Sapelyuk<br>
+            Zoe Oppenheimer<br>
+            Catherine Yu<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
-            <b>Art Directions</b><br>
-            Klaire Geller<br>
-            Anika Hashem<br>
-            Darren Liang<br>
+            <b>Art Directors</b><br>
+            Rebecca Collins<br>
+            Michael Hu<br>
+            Jade Lo<br>
             <br>
         </td>
     </tr>
@@ -280,20 +282,20 @@ Sophie Watwood<br>
         <td style="width:30%;vertical-align: top">
             <b>Layout Editors</b><br>
             Dahae Choi<br>
+            Ahmed Sultan<br>
             Christina Tan<br>
-            Katie Wu<br>
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
             <b>Copy Editors</b><br>
-            Jeanette Cheung<br>
-            Michelle Lai<br>
-            Jonela Malollari<br>
+            Tiffany Cao<br>
+            Brian Zhang<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Business Managers</b><br>
-            Stacey Xue<br>
+            Rachel Joh<br>
+            Yaru Luo<br>
             <br>
         </td>
     </tr>
