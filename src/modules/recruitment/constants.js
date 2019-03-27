@@ -220,4 +220,16 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     link:
       "https://docs.google.com/forms/d/1QFMcm9Eqnjaknx82DgcZBDvlbHG6vdho4-pAr7yXAK0",
   },
+  {
+    name: "Science",
+    imageLink: null,
+    description: `The Spectator’s very own Science Department is one of the newer members on the list,
+    created in 2019 as an offshoot of the Opinions department. Science writers are curious, ambitious,
+    forward-looking, and always open to new ideas -- the cornerstones of progress. We cover a diverse
+    range of topics, including recent experimental breakthroughs, high-profile scientific efforts,
+    and disruptive new theories or technologies so the next time Elon Musk launches a sports car into space,
+    we’ll be the ones covering it.`,
+    quotes: [],
+    link: "https://docs.google.com/document/d/1Ji9Sl6G-isSW2wY3Te80mhOKTf2mAQIC3gV4QYPttms/edit?usp=sharing",
+  },
 ];
