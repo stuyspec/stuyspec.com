@@ -92,7 +92,7 @@ class ArticleFeaturedMedia extends PureComponent {
           <img className={classes.img} src={image.attachmentUrl} />
           {isCarouselButtonVisible && (
             <button className={classes.carouselButton} onClick={openLightbox}>
-              <img className={classes.slidesIcon} src="/img/slides.svg" />
+              <img className={classes.slidesIcon} src="/client-app/img/slides.svg" />
               <span className={classes.carouselImageCount}>
                 {carouselImageCount}
               </span>
