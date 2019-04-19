@@ -19,13 +19,18 @@ const styles = {
  * shortTime: 5:46 PM
  */
 
+ interface IProps {
+   classes: any,
+   timestamp: string,
+ }
+
 /* Welcome to Dateline: Real-Life Crimes, Bad Situations */
-const Dateline = ({ classes, timestamp }) => {
+const Dateline: React.FunctionComponent<IProps> = ({ classes, timestamp }) => {
   // If the timestamp is the same day (< 24 hours difference), use the
   // shortTime format. If not, use the longDate format.
   const dateline = dateFormat(
     timestamp,
-    new Date() - new Date(timestamp) < MILLISECONDS_IN_DAY
+    new Date().getTime() - new Date(timestamp).getTime() < MILLISECONDS_IN_DAY
       ? "shortTime"
       : "longDate",
   );

@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 
+import { IContributor } from '../queries';
+
 const styles = {
   Byline: {
     color: "#888",
@@ -21,7 +23,12 @@ const styles = {
   },
 };
 
-const Byline = ({ classes, contributors }) => {
+interface IProps {
+  classes: any,
+  contributors: IContributor[]
+}
+
+const Byline: React.FunctionComponent<IProps> = ({ classes, contributors }) => {
   let separator = ", ";
   return (
     <div className={classes.Byline}>
@@ -35,7 +42,7 @@ const Byline = ({ classes, contributors }) => {
           <p key={index} className={classes.Byline}>
             {index === 0 ? "By " : ""}
             <Link to={`/contributors/${contributor.slug}`}>
-              {contributor.firstName} {contributor.lastName}
+              {contributor.first_name || ""} {contributor.last_name || ""}
             </Link>
             {separator}
           </p>
