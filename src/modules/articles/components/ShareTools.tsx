@@ -12,6 +12,7 @@ import {
 } from "react-share";
 
 import { Print } from "../../core/icons";
+import { any } from "prop-types";
 
 const styles = {
   ShareTools: {
@@ -38,7 +39,13 @@ const navButtonStyles = {
   },
 };
 
-const NavButton = ({ classes, children, onClick }) => {
+interface INavButtonProps {
+  classes: any,
+  children: React.ReactNode,
+  onClick?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
+}
+
+const NavButton: React.FunctionComponent<INavButtonProps> = ({ classes, children, onClick }) => {
   return (
     <button className={classes.NavButton} onClick={onClick}>
       <div className={classes.icon}>{children}</div>
@@ -49,6 +56,11 @@ const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 
 const SHARE_BUTTON_SIZE = 28;
 const SHARE_BUTTON_COLOR = "#000";
+
+interface IProps {
+  classes: any,
+  
+}
 
 const ShareTools = ({ classes, article }) => {
   const { section, title, preview, outquotes } = article;
