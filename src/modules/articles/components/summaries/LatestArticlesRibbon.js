@@ -2,7 +2,6 @@ import React from "react";
 import injectSheet from "react-jss";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import humps from "humps";
 
 import RibbonComponent from "./RibbonComponent";
 
@@ -97,7 +96,6 @@ const LatestArticlesRibbon = ({ classes, data }) => {
   if (data.loading) {
     return null;
   }
-  data = humps.camelizeKeys(data);
   const { latestArticles } = data;
   return (
     <div className={classes.LatestArticlesRibbon}>

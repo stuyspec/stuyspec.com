@@ -16,7 +16,7 @@ const RibbonComponent = ({ classes, article }) => {
           >
             <figure className={classes.figure}>
               <img
-                src={article.media[0].thumbAttachmentUrl}
+                src={article.media[0].thumb_attachment_url}
                 alt={article.media[0].title}
               />
             </figure>

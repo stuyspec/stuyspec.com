@@ -102,7 +102,7 @@ const FeaturedArticle = ({ classes, article }) => {
           <Link to={`${section.permalink}/${article.slug}`}>
             <figure className={classes.figure}>
               <img
-                src={featuredMedia.attachmentUrl}
+                src={featuredMedia.attachment_url}
                 alt={featuredMedia.title}
               />
             </figure>
@@ -130,7 +130,7 @@ const FeaturedArticle = ({ classes, article }) => {
         </Link>
         <p className={classes.preview}>{article.preview}</p>
         <Byline contributors={article.contributors} />
-        <Dateline timestamp={article.createdAt} />
+        <Dateline timestamp={article.created_at} />
       </Col>
     </Row>
   );

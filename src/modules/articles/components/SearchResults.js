@@ -2,7 +2,6 @@ import React from "react";
 import { compose } from "redux";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import humps from "humps";
 import { Row, Col } from "react-bootstrap";
 import injectSheet from "react-jss";
 
@@ -51,7 +50,6 @@ const SearchResults = ({ classes, data }) => {
   if (data.loading) {
     return <LoadingIcon />;
   }
-  data = humps.camelizeKeys(data);
 
   const articles = data.searchArticles.map(article => article.searchable);
 
