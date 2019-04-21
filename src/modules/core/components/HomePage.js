@@ -1,7 +1,6 @@
 import React from "react";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import humps from "humps";
 import injectSheet from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 
@@ -91,7 +90,6 @@ const HomePage = ({ classes, data }) => {
   if (data.loading) {
     return null;
   }
-  data = humps.camelizeKeys(data);
   const { featuredArticle, columnArticles } = data;
 
   const firstColumnSectionSlugs = ["opinions", "features", "humor"];

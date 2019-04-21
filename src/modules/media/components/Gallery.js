@@ -80,7 +80,7 @@ class Gallery extends PureComponent {
           <a key={i}>
             <img
               className={classes.thumbnailImage}
-              src={media[i].thumbAttachmentUrl}
+              src={media[i].thumb_attachment_url}
             />
           </a>
         );
@@ -106,7 +106,7 @@ class Gallery extends PureComponent {
             // Temporary fix of an unintentionally rotated image.
             // REQUIRES A MORE SOLID FIX
             const imgSrc =
-              image.id == 261 ? image.mediumAttachmentUrl : image.attachmentUrl;
+              image.id == 261 ? image.medium_attachment_url : image.attachment_url;
 
             // Slide unable to be taken out of .map(); there seems to be
             // HTML classes passed down that are interrupted when the
