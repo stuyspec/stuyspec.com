@@ -5,6 +5,7 @@ import injectSheet from "react-jss";
 
 import { openLightbox } from "../../core/actions";
 import ArticleMediaCaption from "./ArticleMediaCaption";
+import { IMedium } from "../queries";
 
 const styles = {
   figure: {
