@@ -12,7 +12,8 @@ import {
 } from "react-share";
 
 import { Print } from "../../core/icons";
-import { any } from "prop-types";
+
+import { IArticle } from "../queries";
 
 const styles = {
   ShareTools: {
@@ -62,11 +63,21 @@ interface IProps {
   
 }
 
-const ShareTools = ({ classes, article }) => {
+interface IProps {
+  classes: any,
+  
+}
+
+interface IProps {
+  classes: any,
+  article: IArticle
+}
+
+const ShareTools: React.FunctionComponent<IProps> = ({ classes, article }) => {
   const { section, title, preview, outquotes } = article;
   const shareUrl =
     window.location.hostname + `/${section.permalink}/${article.slug}`;
-  const outquote = outquotes[0] || null;
+  const outquote = (outquotes && outquotes[0]) || undefined;
 
   const emailBody = `${title}: ${preview}\n\n${shareUrl}`;
   return (
