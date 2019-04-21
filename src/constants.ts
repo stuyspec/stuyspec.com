@@ -10,7 +10,7 @@ export const STUY_SPEC_API_HEADERS = {
   },
 };
 
-export const PROFILE_SLUGS = {
+export const PROFILE_SLUGS: { [index: string] : string} = {
   illustration: "illustrators",
   photo: "photographers",
   illustrators: "illustration",

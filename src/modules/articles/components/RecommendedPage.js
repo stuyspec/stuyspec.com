@@ -2,7 +2,6 @@ import React from "react";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import humps from "humps";
 import injectSheet from "react-jss";
 import { Helmet } from "react-helmet";
 
@@ -63,7 +62,6 @@ const RecommendedPage = ({ classes, data }) => {
   if (data.loading) {
     return null;
   }
-  data = humps.camelizeKeys(data);
   const { topRankedArticles } = data;
   return (
     <Grid fluid>

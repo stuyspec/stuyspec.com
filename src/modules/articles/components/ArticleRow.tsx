@@ -6,6 +6,8 @@ import injectSheet from "react-jss";
 import Byline from "./Byline";
 import Dateline from "./Dateline";
 
+import { IArticle } from "../queries";
+
 const styles = {
   articleBlock: {
     borderBottom: "solid 1px #ddd",
@@ -87,24 +89,29 @@ const styles = {
   },
 };
 
-const ArticleRow = ({ classes, article }) => {
+interface IProps {
+  classes: any,
+  article: IArticle
+}
+
+const ArticleRow: React.FunctionComponent<IProps> = ({ classes, article }) => {
   const { section } = article;
   let featuredMedia = null;
-  if (article.media.length > 0) {
+  if (article.media && article.media.length > 0) {
     featuredMedia = article.media[0];
   }
   return (
     <Row key={article.id} className={classes.ArticleRow}>
       <div className={classes.articleBlock} key={article.id}>
         <div className={classes.DatelineDesktop}>
-          <Dateline timestamp={article.createdAt} />
+          <Dateline timestamp={article.created_at} />
         </div>
         <div className={classes.featuredMedia}>
           {featuredMedia && (
             <Link to={`${section.permalink}/${article.slug}`}>
               <figure className={classes.figure}>
                 <img
-                  src={featuredMedia.attachmentUrl}
+                  src={featuredMedia.attachment_url}
                   alt={featuredMedia.title}
                 />
               </figure>
@@ -119,7 +126,7 @@ const ArticleRow = ({ classes, article }) => {
           <p className={classes.preview}>{article.preview}</p>
           <Byline contributors={article.contributors} />
           <div className={classes.DatelineMobile}>
-            <Dateline timestamp={article.createdAt} />
+            <Dateline timestamp={article.created_at} />
           </div>
         </div>
       </div>

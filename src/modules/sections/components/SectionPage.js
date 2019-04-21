@@ -2,7 +2,6 @@ import React from "react";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import { Grid, Row, Col } from "react-bootstrap/lib";
-import humps from "humps";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import { Helmet } from "react-helmet";
@@ -196,7 +195,6 @@ const SectionPage = ({ data, classes, section }) => {
     return null;
   }
 
-  data = humps.camelizeKeys(data);
   const { topRankedArticles, featuredSubsection } = data;
   const [featuredArticle, secondaryArticle] = topRankedArticles;
 

@@ -126,7 +126,6 @@ const SectionBlock = ({ classes, data }) => {
     return null;
   }
 
-  data = humps.camelizeKeys(data);
   const { topRankedArticles } = data;
   const bigArticle = topRankedArticles[0];
   const { section } = bigArticle;
@@ -146,7 +145,7 @@ const SectionBlock = ({ classes, data }) => {
           </Link>
           <p className={classes.preview}>{bigArticle.preview}</p>
           <Byline classes={classes} contributors={bigArticle.contributors} />
-          <Dateline timestamp={bigArticle.createdAt} />
+          <Dateline timestamp={bigArticle.created_at} />
         </div>
       )}
       {topRankedArticles.slice(1).map(article => {
@@ -156,7 +155,7 @@ const SectionBlock = ({ classes, data }) => {
               <Link to={`${section.permalink}/${article.slug}`}>
                 <figure className={classes.figure}>
                   <img
-                    src={article.media[0].thumbAttachmentUrl}
+                    src={article.media[0].thumb_attachment_url}
                     alt={article.media[0].title}
                   />
                 </figure>

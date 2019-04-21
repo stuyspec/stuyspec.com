@@ -16,8 +16,13 @@ const styles = {
   },
 };
 
-const Outquote = ({ classes, quote }) => {
+interface IProps {
+  classes: any,
+  quote: string
+}
+
+const Outquote: React.FunctionComponent<IProps> = ({ classes, quote }) => {
   return <p className={classes.Outquote}>{quote}</p>;
 };
 
-export default injectSheet(styles)(Outquote);
+export default injectSheet(styles)(Outquote) as React.ComponentType<{quote: string}>;

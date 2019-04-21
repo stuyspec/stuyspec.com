@@ -5,6 +5,8 @@ import injectSheet from "react-jss";
 import { PROFILE_SLUGS } from "../../../constants";
 import { capitalizeWord } from "../../../utils";
 
+import { IMedium } from "../queries";
+
 const styles = {
   caption: {
     fontFamily: "Minion Pro",
@@ -18,7 +20,12 @@ const styles = {
   },
 };
 
-const ArticleMediaCaption = ({ classes, image }) => {
+interface IProps {
+  classes: any,
+  image: IMedium
+}
+
+const ArticleMediaCaption: React.FunctionComponent<IProps> = ({ classes, image }) => {
   const { user } = image;
   let { caption } = image;
 
@@ -35,14 +42,14 @@ const ArticleMediaCaption = ({ classes, image }) => {
       </span>
       <Link
         className={classes.creditLine}
-        to={`/${PROFILE_SLUGS[image.mediaType]}/${user.slug}`}
+        to={`/${PROFILE_SLUGS[image.media_type]}/${user.slug}`}
       >
-        {capitalizeWord(image.mediaType)}
+        {capitalizeWord(image.media_type)}
         &nbsp;by&nbsp;
-        {user.firstName}
+        {user.first_name}
         {/* Department names are stored in firstName, not lastName, requiring 
             the following logic */}
-        {user.lastName !== "" && " " + user.lastName}
+        {user.last_name !== "" && " " + user.last_name}
       </Link>
       .
     </figcaption>

@@ -10,6 +10,8 @@ import { SPEC_IMG_CAROUSEL_PATTERN } from "../../../constants";
 import { Gallery } from "../../media/components";
 import { Lightbox } from "../../core/components";
 
+import { IArticle } from "../queries";
+
 const isBrowserFirefox =
   navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
 
@@ -102,10 +104,15 @@ const styles = {
   },
 };
 
-const ArticleBody = ({ classes, article }) => {
+interface IProps {
+  classes: any,
+  article: IArticle
+}
+
+const ArticleBody: React.FunctionComponent<IProps> = ({ classes, article }) => {
   // TODO: refactor media to make the carousel part of media/back-end
   const isCarouselButtonVisible =
-    SPEC_IMG_CAROUSEL_PATTERN.test(article.content) && article.media.length > 0;
+    SPEC_IMG_CAROUSEL_PATTERN.test(article.content) && article.media && article.media.length > 0;
 
   return (
     <Row>
@@ -115,7 +122,7 @@ const ArticleBody = ({ classes, article }) => {
             <Gallery media={article.media} />
           </Lightbox>
         )}
-        {article.media.length > 0 && (
+        {article.media && article.media.length > 0 && (
           <ArticleFeaturedMedia
             image={article.media[0]}
             isCarouselButtonVisible={isCarouselButtonVisible}

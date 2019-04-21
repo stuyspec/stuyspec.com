@@ -117,7 +117,8 @@ const mapStateToProps = state => ({
   isLightboxVisible: state.core.isLightboxVisible,
 });
 
-const mapDispatchToProps = dispatch => {
+//ownProps lets Lightbox props get type
+const mapDispatchToProps = (dispatch, ownProps) => {
   return bindActionCreators({ openLightbox, closeLightbox }, dispatch);
 };
 

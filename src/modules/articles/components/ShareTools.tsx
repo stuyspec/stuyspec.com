@@ -13,6 +13,8 @@ import {
 
 import { Print } from "../../core/icons";
 
+import { IArticle } from "../queries";
+
 const styles = {
   ShareTools: {
     display: "flex",
@@ -38,7 +40,13 @@ const navButtonStyles = {
   },
 };
 
-const NavButton = ({ classes, children, onClick }) => {
+interface INavButtonProps {
+  classes: any,
+  children: React.ReactNode,
+  onClick?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
+}
+
+const NavButton: React.FunctionComponent<INavButtonProps> = ({ classes, children, onClick }) => {
   return (
     <button className={classes.NavButton} onClick={onClick}>
       <div className={classes.icon}>{children}</div>
@@ -50,11 +58,26 @@ const StyledNavButton = injectSheet(navButtonStyles)(NavButton);
 const SHARE_BUTTON_SIZE = 28;
 const SHARE_BUTTON_COLOR = "#000";
 
-const ShareTools = ({ classes, article }) => {
+interface IProps {
+  classes: any,
+  
+}
+
+interface IProps {
+  classes: any,
+  
+}
+
+interface IProps {
+  classes: any,
+  article: IArticle
+}
+
+const ShareTools: React.FunctionComponent<IProps> = ({ classes, article }) => {
   const { section, title, preview, outquotes } = article;
   const shareUrl =
     window.location.hostname + `/${section.permalink}/${article.slug}`;
-  const outquote = outquotes[0] || null;
+  const outquote = (outquotes && outquotes[0]) || undefined;
 
   const emailBody = `${title}: ${preview}\n\n${shareUrl}`;
   return (

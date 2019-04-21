@@ -1,7 +1,6 @@
 import React from "react";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import humps from "humps";
 import { Link } from "react-router-dom";
 import injectSheet from "react-jss";
 import { Row, Col } from "react-bootstrap/lib";
@@ -136,7 +135,6 @@ const SectionFeature = ({ classes, data }) => {
   if (data.loading) {
     return null;
   }
-  data = humps.camelizeKeys(data);
   const [
     primaryArticle,
     secondaryArticle,
@@ -159,7 +157,7 @@ const SectionFeature = ({ classes, data }) => {
         </Link>
         <p className={classes.preview}>{primaryArticle.preview}</p>
         <Byline contributors={primaryArticle.contributors} />
-        <Dateline timestamp={primaryArticle.createdAt} />
+        <Dateline timestamp={primaryArticle.created_at} />
       </Col>
 
       {featuredMedia ? (
@@ -173,7 +171,7 @@ const SectionFeature = ({ classes, data }) => {
           <Link to={`${section.permalink}/${primaryArticle.slug}`}>
             <figure className={classes.figure}>
               <img
-                src={featuredMedia.mediumAttachmentUrl}
+                src={featuredMedia.medium_attachment_url}
                 alt={featuredMedia.title}
               />
             </figure>
@@ -190,7 +188,7 @@ const SectionFeature = ({ classes, data }) => {
             </Link>
             <p className={classes.preview}>{ternaryArticle.preview}</p>
             <Byline contributors={ternaryArticle.contributors} />
-            <Dateline timestamp={ternaryArticle.createdAt} />
+            <Dateline timestamp={ternaryArticle.created_at} />
           </Col>
         )
       )}
@@ -204,7 +202,7 @@ const SectionFeature = ({ classes, data }) => {
         </Link>
         <p className={classes.preview}>{secondaryArticle.preview}</p>
         <Byline contributors={secondaryArticle.contributors} />
-        <Dateline timestamp={secondaryArticle.createdAt} />
+        <Dateline timestamp={secondaryArticle.created_at} />
       </Col>
 
       <Col

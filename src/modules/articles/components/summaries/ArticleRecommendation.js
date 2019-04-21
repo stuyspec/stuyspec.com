@@ -59,12 +59,12 @@ const ArticleRecommendation = ({ classes, article }) => {
   const { section } = article;
   return (
     <Col xs={12} sm={6} md={6} lg={6} className={classes.ArticleRecommendation}>
-      {article.media.length > 0 && (
+      {article.media && article.media.length > 0 && (
         <div>
           <Link to={`${section.permalink}/${article.slug}`}>
             <figure className={classes.figure}>
               <img
-                src={article.media[0].attachmentUrl}
+                src={article.media[0].attachment_url}
                 alt={article.media[0].title}
               />
             </figure>
@@ -82,7 +82,7 @@ const ArticleRecommendation = ({ classes, article }) => {
       </Link>
       <p className={classes.preview}>{article.preview}</p>
       <Byline contributors={article.contributors} />
-      <Dateline timestamp={article.createdAt} />
+      <Dateline timestamp={article.created_at} />
     </Col>
   );
 };

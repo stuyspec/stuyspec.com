@@ -1,6 +1,5 @@
 import React from "react";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
+import { graphql, ChildDataProps } from "react-apollo";
 import humps from "humps";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
@@ -8,26 +7,7 @@ import { Link } from "react-router-dom";
 import Byline from "./Byline";
 import { TallAd } from "../../advertisements/components";
 
-const RightRailQuery = gql`
-  query RightRailQuery {
-    topRankedArticles(limit: 5) {
-      id
-      slug
-      title
-      contributors {
-        first_name
-        last_name
-      }
-      media {
-        thumb_attachment_url
-      }
-      section {
-        id
-        permalink
-      }
-    }
-  }
-`;
+import { RIGHT_RAIL_QUERY, IRightRailData } from '../queries';
 
 const styles = {
   RightRail: {
@@ -132,13 +112,15 @@ const styles = {
   },
 };
 
+type IProps = ChildDataProps<{classes: any}, IRightRailData>
+
 // inside a Col
-const RightRail = ({ classes, data }) => {
+const RightRail: React.FunctionComponent<IProps> = ({ classes, data }) => {
   if (data.loading) {
     return null;
   }
-  data = humps.camelizeKeys(data);
-  const articles = data.topRankedArticles;
+
+  const articles = data.topRankedArticles || [];
   return (
     <div className={classes.RightRail}>
       <div className={classes.Recommended}>
@@ -146,13 +128,16 @@ const RightRail = ({ classes, data }) => {
           Recommended
         </Link>
         {articles.map(article => {
+          if(!article) {
+            return undefined;
+          }
           const { section } = article;
           return (
             <div className={classes.article} key={article.id}>
-              {article.media.length > 0 && (
+              {article.media && article.media.length > 0 && (
                 <Link to={`${section.permalink}/${article.slug}`}>
                   <figure className={classes.figure}>
-                    <img src={article.media[0].thumbAttachmentUrl} />
+                    <img src={article.media[0].thumb_attachment_url} />
                   </figure>
                 </Link>
               )}
@@ -174,4 +159,6 @@ const RightRail = ({ classes, data }) => {
   );
 };
 
-export default graphql(RightRailQuery)(injectSheet(styles)(RightRail));
+const withRightRail = graphql<{}, IRightRailData, {}>(RIGHT_RAIL_QUERY);
+
+export default withRightRail(injectSheet(styles)(RightRail));

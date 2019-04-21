@@ -7,6 +7,8 @@ import Byline from "./Byline";
 import Dateline from "./Dateline";
 import ShareTools from "./ShareTools";
 
+import { IArticle } from '../queries';
+
 const styles = {
   ArticleHeader: {
     borderTop: "solid 1px #000",
@@ -81,7 +83,12 @@ const styles = {
   },
 };
 
-const ArticleHeader = ({ classes, article }) => {
+interface IProps {
+  classes: any,
+  article: IArticle
+}
+
+const ArticleHeader: React.FunctionComponent<IProps> = ({ classes, article }) => {
   const { contributors, section } = article;
   return (
     <Row className={classes.headerRow}>
@@ -94,10 +101,10 @@ const ArticleHeader = ({ classes, article }) => {
         </Link>
         <h1 className={classes.headline}>{article.title}</h1>
         <div className={classes.meta}>
-          {contributors.length > 0 &&
+          {contributors && contributors.length > 0 &&
             <Byline classes={classes} contributors={article.contributors} />
           }
-          <Dateline classes={classes} timestamp={article.createdAt} />
+          <Dateline classes={classes} timestamp={article.created_at} />
           <ShareTools article={article} />
         </div>
       </Col>
