@@ -14,9 +14,8 @@ jobs:
 
       - run: |
           sudo apt-get install python-dev python-pip
-          sudo pip install awsebcli --upgrade --user
+          pip install awsebcli --upgrade --user
           cd
-          sudo apt-get install python3
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -31,23 +30,25 @@ jobs:
       - run: |
           npm install
           CI=false npm run build
-          mv build client-app
           cd
           git clone https://github.com/stuyspec/stuyspec-api.git
           cd stuyspec-api
           git checkout master
-          cp -af ~/client-app/client-app public/
-          cd
-          zip -r ~/api.zip ~/stuyspec-api
-          mkdir ~/stuyspec-api/archive
-          mv -f ~/api.zip ~/stuyspec-api/archive/
+          mkdir public/client-app
+          cp -af ~/client-app/build/* public/client-app
+          cd ~/stuyspec-api
+          zip -r ~/api.zip ./*
+          mv ~/api.zip ~/stuyspec-api/
       - deploy:
           name: Deploy to AWS S3
           command: |
             #if [ "${CIRCLE_BRANCH}" == "staging" ]; then
               #aws s3 sync ~/client-app/dist/prod s3://staging.stuyspec.com
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              eb deploy --staged
+              ls ~
+              cd ~/stuyspec-api
+              printf "1\n1\n\n" | ~/.local/bin/eb init
+              ~/.local/bin/eb deploy --staged
             else
               echo "We do not deploy on the ${CIRCLE_BRANCH} branch."
             fi
