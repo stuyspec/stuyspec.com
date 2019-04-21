@@ -5,7 +5,6 @@ import injectSheet from "react-jss";
 
 import { openLightbox } from "../../core/actions";
 import ArticleMediaCaption from "./ArticleMediaCaption";
-import { IMedium } from "../queries";
 
 const styles = {
   figure: {
@@ -95,7 +94,7 @@ class ArticleFeaturedMedia extends PureComponent<any, typeof initialState> {
           <img className={classes.img} src={image.attachment_url} />
           {isCarouselButtonVisible && (
             <button className={classes.carouselButton} onClick={openLightbox}>
-              <img className={classes.slidesIcon} src="/img/slides.svg" />
+              <img className={classes.slidesIcon} src="/client-app/img/slides.svg" />
               <span className={classes.carouselImageCount}>
                 {carouselImageCount}
               </span>

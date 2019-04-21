@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import humps from "humps";
 import injectSheet from "react-jss";
 
 const RecommendedArticlesQuery = gql`
@@ -81,7 +80,6 @@ const RecommendedArticles = ({ classes, data }) => {
   if (data.loading) {
     return null;
   }
-  data = humps.camelizeKeys(data);
   const { topRankedArticles } = data;
   return (
     <div className={classes.RecommendedArticles}>

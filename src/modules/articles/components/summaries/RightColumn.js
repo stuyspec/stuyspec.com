@@ -119,7 +119,7 @@ const RightColumn = ({ classes, articles }) => {
             <div>
               <Link to={`${primarySection.permalink}/${primaryArticle.slug}`}>
                 <figure className={classes.figure}>
-                  <img src={primaryArticle.media[0].attachmentUrl} />
+                  <img src={primaryArticle.media[0].attachment_url} />
                 </figure>
               </Link>
             </div>
@@ -135,7 +135,7 @@ const RightColumn = ({ classes, articles }) => {
           </Link>
           <p className={classes.preview}>{primaryArticle.preview}</p>
           <Byline contributors={primaryArticle.contributors} />
-          <Dateline timestamp={primaryArticle.createdAt} />
+          <Dateline timestamp={primaryArticle.created_at} />
         </div>
       )}
 
@@ -147,7 +147,7 @@ const RightColumn = ({ classes, articles }) => {
                 to={`${secondarySection.permalink}/${secondaryArticle.slug}`}
               >
                 <figure className={classes.figure}>
-                  <img src={secondaryArticle.media[0].attachmentUrl} />
+                  <img src={secondaryArticle.media[0].attachment_url} />
                 </figure>
               </Link>
             </div>
@@ -166,7 +166,7 @@ const RightColumn = ({ classes, articles }) => {
           </Link>
           <p className={classes.preview}>{secondaryArticle.preview}</p>
           <Byline contributors={secondaryArticle.contributors} />
-          <Dateline timestamp={secondaryArticle.createdAt} />
+          <Dateline timestamp={secondaryArticle.created_at} />
         </div>
       )}
     </Col>

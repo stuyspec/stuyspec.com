@@ -45,7 +45,7 @@ const styles = {
 const ArticleList = ({ classes, articles, title, label }) => {
   if (title !== "Recommended") {
     articles = articles.sort((a, b) => {
-      return new Date(b.createdAt) - new Date(a.createdAt);
+      return new Date(b.created_at) - new Date(a.created_at);
     });
   }
   return (

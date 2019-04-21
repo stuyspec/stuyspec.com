@@ -105,7 +105,7 @@ const LeftTitleArticle = ({ classes, article }) => {
           <Link to={`${section.permalink}/${article.slug}`}>
             <figure>
               <img
-                src={article.media[0].attachmentUrl}
+                src={article.media[0].attachment_url}
                 alt={article.media[0].title}
               />
             </figure>
@@ -130,7 +130,7 @@ const LeftTitleArticle = ({ classes, article }) => {
         </Link>
         <p className={classes.preview}>{article.preview}</p>
         <Byline contributors={article.contributors} />
-        <Dateline timestamp={article.createdAt} />
+        <Dateline timestamp={article.created_at} />
       </Col>
     </Row>
   );

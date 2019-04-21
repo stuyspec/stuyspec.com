@@ -110,7 +110,7 @@ const LeftColumn = ({ classes, articles }) => {
           <div>
             <Link to={`${primarySection.permalink}/${primaryArticle.slug}`}>
               <figure className={classes.figure}>
-                <img src={primaryArticle.media[0].attachmentUrl} />
+                <img src={primaryArticle.media[0].attachment_url} />
               </figure>
             </Link>
           </div>
@@ -126,7 +126,7 @@ const LeftColumn = ({ classes, articles }) => {
         </Link>
         <p className={classes.preview}>{primaryArticle.preview}</p>
         <Byline contributors={primaryArticle.contributors} />
-        <Dateline timestamp={primaryArticle.createdAt} />
+        <Dateline timestamp={primaryArticle.created_at} />
       </div>
 
       <div className={classes.secondaryArticle}>
@@ -134,7 +134,7 @@ const LeftColumn = ({ classes, articles }) => {
           <div>
             <Link to={`${secondarySection.permalink}/${secondaryArticle.slug}`}>
               <figure className={classes.figure}>
-                <img src={secondaryArticle.media[0].attachmentUrl} />
+                <img src={secondaryArticle.media[0].attachment_url} />
               </figure>
             </Link>
           </div>
@@ -152,7 +152,7 @@ const LeftColumn = ({ classes, articles }) => {
         <div className={classes.bylineContainer}>
           <Byline contributors={secondaryArticle.contributors} />
         </div>
-        <Dateline timestamp={secondaryArticle.createdAt} />
+        <Dateline timestamp={secondaryArticle.created_at} />
       </div>
 
       <div className={classes.outquoteArticle}>
@@ -160,7 +160,7 @@ const LeftColumn = ({ classes, articles }) => {
           <div>
             <Link to={`${outquoteSection.permalink}/${outquoteArticle.slug}`}>
               <figure className={classes.figure}>
-                <img src={outquoteArticle.media[0].attachmentUrl} />
+                <img src={outquoteArticle.media[0].attachment_rl} />
               </figure>
             </Link>
           </div>
@@ -179,7 +179,7 @@ const LeftColumn = ({ classes, articles }) => {
         <div className={classes.bylineContainer}>
           <Byline contributors={outquoteArticle.contributors} />
         </div>
-        <Dateline timestamp={outquoteArticle.createdAt} />
+        <Dateline timestamp={outquoteArticle.created_at} />
       </div>
     </Col>
   );
