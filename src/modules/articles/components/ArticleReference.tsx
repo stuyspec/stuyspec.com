@@ -1,23 +1,10 @@
 import React from "react";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
+import { graphql, ChildDataProps } from "react-apollo";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 import { SPEC_REFERENCE_PATTERN } from "../../../constants";
 
-const ArticleReferenceQuery = gql`
-  query ArticleReferenceQuery($article_id: ID!) {
-    articleByID(id: $article_id) {
-      title
-      volume
-      issue
-      slug
-      section {
-        permalink
-      }
-    }
-  }
-`;
+import { ARTICLE_REFERENCE_QUERY, IArticleReferenceData, IArticleReferenceVariables, IArticle } from '../queries';
 
 const styles = {
   ArticleReference: {
@@ -45,8 +32,10 @@ const styles = {
   },
 };
 
-const ArticleReference = ({ classes, data }) => {
-  if (!data || data.loading || data.error) {
+type IProps = ChildDataProps<{ classes: any, article: IArticle }, IArticleReferenceData, IArticleReferenceVariables>;
+
+const ArticleReference: React.FunctionComponent<IProps> = ({ classes, data }) => {
+  if (!data || data.loading || data.error || !data.articleByID) {
     return null;
   }
   const article = data.articleByID;
@@ -70,12 +59,18 @@ const ArticleReference = ({ classes, data }) => {
   );
 };
 
-export default graphql(ArticleReferenceQuery, {
+const withArticleReference = graphql<{article: IArticle}, IArticleReferenceData, IArticleReferenceVariables>(ARTICLE_REFERENCE_QUERY, {
   // skip this query if no referencedArticleId was found in article content
   skip: ({ article }) => !SPEC_REFERENCE_PATTERN.test(article.content),
-  options: ({ article }) => ({
-    variables: {
-      article_id: parseInt(SPEC_REFERENCE_PATTERN.exec(article.content)[1], 10),
-    },
-  }),
-})(injectSheet(styles)(ArticleReference));
+  options: ({ article }) => {
+    const regex = SPEC_REFERENCE_PATTERN.exec(article.content);
+    const article_id = regex ? parseInt(regex[1], 10).toString() : "";
+    return {
+      variables: {
+        article_id
+      },
+    }
+  },
+})
+
+export default withArticleReference(injectSheet(styles)(ArticleReference));

@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import humps from "humps";
 import injectSheet from "react-jss";
 
 import ArticleList from "./ArticleList";
@@ -93,7 +92,6 @@ class ArticleFeed extends PureComponent {
 
     const { isLoadMoreButtonVisible } = this.state;
     let { latestArticles } = this.props;
-    latestArticles = humps.camelizeKeys(latestArticles);
 
     return (
       <div className={classes.ArticleFeed}>

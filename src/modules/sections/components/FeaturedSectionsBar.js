@@ -3,7 +3,6 @@ import { bindActionCreators, compose } from "redux";
 import { connect } from "react-redux";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import humps from "humps";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 
@@ -63,7 +62,6 @@ const FeaturedSectionsBar = ({
   if (data.loading) {
     return null;
   }
-  data = humps.camelizeKeys(data);
   const { featuredSections } = data;
   return (
     <div className={classes.FeaturedSectionsBar}>

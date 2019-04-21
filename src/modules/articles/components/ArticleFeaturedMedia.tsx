@@ -5,6 +5,7 @@ import injectSheet from "react-jss";
 
 import { openLightbox } from "../../core/actions";
 import ArticleMediaCaption from "./ArticleMediaCaption";
+import { IMedium } from "../queries";
 
 const styles = {
   figure: {
@@ -61,17 +62,19 @@ const styles = {
   },
 };
 
-class ArticleFeaturedMedia extends PureComponent {
-  constructor(props) {
+const initialState = {
+  isImageTall: false,
+};
+
+class ArticleFeaturedMedia extends PureComponent<any, typeof initialState> {
+  constructor(props: any) {
     super(props);
-    this.state = {
-      isImageTall: false,
-    };
+    this.state = initialState;
   }
 
   componentDidMount() {
     const img = new Image();
-    img.src = this.props.image.thumbAttachmentUrl;
+    img.src = this.props.image.thumb_attachment_url;
     img.onload = () =>
       this.setState({ isImageTall: img.height > img.width * 1.3 });
   }
@@ -89,7 +92,7 @@ class ArticleFeaturedMedia extends PureComponent {
     return (
       <figure className={isImageTall ? classes.tallFigure : classes.figure}>
         <div className={classes.imgContainer}>
-          <img className={classes.img} src={image.attachmentUrl} />
+          <img className={classes.img} src={image.attachment_url} />
           {isCarouselButtonVisible && (
             <button className={classes.carouselButton} onClick={openLightbox}>
               <img className={classes.slidesIcon} src="/img/slides.svg" />
@@ -105,7 +108,7 @@ class ArticleFeaturedMedia extends PureComponent {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: any, ownProps: any) => {
   return bindActionCreators({ openLightbox }, dispatch);
 };
 

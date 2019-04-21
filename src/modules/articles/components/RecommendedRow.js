@@ -7,7 +7,6 @@ import { Row, Col } from "react-bootstrap/lib";
 import { withRouter } from "react-router-dom";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import humps from "humps";
 
 import { ArticleRecommendation } from "./summaries";
 
@@ -89,7 +88,6 @@ const RecommendedRow = ({
   if (data.loading) {
     return null;
   }
-  data = humps.camelizeKeys(data);
 
   const articles = data.topRankedArticles.filter(
     article => article.slug !== article_slug,

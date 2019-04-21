@@ -104,7 +104,8 @@ const ArticleFooter = ({ classes, article, subscribe }) => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
+//ownProps so ArticleFooter gets semi typed props
+const mapDispatchToProps = (dispatch, ownProps) => {
   return bindActionCreators({ subscribe }, dispatch);
 };
 
