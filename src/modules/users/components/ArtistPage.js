@@ -4,7 +4,6 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Helmet } from "react-helmet";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import humps from "humps";
 
 import { ArticleList } from "../../articles/components";
 import { NotFoundPage } from "../../core/components";
@@ -84,7 +83,6 @@ const styles = {
 };
 
 const ArtistPage = ({ classes, data }) => {
-  data = humps.camelizeKeys(data);
   if (data.loading) {
     return null;
   }
@@ -99,22 +97,22 @@ const ArtistPage = ({ classes, data }) => {
     ...medium.article,
     media: [
       {
-        mediaType: medium.mediaType,
+        media_type: medium.media_type,
         title: medium.title,
-        attachmentUrl: medium.attachmentUrl,
+        attachment_url: medium.attachment_url,
       },
     ],
   }));
   return (
     <Grid className={classes.ArtistPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-        <title>{`${artist.firstName} ${artist.lastName}`}</title>
+        <title>{`${artist.first_name} ${artist.last_name}`}</title>
         <meta />
       </Helmet>
       <Row>
         <Col xs={12} sm={12} md={9} lg={9}>
           <p className={classes.name}>
-            {`${artist.firstName} ${artist.lastName}`}
+            {`${artist.first_name} ${artist.last_name}`}
           </p>
           <a href={`mailto:${artist.email}`} className={classes.email}>
             {artist.email}
