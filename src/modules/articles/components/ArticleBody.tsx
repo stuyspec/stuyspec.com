@@ -109,37 +109,53 @@ interface IProps {
   article: IArticle
 }
 
-const ArticleBody: React.FunctionComponent<IProps> = ({ classes, article }) => {
-  // TODO: refactor media to make the carousel part of media/back-end
-  const isCarouselButtonVisible =
-    SPEC_IMG_CAROUSEL_PATTERN.test(article.content) && article.media && article.media.length > 0;
+class ArticleBody extends React.Component<IProps> {
+  constructor(props: IProps) {
+    super(props);
+    this.createArticleContent = this.createArticleContent.bind(this);
+  }
 
-  return (
-    <Row>
-      <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
-        {SPEC_IMG_CAROUSEL_PATTERN.test(article.content) && (
-          <Lightbox title={article.title}>
-            <Gallery media={article.media} />
-          </Lightbox>
-        )}
-        {article.media && article.media.length > 0 && (
-          <ArticleFeaturedMedia
-            image={article.media[0]}
-            isCarouselButtonVisible={isCarouselButtonVisible}
-            carouselImageCount={article.media.length}
+  private createArticleContent(element: HTMLDivElement | null): any {
+    //React gives us a DOM element from the render() method if it's been mounted.
+    //We fill this in with article content if it's not null.
+    if(element != null) {
+      const articleFragment = document.createRange().createContextualFragment(this.props.article.content);
+      element.appendChild(articleFragment);
+    }
+  }
+
+  render() {
+    const { article, classes } = this.props;
+    const isCarouselButtonVisible =
+      SPEC_IMG_CAROUSEL_PATTERN.test(article.content) && article.media && article.media.length > 0;
+
+    return (
+      <Row>
+        <Col xs={12} sm={12} md={8} lg={8} className={classes.ArticleBody}>
+          {SPEC_IMG_CAROUSEL_PATTERN.test(article.content) && (
+            <Lightbox title={article.title}>
+              <Gallery media={article.media} />
+            </Lightbox>
+          )}
+          {article.media && article.media.length > 0 && (
+            <ArticleFeaturedMedia
+              image={article.media[0]}
+              isCarouselButtonVisible={isCarouselButtonVisible}
+              carouselImageCount={article.media.length}
+            />
+          )}
+          <ArticleReference article={article} />
+          <div
+            className={classes.innerHTML}
+            ref={this.createArticleContent}
           />
-        )}
-        <ArticleReference article={article} />
-        <div
-          className={classes.innerHTML}
-          dangerouslySetInnerHTML={{ __html: article.content }}
-        />
-      </Col>
-      <Col xsHidden smHidden mdOffset={1} md={3} lgOffset={1} lg={3}>
-        <RightRail />
-      </Col>
-    </Row>
-  );
-};
+        </Col>
+        <Col xsHidden smHidden mdOffset={1} md={3} lgOffset={1} lg={3}>
+          <RightRail />
+        </Col>
+      </Row>
+    );
+  }
+}
 
 export default injectSheet(styles)(ArticleBody);
