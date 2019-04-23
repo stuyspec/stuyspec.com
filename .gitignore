@@ -5,3 +5,4 @@ build
 .env
 .env.production
 .env.development
+*.local

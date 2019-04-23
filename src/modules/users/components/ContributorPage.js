@@ -4,7 +4,6 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Helmet } from "react-helmet";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import humps from "humps";
 
 import { ArticleList } from "../../articles/components";
 import { NotFoundPage } from "../../core/components";
@@ -80,7 +79,6 @@ const ContributorPage = ({ classes, data }) => {
   if (data.loading) {
     return null;
   }
-  data = humps.camelizeKeys(data);
   const contributor = data.userBySlug;
   if (contributor === null) {
     return <NotFoundPage />;
@@ -88,13 +86,13 @@ const ContributorPage = ({ classes, data }) => {
   return (
     <Grid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-        <title>{`${contributor.firstName} ${contributor.lastName}`}</title>
+        <title>{`${contributor.first_name} ${contributor.last_name}`}</title>
         <meta />
       </Helmet>
       <Row>
         <Col xs={12} sm={12} md={9} lg={9}>
           <p className={classes.name}>
-            {`${contributor.firstName} ${contributor.lastName}`}
+            {`${contributor.first_name} ${contributor.last_name}`}
           </p>
           <a href={`mailto:${contributor.email}`} className={classes.email}>
             {contributor.email}
