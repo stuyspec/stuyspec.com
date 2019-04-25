@@ -1,9 +1,5 @@
 import React from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import injectJSS from "react-jss";
-
-import { openLightbox, closeLightbox } from "../actions";
 
 const styles = {
   Lightbox: {
@@ -91,10 +87,10 @@ const Lightbox = ({
   classes,
   children,
   title,
-  isLightboxVisible,
-  closeLightbox,
+  isVisible,
+  onClose,
 }) => {
-  if (isLightboxVisible) {
+  if (isVisible) {
     return (
       <div className={classes.Lightbox}>
         <div className={classes.lightboxHeader}>
@@ -103,7 +99,7 @@ const Lightbox = ({
           <div className={classes.headerTitle}>{title}</div>
         </div>
         <div className={classes.contentContainer}>
-          <button onClick={closeLightbox} className={classes.closeButton} />
+          <button onClick={onClose} className={classes.closeButton} />
           {children}
         </div>
       </div>
@@ -113,15 +109,4 @@ const Lightbox = ({
   }
 };
 
-const mapStateToProps = state => ({
-  isLightboxVisible: state.core.isLightboxVisible,
-});
-
-//ownProps lets Lightbox props get type
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return bindActionCreators({ openLightbox, closeLightbox }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectJSS(styles)(Lightbox),
-);
+export default injectJSS(styles)(Lightbox);
