@@ -11,9 +11,11 @@ export const MediaExtension: React.FunctionComponent<IExtensionProps> = ({ props
     const parsedProps = props as IParsedProps;
 
     //makes a copy so media filtering doesn't affect other components
-    article = Object.assign({}, article);
-    if (parsedProps.mediumIds && article.media) {
-        article.media = article.media.filter(m => parsedProps.mediumIds.indexOf(m.id) >= 0);
+    article = {...article};
+    if (parsedProps.mediumIds && parsedProps.mediumIds.filter && article.media) {
+        //Set used in case many media present to avoid quadratic complexity.
+        const selectedMedia = new Set(parsedProps.mediumIds);
+        article.media = article.media.filter(m => selectedMedia.has(m.id));
         
         return <ArticleMedia article={article} media={article.media} />
 
