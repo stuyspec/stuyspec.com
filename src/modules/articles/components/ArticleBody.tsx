@@ -83,7 +83,7 @@ const styles = {
         padding: "0 10%",
       },
     },
-    innerHTML: {
+    articleContent: {
       padding: "0 10%",
     },
   },
@@ -97,7 +97,7 @@ const styles = {
         },
       },
     },
-    innerHTML: {
+    articleContent: {
       padding: "0 2%",
     },
   },
@@ -114,11 +114,9 @@ class ArticleBody extends React.Component<IProps> {
 
     //creates div in which to store article contents
     this.articleContentDiv = document.createElement("div");
-
-    this.createArticleContent = this.createArticleContent.bind(this);
   }
 
-  private createArticleContent(element: HTMLDivElement | null): any {
+  private createArticleContent = (element: HTMLDivElement | null) => {
     //React gives us a DOM element from the render() method if it's been mounted.
     //We fill this in with article content if it's not null.
     if (element != null) {
@@ -159,7 +157,7 @@ class ArticleBody extends React.Component<IProps> {
           )}
           <ArticleReference article={article} />
           <div
-            className={classes.innerHTML}
+            className={classes.articleContent}
             ref={this.createArticleContent}
           >
             {
