@@ -1,5 +1,5 @@
 import React from "react";
-import injectJSS from "react-jss";
+import injectSheet from "react-jss";
 
 const styles = {
   Lightbox: {
@@ -109,4 +109,4 @@ const Lightbox = ({
   }
 };
 
-export default injectJSS(styles)(Lightbox);
+export default injectSheet(styles)(Lightbox);
