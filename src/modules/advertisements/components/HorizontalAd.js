@@ -15,13 +15,16 @@ const styles = {
 
 const HorizontalAd = ({ classes, advertisements }) => {
   const ad = advertisements[1];
-  return (
-    <div className={classes.HorizontalAd}>
-      <a href={ad.url} target="_blank">
-        <img className={classes.img} src={pathToAds + ad.filename} />
-      </a>
-    </div>
-  );
+  if (ad) {
+    return (
+      <div className={classes.HorizontalAd}>
+        <a href={ad.url} target="_blank">
+          <img className={classes.img} src={pathToAds + ad.filename} />
+        </a>
+      </div>
+    );
+  }
+  else return null;
 };
 
 const mapStateToProps = state => ({
