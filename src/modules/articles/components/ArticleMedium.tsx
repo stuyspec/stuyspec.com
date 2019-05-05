@@ -1,11 +1,9 @@
 import React, { PureComponent } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import injectSheet from "react-jss";
 
-import { openLightbox } from "../../core/actions";
 import ArticleMediaCaption from "./ArticleMediaCaption";
-import { IMedium } from "../queries";
+
+import { IMedium } from '../queries';
 
 const styles = {
   figure: {
@@ -62,12 +60,20 @@ const styles = {
   },
 };
 
+interface IProps {
+  classes: any,
+  image: IMedium,
+  isCarouselButtonVisible?: boolean,
+  carouselImageCount: number,
+  onCarouselButtonClick: () => any
+}
+
 const initialState = {
   isImageTall: false,
 };
 
-class ArticleFeaturedMedia extends PureComponent<any, typeof initialState> {
-  constructor(props: any) {
+class ArticleMedium extends PureComponent<IProps, typeof initialState> {
+  constructor(props: IProps) {
     super(props);
     this.state = initialState;
   }
@@ -85,7 +91,7 @@ class ArticleFeaturedMedia extends PureComponent<any, typeof initialState> {
       image,
       isCarouselButtonVisible,
       carouselImageCount,
-      openLightbox,
+      onCarouselButtonClick,
     } = this.props;
     const { isImageTall } = this.state;
 
@@ -94,7 +100,7 @@ class ArticleFeaturedMedia extends PureComponent<any, typeof initialState> {
         <div className={classes.imgContainer}>
           <img className={classes.img} src={image.attachment_url} />
           {isCarouselButtonVisible && (
-            <button className={classes.carouselButton} onClick={openLightbox}>
+            <button className={classes.carouselButton} onClick={onCarouselButtonClick}>
               <img className={classes.slidesIcon} src="/client-app/img/slides.svg" />
               <span className={classes.carouselImageCount}>
                 {carouselImageCount}
@@ -108,10 +114,4 @@ class ArticleFeaturedMedia extends PureComponent<any, typeof initialState> {
   }
 }
 
-const mapDispatchToProps = (dispatch: any, ownProps: any) => {
-  return bindActionCreators({ openLightbox }, dispatch);
-};
-
-export default connect(null, mapDispatchToProps)(
-  injectSheet(styles)(ArticleFeaturedMedia),
-);
+export default injectSheet(styles)(ArticleMedium);

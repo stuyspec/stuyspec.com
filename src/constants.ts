@@ -2,7 +2,7 @@
 export const STUY_SPEC_API_URL = process.env.REACT_APP_API_URL;
 
 // TODO: a Newspaper model in API that contains an issuu_config
-export const ISSUU_CONFIG = 61744139;
+export const ISSUU_CONFIG = 69577246;
 
 export const STUY_SPEC_API_HEADERS = {
   headers: {
