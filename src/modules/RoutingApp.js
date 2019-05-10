@@ -38,6 +38,8 @@ import { RecruitmentPage } from "./recruitment/components";
 
 import { ClassifiedsRedirect } from "./core/components";
 
+import { adRedirects } from './advertisements/constants';
+
 const RoutingAppQuery = gql`
   query RoutingAppQuery {
     allSections {
@@ -111,6 +113,16 @@ class RoutingAppUnconnected extends PureComponent {
                   />
                 );
               })}
+              {adRedirects.map(ad => {
+                return (
+                  <Route
+                    path={`/ad/${ad[0]}`}
+                    key={`/ad/${ad[0]}`}
+                    render={() => {window.location.replace(ad[1]); return null;}}
+                  />
+                );
+              })
+              }
               <Route
                 exact
                 path={"/about/:description_slug"}
@@ -154,8 +166,8 @@ class RoutingAppUnconnected extends PureComponent {
                   session ? (
                     <Redirect to="/myaccount/profile" />
                   ) : (
-                    <SignInPage />
-                  )}
+                      <SignInPage />
+                    )}
               />
               <Route
                 exact
@@ -165,8 +177,8 @@ class RoutingAppUnconnected extends PureComponent {
                   session ? (
                     <Redirect to="/myaccount/profile" />
                   ) : (
-                    <SignUpPage />
-                  )}
+                      <SignUpPage />
+                    )}
               />
               <Route
                 exact
