@@ -2,7 +2,7 @@ const initialState = [
   {
     company: "Compas To College",
     filename: "compass-to-college.jpg",
-    url: "http://www.compasstocollege.org",
+    url: '/ad/compass-to-college',
   },
 ];
 
