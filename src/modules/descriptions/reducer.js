@@ -214,8 +214,8 @@ Artem Ilyanok<br>
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>News Editors</b><br>
-            Maddy Andersen<br>
-            Erin Lee<br>
+            *Maddy Andersen<br>
+            *Erin Lee<br>
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
@@ -228,7 +228,7 @@ Artem Ilyanok<br>
         <td style="width:30%;vertical-align: top">
              <b>Opinions Editors</b><br>
             Michael Dekhtyar<br>
-            Jonathan Schneiderman<br>
+            *Jonathan Schneiderman<br>
             <br>
         </td>
     </tr>
@@ -260,13 +260,14 @@ Artem Ilyanok<br>
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>Web Editors</b><br>
-            Darius Jankausakas<br>
+            *Darius Jankausakas<br>
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
             <b>Photography Editors</b><br>
             Zoe Oppenheimer<br>
             Catherine Yu<br>
+            **Matt Melucci
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
@@ -289,6 +290,7 @@ Artem Ilyanok<br>
             <b>Copy Editors</b><br>
             Tiffany Cao<br>
             Brian Zhang<br>
+            Amy Halder
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
