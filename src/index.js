@@ -15,6 +15,7 @@ import { objectFilter } from "./utils";
 const apolloClient = new ApolloClient({
   link: new HttpLink({ uri: `${STUY_SPEC_API_URL}/graphql` }),
   cache: new InMemoryCache(),
+  connectToDevTools: true
 });
 
 Object.filter = objectFilter;
