@@ -31,7 +31,7 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     margin: "0 auto",
-    padding: "5px 30px 0px 30px",
+    padding: "0px 30px 0px 30px",
     position: "relative",
     textAlign: "center",
     width: "100%",
@@ -40,7 +40,6 @@ const styles = {
     "& button": {
       position: "relative",
       left: "-10px",
-      top: "2px",
     },
   },
   brandingLink: {
@@ -115,7 +114,6 @@ const styles = {
   "@media (max-width: 375px)": {
     brandingLink: {
       lineHeight: "2rem",
-      marginTop: "7.5px",
     },
   },
 };
