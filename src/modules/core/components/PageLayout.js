@@ -62,7 +62,6 @@ const styles = {
 const sidebarStyles = {
   sidebar: {
     background: "#fff",
-    boxShadow: "1px 2px 12px 0 rgba(0, 0, 0, 0.5)",
     padding: "14px",
     width: "220px",
     zIndex: 5001,
