@@ -34,7 +34,7 @@
     "react-favicon": "0.0.14",
     "react-helmet": "^5.2.0",
     "react-icon-base": "^2.1.2",
-    "react-jss": "^8.6.1",
+    "react-jss": "^10.0.0-alpha.21",
     "react-redux": "^6.0.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
