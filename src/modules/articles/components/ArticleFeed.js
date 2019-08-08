@@ -8,7 +8,7 @@ import { ARTICLES_PER_PAGE } from "../constants";
 
 const ArticleFeedQuery = gql`
   query ArticleFeedQuery($section_id: ID, $offset: Int, $limit: Int) {
-    latestArticles(section_id: $section_id, offset: $offset, limit: $limit) {
+    latestArticles(section_id: $section_id, offset: $offset, limit: $limit, include_subsections: true) {
       id
       title
       slug
