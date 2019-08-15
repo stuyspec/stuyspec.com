@@ -8,7 +8,8 @@ import RightRail from "./RightRail";
 import { SPEC_IMG_CAROUSEL_PATTERN } from "../../../constants";
 
 import { ArticleMedia } from './ArticleMedia';
-import { Extension } from './extensions/Extension';
+import { Extension } from '@stuyspec/article_extensions';
+import { additionalExtensions, IAdditionalExtensionExtraProps } from './extensions/additionalExtensions';
 import { IArticle } from "../queries";
 
 const isBrowserFirefox =
@@ -144,7 +145,15 @@ class ArticleBody extends React.Component<IProps> {
         const type = extensionElements[i].getAttribute("type");
         const props = extensionElements[i].getAttribute("props");
         if (type && props) {
-          extensions.push(<Extension type={type} props={props} article={article} root={extensionElements[i]} />)
+          extensions.push(
+            <Extension<IAdditionalExtensionExtraProps>
+              type={type}
+              props={props}
+              root={extensionElements[i]}
+              additionalExtensions={additionalExtensions}
+              article={article}
+            />
+          )
         }
       }
     }

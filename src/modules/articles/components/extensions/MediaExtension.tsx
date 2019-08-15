@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-import { IExtensionProps } from './extensions';
+import { IAdditionalExtensionProps } from './additionalExtensions';
 import { ArticleMedia } from '../ArticleMedia';
 
 interface IParsedProps {
     mediumIds: string[]
 }
 
-export const MediaExtension: React.FunctionComponent<IExtensionProps> = ({ props, article }) => {
+export const MediaExtension: React.FunctionComponent<IAdditionalExtensionProps> = ({ props, article }) => {
     const parsedProps = props as IParsedProps;
 
     //makes a copy so media filtering doesn't affect other components
