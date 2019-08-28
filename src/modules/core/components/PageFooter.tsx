@@ -233,7 +233,7 @@ const PageFooter: React.SFC<PageFooterProps> = ({
         </Col>
         <Col xs={12} smHidden mdHidden lgHidden className={classes.creditLine}>
           <hr className={classes.hr} />
-          Created by Jason Kao, Nicholas Yang, Jerry Ye, Jason Lin, Darius Jankauskas,
+          Created by Jason Kao, Nicholas Yang, Darius Jankuaskas, Jason Lin, Jerry Ye,
           and Cathy Cai{' '}
           <a href="https://github.com/stuyspec">
             @The Spectator Web Department
