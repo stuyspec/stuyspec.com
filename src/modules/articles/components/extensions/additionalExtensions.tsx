@@ -1,8 +1,12 @@
+import * as React from 'react';
+
 import { IExtensionProps } from '@stuyspec/article_extensions';
 import { MediaExtension } from './MediaExtension';
 import { IArticle } from '../../queries';
 
-export const additionalExtensions = new Map([["MediaExtension", MediaExtension]])
+export const additionalExtensions: Array<[string, React.ComponentType<IAdditionalExtensionProps>]> = [
+    ["MediaExtension", MediaExtension]
+];
 
 export interface IAdditionalExtensionExtraProps {
     article: IArticle
