@@ -144,7 +144,14 @@ class ArticleBody extends React.Component<IProps> {
         const type = extensionElements[i].getAttribute("type");
         const props = extensionElements[i].getAttribute("props");
         if (type && props) {
-          extensions.push(<Extension type={type} props={props} article={article} root={extensionElements[i]} />)
+          extensions.push(
+            <Extension
+              type={type}
+              props={props}
+              root={extensionElements[i]}
+              article={article}
+            />
+          )
         }
       }
     }
