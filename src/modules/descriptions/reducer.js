@@ -252,6 +252,7 @@ Artem Ilyanok<br>
         <td style="width:30%;vertical-align: top" >
             <b>Sports Editors</b><br>
             Ahmed Hussein<br>
+            **Sam Levine<br>
             Sunan Tajwar<br>
             Bernard Wang<br>
             <br>
@@ -267,7 +268,7 @@ Artem Ilyanok<br>
             <b>Photography Editors</b><br>
             Zoe Oppenheimer<br>
             Catherine Yu<br>
-            **Matt Melucci
+            **Matt Melucci<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
@@ -275,6 +276,7 @@ Artem Ilyanok<br>
             Rebecca Collins<br>
             Michael Hu<br>
             Jade Lo<br>
+            **Andrea Huang<br>
             <br>
         </td>
     </tr>
@@ -290,7 +292,9 @@ Artem Ilyanok<br>
             <b>Copy Editors</b><br>
             Tiffany Cao<br>
             Brian Zhang<br>
-            Amy Halder
+            Amy Halder<br>
+            **Irene Hao<br>
+            **Haley Huh<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
