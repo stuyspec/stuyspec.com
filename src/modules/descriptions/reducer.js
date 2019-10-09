@@ -226,13 +226,18 @@ Artem Ilyanok<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
+             <bScience Editors</b><br>
+            Michael Dekhtyar<br>
+            <br>
+        </td>
+    </tr>
+    <tr>
+        <td style="width:30%;vertical-align: top">
              <b>Opinions Editors</b><br>
             Michael Dekhtyar<br>
             *Jonathan Schneiderman<br>
             <br>
         </td>
-    </tr>
-    <tr>
         <td style="width:30%;vertical-align: top">
             <b>Arts & Entertainment Editors</b><br>
             Thomas Chen<br>
