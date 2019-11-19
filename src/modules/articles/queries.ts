@@ -16,6 +16,7 @@ export const ARTICLE_QUERY = gql`
         media_type
         caption
         title
+        is_featured
         user {
           first_name
           last_name
@@ -71,6 +72,7 @@ export interface IMedium {
   media_type: string,
   caption?: string,
   title: string,
+  is_featured: boolean,
   user: IContributor
 }
 
