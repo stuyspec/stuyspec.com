@@ -19,4 +19,3 @@ export const PROFILE_SLUGS: { [index: string] : string} = {
 
 export const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 export const SPEC_REFERENCE_PATTERN = /<spec-reference id=(\d*)><\/spec-reference>/;
-export const SPEC_IMG_CAROUSEL_PATTERN = /<spec-img-carousel><\/spec-img-carousel>/;
