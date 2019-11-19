@@ -105,7 +105,7 @@ const ShareTools: React.FunctionComponent<IProps> = ({ classes, article }) => {
           <TwitterIcon
             size={SHARE_BUTTON_SIZE}
             logoFillColor={SHARE_BUTTON_COLOR}
-            iconBgStyle={{ fill: "white", stroke: "#ddd", "stroke-width": 1.5 }}
+            iconBgStyle={{ fill: "white", stroke: "#ddd", strokeWidth: 1.5 }}
             round
           />
         </TwitterShareButton>
@@ -115,7 +115,7 @@ const ShareTools: React.FunctionComponent<IProps> = ({ classes, article }) => {
           <LinkedinIcon
             size={SHARE_BUTTON_SIZE}
             logoFillColor={SHARE_BUTTON_COLOR}
-            iconBgStyle={{ fill: "white", stroke: "#ddd", "stroke-width": 1.5 }}
+            iconBgStyle={{ fill: "white", stroke: "#ddd", strokeWidth: 1.5 }}
             round
           />
         </LinkedinShareButton>
@@ -129,7 +129,7 @@ const ShareTools: React.FunctionComponent<IProps> = ({ classes, article }) => {
           <EmailIcon
             size={SHARE_BUTTON_SIZE}
             logoFillColor={SHARE_BUTTON_COLOR}
-            iconBgStyle={{ fill: "white", stroke: "#ddd", "stroke-width": 1.5 }}
+            iconBgStyle={{ fill: "white", stroke: "#ddd", strokeWidth: 1.5 }}
             round
           />
         </EmailShareButton>
