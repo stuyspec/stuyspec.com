@@ -19,6 +19,19 @@ const styles = {
     borderBottom: "1px solid #ddd",
     marginBottom: "10px",
     paddingBottom: "10px !important",
+    textAlign: "center",
+  },
+  virtualArchivesLabel: {
+    color: "#000",
+    display: "block",
+    fontFamily: "Minion Pro",
+    fontWeight: "bold",
+    fontSize: "24px",
+    lineHeight: 1.22,
+    marginBottom: "1px",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+    },
   },
   figure: {
     margin: "0 0 12px 0",
@@ -107,12 +120,18 @@ const RightColumn = ({ classes, articles }) => {
     <Col xsHidden sm={3} md={3} lg={3} className={classes.RightColumn}>
       {/* Column xsHidden because the mobile UI would repeat too many articles */}
       <div
-        dangerouslySetInnerHTML={{
-          __html: `<iframe style="width:100%; height:309px;" src="//e.issuu.com/embed.html#9521608/${ISSUU_CONFIG}" frameborder="0" allowfullscreen></iframe>`,
-        }}
         // TODO: Issu & Newspaper/Volume/Issue's have to become Rails models
-        className={classes.issuuEmbed}
-      />
+        className={classes.issuuEmbed}>
+        <a href="https://issuu.com/stuyspectator">
+            <img 
+                src={"/img/virtualArchives.jpg"} 
+                href="https://issuu.com/stuyspectator"
+            />
+        </a>
+        <a href="https://issuu.com/stuyspectator" className={classes.virtualArchivesLabel}>
+            Virtual Archives
+        </a>
+      </div>
       {primaryArticle && (
         <div className={classes.primaryArticle}>
           {primaryArticle.media.length > 0 && (
