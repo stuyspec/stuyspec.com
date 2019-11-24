@@ -226,7 +226,7 @@ Artem Ilyanok<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
-             <bScience Editors</b><br>
+             <b>Science Editors</b><br>
             Michael Dekhtyar<br>
             <br>
         </td>
@@ -238,7 +238,7 @@ Artem Ilyanok<br>
             *Jonathan Schneiderman<br>
             <br>
         </td>
-        <td style="width:30%;vertical-align: top">
+        <td style="width:40%;vertical-align: top">
             <b>Arts & Entertainment Editors</b><br>
             Thomas Chen<br>
             Emma Linderman<br>
@@ -246,7 +246,7 @@ Artem Ilyanok<br>
             Jiahe Wang<br>
             <br>
         </td>
-        <td style="width:40%;vertical-align: top">
+        <td style="width:30%;vertical-align: top">
             <b>Humor Editors</b><br>
             Omar Ali<br>
             Abdulla Elkhadrway<br>
@@ -254,6 +254,8 @@ Artem Ilyanok<br>
             Olly Stewart<br>
             <br>
         </td>
+    </tr>
+    <tr>
         <td style="width:30%;vertical-align: top" >
             <b>Sports Editors</b><br>
             Ahmed Hussein<br>
@@ -262,20 +264,20 @@ Artem Ilyanok<br>
             Bernard Wang<br>
             <br>
         </td>
-    </tr>
-    <tr>
-        <td style="width:30%;vertical-align: top">
+        <td style="width:40%;vertical-align: top">
             <b>Web Editors</b><br>
             *Darius Jankausakas<br>
             <br>
         </td>
-        <td style="width:40%;vertical-align: top">
+        <td style="width:30%;vertical-align: top">
             <b>Photography Editors</b><br>
             Zoe Oppenheimer<br>
             Catherine Yu<br>
             **Matt Melucci<br>
             <br>
         </td>
+    </tr>
+    <tr>
         <td style="width:30%;vertical-align: top">
             <b>Art Directors</b><br>
             Rebecca Collins<br>
@@ -284,16 +286,14 @@ Artem Ilyanok<br>
             **Andrea Huang<br>
             <br>
         </td>
-    </tr>
-    <tr>
-        <td style="width:30%;vertical-align: top">
+        <td style="width:40%;vertical-align: top">
             <b>Layout Editors</b><br>
             Dahae Choi<br>
             Ahmed Sultan<br>
             Christina Tan<br>
             <br>
         </td>
-        <td style="width:40%;vertical-align: top">
+        <td style="width:30%;vertical-align: top">
             <b>Copy Editors</b><br>
             Tiffany Cao<br>
             Brian Zhang<br>
@@ -302,11 +302,17 @@ Artem Ilyanok<br>
             **Haley Huh<br>
             <br>
         </td>
+    </tr>
+    <tr>
         <td style="width:30%;vertical-align: top">
+        </td>
+        <td style="width:40%;vertical-align: top">
             <b>Business Managers</b><br>
             Rachel Joh<br>
             Yaru Luo<br>
             <br>
+        </td>
+        <td style="width:30%;vertical-align: top">
         </td>
     </tr>
 </table>
