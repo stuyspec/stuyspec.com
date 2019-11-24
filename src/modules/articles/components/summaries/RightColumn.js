@@ -120,16 +120,15 @@ const RightColumn = ({ classes, articles }) => {
     <Col xsHidden sm={3} md={3} lg={3} className={classes.RightColumn}>
       {/* Column xsHidden because the mobile UI would repeat too many articles */}
       <div
-        // TODO: Issu & Newspaper/Volume/Issue's have to become Rails models
         className={classes.issuuEmbed}>
         <a href="https://issuu.com/stuyspectator">
-            <img 
-                src={"/img/virtualArchives.jpg"} 
-                href="https://issuu.com/stuyspectator"
-            />
-        </a>
-        <a href="https://issuu.com/stuyspectator" className={classes.virtualArchivesLabel}>
+          <img
+            src={"/img/virtualArchives.jpg"}
+            href="https://issuu.com/stuyspectator"
+          />
+          <div className={classes.virtualArchivesLabel}>
             Virtual Archives
+          </div>
         </a>
       </div>
       {primaryArticle && (
