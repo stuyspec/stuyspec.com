@@ -3,7 +3,7 @@ import injectSheet from "react-jss";
 import { Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 
-import { Byline, Dateline, Outquote } from "../";
+import { Byline, Dateline, } from "../";
 
 const styles = {
   LeftColumn: {
@@ -98,10 +98,10 @@ const LeftColumn = ({ classes, articles }) => {
     // TODO: Better way to handle this
     return <Col xsHidden sm={3} md={3} lg={3} className={classes.LeftColumn} />;
   }
-  const [primaryArticle, secondaryArticle, outquoteArticle] = articles;
+  const [primaryArticle, secondaryArticle] = articles;
   const primarySection = primaryArticle.section;
   const secondarySection = secondaryArticle.section;
-  const outquoteSection = outquoteArticle.section;
+
   return (
     <Col xsHidden sm={3} md={3} lg={3} className={classes.LeftColumn}>
       {/* Column xsHidden because the mobile UI would repeat too many articles */}
@@ -153,33 +153,6 @@ const LeftColumn = ({ classes, articles }) => {
           <Byline contributors={secondaryArticle.contributors} />
         </div>
         <Dateline timestamp={secondaryArticle.created_at} />
-      </div>
-
-      <div className={classes.outquoteArticle}>
-        {outquoteArticle.media.length > 0 && (
-          <div>
-            <Link to={`${outquoteSection.permalink}/${outquoteArticle.slug}`}>
-              <figure className={classes.figure}>
-                <img src={outquoteArticle.media[0].attachment_rl} />
-              </figure>
-            </Link>
-          </div>
-        )}
-        <Link to={outquoteSection.permalink} className={classes.sectionLabel}>
-          {outquoteSection.name}
-        </Link>
-        <Link
-          to={`${outquoteSection.permalink}/${outquoteArticle.slug}`}
-          className={classes.articleTitle}
-        >
-          {outquoteArticle.title}
-        </Link>
-        <Outquote quote={outquoteArticle.outquotes[0].text} />
-        <p className={classes.preview}>{outquoteArticle.preview}</p>
-        <div className={classes.bylineContainer}>
-          <Byline contributors={outquoteArticle.contributors} />
-        </div>
-        <Dateline timestamp={outquoteArticle.created_at} />
       </div>
     </Col>
   );
