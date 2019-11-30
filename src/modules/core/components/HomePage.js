@@ -54,9 +54,6 @@ const HomePageQuery = gql`
         name
         permalink
       }
-      outquotes {
-        text
-      }
     }
   }
 `;
