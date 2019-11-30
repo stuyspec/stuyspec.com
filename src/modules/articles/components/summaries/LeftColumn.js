@@ -98,9 +98,10 @@ const LeftColumn = ({ classes, articles }) => {
     // TODO: Better way to handle this
     return <Col xsHidden sm={3} md={3} lg={3} className={classes.LeftColumn} />;
   }
-  const [primaryArticle, secondaryArticle] = articles;
+  const [primaryArticle, secondaryArticle, tertiaryArticle] = articles;
   const primarySection = primaryArticle.section;
   const secondarySection = secondaryArticle.section;
+  const tertiarySection = tertiaryArticle.section;
 
   return (
     <Col xsHidden sm={3} md={3} lg={3} className={classes.LeftColumn}>
@@ -153,6 +154,32 @@ const LeftColumn = ({ classes, articles }) => {
           <Byline contributors={secondaryArticle.contributors} />
         </div>
         <Dateline timestamp={secondaryArticle.created_at} />
+      </div>
+
+      <div className={classes.secondaryArticle}>
+        {tertiaryArticle.media.length > 0 && (
+          <div>
+            <Link to={`${tertiarySection.permalink}/${tertiaryArticle.slug}`}>
+              <figure className={classes.figure}>
+                <img src={tertiaryArticle.media[0].attachment_rl} />
+              </figure>
+            </Link>
+          </div>
+        )}
+        <Link to={tertiarySection.permalink} className={classes.sectionLabel}>
+          {tertiarySection.name}
+        </Link>
+        <Link
+          to={`${tertiarySection.permalink}/${tertiaryArticle.slug}`}
+          className={classes.articleTitle}
+        >
+          {tertiaryArticle.title}
+        </Link>
+        <p className={classes.preview}>{tertiaryArticle.preview}</p>
+        <div className={classes.bylineContainer}>
+          <Byline contributors={tertiaryArticle.contributors} />
+        </div>
+        <Dateline timestamp={tertiaryArticle.created_at} />
       </div>
     </Col>
   );
