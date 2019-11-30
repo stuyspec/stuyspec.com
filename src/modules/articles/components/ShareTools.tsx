@@ -1,9 +1,9 @@
 import React from "react";
 import injectSheet from "react-jss";
-import { 
-  FacebookShareButton, 
-  TwitterShareButton, 
-  LinkedinShareButton, 
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  LinkedinShareButton,
   EmailShareButton,
   FacebookIcon,
   TwitterIcon,
@@ -60,12 +60,12 @@ const SHARE_BUTTON_COLOR = "#000";
 
 interface IProps {
   classes: any,
-  
+
 }
 
 interface IProps {
   classes: any,
-  
+
 }
 
 interface IProps {
@@ -74,10 +74,10 @@ interface IProps {
 }
 
 const ShareTools: React.FunctionComponent<IProps> = ({ classes, article }) => {
-  const { section, title, preview, outquotes } = article;
+  const { section, title, preview} = article;
   const shareUrl =
     window.location.hostname + `/${section.permalink}/${article.slug}`;
-  const outquote = (outquotes && outquotes[0]) || undefined;
+
 
   const emailBody = `${title}: ${preview}\n\n${shareUrl}`;
   return (
@@ -86,7 +86,6 @@ const ShareTools: React.FunctionComponent<IProps> = ({ classes, article }) => {
         <FacebookShareButton
           url={shareUrl}
           hashtag={"#stuyspec"}
-          quote={outquote && outquote.text}
         >
           <FacebookIcon
             size={SHARE_BUTTON_SIZE}

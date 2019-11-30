@@ -50,9 +50,6 @@ export const ARTICLE_QUERY = gql`
           last_name
         }
       }
-      outquotes {
-        text
-      }
     }
   }
 `;
@@ -86,9 +83,9 @@ export interface ISection {
   }
 }
 
-interface IOutquote {
-  text: string
-}
+// interface IOutquote {
+//   text: string
+// }
 
 export interface IArticle {
   id: string,
@@ -102,7 +99,7 @@ export interface IArticle {
   issue: number,
   contributors?: Array<IContributor>,
   section: ISection,
-  outquotes?: Array<IOutquote | undefined>,
+  //outquotes?: Array<IOutquote | undefined>,
 }
 
 export interface IArticleData {
