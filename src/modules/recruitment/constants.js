@@ -88,7 +88,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     description: `Do you want to be a part of the best department of The Spectator? Do you want to get tight with the administration? Do you want to see your name and your articles on the front page? Do you want to find out about the coolest news at Stuy before anyone else? Do you want to report on that cool news? If so, join the Spectator News Department!!! `,
     quotes: [],
     link:
-      "",
+      "https://docs.google.com/forms/d/e/1FAIpQLSdxSN4xLbDC5U_bx_-07YD47HZjuH7NAxDjVvJTWuhAQ8bf0A/viewform",
   },
   {
     name: "Copy",
@@ -138,7 +138,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     the formatting of each issue as it is released.`,
     quotes: [],
     link:
-      "https://docs.google.com/forms/d/e/1FAIpQLSe3MslyvuMoPQV25PMRVdxK2w5VWP1h1RXiPw1OxaFfwGjIpg/viewform",
+      "",
   },
   {
     name: "Photo",

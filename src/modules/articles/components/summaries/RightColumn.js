@@ -123,7 +123,7 @@ const RightColumn = ({ classes, articles }) => {
         className={classes.issuuEmbed}>
         <a href="https://issuu.com/stuyspectator">
           <img
-            src={"/img/virtualArchives.jpg"}
+            src={`${process.env.PUBLIC_URL}/img/virtualArchives.jpg`}
             href="https://issuu.com/stuyspectator"
           />
           <div className={classes.virtualArchivesLabel}>
