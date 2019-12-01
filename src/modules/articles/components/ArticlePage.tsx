@@ -1,13 +1,13 @@
-import React, { PureComponent } from "react";
-import { compose } from "redux";
-import { graphql, ChildDataProps } from "react-apollo";
-import injectSheet from "react-jss";
+import React from "react";
+import { Query } from "react-apollo";
+import {createUseStyles} from "react-jss";
 import Grid from "react-bootstrap/lib/Grid";
 import { Helmet } from "react-helmet";
 import { match } from 'react-router';
 
 import { ArticleHeader, ArticleBody, ArticleFooter, RecommendedRow } from "./";
-import { ARTICLE_QUERY, IArticle, IArticleData, IArticleVariables } from "../queries";
+import { ARTICLE_QUERY, IArticleData, IArticleVariables } from "../queries";
+import { NotFoundPage } from "../../core/components";
 
 const styles = {
   subscribe: {
@@ -31,59 +31,46 @@ const styles = {
   },
 };
 
-type IProps = ChildDataProps<{ classes: any, match: match<{ article_slug: string }> }, IArticleData, IArticleVariables>;
+const useStyles = createUseStyles(styles);
 
-const initialState = {
-  article: null as IArticle | null
+interface IProps {
+  match: match<{ article_slug: string }>
 }
 
-class ArticlePage extends PureComponent<IProps, typeof initialState> {
-  constructor(props: IProps) {
-    super(props);
+const ArticlePage: React.FC<IProps> = ({match}) => {
+  const classes = useStyles();
 
-    this.state = initialState;
-  }
-
-  componentWillReceiveProps(nextProps: IProps) {
-    let { data } = nextProps;
-
-    if (data.loading) {
-      return;
-    }
-
-    if (data.articleBySlug) {
-      this.setState({ article: data.articleBySlug });
-    }
-  }
-
-  render() {
-    const { article } = this.state;
-    const { classes } = this.props;
-
-    if (!article) {
-      return null;
-    }
-
-    const { section } = article;
-
-    return (
-      <Grid fluid className={classes.ArticlePage}>
-        <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-          <title>{article.title}</title>
-        </Helmet>
-        <ArticleHeader article={article} />
-        <ArticleBody article={article} />
-        <ArticleFooter article={article} />
-        <RecommendedRow section={section.parent_section || section} />
-      </Grid>
-    );
-  }
+  return (
+    <Query<IArticleData, IArticleVariables> query={ARTICLE_QUERY} variables={{slug: match.params.article_slug}}>
+      {
+        (result) => {
+          if(result.error) {
+            return <NotFoundPage />;
+          }
+          
+          const article = result?.data?.articleBySlug;
+          
+          if (!article) {
+            return null;
+          }
+          
+          const { section } = article;
+          
+          return (
+            <Grid fluid className={classes.ArticlePage}>
+              <Helmet>
+                <title>{article.title} | The Stuyvesant Spectator</title>
+              </Helmet>
+              <ArticleHeader article={article} />
+              <ArticleBody article={article} />
+              <ArticleFooter article={article} />
+              <RecommendedRow section={section.parent_section || section} />
+            </Grid>
+          );
+        }
+      }
+    </Query>
+  )
 }
 
-const withArticle = graphql<{ match: match<{ article_slug: string }> }, IArticleData, IArticleVariables>(ARTICLE_QUERY, {
-  options: ({ match }) => ({
-    variables: { slug: match.params.article_slug },
-  }),
-});
-
-export default withArticle(injectSheet(styles)(ArticlePage));
+export default ArticlePage;
