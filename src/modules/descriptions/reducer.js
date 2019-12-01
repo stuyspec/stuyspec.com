@@ -148,18 +148,12 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
 </ul>
 <h2>Contact Business Directly</h2>
 <ul>
-  <b>Manager</b>: Donia Tung
+  <b>Manager</b>: Rachel Joh
   <br>
-  <b>Phone</b>: 646.314.2289
+  <b>Phone</b>: 646.991.5400
   <br>
-  <b>Email</b>: dtung@stuy.edu
+  <b>Email</b>: rjoh10@stuy.edu
   <br>
-  <br>
-  <b>Manager</b>: Saloni Majmudar
-  <br>
-  <b>Phone</b>: 646.628.0139
-  <br>
-  <b>Email</b>: smajmudar@stuy.edu
 </ul>
 `,
   },
