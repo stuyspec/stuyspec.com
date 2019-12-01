@@ -184,17 +184,17 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
 <center>
   <a href=
   "https://www.asphaltgreen.org/bpc?utm_medium=referral&utm_source=stuyvesant%20spectator&utm_campaign=website%20referral">
-  <img alt="AsphaltGreen" src="/img/sponsors/AsphaltGreen.png" style=
+  <img alt="AsphaltGreen" src="${process.env.PUBLIC_URL}/img/sponsors/AsphaltGreen.png" style=
   "margin-bottom:50px"></a><br>
   <a href="http://static.escapetheroomnyc.com/"><img alt="Escape" src=
-  "/img/sponsors/Escape.png" style="margin-bottom:50px"></a><br>
+  "${process.env.PUBLIC_URL}/img/sponsors/Escape.png" style="margin-bottom:50px"></a><br>
   <a href="http://foxmanagementconsulting.com/"><img alt="FoxManagement"
-  src="/img/sponsors/FoxManagement.png" style="margin-bottom:50px"></a><br>
+  src="${process.env.PUBLIC_URL}/img/sponsors/FoxManagement.png" style="margin-bottom:50px"></a><br>
   <a href="http://www.mysteryroomnyc.com/"><img alt="MysteryRoom" src=
-  "/img/sponsors/MysteryRoom.png" style=
+  "${process.env.PUBLIC_URL}/img/sponsors/MysteryRoom.png" style=
   "margin-bottom:50px; width:320px; height:181px"></a><br>
   <a href="http://thinkshirt.com/"><img alt="ThinkShirt" src=
-  "/img/sponsors/ThinkShirt.png" style="margin-bottom:50px"></a><br>
+  "${process.env.PUBLIC_URL}/img/sponsors/ThinkShirt.png" style="margin-bottom:50px"></a><br>
 </center>
 `,
   },
