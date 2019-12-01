@@ -55,7 +55,7 @@ const ArticleList = ({ classes, articles, title, label }) => {
           // voices is the only section with art
           <figure className={classes.voicesBanner}>
             <img
-              src="/img/voices_banner.png"
+              src={`${process.env.PUBLIC_URL}/img/voices_banner.png`}
               alt="VOICES Banner by Vivian Lin (Class of '18)"
               title="Art by Vivian Lin (Class of '18)"
             />

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Grid } from "react-bootstrap/lib";
-import injectSheet from "react-jss";
+import { createUseStyles } from "react-jss";
 import { Helmet } from "react-helmet";
 
 const styles = {
@@ -35,7 +35,11 @@ const styles = {
   },
 };
 
-const NotFoundPage = ({ classes }) => {
+const useStyles = createUseStyles(styles);
+
+const NotFoundPage: React.FC = () => {
+  const classes = useStyles();
+
   return (
     <Grid className={classes.NotFoundPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -43,11 +47,11 @@ const NotFoundPage = ({ classes }) => {
         <meta />
       </Helmet>
       <h1>Page Not Found.</h1>
-      <p>Our apologies, you have reached a page that Does Not Exist.</p>
+      <p>Our apologies, you have reached a page that does not exist.</p>
       <p>
         Please try a modified query, or visit our <Link to="/">home page</Link>.
       </p>
-      <img src="https://i.imgur.com/TqAkThR.png" className={classes.img} />
+      <img src={`${process.env.PUBLIC_URL}/img/404.jpg`} className={classes.img} />
       <p>
         If you were looking for an article, just know that we are currently
         transfering all of the articles<br /> from the old website to this one.
@@ -57,4 +61,4 @@ const NotFoundPage = ({ classes }) => {
   );
 };
 
-export default injectSheet(styles)(NotFoundPage);
+export default NotFoundPage;
