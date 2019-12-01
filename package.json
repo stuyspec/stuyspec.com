@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "/client-app",
   "dependencies": {
-    "@stuyspec/article_extensions": "^1.0.10",
+    "@stuyspec/article_extensions": "^2.0.0",
     "@types/dateformat": "^3.0.0",
     "@types/humps": "^1.1.2",
     "@types/jest": "23.3.13",
@@ -51,7 +51,7 @@
     "redux-promise-middleware": "^5.1.1",
     "redux-thunk": "^2.3.0",
     "roman-numerals": "^0.3.2",
-    "typescript": "3.2.4"
+    "typescript": "^3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",

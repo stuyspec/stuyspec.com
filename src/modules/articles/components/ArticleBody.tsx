@@ -5,7 +5,6 @@ import Col from "react-bootstrap/lib/Col";
 
 import ArticleReference from "./ArticleReference";
 import RightRail from "./RightRail";
-import { SPEC_IMG_CAROUSEL_PATTERN } from "../../../constants";
 
 import { ArticleMedia } from './ArticleMedia';
 import { Extension } from './extensions/Extension';
@@ -131,9 +130,7 @@ class ArticleBody extends React.Component<IProps> {
     this.articleContentDiv.innerHTML = this.props.article.content;
 
     const { article, classes } = this.props;
-    const isFeaturedGalleryActive =
-      article.media && article.media.length > 0 && SPEC_IMG_CAROUSEL_PATTERN.test(article.content);
-    const featuredMedia = isFeaturedGalleryActive ? article.media : (article.media ? article.media.slice(0, 1) : undefined);
+    const featuredMedia = article.media ? article.media.filter(m => m.is_featured) : []
 
     //Here we loop through the contents of the article div to find every element of tag type article-extension.
     //We then create an Extension for each instance to render extension content inside the element.
@@ -143,6 +140,7 @@ class ArticleBody extends React.Component<IProps> {
       for (let i = 0; i < extensionElements.length; i++) {
         const type = extensionElements[i].getAttribute("type");
         const props = extensionElements[i].getAttribute("props");
+        const media = extensionElements[i].getAttribute("media");
         if (type && props) {
           extensions.push(
             <Extension
@@ -150,6 +148,8 @@ class ArticleBody extends React.Component<IProps> {
               props={props}
               root={extensionElements[i]}
               article={article}
+              media={media || undefined}
+              key={i}
             />
           )
         }

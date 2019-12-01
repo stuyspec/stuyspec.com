@@ -1,21 +1,16 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { extensions, IExtensionProps } from '@stuyspec/article_extensions';
-import { additionalExtensions } from './additionalExtensions';
-import { IArticle } from '../../queries';
-
-export interface IExtensionProps {
-    props: any,
-}
+import { extensions } from '@stuyspec/article_extensions';
+import { IArticle, IMedium } from '../../queries';
 
 type IHelperProps =  {
     type: string,
     props: string,
-    article: IArticle
+    media?: IMedium[]
 };
 
-const ExtensionHelper: React.FC<IHelperProps> = ({type, props, ...rest}) => {
+export const ExtensionHelper: React.FC<IHelperProps> = ({type, props, media}) => {
     let propsObj;
     try {
         propsObj = JSON.parse(props);
@@ -25,10 +20,9 @@ const ExtensionHelper: React.FC<IHelperProps> = ({type, props, ...rest}) => {
         return null;
     }
 
-    const allExtensions = additionalExtensions ? new Map<string, any>([...extensions, ...additionalExtensions]) : new Map(extensions)
-    const SelectedExtension = allExtensions.get(type);
+    const SelectedExtension = extensions.get(type);
     if (SelectedExtension) {
-        return <SelectedExtension props={propsObj} {...rest} />
+        return <SelectedExtension props={propsObj} media={media} />
     }
     else {
         console.error(`No article extension available for type ${type} (in Extension).`)
@@ -39,10 +33,23 @@ const ExtensionHelper: React.FC<IHelperProps> = ({type, props, ...rest}) => {
 type IProps =  {
     type: string,
     props: string,
-    root: Element,
+    media?: string,
     article: IArticle
+    root: Element,
 };
 
-export function Extension({root, ...rest}: IProps)  {
-    return ReactDOM.createPortal(<ExtensionHelper {...rest} />, root);
+export function Extension({root, media, article, type, ...rest}: IProps)  {
+    let mediaIds: number[];
+    try {
+        mediaIds = media ? JSON.parse(media) : [];
+    }
+    catch(e) {
+        console.error(`Unable to parse media "${media}" in article extension of type ${type} (in Extension).`)
+        return null;
+    }
+
+    //FIXME: order for media for extensions where IDs are not in ascending order is broken
+    const mediaObjs = mediaIds.includes && article.media ? article.media.filter(m => mediaIds.includes(parseInt(m.id))) : undefined
+
+    return ReactDOM.createPortal(<ExtensionHelper media={mediaObjs} type={type} {...rest} />, root);
 }
