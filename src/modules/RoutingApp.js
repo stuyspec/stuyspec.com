@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import { ConnectedRouter } from "react-router-redux";
+import { ConnectedRouter } from "connected-react-router";
 import queryString from "query-string";
 import appHistory from "../tools/appHistory";
 import store from "../store"
@@ -88,7 +88,7 @@ class RoutingAppUnconnected extends PureComponent {
     }
 
     return (
-      <ConnectedRouter history={appHistory} store={store} >
+      <ConnectedRouter history={appHistory}>
         <PageLayout>
           {!loading && (
             <Switch>
