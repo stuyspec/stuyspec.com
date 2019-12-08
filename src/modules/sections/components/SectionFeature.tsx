@@ -1,14 +1,14 @@
-import React from "react";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
-import { Link } from "react-router-dom";
-import injectSheet from "react-jss";
-import { Row, Col } from "react-bootstrap/lib";
+import React from 'react';
+import { useQuery } from 'react-apollo';
+import gql from 'graphql-tag';
+import { Link } from 'react-router-dom';
+import { createUseStyles } from 'react-jss';
+import { Row, Col } from 'react-bootstrap/lib';
 
-import Byline from "../../articles/components/Byline";
-import Dateline from "../../articles/components/Dateline";
+import Byline from '../../articles/components/Byline';
+import Dateline from '../../articles/components/Dateline';
 
-const SectionFeatureQuery = gql`
+const SECTION_FEATURE_QUERY = gql`
   query SectionFeatureQuery($section_slug: String!) {
     featuredArticlesBySectionSlug(section_slug: $section_slug) {
       title
@@ -131,15 +131,28 @@ const styles = {
   },
 };
 
-const SectionFeature = ({ classes, data }) => {
-  if (data.loading) {
+const useStyles = createUseStyles(styles);
+
+interface IProps {
+  slug: string
+}
+
+const SectionFeature: React.FC<IProps> = ({ slug }) => {
+  const classes: any = useStyles();
+
+  const result = useQuery(SECTION_FEATURE_QUERY, {
+    variables: { section_slug: slug }
+  })
+
+  if (result.loading || !result.data) {
     return null;
   }
+
   const [
     primaryArticle,
     secondaryArticle,
     ternaryArticle,
-  ] = data.featuredArticlesBySectionSlug;
+  ] = result.data.featuredArticlesBySectionSlug;
   const featuredMedia = primaryArticle.media[0];
   const { section } = primaryArticle;
   return (
@@ -241,8 +254,4 @@ const SectionFeature = ({ classes, data }) => {
   );
 };
 
-export default graphql(SectionFeatureQuery, {
-  options: ({ section_slug }) => ({
-    variables: { section_slug },
-  }),
-})(injectSheet(styles)(SectionFeature));
+export default SectionFeature;

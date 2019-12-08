@@ -1,22 +1,20 @@
-import React from "react";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
-import { Grid, Row, Col } from "react-bootstrap/lib";
-import { Link } from "react-router-dom";
-import injectSheet from "react-jss";
-import { Helmet } from "react-helmet";
+import React from 'react';
+import { useQuery } from 'react-apollo';
+import gql from 'graphql-tag';
+import { Grid, Row, Col } from 'react-bootstrap/lib';
+import { Link } from 'react-router-dom';
+import { createUseStyles } from 'react-jss';
+import { Helmet } from 'react-helmet';
 
-import { ArticleFeed } from "../../articles/components";
-import { SubsectionPage, SectionColumn, SectionFeature } from "./";
+import { ArticleFeed } from '../../articles/components';
+import { SubsectionPage, SectionColumn, SectionFeature } from './';
 import {
   LeftTitleArticle,
   RightTitleArticle,
-} from "../../articles/components/summaries";
-import { TallAd } from "../../advertisements/components/index";
+} from '../../articles/components/summaries';
+import { TallAd } from '../../advertisements/components/index';
 
-// TODO: STYLE SECONDARY ARTICLE. consider setting a max height
-
-const SectionPageQuery = gql`
+const SECTION_PAGE_QUERY = gql`
   query SectionPageQuery($section_id: ID!) {
     featuredSubsection(section_id: $section_id) {
       name
@@ -30,6 +28,8 @@ const SectionPageQuery = gql`
       preview
       created_at
       section {
+        id
+        name
         permalink
         parent_section {
           id
@@ -39,11 +39,6 @@ const SectionPageQuery = gql`
         first_name
         last_name
         slug
-      }
-      section {
-        id
-        name
-        permalink
       }
       media {
         title
@@ -59,6 +54,53 @@ const SectionPageQuery = gql`
     }
   }
 `;
+
+interface IVariables {
+  section_id: string
+}
+
+interface IData {
+  featuredSubsection?: {
+    name: string,
+    slug: string,
+    permalink: string
+  },
+  topRankedArticles?: Array<{
+    id: string,
+    title: string,
+    slug: string,
+    preview?: string,
+    created_at?: string,
+    section: {
+      id: string,
+      name: string,
+      permalink: string,
+      parent_section?: {
+        id: string
+      }
+    },
+    contributors?: Array<{
+      first_name?: string,
+      last_name?: string,
+      slug: string
+    }>,
+    media?: Array<{
+      title: string,
+      media_type: string,
+      attachment_url: string
+    } | undefined>,
+  }>,
+  sectionsByParentSectionID: Array<ISubsection | undefined>
+}
+
+interface ISubsection {
+  id: string,
+  name: string,
+  slug: string,
+  permalink: string
+}
+
+// TODO: STYLE SECONDARY ARTICLE. consider setting a max height
 
 const styles = {
   sectionTitle: {
@@ -188,21 +230,45 @@ const styles = {
   },
 };
 
-// const SectionPage = ({ classes, data, section }) => {
-const SectionPage = ({ data, classes, section }) => {
-  // let { data, classes, section } = props;
-  if (data.loading) {
+const useStyles = createUseStyles(styles);
+
+interface IProps {
+  section: {
+    id: string,
+    name: string,
+  }
+}
+
+const SectionPage: React.FC<IProps> = ({ section }) => {
+  const classes: any = useStyles();
+
+  const result = useQuery<IData, IVariables>(SECTION_PAGE_QUERY, {
+    variables: { section_id: section.id }
+  });
+
+  if (result.loading) {
     return null;
   }
 
+  else if (result.error || !result.data) {
+    console.error("SectionPage query failed.");
+    return null;
+  }
+
+  const data = result.data;
+
   const { topRankedArticles, featuredSubsection } = data;
-  const [featuredArticle, secondaryArticle] = topRankedArticles;
+  const [featuredArticle, secondaryArticle] = topRankedArticles ?? [null, null];
 
   if (!featuredSubsection) {
     return <SubsectionPage section={section} />;
   }
 
-  const subsections = data.sectionsByParentSectionID;
+  const subsections = data.sectionsByParentSectionID.filter(s => s) as ISubsection[];
+
+  //stops TS from complaining
+  //TODO: add types to ArticleFeed
+  const UntypedArticleFeed: React.ComponentType<any> = ArticleFeed;
 
   return (
     <Grid fluid className={classes.SectionPage}>
@@ -222,28 +288,28 @@ const SectionPage = ({ data, classes, section }) => {
             </Link>
           </li>
         ) : (
-          subsections
-            .sort((a, b) => a["name"].localeCompare(b["name"]))
-            .map(subsection => {
-              return (
-                <li className={classes.subsectionListItem} key={subsection.id}>
-                  <Link
-                    className={classes.subsectionLink}
-                    to={subsection.permalink}
-                  >
-                    {subsection.name}
-                  </Link>
-                </li>
-              );
-            })
-        )}
+            subsections
+              .sort((a, b) => a!.name.localeCompare(b!.name))
+              .map(subsection => {
+                return (
+                  <li className={classes.subsectionListItem} key={subsection.id}>
+                    <Link
+                      className={classes.subsectionLink}
+                      to={subsection.permalink}
+                    >
+                      {subsection.name}
+                    </Link>
+                  </li>
+                );
+              })
+          )}
       </ul>
       <RightTitleArticle article={featuredArticle} />
       <Row className={classes.secondaryRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.secondaryCol}>
           {featuredSubsection && (
             <div className={classes.SectionFeatureContainer}>
-              <SectionFeature section_slug={featuredSubsection.slug} />
+              <SectionFeature slug={featuredSubsection.slug} />
             </div>
           )}
           <LeftTitleArticle article={secondaryArticle} />
@@ -261,7 +327,7 @@ const SectionPage = ({ data, classes, section }) => {
 
       <Row>
         <Col xs={12} sm={9} md={9} lg={9} className={classes.latestArticles}>
-          <ArticleFeed section={section} />
+          <UntypedArticleFeed section={section} />
         </Col>
         <Col xsHidden sm={3} md={3} lg={3}>
           <div className={classes.sectionColumnContainer}>
@@ -273,10 +339,4 @@ const SectionPage = ({ data, classes, section }) => {
   );
 };
 
-export default graphql(SectionPageQuery, {
-  options: ({ section }) => ({
-    variables: {
-      section_id: section.id,
-    },
-  }),
-})(injectSheet(styles)(SectionPage));
+export default SectionPage;
