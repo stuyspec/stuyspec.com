@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "/client-app",
   "dependencies": {
+    "@apollo/react-hooks": "^3.1.3",
     "@stuyspec/article_extensions": "^2.0.0",
     "@types/dateformat": "^3.0.0",
     "@types/humps": "^1.1.2",
@@ -41,7 +42,7 @@
     "react-favicon": "0.0.14",
     "react-helmet": "^5.2.1",
     "react-icon-base": "^2.1.2",
-    "react-jss": "^10.0.0-alpha.21",
+    "react-jss": "^10.0.0",
     "react-redux": "^6.0.0",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
