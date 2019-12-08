@@ -1,6 +1,6 @@
 import React from "react";
-import { Query } from "react-apollo";
-import {createUseStyles} from "react-jss";
+import { Query, useQuery } from "react-apollo";
+import { createUseStyles } from "react-jss";
 import Grid from "react-bootstrap/lib/Grid";
 import { Helmet } from "react-helmet";
 import { match } from 'react-router';
@@ -37,40 +37,36 @@ interface IProps {
   match: match<{ article_slug: string }>
 }
 
-const ArticlePage: React.FC<IProps> = ({match}) => {
-  const classes = useStyles();
+const ArticlePage: React.FC<IProps> = ({ match }) => {
+  const classes: any = useStyles();
+
+  const result = useQuery<IArticleData, IArticleVariables>(ARTICLE_QUERY, {
+    variables: { slug: match.params.article_slug }
+  })
+
+  if (result.error) {
+    return <NotFoundPage />;
+  }
+
+  const article = result?.data?.articleBySlug;
+
+  if (!article) {
+    return null;
+  }
+
+  const { section } = article;
 
   return (
-    <Query<IArticleData, IArticleVariables> query={ARTICLE_QUERY} variables={{slug: match.params.article_slug}}>
-      {
-        (result) => {
-          if(result.error) {
-            return <NotFoundPage />;
-          }
-          
-          const article = result?.data?.articleBySlug;
-          
-          if (!article) {
-            return null;
-          }
-          
-          const { section } = article;
-          
-          return (
-            <Grid fluid className={classes.ArticlePage}>
-              <Helmet>
-                <title>{article.title} | The Stuyvesant Spectator</title>
-              </Helmet>
-              <ArticleHeader article={article} />
-              <ArticleBody article={article} />
-              <ArticleFooter article={article} />
-              <RecommendedRow section={section.parent_section || section} />
-            </Grid>
-          );
-        }
-      }
-    </Query>
-  )
+    <Grid fluid className={classes.ArticlePage}>
+      <Helmet>
+        <title>{article.title} | The Stuyvesant Spectator</title>
+      </Helmet>
+      <ArticleHeader article={article} />
+      <ArticleBody article={article} />
+      <ArticleFooter article={article} />
+      <RecommendedRow section={section.parent_section || section} />
+    </Grid>
+  );
 }
 
 export default ArticlePage;
