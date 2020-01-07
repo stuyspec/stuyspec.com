@@ -23,7 +23,7 @@ const SectionPageQuery = gql`
       slug
       permalink
     }
-    topRankedArticles(section_id: $section_id, limit: 2, has_media: true) {
+    topRankedArticles(section_id: $section_id, limit: 2, has_media: true, include_subsections: true) {
       id
       title
       slug
