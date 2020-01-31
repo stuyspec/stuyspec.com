@@ -295,7 +295,6 @@ Talia Kahan<br>
         </td>
     </tr>
     <tr>
-        <td></td>
         <td style="width:30%;vertical-align: top">
         </td>
         <td style="width:40%;vertical-align: top">
