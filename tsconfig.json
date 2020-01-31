@@ -5,7 +5,7 @@
     "lib": [
       "esnext.asynciterable",
       "es2017.object",
-      "es2015",
+      "es2016",
       "dom"
     ],
     "jsx": "preserve",

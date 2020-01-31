@@ -113,7 +113,7 @@ class PageLayout extends PureComponent {
             </title>
           </Helmet>
           <PageHeader location={location} sections={featuredSections} />
-          <Favicon url="/img/logo.png" />
+          <Favicon url={`${process.env.PUBLIC_URL}/img/logo.png`} />
           <div className={classes.PageContainer}>
             {children}
             <Grid fluid className={classes.footerAd}>

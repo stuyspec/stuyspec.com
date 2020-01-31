@@ -16,6 +16,7 @@ export const ARTICLE_QUERY = gql`
         media_type
         caption
         title
+        is_featured
         user {
           first_name
           last_name
@@ -50,9 +51,6 @@ export const ARTICLE_QUERY = gql`
           last_name
         }
       }
-      outquotes {
-        text
-      }
     }
   }
 `;
@@ -71,6 +69,7 @@ export interface IMedium {
   media_type: string,
   caption?: string,
   title: string,
+  is_featured: boolean,
   user: IContributor
 }
 
@@ -86,9 +85,9 @@ export interface ISection {
   }
 }
 
-interface IOutquote {
-  text: string
-}
+// interface IOutquote {
+//   text: string
+// }
 
 export interface IArticle {
   id: string,
@@ -102,7 +101,7 @@ export interface IArticle {
   issue: number,
   contributors?: Array<IContributor>,
   section: ISection,
-  outquotes?: Array<IOutquote | undefined>,
+  //outquotes?: Array<IOutquote | undefined>,
 }
 
 export interface IArticleData {

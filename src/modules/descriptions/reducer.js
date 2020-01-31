@@ -148,18 +148,12 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
 </ul>
 <h2>Contact Business Directly</h2>
 <ul>
-  <b>Manager</b>: Donia Tung
+  <b>Manager</b>: Rachel Joh
   <br>
-  <b>Phone</b>: 646.314.2289
+  <b>Phone</b>: 646.991.5400
   <br>
-  <b>Email</b>: dtung@stuy.edu
+  <b>Email</b>: rjoh10@stuy.edu
   <br>
-  <br>
-  <b>Manager</b>: Saloni Majmudar
-  <br>
-  <b>Phone</b>: 646.628.0139
-  <br>
-  <b>Email</b>: smajmudar@stuy.edu
 </ul>
 `,
   },
@@ -184,17 +178,17 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
 <center>
   <a href=
   "https://www.asphaltgreen.org/bpc?utm_medium=referral&utm_source=stuyvesant%20spectator&utm_campaign=website%20referral">
-  <img alt="AsphaltGreen" src="/img/sponsors/AsphaltGreen.png" style=
+  <img alt="AsphaltGreen" src="${process.env.PUBLIC_URL}/img/sponsors/AsphaltGreen.png" style=
   "margin-bottom:50px"></a><br>
   <a href="http://static.escapetheroomnyc.com/"><img alt="Escape" src=
-  "/img/sponsors/Escape.png" style="margin-bottom:50px"></a><br>
+  "${process.env.PUBLIC_URL}/img/sponsors/Escape.png" style="margin-bottom:50px"></a><br>
   <a href="http://foxmanagementconsulting.com/"><img alt="FoxManagement"
-  src="/img/sponsors/FoxManagement.png" style="margin-bottom:50px"></a><br>
+  src="${process.env.PUBLIC_URL}/img/sponsors/FoxManagement.png" style="margin-bottom:50px"></a><br>
   <a href="http://www.mysteryroomnyc.com/"><img alt="MysteryRoom" src=
-  "/img/sponsors/MysteryRoom.png" style=
+  "${process.env.PUBLIC_URL}/img/sponsors/MysteryRoom.png" style=
   "margin-bottom:50px; width:320px; height:181px"></a><br>
   <a href="http://thinkshirt.com/"><img alt="ThinkShirt" src=
-  "/img/sponsors/ThinkShirt.png" style="margin-bottom:50px"></a><br>
+  "${process.env.PUBLIC_URL}/img/sponsors/ThinkShirt.png" style="margin-bottom:50px"></a><br>
 </center>
 `,
   },
@@ -239,7 +233,7 @@ Talia Kahan<br>
             *Jonathan Schneiderman<br>
             <br>
         </td>
-        <td style="width:30%;vertical-align: top">
+        <td style="width:40%;vertical-align: top">
             <b>Arts & Entertainment Editors</b><br>
             Suah Chung<br>
             Miranda Lepri<br>
@@ -247,7 +241,7 @@ Talia Kahan<br>
             Jiahe Wang<br>
             <br>
         </td>
-        <td style="width:40%;vertical-align: top">
+        <td style="width:30%;vertical-align: top">
             <b>Humor Editors</b><br>
             Chrisabella Javier<br>
             *Olly Stewart<br>
@@ -269,7 +263,7 @@ Talia Kahan<br>
             **Cynthia Or<br>
             <br>
         </td>
-        <td style="width:40%;vertical-align: top">
+        <td style="width:30%;vertical-align: top">
             <b>Photography Editors</b><br>
             *Zoe Oppenheimer<br>
             Matt Melucci<br>
@@ -292,7 +286,7 @@ Talia Kahan<br>
             Michelle Thuang<br>
             <br>
         </td>
-        <td style="width:40%;vertical-align: top">
+        <td style="width:30%;vertical-align: top">
             <b>Copy Editors</b><br>
             Brian Zhang<br>
             Irene Hao<br>
@@ -303,11 +297,15 @@ Talia Kahan<br>
     <tr>
         <td></td>
         <td style="width:30%;vertical-align: top">
+        </td>
+        <td style="width:40%;vertical-align: top">
             <b>Business Managers</b><br>
             Rachel Joh<br>
             **Daniella Maksin<br>
             **Tina Nguyen<br>
             <br>
+        </td>
+        <td style="width:30%;vertical-align: top">
         </td>
     </tr>
 </table>
