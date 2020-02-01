@@ -198,102 +198,99 @@ Approved September 24, 2016 by The Spectator Editorial Board.<br>
     slug: "staff",
     content: `<center>
 <h2 style="margin-bottom: 30px;">
-  Members of the 2019-2020 Spectator Editorial Board
+  Members of the 2020-2021 Spectator Editorial Board
 </h2>
 <b>Editors In Chief</b><br>
-Amy Huang<br>
-Artem Ilyanok<br>
+Erin Lee<br>
+Talia Kahan<br>
 <br>
 <table style="width:87%;text-align:center" >
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>News Editors</b><br>
             *Maddy Andersen<br>
-            *Erin Lee<br>
+            Karen Zhang<br>
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
             <b>Features Editors</b><br>
-            Talia Kahan<br>
-            Zoe Oppenheimer<br>
-            Amanda Peng<br>
+            Hayeon Ok<br>
+            *Zoe Oppenheimer<br>
+            Clara Shapiro<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
-             <b>Science Editors</b><br>
-            Michael Dekhtyar<br>
+            <b>Science Editors</b><br>
+            **Claire Shin<br>
+            **Kristoff Misquitta<br>
             <br>
         </td>
     </tr>
     <tr>
         <td style="width:30%;vertical-align: top">
              <b>Opinions Editors</b><br>
-            Michael Dekhtyar<br>
+            Kristin Cheng<br>
             *Jonathan Schneiderman<br>
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
             <b>Arts & Entertainment Editors</b><br>
-            Thomas Chen<br>
-            Emma Linderman<br>
-            Jacqueline Thom<br>
+            Suah Chung<br>
+            Miranda Lepri<br>
+            Morris Raskin<br>
             Jiahe Wang<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Humor Editors</b><br>
-            Omar Ali<br>
-            Abdulla Elkhadrway<br>
-            Victor Kuang<br>
-            Olly Stewart<br>
+            Chrisabella Javier<br>
+            *Olly Stewart<br>
+            Kelly Yip<br>
             <br>
         </td>
     </tr>
     <tr>
         <td style="width:30%;vertical-align: top" >
             <b>Sports Editors</b><br>
-            Ahmed Hussein<br>
-            **Sam Levine<br>
-            Sunan Tajwar<br>
-            Bernard Wang<br>
+            Caroline Ji<br>
+            Sam Levine<br>
+            Matt Melucci<br>
             <br>
         </td>
-        <td style="width:40%;vertical-align: top">
+        <td style="width:30%;vertical-align: top">
             <b>Web Editors</b><br>
-            *Darius Jankausakas<br>
+            Victor Siu<br>
+            **Cynthia Or<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Photography Editors</b><br>
-            Zoe Oppenheimer<br>
-            Catherine Yu<br>
-            **Matt Melucci<br>
+            *Zoe Oppenheimer<br>
+            Matt Melucci<br>
             <br>
         </td>
     </tr>
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>Art Directors</b><br>
-            Rebecca Collins<br>
             Michael Hu<br>
-            Jade Lo<br>
-            **Andrea Huang<br>
+            Andrea Huang<br>
+            **Adrianna Peng<br>
             <br>
         </td>
-        <td style="width:40%;vertical-align: top">
+        <td style="width:30%;vertical-align: top">
             <b>Layout Editors</b><br>
-            Dahae Choi<br>
-            Ahmed Sultan<br>
-            Christina Tan<br>
+            Allison Ho<br>
+            Ezra Lee<br>
+            Amy Lin<br>
+            Michelle Thuang<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Copy Editors</b><br>
-            Tiffany Cao<br>
             Brian Zhang<br>
-            Amy Halder<br>
-            **Irene Hao<br>
-            **Haley Huh<br>
+            Irene Hao<br>
+            Haley Huh<br>
             <br>
         </td>
     </tr>
@@ -303,13 +300,15 @@ Artem Ilyanok<br>
         <td style="width:40%;vertical-align: top">
             <b>Business Managers</b><br>
             Rachel Joh<br>
-            Yaru Luo<br>
+            **Daniella Maksin<br>
+            **Tina Nguyen<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
         </td>
     </tr>
 </table>
+<br>
 <b>Faculty Advisor</b><br>
 Kerry Garfinkel
 <br>
