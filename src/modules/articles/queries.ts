@@ -96,7 +96,7 @@ export interface IArticle {
   preview?: string,
   content: string,
   media?: Array<IMedium>,
-  created_at?: string,
+  created_at: string,
   volume: number,
   issue: number,
   contributors?: Array<IContributor>,
