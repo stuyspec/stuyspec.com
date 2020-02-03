@@ -1,7 +1,7 @@
 import React from "react";
 import { Row } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
-import injectSheet from "react-jss";
+import { createUseStyles } from "react-jss";
 
 import Byline from "./Byline";
 import Dateline from "./Dateline";
@@ -89,12 +89,15 @@ const styles = {
   },
 };
 
+const useStyles = createUseStyles(styles);
+
 interface IProps {
-  classes: any,
   article: IArticle
 }
 
-const ArticleRow: React.FunctionComponent<IProps> = ({ classes, article }) => {
+const ArticleRow: React.FC<IProps> = ({ article }) => {
+  const classes = useStyles();
+
   const { section } = article;
   let featuredMedia = null;
   if (article.media && article.media.length > 0) {
@@ -134,4 +137,4 @@ const ArticleRow: React.FunctionComponent<IProps> = ({ classes, article }) => {
   );
 };
 
-export default injectSheet(styles)(ArticleRow);
+export default ArticleRow;
