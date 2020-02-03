@@ -1,16 +1,16 @@
 import React from "react";
-import injectSheet from "react-jss";
+import { createUseStyles } from "react-jss";
 import { Grid, Row, Col } from "react-bootstrap/lib";
 import { Helmet } from "react-helmet";
-import { graphql } from "react-apollo";
+import { useQuery } from "react-apollo";
 import gql from "graphql-tag";
 
 import { ArticleList } from "../../articles/components";
 import { NotFoundPage } from "../../core/components";
 
 const ArtistProfileBySlug = gql`
-  query ArtistProfileBySlug($user_slug: String!, $role_slug: String!) {
-    profileByUserAndRole(user_slug: $user_slug, role_slug: $role_slug) {
+  query ArtistProfileBySlug($artist_slug: String!, $role_slug: String!) {
+    profileByUserAndRole(user_slug: $artist_slug, role_slug: $role_slug) {
       user {
         first_name
         last_name
@@ -82,18 +82,32 @@ const styles = {
   },
 };
 
-const ArtistPage = ({ classes, data }) => {
-  if (data.loading) {
+const useStyles = createUseStyles(styles);
+
+const ArtistPage = ({ artist_slug, role_slug }) => {
+  const classes = useStyles();
+
+  const result = useQuery(ArtistProfileBySlug, {
+    variables: {
+      artist_slug,
+      role_slug
+    }
+  })
+
+
+  if (result.loading) {
     return null;
   }
 
-  if (!data.profileByUserAndRole) {
+  if (!result.data.profileByUserAndRole) {
     return <NotFoundPage />;
   }
 
+  const data = result.data;
+
   const artist = data.profileByUserAndRole.user;
 
-  const articles = data.profileByUserAndRole.media.map(medium => ({
+  const articles = data.profileByUserAndRole.media.filter(m => m.article).map(medium => ({
     ...medium.article,
     media: [
       {
@@ -103,6 +117,7 @@ const ArtistPage = ({ classes, data }) => {
       },
     ],
   }));
+
   return (
     <Grid className={classes.ArtistPage}>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -126,13 +141,4 @@ const ArtistPage = ({ classes, data }) => {
   );
 };
 
-export default graphql(ArtistProfileBySlug, {
-  options: ({ match }) => ({
-    variables: {
-      user_slug: match.params.artist_slug,
-
-      // this route will always work thanks to limits set in RoutingApp
-      role_slug: match.path.split("/")[1],
-    },
-  }),
-})(injectSheet(styles)(ArtistPage));
+export default ArtistPage;

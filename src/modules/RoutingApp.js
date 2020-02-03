@@ -138,13 +138,13 @@ class RoutingAppUnconnected extends PureComponent {
                 exact
                 path={"/illustrators/:artist_slug"}
                 key={"illustrators"}
-                component={ArtistPage}
+                render={({match}) => <ArtistPage artist_slug={match.params.artist_slug} role_slug="illustrators" />}
               />
               <Route
                 exact
                 path={"/photographers/:artist_slug"}
                 key={"photographers"}
-                component={ArtistPage}
+                render={({match}) => <ArtistPage artist_slug={match.params.artist_slug} role_slug="photographers" />}
               />
               <Route
                 exact
