@@ -52,6 +52,7 @@ const styles = {
       color: "#000",
       textDecoration: "none",
     },
+      marginLeft:"40px",
   },
   navButtons: {
     marginTop: "20px",
@@ -76,7 +77,6 @@ const styles = {
     },
   },
   subscriber: {
-    borderLeft: "1px solid #888",
     marginLeft: "9px",
     paddingLeft: "8px",
   },
@@ -137,11 +137,11 @@ const MastheadBar = ({
         </Link>
         <div className={classes.navButtons}>
           <div className={classes.userTools}>
-            {session ? (
+            {/*session ? (
               <Link to="/myaccount/profile">Profile</Link>
             ) : (
               <Link to="/myaccount">Log In</Link>
-            )}
+            )*/}
             <span
               className={classes.subscriber}
               onClick={openSubscriptionModal}
