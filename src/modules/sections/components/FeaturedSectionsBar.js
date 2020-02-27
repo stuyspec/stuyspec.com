@@ -26,6 +26,7 @@ const styles = {
     justifyContent: "center",
     flexDirection: "row",
     padding: "6px",
+    width: "102%",
   },
   sectionListItem: {
     display: "inline",
@@ -74,6 +75,11 @@ const FeaturedSectionsBar = ({
           </div>
         );
       })}
+      <div key={-2} className={classes.sectionListItem}>
+        <Link to="/recruitments" className={classes.sectionLink}>
+           Recruitments
+        </Link>
+      </div>
       <div key={-1} className={classes.sectionListItem}>
         <span onClick={openSubscriptionModal} className={classes.sectionLink}>
           Newsletter
