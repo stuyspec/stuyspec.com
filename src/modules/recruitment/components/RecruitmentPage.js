@@ -133,12 +133,12 @@ const Section = ({ classes, imageLink, name, description, quotes, app }) => {
       {quotes.map(({ text, source }) => {
         return <StyledQuote text={text} source={source} />;
       })}
-      {app && (
+      {app && /*(
         <a href={app} className={classes.App}>
           {" "}
           Click here to sign up for {name}!{" "}
         </a>
-      )}
+      )*/(<p className={classes.App}> Coming Soon!</p>)}
     </div>
   );
 };
