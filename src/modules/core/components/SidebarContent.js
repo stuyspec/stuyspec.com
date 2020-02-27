@@ -75,7 +75,7 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
 
   sidebarElements.push(<hr className={classes.divider} key={-4} />);
 
-  if (session) {
+  /*if (session) {
     sidebarElements.push(
       <Link
         className={classes.sidebarSectionLink}
@@ -97,7 +97,7 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
         Log In
       </Link>,
     );
-  }
+  }*/
   sidebarElements.push(
     <Link
       className={classes.sidebarSectionLink}

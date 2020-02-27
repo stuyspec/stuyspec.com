@@ -51,6 +51,7 @@ const styles = {
   },
   FeaturedSectionsBarContainer: {
     borderTop: "1px solid black",
+    width: "107%",
   },
   myAccount: {
     display: "inline",
@@ -112,13 +113,13 @@ const Masthead = ({ classes, openSidebar, session, openSubscriptionModal }) => {
           ) : (
             <SubscribeButton onClick={openSubscriptionModal} />
           )}
-          {!session && (
+          {/*!session && (
             <div className={classes.userTools}>
               <Link to="/myaccount/profile">
                 <SignInButton />
               </Link>
             </div>
-          )}
+          )*/}
         </div>
       </div>
       <div className={classes.FeaturedSectionsBarContainer}>
