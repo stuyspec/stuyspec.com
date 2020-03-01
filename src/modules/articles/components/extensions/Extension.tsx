@@ -49,7 +49,7 @@ export function Extension({root, media, article, type, ...rest}: IProps)  {
     }
 
     //FIXME: order for media for extensions where IDs are not in ascending order is broken
-    const mediaObjs = mediaIds.includes && article.media ? article.media.filter(m => mediaIds.includes(parseInt(m.id))) : undefined
+    const mediaObjs = Array.isArray(mediaIds) && article.media ? article.media.filter(m => mediaIds.includes(parseInt(m.id))) : undefined
 
     return ReactDOM.createPortal(<ExtensionHelper media={mediaObjs} type={type} {...rest} />, root);
 }
