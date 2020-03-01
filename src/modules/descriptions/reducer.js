@@ -328,10 +328,9 @@ Kerry Garfinkel
     title: "Contact",
     slug: "contact",
     content: `<p style="text-align: center">
-  For website related questions: Contact <a href="mailto:web@stuyspec.com">web@stuyspec.com</a>.
-</p>
-<p style = "text-align: center">
-   For all other questions: Contact <a href="mailto:erintalia20@gmail.com">erintalia20@gmail.com</a>.
+  For website related questions: Contact <a href="mailto:web@stuyspec.com">web@stuyspec.com</a>. <br/>
+  For all other questions: Contact <a href="mailto:erintalia20@gmail.com">erintalia20@gmail.com</a>.
+
 </p>
 `,
   },
