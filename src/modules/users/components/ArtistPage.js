@@ -16,6 +16,7 @@ const ArtistProfileBySlug = gql`
         last_name
         email
         description
+        profile_url
       }
       media {
         media_type
@@ -75,6 +76,10 @@ const styles = {
     lineHeight: "1.5",
     marginBottom: "26px",
   },
+  image: {
+    textAlign: "center",
+    marginBottom: "20px"
+  },
   "@media (max-width: 1199px) and (min-width: 992px)": {
     ArtistPage: {
       paddingLeft: "10%",
@@ -117,6 +122,8 @@ const ArtistPage = ({ artist_slug, role_slug }) => {
       },
     ],
   }));
+  
+  const hasImage = artist.profile_url !== "/images/original/missing.png";
 
   return (
     <Grid className={classes.ArtistPage}>
@@ -125,7 +132,11 @@ const ArtistPage = ({ artist_slug, role_slug }) => {
         <meta />
       </Helmet>
       <Row>
-        <Col xs={12} sm={12} md={9} lg={9}>
+	    {hasImage &&
+        <Col xs={2} sm={1} md={1} lg={2}>
+            <img className={classes.image} src={artist.profile_url} height={120} width={120}/>
+        </Col>}
+	    <Col>
           <p className={classes.name}>
             {`${artist.first_name} ${artist.last_name}`}
           </p>
