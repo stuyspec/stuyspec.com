@@ -15,6 +15,7 @@ const ContributorBySlug = gql`
       last_name
       email
       description
+      profile_url
       articles {
         id
         slug
@@ -73,6 +74,10 @@ const styles = {
     lineHeight: "1.5",
     marginBottom: "26px",
   },
+  image: {
+    textAlign: "center",
+    marginBottom: "20px"
+  }
 };
 
 const ContributorPage = ({ classes, data }) => {
@@ -83,6 +88,7 @@ const ContributorPage = ({ classes, data }) => {
   if (contributor === null) {
     return <NotFoundPage />;
   }
+  const hasImage = contributor.profile_url !== "/images/original/missing.png";
   return (
     <Grid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -90,7 +96,11 @@ const ContributorPage = ({ classes, data }) => {
         <meta />
       </Helmet>
       <Row>
-        <Col xs={12} sm={12} md={9} lg={9}>
+        {hasImage &&
+        <Col xs={2} sm={1} md={1} lg={2}>
+            <img className={classes.image} src={contributor.profile_url} height={120} width={120}/>
+        </Col>}
+        <Col>
           <p className={classes.name}>
             {`${contributor.first_name} ${contributor.last_name}`}
           </p>
@@ -98,11 +108,13 @@ const ContributorPage = ({ classes, data }) => {
             {contributor.email}
           </a>
           <p className={classes.description}>{contributor.description}</p>
+        </Col>
+      </Row>
+      <Row>
           <ArticleList
             articles={contributor.articles}
             label="Latest Articles"
           />
-        </Col>
       </Row>
     </Grid>
   );
