@@ -125,6 +125,13 @@ const Quote = ({ classes, text, source }) => {
 const StyledQuote = injectSheet(styles)(Quote);
 
 const Section = ({ classes, imageLink, name, description, quotes, app }) => {
+  const appLink = (app) ?
+      <a className={classes.App} href={app} >
+         {" "}
+         Click here to sign up for {name}!{" "}
+      </a>:
+      <p className={classes.App}>Coming Soon!</p>
+
   return (
     <div className={classes.Section}>
       <h1 className={classes.SectionTitle}>{name}</h1>
@@ -133,12 +140,7 @@ const Section = ({ classes, imageLink, name, description, quotes, app }) => {
       {quotes.map(({ text, source }) => {
         return <StyledQuote text={text} source={source} />;
       })}
-      {app && /*(
-        <a href={app} className={classes.App}>
-          {" "}
-          Click here to sign up for {name}!{" "}
-        </a>
-      )*/(<p className={classes.App}> Coming Soon!</p>)}
+      {appLink}
     </div>
   );
 };
