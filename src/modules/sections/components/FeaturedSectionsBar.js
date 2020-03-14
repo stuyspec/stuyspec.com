@@ -26,7 +26,7 @@ const styles = {
     justifyContent: "center",
     flexDirection: "row",
     padding: "6px",
-    width: "102%",
+    width: "100%",
   },
   sectionListItem: {
     display: "inline",
@@ -80,11 +80,12 @@ const FeaturedSectionsBar = ({
            Recruitments
         </Link>
       </div>
+      {/*
       <div key={-1} className={classes.sectionListItem}>
         <span onClick={openSubscriptionModal} className={classes.sectionLink}>
           Newsletter
         </span>
-      </div>
+      </div>*/}
       {!omitSearch && (
         <div key={-3} className={classes.sectionListItem}>
           <Link to="/search" className={classes.sectionLink}>
