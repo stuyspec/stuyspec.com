@@ -66,7 +66,7 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
         Join Spec Humor!
         We write funny and satirical pieces for The Spec and unlike other departments, everything we publish is libel and slander which means that you'll be in control of what everyone says!`,
     quotes: [],
-    link: "",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSebWEsyBO4o4-yD35cIKiI90ce6vB1VdKsnZjJ1-bjedPo6MA/viewform",
   },
   {
     name: "Sports",
@@ -188,7 +188,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         source: "Alexander Radu",
       },
     ],
-    link: "",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSdhDieYwIPgZu_KbRDXlBhGGqEgKwdhTw78B5fhtEnX9eK1Ug/viewform",
   },
   {
     name: "Art",
