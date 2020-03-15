@@ -99,7 +99,7 @@ const ContributorPage = ({ classes, data }) => {
   if (contributor === null) {
     return <NotFoundPage />;
   }
-  const hasImage = contributor.profile_url !== "/images/original/missing.png";
+  const hasImage = contributor.profile_pic_url !== "";
   return (
     <Grid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
