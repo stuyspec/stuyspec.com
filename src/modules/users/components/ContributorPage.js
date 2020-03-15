@@ -75,8 +75,10 @@ const styles = {
     marginBottom: "26px",
   },
   image: {
-    textAlign: "center",
-    marginBottom: "20px"
+    marginBottom: "20px",
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
   }
 };
 
@@ -97,10 +99,10 @@ const ContributorPage = ({ classes, data }) => {
       </Helmet>
       <Row>
         {hasImage &&
-        <Col xs={2} sm={1} md={1} lg={2}>
+        <Col xs={50} sm={3} md={2} lg={2}>
             <img className={classes.image} src={contributor.profile_url} height={120} width={120}/>
         </Col>}
-        <Col>
+        <Col xs={20} sm={30} md={10} lg={10}>
           <p className={classes.name}>
             {`${contributor.first_name} ${contributor.last_name}`}
           </p>

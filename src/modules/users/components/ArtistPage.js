@@ -77,8 +77,10 @@ const styles = {
     marginBottom: "26px",
   },
   image: {
-    textAlign: "center",
-    marginBottom: "20px"
+    marginBottom: "20px",
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   "@media (max-width: 1199px) and (min-width: 992px)": {
     ArtistPage: {
@@ -133,7 +135,7 @@ const ArtistPage = ({ artist_slug, role_slug }) => {
       </Helmet>
       <Row>
 	    {hasImage &&
-        <Col xs={2} sm={1} md={1} lg={2}>
+        <Col xs={50} sm={3} md={2} lg={2}>
             <img className={classes.image} src={artist.profile_url} height={120} width={120}/>
         </Col>}
 	    <Col>
