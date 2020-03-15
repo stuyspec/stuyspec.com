@@ -134,7 +134,7 @@ const ArtistPage = ({ artist_slug, role_slug }) => {
     ],
   }));
   
-  const hasImage = artist.profile_url !== "/images/original/missing.png";
+  const hasImage = artist.profile_pic_url !== "";
 
   return (
     <Grid className={classes.ArtistPage}>
