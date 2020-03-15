@@ -15,7 +15,7 @@ const ContributorBySlug = gql`
       last_name
       email
       description
-      profile_url
+      profile_pic_url
       articles {
         id
         slug
@@ -49,6 +49,9 @@ const styles = {
     fontWeight: 500,
     lineHeight: 1,
     marginBottom: "11px",
+    "@media screen and (max-width: 760px)": {
+        textAlign: "center",
+    }
   },
   email: {
     color: "#3084df",
@@ -56,6 +59,9 @@ const styles = {
     fontFamily: "Minion Pro",
     fontSize: "17px",
     marginBottom: "7px",
+    "@media screen and (max-width: 760px)": {
+        textAlign: "center",
+    }
   },
   latest: {
     borderTop: "1px solid #000",
@@ -77,8 +83,11 @@ const styles = {
   image: {
     marginBottom: "20px",
     display: "block",
-    marginLeft: "auto",
-    marginRight: "auto",
+    margin: "0 auto",
+    width: "auto",
+    "@media screen and (max-width: 760px)": {
+        transform: "translate(5%, 0%)",
+    }
   }
 };
 
@@ -100,9 +109,10 @@ const ContributorPage = ({ classes, data }) => {
       <Row>
         {hasImage &&
         <Col xs={50} sm={3} md={2} lg={2}>
-            <img className={classes.image} src={contributor.profile_url} height={120} width={120}/>
+            <img className={classes.image} src={contributor.profile_pic_url} height={120} width={120}/>
         </Col>}
         <Col xs={20} sm={30} md={10} lg={10}>
+          
           <p className={classes.name}>
             {`${contributor.first_name} ${contributor.last_name}`}
           </p>
