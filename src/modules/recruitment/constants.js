@@ -34,7 +34,7 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
       },
     ],
     link:
-      "https://docs.google.com/forms/d/e/1FAIpQLSeyZcIELMcOdKRlapEqpXDVRiQq1Hr8uC9MLqCWi9Xol5lDeA/viewform",
+      "https://docs.google.com/document/d/1P2O4lPIRDbXtPXd66pWJGB0Sg3sPvTfqZh1Pcal7aOA/edit",
   },
   {
     name: "Features",
@@ -162,7 +162,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      "https://docs.google.com/forms/d/e/1FAIpQLScznOfh0kB-uRXOMcrBS6BK9cvZorPEVYmegn63BfENDvlRpg/viewform",
+      "https://docs.google.com/forms/d/e/1FAIpQLSfrVx_-h4OoROyKfm1MTrSI06B56j4k8jmsgEb4zb9AJeU-1Q/viewform?usp=send_form",
   },
   {
     name: "Business",
