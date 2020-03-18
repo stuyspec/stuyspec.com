@@ -15,7 +15,7 @@ const ContributorBySlug = gql`
       last_name
       email
       description
-      profile_url
+      profile_pic_url
       articles {
         id
         slug
@@ -49,6 +49,9 @@ const styles = {
     fontWeight: 500,
     lineHeight: 1,
     marginBottom: "11px",
+    "@media screen and (max-width: 760px)": {
+        textAlign: "center",
+    }
   },
   email: {
     color: "#3084df",
@@ -56,6 +59,9 @@ const styles = {
     fontFamily: "Minion Pro",
     fontSize: "17px",
     marginBottom: "7px",
+    "@media screen and (max-width: 760px)": {
+        textAlign: "center",
+    }
   },
   latest: {
     borderTop: "1px solid #000",
@@ -75,8 +81,13 @@ const styles = {
     marginBottom: "26px",
   },
   image: {
-    textAlign: "center",
-    marginBottom: "20px"
+    marginBottom: "20px",
+    display: "block",
+    margin: "0 auto",
+    width: "auto",
+    "@media screen and (max-width: 760px)": {
+        transform: "translate(5%, 0%)",
+    }
   }
 };
 
@@ -88,7 +99,7 @@ const ContributorPage = ({ classes, data }) => {
   if (contributor === null) {
     return <NotFoundPage />;
   }
-  const hasImage = contributor.profile_url !== "/images/original/missing.png";
+  const hasImage = contributor.profile_pic_url !== "";
   return (
     <Grid>
       <Helmet titleTemplate="%s | The Stuyvesant Spectator">
@@ -97,10 +108,11 @@ const ContributorPage = ({ classes, data }) => {
       </Helmet>
       <Row>
         {hasImage &&
-        <Col xs={2} sm={1} md={1} lg={2}>
-            <img className={classes.image} src={contributor.profile_url} height={120} width={120}/>
+        <Col xs={50} sm={3} md={2} lg={2}>
+            <img className={classes.image} src={contributor.profile_pic_url} height={120} width={120}/>
         </Col>}
-        <Col>
+        <Col xs={20} sm={30} md={10} lg={10}>
+          
           <p className={classes.name}>
             {`${contributor.first_name} ${contributor.last_name}`}
           </p>

@@ -16,7 +16,7 @@ const ArtistProfileBySlug = gql`
         last_name
         email
         description
-        profile_url
+        profile_pic_url
       }
       media {
         media_type
@@ -51,6 +51,9 @@ const styles = {
     fontWeight: 500,
     lineHeight: 1,
     marginBottom: "11px",
+    "@media screen and (max-width: 760px)": {
+        textAlign: "center",
+    }
   },
   email: {
     color: "#3084df",
@@ -58,6 +61,9 @@ const styles = {
     fontFamily: "Minion Pro",
     fontSize: "17px",
     marginBottom: "7px",
+    "@media screen and (max-width: 760px)": {
+        textAlign: "center",
+    }
   },
   latest: {
     borderTop: "1px solid #000",
@@ -77,8 +83,13 @@ const styles = {
     marginBottom: "26px",
   },
   image: {
-    textAlign: "center",
-    marginBottom: "20px"
+    marginBottom: "20px",
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
+    "@media screen and (max-width: 760px)": {
+        transform: "translate(5%, 0%)",
+    }
   },
   "@media (max-width: 1199px) and (min-width: 992px)": {
     ArtistPage: {
@@ -123,7 +134,7 @@ const ArtistPage = ({ artist_slug, role_slug }) => {
     ],
   }));
   
-  const hasImage = artist.profile_url !== "/images/original/missing.png";
+  const hasImage = artist.profile_pic_url !== "";
 
   return (
     <Grid className={classes.ArtistPage}>
@@ -133,8 +144,8 @@ const ArtistPage = ({ artist_slug, role_slug }) => {
       </Helmet>
       <Row>
 	    {hasImage &&
-        <Col xs={2} sm={1} md={1} lg={2}>
-            <img className={classes.image} src={artist.profile_url} height={120} width={120}/>
+        <Col xs={50} sm={3} md={2} lg={2}>
+            <img className={classes.image} src={artist.profile_pic_url} height={120} width={120}/>
         </Col>}
 	    <Col>
           <p className={classes.name}>
@@ -144,9 +155,11 @@ const ArtistPage = ({ artist_slug, role_slug }) => {
             {artist.email}
           </a>
           <p className={classes.description}>{artist.description}</p>
+        </Col>
+      </Row>
+      <Row> 
           <div className={classes.latest}>Photos</div>
           <ArticleList articles={articles} />
-        </Col>
       </Row>
     </Grid>
   );
