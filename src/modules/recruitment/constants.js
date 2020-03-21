@@ -10,10 +10,10 @@ export const SECTIONS = [
     The overarching goal is to create engaging, substantive, and relevant content to provide a closer look at the world.`,
     quotes: [
       {
-        text: `Joining the Spectator Opinions Department has been the best decision I have made freshman year here at Stuyvesant. 
-        Throughout the half of a year on the department, I’ve had the opportunity to share many of my opinions that I only told my close friends 
-        or family to a wider audience. With writing drafts and coming up with arguments, I’ve also seen myself grow as a writer, allowing me to support my 
-        arguments more effectively. As teenagers, it’s easy to feel like our voices do not matter as much as adults, 
+        text: `Joining the Spectator Opinions Department has been the best decision I have made freshman year here at Stuyvesant.
+        Throughout the half of a year on the department, I’ve had the opportunity to share many of my opinions that I only told my close friends
+        or family to a wider audience. With writing drafts and coming up with arguments, I’ve also seen myself grow as a writer, allowing me to support my
+        arguments more effectively. As teenagers, it’s easy to feel like our voices do not matter as much as adults,
         but this department has allowed for many students’ voices to be recognized, and I find that very special.`,
         source: "Angela Wong",
       },
@@ -200,21 +200,15 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     you can flaunt your skills in thematic spreads, comics, or Caption Contest illustrations! We encourage the use of all media!`,
     quotes: [
       {
-        text: `Why join Spec Art.. why WOULDN'T you join Spec Art? 
-        Imagine sitting home and drawing away, putting your talent into a drawing that will be shown to almost everyone in the school. 
-        Drawing for the art department has been such a fantastic experience. The club meetings are incredibly fun and relaxing as well. 
-        You can socialize with friends and feel free to be yourself. 
-        With different articles to draw for every 2 weeks, you'll find yourself challenged, but having fun at the same time.`,
-        source: "Fahim Rahman",
+        text: `Spectator Art has allowed me to learn about and deeply analyze current issues, vital concepts both timeless and immediate,
+        as well as relearn how my mind functions in converting a written idea into an artistic manifestation. Being able to support a
+        writer’s message and visually enhance the Spectator has been a rewarding experience.`,
+        source: "Yume Igarashi",
       },
       {
-        text: `Spectator Art is the best club I have joined so far. When I see my art featured in The Spectator, I feel this sense of ecstasy! 
-        Why doodle in your notebook when you could send it in and have everyone get to see it? 
-        Although I’m just a freshman, I feel like I really fit into this artistic community; the people are amazing and everyone is so supportive. 
-        Like every art club, there is always someone better than me, but their art serves as motivation for me to improve! 
-        All the drawing I do boosts my sense of confidence. 
-        This club is everything I can ask for.`,
-        source: "Alex Lin",
+        text: `Spectator Art simultaneously drives my passion to create art and provides me with a platform to share my art with a large,
+        supportive audience. Honestly, I don’t think I would’ve drawn much in high school at all if it wasn’t for Spec Art.`,
+        source: "Sammi Chen`",
       },
     ],
     link:
