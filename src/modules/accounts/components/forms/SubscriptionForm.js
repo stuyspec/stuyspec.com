@@ -18,6 +18,7 @@ const styles = {
     padding: "11px",
     margin: "9px 0 0 0",
     width: "275px",
+    maxWidth: "90%",
     "&:disabled": {
       background: "#ddd",
       borderColor: "#ddd",
@@ -33,6 +34,7 @@ const styles = {
     fontWeight: 300,
     padding: "11px",
     width: "275px",
+    maxWidth: "90%"
   },
   syncValidation: {
     color: "red",

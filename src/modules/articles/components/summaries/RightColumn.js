@@ -28,6 +28,7 @@ const styles = {
     fontWeight: "bold",
     fontSize: "24px",
     lineHeight: 1.22,
+    marginTop: "15px",
     marginBottom: "1px",
     "&:hover, &:active, &:focus": {
       color: "#000",
@@ -123,8 +124,10 @@ const RightColumn = ({ classes, articles }) => {
         className={classes.issuuEmbed}>
         <a href="https://issuu.com/stuyspectator">
           <img
-            src={`${process.env.PUBLIC_URL}/img/virtualArchives.jpg`}
+            src={`${process.env.PUBLIC_URL}/img/virtualArchives.png`}
             href="https://issuu.com/stuyspectator"
+            height={384}
+            width={248}
           />
           <div className={classes.virtualArchivesLabel}>
             Virtual Archives

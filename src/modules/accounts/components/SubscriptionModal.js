@@ -9,16 +9,17 @@ import { closeSubscriptionModal, subscribe } from "../actions";
 
 const styles = {
   SubscriptionModal: {
-    left: "30.5%",
-    position: "absolute",
     textAlign: "center",
     top: "3%",
     width: "483px",
+    margin: "auto",
+    maxWidth: "100%",
+    padding: "10px"
   },
   film: {
     display: "block",
     height: "89px",
-    marginLeft: "40%",
+    margin: "auto",
     width: "164px",
   },
   playlist: {
@@ -30,7 +31,7 @@ const styles = {
   borough: {
     display: "block",
     height: "145px",
-    margin: "0 0 30px 25%",
+    margin: "auto auto 30px auto",
     width: "234px",
   },
   notInterested: {
@@ -44,19 +45,27 @@ const styles = {
     margin: "20px 0",
     padding: "11px",
     width: "275px",
+    maxWidth: "90%"
   },
   newsletter: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "28px",
     margin: "0 0 13px",
+    padding: "0 10px"
   },
   inbox: {
     color: "#000",
     fontFamily: "Minion Pro",
     fontSize: "21px",
     margin: "0 0 24px 0",
+    padding: "0 10px"
   },
+  '@media (max-width: 540px)':{
+    playlist: {
+      display: "none"
+    }
+  }
 };
 
 const SubscriptionModal = ({
@@ -66,37 +75,37 @@ const SubscriptionModal = ({
   subscribe,
 }) => {
   return (
-    <Modal
-      dialogClassName={classes.SubscriptionModal}
-      show={isSubscriptionModalOpen}
-      onHide={closeSubscriptionModal}
-    >
-      <img
-        className={classes.borough}
-        src="https://i.imgur.com/4dYhg6S.png"
-        title="Art by Vivian Lin (Class of '18)"
-      />
-      <img
-        className={classes.playlist}
-        src="https://i.imgur.com/zEV6AQ5.png"
-        title="Art by Vivian Lin (Class of '18)"
-      />
-      <p className={classes.newsletter}>Get The Spectator Newsletter.</p>
-      <p className={classes.inbox}>Delivered directly to your inbox.</p>
-      <SubscriptionForm onSubmit={values => subscribe(values)} />
-      <button
-        onClick={closeSubscriptionModal}
-        className={classes.notInterested}
+      <Modal
+          dialogClassName={classes.SubscriptionModal}
+          show={isSubscriptionModalOpen}
+          onHide={closeSubscriptionModal}
       >
-        I am not interested.
-      </button>
-      <br />
-      <img
-        className={classes.film}
-        src="https://i.imgur.com/CY9Xf3s.png"
-        title="Art by Karen Lai (Class of '19)"
-      />
-    </Modal>
+        <img
+            className={classes.borough}
+            src="https://i.imgur.com/4dYhg6S.png"
+            title="Art by Vivian Lin (Class of '18)"
+        />
+        <img
+            className={classes.playlist}
+            src="https://i.imgur.com/zEV6AQ5.png"
+            title="Art by Vivian Lin (Class of '18)"
+        />
+        <p className={classes.newsletter}>Get The Spectator Newsletter.</p>
+        <p className={classes.inbox}>Delivered directly to your inbox.</p>
+        <SubscriptionForm onSubmit={values => subscribe(values)} />
+        <button
+            onClick={closeSubscriptionModal}
+            className={classes.notInterested}
+        >
+          I am not interested.
+        </button>
+        <br />
+        <img
+            className={classes.film}
+            src="https://i.imgur.com/CY9Xf3s.png"
+            title="Art by Karen Lai (Class of '19)"
+        />
+      </Modal>
   );
 };
 
