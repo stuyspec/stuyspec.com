@@ -19,7 +19,7 @@ export const SECTIONS = [
       },
     ],
     link:
-      "https://docs.google.com/document/d/11GuzE86vDBd-97AX0yfdmjhLeYtjP8-DnKr_er569Uc/edit?usp=sharing",
+      null,
   },
   {
     name: "Arts and Entertainment",
@@ -34,7 +34,7 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
       },
     ],
     link:
-      "https://docs.google.com/document/d/1P2O4lPIRDbXtPXd66pWJGB0Sg3sPvTfqZh1Pcal7aOA/edit",
+      null,
   },
   {
     name: "Features",
@@ -55,7 +55,8 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
         source: "Amy Huang",
       },
     ],
-    link: "https://docs.google.com/forms/d/e/1FAIpQLScEPVdCPxHr8OWX3t_-N25DdtsnC00RYmKC8wTKw5utw7FxFQ/viewform?vc=0&c=0&w=1",
+    link: 
+      null,
   },
   {
     name: "Humor",
@@ -80,7 +81,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      "https://docs.google.com/forms/d/e/1FAIpQLSfimDo0xb2mZo-GxA3N9Q9vdYIYgX2mL6OXP6GlLvOvoskJQg/viewform?vc=0&c=0&w=1",
+      null,
   },
   {
     name: "News",
@@ -88,7 +89,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     description: `Do you want to be a part of the best department of The Spectator? Do you want to get tight with the administration? Do you want to see your name and your articles on the front page? Do you want to find out about the coolest news at Stuy before anyone else? Do you want to report on that cool news? If so, join the Spectator News Department!!! `,
     quotes: [],
     link:
-      "https://docs.google.com/forms/d/e/1FAIpQLSdbrSy-wJpiEq7_t-DxFWft-iXJLXz7rkfssHhwT5wvN3VNxw/viewform",
+      null,
   },
   {
     name: "Copy",
@@ -106,7 +107,8 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         source: "Tasfia Bashar",
       },
     ],
-    link: "https://docs.google.com/forms/d/e/1FAIpQLSeSxZQ0AXLNjEkKbtJYb86ilRtnDSRt__Wa-t6Ps3KJl70VQg/viewform?vc=0&c=0&w=1",
+    link:
+      null,
   },
   {
     name: "Web",
@@ -125,7 +127,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      "https://forms.gle/1Z44JHDziJrkpaQL6",
+      null,
   },
   {
     name: "Layout",
@@ -138,7 +140,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     the formatting of each issue as it is released.`,
     quotes: [],
     link:
-      "https://docs.google.com/forms/d/e/1FAIpQLScs9MbLQNdAVJzuUkiib7NYMDV1DVb5uAccfMUQmFiu-ei24w/viewform",
+      null,
   },
   {
     name: "Photo",
@@ -162,7 +164,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      "https://docs.google.com/forms/d/e/1FAIpQLSfrVx_-h4OoROyKfm1MTrSI06B56j4k8jmsgEb4zb9AJeU-1Q/viewform?usp=send_form",
+      null,
   },
   {
     name: "Business",
@@ -188,7 +190,8 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
         source: "Alexander Radu",
       },
     ],
-    link: "https://docs.google.com/forms/d/e/1FAIpQLSdhDieYwIPgZu_KbRDXlBhGGqEgKwdhTw78B5fhtEnX9eK1Ug/viewform",
+    link:
+      null,
   },
   {
     name: "Art",
@@ -212,7 +215,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      "https://docs.google.com/forms/d/e/1FAIpQLSeyZcIELMcOdKRlapEqpXDVRiQq1Hr8uC9MLqCWi9Xol5lDeA/viewform",
+      null,
   },
   {
     name: "Science",
@@ -224,6 +227,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     and disruptive new theories or technologies so the next time Elon Musk launches a sports car into space,
     we’ll be the ones covering it.`,
     quotes: [],
-    link: "https://docs.google.com/document/d/1G4FB3e-Wlsct-OnbNy2gvbGmYalHMfjxUPm27CTAeNY/edit?usp=sharing",
+    link:
+      null,
   },
 ];

@@ -118,7 +118,7 @@ class PageLayout extends PureComponent {
             {children}
             <Grid fluid className={classes.footerAd}>
               <div className={classes.horizontalAdContainer}>
-                <HorizontalAd />
+                {/*<HorizontalAd />*/}
               </div>
             </Grid>
           </div>

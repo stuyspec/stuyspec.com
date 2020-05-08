@@ -130,7 +130,7 @@ const Section = ({ classes, imageLink, name, description, quotes, app }) => {
          {" "}
          Click here to sign up for {name}!{" "}
       </a>:
-      <p className={classes.App}>Coming Soon!</p>
+      <p className={classes.App}>Recruitments in the Fall!</p>
 
   return (
     <div className={classes.Section}>

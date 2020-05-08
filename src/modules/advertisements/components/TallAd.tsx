@@ -24,12 +24,12 @@ const TallAd: React.FC<IProps> = ({ advertisements, ad }) => {
   const classes = useStyles();
 
   if (!ad) {
-    ad = advertisements[0];
+    ad = advertisements[Math.round(Math.random())];
   }
   return (
     <div className={classes.TallAd}>
       <a href={ad.url} target="_blank">
-        <img className={classes.img} src={pathToAds + ad.filename} />
+        <img className={classes.img} src={pathToAds + ad.filename}/>
       </a>
     </div>
   );
