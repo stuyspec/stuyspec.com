@@ -24,7 +24,7 @@ const TallAd: React.FC<IProps> = ({ advertisements, ad }) => {
   const classes = useStyles();
 
   if (!ad) {
-    ad = advertisements[Math.round(Math.random())];
+    ad = advertisements[0];
   }
   return (
     <div className={classes.TallAd}>
