@@ -4,7 +4,6 @@ import { Col } from "react-bootstrap/lib";
 import { Link } from "react-router-dom";
 
 import { Byline, Dateline } from "../";
-import { ISSUU_CONFIG } from "../../../../constants";
 
 const styles = {
   RightColumn: {
@@ -128,6 +127,7 @@ const RightColumn = ({ classes, articles }) => {
             href="https://issuu.com/stuyspectator"
             height={384}
             width={248}
+            alt=""
           />
           <div className={classes.virtualArchivesLabel}>
             Virtual Archives
@@ -140,7 +140,9 @@ const RightColumn = ({ classes, articles }) => {
             <div>
               <Link to={`${primarySection.permalink}/${primaryArticle.slug}`}>
                 <figure className={classes.figure}>
-                  <img src={primaryArticle.media[0].attachment_url} />
+                  <img src={primaryArticle.media[0].attachment_url} 
+                       alt={primaryArticle.media[0].title}
+                  />
                 </figure>
               </Link>
             </div>
@@ -168,7 +170,9 @@ const RightColumn = ({ classes, articles }) => {
                 to={`${secondarySection.permalink}/${secondaryArticle.slug}`}
               >
                 <figure className={classes.figure}>
-                  <img src={secondaryArticle.media[0].attachment_url} />
+                  <img src={secondaryArticle.media[0].attachment_url} 
+                       alt={secondaryArticle.media[0].title}
+                  />
                 </figure>
               </Link>
             </div>

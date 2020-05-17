@@ -23,10 +23,6 @@ const styles = {
 };
 
 class SearchPage extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   handleSearchFormSubmit = ({ query }) => {
     // We want a reusable search path
     this.props.history.push(

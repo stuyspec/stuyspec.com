@@ -82,8 +82,8 @@ const ArticleFooter = ({ classes, article, subscribe }) => {
           {section.permalink.includes('special-issues') ? (
             <span><Link to={section.permalink}>{section.name}</Link>, {section.description}</span>
           ) : (
-            <a href="https://issuu.com/stuyspectator/docs" target="_blank">
-              {`Volume ${toRoman(article.volume)}, Issue ${article.issue}`}
+            <a href="https://issuu.com/stuyspectator/docs" target="_blank" rel="noopener noreferrer">
+              {`Volume ${toRoman(volume)}, Issue ${issue}`}
               {/* TODO: Lookup table for individual volume/issue links */}
             </a>
           )}.
