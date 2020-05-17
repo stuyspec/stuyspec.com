@@ -19,7 +19,7 @@ const HorizontalAd = ({ classes, advertisements }) => {
     return (
       <div className={classes.HorizontalAd}>
         <a href={ad.url} target="_blank">
-          <img className={classes.img} src={pathToAds + ad.filename} />
+          <img className={classes.img} src={pathToAds + ad.filename}/>
         </a>
       </div>
     );
