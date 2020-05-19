@@ -50,6 +50,7 @@ const reducer = (state = { ...initialState }, action) => {
           session: headers,
         };
       }
+      break;
     }
 
     case SIGN_IN_PENDING:
