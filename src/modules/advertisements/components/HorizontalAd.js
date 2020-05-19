@@ -9,12 +9,12 @@ const styles = {
     width: "100%",
   },
   img: {
-    width: "100%",
+    height: "500px",
   },
 };
 
 const HorizontalAd = ({ classes, advertisements }) => {
-  const ad = advertisements[1];
+  const ad = advertisements[0];
   if (ad) {
     return (
       <div className={classes.HorizontalAd}>

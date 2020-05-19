@@ -39,7 +39,13 @@ const styles = {
       display: "block",
       margin: "0 auto",
       width: "75%",
+      textAlign: "center",
     },
+  },
+  "@media screen and (min-width: 769px)": {
+      horizontalAdContainer: {
+          display: "none",
+      }
   },
   "@media (max-width: 991px)": {
     footerAd: {
@@ -118,7 +124,7 @@ class PageLayout extends PureComponent {
             {children}
             <Grid fluid className={classes.footerAd}>
               <div className={classes.horizontalAdContainer}>
-                {/*<HorizontalAd />*/}
+                {<HorizontalAd />}
               </div>
             </Grid>
           </div>
