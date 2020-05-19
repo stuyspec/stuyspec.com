@@ -27,10 +27,10 @@ const TallAd: React.FC<IProps> = ({ advertisements, ad }) => {
     ad = advertisements[0];
   }
   return (
-    <div className={classes.TallAd}>
-      <a href={ad.url} target="_blank">
-        <img className={classes.img} src={pathToAds + ad.filename}/>
-      </a>
+      <div className={classes.TallAd}>
+        <a href={ad.url} target="_blank">
+            <img className={classes.img} src={pathToAds + ad.filename}/>
+        </a>
     </div>
   );
 };
