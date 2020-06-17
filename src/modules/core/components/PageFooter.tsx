@@ -105,11 +105,11 @@ const styles = {
     sectionFlex: {
       flexWrap: "nowrap",
       height: "auto",
-      "& > div:nth-child(11) ~ div": {
-        // shows first eleven section blocks
+      "& > div:nth-child(6) ~ div": {
+        // shows first six section blocks
         display: "none"
       },
-      "& > div:nth-child(11)": {
+      "& > div:nth-child(6)": {
         borderBottom: "1px solid #ddd"
       }
     },
