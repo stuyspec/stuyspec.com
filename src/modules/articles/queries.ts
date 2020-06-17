@@ -124,6 +124,7 @@ export const RIGHT_RAIL_QUERY = gql`
         slug
       }
       media {
+        title
         thumb_attachment_url
       }
       section {
@@ -141,6 +142,7 @@ export interface IRightRailData {
     title: string,
     contributors?: Array<IContributor>,
     media?: Array<{
+      title: string,
       thumb_attachment_url: string,
     }>,
     section: {

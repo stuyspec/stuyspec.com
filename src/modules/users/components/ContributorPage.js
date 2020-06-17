@@ -109,7 +109,7 @@ const ContributorPage = ({ classes, data }) => {
       <Row>
         {hasImage &&
         <Col xs={50} sm={3} md={2} lg={2}>
-            <img className={classes.image} src={contributor.profile_pic_url} height={120} width={120}/>
+            <img className={classes.image} src={contributor.profile_pic_url} height={120} width={120} alt={contributor.first_name + " " + contributor.last_name}/>
         </Col>}
         <Col xs={20} sm={30} md={10} lg={10}>
           

@@ -8,7 +8,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import humps from "humps";
 import injectSheet from "react-jss";
 
 import Dateline from "../../articles/components/Dateline";

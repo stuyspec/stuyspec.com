@@ -1,6 +1,5 @@
 import React from "react";
 import { graphql, ChildDataProps } from "react-apollo";
-import humps from "humps";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 
@@ -137,7 +136,8 @@ const RightRail: React.FunctionComponent<IProps> = ({ classes, data }) => {
               {article.media && article.media.length > 0 && (
                 <Link to={`${section.permalink}/${article.slug}`}>
                   <figure className={classes.figure}>
-                    <img src={article.media[0].thumb_attachment_url} />
+                      <img src={article.media[0].thumb_attachment_url} 
+                           alt={article.media[0].title}/>
                   </figure>
                 </Link>
               )}

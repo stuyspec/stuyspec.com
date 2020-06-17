@@ -7,7 +7,6 @@ import gql from "graphql-tag";
 import { ConnectedRouter } from "connected-react-router";
 import queryString from "query-string";
 import appHistory from "../tools/appHistory";
-import store from "../store"
 
 import {
   EditProfilePage,

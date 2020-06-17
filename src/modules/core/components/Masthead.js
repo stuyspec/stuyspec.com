@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
 import { Grid } from "react-bootstrap/lib";
-import SignInButton from "./SignInButton";
 import SubscribeButton from "./SubscribeButton";
 import SectionsButton from "./SectionsButton";
 import { Search } from "../icons";

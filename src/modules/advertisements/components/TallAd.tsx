@@ -28,8 +28,8 @@ const TallAd: React.FC<IProps> = ({ advertisements, ad }) => {
   }
   return (
       <div className={classes.TallAd}>
-        <a href={ad.url} target="_blank">
-            <img className={classes.img} src={pathToAds + ad.filename}/>
+        <a href={ad.url} target="_blank" rel="noopener noreferrer">
+            <img className={classes.img} src={pathToAds + ad.filename} alt="Support Kweller Prep!"/>
         </a>
     </div>
   );

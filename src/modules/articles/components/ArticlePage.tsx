@@ -1,5 +1,5 @@
 import React from "react";
-import { Query, useQuery } from "react-apollo";
+import { useQuery } from "react-apollo";
 import { createUseStyles } from "react-jss";
 import Grid from "react-bootstrap/lib/Grid";
 import { Helmet } from "react-helmet";

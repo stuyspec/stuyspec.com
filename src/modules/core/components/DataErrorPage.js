@@ -60,6 +60,7 @@ const DataErrorPage = ({ classes, action }) => {
         src="/img/wow-face.png"
         title="Art by Jade Lo (Class Of '20)"
         className={classes.wowFace}
+        alt=""
       />
       <p className={classes.requestText}>
         If the error persists, please e-mail The Spectator Web Department at
