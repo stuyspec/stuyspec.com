@@ -18,8 +18,8 @@ const HorizontalAd = ({ classes, advertisements }) => {
   if (ad) {
     return (
       <div className={classes.HorizontalAd}>
-        <a href={ad.url} target="_blank">
-          <img className={classes.img} src={pathToAds + ad.filename}/>
+        <a href={ad.url} target="_blank" rel="noopener noreferrer">
+          <img className={classes.img} src={pathToAds + ad.filename} alt="Advertisement"/>
         </a>
       </div>
     );

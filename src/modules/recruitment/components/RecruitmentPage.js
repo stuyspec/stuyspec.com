@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import injectSheet from "react-jss";
 
 import * as constants from "../constants";
@@ -135,7 +135,7 @@ const Section = ({ classes, imageLink, name, description, quotes, app }) => {
   return (
     <div className={classes.Section}>
       <h1 className={classes.SectionTitle}>{name}</h1>
-      {imageLink && <img src={imageLink} className={classes.Image} />}
+      {imageLink && <img src={imageLink} className={classes.Image} alt="Quote"/>}
       <p className={classes.SectionText}>{description}</p>
       {quotes.map(({ text, source }) => {
         return <StyledQuote text={text} source={source} />;

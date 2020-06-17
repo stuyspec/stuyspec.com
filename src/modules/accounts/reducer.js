@@ -50,6 +50,7 @@ const reducer = (state = { ...initialState }, action) => {
           session: headers,
         };
       }
+      break;
     }
 
     case SIGN_IN_PENDING:
@@ -100,6 +101,7 @@ const reducer = (state = { ...initialState }, action) => {
             "Welcome! You can confirm your account through the link sent to the email you signed up with.",
         },
       };
+
     }
     case SIGN_UP_REJECTED: {
       return {
@@ -222,8 +224,11 @@ const reducer = (state = { ...initialState }, action) => {
         session: state.session,
       };
     }
+
+    default: {
+        return state;
+    }
   }
-  return state;
 };
 
 export default reducer;

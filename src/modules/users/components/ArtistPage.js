@@ -145,7 +145,12 @@ const ArtistPage = ({ artist_slug, role_slug }) => {
       <Row>
 	    {hasImage &&
         <Col xs={50} sm={3} md={2} lg={2}>
-            <img className={classes.image} src={artist.profile_pic_url} height={120} width={120}/>
+            <img 
+                className={classes.image} 
+                src={artist.profile_pic_url} 
+                height={120} width={120}
+                alt={artist.first_name + " " + artist.last_name}    
+            />
         </Col>}
 	    <Col>
           <p className={classes.name}>

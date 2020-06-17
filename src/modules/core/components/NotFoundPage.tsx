@@ -51,7 +51,7 @@ const NotFoundPage: React.FC = () => {
       <p>
         Please try a modified query, or visit our <Link to="/">home page</Link>.
       </p>
-      <img src={`${process.env.PUBLIC_URL}/img/404.jpg`} className={classes.img} />
+      <img src={`${process.env.PUBLIC_URL}/img/404.jpg`} className={classes.img} alt=""/>
       <p>
         If you were looking for an article, just know that we are currently
         transfering all of the articles<br /> from the old website to this one.

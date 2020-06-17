@@ -62,10 +62,6 @@ const styles = {
 };
 
 class SearchForm extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   componentWillMount() {
     const { query, initialize } = this.props;
     if (query) {
