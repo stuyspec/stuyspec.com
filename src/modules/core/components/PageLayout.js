@@ -14,7 +14,7 @@ import PageHeader from "./PageHeader";
 import PageFooter from "./PageFooter";
 import SidebarContent from "./SidebarContent";
 import SubscriptionModal from "../../accounts/components/SubscriptionModal";
-//import { HorizontalAd } from "../../advertisements/components";
+import { HorizontalAd } from "../../advertisements/components";
 import { openSidebar, closeSidebar } from "../actions";
 
 const PageLayoutQuery = gql`
