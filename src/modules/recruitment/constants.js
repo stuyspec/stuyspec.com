@@ -19,7 +19,7 @@ export const SECTIONS = [
       },
     ],
     link:
-      null,
+      "https://docs.google.com/document/d/11nTdoyrcTnRmLaEpuAIo7W7q5OZ64xYpKEXZQaFTXy0/edit?usp=sharing",
   },
   {
     name: "Arts and Entertainment",
@@ -34,7 +34,7 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
       },
     ],
     link:
-      null,
+      "https://docs.google.com/document/d/1jv51dLglBhw2KyMBc-3ZXaqC4K-ChuZZq7M4hLzJ0Q0/edit?usp=sharing",
   },
   {
     name: "Features",
@@ -56,7 +56,7 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
       },
     ],
     link: 
-      null,
+      "https://forms.gle/GkWCCScPmPih8f7PA",
   },
   {
     name: "Humor",
@@ -67,7 +67,7 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
         Join Spec Humor!
         We write funny and satirical pieces for The Spec and unlike other departments, everything we publish is libel and slander which means that you'll be in control of what everyone says!`,
     quotes: [],
-    link: "https://docs.google.com/forms/d/e/1FAIpQLSebWEsyBO4o4-yD35cIKiI90ce6vB1VdKsnZjJ1-bjedPo6MA/viewform",
+    link: "https://forms.gle/5j7V1vPJTHdsF2jCA",
   },
   {
     name: "Sports",
@@ -81,7 +81,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      null,
+      "https://forms.gle/E6woBgfX493fMjDQ7",
   },
   {
     name: "News",
@@ -89,7 +89,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     description: `Do you want to be a part of the best department of The Spectator? Do you want to get tight with the administration? Do you want to see your name and your articles on the front page? Do you want to find out about the coolest news at Stuy before anyone else? Do you want to report on that cool news? If so, join the Spectator News Department!!! `,
     quotes: [],
     link:
-      null,
+      "https://forms.gle/DDmutuu7BuV4nU5A6",
   },
   {
     name: "Copy",
@@ -108,7 +108,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      null,
+      "https://docs.google.com/forms/d/e/1FAIpQLSdCUEfCIfhoeTLy7M-_u0LJc53bL1PAJeRGRfsTh9CaHde9og/viewform?usp=sf_link",
   },
   {
     name: "Web",
@@ -127,7 +127,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      null,
+      "https://forms.gle/km8AhjzxDDEhEQbF8",
   },
   {
     name: "Layout",
@@ -140,7 +140,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     the formatting of each issue as it is released.`,
     quotes: [],
     link:
-      null,
+      "https://docs.google.com/forms/d/e/1FAIpQLSefYzXDztPdc1IX4eWbvyr4chaagRgzNyFzboGFJjFjFvMRAA/viewform",
   },
   {
     name: "Photo",
@@ -164,7 +164,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      null,
+      "https://forms.gle/1ynxXcPGA6uC3z269",
   },
   {
     name: "Business",
@@ -191,7 +191,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      null,
+      "https://forms.gle/8wQYdAqRQLScocrk8",
   },
   {
     name: "Art",
@@ -215,7 +215,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      null,
+      "https://docs.google.com/forms/d/e/1FAIpQLScQM9mYdYvwvS_uYYValtdm5LGhKCNl5qmItlwQUeI4WuPvoQ/viewform?usp=sf_link",
   },
   {
     name: "Science",
@@ -228,6 +228,6 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     we’ll be the ones covering it.`,
     quotes: [],
     link:
-      null,
+      "https://docs.google.com/document/d/1vLVgwRFf9C9oDRVMFRAhKcLE-6YZPTcWv0KW-4tro4M/edit?usp=sharing",
   },
 ];
