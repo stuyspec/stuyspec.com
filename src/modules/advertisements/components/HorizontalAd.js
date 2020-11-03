@@ -14,7 +14,8 @@ const styles = {
 };
 
 const HorizontalAd = ({ classes, advertisements }) => {
-  const ad = advertisements[0];
+  const len = Object.keys(advertisements).length;
+  const ad = advertisements[Math.floor(Math.random() * len)];
   if (ad) {
     return (
       <div className={classes.HorizontalAd}>
