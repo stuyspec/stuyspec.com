@@ -24,7 +24,8 @@ const TallAd: React.FC<IProps> = ({ advertisements, ad }) => {
   const classes = useStyles();
 
   if (!ad) {
-    ad = advertisements[0];
+      const len = Object.keys(advertisements).length;
+      ad = advertisements[Math.floor(Math.random() * len)];
   }
   return (
       <div className={classes.TallAd}>
