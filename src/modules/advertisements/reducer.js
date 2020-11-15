@@ -4,11 +4,11 @@ const initialState = [
     filename: "kweller.jpg",
     url: '/ad/kweller'
   },
-  /* {
+  {
     company: "IExcel",
     filename: "iExcel.jpg",
     url: '/ad/iExcel'
-  } */
+  }
 ];
 
 const reducer = (state = { ...initialState }) => {
