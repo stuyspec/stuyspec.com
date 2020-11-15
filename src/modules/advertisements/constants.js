@@ -6,4 +6,4 @@ export default {
 export const pathToAds = process.env.PUBLIC_URL + "/img/ads/";
 
 export const adRedirects = [['kweller', "http://www.kwellerprep.com"], 
-                            ["iExcel", "https://www.ixltutor.com/"]];
+                             ["iExcel", "https://www.ixltutor.com/"]];
