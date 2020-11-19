@@ -11,11 +11,11 @@ const styles = {
     background: "#fff",
     height: "370px",
     marginTop: "14px",
-    marginBottom: "60px"
+    marginBottom: "60px",
   },
   pageFooterMain: {
     borderTop: "3px solid #ddd",
-    margin: "0 auto"
+    margin: "0 auto",
   },
   sectionFlex: {
     height: "264px",
@@ -24,7 +24,8 @@ const styles = {
     paddingTop: "6px"
   },
   sectionBlock: {
-    marginTop: "19px"
+    marginTop: "19px",
+    marginRight: "60px"
   },
   topLevelSectionLink: {
     color: "#000",
@@ -159,11 +160,11 @@ const PageFooter: React.SFC<PageFooterProps> = ({
         <Col
           xs={12}
           sm={10}
-          smOffset={1}
+          smOffset={0}
           md={8}
-          mdOffset={2}
+          mdOffset={1}
           lg={8}
-          lgOffset={2}
+          lgOffset={0}
         >
           <Link to="/" className={classes.theSpectator}>
             The Spectator
@@ -172,11 +173,11 @@ const PageFooter: React.SFC<PageFooterProps> = ({
         <Col
           xs={12}
           sm={10}
-          smOffset={1}
+          smOffset={0}
           md={8}
-          mdOffset={2}
+          mdOffset={1}
           lg={8}
-          lgOffset={2}
+          lgOffset={0}
           className={classes.sectionFlex}
         >
           {sections.map(section => {
