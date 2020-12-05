@@ -217,8 +217,7 @@ const PageFooter: React.SFC<PageFooterProps> = ({
           className={classes.creditLine}
         >
           <hr className={classes.hr} />
-          Created by Jason Kao, Nicholas Yang, Jerry Ye, Jason Lin, Darius Jankauskas, Victor Siu, and
-          Cathy Cai{" "}
+          Created by {" "}
           <a href="https://github.com/stuyspec">
             @The Spectator Web Department
           </a>.
