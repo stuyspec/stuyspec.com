@@ -11,7 +11,7 @@ const styles = {
     background: "#fff",
     height: "370px",
     marginTop: "14px",
-    marginBottom: "60px",
+    marginBottom: "30px",
   },
   pageFooterMain: {
     borderTop: "3px solid #ddd",
@@ -206,40 +206,7 @@ const PageFooter: React.SFC<PageFooterProps> = ({
           })}
           <DescriptionLinks classes={classes} descriptions={descriptions} />
         </Col>
-        <Col
-          xsHidden
-          sm={10}
-          smOffset={1}
-          md={8}
-          mdOffset={2}
-          lg={8}
-          lgOffset={2}
-          className={classes.creditLine}
-        >
-          <hr className={classes.hr} />
-          Created by Jason Kao, Nicholas Yang, Jerry Ye, Jason Lin, Darius Jankauskas, Victor Siu, and
-          Cathy Cai{" "}
-          <a href="https://github.com/stuyspec">
-            @The Spectator Web Department
-          </a>.
-        </Col>
-        <Col
-          xs={12}
-          smHidden
-          mdHidden
-          lgHidden
-          className={classes.aboutNavLinksMobile}
-        >
-          <DescriptionLinks classes={classes} descriptions={descriptions} />
-        </Col>
-        <Col xs={12} smHidden mdHidden lgHidden className={classes.creditLine}>
-          <hr className={classes.hr} />
-          Created by Jason Kao, Nicholas Yang, Darius Jankuaskas, Jason Lin, Jerry Ye, Victor Siu,
-          and Cathy Cai{' '}
-          <a href="https://github.com/stuyspec">
-            @The Spectator Web Department
-          </a>.
-        </Col>
+
       </Row>
     </Grid>
   );
