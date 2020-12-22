@@ -325,6 +325,27 @@ Kerry Garfinkel
   },
   {
     id: 4,
+    title: "Programmers",
+    slug: "programmers",
+    content: `<center>
+<h2 style="margin-bottom: 30px;">
+  Programmers of the Spectator Website
+</h2>
+<b>Head Developers & Contributors</b><br>
+Jason Kao<br>
+Nicholas Yang<br>
+Jerry Ye<br>
+Jason Lin<br>
+Darius Jankauskas<br>
+Victor Siu<br>
+Cathy Cai<br>
+<br>
+<p>@The Spectator Web</p>
+</center>
+`,
+  },
+  {
+    id: 5,
     title: "Contact",
     slug: "contact",
     content: `<p style="text-align: center">
