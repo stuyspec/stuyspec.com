@@ -11,7 +11,7 @@ const styles = {
     background: "#fff",
     height: "370px",
     marginTop: "14px",
-    marginBottom: "60px",
+    marginBottom: "30px",
   },
   pageFooterMain: {
     borderTop: "3px solid #ddd",
@@ -217,11 +217,7 @@ const PageFooter: React.SFC<PageFooterProps> = ({
           className={classes.creditLine}
         >
           <hr className={classes.hr} />
-          Created by Jason Kao, Nicholas Yang, Jerry Ye, Jason Lin, Darius Jankauskas, Victor Siu, and
-          Cathy Cai{" "}
-          <a href="https://github.com/stuyspec">
-            @The Spectator Web Department
-          </a>.
+          
         </Col>
         <Col
           xs={12}
@@ -234,11 +230,6 @@ const PageFooter: React.SFC<PageFooterProps> = ({
         </Col>
         <Col xs={12} smHidden mdHidden lgHidden className={classes.creditLine}>
           <hr className={classes.hr} />
-          Created by Jason Kao, Nicholas Yang, Darius Jankuaskas, Jason Lin, Jerry Ye, Victor Siu,
-          and Cathy Cai{' '}
-          <a href="https://github.com/stuyspec">
-            @The Spectator Web Department
-          </a>.
         </Col>
       </Row>
     </Grid>
