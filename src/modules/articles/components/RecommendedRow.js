@@ -19,6 +19,7 @@ const RecommendedRowQuery = gql`
       preview
       created_at
       contributors {
+        slug
         first_name
         last_name
       }
@@ -88,6 +89,8 @@ const RecommendedRow = ({
   if (data.loading) {
     return null;
   }
+
+  console.log(data);
 
   const articles = data.topRankedArticles.filter(
     article => article.slug !== article_slug,
