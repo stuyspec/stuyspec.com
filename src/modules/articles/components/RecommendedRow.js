@@ -90,8 +90,6 @@ const RecommendedRow = ({
     return null;
   }
 
-  console.log(data);
-
   const articles = data.topRankedArticles.filter(
     article => article.slug !== article_slug,
   );
