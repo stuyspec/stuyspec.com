@@ -19,7 +19,7 @@ export const SECTIONS = [
       },
     ],
     link:
-      null,
+      "",
   },
   {
     name: "Arts and Entertainment",
@@ -34,7 +34,7 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
       },
     ],
     link:
-      null,
+      "",
   },
   {
     name: "Features",
@@ -56,7 +56,7 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
       },
     ],
     link: 
-      null,
+      "",
   },
   {
     name: "Humor",
@@ -67,7 +67,7 @@ Apply for the Spectator Arts and Entertainment department now!!!`,
         Join Spec Humor!
         We write funny and satirical pieces for The Spec and unlike other departments, everything we publish is libel and slander which means that you'll be in control of what everyone says!`,
     quotes: [],
-    link: "https://docs.google.com/forms/d/e/1FAIpQLSebWEsyBO4o4-yD35cIKiI90ce6vB1VdKsnZjJ1-bjedPo6MA/viewform",
+    link: "",
   },
   {
     name: "Sports",
@@ -81,7 +81,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      null,
+      "",
   },
   {
     name: "News",
@@ -89,7 +89,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     description: `Do you want to be a part of the best department of The Spectator? Do you want to get tight with the administration? Do you want to see your name and your articles on the front page? Do you want to find out about the coolest news at Stuy before anyone else? Do you want to report on that cool news? If so, join the Spectator News Department!!! `,
     quotes: [],
     link:
-      null,
+      "",
   },
   {
     name: "Copy",
@@ -108,7 +108,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      null,
+      "",
   },
   {
     name: "Web",
@@ -127,7 +127,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      null,
+      "https://forms.gle/km8AhjzxDDEhEQbF8",
   },
   {
     name: "Layout",
@@ -140,7 +140,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     the formatting of each issue as it is released.`,
     quotes: [],
     link:
-      null,
+      "",
   },
   {
     name: "Photo",
@@ -164,7 +164,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      null,
+      "",
   },
   {
     name: "Business",
@@ -191,7 +191,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      null,
+      "",
   },
   {
     name: "Art",
@@ -215,7 +215,7 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
       },
     ],
     link:
-      null,
+      "",
   },
   {
     name: "Science",
@@ -228,6 +228,6 @@ If you answered yes (or no!) to any of those questions, the Spectator Sports dep
     we’ll be the ones covering it.`,
     quotes: [],
     link:
-      null,
+      "",
   },
 ];

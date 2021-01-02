@@ -14,13 +14,17 @@ const styles = {
 };
 
 const HorizontalAd = ({ classes, advertisements }) => {
-  const ad = advertisements[0];
-  if (ad) {
+  const len = Object.keys(advertisements).length;
+  if (len > 0) {
     return (
       <div className={classes.HorizontalAd}>
-        <a href={ad.url} target="_blank" rel="noopener noreferrer">
-          <img className={classes.img} src={pathToAds + ad.filename} alt="Advertisement"/>
-        </a>
+        {Object.values(advertisements).map((ad) => {
+            return (
+                <a href={ad.url} target="_blank" rel="noopener noreferrer">
+                    <img className={classes.img} src={pathToAds + ad.filename} alt="Advertisement"/>
+                </a>
+            )
+        })}
       </div>
     );
   }

@@ -101,6 +101,16 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
   sidebarElements.push(
     <Link
       className={classes.sidebarSectionLink}
+      key={-2}
+      onClick={closeSidebar}
+      to="/recruitments"
+    >
+      Recruitments
+    </Link>,
+  )
+  sidebarElements.push(
+    <Link
+      className={classes.sidebarSectionLink}
       key={-5}
       onClick={closeSidebar}
       to="/search"

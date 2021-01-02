@@ -11,11 +11,11 @@ const styles = {
     background: "#fff",
     height: "370px",
     marginTop: "14px",
-    marginBottom: "60px"
+    marginBottom: "30px",
   },
   pageFooterMain: {
     borderTop: "3px solid #ddd",
-    margin: "0 auto"
+    margin: "0 auto",
   },
   sectionFlex: {
     height: "264px",
@@ -24,7 +24,8 @@ const styles = {
     paddingTop: "6px"
   },
   sectionBlock: {
-    marginTop: "19px"
+    marginTop: "19px",
+    marginRight: "60px"
   },
   topLevelSectionLink: {
     color: "#000",
@@ -105,11 +106,11 @@ const styles = {
     sectionFlex: {
       flexWrap: "nowrap",
       height: "auto",
-      "& > div:nth-child(6) ~ div": {
-        // shows first six section blocks
+      "& > div:nth-child(10) ~ div": {
+        // shows first ten section blocks
         display: "none"
       },
-      "& > div:nth-child(6)": {
+      "& > div:nth-child(11)": {
         borderBottom: "1px solid #ddd"
       }
     },
@@ -159,11 +160,11 @@ const PageFooter: React.SFC<PageFooterProps> = ({
         <Col
           xs={12}
           sm={10}
-          smOffset={1}
+          smOffset={0}
           md={8}
-          mdOffset={2}
+          mdOffset={1}
           lg={8}
-          lgOffset={2}
+          lgOffset={0}
         >
           <Link to="/" className={classes.theSpectator}>
             The Spectator
@@ -172,11 +173,11 @@ const PageFooter: React.SFC<PageFooterProps> = ({
         <Col
           xs={12}
           sm={10}
-          smOffset={1}
+          smOffset={0}
           md={8}
-          mdOffset={2}
+          mdOffset={1}
           lg={8}
-          lgOffset={2}
+          lgOffset={0}
           className={classes.sectionFlex}
         >
           {sections.map(section => {
@@ -216,11 +217,7 @@ const PageFooter: React.SFC<PageFooterProps> = ({
           className={classes.creditLine}
         >
           <hr className={classes.hr} />
-          Created by Jason Kao, Nicholas Yang, Jerry Ye, Jason Lin, Darius Jankauskas, Victor Siu, and
-          Cathy Cai{" "}
-          <a href="https://github.com/stuyspec">
-            @The Spectator Web Department
-          </a>.
+          
         </Col>
         <Col
           xs={12}
@@ -233,11 +230,6 @@ const PageFooter: React.SFC<PageFooterProps> = ({
         </Col>
         <Col xs={12} smHidden mdHidden lgHidden className={classes.creditLine}>
           <hr className={classes.hr} />
-          Created by Jason Kao, Nicholas Yang, Darius Jankuaskas, Jason Lin, Jerry Ye, Victor Siu,
-          and Cathy Cai{' '}
-          <a href="https://github.com/stuyspec">
-            @The Spectator Web Department
-          </a>.
         </Col>
       </Row>
     </Grid>

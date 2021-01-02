@@ -92,7 +92,7 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
   <li>Staff writers must not interview their friends for an article in which they have little importance.</li>
   <li>Editors may not campaign for candidates in Student Union elections.</li>
   <li>If the Editorial Board is writing a Staff Editorial about a Stuyvesant organization that a member of the Editorial Board is a prominent member of, this person cannot be present during the Staff Editorial discussion.</li>
-  <li>Editors-in-Chief cannot hold major leadership positions in another of the leading four organizations at Stuyvesant, which at the time of writing include the Big Sibs Program, Stuyvesant ARISTA, and the Stuyvesant Student Union; what constitutes a leadership position shall be decided by the members of the editorial board, in consultation with the Faculty Advisor. The Presidency and Vice Presidency of the Student Union, the Executive Council of ARISTA, and the Chair of the Big Sibs are all major leadership positions.</li>
+  <li>Editors or Editors-in-Chief of The Spectator cannot hold the positions of Student Union President or Vice President, Senior Caucus President or Vice President, Junior Caucus President or Vice President, Sophomore Caucus President or Vice President, or Freshman Caucus President or Vice President. Editors may not hold Student Union positions deemed major in either scope or influence by the Editors-in-Chief or Editorial Board, or be members of the Student Union cabinet.</li>
   <li>Incoming editors of the Editorial Board starting in 2020 may not hold any major leadership in the Student Union or be coordinator of SING!. Editors may only hold the highest form of leadership in other large organizations at Stuyvesant with approval from the Editor-in-Chiefs, their co-editors, and the faculty advisor. Larger organizations include but are not limited to the Big Sibs Program, the ARISTA Honor Society, the Student Union, the Stuyvesant Indicator, Speech and Debate, Model United Nations, SING!, and the Stuyvesant Theater Community. What constitutes said leadership positions shall be decided by the members of the Editorial Board, in consultation with the Faculty Advisor. The Presidency and Vice Presidency of the Student Union, the Executive Council of ARISTA, the Chair of the Big Sibs, the President of Speech and Debate, the Editor-in-Chief of The Indicator, and members of Slate are all ultimate leadership positions. With major organizations such as the Big Sibs Program or ARISTA, the Editor-in-Chiefs should exert additional caution with their approvals.</li>
   <li>Editors who participate in SING! may not contribute to SING! non-humor reviews of SING! published in The Spectator.</li>      
 </ol>
@@ -325,6 +325,26 @@ Kerry Garfinkel
   },
   {
     id: 4,
+    title: "Developers",
+    slug: "developers",
+    content: `<center>
+<h2 style="margin-bottom: 30px;">
+  Major Contributors of The Spectator's Website
+</h2>
+Jason Kao<br>
+Nicholas Yang<br>
+Jerry Ye<br>
+Jason Lin<br>
+Cathy Cai<br>
+Darius Jankauskas<br>
+Victor Siu<br>
+<br>
+<p>@The Spectator Web Department</p>
+</center>
+`,
+  },
+  {
+    id: 5,
     title: "Contact",
     slug: "contact",
     content: `<p style="text-align: center">
