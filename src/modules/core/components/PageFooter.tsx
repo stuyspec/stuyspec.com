@@ -177,7 +177,6 @@ const PageFooter: React.SFC<PageFooterProps> = ({
           md={8}
           mdOffset={1}
           lg={8}
-          lgOffset={0}
           className={classes.sectionFlex}
         >
           {sections.map(section => {
