@@ -13,10 +13,6 @@ We welcome pull requests from Spec Web developers and seasoned JavaScript develo
 
 For information on the things which are currently being focused on, please visit the [ROADMAP.md](ROADMAP.md) file.
 
-## Virtual Archive
-
-Unfortunately, Issuu has updated its terms of service and made it impossible to embed issues of the newspaper without paying. As such, for the time being the Spectator is going to have a simple Virtual Archive thumbnail which is going to link to the Issuu page. 
-
 ## Setting Up
 
 [WORK IN PROGRESS]
