@@ -3,20 +3,20 @@
 The roadmap here is a living document of where the client-facing app is intending to go and things needed to be done in the near future. Since we can't really predict the best way of doing things, this may be flexible and subject to change.
 
 ## Timeline
-The aim is to get the majority of these goals done by the end of the semester. However, that could happen sooner or later; it depends.
+As the Spectator Web Application has been able to stick around for the last few years, we're going to continue the maintance of the application, potentially improving the ✨User Experience✨ with small quality-of-life improvements.
 
 ## Short term goals
-These goals should hopefully be tackled in one to two months.
-* Get the CLI in order so that articles can be uploaded the day of issue publish, preferably available at the same time as paper copies.
-* Fix issues with certain authors and contributors not having user pages.
-* ~~Give photographers and illustrators their own individual pages~~
+These goals should be tackled as a priority.
+
+* Media section on the homepage
+* Worldbeat on the homepage
+* Anonymous comment section - INCLUDING WORD FILTER!
 
 ## Long term goals
 These goals are more difficult to give a timeline for. They are ordered by increasing difficulty.
 * Newsletter for subscribers via email.
-* Photo galleries for arts & entertainment (and other departments).
+* Get the CLI in order so that articles can be uploaded the day of issue publish, preferably available at the same time as paper copies.
 * Fine grained analytics- views per article, time and percent of read, overall site data.
-* Allow more than one picture per article.
 * More article designs and more control over designs for writers.
 
 ## Backlog
