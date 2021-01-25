@@ -152,11 +152,9 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
 </ul>
 <h2>Contact Business Directly</h2>
 <ul>
-  <b>Manager</b>: Rachel Joh
+  <b>Manager</b>: Tina Nguyen
   <br>
-  <b>Phone</b>: 646.991.5400
-  <br>
-  <b>Email</b>: rjoh10@stuy.edu
+  <b>Email</b>: tnguyen20@stuy.edu
   <br>
 </ul>
 `,
@@ -202,7 +200,7 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
     slug: "staff",
     content: `<center>
 <h2 style="margin-bottom: 30px;">
-  Members of the 2020-2021 Spectator Editorial Board
+  Members of the 2021-2022 Spectator Editorial Board
 </h2>
 <b>Editors In Chief</b><br>
 Morris Raskin<br>
@@ -338,8 +336,9 @@ Jason Lin<br>
 Cathy Cai<br>
 Darius Jankauskas<br>
 Victor Siu<br>
+Cynthia Or<br>
 <br>
-<p>@The Spectator Web Department</p>
+<p><a href="https://github.com/stuyspec" target="_blank">@The Spectator Web Department</a></p>
 </center>
 `,
   },
@@ -349,7 +348,7 @@ Victor Siu<br>
     slug: "contact",
     content: `<p style="text-align: center">
   For website related questions: Contact <a href="mailto:web@stuyspec.com">web@stuyspec.com</a>. <br/>
-  For all other questions: Contact <a href="mailto:erintalia20@gmail.com">erintalia20@gmail.com</a>.
+  For all other questions: Contact <a href="mailto:morriskaren2021@gmail.com">morriskaren2021@gmail.com</a>.
 
 </p>
 `,
