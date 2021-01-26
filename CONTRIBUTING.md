@@ -101,9 +101,9 @@ $ git pull --rebase upstream develop
 
 This will pull down all of the changes to the official develop branch, without making an additional commit in your local repo.
 
-### Set Up MailHog
+### Set Up MailHog (Optional)
 
-To be able to test account creation, you need to set up MailHog. MailHog is a local SMTP mail server that will catch the emails your stuyspec.com instance is sending. How you install MailHog is dependent upon your OS. 
+If you want to test account creation, you need to set up MailHog. MailHog is a local SMTP mail server that will catch the emails your stuyspec.com instance is sending. How you install MailHog is dependent upon your OS. 
 
 #### macOS
 
@@ -130,18 +130,19 @@ Once you have stuyspec.com cloned, before you start the application, you first n
 
 ```bash
 # Install NPM dependencies
-npm install && npm install -g gulp-cli
+npm install
 ```
+By default, stuyspec.com will try to connect to a local version of the api server hosted at <http://api.localhost:3000>. However, when starting, it's simpler to point stuyspec.com to the production API and use real data. To do that, set `REACT_APP_API_URL` in `.env.development` to <https://api.stuyspec.com>. 
 
-Now you will need to [set up our API on localhost](https://github.com/stuyspec/stuy-spec-api/blob/develop/README.md). After you have done that, you can start the application:
+Now you can start the application:
 
 ```bash
-npm run dev
+npm start
 ```
 
 Now navigate to your browser and open <http://localhost:3002>. If the app loads, congratulations---you're all set.
 
-If you ever want to use data from the real, production API, give the DEV_API variable in your `.env` (dotenv) file the same value as your PROD_API.
+If you ever want to test with your own data, you will need to [set up our API on localhost](https://github.com/stuyspec/stuy-spec-api/blob/develop/README.md). To use that server, you'll want to change `REACT_APP_API_URL` in `.env.development` back to <http://api.localhost:3000>.
 
 ### Create a Branch
 
@@ -244,31 +245,3 @@ This keeps your working fork clean.
 
 You can do this with a press of a button on the GitHub PR interface. You can
 delete the local copy of the branch with: `git branch -D branch/to-delete-name`
-
-### Code Style and Prettier
-
-We use [Prettier](https://github.com/prettier/prettier) to make sure all developers have a uniform coding style. Add `prettier` with `yarn global add prettier`. To run Prettier, `cd` to the root of stuyspec.com and run
-```
-find ./src/js/modules -type f -name '*.js' | xargs prettier --write --trailing-comma all --single-quote
-```
-
-#### Prettier with Webstorm 
-Webstorm is a popular IDE choice among JS developers, and Prettier integrates well into it. Get a free student license at [JetBrains](https://www.jetbrains.com/student/), then download and install WebStorm. In Webstorm, navigate to `WebStorm > Preferences > Tools > External Tools`.  
-
-Click on the `+` icon to add a new external tool. Then fill out the `Name` and under the Tool Settings, fill out `Program`, `Parameters` , and `Working directory`.  
-
-```
-Program: /usr/local/lib/node_modules/prettier/bin/prettier.js
-Parameters: --write --trailing-comma all --single-quote $FilePathRelativeToProjectRoot$
-Working directory: $ProjectFileDir$
-```
-
-<img src="https://cdn-images-1.medium.com/max/1600/1*anZPX6XaHHBJQUC4Zz6aSA.png"/>
-
-To set the keybindings for Prettier, navigate to `WebStorm > Preferences > Keymap`. Under `Keymap`, use the search input box to search for `prettier`.
-
-<img src="https://cdn-images-1.medium.com/max/1600/1*rwhqT811uuR2X4ftQpWOPA.png"/>
-
-Double click on Prettier and add keyboard shortcut. I am on a Mac and I personally use `command + shift + p`.  
-
-You are now good to go, now any file that you want to prettify, just go to that specific file in WebStorm and then press your set keybinding and it should automatically prettify the file that you are currently viewing.  

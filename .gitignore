@@ -1,8 +1,8 @@
-dist/dev/*.js
-dist/prod/*.js
-dist/prod/**
 node_modules
-builds/**
+build
 .idea
 .DS_STORE
 .env
+.env.production
+.env.development
+*.local
