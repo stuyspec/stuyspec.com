@@ -104,7 +104,7 @@ const ArticleFooter = ({ classes, article, subscribe }) => {
       <Col xsHidden smHidden md={4} lg={4} />
 
       <FacebookProvider appId='510092146640696'>
-        <Comments href={`https://www.stuyspec.com/${window.location.href.split('/')[3]}/${window.location.href.split('/')[4]}`} tabs="none" />
+        <Comments href={`https://www.stuyspec.com${window.location.pathname}`} tabs="none" />
       </FacebookProvider>
     </Row>
   );
