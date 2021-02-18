@@ -22,14 +22,18 @@ const styles = {
     textAlign: "center",
     width: "300px",
     height: "300px",
-    border: "3px solid black",
+    //border: "2px solid black",
     borderRadius: "15px",
-    backgroundColor: "white",
+    backgroundColor: "rgb(171, 224, 255)",
     margin: "15px",
-    //paddingTop: "290px",
     fontWeight: "bold",
-    ':hover': {
-      border: '1px solid blue'
+    textDecoration: "none",
+    transition: "all 0.1s ease-in-out",
+    '&:hover': {
+      //border: '1px solid blue',
+      textDecoration: 'none',
+      color: 'black',
+      boxShadow: "0 5px 20px rgba(171, 224, 255, .5)"
     }
   },
   SectionText: {
@@ -41,12 +45,26 @@ const styles = {
     padding: "3px",
     textAlign: "center",
   },
+  Title: {
+    color: "#000",
+    fontFamily: "Old English Text MT",
+    fontSize: "50px",
+    marginTop: "0",
+    textAlign: "center",
+    paddingBottom: "10px",
+  },
   FlexContainer: {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-evenly",
     marginBottom: "150px",
+    marginTop: "50px",
+    margin: "auto",
+    width: "90%",
+    borderTop: "1px solid black",
+    borderBottom: "1px solid black",
+    padding: "20px",
     //backgroundColor: "#B3DAF1"
   },
   Image: {
@@ -66,6 +84,7 @@ const styles = {
 const GamePage = ({ classes }) => {
   return (
     <div>
+      <h1 className={classes.Title}>SpecGames</h1>
       <div key={-5} className={classes.FlexContainer}>
         <Link to="/winter-crossword" className={classes.Link}>
           <div className={classes.GameText}>
@@ -79,43 +98,5 @@ const GamePage = ({ classes }) => {
 };
 
 const StyledSection = injectSheet(styles)(GamePage);
-
-/*const Quote = ({ classes, text, source }) => {
-  return (
-    <div className={classes.Quote}>
-      <p className={classes.QuoteText}>
-        <i>{"“" + text + "”"}</i>
-      </p>
-      <p className={classes.QuoteText}>
-        <i>{"―" + source}</i>
-      </p>
-    </div>
-  );
-};
-
-const StyledQuote = injectSheet(styles)(Quote);
-
-const Section = ({ classes, imageLink, name, description, quotes, app }) => {
-  const appLink = (app) ?
-      <a className={classes.App} href={app} >
-         {" "}
-         Click here to sign up for {name}!{" "}
-      </a>:
-      <p className={classes.App}>Recruitments in the Fall!</p>
-
-  return (
-    <div className={classes.Section}>
-      <h1 className={classes.SectionTitle}>{name}</h1>
-      {imageLink && <img src={imageLink} className={classes.Image} alt="Quote"/>}
-      <p className={classes.SectionText}>{description}</p>
-      {quotes.map(({ text, source }) => {
-        return <StyledQuote text={text} source={source} />;
-      })}
-      {appLink}
-    </div>
-  );
-};
-
-const StyledSection = injectSheet(styles)(Section);*/
 
 export default injectSheet(styles)(GamePage);
