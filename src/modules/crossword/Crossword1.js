@@ -226,13 +226,11 @@ const CrosswordWrapper = styled.div`
   }
   .direction {
       font-weight: 255;
-      /*max-width: 380px;*/
       overflow: scroll;
       max-height: 290px;
       margin: 0 auto;
       float: right;
       margin-bottom: 20px;
-      /*margin-right: 120px;*/
   }
   .crossword.correct {
     rect {
