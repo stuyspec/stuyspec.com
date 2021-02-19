@@ -35,6 +35,10 @@ import { createSession } from "./accounts/actions";
 
 import { RecruitmentPage } from "./recruitment/components";
 
+import GamePage from "./games/GamePage";
+
+import Crossword1 from "./crossword/Crossword1"
+
 import { ClassifiedsRedirect } from "./core/components";
 
 import { adRedirects } from './advertisements/constants';
@@ -198,6 +202,18 @@ class RoutingAppUnconnected extends PureComponent {
                 path={"/recruitments"}
                 key={"recruitments"}
                 component={RecruitmentPage}
+              />
+              <Route
+                exact
+                path={"/spec-games"}
+                key={"games"}
+                component={GamePage}
+              />
+              <Route
+                exact
+                path={"/winter-crossword"}
+                key={"crossword"}
+                component={Crossword1}
               />
               <Route
                 exact
