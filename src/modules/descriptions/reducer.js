@@ -350,6 +350,7 @@ Cynthia Or<br>
   For website related questions: Contact <a href="mailto:web@stuyspec.com">web@stuyspec.com</a>. <br/>
   For all other questions: Contact <a href="mailto:morriskaren2021@gmail.com">morriskaren2021@gmail.com</a>.
 </p>
+
 `,
   },
 ];

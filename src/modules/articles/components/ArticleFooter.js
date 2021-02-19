@@ -8,6 +8,8 @@ import { toRoman } from "roman-numerals";
 
 import SubscriptionForm from "../../accounts/components/forms/SubscriptionForm";
 import { subscribe } from "../../accounts/actions";
+import { FacebookProvider, Comments } from 'react-facebook';
+
 
 const styles = {
   ArticleFooter: {
@@ -100,6 +102,10 @@ const ArticleFooter = ({ classes, article, subscribe }) => {
         </div>
       </Col>
       <Col xsHidden smHidden md={4} lg={4} />
+
+      <FacebookProvider appId='510092146640696'>
+        <Comments href={`https://www.stuyspec.com${window.location.pathname}`} tabs="none" />
+      </FacebookProvider>
     </Row>
   );
 };
