@@ -177,7 +177,6 @@ const PageFooter: React.SFC<PageFooterProps> = ({
           md={8}
           mdOffset={1}
           lg={8}
-          lgOffset={0}
           className={classes.sectionFlex}
         >
           {sections.map(section => {
@@ -206,7 +205,31 @@ const PageFooter: React.SFC<PageFooterProps> = ({
           })}
           <DescriptionLinks classes={classes} descriptions={descriptions} />
         </Col>
-
+        <Col
+          xsHidden
+          sm={10}
+          smOffset={1}
+          md={8}
+          mdOffset={2}
+          lg={8}
+          lgOffset={2}
+          className={classes.creditLine}
+        >
+          <hr className={classes.hr} />
+          
+        </Col>
+        <Col
+          xs={12}
+          smHidden
+          mdHidden
+          lgHidden
+          className={classes.aboutNavLinksMobile}
+        >
+          <DescriptionLinks classes={classes} descriptions={descriptions} />
+        </Col>
+        <Col xs={12} smHidden mdHidden lgHidden className={classes.creditLine}>
+          <hr className={classes.hr} />
+        </Col>
       </Row>
     </Grid>
   );
