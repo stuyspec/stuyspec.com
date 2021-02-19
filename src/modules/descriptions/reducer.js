@@ -340,7 +340,7 @@ Darius Jankauskas<br>
 Victor Siu<br>
 Cathy Cai<br>
 <br>
-<p>@The Spectator Web Department</p>
+<p>@The Spectator Web</p>
 </center>
 `,
   },
