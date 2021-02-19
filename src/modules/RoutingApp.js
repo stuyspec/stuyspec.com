@@ -6,7 +6,7 @@ import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import { ConnectedRouter } from "connected-react-router";
 import queryString from "query-string";
-import appHistory from "../tools/appHistory";
+import appHistory from "../tools/appHistory";  
 
 import {
   EditProfilePage,
