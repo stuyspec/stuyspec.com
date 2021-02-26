@@ -303,7 +303,7 @@ Karen Zhang<br>
         <td style="width:40%;vertical-align: top">
             <b>Business Managers</b><br>
             Tina Nguyen<br>
-            ---<br>
+            Jared Moser<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
