@@ -16,7 +16,7 @@ const styles = {
     paddingTop: "20px",
     display: "flex",
     flexDirection: "column",
-    paddingBottom: "3%",
+    paddingBottom: "0%",
   },
   theSpectatorLogo: {
     flexGrow: "2",
@@ -124,6 +124,7 @@ const Masthead = ({ classes, openSidebar, session, openSubscriptionModal }) => {
       <div className={classes.FeaturedSectionsBarContainer}>
         <FeaturedSectionsBar />
       </div>
+
     </Grid>
   );
 };
