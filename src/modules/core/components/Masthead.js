@@ -24,7 +24,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    fontFamily: "Mrs Eaves Small Caps",
+    fontFamily: "Old English Text MT",
     fontSize: "8rem",
     marginBottom: "10px",
     "&:hover, &:active, &:focus": {
@@ -32,7 +32,7 @@ const styles = {
       textDecoration: "none",
     },
     "@media (min-width: 768px)": {
-      fontSize: "75px",
+      fontSize: "11rem",
     },
   },
   userTools: {
