@@ -45,7 +45,7 @@ const styles = {
   brandingLink: {
     bottom: "5px",
     color: "#000",
-    fontFamily: "Mrs Eaves Small Caps",
+    fontFamily: "Old English Text MT",
     fontSize: "2.5rem",
     textDecoration: "none",
     "&:hover, &:active, &:focus": {
