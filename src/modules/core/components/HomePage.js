@@ -110,7 +110,7 @@ const HomePage = ({ classes, data }) => {
       
       <Grid fluid>
         <Row>
-          <center><div className={classes.adbanner}><h1 class="col-md-12 container-fluid">Check out the advertisements on the bottom of the page!</h1></div></center>
+          <center><div className={classes.adbanner}><h1 class="col-md-12 container-fluid">Check out the promotions on the bottom of the page!</h1></div></center>
           <Col
           
             xs={12}
