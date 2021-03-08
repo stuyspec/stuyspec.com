@@ -177,21 +177,6 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
   "width:500px; height:647px;"></iframe>
 </center>
 <hr>
-<center>
-  <a href=
-  "https://www.asphaltgreen.org/bpc?utm_medium=referral&utm_source=stuyvesant%20spectator&utm_campaign=website%20referral">
-  <img alt="AsphaltGreen" src="${process.env.PUBLIC_URL}/img/sponsors/AsphaltGreen.png" style=
-  "margin-bottom:50px"></a><br>
-  <a href="http://static.escapetheroomnyc.com/"><img alt="Escape" src=
-  "${process.env.PUBLIC_URL}/img/sponsors/Escape.png" style="margin-bottom:50px"></a><br>
-  <a href="http://foxmanagementconsulting.com/"><img alt="FoxManagement"
-  src="${process.env.PUBLIC_URL}/img/sponsors/FoxManagement.png" style="margin-bottom:50px"></a><br>
-  <a href="http://www.mysteryroomnyc.com/"><img alt="MysteryRoom" src=
-  "${process.env.PUBLIC_URL}/img/sponsors/MysteryRoom.png" style=
-  "margin-bottom:50px; width:320px; height:181px"></a><br>
-  <a href="http://thinkshirt.com/"><img alt="ThinkShirt" src=
-  "${process.env.PUBLIC_URL}/img/sponsors/ThinkShirt.png" style="margin-bottom:50px"></a><br>
-</center>
 `,
   },
   {
