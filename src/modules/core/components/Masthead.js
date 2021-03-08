@@ -32,7 +32,7 @@ const styles = {
       textDecoration: "none",
     },
     "@media (min-width: 768px)": {
-      fontSize: "11rem",
+      fontSize: "75px",
     },
   },
   userTools: {
