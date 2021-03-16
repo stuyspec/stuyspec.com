@@ -1,5 +1,6 @@
 import React from "react";
 import injectSheet from "react-jss";
+import ReactPlayer from "react-player"
 
 import * as constants from "../constants";
 
@@ -83,6 +84,13 @@ const styles = {
     textAlign: "center",
     paddingBottom: "20px",
   },
+  Video: {
+    display: "block",
+    margin: "auto",
+    width: "50%",
+    paddingBottom: "50px",
+    textAlign: "center",
+  }
 };
 
 const RecruitmentPage = ({ classes }) => {
@@ -93,6 +101,10 @@ const RecruitmentPage = ({ classes }) => {
         Apply to the Stuyvesant Spectator to join a 100 year tradition of
         student journalism.
       </p>
+      <ReactPlayer
+        url="https://youtu.be/8MvOzTSwwCs"
+        className={classes.Video}
+      />
       <div className={classes.FlexContainer}>
         {constants.SECTIONS.map(section => (
           <StyledSection
