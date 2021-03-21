@@ -24,7 +24,6 @@ const styles = {
     padding: "0 0 10px 7px",
   },
   label: {
-    borderTop: "1px solid #000",
     borderBottom: "1px solid #ddd",
     color: "#000",
     display: "block",

@@ -21,7 +21,6 @@ import {
   CREATE_SUBSCRIBER_FULFILLED,
   CREATE_SUBSCRIBER_REJECTED,
 } from "./actionTypes";
-import { CREATE_COMMENT_FULFILLED } from "../comments/actionTypes";
 
 const initialState = {
   status: {
@@ -41,18 +40,6 @@ const isSessionValid = session => {
 
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
-    case CREATE_COMMENT_FULFILLED: {
-      const { headers } = action.payload;
-      if (isSessionValid(headers)) {
-        localStorage.setItem("session", JSON.stringify(headers));
-        return {
-          ...state,
-          session: headers,
-        };
-      }
-      break;
-    }
-
     case SIGN_IN_PENDING:
     case SIGN_UP_PENDING:
     case SIGN_OUT_PENDING:

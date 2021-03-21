@@ -50,7 +50,9 @@ const styles = {
   },
   FeaturedSectionsBarContainer: {
     borderTop: "1px solid black",
-    width: "107%",
+    borderBottom: "1px solid gray",
+    width: "100%",
+    marginBottom: "2rem",
   },
   myAccount: {
     display: "inline",
