@@ -32,7 +32,7 @@ export const SECTIONS = [
         Join Spec Humor!
         We write funny and satirical pieces for The Spec and unlike other departments, everything we publish is libel and slander which means that you'll be in control of what everyone says!`,
     quotes: [],
-    link: "https://docs.google.com/document/d/1_0KHjM2wTt2p6Ep-IUBd5bHVantbDkWptZOKV-4HW14/edit?usp=sharing",
+    link: "https://forms.gle/8HTehpzT9L4PJnn97",
   },
   {
     name: "Sports",
