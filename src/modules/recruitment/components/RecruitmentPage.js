@@ -1,6 +1,6 @@
 import React from "react";
 import injectSheet from "react-jss";
-import ReactPlayer from "react-player"
+import ReactPlayer from "react-player/youtube"
 
 import * as constants from "../constants";
 
@@ -88,7 +88,7 @@ const styles = {
     display: "block",
     margin: "auto",
     width: "50%",
-    paddingBottom: "50px",
+    paddingBottom: "",
     textAlign: "center",
   }
 };
@@ -103,8 +103,10 @@ const RecruitmentPage = ({ classes }) => {
       </p>
       <ReactPlayer
         url="https://youtu.be/8MvOzTSwwCs"
+        controls={true}
         className={classes.Video}
       />
+      <hr></hr>
       <div className={classes.FlexContainer}>
         {constants.SECTIONS.map(section => (
           <StyledSection
