@@ -33,11 +33,6 @@ const initialState = {
   isSubscriptionModalOpen: false,
 };
 
-const isSessionValid = session => {
-  const requiredHeaders = ["access-token", "expiry", "client", "uid"];
-  return requiredHeaders.every(header => header in session);
-};
-
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     case SIGN_IN_PENDING:
