@@ -40,7 +40,7 @@ export const SECTIONS = [
     description: `The Sports department covers all things sports, whether it be PSAL sports at Stuyvesant or professional sports. Articles pertaining to Stuyvesant sports range from championship articles and season updates to athlete and coach interviews and opinions. Writers also cover virtually any topic in the larger sports world, from debates on LeBron vs. MJ and college basketball to YouTube boxing and the Champions League. If that’s not enough to convince you to apply, we have an exclusive fantasy football league (with rewards).`,
     quotes: [],
     link:
-      "",
+      "https://docs.google.com/document/d/1r7h2MOM5mKv5rIzl1V4xmLm-7D_LpB_amWzVX6a7Lp8/edit",
   },
   {
     name: "News",
