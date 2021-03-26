@@ -114,6 +114,7 @@ const RecruitmentPage = ({ classes }) => {
             imageLink={section.imageLink}
             description={section.description}
             quotes={section.quotes}
+            deadline={section.deadline}
             app={section.link}
             key={section.name}
           />
@@ -138,7 +139,7 @@ const Quote = ({ classes, text, source }) => {
 
 const StyledQuote = injectSheet(styles)(Quote);
 
-const Section = ({ classes, imageLink, name, description, quotes, app }) => {
+const Section = ({ classes, imageLink, name, description, quotes, deadline, app }) => {
   const appLink = (app) ?
       <a className={classes.App} href={app} >
          {" "}
@@ -154,6 +155,7 @@ const Section = ({ classes, imageLink, name, description, quotes, app }) => {
       {quotes.map(({ text, source }) => {
         return <StyledQuote text={text} source={source} />;
       })}
+      <p className={classes.SectionText}>Deadline - <b>{deadline}</b></p>
       {appLink}
     </div>
   );
