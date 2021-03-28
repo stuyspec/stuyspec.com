@@ -7,9 +7,11 @@ import { pathToAds } from '../constants';
 const styles = {
     TallAd: {
         width: "100%",
+        marginBottom: '1rem'
     },
     img: {
         width: "100%",
+        marginBottom: '1rem'
     },
 };
 
