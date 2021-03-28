@@ -11,7 +11,9 @@ const styles = {
     },
     img: {
         width: "100%",
-        marginBottom: '2rem'
+        marginBottom: '2rem',
+        paddingBottom: '1rem',
+        borderBottom: '2px dashed #b1b4ba'
     },
 };
 
