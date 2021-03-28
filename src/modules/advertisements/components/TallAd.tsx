@@ -13,7 +13,7 @@ const styles = {
         width: "100%",
         marginBottom: '2rem',
         paddingBottom: '1rem',
-        borderBottom: '2px dashed #b1b4ba'
+        borderBottom: '2px solid #b1b4ba'
     },
 };
 
