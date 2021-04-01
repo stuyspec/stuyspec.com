@@ -7,7 +7,7 @@ import { IContributor } from '../queries';
 const styles = {
   Byline: {
     color: "#888",
-    fontFamily: "Circular Std",
+    fontFamily: "Comic Sans MS",
     fontSize: "1.3rem",
     fontWeight: 300,
     "& p": {

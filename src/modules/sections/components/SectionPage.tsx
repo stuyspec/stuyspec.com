@@ -105,7 +105,7 @@ interface ISubsection {
 const styles = {
   sectionTitle: {
     color: "#000",
-    fontFamily: "Canela",
+    fontFamily: "Comic Sans MS",
     fontSize: "60px",
     fontWeight: 300,
     lineHeight: 1.2,
@@ -150,7 +150,7 @@ const styles = {
   },
   subsectionLink: {
     color: "#000",
-    fontFamily: "Circular Std",
+    fontFamily: "Comic Sans MS",
     fontSize: "14px",
     fontWeight: 300,
     "&:hover, &:active, &:focus": {
