@@ -15,7 +15,7 @@ const styles = {
     marginBottom: "25px",
   },
   QuoteText: {
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Minion Pro",
     fontSize: "1.3em",
     lineHeight: "1.4em",
     margin: "10px",
@@ -24,13 +24,13 @@ const styles = {
   },
   SectionTitle: {
     color: "#000",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Canela",
     margin: "10px",
     textAlign: "center",
   },
   SectionText: {
     color: "#000",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Minion Pro",
     fontSize: "1.3em",
     lineHeight: "1.4em",
     margin: "13px",
@@ -62,7 +62,7 @@ const styles = {
   },
   App: {
     display: "block",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Minion Pro",
     margin: "10px",
     textAlign: "center",
     float: "bottom",
@@ -72,14 +72,14 @@ const styles = {
   },
   Title: {
     color: "#000",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Old English Text MT",
     fontSize: "50px",
     marginTop: "0",
     textAlign: "center",
     paddingBottom: "10px",
   },
   Description: {
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Minion Pro",
     fontSize: "20px",
     textAlign: "center",
     paddingBottom: "20px",

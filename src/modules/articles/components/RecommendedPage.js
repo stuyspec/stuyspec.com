@@ -37,7 +37,7 @@ const RecommendedPageQuery = gql`
 const styles = {
   pageTitle: {
     color: "#000",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Canela",
     fontSize: "48px",
     fontWeight: 500,
     lineHeight: 1,

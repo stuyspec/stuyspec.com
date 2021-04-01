@@ -30,7 +30,7 @@ const styles = {
   topLevelSectionLink: {
     color: "#000",
     fontSize: "14px",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Circular Std",
     fontStyle: "normal",
     fontWeight: "bold",
     marginBottom: 0,
@@ -44,7 +44,7 @@ const styles = {
     color: "#000",
     display: "block",
     fontSize: "13px",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Circular Std",
     fontStyle: "normal",
     fontWeight: 300,
     textDecoration: "none",
@@ -55,7 +55,7 @@ const styles = {
   },
   theSpectator: {
     color: "#000",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Old English Text MT",
     fontSize: "30px",
     fontStyle: "normal",
     fontWeight: 400,
