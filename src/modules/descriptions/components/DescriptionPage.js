@@ -8,14 +8,14 @@ import { NotFoundPage } from "../../core/components";
 
 const styles = {
   descriptionTitle: {
-    fontFamily: "Canela",
+    fontFamily: "Comic Sans MS",
     fontSize: "36px",
     fontWeight: 500,
     textAlign: "center",
     color: "#000000",
   },
   descriptionContent: {
-    fontFamily: "Minion Pro",
+    fontFamily: "Comic Sans MS",
     fontSize: "18px",
     color: "#000000",
   },

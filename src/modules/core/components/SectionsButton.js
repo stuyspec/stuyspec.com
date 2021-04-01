@@ -25,7 +25,7 @@ const styles = {
     minHeight: "23px",
   },
   text: {
-    fontFamily: "Circular Std",
+    fontFamily: "Comic Sans MS",
     paddingLeft: "5px",
     fontSize: "1.6rem",
     fontWeight: "bold",
