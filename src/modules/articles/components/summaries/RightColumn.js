@@ -112,8 +112,9 @@ const RightColumn = ({ classes, articles }) => {
       <Col xsHidden sm={3} md={3} lg={3} className={classes.RightColumn} />
     );
   }
-  const [primaryArticle] = articles;
+  const [primaryArticle, secondaryArticle] = articles;
   const primarySection = primaryArticle.section;
+  const secondarySection = secondaryArticle.section;
 
   return (
     <Col xsHidden sm={3} md={3} lg={3} className={classes.RightColumn}>
@@ -158,6 +159,39 @@ const RightColumn = ({ classes, articles }) => {
           <p className={classes.preview}>{primaryArticle.preview}</p>
           <Byline contributors={primaryArticle.contributors} />
           <Dateline timestamp={primaryArticle.created_at} />
+        </div>
+      )}
+
+      {secondaryArticle && (
+        <div className={classes.secondaryArticle}>
+          {secondaryArticle.media.length > 0 && (
+            <div>
+              <Link
+                to={`${secondarySection.permalink}/${secondaryArticle.slug}`}
+              >
+                <figure className={classes.figure}>
+                  <img src={secondaryArticle.media[0].attachment_url} 
+                       alt={secondaryArticle.media[0].title}
+                  />
+                </figure>
+              </Link>
+            </div>
+          )}
+          <Link
+            to={secondarySection.permalink}
+            className={classes.sectionLabel}
+          >
+            {secondarySection.name}
+          </Link>
+          <Link
+            to={`${secondarySection.permalink}/${secondaryArticle.slug}`}
+            className={classes.articleTitle}
+          >
+            {secondaryArticle.title}
+          </Link>
+          <p className={classes.preview}>{secondaryArticle.preview}</p>
+          <Byline contributors={secondaryArticle.contributors} />
+          <Dateline timestamp={secondaryArticle.created_at} />
         </div>
       )}
     </Col>
