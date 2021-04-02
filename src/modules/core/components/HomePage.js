@@ -82,7 +82,7 @@ const styles = {
     },
   },
   adbanner: {
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Circular Std",
     marginTop: "0%",
     margin: "auto",
   },
@@ -100,7 +100,11 @@ const HomePage = ({ classes, data }) => {
   const { featuredArticle, columnArticles } = data;
 
   const firstColumnSectionSlugs = ["opinions", "features", "humor"];
-  const secondColumnSectionSlugs = ["staff-editorials", "ae", "sports-at-stuyvesant",];
+  const secondColumnSectionSlugs = [
+    "staff-editorials",
+    "ae",
+    "sports-at-stuyvesant",
+  ];
   return (
     <div>
       

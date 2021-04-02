@@ -38,7 +38,7 @@ const styles = {
   },
   sectionLink: {
     display: "block",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Circular Std",
     fontSize: "13px",
     fontWeight: 300,
     marginBottom: "8px",
@@ -46,14 +46,14 @@ const styles = {
   },
   title: {
     display: "block",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Canela",
     fontSize: "40px",
     fontWeight: 300,
     lineHeight: "48px",
     marginBottom: "13px",
   },
   preview: {
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Minion Pro",
     fontSize: "16px",
     lineHeight: 1.25,
     marginBottom: "18px",

@@ -7,7 +7,7 @@ const MILLISECONDS_IN_DAY = 8.64e7;
 const styles = {
   Dateline: {
     color: "#888",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Circular Std",
     fontSize: "1.3rem",
     fontWeight: 300,
     marginBottom: 0,

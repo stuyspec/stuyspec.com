@@ -13,7 +13,7 @@ import { FacebookProvider, Comments } from 'react-facebook';
 
 const styles = {
   ArticleFooter: {
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Minion Pro",
   },
   inPrint: {
     borderBottom: "1px solid #ddd",
