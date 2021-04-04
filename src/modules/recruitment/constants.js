@@ -45,7 +45,7 @@ export const SECTIONS = [
     quotes: [],
     deadline: `4/16/2021`,
     link:
-      "https://docs.google.com/document/d/1r7h2MOM5mKv5rIzl1V4xmLm-7D_LpB_amWzVX6a7Lp8/edit",
+      "https://forms.gle/9HkNBUsi7JwmbEWH6",
   },
   {
     name: "News",
