@@ -54,7 +54,7 @@ const styles = {
   bigTitle: {
     color: "#000",
     display: "block",
-    fontFamily: "Minion Pro",
+    fontFamily: "Comic Sans MS",
     fontSize: "18px",
     fontWeight: "bold",
     lineHeight: "1.22",
@@ -65,7 +65,7 @@ const styles = {
   },
   smallTitle: {
     color: "#000",
-    fontFamily: "Minion Pro",
+    fontFamily: "Comic Sans MS",
     fontSize: "16px",
     lineHeight: "1.25",
     "&:hover, &:active, &:focus": {
@@ -75,7 +75,7 @@ const styles = {
   sectionLabel: {
     color: "#000",
     display: "block",
-    fontFamily: "Minion Pro",
+    fontFamily: "Comic Sans MS",
     fontSize: "12px",
     marginBottom: "6px",
     textTransform: "uppercase",
@@ -96,14 +96,14 @@ const styles = {
   },
   preview: {
     color: "#000",
-    fontFamily: "Minion Pro",
+    fontFamily: "Comic Sans MS",
     fontSize: "14px",
     lineHeight: "1.29",
     marginBottom: "13px",
   },
   Byline: {
     color: "#888",
-    fontFamily: "Circular Std",
+    fontFamily: "Comic Sans MS",
     fontSize: "12px",
     fontWeight: 300,
     marginBottom: "3px",

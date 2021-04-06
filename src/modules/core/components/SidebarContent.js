@@ -17,7 +17,7 @@ const styles = {
     borderRadius: "3px",
     color: "#000",
     display: "block",
-    fontFamily: "Circular Std",
+    fontFamily: "Comic Sans MS",
     fontSize: "15px",
     fontWeight: 500,
     margin: "8px 0",

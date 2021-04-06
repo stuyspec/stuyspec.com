@@ -28,7 +28,7 @@ const styles = {
   primaryTitle: {
     color: "#000",
     display: "block",
-    fontFamily: "Minion Pro",
+    fontFamily: "Comic Sans MS",
     fontWeight: "bold",
     fontSize: "30px",
     lineHeight: 1.13,
@@ -40,7 +40,7 @@ const styles = {
   sectionLabel: {
     color: "#000",
     display: "block",
-    fontFamily: "Circular Std",
+    fontFamily: "Comic Sans MS",
     fontWeight: 300,
     fontSize: "12px",
     marginBottom: "7px",
@@ -51,7 +51,7 @@ const styles = {
   },
   preview: {
     color: "#000",
-    fontFamily: "Minion Pro",
+    fontFamily: "Comic Sans MS",
     fontSize: "14px",
     lineHeight: 1.29,
     marginBottom: "10px",
@@ -59,7 +59,7 @@ const styles = {
   articleTitle: {
     color: "#000",
     display: "block",
-    fontFamily: "Minion Pro",
+    fontFamily: "Comic Sans MS",
     fontWeight: "bold",
     fontSize: "18px",
     lineHeight: 1.22,

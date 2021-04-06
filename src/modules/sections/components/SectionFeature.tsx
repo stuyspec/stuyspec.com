@@ -43,7 +43,7 @@ const styles = {
   sectionLabel: {
     color: "#000",
     display: "block",
-    fontFamily: "Minion Pro",
+    fontFamily: "Comic Sans MS",
     fontSize: "12px",
     marginBottom: "3px",
     textTransform: "uppercase",
@@ -66,7 +66,7 @@ const styles = {
   title: {
     color: "#000",
     display: "block",
-    fontFamily: "Minion Pro",
+    fontFamily: "Comic Sans MS",
     fontSize: "18px",
     fontWeight: "bold",
     lineHeight: 1.25,
@@ -76,7 +76,7 @@ const styles = {
     },
   },
   preview: {
-    fontFamily: "Minion Pro",
+    fontFamily: "Comic Sans MS",
     fontSize: "1.1em",
     lineHeight: 1.29,
     margin: "0 0 12px 0",

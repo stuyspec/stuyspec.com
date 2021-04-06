@@ -27,7 +27,7 @@ const styles = {
     borderBottom: "1px solid #ddd",
     color: "#000",
     display: "block",
-    fontFamily: "Circular Std",
+    fontFamily: "Comic Sans MS",
     fontSize: "1em",
     fontWeight: 300,
     margin: 0,
@@ -39,7 +39,7 @@ const styles = {
   numberLabel: {
     color: "#000",
     float: "left",
-    fontFamily: "Circular Std",
+    fontFamily: "Comic Sans MS",
     fontSize: "13px",
     fontWeight: 300,
     margin: 0,
@@ -57,7 +57,7 @@ const styles = {
   title: {
     color: "#000",
     display: "block",
-    fontFamily: "Minion Pro",
+    fontFamily: "Comic Sans MS",
     fontSize: "1.1em",
     fontWeight: "bold",
     lineHeight: "1.1em",
@@ -68,7 +68,7 @@ const styles = {
   },
   preview: {
     color: "#000",
-    fontFamily: "Minion Pro",
+    fontFamily: "Comic Sans MS",
     fontSize: "1.1em",
     lineHeight: 1.21,
     margin: 0,
