@@ -49,7 +49,7 @@ const styles = {
   sectionLabel: {
     display: "block",
     color: "#a8a8a8",
-    fontFamily: "Circular Std",
+    fontFamily: "Comic Sans MS",
     fontSize: "1rem",
     fontWeight: 300,
     letterSpacing: "0.5px",

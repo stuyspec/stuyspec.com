@@ -21,7 +21,7 @@ const FeaturedSectionsQuery = gql`
 
 const styles = {
   FeaturedSectionsBar: {
-    fontFamily: "Circular Std",
+    fontFamily: "Comic Sans MS",
     display: "flex",
     justifyContent: "center",
     flexDirection: "row",

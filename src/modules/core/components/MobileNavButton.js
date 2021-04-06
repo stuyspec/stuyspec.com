@@ -14,7 +14,7 @@ const navButtonStyles = {
   },
   buttonText: {
     color: "#000",
-    fontFamily: "Circular Std",
+    fontFamily: "Comic Sans MC",
     fontSize: "12px",
     fontWeight: "bold",
     textTransform: "uppercase",

@@ -22,7 +22,7 @@ const styles = {
     borderBottom: "1px solid #ddd",
     color: "#000",
     display: "block",
-    fontFamily: "Circular Std",
+    fontFamily: "Comic Sans MS",
     fontSize: "13px",
     fontWeight: 300,
     margin: "0 0 12px 0",
@@ -38,7 +38,7 @@ const styles = {
   },
   bigTitle: {
     color: "#000",
-    fontFamily: "Minion Pro",
+    fontFamily: "Comic Sans MS",
     fontSize: "18px",
     fontWeight: "bold",
     lineHeight: "1.22",
@@ -46,14 +46,14 @@ const styles = {
   },
   smallTitle: {
     color: "#000",
-    fontFamily: "Minion Pro",
+    fontFamily: "Comic Sans MS",
     fontSize: "15px",
     lineHeight: "1.25",
   },
   sectionLabel: {
     color: "#000",
     display: "block",
-    fontFamily: "Minion Pro",
+    fontFamily: "Comic Sans MS",
     fontSize: "12px",
     marginBottom: "6px",
     textTransform: "uppercase",
@@ -74,7 +74,7 @@ const styles = {
   },
   Byline: {
     color: "#888",
-    fontFamily: "Circular Std",
+    fontFamily: "Comic Sans MS",
     fontSize: "12px",
     fontWeight: 300,
     marginBottom: "3px",
@@ -91,7 +91,7 @@ const styles = {
   },
   Dateline: {
     color: "#888",
-    fontFamily: "Circular Std",
+    fontFamily: "Comic Sans MS",
     fontSize: "12px",
     fontWeight: 300,
     margin: 0,

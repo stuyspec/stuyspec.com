@@ -45,7 +45,7 @@ const styles = {
   brandingLink: {
     bottom: "5px",
     color: "#000",
-    fontFamily: "Old English Text MT",
+    fontFamily: "Comic Sans MS",
     fontSize: "2.5rem",
     textDecoration: "none",
     "&:hover, &:active, &:focus": {
@@ -56,7 +56,7 @@ const styles = {
   },
   navButtons: {
     marginTop: "20px",
-    fontFamily: "Circular Std",
+    fontFamily: "Comic Sans MS",
     fontSize: "13px",
     fontWeight: 300,
     display: "flex",
