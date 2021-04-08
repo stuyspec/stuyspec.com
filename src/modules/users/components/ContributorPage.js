@@ -44,7 +44,7 @@ const ContributorBySlug = gql`
 const styles = {
   name: {
     color: "#000",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Canela",
     fontSize: "48px",
     fontWeight: 500,
     lineHeight: 1,
@@ -56,7 +56,7 @@ const styles = {
   email: {
     color: "#3084df",
     display: "block",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Minion Pro",
     fontSize: "17px",
     marginBottom: "7px",
     "@media screen and (max-width: 760px)": {
@@ -68,14 +68,14 @@ const styles = {
     borderBottom: "1px solid #ddd",
     borderStyle: "solid none",
     color: "#000",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Circular Std",
     fontSize: "13px",
     fontWeight: 300,
     marginBottom: "22px",
     padding: "4px 0px",
   },
   description: {
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Minion Pro",
     fontSize: "16px",
     lineHeight: "1.5",
     marginBottom: "26px",
@@ -83,8 +83,8 @@ const styles = {
   image: {
     marginBottom: "20px",
     display: "block",
-    marginLeft: "auto",
-    marginRight: "auto",
+    margin: "0 auto",
+    width: "auto",
     "@media screen and (max-width: 760px)": {
         transform: "translate(5%, 0%)",
     }

@@ -44,7 +44,7 @@ const styles = {
     border: "1px solid #ddd",
     borderStyle: "solid none",
     color: "#000",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Minion Pro",
     fontSize: "26px",
     marginBottom: "24px",
     padding: "12px 0 13px",
