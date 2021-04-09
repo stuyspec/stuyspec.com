@@ -56,7 +56,7 @@ node -v
 2. Clone your fork of stuyspec.com
 
 ```shell
-$ git clone https://github.com/YOUR_USERNAME/freeCodeCamp.git
+$ git clone https://github.com/YOUR_USERNAME/stuyspec.com.git
 ```
 
 This will download the entire stuyspec.com repo to your projects directory.
