@@ -16,7 +16,7 @@ const isBrowserFirefox =
 const styles = {
   ArticleBody: {
     color: "#000",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Minion Pro",
     fontSize: "19px",
     lineHeight: 1.4,
     padding: "0 0 18px",
@@ -65,7 +65,7 @@ const styles = {
   },
   print: {
     color: "#000",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Minion Pro",
     fontStyle: "italic",
     "& a": {
       "&:hover, &:active, &:focus": {

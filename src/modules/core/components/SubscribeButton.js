@@ -25,14 +25,14 @@ const styles = {
     },
   },
   text: {
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Circular Std",
     fontSize: "1.6rem",
     fontWeight: "bold",
     textAlign: "center",
     color: "#fff",
   },
   subscribeTo: {
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Circular Std",
     fontSize: "1.4rem",
     textAlign: "center",
     color: "#ffffff",

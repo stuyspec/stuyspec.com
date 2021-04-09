@@ -20,11 +20,11 @@ const styles = {
   },
   theSpectatorLogo: {
     flexGrow: "2",
-    color: "#e416f2",
+    color: "#000",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Old English Text MT",
     fontSize: "8rem",
     marginBottom: "10px",
     "&:hover, &:active, &:focus": {
@@ -56,7 +56,7 @@ const styles = {
   },
   myAccount: {
     display: "inline",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Circular Std",
     fontSize: "14px",
     fontWeight: "bold",
     color: "#000",

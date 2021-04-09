@@ -47,7 +47,7 @@ const styles = {
     background: "#9dba73",
     borderRadius: "3px",
     color: "#fff",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Canela",
     border: "none",
     padding: "12px 16px",
     fontSize: "16px",

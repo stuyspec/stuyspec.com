@@ -16,7 +16,7 @@ const styles = {
   },
   title: {
     color: "#000",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Canela",
     fontSize: "30px",
     fontWeight: 300,
     lineHeight: "1.25",
@@ -33,7 +33,7 @@ const styles = {
   sectionLabel: {
     color: "#000",
     display: "blocK",
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Circular Std",
     fontSize: "13px",
     fontWeight: 300,
     margin: "6px 0 9px 0",
@@ -48,7 +48,7 @@ const styles = {
     paddingLeft: "0 !important",
   },
   preview: {
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Minion Pro",
     fontSize: "1.2em",
     lineHeight: 1.29,
     margin: "0 0 8px 0",
