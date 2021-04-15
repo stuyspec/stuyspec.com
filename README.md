@@ -15,7 +15,26 @@ For information on the things which are currently being focused on, please visit
 
 ## Setting Up
 
-[WORK IN PROGRESS]
+1. Clone the repository
+
+```
+$ git clone https://github.com/stuyspec/stuyspec.com.git
+```
+
+2. In the `stuyspec.com` folder, run 
+
+```
+npm install
+```
+
+3. Run the application
+
+```
+npm start
+```
+
+4. Experiment with the code!
+> React automatically hot reloads the code so it will take a few seconds to see your code reflect in the build
 
 ## Deploying
 
