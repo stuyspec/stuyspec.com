@@ -85,8 +85,8 @@ const styles = {
   image: {
     marginBottom: "20px",
     display: "block",
-    marginLeft: "auto",
-    marginRight: "auto",
+    margin: '0 auto',
+    width: "auto",  
     "@media screen and (max-width: 760px)": {
         transform: "translate(5%, 0%)",
     }
