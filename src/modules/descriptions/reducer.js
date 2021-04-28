@@ -188,8 +188,8 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
   Members of the 2021-2022 Spectator Editorial Board
 </h2>
 <b>Editors In Chief</b><br>
-Morris Raskin<br>
-Karen Zhang<br>
+*Morris Raskin<br>
+*Karen Zhang<br>
 <br>
 <table style="width:87%;text-align:center" >
     <tr>
@@ -203,7 +203,7 @@ Karen Zhang<br>
             <b>Features Editors</b><br>
             Angela Cai<br>
             Christina Pan<br>
-            Clara Shapiro<br>
+            *Clara Shapiro<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
@@ -217,7 +217,7 @@ Karen Zhang<br>
         <td style="width:30%;vertical-align: top">
              <b>Opinions Editors</b><br>
             Maya Nelson<br>
-            Aaron Visser<br>
+            *Aaron Visser<br>
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
@@ -231,7 +231,7 @@ Karen Zhang<br>
         <td style="width:30%;vertical-align: top">
             <b>Humor Editors</b><br>
             **Logan Ruzzier<br>
-            Kelly Yip<br>
+            *Kelly Yip<br>
             <br>
         </td>
     </tr>

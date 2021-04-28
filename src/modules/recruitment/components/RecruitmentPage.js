@@ -145,7 +145,7 @@ const Section = ({ classes, imageLink, name, description, quotes, deadline, app 
          {" "}
          Click here to sign up for {name}!{" "}
       </a>:
-      <p className={classes.App}>Check out recruitments in the spring!</p>
+      <p className={classes.App}>Check out recruitments in the fall!</p>
 
   return (
     <div className={classes.Section}>
@@ -155,7 +155,7 @@ const Section = ({ classes, imageLink, name, description, quotes, deadline, app 
       {quotes.map(({ text, source }) => {
         return <StyledQuote text={text} source={source} />;
       })}
-      <p className={classes.SectionText}>Deadline - <b>{deadline}</b></p>
+      <p className={classes.SectionText}><b>{deadline}</b></p>
       {appLink}
     </div>
   );

@@ -5,7 +5,7 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 import DescriptionLinks from "./DescriptionLinks";
 import { Description } from "../types";
-import { Instagram, Facebook, Linkedin, Github } from "../icons";
+import { Instagram, Facebook, Linkedin } from "../icons";
 
 const styles = {
   PageFooter: {
