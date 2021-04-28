@@ -10,6 +10,7 @@ import { Search } from "../icons";
 import { openSidebar } from "../actions";
 import { openSubscriptionModal } from "../../accounts/actions";
 import { FeaturedSectionsBar } from "../../sections/components";
+import DarkModeToggle from "./DarkModeToggle";
 
 const styles = {
   Masthead: {
@@ -65,6 +66,9 @@ const styles = {
       color: "#000",
     },
   },
+  toggle: {
+    marginRight: '35%'
+  },
   searchLink: {
     color: "#000",
     position: "relative",
@@ -112,7 +116,12 @@ const Masthead = ({ classes, openSidebar, session, openSubscriptionModal }) => {
               </Link>
             </div>
           ) : (
-            <SubscribeButton onClick={openSubscriptionModal} />
+            <>
+            <div className={classes.toggle}>
+              <DarkModeToggle/>
+            </div>
+              <SubscribeButton onClick={openSubscriptionModal} />
+            </>
           )}
           {/*!session && (
             <div className={classes.userTools}>

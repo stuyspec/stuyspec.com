@@ -8,6 +8,7 @@ import { Hamburger, Search } from "../icons";
 import { openSidebar } from "../actions";
 import MobileNavButton from "./MobileNavButton";
 import { FeaturedSectionsBar } from "../../sections/components";
+import DarkModeToggle from "./DarkModeToggle";
 
 import { openSubscriptionModal } from "../../accounts/actions";
 
@@ -41,6 +42,11 @@ const styles = {
       position: "relative",
       left: "-10px",
     },
+  },
+  DarkModeToggle: {
+    position: "relative",
+    right: "125px",
+    bottom: "-25px",
   },
   brandingLink: {
     bottom: "5px",
@@ -142,6 +148,9 @@ const MastheadBar = ({
             ) : (
               <Link to="/myaccount">Log In</Link>
             )*/}
+            <div className={classes.DarkModeToggle}>
+              <DarkModeToggle />
+            </div>
             <span
               className={classes.subscriber}
               onClick={openSubscriptionModal}

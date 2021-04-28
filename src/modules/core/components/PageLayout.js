@@ -106,6 +106,8 @@ class PageLayout extends PureComponent {
     }
     return (
       <Sidebar
+        sidebarClassName="sidebar"
+        overlayClassName="sidebar-overlay"
         sidebar={<SidebarContent sections={featuredSections} />}
         open={isSidebarOpen}
         onSetOpen={isSidebarOpen => this.handleSetOpen(isSidebarOpen)}
