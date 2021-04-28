@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
 import { Grid, Row } from "react-bootstrap/lib";

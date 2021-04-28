@@ -10,7 +10,6 @@ import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
 import { objectFilter } from "./utils";
-import useDarkMode from 'use-dark-mode';
 import './index.scss';
 
 const apolloClient = new ApolloClient({
@@ -22,7 +21,6 @@ const apolloClient = new ApolloClient({
 Object.filter = objectFilter;
 
 function App () {
-  const darkMode = useDarkMode(false);
   return(
     <Provider store={store}>
       <ApolloProvider client={apolloClient}>
