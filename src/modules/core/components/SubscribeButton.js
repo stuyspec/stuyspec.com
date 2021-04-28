@@ -1,6 +1,7 @@
 import React from "react";
 import injectSheet from "react-jss";
 
+
 const styles = {
   SubscribeButton: {
     width: "8vw",
@@ -13,7 +14,7 @@ const styles = {
     borderRadius: "4px",
     //borderTopLeftRadius: "4px",
     //borderBottomLeftRadius: "4px",
-    backgroundColor: "#DB2B39",
+    backgroundColor: "#DB2B39 !important",
     border: "solid 1.5px #DB2B39",
     display: "flex",
     flexDirection: "column",
@@ -23,6 +24,9 @@ const styles = {
     "&:hover": {
       filter: "opacity(75%)",
     },
+    "& span" : {
+      background: "transparent"
+    }
   },
   text: {
     fontFamily: "Circular Std",
