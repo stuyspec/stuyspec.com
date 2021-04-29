@@ -28,9 +28,7 @@ body.dark-mode div[role="dialog"] {
 .dark-mode-toggle > button {
     font-size: 1.2em;
     background: none;
-    padding: 5px;
     margin-left: 0px !important;
-    border: 2px solid black;
     border-radius: 50%;
     color: #ffe600;
     cursor: pointer;

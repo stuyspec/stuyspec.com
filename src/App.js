@@ -11,7 +11,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 
 import { objectFilter } from "./utils";
 import useDarkMode from "use-dark-mode";
-import "./index.scss";
+import "./index.css";
 
 const apolloClient = new ApolloClient({
   link: new HttpLink({ uri: `${STUY_SPEC_API_URL}/graphql` }),
