@@ -116,11 +116,17 @@ const styles = {
     navButtons: {
       display: "none",
     },
+    // DarkModeToggle: {
+    //   display: "block",
+    //   marginBottom: '27px',
+    //   position: 'absolute',
+    //   left: '-35vw'
+    // },
   },
   "@media (max-width: 375px)": {
     brandingLink: {
       lineHeight: "2rem",
-    },
+    }
   },
 };
 
