@@ -67,7 +67,8 @@ const styles = {
     },
   },
   toggle: {
-    marginRight: '35%'
+    marginRight: '20%',
+    marginTop: '5%'
   },
   searchLink: {
     color: "#000",

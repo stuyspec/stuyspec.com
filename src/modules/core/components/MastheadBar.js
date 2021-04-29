@@ -45,7 +45,7 @@ const styles = {
   },
   DarkModeToggle: {
     position: "relative",
-    right: "125px",
+    right: "75px",
     bottom: "-25px",
   },
   brandingLink: {
