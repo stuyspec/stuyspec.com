@@ -26,13 +26,18 @@ const navButtonStyles = {
   },
   DarkModeToggle: {
     position: "absolute",
-    marginLeft: "5rem",
-    bottom: "5px"
+    marginLeft: "-9999px",
+    bottom: "5px",
+    display: 'hidden'
   },
   "@media (max-width: 1100px)": {
     MobileNavButton: {
       display: "flex",
     },
+    DarkModeToggle: {
+      display: "block !important",
+      marginLeft: '5rem'
+    }
   },
 };
 
