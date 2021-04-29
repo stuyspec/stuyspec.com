@@ -9,7 +9,7 @@ const DarkModeToggle = () => {
 
   return (
     <div className="dark-mode-toggle">
-      <button style={{paddingLeft: '4px', paddingRight: '4px', paddingTop: '0px', paddingBottom: '1px', border: value ? "2px solid white" : "2px solid black"}} type="button" onClick={darkMode.toggle}>
+      <button style={{paddingLeft: '4px', paddingRight: '4px', paddingTop: '4px', paddingBottom: '4px', border: value ? "2px solid white" : "2px solid black"}} type="button" onClick={darkMode.toggle}>
         {value ? <Sun /> : <Moon />}
       </button>
     </div>
