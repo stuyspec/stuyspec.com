@@ -322,6 +322,9 @@ Cathy Cai<br>
 Darius Jankauskas<br>
 Victor Siu<br>
 Cynthia Or<br>
+Alyssa Choi<br>
+David Chen<br>
+Andrey Sokolov<br>
 <br>
 <p><a href="https://github.com/stuyspec" target="_blank">@The Spectator Web Department</a></p>
 </center>
