@@ -93,7 +93,7 @@ const SignInModal = ({
         {/* If second param of signIn is true, the form will not redirect
         to the profile page because it knows it is in a modal */}
         <div className={classes.signInForm}>
-          <h3 className={classes.formTitle}>Sign in to comment</h3>
+          <h3 className={classes.formTitle}>Sign in!</h3>
           <hr />
           <SignInForm onSubmit={values => signIn(values, true)} />
         </div>

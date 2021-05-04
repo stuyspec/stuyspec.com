@@ -158,7 +158,6 @@ https://stackoverflow.com/a/8539107/6174302
     /* We assume MastheadBar has the className MastheadBar (part of CFA's code style) */
     div[class^="MastheadBar-"],
     div[class^="RecommendedRow-"],
-    div[class^="CommentThread-"],
     div[class^="RightRail-"], 
     div[class^="HorizontalAd-"], 
     div[class^="PageFooter-"] {
