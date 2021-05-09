@@ -43,14 +43,12 @@ const styles = {
   },
 };
 
-const SubscribeButton = ({ onClick, classes }) => {
+const SubscribeButton = ({ classes }) => {
   return (
-    <button onClick={onClick} className={classes.SubscribeButton}><a href="https://stuyspec.us4.list-manage.com/subscribe?u=d92e8c831515555b06ae9eeea&id=78d0a29c4f">
+    <a href="https://stuyspec.us4.list-manage.com/subscribe?u=d92e8c831515555b06ae9eeea&id=78d0a29c4f"><button className={classes.SubscribeButton}>
       <span className={classes.text}>Subscribe</span>
-      <br></br>
-      <span className={classes.subscribeTo}>to our newsletter</span>
-      </a>
-    </button>
+      <span className={classes.subscribeTo}>to our newsletter</span>      
+    </button></a>
   );
 };
 
