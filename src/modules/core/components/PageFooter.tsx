@@ -5,7 +5,7 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 import DescriptionLinks from "./DescriptionLinks";
 import { Description } from "../types";
-import { Instagram, Facebook, Linkedin } from "../icons";
+import { Instagram, Facebook, Linkedin, Spotify } from "../icons";
 
 const styles = {
   PageFooter: {
@@ -89,8 +89,7 @@ const styles = {
       textDecoration: "none"
     }
   },
-  // might be a little redundant
-  Github: {
+  Spotify: {
     color: "#000",
     fontSize: "25px",
     fontWeight: 400,
@@ -216,6 +215,10 @@ const PageFooter: React.SFC<PageFooterProps> = ({
           <Link to="/" className={classes.theSpectator}>
             The Spectator
           </Link>
+          <a href="https://open.spotify.com/show/1D0i5KdRFdMNNUwsKVfpYb" 
+              className={classes.Spotify}>
+            <Spotify />
+          </a>
           <a href="https://www.instagram.com/stuyspectator/" 
               className={classes.Instagram}>
             <Instagram />
