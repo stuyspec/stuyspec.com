@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
 import { Grid, Row } from "react-bootstrap/lib";
@@ -22,36 +22,37 @@ const styles = {
   },
 };
 
-class SearchPage extends PureComponent {
-  handleSearchFormSubmit = ({ query }) => {
+function SearchPage (props) {
+  
+  const handleSearchFormSubmit = ({ query }) => {
     // We want a reusable search path
-    this.props.history.push(
-      `${this.props.location.pathname}?query=${encodeURIComponent(query)}`,
+    props.history.push(
+      `${props.location.pathname}?query=${encodeURIComponent(query)}`,
     );
   };
 
-  render() {
-    const { classes } = this.props;
-    const searchParams = new URLSearchParams(this.props.location.search);
-    const query = searchParams.get("query");
-    return (
-      <Grid fluid>
-        <Helmet titleTemplate="%s | The Stuyvesant Spectator">
-          <title>Search</title>
-        </Helmet>
-        <Row>
-          <p className={classes.title}>Search Results</p>
-          <SearchForm
-            onSubmit={this.handleSearchFormSubmit}
-            query={query}
-            className={classes.form}
-          />
-          <hr className={classes.hr} />
-        </Row>
-        {query && <SearchResults query={query} />}
-      </Grid>
-    );
-  }
+  const { classes } = props;
+  const searchParams = new URLSearchParams(props.location.search);
+  const query = searchParams.get("query");
+
+  return (
+    <Grid fluid>
+      <Helmet titleTemplate="%s | The Stuyvesant Spectator">
+        <title>Search</title>
+      </Helmet>
+      <Row>
+        <p className={classes.title}>Search Results</p>
+        <SearchForm
+          onSubmit={handleSearchFormSubmit}
+          query={query}
+          className={classes.form}
+        />
+        <hr className={classes.hr} />
+      </Row>
+      {query && <SearchResults query={query} />}
+    </Grid>
+  );
+  
 }
 
 export default compose(withRouter, injectSheet(styles))(SearchPage);

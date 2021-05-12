@@ -19,6 +19,7 @@ const RecommendedRowQuery = gql`
       preview
       created_at
       contributors {
+        slug
         first_name
         last_name
       }

@@ -13,31 +13,29 @@ We welcome pull requests from Spec Web developers and seasoned JavaScript develo
 
 For information on the things which are currently being focused on, please visit the [ROADMAP.md](ROADMAP.md) file.
 
-## Issuu
+## Setting Up
 
-We use Issuu to host our newspaper PDFs. Every time we send, we have to upload the PDF to this platform and embed it into the website. Here are the instructions:
+1. Clone the repository
 
-1. Sign in to <https://issuu.com/> (ask previous editors for credentials).
-
-2. Click the upload icon in the navigation bar and select the newest issue's PDF file. 
-
-3. Name the publication with the format "Volume XXX, Issue N". For the original publication date, use the date printed on the issue. Don't check any of the boxes and click "Publish Now".
-
-4. Go to the [publication list](https://issuu.com/home/publications) and click the `Embed` option for the issue you just published.
-
-5. Go to the "First, the basics." section and change the background color to `#333333`.
-
-6. Scroll down and click "Save & Get Code". Choose the `iFrame` option. It looks something like this:
 ```
-<iframe style="..." src="//e.issuu.com/embed.html#FIRST_NUMBER/SECOND_NUMBER" frameborder="0" allowfullscreen></iframe>
+$ git clone https://github.com/stuyspec/stuyspec.com.git
 ```
 
-7. Copy the SECOND\_NUMBER and, in the constants file, set the `ISSUU_CONFIG` to that number.
+2. In the `stuyspec.com` folder, run 
+
 ```
-export const ISSUU_CONFIG = SECOND_NUMBER;
+npm install
 ```
+
+3. Run the application
+
+```
+npm start
+```
+
+4. Experiment with the code!
+> React automatically hot reloads the code so it will take a few seconds to see your code reflect in the build
 
 ## Deploying
 
-We use CircleCI for continuous integration. If you push to the `staging` branch, the code will be synced to our staging S3 bucket (hosted on `staging.stuyspec.com`). If you push to `master`, it will be synced to the prod bucket (`stuyspec.com`).
-
+To push new features to the website, please make sure they work on your local repo first. After having your features merged into the ``develop`` branch, go into your local [stuy-spec-api](https://github.com/stuyspec/stuyspec-api) repo and run ``bundle exec cap production deploy``

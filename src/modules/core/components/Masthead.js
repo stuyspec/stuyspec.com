@@ -10,13 +10,14 @@ import { Search } from "../icons";
 import { openSidebar } from "../actions";
 import { openSubscriptionModal } from "../../accounts/actions";
 import { FeaturedSectionsBar } from "../../sections/components";
+import DarkModeToggle from "./DarkModeToggle";
 
 const styles = {
   Masthead: {
     paddingTop: "20px",
     display: "flex",
     flexDirection: "column",
-    paddingBottom: "3%",
+    paddingBottom: "0%",
   },
   theSpectatorLogo: {
     flexGrow: "2",
@@ -24,7 +25,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    fontFamily: "Mrs Eaves Small Caps",
+    fontFamily: "Old English Text MT",
     fontSize: "8rem",
     marginBottom: "10px",
     "&:hover, &:active, &:focus": {
@@ -32,7 +33,7 @@ const styles = {
       textDecoration: "none",
     },
     "@media (min-width: 768px)": {
-      fontSize: "75px",
+      fontSize: "65px"
     },
   },
   userTools: {
@@ -50,7 +51,9 @@ const styles = {
   },
   FeaturedSectionsBarContainer: {
     borderTop: "1px solid black",
-    width: "107%",
+    borderBottom: "1px solid gray",
+    width: "100%",
+    marginBottom: "2rem",
   },
   myAccount: {
     display: "inline",
@@ -62,6 +65,10 @@ const styles = {
     "&:hover, &:active, &:focus": {
       color: "#000",
     },
+  },
+  toggle: {
+    marginRight: '20%',
+    marginTop: '5%',
   },
   searchLink: {
     color: "#000",
@@ -110,7 +117,12 @@ const Masthead = ({ classes, openSidebar, session, openSubscriptionModal }) => {
               </Link>
             </div>
           ) : (
-            <SubscribeButton onClick={openSubscriptionModal} />
+            <>
+            <div className={classes.toggle}>
+              <DarkModeToggle/>
+            </div>
+              <SubscribeButton onClick={openSubscriptionModal} />
+            </>
           )}
           {/*!session && (
             <div className={classes.userTools}>
@@ -124,6 +136,7 @@ const Masthead = ({ classes, openSidebar, session, openSubscriptionModal }) => {
       <div className={classes.FeaturedSectionsBarContainer}>
         <FeaturedSectionsBar />
       </div>
+
     </Grid>
   );
 };

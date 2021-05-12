@@ -5,17 +5,18 @@ import { Grid, Row, Col } from "react-bootstrap/lib";
 import injectSheet from "react-jss";
 import DescriptionLinks from "./DescriptionLinks";
 import { Description } from "../types";
+import { Instagram, Facebook, Linkedin, Spotify } from "../icons";
 
 const styles = {
   PageFooter: {
     background: "#fff",
     height: "370px",
     marginTop: "14px",
-    marginBottom: "60px"
+    marginBottom: "30px",
   },
   pageFooterMain: {
     borderTop: "3px solid #ddd",
-    margin: "0 auto"
+    margin: "0 auto",
   },
   sectionFlex: {
     height: "264px",
@@ -24,7 +25,8 @@ const styles = {
     paddingTop: "6px"
   },
   sectionBlock: {
-    marginTop: "19px"
+    marginTop: "19px",
+    marginRight: "60px"
   },
   topLevelSectionLink: {
     color: "#000",
@@ -59,6 +61,51 @@ const styles = {
     fontStyle: "normal",
     fontWeight: 400,
     paddingTop: "10px",
+    paddingRight: '10px',
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none"
+    }
+  },
+  Instagram: {
+    color: "#000",
+    fontSize: "25px",
+    fontWeight: 400,
+    paddingTop: "10px",
+    paddingRight: '10px',
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none"
+    }
+  },
+  Facebook: {
+    color: "#000",
+    fontSize: "25px",
+    fontWeight: 400,
+    paddingTop: "10px",
+    paddingRight: '10px',
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none"
+    }
+  },
+  Spotify: {
+    color: "#000",
+    fontSize: "25px",
+    fontWeight: 400,
+    paddingTop: "10px",
+    paddingRight: '10px',
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none"
+    }
+  },
+  Linkedin: {
+    color: "#000",
+    fontSize: "25px",
+    fontWeight: 400,
+    paddingTop: "10px",
+    paddingRight: '10px',
     "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none"
@@ -159,24 +206,44 @@ const PageFooter: React.SFC<PageFooterProps> = ({
         <Col
           xs={12}
           sm={10}
-          smOffset={1}
+          smOffset={0}
           md={8}
-          mdOffset={2}
+          mdOffset={1}
           lg={8}
-          lgOffset={2}
+          lgOffset={0}
         >
           <Link to="/" className={classes.theSpectator}>
             The Spectator
           </Link>
+          <a href="https://open.spotify.com/show/1D0i5KdRFdMNNUwsKVfpYb" 
+              className={classes.Spotify}>
+            <Spotify />
+          </a>
+          <a href="https://www.instagram.com/stuyspectator/" 
+              className={classes.Instagram}>
+            <Instagram />
+          </a>
+          <a href="https://www.facebook.com/stuyspectator" 
+              className={classes.Facebook}>
+            <Facebook />
+          </a>
+          {/* {Might add back later} */}
+          {/* <a href="https://github.com/stuyspec" 
+              className={classes.Github}>
+            <Github/>
+          </a> */}
+          <a href="https://www.linkedin.com/company/the-stuyvesant-spectator" 
+              className={classes.Linkedin}>
+            <Linkedin/>
+          </a>
         </Col>
         <Col
           xs={12}
           sm={10}
-          smOffset={1}
+          smOffset={0}
           md={8}
-          mdOffset={2}
+          mdOffset={1}
           lg={8}
-          lgOffset={2}
           className={classes.sectionFlex}
         >
           {sections.map(section => {
@@ -216,11 +283,7 @@ const PageFooter: React.SFC<PageFooterProps> = ({
           className={classes.creditLine}
         >
           <hr className={classes.hr} />
-          Created by Jason Kao, Nicholas Yang, Jerry Ye, Jason Lin, Darius Jankauskas, Victor Siu, and
-          Cathy Cai{" "}
-          <a href="https://github.com/stuyspec">
-            @The Spectator Web Department
-          </a>.
+          
         </Col>
         <Col
           xs={12}
@@ -233,11 +296,6 @@ const PageFooter: React.SFC<PageFooterProps> = ({
         </Col>
         <Col xs={12} smHidden mdHidden lgHidden className={classes.creditLine}>
           <hr className={classes.hr} />
-          Created by Jason Kao, Nicholas Yang, Darius Jankuaskas, Jason Lin, Jerry Ye, Victor Siu,
-          and Cathy Cai{' '}
-          <a href="https://github.com/stuyspec">
-            @The Spectator Web Department
-          </a>.
         </Col>
       </Row>
     </Grid>

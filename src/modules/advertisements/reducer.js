@@ -5,10 +5,15 @@ const initialState = [
     url: '/ad/kweller'
   },
   {
-    company: "IExcel",
-    filename: "iExcel.jpg",
-    url: '/ad/iExcel'
-  }
+    company: "Aim Plus Education",
+    filename: "aimpluseducation.png",
+    url: '/ad/aimplus'
+  },
+  {
+    company: "The Tutorverse",
+    filename: "tutorverse.jpg",
+    url: '/ad/tutorverse'
+  }  
 ];
 
 const reducer = (state = { ...initialState }) => {

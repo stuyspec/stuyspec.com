@@ -152,11 +152,9 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
 </ul>
 <h2>Contact Business Directly</h2>
 <ul>
-  <b>Manager</b>: Rachel Joh
+  <b>Manager</b>: Tina Nguyen
   <br>
-  <b>Phone</b>: 646.991.5400
-  <br>
-  <b>Email</b>: rjoh10@stuy.edu
+  <b>Email</b>: tnguyen20@stuy.edu
   <br>
 </ul>
 `,
@@ -179,21 +177,6 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
   "width:500px; height:647px;"></iframe>
 </center>
 <hr>
-<center>
-  <a href=
-  "https://www.asphaltgreen.org/bpc?utm_medium=referral&utm_source=stuyvesant%20spectator&utm_campaign=website%20referral">
-  <img alt="AsphaltGreen" src="${process.env.PUBLIC_URL}/img/sponsors/AsphaltGreen.png" style=
-  "margin-bottom:50px"></a><br>
-  <a href="http://static.escapetheroomnyc.com/"><img alt="Escape" src=
-  "${process.env.PUBLIC_URL}/img/sponsors/Escape.png" style="margin-bottom:50px"></a><br>
-  <a href="http://foxmanagementconsulting.com/"><img alt="FoxManagement"
-  src="${process.env.PUBLIC_URL}/img/sponsors/FoxManagement.png" style="margin-bottom:50px"></a><br>
-  <a href="http://www.mysteryroomnyc.com/"><img alt="MysteryRoom" src=
-  "${process.env.PUBLIC_URL}/img/sponsors/MysteryRoom.png" style=
-  "margin-bottom:50px; width:320px; height:181px"></a><br>
-  <a href="http://thinkshirt.com/"><img alt="ThinkShirt" src=
-  "${process.env.PUBLIC_URL}/img/sponsors/ThinkShirt.png" style="margin-bottom:50px"></a><br>
-</center>
 `,
   },
   {
@@ -202,99 +185,100 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
     slug: "staff",
     content: `<center>
 <h2 style="margin-bottom: 30px;">
-  Members of the 2020-2021 Spectator Editorial Board
+  Members of the 2021-2022 Spectator Editorial Board
 </h2>
 <b>Editors In Chief</b><br>
-*Erin Lee<br>
-*Talia Kahan<br>
+*Morris Raskin<br>
+*Karen Zhang<br>
 <br>
 <table style="width:87%;text-align:center" >
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>News Editors</b><br>
-            *Maddy Andersen<br>
-            Karen Zhang<br>
+            Jenny Liu<br>
+            Momoca Mairaj<br>
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
             <b>Features Editors</b><br>
-            Hayeon Ok<br>
-            *Zoe Oppenheimer<br>
-            Clara Shapiro<br>
+            Angela Cai<br>
+            Christina Pan<br>
+            *Clara Shapiro<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Science Editors</b><br>
-            **Claire Shin<br>
-            **Kristoff Misquitta<br>
+            Gerard Lin<br>
+            **Sonya Sasson<br>
             <br>
         </td>
     </tr>
     <tr>
         <td style="width:30%;vertical-align: top">
              <b>Opinions Editors</b><br>
-            Kristin Cheng<br>
-            *Jonathan Schneiderman<br>
+            Maya Nelson<br>
+            *Aaron Visser<br>
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
             <b>Arts & Entertainment Editors</b><br>
             Suah Chung<br>
-            Miranda Lepri<br>
-            Morris Raskin<br>
-            Jiahe Wang<br>
+            **Kenisha Mahajan<br>
+            Gavin McGinley<br>
+            Dexter Wells<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Humor Editors</b><br>
-            Chrisabella Javier<br>
-            *Olly Stewart<br>
-            Kelly Yip<br>
+            **Logan Ruzzier<br>
+            *Kelly Yip<br>
             <br>
         </td>
     </tr>
     <tr>
         <td style="width:30%;vertical-align: top" >
             <b>Sports Editors</b><br>
-            Caroline Ji<br>
+            Krish Gupta<br>
             Sam Levine<br>
             Matt Melucci<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Web Editors</b><br>
-            Victor Siu<br>
-            **Cynthia Or<br>
+            **David Chen<br>
+            Alyssa Choi<br>
+            Andrey Sokolov<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Photography Editors</b><br>
-            *Zoe Oppenheimer<br>
-            Matt Melucci<br>
+            Francesca Nemati<br>
+            Sasha Socolow<br>
             <br>
         </td>
     </tr>
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>Art Directors</b><br>
-            Michael Hu<br>
-            Andrea Huang<br>
-            **Adrianna Peng<br>
+            **Afra Mahmud<br>
+            Adrianna Peng<br>
+            Sophie Poget<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Layout Editors</b><br>
-            Allison Ho<br>
             Ezra Lee<br>
             Amy Lin<br>
-            Michelle Thuang<br>
+            Susie McKnight<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Copy Editors</b><br>
-            Brian Zhang<br>
-            Irene Hao<br>
-            Haley Huh<br>
+            Nora Miller<br>
+            **Tashfia Noor<br>
+            Shreyasi Saha<br>
+            Ruiwen Tang<br>
+            **Raymond Yang<br>
             <br>
         </td>
     </tr>
@@ -303,9 +287,8 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
         </td>
         <td style="width:40%;vertical-align: top">
             <b>Business Managers</b><br>
-            Rachel Joh<br>
-            **Daniella Maksin<br>
-            **Tina Nguyen<br>
+            Tina Nguyen<br>
+            Jared Moser<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
@@ -325,11 +308,35 @@ Kerry Garfinkel
   },
   {
     id: 4,
+    title: "Developers",
+    slug: "developers",
+    content: `<center>
+<h2 style="margin-bottom: 30px;">
+  Major Contributors of The Spectator's Website
+</h2>
+Jason Kao<br>
+Nicholas Yang<br>
+Jerry Ye<br>
+Jason Lin<br>
+Cathy Cai<br>
+Darius Jankauskas<br>
+Victor Siu<br>
+Cynthia Or<br>
+Alyssa Choi<br>
+David Chen<br>
+Andrey Sokolov<br>
+<br>
+<p><a href="https://github.com/stuyspec" target="_blank">@The Spectator Web Department</a></p>
+</center>
+`,
+  },
+  {
+    id: 5,
     title: "Contact",
     slug: "contact",
     content: `<p style="text-align: center">
   For website related questions: Contact <a href="mailto:web@stuyspec.com">web@stuyspec.com</a>. <br/>
-  For all other questions: Contact <a href="mailto:erintalia20@gmail.com">erintalia20@gmail.com</a>.
+  For all other questions: Contact <a href="mailto:morriskaren2021@gmail.com">morriskaren2021@gmail.com</a>.
 
 </p>
 `,

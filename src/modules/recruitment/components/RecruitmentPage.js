@@ -1,5 +1,6 @@
 import React from "react";
 import injectSheet from "react-jss";
+import ReactPlayer from "react-player/youtube"
 
 import * as constants from "../constants";
 
@@ -83,6 +84,13 @@ const styles = {
     textAlign: "center",
     paddingBottom: "20px",
   },
+  Video: {
+    display: "block",
+    margin: "auto",
+    width: "50%",
+    paddingBottom: "",
+    textAlign: "center",
+  }
 };
 
 const RecruitmentPage = ({ classes }) => {
@@ -93,6 +101,12 @@ const RecruitmentPage = ({ classes }) => {
         Apply to the Stuyvesant Spectator to join a 100 year tradition of
         student journalism.
       </p>
+      <ReactPlayer
+        url="https://youtu.be/8MvOzTSwwCs"
+        controls={true}
+        className={classes.Video}
+      />
+      <hr></hr>
       <div className={classes.FlexContainer}>
         {constants.SECTIONS.map(section => (
           <StyledSection
@@ -100,6 +114,7 @@ const RecruitmentPage = ({ classes }) => {
             imageLink={section.imageLink}
             description={section.description}
             quotes={section.quotes}
+            deadline={section.deadline}
             app={section.link}
             key={section.name}
           />
@@ -124,13 +139,13 @@ const Quote = ({ classes, text, source }) => {
 
 const StyledQuote = injectSheet(styles)(Quote);
 
-const Section = ({ classes, imageLink, name, description, quotes, app }) => {
+const Section = ({ classes, imageLink, name, description, quotes, deadline, app }) => {
   const appLink = (app) ?
       <a className={classes.App} href={app} >
          {" "}
          Click here to sign up for {name}!{" "}
       </a>:
-      <p className={classes.App}>Recruitments in the Fall!</p>
+      <p className={classes.App}>Check out recruitments in the fall!</p>
 
   return (
     <div className={classes.Section}>
@@ -140,6 +155,7 @@ const Section = ({ classes, imageLink, name, description, quotes, app }) => {
       {quotes.map(({ text, source }) => {
         return <StyledQuote text={text} source={source} />;
       })}
+      <p className={classes.SectionText}><b>{deadline}</b></p>
       {appLink}
     </div>
   );

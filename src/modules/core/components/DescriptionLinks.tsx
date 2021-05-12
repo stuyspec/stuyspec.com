@@ -34,13 +34,6 @@ const DescriptionLinks: React.SFC<DescriptionLinksProps> = ({
       >
         Visual Archives
       </a>
-      <a
-        className={classes.subsectionLink}
-        key={-3}
-        href="https://specapparel.strikingly.com/"
-      >
-        Apparel
-      </a>
     </div>
   );
 };

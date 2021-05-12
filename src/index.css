@@ -1,0 +1,87 @@
+body.light-mode {
+  background-color: #fff;
+  color: #333;
+  transition: background-color 0.3s ease;
+}
+body.dark-mode {
+  background-color: #1a1919;
+}
+body.dark-mode a {
+  color: white !important;
+}
+body.dark-mode p {
+  color: white !important;
+}
+body.dark-mode * {
+  background-color: #1a1919;
+  color: white !important;
+}
+body.dark-mode .sidebar {
+  background-color: #1a1919 !important;
+}
+body.dark-mode .sidebar-overlay {
+  background-color: rgba(44, 41, 42, 0.8) !important;
+}
+body.dark-mode div[role="dialog"] {
+  background-color: rgba(44, 41, 42, 0.8) !important;
+}
+.dark-mode-toggle > button {
+  font-size: 1.2em;
+  background: none;
+  margin-left: 0px !important;
+  border-radius: 31%;
+  color: #ffe600;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.dark-mode-toggle > button > svg {
+  vertical-align: text-top;
+}
+
+.dark-mode-toggle > button:last-child {
+  color: #666;
+}
+.dark-mode-toggle > button:focus {
+  outline: none;
+}
+.dmcheck input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.toggle-control {
+  position: relative;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+}
+input[type="checkbox"].dmcheck {
+  width: 40px;
+  height: 16px;
+  top: 0;
+  background: #555;
+  position: relative;
+  border-radius: 10px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+}
+input[type="checkbox"].dmcheck:checked + label {
+  left: 30px;
+}
+input[type="checkbox"].dmcheck + label {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: absolute;
+  background: #fff;
+  top: 28%;
+  opacity: 0.9;
+  background-color: #f6f6f6;
+}

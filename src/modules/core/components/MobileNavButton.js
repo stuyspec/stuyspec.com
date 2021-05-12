@@ -1,5 +1,6 @@
 import React from "react";
 import injectSheet from "react-jss";
+import DarkModeToggle from "./DarkModeToggle";
 
 const navButtonStyles = {
   MobileNavButton: {
@@ -23,19 +24,34 @@ const navButtonStyles = {
     display: "inline",
     marginRight: "4px",
   },
+  DarkModeToggle: {
+    position: "absolute",
+    marginLeft: "-9999px",
+    bottom: "5px",
+    display: 'hidden'
+  },
   "@media (max-width: 1100px)": {
     MobileNavButton: {
       display: "flex",
     },
+    DarkModeToggle: {
+      display: "block !important",
+      marginLeft: '5rem'
+    }
   },
 };
 
 const MobileNavButton = ({ classes, children, label, onClick }) => {
   return (
-    <button className={classes.MobileNavButton} onClick={onClick}>
-      <div className={classes.icon}>{children}</div>
-      <span className={classes.buttonText}>{label}</span>
-    </button>
+    <div>
+      <div className={classes.DarkModeToggle}>
+      <DarkModeToggle />
+      </div>
+      <button className={classes.MobileNavButton} onClick={onClick}>
+        <div className={classes.icon}>{children}</div>
+        <span className={classes.buttonText}>{label}</span>
+      </button>
+    </div>
   );
 };
 

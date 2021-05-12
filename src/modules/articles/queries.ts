@@ -42,15 +42,6 @@ export const ARTICLE_QUERY = gql`
           permalink
         }
       }
-      published_comments {
-        id
-        content
-        created_at
-        user {
-          first_name
-          last_name
-        }
-      }
     }
   }
 `;

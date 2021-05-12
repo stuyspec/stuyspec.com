@@ -81,6 +81,16 @@ const styles = {
       padding: "0 !important",
     },
   },
+  adbanner: {
+    fontFamily: "Circular Std",
+    marginTop: "0%",
+    margin: "auto",
+  },
+  "@media screen and (min-width: 769px)": {
+    adbanner: {
+      display: "none",
+    },
+  },
 };
 
 const HomePage = ({ classes, data }) => {
@@ -99,6 +109,13 @@ const HomePage = ({ classes, data }) => {
     <div>
       <Grid fluid>
         <Row>
+          <center>
+            <div className={classes.adbanner}>
+              <h1 class="col-md-12 container-fluid">
+                Check out the promotions on the bottom of the page!
+              </h1>
+            </div>
+          </center>
           <Col
             xs={12}
             sm={12}

@@ -8,7 +8,7 @@ import { FormStatus, RenderField } from "./helpers";
 
 const styles = {
   submitButton: {
-    backgroundColor: "#e2130b",
+    backgroundColor: "#e2130b !important",
     border: "none",
     borderRadius: "3px",
     color: "#fff",
@@ -27,7 +27,7 @@ const styles = {
   },
   input: {
     backgroundColor: "#eee",
-    border: "none",
+    border: "1px solid white",
     borderRadius: "3px",
     fontFamily: "Circular Std",
     fontSize: "15px",

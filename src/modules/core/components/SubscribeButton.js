@@ -1,6 +1,7 @@
 import React from "react";
 import injectSheet from "react-jss";
 
+
 const styles = {
   SubscribeButton: {
     width: "8vw",
@@ -13,7 +14,7 @@ const styles = {
     borderRadius: "4px",
     //borderTopLeftRadius: "4px",
     //borderBottomLeftRadius: "4px",
-    backgroundColor: "#DB2B39",
+    backgroundColor: "#DB2B39 !important",
     border: "solid 1.5px #DB2B39",
     display: "flex",
     flexDirection: "column",
@@ -23,6 +24,9 @@ const styles = {
     "&:hover": {
       filter: "opacity(75%)",
     },
+    "& span" : {
+      background: "transparent"
+    }
   },
   text: {
     fontFamily: "Circular Std",
@@ -39,12 +43,12 @@ const styles = {
   },
 };
 
-const SubscribeButton = ({ onClick, classes }) => {
+const SubscribeButton = ({ classes }) => {
   return (
-    <button onClick={onClick} className={classes.SubscribeButton}>
+    <a href="https://stuyspec.us4.list-manage.com/subscribe?u=d92e8c831515555b06ae9eeea&id=78d0a29c4f"><button className={classes.SubscribeButton}>
       <span className={classes.text}>Subscribe</span>
-      <span className={classes.subscribeTo}>to our newsletter</span>
-    </button>
+      <span className={classes.subscribeTo}>to our newsletter</span>      
+    </button></a>
   );
 };
 
