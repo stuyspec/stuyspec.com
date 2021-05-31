@@ -13,6 +13,11 @@ const initialState = [
     company: "The Tutorverse",
     filename: "tutorverse.jpg",
     url: '/ad/tutorverse'
+  },
+  {
+    company: "Sagacity",
+    filename: "sagacity.png",
+    url: '/ad/sagacity'
   }  
 ];
 
