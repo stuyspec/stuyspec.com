@@ -18,6 +18,11 @@ const initialState = [
     company: "Sagacity",
     filename: "sagacity.png",
     url: '/ad/sagacity'
+  },
+  {
+    company: "Manhattan Ace",
+    filename: "manhattanace.png",
+    url: "/ad/manhattanace"
   }  
 ];
 
