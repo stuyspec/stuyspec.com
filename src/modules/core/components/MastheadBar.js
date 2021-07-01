@@ -157,12 +157,13 @@ const MastheadBar = ({
             <div className={classes.DarkModeToggle}>
               <DarkModeToggle />
             </div>
-            <span
+<a href="https://stuyspec.us4.list-manage.com/subscribe?u=d92e8c831515555b06ae9eeea&id=78d0a29c4f">            
+<span
               className={classes.subscriber}
-              onClick={openSubscriptionModal}
             >
               Subscribe
             </span>
+</a>
           </div>
           <Link to="/search" className={classes.searchLink}>
             <Search color={"#000"} />
