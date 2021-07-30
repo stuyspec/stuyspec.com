@@ -185,9 +185,13 @@ https://stackoverflow.com/a/8539107/6174302
  * LOADING ICON STYLES
  * ========================= */
 #loading {
-    margin: 100px auto 0;
+    margin: 0;
     width: 80px;
     text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #loading > div {
