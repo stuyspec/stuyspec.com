@@ -7,6 +7,7 @@ const styles = {
     width: "8vw",
     height: "45px",
     padding: "4px 0",
+    right: "39px",
     lineHeight: "1.5rem",
     minWidth: "135px",
     maxWidth: "150px",
