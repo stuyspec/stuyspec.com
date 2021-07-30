@@ -50,7 +50,7 @@ const styles = {
     position: "relative",
   },
   FeaturedSectionsBarContainer: {
-    borderTop: "1px solid black",
+    borderTop: "1px solid gray",
     borderBottom: "1px solid gray",
     width: "100%",
     marginBottom: "2rem",
@@ -68,7 +68,7 @@ const styles = {
   },
   toggle: {
     marginRight: '20%',
-    marginTop: '5%',
+    marginTop: '3%',
   },
   searchLink: {
     color: "#000",
