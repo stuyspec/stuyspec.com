@@ -27,6 +27,7 @@ const styles = {
   text: {
     fontFamily: "Circular Std",
     paddingLeft: "5px",
+    paddingTop: "2px",
     fontSize: "1.6rem",
     fontWeight: "bold",
     textAlign: "left",
