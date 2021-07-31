@@ -111,7 +111,7 @@ const HomePage = ({ classes, data }) => {
         <Row>
           <center>
             <div className={classes.adbanner}>
-              <h1 class="col-md-12 container-fluid">
+              <h1 className="col-md-12 container-fluid">
                 Check out the promotions on the bottom of the page!
               </h1>
             </div>
