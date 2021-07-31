@@ -16,7 +16,7 @@ const styles = {
       backgroundColor: "#eee",
       borderRadius: "4px 0 0 4px",
       border: "none",
-      color: "#888",
+      color: "#333 !important",
       fontFamily: "Circular Std",
       fontSize: "18px",
       fontWeight: 500,
