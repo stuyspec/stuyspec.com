@@ -60,7 +60,7 @@ const styles = {
     fontSize: "30px",
     fontStyle: "normal",
     fontWeight: 400,
-    paddingTop: "6px",
+    paddingTop: "5px",
     paddingRight: '10px',
     "&:hover, &:active, &:focus": {
       color: "#000",
