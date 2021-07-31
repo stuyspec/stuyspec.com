@@ -29,6 +29,7 @@ body.dark-mode div[role="dialog"] {
   font-size: 1.2em;
   background: none;
   margin-left: 0px !important;
+  margin-right: 20px !important;
   border-radius: 31%;
   color: #ffe600;
   cursor: pointer;
