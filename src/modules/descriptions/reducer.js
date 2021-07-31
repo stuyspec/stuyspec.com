@@ -241,13 +241,13 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
             Krish Gupta<br>
             Sam Levine<br>
             Matt Melucci<br>
+            **Shafiul Haque<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Web Editors</b><br>
-            **David Chen<br>
+            David Chen<br>
             Alyssa Choi<br>
-            Andrey Sokolov<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
