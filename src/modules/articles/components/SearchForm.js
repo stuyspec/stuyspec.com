@@ -43,6 +43,7 @@ const styles = {
     height: "17px",
     position: "relative",
     left: "33px",
+    backgroundColor: 'transparent !important',
     bottom: "2px",
   },
   "@media (max-width: 767px)": {
@@ -74,7 +75,7 @@ class SearchForm extends PureComponent {
     return (
       <form onSubmit={handleSubmit} className={classes.SearchForm}>
         <div className={classes.inputContainer}>
-          <Search className={classes.search} />
+          <Search fill="black" className={classes.search} />
           <Field
             name="query"
             type="text"
