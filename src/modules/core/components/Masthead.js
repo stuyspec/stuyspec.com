@@ -50,7 +50,7 @@ const styles = {
     position: "relative",
   },
   FeaturedSectionsBarContainer: {
-    borderTop: "1px solid black",
+    borderTop: "1px solid",
     borderBottom: "1px solid gray",
     width: "100%",
     marginBottom: "2rem",
