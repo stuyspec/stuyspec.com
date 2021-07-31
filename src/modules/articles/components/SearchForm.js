@@ -27,7 +27,7 @@ const styles = {
     },
   },
   submitButton: {
-    backgroundColor: "#3572b7",
+    backgroundColor: "#3572b7 !important",
     borderRadius: "0 4px 4px 0",
     border: "none",
     color: "#fff",
