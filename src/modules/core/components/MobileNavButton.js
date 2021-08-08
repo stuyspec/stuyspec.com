@@ -30,7 +30,7 @@ const navButtonStyles = {
     bottom: "5px",
     display: 'hidden'
   },
-  "@media (max-width: 1100px)": {
+  "@media (max-width: 1300px)": {
     MobileNavButton: {
       display: "flex",
     },

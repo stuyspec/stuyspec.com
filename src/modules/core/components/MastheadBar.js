@@ -105,7 +105,7 @@ const styles = {
     display: "flex",
     justifyContent: "center",
   },
-  "@media (max-width: 1100px)": {
+  "@media (max-width: 1300px)": {
     MastheadBar: {
       height: "52px",
       flexDirection: "row"
