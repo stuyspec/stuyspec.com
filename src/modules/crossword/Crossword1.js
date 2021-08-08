@@ -1,7 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
-import {Crossword, CrosswordSizeContext} from '@jaredreisinger/react-crossword';
+import Crossword from '@jaredreisinger/react-crossword';
 import styled from 'styled-components';
-import useDarkMode from "use-dark-mode";
 
 
 const data = {
