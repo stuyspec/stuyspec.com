@@ -89,6 +89,12 @@ const GamePage = ({ classes }) => {
             <p style={{paddingTop:"10px"}}>THE WINTER CROSSWORD</p>
           </div>
         </Link>
+        <Link to="/zooming" className={classes.Link}>
+          <div className={classes.GameText}>
+            <img src={`${process.env.PUBLIC_URL}/img/crossword_logo.jpeg`} className={classes.Image} alt="crossword_logo"/>
+            <p style={{paddingTop:"10px"}}>ZOOMING!</p>
+          </div>
+        </Link>
       </div>    
     </div>
   );
