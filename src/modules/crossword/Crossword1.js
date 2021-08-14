@@ -386,7 +386,7 @@ function Crossword1() {
 
       <p>
         <span className="contributor">By The Editorial Board</span>
-        <span className="date">February 18, 2020</span>
+        <span className="date">December 23, 2020</span>
       </p>
 
       <Commands>
