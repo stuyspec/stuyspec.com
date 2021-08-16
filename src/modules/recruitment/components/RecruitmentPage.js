@@ -83,13 +83,6 @@ const styles = {
     fontSize: "20px",
     textAlign: "center",
     paddingBottom: "20px",
-  },
-  Video: {
-    display: "block",
-    margin: "auto",
-    width: "50%",
-    paddingBottom: "",
-    textAlign: "center",
   }
 };
 
@@ -102,9 +95,10 @@ const RecruitmentPage = ({ classes }) => {
         student journalism.
       </p>
       <ReactPlayer
+        height="50%"
+        width="100%"
         url="https://youtu.be/8MvOzTSwwCs"
         controls={true}
-        className={classes.Video}
       />
       <hr></hr>
       <div className={classes.FlexContainer}>
