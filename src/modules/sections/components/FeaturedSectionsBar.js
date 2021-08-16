@@ -33,7 +33,7 @@ const styles = {
     margin: "0px 13px",
   },
   navSearchButton: {
-    top: "2px",
+    top: "-1px",
     position: "relative",
   },
   sectionLink: {
