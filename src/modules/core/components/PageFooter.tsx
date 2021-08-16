@@ -70,7 +70,6 @@ const styles = {
     color: "#000",
     fontSize: "25px",
     fontWeight: 400,
-    paddingTop: "10px",
     paddingRight: '10px',
     "&:hover, &:active, &:focus": {
       color: "#000",
@@ -81,7 +80,6 @@ const styles = {
     color: "#000",
     fontSize: "25px",
     fontWeight: 400,
-    paddingTop: "10px",
     paddingRight: '10px',
     "&:hover, &:active, &:focus": {
       color: "#000",
@@ -92,7 +90,6 @@ const styles = {
     color: "#000",
     fontSize: "25px",
     fontWeight: 400,
-    paddingTop: "10px",
     paddingRight: '10px',
     "&:hover, &:active, &:focus": {
       color: "#000",
@@ -103,7 +100,6 @@ const styles = {
     color: "#000",
     fontSize: "25px",
     fontWeight: 400,
-    paddingTop: "10px",
     paddingRight: '10px',
     "&:hover, &:active, &:focus": {
       color: "#000",
