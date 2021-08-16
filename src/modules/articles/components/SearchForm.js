@@ -24,6 +24,7 @@ const styles = {
       padding: "14px 44px",
       textAlign: "left",
       width: "420px",
+      outline: "none",
     },
   },
   submitButton: {
