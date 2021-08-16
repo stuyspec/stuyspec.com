@@ -59,8 +59,8 @@ const styles = {
     marginTop: "50px",
     margin: "auto",
     width: "90%",
-    borderTop: "1px solid black",
-    borderBottom: "1px solid black",
+    borderTop: "1px solid",
+    borderBottom: "1px solid",
     padding: "20px",
     //backgroundColor: "#B3DAF1"
   },

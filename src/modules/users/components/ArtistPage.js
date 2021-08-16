@@ -66,7 +66,7 @@ const styles = {
     }
   },
   latest: {
-    borderTop: "1px solid #000",
+    borderTop: "1px solid",
     borderBottom: "1px solid #ddd",
     borderStyle: "solid none",
     color: "#000",

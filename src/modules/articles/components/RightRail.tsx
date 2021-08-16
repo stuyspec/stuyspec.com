@@ -18,7 +18,7 @@ const styles = {
     },
   },
   label: {
-    borderTop: "1px solid #000",
+    borderTop: "1px solid",
     borderBottom: "1px solid #ddd",
     color: "#000",
     display: "block",

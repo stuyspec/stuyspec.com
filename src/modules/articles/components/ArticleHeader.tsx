@@ -11,7 +11,7 @@ import { IArticle } from '../queries';
 
 const styles = {
   ArticleHeader: {
-    borderTop: "solid 1px #000",
+    borderTop: "solid 1px",
     borderBottom: "1px solid #dedede",
     color: "#000",
     fontFamily: "Minion Pro",

@@ -20,7 +20,7 @@ const styles = {
   },
   label: {
     borderBottom: "solid 1px #ddd",
-    borderTop: "solid 1px #000",
+    borderTop: "solid 1px",
     color: "#000",
     fontFamily: "Circular Std",
     fontSize: "13px",
