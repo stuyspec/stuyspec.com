@@ -21,7 +21,6 @@ const styles = {
     height: "300px",
     //border: "2px solid black",
     borderRadius: "15px",
-    backgroundColor: "rgb(171, 224, 255)",
     margin: "15px",
     fontWeight: "bold",
     textDecoration: "none",
@@ -30,7 +29,7 @@ const styles = {
       //border: '1px solid blue',
       textDecoration: 'none',
       color: 'black',
-      boxShadow: "0 5px 20px rgba(171, 224, 255, .5)"
+      boxShadow: "8px 8px 0px black"
     }
   },
   SectionText: {
@@ -74,7 +73,7 @@ const styles = {
     fontFamily: "Circular Std",
     fontSize: "1.3em",
     lineHeight: "1em",
-    color: "black"
+    color: "black",
   }
 };
 
@@ -83,14 +82,20 @@ const GamePage = ({ classes }) => {
     <div>
       <h1 className={classes.Title}>SpecGames</h1>
       <div key={-5} className={classes.FlexContainer}>
-        <Link to="/winter-crossword" className={classes.Link}>
-          <div className={classes.GameText}>
+        <Link to="/winter-crossword" className={classes.Link} style={{textDecoration: "none"}}>
+          <div className={classes.GameText} style={{backgroundColor:"rgb(171, 224, 255)",}}>
             <img src={`${process.env.PUBLIC_URL}/img/crossword_logo.jpeg`} className={classes.Image} alt="crossword_logo"/>
             <p style={{paddingTop:"10px"}}>THE WINTER CROSSWORD</p>
           </div>
         </Link>
-        <Link to="/zooming" className={classes.Link}>
-          <div className={classes.GameText}>
+        <Link to="/clubs-and-pubs-galore" className={classes.Link} style={{textDecoration: "none"}}>
+          <div className={classes.GameText} style={{backgroundColor:"#ff9999"}}>
+            <img src={`${process.env.PUBLIC_URL}/img/crossword_logo.jpeg`} className={classes.Image} alt="crossword_logo"/>
+            <p style={{paddingTop:"10px"}}>CLUBS AND PUBS GALORE</p>
+          </div>
+        </Link>
+        <Link to="/zooming" className={classes.Link} style={{textDecoration: "none"}}>
+          <div className={classes.GameText} style={{backgroundColor:"#56a3ff"}}>
             <img src={`${process.env.PUBLIC_URL}/img/crossword_logo.jpeg`} className={classes.Image} alt="crossword_logo"/>
             <p style={{paddingTop:"10px"}}>ZOOMING!</p>
           </div>

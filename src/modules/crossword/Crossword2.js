@@ -6,114 +6,120 @@ import styled from 'styled-components';
 const data = {
   down: {
     1: {
-      clue: 'Check to make sure you have no embarrassing tabs open before you do this.',
-      answer: 'SCREENSHARE',
+      clue: 'Solves problems and makes friends (and solves more problems)',
+      answer: 'MATHTEAM',
       row: 1,
-      col: 10,
+      col: 8,
     },
     2: {
-        clue: 'Allows you to travel to San Francisco or outer space in the middle of your meeting.',
-        answer: 'BACKGROUND',
-        row: 1,
+        clue: 'Is a delegate of 10 different countries every year',
+        answer: 'MODELUN',
+        row: 2,
+        col: 13,
+      },
+    3: {
+        clue: 'No instruments, just vibes (and good voices)',
+        answer: 'ACAPELLA',
+        row: 3,
+        col: 16,
+      },   
+      4: {
+        clue: 'Talks fast, cuts too many cards, does dramatic performances',
+        answer: 'SPEECHANDDEBATE',
+        row: 4,
+        col: 11,
+      },
+      7: {
+        clue: 'Door-opening',
+        answer: 'KEYCLUB',
+        row: 11,
+        col: 19,
+      },
+      9: {
+        clue: '“Bridging the gap” (dictatorship)',
+        answer: 'STUDENTUNION',
+        row: 12,
         col: 15,
       },
-    5: {
-      clue: 'Second in line to the Zoom throne (__host)',
-      answer: 'CO',
-      row: 7,
-      col: 3,
-    },
-    6: {
-      clue: 'You are one of them!',
-      answer: 'PARTICIPANTS',
-      row: 7,
-      col: 8,
-    },
-    7: {
-      clue: '“If you want to speak, click on your ___Hand feature.”',
-      answer: 'RAISE',
-      row: 7,
-      col: 13,
-    },
-    9: {
-      clue: 'For participants, the most tempting red button on the corner of the screen.',
-      answer: 'LEAVE',
-      row: 8,
-      col: 4,
-    },
-    12: {
-      clue: '“Can you hear me? Is my ___ working?”',
-      answer: 'MIC',
-      row: 12,
-      col: 3,
-    },
-    14: {
-      clue: 'The one who asks you to unmute yourself when you don’t want to.',
-      answer: 'HOST',
-      row: 13,
-      col: 11,
-    },
-    17: {
-      clue: 'For hosts, the most tempting red button at the bottom right corner of the screen.',
-      answer: 'END',
-      row: 16,
-      col: 12,
-    },
-  },
-  across: {
-    3: {
-      clue: 'When sharing, “Can everyone see my ___?”',
-      answer: 'SCREEN',
-      row: 3,
-      col: 8,
-    },
-    4: {
-        clue: '“Mr. Citron, we can’t hear you. You’re ___.”',
-        answer: 'MUTED',
-        row: 5,
+      10: {
+        clue: 'Our school’s theater group, abbr.',
+        answer: 'STC',
+        row: 13,
+        col: 4,
+      },
+      12: {
+        clue: 'Girls’ racketing!',
+        answer: 'LOBSTERS',
+        row: 14,
+        col: 9,
+      },
+      13: {
+        clue: 'The pulse of the student body',
+        answer: 'SPECTATOR',
+        row: 14,
+        col: 13,
+      },
+      14: {
+        clue: 'Had missing stoles (and a broken website)',
+        answer: 'ARISTA',
+        row: 16,
         col: 7,
       },
-    8: {
-      clue: '“Okay everyone, we are going to launch a___.”',
-      answer: 'POLL',
-      row: 8,
-      col: 2,
+      15: {
+        clue: '_____ing in the shower',
+        answer: 'SING',
+        row: 16,
+        col: 17,
       },
-    10: {
-      clue: 'Raise Hand, Clap, Go Slower.',
-      answer: 'REACTIONS',
-      row: 9,
-      col: 8,
+  },
+  across: {
+    5: {
+      clue: 'Competitive scienceing',
+      answer: 'SCIENCEOLYMPIAD',
+      row: 6,
+      col: 5,
+    },
+    6: {
+        clue: 'Helps one send flowers and candy to oneself',
+        answer: 'INDICATOR',
+        row: 10,
+        col: 6,
+      },
+    8: {
+        clue: 'Find them in Van Cortlandt Park',
+        answer: 'GREYDUCKS',
+        row: 12,
+        col: 7,
       },
     11: {
-      clue: 'A place for turning and talking with muted classmates and awkward silence.',
-      answer: 'BREAKOUT',
-      row: 10,
-      col: 1,
-      },
-    12: {
-      clue: 'A worse version of Zoom that every P.E.teacher uses.',
-      answer: 'MEET',
-      row: 12,
-      col: 3,
+        clue: 'A club that might be measured in beats per minute',
+        answer: 'STUYPULSE',
+        row: 14,
+        col: 3,
       },
     13: {
-      clue: 'You can see your teacher or your crush on full screen by doing this',
-      answer: 'PIN',
-      row: 13,
-      col: 7,
+        clue: '“We’re in”',
+        answer: 'STUYHACKS',
+        row: 14,
+        col: 13,
       },
     15: {
-      clue: '“This meeting is being ___ed. By continuing to be in the meeting you are consenting to be _____ed.”',
-      answer: 'RECORD',
-      row: 14,
-      col: 1,
+        clue: 'After-school dance routine run-throughs',
+        answer: 'SQUAD',
+        row: 16,
+        col: 17,
       },
     16: {
-      clue: 'If you accidentally press this button, embarrassment lies ahead',
-      answer: 'UNMUTE',
-      row: 16,
-      col: 7,
+        clue: 'Ms. Shamazov’s cult',
+        answer: 'CHORUS',
+        row: 17,
+        col: 4,
+      },
+    17: {
+        clue: 'Younger sibling havers',
+        answer: 'BIGSIBS',
+        row: 19,
+        col: 1,
       },
   }
 };
@@ -202,13 +208,16 @@ const CrosswordWrapper = styled.div`
   g rect {
       //fill: #efefef;
       //stroke-width: 0;
-      width: 5.26px;
-      height: 5.26px;
+      width: 4.18px;
+      height: 4.18px;
+  }
+  .highlightBackground {
+      fill: blue;
   }
   .direction {
-      font-family: Circular Std;
+      font-family: Minion Pro;
       line-height: 1.4;
-      font-weight: lighter;
+      font-weight: light;
       font-size: 15px;
       overflow: scroll; 
       max-height: 290px;
@@ -249,7 +258,10 @@ const Messages = styled.pre`
   padding: 1em;
 `;
 
-function Crossword3() {
+// in order to make this a more-comprehensive example, and to vet Crossword's
+// features, we actually implement a fair amount...
+
+function Crossword1() {
   const crossword = useRef();
 
   const fillAllAnswers = useCallback((event) => {
@@ -318,11 +330,11 @@ function Crossword3() {
 
   return (
     <Page>
-      <Header>Zooming!</Header>
+      <Header>Clubs and Pubs Galore</Header>
 
       <p>
         <span className="contributor">By The Editorial Board</span>
-        <span className="date">May 30, 2021</span>
+        <span className="date">April 27, 2021</span>
       </p>
 
       <Commands>
@@ -333,6 +345,7 @@ function Crossword3() {
 
       <CrosswordWrapper>
         <Crossword
+          viewBox="0 0 101 100"
           data={data}
           ref={crossword}
           onCorrect={onCorrect}
@@ -341,16 +354,17 @@ function Crossword3() {
           onCellChange={onCellChange}
           theme={{
             gridBackground: "transparent",
-            focusBackground: '#56a3ff',
-            highlightBackground: '#abd1ff'
+            focusBackground: '#ffadad',
+            highlightBackground: '#ffe0e0'
           }}
         />
+
       </CrosswordWrapper>
       <p className="issue">
-        Check out <a href="https://issuu.com/stuyspectator/docs/issue16_color">Issue 16</a> where this crossword was featured! (pg 24)
+        Check out <a href="https://issuu.com/stuyspectator/docs/issue14_online">Issue 14</a> where this crossword was featured! (pg 19)
       </p>
     </Page>
   );
 }
 
-export default Crossword3;  
+export default Crossword1;  

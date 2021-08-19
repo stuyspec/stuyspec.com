@@ -28,6 +28,7 @@ import {
 } from "./core/components";
 import {
   Crossword1,
+  Crossword2,
   Crossword3
 } from "./crossword";
 
@@ -208,6 +209,12 @@ class RoutingAppUnconnected extends PureComponent {
                 path={"/winter-crossword"}
                 key={"crossword"}
                 component={Crossword1}
+              />
+              <Route
+                exact
+                path={"/clubs-and-pubs-galore"}
+                key={"crossword"}
+                component={Crossword2}
               />
               <Route
                 exact
