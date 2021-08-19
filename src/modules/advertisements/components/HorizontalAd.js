@@ -9,7 +9,7 @@ const styles = {
     width: "100%",
   },
   img: {
-    height: "500px",
+    height: "400px",
   },
 };
 

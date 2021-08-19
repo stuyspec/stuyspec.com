@@ -54,7 +54,7 @@ const data = {
         col: 12,
       },
       19: {
-        clue: 'Most common first name aong assistant princpials (and former principals).',
+        clue: 'Most common first name among assistant principals (and former principals).',
         answer: 'ERIC',
         row: 12,
         col: 5,
@@ -128,7 +128,7 @@ const data = {
         col: 2,
       },
     16: {
-        clue: 'Bi-annual Spectator events held in the fall to welcome new students to The Spectator.',
+        clue: 'Bi-annual Spectator event held in the fall to introduce students to The Spectator.',
         answer: 'RECRUITMENTS',
         row: 10,
         col: 13,

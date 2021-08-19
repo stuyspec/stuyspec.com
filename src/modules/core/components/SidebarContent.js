@@ -63,10 +63,8 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
      * sections and one separating the non-writing sections from the user
      * account options.
      */
-    if (
-      section.name === "Arts & Entertainment" ||
-      section.name === "10/31 Terror Attack"
-    ) {
+    if (section.name === "Spec+") 
+    {
       sidebarElements.push(
         <hr className={classes.divider} key={section.id + 100} />,
       );
@@ -98,6 +96,16 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
       </Link>,
     );
   }*/
+  sidebarElements.push(
+    <Link
+      className={classes.sidebarSectionLink}
+      key={-2}
+      onClick={closeSidebar}
+      to="/spec-games"
+    >
+      SpecGames
+    </Link>,
+  )
   sidebarElements.push(
     <Link
       className={classes.sidebarSectionLink}
