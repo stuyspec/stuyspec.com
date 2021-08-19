@@ -216,6 +216,14 @@ const Page = styled.div`
       font-weight: bold;
       font-family: Circular Std;
   }
+  .issue {
+    position: flex;
+    align-items: center;
+    font-family: Minion Pro;
+    font-size: 14px;
+    margin-top: 50px;
+    color: black;
+  }
 `;
 
 const Commands = styled.div`
@@ -267,9 +275,9 @@ const CrosswordWrapper = styled.div`
       fill: blue;
   }
   .direction {
-      font-family: Circular Std;
+      font-family: Minion Pro;
       line-height: 1.4;
-      font-weight: lighter;
+      font-weight: light;
       font-size: 15px;
       overflow: scroll; 
       max-height: 290px;
@@ -410,7 +418,11 @@ function Crossword1() {
             highlightBackground: '#d9f5ff'
           }}
         />
+
       </CrosswordWrapper>
+      <p className="issue">
+        Check out <a href="https://issuu.com/stuyspectator/docs/issue8-online">Issue 8</a> where this crossword was featured! (pg 8)
+      </p>
     </Page>
   );
 }
