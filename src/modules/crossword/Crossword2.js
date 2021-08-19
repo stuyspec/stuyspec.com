@@ -223,7 +223,6 @@ const CrosswordWrapper = styled.div`
       max-height: 290px;
       margin: 0 auto;
       padding: 10px;
-      float: right;
       margin-bottom: 20px;
   }
   .direction h3 {
