@@ -195,7 +195,7 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>News Editors</b><br>
-            Jenny Liu<br>
+            *Jenny Liu<br>
             Momoca Mairaj<br>
             <br>
         </td>
