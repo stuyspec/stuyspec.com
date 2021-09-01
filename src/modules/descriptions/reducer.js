@@ -254,6 +254,8 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
             <b>Photography Editors</b><br>
             Francesca Nemati<br>
             Sasha Socolow<br>
+            **Alexander Lopez<br>
+            **Zifei Zhao<br>
             <br>
         </td>
     </tr>
