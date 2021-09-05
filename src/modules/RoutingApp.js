@@ -25,6 +25,8 @@ import {
   HomePage,
   NotFoundPage,
   PageLayout,
+  ClassifiedsRedirect,
+  Adstxt
 } from "./core/components";
 import {
   Crossword1,
@@ -38,7 +40,6 @@ import { ArtistPage, ContributorPage } from "./users/components";
 import { createSession } from "./accounts/actions";
 import { RecruitmentPage } from "./recruitment/components";
 import GamePage from "./games/GamePage";
-import { ClassifiedsRedirect } from "./core/components";
 import { adRedirects } from "./advertisements/constants";
 
 const RoutingAppQuery = gql`
@@ -243,6 +244,12 @@ class RoutingAppUnconnected extends PureComponent {
                 path={"/recruitments"}
                 key={"recruitments"}
                 component={RecruitmentPage}
+              />
+              <Route
+                exact
+                path={"/ads.txt"}
+                key={"adstxt"}
+                component={Adstxt}
               />
               <Route
                 exact
