@@ -251,12 +251,6 @@ const CrosswordWrapper = styled.div`
   }
 `;
 
-const Messages = styled.pre`
-  background-color: #B3DAF1;
-  margin: 1em 0;
-  padding: 1em;
-`;
-
 // in order to make this a more-comprehensive example, and to vet Crossword's
 // features, we actually implement a fair amount...
 
@@ -320,12 +314,6 @@ function Crossword1() {
     },
     [addMessage]
   );
-
-  const cellPadding = 0.125;
-
-  const sizeContext = {
-    cellPadding,
-  };
 
   return (
     <Page>

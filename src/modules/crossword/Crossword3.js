@@ -243,12 +243,6 @@ const CrosswordWrapper = styled.div`
   }
 `;
 
-const Messages = styled.pre`
-  background-color: #B3DAF1;
-  margin: 1em 0;
-  padding: 1em;
-`;
-
 function Crossword3() {
   const crossword = useRef();
 
@@ -309,12 +303,6 @@ function Crossword3() {
     },
     [addMessage]
   );
-
-  const cellPadding = 0.125;
-
-  const sizeContext = {
-    cellPadding,
-  };
 
   return (
     <Page>

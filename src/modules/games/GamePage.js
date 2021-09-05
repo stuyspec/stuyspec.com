@@ -105,6 +105,4 @@ const GamePage = ({ classes }) => {
   );
 };
 
-const StyledSection = injectSheet(styles)(GamePage);
-
 export default injectSheet(styles)(GamePage);
