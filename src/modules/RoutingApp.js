@@ -251,12 +251,7 @@ class RoutingAppUnconnected extends PureComponent {
                 key={"adstxt"}
                 component={Adstxt}
               />
-              <Route
-                exact
-                path={"/classifieds"}
-                key={"classifieds"}
-                component={ClassifiedsRedirect}
-              />
+              <Route exact path={"/ads.txt"} render={() => <div>google.com, pub-6227330768557696, DIRECT, f08c47fec0942fa0</div>}/>
               <Route path={"/search"} key={"search"} component={SearchPage} />
               <Route path="*" key={"404"} component={NotFoundPage} />
             </Switch>
