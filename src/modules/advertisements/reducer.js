@@ -1,7 +1,7 @@
 const initialState = [
   {
     company: "Kweller Prep",
-    filename: "kweller.jpg",
+    filename: "kweller.png",
     url: '/ad/kweller'
   },
   {
