@@ -247,7 +247,7 @@ class RoutingAppUnconnected extends PureComponent {
               />
               <Route
                 exact
-                path={"/ads.txt"}
+                path={"/adstxt"}
                 key={"adstxt"}
                 component={Adstxt}
               />
