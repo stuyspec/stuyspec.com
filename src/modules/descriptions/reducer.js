@@ -248,6 +248,8 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
             <b>Web Editors</b><br>
             David Chen<br>
             Alyssa Choi<br>
+            **Samantha Hua<br>
+            **Theodore Yochum<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
