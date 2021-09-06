@@ -5,7 +5,7 @@ import Grid from "react-bootstrap/lib/Grid";
 import { Helmet } from "react-helmet";
 import { match } from 'react-router';
 
-import { ArticleHeader, ArticleBody, ArticleFooter, RecommendedRow } from "./";
+import { ArticleHeader, ArticleBody, ArticleFooter, ArticleCommentSection, RecommendedRow } from "./";
 import { ARTICLE_QUERY, IArticleData, IArticleVariables } from "../queries";
 import { NotFoundPage } from "../../core/components";
 
@@ -64,6 +64,7 @@ const ArticlePage: React.FC<IProps> = ({ match }) => {
       <ArticleHeader article={article} />
       <ArticleBody article={article} />
       <ArticleFooter article={article} />
+      <ArticleCommentSection article={article} />
       <RecommendedRow section={section.parent_section || section} />
     </Grid>
   );

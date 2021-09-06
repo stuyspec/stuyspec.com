@@ -8,7 +8,6 @@ import { toRoman } from "roman-numerals";
 
 import SubscriptionForm from "../../accounts/components/forms/SubscriptionForm";
 import { subscribe } from "../../accounts/actions";
-import { FacebookProvider, Comments } from 'react-facebook';
 import { GoogleAdsense } from "../../advertisements/components";
 
 
@@ -106,16 +105,11 @@ const ArticleFooter = ({ classes, article, subscribe }) => {
         <GoogleAdsense
           adClient='ca-pub-6227330768557696'
           adSlot='8432941751'
-          style={{'display': 'block'}}
+          style={{'display': 'inline-block'}}
           adLayout='in-article'
           adFormat='auto'
           fullWidthResponsive='true'
         />
-      </div>
-      <div>
-      <FacebookProvider appId='510092146640696'>
-        <Comments href={`https://www.stuyspec.com${window.location.pathname}`} tabs="none" />
-      </FacebookProvider>
       </div>
     </Row>
   );
