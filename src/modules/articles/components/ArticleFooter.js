@@ -104,14 +104,14 @@ const ArticleFooter = ({ classes, article, subscribe }) => {
       <div>
         <GoogleAdsense
           adClient='ca-pub-6227330768557696'
-          adSlot='7357348018'
+          adSlot='1527604127'
           style=
             {{
-              'display':'inline', 
-              'text-align':'center'
+              'display':'display:inline-block', 
             }}
           adLayout='in-article'
-          adFormat='fluid'
+          adFormat='auto'
+          fullWidthResponsive='true'
         />
       </div>
     </Row>
