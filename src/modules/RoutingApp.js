@@ -25,8 +25,7 @@ import {
   HomePage,
   NotFoundPage,
   PageLayout,
-  ClassifiedsRedirect,
-  Adstxt
+  ClassifiedsRedirect
 } from "./core/components";
 import {
   Crossword1,
