@@ -8,7 +8,6 @@ import { toRoman } from "roman-numerals";
 
 import SubscriptionForm from "../../accounts/components/forms/SubscriptionForm";
 import { subscribe } from "../../accounts/actions";
-import { GoogleAdsense } from "../../advertisements/components";
 
 
 const styles = {
@@ -102,17 +101,6 @@ const ArticleFooter = ({ classes, article, subscribe }) => {
         </div>
       </Col>
       <div>
-        <GoogleAdsense
-          adClient='ca-pub-6227330768557696'
-          adSlot='1527604127'
-          style=
-            {{
-              'display':'block' 
-            }}
-          adLayout='in-article'
-          adFormat='auto'
-          fullWidthResponsive='true'
-        />
       </div>
     </Row>
   );
