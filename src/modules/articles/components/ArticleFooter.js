@@ -102,7 +102,7 @@ const ArticleFooter = ({ classes, article, subscribe }) => {
           />
         </div>
       </Col>
-      <Col xsHidden smHidden md={4} lg={4} />
+      <Col xsHidden smHidden md={4} lg={4}>
       <div>
         <GoogleAdsense
           adClient='ca-pub-6227330768557696'
@@ -113,6 +113,8 @@ const ArticleFooter = ({ classes, article, subscribe }) => {
           fullWidthResponsive='true'
         />
       </div>
+      </Col>
+      <Col xsHidden smHidden md={4} lg={4}/>
       <FacebookProvider appId='510092146640696'>
         <Comments href={`https://www.stuyspec.com${window.location.pathname}`} tabs="none" />
       </FacebookProvider>
