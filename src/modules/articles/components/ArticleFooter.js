@@ -107,13 +107,12 @@ const ArticleFooter = ({ classes, article, subscribe }) => {
           adSlot='7357348018'
           style=
             {{
-              'display':'block', 
+              'display':'inline', 
               'text-align':'center'
             }}
           adLayout='in-article'
           adFormat='fluid'
         />
-        <br/>
       </div>
     </Row>
   );
