@@ -113,6 +113,7 @@ const ArticleFooter = ({ classes, article, subscribe }) => {
           adLayout='in-article'
           adFormat='fluid'
         />
+        <br/>
       </div>
     </Row>
   );
