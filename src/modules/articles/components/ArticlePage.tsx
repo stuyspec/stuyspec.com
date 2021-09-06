@@ -66,6 +66,7 @@ const ArticlePage: React.FC<IProps> = ({ match }) => {
       <ArticleBody article={article} />
       <ArticleFooter article={article} />
       <ArticleCommentSection />
+{/*   Commented Until GPT is Implemented or a special npm package is installed
       <GoogleAdsense
           adClient='ca-pub-6227330768557696'
           adSlot='1527604127'
@@ -77,6 +78,7 @@ const ArticlePage: React.FC<IProps> = ({ match }) => {
           adFormat='auto'
           fullWidthResponsive='true'
         />
+*/}
       <RecommendedRow section={section.parent_section || section} />
     </Grid>
   );
