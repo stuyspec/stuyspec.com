@@ -64,7 +64,7 @@ const ArticlePage: React.FC<IProps> = ({ match }) => {
       <ArticleHeader article={article} />
       <ArticleBody article={article} />
       <ArticleFooter article={article} />
-      <ArticleCommentSection article={article} />
+      <ArticleCommentSection />
       <RecommendedRow section={section.parent_section || section} />
     </Grid>
   );
