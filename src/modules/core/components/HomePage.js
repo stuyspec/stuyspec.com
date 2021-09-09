@@ -124,7 +124,7 @@ const HomePage = ({ classes, data }) => {
             className={classes.primaryComponents}
           >
             <FeaturedArticle article={featuredArticle} />
-            <SectionFeature slug={"sing!"} />
+            <SectionFeature slug={"news"} />
           </Col>
           <Col
             xsHidden
