@@ -123,7 +123,7 @@ const HomePage = ({ classes, data }) => {
           </center>
           <a href="/features/9-11">
           <img 
-            src="/img/911twentyyears.jpg"
+            src="client-app/img/911twentyyears.jpg"
             title="Art by Afra Mahmud (Class Of '23)"
             className={classes.nineeleven}
             alt=""
