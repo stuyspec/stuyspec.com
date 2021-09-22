@@ -38,7 +38,6 @@ import { SectionPage } from "./sections/components";
 import { ArtistPage, ContributorPage } from "./users/components";
 import { createSession } from "./accounts/actions";
 import { RecruitmentPage } from "./recruitment/components";
-import GamePage from "./games/GamePage";
 import { adRedirects } from "./advertisements/constants";
 
 const RoutingAppQuery = gql`
@@ -197,12 +196,6 @@ class RoutingAppUnconnected extends PureComponent {
                     <SignUpPage />
                   )
                 }
-              />
-              <Route
-                exact
-                path={"/spec-games"}
-                key={"games"}
-                component={GamePage}
               />
               <Route
                 exact
