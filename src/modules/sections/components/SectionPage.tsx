@@ -12,6 +12,7 @@ import {
   LeftTitleArticle,
   RightTitleArticle,
 } from '../../articles/components/summaries';
+import GamePage from '../../games/GamePage';
 import { TallAd } from '../../advertisements/components/index';
 
 const SECTION_PAGE_QUERY = gql`
@@ -278,7 +279,7 @@ const SectionPage: React.FC<IProps> = ({ section }) => {
       </Helmet>
       <div className={classes.sectionTitle}>{section.name}</div>
       <ul className={classes.subsectionBar}>
-        {section.name === "10/31 Terror Attack" ? (
+        {section.name === "Black Lives Matter" ? (
           <li className={classes.subsectionListItem}>
             <Link
               className={classes.subsectionLink}
@@ -304,7 +305,9 @@ const SectionPage: React.FC<IProps> = ({ section }) => {
               })
           )}
       </ul>
-      <RightTitleArticle article={featuredArticle} />
+        {section.name === "Spec+" ? (
+          <GamePage></GamePage>
+        ):<RightTitleArticle article={featuredArticle} />}
       <Row className={classes.secondaryRow}>
         <Col xs={12} sm={12} md={9} lg={9} className={classes.secondaryCol}>
           {featuredSubsection && (

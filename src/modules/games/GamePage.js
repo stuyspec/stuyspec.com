@@ -54,13 +54,10 @@ const styles = {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-evenly",
-    marginBottom: "150px",
-    marginTop: "50px",
+    marginBottom: "10px",
     margin: "auto",
-    width: "90%",
-    borderTop: "1px solid black",
     borderBottom: "1px solid black",
-    padding: "20px",
+    paddingBottom: "20px",
     //backgroundColor: "#B3DAF1"
   },
   Image: {
@@ -80,7 +77,6 @@ const styles = {
 const GamePage = ({ classes }) => {
   return (
     <div>
-      <h1 className={classes.Title}>SpecGames</h1>
       <div key={-5} className={classes.FlexContainer}>
         <Link to="/winter-crossword" className={classes.Link} style={{textDecoration: "none"}}>
           <div className={classes.GameText} style={{backgroundColor:"rgb(171, 224, 255)",}}>
