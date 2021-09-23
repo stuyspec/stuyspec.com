@@ -80,11 +80,6 @@ const FeaturedSectionsBar = ({
            Recruitments
         </Link>
       </div>
-      <div key={-3} className={classes.sectionListItem}>
-        <Link to="/spec-games" className={classes.sectionLink}>
-           SpecGames
-        </Link>
-      </div>
       {/*
       <div key={-1} className={classes.sectionListItem}>
         <span onClick={openSubscriptionModal} className={classes.sectionLink}>
