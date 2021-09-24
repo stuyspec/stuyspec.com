@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { useQuery } from "react-apollo";
 import { createUseStyles } from "react-jss";
@@ -66,19 +67,20 @@ const ArticlePage: React.FC<IProps> = ({ match }) => {
       <ArticleBody article={article} />
       <ArticleFooter article={article} />
       <ArticleCommentSection />
-{/*   Commented Until GPT is Implemented or a special npm package is installed
       <GoogleAdsense
           adClient='ca-pub-6227330768557696'
           adSlot='1527604127'
           style=
             {{
-              'display':'block' 
+              'display':'block',
+              minHeight: '10vh',
+               minWidth: '20vw',
             }}
           adLayout='in-article'
           adFormat='auto'
           fullWidthResponsive='true'
         />
-*/}
+
       <RecommendedRow section={section.parent_section || section} />
     </Grid>
   );
