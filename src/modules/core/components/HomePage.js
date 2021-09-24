@@ -70,11 +70,6 @@ const styles = {
     marginBottom: "19px",
     paddingRight: "14px",
   },
-  nineeleven:{
-    maxWidth: "100%",
-    Height: "auto",
-    marginBottom: "10px"
-  },
   "@media (max-width: 991px)": {
     primaryComponents: {
       borderRight: "none",
@@ -121,14 +116,6 @@ const HomePage = ({ classes, data }) => {
               </h1>
             </div>
           </center>
-          <a href="/features/9-11">
-          <img 
-            src="client-app/img/911twentyyears.jpg"
-            title="Art by Afra Mahmud (Class Of '23)"
-            className={classes.nineeleven}
-            alt=""
-          ></img>
-          </a>
           <Col
             xs={12}
             sm={12}
