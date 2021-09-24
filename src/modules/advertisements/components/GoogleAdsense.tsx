@@ -19,6 +19,12 @@ declare global {
 
 const GoogleAdsense: React.FC<IGoogleAdsenseProps> = props => {
   useEffect(() => {
+    const elem = document.createElement("script");
+    elem.src =
+      "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+    elem.async = true;
+    elem.defer = true;
+    document.body.insertBefore(elem, document.body.firstChild);
     if (window) (window.adsbygoogle = window.adsbygoogle || []).push({});
   });
 
@@ -27,6 +33,7 @@ const GoogleAdsense: React.FC<IGoogleAdsenseProps> = props => {
          style={props.style}
          data-ad-client={props.adClient}
          data-ad-slot={props.adSlot}
+         data-adtest='on'
          data-ad-layout={props.adLayout}
          data-ad-layout-key={props.adLayoutKey}
          data-ad-format={props.adFormat}
