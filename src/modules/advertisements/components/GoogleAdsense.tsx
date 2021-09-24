@@ -33,7 +33,6 @@ const GoogleAdsense: React.FC<IGoogleAdsenseProps> = props => {
          style={props.style}
          data-ad-client={props.adClient}
          data-ad-slot={props.adSlot}
-         data-adtest='on'
          data-ad-layout={props.adLayout}
          data-ad-layout-key={props.adLayoutKey}
          data-ad-format={props.adFormat}
