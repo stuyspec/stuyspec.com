@@ -74,7 +74,7 @@ const ArticlePage: React.FC<IProps> = ({ match }) => {
             {{
               'display':'block',
               minHeight: '10vh',
-               minWidth: '20vw',
+              minWidth: '20vw',
             }}
           adLayout='in-article'
           adFormat='auto'
