@@ -211,10 +211,11 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
         <td style="width:30%;vertical-align: top">
             <b>Science Editors</b><br>
             Gerard Lin<br>
-            **Sonya Sasson<br>
+            Sonya Sasson<br>
             <br>
         </td>
     </tr>
+    <br>
     <tr>
         <td style="width:30%;vertical-align: top">
              <b>Opinions Editors</b><br>
