@@ -67,7 +67,7 @@ const ArticlePage: React.FC<IProps> = ({ match }) => {
       <ArticleBody article={article} />
       <ArticleFooter article={article} />
       <ArticleCommentSection />
-      <GoogleAdsense
+      {/* <GoogleAdsense
           adClient='ca-pub-6227330768557696'
           adSlot='1527604127'
           style=
@@ -79,7 +79,7 @@ const ArticlePage: React.FC<IProps> = ({ match }) => {
           adLayout='in-article'
           adFormat='auto'
           fullWidthResponsive='true'
-        />
+        /> */}
 
       <RecommendedRow section={section.parent_section || section} />
     </Grid>
