@@ -212,6 +212,7 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
             <b>Science Editors</b><br>
             Gerard Lin<br>
             Sonya Sasson<br>
+            **Sathirtha Mondal<br>
             <br>
         </td>
     </tr>
