@@ -4,9 +4,9 @@ export const SECTIONS = [
     imageLink: null,
     description: `The Opinions section lets writers share their views on issues relevant within the country, Stuyvesant, and their personal lives. Writers across all grades give their opinions on subjects ranging from politics and economics to technology and culture and share their personal stories. We try to consistently create engaging, substantive, and relevant content to provide students with a closer look at the world and the Stuyvesant community.`,
     quotes: [],
-    deadline: ``,
+    deadline: `11/1/2021`,
     link:
-      "",
+      "https://docs.google.com/document/d/1jjRU59bam89yxJ3RvIIRDsbsJrXIBZfDrb8pTkx0Em8/edit",
   },
   {
     name: "Arts and Entertainment",
@@ -23,7 +23,7 @@ export const SECTIONS = [
     description: `Features capture the spirit and mood of the school. At times, Features covers Stuyvesant’s evergreen topics, e.g. what is it about PE uniforms that gets everybody so hot and bothered? Other times, writers might profile a teacher. Other times, writers share creative narratives about experiences they have had in the “Voices” section. There is much to be found in Features, so come hither!`,
     quotes: [],
     deadline: ``,
-    link: 
+    link:
       "",
   },
   {
@@ -31,7 +31,7 @@ export const SECTIONS = [
     imageLink: null,
     description: `Do you want to lowkey rant about your life and roast everything?
         Would you like to have a personality glow up?
-        Do you want to join a low commitment and fun Spec department? 
+        Do you want to join a low commitment and fun Spec department?
         Join Spec Humor!
         We write funny and satirical pieces for The Spec and unlike other departments, everything we publish is libel and slander which means that you'll be in control of what everyone says!`,
     quotes: [],
