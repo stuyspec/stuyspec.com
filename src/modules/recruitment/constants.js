@@ -52,9 +52,9 @@ export const SECTIONS = [
     imageLink: null,
     description: `The News Department covers school events, administrative changes, student organizations, school and student government policies, and out-of-school news. Besides traditional News articles, we also write mini-articles, graphs & surveys, and spreads. If you are interested in knowing Stuyvesant news before it is released, informing the student body, meeting students, teachers, and administrators, or seeing your work on the front page, apply to our department!`,
     quotes: [],
-    deadline: ``,
+    deadline: `11/6/2021`,
     link:
-      "",
+      "https://docs.google.com/forms/d/e/1FAIpQLSfUJEMJBzW-SBxRuV_luaIzeXwYJDLZ33_CepCAfLMfUJ1tzA/viewform",
   },
   {
     name: "Copy",
@@ -70,9 +70,9 @@ export const SECTIONS = [
     imageLink: null,
     description: `The Web department is responsible for designing and updating The Spectator's website, www.stuyspec.com. It also attempts to facilitate the learning of developing and maintaining a web application based on Ruby on Rails and React. These real-world skills are a great resume builder and provide invaluable experience in working together as a team. This is the perfect department for both computer programming enthusiasts and novices who want to help The Spectator continue to storm the frontier of online journalism.`,
     quotes: [],
-    deadline: ``,
+    deadline: `11/1/2021`,
     link:
-      "",
+      "https://docs.google.com/forms/d/1wjYBepmaQFVCFL5QrRppB9Ys8Emr2CJkufoIOee3Rj4",
   },
   {
     name: "Layout",
@@ -88,9 +88,9 @@ export const SECTIONS = [
     imageLink: null,
     description: `Photo is dedicated to providing interesting and dynamic photographs to support the articles in The Spectator and spearhead photo essay projects. Typical assignments include portraits of students and teachers, photos at school events, and shots of fun things around the city. This department is a good fit for anyone interested in photography, whether you’re just starting out, or you’re an expert looking for a place to practice and refine your skills.`,
     quotes: [],
-    deadline: ``,
+    deadline: `11/12/2021`,
     link:
-      "",
+      "https://docs.google.com/forms/d/e/1FAIpQLSe_xSfAMrtSw1_wjdg2hBBFloUfXAhWxQpyu_Bat1b3FEMi4A/viewform?vc=0&c=0&w=1&flr=0&pli=1",
   },
   {
     name: "Business",
@@ -106,17 +106,17 @@ export const SECTIONS = [
     imageLink: null,
     description: `It is often difficult to read through dense blocks of text without something to rest your eyes on. In the Art Department, we strive to embellish the newspaper with our unique illustrations, each perfectly suited for its article. In a school where artistic abilities are not seen as a priority, you can easily find your niche as an artist for The Spectator, where your art will be displayed for all of its readers to admire. The limits of your creativity have no bounds; you can explore and develop your art skills by taking on cool and unique requests, from a portrait of Taylor Swift (A&E) to an oily stork (Humor), as well as the occasional thematic spread; the range is infinite. We encourage the use of all media!`,
     quotes: [],
-    deadline: ``,
+    deadline: `11/8/2021`,
     link:
-      "",
+      "https://docs.google.com/forms/d/e/1FAIpQLScTLVi3AS21_YRMBfMuptTSvWB_DNkT0xqcwecE1SoXsGG-aQ/viewform",
   },
   {
     name: "Science",
     imageLink: null,
     description: `The Science Department covers everything science-related, from pandemics and groundbreaking discoveries to Stuyvesant’s very own fascinating science clubs and events. Our department captures the complexity of science through analytical and often opinion-based writing, and we aim to convey the intricacies of the world around us and beyond to the student body.`,
     quotes: [],
-    deadline: ``,
+    deadline: `11/6/2021`,
     link:
-      "",
+      "https://docs.google.com/document/d/1aepDUeyeALWkeMo6MHh18xCcQ2ah17jK7X1m0WdH3pE/edit?usp=sharing",
   },
 ];
