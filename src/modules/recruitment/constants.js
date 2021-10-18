@@ -43,9 +43,9 @@ export const SECTIONS = [
     imageLink: null,
     description: `The Sports department covers all things sports, whether it be PSAL sports at Stuyvesant or professional sports. Articles pertaining to Stuyvesant sports range from championship articles and season updates to athlete and coach interviews and opinions. Writers also cover virtually any topic in the larger sports world, from debates on LeBron vs. MJ and college basketball to YouTube boxing and the Champions League. If that’s not enough to convince you to apply, we have an exclusive fantasy football league (with rewards).`,
     quotes: [],
-    deadline: `(Coming Soon!)`,
+    deadline: `11/7/2021`,
     link:
-      "",
+      "https://docs.google.com/forms/d/10KyZPFF3LRbjsCwcLxmet1ebjdiRHzGQ4EvrP2o6Yec/edit",
   },
   {
     name: "News",
@@ -97,9 +97,9 @@ export const SECTIONS = [
     imageLink: null,
     description: `The Business department is the backbone of The Spectator. Due to the efforts of this department, The Spectator is able to print all of its issues while still remaining independent. We negotiate and secure deals with businesses all over New York as well as handle the advertisements on the website and in the paper. Members learn skills that can be applied to real life, including talking in formal settings, learning how to negotiate and compromise, and understanding how to manage money.`,
     quotes: [],
-    deadline: `(Coming Soon!)`,
+    deadline: `11/7/2021`,
     link:
-      "",
+      "https://docs.google.com/forms/d/1hATtYti4KOskCUQmTD_R8DtiOsciUi2YLO23vPGsdJI/edit",
   },
   {
     name: "Art",
