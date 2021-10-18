@@ -13,7 +13,7 @@ export const SECTIONS = [
     imageLink: null,
     description: `As the only department with more than three article categories, Arts and Entertainment is notable for its versatility and creative freedom. We review recent cultural topics such as art, fashion, film, food, literature, music, and more! A&E writers are also free to experiment with the thinkpiece category, where one can explore cultural phenomena or trends, gender standards, or race from a cultural standpoint. Whether you are an aspiring music enthusiast or cultural connoisseur, everyone can find (or create!) their own niche in A&E.`,
     quotes: [],
-    deadline: ``,
+    deadline: `(Coming Soon!)`,
     link:
       "",
   },
@@ -22,7 +22,7 @@ export const SECTIONS = [
     imageLink: null,
     description: `Features capture the spirit and mood of the school. At times, Features covers Stuyvesant’s evergreen topics, e.g. what is it about PE uniforms that gets everybody so hot and bothered? Other times, writers might profile a teacher. Other times, writers share creative narratives about experiences they have had in the “Voices” section. There is much to be found in Features, so come hither!`,
     quotes: [],
-    deadline: ``,
+    deadline: `(Coming Soon!)`,
     link:
       "",
   },
@@ -35,7 +35,7 @@ export const SECTIONS = [
         Join Spec Humor!
         We write funny and satirical pieces for The Spec and unlike other departments, everything we publish is libel and slander which means that you'll be in control of what everyone says!`,
     quotes: [],
-    deadline: ``,
+    deadline: `(Coming Soon!)`,
     link: "",
   },
   {
@@ -43,7 +43,7 @@ export const SECTIONS = [
     imageLink: null,
     description: `The Sports department covers all things sports, whether it be PSAL sports at Stuyvesant or professional sports. Articles pertaining to Stuyvesant sports range from championship articles and season updates to athlete and coach interviews and opinions. Writers also cover virtually any topic in the larger sports world, from debates on LeBron vs. MJ and college basketball to YouTube boxing and the Champions League. If that’s not enough to convince you to apply, we have an exclusive fantasy football league (with rewards).`,
     quotes: [],
-    deadline: ``,
+    deadline: `(Coming Soon!)`,
     link:
       "",
   },
@@ -61,7 +61,7 @@ export const SECTIONS = [
     imageLink: null,
     description: `Members of the Copy Department ensures that The Spectator produces clear, grammatically correct, and accurate articles. Did you notice both mistakes in the last sentence? If you did, you should join the Copy Department! Members gain early access to articles and sharpen their grammar skills while editing and fact-checking departments of their choice. We are committed to catching grammatical and factual mistakes in articles with attention to detail, and we look for members who want to contribute to maintaining The Spectator’s high-quality content.`,
     quotes: [],
-    deadline: ``,
+    deadline: `(Coming Soon!)`,
     link:
       "",
   },
@@ -79,7 +79,7 @@ export const SECTIONS = [
     imageLink: null,
     description: `A good publication should interest readers before they even pick it up and read it; the Layout department does just that! We are responsible for formatting all of the articles, photos, art, and other media and make sure that the paper is aesthetically appealing and easy to read. After all, no one wants to read ugly and confusing blocks of text. With creativity and a certain magic called InDesign, we present to you what you know as The Spectator. As a staff member, you will be taught how to use InDesign and asked to critique the formatting of each issue as it is released.`,
     quotes: [],
-    deadline: ``,
+    deadline: `(Coming Soon!)`,
     link:
       "",
   },
@@ -97,7 +97,7 @@ export const SECTIONS = [
     imageLink: null,
     description: `The Business department is the backbone of The Spectator. Due to the efforts of this department, The Spectator is able to print all of its issues while still remaining independent. We negotiate and secure deals with businesses all over New York as well as handle the advertisements on the website and in the paper. Members learn skills that can be applied to real life, including talking in formal settings, learning how to negotiate and compromise, and understanding how to manage money.`,
     quotes: [],
-    deadline: ``,
+    deadline: `(Coming Soon!)`,
     link:
       "",
   },
