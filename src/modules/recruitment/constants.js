@@ -61,9 +61,9 @@ export const SECTIONS = [
     imageLink: null,
     description: `Members of the Copy Department ensures that The Spectator produces clear, grammatically correct, and accurate articles. Did you notice both mistakes in the last sentence? If you did, you should join the Copy Department! Members gain early access to articles and sharpen their grammar skills while editing and fact-checking departments of their choice. We are committed to catching grammatical and factual mistakes in articles with attention to detail, and we look for members who want to contribute to maintaining The Spectator’s high-quality content.`,
     quotes: [],
-    deadline: `(Coming Soon!)`,
+    deadline: `11/7/2021`,
     link:
-      "",
+      "https://docs.google.com/forms/d/e/1FAIpQLSfHQY_KI8BDxXEguwfJQe2gbDPT6xGmQPfFURH9jit-JtaMlA/viewform",
   },
   {
     name: "Web",
