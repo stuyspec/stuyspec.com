@@ -35,6 +35,15 @@ const styles = {
     lineHeight: "1.4em",
     margin: "13px",
     padding: "3px",
+    textAlign: "justify",
+  },
+  Deadline: {
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "1.3em",
+    lineHeight: "1.4em",
+    margin: "13px",
+    padding: "3px",
     textAlign: "center",
   },
   Section: {
@@ -64,6 +73,7 @@ const styles = {
     display: "block",
     fontFamily: "Minion Pro",
     margin: "10px",
+    fontSize: "1.5em",
     textAlign: "center",
     float: "bottom",
     bottom: "-2.5px",
@@ -143,9 +153,9 @@ const Section = ({ classes, imageLink, name, description, quotes, deadline, app 
   const appLink = (app) ?
       <a className={classes.App} href={app} >
          {" "}
-         Click here to sign up for {name}!{" "}
+         Click here to apply for {name}!{" "}
       </a>:
-      <p className={classes.App}>Check out recruitments in the fall!</p>
+      <p className={classes.App}>Coming Soon!</p>
 
   return (
     <div className={classes.Section}>
@@ -155,8 +165,8 @@ const Section = ({ classes, imageLink, name, description, quotes, deadline, app 
       {quotes.map(({ text, source }) => {
         return <StyledQuote text={text} source={source} />;
       })}
-      <p className={classes.SectionText}><b>{deadline}</b></p>
       {appLink}
+      <p className={classes.Deadline}><b>{deadline}</b></p>
     </div>
   );
 };
