@@ -35,8 +35,8 @@ export const SECTIONS = [
         Join Spec Humor!
         We write funny and satirical pieces for The Spec and unlike other departments, everything we publish is libel and slander which means that you'll be in control of what everyone says!`,
     quotes: [],
-    deadline: `(Coming Soon!)`,
-    link: "",
+    deadline: `11/8/2021`,
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSeKIgJrBATBWcCb8eFNUR2-7rqD0MKIlXufujPm1nu_ysQ9vA/viewform?usp=sf_link",
   },
   {
     name: "Sports",
