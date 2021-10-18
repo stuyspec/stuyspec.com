@@ -13,18 +13,18 @@ export const SECTIONS = [
     imageLink: null,
     description: `As the only department with more than three article categories, Arts and Entertainment is notable for its versatility and creative freedom. We review recent cultural topics such as art, fashion, film, food, literature, music, and more! A&E writers are also free to experiment with the thinkpiece category, where one can explore cultural phenomena or trends, gender standards, or race from a cultural standpoint. Whether you are an aspiring music enthusiast or cultural connoisseur, everyone can find (or create!) their own niche in A&E.`,
     quotes: [],
-    deadline: ``,
+    deadline: `Application due November 6th, 2021`,
     link:
-      "",
+      "https://docs.google.com/document/d/1y6IJ_Eq0H6DYS7ro32Jl8bjTaPVHyJrEjFC4pwa-BNk/edit?usp=sharing",
   },
   {
     name: "Features",
     imageLink: null,
     description: `Features capture the spirit and mood of the school. At times, Features covers Stuyvesant’s evergreen topics, e.g. what is it about PE uniforms that gets everybody so hot and bothered? Other times, writers might profile a teacher. Other times, writers share creative narratives about experiences they have had in the “Voices” section. There is much to be found in Features, so come hither!`,
     quotes: [],
-    deadline: ``,
+    deadline: `Application due November 12th, 2021`,
     link:
-      "",
+      "https://docs.google.com/document/d/1Nkg9uWtkPfYH2s3hzHCph3xFKkprhM2mGZZQD4dK2rw/edit",
   },
   {
     name: "Humor",
@@ -79,9 +79,9 @@ export const SECTIONS = [
     imageLink: null,
     description: `A good publication should interest readers before they even pick it up and read it; the Layout department does just that! We are responsible for formatting all of the articles, photos, art, and other media and make sure that the paper is aesthetically appealing and easy to read. After all, no one wants to read ugly and confusing blocks of text. With creativity and a certain magic called InDesign, we present to you what you know as The Spectator. As a staff member, you will be taught how to use InDesign and asked to critique the formatting of each issue as it is released.`,
     quotes: [],
-    deadline: ``,
+    deadline: `Application due November 1st, 2021`,
     link:
-      "",
+      "https://forms.gle/cVFpAeDjiX8xcErJA",
   },
   {
     name: "Photo",
