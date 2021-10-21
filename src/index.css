@@ -3,6 +3,13 @@ body.light-mode {
   color: #333;
   transition: background-color 0.3s ease;
 }
+body.dark-mode .facebookComments {
+  background-color: #f2d8d8 !important;
+  width: fit-content;
+}
+body.dark-mode .facebookComments * {
+  background-color: #f2d8d8 !important;
+}
 body.dark-mode {
   background-color: #1a1919;
 }
@@ -25,6 +32,7 @@ body.dark-mode .sidebar-overlay {
 body.dark-mode div[role="dialog"] {
   background-color: rgba(44, 41, 42, 0.8) !important;
 }
+
 .dark-mode-toggle > button {
   font-size: 1.2em;
   background: none;
