@@ -22,7 +22,7 @@ export const SECTIONS = [
     imageLink: null,
     description: `Features capture the spirit and mood of the school. At times, Features covers Stuyvesant’s evergreen topics, e.g. what is it about PE uniforms that gets everybody so hot and bothered? Other times, writers might profile a teacher. Other times, writers share creative narratives about experiences they have had in the “Voices” section. There is much to be found in Features, so come hither!`,
     quotes: [],
-    deadline: `Application due November 12th, 2021`,
+    deadline: `Application due November 6th, 2021`,
     link:
       "https://docs.google.com/document/d/1Nkg9uWtkPfYH2s3hzHCph3xFKkprhM2mGZZQD4dK2rw/edit",
   },
