@@ -150,6 +150,14 @@ const Page = styled.div`
       font-weight: bold;
       font-family: Circular Std;
   }
+  .issue {
+    position: flex;
+    align-items: center;
+    font-family: Minion Pro;
+    font-size: 14px;
+    margin-top: 50px;
+    color: black;
+  }
 `;
 
 const Commands = styled.div`
@@ -235,12 +243,6 @@ const CrosswordWrapper = styled.div`
   }
 `;
 
-const Messages = styled.pre`
-  background-color: #B3DAF1;
-  margin: 1em 0;
-  padding: 1em;
-`;
-
 function Crossword3() {
   const crossword = useRef();
 
@@ -302,19 +304,13 @@ function Crossword3() {
     [addMessage]
   );
 
-  const cellPadding = 0.125;
-
-  const sizeContext = {
-    cellPadding,
-  };
-
   return (
     <Page>
       <Header>Zooming!</Header>
 
       <p>
         <span className="contributor">By The Editorial Board</span>
-        <span className="date">June 1, 2021</span>
+        <span className="date">May 30, 2021</span>
       </p>
 
       <Commands>
@@ -338,6 +334,9 @@ function Crossword3() {
           }}
         />
       </CrosswordWrapper>
+      <p className="issue">
+        Check out <a href="https://issuu.com/stuyspectator/docs/issue16_color">Issue 16</a> where this crossword was featured! (pg 24)
+      </p>
     </Page>
   );
 }

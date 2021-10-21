@@ -25,9 +25,11 @@ import {
   HomePage,
   NotFoundPage,
   PageLayout,
+  ClassifiedsRedirect
 } from "./core/components";
 import {
   Crossword1,
+  Crossword2,
   Crossword3
 } from "./crossword";
 
@@ -37,7 +39,6 @@ import { ArtistPage, ContributorPage } from "./users/components";
 import { createSession } from "./accounts/actions";
 import { RecruitmentPage } from "./recruitment/components";
 import GamePage from "./games/GamePage";
-import { ClassifiedsRedirect } from "./core/components";
 import { adRedirects } from "./advertisements/constants";
 
 const RoutingAppQuery = gql`
@@ -208,6 +209,12 @@ class RoutingAppUnconnected extends PureComponent {
                 path={"/winter-crossword"}
                 key={"crossword"}
                 component={Crossword1}
+              />
+              <Route
+                exact
+                path={"/clubs-and-pubs-galore"}
+                key={"crossword"}
+                component={Crossword2}
               />
               <Route
                 exact

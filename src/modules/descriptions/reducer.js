@@ -195,8 +195,10 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>News Editors</b><br>
-            Jenny Liu<br>
+            **Isabella Jia<br>
+            *Jenny Liu<br>
             Momoca Mairaj<br>
+            **Janna Wang
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
@@ -209,10 +211,12 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
         <td style="width:30%;vertical-align: top">
             <b>Science Editors</b><br>
             Gerard Lin<br>
-            **Sonya Sasson<br>
+            Sonya Sasson<br>
+            **Sathirtha Mondal<br>
             <br>
         </td>
     </tr>
+    <br>
     <tr>
         <td style="width:30%;vertical-align: top">
              <b>Opinions Editors</b><br>
@@ -223,14 +227,14 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
         <td style="width:40%;vertical-align: top">
             <b>Arts & Entertainment Editors</b><br>
             Suah Chung<br>
-            **Kenisha Mahajan<br>
+            Kenisha Mahajan<br>
             Gavin McGinley<br>
             Dexter Wells<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Humor Editors</b><br>
-            **Logan Ruzzier<br>
+            Logan Ruzzier<br>
             *Kelly Yip<br>
             <br>
         </td>
@@ -248,21 +252,26 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
             <b>Web Editors</b><br>
             David Chen<br>
             Alyssa Choi<br>
+            **Samantha Hua<br>
+            **Theodore Yochum<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Photography Editors</b><br>
             Francesca Nemati<br>
             Sasha Socolow<br>
+            **Alexander Lopez<br>
+            **Zifei Zhao<br>
             <br>
         </td>
     </tr>
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>Art Directors</b><br>
-            **Afra Mahmud<br>
+            Afra Mahmud<br>
             Adrianna Peng<br>
             Sophie Poget<br>
+            Vivian Teo**<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
@@ -275,10 +284,10 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
         <td style="width:30%;vertical-align: top">
             <b>Copy Editors</b><br>
             Nora Miller<br>
-            **Tashfia Noor<br>
+            Tashfia Noor<br>
             Shreyasi Saha<br>
             Ruiwen Tang<br>
-            **Raymond Yang<br>
+            Raymond Yang<br>
             <br>
         </td>
     </tr>

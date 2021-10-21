@@ -106,6 +106,6 @@ const RecommendedArticles = ({ classes, data }) => {
 };
 
 export default graphql(RecommendedArticlesQuery, {
-  options: ({ limit }) => ({ variables: { limit: limit || 5 } }),
-  // if limit not given as prop, we use 5 as the default.
+  options: ({ limit }) => ({ variables: { limit: limit || 4 } }),
+  // if limit not given as prop, we use 4 as the default.
 })(injectSheet(styles)(RecommendedArticles));
