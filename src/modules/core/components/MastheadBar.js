@@ -51,7 +51,8 @@ const styles = {
   brandingLink: {
     bottom: "5px",
     color: "#000",
-    fontFamily: "Old English Text MT",
+//    fontFamily: "Old English Text MT",
+    fontFamily: "Headhunter",
     fontSize: "2.5rem",
     textDecoration: "none",
     "&:hover, &:active, &:focus": {
@@ -145,7 +146,7 @@ const MastheadBar = ({
           </MobileNavButton>
         </div>
         <Link className={classes.brandingLink} to={"/"}>
-          The Spectator
+          The Spooktator
         </Link>
         <div className={classes.navButtons}>
           <div className={classes.userTools}>

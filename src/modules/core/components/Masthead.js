@@ -25,8 +25,9 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    fontFamily: "Old English Text MT",
-    fontSize: "8rem",
+//    fontFamily: "Old English Text MT",
+    fontFamily: "Headhunter",
+    fontSize: "6rem",
     marginBottom: "10px",
     "&:hover, &:active, &:focus": {
       color: "#000",
@@ -104,7 +105,7 @@ const Masthead = ({ classes, openSidebar, session, openSubscriptionModal }) => {
       <div className={classes.logo}>
         <SectionsButton onClick={openSidebar} />
         <Link className={classes.theSpectatorLogo} to="/">
-          The Spectator
+          The Spooktator
         </Link>
         <div className={classes.positioning}>
           {session ? (
