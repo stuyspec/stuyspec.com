@@ -79,7 +79,7 @@ export const SECTIONS = [
     imageLink: null,
     description: `A good publication should interest readers before they even pick it up and read it; the Layout department does just that! We are responsible for formatting all of the articles, photos, art, and other media and make sure that the paper is aesthetically appealing and easy to read. After all, no one wants to read ugly and confusing blocks of text. With creativity and a certain magic called InDesign, we present to you what you know as The Spectator. As a staff member, you will be taught how to use InDesign and asked to critique the formatting of each issue as it is released.`,
     quotes: [],
-    deadline: `Application due November 1st, 2021`,
+    deadline: `Application due November 8th, 2021`,
     link:
       "https://forms.gle/cVFpAeDjiX8xcErJA",
   },
