@@ -25,16 +25,15 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-//    fontFamily: "Old English Text MT",
-    fontFamily: "Headhunter",
-    fontSize: "6rem",
+    fontFamily: "Old English Text MT",
+    fontSize: "8rem",
     marginBottom: "10px",
     "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none",
     },
     "@media (min-width: 768px)": {
-      fontSize: "65px"
+      fontSize: "65px",
     },
   },
   userTools: {
@@ -68,8 +67,8 @@ const styles = {
     },
   },
   toggle: {
-    marginRight: '20%',
-    marginTop: '3%',
+    marginRight: "20%",
+    marginTop: "3%",
   },
   searchLink: {
     color: "#000",
@@ -105,7 +104,7 @@ const Masthead = ({ classes, openSidebar, session, openSubscriptionModal }) => {
       <div className={classes.logo}>
         <SectionsButton onClick={openSidebar} />
         <Link className={classes.theSpectatorLogo} to="/">
-          The Spooktator
+          The Spectator
         </Link>
         <div className={classes.positioning}>
           {session ? (
@@ -119,9 +118,9 @@ const Masthead = ({ classes, openSidebar, session, openSubscriptionModal }) => {
             </div>
           ) : (
             <>
-            <div className={classes.toggle}>
-              <DarkModeToggle/>
-            </div>
+              <div className={classes.toggle}>
+                <DarkModeToggle />
+              </div>
               <SubscribeButton onClick={openSubscriptionModal} />
             </>
           )}
@@ -137,19 +136,19 @@ const Masthead = ({ classes, openSidebar, session, openSubscriptionModal }) => {
       <div className={classes.FeaturedSectionsBarContainer}>
         <FeaturedSectionsBar />
       </div>
-
     </Grid>
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   session: state.accounts.session,
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ openSubscriptionModal, openSidebar }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(Masthead),
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(injectSheet(styles)(Masthead));

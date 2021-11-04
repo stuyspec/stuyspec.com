@@ -24,7 +24,7 @@ const styles = {
     zIndex: 1000,
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   barContainer: {
     display: "flex",
@@ -51,15 +51,14 @@ const styles = {
   brandingLink: {
     bottom: "5px",
     color: "#000",
-//    fontFamily: "Old English Text MT",
-    fontFamily: "Headhunter",
+    fontFamily: "Old English Text MT",
     fontSize: "2.5rem",
     textDecoration: "none",
     "&:hover, &:active, &:focus": {
       color: "#000",
       textDecoration: "none",
     },
-      marginLeft:"40px",
+    marginLeft: "40px",
   },
   navButtons: {
     marginTop: "20px",
@@ -109,7 +108,7 @@ const styles = {
   "@media (max-width: 1300px)": {
     MastheadBar: {
       height: "52px",
-      flexDirection: "row"
+      flexDirection: "row",
     },
     sectionsBarContainer: {
       display: "none",
@@ -127,7 +126,7 @@ const styles = {
   "@media (max-width: 375px)": {
     brandingLink: {
       lineHeight: "2rem",
-    }
+    },
   },
 };
 
@@ -146,7 +145,7 @@ const MastheadBar = ({
           </MobileNavButton>
         </div>
         <Link className={classes.brandingLink} to={"/"}>
-          The Spooktator
+          The Spectator
         </Link>
         <div className={classes.navButtons}>
           <div className={classes.userTools}>
@@ -158,13 +157,9 @@ const MastheadBar = ({
             <div className={classes.DarkModeToggle}>
               <DarkModeToggle />
             </div>
-<a href="https://stuyspec.us4.list-manage.com/subscribe?u=d92e8c831515555b06ae9eeea&id=78d0a29c4f">            
-<span
-              className={classes.subscriber}
-            >
-              Subscribe
-            </span>
-</a>
+            <a href="https://stuyspec.us4.list-manage.com/subscribe?u=d92e8c831515555b06ae9eeea&id=78d0a29c4f">
+              <span className={classes.subscriber}>Subscribe</span>
+            </a>
           </div>
           <Link to="/search" className={classes.searchLink}>
             <Search color={"#000"} />
@@ -179,14 +174,15 @@ const MastheadBar = ({
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   session: state.accounts.session,
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ openSidebar, openSubscriptionModal }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(MastheadBar),
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(injectSheet(styles)(MastheadBar));
