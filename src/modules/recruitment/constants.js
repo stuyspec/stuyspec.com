@@ -72,7 +72,7 @@ export const SECTIONS = [
     quotes: [],
     deadline: `Application due November 5th, 2021`,
     link:
-      "https://docs.google.com/forms/d/1wjYBepmaQFVCFL5QrRppB9Ys8Emr2CJkufoIOee3Rj4",
+      "https://docs.google.com/forms/d/e/1FAIpQLScQ8JuhJOMOdTo67HgXlw8y1dR2TYFqctx599Yvz55foXDSew/viewform",
   },
   {
     name: "Layout",
