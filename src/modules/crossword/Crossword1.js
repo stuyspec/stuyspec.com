@@ -381,7 +381,8 @@ function Crossword1() {
       <Header>Winter Crossword</Header>
 
       <p>
-        <a href={window.location.origin + "/contributors/the-editorial-board"} className="contributor">By The Editorial Board</a>
+        <span className="contributor">By</span>
+        <a href={window.location.origin + "/contributors/the-editorial-board"} className="contributor">The Editorial Board</a>
         <span className="date">December 23, 2020</span>
       </p>
 
