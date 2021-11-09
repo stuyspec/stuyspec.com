@@ -6,7 +6,7 @@ body.dark-mode .facebookComments {
   background-color: #f2d8d8 !important;
   width: fit-content;
 }
-body.dark-mode .facebookComments *{
+body.dark-mode .facebookComments * {
   background-color: #f2d8d8 !important;
 }
 body.dark-mode {
