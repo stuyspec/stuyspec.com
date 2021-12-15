@@ -3,7 +3,7 @@ import { FacebookProvider, Comments } from 'react-facebook';
 
 const ArticleCommentSection = ({}) => {
 return (
-    <div>
+    <div className="facebookComments">
       <FacebookProvider style={{'display': 'block'}} appId='510092146640696'>
       <Comments href={`https://www.stuyspec.com${window.location.pathname}`} tabs="none" />
     </FacebookProvider>

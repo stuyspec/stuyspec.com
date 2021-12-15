@@ -62,6 +62,7 @@ const ArticlePage: React.FC<IProps> = ({ match }) => {
     <Grid fluid className={classes.ArticlePage}>
       <Helmet>
         <title>{article.title} | The Stuyvesant Spectator</title>
+        <meta name="fb:app_id" content="510092146640696" />
       </Helmet>
       <ArticleHeader article={article} />
       <ArticleBody article={article} />

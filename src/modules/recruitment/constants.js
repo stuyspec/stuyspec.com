@@ -22,7 +22,7 @@ export const SECTIONS = [
     imageLink: null,
     description: `Features capture the spirit and mood of the school. At times, Features covers Stuyvesant’s evergreen topics, e.g. what is it about PE uniforms that gets everybody so hot and bothered? Other times, writers might profile a teacher. Other times, writers share creative narratives about experiences they have had in the “Voices” section. There is much to be found in Features, so come hither!`,
     quotes: [],
-    deadline: `Application due November 12th, 2021`,
+    deadline: `Application due November 6th, 2021`,
     link:
       "https://docs.google.com/document/d/1Nkg9uWtkPfYH2s3hzHCph3xFKkprhM2mGZZQD4dK2rw/edit",
   },
@@ -70,9 +70,9 @@ export const SECTIONS = [
     imageLink: null,
     description: `The Web department is responsible for designing and updating The Spectator's website, www.stuyspec.com. It also attempts to facilitate the learning of developing and maintaining a web application based on Ruby on Rails and React. These real-world skills are a great resume builder and provide invaluable experience in working together as a team. This is the perfect department for both computer programming enthusiasts and novices who want to help The Spectator continue to storm the frontier of online journalism.`,
     quotes: [],
-    deadline: `Application due November 1st, 2021`,
+    deadline: `Application due November 5th, 2021`,
     link:
-      "https://docs.google.com/forms/d/1wjYBepmaQFVCFL5QrRppB9Ys8Emr2CJkufoIOee3Rj4",
+      "https://docs.google.com/forms/d/e/1FAIpQLScQ8JuhJOMOdTo67HgXlw8y1dR2TYFqctx599Yvz55foXDSew/viewform",
   },
   {
     name: "Layout",
