@@ -1,29 +1,28 @@
-import React from "react";
-import { compose } from "redux";
-import { withRouter } from "react-router-dom";
-import { Grid, Row } from "react-bootstrap/lib";
-import injectSheet from "react-jss";
-import { Helmet } from "react-helmet";
+import React from 'react';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
+import { Grid, Row } from 'react-bootstrap/lib';
+import injectSheet from 'react-jss';
+import { Helmet } from 'react-helmet';
 
-import { SearchForm, SearchResults } from "./";
+import { SearchForm, SearchResults } from '.';
 
 const styles = {
   title: {
-    color: "#000",
-    fontFamily: "Canela",
-    fontSize: "36px",
+    color: '#000',
+    fontFamily: 'Canela',
+    fontSize: '36px',
     fontWeight: 500,
     margin: 0,
-    textAlign: "center",
+    textAlign: 'center',
   },
   form: {
-    margin: "0 auto",
-    display: "block",
+    margin: '0 auto',
+    display: 'block',
   },
 };
 
-function SearchPage (props) {
-  
+function SearchPage(props) {
   const handleSearchFormSubmit = ({ query }) => {
     // We want a reusable search path
     props.history.push(
@@ -33,7 +32,7 @@ function SearchPage (props) {
 
   const { classes } = props;
   const searchParams = new URLSearchParams(props.location.search);
-  const query = searchParams.get("query");
+  const query = searchParams.get('query');
 
   return (
     <Grid fluid>
@@ -52,7 +51,6 @@ function SearchPage (props) {
       {query && <SearchResults query={query} />}
     </Grid>
   );
-  
 }
 
 export default compose(withRouter, injectSheet(styles))(SearchPage);

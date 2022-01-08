@@ -1,10 +1,10 @@
 // RibbonComponents are mapped inline to a ribbon (e.g. LatestArticlesRibbon).
 // Ribbons are components for content that stretch across the window.
 
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const RibbonComponent = ({ classes, article }) => {
+function RibbonComponent({ classes, article }) {
   const { section } = article;
   return (
     <div className={classes.RibbonComponent}>
@@ -24,7 +24,7 @@ const RibbonComponent = ({ classes, article }) => {
         </div>
       )}
       <Link to={section.permalink} className={classes.sectionLabel}>
-        {section.name === "Arts & Entertainment" ? "A&E" : section.name}
+        {section.name === 'Arts & Entertainment' ? 'A&E' : section.name}
       </Link>
       <Link
         to={`${section.permalink}/${article.slug}`}
@@ -34,6 +34,6 @@ const RibbonComponent = ({ classes, article }) => {
       </Link>
     </div>
   );
-};
+}
 
 export default RibbonComponent;

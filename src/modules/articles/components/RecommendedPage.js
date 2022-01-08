@@ -1,12 +1,12 @@
-import React from "react";
-import { Grid, Row, Col } from "react-bootstrap/lib";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
-import injectSheet from "react-jss";
-import { Helmet } from "react-helmet";
+import React from 'react';
+import { Grid, Row, Col } from 'react-bootstrap/lib';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import injectSheet from 'react-jss';
+import { Helmet } from 'react-helmet';
 
-import ArticleList from "./ArticleList";
-import { TallAd } from "../../advertisements/components/index";
+import ArticleList from './ArticleList';
+import { TallAd } from '../../advertisements/components/index';
 
 const RecommendedPageQuery = gql`
   query RecommendedPageQuery($limit: Int!) {
@@ -36,29 +36,29 @@ const RecommendedPageQuery = gql`
 
 const styles = {
   pageTitle: {
-    color: "#000",
-    fontFamily: "Canela",
-    fontSize: "48px",
+    color: '#000',
+    fontFamily: 'Canela',
+    fontSize: '48px',
     fontWeight: 500,
     lineHeight: 1,
-    marginBottom: "11px",
+    marginBottom: '11px',
   },
   articleList: {
-    paddingRight: "14px !important",
+    paddingRight: '14px !important',
   },
   tallAdContainer: {
-    paddingLeft: "14px !important",
-    marginTop: "57px",
-    borderLeft: "1px solid #ddd",
+    paddingLeft: '14px !important',
+    marginTop: '57px',
+    borderLeft: '1px solid #ddd',
   },
-  "@media (max-width: 991px)": {
+  '@media (max-width: 991px)': {
     articleList: {
-      paddingRight: "0 !important",
+      paddingRight: '0 !important',
     },
   },
 };
 
-const RecommendedPage = ({ classes, data }) => {
+function RecommendedPage({ classes, data }) {
   if (data.loading) {
     return null;
   }
@@ -89,7 +89,7 @@ const RecommendedPage = ({ classes, data }) => {
       </Row>
     </Grid>
   );
-};
+}
 
 export default graphql(RecommendedPageQuery, {
   options: () => ({ variables: { limit: 20 } }),

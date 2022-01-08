@@ -1,99 +1,99 @@
-import React from "react";
-import injectSheet from "react-jss";
-import { Col } from "react-bootstrap/lib";
-import { Link } from "react-router-dom";
+import React from 'react';
+import injectSheet from 'react-jss';
+import { Col } from 'react-bootstrap/lib';
+import { Link } from 'react-router-dom';
 
-import { Byline, Dateline, } from "../";
+import { Byline, Dateline } from '..';
 
 const styles = {
   LeftColumn: {
     // adds to the 7px in Col = 14px
-    paddingRight: "7px !important",
-    "& > div": {
-      borderBottom: "1px solid #ddd",
-      marginBottom: "14px",
-      paddingBottom: "14px !important",
+    paddingRight: '7px !important',
+    '& > div': {
+      borderBottom: '1px solid #ddd',
+      marginBottom: '14px',
+      paddingBottom: '14px !important',
     },
   },
   figure: {
-    margin: "0 0 13px 0",
-    width: "100%",
-    "& img": {
-      width: "100%",
+    margin: '0 0 13px 0',
+    width: '100%',
+    '& img': {
+      width: '100%',
     },
   },
   primaryArticle: {
-    borderBottom: "1px solid #ddd",
+    borderBottom: '1px solid #ddd',
   },
   primaryTitle: {
-    color: "#000",
-    display: "block",
-    fontFamily: "Minion Pro",
-    fontWeight: "bold",
-    fontSize: "30px",
+    color: '#000',
+    display: 'block',
+    fontFamily: 'Minion Pro',
+    fontWeight: 'bold',
+    fontSize: '30px',
     lineHeight: 1.13,
-    marginBottom: "6px",
-    "&:hover, &:active, &:focus": {
-      color: "#000",
+    marginBottom: '6px',
+    '&:hover, &:active, &:focus': {
+      color: '#000',
     },
   },
   sectionLabel: {
-    color: "#000",
-    display: "block",
-    fontFamily: "Circular Std",
+    color: '#000',
+    display: 'block',
+    fontFamily: 'Circular Std',
     fontWeight: 300,
-    fontSize: "12px",
-    marginBottom: "7px",
-    textTransform: "uppercase",
-    "&:hover, &:active, &:focus": {
-      color: "#000",
+    fontSize: '12px',
+    marginBottom: '7px',
+    textTransform: 'uppercase',
+    '&:hover, &:active, &:focus': {
+      color: '#000',
     },
   },
   preview: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "14px",
+    color: '#000',
+    fontFamily: 'Minion Pro',
+    fontSize: '14px',
     lineHeight: 1.29,
-    marginBottom: "10px",
+    marginBottom: '10px',
   },
   articleTitle: {
-    color: "#000",
-    display: "block",
-    fontFamily: "Minion Pro",
-    fontWeight: "bold",
-    fontSize: "18px",
+    color: '#000',
+    display: 'block',
+    fontFamily: 'Minion Pro',
+    fontWeight: 'bold',
+    fontSize: '18px',
     lineHeight: 1.22,
-    marginBottom: "4px",
-    "&:hover, &:active, &:focus": {
-      color: "#000",
+    marginBottom: '4px',
+    '&:hover, &:active, &:focus': {
+      color: '#000',
     },
   },
-  "@media (max-width: 767px)": {
+  '@media (max-width: 767px)': {
     LeftColumn: {
-      paddingRight: "0 !important",
+      paddingRight: '0 !important',
     },
     figure: {
-      "& img": {
-        marginLeft: "-14px",
-        width: "100vw",
+      '& img': {
+        marginLeft: '-14px',
+        width: '100vw',
       },
     },
     primaryTitle: {
-      fontSize: "28px",
-      fontWeight: "bold",
-      fontStyle: "normal",
-      lineHeight: "30px",
+      fontSize: '28px',
+      fontWeight: 'bold',
+      fontStyle: 'normal',
+      lineHeight: '30px',
     },
     articleTitle: {
-      fontSize: "28px",
-      fontWeight: "bold",
-      fontStyle: "normal",
-      lineHeight: "30px",
+      fontSize: '28px',
+      fontWeight: 'bold',
+      fontStyle: 'normal',
+      lineHeight: '30px',
     },
   },
 };
 
-const LeftColumn = ({ classes, articles }) => {
+function LeftColumn({ classes, articles }) {
   if (articles.length !== 3) {
     // TODO: Better way to handle this
     return <Col xsHidden sm={3} md={3} lg={3} className={classes.LeftColumn} />;
@@ -111,8 +111,9 @@ const LeftColumn = ({ classes, articles }) => {
           <div>
             <Link to={`${primarySection.permalink}/${primaryArticle.slug}`}>
               <figure className={classes.figure}>
-                <img src={primaryArticle.media[0].attachment_url} 
-                     alt={primaryArticle.media[0].title}
+                <img
+                  src={primaryArticle.media[0].attachment_url}
+                  alt={primaryArticle.media[0].title}
                 />
               </figure>
             </Link>
@@ -137,8 +138,9 @@ const LeftColumn = ({ classes, articles }) => {
           <div>
             <Link to={`${secondarySection.permalink}/${secondaryArticle.slug}`}>
               <figure className={classes.figure}>
-                <img src={secondaryArticle.media[0].attachment_url} 
-                     alt={secondaryArticle.media[0].title}     
+                <img
+                  src={secondaryArticle.media[0].attachment_url}
+                  alt={secondaryArticle.media[0].title}
                 />
               </figure>
             </Link>
@@ -165,8 +167,9 @@ const LeftColumn = ({ classes, articles }) => {
           <div>
             <Link to={`${tertiarySection.permalink}/${tertiaryArticle.slug}`}>
               <figure className={classes.figure}>
-                <img src={tertiaryArticle.media[0].attachment_url} 
-                     alt={tertiaryArticle.media[0].title}
+                <img
+                  src={tertiaryArticle.media[0].attachment_url}
+                  alt={tertiaryArticle.media[0].title}
                 />
               </figure>
             </Link>
@@ -189,6 +192,6 @@ const LeftColumn = ({ classes, articles }) => {
       </div>
     </Col>
   );
-};
+}
 
 export default injectSheet(styles)(LeftColumn);

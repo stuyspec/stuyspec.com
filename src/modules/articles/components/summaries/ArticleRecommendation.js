@@ -1,61 +1,61 @@
-import React from "react";
-import Col from "react-bootstrap/lib/Col";
-import injectSheet from "react-jss";
-import { Link } from "react-router-dom";
-import { Byline, Dateline } from "../";
+import React from 'react';
+import Col from 'react-bootstrap/lib/Col';
+import injectSheet from 'react-jss';
+import { Link } from 'react-router-dom';
+import { Byline, Dateline } from '..';
 
 const styles = {
   ArticleRecommendation: {
-    marginBottom: "12px",
+    marginBottom: '12px',
   },
   figure: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    height: "400px",
-    marginBottom: "16px",
-    overflow: "hidden",
-    width: "100%",
-    "& img": {
-      height: "400px",
-      objectFit: "cover",
-      width: "100%",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    height: '400px',
+    marginBottom: '16px',
+    overflow: 'hidden',
+    width: '100%',
+    '& img': {
+      height: '400px',
+      objectFit: 'cover',
+      width: '100%',
     },
   },
   sectionLabel: {
-    color: "#000",
-    display: "block",
-    fontFamily: "Circular Std",
-    fontSize: "12px",
+    color: '#000',
+    display: 'block',
+    fontFamily: 'Circular Std',
+    fontSize: '12px',
     fontWeight: 300,
-    marginBottom: "12px",
-    textTransform: "uppercase",
-    "&:hover, &:active, &:focus": {
-      color: "#000",
+    marginBottom: '12px',
+    textTransform: 'uppercase',
+    '&:hover, &:active, &:focus': {
+      color: '#000',
     },
   },
   title: {
-    color: "#000",
-    display: "block",
-    fontFamily: "Canela",
-    fontSize: "28px",
+    color: '#000',
+    display: 'block',
+    fontFamily: 'Canela',
+    fontSize: '28px',
     fontWeight: 300,
-    lineHeight: "1.2",
-    marginBottom: "8px",
-    "&:hover, &:active, &:focus": {
-      color: "#000",
+    lineHeight: '1.2',
+    marginBottom: '8px',
+    '&:hover, &:active, &:focus': {
+      color: '#000',
     },
   },
   preview: {
-    color: "#000",
-    fontFamily: "Minion Pro",
-    fontSize: "16px",
+    color: '#000',
+    fontFamily: 'Minion Pro',
+    fontSize: '16px',
     fontWeight: 300,
-    lineHeight: "1.29",
+    lineHeight: '1.29',
   },
 };
 
-const ArticleRecommendation = ({ classes, article }) => {
+function ArticleRecommendation({ classes, article }) {
   const { section } = article;
   return (
     <Col xs={12} sm={6} md={6} lg={6} className={classes.ArticleRecommendation}>
@@ -85,6 +85,6 @@ const ArticleRecommendation = ({ classes, article }) => {
       <Dateline timestamp={article.created_at} />
     </Col>
   );
-};
+}
 
 export default injectSheet(styles)(ArticleRecommendation);

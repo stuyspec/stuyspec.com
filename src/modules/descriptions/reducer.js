@@ -1,8 +1,8 @@
 const initialState = [
   {
     id: 0,
-    title: "Our Charter",
-    slug: "our-charter",
+    title: 'Our Charter',
+    slug: 'our-charter',
     content: `<h1>The Charter of The Spectator</h1>
 Approved January, 2020 by The Spectator Editorial Board.<br>
 <h2>I. Statement of Purpose<br></h2>
@@ -126,8 +126,8 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
   },
   {
     id: 1,
-    title: "Advertise",
-    slug: "advertise",
+    title: 'Advertise',
+    slug: 'advertise',
     content: `<h2>Local Advertising</h2>
 <ul>Local advertisers are classified as all those companies either headquartered within New York City or whose New York City local branch is placing an advertisement.The best way to contact an advertising representative is to <a href="mailto:specbusiness@gmail.com">e-mail the business manager</a>. For information on rates and our publication schedule, please see the advertising forms below.</ul>
 <h2>National Advertising</h2>
@@ -161,8 +161,8 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
   },
   {
     id: 2,
-    title: "Sponsors",
-    slug: "sponsors",
+    title: 'Sponsors',
+    slug: 'sponsors',
     content: `<h2>Become A Sponsor</h2>
 <p>
   If you are interested in sponsoring <i>The Spectator</i> to help
@@ -181,8 +181,8 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
   },
   {
     id: 3,
-    title: "Staff",
-    slug: "staff",
+    title: 'Staff',
+    slug: 'staff',
     content: `<center>
 <h2 style="margin-bottom: 30px;">
   Members of the 2021-2022 Spectator Editorial Board
@@ -317,8 +317,8 @@ Kerry Garfinkel
   },
   {
     id: 4,
-    title: "Developers",
-    slug: "developers",
+    title: 'Developers',
+    slug: 'developers',
     content: `<center>
 <h2 style="margin-bottom: 30px;">
   Major Contributors of The Spectator's Website
@@ -341,8 +341,8 @@ Andrey Sokolov<br>
   },
   {
     id: 5,
-    title: "Contact",
-    slug: "contact",
+    title: 'Contact',
+    slug: 'contact',
     content: `<p style="text-align: center">
   For website related questions: Contact <a href="mailto:web@stuyspec.com">web@stuyspec.com</a>. <br/>
   For all other questions: Contact <a href="mailto:morriskaren2021@gmail.com">morriskaren2021@gmail.com</a>.
@@ -352,8 +352,6 @@ Andrey Sokolov<br>
   },
 ];
 
-const reducer = (state = initialState) => {
-  return state;
-};
+const reducer = (state = initialState) => state;
 
 export default reducer;

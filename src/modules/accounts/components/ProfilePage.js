@@ -1,50 +1,54 @@
-import React from "react";
-import { bindActionCreators, compose } from "redux";
-import { connect } from "react-redux";
-import { graphql } from "react-apollo";
-import humps from "humps";
-import { Link } from "react-router-dom";
-import injectSheet from "react-jss";
-import { Grid, Row, Col, Table } from "react-bootstrap/lib";
-import { Helmet } from "react-helmet";
+import React from 'react';
+import { bindActionCreators, compose } from 'redux';
+import { connect } from 'react-redux';
+import { graphql } from 'react-apollo';
+import humps from 'humps';
+import { Link } from 'react-router-dom';
+import injectSheet from 'react-jss';
+import {
+  Grid, Row, Col, Table,
+} from 'react-bootstrap/lib';
+import { Helmet } from 'react-helmet';
 
-import { SignOutForm } from "./forms";
-import { signOut } from "../actions";
-import { UserByUIDQuery } from "../../../queries";
+import { SignOutForm } from './forms';
+import { signOut } from '../actions';
+import { UserByUIDQuery } from '../../../queries';
 
 const styles = {
   pageTitle: {
-    color: "#000",
-    fontFamily: "Canela",
-    fontSize: "48px",
+    color: '#000',
+    fontFamily: 'Canela',
+    fontSize: '48px',
     fontWeight: 500,
     lineHeight: 1,
-    marginBottom: "11px",
+    marginBottom: '11px',
   },
   hr: {
-    margin: "10px 0",
+    margin: '10px 0',
   },
   editRedirect: {
-    color: "#3084df",
-    display: "block",
-    fontFamily: "Minion Pro",
-    fontSize: "17px",
-    marginBottom: "14px",
+    color: '#3084df',
+    display: 'block',
+    fontFamily: 'Minion Pro',
+    fontSize: '17px',
+    marginBottom: '14px',
   },
   userInfo: {
-    "& .table-responsive table > tbody > tr > td": {
-      fontFamily: "Minion Pro",
-      fontSize: "17px",
-      padding: "8px 0",
+    '& .table-responsive table > tbody > tr > td': {
+      fontFamily: 'Minion Pro',
+      fontSize: '17px',
+      padding: '8px 0',
     },
-    "& .table-responsive table > tbody > tr > td:first-child": {
-      paddingRight: "12px",
-      width: "120px",
+    '& .table-responsive table > tbody > tr > td:first-child': {
+      paddingRight: '12px',
+      width: '120px',
     },
   },
 };
 
-const ProfilePage = ({ classes, signOut, session, data }) => {
+function ProfilePage({
+  classes, signOut, session, data,
+}) {
   if (data.loading) {
     return null;
   }
@@ -66,8 +70,12 @@ const ProfilePage = ({ classes, signOut, session, data }) => {
           lg={6}
           lgOffset={3}
         >
-          <p className={classes.pageTitle}>Welcome, {currentUser.firstName}.</p>
-          <Link to={"/myaccount/profile/edit"} className={classes.editRedirect}>
+          <p className={classes.pageTitle}>
+            Welcome,
+            {currentUser.firstName}
+            .
+          </p>
+          <Link to="/myaccount/profile/edit" className={classes.editRedirect}>
             Edit Profile
           </Link>
           <div className={classes.userInfo}>
@@ -93,15 +101,13 @@ const ProfilePage = ({ classes, signOut, session, data }) => {
       </Row>
     </Grid>
   );
-};
+}
 
 const mapStateToProps = state => ({
   session: state.accounts.session,
 });
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ signOut }, dispatch);
-};
+const mapDispatchToProps = dispatch => bindActionCreators({ signOut }, dispatch);
 
 export default compose(
   // connect is placed above the Apollo HOC so options can use props.session
@@ -109,11 +115,11 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   graphql(UserByUIDQuery, {
     options: ({ session }) => ({
-      variables: { uid: (session && session.uid) || "" },
+      variables: { uid: (session && session.uid) || '' },
 
       // The "network-only" fetch policy prevents any caching of user token
       // headers, which constantly change.
-      fetchPolicy: "network-only",
+      fetchPolicy: 'network-only',
     }),
   }),
   injectSheet(styles),

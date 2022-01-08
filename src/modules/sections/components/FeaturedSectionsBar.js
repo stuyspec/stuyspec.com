@@ -1,13 +1,13 @@
-import React from "react";
-import { bindActionCreators, compose } from "redux";
-import { connect } from "react-redux";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
-import injectSheet from "react-jss";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { bindActionCreators, compose } from 'redux';
+import { connect } from 'react-redux';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import injectSheet from 'react-jss';
+import { Link } from 'react-router-dom';
 
-import { Search } from "../../core/icons";
-import { openSubscriptionModal } from "../../accounts/actions";
+import { Search } from '../../core/icons';
+import { openSubscriptionModal } from '../../accounts/actions';
 
 const FeaturedSectionsQuery = gql`
   query FeaturedSectionsQuery {
@@ -21,68 +21,66 @@ const FeaturedSectionsQuery = gql`
 
 const styles = {
   FeaturedSectionsBar: {
-    fontFamily: "Circular Std",
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "row",
-    padding: "6px",
-    width: "100%",
+    fontFamily: 'Circular Std',
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    padding: '6px',
+    width: '100%',
   },
   sectionListItem: {
-    display: "inline",
-    margin: "0px 13px",
+    display: 'inline',
+    margin: '0px 13px',
   },
   navSearchButton: {
-    top: "2px",
-    position: "relative",
+    top: '2px',
+    position: 'relative',
   },
   sectionLink: {
-    color: "#000",
-    fontSize: "1.5rem",
+    color: '#000',
+    fontSize: '1.5rem',
     fontWeight: 300,
-    textDecoration: "none",
-    "&:hover": {
-      color: "#000",
-      textDecoration: "underline",
-      cursor: "pointer",
+    textDecoration: 'none',
+    '&:hover': {
+      color: '#000',
+      textDecoration: 'underline',
+      cursor: 'pointer',
     },
-    "&:active, &:focus": {
-      color: "#000",
-      textDecoration: "none",
-      outline: "none",
+    '&:active, &:focus': {
+      color: '#000',
+      textDecoration: 'none',
+      outline: 'none',
     },
   },
 };
 
-const FeaturedSectionsBar = ({
+function FeaturedSectionsBar({
   classes,
   openSubscriptionModal,
   data,
   omitSearch,
-}) => {
+}) {
   if (data.loading) {
     return null;
   }
   const { featuredSections } = data;
   return (
     <div className={classes.FeaturedSectionsBar}>
-      {featuredSections.map(section => {
-        return (
-          <div key={section.id} className={classes.sectionListItem}>
-            <Link to={section.permalink} className={classes.sectionLink}>
-              {section.name}
-            </Link>
-          </div>
-        );
-      })}
+      {featuredSections.map(section => (
+        <div key={section.id} className={classes.sectionListItem}>
+          <Link to={section.permalink} className={classes.sectionLink}>
+            {section.name}
+          </Link>
+        </div>
+      ))}
       <div key={-2} className={classes.sectionListItem}>
         <Link to="/recruitments" className={classes.sectionLink}>
-           Recruitments
+          Recruitments
         </Link>
       </div>
       <div key={-3} className={classes.sectionListItem}>
         <Link to="/spec-games" className={classes.sectionLink}>
-           SpecGames
+          SpecGames
         </Link>
       </div>
       {/*
@@ -90,7 +88,7 @@ const FeaturedSectionsBar = ({
         <span onClick={openSubscriptionModal} className={classes.sectionLink}>
           Newsletter
         </span>
-      </div>*/}
+      </div> */}
       {!omitSearch && (
         <div key={-3} className={classes.sectionListItem}>
           <Link to="/search" className={classes.sectionLink}>
@@ -100,11 +98,9 @@ const FeaturedSectionsBar = ({
       )}
     </div>
   );
-};
+}
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ openSubscriptionModal }, dispatch);
-};
+const mapDispatchToProps = dispatch => bindActionCreators({ openSubscriptionModal }, dispatch);
 
 export default compose(
   graphql(FeaturedSectionsQuery),

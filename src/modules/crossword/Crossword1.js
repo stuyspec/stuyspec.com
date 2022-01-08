@@ -2,7 +2,6 @@ import React, { useCallback, useRef, useState } from 'react';
 import Crossword from '@jaredreisinger/react-crossword';
 import styled from 'styled-components';
 
-
 const data = {
   down: {
     1: {
@@ -12,71 +11,71 @@ const data = {
       col: 21,
     },
     2: {
-        clue: '“Wait I can’t hear you, you’re ____!”',
-        answer: 'MUTED',
-        row: 2,
-        col: 8,
-      },
+      clue: '“Wait I can’t hear you, you’re ____!”',
+      answer: 'MUTED',
+      row: 2,
+      col: 8,
+    },
     4: {
-        clue: 'A means of traversing between floors at Stuyvesant (in theory).',
-        answer: 'ESCALATOR',
-        row: 2,
-        col: 16,
-      },   
-      5: {
-        clue: 'First word of “Ferry’s” real name',
-        answer: 'GOURMET',
-        row: 3,
-        col: 11,
-      },
-      6: {
-        clue: 'Annual Spectator published on April Fools’ Day.',
-        answer: 'DISRESPECTATOR',
-        row: 3,
-        col: 14,
-      },
-      9: {
-        clue: 'Number of departments on The Spectator!',
-        answer: 'THIRTEEN',
-        row: 5,
-        col: 6,
-      },
-      15: {
-        clue: 'Stuyvesant’s go-to social media platform.',
-        answer: 'FACEBOOK',
-        row: 10,
-        col: 9,
-      },
-      17: {
-        clue: 'A common article format to present quotes. For the uneducated—examples include jam, peanut butter, and marmalade.',
-        answer: 'SPREAD',
-        row: 11,
-        col: 12,
-      },
-      19: {
-        clue: 'Most common first name among assistant principals (and former principals).',
-        answer: 'ERIC',
-        row: 12,
-        col: 5,
-      },
-      21: {
-        clue: 'The symbol used in many outquotes in The Spectator.',
-        answer: 'EMDASH',
-        row: 12,
-        col: 16,
-      },
-      22: {
-        clue: '“Please raise your ___ hand!”',
-        answer: 'BLUE',
-        row: 13,
-        col: 21,
-      },
-      28: {
-        clue: 'The “A” in “A&E.”',
-        answer: 'ARTS',
-        row: 17,
-        col: 10,
-      }
+      clue: 'A means of traversing between floors at Stuyvesant (in theory).',
+      answer: 'ESCALATOR',
+      row: 2,
+      col: 16,
+    },
+    5: {
+      clue: 'First word of “Ferry’s” real name',
+      answer: 'GOURMET',
+      row: 3,
+      col: 11,
+    },
+    6: {
+      clue: 'Annual Spectator published on April Fools’ Day.',
+      answer: 'DISRESPECTATOR',
+      row: 3,
+      col: 14,
+    },
+    9: {
+      clue: 'Number of departments on The Spectator!',
+      answer: 'THIRTEEN',
+      row: 5,
+      col: 6,
+    },
+    15: {
+      clue: 'Stuyvesant’s go-to social media platform.',
+      answer: 'FACEBOOK',
+      row: 10,
+      col: 9,
+    },
+    17: {
+      clue: 'A common article format to present quotes. For the uneducated—examples include jam, peanut butter, and marmalade.',
+      answer: 'SPREAD',
+      row: 11,
+      col: 12,
+    },
+    19: {
+      clue: 'Most common first name among assistant principals (and former principals).',
+      answer: 'ERIC',
+      row: 12,
+      col: 5,
+    },
+    21: {
+      clue: 'The symbol used in many outquotes in The Spectator.',
+      answer: 'EMDASH',
+      row: 12,
+      col: 16,
+    },
+    22: {
+      clue: '“Please raise your ___ hand!”',
+      answer: 'BLUE',
+      row: 13,
+      col: 21,
+    },
+    28: {
+      clue: 'The “A” in “A&E.”',
+      answer: 'ARTS',
+      row: 17,
+      col: 10,
+    },
   },
   across: {
     3: {
@@ -86,102 +85,102 @@ const data = {
       col: 15,
     },
     7: {
-        clue: 'The website that the program office is NOT using for program changes this semester.',
-        answer: 'TALOS',
-        row: 4,
-        col: 8,
-      },
+      clue: 'The website that the program office is NOT using for program changes this semester.',
+      answer: 'TALOS',
+      row: 4,
+      col: 8,
+    },
     8: {
-        clue: 'First name of the former Stuyvesant principal for whom the auditorium is named.',
-        answer: 'MURRAY',
-        row: 4,
-        col: 19,
-      },
+      clue: 'First name of the former Stuyvesant principal for whom the auditorium is named.',
+      answer: 'MURRAY',
+      row: 4,
+      col: 19,
+    },
     10: {
-        clue: 'Last name of the singer of The Spectator’s pick for the best album of 2019.',
-        answer: 'EILISH',
-        row: 6,
-        col: 1,
-      },
+      clue: 'Last name of the singer of The Spectator’s pick for the best album of 2019.',
+      answer: 'EILISH',
+      row: 6,
+      col: 1,
+    },
     11: {
-        clue: 'Iconic Stuyvesant inter-grade performance competition.',
-        answer: 'SING',
-        row: 6,
-        col: 19,
-      },
+      clue: 'Iconic Stuyvesant inter-grade performance competition.',
+      answer: 'SING',
+      row: 6,
+      col: 19,
+    },
     12: {
-        clue: 'Title of The Spectator magazine that started online beef with the Big Sibs program.',
-        answer: 'UNDERCURRENTS',
-        row: 8,
-        col: 2,
-      },
+      clue: 'Title of The Spectator magazine that started online beef with the Big Sibs program.',
+      answer: 'UNDERCURRENTS',
+      row: 8,
+      col: 2,
+    },
     13: {
-        clue: 'The Spectator’s newest department.',
-        answer: 'SCIENCE',
-        row: 8,
-        col: 19,
-      },
+      clue: 'The Spectator’s newest department.',
+      answer: 'SCIENCE',
+      row: 8,
+      col: 19,
+    },
     14: {
-        clue: 'A section in the Features department that includes personal pieces.',
-        answer: 'VOICES',
-        row: 10,
-        col: 2,
-      },
+      clue: 'A section in the Features department that includes personal pieces.',
+      answer: 'VOICES',
+      row: 10,
+      col: 2,
+    },
     16: {
-        clue: 'Bi-annual Spectator event held in the fall to introduce students to The Spectator.',
-        answer: 'RECRUITMENTS',
-        row: 10,
-        col: 13,
-      },
+      clue: 'Bi-annual Spectator event held in the fall to introduce students to The Spectator.',
+      answer: 'RECRUITMENTS',
+      row: 10,
+      col: 13,
+    },
     18: {
-        clue: 'Floor number in which freshmen are told there is a pool.',
-        answer: 'ELEVEN',
-        row: 12,
-        col: 1,
-      },
+      clue: 'Floor number in which freshmen are told there is a pool.',
+      answer: 'ELEVEN',
+      row: 12,
+      col: 1,
+    },
     20: {
-        clue: 'The *best* sauce on Ferry’s sandwiches.',
-        answer: 'CHIPOTLEMAYO',
-        row: 12,
-        col: 9,
-      },
+      clue: 'The *best* sauce on Ferry’s sandwiches.',
+      answer: 'CHIPOTLEMAYO',
+      row: 12,
+      col: 9,
+    },
     23: {
-        clue: 'Train many Stuyvesant students take to get to school.',
-        answer: 'LIRR',
-        row: 14,
-        col: 21,
-      },
+      clue: 'Train many Stuyvesant students take to get to school.',
+      answer: 'LIRR',
+      row: 14,
+      col: 21,
+    },
     24: {
-        clue: 'Last name of the Sports Department’s most recent Athlete of the Issue.',
-        answer: 'YAO',
-        row: 15,
-        col: 7,
+      clue: 'Last name of the Sports Department’s most recent Athlete of the Issue.',
+      answer: 'YAO',
+      row: 15,
+      col: 7,
     },
     26: {
-        clue: 'The machine that plays “Birthday” by The Beatles on your birthday.',
-        answer: 'SCANNERS',
-        row: 16,
-        col: 16,
+      clue: 'The machine that plays “Birthday” by The Beatles on your birthday.',
+      answer: 'SCANNERS',
+      row: 16,
+      col: 16,
     },
     27: {
-        clue: 'The aha moment! (and joint name of the current Spectator editors-in-chief).',
-        answer: 'EUREKA',
-        row: 17,
-        col: 5,
+      clue: 'The aha moment! (and joint name of the current Spectator editors-in-chief).',
+      answer: 'EUREKA',
+      row: 17,
+      col: 5,
     },
     29: {
-        clue: 'Staircase that covers least number of floors in the school building.',
-        answer: 'RIVER',
-        row: 18,
-        col: 10,
+      clue: 'Staircase that covers least number of floors in the school building.',
+      answer: 'RIVER',
+      row: 18,
+      col: 10,
     },
     30: {
-        clue: 'Initials of an iconic Ferry’s sandwich',
-        answer: 'BLT',
-        row: 19,
-        col: 8,
-    }
-  }
+      clue: 'Initials of an iconic Ferry’s sandwich',
+      answer: 'BLT',
+      row: 19,
+      col: 8,
+    },
+  },
 };
 
 const Header = styled.h1`
@@ -248,7 +247,7 @@ const Command = styled.button`
       outline: none;
   }
 `;
-//#B3DAF1
+// #B3DAF1
 const CrosswordWrapper = styled.div`
   margin-top: 2em;
   max-width: 200em;
@@ -318,11 +317,11 @@ const CrosswordWrapper = styled.div`
 function Crossword1() {
   const crossword = useRef();
 
-  const fillAllAnswers = useCallback((event) => {
+  const fillAllAnswers = useCallback(event => {
     crossword.current.fillAllAnswers();
   }, []);
 
-  const reset = useCallback((event) => {
+  const reset = useCallback(event => {
     crossword.current.reset();
   }, []);
 
@@ -331,8 +330,8 @@ function Crossword1() {
   // something more interesting than simply collecting them as messages.
   const [messages, setMessages] = useState([]);
 
-  const addMessage = useCallback((message) => {
-    setMessages((m) => m.concat(`${message}\n`));
+  const addMessage = useCallback(message => {
+    setMessages(m => m.concat(`${message}\n`));
   }, []);
 
   // onCorrect is called with the direction, number, and the correct answer.
@@ -340,32 +339,31 @@ function Crossword1() {
     (direction, number, answer) => {
       addMessage(`onCorrect: "${direction}", "${number}", "${answer}"`);
     },
-    [addMessage]
+    [addMessage],
   );
 
   // onLoadedCorrect is called with an array of the already-correct answers,
   // each element itself is an array with the same values as in onCorrect: the
   // direction, number, and the correct answer.
   const onLoadedCorrect = useCallback(
-    (answers) => {
+    answers => {
       addMessage(
         `onLoadedCorrect:\n${answers
           .map(
-            ([direction, number, answer]) =>
-              `    - "${direction}", "${number}", "${answer}"`
+            ([direction, number, answer]) => `    - "${direction}", "${number}", "${answer}"`,
           )
-          .join('\n')}`
+          .join('\n')}`,
       );
     },
-    [addMessage]
+    [addMessage],
   );
 
   // onCrosswordCorrect is called with a truthy/falsy value.
   const onCrosswordCorrect = useCallback(
-    (isCorrect) => {
+    isCorrect => {
       addMessage(`onCrosswordCorrect: ${JSON.stringify(isCorrect)}`);
     },
-    [addMessage]
+    [addMessage],
   );
 
   // onCellChange is called with the row, column, and character.
@@ -373,7 +371,7 @@ function Crossword1() {
     (row, col, char) => {
       addMessage(`onCellChange: "${row}", "${col}", "${char}"`);
     },
-    [addMessage]
+    [addMessage],
   );
 
   return (
@@ -382,7 +380,7 @@ function Crossword1() {
 
       <p>
         <span className="contributor">By</span>
-        <a href={window.location.origin + "/contributors/the-editorial-board"} className="contributor">The Editorial Board</a>
+        <a href={`${window.location.origin}/contributors/the-editorial-board`} className="contributor">The Editorial Board</a>
         <span className="date">December 23, 2020</span>
       </p>
 
@@ -390,7 +388,6 @@ function Crossword1() {
         <Command onClick={reset}>Clear</Command>
         <Command onClick={fillAllAnswers}>Reveal</Command>
       </Commands>
-      
 
       <CrosswordWrapper>
         <Crossword
@@ -402,18 +399,22 @@ function Crossword1() {
           onCrosswordCorrect={onCrosswordCorrect}
           onCellChange={onCellChange}
           theme={{
-            gridBackground: "transparent",
+            gridBackground: 'transparent',
             focusBackground: '#9ee7ff',
-            highlightBackground: '#d9f5ff'
+            highlightBackground: '#d9f5ff',
           }}
         />
 
       </CrosswordWrapper>
       <p className="issue">
-        Check out <a href="https://issuu.com/stuyspectator/docs/issue8-online">Issue 8</a> where this crossword was featured! (pg 8)
+        Check out
+        {' '}
+        <a href="https://issuu.com/stuyspectator/docs/issue8-online">Issue 8</a>
+        {' '}
+        where this crossword was featured! (pg 8)
       </p>
     </Page>
   );
 }
 
-export default Crossword1;  
+export default Crossword1;

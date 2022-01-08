@@ -1,23 +1,25 @@
-import React from "react";
-import { compose } from "redux";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import injectSheet from "react-jss";
+import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import injectSheet from 'react-jss';
 
 const styles = {
   FormStatus: {
-    fontFamily: "Minion Pro",
+    fontFamily: 'Minion Pro',
   },
   successMessage: {
-    color: "green",
-    marginTop: "10px",
+    color: 'green',
+    marginTop: '10px',
   },
   errorMessage: {
-    color: "red",
+    color: 'red',
   },
 };
 
-const FormStatus = ({ classes, status, formName, redirect, history }) => {
+function FormStatus({
+  classes, status, formName, redirect, history,
+}) {
   // The FormStatus component is shared on most forms. We have a status with
   // the current formName in external state so the FormStatus doesn't display
   // messages on one form that was actually meant for another form.
@@ -37,16 +39,14 @@ const FormStatus = ({ classes, status, formName, redirect, history }) => {
       <p key="success" className={classes.successMessage}>
         {status.message}
       </p>
-      {status.errors.map(error => {
-        return (
-          <p key={error} className={classes.errorMessage}>
-            {error}
-          </p>
-        );
-      })}
+      {status.errors.map(error => (
+        <p key={error} className={classes.errorMessage}>
+          {error}
+        </p>
+      ))}
     </div>
   );
-};
+}
 
 const mapStateToProps = state => ({
   status: state.accounts.status,

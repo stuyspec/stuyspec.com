@@ -1,1 +1,1 @@
-export { default as RecruitmentPage } from "./RecruitmentPage";
+export { default as RecruitmentPage } from './RecruitmentPage';
