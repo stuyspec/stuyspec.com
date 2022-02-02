@@ -188,29 +188,28 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
   Members of the 2021-2022 Spectator Editorial Board
 </h2>
 <b>Editors In Chief</b><br>
-*Morris Raskin<br>
-*Karen Zhang<br>
+*Momoca Mairaj<br>
+*Maya Nelson<br>
 <br>
 <table style="width:87%;text-align:center" >
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>News Editors</b><br>
-            **Isabella Jia<br>
-            *Jenny Liu<br>
-            Momoca Mairaj<br>
-            **Janna Wang
+            Rebecca Bao**<br>
+            Isabella Jia<br>
+            Janna Wang<br>
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
             <b>Features Editors</b><br>
-            Angela Cai<br>
+            Lauren Lee<br>
+            Shivani Manimaran<br>
             Christina Pan<br>
-            *Clara Shapiro<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Science Editors</b><br>
-            Gerard Lin<br>
+            Sathirtha Mondal<br>
             Sonya Sasson<br>
             **Sathirtha Mondal<br>
             <br>
@@ -220,48 +219,43 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
     <tr>
         <td style="width:30%;vertical-align: top">
              <b>Opinions Editors</b><br>
-            Maya Nelson<br>
-            *Aaron Visser<br>
+            Peter Goswami<br>
+            Anisha Singhal<br>
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
             <b>Arts & Entertainment Editors</b><br>
-            Suah Chung<br>
+            Nicole Liu<br>
             Kenisha Mahajan<br>
-            Gavin McGinley<br>
-            Dexter Wells<br>
+            Levi Simon<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Humor Editors</b><br>
-            Logan Ruzzier<br>
-            *Kelly Yip<br>
+            Erica Chen<br>
+            Oliver Hollmann<br>
             <br>
         </td>
     </tr>
     <tr>
         <td style="width:30%;vertical-align: top" >
             <b>Sports Editors</b><br>
-            Krish Gupta<br>
-            Sam Levine<br>
-            Matt Melucci<br>
-            **Shafiul Haque<br>
+            Taee Chi<br>
+            Shafiul Haque<br>
+            Ava Quarles<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Web Editors</b><br>
             David Chen<br>
-            Alyssa Choi<br>
-            **Samantha Hua<br>
-            **Theodore Yochum<br>
+            Samantha Hua<br>
+            Theodore Yochum<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Photography Editors</b><br>
-            Francesca Nemati<br>
-            Sasha Socolow<br>
-            **Alexander Lopez<br>
-            **Zifei Zhao<br>
+            Alexander Lopez<br>
+            Zifei Zhao<br>
             <br>
         </td>
     </tr>
@@ -269,23 +263,18 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
         <td style="width:30%;vertical-align: top">
             <b>Art Directors</b><br>
             Afra Mahmud<br>
-            Adrianna Peng<br>
-            Sophie Poget<br>
-            Vivian Teo**<br>
+            Vivian Teo<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Layout Editors</b><br>
-            Ezra Lee<br>
-            Amy Lin<br>
             Susie McKnight<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Copy Editors</b><br>
-            Nora Miller<br>
-            Tashfia Noor<br>
-            Shreyasi Saha<br>
+            Nada Hameed**<br>
+            Eman Sadiq**<br>
             Ruiwen Tang<br>
             Raymond Yang<br>
             <br>
@@ -296,8 +285,8 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
         </td>
         <td style="width:40%;vertical-align: top">
             <b>Business Managers</b><br>
-            Tina Nguyen<br>
-            Jared Moser<br>
+            Inara Rabanni<br>
+            Amber Shen<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
@@ -345,7 +334,7 @@ Andrey Sokolov<br>
     slug: 'contact',
     content: `<p style="text-align: center">
   For website related questions: Contact <a href="mailto:web@stuyspec.com">web@stuyspec.com</a>. <br/>
-  For all other questions: Contact <a href="mailto:morriskaren2021@gmail.com">morriskaren2021@gmail.com</a>.
+  For all other questions: Contact <a href="mailto:eics@stuyspec.com">eics@stuyspec.com</a>.
 
 </p>
 `,
