@@ -7,7 +7,7 @@ import descriptions from "./modules/descriptions";
 import core from "./modules/core";
 import users from "./modules/users";
 
-export default (history: History) => combineReducers<any>({
+export default (history: any) => combineReducers<any>({
   accounts: accounts.reducer,
   advertisements: advertisements.reducer,
   core: core.reducer,
