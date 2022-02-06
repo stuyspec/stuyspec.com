@@ -185,18 +185,18 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
     slug: 'staff',
     content: `<center>
 <h2 style="margin-bottom: 30px;">
-  Members of the 2021-2022 Spectator Editorial Board
+  Members of the 2022-2023 Spectator Editorial Board
 </h2>
 <b>Editors In Chief</b><br>
-*Momoca Mairaj<br>
-*Maya Nelson<br>
+Momoca Mairaj*<br>
+Maya Nelson*<br>
 <br>
 <table style="width:87%;text-align:center" >
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>News Editors</b><br>
             Rebecca Bao**<br>
-            Isabella Jia<br>
+            Isabella Jia*<br>
             Janna Wang<br>
             <br>
         </td>
@@ -211,7 +211,6 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
             <b>Science Editors</b><br>
             Sathirtha Mondal<br>
             Sonya Sasson<br>
-            **Sathirtha Mondal<br>
             <br>
         </td>
     </tr>
@@ -220,13 +219,13 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
         <td style="width:30%;vertical-align: top">
              <b>Opinions Editors</b><br>
             Peter Goswami<br>
-            Anisha Singhal<br>
+            Anisha Singhal*<br>
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
             <b>Arts & Entertainment Editors</b><br>
             Nicole Liu<br>
-            Kenisha Mahajan<br>
+            Kenisha Mahajan*<br>
             Levi Simon<br>
             <br>
         </td>
@@ -241,13 +240,13 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
         <td style="width:30%;vertical-align: top" >
             <b>Sports Editors</b><br>
             Taee Chi<br>
-            Shafiul Haque<br>
+            Shafiul Haque*<br>
             Ava Quarles<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Web Editors</b><br>
-            David Chen<br>
+            David Chen*<br>
             Samantha Hua<br>
             Theodore Yochum<br>
             <br>
@@ -262,13 +261,16 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>Art Directors</b><br>
-            Afra Mahmud<br>
+            Afra Mahmud*<br>
+            Nelli Rojas-Cessa**<br>
             Vivian Teo<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Layout Editors</b><br>
             Susie McKnight<br>
+            Shreya Roy<br>
+            Danny Xiong<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
