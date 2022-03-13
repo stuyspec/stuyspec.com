@@ -5,11 +5,6 @@ const initialState = [
     url: '/ad/kweller',
   },
   {
-    company: 'Aim Plus Education',
-    filename: 'aimpluseducation.png',
-    url: '/ad/aimplus',
-  },
-  {
     company: 'The Tutorverse',
     filename: 'tutorverse.jpg',
     url: '/ad/tutorverse',
@@ -18,6 +13,26 @@ const initialState = [
     company: 'Manhattan Ace',
     filename: 'manhattanace.png',
     url: '/ad/manhattanace',
+  },
+  {
+    company: 'Georgetown University',
+    filename: 'Georgetown.png',
+    url: '/ad/georgetown',
+  },
+  {
+    company: 'Parsons Paris',
+    filename: 'Parsons.png',
+    url: '/ad/parsons',
+  },
+  {
+    company: 'Columbia University',
+    filename: 'Columbia.png',
+    url: '/ad/columbia',
+  },
+  {
+    company: 'University of Rochester',
+    filename: 'Rochester.png',
+    url: '/ad/rochester',
   },
 ];
 
