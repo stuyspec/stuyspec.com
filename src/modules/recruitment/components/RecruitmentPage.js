@@ -112,7 +112,7 @@ function RecruitmentPage({ classes }) {
         student journalism.
       </p>
       <ReactPlayer
-        url="https://youtu.be/8MvOzTSwwCs"
+        url="https://youtu.be/CDZauduRFAU"
         controls
         className={classes.Video}
       />
