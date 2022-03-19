@@ -41,7 +41,7 @@ export const SECTIONS = [
   {
     name: 'Sports',
     imageLink: null,
-    description: 'The Sports department covers all things sports, whether it be PSAL sports at Stuyvesant or professional sports. Articles pertaining to Stuyvesant sports range from championship articles and season updates to athlete and coach interviews and opinions. Writers also cover virtually any topic in the larger sports world, from debates on LeBron vs. MJ and college basketball to YouTube boxing and the Champions League. If that’s not enough to convince you to apply, we have an exclusive fantasy football league (with rewards).',
+    description: 'The Sports department covers all sports topics, whether it be PSAL sports at Stuyvesant or professional sports. Articles pertaining to Stuyvesant sports range from championship articles and season updates to athlete and coach interviews and opinions. Writers also cover virtually any topic in the larger sports world, from debates on Messi vs Ronaldo and college basketball to NFL playoffs and the Champions League. If that’s not enough to convince you to apply, we also have amazing commentary, livestreaming, and social media projects that you could be a part of!',
     quotes: [],
     deadline: 'Application due April 10th, 2022',
     link:
