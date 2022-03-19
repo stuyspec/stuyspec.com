@@ -88,9 +88,9 @@ export const SECTIONS = [
     imageLink: null,
     description: 'Photo is dedicated to providing interesting and dynamic photographs to support the articles in The Spectator and spearhead photo essay projects. Typical assignments include portraits of students and teachers, photos at school events, and shots of fun things around the city. This department is a good fit for anyone interested in photography, whether you’re just starting out, or you’re an expert looking for a place to practice and refine your skills.',
     quotes: [],
-    deadline: 'Application due April 10th, 2022',
+    deadline: 'Application due April 9th, 2022',
     link:
-      '',
+      'https://docs.google.com/forms/d/e/1FAIpQLSdBzC70i1JUeDPoip-bI-zKdTfw_yJy3m4kC2JUrJXwrMnCVA/viewform',
   },
   {
     name: 'Business',
