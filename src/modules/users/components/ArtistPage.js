@@ -1,12 +1,12 @@
-import React from "react";
-import { createUseStyles } from "react-jss";
-import { Grid, Row, Col } from "react-bootstrap/lib";
-import { Helmet } from "react-helmet";
-import { useQuery } from "react-apollo";
-import gql from "graphql-tag";
+import React from 'react';
+import { createUseStyles } from 'react-jss';
+import { Grid, Row, Col } from 'react-bootstrap/lib';
+import { Helmet } from 'react-helmet';
+import { useQuery } from 'react-apollo';
+import gql from 'graphql-tag';
 
-import { ArticleList } from "../../articles/components";
-import { NotFoundPage } from "../../core/components";
+import { ArticleList } from '../../articles/components';
+import { NotFoundPage } from '../../core/components';
 
 const ArtistProfileBySlug = gql`
   query ArtistProfileBySlug($artist_slug: String!, $role_slug: String!) {
@@ -45,71 +45,70 @@ const ArtistProfileBySlug = gql`
 
 const styles = {
   name: {
-    color: "#000",
-    fontFamily: "Canela",
-    fontSize: "48px",
+    color: '#000',
+    fontFamily: 'Canela',
+    fontSize: '48px',
     fontWeight: 500,
     lineHeight: 1,
-    marginBottom: "11px",
-    "@media screen and (max-width: 760px)": {
-        textAlign: "center",
-    }
+    marginBottom: '11px',
+    '@media screen and (max-width: 760px)': {
+      textAlign: 'center',
+    },
   },
   email: {
-    color: "#3084df",
-    display: "block",
-    fontFamily: "Minion Pro",
-    fontSize: "17px",
-    marginBottom: "7px",
-    "@media screen and (max-width: 760px)": {
-        textAlign: "center",
-    }
+    color: '#3084df',
+    display: 'block',
+    fontFamily: 'Minion Pro',
+    fontSize: '17px',
+    marginBottom: '7px',
+    '@media screen and (max-width: 760px)': {
+      textAlign: 'center',
+    },
   },
   latest: {
-    borderTop: "1px solid #000",
-    borderBottom: "1px solid #ddd",
-    borderStyle: "solid none",
-    color: "#000",
-    fontFamily: "Circular Std",
-    fontSize: "13px",
+    borderTop: '1px solid #000',
+    borderBottom: '1px solid #ddd',
+    borderStyle: 'solid none',
+    color: '#000',
+    fontFamily: 'Circular Std',
+    fontSize: '13px',
     fontWeight: 300,
-    marginBottom: "22px",
-    padding: "4px 0px",
+    marginBottom: '22px',
+    padding: '4px 0px',
   },
   description: {
-    fontFamily: "Minion Pro",
-    fontSize: "16px",
-    lineHeight: "1.5",
-    marginBottom: "26px",
+    fontFamily: 'Minion Pro',
+    fontSize: '16px',
+    lineHeight: '1.5',
+    marginBottom: '26px',
   },
   image: {
-    marginBottom: "20px",
-    display: "block",
+    marginBottom: '20px',
+    display: 'block',
     margin: '0 auto',
-    width: "auto",  
-    "@media screen and (max-width: 760px)": {
-        transform: "translate(5%, 0%)",
-    }
+    width: 'auto',
+    '@media screen and (max-width: 760px)': {
+      transform: 'translate(5%, 0%)',
+    },
   },
-  "@media (max-width: 1199px) and (min-width: 992px)": {
+  '@media (max-width: 1199px) and (min-width: 992px)': {
     ArtistPage: {
-      paddingLeft: "10%",
+      paddingLeft: '10%',
     },
   },
 };
 
 const useStyles = createUseStyles(styles);
 
-const ArtistPage = ({ artist_slug, role_slug }) => {
+function ArtistPage({ artist_slug, role_slug }) {
   const classes = useStyles();
 
   const result = useQuery(ArtistProfileBySlug, {
     variables: {
       artist_slug,
-      role_slug
-    }
-  })
-
+      role_slug,
+    },
+  });
 
   if (result.loading) {
     return null;
@@ -119,7 +118,7 @@ const ArtistPage = ({ artist_slug, role_slug }) => {
     return <NotFoundPage />;
   }
 
-  const data = result.data;
+  const { data } = result;
 
   const artist = data.profileByUserAndRole.user;
 
@@ -133,8 +132,8 @@ const ArtistPage = ({ artist_slug, role_slug }) => {
       },
     ],
   }));
-  
-  const hasImage = artist.profile_pic_url !== "";
+
+  const hasImage = artist.profile_pic_url !== '';
 
   return (
     <Grid className={classes.ArtistPage}>
@@ -143,16 +142,19 @@ const ArtistPage = ({ artist_slug, role_slug }) => {
         <meta />
       </Helmet>
       <Row>
-	    {hasImage &&
+        {hasImage
+        && (
         <Col xs={50} sm={3} md={2} lg={2}>
-            <img 
-                className={classes.image} 
-                src={artist.profile_pic_url} 
-                height={120} width={120}
-                alt={artist.first_name + " " + artist.last_name}    
-            />
-        </Col>}
-	    <Col>
+          <img
+            className={classes.image}
+            src={artist.profile_pic_url}
+            height={120}
+            width={120}
+            alt={`${artist.first_name} ${artist.last_name}`}
+          />
+        </Col>
+        )}
+        <Col>
           <p className={classes.name}>
             {`${artist.first_name} ${artist.last_name}`}
           </p>
@@ -162,12 +164,12 @@ const ArtistPage = ({ artist_slug, role_slug }) => {
           <p className={classes.description}>{artist.description}</p>
         </Col>
       </Row>
-      <Row> 
-          <div className={classes.latest}>Photos</div>
-          <ArticleList articles={articles} />
+      <Row>
+        <div className={classes.latest}>Photos</div>
+        <ArticleList articles={articles} />
       </Row>
     </Grid>
   );
-};
+}
 
 export default ArtistPage;

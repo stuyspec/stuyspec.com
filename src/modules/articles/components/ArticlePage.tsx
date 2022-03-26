@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { useQuery } from "react-apollo";
 import { createUseStyles } from "react-jss";
@@ -5,7 +6,8 @@ import Grid from "react-bootstrap/lib/Grid";
 import { Helmet } from "react-helmet";
 import { match } from 'react-router';
 
-import { ArticleHeader, ArticleBody, ArticleFooter, RecommendedRow } from "./";
+import { ArticleHeader, ArticleBody, ArticleFooter, ArticleCommentSection, RecommendedRow } from "./";
+import { GoogleAdsense } from "../../advertisements/components";
 import { ARTICLE_QUERY, IArticleData, IArticleVariables } from "../queries";
 import { NotFoundPage } from "../../core/components";
 
@@ -60,10 +62,26 @@ const ArticlePage: React.FC<IProps> = ({ match }) => {
     <Grid fluid className={classes.ArticlePage}>
       <Helmet>
         <title>{article.title} | The Stuyvesant Spectator</title>
+        <meta name="fb:app_id" content="510092146640696" />
       </Helmet>
       <ArticleHeader article={article} />
       <ArticleBody article={article} />
       <ArticleFooter article={article} />
+      <ArticleCommentSection />
+      {/* <GoogleAdsense
+          adClient='ca-pub-6227330768557696'
+          adSlot='1527604127'
+          style=
+            {{
+              'display':'block',
+              minHeight: '10vh',
+              minWidth: '20vw',
+            }}
+          adLayout='in-article'
+          adFormat='auto'
+          fullWidthResponsive='true'
+        /> */}
+
       <RecommendedRow section={section.parent_section || section} />
     </Grid>
   );

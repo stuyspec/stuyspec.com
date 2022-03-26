@@ -2,10 +2,10 @@
   "extends": "airbnb",
   "rules": {
     "import/no-named-as-default": 0,
-    "import/no-named-as-default-member", 0,
+    "import/no-named-as-default-member": 0,
 
     // allow files to have extension ".js"
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx", ".ts"] }],
 
     // allow ommitted parentheses in single-argument arrow functions
     "arrow-parens": [2, "as-needed"],

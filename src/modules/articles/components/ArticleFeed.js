@@ -1,10 +1,10 @@
-import React, { PureComponent } from "react";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
-import injectSheet from "react-jss";
+import React, { PureComponent } from 'react';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import injectSheet from 'react-jss';
 
-import ArticleList from "./ArticleList";
-import { ARTICLES_PER_PAGE } from "../constants";
+import ArticleList from './ArticleList';
+import { ARTICLES_PER_PAGE } from '../constants';
 
 const ArticleFeedQuery = gql`
   query ArticleFeedQuery($section_id: ID, $offset: Int, $limit: Int) {
@@ -36,22 +36,22 @@ const ArticleFeedQuery = gql`
 
 const styles = {
   ArticleFeed: {
-    marginBottom: "36px",
+    marginBottom: '36px',
   },
   buttonContainer: {
-    display: "flex",
-    width: "100%",
-    justifyContent: "center",
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'center',
   },
   loadMoreButton: {
-    background: "#9dba73",
-    borderRadius: "3px",
-    color: "#fff",
-    fontFamily: "Canela",
-    border: "none",
-    padding: "12px 16px",
-    fontSize: "16px",
-    cursor: "pointer",
+    background: '#9dba73',
+    borderRadius: '3px',
+    color: '#fff',
+    fontFamily: 'Canela',
+    border: 'none',
+    padding: '12px 16px',
+    fontSize: '16px',
+    cursor: 'pointer',
   },
 };
 
@@ -72,26 +72,27 @@ class ArticleFeed extends PureComponent {
     // If after getting the next page of articles we still have the same
     // number of articles or the number of articles we have is not a multiple
     // of ARTICLES_PER_PAGE, we know there aren't any articles left.
-    const noNewArticles =
-      this.props.latestArticles &&
-      this.props.latestArticles.length === nextProps.latestArticles.length;
+    const noNewArticles = this.props.latestArticles
+      && this.props.latestArticles.length === nextProps.latestArticles.length;
     if (
-      noNewArticles ||
-      nextProps.latestArticles.length % ARTICLES_PER_PAGE !== 0
+      noNewArticles
+      || nextProps.latestArticles.length % ARTICLES_PER_PAGE !== 0
     ) {
       this.setState({ isLoadMoreButtonVisible: false });
     }
   }
 
   render() {
-    const { classes, loading, loadMoreArticles, title = "Latest" } = this.props;
+    const {
+      classes, loading, loadMoreArticles, title = 'Latest',
+    } = this.props;
 
     if (loading) {
       return null;
     }
 
     const { isLoadMoreButtonVisible } = this.state;
-    let { latestArticles } = this.props;
+    const { latestArticles } = this.props;
 
     return (
       <div className={classes.ArticleFeed}>
@@ -131,25 +132,23 @@ export default graphql(ArticleFeedQuery, {
 
     // loadMoreArticles is just a wrapper for Apollo's fetchMore function.
     // It uses offsets and previous data to determine which articles to get.
-    loadMoreArticles: () => {
-      return fetchMore({
-        variables: {
-          // We update our offset to get the next page of articles.
-          offset: latestArticles.length,
-        },
-        updateQuery: (previousResult, { fetchMoreResult }) => {
-          if (!fetchMoreResult) {
-            return previousResult;
-          }
-          return {
-            ...previousResult,
-            latestArticles: [
-              ...previousResult.latestArticles,
-              ...fetchMoreResult.latestArticles,
-            ],
-          };
-        },
-      });
-    },
+    loadMoreArticles: () => fetchMore({
+      variables: {
+        // We update our offset to get the next page of articles.
+        offset: latestArticles.length,
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        if (!fetchMoreResult) {
+          return previousResult;
+        }
+        return {
+          ...previousResult,
+          latestArticles: [
+            ...previousResult.latestArticles,
+            ...fetchMoreResult.latestArticles,
+          ],
+        };
+      },
+    }),
   }),
 })(injectSheet(styles)(ArticleFeed));

@@ -1,3 +1,3 @@
-import RoutingApp from "./RoutingApp";
+import RoutingApp from './RoutingApp';
 
 export { RoutingApp };

@@ -1,13 +1,13 @@
-import React from "react";
-import injectSheet from "react-jss";
+import React from 'react';
+import injectSheet from 'react-jss';
 
 const styles = {
   LoadingIcon: {
-    margin: "16px auto !important",
+    margin: '16px auto !important',
   },
 };
 
-const LoadingIcon = ({ classes }) => {
+function LoadingIcon({ classes }) {
   // Since this is the same loading icon as in the HTML, we need id's so
   // main-index.css will style it.
   return (
@@ -17,6 +17,6 @@ const LoadingIcon = ({ classes }) => {
       <div id="bounce3" />
     </div>
   );
-};
+}
 
 export default injectSheet(styles)(LoadingIcon);

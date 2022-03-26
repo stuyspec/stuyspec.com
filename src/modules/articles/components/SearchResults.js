@@ -1,21 +1,21 @@
-import React from "react";
-import { compose } from "redux";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
-import { Row, Col } from "react-bootstrap";
-import injectSheet from "react-jss";
+import React from 'react';
+import { compose } from 'redux';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import { Row, Col } from 'react-bootstrap';
+import injectSheet from 'react-jss';
 
-import { TallAd } from "../../advertisements/components";
-import { LoadingIcon } from "../../core/icons";
-import ArticleList from "./ArticleList";
+import { TallAd } from '../../advertisements/components';
+import { LoadingIcon } from '../../core/icons';
+import ArticleList from './ArticleList';
 
 const styles = {
   articleList: {
-    paddingRight: "14px !important",
+    paddingRight: '14px !important',
   },
   tallAdContainer: {
-    paddingLeft: "14px !important",
-    borderLeft: "solid 1px #ddd",
+    paddingLeft: '14px !important',
+    borderLeft: 'solid 1px #ddd',
   },
 };
 
@@ -46,7 +46,7 @@ const SearchResultsQuery = gql`
   }
 `;
 
-const SearchResults = ({ classes, data }) => {
+function SearchResults({ classes, data }) {
   if (data.loading) {
     return <LoadingIcon />;
   }
@@ -67,7 +67,7 @@ const SearchResults = ({ classes, data }) => {
       </Col>
     </Row>
   );
-};
+}
 
 export default compose(graphql(SearchResultsQuery), injectSheet(styles))(
   SearchResults,

@@ -1,90 +1,90 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import injectSheet from "react-jss";
-import Row from "react-bootstrap/lib/Row";
-import Col from "react-bootstrap/lib/Col";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import injectSheet from 'react-jss';
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
 
-import Byline from "../Byline";
-import Dateline from "../Dateline";
+import Byline from '../Byline';
+import Dateline from '../Dateline';
 
 const styles = {
   section: {
-    color: "#000",
-    display: "block",
-    fontFamily: "Minion Pro",
+    color: '#000',
+    display: 'block',
+    fontFamily: 'Minion Pro',
     fontWeight: 300,
-    fontSize: "12px",
-    marginBottom: "4px",
-    textTransform: "uppercase",
-    "&:hover": {
-      color: "#000",
+    fontSize: '12px',
+    marginBottom: '4px',
+    textTransform: 'uppercase',
+    '&:hover': {
+      color: '#000',
     },
-    "&:active": {
-      color: "#000",
+    '&:active': {
+      color: '#000',
     },
-    "&:focus": {
-      color: "#000",
+    '&:focus': {
+      color: '#000',
     },
   },
   header: {
-    padding: "0 !important",
+    padding: '0 !important',
   },
   title: {
-    color: "#000",
-    display: "block",
-    fontFamily: "Minion Pro",
-    fontSize: "26px",
+    color: '#000',
+    display: 'block',
+    fontFamily: 'Minion Pro',
+    fontSize: '26px',
     fontWeight: 700,
     lineHeight: 1.08,
-    marginBottom: "9px",
-    "&:hover": {
-      color: "#000",
+    marginBottom: '9px',
+    '&:hover': {
+      color: '#000',
     },
-    "&:active": {
-      color: "#000",
+    '&:active': {
+      color: '#000',
     },
-    "&:focus": {
-      color: "#000",
+    '&:focus': {
+      color: '#000',
     },
   },
   preview: {
-    fontFamily: "Minion Pro",
-    fontSize: "16px",
+    fontFamily: 'Minion Pro',
+    fontSize: '16px',
     lineHeight: 1.29,
   },
   featuredMedia: {
-    maxHeight: "360px",
-    overflow: "hidden",
-    padding: "0 14px !important",
-    "& > a > figure > img": {
-      width: "100%",
+    maxHeight: '360px',
+    overflow: 'hidden',
+    padding: '0 14px !important',
+    '& > a > figure > img': {
+      width: '100%',
     },
   },
-  "@media (min-width: 992px and max-width: )": {
+  '@media (min-width: 992px and max-width: )': {
     featuredMedia: {
-      paddingLeft: "14px",
+      paddingLeft: '14px',
     },
   },
-  "@media (max-width: 991px)": {
+  '@media (max-width: 991px)': {
     featuredMedia: {
-      paddingRight: "0 !important",
+      paddingRight: '0 !important',
     },
   },
-  "@media (max-width: 767px)": {
+  '@media (max-width: 767px)': {
     featuredMedia: {
-      height: "auto",
-      marginBottom: "18px",
-      paddingLeft: "0 !important",
-      paddingTop: "14px",
-      "& figure img": {
-        marginLeft: "-14px",
-        width: "100vw !important",
+      height: 'auto',
+      marginBottom: '18px',
+      paddingLeft: '0 !important',
+      paddingTop: '14px',
+      '& figure img': {
+        marginLeft: '-14px',
+        width: '100vw !important',
       },
     },
   },
 };
 
-const LeftTitleArticle = ({ classes, article }) => {
+function LeftTitleArticle({ classes, article }) {
   const { section } = article;
   return (
     <Row className={classes.article}>
@@ -134,6 +134,6 @@ const LeftTitleArticle = ({ classes, article }) => {
       </Col>
     </Row>
   );
-};
+}
 
 export default injectSheet(styles)(LeftTitleArticle);

@@ -1,8 +1,8 @@
 const initialState = [
   {
     id: 0,
-    title: "Our Charter",
-    slug: "our-charter",
+    title: 'Our Charter',
+    slug: 'our-charter',
     content: `<h1>The Charter of The Spectator</h1>
 Approved January, 2020 by The Spectator Editorial Board.<br>
 <h2>I. Statement of Purpose<br></h2>
@@ -126,8 +126,8 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
   },
   {
     id: 1,
-    title: "Advertise",
-    slug: "advertise",
+    title: 'Advertise',
+    slug: 'advertise',
     content: `<h2>Local Advertising</h2>
 <ul>Local advertisers are classified as all those companies either headquartered within New York City or whose New York City local branch is placing an advertisement.The best way to contact an advertising representative is to <a href="mailto:specbusiness@gmail.com">e-mail the business manager</a>. For information on rates and our publication schedule, please see the advertising forms below.</ul>
 <h2>National Advertising</h2>
@@ -161,8 +161,8 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
   },
   {
     id: 2,
-    title: "Sponsors",
-    slug: "sponsors",
+    title: 'Sponsors',
+    slug: 'sponsors',
     content: `<h2>Become A Sponsor</h2>
 <p>
   If you are interested in sponsoring <i>The Spectator</i> to help
@@ -181,104 +181,104 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
   },
   {
     id: 3,
-    title: "Staff",
-    slug: "staff",
+    title: 'Staff',
+    slug: 'staff',
     content: `<center>
 <h2 style="margin-bottom: 30px;">
-  Members of the 2021-2022 Spectator Editorial Board
+  Members of the 2022-2023 Spectator Editorial Board
 </h2>
 <b>Editors In Chief</b><br>
-*Morris Raskin<br>
-*Karen Zhang<br>
+Momoca Mairaj*<br>
+Maya Nelson*<br>
 <br>
 <table style="width:87%;text-align:center" >
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>News Editors</b><br>
-            Jenny Liu<br>
-            Momoca Mairaj<br>
+            Rebecca Bao**<br>
+            Isabella Jia*<br>
+            Janna Wang<br>
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
             <b>Features Editors</b><br>
-            Angela Cai<br>
+            Lauren Lee<br>
+            Shivani Manimaran<br>
             Christina Pan<br>
-            *Clara Shapiro<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Science Editors</b><br>
-            Gerard Lin<br>
-            **Sonya Sasson<br>
+            Sathirtha Mondal<br>
+            Sonya Sasson<br>
             <br>
         </td>
     </tr>
+    <br>
     <tr>
         <td style="width:30%;vertical-align: top">
              <b>Opinions Editors</b><br>
-            Maya Nelson<br>
-            *Aaron Visser<br>
+            Peter Goswami<br>
+            Anisha Singhal*<br>
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
             <b>Arts & Entertainment Editors</b><br>
-            Suah Chung<br>
-            **Kenisha Mahajan<br>
-            Gavin McGinley<br>
-            Dexter Wells<br>
+            Nicole Liu<br>
+            Kenisha Mahajan*<br>
+            Levi Simon<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Humor Editors</b><br>
-            **Logan Ruzzier<br>
-            *Kelly Yip<br>
+            Erica Chen<br>
+            Oliver Hollmann<br>
             <br>
         </td>
     </tr>
     <tr>
         <td style="width:30%;vertical-align: top" >
             <b>Sports Editors</b><br>
-            Krish Gupta<br>
-            Sam Levine<br>
-            Matt Melucci<br>
+            Taee Chi<br>
+            Shafiul Haque*<br>
+            Ava Quarles<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Web Editors</b><br>
-            **David Chen<br>
-            Alyssa Choi<br>
-            Andrey Sokolov<br>
+            David Chen*<br>
+            Samantha Hua<br>
+            Theodore Yochum<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Photography Editors</b><br>
-            Francesca Nemati<br>
-            Sasha Socolow<br>
+            Alexander Lopez<br>
+            Zifei Zhao<br>
             <br>
         </td>
     </tr>
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>Art Directors</b><br>
-            **Afra Mahmud<br>
-            Adrianna Peng<br>
-            Sophie Poget<br>
+            Afra Mahmud*<br>
+            Nelli Rojas-Cessa**<br>
+            Vivian Teo<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Layout Editors</b><br>
-            Ezra Lee<br>
-            Amy Lin<br>
             Susie McKnight<br>
+            Shreya Roy<br>
+            Danny Xiong<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Copy Editors</b><br>
-            Nora Miller<br>
-            **Tashfia Noor<br>
-            Shreyasi Saha<br>
+            Nada Hameed**<br>
+            Eman Sadiq**<br>
             Ruiwen Tang<br>
-            **Raymond Yang<br>
+            Raymond Yang<br>
             <br>
         </td>
     </tr>
@@ -287,8 +287,8 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
         </td>
         <td style="width:40%;vertical-align: top">
             <b>Business Managers</b><br>
-            Tina Nguyen<br>
-            Jared Moser<br>
+            Inara Rabanni<br>
+            Amber Shen<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
@@ -308,8 +308,8 @@ Kerry Garfinkel
   },
   {
     id: 4,
-    title: "Developers",
-    slug: "developers",
+    title: 'Developers',
+    slug: 'developers',
     content: `<center>
 <h2 style="margin-bottom: 30px;">
   Major Contributors of The Spectator's Website
@@ -332,19 +332,17 @@ Andrey Sokolov<br>
   },
   {
     id: 5,
-    title: "Contact",
-    slug: "contact",
+    title: 'Contact',
+    slug: 'contact',
     content: `<p style="text-align: center">
   For website related questions: Contact <a href="mailto:web@stuyspec.com">web@stuyspec.com</a>. <br/>
-  For all other questions: Contact <a href="mailto:morriskaren2021@gmail.com">morriskaren2021@gmail.com</a>.
+  For all other questions: Contact <a href="mailto:eics@stuyspec.com">eics@stuyspec.com</a>.
 
 </p>
 `,
   },
 ];
 
-const reducer = (state = initialState) => {
-  return state;
-};
+const reducer = (state = initialState) => state;
 
 export default reducer;

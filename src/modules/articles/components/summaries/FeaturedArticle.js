@@ -1,89 +1,89 @@
 /* The FeaturedArticle component displays the highest-rated article. It is
  * currently nested in a <Col md={9} lg={9}>.
  */
-import React from "react";
-import { Link } from "react-router-dom";
-import injectSheet from "react-jss";
-import Row from "react-bootstrap/lib/Row";
-import Col from "react-bootstrap/lib/Col";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import injectSheet from 'react-jss';
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
 
-import Byline from "../Byline";
-import Dateline from "../Dateline";
+import Byline from '../Byline';
+import Dateline from '../Dateline';
 
 const styles = {
   FeaturedArticle: {
-    paddingBottom: "24px",
+    paddingBottom: '24px',
   },
   title: {
-    color: "#000",
-    fontFamily: "Canela",
-    fontSize: "30px",
+    color: '#000',
+    fontFamily: 'Canela',
+    fontSize: '30px',
     fontWeight: 300,
-    lineHeight: "1.25",
-    "&:active": {
-      color: "#000",
+    lineHeight: '1.25',
+    '&:active': {
+      color: '#000',
     },
-    "&:focus": {
-      color: "#000",
+    '&:focus': {
+      color: '#000',
     },
-    "&:hover": {
-      color: "#000",
+    '&:hover': {
+      color: '#000',
     },
   },
   sectionLabel: {
-    color: "#000",
-    display: "blocK",
-    fontFamily: "Circular Std",
-    fontSize: "13px",
+    color: '#000',
+    display: 'blocK',
+    fontFamily: 'Circular Std',
+    fontSize: '13px',
     fontWeight: 300,
-    margin: "6px 0 9px 0",
-    textTransform: "uppercase",
-    "&:hover, &:active, &:focus": {
-      color: "#000",
-      textDecoration: "none",
+    margin: '6px 0 9px 0',
+    textTransform: 'uppercase',
+    '&:hover, &:active, &:focus': {
+      color: '#000',
+      textDecoration: 'none',
     },
   },
   headline: {
-    paddingRight: "0 !important",
-    paddingLeft: "0 !important",
+    paddingRight: '0 !important',
+    paddingLeft: '0 !important',
   },
   preview: {
-    fontFamily: "Minion Pro",
-    fontSize: "1.2em",
+    fontFamily: 'Minion Pro',
+    fontSize: '1.2em',
     lineHeight: 1.29,
-    margin: "0 0 8px 0",
+    margin: '0 0 8px 0',
   },
   featuredMediaContainer: {
-    padding: "0 0 0 14px !important",
+    padding: '0 0 0 14px !important',
   },
   figure: {
-    maxHeight: "480px",
-    overflow: "hidden",
-    "& img": {
-      width: "100%",
+    maxHeight: '480px',
+    overflow: 'hidden',
+    '& img': {
+      width: '100%',
     },
   },
-  "@media (max-width: 767px)": {
+  '@media (max-width: 767px)': {
     featuredMediaContainer: {
-      marginBottom: "14px",
-      padding: "0 !important",
+      marginBottom: '14px',
+      padding: '0 !important',
     },
     headline: {
-      padding: "0 !important",
+      padding: '0 !important',
     },
     figure: {
-      overflow: "hidden",
-      height: "auto !important",
-      maxHeight: "none",
-      "& img": {
-        marginLeft: "-14px",
-        width: "100vw",
+      overflow: 'hidden',
+      height: 'auto !important',
+      maxHeight: 'none',
+      '& img': {
+        marginLeft: '-14px',
+        width: '100vw',
       },
     },
   },
 };
 
-const FeaturedArticle = ({ classes, article }) => {
+function FeaturedArticle({ classes, article }) {
   const { section } = article;
   const featuredMedia = article.media[0];
   return (
@@ -134,6 +134,6 @@ const FeaturedArticle = ({ classes, article }) => {
       </Col>
     </Row>
   );
-};
+}
 
 export default injectSheet(styles)(FeaturedArticle);

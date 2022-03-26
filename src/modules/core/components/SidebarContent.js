@@ -1,49 +1,51 @@
-import React from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import injectSheet from "react-jss";
+import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import injectSheet from 'react-jss';
 
-import { closeSidebar } from "../actions";
+import { closeSidebar } from '../actions';
 
 const styles = {
   divider: {
-    background: "#ddd",
+    background: '#ddd',
     border: 0,
-    height: "1px",
+    height: '1px',
     margin: 0,
   },
   sidebarSectionLink: {
-    borderRadius: "3px",
-    color: "#000",
-    display: "block",
-    fontFamily: "Circular Std",
-    fontSize: "15px",
+    borderRadius: '3px',
+    color: '#000',
+    display: 'block',
+    fontFamily: 'Circular Std',
+    fontSize: '15px',
     fontWeight: 500,
-    margin: "8px 0",
-    padding: "8px 0 8px 11px",
-    textAlign: "left",
-    width: "100%",
-    "&:hover, &:active, &:focus": {
-      color: "#000",
-      textDecoration: "none",
+    margin: '8px 0',
+    padding: '8px 0 8px 11px',
+    textAlign: 'left',
+    width: '100%',
+    '&:hover, &:active, &:focus': {
+      color: '#000',
+      textDecoration: 'none',
     },
-    "&:hover": {
-      background: "rgba(84, 153, 232, 0.26)",
-      color: "#000",
-      textDecoration: "none",
+    '&:hover': {
+      background: 'rgba(84, 153, 232, 0.26)',
+      color: '#000',
+      textDecoration: 'none',
     },
   },
 };
 
-const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
-  let sidebarElements = [];
+function SidebarContent({
+  classes, session, sections, closeSidebar,
+}) {
+  const sidebarElements = [];
   sidebarElements.push(
     <Link
       className={classes.sidebarSectionLink}
       key={-1}
       onClick={closeSidebar}
-      to={"/"}
+      to="/"
     >
       Home
     </Link>,
@@ -63,10 +65,7 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
      * sections and one separating the non-writing sections from the user
      * account options.
      */
-    if (
-      section.name === "Arts & Entertainment" ||
-      section.name === "10/31 Terror Attack"
-    ) {
+    if (section.name === 'Spec+') {
       sidebarElements.push(
         <hr className={classes.divider} key={section.id + 100} />,
       );
@@ -75,7 +74,7 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
 
   sidebarElements.push(<hr className={classes.divider} key={-4} />);
 
-  /*if (session) {
+  /* if (session) {
     sidebarElements.push(
       <Link
         className={classes.sidebarSectionLink}
@@ -97,7 +96,17 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
         Log In
       </Link>,
     );
-  }*/
+  } */
+  sidebarElements.push(
+    <Link
+      className={classes.sidebarSectionLink}
+      key={-2}
+      onClick={closeSidebar}
+      to="/spec-games"
+    >
+      SpecGames
+    </Link>,
+  );
   sidebarElements.push(
     <Link
       className={classes.sidebarSectionLink}
@@ -107,7 +116,7 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
     >
       Recruitments
     </Link>,
-  )
+  );
   sidebarElements.push(
     <Link
       className={classes.sidebarSectionLink}
@@ -119,15 +128,13 @@ const SidebarContent = ({ classes, session, sections, closeSidebar }) => {
     </Link>,
   );
   return <div>{sidebarElements}</div>;
-};
+}
 
 const mapStateToProps = state => ({
   session: state.accounts.session,
 });
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ closeSidebar }, dispatch);
-};
+const mapDispatchToProps = dispatch => bindActionCreators({ closeSidebar }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   injectSheet(styles)(SidebarContent),

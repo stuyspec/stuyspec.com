@@ -1,3 +1,3 @@
 export default {
-  NAME: "descriptions",
+  NAME: 'descriptions',
 };

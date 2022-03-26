@@ -1,4 +1,4 @@
-import createBrowserHistory from "history/createBrowserHistory";
+const createBrowserHistory : any = require('history').createBrowserHistory;
 
 let appHistory = createBrowserHistory();
 

@@ -1,17 +1,17 @@
-import React from "react";
-import injectSheet from "react-jss";
+import React from 'react';
+import injectSheet from 'react-jss';
 
 const styles = {
   input: {
-    width: "100%",
+    width: '100%',
   },
   syncValidation: {
-    color: "red",
-    margin: "10px 0 0 0",
+    color: 'red',
+    margin: '10px 0 0 0',
   },
 };
 
-const RenderField = ({
+function RenderField({
   classes,
   input,
   label,
@@ -22,7 +22,7 @@ const RenderField = ({
   // The autoComplete input attribute helps password managers infer the purpose
   // of a field in a form. Proper usage of autoCompletes means better UX.
   autoComplete,
-}) => {
+}) {
   return (
     <div>
       {isLabelVisible && <label>{label}</label>}
@@ -34,11 +34,11 @@ const RenderField = ({
           placeholder={label}
           type={type}
         />
-        {touched &&
-          (error && <p className={classes.syncValidation}>{error}</p>)}
+        {touched
+          && (error && <p className={classes.syncValidation}>{error}</p>)}
       </div>
     </div>
   );
-};
+}
 
 export default injectSheet(styles)(RenderField);
