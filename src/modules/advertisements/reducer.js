@@ -5,11 +5,6 @@ const initialState = [
     url: '/ad/kweller',
   },
   {
-    company: 'The Tutorverse',
-    filename: 'tutorverse.jpg',
-    url: '/ad/tutorverse',
-  },
-  {
     company: 'Manhattan Ace',
     filename: 'manhattanace.png',
     url: '/ad/manhattanace',
