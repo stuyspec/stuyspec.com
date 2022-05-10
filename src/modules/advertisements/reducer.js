@@ -34,6 +34,11 @@ const initialState = [
     filename: 'Rochester.png',
     url: '/ad/rochester',
   },
+  {
+    company: 'Don\'t Sweat the Essay',
+    filename: 'DontSweatTheEssay.png',
+    url: '/ad/dontsweattheessay',
+  }
 ];
 
 const reducer = (state = { ...initialState }) => state;

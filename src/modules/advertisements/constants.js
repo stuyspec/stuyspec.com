@@ -12,4 +12,5 @@ export const adRedirects = [['kweller', 'http://www.kwellerprep.com'],
   ['parsons', 'https://qrco.de/stuy-parsons'],
   ['columbia', 'https://qrco.de/stuy-cbs'],
   ['rochester', 'https://qrco.de/stuy-roch'],
+  ['dontsweattheessay', 'https://www.dontsweattheessay.com']
 ];
