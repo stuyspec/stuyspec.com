@@ -1,19 +1,19 @@
 const initialState = [
   {
     id: 0,
-    title: 'Our Charter',
-    slug: 'our-charter',
+    title: "Our Charter",
+    slug: "our-charter",
     content: `<h1>The Charter of The Spectator</h1>
 Approved January, 2020 by The Spectator Editorial Board.<br>
 <h2>I. Statement of Purpose<br></h2>
-<ol>
+<ol type="A">
   <li>The goal of The Spectator, the school newspaper of Stuyvesant High School, is to inform the Stuyvesant community, including students, teachers, administrators and parents, of the significant events and issues pertaining to the school.</li>
   <li>The Spectator is established as a public forum for expression, and as a voice in the free and open discussion of issues for all parties. The Spectator provides a full opportunity for all groups to inquire, question and exchange ideas. Content should reflect areas of school interest, including topics about which there may be dissent or controversy. The Editors-in-Chief, with the counsel of the Faculty Advisor, will make the final content decisions for The Spectator.</li>
   <li>All student journalists, including Editors and staff members, must follow professional standards of journalism in reporting and writing.</li>
   <li>The Spectator is committed to remaining independent from the influence of the administration and other groups who may wish to use the newspaper to pursue their interests. This commitment chiefly includes independence from prior review by any and all groups except those with whom the Editors make an agreement to review the content in order to advise Editors on matters of style and content; these individuals will review the content of the newspaper before printing under the promise of confidentiality. Additionally, we choose to remain financially independent from the administration and Student Union in order to preserve our journalistic integrity.</li>
 </ol>
 <h2>II. The Spectator Staff</h2>
-<ol>
+<ol type="A">
   <li><b>Editor in Chief</b>: In general, two Editors-in-Chief share all responsibilities noted in this charter and act as the leaders of The Spectator. However, an Editor-in-Chief and a Managing Editor may also lead The Spectator, in which case the Editor-in-Chief runs the newspaper in concert with the Managing Editor and with counsel from the Faculty Advisor, though he/she is the one who makes the final decisions on all aspects of the paper except the filling of and removal from positions. The Editor-in-Chief is held responsible for all content in the newspaper and coordinates the printing of the paper. Any combination of the existing Editors-in-Chief or Managing Editors are in charge of running the Spectator class, and teach the class in concert with the Faculty Advisor (see Section II.H).</li>
   <li><b>Managing Editor</b>: The Managing Editor, if one is chosen, oversees the production of the paper, oversees Department Editors and works in cooperative effort with the Editor-in-Chief to run the newspaper. The Managing Editor is responsible for running the Spectator class with the Editor-in-Chief, and teaches the class in concert with the Editor-in-Chief and Faculty Advisor (see Section II.H).</li>
   <li><b>Managing Board</b>: The Managing Board consists of six members, including the Editors-in-Chief or a Managing Editor (if one exists) and four Department Editors of their choice. The Managing Board advises the Editor-in-Chief and Managing Editor on all issues involving the newspaper. In cases where the Managing Board votes, at least five members must be present, including the Editor-in-Chief and Managing Editor. All votes are decided by a simple majority with the exception of removal from position (see Section III.C). The Editor-in-Chief decides in cases of a tie. If the two Editors-in-Chief cannot come to a resolution, the Editorial Board decides (see Section II.D). The Managing Board can vote to ask the administration to propose candidates to be considered for the position of Faculty Advisor. The outgoing Managing Board is encouraged to advise the incoming Editor-in-Chief and Managing Editor on selecting Editors for a new Managing Board. Additionally, the Editors-in-Chief must approve of all incoming Editors. It is recommended of that there be some diversity in the Managing Board with respect to the type of departments from which the chosen Editors come; both writing and non-writing departments should be represented. There are no limits on or guarantees of the term of a Managing Board member; Managing Board members will be chosen at the discretion of the Editor-in-Chief and Managing Editor.</li>
@@ -25,7 +25,7 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
   <li><b>Faculty Advisor</b>: The Editorial Board consults the Faculty Advisor on matters involving the newspaper. The Faculty Advisor gives guidance to the students on libel and journalistic ethics, balance and objectivity, taste and writing style. The Faculty Advisor must teach the Spectator class in concert with the Editor-in-Chief and Managing Editor (see Sections II.A and II.B). It is recommended that the Faculty Advisor be from the English Department, but he/she can be from any department.</li>
 </ol>
 <h2>III. Operating Procedures</h2>
-<ol>
+<ol type="A">
   <li><b>Production of the Newspaper</b>: Department Editors will first determine Pasteup for each issue, assigning the writing and reporting of articles, the taking of photographs, drawing of artwork, or the soliciting of ads. Department Editors will complete one round of edits for their respective media (articles and photographs). Next, the Editors-in-Chief will edit all articles. Exceptions can be made for time-sensitive articles or articles that are deemed complete by the Editors-in-Chief. After the writer has addressed both the Editors-in-Chief&rsquo;s and the Department Editor&rsquo;s comments, the Department Editor and Editors-in-Chief will make final changes before sending the article to the Copy Department. Copy will edit the articles for grammar and style but not content, fact-check them and send them, after editing, to the Layout Department. The Faculty Advisor will review articles before they are printed or put on the website. The Layout Department will begin laying out the paper a few days before the sending date, and the Editors-in-Chief will work with the Layout Editors to complete the paper. The Business Managers are in charge of deciding which advertisements will be placed in each issue.</li>
   <li><b>Procedure for Approving the Incoming Editor in Chief or Managing Editor</b>:  All non-outgoing Editors and Editors-in-Training who have been in Advanced Journalism class for at least one semester can apply for either or both positions.  In order to serve as Editor in Chief, an applicant must be committed to serving two terms.  Applicants will not be included in any of the discussions regarding the choosing of new Editors-in-Chief. The Editorial Board will spend a few class days in the end of the Fall semester discussing the applicants. At the end of these discussions, the Editorial Board will vote on pairs of applicants, and narrow down the potential pairings in a way deemed appropiate by the Editors-in-Chief. All members of the Spectator class who are not applying for the role of Editor-in-Chief, as well as whichever other editors the Editors-in-Chief might pick by the procedure of their choice will discuss the final pairings and then vote on them. A simple majority will determine the next semester&rsquo;s Editors-in-Chief.</li>
   <li><b>Removal From Position</b>: All concerns regarding Editors not performing their duties adequately should be taken to the Editor-in-Chief and Managing Editor. If they deem the case worthy of further attention, they can present the case to the Managing Board. If the Managing Board decides that the case should be furthered, it can hold a vote; if a two-thirds majority is obtained there, the matter moves on to the Editorial Board. If a two-thirds majority is obtained there, the removal from position is approved. The Editor in question may not be present during the vote. The removed Editor can appeal to the Faculty Advisor, who will act as a neutral party by presenting the facts of the case to the Editorial Board. The Editor in question will be present during the presentation of the case. If the Editor in question is the Editor-in-Chief or Managing Editor, concerns can be brought up to the other one of the two, who can convene the Managing Board in absence of the member in question; the previously stated procedures then follow. If the concern is about both the Editor-in-Chief and Managing Editor, it will be brought to the Faculty Advisor, who can convene the Managing Board without their presence; the previously stated procedures then follow. To remove an Editor who is on the Managing Board, a two-thirds vote of the remaining members of the Managing Board is needed. The Faculty Advisor may not remove any Editor from his/her position and may not select new Editors.</li>
@@ -126,8 +126,8 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
   },
   {
     id: 1,
-    title: 'Advertise',
-    slug: 'advertise',
+    title: "Advertise",
+    slug: "advertise",
     content: `<h2>Local Advertising</h2>
 <ul>Local advertisers are classified as all those companies either headquartered within New York City or whose New York City local branch is placing an advertisement.The best way to contact an advertising representative is to <a href="mailto:specbusiness@gmail.com">e-mail the business manager</a>. For information on rates and our publication schedule, please see the advertising forms below.</ul>
 <h2>National Advertising</h2>
@@ -161,8 +161,8 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
   },
   {
     id: 2,
-    title: 'Sponsors',
-    slug: 'sponsors',
+    title: "Sponsors",
+    slug: "sponsors",
     content: `<h2>Become A Sponsor</h2>
 <p>
   If you are interested in sponsoring <i>The Spectator</i> to help
@@ -181,8 +181,8 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
   },
   {
     id: 3,
-    title: 'Staff',
-    slug: 'staff',
+    title: "Staff",
+    slug: "staff",
     content: `<center>
 <h2 style="margin-bottom: 30px;">
   Members of the 2022-2023 Spectator Editorial Board
@@ -308,8 +308,8 @@ Kerry Garfinkel
   },
   {
     id: 4,
-    title: 'Developers',
-    slug: 'developers',
+    title: "Developers",
+    slug: "developers",
     content: `<center>
 <h2 style="margin-bottom: 30px;">
   Major Contributors of The Spectator's Website
@@ -332,8 +332,8 @@ Andrey Sokolov<br>
   },
   {
     id: 5,
-    title: 'Contact',
-    slug: 'contact',
+    title: "Contact",
+    slug: "contact",
     content: `<p style="text-align: center">
   For website related questions: Contact <a href="mailto:web@stuyspec.com">web@stuyspec.com</a>. <br/>
   For all other questions: Contact <a href="mailto:eics@stuyspec.com">eics@stuyspec.com</a>.

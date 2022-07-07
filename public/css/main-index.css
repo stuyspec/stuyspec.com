@@ -177,9 +177,11 @@ https://stackoverflow.com/a/8539107/6174302
     }
 
     a[href^="javascript:"]:after,a[href^="#"]:after {
-        content: ""
+        content: "";
+        
     }
 }
+
 
 /* ========================= *
  * LOADING ICON STYLES
