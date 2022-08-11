@@ -68,12 +68,18 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --collectCoverageFrom=src/**/*.js --collectCoverageFrom=!src/modules/crossword/*.js",
+    "test": "react-scripts test",
+    "test1": "set CI=false && react-scripts test --collectCoverageFrom=src/**/*.js --collectCoverageFrom=!src/modules/crossword/*.js",
     "eject": "react-scripts eject",
     "lint": "eslint . --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "src/modules/crossword/**"
+    ]
   },
   "browserslist": [
     ">0.2%",
