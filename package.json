@@ -72,11 +72,6 @@
     "eject": "react-scripts eject",
     "lint": "eslint . --fix"
   },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "<rootDir>/ignore/this/path/"
-    ]
-  },
   "eslintConfig": {
     "extends": "react-app"
   },
