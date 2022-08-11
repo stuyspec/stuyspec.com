@@ -13,14 +13,14 @@ body.dark-mode {
   background-color: #1a1919;
 }
 body.dark-mode a {
-  color: white !important;
+  color: #EDEDED !important;
 }
 body.dark-mode p {
-  color: white !important;
+  color: #EDEDED !important;
 }
 body.dark-mode * {
-  background-color: #1a1919;
-  color: white !important;
+  background-color: #171717;
+  color: #EDEDED !important;
 }
 body.dark-mode .sidebar {
   background-color: #1a1919 !important;
