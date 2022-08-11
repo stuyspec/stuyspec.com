@@ -2,12 +2,7 @@
   "compilerOptions": {
     "noImplicitAny": true,
     "target": "es5",
-    "lib": [
-      "esnext.asynciterable",
-      "es2017.object",
-      "es2016",
-      "dom"
-    ],
+    "lib": ["esnext.asynciterable", "es2017.object", "es2016", "dom"],
     "jsx": "preserve",
     "allowJs": true,
     "skipLibCheck": true,
@@ -21,11 +16,6 @@
     "isolatedModules": true,
     "noEmit": true
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "src",
-    "typings"
-  ]
+  "exclude": ["node_modules"],
+  "include": ["src", "typings"]
 }
