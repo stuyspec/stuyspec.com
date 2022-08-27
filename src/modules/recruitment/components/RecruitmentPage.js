@@ -111,6 +111,10 @@ function RecruitmentPage({ classes }) {
         Apply to the Stuyvesant Spectator to join a 100 year tradition of
         student journalism.
       </p>
+      <br>
+      <p className={classes.Description}>
+        Recruitments will be in the October!
+      </p>       
       <ReactPlayer
         url="https://youtu.be/CDZauduRFAU"
         controls
