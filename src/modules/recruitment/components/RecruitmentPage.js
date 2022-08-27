@@ -1,105 +1,105 @@
-import React from 'react';
-import injectSheet from 'react-jss';
-import ReactPlayer from 'react-player/youtube';
+import React from "react";
+import injectSheet from "react-jss";
+import ReactPlayer from "react-player/youtube";
 
-import * as constants from '../constants';
+import * as constants from "../constants";
 
 const styles = {
   Quote: {
-    borderRadius: '5px',
-    borderColor: 'gray',
-    color: '#000',
-    display: 'inlineBlock',
-    marginLeft: '5px',
-    marginRight: '5px',
-    marginBottom: '25px',
+    borderRadius: "5px",
+    borderColor: "gray",
+    color: "#000",
+    display: "inlineBlock",
+    marginLeft: "5px",
+    marginRight: "5px",
+    marginBottom: "25px",
   },
   QuoteText: {
-    fontFamily: 'Minion Pro',
-    fontSize: '1.3em',
-    lineHeight: '1.4em',
-    margin: '10px',
-    padding: '3px',
-    textAlign: 'center',
+    fontFamily: "Minion Pro",
+    fontSize: "1.3em",
+    lineHeight: "1.4em",
+    margin: "10px",
+    padding: "3px",
+    textAlign: "center",
   },
   SectionTitle: {
-    color: '#000',
-    fontFamily: 'Canela',
-    margin: '10px',
-    textAlign: 'center',
+    color: "#000",
+    fontFamily: "Canela",
+    margin: "10px",
+    textAlign: "center",
   },
   SectionText: {
-    color: '#000',
-    fontFamily: 'Minion Pro',
-    fontSize: '1.3em',
-    lineHeight: '1.4em',
-    margin: '13px',
-    padding: '3px',
-    textAlign: 'justify',
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "1.3em",
+    lineHeight: "1.4em",
+    margin: "13px",
+    padding: "3px",
+    textAlign: "justify",
   },
   Deadline: {
-    color: '#000',
-    fontFamily: 'Minion Pro',
-    fontSize: '1.3em',
-    lineHeight: '1.4em',
-    margin: '13px',
-    padding: '3px',
-    textAlign: 'center',
+    color: "#000",
+    fontFamily: "Minion Pro",
+    fontSize: "1.3em",
+    lineHeight: "1.4em",
+    margin: "13px",
+    padding: "3px",
+    textAlign: "center",
   },
   Section: {
-    backgroundColor: 'whitesmoke',
-    borderColor: 'steelblue',
-    borderRadius: '10px',
-    boxShadow: '0px 2.5px 5px 2.5px lightgray',
-    flexGrow: '1',
-    marginBottom: '25px',
-    maxWidth: '350px',
-    maxHeight: '1300px',
-    position: 'relative',
+    backgroundColor: "whitesmoke",
+    borderColor: "steelblue",
+    borderRadius: "10px",
+    boxShadow: "0px 2.5px 5px 2.5px lightgray",
+    flexGrow: "1",
+    marginBottom: "25px",
+    maxWidth: "350px",
+    maxHeight: "1300px",
+    position: "relative",
   },
   FlexContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-evenly",
   },
   Image: {
-    display: 'block',
-    height: '300px',
-    margin: '0 auto 10px',
-    width: '300px',
+    display: "block",
+    height: "300px",
+    margin: "0 auto 10px",
+    width: "300px",
   },
   App: {
-    display: 'block',
-    fontFamily: 'Minion Pro',
-    margin: '10px',
-    fontSize: '1.5em',
-    textAlign: 'center',
-    float: 'bottom',
-    bottom: '-2.5px',
-    left: '0',
-    right: '0',
+    display: "block",
+    fontFamily: "Minion Pro",
+    margin: "10px",
+    fontSize: "1.5em",
+    textAlign: "center",
+    float: "bottom",
+    bottom: "-2.5px",
+    left: "0",
+    right: "0",
   },
   Title: {
-    color: '#000',
-    fontFamily: 'Old English Text MT',
-    fontSize: '50px',
-    marginTop: '0',
-    textAlign: 'center',
-    paddingBottom: '10px',
+    color: "#000",
+    fontFamily: "Old English Text MT",
+    fontSize: "50px",
+    marginTop: "0",
+    textAlign: "center",
+    paddingBottom: "10px",
   },
   Description: {
-    fontFamily: 'Minion Pro',
-    fontSize: '20px',
-    textAlign: 'center',
-    paddingBottom: '20px',
+    fontFamily: "Minion Pro",
+    fontSize: "20px",
+    textAlign: "center",
+    paddingBottom: "20px",
   },
   Video: {
-    display: 'block',
-    margin: 'auto',
-    width: '50%',
-    paddingBottom: '',
-    textAlign: 'center',
+    display: "block",
+    margin: "auto",
+    width: "50%",
+    paddingBottom: "",
+    textAlign: "center",
   },
 };
 
@@ -111,10 +111,10 @@ function RecruitmentPage({ classes }) {
         Apply to the Stuyvesant Spectator to join a 100 year tradition of
         student journalism.
       </p>
-      <br>
+      <br />
       <p className={classes.Description}>
         Recruitments will be in the October!
-      </p>       
+      </p>
       <ReactPlayer
         url="https://youtu.be/CDZauduRFAU"
         controls
@@ -122,7 +122,7 @@ function RecruitmentPage({ classes }) {
       />
       <hr />
       <div className={classes.FlexContainer}>
-        {constants.SECTIONS.map(section => (
+        {constants.SECTIONS.map((section) => (
           <StyledSection
             name={section.name}
             imageLink={section.imageLink}
@@ -154,29 +154,37 @@ function Quote({ classes, text, source }) {
 const StyledQuote = injectSheet(styles)(Quote);
 
 function Section({
-  classes, imageLink, name, description, quotes, deadline, app,
+  classes,
+  imageLink,
+  name,
+  description,
+  quotes,
+  deadline,
+  app,
 }) {
-  const appLink = (app)
-    ? (
-      <a className={classes.App} href={app}>
-        {' '}
-        Click here to apply for
-        {' '}
-        {name}
-        !
-        {' '}
-      </a>
-    )
-    : <p className={classes.App}>Recruitments will be hosted in the fall!</p>;
+  const appLink = app ? (
+    <a className={classes.App} href={app}>
+      {" "}
+      Click here to apply for {name}!{" "}
+    </a>
+  ) : (
+    <p className={classes.App}>Recruitments will be hosted in the fall!</p>
+  );
 
   return (
     <div className={classes.Section}>
       <h1 className={classes.SectionTitle}>{name}</h1>
-      {imageLink && <img src={imageLink} className={classes.Image} alt="Quote" />}
+      {imageLink && (
+        <img src={imageLink} className={classes.Image} alt="Quote" />
+      )}
       <p className={classes.SectionText}>{description}</p>
-      {quotes.map(({ text, source }) => <StyledQuote text={text} source={source} />)}
+      {quotes.map(({ text, source }) => (
+        <StyledQuote text={text} source={source} />
+      ))}
       {appLink}
-      <p className={classes.Deadline}><b>{deadline}</b></p>
+      <p className={classes.Deadline}>
+        <b>{deadline}</b>
+      </p>
     </div>
   );
 }
