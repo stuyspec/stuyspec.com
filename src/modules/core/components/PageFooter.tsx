@@ -132,21 +132,6 @@ const styles = {
   hr: {
     margin: "12px 0",
   },
-  creditLine: {
-    color: "#aaa",
-    fontSize: "12px",
-    padding: "0 15px",
-    margin: "auto",
-    width: "100%",
-    paddingLeft: "7px",
-    "& a": {
-      color: "#aaa",
-      textDecoration: "underline",
-      "&:hover, &:active, &:focus": {
-        color: "#aaa",
-      },
-    },
-  },
   "@media (max-width: 767px)": {
     PageFooter: {
       marginBottom: "30px",
@@ -281,18 +266,6 @@ const PageFooter: React.SFC<PageFooterProps> = ({
             );
           })}
           <DescriptionLinks classes={classes} descriptions={descriptions} />
-        </Col>
-        <Col
-          xsHidden
-          sm={10}
-          smOffset={1}
-          md={8}
-          mdOffset={2}
-          lg={8}
-          lgOffset={2}
-          className={classes.creditLine}
-        >
-          <hr className={classes.hr} />
         </Col>
         <Col
           xs={12}
