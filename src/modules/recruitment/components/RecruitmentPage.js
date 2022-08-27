@@ -163,7 +163,7 @@ function Section({
         {' '}
       </a>
     )
-    : <p className={classes.App}>Coming Soon!</p>;
+    : <p className={classes.App}>Recruitments will be hosted in the fall!</p>;
 
   return (
     <div className={classes.Section}>
