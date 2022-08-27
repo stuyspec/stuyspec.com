@@ -340,7 +340,7 @@ function Crossword1() {
   // We don't really *do* anything with callbacks from the Crossword component,
   // but we can at least show that they are happening.  You would want to do
   // something more interesting than simply collecting them as messages.
-  const [messages, setMessages] = useState([]);
+  const [, setMessages] = useState([]);
 
   const addMessage = useCallback((message) => {
     setMessages((m) => m.concat(`${message}\n`));

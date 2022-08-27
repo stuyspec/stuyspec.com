@@ -1,122 +1,122 @@
-import React, { useCallback, useRef, useState } from 'react';
-import Crossword from '@jaredreisinger/react-crossword';
-import styled from 'styled-components';
+import React, { useCallback, useRef, useState } from "react";
+import Crossword from "@jaredreisinger/react-crossword";
+import styled from "styled-components";
 
 const data = {
   down: {
     1: {
-      clue: 'Solves problems and makes friends (and solves more problems)',
-      answer: 'MATHTEAM',
+      clue: "Solves problems and makes friends (and solves more problems)",
+      answer: "MATHTEAM",
       row: 1,
       col: 8,
     },
     2: {
-      clue: 'Is a delegate of 10 different countries every year',
-      answer: 'MODELUN',
+      clue: "Is a delegate of 10 different countries every year",
+      answer: "MODELUN",
       row: 2,
       col: 13,
     },
     3: {
-      clue: 'No instruments, just vibes (and good voices)',
-      answer: 'ACAPELLA',
+      clue: "No instruments, just vibes (and good voices)",
+      answer: "ACAPELLA",
       row: 3,
       col: 16,
     },
     4: {
-      clue: 'Talks fast, cuts too many cards, does dramatic performances',
-      answer: 'SPEECHANDDEBATE',
+      clue: "Talks fast, cuts too many cards, does dramatic performances",
+      answer: "SPEECHANDDEBATE",
       row: 4,
       col: 11,
     },
     7: {
-      clue: 'Door-opening',
-      answer: 'KEYCLUB',
+      clue: "Door-opening",
+      answer: "KEYCLUB",
       row: 11,
       col: 19,
     },
     9: {
-      clue: '“Bridging the gap” (dictatorship)',
-      answer: 'STUDENTUNION',
+      clue: "“Bridging the gap” (dictatorship)",
+      answer: "STUDENTUNION",
       row: 12,
       col: 15,
     },
     10: {
-      clue: 'Our school’s theater group, abbr.',
-      answer: 'STC',
+      clue: "Our school’s theater group, abbr.",
+      answer: "STC",
       row: 13,
       col: 4,
     },
     12: {
-      clue: 'Girls’ racketing!',
-      answer: 'LOBSTERS',
+      clue: "Girls’ racketing!",
+      answer: "LOBSTERS",
       row: 14,
       col: 9,
     },
     13: {
-      clue: 'The pulse of the student body',
-      answer: 'SPECTATOR',
+      clue: "The pulse of the student body",
+      answer: "SPECTATOR",
       row: 14,
       col: 13,
     },
     14: {
-      clue: 'Had missing stoles (and a broken website)',
-      answer: 'ARISTA',
+      clue: "Had missing stoles (and a broken website)",
+      answer: "ARISTA",
       row: 16,
       col: 7,
     },
     15: {
-      clue: '_____ing in the shower',
-      answer: 'SING',
+      clue: "_____ing in the shower",
+      answer: "SING",
       row: 16,
       col: 17,
     },
   },
   across: {
     5: {
-      clue: 'Competitive scienceing',
-      answer: 'SCIENCEOLYMPIAD',
+      clue: "Competitive scienceing",
+      answer: "SCIENCEOLYMPIAD",
       row: 6,
       col: 5,
     },
     6: {
-      clue: 'Helps one send flowers and candy to oneself',
-      answer: 'INDICATOR',
+      clue: "Helps one send flowers and candy to oneself",
+      answer: "INDICATOR",
       row: 10,
       col: 6,
     },
     8: {
-      clue: 'Find them in Van Cortlandt Park',
-      answer: 'GREYDUCKS',
+      clue: "Find them in Van Cortlandt Park",
+      answer: "GREYDUCKS",
       row: 12,
       col: 7,
     },
     11: {
-      clue: 'A club that might be measured in beats per minute',
-      answer: 'STUYPULSE',
+      clue: "A club that might be measured in beats per minute",
+      answer: "STUYPULSE",
       row: 14,
       col: 3,
     },
     13: {
-      clue: '“We’re in”',
-      answer: 'STUYHACKS',
+      clue: "“We’re in”",
+      answer: "STUYHACKS",
       row: 14,
       col: 13,
     },
     15: {
-      clue: 'After-school dance routine run-throughs',
-      answer: 'SQUAD',
+      clue: "After-school dance routine run-throughs",
+      answer: "SQUAD",
       row: 16,
       col: 17,
     },
     16: {
-      clue: 'Ms. Shamazov’s cult',
-      answer: 'CHORUS',
+      clue: "Ms. Shamazov’s cult",
+      answer: "CHORUS",
       row: 17,
       col: 4,
     },
     17: {
-      clue: 'Younger sibling havers',
-      answer: 'BIGSIBS',
+      clue: "Younger sibling havers",
+      answer: "BIGSIBS",
       row: 19,
       col: 1,
     },
@@ -256,21 +256,21 @@ const CrosswordWrapper = styled.div`
 function Crossword1() {
   const crossword = useRef();
 
-  const fillAllAnswers = useCallback(event => {
+  const fillAllAnswers = useCallback((event) => {
     crossword.current.fillAllAnswers();
   }, []);
 
-  const reset = useCallback(event => {
+  const reset = useCallback((event) => {
     crossword.current.reset();
   }, []);
 
   // We don't really *do* anything with callbacks from the Crossword component,
   // but we can at least show that they are happening.  You would want to do
   // something more interesting than simply collecting them as messages.
-  const [messages, setMessages] = useState([]);
+  const [, setMessages] = useState([]);
 
-  const addMessage = useCallback(message => {
-    setMessages(m => m.concat(`${message}\n`));
+  const addMessage = useCallback((message) => {
+    setMessages((m) => m.concat(`${message}\n`));
   }, []);
 
   // onCorrect is called with the direction, number, and the correct answer.
@@ -278,31 +278,32 @@ function Crossword1() {
     (direction, number, answer) => {
       addMessage(`onCorrect: "${direction}", "${number}", "${answer}"`);
     },
-    [addMessage],
+    [addMessage]
   );
 
   // onLoadedCorrect is called with an array of the already-correct answers,
   // each element itself is an array with the same values as in onCorrect: the
   // direction, number, and the correct answer.
   const onLoadedCorrect = useCallback(
-    answers => {
+    (answers) => {
       addMessage(
         `onLoadedCorrect:\n${answers
           .map(
-            ([direction, number, answer]) => `    - "${direction}", "${number}", "${answer}"`,
+            ([direction, number, answer]) =>
+              `    - "${direction}", "${number}", "${answer}"`
           )
-          .join('\n')}`,
+          .join("\n")}`
       );
     },
-    [addMessage],
+    [addMessage]
   );
 
   // onCrosswordCorrect is called with a truthy/falsy value.
   const onCrosswordCorrect = useCallback(
-    isCorrect => {
+    (isCorrect) => {
       addMessage(`onCrosswordCorrect: ${JSON.stringify(isCorrect)}`);
     },
-    [addMessage],
+    [addMessage]
   );
 
   // onCellChange is called with the row, column, and character.
@@ -310,7 +311,7 @@ function Crossword1() {
     (row, col, char) => {
       addMessage(`onCellChange: "${row}", "${col}", "${char}"`);
     },
-    [addMessage],
+    [addMessage]
   );
 
   return (
@@ -343,19 +344,17 @@ function Crossword1() {
           onCrosswordCorrect={onCrosswordCorrect}
           onCellChange={onCellChange}
           theme={{
-            gridBackground: 'transparent',
-            focusBackground: '#ffadad',
-            highlightBackground: '#ffe0e0',
+            gridBackground: "transparent",
+            focusBackground: "#ffadad",
+            highlightBackground: "#ffe0e0",
           }}
         />
       </CrosswordWrapper>
       <p className="issue">
-        Check out
-        {' '}
+        Check out{" "}
         <a href="https://issuu.com/stuyspectator/docs/issue14_online">
           Issue 14
-        </a>
-        {' '}
+        </a>{" "}
         where this crossword was featured! (pg 19)
       </p>
     </Page>
