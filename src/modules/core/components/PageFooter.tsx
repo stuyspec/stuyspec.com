@@ -24,7 +24,7 @@ const styles = {
     display: "flex",
     flexFlow: "column wrap",
     paddingTop: "6px",
-    alignItems: "left",
+    margin: "0 auto",
   },
   sectionBlock: {
     marginTop: "19px",
