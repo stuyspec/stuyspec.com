@@ -22,11 +22,11 @@ const styles = {
     height: "264px",
     display: "flex",
     flexFlow: "column wrap",
-    paddingTop: "6px"
+    paddingTop: "6px",
   },
   sectionBlock: {
     marginTop: "19px",
-    marginRight: "60px"
+    marginRight: "60px",
   },
   topLevelSectionLink: {
     color: "#000",
@@ -38,8 +38,8 @@ const styles = {
     textDecoration: "none",
     "&:hover, &:active, &:focus": {
       color: "#000",
-      textDecoration: "none"
-    }
+      textDecoration: "none",
+    },
   },
   subsectionLink: {
     color: "#000",
@@ -51,8 +51,8 @@ const styles = {
     textDecoration: "none",
     "&:hover, &:active, &:focus": {
       color: "#000",
-      textDecoration: "none"
-    }
+      textDecoration: "none",
+    },
   },
   theSpectator: {
     color: "#000",
@@ -60,61 +60,62 @@ const styles = {
     fontSize: "30px",
     fontStyle: "normal",
     fontWeight: 400,
-    paddingRight: '10px',
+    paddingTop: "10px",
+    paddingRight: "10px",
     "&:hover, &:active, &:focus": {
       color: "#000",
-      textDecoration: "none"
-    }
+      textDecoration: "none",
+    },
   },
   Instagram: {
     color: "#000",
-    fontSize: "25px",
+    fontSize: "30px",
     fontWeight: 400,
     paddingTop: "10px",
-    paddingRight: '10px',
+    paddingRight: "10px",
     "&:hover, &:active, &:focus": {
       color: "#000",
-      textDecoration: "none"
-    }
+      textDecoration: "none",
+    },
   },
   Facebook: {
     color: "#000",
-    fontSize: "25px",
+    fontSize: "30px",
     fontWeight: 400,
     paddingTop: "10px",
-    paddingRight: '10px',
+    paddingRight: "10px",
     "&:hover, &:active, &:focus": {
       color: "#000",
-      textDecoration: "none"
-    }
+      textDecoration: "none",
+    },
   },
   Spotify: {
     color: "#000",
-    fontSize: "25px",
+    fontSize: "30px",
     fontWeight: 400,
     paddingTop: "10px",
-    paddingRight: '10px',
+    paddingRight: "10px",
     "&:hover, &:active, &:focus": {
       color: "#000",
-      textDecoration: "none"
-    }
+      textDecoration: "none",
+    },
   },
   Linkedin: {
     color: "#000",
-    fontSize: "25px",
+    fontSize: "30px",
     fontWeight: 400,
     paddingTop: "10px",
-    paddingRight: '10px',
+    paddingRight: "10px",
     "&:hover, &:active, &:focus": {
       color: "#000",
-      textDecoration: "none"
-    }
+      textDecoration: "none",
+    },
   },
   aboutNavLinksMobile: {
     paddingLeft: "7px",
     "& > div": {
       border: 0,
-      paddingBottom: "1px"
+      paddingBottom: "1px",
     },
     "& > div > a": {
       // each about-us link
@@ -124,12 +125,12 @@ const styles = {
       padding: "0 16px 6px 0",
       "&:hover, &:active, &:focus": {
         color: "#aaa",
-        textDecoration: "underline"
-      }
-    }
+        textDecoration: "underline",
+      },
+    },
   },
   hr: {
-    margin: "12px 0"
+    margin: "12px 0",
   },
   creditLine: {
     color: "#aaa",
@@ -140,45 +141,45 @@ const styles = {
       color: "#aaa",
       textDecoration: "underline",
       "&:hover, &:active, &:focus": {
-        color: "#aaa"
-      }
-    }
+        color: "#aaa",
+      },
+    },
   },
   "@media (max-width: 767px)": {
     PageFooter: {
-      marginBottom: "30px"
+      marginBottom: "30px",
     },
     sectionFlex: {
       flexWrap: "nowrap",
       height: "auto",
       "& > div:nth-child(9) ~ div": {
         // shows first nine section blocks
-        display: "none"
+        display: "none",
       },
       "& > div:nth-child(9)": {
-        borderBottom: "1px solid #ddd"
-      }
+        borderBottom: "1px solid #ddd",
+      },
     },
     sectionBlock: {
       margin: 0,
       padding: "10px 0",
-      borderTop: "1px solid #ddd"
+      borderTop: "1px solid #ddd",
     },
     topLevelSectionLink: {
       fontSize: "15px",
       fontWeight: 500,
       "&:hover, &:active, &:focus": {
         color: "#000",
-        textDecoration: "none"
-      }
+        textDecoration: "none",
+      },
     },
     subsectionLink: {
-      display: "none"
+      display: "none",
     },
     hr: {
-      display: "none"
-    }
-  }
+      display: "none",
+    },
+  },
 };
 
 interface PageFooterProps {
@@ -197,7 +198,7 @@ interface Section {
 const PageFooter: React.SFC<PageFooterProps> = ({
   classes,
   sections,
-  descriptions
+  descriptions,
 }) => {
   return (
     <Grid fluid className={classes.PageFooter}>
@@ -214,16 +215,22 @@ const PageFooter: React.SFC<PageFooterProps> = ({
           <Link to="/" className={classes.theSpectator}>
             The Spectator
           </Link>
-          <a href="https://open.spotify.com/show/1D0i5KdRFdMNNUwsKVfpYb" 
-              className={classes.Spotify}>
+          <a
+            href="https://open.spotify.com/show/1D0i5KdRFdMNNUwsKVfpYb"
+            className={classes.Spotify}
+          >
             <Spotify />
           </a>
-          <a href="https://www.instagram.com/stuyspectator/" 
-              className={classes.Instagram}>
+          <a
+            href="https://www.instagram.com/stuyspectator/"
+            className={classes.Instagram}
+          >
             <Instagram />
           </a>
-          <a href="https://www.facebook.com/stuyspectator" 
-              className={classes.Facebook}>
+          <a
+            href="https://www.facebook.com/stuyspectator"
+            className={classes.Facebook}
+          >
             <Facebook />
           </a>
           {/* {Might add back later} */}
@@ -231,9 +238,11 @@ const PageFooter: React.SFC<PageFooterProps> = ({
               className={classes.Github}>
             <Github/>
           </a> */}
-          <a href="https://www.linkedin.com/company/the-stuyvesant-spectator" 
-              className={classes.Linkedin}>
-            <Linkedin/>
+          <a
+            href="https://www.linkedin.com/company/the-stuyvesant-spectator"
+            className={classes.Linkedin}
+          >
+            <Linkedin />
           </a>
         </Col>
         <Col
@@ -245,7 +254,7 @@ const PageFooter: React.SFC<PageFooterProps> = ({
           lg={8}
           className={classes.sectionFlex}
         >
-          {sections.map(section => {
+          {sections.map((section) => {
             return (
               <div className={classes.sectionBlock} key={section.id}>
                 <Link
@@ -255,7 +264,7 @@ const PageFooter: React.SFC<PageFooterProps> = ({
                 >
                   {section.name}
                 </Link>
-                {section.subsections.map(subsection => {
+                {section.subsections.map((subsection) => {
                   return (
                     <Link
                       className={classes.subsectionLink}
@@ -282,7 +291,6 @@ const PageFooter: React.SFC<PageFooterProps> = ({
           className={classes.creditLine}
         >
           <hr className={classes.hr} />
-          
         </Col>
         <Col
           xs={12}
@@ -303,7 +311,7 @@ const PageFooter: React.SFC<PageFooterProps> = ({
 
 // TODO: Make a Redux state type
 const mapStateToProps = (state: any) => ({
-  descriptions: state.descriptions
+  descriptions: state.descriptions,
 });
 
 export default connect(mapStateToProps)(injectSheet(styles)(PageFooter));
