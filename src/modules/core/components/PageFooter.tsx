@@ -16,6 +16,7 @@ const styles = {
   },
   pageFooterMain: {
     borderTop: "3px solid #ddd",
+    borderBottom: "1px solid #ddd",
     margin: "0 auto",
   },
   sectionFlex: {
@@ -136,9 +137,9 @@ const styles = {
     // color: "#aaa",
     fontSize: "12px",
     padding: "0 15px",
-    margin: "auto",
     width: "100%",
     paddingLeft: "7px",
+    margin: "12px 0",
   },
   "@media (max-width: 767px)": {
     PageFooter: {
