@@ -61,7 +61,7 @@ const styles = {
     fontSize: "32px",
     fontStyle: "normal",
     fontWeight: 400,
-    // paddingTop: "15px",
+    marginTop: "15px",
     paddingRight: "10px",
     "&:hover, &:active, &:focus": {
       color: "#000",
