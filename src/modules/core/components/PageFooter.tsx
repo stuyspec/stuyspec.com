@@ -16,7 +16,7 @@ const styles = {
   },
   pageFooterMain: {
     borderTop: "3px solid #ddd",
-    borderBottom: "1px solid #ddd",
+    borderBottom: "2px solid #ddd",
     margin: "0 auto",
   },
   sectionFlex: {
@@ -58,10 +58,10 @@ const styles = {
   theSpectator: {
     color: "#000",
     fontFamily: "Old English Text MT",
-    fontSize: "30px",
+    fontSize: "32px",
     fontStyle: "normal",
     fontWeight: 400,
-    paddingTop: "10px",
+    // paddingTop: "15px",
     paddingRight: "10px",
     "&:hover, &:active, &:focus": {
       color: "#000",
@@ -70,7 +70,7 @@ const styles = {
   },
   Instagram: {
     color: "#000",
-    fontSize: "30px",
+    fontSize: "25px",
     fontWeight: 400,
     paddingTop: "10px",
     paddingRight: "10px",
@@ -81,7 +81,7 @@ const styles = {
   },
   Facebook: {
     color: "#000",
-    fontSize: "30px",
+    fontSize: "25px",
     fontWeight: 400,
     paddingTop: "10px",
     paddingRight: "10px",
@@ -92,7 +92,7 @@ const styles = {
   },
   Spotify: {
     color: "#000",
-    fontSize: "30px",
+    fontSize: "25px",
     fontWeight: 400,
     paddingTop: "10px",
     paddingRight: "10px",
@@ -103,7 +103,7 @@ const styles = {
   },
   Linkedin: {
     color: "#000",
-    fontSize: "30px",
+    fontSize: "25px",
     fontWeight: 400,
     paddingTop: "10px",
     paddingRight: "10px",
