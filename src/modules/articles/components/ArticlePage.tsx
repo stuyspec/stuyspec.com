@@ -7,7 +7,6 @@ import { Helmet } from "react-helmet";
 import { match } from 'react-router';
 
 import { ArticleHeader, ArticleBody, ArticleFooter, ArticleCommentSection, RecommendedRow } from "./";
-import { GoogleAdsense } from "../../advertisements/components";
 import { ARTICLE_QUERY, IArticleData, IArticleVariables } from "../queries";
 import { NotFoundPage } from "../../core/components";
 
