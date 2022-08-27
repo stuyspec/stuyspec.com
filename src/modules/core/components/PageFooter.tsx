@@ -136,6 +136,8 @@ const styles = {
     color: "#aaa",
     fontSize: "12px",
     padding: "0 15px",
+    margin: "auto",
+    width: "100%",
     paddingLeft: "7px",
     "& a": {
       color: "#aaa",
