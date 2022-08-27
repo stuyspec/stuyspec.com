@@ -132,6 +132,14 @@ const styles = {
   hr: {
     margin: "12px 0",
   },
+  creditLine: {
+    // color: "#aaa",
+    fontSize: "12px",
+    padding: "0 15px",
+    margin: "auto",
+    width: "100%",
+    paddingLeft: "7px",
+  },
   "@media (max-width: 767px)": {
     PageFooter: {
       marginBottom: "30px",
@@ -267,6 +275,16 @@ const PageFooter: React.SFC<PageFooterProps> = ({
           })}
           <DescriptionLinks classes={classes} descriptions={descriptions} />
         </Col>
+        <Col
+          xsHidden
+          sm={10}
+          smOffset={1}
+          md={8}
+          mdOffset={2}
+          lg={8}
+          lgOffset={2}
+          className={classes.creditLine}
+        />
         <Col
           xs={12}
           smHidden
