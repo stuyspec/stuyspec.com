@@ -113,7 +113,7 @@ function RecruitmentPage({ classes }) {
       </p>
       <br />
       <p className={classes.Description}>
-        Recruitments will be in the October!
+        Recruitments will be held this October 2022!
       </p>
       <ReactPlayer
         url="https://youtu.be/CDZauduRFAU"
