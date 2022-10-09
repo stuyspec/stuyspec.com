@@ -25,7 +25,7 @@ const styles = {
   SectionTitle: {
     color: "#000",
     fontFamily: "Canela",
-    margin: "10px",
+    marginTop: "30px",
     textAlign: "center",
   },
   SectionText: {
@@ -34,7 +34,7 @@ const styles = {
     fontSize: "1.3em",
     lineHeight: "1.4em",
     margin: "13px",
-    padding: "3px",
+    padding: "0 10 10 10",
     textAlign: "justify",
   },
   Deadline: {
@@ -53,7 +53,7 @@ const styles = {
     boxShadow: "0px 2.5px 5px 2.5px lightgray",
     flexGrow: "1",
     marginBottom: "25px",
-    maxWidth: "350px",
+    maxWidth: "450px",
     maxHeight: "1300px",
     position: "relative",
   },
