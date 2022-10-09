@@ -25,7 +25,7 @@ export const SECTIONS = [
     description:
       "Features capture the spirit and mood of the school. At times, Features covers Stuyvesant’s evergreen topics, e.g. what is it about PE uniforms that gets everybody so hot and bothered? Other times, writers might profile a teacher. Other times, writers share creative narratives about experiences they have had in the “Voices” section. There is much to be found in Features, so come hither!",
     quotes: [],
-    deadline: "Application due October 22, 2022",
+    deadline: "Application due October 22nd, 2022",
     link:
       "https://docs.google.com/document/d/1mkO6ErHiwlRH5qWKcB-jPeTr2hp23hNuEKR-hwn0wno/edit?usp=sharing",
   },
@@ -68,7 +68,7 @@ export const SECTIONS = [
     description:
       "Grammar, editing, and fact-checking. Are you interested in any of those? If so, you should join the Copy Department! Members gain early access to articles and sharpen their grammar skills while editing and fact-checking departments of their choice. We are committed to catching grammatical and factual mistakes in articles with attention to detail, and we look for members who want to contribute to maintaining The Spectator’s high-quality content.",
     quotes: [],
-    deadline: "Application due October 21, 2022",
+    deadline: "Application due October 21st, 2022",
     link:
       "https://docs.google.com/forms/d/e/1FAIpQLSd8WY0iMhonzN0OGG6D3xfgEk5nTCv6FNB4ZOWJv0hLUnQ4fQ/viewform",
   },
@@ -78,8 +78,8 @@ export const SECTIONS = [
     description:
       "The Web department is responsible for designing and updating The Spectator's website, www.stuyspec.com. It also attempts to facilitate the learning of developing and maintaining a web application based on Ruby on Rails and React. These real-world skills are a great resume builder and provide invaluable experience in working together as a team. This is the perfect department for both computer programming enthusiasts and novices who want to help The Spectator continue to storm the frontier of online journalism. Join the BEST department!",
     quotes: [],
-    deadline: "Application due",
-    link: "",
+    deadline: "Application due November 6th, 2022",
+    link: "https://forms.gle/WL96YDmmVv8AsFNf6",
   },
   {
     name: "Layout",
@@ -87,7 +87,7 @@ export const SECTIONS = [
     description:
       "A good publication should interest readers before they even pick it up and read it; the Layout department does just that! We are responsible for formatting all of the articles, photos, art, and other media and make sure that the paper is aesthetically appealing and easy to read. After all, no one wants to read ugly and confusing blocks of text. With creativity and a certain magic called InDesign, we present to you what you know as The Spectator. As a staff member, you will be taught how to use InDesign and asked to critique the formatting of each issue as it is released.",
     quotes: [],
-    deadline: "Application due October 23, 2022",
+    deadline: "Application due October 23rd, 2022",
     link:
       "https://docs.google.com/forms/d/e/1FAIpQLScw5AKD7_5yDm2DZ6gkOP4AQObaDz63lxaz8sfoEv0gvXm8pA/viewform",
   },
@@ -97,7 +97,7 @@ export const SECTIONS = [
     description:
       "Photo is dedicated to providing interesting and dynamic photographs to support the articles in The Spectator and spearhead photo essay projects. Typical assignments include portraits of students and teachers, photos at school events, and shots of fun things around the city. This department is a good fit for anyone interested in photography, whether you’re just starting out, or you’re an expert looking for a place to practice and refine your skills.",
     quotes: [],
-    deadline: "Application due October 28, 2022",
+    deadline: "Application due October 28th, 2022",
     link:
       "https://docs.google.com/forms/d/e/1FAIpQLSfWi0Lk3QVdhfIBcyFFaRrTPWhu39COJ3aSpkRKyCVJS01ETA/viewform",
   },
