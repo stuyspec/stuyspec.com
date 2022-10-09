@@ -34,7 +34,7 @@ const styles = {
     fontSize: "1.3em",
     lineHeight: "1.4em",
     margin: "13px",
-    padding: "0 10 10 10",
+    padding: "0 10 5 10",
     textAlign: "justify",
   },
   Deadline: {

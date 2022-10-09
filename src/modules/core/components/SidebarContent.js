@@ -1,44 +1,42 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import injectSheet from 'react-jss';
+import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import injectSheet from "react-jss";
 
-import { closeSidebar } from '../actions';
+import { closeSidebar } from "../actions";
 
 const styles = {
   divider: {
-    background: '#ddd',
+    background: "#ddd",
     border: 0,
-    height: '1px',
+    height: "1px",
     margin: 0,
   },
   sidebarSectionLink: {
-    borderRadius: '3px',
-    color: '#000',
-    display: 'block',
-    fontFamily: 'Circular Std',
-    fontSize: '15px',
+    borderRadius: "3px",
+    color: "#000",
+    display: "block",
+    fontFamily: "Circular Std",
+    fontSize: "15px",
     fontWeight: 500,
-    margin: '8px 0',
-    padding: '8px 0 8px 11px',
-    textAlign: 'left',
-    width: '100%',
-    '&:hover, &:active, &:focus': {
-      color: '#000',
-      textDecoration: 'none',
+    margin: "8px 0",
+    padding: "8px 0 8px 11px",
+    textAlign: "left",
+    width: "100%",
+    "&:hover, &:active, &:focus": {
+      color: "#000",
+      textDecoration: "none",
     },
-    '&:hover': {
-      background: 'rgba(84, 153, 232, 0.26)',
-      color: '#000',
-      textDecoration: 'none',
+    "&:hover": {
+      background: "rgba(84, 153, 232, 0.26)",
+      color: "#000",
+      textDecoration: "none",
     },
   },
 };
 
-function SidebarContent({
-  classes, session, sections, closeSidebar,
-}) {
+function SidebarContent({ classes, session, sections, closeSidebar }) {
   const sidebarElements = [];
   sidebarElements.push(
     <Link
@@ -48,9 +46,9 @@ function SidebarContent({
       to="/"
     >
       Home
-    </Link>,
+    </Link>
   );
-  sections.forEach(section => {
+  sections.forEach((section) => {
     sidebarElements.push(
       <Link
         className={classes.sidebarSectionLink}
@@ -59,15 +57,15 @@ function SidebarContent({
         to={section.permalink}
       >
         {section.name}
-      </Link>,
+      </Link>
     );
     /* We want a line separating the writing sections from the non-writing
      * sections and one separating the non-writing sections from the user
      * account options.
      */
-    if (section.name === 'Spec+') {
+    if (section.name === "Spec+") {
       sidebarElements.push(
-        <hr className={classes.divider} key={section.id + 100} />,
+        <hr className={classes.divider} key={section.id + 100} />
       );
     }
   });
@@ -105,7 +103,7 @@ function SidebarContent({
       to="/spec-games"
     >
       SpecGames
-    </Link>,
+    </Link>
   );
   sidebarElements.push(
     <Link
@@ -115,7 +113,7 @@ function SidebarContent({
       to="/recruitments"
     >
       Recruitments
-    </Link>,
+    </Link>
   );
   sidebarElements.push(
     <Link
@@ -125,17 +123,19 @@ function SidebarContent({
       to="/search"
     >
       Search
-    </Link>,
+    </Link>
   );
   return <div>{sidebarElements}</div>;
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   session: state.accounts.session,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ closeSidebar }, dispatch);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ closeSidebar }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectSheet(styles)(SidebarContent),
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(injectSheet(styles)(SidebarContent));

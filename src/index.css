@@ -13,17 +13,17 @@ body.dark-mode {
   background-color: #1a1919;
 }
 body.dark-mode a {
-  color: #EDEDED !important;
+  color: #ededed !important;
 }
 body.dark-mode p {
-  color: #EDEDED !important;
+  color: #ededed !important;
 }
 body.dark-mode * {
   background-color: #171717;
-  color: #EDEDED !important;
+  color: #ededed !important;
 }
 body.dark-mode .sidebar {
-  background-color: #1a1919 !important;
+  background-color: #171717 !important;
 }
 body.dark-mode .sidebar-overlay {
   background-color: rgba(44, 41, 42, 0.8) !important;
