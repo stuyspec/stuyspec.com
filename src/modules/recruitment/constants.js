@@ -5,7 +5,7 @@ export const SECTIONS = [
     description:
       "The Opinions section lets writers share their views on issues relevant within the country, Stuyvesant, and their personal lives. Writers across all grades give their opinions on subjects ranging from politics and economics to technology and culture and share their personal stories. We try to consistently create engaging, substantive, and relevant content to provide students with a closer look at the world and the Stuyvesant community.",
     quotes: [],
-    deadline: "Application due November 29th, 2022",
+    deadline: "Application due October 29th, 2022",
     link:
       "https://docs.google.com/document/d/1iTVCDjz5qnw22GEEhImaNNSmxF6v7q91aHhjeJ1Elqc/edit",
   },
@@ -38,7 +38,7 @@ export const SECTIONS = [
         Join Spec Humor!
         We write funny and satirical pieces for The Spec and unlike other departments, everything we publish is libel and slander which means that you'll be in control of what everyone says!`,
     quotes: [],
-    deadline: "Application due",
+    deadline: "Application due October 22nd, 2022",
     link:
       "https://docs.google.com/forms/d/e/1FAIpQLSfR7V1h76tdkPAcCiXQ915knCYuHTPWnLMvalEEBjKRpaA5yw/viewform",
   },
