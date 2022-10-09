@@ -12,5 +12,4 @@ export const adRedirects = [
   ["columbia", "https://qrco.de/stuy-cbs"],
   ["rochester", "https://qrco.de/stuy-roch"],
   ["dontsweattheessay", "https://www.dontsweattheessay.com"],
-  ["collegecounselor", "mailto:thegoldfish@mac.com"],
 ];
