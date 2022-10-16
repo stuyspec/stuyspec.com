@@ -286,7 +286,7 @@ Maya Nelson*<br>
         <td style="width:30%;vertical-align: top">
             <b>Copy Editors</b><br>
             Kevin Chan**<br>
-            Nada Hameed**<br>
+            Nada Hameed<br>
             Eman Sadiq<br>
             Ruiwen Tang<br>
             Raymond Yang<br>
