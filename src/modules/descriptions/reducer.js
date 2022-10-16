@@ -209,8 +209,10 @@ Maya Nelson*<br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Science Editors</b><br>
+            Hellen Luo**<br>
             Sathirtha Mondal<br>
             Sonya Sasson<br>
+            Jovanna Wu**<br>
             <br>
         </td>
     </tr>
@@ -219,11 +221,14 @@ Maya Nelson*<br>
         <td style="width:30%;vertical-align: top">
              <b>Opinions Editors</b><br>
             Peter Goswami<br>
+            Ivy Huang**<br>
+            Gulam Monawarah**<br>
             Anisha Singhal*<br>
             <br>
         </td>
         <td style="width:40%;vertical-align: top">
             <b>Arts & Entertainment Editors</b><br>
+            Phoebe Buckwalter**<br>
             Nicole Liu<br>
             Kenisha Mahajan*<br>
             Levi Simon<br>
@@ -242,6 +247,7 @@ Maya Nelson*<br>
             Taee Chi<br>
             Shafiul Haque*<br>
             Ava Quarles<br>
+            Khush Wadhwa**<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
@@ -254,6 +260,8 @@ Maya Nelson*<br>
         <td style="width:30%;vertical-align: top">
             <b>Photography Editors</b><br>
             Alexander Lopez<br>
+            Lily Serry**<br>
+            Sophia Mueller**<br>
             Zifei Zhao<br>
             <br>
         </td>
@@ -261,13 +269,15 @@ Maya Nelson*<br>
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>Art Directors</b><br>
+            Fareha Islam**<br>
             Afra Mahmud*<br>
-            Nelli Rojas-Cessa**<br>
+            Nelli Rojas-Cessa<br>
             Vivian Teo<br>
             <br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Layout Editors</b><br>
+            Fiona Huang**<br>
             Susie McKnight<br>
             Shreya Roy<br>
             Danny Xiong<br>
@@ -275,10 +285,12 @@ Maya Nelson*<br>
         </td>
         <td style="width:30%;vertical-align: top">
             <b>Copy Editors</b><br>
+            Kevin Chan**<br>
             Nada Hameed**<br>
-            Eman Sadiq**<br>
+            Eman Sadiq<br>
             Ruiwen Tang<br>
             Raymond Yang<br>
+            Allison Zhao**<br>
             <br>
         </td>
     </tr>
