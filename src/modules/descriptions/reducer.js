@@ -328,15 +328,14 @@ Kerry Garfinkel
 </h2>
 Jason Kao<br>
 Nicholas Yang<br>
-Jerry Ye<br>
-Jason Lin<br>
-Cathy Cai<br>
-Darius Jankauskas<br>
-Victor Siu<br>
-Cynthia Or<br>
-Alyssa Choi<br>
-David Chen<br>
-Andrey Sokolov<br>
+Jerry Ye ('19) <br>
+Jason Lin ('19) <br>
+Cathy Cai ('19) <br>
+Darius Jankauskas ('20) <br>
+Victor Siu ('21) <br>
+Cynthia Or ('21) <br>
+David Chen ('23) <br>
+Andrey Sokolov ('23) <br>
 <br>
 <p><a href="https://github.com/stuyspec" target="_blank">@The Spectator Web Department</a></p>
 </center>
