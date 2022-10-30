@@ -48,7 +48,7 @@ export const SECTIONS = [
     description:
       "The Sports department covers all sports topics, whether it be PSAL sports at Stuyvesant or professional sports. Articles pertaining to Stuyvesant sports range from championship articles and season updates to athlete and coach interviews and opinions. Writers also cover virtually any topic in the larger sports world, from debates on Messi vs Ronaldo and college basketball to NFL playoffs and the Champions League. If that’s not enough to convince you to apply, we also have amazing commentary, livestreaming, and social media projects that you could be a part of!",
     quotes: [],
-    deadline: "Application due November 1st, 2022",
+    deadline: "Application due November 13th, 2022",
     link:
       "https://docs.google.com/document/d/15lvrc9EC5mTG6WPTWC1jwggiGM7iZ83xNUe8vLC9qaU/edit",
   },
