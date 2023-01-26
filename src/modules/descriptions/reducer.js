@@ -94,7 +94,7 @@ Approved January, 2020 by The Spectator Editorial Board.<br>
   <li>If the Editorial Board is writing a Staff Editorial about a Stuyvesant organization that a member of the Editorial Board is a prominent member of, this person cannot be present during the Staff Editorial discussion.</li>
   <li>Editors or Editors-in-Chief of The Spectator cannot hold the positions of Student Union President or Vice President, Senior Caucus President or Vice President, Junior Caucus President or Vice President, Sophomore Caucus President or Vice President, or Freshman Caucus President or Vice President. Editors may not hold Student Union positions deemed major in either scope or influence by the Editors-in-Chief or Editorial Board, or be members of the Student Union cabinet.</li>
   <li>Incoming editors of the Editorial Board starting in 2020 may not hold any major leadership in the Student Union or be coordinator of SING!. Editors may only hold the highest form of leadership in other large organizations at Stuyvesant with approval from the Editor-in-Chiefs, their co-editors, and the faculty advisor. Larger organizations include but are not limited to the Big Sibs Program, the ARISTA Honor Society, the Student Union, the Stuyvesant Indicator, Speech and Debate, Model United Nations, SING!, and the Stuyvesant Theater Community. What constitutes said leadership positions shall be decided by the members of the Editorial Board, in consultation with the Faculty Advisor. The Presidency and Vice Presidency of the Student Union, the Executive Council of ARISTA, the Chair of the Big Sibs, the President of Speech and Debate, the Editor-in-Chief of The Indicator, and members of Slate are all ultimate leadership positions. With major organizations such as the Big Sibs Program or ARISTA, the Editor-in-Chiefs should exert additional caution with their approvals.</li>
-  <li>Editors who participate in SING! may not contribute to SING! non-humor reviews of SING! published in The Spectator.</li>      
+  <li>Editors who participate in SING! may not contribute to SING! non-humor reviews of SING! published in The Spectator.</li>
 </ol>
 <h3>H. Grounds for Removal from Position</h3>
 <ol>If an Editor shows significant signs of inadequacy in his/her position for any reason, including being unable to handle his/her work, leaking sensitive information, condoning plagiarism or failure to follow the guidelines set forth in the Charter, his/her position will be reconsidered as per the guidelines set forth under &#167;III.C.</ol>
@@ -195,7 +195,7 @@ Maya Nelson*<br>
     <tr>
         <td style="width:30%;vertical-align: top">
             <b>News Editors</b><br>
-            Rebecca Bao**<br>
+            Rebecca Bao<br>
             Isabella Jia*<br>
             Janna Wang<br>
             <br>
